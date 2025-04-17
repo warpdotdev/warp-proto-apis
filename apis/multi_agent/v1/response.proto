@@ -1,0 +1,101 @@
+// The response types for the multi-agent API.
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/go_features.proto";
+
+import "message.proto";
+import "task.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A single streamed event returned by the multi-agent API.
+message ResponseEvent {
+  // The type of the event.
+  oneof type {
+    // An event to indicate the stream has successfully started.
+    // Sent exactly once as the first streamed event.
+    StreamInit init = 1;
+
+    // An event to relay actions that the client should apply.
+    ClientActions client_actions = 2;
+
+    // Sent exactly once as the final event for streams that finished
+    // gracefully.
+    StreamFinished finished = 3;
+  }
+
+  message StreamInit {
+    // A unique ID for this conversation.
+    //
+    // If the request started a new conversation, this is a newly generated ID.
+    // Else, if it continued an existing conversation, this is the same
+    // conversation ID provided in the request.
+    //
+    // This should be round-tripped back to the server for any subsequent
+    // requests that continue this conversation.
+    string conversation_id = 1;
+
+    // A unique ID for this request.
+    //
+    // This is mainly used for logging and analytics, so we can join client
+    // telemetry events on this ID.
+    string request_id = 2;
+  }
+
+  message ClientActions { repeated ClientAction actions = 1; }
+
+  message StreamFinished {
+    oneof reason {
+      Other other = 1;
+      Done done = 2;
+      ReachedMaxTokenLimit max_token_limit = 3;
+    }
+
+    message Other {}
+    message Done {}
+    message ReachedMaxTokenLimit {}
+  }
+}
+
+// Client actions that can be requested in a response
+message ClientAction {
+  oneof action {
+    CreateTask create_task = 1;
+    UpdateTaskStatus update_task_status = 2;
+    AddMessagesToTask add_messages_to_task = 3;
+    UpdateTaskMessage update_task_message = 4;
+    AppendToMessageContent append_to_message_content = 5;
+  }
+
+  // Create task action
+  message CreateTask { Task task = 1; }
+
+  // Update task status action
+  message UpdateTaskStatus {
+    string task_id = 1;
+    TaskStatus task_status = 2;
+  }
+
+  // Add message to task action
+  message AddMessagesToTask {
+    string task_id = 1;
+    repeated Message messages = 2;
+  }
+
+  // Update task message action
+  message UpdateTaskMessage {
+    Message message = 1;
+    google.protobuf.FieldMask mask = 2;
+  }
+
+  // Append to message content action
+  message AppendToMessageContent {
+    Message message = 1;
+    // Fields in mask must be of type string; content is appended
+    google.protobuf.FieldMask mask = 2;
+  }
+}

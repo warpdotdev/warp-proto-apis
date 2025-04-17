@@ -1,0 +1,59 @@
+// The request types for the multi-agent API.
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+
+import "message.proto";
+import "task.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// Main Request message for the API
+message Request {
+  // Context provides the state of tasks and active task
+  Context context = 1;
+
+  // Input from user or tool call result
+  Input input = 2;
+
+  // Context contains the current state of tasks and which task is active
+  message Context {
+    // List of all tasks
+    repeated Task tasks = 1;
+
+    // Currently active task ID, if there is one.
+    string active_task_id = 2;
+  }
+}
+
+// Input for the Request
+message Input {
+  Context context = 1;
+
+  // Type of input
+  oneof type {
+    UserQuery user_query = 2;
+    ToolCallResult tool_call_result = 3;
+  }
+
+  // Client context associated to the input.
+  message Context {}
+
+  // User query
+  message UserQuery { string query = 1; }
+
+  // Tool call result
+  message ToolCallResult {
+    string tool_call_id = 1;
+
+    oneof result {
+      RunShellCommandResult run_shell_command = 2;
+      ReadFilesResult read_files = 3;
+      SearchCodebaseResult search_codebase = 4;
+      ApplyFileDiffsResult apply_file_diffs = 5;
+    }
+  }
+}

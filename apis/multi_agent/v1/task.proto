@@ -1,0 +1,58 @@
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+
+import "message.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A task represents a unit of work with messages
+message Task {
+  // Unique identifier for the task.
+  string id = 1;
+
+  // Short description for the task.
+  string description = 2;
+
+  // Dependencies for task hierarchy and execution order.
+  Dependencies dependencies = 3;
+
+  // Current status of the task.
+  TaskStatus status = 4;
+
+  // Messages associated with this task
+  repeated Message messages = 5;
+
+  // Dependencies for task hierarchy and execution order.
+  message Dependencies {
+    // ID of the parent task, may be null for root tasks.  This task cannot
+    // start executing until the parent has started executing.
+    string parent_task_id = 1;
+
+    // List of siblings that this task depends on.  This task cannot start
+    // executing until all listed siblings have completed executing.
+    repeated string sibling_dependencies = 2;
+  }
+}
+
+// A status for a task.
+message TaskStatus {
+  oneof status {
+    Pending pending = 1;
+    InProgress in_progress = 2;
+    Blocked blocked = 3;
+    Succeeded succeeded = 4;
+    Failed failed = 5;
+    Aborted aborted = 6;
+  }
+
+  message Pending {}
+  message InProgress {}
+  message Blocked {}
+  message Succeeded {}
+  message Failed {}
+  message Aborted {}
+}

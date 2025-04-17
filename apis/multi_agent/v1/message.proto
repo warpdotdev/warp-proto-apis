@@ -1,0 +1,128 @@
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A message within a task
+message Message {
+  // Globally-unique identifier for the message.
+  string id = 1;
+
+  // The type of message with its specific content
+  oneof message {
+    UserQuery user_query = 2;
+    AgentOutput agent_output = 3;
+    ToolCall tool_call = 4;
+    ToolCallResult tool_call_result = 5;
+  }
+
+  // User query message type
+  message UserQuery { string query = 1; }
+
+  // Agent output message type
+  message AgentOutput { string text = 1; }
+
+  // Tool call message type
+  message ToolCall {
+    string tool_call_id = 1;
+
+    // The specific tool being called
+    oneof tool {
+      RunShellCommand run_shell_command = 2;
+      SearchCodebase search_codebase = 3;
+      Server server = 4;
+      ReadFiles read_files = 5;
+      ApplyFileDiffs apply_file_diffs = 6;
+    }
+
+    // A tool call that is totally resolved server-side and hence opaque to
+    // clients. It's included in the message history for bookkeeping purposes.
+    message Server { string payload = 1; }
+
+    // A tool call to run a shell command.
+    message RunShellCommand {
+      string command = 1;
+      bool is_read_only = 2;
+    }
+
+    // A tool call to read files.
+    message ReadFiles {
+      repeated File files = 1;
+      message File {
+        string name = 1;
+        // If empty, the entire file is retrieved.
+        repeated FileContentLineRange line_ranges = 2;
+      }
+    }
+
+    // A tool call to search a codebase.
+    message SearchCodebase {
+      string query = 1;
+      repeated string path_filters = 2;
+    }
+
+    // A tool call to apply diffs to files.
+    message ApplyFileDiffs {
+      string summary = 1;
+      repeated FileDiff diffs = 2;
+
+      message FileDiff {
+        string file_path = 1;
+        // The content to be replaced.
+        string search = 2;
+        // The content that replaces `search`.
+        string replace = 3;
+      }
+    }
+  }
+
+  // Entry in the message log representing the result of a tool call.
+  message ToolCallResult {
+    string tool_call_id = 1;
+
+    oneof result {
+      RunShellCommandResult run_shell_command = 2;
+      SearchCodebaseResult search_codebase = 3;
+      ServerResult server = 4;
+      ReadFilesResult read_files = 5;
+      ApplyFileDiffsResult apply_file_diffs = 6;
+    }
+
+    // Result of a server-side tool call.
+    // Provided by the server to simply roundtrip.
+    message ServerResult { string serialized_result = 1; }
+  }
+}
+
+// Result of a `RunShellCommand` tool call.
+message RunShellCommandResult {
+  string output = 1;
+  int32 exit_code = 2;
+}
+
+// Result of a `ReadFiles` tool call.
+message ReadFilesResult { repeated FileContent files = 1; }
+
+// Result of a `SearchCodebase` tool call.
+message SearchCodebaseResult { repeated FileContent files = 1; }
+
+// Result of a `ApplyFileDiffs` tool call.
+message ApplyFileDiffsResult { repeated FileContent updated_files = 1; }
+
+// A range of lines [start, end] that situate content in a file, 0-indexed.
+message FileContentLineRange {
+  int32 start = 1;
+  int32 end = 2;
+}
+
+// A representation of raw content within a file.
+message FileContent {
+  string file_path = 1;
+  string content = 2;
+  FileContentLineRange line_range = 3;
+}
