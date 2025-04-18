@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = [
+    "apis/*/*/gen/rust",
+]
+default-members = [
+    "apis/*/*/gen/rust",
+]
+
+[workspace.dependencies]
+prost = "0.13"
+prost-types = "0.13"
+prost-reflect = "0.15.1"
+prost-reflect-build = "0.15.0"

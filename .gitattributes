@@ -1,2 +1,2 @@
-# Tell GitHub to treat all files in "gen" directories as generated.
-**/gen/** linguist-generated=true
+# Tell GitHub that .pb.go files are generated code.
+**/gen/go/*.pb.go linguist-generated=true
