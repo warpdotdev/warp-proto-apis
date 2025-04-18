@@ -7,11 +7,3 @@ fi
 
 # Install protoc go plugin.
 go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6
-
-# Install prost plugins for Rust.
-if ! command -v cargo-binstall &> /dev/null; then
-    # Install cargo-binstall from source if it isn't already installed.
-    cargo install cargo-binstall
-fi
-
-cargo binstall protoc-gen-prost@0.4.0 protoc-gen-prost-crate@0.4.0

@@ -5,5 +5,9 @@ publish = false
 edition = "2021"
 
 [dependencies]
-prost = "0.13"
-prost-types = "0.13" 
+prost.workspace = true
+prost-reflect = { workspace = true, features = ["derive"] }
+prost-types.workspace = true
+
+[build-dependencies]
+prost-reflect-build.workspace = true

@@ -65,27 +65,3 @@ go mod tidy
 popd >/dev/null 2>&1
 
 echo "✅️ Done generating Go bindings"
-
-# For Rust, prost doesn't yet support editions, so we need to do a bit
-# of preprocessing on the files before passing them to the compiler.
-cleanup_temp() {
-    rm -rf "$TEMP"
-}
-TEMP="$(mktemp -d)"
-trap cleanup_temp EXIT
-
-mkdir -p "$TEMP/$API_PATH"
-cp "$API_PATH"/*.proto "$TEMP/$API_PATH"
-# Replace `edition = "2023";` with `syntax = "proto3";` in all proto files,
-# remove `option features.*`, and remove "unused" feature proto imports.
-find "$TEMP" \
-  -name "*.proto" \
-  -exec sed -i '' \
-    -e 's/edition = "2023";/syntax = "proto3";/g' \
-    -e 's/option features.*//g' \
-    -e 's/import "google\/protobuf\/go_features.proto";//g' \
-    {} \;
-
-echo -e "\n➡️  Generating Rust bindings..."
-protoc --prost_out="$API_PATH/gen/rust/src" --proto_path="$(realpath "$TEMP/$API_PATH")" "${PROTO_FILES[@]}"
-echo "✅️ Done generating Rust bindings"
