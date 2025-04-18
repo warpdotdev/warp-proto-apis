@@ -4,55 +4,125 @@ edition = "2023";
 package warp.multi_agent.v1;
 
 import "google/protobuf/go_features.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 import "task.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
-// Main Request message for the API
+// The main request type. Every multi-agent API call begins with a `Request`.
 message Request {
-  // Context provides the state of tasks and active task
-  Context context = 1;
+  // The task state.
+  TaskContext task_context = 1;
 
-  // Input from user or tool call result
+  // User input to progress the task state.
   Input input = 2;
 
-  // Context contains the current state of tasks and which task is active
-  message Context {
-    // List of all tasks
+  // Supported configuration for the request. 
+  Settings settings = 3;
+
+  // General metadata for the request.
+  Metadata metadata = 4;
+
+  message TaskContext {
+    // List of all known tasks.
     repeated Task tasks = 1;
 
     // Currently active task ID, if there is one.
     string active_task_id = 2;
   }
-}
 
-// Input for the Request
-message Input {
-  Context context = 1;
+  message Input {
+    Context context = 1;
 
-  // Type of input
-  oneof type {
-    UserQuery user_query = 2;
-    ToolCallResult tool_call_result = 3;
+    // The type of input from the user.
+    oneof type {
+      UserQuery user_query = 2;
+      ToolCallResult tool_call_result = 3;
+    }
+
+    message Context {
+      Directory directory = 1;
+      OperatingSystem operating_system = 2;
+      Shell shell = 3;
+      google.protobuf.Timestamp current_time = 4;
+      repeated ExecutedShellCommand executed_shell_commands = 5;
+      repeated SelectedText selected_text = 6;
+
+      // Information about shell commands that the user has executed.
+      message ExecutedShellCommand {
+        string command = 1;
+        string output = 2;
+        int32 exit_code = 3;
+      }
+
+      message SelectedText { string text = 1; }
+
+      // Information about the user's directories.
+      message Directory {
+        string pwd = 1;
+        string home = 2;
+        bool pwd_file_symbols_indexed = 3;
+      }
+
+      // Information about the user's terminal shell.
+      message Shell {
+        string name = 1;
+        string version = 2;
+      }
+
+      // Information about the user's operating system.
+      message OperatingSystem {
+        // The OS "category", e.g. "MacOS" or "Linux".
+        string platform = 1;
+
+        // The OS distribution, which is typically only populated for Linux,
+        // e.g. Fedora or Ubuntu.
+        string distribution = 2;
+      }
+    }
+
+    message UserQuery { string query = 1; }
+
+    // Tool call result
+    message ToolCallResult {
+      string tool_call_id = 1;
+
+      oneof result {
+        RunShellCommandResult run_shell_command = 2;
+        ReadFilesResult read_files = 3;
+        SearchCodebaseResult search_codebase = 4;
+        ApplyFileDiffsResult apply_file_diffs = 5;
+      }
+    }
   }
 
-  // Client context associated to the input.
-  message Context {}
+  message Metadata {
+    // Optional conversation ID.
+    //
+    // If this request continues an existing conversation, this is expected to
+    // be the same conversation ID received in a previous AI response earlier in
+    // the conversation.
+    string conversation_id = 1;
 
-  // User query
-  message UserQuery { string query = 1; }
+    // Map of metadata to inline in server analytic events for this request.
+    // Values in the map should be JSON.
+    map<string, google.protobuf.Struct> logging = 2;
+  }
 
-  // Tool call result
-  message ToolCallResult {
-    string tool_call_id = 1;
+  message Settings {
+    ModelConfig model_config = 1;
+    bool rules_enabled = 2;
+    bool web_context_retrieval_enabled = 3;
 
-    oneof result {
-      RunShellCommandResult run_shell_command = 2;
-      ReadFilesResult read_files = 3;
-      SearchCodebaseResult search_codebase = 4;
-      ApplyFileDiffsResult apply_file_diffs = 5;
+    message ModelConfig {
+      // The LLM of preference for general tasks.
+      string base = 1;
+
+      // The LLM of preference for reasoning tasks.
+      string planning = 2;
     }
   }
 }

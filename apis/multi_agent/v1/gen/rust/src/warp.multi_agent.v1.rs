@@ -321,87 +321,191 @@ pub struct FileContent {
     #[prost(message, optional, tag="3")]
     pub line_range: ::core::option::Option<FileContentLineRange>,
 }
-/// Main Request message for the API
+/// The main request type. Every multi-agent API call begins with a `Request`.
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Request {
-    /// Context provides the state of tasks and active task
+    /// The task state.
     #[prost(message, optional, tag="1")]
-    pub context: ::core::option::Option<request::Context>,
-    /// Input from user or tool call result
+    pub task_context: ::core::option::Option<request::TaskContext>,
+    /// User input to progress the task state.
     #[prost(message, optional, tag="2")]
-    pub input: ::core::option::Option<Input>,
+    pub input: ::core::option::Option<request::Input>,
+    /// Supported configuration for the request. 
+    #[prost(message, optional, tag="3")]
+    pub settings: ::core::option::Option<request::Settings>,
+    /// General metadata for the request.
+    #[prost(message, optional, tag="4")]
+    pub metadata: ::core::option::Option<request::Metadata>,
 }
 /// Nested message and enum types in `Request`.
 pub mod request {
-    /// Context contains the current state of tasks and which task is active
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct Context {
-        /// List of all tasks
+    pub struct TaskContext {
+        /// List of all known tasks.
         #[prost(message, repeated, tag="1")]
         pub tasks: ::prost::alloc::vec::Vec<super::Task>,
         /// Currently active task ID, if there is one.
         #[prost(string, tag="2")]
         pub active_task_id: ::prost::alloc::string::String,
     }
-}
-/// Input for the Request
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Message)]
-pub struct Input {
-    #[prost(message, optional, tag="1")]
-    pub context: ::core::option::Option<input::Context>,
-    /// Type of input
-    #[prost(oneof="input::Type", tags="2, 3")]
-    pub r#type: ::core::option::Option<input::Type>,
-}
-/// Nested message and enum types in `Input`.
-pub mod input {
-    /// Client context associated to the input.
-    #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Copy, PartialEq, ::prost::Message)]
-    pub struct Context {
-    }
-    /// User query
     #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct UserQuery {
-        #[prost(string, tag="1")]
-        pub query: ::prost::alloc::string::String,
+    pub struct Input {
+        #[prost(message, optional, tag="1")]
+        pub context: ::core::option::Option<input::Context>,
+        /// The type of input from the user.
+        #[prost(oneof="input::Type", tags="2, 3")]
+        pub r#type: ::core::option::Option<input::Type>,
     }
-    /// Tool call result
-    #[allow(clippy::derive_partial_eq_without_eq)]
+    /// Nested message and enum types in `Input`.
+    pub mod input {
+        #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
-    pub struct ToolCallResult {
-        #[prost(string, tag="1")]
-        pub tool_call_id: ::prost::alloc::string::String,
-        #[prost(oneof="tool_call_result::Result", tags="2, 3, 4, 5")]
-        pub result: ::core::option::Option<tool_call_result::Result>,
-    }
-    /// Nested message and enum types in `ToolCallResult`.
-    pub mod tool_call_result {
+        pub struct Context {
+            #[prost(message, optional, tag="1")]
+            pub directory: ::core::option::Option<context::Directory>,
+            #[prost(message, optional, tag="2")]
+            pub operating_system: ::core::option::Option<context::OperatingSystem>,
+            #[prost(message, optional, tag="3")]
+            pub shell: ::core::option::Option<context::Shell>,
+            #[prost(message, optional, tag="4")]
+            pub current_time: ::core::option::Option<::prost_types::Timestamp>,
+            #[prost(message, repeated, tag="5")]
+            pub executed_shell_commands: ::prost::alloc::vec::Vec<context::ExecutedShellCommand>,
+            #[prost(message, repeated, tag="6")]
+            pub selected_text: ::prost::alloc::vec::Vec<context::SelectedText>,
+        }
+        /// Nested message and enum types in `Context`.
+        pub mod context {
+            /// Information about shell commands that the user has executed.
+            #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+            pub struct ExecutedShellCommand {
+                #[prost(string, tag="1")]
+                pub command: ::prost::alloc::string::String,
+                #[prost(string, tag="2")]
+                pub output: ::prost::alloc::string::String,
+                #[prost(int32, tag="3")]
+                pub exit_code: i32,
+            }
+            #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+            pub struct SelectedText {
+                #[prost(string, tag="1")]
+                pub text: ::prost::alloc::string::String,
+            }
+            /// Information about the user's directories.
+            #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+            pub struct Directory {
+                #[prost(string, tag="1")]
+                pub pwd: ::prost::alloc::string::String,
+                #[prost(string, tag="2")]
+                pub home: ::prost::alloc::string::String,
+                #[prost(bool, tag="3")]
+                pub pwd_file_symbols_indexed: bool,
+            }
+            /// Information about the user's terminal shell.
+            #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+            pub struct Shell {
+                #[prost(string, tag="1")]
+                pub name: ::prost::alloc::string::String,
+                #[prost(string, tag="2")]
+                pub version: ::prost::alloc::string::String,
+            }
+            /// Information about the user's operating system.
+            #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+            pub struct OperatingSystem {
+                /// The OS "category", e.g. "MacOS" or "Linux".
+                #[prost(string, tag="1")]
+                pub platform: ::prost::alloc::string::String,
+                /// The OS distribution, which is typically only populated for Linux,
+                /// e.g. Fedora or Ubuntu.
+                #[prost(string, tag="2")]
+                pub distribution: ::prost::alloc::string::String,
+            }
+        }
+        #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct UserQuery {
+            #[prost(string, tag="1")]
+            pub query: ::prost::alloc::string::String,
+        }
+        /// Tool call result
+        #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct ToolCallResult {
+            #[prost(string, tag="1")]
+            pub tool_call_id: ::prost::alloc::string::String,
+            #[prost(oneof="tool_call_result::Result", tags="2, 3, 4, 5")]
+            pub result: ::core::option::Option<tool_call_result::Result>,
+        }
+        /// Nested message and enum types in `ToolCallResult`.
+        pub mod tool_call_result {
+            #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Oneof)]
+            pub enum Result {
+                #[prost(message, tag="2")]
+                RunShellCommand(super::super::super::RunShellCommandResult),
+                #[prost(message, tag="3")]
+                ReadFiles(super::super::super::ReadFilesResult),
+                #[prost(message, tag="4")]
+                SearchCodebase(super::super::super::SearchCodebaseResult),
+                #[prost(message, tag="5")]
+                ApplyFileDiffs(super::super::super::ApplyFileDiffsResult),
+            }
+        }
+        /// The type of input from the user.
         #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Oneof)]
-        pub enum Result {
+        pub enum Type {
             #[prost(message, tag="2")]
-            RunShellCommand(super::super::RunShellCommandResult),
+            UserQuery(UserQuery),
             #[prost(message, tag="3")]
-            ReadFiles(super::super::ReadFilesResult),
-            #[prost(message, tag="4")]
-            SearchCodebase(super::super::SearchCodebaseResult),
-            #[prost(message, tag="5")]
-            ApplyFileDiffs(super::super::ApplyFileDiffsResult),
+            ToolCallResult(ToolCallResult),
         }
     }
-    /// Type of input
     #[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, PartialEq, ::prost::Oneof)]
-    pub enum Type {
-        #[prost(message, tag="2")]
-        UserQuery(UserQuery),
-        #[prost(message, tag="3")]
-        ToolCallResult(ToolCallResult),
+#[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Metadata {
+        /// Optional conversation ID.
+        ///
+        /// If this request continues an existing conversation, this is expected to
+        /// be the same conversation ID received in a previous AI response earlier in
+        /// the conversation.
+        #[prost(string, tag="1")]
+        pub conversation_id: ::prost::alloc::string::String,
+        /// Map of metadata to inline in server analytic events for this request.
+        /// Values in the map should be JSON.
+        #[prost(map="string, message", tag="2")]
+        pub logging: ::std::collections::HashMap<::prost::alloc::string::String, ::prost_types::Struct>,
+    }
+    #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+    pub struct Settings {
+        #[prost(message, optional, tag="1")]
+        pub model_config: ::core::option::Option<settings::ModelConfig>,
+        #[prost(bool, tag="2")]
+        pub rules_enabled: bool,
+        #[prost(bool, tag="3")]
+        pub web_context_retrieval_enabled: bool,
+    }
+    /// Nested message and enum types in `Settings`.
+    pub mod settings {
+        #[allow(clippy::derive_partial_eq_without_eq)]
+#[derive(Clone, PartialEq, ::prost::Message)]
+        pub struct ModelConfig {
+            /// The LLM of preference for general tasks.
+            #[prost(string, tag="1")]
+            pub base: ::prost::alloc::string::String,
+            /// The LLM of preference for reasoning tasks.
+            #[prost(string, tag="2")]
+            pub planning: ::prost::alloc::string::String,
+        }
     }
 }
 /// A single streamed event returned by the multi-agent API.

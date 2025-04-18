@@ -12,6 +12,8 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -23,13 +25,15 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Main Request message for the API
+// The main request type. Every multi-agent API call begins with a `Request`.
 type Request struct {
-	state              protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Context *Request_Context       `protobuf:"bytes,1,opt,name=context"`
-	xxx_hidden_Input   *Input                 `protobuf:"bytes,2,opt,name=input"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskContext *Request_TaskContext   `protobuf:"bytes,1,opt,name=task_context,json=taskContext"`
+	xxx_hidden_Input       *Request_Input         `protobuf:"bytes,2,opt,name=input"`
+	xxx_hidden_Settings    *Request_Settings      `protobuf:"bytes,3,opt,name=settings"`
+	xxx_hidden_Metadata    *Request_Metadata      `protobuf:"bytes,4,opt,name=metadata"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Request) Reset() {
@@ -57,33 +61,55 @@ func (x *Request) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request) GetContext() *Request_Context {
+func (x *Request) GetTaskContext() *Request_TaskContext {
 	if x != nil {
-		return x.xxx_hidden_Context
+		return x.xxx_hidden_TaskContext
 	}
 	return nil
 }
 
-func (x *Request) GetInput() *Input {
+func (x *Request) GetInput() *Request_Input {
 	if x != nil {
 		return x.xxx_hidden_Input
 	}
 	return nil
 }
 
-func (x *Request) SetContext(v *Request_Context) {
-	x.xxx_hidden_Context = v
+func (x *Request) GetSettings() *Request_Settings {
+	if x != nil {
+		return x.xxx_hidden_Settings
+	}
+	return nil
 }
 
-func (x *Request) SetInput(v *Input) {
+func (x *Request) GetMetadata() *Request_Metadata {
+	if x != nil {
+		return x.xxx_hidden_Metadata
+	}
+	return nil
+}
+
+func (x *Request) SetTaskContext(v *Request_TaskContext) {
+	x.xxx_hidden_TaskContext = v
+}
+
+func (x *Request) SetInput(v *Request_Input) {
 	x.xxx_hidden_Input = v
 }
 
-func (x *Request) HasContext() bool {
+func (x *Request) SetSettings(v *Request_Settings) {
+	x.xxx_hidden_Settings = v
+}
+
+func (x *Request) SetMetadata(v *Request_Metadata) {
+	x.xxx_hidden_Metadata = v
+}
+
+func (x *Request) HasTaskContext() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_Context != nil
+	return x.xxx_hidden_TaskContext != nil
 }
 
 func (x *Request) HasInput() bool {
@@ -93,233 +119,61 @@ func (x *Request) HasInput() bool {
 	return x.xxx_hidden_Input != nil
 }
 
-func (x *Request) ClearContext() {
-	x.xxx_hidden_Context = nil
+func (x *Request) HasSettings() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Settings != nil
+}
+
+func (x *Request) HasMetadata() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Metadata != nil
+}
+
+func (x *Request) ClearTaskContext() {
+	x.xxx_hidden_TaskContext = nil
 }
 
 func (x *Request) ClearInput() {
 	x.xxx_hidden_Input = nil
 }
 
+func (x *Request) ClearSettings() {
+	x.xxx_hidden_Settings = nil
+}
+
+func (x *Request) ClearMetadata() {
+	x.xxx_hidden_Metadata = nil
+}
+
 type Request_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Context provides the state of tasks and active task
-	Context *Request_Context
-	// Input from user or tool call result
-	Input *Input
+	// The task state.
+	TaskContext *Request_TaskContext
+	// User input to progress the task state.
+	Input *Request_Input
+	// Supported configuration for the request.
+	Settings *Request_Settings
+	// General metadata for the request.
+	Metadata *Request_Metadata
 }
 
 func (b0 Request_builder) Build() *Request {
 	m0 := &Request{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Context = b.Context
+	x.xxx_hidden_TaskContext = b.TaskContext
 	x.xxx_hidden_Input = b.Input
+	x.xxx_hidden_Settings = b.Settings
+	x.xxx_hidden_Metadata = b.Metadata
 	return m0
 }
 
-// Input for the Request
-type Input struct {
-	state              protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Context *Input_Context         `protobuf:"bytes,1,opt,name=context"`
-	xxx_hidden_Type    isInput_Type           `protobuf_oneof:"type"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *Input) Reset() {
-	*x = Input{}
-	mi := &file_request_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Input) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Input) ProtoMessage() {}
-
-func (x *Input) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Input) GetContext() *Input_Context {
-	if x != nil {
-		return x.xxx_hidden_Context
-	}
-	return nil
-}
-
-func (x *Input) GetUserQuery() *Input_UserQuery {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*input_UserQuery_); ok {
-			return x.UserQuery
-		}
-	}
-	return nil
-}
-
-func (x *Input) GetToolCallResult() *Input_ToolCallResult {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*input_ToolCallResult_); ok {
-			return x.ToolCallResult
-		}
-	}
-	return nil
-}
-
-func (x *Input) SetContext(v *Input_Context) {
-	x.xxx_hidden_Context = v
-}
-
-func (x *Input) SetUserQuery(v *Input_UserQuery) {
-	if v == nil {
-		x.xxx_hidden_Type = nil
-		return
-	}
-	x.xxx_hidden_Type = &input_UserQuery_{v}
-}
-
-func (x *Input) SetToolCallResult(v *Input_ToolCallResult) {
-	if v == nil {
-		x.xxx_hidden_Type = nil
-		return
-	}
-	x.xxx_hidden_Type = &input_ToolCallResult_{v}
-}
-
-func (x *Input) HasContext() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Context != nil
-}
-
-func (x *Input) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Type != nil
-}
-
-func (x *Input) HasUserQuery() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Type.(*input_UserQuery_)
-	return ok
-}
-
-func (x *Input) HasToolCallResult() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Type.(*input_ToolCallResult_)
-	return ok
-}
-
-func (x *Input) ClearContext() {
-	x.xxx_hidden_Context = nil
-}
-
-func (x *Input) ClearType() {
-	x.xxx_hidden_Type = nil
-}
-
-func (x *Input) ClearUserQuery() {
-	if _, ok := x.xxx_hidden_Type.(*input_UserQuery_); ok {
-		x.xxx_hidden_Type = nil
-	}
-}
-
-func (x *Input) ClearToolCallResult() {
-	if _, ok := x.xxx_hidden_Type.(*input_ToolCallResult_); ok {
-		x.xxx_hidden_Type = nil
-	}
-}
-
-const Input_Type_not_set_case case_Input_Type = 0
-const Input_UserQuery_case case_Input_Type = 2
-const Input_ToolCallResult_case case_Input_Type = 3
-
-func (x *Input) WhichType() case_Input_Type {
-	if x == nil {
-		return Input_Type_not_set_case
-	}
-	switch x.xxx_hidden_Type.(type) {
-	case *input_UserQuery_:
-		return Input_UserQuery_case
-	case *input_ToolCallResult_:
-		return Input_ToolCallResult_case
-	default:
-		return Input_Type_not_set_case
-	}
-}
-
-type Input_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Context *Input_Context
-	// Type of input
-
-	// Fields of oneof xxx_hidden_Type:
-	UserQuery      *Input_UserQuery
-	ToolCallResult *Input_ToolCallResult
-	// -- end of xxx_hidden_Type
-}
-
-func (b0 Input_builder) Build() *Input {
-	m0 := &Input{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_Context = b.Context
-	if b.UserQuery != nil {
-		x.xxx_hidden_Type = &input_UserQuery_{b.UserQuery}
-	}
-	if b.ToolCallResult != nil {
-		x.xxx_hidden_Type = &input_ToolCallResult_{b.ToolCallResult}
-	}
-	return m0
-}
-
-type case_Input_Type protoreflect.FieldNumber
-
-func (x case_Input_Type) String() string {
-	md := file_request_proto_msgTypes[1].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isInput_Type interface {
-	isInput_Type()
-}
-
-type input_UserQuery_ struct {
-	UserQuery *Input_UserQuery `protobuf:"bytes,2,opt,name=user_query,json=userQuery,oneof"`
-}
-
-type input_ToolCallResult_ struct {
-	ToolCallResult *Input_ToolCallResult `protobuf:"bytes,3,opt,name=tool_call_result,json=toolCallResult,oneof"`
-}
-
-func (*input_UserQuery_) isInput_Type() {}
-
-func (*input_ToolCallResult_) isInput_Type() {}
-
-// Context contains the current state of tasks and which task is active
-type Request_Context struct {
+type Request_TaskContext struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Tasks        *[]*Task               `protobuf:"bytes,1,rep,name=tasks"`
 	xxx_hidden_ActiveTaskId *string                `protobuf:"bytes,2,opt,name=active_task_id,json=activeTaskId"`
@@ -329,21 +183,21 @@ type Request_Context struct {
 	sizeCache               protoimpl.SizeCache
 }
 
-func (x *Request_Context) Reset() {
-	*x = Request_Context{}
-	mi := &file_request_proto_msgTypes[2]
+func (x *Request_TaskContext) Reset() {
+	*x = Request_TaskContext{}
+	mi := &file_request_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Context) String() string {
+func (x *Request_TaskContext) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Context) ProtoMessage() {}
+func (*Request_TaskContext) ProtoMessage() {}
 
-func (x *Request_Context) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[2]
+func (x *Request_TaskContext) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -354,7 +208,7 @@ func (x *Request_Context) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Context) GetTasks() []*Task {
+func (x *Request_TaskContext) GetTasks() []*Task {
 	if x != nil {
 		if x.xxx_hidden_Tasks != nil {
 			return *x.xxx_hidden_Tasks
@@ -363,7 +217,7 @@ func (x *Request_Context) GetTasks() []*Task {
 	return nil
 }
 
-func (x *Request_Context) GetActiveTaskId() string {
+func (x *Request_TaskContext) GetActiveTaskId() string {
 	if x != nil {
 		if x.xxx_hidden_ActiveTaskId != nil {
 			return *x.xxx_hidden_ActiveTaskId
@@ -373,38 +227,38 @@ func (x *Request_Context) GetActiveTaskId() string {
 	return ""
 }
 
-func (x *Request_Context) SetTasks(v []*Task) {
+func (x *Request_TaskContext) SetTasks(v []*Task) {
 	x.xxx_hidden_Tasks = &v
 }
 
-func (x *Request_Context) SetActiveTaskId(v string) {
+func (x *Request_TaskContext) SetActiveTaskId(v string) {
 	x.xxx_hidden_ActiveTaskId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *Request_Context) HasActiveTaskId() bool {
+func (x *Request_TaskContext) HasActiveTaskId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Context) ClearActiveTaskId() {
+func (x *Request_TaskContext) ClearActiveTaskId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_ActiveTaskId = nil
 }
 
-type Request_Context_builder struct {
+type Request_TaskContext_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// List of all tasks
+	// List of all known tasks.
 	Tasks []*Task
 	// Currently active task ID, if there is one.
 	ActiveTaskId *string
 }
 
-func (b0 Request_Context_builder) Build() *Request_Context {
-	m0 := &Request_Context{}
+func (b0 Request_TaskContext_builder) Build() *Request_TaskContext {
+	m0 := &Request_TaskContext{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Tasks = &b.Tasks
@@ -415,27 +269,228 @@ func (b0 Request_Context_builder) Build() *Request_Context {
 	return m0
 }
 
-// Client context associated to the input.
-type Input_Context struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+type Request_Input struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Context *Request_Input_Context `protobuf:"bytes,1,opt,name=context"`
+	xxx_hidden_Type    isRequest_Input_Type   `protobuf_oneof:"type"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
-func (x *Input_Context) Reset() {
-	*x = Input_Context{}
+func (x *Request_Input) Reset() {
+	*x = Request_Input{}
+	mi := &file_request_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input) ProtoMessage() {}
+
+func (x *Request_Input) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input) GetContext() *Request_Input_Context {
+	if x != nil {
+		return x.xxx_hidden_Context
+	}
+	return nil
+}
+
+func (x *Request_Input) GetUserQuery() *Request_Input_UserQuery {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_UserQuery_); ok {
+			return x.UserQuery
+		}
+	}
+	return nil
+}
+
+func (x *Request_Input) GetToolCallResult() *Request_Input_ToolCallResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_ToolCallResult_); ok {
+			return x.ToolCallResult
+		}
+	}
+	return nil
+}
+
+func (x *Request_Input) SetContext(v *Request_Input_Context) {
+	x.xxx_hidden_Context = v
+}
+
+func (x *Request_Input) SetUserQuery(v *Request_Input_UserQuery) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &request_Input_UserQuery_{v}
+}
+
+func (x *Request_Input) SetToolCallResult(v *Request_Input_ToolCallResult) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &request_Input_ToolCallResult_{v}
+}
+
+func (x *Request_Input) HasContext() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Context != nil
+}
+
+func (x *Request_Input) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *Request_Input) HasUserQuery() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*request_Input_UserQuery_)
+	return ok
+}
+
+func (x *Request_Input) HasToolCallResult() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*request_Input_ToolCallResult_)
+	return ok
+}
+
+func (x *Request_Input) ClearContext() {
+	x.xxx_hidden_Context = nil
+}
+
+func (x *Request_Input) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *Request_Input) ClearUserQuery() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_UserQuery_); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *Request_Input) ClearToolCallResult() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_ToolCallResult_); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const Request_Input_Type_not_set_case case_Request_Input_Type = 0
+const Request_Input_UserQuery_case case_Request_Input_Type = 2
+const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
+
+func (x *Request_Input) WhichType() case_Request_Input_Type {
+	if x == nil {
+		return Request_Input_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *request_Input_UserQuery_:
+		return Request_Input_UserQuery_case
+	case *request_Input_ToolCallResult_:
+		return Request_Input_ToolCallResult_case
+	default:
+		return Request_Input_Type_not_set_case
+	}
+}
+
+type Request_Input_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Context *Request_Input_Context
+	// The type of input from the user.
+
+	// Fields of oneof xxx_hidden_Type:
+	UserQuery      *Request_Input_UserQuery
+	ToolCallResult *Request_Input_ToolCallResult
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 Request_Input_builder) Build() *Request_Input {
+	m0 := &Request_Input{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Context = b.Context
+	if b.UserQuery != nil {
+		x.xxx_hidden_Type = &request_Input_UserQuery_{b.UserQuery}
+	}
+	if b.ToolCallResult != nil {
+		x.xxx_hidden_Type = &request_Input_ToolCallResult_{b.ToolCallResult}
+	}
+	return m0
+}
+
+type case_Request_Input_Type protoreflect.FieldNumber
+
+func (x case_Request_Input_Type) String() string {
+	md := file_request_proto_msgTypes[2].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isRequest_Input_Type interface {
+	isRequest_Input_Type()
+}
+
+type request_Input_UserQuery_ struct {
+	UserQuery *Request_Input_UserQuery `protobuf:"bytes,2,opt,name=user_query,json=userQuery,oneof"`
+}
+
+type request_Input_ToolCallResult_ struct {
+	ToolCallResult *Request_Input_ToolCallResult `protobuf:"bytes,3,opt,name=tool_call_result,json=toolCallResult,oneof"`
+}
+
+func (*request_Input_UserQuery_) isRequest_Input_Type() {}
+
+func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
+
+type Request_Metadata struct {
+	state                     protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId *string                     `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging        map[string]*structpb.Struct `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *Request_Metadata) Reset() {
+	*x = Request_Metadata{}
 	mi := &file_request_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Input_Context) String() string {
+func (x *Request_Metadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Input_Context) ProtoMessage() {}
+func (*Request_Metadata) ProtoMessage() {}
 
-func (x *Input_Context) ProtoReflect() protoreflect.Message {
+func (x *Request_Metadata) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -447,20 +502,376 @@ func (x *Input_Context) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type Input_Context_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
+func (x *Request_Metadata) GetConversationId() string {
+	if x != nil {
+		if x.xxx_hidden_ConversationId != nil {
+			return *x.xxx_hidden_ConversationId
+		}
+		return ""
+	}
+	return ""
 }
 
-func (b0 Input_Context_builder) Build() *Input_Context {
-	m0 := &Input_Context{}
+func (x *Request_Metadata) GetLogging() map[string]*structpb.Struct {
+	if x != nil {
+		return x.xxx_hidden_Logging
+	}
+	return nil
+}
+
+func (x *Request_Metadata) SetConversationId(v string) {
+	x.xxx_hidden_ConversationId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Request_Metadata) SetLogging(v map[string]*structpb.Struct) {
+	x.xxx_hidden_Logging = v
+}
+
+func (x *Request_Metadata) HasConversationId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Metadata) ClearConversationId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_ConversationId = nil
+}
+
+type Request_Metadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Optional conversation ID.
+	//
+	// If this request continues an existing conversation, this is expected to
+	// be the same conversation ID received in a previous AI response earlier in
+	// the conversation.
+	ConversationId *string
+	// Map of metadata to inline in server analytic events for this request.
+	// Values in the map should be JSON.
+	Logging map[string]*structpb.Struct
+}
+
+func (b0 Request_Metadata_builder) Build() *Request_Metadata {
+	m0 := &Request_Metadata{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.ConversationId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_ConversationId = b.ConversationId
+	}
+	x.xxx_hidden_Logging = b.Logging
 	return m0
 }
 
-// User query
-type Input_UserQuery struct {
+type Request_Settings struct {
+	state                                 protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_ModelConfig                *Request_Settings_ModelConfig `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
+	xxx_hidden_RulesEnabled               bool                          `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
+	xxx_hidden_WebContextRetrievalEnabled bool                          `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
+	XXX_raceDetectHookData                protoimpl.RaceDetectHookData
+	XXX_presence                          [1]uint32
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
+}
+
+func (x *Request_Settings) Reset() {
+	*x = Request_Settings{}
+	mi := &file_request_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Settings) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Settings) ProtoMessage() {}
+
+func (x *Request_Settings) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Settings) GetModelConfig() *Request_Settings_ModelConfig {
+	if x != nil {
+		return x.xxx_hidden_ModelConfig
+	}
+	return nil
+}
+
+func (x *Request_Settings) GetRulesEnabled() bool {
+	if x != nil {
+		return x.xxx_hidden_RulesEnabled
+	}
+	return false
+}
+
+func (x *Request_Settings) GetWebContextRetrievalEnabled() bool {
+	if x != nil {
+		return x.xxx_hidden_WebContextRetrievalEnabled
+	}
+	return false
+}
+
+func (x *Request_Settings) SetModelConfig(v *Request_Settings_ModelConfig) {
+	x.xxx_hidden_ModelConfig = v
+}
+
+func (x *Request_Settings) SetRulesEnabled(v bool) {
+	x.xxx_hidden_RulesEnabled = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Request_Settings) SetWebContextRetrievalEnabled(v bool) {
+	x.xxx_hidden_WebContextRetrievalEnabled = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *Request_Settings) HasModelConfig() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ModelConfig != nil
+}
+
+func (x *Request_Settings) HasRulesEnabled() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Settings) HasWebContextRetrievalEnabled() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Request_Settings) ClearModelConfig() {
+	x.xxx_hidden_ModelConfig = nil
+}
+
+func (x *Request_Settings) ClearRulesEnabled() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_RulesEnabled = false
+}
+
+func (x *Request_Settings) ClearWebContextRetrievalEnabled() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_WebContextRetrievalEnabled = false
+}
+
+type Request_Settings_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ModelConfig                *Request_Settings_ModelConfig
+	RulesEnabled               *bool
+	WebContextRetrievalEnabled *bool
+}
+
+func (b0 Request_Settings_builder) Build() *Request_Settings {
+	m0 := &Request_Settings{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_ModelConfig = b.ModelConfig
+	if b.RulesEnabled != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_RulesEnabled = *b.RulesEnabled
+	}
+	if b.WebContextRetrievalEnabled != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_WebContextRetrievalEnabled = *b.WebContextRetrievalEnabled
+	}
+	return m0
+}
+
+type Request_Input_Context struct {
+	state                            protoimpl.MessageState                         `protogen:"opaque.v1"`
+	xxx_hidden_Directory             *Request_Input_Context_Directory               `protobuf:"bytes,1,opt,name=directory"`
+	xxx_hidden_OperatingSystem       *Request_Input_Context_OperatingSystem         `protobuf:"bytes,2,opt,name=operating_system,json=operatingSystem"`
+	xxx_hidden_Shell                 *Request_Input_Context_Shell                   `protobuf:"bytes,3,opt,name=shell"`
+	xxx_hidden_CurrentTime           *timestamppb.Timestamp                         `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
+	xxx_hidden_ExecutedShellCommands *[]*Request_Input_Context_ExecutedShellCommand `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
+	xxx_hidden_SelectedText          *[]*Request_Input_Context_SelectedText         `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
+}
+
+func (x *Request_Input_Context) Reset() {
+	*x = Request_Input_Context{}
+	mi := &file_request_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_Context) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_Context) ProtoMessage() {}
+
+func (x *Request_Input_Context) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_Context) GetDirectory() *Request_Input_Context_Directory {
+	if x != nil {
+		return x.xxx_hidden_Directory
+	}
+	return nil
+}
+
+func (x *Request_Input_Context) GetOperatingSystem() *Request_Input_Context_OperatingSystem {
+	if x != nil {
+		return x.xxx_hidden_OperatingSystem
+	}
+	return nil
+}
+
+func (x *Request_Input_Context) GetShell() *Request_Input_Context_Shell {
+	if x != nil {
+		return x.xxx_hidden_Shell
+	}
+	return nil
+}
+
+func (x *Request_Input_Context) GetCurrentTime() *timestamppb.Timestamp {
+	if x != nil {
+		return x.xxx_hidden_CurrentTime
+	}
+	return nil
+}
+
+func (x *Request_Input_Context) GetExecutedShellCommands() []*Request_Input_Context_ExecutedShellCommand {
+	if x != nil {
+		if x.xxx_hidden_ExecutedShellCommands != nil {
+			return *x.xxx_hidden_ExecutedShellCommands
+		}
+	}
+	return nil
+}
+
+func (x *Request_Input_Context) GetSelectedText() []*Request_Input_Context_SelectedText {
+	if x != nil {
+		if x.xxx_hidden_SelectedText != nil {
+			return *x.xxx_hidden_SelectedText
+		}
+	}
+	return nil
+}
+
+func (x *Request_Input_Context) SetDirectory(v *Request_Input_Context_Directory) {
+	x.xxx_hidden_Directory = v
+}
+
+func (x *Request_Input_Context) SetOperatingSystem(v *Request_Input_Context_OperatingSystem) {
+	x.xxx_hidden_OperatingSystem = v
+}
+
+func (x *Request_Input_Context) SetShell(v *Request_Input_Context_Shell) {
+	x.xxx_hidden_Shell = v
+}
+
+func (x *Request_Input_Context) SetCurrentTime(v *timestamppb.Timestamp) {
+	x.xxx_hidden_CurrentTime = v
+}
+
+func (x *Request_Input_Context) SetExecutedShellCommands(v []*Request_Input_Context_ExecutedShellCommand) {
+	x.xxx_hidden_ExecutedShellCommands = &v
+}
+
+func (x *Request_Input_Context) SetSelectedText(v []*Request_Input_Context_SelectedText) {
+	x.xxx_hidden_SelectedText = &v
+}
+
+func (x *Request_Input_Context) HasDirectory() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Directory != nil
+}
+
+func (x *Request_Input_Context) HasOperatingSystem() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_OperatingSystem != nil
+}
+
+func (x *Request_Input_Context) HasShell() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Shell != nil
+}
+
+func (x *Request_Input_Context) HasCurrentTime() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CurrentTime != nil
+}
+
+func (x *Request_Input_Context) ClearDirectory() {
+	x.xxx_hidden_Directory = nil
+}
+
+func (x *Request_Input_Context) ClearOperatingSystem() {
+	x.xxx_hidden_OperatingSystem = nil
+}
+
+func (x *Request_Input_Context) ClearShell() {
+	x.xxx_hidden_Shell = nil
+}
+
+func (x *Request_Input_Context) ClearCurrentTime() {
+	x.xxx_hidden_CurrentTime = nil
+}
+
+type Request_Input_Context_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Directory             *Request_Input_Context_Directory
+	OperatingSystem       *Request_Input_Context_OperatingSystem
+	Shell                 *Request_Input_Context_Shell
+	CurrentTime           *timestamppb.Timestamp
+	ExecutedShellCommands []*Request_Input_Context_ExecutedShellCommand
+	SelectedText          []*Request_Input_Context_SelectedText
+}
+
+func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
+	m0 := &Request_Input_Context{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Directory = b.Directory
+	x.xxx_hidden_OperatingSystem = b.OperatingSystem
+	x.xxx_hidden_Shell = b.Shell
+	x.xxx_hidden_CurrentTime = b.CurrentTime
+	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
+	x.xxx_hidden_SelectedText = &b.SelectedText
+	return m0
+}
+
+type Request_Input_UserQuery struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -469,21 +880,21 @@ type Input_UserQuery struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Input_UserQuery) Reset() {
-	*x = Input_UserQuery{}
-	mi := &file_request_proto_msgTypes[4]
+func (x *Request_Input_UserQuery) Reset() {
+	*x = Request_Input_UserQuery{}
+	mi := &file_request_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Input_UserQuery) String() string {
+func (x *Request_Input_UserQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Input_UserQuery) ProtoMessage() {}
+func (*Request_Input_UserQuery) ProtoMessage() {}
 
-func (x *Input_UserQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[4]
+func (x *Request_Input_UserQuery) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -494,7 +905,7 @@ func (x *Input_UserQuery) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Input_UserQuery) GetQuery() string {
+func (x *Request_Input_UserQuery) GetQuery() string {
 	if x != nil {
 		if x.xxx_hidden_Query != nil {
 			return *x.xxx_hidden_Query
@@ -504,31 +915,31 @@ func (x *Input_UserQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Input_UserQuery) SetQuery(v string) {
+func (x *Request_Input_UserQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *Input_UserQuery) HasQuery() bool {
+func (x *Request_Input_UserQuery) HasQuery() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Input_UserQuery) ClearQuery() {
+func (x *Request_Input_UserQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
 }
 
-type Input_UserQuery_builder struct {
+type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query *string
 }
 
-func (b0 Input_UserQuery_builder) Build() *Input_UserQuery {
-	m0 := &Input_UserQuery{}
+func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
+	m0 := &Request_Input_UserQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
@@ -539,31 +950,31 @@ func (b0 Input_UserQuery_builder) Build() *Input_UserQuery {
 }
 
 // Tool call result
-type Input_ToolCallResult struct {
-	state                  protoimpl.MessageState        `protogen:"opaque.v1"`
-	xxx_hidden_ToolCallId  *string                       `protobuf:"bytes,1,opt,name=tool_call_id,json=toolCallId"`
-	xxx_hidden_Result      isInput_ToolCallResult_Result `protobuf_oneof:"result"`
+type Request_Input_ToolCallResult struct {
+	state                  protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_ToolCallId  *string                               `protobuf:"bytes,1,opt,name=tool_call_id,json=toolCallId"`
+	xxx_hidden_Result      isRequest_Input_ToolCallResult_Result `protobuf_oneof:"result"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Input_ToolCallResult) Reset() {
-	*x = Input_ToolCallResult{}
-	mi := &file_request_proto_msgTypes[5]
+func (x *Request_Input_ToolCallResult) Reset() {
+	*x = Request_Input_ToolCallResult{}
+	mi := &file_request_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Input_ToolCallResult) String() string {
+func (x *Request_Input_ToolCallResult) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Input_ToolCallResult) ProtoMessage() {}
+func (*Request_Input_ToolCallResult) ProtoMessage() {}
 
-func (x *Input_ToolCallResult) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[5]
+func (x *Request_Input_ToolCallResult) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -574,7 +985,7 @@ func (x *Input_ToolCallResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Input_ToolCallResult) GetToolCallId() string {
+func (x *Request_Input_ToolCallResult) GetToolCallId() string {
 	if x != nil {
 		if x.xxx_hidden_ToolCallId != nil {
 			return *x.xxx_hidden_ToolCallId
@@ -584,183 +995,183 @@ func (x *Input_ToolCallResult) GetToolCallId() string {
 	return ""
 }
 
-func (x *Input_ToolCallResult) GetRunShellCommand() *RunShellCommandResult {
+func (x *Request_Input_ToolCallResult) GetRunShellCommand() *RunShellCommandResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*input_ToolCallResult_RunShellCommand); ok {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_RunShellCommand); ok {
 			return x.RunShellCommand
 		}
 	}
 	return nil
 }
 
-func (x *Input_ToolCallResult) GetReadFiles() *ReadFilesResult {
+func (x *Request_Input_ToolCallResult) GetReadFiles() *ReadFilesResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*input_ToolCallResult_ReadFiles); ok {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadFiles); ok {
 			return x.ReadFiles
 		}
 	}
 	return nil
 }
 
-func (x *Input_ToolCallResult) GetSearchCodebase() *SearchCodebaseResult {
+func (x *Request_Input_ToolCallResult) GetSearchCodebase() *SearchCodebaseResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*input_ToolCallResult_SearchCodebase); ok {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_SearchCodebase); ok {
 			return x.SearchCodebase
 		}
 	}
 	return nil
 }
 
-func (x *Input_ToolCallResult) GetApplyFileDiffs() *ApplyFileDiffsResult {
+func (x *Request_Input_ToolCallResult) GetApplyFileDiffs() *ApplyFileDiffsResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*input_ToolCallResult_ApplyFileDiffs); ok {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ApplyFileDiffs); ok {
 			return x.ApplyFileDiffs
 		}
 	}
 	return nil
 }
 
-func (x *Input_ToolCallResult) SetToolCallId(v string) {
+func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Input_ToolCallResult) SetRunShellCommand(v *RunShellCommandResult) {
+func (x *Request_Input_ToolCallResult) SetRunShellCommand(v *RunShellCommandResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &input_ToolCallResult_RunShellCommand{v}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_RunShellCommand{v}
 }
 
-func (x *Input_ToolCallResult) SetReadFiles(v *ReadFilesResult) {
+func (x *Request_Input_ToolCallResult) SetReadFiles(v *ReadFilesResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &input_ToolCallResult_ReadFiles{v}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadFiles{v}
 }
 
-func (x *Input_ToolCallResult) SetSearchCodebase(v *SearchCodebaseResult) {
+func (x *Request_Input_ToolCallResult) SetSearchCodebase(v *SearchCodebaseResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &input_ToolCallResult_SearchCodebase{v}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_SearchCodebase{v}
 }
 
-func (x *Input_ToolCallResult) SetApplyFileDiffs(v *ApplyFileDiffsResult) {
+func (x *Request_Input_ToolCallResult) SetApplyFileDiffs(v *ApplyFileDiffsResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &input_ToolCallResult_ApplyFileDiffs{v}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_ApplyFileDiffs{v}
 }
 
-func (x *Input_ToolCallResult) HasToolCallId() bool {
+func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Input_ToolCallResult) HasResult() bool {
+func (x *Request_Input_ToolCallResult) HasResult() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Result != nil
 }
 
-func (x *Input_ToolCallResult) HasRunShellCommand() bool {
+func (x *Request_Input_ToolCallResult) HasRunShellCommand() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*input_ToolCallResult_RunShellCommand)
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_RunShellCommand)
 	return ok
 }
 
-func (x *Input_ToolCallResult) HasReadFiles() bool {
+func (x *Request_Input_ToolCallResult) HasReadFiles() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*input_ToolCallResult_ReadFiles)
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadFiles)
 	return ok
 }
 
-func (x *Input_ToolCallResult) HasSearchCodebase() bool {
+func (x *Request_Input_ToolCallResult) HasSearchCodebase() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*input_ToolCallResult_SearchCodebase)
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_SearchCodebase)
 	return ok
 }
 
-func (x *Input_ToolCallResult) HasApplyFileDiffs() bool {
+func (x *Request_Input_ToolCallResult) HasApplyFileDiffs() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*input_ToolCallResult_ApplyFileDiffs)
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ApplyFileDiffs)
 	return ok
 }
 
-func (x *Input_ToolCallResult) ClearToolCallId() {
+func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
 }
 
-func (x *Input_ToolCallResult) ClearResult() {
+func (x *Request_Input_ToolCallResult) ClearResult() {
 	x.xxx_hidden_Result = nil
 }
 
-func (x *Input_ToolCallResult) ClearRunShellCommand() {
-	if _, ok := x.xxx_hidden_Result.(*input_ToolCallResult_RunShellCommand); ok {
+func (x *Request_Input_ToolCallResult) ClearRunShellCommand() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_RunShellCommand); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *Input_ToolCallResult) ClearReadFiles() {
-	if _, ok := x.xxx_hidden_Result.(*input_ToolCallResult_ReadFiles); ok {
+func (x *Request_Input_ToolCallResult) ClearReadFiles() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadFiles); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *Input_ToolCallResult) ClearSearchCodebase() {
-	if _, ok := x.xxx_hidden_Result.(*input_ToolCallResult_SearchCodebase); ok {
+func (x *Request_Input_ToolCallResult) ClearSearchCodebase() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_SearchCodebase); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *Input_ToolCallResult) ClearApplyFileDiffs() {
-	if _, ok := x.xxx_hidden_Result.(*input_ToolCallResult_ApplyFileDiffs); ok {
+func (x *Request_Input_ToolCallResult) ClearApplyFileDiffs() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ApplyFileDiffs); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-const Input_ToolCallResult_Result_not_set_case case_Input_ToolCallResult_Result = 0
-const Input_ToolCallResult_RunShellCommand_case case_Input_ToolCallResult_Result = 2
-const Input_ToolCallResult_ReadFiles_case case_Input_ToolCallResult_Result = 3
-const Input_ToolCallResult_SearchCodebase_case case_Input_ToolCallResult_Result = 4
-const Input_ToolCallResult_ApplyFileDiffs_case case_Input_ToolCallResult_Result = 5
+const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
+const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
+const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
+const Request_Input_ToolCallResult_SearchCodebase_case case_Request_Input_ToolCallResult_Result = 4
+const Request_Input_ToolCallResult_ApplyFileDiffs_case case_Request_Input_ToolCallResult_Result = 5
 
-func (x *Input_ToolCallResult) WhichResult() case_Input_ToolCallResult_Result {
+func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
-		return Input_ToolCallResult_Result_not_set_case
+		return Request_Input_ToolCallResult_Result_not_set_case
 	}
 	switch x.xxx_hidden_Result.(type) {
-	case *input_ToolCallResult_RunShellCommand:
-		return Input_ToolCallResult_RunShellCommand_case
-	case *input_ToolCallResult_ReadFiles:
-		return Input_ToolCallResult_ReadFiles_case
-	case *input_ToolCallResult_SearchCodebase:
-		return Input_ToolCallResult_SearchCodebase_case
-	case *input_ToolCallResult_ApplyFileDiffs:
-		return Input_ToolCallResult_ApplyFileDiffs_case
+	case *request_Input_ToolCallResult_RunShellCommand:
+		return Request_Input_ToolCallResult_RunShellCommand_case
+	case *request_Input_ToolCallResult_ReadFiles:
+		return Request_Input_ToolCallResult_ReadFiles_case
+	case *request_Input_ToolCallResult_SearchCodebase:
+		return Request_Input_ToolCallResult_SearchCodebase_case
+	case *request_Input_ToolCallResult_ApplyFileDiffs:
+		return Request_Input_ToolCallResult_ApplyFileDiffs_case
 	default:
-		return Input_ToolCallResult_Result_not_set_case
+		return Request_Input_ToolCallResult_Result_not_set_case
 	}
 }
 
-type Input_ToolCallResult_builder struct {
+type Request_Input_ToolCallResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ToolCallId *string
@@ -772,8 +1183,8 @@ type Input_ToolCallResult_builder struct {
 	// -- end of xxx_hidden_Result
 }
 
-func (b0 Input_ToolCallResult_builder) Build() *Input_ToolCallResult {
-	m0 := &Input_ToolCallResult{}
+func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallResult {
+	m0 := &Request_Input_ToolCallResult{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ToolCallId != nil {
@@ -781,76 +1192,802 @@ func (b0 Input_ToolCallResult_builder) Build() *Input_ToolCallResult {
 		x.xxx_hidden_ToolCallId = b.ToolCallId
 	}
 	if b.RunShellCommand != nil {
-		x.xxx_hidden_Result = &input_ToolCallResult_RunShellCommand{b.RunShellCommand}
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_RunShellCommand{b.RunShellCommand}
 	}
 	if b.ReadFiles != nil {
-		x.xxx_hidden_Result = &input_ToolCallResult_ReadFiles{b.ReadFiles}
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadFiles{b.ReadFiles}
 	}
 	if b.SearchCodebase != nil {
-		x.xxx_hidden_Result = &input_ToolCallResult_SearchCodebase{b.SearchCodebase}
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_SearchCodebase{b.SearchCodebase}
 	}
 	if b.ApplyFileDiffs != nil {
-		x.xxx_hidden_Result = &input_ToolCallResult_ApplyFileDiffs{b.ApplyFileDiffs}
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_ApplyFileDiffs{b.ApplyFileDiffs}
 	}
 	return m0
 }
 
-type case_Input_ToolCallResult_Result protoreflect.FieldNumber
+type case_Request_Input_ToolCallResult_Result protoreflect.FieldNumber
 
-func (x case_Input_ToolCallResult_Result) String() string {
-	md := file_request_proto_msgTypes[5].Descriptor()
+func (x case_Request_Input_ToolCallResult_Result) String() string {
+	md := file_request_proto_msgTypes[7].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isInput_ToolCallResult_Result interface {
-	isInput_ToolCallResult_Result()
+type isRequest_Input_ToolCallResult_Result interface {
+	isRequest_Input_ToolCallResult_Result()
 }
 
-type input_ToolCallResult_RunShellCommand struct {
+type request_Input_ToolCallResult_RunShellCommand struct {
 	RunShellCommand *RunShellCommandResult `protobuf:"bytes,2,opt,name=run_shell_command,json=runShellCommand,oneof"`
 }
 
-type input_ToolCallResult_ReadFiles struct {
+type request_Input_ToolCallResult_ReadFiles struct {
 	ReadFiles *ReadFilesResult `protobuf:"bytes,3,opt,name=read_files,json=readFiles,oneof"`
 }
 
-type input_ToolCallResult_SearchCodebase struct {
+type request_Input_ToolCallResult_SearchCodebase struct {
 	SearchCodebase *SearchCodebaseResult `protobuf:"bytes,4,opt,name=search_codebase,json=searchCodebase,oneof"`
 }
 
-type input_ToolCallResult_ApplyFileDiffs struct {
+type request_Input_ToolCallResult_ApplyFileDiffs struct {
 	ApplyFileDiffs *ApplyFileDiffsResult `protobuf:"bytes,5,opt,name=apply_file_diffs,json=applyFileDiffs,oneof"`
 }
 
-func (*input_ToolCallResult_RunShellCommand) isInput_ToolCallResult_Result() {}
+func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
-func (*input_ToolCallResult_ReadFiles) isInput_ToolCallResult_Result() {}
+func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
 
-func (*input_ToolCallResult_SearchCodebase) isInput_ToolCallResult_Result() {}
+func (*request_Input_ToolCallResult_SearchCodebase) isRequest_Input_ToolCallResult_Result() {}
 
-func (*input_ToolCallResult_ApplyFileDiffs) isInput_ToolCallResult_Result() {}
+func (*request_Input_ToolCallResult_ApplyFileDiffs) isRequest_Input_ToolCallResult_Result() {}
+
+// Information about shell commands that the user has executed.
+type Request_Input_Context_ExecutedShellCommand struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
+	xxx_hidden_Output      *string                `protobuf:"bytes,2,opt,name=output"`
+	xxx_hidden_ExitCode    int32                  `protobuf:"varint,3,opt,name=exit_code,json=exitCode"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) Reset() {
+	*x = Request_Input_Context_ExecutedShellCommand{}
+	mi := &file_request_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_Context_ExecutedShellCommand) ProtoMessage() {}
+
+func (x *Request_Input_Context_ExecutedShellCommand) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) GetCommand() string {
+	if x != nil {
+		if x.xxx_hidden_Command != nil {
+			return *x.xxx_hidden_Command
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) GetOutput() string {
+	if x != nil {
+		if x.xxx_hidden_Output != nil {
+			return *x.xxx_hidden_Output
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) GetExitCode() int32 {
+	if x != nil {
+		return x.xxx_hidden_ExitCode
+	}
+	return 0
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) SetCommand(v string) {
+	x.xxx_hidden_Command = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) SetOutput(v string) {
+	x.xxx_hidden_Output = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) SetExitCode(v int32) {
+	x.xxx_hidden_ExitCode = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) HasCommand() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) HasOutput() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) HasExitCode() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) ClearCommand() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Command = nil
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) ClearOutput() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Output = nil
+}
+
+func (x *Request_Input_Context_ExecutedShellCommand) ClearExitCode() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ExitCode = 0
+}
+
+type Request_Input_Context_ExecutedShellCommand_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Command  *string
+	Output   *string
+	ExitCode *int32
+}
+
+func (b0 Request_Input_Context_ExecutedShellCommand_builder) Build() *Request_Input_Context_ExecutedShellCommand {
+	m0 := &Request_Input_Context_ExecutedShellCommand{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Command != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Command = b.Command
+	}
+	if b.Output != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Output = b.Output
+	}
+	if b.ExitCode != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_ExitCode = *b.ExitCode
+	}
+	return m0
+}
+
+type Request_Input_Context_SelectedText struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Text        *string                `protobuf:"bytes,1,opt,name=text"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_Input_Context_SelectedText) Reset() {
+	*x = Request_Input_Context_SelectedText{}
+	mi := &file_request_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_Context_SelectedText) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_Context_SelectedText) ProtoMessage() {}
+
+func (x *Request_Input_Context_SelectedText) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_Context_SelectedText) GetText() string {
+	if x != nil {
+		if x.xxx_hidden_Text != nil {
+			return *x.xxx_hidden_Text
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_SelectedText) SetText(v string) {
+	x.xxx_hidden_Text = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *Request_Input_Context_SelectedText) HasText() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_Context_SelectedText) ClearText() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Text = nil
+}
+
+type Request_Input_Context_SelectedText_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Text *string
+}
+
+func (b0 Request_Input_Context_SelectedText_builder) Build() *Request_Input_Context_SelectedText {
+	m0 := &Request_Input_Context_SelectedText{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Text != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Text = b.Text
+	}
+	return m0
+}
+
+// Information about the user's directories.
+type Request_Input_Context_Directory struct {
+	state                            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Pwd                   *string                `protobuf:"bytes,1,opt,name=pwd"`
+	xxx_hidden_Home                  *string                `protobuf:"bytes,2,opt,name=home"`
+	xxx_hidden_PwdFileSymbolsIndexed bool                   `protobuf:"varint,3,opt,name=pwd_file_symbols_indexed,json=pwdFileSymbolsIndexed"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
+}
+
+func (x *Request_Input_Context_Directory) Reset() {
+	*x = Request_Input_Context_Directory{}
+	mi := &file_request_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_Context_Directory) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_Context_Directory) ProtoMessage() {}
+
+func (x *Request_Input_Context_Directory) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_Context_Directory) GetPwd() string {
+	if x != nil {
+		if x.xxx_hidden_Pwd != nil {
+			return *x.xxx_hidden_Pwd
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_Directory) GetHome() string {
+	if x != nil {
+		if x.xxx_hidden_Home != nil {
+			return *x.xxx_hidden_Home
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_Directory) GetPwdFileSymbolsIndexed() bool {
+	if x != nil {
+		return x.xxx_hidden_PwdFileSymbolsIndexed
+	}
+	return false
+}
+
+func (x *Request_Input_Context_Directory) SetPwd(v string) {
+	x.xxx_hidden_Pwd = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *Request_Input_Context_Directory) SetHome(v string) {
+	x.xxx_hidden_Home = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Request_Input_Context_Directory) SetPwdFileSymbolsIndexed(v bool) {
+	x.xxx_hidden_PwdFileSymbolsIndexed = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *Request_Input_Context_Directory) HasPwd() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_Context_Directory) HasHome() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Input_Context_Directory) HasPwdFileSymbolsIndexed() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Request_Input_Context_Directory) ClearPwd() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Pwd = nil
+}
+
+func (x *Request_Input_Context_Directory) ClearHome() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Home = nil
+}
+
+func (x *Request_Input_Context_Directory) ClearPwdFileSymbolsIndexed() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_PwdFileSymbolsIndexed = false
+}
+
+type Request_Input_Context_Directory_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Pwd                   *string
+	Home                  *string
+	PwdFileSymbolsIndexed *bool
+}
+
+func (b0 Request_Input_Context_Directory_builder) Build() *Request_Input_Context_Directory {
+	m0 := &Request_Input_Context_Directory{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Pwd != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Pwd = b.Pwd
+	}
+	if b.Home != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Home = b.Home
+	}
+	if b.PwdFileSymbolsIndexed != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_PwdFileSymbolsIndexed = *b.PwdFileSymbolsIndexed
+	}
+	return m0
+}
+
+// Information about the user's terminal shell.
+type Request_Input_Context_Shell struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Version     *string                `protobuf:"bytes,2,opt,name=version"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_Input_Context_Shell) Reset() {
+	*x = Request_Input_Context_Shell{}
+	mi := &file_request_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_Context_Shell) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_Context_Shell) ProtoMessage() {}
+
+func (x *Request_Input_Context_Shell) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_Context_Shell) GetName() string {
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_Shell) GetVersion() string {
+	if x != nil {
+		if x.xxx_hidden_Version != nil {
+			return *x.xxx_hidden_Version
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_Shell) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Request_Input_Context_Shell) SetVersion(v string) {
+	x.xxx_hidden_Version = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Request_Input_Context_Shell) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_Context_Shell) HasVersion() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Input_Context_Shell) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *Request_Input_Context_Shell) ClearVersion() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Version = nil
+}
+
+type Request_Input_Context_Shell_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name    *string
+	Version *string
+}
+
+func (b0 Request_Input_Context_Shell_builder) Build() *Request_Input_Context_Shell {
+	m0 := &Request_Input_Context_Shell{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Version != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Version = b.Version
+	}
+	return m0
+}
+
+// Information about the user's operating system.
+type Request_Input_Context_OperatingSystem struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Platform     *string                `protobuf:"bytes,1,opt,name=platform"`
+	xxx_hidden_Distribution *string                `protobuf:"bytes,2,opt,name=distribution"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *Request_Input_Context_OperatingSystem) Reset() {
+	*x = Request_Input_Context_OperatingSystem{}
+	mi := &file_request_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_Context_OperatingSystem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_Context_OperatingSystem) ProtoMessage() {}
+
+func (x *Request_Input_Context_OperatingSystem) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_Context_OperatingSystem) GetPlatform() string {
+	if x != nil {
+		if x.xxx_hidden_Platform != nil {
+			return *x.xxx_hidden_Platform
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_OperatingSystem) GetDistribution() string {
+	if x != nil {
+		if x.xxx_hidden_Distribution != nil {
+			return *x.xxx_hidden_Distribution
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_Context_OperatingSystem) SetPlatform(v string) {
+	x.xxx_hidden_Platform = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Request_Input_Context_OperatingSystem) SetDistribution(v string) {
+	x.xxx_hidden_Distribution = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Request_Input_Context_OperatingSystem) HasPlatform() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_Context_OperatingSystem) HasDistribution() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Input_Context_OperatingSystem) ClearPlatform() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Platform = nil
+}
+
+func (x *Request_Input_Context_OperatingSystem) ClearDistribution() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Distribution = nil
+}
+
+type Request_Input_Context_OperatingSystem_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The OS "category", e.g. "MacOS" or "Linux".
+	Platform *string
+	// The OS distribution, which is typically only populated for Linux,
+	// e.g. Fedora or Ubuntu.
+	Distribution *string
+}
+
+func (b0 Request_Input_Context_OperatingSystem_builder) Build() *Request_Input_Context_OperatingSystem {
+	m0 := &Request_Input_Context_OperatingSystem{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Platform != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Platform = b.Platform
+	}
+	if b.Distribution != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Distribution = b.Distribution
+	}
+	return m0
+}
+
+type Request_Settings_ModelConfig struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Base        *string                `protobuf:"bytes,1,opt,name=base"`
+	xxx_hidden_Planning    *string                `protobuf:"bytes,2,opt,name=planning"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_Settings_ModelConfig) Reset() {
+	*x = Request_Settings_ModelConfig{}
+	mi := &file_request_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Settings_ModelConfig) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Settings_ModelConfig) ProtoMessage() {}
+
+func (x *Request_Settings_ModelConfig) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Settings_ModelConfig) GetBase() string {
+	if x != nil {
+		if x.xxx_hidden_Base != nil {
+			return *x.xxx_hidden_Base
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Settings_ModelConfig) GetPlanning() string {
+	if x != nil {
+		if x.xxx_hidden_Planning != nil {
+			return *x.xxx_hidden_Planning
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Settings_ModelConfig) SetBase(v string) {
+	x.xxx_hidden_Base = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Request_Settings_ModelConfig) SetPlanning(v string) {
+	x.xxx_hidden_Planning = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Request_Settings_ModelConfig) HasBase() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Settings_ModelConfig) HasPlanning() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Settings_ModelConfig) ClearBase() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Base = nil
+}
+
+func (x *Request_Settings_ModelConfig) ClearPlanning() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Planning = nil
+}
+
+type Request_Settings_ModelConfig_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The LLM of preference for general tasks.
+	Base *string
+	// The LLM of preference for reasoning tasks.
+	Planning *string
+}
+
+func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelConfig {
+	m0 := &Request_Settings_ModelConfig{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Base != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Base = b.Base
+	}
+	if b.Planning != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Planning = b.Planning
+	}
+	return m0
+}
 
 var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
-	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\n" +
-	"task.proto\"\xdd\x01\n" +
-	"\aRequest\x12>\n" +
-	"\acontext\x18\x01 \x01(\v2$.warp.multi_agent.v1.Request.ContextR\acontext\x120\n" +
-	"\x05input\x18\x02 \x01(\v2\x1a.warp.multi_agent.v1.InputR\x05input\x1a`\n" +
-	"\aContext\x12/\n" +
+	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\n" +
+	"task.proto\"\xbb\x13\n" +
+	"\aRequest\x12K\n" +
+	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
+	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
+	"\bsettings\x18\x03 \x01(\v2%.warp.multi_agent.v1.Request.SettingsR\bsettings\x12A\n" +
+	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
+	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\"\xa6\x05\n" +
-	"\x05Input\x12<\n" +
-	"\acontext\x18\x01 \x01(\v2\".warp.multi_agent.v1.Input.ContextR\acontext\x12E\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xd9\f\n" +
+	"\x05Input\x12D\n" +
+	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
-	"user_query\x18\x02 \x01(\v2$.warp.multi_agent.v1.Input.UserQueryH\x00R\tuserQuery\x12U\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v2).warp.multi_agent.v1.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\t\n" +
-	"\aContext\x1a!\n" +
+	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xa3\a\n" +
+	"\aContext\x12R\n" +
+	"\tdirectory\x18\x01 \x01(\v24.warp.multi_agent.v1.Request.Input.Context.DirectoryR\tdirectory\x12e\n" +
+	"\x10operating_system\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.Context.OperatingSystemR\x0foperatingSystem\x12F\n" +
+	"\x05shell\x18\x03 \x01(\v20.warp.multi_agent.v1.Request.Input.Context.ShellR\x05shell\x12=\n" +
+	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12w\n" +
+	"\x17executed_shell_commands\x18\x05 \x03(\v2?.warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommandR\x15executedShellCommands\x12\\\n" +
+	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x1ae\n" +
+	"\x14ExecutedShellCommand\x12\x18\n" +
+	"\acommand\x18\x01 \x01(\tR\acommand\x12\x16\n" +
+	"\x06output\x18\x02 \x01(\tR\x06output\x12\x1b\n" +
+	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x1a\"\n" +
+	"\fSelectedText\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x1aj\n" +
+	"\tDirectory\x12\x10\n" +
+	"\x03pwd\x18\x01 \x01(\tR\x03pwd\x12\x12\n" +
+	"\x04home\x18\x02 \x01(\tR\x04home\x127\n" +
+	"\x18pwd_file_symbols_indexed\x18\x03 \x01(\bR\x15pwdFileSymbolsIndexed\x1a5\n" +
+	"\x05Shell\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\tR\aversion\x1aQ\n" +
+	"\x0fOperatingSystem\x12\x1a\n" +
+	"\bplatform\x18\x01 \x01(\tR\bplatform\x12\"\n" +
+	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a!\n" +
 	"\tUserQuery\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x1a\x8a\x03\n" +
 	"\x0eToolCallResult\x12 \n" +
@@ -862,38 +1999,73 @@ const file_request_proto_rawDesc = "" +
 	"\x0fsearch_codebase\x18\x04 \x01(\v2).warp.multi_agent.v1.SearchCodebaseResultH\x00R\x0esearchCodebase\x12U\n" +
 	"\x10apply_file_diffs\x18\x05 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffsB\b\n" +
 	"\x06resultB\x06\n" +
-	"\x04typeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04type\x1a\xd6\x01\n" +
+	"\bMetadata\x12'\n" +
+	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aS\n" +
+	"\fLoggingEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
+	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\x1a\x87\x02\n" +
+	"\bSettings\x12T\n" +
+	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
+	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
+	"\x1dweb_context_retrieval_enabled\x18\x03 \x01(\bR\x1awebContextRetrievalEnabled\x1a=\n" +
+	"\vModelConfig\x12\x12\n" +
+	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
+	"\bplanning\x18\x02 \x01(\tR\bplanningB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_request_proto_goTypes = []any{
-	(*Request)(nil),               // 0: warp.multi_agent.v1.Request
-	(*Input)(nil),                 // 1: warp.multi_agent.v1.Input
-	(*Request_Context)(nil),       // 2: warp.multi_agent.v1.Request.Context
-	(*Input_Context)(nil),         // 3: warp.multi_agent.v1.Input.Context
-	(*Input_UserQuery)(nil),       // 4: warp.multi_agent.v1.Input.UserQuery
-	(*Input_ToolCallResult)(nil),  // 5: warp.multi_agent.v1.Input.ToolCallResult
-	(*Task)(nil),                  // 6: warp.multi_agent.v1.Task
-	(*RunShellCommandResult)(nil), // 7: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),       // 8: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),  // 9: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),  // 10: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*Request)(nil),                                    // 0: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                        // 1: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                              // 2: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                           // 3: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                           // 4: warp.multi_agent.v1.Request.Settings
+	(*Request_Input_Context)(nil),                      // 5: warp.multi_agent.v1.Request.Input.Context
+	(*Request_Input_UserQuery)(nil),                    // 6: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_ToolCallResult)(nil),               // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_Context_ExecutedShellCommand)(nil), // 8: warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
+	(*Request_Input_Context_SelectedText)(nil),         // 9: warp.multi_agent.v1.Request.Input.Context.SelectedText
+	(*Request_Input_Context_Directory)(nil),            // 10: warp.multi_agent.v1.Request.Input.Context.Directory
+	(*Request_Input_Context_Shell)(nil),                // 11: warp.multi_agent.v1.Request.Input.Context.Shell
+	(*Request_Input_Context_OperatingSystem)(nil),      // 12: warp.multi_agent.v1.Request.Input.Context.OperatingSystem
+	nil,                                  // 13: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil), // 14: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Task)(nil),                         // 15: warp.multi_agent.v1.Task
+	(*timestamppb.Timestamp)(nil),        // 16: google.protobuf.Timestamp
+	(*RunShellCommandResult)(nil),        // 17: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),              // 18: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),         // 19: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),         // 20: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*structpb.Struct)(nil),              // 21: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
-	2,  // 0: warp.multi_agent.v1.Request.context:type_name -> warp.multi_agent.v1.Request.Context
-	1,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Input
-	3,  // 2: warp.multi_agent.v1.Input.context:type_name -> warp.multi_agent.v1.Input.Context
-	4,  // 3: warp.multi_agent.v1.Input.user_query:type_name -> warp.multi_agent.v1.Input.UserQuery
-	5,  // 4: warp.multi_agent.v1.Input.tool_call_result:type_name -> warp.multi_agent.v1.Input.ToolCallResult
-	6,  // 5: warp.multi_agent.v1.Request.Context.tasks:type_name -> warp.multi_agent.v1.Task
-	7,  // 6: warp.multi_agent.v1.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	8,  // 7: warp.multi_agent.v1.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	9,  // 8: warp.multi_agent.v1.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	10, // 9: warp.multi_agent.v1.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	10, // [10:10] is the sub-list for method output_type
-	10, // [10:10] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
+	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
+	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
+	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
+	15, // 4: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	5,  // 5: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.Request.Input.Context
+	6,  // 6: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	7,  // 7: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	13, // 8: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	14, // 9: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	10, // 10: warp.multi_agent.v1.Request.Input.Context.directory:type_name -> warp.multi_agent.v1.Request.Input.Context.Directory
+	12, // 11: warp.multi_agent.v1.Request.Input.Context.operating_system:type_name -> warp.multi_agent.v1.Request.Input.Context.OperatingSystem
+	11, // 12: warp.multi_agent.v1.Request.Input.Context.shell:type_name -> warp.multi_agent.v1.Request.Input.Context.Shell
+	16, // 13: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
+	8,  // 14: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
+	9,  // 15: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
+	17, // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	18, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	19, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	20, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	21, // 20: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Struct
+	21, // [21:21] is the sub-list for method output_type
+	21, // [21:21] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -902,15 +2074,15 @@ func file_request_proto_init() {
 		return
 	}
 	file_task_proto_init()
-	file_request_proto_msgTypes[1].OneofWrappers = []any{
-		(*input_UserQuery_)(nil),
-		(*input_ToolCallResult_)(nil),
+	file_request_proto_msgTypes[2].OneofWrappers = []any{
+		(*request_Input_UserQuery_)(nil),
+		(*request_Input_ToolCallResult_)(nil),
 	}
-	file_request_proto_msgTypes[5].OneofWrappers = []any{
-		(*input_ToolCallResult_RunShellCommand)(nil),
-		(*input_ToolCallResult_ReadFiles)(nil),
-		(*input_ToolCallResult_SearchCodebase)(nil),
-		(*input_ToolCallResult_ApplyFileDiffs)(nil),
+	file_request_proto_msgTypes[7].OneofWrappers = []any{
+		(*request_Input_ToolCallResult_RunShellCommand)(nil),
+		(*request_Input_ToolCallResult_ReadFiles)(nil),
+		(*request_Input_ToolCallResult_SearchCodebase)(nil),
+		(*request_Input_ToolCallResult_ApplyFileDiffs)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -918,7 +2090,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
