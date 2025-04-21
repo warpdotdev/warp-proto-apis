@@ -147,6 +147,7 @@ message Message {
       ServerResult server = 4;
       ReadFilesResult read_files = 5;
       ApplyFileDiffsResult apply_file_diffs = 6;
+      SuggestPlanResult suggest_plan = 7;
     }
 
     // Result of a server-side tool call.
@@ -181,4 +182,20 @@ message FileContent {
   string file_path = 1;
   string content = 2;
   FileContentLineRange line_range = 3;
+}
+
+// Result of a `SuggestPlan` tool call.
+message SuggestPlanResult {
+  oneof result {
+    // The user accepted the plan as-is.
+    bool accepted = 1;
+    // The user provided a manually-edited plan to execute.
+    UserEditedPlan user_edited_plan = 2;
+  }
+
+  // A plan that was provided by the user.
+  message UserEditedPlan {
+    // The plan text provided by the user.
+    string plan_text = 1;
+  }
 }
