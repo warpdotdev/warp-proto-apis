@@ -2,6 +2,7 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
@@ -188,7 +189,7 @@ message FileContent {
 message SuggestPlanResult {
   oneof result {
     // The user accepted the plan as-is.
-    bool accepted = 1;
+    google.protobuf.Empty accepted = 1;
     // The user provided a manually-edited plan to execute.
     UserEditedPlan user_edited_plan = 2;
   }

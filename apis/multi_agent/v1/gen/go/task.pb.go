@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -1415,13 +1416,13 @@ func (x *SuggestPlanResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SuggestPlanResult) GetAccepted() bool {
+func (x *SuggestPlanResult) GetAccepted() *emptypb.Empty {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Result.(*suggestPlanResult_Accepted); ok {
 			return x.Accepted
 		}
 	}
-	return false
+	return nil
 }
 
 func (x *SuggestPlanResult) GetUserEditedPlan() *SuggestPlanResult_UserEditedPlan {
@@ -1433,7 +1434,11 @@ func (x *SuggestPlanResult) GetUserEditedPlan() *SuggestPlanResult_UserEditedPla
 	return nil
 }
 
-func (x *SuggestPlanResult) SetAccepted(v bool) {
+func (x *SuggestPlanResult) SetAccepted(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
 	x.xxx_hidden_Result = &suggestPlanResult_Accepted{v}
 }
 
@@ -1507,7 +1512,7 @@ type SuggestPlanResult_builder struct {
 
 	// Fields of oneof xxx_hidden_Result:
 	// The user accepted the plan as-is.
-	Accepted *bool
+	Accepted *emptypb.Empty
 	// The user provided a manually-edited plan to execute.
 	UserEditedPlan *SuggestPlanResult_UserEditedPlan
 	// -- end of xxx_hidden_Result
@@ -1518,7 +1523,7 @@ func (b0 SuggestPlanResult_builder) Build() *SuggestPlanResult {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Accepted != nil {
-		x.xxx_hidden_Result = &suggestPlanResult_Accepted{*b.Accepted}
+		x.xxx_hidden_Result = &suggestPlanResult_Accepted{b.Accepted}
 	}
 	if b.UserEditedPlan != nil {
 		x.xxx_hidden_Result = &suggestPlanResult_UserEditedPlan_{b.UserEditedPlan}
@@ -1542,7 +1547,7 @@ type isSuggestPlanResult_Result interface {
 
 type suggestPlanResult_Accepted struct {
 	// The user accepted the plan as-is.
-	Accepted bool `protobuf:"varint,1,opt,name=accepted,oneof"`
+	Accepted *emptypb.Empty `protobuf:"bytes,1,opt,name=accepted,oneof"`
 }
 
 type suggestPlanResult_UserEditedPlan_ struct {
@@ -3775,7 +3780,7 @@ var File_task_proto protoreflect.FileDescriptor
 const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"task.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\xe0\x02\n" +
+	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\"\xe0\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
@@ -3880,9 +3885,9 @@ const file_task_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x18\n" +
 	"\acontent\x18\x02 \x01(\tR\acontent\x12H\n" +
 	"\n" +
-	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\"\xcd\x01\n" +
-	"\x11SuggestPlanResult\x12\x1c\n" +
-	"\baccepted\x18\x01 \x01(\bH\x00R\baccepted\x12a\n" +
+	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\"\xe5\x01\n" +
+	"\x11SuggestPlanResult\x124\n" +
+	"\baccepted\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\baccepted\x12a\n" +
 	"\x10user_edited_plan\x18\x02 \x01(\v25.warp.multi_agent.v1.SuggestPlanResult.UserEditedPlanH\x00R\x0euserEditedPlan\x1a-\n" +
 	"\x0eUserEditedPlan\x12\x1b\n" +
 	"\tplan_text\x18\x01 \x01(\tR\bplanTextB\b\n" +
@@ -3921,6 +3926,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil), // 28: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
 	(*Message_ToolCallResult_ServerResult)(nil),      // 29: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
 	(*SuggestPlanResult_UserEditedPlan)(nil),         // 30: warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	(*emptypb.Empty)(nil),                            // 31: google.protobuf.Empty
 }
 var file_task_proto_depIdxs = []int32{
 	10, // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -3940,28 +3946,29 @@ var file_task_proto_depIdxs = []int32{
 	8,  // 14: warp.multi_agent.v1.SearchCodebaseResult.files:type_name -> warp.multi_agent.v1.FileContent
 	8,  // 15: warp.multi_agent.v1.ApplyFileDiffsResult.updated_files:type_name -> warp.multi_agent.v1.FileContent
 	7,  // 16: warp.multi_agent.v1.FileContent.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	30, // 17: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
-	22, // 18: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	24, // 19: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	21, // 20: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
-	23, // 21: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	25, // 22: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	26, // 23: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	3,  // 24: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	5,  // 25: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	29, // 26: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	4,  // 27: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	6,  // 28: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	9,  // 29: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	27, // 30: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	28, // 31: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	0,  // 32: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	7,  // 33: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	34, // [34:34] is the sub-list for method output_type
-	34, // [34:34] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	31, // 17: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	30, // 18: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	22, // 19: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	24, // 20: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	21, // 21: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
+	23, // 22: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	25, // 23: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	26, // 24: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	3,  // 25: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	5,  // 26: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	29, // 27: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	4,  // 28: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	6,  // 29: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	9,  // 30: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	27, // 31: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	28, // 32: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	0,  // 33: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	7,  // 34: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	35, // [35:35] is the sub-list for method output_type
+	35, // [35:35] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
