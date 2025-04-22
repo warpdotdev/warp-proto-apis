@@ -3807,7 +3807,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xf3\x12\n" +
+	"\x06status\"\xe7\x12\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12G\n" +
 	"\n" +
@@ -3818,7 +3818,7 @@ const file_task_proto_rawDesc = "" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a'\n" +
 	"\vAgentOutput\x12\x18\n" +
-	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a\xd2\n" +
+	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a\xcc\n" +
 	"\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
@@ -3829,9 +3829,9 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_files\x18\x05 \x01(\v2/.warp.multi_agent.v1.Message.ToolCall.ReadFilesH\x00R\treadFiles\x12`\n" +
 	"\x10apply_file_diffs\x18\x06 \x01(\v24.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffsH\x00R\x0eapplyFileDiffs\x12V\n" +
-	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x1a(\n" +
-	"\x06Server\x12\x1e\n" +
-	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayload\x1aS\n" +
+	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x1a\"\n" +
+	"\x06Server\x12\x18\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1aS\n" +
 	"\x0fRunShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
@@ -3855,7 +3855,7 @@ const file_task_proto_rawDesc = "" +
 	"\vSuggestPlan\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12@\n" +
 	"\x0eproposed_tasks\x18\x02 \x03(\v2\x19.warp.multi_agent.v1.TaskR\rproposedTasksB\x06\n" +
-	"\x04tool\x1a\xee\x04\n" +
+	"\x04tool\x1a\xe8\x04\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -3865,9 +3865,9 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_files\x18\x05 \x01(\v2$.warp.multi_agent.v1.ReadFilesResultH\x00R\treadFiles\x12U\n" +
 	"\x10apply_file_diffs\x18\x06 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
-	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x1aA\n" +
-	"\fServerResult\x121\n" +
-	"\x11serialized_result\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x10serializedResultB\b\n" +
+	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x1a;\n" +
+	"\fServerResult\x12+\n" +
+	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResultB\b\n" +
 	"\x06resultB\t\n" +
 	"\amessage\"R\n" +
 	"\x15RunShellCommandResult\x12\x1c\n" +

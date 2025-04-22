@@ -34,7 +34,10 @@ var file_options_proto_extTypes = []protoimpl.ExtensionInfo{
 
 // Extension fields to descriptorpb.FieldOptions.
 var (
-	// Indicates that the field is subject to secret redaction
+	// Indicates that the field is subject to secret redaction.
+	// Can only be applied to `string`-type fields.
+	// Secret redaction is applied in warp-server during the MAA request
+	// processing.
 	//
 	// optional bool sensitive = 50000;
 	E_Sensitive = &file_options_proto_extTypes[0]
