@@ -9,6 +9,7 @@ package v1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	_ "google.golang.org/protobuf/types/descriptorpb"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
@@ -3780,7 +3781,7 @@ var File_task_proto protoreflect.FileDescriptor
 const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\"\xe0\x02\n" +
+	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\roptions.proto\"\xe0\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
@@ -3806,18 +3807,18 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xa5\x12\n" +
+	"\x06status\"\xf3\x12\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12G\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryH\x00R\tuserQuery\x12M\n" +
 	"\fagent_output\x18\x03 \x01(\v2(.warp.multi_agent.v1.Message.AgentOutputH\x00R\vagentOutput\x12D\n" +
 	"\ttool_call\x18\x04 \x01(\v2%.warp.multi_agent.v1.Message.ToolCallH\x00R\btoolCall\x12W\n" +
-	"\x10tool_call_result\x18\x05 \x01(\v2+.warp.multi_agent.v1.Message.ToolCallResultH\x00R\x0etoolCallResult\x1a!\n" +
-	"\tUserQuery\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x1a!\n" +
-	"\vAgentOutput\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1a\x96\n" +
+	"\x10tool_call_result\x18\x05 \x01(\v2+.warp.multi_agent.v1.Message.ToolCallResultH\x00R\x0etoolCallResult\x1a'\n" +
+	"\tUserQuery\x12\x1a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a'\n" +
+	"\vAgentOutput\x12\x18\n" +
+	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a\xd2\n" +
 	"\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
@@ -3828,33 +3829,33 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_files\x18\x05 \x01(\v2/.warp.multi_agent.v1.Message.ToolCall.ReadFilesH\x00R\treadFiles\x12`\n" +
 	"\x10apply_file_diffs\x18\x06 \x01(\v24.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffsH\x00R\x0eapplyFileDiffs\x12V\n" +
-	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x1a\"\n" +
-	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1aM\n" +
-	"\x0fRunShellCommand\x12\x18\n" +
-	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
+	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x1a(\n" +
+	"\x06Server\x12\x1e\n" +
+	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayload\x1aS\n" +
+	"\x0fRunShellCommand\x12\x1e\n" +
+	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
-	"isReadOnly\x1a\xbf\x01\n" +
+	"isReadOnly\x1a\xc5\x01\n" +
 	"\tReadFiles\x12J\n" +
-	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1af\n" +
-	"\x04File\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12J\n" +
+	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1al\n" +
+	"\x04File\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12J\n" +
 	"\vline_ranges\x18\x02 \x03(\v2).warp.multi_agent.v1.FileContentLineRangeR\n" +
-	"lineRanges\x1aI\n" +
-	"\x0eSearchCodebase\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x12!\n" +
-	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x1a\xda\x01\n" +
-	"\x0eApplyFileDiffs\x12\x18\n" +
-	"\asummary\x18\x01 \x01(\tR\asummary\x12S\n" +
-	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x1aY\n" +
-	"\bFileDiff\x12\x1b\n" +
-	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x16\n" +
-	"\x06search\x18\x02 \x01(\tR\x06search\x12\x18\n" +
-	"\areplace\x18\x03 \x01(\tR\areplace\x1ai\n" +
-	"\vSuggestPlan\x12\x18\n" +
-	"\asummary\x18\x01 \x01(\tR\asummary\x12@\n" +
+	"lineRanges\x1aU\n" +
+	"\x0eSearchCodebase\x12\x1a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12'\n" +
+	"\fpath_filters\x18\x02 \x03(\tB\x04\x80\xb5\x18\x01R\vpathFilters\x1a\xf2\x01\n" +
+	"\x0eApplyFileDiffs\x12\x1e\n" +
+	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12S\n" +
+	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x1ak\n" +
+	"\bFileDiff\x12!\n" +
+	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1c\n" +
+	"\x06search\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06search\x12\x1e\n" +
+	"\areplace\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\areplace\x1ao\n" +
+	"\vSuggestPlan\x12\x1e\n" +
+	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12@\n" +
 	"\x0eproposed_tasks\x18\x02 \x03(\v2\x19.warp.multi_agent.v1.TaskR\rproposedTasksB\x06\n" +
-	"\x04tool\x1a\xe8\x04\n" +
+	"\x04tool\x1a\xee\x04\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -3864,13 +3865,13 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_files\x18\x05 \x01(\v2$.warp.multi_agent.v1.ReadFilesResultH\x00R\treadFiles\x12U\n" +
 	"\x10apply_file_diffs\x18\x06 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
-	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x1a;\n" +
-	"\fServerResult\x12+\n" +
-	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResultB\b\n" +
+	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x1aA\n" +
+	"\fServerResult\x121\n" +
+	"\x11serialized_result\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x10serializedResultB\b\n" +
 	"\x06resultB\t\n" +
-	"\amessage\"L\n" +
-	"\x15RunShellCommandResult\x12\x16\n" +
-	"\x06output\x18\x01 \x01(\tR\x06output\x12\x1b\n" +
+	"\amessage\"R\n" +
+	"\x15RunShellCommandResult\x12\x1c\n" +
+	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
 	"\texit_code\x18\x02 \x01(\x05R\bexitCode\"I\n" +
 	"\x0fReadFilesResult\x126\n" +
 	"\x05files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentR\x05files\"N\n" +
@@ -3880,17 +3881,17 @@ const file_task_proto_rawDesc = "" +
 	"\rupdated_files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentR\fupdatedFiles\">\n" +
 	"\x14FileContentLineRange\x12\x14\n" +
 	"\x05start\x18\x01 \x01(\x05R\x05start\x12\x10\n" +
-	"\x03end\x18\x02 \x01(\x05R\x03end\"\x8e\x01\n" +
-	"\vFileContent\x12\x1b\n" +
-	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontent\x12H\n" +
+	"\x03end\x18\x02 \x01(\x05R\x03end\"\x9a\x01\n" +
+	"\vFileContent\x12!\n" +
+	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
+	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12H\n" +
 	"\n" +
-	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\"\xe5\x01\n" +
+	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\"\xeb\x01\n" +
 	"\x11SuggestPlanResult\x124\n" +
 	"\baccepted\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\baccepted\x12a\n" +
-	"\x10user_edited_plan\x18\x02 \x01(\v25.warp.multi_agent.v1.SuggestPlanResult.UserEditedPlanH\x00R\x0euserEditedPlan\x1a-\n" +
-	"\x0eUserEditedPlan\x12\x1b\n" +
-	"\tplan_text\x18\x01 \x01(\tR\bplanTextB\b\n" +
+	"\x10user_edited_plan\x18\x02 \x01(\v25.warp.multi_agent.v1.SuggestPlanResult.UserEditedPlanH\x00R\x0euserEditedPlan\x1a3\n" +
+	"\x0eUserEditedPlan\x12!\n" +
+	"\tplan_text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bplanTextB\b\n" +
 	"\x06resultB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
@@ -3976,6 +3977,7 @@ func file_task_proto_init() {
 	if File_task_proto != nil {
 		return
 	}
+	file_options_proto_init()
 	file_task_proto_msgTypes[1].OneofWrappers = []any{
 		(*taskStatus_Pending_)(nil),
 		(*taskStatus_InProgress_)(nil),

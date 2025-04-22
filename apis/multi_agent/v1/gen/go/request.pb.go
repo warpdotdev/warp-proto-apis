@@ -1994,8 +1994,8 @@ var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
-	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\n" +
-	"task.proto\"\x88\x14\n" +
+	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
+	"task.proto\"\xac\x14\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2003,37 +2003,37 @@ const file_request_proto_rawDesc = "" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xa6\r\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xca\r\n" +
 	"\x05Input\x12D\n" +
 	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xa3\a\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xc1\a\n" +
 	"\aContext\x12R\n" +
 	"\tdirectory\x18\x01 \x01(\v24.warp.multi_agent.v1.Request.Input.Context.DirectoryR\tdirectory\x12e\n" +
 	"\x10operating_system\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.Context.OperatingSystemR\x0foperatingSystem\x12F\n" +
 	"\x05shell\x18\x03 \x01(\v20.warp.multi_agent.v1.Request.Input.Context.ShellR\x05shell\x12=\n" +
 	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12w\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2?.warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommandR\x15executedShellCommands\x12\\\n" +
-	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x1ae\n" +
-	"\x14ExecutedShellCommand\x12\x18\n" +
-	"\acommand\x18\x01 \x01(\tR\acommand\x12\x16\n" +
-	"\x06output\x18\x02 \x01(\tR\x06output\x12\x1b\n" +
-	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x1a\"\n" +
-	"\fSelectedText\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1aj\n" +
-	"\tDirectory\x12\x10\n" +
-	"\x03pwd\x18\x01 \x01(\tR\x03pwd\x12\x12\n" +
-	"\x04home\x18\x02 \x01(\tR\x04home\x127\n" +
+	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x1aq\n" +
+	"\x14ExecutedShellCommand\x12\x1e\n" +
+	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
+	"\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
+	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x1a(\n" +
+	"\fSelectedText\x12\x18\n" +
+	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1av\n" +
+	"\tDirectory\x12\x16\n" +
+	"\x03pwd\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03pwd\x12\x18\n" +
+	"\x04home\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04home\x127\n" +
 	"\x18pwd_file_symbols_indexed\x18\x03 \x01(\bR\x15pwdFileSymbolsIndexed\x1a5\n" +
 	"\x05Shell\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x1aQ\n" +
 	"\x0fOperatingSystem\x12\x1a\n" +
 	"\bplatform\x18\x01 \x01(\tR\bplatform\x12\"\n" +
-	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a!\n" +
-	"\tUserQuery\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x1a\xd7\x03\n" +
+	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a'\n" +
+	"\tUserQuery\x12\x1a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xd7\x03\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2120,6 +2120,7 @@ func file_request_proto_init() {
 	if File_request_proto != nil {
 		return
 	}
+	file_options_proto_init()
 	file_task_proto_init()
 	file_request_proto_msgTypes[2].OneofWrappers = []any{
 		(*request_Input_UserQuery_)(nil),

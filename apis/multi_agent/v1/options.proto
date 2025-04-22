@@ -1,0 +1,12 @@
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+
+extend google.protobuf.FieldOptions {
+  // Indicates that the field is subject to secret redaction
+  bool sensitive = 50000;
+}
