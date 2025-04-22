@@ -66,6 +66,7 @@ message Message {
     AgentOutput agent_output = 3;
     ToolCall tool_call = 4;
     ToolCallResult tool_call_result = 5;
+    ServerEvent server_event = 6;
   }
 
   // User query message type
@@ -152,6 +153,14 @@ message Message {
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
     message ServerResult { string serialized_result = 1; }
+  }
+
+  // An event that is preserved in message history
+  // for server-side processing.
+  //
+  // The client should treat the `payload` as an opaque blob.
+  message ServerEvent {
+    string payload = 1;
   }
 }
 
