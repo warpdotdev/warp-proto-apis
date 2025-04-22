@@ -468,9 +468,9 @@ func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                     protoimpl.MessageState      `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId *string                     `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging        map[string]*structpb.Struct `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging        map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
 	XXX_presence              [1]uint32
 	unknownFields             protoimpl.UnknownFields
@@ -512,7 +512,7 @@ func (x *Request_Metadata) GetConversationId() string {
 	return ""
 }
 
-func (x *Request_Metadata) GetLogging() map[string]*structpb.Struct {
+func (x *Request_Metadata) GetLogging() map[string]*structpb.Value {
 	if x != nil {
 		return x.xxx_hidden_Logging
 	}
@@ -524,7 +524,7 @@ func (x *Request_Metadata) SetConversationId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Metadata) SetLogging(v map[string]*structpb.Struct) {
+func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 	x.xxx_hidden_Logging = v
 }
 
@@ -550,8 +550,8 @@ type Request_Metadata_builder struct {
 	// the conversation.
 	ConversationId *string
 	// Map of metadata to inline in server analytic events for this request.
-	// Values in the map should be JSON.
-	Logging map[string]*structpb.Struct
+	// Values in the map should be valid JSON values.
+	Logging map[string]*structpb.Value
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -1031,6 +1031,15 @@ func (x *Request_Input_ToolCallResult) GetApplyFileDiffs() *ApplyFileDiffsResult
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetSuggestPlan() *SuggestPlanResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_SuggestPlan); ok {
+			return x.SuggestPlan
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -1066,6 +1075,14 @@ func (x *Request_Input_ToolCallResult) SetApplyFileDiffs(v *ApplyFileDiffsResult
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_ApplyFileDiffs{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetSuggestPlan(v *SuggestPlanResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_SuggestPlan{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -1114,6 +1131,14 @@ func (x *Request_Input_ToolCallResult) HasApplyFileDiffs() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasSuggestPlan() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_SuggestPlan)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -1147,11 +1172,18 @@ func (x *Request_Input_ToolCallResult) ClearApplyFileDiffs() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearSuggestPlan() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_SuggestPlan); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
 const Request_Input_ToolCallResult_SearchCodebase_case case_Request_Input_ToolCallResult_Result = 4
 const Request_Input_ToolCallResult_ApplyFileDiffs_case case_Request_Input_ToolCallResult_Result = 5
+const Request_Input_ToolCallResult_SuggestPlan_case case_Request_Input_ToolCallResult_Result = 6
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -1166,6 +1198,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_SearchCodebase_case
 	case *request_Input_ToolCallResult_ApplyFileDiffs:
 		return Request_Input_ToolCallResult_ApplyFileDiffs_case
+	case *request_Input_ToolCallResult_SuggestPlan:
+		return Request_Input_ToolCallResult_SuggestPlan_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -1180,6 +1214,7 @@ type Request_Input_ToolCallResult_builder struct {
 	ReadFiles       *ReadFilesResult
 	SearchCodebase  *SearchCodebaseResult
 	ApplyFileDiffs  *ApplyFileDiffsResult
+	SuggestPlan     *SuggestPlanResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -1202,6 +1237,9 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.ApplyFileDiffs != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_ApplyFileDiffs{b.ApplyFileDiffs}
+	}
+	if b.SuggestPlan != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_SuggestPlan{b.SuggestPlan}
 	}
 	return m0
 }
@@ -1236,6 +1274,10 @@ type request_Input_ToolCallResult_ApplyFileDiffs struct {
 	ApplyFileDiffs *ApplyFileDiffsResult `protobuf:"bytes,5,opt,name=apply_file_diffs,json=applyFileDiffs,oneof"`
 }
 
+type request_Input_ToolCallResult_SuggestPlan struct {
+	SuggestPlan *SuggestPlanResult `protobuf:"bytes,6,opt,name=suggest_plan,json=suggestPlan,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -1243,6 +1285,8 @@ func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Re
 func (*request_Input_ToolCallResult_SearchCodebase) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ApplyFileDiffs) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_SuggestPlan) isRequest_Input_ToolCallResult_Result() {}
 
 // Information about shell commands that the user has executed.
 type Request_Input_Context_ExecutedShellCommand struct {
@@ -1950,8 +1994,8 @@ var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
-	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\n" +
-	"task.proto\"\xbb\x13\n" +
+	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
+	"task.proto\"\xab\x14\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -1959,37 +2003,37 @@ const file_request_proto_rawDesc = "" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xd9\f\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xca\r\n" +
 	"\x05Input\x12D\n" +
 	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xa3\a\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xc1\a\n" +
 	"\aContext\x12R\n" +
 	"\tdirectory\x18\x01 \x01(\v24.warp.multi_agent.v1.Request.Input.Context.DirectoryR\tdirectory\x12e\n" +
 	"\x10operating_system\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.Context.OperatingSystemR\x0foperatingSystem\x12F\n" +
 	"\x05shell\x18\x03 \x01(\v20.warp.multi_agent.v1.Request.Input.Context.ShellR\x05shell\x12=\n" +
 	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12w\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2?.warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommandR\x15executedShellCommands\x12\\\n" +
-	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x1ae\n" +
-	"\x14ExecutedShellCommand\x12\x18\n" +
-	"\acommand\x18\x01 \x01(\tR\acommand\x12\x16\n" +
-	"\x06output\x18\x02 \x01(\tR\x06output\x12\x1b\n" +
-	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x1a\"\n" +
-	"\fSelectedText\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1aj\n" +
-	"\tDirectory\x12\x10\n" +
-	"\x03pwd\x18\x01 \x01(\tR\x03pwd\x12\x12\n" +
-	"\x04home\x18\x02 \x01(\tR\x04home\x127\n" +
+	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x1aq\n" +
+	"\x14ExecutedShellCommand\x12\x1e\n" +
+	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
+	"\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
+	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x1a(\n" +
+	"\fSelectedText\x12\x18\n" +
+	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1av\n" +
+	"\tDirectory\x12\x16\n" +
+	"\x03pwd\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03pwd\x12\x18\n" +
+	"\x04home\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04home\x127\n" +
 	"\x18pwd_file_symbols_indexed\x18\x03 \x01(\bR\x15pwdFileSymbolsIndexed\x1a5\n" +
 	"\x05Shell\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x1aQ\n" +
 	"\x0fOperatingSystem\x12\x1a\n" +
 	"\bplatform\x18\x01 \x01(\tR\bplatform\x12\"\n" +
-	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a!\n" +
-	"\tUserQuery\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x1a\x8a\x03\n" +
+	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a'\n" +
+	"\tUserQuery\x12\x1a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xd7\x03\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -1997,15 +2041,16 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"read_files\x18\x03 \x01(\v2$.warp.multi_agent.v1.ReadFilesResultH\x00R\treadFiles\x12T\n" +
 	"\x0fsearch_codebase\x18\x04 \x01(\v2).warp.multi_agent.v1.SearchCodebaseResultH\x00R\x0esearchCodebase\x12U\n" +
-	"\x10apply_file_diffs\x18\x05 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffsB\b\n" +
+	"\x10apply_file_diffs\x18\x05 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
+	"\fsuggest_plan\x18\x06 \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlanB\b\n" +
 	"\x06resultB\x06\n" +
-	"\x04type\x1a\xd6\x01\n" +
+	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
-	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aS\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
-	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\x1a\x87\x02\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x87\x02\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -2037,7 +2082,8 @@ var file_request_proto_goTypes = []any{
 	(*ReadFilesResult)(nil),              // 18: warp.multi_agent.v1.ReadFilesResult
 	(*SearchCodebaseResult)(nil),         // 19: warp.multi_agent.v1.SearchCodebaseResult
 	(*ApplyFileDiffsResult)(nil),         // 20: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*structpb.Struct)(nil),              // 21: google.protobuf.Struct
+	(*SuggestPlanResult)(nil),            // 21: warp.multi_agent.v1.SuggestPlanResult
+	(*structpb.Value)(nil),               // 22: google.protobuf.Value
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -2060,12 +2106,13 @@ var file_request_proto_depIdxs = []int32{
 	18, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
 	19, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	20, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	21, // 20: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Struct
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	21, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	22, // 21: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -2073,6 +2120,7 @@ func file_request_proto_init() {
 	if File_request_proto != nil {
 		return
 	}
+	file_options_proto_init()
 	file_task_proto_init()
 	file_request_proto_msgTypes[2].OneofWrappers = []any{
 		(*request_Input_UserQuery_)(nil),
@@ -2083,6 +2131,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_ReadFiles)(nil),
 		(*request_Input_ToolCallResult_SearchCodebase)(nil),
 		(*request_Input_ToolCallResult_ApplyFileDiffs)(nil),
+		(*request_Input_ToolCallResult_SuggestPlan)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

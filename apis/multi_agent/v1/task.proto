@@ -2,7 +2,11 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
+import "google/protobuf/descriptor.proto";
+
+import "options.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -70,10 +74,10 @@ message Message {
   }
 
   // User query message type
-  message UserQuery { string query = 1; }
+  message UserQuery { string query = 1 [ (sensitive) = true ]; }
 
   // Agent output message type
-  message AgentOutput { string text = 1; }
+  message AgentOutput { string text = 1 [ (sensitive) = true ]; }
 
   // Tool call message type
   message ToolCall {
@@ -95,7 +99,7 @@ message Message {
 
     // A tool call to run a shell command.
     message RunShellCommand {
-      string command = 1;
+      string command = 1 [ (sensitive) = true ];
       bool is_read_only = 2;
     }
 
@@ -103,7 +107,7 @@ message Message {
     message ReadFiles {
       repeated File files = 1;
       message File {
-        string name = 1;
+        string name = 1 [ (sensitive) = true ];
         // If empty, the entire file is retrieved.
         repeated FileContentLineRange line_ranges = 2;
       }
@@ -111,28 +115,28 @@ message Message {
 
     // A tool call to search a codebase.
     message SearchCodebase {
-      string query = 1;
-      repeated string path_filters = 2;
+      string query = 1 [ (sensitive) = true ];
+      repeated string path_filters = 2 [ (sensitive) = true ];
     }
 
     // A tool call to apply diffs to files.
     message ApplyFileDiffs {
-      string summary = 1;
+      string summary = 1 [ (sensitive) = true ];
       repeated FileDiff diffs = 2;
 
       message FileDiff {
-        string file_path = 1;
+        string file_path = 1 [ (sensitive) = true ];
         // The content to be replaced.
-        string search = 2;
+        string search = 2 [ (sensitive) = true ];
         // The content that replaces `search`.
-        string replace = 3;
+        string replace = 3 [ (sensitive) = true ];
       }
     }
 
     // A tool call to suggest a plan.
     message SuggestPlan {
       // A high-level summary.
-      string summary = 1;
+      string summary = 1 [ (sensitive) = true ];
       // A set of tasks that form the proposed execution plan.
       repeated Task proposed_tasks = 2;
     }
@@ -148,6 +152,7 @@ message Message {
       ServerResult server = 4;
       ReadFilesResult read_files = 5;
       ApplyFileDiffsResult apply_file_diffs = 6;
+      SuggestPlanResult suggest_plan = 7;
     }
 
     // Result of a server-side tool call.
@@ -166,7 +171,7 @@ message Message {
 
 // Result of a `RunShellCommand` tool call.
 message RunShellCommandResult {
-  string output = 1;
+  string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
 }
 
@@ -187,7 +192,23 @@ message FileContentLineRange {
 
 // A representation of raw content within a file.
 message FileContent {
-  string file_path = 1;
-  string content = 2;
+  string file_path = 1 [ (sensitive) = true ];
+  string content = 2 [ (sensitive) = true ];
   FileContentLineRange line_range = 3;
+}
+
+// Result of a `SuggestPlan` tool call.
+message SuggestPlanResult {
+  oneof result {
+    // The user accepted the plan as-is.
+    google.protobuf.Empty accepted = 1;
+    // The user provided a manually-edited plan to execute.
+    UserEditedPlan user_edited_plan = 2;
+  }
+
+  // A plan that was provided by the user.
+  message UserEditedPlan {
+    // The plan text provided by the user.
+    string plan_text = 1 [ (sensitive) = true ];
+  }
 }

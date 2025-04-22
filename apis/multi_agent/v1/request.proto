@@ -7,6 +7,7 @@ import "google/protobuf/go_features.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
+import "options.proto";
 import "task.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
@@ -20,7 +21,7 @@ message Request {
   // User input to progress the task state.
   Input input = 2;
 
-  // Supported configuration for the request. 
+  // Supported configuration for the request.
   Settings settings = 3;
 
   // General metadata for the request.
@@ -53,17 +54,17 @@ message Request {
 
       // Information about shell commands that the user has executed.
       message ExecutedShellCommand {
-        string command = 1;
-        string output = 2;
+        string command = 1 [ (sensitive) = true ];
+        string output = 2 [ (sensitive) = true ];
         int32 exit_code = 3;
       }
 
-      message SelectedText { string text = 1; }
+      message SelectedText { string text = 1 [ (sensitive) = true ]; }
 
       // Information about the user's directories.
       message Directory {
-        string pwd = 1;
-        string home = 2;
+        string pwd = 1 [ (sensitive) = true ];
+        string home = 2 [ (sensitive) = true ];
         bool pwd_file_symbols_indexed = 3;
       }
 
@@ -84,7 +85,7 @@ message Request {
       }
     }
 
-    message UserQuery { string query = 1; }
+    message UserQuery { string query = 1 [ (sensitive) = true ]; }
 
     // Tool call result
     message ToolCallResult {
@@ -95,6 +96,7 @@ message Request {
         ReadFilesResult read_files = 3;
         SearchCodebaseResult search_codebase = 4;
         ApplyFileDiffsResult apply_file_diffs = 5;
+        SuggestPlanResult suggest_plan = 6;
       }
     }
   }
@@ -108,8 +110,8 @@ message Request {
     string conversation_id = 1;
 
     // Map of metadata to inline in server analytic events for this request.
-    // Values in the map should be JSON.
-    map<string, google.protobuf.Struct> logging = 2;
+    // Values in the map should be valid JSON values.
+    map<string, google.protobuf.Value> logging = 2;
   }
 
   message Settings {
