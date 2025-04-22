@@ -20,7 +20,7 @@ message Request {
   // User input to progress the task state.
   Input input = 2;
 
-  // Supported configuration for the request. 
+  // Supported configuration for the request.
   Settings settings = 3;
 
   // General metadata for the request.
@@ -108,8 +108,8 @@ message Request {
     string conversation_id = 1;
 
     // Map of metadata to inline in server analytic events for this request.
-    // Values in the map should be JSON.
-    map<string, google.protobuf.Struct> logging = 2;
+    // Values in the map should be valid JSON values.
+    map<string, google.protobuf.Value> logging = 2;
   }
 
   message Settings {
