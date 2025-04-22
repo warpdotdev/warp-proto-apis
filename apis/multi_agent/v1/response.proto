@@ -87,12 +87,16 @@ message ClientAction {
 
   // Update task message action
   message UpdateTaskMessage {
+    // ID of the task containing the message.
+    string task_id = 3;
     Message message = 1;
     google.protobuf.FieldMask mask = 2;
   }
 
   // Append to message content action
   message AppendToMessageContent {
+    // ID of the task containing the message.
+    string task_id = 3;
     Message message = 1;
     // Fields in mask must be of type string; content is appended
     google.protobuf.FieldMask mask = 2;

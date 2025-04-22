@@ -468,9 +468,9 @@ func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                     protoimpl.MessageState      `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId *string                     `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging        map[string]*structpb.Struct `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging        map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
 	XXX_presence              [1]uint32
 	unknownFields             protoimpl.UnknownFields
@@ -512,7 +512,7 @@ func (x *Request_Metadata) GetConversationId() string {
 	return ""
 }
 
-func (x *Request_Metadata) GetLogging() map[string]*structpb.Struct {
+func (x *Request_Metadata) GetLogging() map[string]*structpb.Value {
 	if x != nil {
 		return x.xxx_hidden_Logging
 	}
@@ -524,7 +524,7 @@ func (x *Request_Metadata) SetConversationId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Metadata) SetLogging(v map[string]*structpb.Struct) {
+func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 	x.xxx_hidden_Logging = v
 }
 
@@ -550,8 +550,8 @@ type Request_Metadata_builder struct {
 	// the conversation.
 	ConversationId *string
 	// Map of metadata to inline in server analytic events for this request.
-	// Values in the map should be JSON.
-	Logging map[string]*structpb.Struct
+	// Values in the map should be valid JSON values.
+	Logging map[string]*structpb.Value
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -1995,7 +1995,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\"\xac\x14\n" +
+	"task.proto\"\xab\x14\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2044,13 +2044,13 @@ const file_request_proto_rawDesc = "" +
 	"\x10apply_file_diffs\x18\x05 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
 	"\fsuggest_plan\x18\x06 \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlanB\b\n" +
 	"\x06resultB\x06\n" +
-	"\x04type\x1a\xd6\x01\n" +
+	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
-	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aS\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12-\n" +
-	"\x05value\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x05value:\x028\x01\x1a\x87\x02\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x87\x02\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -2083,7 +2083,7 @@ var file_request_proto_goTypes = []any{
 	(*SearchCodebaseResult)(nil),         // 19: warp.multi_agent.v1.SearchCodebaseResult
 	(*ApplyFileDiffsResult)(nil),         // 20: warp.multi_agent.v1.ApplyFileDiffsResult
 	(*SuggestPlanResult)(nil),            // 21: warp.multi_agent.v1.SuggestPlanResult
-	(*structpb.Struct)(nil),              // 22: google.protobuf.Struct
+	(*structpb.Value)(nil),               // 22: google.protobuf.Value
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -2107,7 +2107,7 @@ var file_request_proto_depIdxs = []int32{
 	19, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	20, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
 	21, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	22, // 21: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Struct
+	22, // 21: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
 	22, // [22:22] is the sub-list for method output_type
 	22, // [22:22] is the sub-list for method input_type
 	22, // [22:22] is the sub-list for extension type_name
