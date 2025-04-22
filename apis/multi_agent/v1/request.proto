@@ -97,6 +97,7 @@ message Request {
         SearchCodebaseResult search_codebase = 4;
         ApplyFileDiffsResult apply_file_diffs = 5;
         SuggestPlanResult suggest_plan = 6;
+        SuggestCreatePlanResult suggest_create_plan = 7;
       }
     }
   }

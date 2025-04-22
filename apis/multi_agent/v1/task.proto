@@ -91,6 +91,7 @@ message Message {
       ReadFiles read_files = 5;
       ApplyFileDiffs apply_file_diffs = 6;
       SuggestPlan suggest_plan = 7;
+      SuggestCreatePlan suggest_create_plan = 8;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -140,6 +141,9 @@ message Message {
       // A set of tasks that form the proposed execution plan.
       repeated Task proposed_tasks = 2;
     }
+
+    // A tool call to suggest creating a plan (i.e. autoplanning).
+    message SuggestCreatePlan {}
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -153,6 +157,7 @@ message Message {
       ReadFilesResult read_files = 5;
       ApplyFileDiffsResult apply_file_diffs = 6;
       SuggestPlanResult suggest_plan = 7;
+      SuggestCreatePlanResult suggest_create_plan = 8;
     }
 
     // Result of a server-side tool call.
@@ -183,6 +188,11 @@ message SearchCodebaseResult { repeated FileContent files = 1; }
 
 // Result of a `ApplyFileDiffs` tool call.
 message ApplyFileDiffsResult { repeated FileContent updated_files = 1; }
+
+// Result of a `SuggestCreatePlan` tool call.
+message SuggestCreatePlanResult {
+  bool accepted = 1;
+}
 
 // A range of lines [start, end] that situate content in a file, 0-indexed.
 message FileContentLineRange {

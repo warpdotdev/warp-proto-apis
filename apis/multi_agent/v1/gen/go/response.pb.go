@@ -1353,9 +1353,9 @@ func (b0 ClientAction_AddMessagesToTask_builder) Build() *ClientAction_AddMessag
 // Update task message action
 type ClientAction_UpdateTaskMessage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskId      *string                `protobuf:"bytes,3,opt,name=task_id,json=taskId"`
 	xxx_hidden_Message     *Message               `protobuf:"bytes,1,opt,name=message"`
 	xxx_hidden_Mask        *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=mask"`
-	xxx_hidden_TaskId      *string                `protobuf:"bytes,3,opt,name=task_id,json=taskId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1387,6 +1387,16 @@ func (x *ClientAction_UpdateTaskMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *ClientAction_UpdateTaskMessage) GetTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_TaskId != nil {
+			return *x.xxx_hidden_TaskId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ClientAction_UpdateTaskMessage) GetMessage() *Message {
 	if x != nil {
 		return x.xxx_hidden_Message
@@ -1401,14 +1411,9 @@ func (x *ClientAction_UpdateTaskMessage) GetMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
-func (x *ClientAction_UpdateTaskMessage) GetTaskId() string {
-	if x != nil {
-		if x.xxx_hidden_TaskId != nil {
-			return *x.xxx_hidden_TaskId
-		}
-		return ""
-	}
-	return ""
+func (x *ClientAction_UpdateTaskMessage) SetTaskId(v string) {
+	x.xxx_hidden_TaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *ClientAction_UpdateTaskMessage) SetMessage(v *Message) {
@@ -1419,9 +1424,11 @@ func (x *ClientAction_UpdateTaskMessage) SetMask(v *fieldmaskpb.FieldMask) {
 	x.xxx_hidden_Mask = v
 }
 
-func (x *ClientAction_UpdateTaskMessage) SetTaskId(v string) {
-	x.xxx_hidden_TaskId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+func (x *ClientAction_UpdateTaskMessage) HasTaskId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
 func (x *ClientAction_UpdateTaskMessage) HasMessage() bool {
@@ -1438,11 +1445,9 @@ func (x *ClientAction_UpdateTaskMessage) HasMask() bool {
 	return x.xxx_hidden_Mask != nil
 }
 
-func (x *ClientAction_UpdateTaskMessage) HasTaskId() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+func (x *ClientAction_UpdateTaskMessage) ClearTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_TaskId = nil
 }
 
 func (x *ClientAction_UpdateTaskMessage) ClearMessage() {
@@ -1453,38 +1458,34 @@ func (x *ClientAction_UpdateTaskMessage) ClearMask() {
 	x.xxx_hidden_Mask = nil
 }
 
-func (x *ClientAction_UpdateTaskMessage) ClearTaskId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_TaskId = nil
-}
-
 type ClientAction_UpdateTaskMessage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// ID of the task containing the message.
+	TaskId  *string
 	Message *Message
 	Mask    *fieldmaskpb.FieldMask
-	TaskId  *string
 }
 
 func (b0 ClientAction_UpdateTaskMessage_builder) Build() *ClientAction_UpdateTaskMessage {
 	m0 := &ClientAction_UpdateTaskMessage{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Message = b.Message
-	x.xxx_hidden_Mask = b.Mask
 	if b.TaskId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_TaskId = b.TaskId
 	}
+	x.xxx_hidden_Message = b.Message
+	x.xxx_hidden_Mask = b.Mask
 	return m0
 }
 
 // Append to message content action
 type ClientAction_AppendToMessageContent struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskId      *string                `protobuf:"bytes,3,opt,name=task_id,json=taskId"`
 	xxx_hidden_Message     *Message               `protobuf:"bytes,1,opt,name=message"`
 	xxx_hidden_Mask        *fieldmaskpb.FieldMask `protobuf:"bytes,2,opt,name=mask"`
-	xxx_hidden_TaskId      *string                `protobuf:"bytes,3,opt,name=task_id,json=taskId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1516,6 +1517,16 @@ func (x *ClientAction_AppendToMessageContent) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
+func (x *ClientAction_AppendToMessageContent) GetTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_TaskId != nil {
+			return *x.xxx_hidden_TaskId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ClientAction_AppendToMessageContent) GetMessage() *Message {
 	if x != nil {
 		return x.xxx_hidden_Message
@@ -1530,14 +1541,9 @@ func (x *ClientAction_AppendToMessageContent) GetMask() *fieldmaskpb.FieldMask {
 	return nil
 }
 
-func (x *ClientAction_AppendToMessageContent) GetTaskId() string {
-	if x != nil {
-		if x.xxx_hidden_TaskId != nil {
-			return *x.xxx_hidden_TaskId
-		}
-		return ""
-	}
-	return ""
+func (x *ClientAction_AppendToMessageContent) SetTaskId(v string) {
+	x.xxx_hidden_TaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *ClientAction_AppendToMessageContent) SetMessage(v *Message) {
@@ -1548,9 +1554,11 @@ func (x *ClientAction_AppendToMessageContent) SetMask(v *fieldmaskpb.FieldMask) 
 	x.xxx_hidden_Mask = v
 }
 
-func (x *ClientAction_AppendToMessageContent) SetTaskId(v string) {
-	x.xxx_hidden_TaskId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+func (x *ClientAction_AppendToMessageContent) HasTaskId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
 func (x *ClientAction_AppendToMessageContent) HasMessage() bool {
@@ -1567,11 +1575,9 @@ func (x *ClientAction_AppendToMessageContent) HasMask() bool {
 	return x.xxx_hidden_Mask != nil
 }
 
-func (x *ClientAction_AppendToMessageContent) HasTaskId() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+func (x *ClientAction_AppendToMessageContent) ClearTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_TaskId = nil
 }
 
 func (x *ClientAction_AppendToMessageContent) ClearMessage() {
@@ -1582,30 +1588,26 @@ func (x *ClientAction_AppendToMessageContent) ClearMask() {
 	x.xxx_hidden_Mask = nil
 }
 
-func (x *ClientAction_AppendToMessageContent) ClearTaskId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_TaskId = nil
-}
-
 type ClientAction_AppendToMessageContent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// ID of the task containing the message.
+	TaskId  *string
 	Message *Message
 	// Fields in mask must be of type string; content is appended
-	Mask   *fieldmaskpb.FieldMask
-	TaskId *string
+	Mask *fieldmaskpb.FieldMask
 }
 
 func (b0 ClientAction_AppendToMessageContent_builder) Build() *ClientAction_AppendToMessageContent {
 	m0 := &ClientAction_AppendToMessageContent{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Message = b.Message
-	x.xxx_hidden_Mask = b.Mask
 	if b.TaskId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_TaskId = b.TaskId
 	}
+	x.xxx_hidden_Message = b.Message
+	x.xxx_hidden_Mask = b.Mask
 	return m0
 }
 
@@ -1652,14 +1654,14 @@ const file_response_proto_rawDesc = "" +
 	"\x11AddMessagesToTask\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x128\n" +
 	"\bmessages\x18\x02 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\bmessages\x1a\x94\x01\n" +
-	"\x11UpdateTaskMessage\x126\n" +
+	"\x11UpdateTaskMessage\x12\x17\n" +
+	"\atask_id\x18\x03 \x01(\tR\x06taskId\x126\n" +
 	"\amessage\x18\x01 \x01(\v2\x1c.warp.multi_agent.v1.MessageR\amessage\x12.\n" +
-	"\x04mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\x04mask\x12\x17\n" +
-	"\atask_id\x18\x03 \x01(\tR\x06taskId\x1a\x99\x01\n" +
-	"\x16AppendToMessageContent\x126\n" +
+	"\x04mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\x04mask\x1a\x99\x01\n" +
+	"\x16AppendToMessageContent\x12\x17\n" +
+	"\atask_id\x18\x03 \x01(\tR\x06taskId\x126\n" +
 	"\amessage\x18\x01 \x01(\v2\x1c.warp.multi_agent.v1.MessageR\amessage\x12.\n" +
-	"\x04mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\x04mask\x12\x17\n" +
-	"\atask_id\x18\x03 \x01(\tR\x06taskIdB\b\n" +
+	"\x04mask\x18\x02 \x01(\v2\x1a.google.protobuf.FieldMaskR\x04maskB\b\n" +
 	"\x06actionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
