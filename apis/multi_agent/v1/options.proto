@@ -8,7 +8,8 @@ option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 
 extend google.protobuf.FieldOptions {
   // Indicates that the field is subject to secret redaction.
-  // Can only be applied to `string`-type fields.
+  // Can be applied to strings, lists of strings, and maps where the value is a
+  // string.
   // Secret redaction is applied in warp-server during the MAA request
   // processing.
   bool sensitive = 50000;
