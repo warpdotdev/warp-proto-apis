@@ -84,6 +84,15 @@ func (x *ResponseEvent) GetFinished() *ResponseEvent_StreamFinished {
 	return nil
 }
 
+func (x *ResponseEvent) GetSuggestions() *Suggestions {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*responseEvent_Suggestions); ok {
+			return x.Suggestions
+		}
+	}
+	return nil
+}
+
 func (x *ResponseEvent) SetInit(v *ResponseEvent_StreamInit) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
@@ -106,6 +115,14 @@ func (x *ResponseEvent) SetFinished(v *ResponseEvent_StreamFinished) {
 		return
 	}
 	x.xxx_hidden_Type = &responseEvent_Finished{v}
+}
+
+func (x *ResponseEvent) SetSuggestions(v *Suggestions) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &responseEvent_Suggestions{v}
 }
 
 func (x *ResponseEvent) HasType() bool {
@@ -139,6 +156,14 @@ func (x *ResponseEvent) HasFinished() bool {
 	return ok
 }
 
+func (x *ResponseEvent) HasSuggestions() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*responseEvent_Suggestions)
+	return ok
+}
+
 func (x *ResponseEvent) ClearType() {
 	x.xxx_hidden_Type = nil
 }
@@ -161,10 +186,17 @@ func (x *ResponseEvent) ClearFinished() {
 	}
 }
 
+func (x *ResponseEvent) ClearSuggestions() {
+	if _, ok := x.xxx_hidden_Type.(*responseEvent_Suggestions); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
 const ResponseEvent_Type_not_set_case case_ResponseEvent_Type = 0
 const ResponseEvent_Init_case case_ResponseEvent_Type = 1
 const ResponseEvent_ClientActions_case case_ResponseEvent_Type = 2
 const ResponseEvent_Finished_case case_ResponseEvent_Type = 3
+const ResponseEvent_Suggestions_case case_ResponseEvent_Type = 4
 
 func (x *ResponseEvent) WhichType() case_ResponseEvent_Type {
 	if x == nil {
@@ -177,6 +209,8 @@ func (x *ResponseEvent) WhichType() case_ResponseEvent_Type {
 		return ResponseEvent_ClientActions_case
 	case *responseEvent_Finished:
 		return ResponseEvent_Finished_case
+	case *responseEvent_Suggestions:
+		return ResponseEvent_Suggestions_case
 	default:
 		return ResponseEvent_Type_not_set_case
 	}
@@ -196,6 +230,8 @@ type ResponseEvent_builder struct {
 	// Sent exactly once as the final event for streams that finished
 	// gracefully.
 	Finished *ResponseEvent_StreamFinished
+	// An event to relay suggestions that the client should display.
+	Suggestions *Suggestions
 	// -- end of xxx_hidden_Type
 }
 
@@ -211,6 +247,9 @@ func (b0 ResponseEvent_builder) Build() *ResponseEvent {
 	}
 	if b.Finished != nil {
 		x.xxx_hidden_Type = &responseEvent_Finished{b.Finished}
+	}
+	if b.Suggestions != nil {
+		x.xxx_hidden_Type = &responseEvent_Suggestions{b.Suggestions}
 	}
 	return m0
 }
@@ -246,11 +285,18 @@ type responseEvent_Finished struct {
 	Finished *ResponseEvent_StreamFinished `protobuf:"bytes,3,opt,name=finished,oneof"`
 }
 
+type responseEvent_Suggestions struct {
+	// An event to relay suggestions that the client should display.
+	Suggestions *Suggestions `protobuf:"bytes,4,opt,name=suggestions,oneof"`
+}
+
 func (*responseEvent_Init) isResponseEvent_Type() {}
 
 func (*responseEvent_ClientActions_) isResponseEvent_Type() {}
 
 func (*responseEvent_Finished) isResponseEvent_Type() {}
+
+func (*responseEvent_Suggestions) isResponseEvent_Type() {}
 
 // Client actions that can be requested in a response
 type ClientAction struct {
@@ -1615,12 +1661,13 @@ var File_response_proto protoreflect.FileDescriptor
 
 const file_response_proto_rawDesc = "" +
 	"\n" +
-	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\n" +
-	"task.proto\"\x83\x06\n" +
+	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a\fcommon.proto\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\n" +
+	"task.proto\"\xc9\x06\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
-	"\bfinished\x18\x03 \x01(\v21.warp.multi_agent.v1.ResponseEvent.StreamFinishedH\x00R\bfinished\x1aT\n" +
+	"\bfinished\x18\x03 \x01(\v21.warp.multi_agent.v1.ResponseEvent.StreamFinishedH\x00R\bfinished\x12D\n" +
+	"\vsuggestions\x18\x04 \x01(\v2 .warp.multi_agent.v1.SuggestionsH\x00R\vsuggestions\x1aT\n" +
 	"\n" +
 	"StreamInit\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12\x1d\n" +
@@ -1679,36 +1726,38 @@ var file_response_proto_goTypes = []any{
 	(*ClientAction_AddMessagesToTask)(nil),                    // 10: warp.multi_agent.v1.ClientAction.AddMessagesToTask
 	(*ClientAction_UpdateTaskMessage)(nil),                    // 11: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
 	(*ClientAction_AppendToMessageContent)(nil),               // 12: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*Task)(nil),                  // 13: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),            // 14: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),               // 15: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
+	(*Suggestions)(nil),                                       // 13: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                              // 14: warp.multi_agent.v1.Task
+	(*TaskStatus)(nil),                                        // 15: warp.multi_agent.v1.TaskStatus
+	(*Message)(nil),                                           // 16: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                             // 17: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
 	3,  // 1: warp.multi_agent.v1.ResponseEvent.client_actions:type_name -> warp.multi_agent.v1.ResponseEvent.ClientActions
 	4,  // 2: warp.multi_agent.v1.ResponseEvent.finished:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished
-	8,  // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
-	9,  // 4: warp.multi_agent.v1.ClientAction.update_task_status:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	10, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	11, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	12, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	1,  // 8: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	5,  // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	6,  // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	7,  // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	13, // 12: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	14, // 13: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
-	15, // 14: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	15, // 15: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	16, // 16: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	15, // 17: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	16, // 18: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	13, // 3: warp.multi_agent.v1.ResponseEvent.suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	8,  // 4: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
+	9,  // 5: warp.multi_agent.v1.ClientAction.update_task_status:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskStatus
+	10, // 6: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	11, // 7: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	12, // 8: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	1,  // 9: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
+	5,  // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	6,  // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	7,  // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	14, // 13: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	15, // 14: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
+	16, // 15: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	16, // 16: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	17, // 17: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	16, // 18: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	17, // 19: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -1716,11 +1765,13 @@ func file_response_proto_init() {
 	if File_response_proto != nil {
 		return
 	}
+	file_common_proto_init()
 	file_task_proto_init()
 	file_response_proto_msgTypes[0].OneofWrappers = []any{
 		(*responseEvent_Init)(nil),
 		(*responseEvent_ClientActions_)(nil),
 		(*responseEvent_Finished)(nil),
+		(*responseEvent_Suggestions)(nil),
 	}
 	file_response_proto_msgTypes[1].OneofWrappers = []any{
 		(*clientAction_CreateTask_)(nil),

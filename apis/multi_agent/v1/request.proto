@@ -7,6 +7,7 @@ import "google/protobuf/go_features.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
+import "common.proto";
 import "options.proto";
 import "task.proto";
 
@@ -144,6 +145,9 @@ message Request {
     // Map of metadata to inline in server analytic events for this request.
     // Values in the map should be valid JSON values.
     map<string, google.protobuf.Value> logging = 2;
+    
+    // The list of suggestions received from the previous request.
+    Suggestions existing_suggestions = 3;
   }
 
   message Settings {

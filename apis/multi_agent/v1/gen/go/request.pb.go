@@ -512,13 +512,14 @@ func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 func (*request_Input_StaticQuery_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging        map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
-	XXX_presence              [1]uint32
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                          protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId      *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging             map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ExistingSuggestions *Suggestions               `protobuf:"bytes,3,opt,name=existing_suggestions,json=existingSuggestions"`
+	XXX_raceDetectHookData         protoimpl.RaceDetectHookData
+	XXX_presence                   [1]uint32
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *Request_Metadata) Reset() {
@@ -563,13 +564,24 @@ func (x *Request_Metadata) GetLogging() map[string]*structpb.Value {
 	return nil
 }
 
+func (x *Request_Metadata) GetExistingSuggestions() *Suggestions {
+	if x != nil {
+		return x.xxx_hidden_ExistingSuggestions
+	}
+	return nil
+}
+
 func (x *Request_Metadata) SetConversationId(v string) {
 	x.xxx_hidden_ConversationId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 	x.xxx_hidden_Logging = v
+}
+
+func (x *Request_Metadata) SetExistingSuggestions(v *Suggestions) {
+	x.xxx_hidden_ExistingSuggestions = v
 }
 
 func (x *Request_Metadata) HasConversationId() bool {
@@ -579,9 +591,20 @@ func (x *Request_Metadata) HasConversationId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Request_Metadata) HasExistingSuggestions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExistingSuggestions != nil
+}
+
 func (x *Request_Metadata) ClearConversationId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ConversationId = nil
+}
+
+func (x *Request_Metadata) ClearExistingSuggestions() {
+	x.xxx_hidden_ExistingSuggestions = nil
 }
 
 type Request_Metadata_builder struct {
@@ -596,6 +619,8 @@ type Request_Metadata_builder struct {
 	// Map of metadata to inline in server analytic events for this request.
 	// Values in the map should be valid JSON values.
 	Logging map[string]*structpb.Value
+	// The list of suggestions received from the previous request.
+	ExistingSuggestions *Suggestions
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -603,10 +628,11 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ConversationId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ConversationId = b.ConversationId
 	}
 	x.xxx_hidden_Logging = b.Logging
+	x.xxx_hidden_ExistingSuggestions = b.ExistingSuggestions
 	return m0
 }
 
@@ -2805,7 +2831,8 @@ const file_request_proto_rawDesc = "" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
-	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x12S\n" +
+	"\x14existing_suggestions\x18\x03 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x87\x02\n" +
@@ -2894,6 +2921,7 @@ func file_request_proto_init() {
 	if File_request_proto != nil {
 		return
 	}
+	file_common_proto_init()
 	file_options_proto_init()
 	file_task_proto_init()
 	file_request_proto_msgTypes[2].OneofWrappers = []any{

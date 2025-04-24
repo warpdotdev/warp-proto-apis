@@ -3,6 +3,7 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "common.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
 
@@ -25,6 +26,9 @@ message ResponseEvent {
     // Sent exactly once as the final event for streams that finished
     // gracefully.
     StreamFinished finished = 3;
+
+    // An event to relay suggestions that the client should display.
+    Suggestions suggestions = 4;
   }
 
   message StreamInit {
