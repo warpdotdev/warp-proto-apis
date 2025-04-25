@@ -77,7 +77,7 @@ message Message {
   message UserQuery { string query = 1 [ (sensitive) = true ]; }
 
   // Agent output message type
-  message AgentOutput { string text = 1 [ (sensitive) = true ]; }
+  message AgentOutput { string text = 1; }
 
   // Tool call message type
   message ToolCall {
@@ -100,7 +100,7 @@ message Message {
 
     // A tool call to run a shell command.
     message RunShellCommand {
-      string command = 1 [ (sensitive) = true ];
+      string command = 1;
       bool is_read_only = 2;
     }
 
@@ -108,7 +108,7 @@ message Message {
     message ReadFiles {
       repeated File files = 1;
       message File {
-        string name = 1 [ (sensitive) = true ];
+        string name = 1;
         // If empty, the entire file is retrieved.
         repeated FileContentLineRange line_ranges = 2;
       }
@@ -116,28 +116,28 @@ message Message {
 
     // A tool call to search a codebase.
     message SearchCodebase {
-      string query = 1 [ (sensitive) = true ];
-      repeated string path_filters = 2 [ (sensitive) = true ];
+      string query = 1;
+      repeated string path_filters = 2;
     }
 
     // A tool call to apply diffs to files.
     message ApplyFileDiffs {
-      string summary = 1 [ (sensitive) = true ];
+      string summary = 1;
       repeated FileDiff diffs = 2;
 
       message FileDiff {
-        string file_path = 1 [ (sensitive) = true ];
+        string file_path = 1;
         // The content to be replaced.
-        string search = 2 [ (sensitive) = true ];
+        string search = 2;
         // The content that replaces `search`.
-        string replace = 3 [ (sensitive) = true ];
+        string replace = 3;
       }
     }
 
     // A tool call to suggest a plan.
     message SuggestPlan {
       // A high-level summary.
-      string summary = 1 [ (sensitive) = true ];
+      string summary = 1;
       // A set of tasks that form the proposed execution plan.
       repeated Task proposed_tasks = 2;
     }
@@ -169,9 +169,7 @@ message Message {
   // for server-side processing.
   //
   // The client should treat the `payload` as an opaque blob.
-  message ServerEvent {
-    string payload = 1;
-  }
+  message ServerEvent { string payload = 1; }
 }
 
 // Result of a `RunShellCommand` tool call.
@@ -190,9 +188,7 @@ message SearchCodebaseResult { repeated FileContent files = 1; }
 message ApplyFileDiffsResult { repeated FileContent updated_files = 1; }
 
 // Result of a `SuggestCreatePlan` tool call.
-message SuggestCreatePlanResult {
-  bool accepted = 1;
-}
+message SuggestCreatePlanResult { bool accepted = 1; }
 
 // A range of lines [start, end] that situate content in a file, 0-indexed.
 message FileContentLineRange {
