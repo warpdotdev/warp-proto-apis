@@ -92,6 +92,7 @@ message Message {
       ApplyFileDiffs apply_file_diffs = 6;
       SuggestPlan suggest_plan = 7;
       SuggestCreatePlan suggest_create_plan = 8;
+      Grep grep = 9;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -144,6 +145,14 @@ message Message {
 
     // A tool call to suggest creating a plan (i.e. autoplanning).
     message SuggestCreatePlan {}
+
+    // A tool call to perform a grep search.
+    message Grep {
+      // The search terms or patterns to look for.
+      repeated string queries = 1;
+      // The relative path to the file or directory to search in.
+      string path = 2;
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -158,6 +167,7 @@ message Message {
       ApplyFileDiffsResult apply_file_diffs = 6;
       SuggestPlanResult suggest_plan = 7;
       SuggestCreatePlanResult suggest_create_plan = 8;
+      GrepResult grep = 9;
     }
 
     // Result of a server-side tool call.
@@ -216,5 +226,25 @@ message SuggestPlanResult {
   message UserEditedPlan {
     // The plan text provided by the user.
     string plan_text = 1 [ (sensitive) = true ];
+  }
+}
+
+// Result of a `Grep` tool call.
+message GrepResult {
+  // List of files containing lines that matched the grep query.
+  repeated GrepFileMatch matched_files = 1;
+
+  message GrepFileMatch {
+    // The path to the file that matched the grep query.
+    string file_path = 1 [ (sensitive) = true ];
+    // List of line matches within this file.
+    repeated GrepLineMatch matched_lines = 2;
+
+    message GrepLineMatch {
+      // The matched line within the file. This currently only includes the line
+      // number, but could be extended to include the line content in the
+      // future.
+      int32 line_number = 1;
+    }
   }
 }
