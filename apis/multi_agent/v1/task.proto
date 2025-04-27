@@ -93,6 +93,7 @@ message Message {
       SuggestPlan suggest_plan = 7;
       SuggestCreatePlan suggest_create_plan = 8;
       Grep grep = 9;
+      FileGlob file_glob = 10;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -153,6 +154,14 @@ message Message {
       // The relative path to the file or directory to search in.
       string path = 2;
     }
+
+    // A tool call to find files matching glob patterns.
+    message FileGlob {
+      // The glob patterns to match file names against.
+      repeated string patterns = 1;
+      // The relative path to the directory to search in.
+      string path = 2;
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -168,6 +177,7 @@ message Message {
       SuggestPlanResult suggest_plan = 7;
       SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
+      FileGlobResult file_glob = 10;
     }
 
     // Result of a server-side tool call.
@@ -247,4 +257,10 @@ message GrepResult {
       int32 line_number = 1;
     }
   }
+}
+
+// Result of a `FileGlob` tool call.
+message FileGlobResult {
+  // String containing list of file paths matching the glob patterns.
+  string matched_files = 1;
 }

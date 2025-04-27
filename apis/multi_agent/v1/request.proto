@@ -114,6 +114,7 @@ message Request {
         SuggestPlanResult suggest_plan = 6;
         SuggestCreatePlanResult suggest_create_plan = 7;
         GrepResult grep = 8;
+        FileGlobResult file_glob = 9;
       }
     }
 
