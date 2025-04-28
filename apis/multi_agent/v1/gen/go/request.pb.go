@@ -888,13 +888,13 @@ func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
 }
 
 type Request_Input_UserQuery struct {
-	state                      protoimpl.MessageState         `protogen:"opaque.v1"`
-	xxx_hidden_Query           *string                        `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_StaticQueryType *Request_Input_StaticQueryType `protobuf:"bytes,2,opt,name=static_query_type,json=staticQueryType"`
-	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
-	XXX_presence               [1]uint32
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                         protoimpl.MessageState            `protogen:"opaque.v1"`
+	xxx_hidden_Query              *string                           `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_CannedResponseType *Request_Input_CannedResponseType `protobuf:"bytes,2,opt,name=canned_response_type,json=cannedResponseType"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *Request_Input_UserQuery) Reset() {
@@ -932,9 +932,9 @@ func (x *Request_Input_UserQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Request_Input_UserQuery) GetStaticQueryType() *Request_Input_StaticQueryType {
+func (x *Request_Input_UserQuery) GetCannedResponseType() *Request_Input_CannedResponseType {
 	if x != nil {
-		return x.xxx_hidden_StaticQueryType
+		return x.xxx_hidden_CannedResponseType
 	}
 	return nil
 }
@@ -944,8 +944,8 @@ func (x *Request_Input_UserQuery) SetQuery(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Input_UserQuery) SetStaticQueryType(v *Request_Input_StaticQueryType) {
-	x.xxx_hidden_StaticQueryType = v
+func (x *Request_Input_UserQuery) SetCannedResponseType(v *Request_Input_CannedResponseType) {
+	x.xxx_hidden_CannedResponseType = v
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -955,11 +955,11 @@ func (x *Request_Input_UserQuery) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_UserQuery) HasStaticQueryType() bool {
+func (x *Request_Input_UserQuery) HasCannedResponseType() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_StaticQueryType != nil
+	return x.xxx_hidden_CannedResponseType != nil
 }
 
 func (x *Request_Input_UserQuery) ClearQuery() {
@@ -967,16 +967,16 @@ func (x *Request_Input_UserQuery) ClearQuery() {
 	x.xxx_hidden_Query = nil
 }
 
-func (x *Request_Input_UserQuery) ClearStaticQueryType() {
-	x.xxx_hidden_StaticQueryType = nil
+func (x *Request_Input_UserQuery) ClearCannedResponseType() {
+	x.xxx_hidden_CannedResponseType = nil
 }
 
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query *string
-	// Optional static query type.
-	StaticQueryType *Request_Input_StaticQueryType
+	// Optional canned response type.
+	CannedResponseType *Request_Input_CannedResponseType
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -987,7 +987,7 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Query = b.Query
 	}
-	x.xxx_hidden_StaticQueryType = b.StaticQueryType
+	x.xxx_hidden_CannedResponseType = b.CannedResponseType
 	return m0
 }
 
@@ -1374,31 +1374,31 @@ func (*request_Input_ToolCallResult_SuggestPlan) isRequest_Input_ToolCallResult_
 
 func (*request_Input_ToolCallResult_SuggestCreatePlan) isRequest_Input_ToolCallResult_Result() {}
 
-// Static queries correspond to hardcoded predefined responses from
+// Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
 // initial response asking the user for more information, before passing it
 // off to "real AI".
-type Request_Input_StaticQueryType struct {
-	state           protoimpl.MessageState               `protogen:"opaque.v1"`
-	xxx_hidden_Type isRequest_Input_StaticQueryType_Type `protobuf_oneof:"type"`
+type Request_Input_CannedResponseType struct {
+	state           protoimpl.MessageState                  `protogen:"opaque.v1"`
+	xxx_hidden_Type isRequest_Input_CannedResponseType_Type `protobuf_oneof:"type"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *Request_Input_StaticQueryType) Reset() {
-	*x = Request_Input_StaticQueryType{}
+func (x *Request_Input_CannedResponseType) Reset() {
+	*x = Request_Input_CannedResponseType{}
 	mi := &file_request_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_StaticQueryType) String() string {
+func (x *Request_Input_CannedResponseType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_StaticQueryType) ProtoMessage() {}
+func (*Request_Input_CannedResponseType) ProtoMessage() {}
 
-func (x *Request_Input_StaticQueryType) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_CannedResponseType) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1410,236 +1410,236 @@ func (x *Request_Input_StaticQueryType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_StaticQueryType) GetInstall() *Request_Input_InstallStaticQuery {
+func (x *Request_Input_CannedResponseType) GetInstall() *Request_Input_InstallCannedResponse {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Install); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Install); ok {
 			return x.Install
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQueryType) GetCode() *Request_Input_CodeStaticQuery {
+func (x *Request_Input_CannedResponseType) GetCode() *Request_Input_CodeCannedResponse {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Code); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Code); ok {
 			return x.Code
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQueryType) GetDeploy() *Request_Input_DeployStaticQuery {
+func (x *Request_Input_CannedResponseType) GetDeploy() *Request_Input_DeployCannedResponse {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Deploy); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Deploy); ok {
 			return x.Deploy
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQueryType) GetSomethingElse() *Request_Input_SomethingElseStaticQuery {
+func (x *Request_Input_CannedResponseType) GetSomethingElse() *Request_Input_SomethingElseCannedResponse {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_SomethingElse); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_SomethingElse); ok {
 			return x.SomethingElse
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQueryType) GetCustomOnboardingRequest() *Request_Input_CustomOnboardingRequestStaticQuery {
+func (x *Request_Input_CannedResponseType) GetCustomOnboardingRequest() *Request_Input_CustomOnboardingRequestCannedResponse {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_CustomOnboardingRequest); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_CustomOnboardingRequest); ok {
 			return x.CustomOnboardingRequest
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQueryType) SetInstall(v *Request_Input_InstallStaticQuery) {
+func (x *Request_Input_CannedResponseType) SetInstall(v *Request_Input_InstallCannedResponse) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQueryType_Install{v}
+	x.xxx_hidden_Type = &request_Input_CannedResponseType_Install{v}
 }
 
-func (x *Request_Input_StaticQueryType) SetCode(v *Request_Input_CodeStaticQuery) {
+func (x *Request_Input_CannedResponseType) SetCode(v *Request_Input_CodeCannedResponse) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQueryType_Code{v}
+	x.xxx_hidden_Type = &request_Input_CannedResponseType_Code{v}
 }
 
-func (x *Request_Input_StaticQueryType) SetDeploy(v *Request_Input_DeployStaticQuery) {
+func (x *Request_Input_CannedResponseType) SetDeploy(v *Request_Input_DeployCannedResponse) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQueryType_Deploy{v}
+	x.xxx_hidden_Type = &request_Input_CannedResponseType_Deploy{v}
 }
 
-func (x *Request_Input_StaticQueryType) SetSomethingElse(v *Request_Input_SomethingElseStaticQuery) {
+func (x *Request_Input_CannedResponseType) SetSomethingElse(v *Request_Input_SomethingElseCannedResponse) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQueryType_SomethingElse{v}
+	x.xxx_hidden_Type = &request_Input_CannedResponseType_SomethingElse{v}
 }
 
-func (x *Request_Input_StaticQueryType) SetCustomOnboardingRequest(v *Request_Input_CustomOnboardingRequestStaticQuery) {
+func (x *Request_Input_CannedResponseType) SetCustomOnboardingRequest(v *Request_Input_CustomOnboardingRequestCannedResponse) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQueryType_CustomOnboardingRequest{v}
+	x.xxx_hidden_Type = &request_Input_CannedResponseType_CustomOnboardingRequest{v}
 }
 
-func (x *Request_Input_StaticQueryType) HasType() bool {
+func (x *Request_Input_CannedResponseType) HasType() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Type != nil
 }
 
-func (x *Request_Input_StaticQueryType) HasInstall() bool {
+func (x *Request_Input_CannedResponseType) HasInstall() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Install)
+	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Install)
 	return ok
 }
 
-func (x *Request_Input_StaticQueryType) HasCode() bool {
+func (x *Request_Input_CannedResponseType) HasCode() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Code)
+	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Code)
 	return ok
 }
 
-func (x *Request_Input_StaticQueryType) HasDeploy() bool {
+func (x *Request_Input_CannedResponseType) HasDeploy() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Deploy)
+	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Deploy)
 	return ok
 }
 
-func (x *Request_Input_StaticQueryType) HasSomethingElse() bool {
+func (x *Request_Input_CannedResponseType) HasSomethingElse() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_SomethingElse)
+	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_SomethingElse)
 	return ok
 }
 
-func (x *Request_Input_StaticQueryType) HasCustomOnboardingRequest() bool {
+func (x *Request_Input_CannedResponseType) HasCustomOnboardingRequest() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_CustomOnboardingRequest)
+	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_CustomOnboardingRequest)
 	return ok
 }
 
-func (x *Request_Input_StaticQueryType) ClearType() {
+func (x *Request_Input_CannedResponseType) ClearType() {
 	x.xxx_hidden_Type = nil
 }
 
-func (x *Request_Input_StaticQueryType) ClearInstall() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Install); ok {
+func (x *Request_Input_CannedResponseType) ClearInstall() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Install); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQueryType) ClearCode() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Code); ok {
+func (x *Request_Input_CannedResponseType) ClearCode() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Code); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQueryType) ClearDeploy() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Deploy); ok {
+func (x *Request_Input_CannedResponseType) ClearDeploy() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Deploy); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQueryType) ClearSomethingElse() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_SomethingElse); ok {
+func (x *Request_Input_CannedResponseType) ClearSomethingElse() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_SomethingElse); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQueryType) ClearCustomOnboardingRequest() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_CustomOnboardingRequest); ok {
+func (x *Request_Input_CannedResponseType) ClearCustomOnboardingRequest() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_CustomOnboardingRequest); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-const Request_Input_StaticQueryType_Type_not_set_case case_Request_Input_StaticQueryType_Type = 0
-const Request_Input_StaticQueryType_Install_case case_Request_Input_StaticQueryType_Type = 1
-const Request_Input_StaticQueryType_Code_case case_Request_Input_StaticQueryType_Type = 2
-const Request_Input_StaticQueryType_Deploy_case case_Request_Input_StaticQueryType_Type = 3
-const Request_Input_StaticQueryType_SomethingElse_case case_Request_Input_StaticQueryType_Type = 4
-const Request_Input_StaticQueryType_CustomOnboardingRequest_case case_Request_Input_StaticQueryType_Type = 5
+const Request_Input_CannedResponseType_Type_not_set_case case_Request_Input_CannedResponseType_Type = 0
+const Request_Input_CannedResponseType_Install_case case_Request_Input_CannedResponseType_Type = 1
+const Request_Input_CannedResponseType_Code_case case_Request_Input_CannedResponseType_Type = 2
+const Request_Input_CannedResponseType_Deploy_case case_Request_Input_CannedResponseType_Type = 3
+const Request_Input_CannedResponseType_SomethingElse_case case_Request_Input_CannedResponseType_Type = 4
+const Request_Input_CannedResponseType_CustomOnboardingRequest_case case_Request_Input_CannedResponseType_Type = 5
 
-func (x *Request_Input_StaticQueryType) WhichType() case_Request_Input_StaticQueryType_Type {
+func (x *Request_Input_CannedResponseType) WhichType() case_Request_Input_CannedResponseType_Type {
 	if x == nil {
-		return Request_Input_StaticQueryType_Type_not_set_case
+		return Request_Input_CannedResponseType_Type_not_set_case
 	}
 	switch x.xxx_hidden_Type.(type) {
-	case *request_Input_StaticQueryType_Install:
-		return Request_Input_StaticQueryType_Install_case
-	case *request_Input_StaticQueryType_Code:
-		return Request_Input_StaticQueryType_Code_case
-	case *request_Input_StaticQueryType_Deploy:
-		return Request_Input_StaticQueryType_Deploy_case
-	case *request_Input_StaticQueryType_SomethingElse:
-		return Request_Input_StaticQueryType_SomethingElse_case
-	case *request_Input_StaticQueryType_CustomOnboardingRequest:
-		return Request_Input_StaticQueryType_CustomOnboardingRequest_case
+	case *request_Input_CannedResponseType_Install:
+		return Request_Input_CannedResponseType_Install_case
+	case *request_Input_CannedResponseType_Code:
+		return Request_Input_CannedResponseType_Code_case
+	case *request_Input_CannedResponseType_Deploy:
+		return Request_Input_CannedResponseType_Deploy_case
+	case *request_Input_CannedResponseType_SomethingElse:
+		return Request_Input_CannedResponseType_SomethingElse_case
+	case *request_Input_CannedResponseType_CustomOnboardingRequest:
+		return Request_Input_CannedResponseType_CustomOnboardingRequest_case
 	default:
-		return Request_Input_StaticQueryType_Type_not_set_case
+		return Request_Input_CannedResponseType_Type_not_set_case
 	}
 }
 
-type Request_Input_StaticQueryType_builder struct {
+type Request_Input_CannedResponseType_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Type:
-	Install                 *Request_Input_InstallStaticQuery
-	Code                    *Request_Input_CodeStaticQuery
-	Deploy                  *Request_Input_DeployStaticQuery
-	SomethingElse           *Request_Input_SomethingElseStaticQuery
-	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestStaticQuery
+	Install                 *Request_Input_InstallCannedResponse
+	Code                    *Request_Input_CodeCannedResponse
+	Deploy                  *Request_Input_DeployCannedResponse
+	SomethingElse           *Request_Input_SomethingElseCannedResponse
+	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestCannedResponse
 	// -- end of xxx_hidden_Type
 }
 
-func (b0 Request_Input_StaticQueryType_builder) Build() *Request_Input_StaticQueryType {
-	m0 := &Request_Input_StaticQueryType{}
+func (b0 Request_Input_CannedResponseType_builder) Build() *Request_Input_CannedResponseType {
+	m0 := &Request_Input_CannedResponseType{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Install != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQueryType_Install{b.Install}
+		x.xxx_hidden_Type = &request_Input_CannedResponseType_Install{b.Install}
 	}
 	if b.Code != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQueryType_Code{b.Code}
+		x.xxx_hidden_Type = &request_Input_CannedResponseType_Code{b.Code}
 	}
 	if b.Deploy != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQueryType_Deploy{b.Deploy}
+		x.xxx_hidden_Type = &request_Input_CannedResponseType_Deploy{b.Deploy}
 	}
 	if b.SomethingElse != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQueryType_SomethingElse{b.SomethingElse}
+		x.xxx_hidden_Type = &request_Input_CannedResponseType_SomethingElse{b.SomethingElse}
 	}
 	if b.CustomOnboardingRequest != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQueryType_CustomOnboardingRequest{b.CustomOnboardingRequest}
+		x.xxx_hidden_Type = &request_Input_CannedResponseType_CustomOnboardingRequest{b.CustomOnboardingRequest}
 	}
 	return m0
 }
 
-type case_Request_Input_StaticQueryType_Type protoreflect.FieldNumber
+type case_Request_Input_CannedResponseType_Type protoreflect.FieldNumber
 
-func (x case_Request_Input_StaticQueryType_Type) String() string {
+func (x case_Request_Input_CannedResponseType_Type) String() string {
 	md := file_request_proto_msgTypes[8].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -1647,61 +1647,61 @@ func (x case_Request_Input_StaticQueryType_Type) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_StaticQueryType_Type interface {
-	isRequest_Input_StaticQueryType_Type()
+type isRequest_Input_CannedResponseType_Type interface {
+	isRequest_Input_CannedResponseType_Type()
 }
 
-type request_Input_StaticQueryType_Install struct {
-	Install *Request_Input_InstallStaticQuery `protobuf:"bytes,1,opt,name=install,oneof"`
+type request_Input_CannedResponseType_Install struct {
+	Install *Request_Input_InstallCannedResponse `protobuf:"bytes,1,opt,name=install,oneof"`
 }
 
-type request_Input_StaticQueryType_Code struct {
-	Code *Request_Input_CodeStaticQuery `protobuf:"bytes,2,opt,name=code,oneof"`
+type request_Input_CannedResponseType_Code struct {
+	Code *Request_Input_CodeCannedResponse `protobuf:"bytes,2,opt,name=code,oneof"`
 }
 
-type request_Input_StaticQueryType_Deploy struct {
-	Deploy *Request_Input_DeployStaticQuery `protobuf:"bytes,3,opt,name=deploy,oneof"`
+type request_Input_CannedResponseType_Deploy struct {
+	Deploy *Request_Input_DeployCannedResponse `protobuf:"bytes,3,opt,name=deploy,oneof"`
 }
 
-type request_Input_StaticQueryType_SomethingElse struct {
-	SomethingElse *Request_Input_SomethingElseStaticQuery `protobuf:"bytes,4,opt,name=something_else,json=somethingElse,oneof"`
+type request_Input_CannedResponseType_SomethingElse struct {
+	SomethingElse *Request_Input_SomethingElseCannedResponse `protobuf:"bytes,4,opt,name=something_else,json=somethingElse,oneof"`
 }
 
-type request_Input_StaticQueryType_CustomOnboardingRequest struct {
-	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestStaticQuery `protobuf:"bytes,5,opt,name=custom_onboarding_request,json=customOnboardingRequest,oneof"`
+type request_Input_CannedResponseType_CustomOnboardingRequest struct {
+	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestCannedResponse `protobuf:"bytes,5,opt,name=custom_onboarding_request,json=customOnboardingRequest,oneof"`
 }
 
-func (*request_Input_StaticQueryType_Install) isRequest_Input_StaticQueryType_Type() {}
+func (*request_Input_CannedResponseType_Install) isRequest_Input_CannedResponseType_Type() {}
 
-func (*request_Input_StaticQueryType_Code) isRequest_Input_StaticQueryType_Type() {}
+func (*request_Input_CannedResponseType_Code) isRequest_Input_CannedResponseType_Type() {}
 
-func (*request_Input_StaticQueryType_Deploy) isRequest_Input_StaticQueryType_Type() {}
+func (*request_Input_CannedResponseType_Deploy) isRequest_Input_CannedResponseType_Type() {}
 
-func (*request_Input_StaticQueryType_SomethingElse) isRequest_Input_StaticQueryType_Type() {}
+func (*request_Input_CannedResponseType_SomethingElse) isRequest_Input_CannedResponseType_Type() {}
 
-func (*request_Input_StaticQueryType_CustomOnboardingRequest) isRequest_Input_StaticQueryType_Type() {
+func (*request_Input_CannedResponseType_CustomOnboardingRequest) isRequest_Input_CannedResponseType_Type() {
 }
 
-type Request_Input_InstallStaticQuery struct {
+type Request_Input_InstallCannedResponse struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_InstallStaticQuery) Reset() {
-	*x = Request_Input_InstallStaticQuery{}
+func (x *Request_Input_InstallCannedResponse) Reset() {
+	*x = Request_Input_InstallCannedResponse{}
 	mi := &file_request_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_InstallStaticQuery) String() string {
+func (x *Request_Input_InstallCannedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_InstallStaticQuery) ProtoMessage() {}
+func (*Request_Input_InstallCannedResponse) ProtoMessage() {}
 
-func (x *Request_Input_InstallStaticQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_InstallCannedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1713,38 +1713,38 @@ func (x *Request_Input_InstallStaticQuery) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type Request_Input_InstallStaticQuery_builder struct {
+type Request_Input_InstallCannedResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_InstallStaticQuery_builder) Build() *Request_Input_InstallStaticQuery {
-	m0 := &Request_Input_InstallStaticQuery{}
+func (b0 Request_Input_InstallCannedResponse_builder) Build() *Request_Input_InstallCannedResponse {
+	m0 := &Request_Input_InstallCannedResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
 }
 
-type Request_Input_CodeStaticQuery struct {
+type Request_Input_CodeCannedResponse struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_CodeStaticQuery) Reset() {
-	*x = Request_Input_CodeStaticQuery{}
+func (x *Request_Input_CodeCannedResponse) Reset() {
+	*x = Request_Input_CodeCannedResponse{}
 	mi := &file_request_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_CodeStaticQuery) String() string {
+func (x *Request_Input_CodeCannedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_CodeStaticQuery) ProtoMessage() {}
+func (*Request_Input_CodeCannedResponse) ProtoMessage() {}
 
-func (x *Request_Input_CodeStaticQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_CodeCannedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1756,38 +1756,38 @@ func (x *Request_Input_CodeStaticQuery) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type Request_Input_CodeStaticQuery_builder struct {
+type Request_Input_CodeCannedResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_CodeStaticQuery_builder) Build() *Request_Input_CodeStaticQuery {
-	m0 := &Request_Input_CodeStaticQuery{}
+func (b0 Request_Input_CodeCannedResponse_builder) Build() *Request_Input_CodeCannedResponse {
+	m0 := &Request_Input_CodeCannedResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
 }
 
-type Request_Input_DeployStaticQuery struct {
+type Request_Input_DeployCannedResponse struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_DeployStaticQuery) Reset() {
-	*x = Request_Input_DeployStaticQuery{}
+func (x *Request_Input_DeployCannedResponse) Reset() {
+	*x = Request_Input_DeployCannedResponse{}
 	mi := &file_request_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_DeployStaticQuery) String() string {
+func (x *Request_Input_DeployCannedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_DeployStaticQuery) ProtoMessage() {}
+func (*Request_Input_DeployCannedResponse) ProtoMessage() {}
 
-func (x *Request_Input_DeployStaticQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_DeployCannedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1799,38 +1799,38 @@ func (x *Request_Input_DeployStaticQuery) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type Request_Input_DeployStaticQuery_builder struct {
+type Request_Input_DeployCannedResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_DeployStaticQuery_builder) Build() *Request_Input_DeployStaticQuery {
-	m0 := &Request_Input_DeployStaticQuery{}
+func (b0 Request_Input_DeployCannedResponse_builder) Build() *Request_Input_DeployCannedResponse {
+	m0 := &Request_Input_DeployCannedResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
 }
 
-type Request_Input_SomethingElseStaticQuery struct {
+type Request_Input_SomethingElseCannedResponse struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_SomethingElseStaticQuery) Reset() {
-	*x = Request_Input_SomethingElseStaticQuery{}
+func (x *Request_Input_SomethingElseCannedResponse) Reset() {
+	*x = Request_Input_SomethingElseCannedResponse{}
 	mi := &file_request_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_SomethingElseStaticQuery) String() string {
+func (x *Request_Input_SomethingElseCannedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_SomethingElseStaticQuery) ProtoMessage() {}
+func (*Request_Input_SomethingElseCannedResponse) ProtoMessage() {}
 
-func (x *Request_Input_SomethingElseStaticQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_SomethingElseCannedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1842,38 +1842,38 @@ func (x *Request_Input_SomethingElseStaticQuery) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-type Request_Input_SomethingElseStaticQuery_builder struct {
+type Request_Input_SomethingElseCannedResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_SomethingElseStaticQuery_builder) Build() *Request_Input_SomethingElseStaticQuery {
-	m0 := &Request_Input_SomethingElseStaticQuery{}
+func (b0 Request_Input_SomethingElseCannedResponse_builder) Build() *Request_Input_SomethingElseCannedResponse {
+	m0 := &Request_Input_SomethingElseCannedResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
 }
 
-type Request_Input_CustomOnboardingRequestStaticQuery struct {
+type Request_Input_CustomOnboardingRequestCannedResponse struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_CustomOnboardingRequestStaticQuery) Reset() {
-	*x = Request_Input_CustomOnboardingRequestStaticQuery{}
+func (x *Request_Input_CustomOnboardingRequestCannedResponse) Reset() {
+	*x = Request_Input_CustomOnboardingRequestCannedResponse{}
 	mi := &file_request_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_CustomOnboardingRequestStaticQuery) String() string {
+func (x *Request_Input_CustomOnboardingRequestCannedResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_CustomOnboardingRequestStaticQuery) ProtoMessage() {}
+func (*Request_Input_CustomOnboardingRequestCannedResponse) ProtoMessage() {}
 
-func (x *Request_Input_CustomOnboardingRequestStaticQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_CustomOnboardingRequestCannedResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1885,13 +1885,13 @@ func (x *Request_Input_CustomOnboardingRequestStaticQuery) ProtoReflect() protor
 	return mi.MessageOf(x)
 }
 
-type Request_Input_CustomOnboardingRequestStaticQuery_builder struct {
+type Request_Input_CustomOnboardingRequestCannedResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_CustomOnboardingRequestStaticQuery_builder) Build() *Request_Input_CustomOnboardingRequestStaticQuery {
-	m0 := &Request_Input_CustomOnboardingRequestStaticQuery{}
+func (b0 Request_Input_CustomOnboardingRequestCannedResponse_builder) Build() *Request_Input_CustomOnboardingRequestCannedResponse {
+	m0 := &Request_Input_CustomOnboardingRequestCannedResponse{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -2718,7 +2718,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\"\xe5\x1b\n" +
+	"task.proto\"\x8f\x1c\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2726,7 +2726,7 @@ const file_request_proto_rawDesc = "" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\x84\x15\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xae\x15\n" +
 	"\x05Input\x12D\n" +
 	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
@@ -2758,10 +2758,10 @@ const file_request_proto_rawDesc = "" +
 	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
 	"\x05Image\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a\x87\x01\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a\x90\x01\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12^\n" +
-	"\x11static_query_type\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.StaticQueryTypeR\x0fstaticQueryType\x1a\xb7\x04\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12g\n" +
+	"\x14canned_response_type\x18\x02 \x01(\v25.warp.multi_agent.v1.Request.Input.CannedResponseTypeR\x12cannedResponseType\x1a\xb7\x04\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2772,19 +2772,19 @@ const file_request_proto_rawDesc = "" +
 	"\x10apply_file_diffs\x18\x05 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
 	"\fsuggest_plan\x18\x06 \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x12^\n" +
 	"\x13suggest_create_plan\x18\a \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlanB\b\n" +
-	"\x06result\x1a\xf2\x03\n" +
-	"\x0fStaticQueryType\x12Q\n" +
-	"\ainstall\x18\x01 \x01(\v25.warp.multi_agent.v1.Request.Input.InstallStaticQueryH\x00R\ainstall\x12H\n" +
-	"\x04code\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.CodeStaticQueryH\x00R\x04code\x12N\n" +
-	"\x06deploy\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.DeployStaticQueryH\x00R\x06deploy\x12d\n" +
-	"\x0esomething_else\x18\x04 \x01(\v2;.warp.multi_agent.v1.Request.Input.SomethingElseStaticQueryH\x00R\rsomethingElse\x12\x83\x01\n" +
-	"\x19custom_onboarding_request\x18\x05 \x01(\v2E.warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQueryH\x00R\x17customOnboardingRequestB\x06\n" +
-	"\x04type\x1a\x14\n" +
-	"\x12InstallStaticQuery\x1a\x11\n" +
-	"\x0fCodeStaticQuery\x1a\x13\n" +
-	"\x11DeployStaticQuery\x1a\x1a\n" +
-	"\x18SomethingElseStaticQuery\x1a$\n" +
-	"\"CustomOnboardingRequestStaticQueryB\x06\n" +
+	"\x06result\x1a\x84\x04\n" +
+	"\x12CannedResponseType\x12T\n" +
+	"\ainstall\x18\x01 \x01(\v28.warp.multi_agent.v1.Request.Input.InstallCannedResponseH\x00R\ainstall\x12K\n" +
+	"\x04code\x18\x02 \x01(\v25.warp.multi_agent.v1.Request.Input.CodeCannedResponseH\x00R\x04code\x12Q\n" +
+	"\x06deploy\x18\x03 \x01(\v27.warp.multi_agent.v1.Request.Input.DeployCannedResponseH\x00R\x06deploy\x12g\n" +
+	"\x0esomething_else\x18\x04 \x01(\v2>.warp.multi_agent.v1.Request.Input.SomethingElseCannedResponseH\x00R\rsomethingElse\x12\x86\x01\n" +
+	"\x19custom_onboarding_request\x18\x05 \x01(\v2H.warp.multi_agent.v1.Request.Input.CustomOnboardingRequestCannedResponseH\x00R\x17customOnboardingRequestB\x06\n" +
+	"\x04type\x1a\x17\n" +
+	"\x15InstallCannedResponse\x1a\x14\n" +
+	"\x12CodeCannedResponse\x1a\x16\n" +
+	"\x14DeployCannedResponse\x1a\x1d\n" +
+	"\x1bSomethingElseCannedResponse\x1a'\n" +
+	"%CustomOnboardingRequestCannedResponseB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -2802,37 +2802,37 @@ const file_request_proto_rawDesc = "" +
 
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_request_proto_goTypes = []any{
-	(*Request)(nil),                                          // 0: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                              // 1: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                    // 2: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                 // 3: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                 // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_Input_Context)(nil),                            // 5: warp.multi_agent.v1.Request.Input.Context
-	(*Request_Input_UserQuery)(nil),                          // 6: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_ToolCallResult)(nil),                     // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_StaticQueryType)(nil),                    // 8: warp.multi_agent.v1.Request.Input.StaticQueryType
-	(*Request_Input_InstallStaticQuery)(nil),                 // 9: warp.multi_agent.v1.Request.Input.InstallStaticQuery
-	(*Request_Input_CodeStaticQuery)(nil),                    // 10: warp.multi_agent.v1.Request.Input.CodeStaticQuery
-	(*Request_Input_DeployStaticQuery)(nil),                  // 11: warp.multi_agent.v1.Request.Input.DeployStaticQuery
-	(*Request_Input_SomethingElseStaticQuery)(nil),           // 12: warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
-	(*Request_Input_CustomOnboardingRequestStaticQuery)(nil), // 13: warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
-	(*Request_Input_Context_ExecutedShellCommand)(nil),       // 14: warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
-	(*Request_Input_Context_SelectedText)(nil),               // 15: warp.multi_agent.v1.Request.Input.Context.SelectedText
-	(*Request_Input_Context_Directory)(nil),                  // 16: warp.multi_agent.v1.Request.Input.Context.Directory
-	(*Request_Input_Context_Shell)(nil),                      // 17: warp.multi_agent.v1.Request.Input.Context.Shell
-	(*Request_Input_Context_OperatingSystem)(nil),            // 18: warp.multi_agent.v1.Request.Input.Context.OperatingSystem
-	(*Request_Input_Context_Image)(nil),                      // 19: warp.multi_agent.v1.Request.Input.Context.Image
-	nil,                                                      // 20: warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	(*Request_Settings_ModelConfig)(nil),                     // 21: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Task)(nil),                                             // 22: warp.multi_agent.v1.Task
-	(*timestamppb.Timestamp)(nil),                            // 23: google.protobuf.Timestamp
-	(*RunShellCommandResult)(nil),                            // 24: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                  // 25: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                             // 26: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                             // 27: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                                // 28: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),                          // 29: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*structpb.Value)(nil),                                   // 30: google.protobuf.Value
+	(*Request)(nil),                                             // 0: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                                 // 1: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                                       // 2: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                                    // 3: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                                    // 4: warp.multi_agent.v1.Request.Settings
+	(*Request_Input_Context)(nil),                               // 5: warp.multi_agent.v1.Request.Input.Context
+	(*Request_Input_UserQuery)(nil),                             // 6: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_ToolCallResult)(nil),                        // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_CannedResponseType)(nil),                    // 8: warp.multi_agent.v1.Request.Input.CannedResponseType
+	(*Request_Input_InstallCannedResponse)(nil),                 // 9: warp.multi_agent.v1.Request.Input.InstallCannedResponse
+	(*Request_Input_CodeCannedResponse)(nil),                    // 10: warp.multi_agent.v1.Request.Input.CodeCannedResponse
+	(*Request_Input_DeployCannedResponse)(nil),                  // 11: warp.multi_agent.v1.Request.Input.DeployCannedResponse
+	(*Request_Input_SomethingElseCannedResponse)(nil),           // 12: warp.multi_agent.v1.Request.Input.SomethingElseCannedResponse
+	(*Request_Input_CustomOnboardingRequestCannedResponse)(nil), // 13: warp.multi_agent.v1.Request.Input.CustomOnboardingRequestCannedResponse
+	(*Request_Input_Context_ExecutedShellCommand)(nil),          // 14: warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
+	(*Request_Input_Context_SelectedText)(nil),                  // 15: warp.multi_agent.v1.Request.Input.Context.SelectedText
+	(*Request_Input_Context_Directory)(nil),                     // 16: warp.multi_agent.v1.Request.Input.Context.Directory
+	(*Request_Input_Context_Shell)(nil),                         // 17: warp.multi_agent.v1.Request.Input.Context.Shell
+	(*Request_Input_Context_OperatingSystem)(nil),               // 18: warp.multi_agent.v1.Request.Input.Context.OperatingSystem
+	(*Request_Input_Context_Image)(nil),                         // 19: warp.multi_agent.v1.Request.Input.Context.Image
+	nil,                                                         // 20: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil),                        // 21: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Task)(nil),                                                // 22: warp.multi_agent.v1.Task
+	(*timestamppb.Timestamp)(nil),                               // 23: google.protobuf.Timestamp
+	(*RunShellCommandResult)(nil),                               // 24: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                     // 25: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                                // 26: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                                // 27: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                                   // 28: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),                             // 29: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*structpb.Value)(nil),                                      // 30: google.protobuf.Value
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -2852,18 +2852,18 @@ var file_request_proto_depIdxs = []int32{
 	14, // 14: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
 	15, // 15: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
 	19, // 16: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
-	8,  // 17: warp.multi_agent.v1.Request.Input.UserQuery.static_query_type:type_name -> warp.multi_agent.v1.Request.Input.StaticQueryType
+	8,  // 17: warp.multi_agent.v1.Request.Input.UserQuery.canned_response_type:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType
 	24, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
 	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	27, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
 	28, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
 	29, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	9,  // 24: warp.multi_agent.v1.Request.Input.StaticQueryType.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
-	10, // 25: warp.multi_agent.v1.Request.Input.StaticQueryType.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
-	11, // 26: warp.multi_agent.v1.Request.Input.StaticQueryType.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
-	12, // 27: warp.multi_agent.v1.Request.Input.StaticQueryType.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
-	13, // 28: warp.multi_agent.v1.Request.Input.StaticQueryType.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
+	9,  // 24: warp.multi_agent.v1.Request.Input.CannedResponseType.install:type_name -> warp.multi_agent.v1.Request.Input.InstallCannedResponse
+	10, // 25: warp.multi_agent.v1.Request.Input.CannedResponseType.code:type_name -> warp.multi_agent.v1.Request.Input.CodeCannedResponse
+	11, // 26: warp.multi_agent.v1.Request.Input.CannedResponseType.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployCannedResponse
+	12, // 27: warp.multi_agent.v1.Request.Input.CannedResponseType.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseCannedResponse
+	13, // 28: warp.multi_agent.v1.Request.Input.CannedResponseType.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestCannedResponse
 	30, // 29: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
 	30, // [30:30] is the sub-list for method output_type
 	30, // [30:30] is the sub-list for method input_type
@@ -2892,11 +2892,11 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_SuggestCreatePlan)(nil),
 	}
 	file_request_proto_msgTypes[8].OneofWrappers = []any{
-		(*request_Input_StaticQueryType_Install)(nil),
-		(*request_Input_StaticQueryType_Code)(nil),
-		(*request_Input_StaticQueryType_Deploy)(nil),
-		(*request_Input_StaticQueryType_SomethingElse)(nil),
-		(*request_Input_StaticQueryType_CustomOnboardingRequest)(nil),
+		(*request_Input_CannedResponseType_Install)(nil),
+		(*request_Input_CannedResponseType_Code)(nil),
+		(*request_Input_CannedResponseType_Deploy)(nil),
+		(*request_Input_CannedResponseType_SomethingElse)(nil),
+		(*request_Input_CannedResponseType_CustomOnboardingRequest)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
