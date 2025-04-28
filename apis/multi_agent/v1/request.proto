@@ -121,19 +121,19 @@ message Request {
     // off to "real AI".
     message CannedResponseType {
       oneof type {
-        InstallCannedResponse install = 1;
-        CodeCannedResponse code = 2;
-        DeployCannedResponse deploy = 3;
-        SomethingElseCannedResponse something_else = 4;
-        CustomOnboardingRequestCannedResponse custom_onboarding_request = 5;
+        Install install = 1;
+        Code code = 2;
+        Deploy deploy = 3;
+        SomethingElse something_else = 4;
+        CustomOnboardingRequest custom_onboarding_request = 5;
       }
-    }
 
-    message InstallCannedResponse {}
-    message CodeCannedResponse {}
-    message DeployCannedResponse {}
-    message SomethingElseCannedResponse {}
-    message CustomOnboardingRequestCannedResponse {}
+      message Install {}
+      message Code {}
+      message Deploy {}
+      message SomethingElse {}
+      message CustomOnboardingRequest {}
+    }
   }
 
   message Metadata {
