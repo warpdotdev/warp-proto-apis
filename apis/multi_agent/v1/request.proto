@@ -102,7 +102,10 @@ message Request {
       }
     }
 
-    // Static query (hardcoded predefined responses)
+    // Static queries correspond to hardcoded predefined responses from
+    // Agent Mode e.g. the zero-state chip for "Install" has a predefined 
+    // initial response asking the user for more information, before passing it
+    // off to "real AI".
     message StaticQuery {
       oneof type {
         InstallStaticQuery install = 1;
@@ -113,7 +116,6 @@ message Request {
       }
     }
 
-    // Empty message types for each static query that can be extended in the future with parameters
     message InstallStaticQuery {}
     message CodeStaticQuery {}
     message DeployStaticQuery {}
