@@ -31,6 +31,7 @@ type Task struct {
 	xxx_hidden_Dependencies *Task_Dependencies     `protobuf:"bytes,3,opt,name=dependencies"`
 	xxx_hidden_Status       *TaskStatus            `protobuf:"bytes,4,opt,name=status"`
 	xxx_hidden_Messages     *[]*Message            `protobuf:"bytes,5,rep,name=messages"`
+	xxx_hidden_Summary      *string                `protobuf:"bytes,6,opt,name=summary"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
@@ -105,14 +106,24 @@ func (x *Task) GetMessages() []*Message {
 	return nil
 }
 
+func (x *Task) GetSummary() string {
+	if x != nil {
+		if x.xxx_hidden_Summary != nil {
+			return *x.xxx_hidden_Summary
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Task) SetId(v string) {
 	x.xxx_hidden_Id = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *Task) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *Task) SetDependencies(v *Task_Dependencies) {
@@ -125,6 +136,11 @@ func (x *Task) SetStatus(v *TaskStatus) {
 
 func (x *Task) SetMessages(v []*Message) {
 	x.xxx_hidden_Messages = &v
+}
+
+func (x *Task) SetSummary(v string) {
+	x.xxx_hidden_Summary = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
 
 func (x *Task) HasId() bool {
@@ -155,6 +171,13 @@ func (x *Task) HasStatus() bool {
 	return x.xxx_hidden_Status != nil
 }
 
+func (x *Task) HasSummary() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
 func (x *Task) ClearId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Id = nil
@@ -173,6 +196,11 @@ func (x *Task) ClearStatus() {
 	x.xxx_hidden_Status = nil
 }
 
+func (x *Task) ClearSummary() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Summary = nil
+}
+
 type Task_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -186,6 +214,9 @@ type Task_builder struct {
 	Status *TaskStatus
 	// Messages associated with this task
 	Messages []*Message
+	// The task summary. Differs from the task description in that it summarizes
+	// what has been done to accomplish the task.
+	Summary *string
 }
 
 func (b0 Task_builder) Build() *Task {
@@ -193,16 +224,20 @@ func (b0 Task_builder) Build() *Task {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Id != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_Id = b.Id
 	}
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_Description = b.Description
 	}
 	x.xxx_hidden_Dependencies = b.Dependencies
 	x.xxx_hidden_Status = b.Status
 	x.xxx_hidden_Messages = &b.Messages
+	if b.Summary != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_Summary = b.Summary
+	}
 	return m0
 }
 
@@ -4796,13 +4831,14 @@ var File_task_proto protoreflect.FileDescriptor
 const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\roptions.proto\"\xe0\x02\n" +
+	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\roptions.proto\"\xfa\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
 	"\fdependencies\x18\x03 \x01(\v2&.warp.multi_agent.v1.Task.DependenciesR\fdependencies\x127\n" +
 	"\x06status\x18\x04 \x01(\v2\x1f.warp.multi_agent.v1.TaskStatusR\x06status\x128\n" +
-	"\bmessages\x18\x05 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\bmessages\x1ag\n" +
+	"\bmessages\x18\x05 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\bmessages\x12\x18\n" +
+	"\asummary\x18\x06 \x01(\tR\asummary\x1ag\n" +
 	"\fDependencies\x12$\n" +
 	"\x0eparent_task_id\x18\x01 \x01(\tR\fparentTaskId\x121\n" +
 	"\x14sibling_dependencies\x18\x02 \x03(\tR\x13siblingDependencies\"\x87\x04\n" +
@@ -4935,9 +4971,9 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_lines\x18\x02 \x03(\v2;.warp.multi_agent.v1.GrepResult.GrepFileMatch.GrepLineMatchR\fmatchedLines\x1a0\n" +
 	"\rGrepLineMatch\x12\x1f\n" +
 	"\vline_number\x18\x01 \x01(\x05R\n" +
-	"lineNumber\"5\n" +
-	"\x0eFileGlobResult\x12#\n" +
-	"\rmatched_files\x18\x01 \x01(\tR\fmatchedFilesB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"lineNumber\";\n" +
+	"\x0eFileGlobResult\x12)\n" +
+	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFilesB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_task_proto_goTypes = []any{

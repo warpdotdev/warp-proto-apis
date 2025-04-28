@@ -28,6 +28,10 @@ message Task {
   // Messages associated with this task
   repeated Message messages = 5;
 
+  // The task summary. Differs from the task description in that it summarizes
+  // what has been done to accomplish the task.
+  string summary = 6;
+
   // Dependencies for task hierarchy and execution order.
   message Dependencies {
     // ID of the parent task, may be null for root tasks.  This task cannot
