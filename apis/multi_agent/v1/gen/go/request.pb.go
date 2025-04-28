@@ -327,15 +327,6 @@ func (x *Request_Input) GetToolCallResult() *Request_Input_ToolCallResult {
 	return nil
 }
 
-func (x *Request_Input) GetStaticQuery() *Request_Input_StaticQuery {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_); ok {
-			return x.StaticQuery
-		}
-	}
-	return nil
-}
-
 func (x *Request_Input) SetContext(v *Request_Input_Context) {
 	x.xxx_hidden_Context = v
 }
@@ -354,14 +345,6 @@ func (x *Request_Input) SetToolCallResult(v *Request_Input_ToolCallResult) {
 		return
 	}
 	x.xxx_hidden_Type = &request_Input_ToolCallResult_{v}
-}
-
-func (x *Request_Input) SetStaticQuery(v *Request_Input_StaticQuery) {
-	if v == nil {
-		x.xxx_hidden_Type = nil
-		return
-	}
-	x.xxx_hidden_Type = &request_Input_StaticQuery_{v}
 }
 
 func (x *Request_Input) HasContext() bool {
@@ -394,14 +377,6 @@ func (x *Request_Input) HasToolCallResult() bool {
 	return ok
 }
 
-func (x *Request_Input) HasStaticQuery() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_)
-	return ok
-}
-
 func (x *Request_Input) ClearContext() {
 	x.xxx_hidden_Context = nil
 }
@@ -422,16 +397,9 @@ func (x *Request_Input) ClearToolCallResult() {
 	}
 }
 
-func (x *Request_Input) ClearStaticQuery() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_); ok {
-		x.xxx_hidden_Type = nil
-	}
-}
-
 const Request_Input_Type_not_set_case case_Request_Input_Type = 0
 const Request_Input_UserQuery_case case_Request_Input_Type = 2
 const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
-const Request_Input_StaticQuery_case case_Request_Input_Type = 4
 
 func (x *Request_Input) WhichType() case_Request_Input_Type {
 	if x == nil {
@@ -442,8 +410,6 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_UserQuery_case
 	case *request_Input_ToolCallResult_:
 		return Request_Input_ToolCallResult_case
-	case *request_Input_StaticQuery_:
-		return Request_Input_StaticQuery_case
 	default:
 		return Request_Input_Type_not_set_case
 	}
@@ -458,7 +424,6 @@ type Request_Input_builder struct {
 	// Fields of oneof xxx_hidden_Type:
 	UserQuery      *Request_Input_UserQuery
 	ToolCallResult *Request_Input_ToolCallResult
-	StaticQuery    *Request_Input_StaticQuery
 	// -- end of xxx_hidden_Type
 }
 
@@ -472,9 +437,6 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	}
 	if b.ToolCallResult != nil {
 		x.xxx_hidden_Type = &request_Input_ToolCallResult_{b.ToolCallResult}
-	}
-	if b.StaticQuery != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQuery_{b.StaticQuery}
 	}
 	return m0
 }
@@ -501,15 +463,9 @@ type request_Input_ToolCallResult_ struct {
 	ToolCallResult *Request_Input_ToolCallResult `protobuf:"bytes,3,opt,name=tool_call_result,json=toolCallResult,oneof"`
 }
 
-type request_Input_StaticQuery_ struct {
-	StaticQuery *Request_Input_StaticQuery `protobuf:"bytes,4,opt,name=static_query,json=staticQuery,oneof"`
-}
-
 func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
-
-func (*request_Input_StaticQuery_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
 	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
@@ -932,8 +888,9 @@ func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
 }
 
 type Request_Input_UserQuery struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
+	state                  protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Query       *string                        `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_StaticQuery *Request_Input_StaticQueryType `protobuf:"bytes,2,opt,name=static_query,json=staticQuery"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -975,9 +932,20 @@ func (x *Request_Input_UserQuery) GetQuery() string {
 	return ""
 }
 
+func (x *Request_Input_UserQuery) GetStaticQuery() *Request_Input_StaticQueryType {
+	if x != nil {
+		return x.xxx_hidden_StaticQuery
+	}
+	return nil
+}
+
 func (x *Request_Input_UserQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Request_Input_UserQuery) SetStaticQuery(v *Request_Input_StaticQueryType) {
+	x.xxx_hidden_StaticQuery = v
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -987,15 +955,27 @@ func (x *Request_Input_UserQuery) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Request_Input_UserQuery) HasStaticQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_StaticQuery != nil
+}
+
 func (x *Request_Input_UserQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
 }
 
+func (x *Request_Input_UserQuery) ClearStaticQuery() {
+	x.xxx_hidden_StaticQuery = nil
+}
+
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query *string
+	Query       *string
+	StaticQuery *Request_Input_StaticQueryType
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -1003,9 +983,10 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Query = b.Query
 	}
+	x.xxx_hidden_StaticQuery = b.StaticQuery
 	return m0
 }
 
@@ -1396,27 +1377,27 @@ func (*request_Input_ToolCallResult_SuggestCreatePlan) isRequest_Input_ToolCallR
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
 // initial response asking the user for more information, before passing it
 // off to "real AI".
-type Request_Input_StaticQuery struct {
-	state           protoimpl.MessageState           `protogen:"opaque.v1"`
-	xxx_hidden_Type isRequest_Input_StaticQuery_Type `protobuf_oneof:"type"`
+type Request_Input_StaticQueryType struct {
+	state           protoimpl.MessageState               `protogen:"opaque.v1"`
+	xxx_hidden_Type isRequest_Input_StaticQueryType_Type `protobuf_oneof:"type"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *Request_Input_StaticQuery) Reset() {
-	*x = Request_Input_StaticQuery{}
+func (x *Request_Input_StaticQueryType) Reset() {
+	*x = Request_Input_StaticQueryType{}
 	mi := &file_request_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_StaticQuery) String() string {
+func (x *Request_Input_StaticQueryType) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_StaticQuery) ProtoMessage() {}
+func (*Request_Input_StaticQueryType) ProtoMessage() {}
 
-func (x *Request_Input_StaticQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_StaticQueryType) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1428,200 +1409,200 @@ func (x *Request_Input_StaticQuery) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_StaticQuery) GetInstall() *Request_Input_InstallStaticQuery {
+func (x *Request_Input_StaticQueryType) GetInstall() *Request_Input_InstallStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Install); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Install); ok {
 			return x.Install
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQuery) GetCode() *Request_Input_CodeStaticQuery {
+func (x *Request_Input_StaticQueryType) GetCode() *Request_Input_CodeStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Code); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Code); ok {
 			return x.Code
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQuery) GetDeploy() *Request_Input_DeployStaticQuery {
+func (x *Request_Input_StaticQueryType) GetDeploy() *Request_Input_DeployStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Deploy); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Deploy); ok {
 			return x.Deploy
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQuery) GetSomethingElse() *Request_Input_SomethingElseStaticQuery {
+func (x *Request_Input_StaticQueryType) GetSomethingElse() *Request_Input_SomethingElseStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_SomethingElse); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_SomethingElse); ok {
 			return x.SomethingElse
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQuery) GetCustomOnboardingRequest() *Request_Input_CustomOnboardingRequestStaticQuery {
+func (x *Request_Input_StaticQueryType) GetCustomOnboardingRequest() *Request_Input_CustomOnboardingRequestStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_CustomOnboardingRequest); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_CustomOnboardingRequest); ok {
 			return x.CustomOnboardingRequest
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_StaticQuery) SetInstall(v *Request_Input_InstallStaticQuery) {
+func (x *Request_Input_StaticQueryType) SetInstall(v *Request_Input_InstallStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQuery_Install{v}
+	x.xxx_hidden_Type = &request_Input_StaticQueryType_Install{v}
 }
 
-func (x *Request_Input_StaticQuery) SetCode(v *Request_Input_CodeStaticQuery) {
+func (x *Request_Input_StaticQueryType) SetCode(v *Request_Input_CodeStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQuery_Code{v}
+	x.xxx_hidden_Type = &request_Input_StaticQueryType_Code{v}
 }
 
-func (x *Request_Input_StaticQuery) SetDeploy(v *Request_Input_DeployStaticQuery) {
+func (x *Request_Input_StaticQueryType) SetDeploy(v *Request_Input_DeployStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQuery_Deploy{v}
+	x.xxx_hidden_Type = &request_Input_StaticQueryType_Deploy{v}
 }
 
-func (x *Request_Input_StaticQuery) SetSomethingElse(v *Request_Input_SomethingElseStaticQuery) {
+func (x *Request_Input_StaticQueryType) SetSomethingElse(v *Request_Input_SomethingElseStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQuery_SomethingElse{v}
+	x.xxx_hidden_Type = &request_Input_StaticQueryType_SomethingElse{v}
 }
 
-func (x *Request_Input_StaticQuery) SetCustomOnboardingRequest(v *Request_Input_CustomOnboardingRequestStaticQuery) {
+func (x *Request_Input_StaticQueryType) SetCustomOnboardingRequest(v *Request_Input_CustomOnboardingRequestStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_StaticQuery_CustomOnboardingRequest{v}
+	x.xxx_hidden_Type = &request_Input_StaticQueryType_CustomOnboardingRequest{v}
 }
 
-func (x *Request_Input_StaticQuery) HasType() bool {
+func (x *Request_Input_StaticQueryType) HasType() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Type != nil
 }
 
-func (x *Request_Input_StaticQuery) HasInstall() bool {
+func (x *Request_Input_StaticQueryType) HasInstall() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Install)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Install)
 	return ok
 }
 
-func (x *Request_Input_StaticQuery) HasCode() bool {
+func (x *Request_Input_StaticQueryType) HasCode() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Code)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Code)
 	return ok
 }
 
-func (x *Request_Input_StaticQuery) HasDeploy() bool {
+func (x *Request_Input_StaticQueryType) HasDeploy() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Deploy)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Deploy)
 	return ok
 }
 
-func (x *Request_Input_StaticQuery) HasSomethingElse() bool {
+func (x *Request_Input_StaticQueryType) HasSomethingElse() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_SomethingElse)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_SomethingElse)
 	return ok
 }
 
-func (x *Request_Input_StaticQuery) HasCustomOnboardingRequest() bool {
+func (x *Request_Input_StaticQueryType) HasCustomOnboardingRequest() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_CustomOnboardingRequest)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_CustomOnboardingRequest)
 	return ok
 }
 
-func (x *Request_Input_StaticQuery) ClearType() {
+func (x *Request_Input_StaticQueryType) ClearType() {
 	x.xxx_hidden_Type = nil
 }
 
-func (x *Request_Input_StaticQuery) ClearInstall() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Install); ok {
+func (x *Request_Input_StaticQueryType) ClearInstall() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Install); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQuery) ClearCode() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Code); ok {
+func (x *Request_Input_StaticQueryType) ClearCode() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Code); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQuery) ClearDeploy() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Deploy); ok {
+func (x *Request_Input_StaticQueryType) ClearDeploy() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_Deploy); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQuery) ClearSomethingElse() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_SomethingElse); ok {
+func (x *Request_Input_StaticQueryType) ClearSomethingElse() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_SomethingElse); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_StaticQuery) ClearCustomOnboardingRequest() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_CustomOnboardingRequest); ok {
+func (x *Request_Input_StaticQueryType) ClearCustomOnboardingRequest() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQueryType_CustomOnboardingRequest); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-const Request_Input_StaticQuery_Type_not_set_case case_Request_Input_StaticQuery_Type = 0
-const Request_Input_StaticQuery_Install_case case_Request_Input_StaticQuery_Type = 1
-const Request_Input_StaticQuery_Code_case case_Request_Input_StaticQuery_Type = 2
-const Request_Input_StaticQuery_Deploy_case case_Request_Input_StaticQuery_Type = 3
-const Request_Input_StaticQuery_SomethingElse_case case_Request_Input_StaticQuery_Type = 4
-const Request_Input_StaticQuery_CustomOnboardingRequest_case case_Request_Input_StaticQuery_Type = 5
+const Request_Input_StaticQueryType_Type_not_set_case case_Request_Input_StaticQueryType_Type = 0
+const Request_Input_StaticQueryType_Install_case case_Request_Input_StaticQueryType_Type = 1
+const Request_Input_StaticQueryType_Code_case case_Request_Input_StaticQueryType_Type = 2
+const Request_Input_StaticQueryType_Deploy_case case_Request_Input_StaticQueryType_Type = 3
+const Request_Input_StaticQueryType_SomethingElse_case case_Request_Input_StaticQueryType_Type = 4
+const Request_Input_StaticQueryType_CustomOnboardingRequest_case case_Request_Input_StaticQueryType_Type = 5
 
-func (x *Request_Input_StaticQuery) WhichType() case_Request_Input_StaticQuery_Type {
+func (x *Request_Input_StaticQueryType) WhichType() case_Request_Input_StaticQueryType_Type {
 	if x == nil {
-		return Request_Input_StaticQuery_Type_not_set_case
+		return Request_Input_StaticQueryType_Type_not_set_case
 	}
 	switch x.xxx_hidden_Type.(type) {
-	case *request_Input_StaticQuery_Install:
-		return Request_Input_StaticQuery_Install_case
-	case *request_Input_StaticQuery_Code:
-		return Request_Input_StaticQuery_Code_case
-	case *request_Input_StaticQuery_Deploy:
-		return Request_Input_StaticQuery_Deploy_case
-	case *request_Input_StaticQuery_SomethingElse:
-		return Request_Input_StaticQuery_SomethingElse_case
-	case *request_Input_StaticQuery_CustomOnboardingRequest:
-		return Request_Input_StaticQuery_CustomOnboardingRequest_case
+	case *request_Input_StaticQueryType_Install:
+		return Request_Input_StaticQueryType_Install_case
+	case *request_Input_StaticQueryType_Code:
+		return Request_Input_StaticQueryType_Code_case
+	case *request_Input_StaticQueryType_Deploy:
+		return Request_Input_StaticQueryType_Deploy_case
+	case *request_Input_StaticQueryType_SomethingElse:
+		return Request_Input_StaticQueryType_SomethingElse_case
+	case *request_Input_StaticQueryType_CustomOnboardingRequest:
+		return Request_Input_StaticQueryType_CustomOnboardingRequest_case
 	default:
-		return Request_Input_StaticQuery_Type_not_set_case
+		return Request_Input_StaticQueryType_Type_not_set_case
 	}
 }
 
-type Request_Input_StaticQuery_builder struct {
+type Request_Input_StaticQueryType_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Type:
@@ -1633,31 +1614,31 @@ type Request_Input_StaticQuery_builder struct {
 	// -- end of xxx_hidden_Type
 }
 
-func (b0 Request_Input_StaticQuery_builder) Build() *Request_Input_StaticQuery {
-	m0 := &Request_Input_StaticQuery{}
+func (b0 Request_Input_StaticQueryType_builder) Build() *Request_Input_StaticQueryType {
+	m0 := &Request_Input_StaticQueryType{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Install != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQuery_Install{b.Install}
+		x.xxx_hidden_Type = &request_Input_StaticQueryType_Install{b.Install}
 	}
 	if b.Code != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQuery_Code{b.Code}
+		x.xxx_hidden_Type = &request_Input_StaticQueryType_Code{b.Code}
 	}
 	if b.Deploy != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQuery_Deploy{b.Deploy}
+		x.xxx_hidden_Type = &request_Input_StaticQueryType_Deploy{b.Deploy}
 	}
 	if b.SomethingElse != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQuery_SomethingElse{b.SomethingElse}
+		x.xxx_hidden_Type = &request_Input_StaticQueryType_SomethingElse{b.SomethingElse}
 	}
 	if b.CustomOnboardingRequest != nil {
-		x.xxx_hidden_Type = &request_Input_StaticQuery_CustomOnboardingRequest{b.CustomOnboardingRequest}
+		x.xxx_hidden_Type = &request_Input_StaticQueryType_CustomOnboardingRequest{b.CustomOnboardingRequest}
 	}
 	return m0
 }
 
-type case_Request_Input_StaticQuery_Type protoreflect.FieldNumber
+type case_Request_Input_StaticQueryType_Type protoreflect.FieldNumber
 
-func (x case_Request_Input_StaticQuery_Type) String() string {
+func (x case_Request_Input_StaticQueryType_Type) String() string {
 	md := file_request_proto_msgTypes[8].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -1665,39 +1646,40 @@ func (x case_Request_Input_StaticQuery_Type) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_StaticQuery_Type interface {
-	isRequest_Input_StaticQuery_Type()
+type isRequest_Input_StaticQueryType_Type interface {
+	isRequest_Input_StaticQueryType_Type()
 }
 
-type request_Input_StaticQuery_Install struct {
+type request_Input_StaticQueryType_Install struct {
 	Install *Request_Input_InstallStaticQuery `protobuf:"bytes,1,opt,name=install,oneof"`
 }
 
-type request_Input_StaticQuery_Code struct {
+type request_Input_StaticQueryType_Code struct {
 	Code *Request_Input_CodeStaticQuery `protobuf:"bytes,2,opt,name=code,oneof"`
 }
 
-type request_Input_StaticQuery_Deploy struct {
+type request_Input_StaticQueryType_Deploy struct {
 	Deploy *Request_Input_DeployStaticQuery `protobuf:"bytes,3,opt,name=deploy,oneof"`
 }
 
-type request_Input_StaticQuery_SomethingElse struct {
+type request_Input_StaticQueryType_SomethingElse struct {
 	SomethingElse *Request_Input_SomethingElseStaticQuery `protobuf:"bytes,4,opt,name=something_else,json=somethingElse,oneof"`
 }
 
-type request_Input_StaticQuery_CustomOnboardingRequest struct {
+type request_Input_StaticQueryType_CustomOnboardingRequest struct {
 	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestStaticQuery `protobuf:"bytes,5,opt,name=custom_onboarding_request,json=customOnboardingRequest,oneof"`
 }
 
-func (*request_Input_StaticQuery_Install) isRequest_Input_StaticQuery_Type() {}
+func (*request_Input_StaticQueryType_Install) isRequest_Input_StaticQueryType_Type() {}
 
-func (*request_Input_StaticQuery_Code) isRequest_Input_StaticQuery_Type() {}
+func (*request_Input_StaticQueryType_Code) isRequest_Input_StaticQueryType_Type() {}
 
-func (*request_Input_StaticQuery_Deploy) isRequest_Input_StaticQuery_Type() {}
+func (*request_Input_StaticQueryType_Deploy) isRequest_Input_StaticQueryType_Type() {}
 
-func (*request_Input_StaticQuery_SomethingElse) isRequest_Input_StaticQuery_Type() {}
+func (*request_Input_StaticQueryType_SomethingElse) isRequest_Input_StaticQueryType_Type() {}
 
-func (*request_Input_StaticQuery_CustomOnboardingRequest) isRequest_Input_StaticQuery_Type() {}
+func (*request_Input_StaticQueryType_CustomOnboardingRequest) isRequest_Input_StaticQueryType_Type() {
+}
 
 type Request_Input_InstallStaticQuery struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
@@ -2735,7 +2717,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\"\xd5\x1b\n" +
+	"task.proto\"\xdb\x1b\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2743,13 +2725,12 @@ const file_request_proto_rawDesc = "" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xf4\x14\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfa\x14\n" +
 	"\x05Input\x12D\n" +
 	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12S\n" +
-	"\fstatic_query\x18\x04 \x01(\v2..warp.multi_agent.v1.Request.Input.StaticQueryH\x00R\vstaticQuery\x1a\xc5\b\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xc5\b\n" +
 	"\aContext\x12R\n" +
 	"\tdirectory\x18\x01 \x01(\v24.warp.multi_agent.v1.Request.Input.Context.DirectoryR\tdirectory\x12e\n" +
 	"\x10operating_system\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.Context.OperatingSystemR\x0foperatingSystem\x12F\n" +
@@ -2776,9 +2757,10 @@ const file_request_proto_rawDesc = "" +
 	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
 	"\x05Image\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a'\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a~\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xb7\x04\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12U\n" +
+	"\fstatic_query\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.StaticQueryTypeR\vstaticQuery\x1a\xb7\x04\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2789,8 +2771,8 @@ const file_request_proto_rawDesc = "" +
 	"\x10apply_file_diffs\x18\x05 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
 	"\fsuggest_plan\x18\x06 \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x12^\n" +
 	"\x13suggest_create_plan\x18\a \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlanB\b\n" +
-	"\x06result\x1a\xee\x03\n" +
-	"\vStaticQuery\x12Q\n" +
+	"\x06result\x1a\xf2\x03\n" +
+	"\x0fStaticQueryType\x12Q\n" +
 	"\ainstall\x18\x01 \x01(\v25.warp.multi_agent.v1.Request.Input.InstallStaticQueryH\x00R\ainstall\x12H\n" +
 	"\x04code\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.CodeStaticQueryH\x00R\x04code\x12N\n" +
 	"\x06deploy\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.DeployStaticQueryH\x00R\x06deploy\x12d\n" +
@@ -2827,7 +2809,7 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_Context)(nil),                            // 5: warp.multi_agent.v1.Request.Input.Context
 	(*Request_Input_UserQuery)(nil),                          // 6: warp.multi_agent.v1.Request.Input.UserQuery
 	(*Request_Input_ToolCallResult)(nil),                     // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_StaticQuery)(nil),                        // 8: warp.multi_agent.v1.Request.Input.StaticQuery
+	(*Request_Input_StaticQueryType)(nil),                    // 8: warp.multi_agent.v1.Request.Input.StaticQueryType
 	(*Request_Input_InstallStaticQuery)(nil),                 // 9: warp.multi_agent.v1.Request.Input.InstallStaticQuery
 	(*Request_Input_CodeStaticQuery)(nil),                    // 10: warp.multi_agent.v1.Request.Input.CodeStaticQuery
 	(*Request_Input_DeployStaticQuery)(nil),                  // 11: warp.multi_agent.v1.Request.Input.DeployStaticQuery
@@ -2860,27 +2842,27 @@ var file_request_proto_depIdxs = []int32{
 	5,  // 5: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.Request.Input.Context
 	6,  // 6: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	7,  // 7: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	8,  // 8: warp.multi_agent.v1.Request.Input.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQuery
-	20, // 9: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	21, // 10: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	16, // 11: warp.multi_agent.v1.Request.Input.Context.directory:type_name -> warp.multi_agent.v1.Request.Input.Context.Directory
-	18, // 12: warp.multi_agent.v1.Request.Input.Context.operating_system:type_name -> warp.multi_agent.v1.Request.Input.Context.OperatingSystem
-	17, // 13: warp.multi_agent.v1.Request.Input.Context.shell:type_name -> warp.multi_agent.v1.Request.Input.Context.Shell
-	23, // 14: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
-	14, // 15: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
-	15, // 16: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
-	19, // 17: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
+	20, // 8: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	21, // 9: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	16, // 10: warp.multi_agent.v1.Request.Input.Context.directory:type_name -> warp.multi_agent.v1.Request.Input.Context.Directory
+	18, // 11: warp.multi_agent.v1.Request.Input.Context.operating_system:type_name -> warp.multi_agent.v1.Request.Input.Context.OperatingSystem
+	17, // 12: warp.multi_agent.v1.Request.Input.Context.shell:type_name -> warp.multi_agent.v1.Request.Input.Context.Shell
+	23, // 13: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
+	14, // 14: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
+	15, // 15: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
+	19, // 16: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
+	8,  // 17: warp.multi_agent.v1.Request.Input.UserQuery.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQueryType
 	24, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
 	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	27, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
 	28, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
 	29, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	9,  // 24: warp.multi_agent.v1.Request.Input.StaticQuery.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
-	10, // 25: warp.multi_agent.v1.Request.Input.StaticQuery.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
-	11, // 26: warp.multi_agent.v1.Request.Input.StaticQuery.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
-	12, // 27: warp.multi_agent.v1.Request.Input.StaticQuery.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
-	13, // 28: warp.multi_agent.v1.Request.Input.StaticQuery.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
+	9,  // 24: warp.multi_agent.v1.Request.Input.StaticQueryType.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
+	10, // 25: warp.multi_agent.v1.Request.Input.StaticQueryType.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
+	11, // 26: warp.multi_agent.v1.Request.Input.StaticQueryType.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
+	12, // 27: warp.multi_agent.v1.Request.Input.StaticQueryType.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
+	13, // 28: warp.multi_agent.v1.Request.Input.StaticQueryType.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
 	30, // 29: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
 	30, // [30:30] is the sub-list for method output_type
 	30, // [30:30] is the sub-list for method input_type
@@ -2899,7 +2881,6 @@ func file_request_proto_init() {
 	file_request_proto_msgTypes[2].OneofWrappers = []any{
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
-		(*request_Input_StaticQuery_)(nil),
 	}
 	file_request_proto_msgTypes[7].OneofWrappers = []any{
 		(*request_Input_ToolCallResult_RunShellCommand)(nil),
@@ -2910,11 +2891,11 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_SuggestCreatePlan)(nil),
 	}
 	file_request_proto_msgTypes[8].OneofWrappers = []any{
-		(*request_Input_StaticQuery_Install)(nil),
-		(*request_Input_StaticQuery_Code)(nil),
-		(*request_Input_StaticQuery_Deploy)(nil),
-		(*request_Input_StaticQuery_SomethingElse)(nil),
-		(*request_Input_StaticQuery_CustomOnboardingRequest)(nil),
+		(*request_Input_StaticQueryType_Install)(nil),
+		(*request_Input_StaticQueryType_Code)(nil),
+		(*request_Input_StaticQueryType_Deploy)(nil),
+		(*request_Input_StaticQueryType_SomethingElse)(nil),
+		(*request_Input_StaticQueryType_CustomOnboardingRequest)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -42,7 +42,6 @@ message Request {
     oneof type {
       UserQuery user_query = 2;
       ToolCallResult tool_call_result = 3;
-      StaticQuery static_query = 4;
     }
 
     message Context {
@@ -96,7 +95,10 @@ message Request {
       }
     }
 
-    message UserQuery { string query = 1 [ (sensitive) = true ]; }
+    message UserQuery { 
+      string query = 1 [ (sensitive) = true ];
+      StaticQueryType static_query = 2;
+    }
 
     // Tool call result
     message ToolCallResult {
@@ -116,7 +118,7 @@ message Request {
     // Agent Mode e.g. the zero-state chip for "Install" has a predefined 
     // initial response asking the user for more information, before passing it
     // off to "real AI".
-    message StaticQuery {
+    message StaticQueryType {
       oneof type {
         InstallStaticQuery install = 1;
         CodeStaticQuery code = 2;
