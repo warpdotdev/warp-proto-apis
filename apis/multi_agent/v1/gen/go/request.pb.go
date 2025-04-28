@@ -704,7 +704,7 @@ type Request_Input_Context struct {
 	xxx_hidden_CurrentTime           *timestamppb.Timestamp                         `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
 	xxx_hidden_ExecutedShellCommands *[]*Request_Input_Context_ExecutedShellCommand `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
 	xxx_hidden_SelectedText          *[]*Request_Input_Context_SelectedText         `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
-	xxx_hidden_Image                 *[]*Request_Input_Context_Image                `protobuf:"bytes,7,rep,name=image"`
+	xxx_hidden_Images                *[]*Request_Input_Context_Image                `protobuf:"bytes,7,rep,name=images"`
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -780,10 +780,10 @@ func (x *Request_Input_Context) GetSelectedText() []*Request_Input_Context_Selec
 	return nil
 }
 
-func (x *Request_Input_Context) GetImage() []*Request_Input_Context_Image {
+func (x *Request_Input_Context) GetImages() []*Request_Input_Context_Image {
 	if x != nil {
-		if x.xxx_hidden_Image != nil {
-			return *x.xxx_hidden_Image
+		if x.xxx_hidden_Images != nil {
+			return *x.xxx_hidden_Images
 		}
 	}
 	return nil
@@ -813,8 +813,8 @@ func (x *Request_Input_Context) SetSelectedText(v []*Request_Input_Context_Selec
 	x.xxx_hidden_SelectedText = &v
 }
 
-func (x *Request_Input_Context) SetImage(v []*Request_Input_Context_Image) {
-	x.xxx_hidden_Image = &v
+func (x *Request_Input_Context) SetImages(v []*Request_Input_Context_Image) {
+	x.xxx_hidden_Images = &v
 }
 
 func (x *Request_Input_Context) HasDirectory() bool {
@@ -870,7 +870,7 @@ type Request_Input_Context_builder struct {
 	CurrentTime           *timestamppb.Timestamp
 	ExecutedShellCommands []*Request_Input_Context_ExecutedShellCommand
 	SelectedText          []*Request_Input_Context_SelectedText
-	Image                 []*Request_Input_Context_Image
+	Images                []*Request_Input_Context_Image
 }
 
 func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
@@ -883,7 +883,7 @@ func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
 	x.xxx_hidden_CurrentTime = b.CurrentTime
 	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
 	x.xxx_hidden_SelectedText = &b.SelectedText
-	x.xxx_hidden_Image = &b.Image
+	x.xxx_hidden_Images = &b.Images
 	return m0
 }
 
@@ -2169,7 +2169,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\"\x8d\x16\n" +
+	"task.proto\"\x8f\x16\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2177,20 +2177,20 @@ const file_request_proto_rawDesc = "" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xac\x0f\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xae\x0f\n" +
 	"\x05Input\x12D\n" +
 	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xc3\b\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xc5\b\n" +
 	"\aContext\x12R\n" +
 	"\tdirectory\x18\x01 \x01(\v24.warp.multi_agent.v1.Request.Input.Context.DirectoryR\tdirectory\x12e\n" +
 	"\x10operating_system\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.Context.OperatingSystemR\x0foperatingSystem\x12F\n" +
 	"\x05shell\x18\x03 \x01(\v20.warp.multi_agent.v1.Request.Input.Context.ShellR\x05shell\x12=\n" +
 	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12w\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2?.warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommandR\x15executedShellCommands\x12\\\n" +
-	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x12F\n" +
-	"\x05image\x18\a \x03(\v20.warp.multi_agent.v1.Request.Input.Context.ImageR\x05image\x1aq\n" +
+	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x12H\n" +
+	"\x06images\x18\a \x03(\v20.warp.multi_agent.v1.Request.Input.Context.ImageR\x06images\x1aq\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
 	"\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
@@ -2283,7 +2283,7 @@ var file_request_proto_depIdxs = []int32{
 	17, // 13: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
 	8,  // 14: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
 	9,  // 15: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
-	13, // 16: warp.multi_agent.v1.Request.Input.Context.image:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
+	13, // 16: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
 	18, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	19, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
 	20, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
