@@ -52,6 +52,7 @@ message Request {
       google.protobuf.Timestamp current_time = 4;
       repeated ExecutedShellCommand executed_shell_commands = 5;
       repeated SelectedText selected_text = 6;
+      repeated Image images = 7;
 
       // Information about shell commands that the user has executed.
       message ExecutedShellCommand {
@@ -83,6 +84,15 @@ message Request {
         // The OS distribution, which is typically only populated for Linux,
         // e.g. Fedora or Ubuntu.
         string distribution = 2;
+      }
+
+      // Any attached images.
+      message Image {
+        // The base64-encoded image data.
+        string data = 1;
+
+        // MIME type of the image content (e.g., "image/jpeg", "image/png").
+        string mime_type = 2;
       }
     }
 
