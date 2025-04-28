@@ -262,5 +262,5 @@ message GrepResult {
 // Result of a `FileGlob` tool call.
 message FileGlobResult {
   // String containing list of file paths matching the glob patterns.
-  string matched_files = 1;
+  string matched_files = 1 [ (sensitive) = true ];
 }
