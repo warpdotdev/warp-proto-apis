@@ -1376,7 +1376,10 @@ func (*request_Input_ToolCallResult_SuggestPlan) isRequest_Input_ToolCallResult_
 
 func (*request_Input_ToolCallResult_SuggestCreatePlan) isRequest_Input_ToolCallResult_Result() {}
 
-// Static query (hardcoded predefined responses)
+// Static queries correspond to hardcoded predefined responses from
+// Agent Mode e.g. the zero-state chip for "Install" has a predefined
+// initial response asking the user for more information, before passing it
+// off to "real AI".
 type Request_Input_StaticQuery struct {
 	state           protoimpl.MessageState           `protogen:"opaque.v1"`
 	xxx_hidden_Type isRequest_Input_StaticQuery_Type `protobuf_oneof:"type"`
@@ -1680,7 +1683,6 @@ func (*request_Input_StaticQuery_SomethingElse) isRequest_Input_StaticQuery_Type
 
 func (*request_Input_StaticQuery_CustomOnboardingRequest) isRequest_Input_StaticQuery_Type() {}
 
-// Empty message types for each static query that can be extended in the future with parameters
 type Request_Input_InstallStaticQuery struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
