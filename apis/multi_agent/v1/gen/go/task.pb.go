@@ -4141,7 +4141,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xbf\x15\n" +
+	"\x06status\"\x83\x15\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12G\n" +
 	"\n" +
@@ -4151,9 +4151,9 @@ const file_task_proto_rawDesc = "" +
 	"\x10tool_call_result\x18\x05 \x01(\v2+.warp.multi_agent.v1.Message.ToolCallResultH\x00R\x0etoolCallResult\x12M\n" +
 	"\fserver_event\x18\x06 \x01(\v2(.warp.multi_agent.v1.Message.ServerEventH\x00R\vserverEvent\x1a'\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a'\n" +
-	"\vAgentOutput\x12\x18\n" +
-	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a\xcc\v\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a!\n" +
+	"\vAgentOutput\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x1a\x96\v\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -4166,29 +4166,29 @@ const file_task_proto_rawDesc = "" +
 	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x12i\n" +
 	"\x13suggest_create_plan\x18\b \x01(\v27.warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlanH\x00R\x11suggestCreatePlan\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1aS\n" +
-	"\x0fRunShellCommand\x12\x1e\n" +
-	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12 \n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1aM\n" +
+	"\x0fRunShellCommand\x12\x18\n" +
+	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
-	"isReadOnly\x1a\xc5\x01\n" +
+	"isReadOnly\x1a\xbf\x01\n" +
 	"\tReadFiles\x12J\n" +
-	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1al\n" +
-	"\x04File\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12J\n" +
+	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1af\n" +
+	"\x04File\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12J\n" +
 	"\vline_ranges\x18\x02 \x03(\v2).warp.multi_agent.v1.FileContentLineRangeR\n" +
-	"lineRanges\x1aU\n" +
-	"\x0eSearchCodebase\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12'\n" +
-	"\fpath_filters\x18\x02 \x03(\tB\x04\x80\xb5\x18\x01R\vpathFilters\x1a\xf2\x01\n" +
-	"\x0eApplyFileDiffs\x12\x1e\n" +
-	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12S\n" +
-	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x1ak\n" +
-	"\bFileDiff\x12!\n" +
-	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1c\n" +
-	"\x06search\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06search\x12\x1e\n" +
-	"\areplace\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\areplace\x1ao\n" +
-	"\vSuggestPlan\x12\x1e\n" +
-	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12@\n" +
+	"lineRanges\x1aI\n" +
+	"\x0eSearchCodebase\x12\x14\n" +
+	"\x05query\x18\x01 \x01(\tR\x05query\x12!\n" +
+	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x1a\xda\x01\n" +
+	"\x0eApplyFileDiffs\x12\x18\n" +
+	"\asummary\x18\x01 \x01(\tR\asummary\x12S\n" +
+	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x1aY\n" +
+	"\bFileDiff\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x16\n" +
+	"\x06search\x18\x02 \x01(\tR\x06search\x12\x18\n" +
+	"\areplace\x18\x03 \x01(\tR\areplace\x1ai\n" +
+	"\vSuggestPlan\x12\x18\n" +
+	"\asummary\x18\x01 \x01(\tR\asummary\x12@\n" +
 	"\x0eproposed_tasks\x18\x02 \x03(\v2\x19.warp.multi_agent.v1.TaskR\rproposedTasks\x1a\x13\n" +
 	"\x11SuggestCreatePlanB\x06\n" +
 	"\x04tool\x1a\xc8\x05\n" +

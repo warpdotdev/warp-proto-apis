@@ -42,6 +42,7 @@ message Request {
     oneof type {
       UserQuery user_query = 2;
       ToolCallResult tool_call_result = 3;
+      StaticQuery static_query = 4;
     }
 
     message Context {
@@ -100,6 +101,24 @@ message Request {
         SuggestCreatePlanResult suggest_create_plan = 7;
       }
     }
+
+    // Static query (hardcoded predefined responses)
+    message StaticQuery {
+      oneof type {
+        InstallStaticQuery install = 1;
+        CodeStaticQuery code = 2;
+        DeployStaticQuery deploy = 3;
+        SomethingElseStaticQuery something_else = 4;
+        CustomOnboardingRequestStaticQuery custom_onboarding_request = 5;
+      }
+    }
+
+    // Empty message types for each static query that can be extended in the future with parameters
+    message InstallStaticQuery {}
+    message CodeStaticQuery {}
+    message DeployStaticQuery {}
+    message SomethingElseStaticQuery {}
+    message CustomOnboardingRequestStaticQuery {}
   }
 
   message Metadata {
