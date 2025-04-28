@@ -888,13 +888,13 @@ func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
 }
 
 type Request_Input_UserQuery struct {
-	state                  protoimpl.MessageState         `protogen:"opaque.v1"`
-	xxx_hidden_Query       *string                        `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_StaticQuery *Request_Input_StaticQueryType `protobuf:"bytes,2,opt,name=static_query,json=staticQuery"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                      protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Query           *string                        `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_StaticQueryType *Request_Input_StaticQueryType `protobuf:"bytes,2,opt,name=static_query_type,json=staticQueryType"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *Request_Input_UserQuery) Reset() {
@@ -932,9 +932,9 @@ func (x *Request_Input_UserQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Request_Input_UserQuery) GetStaticQuery() *Request_Input_StaticQueryType {
+func (x *Request_Input_UserQuery) GetStaticQueryType() *Request_Input_StaticQueryType {
 	if x != nil {
-		return x.xxx_hidden_StaticQuery
+		return x.xxx_hidden_StaticQueryType
 	}
 	return nil
 }
@@ -944,8 +944,8 @@ func (x *Request_Input_UserQuery) SetQuery(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Input_UserQuery) SetStaticQuery(v *Request_Input_StaticQueryType) {
-	x.xxx_hidden_StaticQuery = v
+func (x *Request_Input_UserQuery) SetStaticQueryType(v *Request_Input_StaticQueryType) {
+	x.xxx_hidden_StaticQueryType = v
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -955,11 +955,11 @@ func (x *Request_Input_UserQuery) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_UserQuery) HasStaticQuery() bool {
+func (x *Request_Input_UserQuery) HasStaticQueryType() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_StaticQuery != nil
+	return x.xxx_hidden_StaticQueryType != nil
 }
 
 func (x *Request_Input_UserQuery) ClearQuery() {
@@ -967,15 +967,16 @@ func (x *Request_Input_UserQuery) ClearQuery() {
 	x.xxx_hidden_Query = nil
 }
 
-func (x *Request_Input_UserQuery) ClearStaticQuery() {
-	x.xxx_hidden_StaticQuery = nil
+func (x *Request_Input_UserQuery) ClearStaticQueryType() {
+	x.xxx_hidden_StaticQueryType = nil
 }
 
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query       *string
-	StaticQuery *Request_Input_StaticQueryType
+	Query *string
+	// Optional static query type.
+	StaticQueryType *Request_Input_StaticQueryType
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -986,7 +987,7 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Query = b.Query
 	}
-	x.xxx_hidden_StaticQuery = b.StaticQuery
+	x.xxx_hidden_StaticQueryType = b.StaticQueryType
 	return m0
 }
 
@@ -2717,7 +2718,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\"\xdb\x1b\n" +
+	"task.proto\"\xe5\x1b\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2725,7 +2726,7 @@ const file_request_proto_rawDesc = "" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfa\x14\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\x84\x15\n" +
 	"\x05Input\x12D\n" +
 	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
 	"\n" +
@@ -2757,10 +2758,10 @@ const file_request_proto_rawDesc = "" +
 	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
 	"\x05Image\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a~\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a\x87\x01\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12U\n" +
-	"\fstatic_query\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.StaticQueryTypeR\vstaticQuery\x1a\xb7\x04\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12^\n" +
+	"\x11static_query_type\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.StaticQueryTypeR\x0fstaticQueryType\x1a\xb7\x04\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2851,7 +2852,7 @@ var file_request_proto_depIdxs = []int32{
 	14, // 14: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
 	15, // 15: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
 	19, // 16: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
-	8,  // 17: warp.multi_agent.v1.Request.Input.UserQuery.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQueryType
+	8,  // 17: warp.multi_agent.v1.Request.Input.UserQuery.static_query_type:type_name -> warp.multi_agent.v1.Request.Input.StaticQueryType
 	24, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
 	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult

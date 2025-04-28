@@ -97,6 +97,7 @@ message Request {
 
     message UserQuery { 
       string query = 1 [ (sensitive) = true ];
+      // Optional static query type.
       StaticQueryType static_query_type = 2;
     }
 
