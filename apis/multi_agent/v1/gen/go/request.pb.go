@@ -27,13 +27,14 @@ const (
 
 // The main request type. Every multi-agent API call begins with a `Request`.
 type Request struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TaskContext *Request_TaskContext   `protobuf:"bytes,1,opt,name=task_context,json=taskContext"`
-	xxx_hidden_Input       *Request_Input         `protobuf:"bytes,2,opt,name=input"`
-	xxx_hidden_Settings    *Request_Settings      `protobuf:"bytes,3,opt,name=settings"`
-	xxx_hidden_Metadata    *Request_Metadata      `protobuf:"bytes,4,opt,name=metadata"`
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskContext         *Request_TaskContext   `protobuf:"bytes,1,opt,name=task_context,json=taskContext"`
+	xxx_hidden_Input               *Request_Input         `protobuf:"bytes,2,opt,name=input"`
+	xxx_hidden_Settings            *Request_Settings      `protobuf:"bytes,3,opt,name=settings"`
+	xxx_hidden_Metadata            *Request_Metadata      `protobuf:"bytes,4,opt,name=metadata"`
+	xxx_hidden_ExistingSuggestions *Suggestions           `protobuf:"bytes,5,opt,name=existing_suggestions,json=existingSuggestions"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
 func (x *Request) Reset() {
@@ -89,6 +90,13 @@ func (x *Request) GetMetadata() *Request_Metadata {
 	return nil
 }
 
+func (x *Request) GetExistingSuggestions() *Suggestions {
+	if x != nil {
+		return x.xxx_hidden_ExistingSuggestions
+	}
+	return nil
+}
+
 func (x *Request) SetTaskContext(v *Request_TaskContext) {
 	x.xxx_hidden_TaskContext = v
 }
@@ -103,6 +111,10 @@ func (x *Request) SetSettings(v *Request_Settings) {
 
 func (x *Request) SetMetadata(v *Request_Metadata) {
 	x.xxx_hidden_Metadata = v
+}
+
+func (x *Request) SetExistingSuggestions(v *Suggestions) {
+	x.xxx_hidden_ExistingSuggestions = v
 }
 
 func (x *Request) HasTaskContext() bool {
@@ -133,6 +145,13 @@ func (x *Request) HasMetadata() bool {
 	return x.xxx_hidden_Metadata != nil
 }
 
+func (x *Request) HasExistingSuggestions() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ExistingSuggestions != nil
+}
+
 func (x *Request) ClearTaskContext() {
 	x.xxx_hidden_TaskContext = nil
 }
@@ -149,6 +168,10 @@ func (x *Request) ClearMetadata() {
 	x.xxx_hidden_Metadata = nil
 }
 
+func (x *Request) ClearExistingSuggestions() {
+	x.xxx_hidden_ExistingSuggestions = nil
+}
+
 type Request_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -160,6 +183,8 @@ type Request_builder struct {
 	Settings *Request_Settings
 	// General metadata for the request.
 	Metadata *Request_Metadata
+	// The list of suggestions received from the previous request.
+	ExistingSuggestions *Suggestions
 }
 
 func (b0 Request_builder) Build() *Request {
@@ -170,6 +195,7 @@ func (b0 Request_builder) Build() *Request {
 	x.xxx_hidden_Input = b.Input
 	x.xxx_hidden_Settings = b.Settings
 	x.xxx_hidden_Metadata = b.Metadata
+	x.xxx_hidden_ExistingSuggestions = b.ExistingSuggestions
 	return m0
 }
 
@@ -512,14 +538,13 @@ func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 func (*request_Input_StaticQuery_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                          protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId      *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging             map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_ExistingSuggestions *Suggestions               `protobuf:"bytes,3,opt,name=existing_suggestions,json=existingSuggestions"`
-	XXX_raceDetectHookData         protoimpl.RaceDetectHookData
-	XXX_presence                   [1]uint32
-	unknownFields                  protoimpl.UnknownFields
-	sizeCache                      protoimpl.SizeCache
+	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging        map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *Request_Metadata) Reset() {
@@ -564,24 +589,13 @@ func (x *Request_Metadata) GetLogging() map[string]*structpb.Value {
 	return nil
 }
 
-func (x *Request_Metadata) GetExistingSuggestions() *Suggestions {
-	if x != nil {
-		return x.xxx_hidden_ExistingSuggestions
-	}
-	return nil
-}
-
 func (x *Request_Metadata) SetConversationId(v string) {
 	x.xxx_hidden_ConversationId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
 func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 	x.xxx_hidden_Logging = v
-}
-
-func (x *Request_Metadata) SetExistingSuggestions(v *Suggestions) {
-	x.xxx_hidden_ExistingSuggestions = v
 }
 
 func (x *Request_Metadata) HasConversationId() bool {
@@ -591,20 +605,9 @@ func (x *Request_Metadata) HasConversationId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Metadata) HasExistingSuggestions() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_ExistingSuggestions != nil
-}
-
 func (x *Request_Metadata) ClearConversationId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ConversationId = nil
-}
-
-func (x *Request_Metadata) ClearExistingSuggestions() {
-	x.xxx_hidden_ExistingSuggestions = nil
 }
 
 type Request_Metadata_builder struct {
@@ -619,8 +622,6 @@ type Request_Metadata_builder struct {
 	// Map of metadata to inline in server analytic events for this request.
 	// Values in the map should be valid JSON values.
 	Logging map[string]*structpb.Value
-	// The list of suggestions received from the previous request.
-	ExistingSuggestions *Suggestions
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -628,11 +629,10 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ConversationId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_ConversationId = b.ConversationId
 	}
 	x.xxx_hidden_Logging = b.Logging
-	x.xxx_hidden_ExistingSuggestions = b.ExistingSuggestions
 	return m0
 }
 
@@ -2761,12 +2761,13 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\"\xd5\x1b\n" +
+	"task.proto\x1a\x11suggestions.proto\"\xaa\x1c\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
 	"\bsettings\x18\x03 \x01(\v2%.warp.multi_agent.v1.Request.SettingsR\bsettings\x12A\n" +
-	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x1ad\n" +
+	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x12S\n" +
+	"\x14existing_suggestions\x18\x05 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
 	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xf4\x14\n" +
@@ -2831,8 +2832,7 @@ const file_request_proto_rawDesc = "" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
-	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x12S\n" +
-	"\x14existing_suggestions\x18\x03 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x1aR\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x87\x02\n" +
@@ -2868,52 +2868,54 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_Context_Image)(nil),                      // 19: warp.multi_agent.v1.Request.Input.Context.Image
 	nil,                                                      // 20: warp.multi_agent.v1.Request.Metadata.LoggingEntry
 	(*Request_Settings_ModelConfig)(nil),                     // 21: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Task)(nil),                                             // 22: warp.multi_agent.v1.Task
-	(*timestamppb.Timestamp)(nil),                            // 23: google.protobuf.Timestamp
-	(*RunShellCommandResult)(nil),                            // 24: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                  // 25: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                             // 26: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                             // 27: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                                // 28: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),                          // 29: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*structpb.Value)(nil),                                   // 30: google.protobuf.Value
+	(*Suggestions)(nil),                                      // 22: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                             // 23: warp.multi_agent.v1.Task
+	(*timestamppb.Timestamp)(nil),                            // 24: google.protobuf.Timestamp
+	(*RunShellCommandResult)(nil),                            // 25: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                  // 26: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                             // 27: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                             // 28: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                                // 29: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),                          // 30: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*structpb.Value)(nil),                                   // 31: google.protobuf.Value
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
 	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
 	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
 	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
-	22, // 4: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	5,  // 5: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.Request.Input.Context
-	6,  // 6: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	7,  // 7: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	8,  // 8: warp.multi_agent.v1.Request.Input.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQuery
-	20, // 9: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	21, // 10: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	16, // 11: warp.multi_agent.v1.Request.Input.Context.directory:type_name -> warp.multi_agent.v1.Request.Input.Context.Directory
-	18, // 12: warp.multi_agent.v1.Request.Input.Context.operating_system:type_name -> warp.multi_agent.v1.Request.Input.Context.OperatingSystem
-	17, // 13: warp.multi_agent.v1.Request.Input.Context.shell:type_name -> warp.multi_agent.v1.Request.Input.Context.Shell
-	23, // 14: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
-	14, // 15: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
-	15, // 16: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
-	19, // 17: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
-	24, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	27, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	28, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	29, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	9,  // 24: warp.multi_agent.v1.Request.Input.StaticQuery.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
-	10, // 25: warp.multi_agent.v1.Request.Input.StaticQuery.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
-	11, // 26: warp.multi_agent.v1.Request.Input.StaticQuery.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
-	12, // 27: warp.multi_agent.v1.Request.Input.StaticQuery.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
-	13, // 28: warp.multi_agent.v1.Request.Input.StaticQuery.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
-	30, // 29: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	22, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	23, // 5: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	5,  // 6: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.Request.Input.Context
+	6,  // 7: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	7,  // 8: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	8,  // 9: warp.multi_agent.v1.Request.Input.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQuery
+	20, // 10: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	21, // 11: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	16, // 12: warp.multi_agent.v1.Request.Input.Context.directory:type_name -> warp.multi_agent.v1.Request.Input.Context.Directory
+	18, // 13: warp.multi_agent.v1.Request.Input.Context.operating_system:type_name -> warp.multi_agent.v1.Request.Input.Context.OperatingSystem
+	17, // 14: warp.multi_agent.v1.Request.Input.Context.shell:type_name -> warp.multi_agent.v1.Request.Input.Context.Shell
+	24, // 15: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
+	14, // 16: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
+	15, // 17: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
+	19, // 18: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
+	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	27, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	28, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	29, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	30, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	9,  // 25: warp.multi_agent.v1.Request.Input.StaticQuery.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
+	10, // 26: warp.multi_agent.v1.Request.Input.StaticQuery.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
+	11, // 27: warp.multi_agent.v1.Request.Input.StaticQuery.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
+	12, // 28: warp.multi_agent.v1.Request.Input.StaticQuery.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
+	13, // 29: warp.multi_agent.v1.Request.Input.StaticQuery.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
+	31, // 30: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	31, // [31:31] is the sub-list for method output_type
+	31, // [31:31] is the sub-list for method input_type
+	31, // [31:31] is the sub-list for extension type_name
+	31, // [31:31] is the sub-list for extension extendee
+	0,  // [0:31] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -2921,9 +2923,9 @@ func file_request_proto_init() {
 	if File_request_proto != nil {
 		return
 	}
-	file_common_proto_init()
 	file_options_proto_init()
 	file_task_proto_init()
+	file_suggestions_proto_init()
 	file_request_proto_msgTypes[2].OneofWrappers = []any{
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),

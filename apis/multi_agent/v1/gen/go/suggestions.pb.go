@@ -4,7 +4,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: common.proto
+// source: suggestions.proto
 
 package v1
 
@@ -33,7 +33,7 @@ type Suggestions struct {
 
 func (x *Suggestions) Reset() {
 	*x = Suggestions{}
-	mi := &file_common_proto_msgTypes[0]
+	mi := &file_suggestions_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +45,7 @@ func (x *Suggestions) String() string {
 func (*Suggestions) ProtoMessage() {}
 
 func (x *Suggestions) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[0]
+	mi := &file_suggestions_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -111,7 +111,7 @@ type SuggestedRule struct {
 
 func (x *SuggestedRule) Reset() {
 	*x = SuggestedRule{}
-	mi := &file_common_proto_msgTypes[1]
+	mi := &file_suggestions_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -123,7 +123,7 @@ func (x *SuggestedRule) String() string {
 func (*SuggestedRule) ProtoMessage() {}
 
 func (x *SuggestedRule) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[1]
+	mi := &file_suggestions_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -255,7 +255,7 @@ type SuggestedAgentModeWorkflow struct {
 
 func (x *SuggestedAgentModeWorkflow) Reset() {
 	*x = SuggestedAgentModeWorkflow{}
-	mi := &file_common_proto_msgTypes[2]
+	mi := &file_suggestions_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -267,7 +267,7 @@ func (x *SuggestedAgentModeWorkflow) String() string {
 func (*SuggestedAgentModeWorkflow) ProtoMessage() {}
 
 func (x *SuggestedAgentModeWorkflow) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[2]
+	mi := &file_suggestions_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -386,11 +386,11 @@ func (b0 SuggestedAgentModeWorkflow_builder) Build() *SuggestedAgentModeWorkflow
 	return m0
 }
 
-var File_common_proto protoreflect.FileDescriptor
+var File_suggestions_proto protoreflect.FileDescriptor
 
-const file_common_proto_rawDesc = "" +
+const file_suggestions_proto_rawDesc = "" +
 	"\n" +
-	"\fcommon.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\x96\x01\n" +
+	"\x11suggestions.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\x96\x01\n" +
 	"\vSuggestions\x128\n" +
 	"\x05rules\x18\x01 \x03(\v2\".warp.multi_agent.v1.SuggestedRuleR\x05rules\x12M\n" +
 	"\tworkflows\x18\x02 \x03(\v2/.warp.multi_agent.v1.SuggestedAgentModeWorkflowR\tworkflows\"\\\n" +
@@ -405,13 +405,13 @@ const file_common_proto_rawDesc = "" +
 	"\n" +
 	"logging_id\x18\x03 \x01(\tR\tloggingIdB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_common_proto_goTypes = []any{
+var file_suggestions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_suggestions_proto_goTypes = []any{
 	(*Suggestions)(nil),                // 0: warp.multi_agent.v1.Suggestions
 	(*SuggestedRule)(nil),              // 1: warp.multi_agent.v1.SuggestedRule
 	(*SuggestedAgentModeWorkflow)(nil), // 2: warp.multi_agent.v1.SuggestedAgentModeWorkflow
 }
-var file_common_proto_depIdxs = []int32{
+var file_suggestions_proto_depIdxs = []int32{
 	1, // 0: warp.multi_agent.v1.Suggestions.rules:type_name -> warp.multi_agent.v1.SuggestedRule
 	2, // 1: warp.multi_agent.v1.Suggestions.workflows:type_name -> warp.multi_agent.v1.SuggestedAgentModeWorkflow
 	2, // [2:2] is the sub-list for method output_type
@@ -421,26 +421,26 @@ var file_common_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_common_proto_init() }
-func file_common_proto_init() {
-	if File_common_proto != nil {
+func init() { file_suggestions_proto_init() }
+func file_suggestions_proto_init() {
+	if File_suggestions_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_proto_rawDesc), len(file_common_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_suggestions_proto_rawDesc), len(file_suggestions_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_common_proto_goTypes,
-		DependencyIndexes: file_common_proto_depIdxs,
-		MessageInfos:      file_common_proto_msgTypes,
+		GoTypes:           file_suggestions_proto_goTypes,
+		DependencyIndexes: file_suggestions_proto_depIdxs,
+		MessageInfos:      file_suggestions_proto_msgTypes,
 	}.Build()
-	File_common_proto = out.File
-	file_common_proto_goTypes = nil
-	file_common_proto_depIdxs = nil
+	File_suggestions_proto = out.File
+	file_suggestions_proto_goTypes = nil
+	file_suggestions_proto_depIdxs = nil
 }
