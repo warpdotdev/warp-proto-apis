@@ -330,6 +330,15 @@ func (x *ClientAction) GetAppendToMessageContent() *ClientAction_AppendToMessage
 	return nil
 }
 
+func (x *ClientAction) GetShowSuggestions() *Suggestions {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Action.(*clientAction_ShowSuggestions); ok {
+			return x.ShowSuggestions
+		}
+	}
+	return nil
+}
+
 func (x *ClientAction) SetCreateTask(v *ClientAction_CreateTask) {
 	if v == nil {
 		x.xxx_hidden_Action = nil
@@ -368,6 +377,14 @@ func (x *ClientAction) SetAppendToMessageContent(v *ClientAction_AppendToMessage
 		return
 	}
 	x.xxx_hidden_Action = &clientAction_AppendToMessageContent_{v}
+}
+
+func (x *ClientAction) SetShowSuggestions(v *Suggestions) {
+	if v == nil {
+		x.xxx_hidden_Action = nil
+		return
+	}
+	x.xxx_hidden_Action = &clientAction_ShowSuggestions{v}
 }
 
 func (x *ClientAction) HasAction() bool {
@@ -417,6 +434,14 @@ func (x *ClientAction) HasAppendToMessageContent() bool {
 	return ok
 }
 
+func (x *ClientAction) HasShowSuggestions() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*clientAction_ShowSuggestions)
+	return ok
+}
+
 func (x *ClientAction) ClearAction() {
 	x.xxx_hidden_Action = nil
 }
@@ -451,12 +476,19 @@ func (x *ClientAction) ClearAppendToMessageContent() {
 	}
 }
 
+func (x *ClientAction) ClearShowSuggestions() {
+	if _, ok := x.xxx_hidden_Action.(*clientAction_ShowSuggestions); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
 const ClientAction_Action_not_set_case case_ClientAction_Action = 0
 const ClientAction_CreateTask_case case_ClientAction_Action = 1
 const ClientAction_UpdateTaskStatus_case case_ClientAction_Action = 2
 const ClientAction_AddMessagesToTask_case case_ClientAction_Action = 3
 const ClientAction_UpdateTaskMessage_case case_ClientAction_Action = 4
 const ClientAction_AppendToMessageContent_case case_ClientAction_Action = 5
+const ClientAction_ShowSuggestions_case case_ClientAction_Action = 6
 
 func (x *ClientAction) WhichAction() case_ClientAction_Action {
 	if x == nil {
@@ -473,6 +505,8 @@ func (x *ClientAction) WhichAction() case_ClientAction_Action {
 		return ClientAction_UpdateTaskMessage_case
 	case *clientAction_AppendToMessageContent_:
 		return ClientAction_AppendToMessageContent_case
+	case *clientAction_ShowSuggestions:
+		return ClientAction_ShowSuggestions_case
 	default:
 		return ClientAction_Action_not_set_case
 	}
@@ -487,6 +521,7 @@ type ClientAction_builder struct {
 	AddMessagesToTask      *ClientAction_AddMessagesToTask
 	UpdateTaskMessage      *ClientAction_UpdateTaskMessage
 	AppendToMessageContent *ClientAction_AppendToMessageContent
+	ShowSuggestions        *Suggestions
 	// -- end of xxx_hidden_Action
 }
 
@@ -508,6 +543,9 @@ func (b0 ClientAction_builder) Build() *ClientAction {
 	}
 	if b.AppendToMessageContent != nil {
 		x.xxx_hidden_Action = &clientAction_AppendToMessageContent_{b.AppendToMessageContent}
+	}
+	if b.ShowSuggestions != nil {
+		x.xxx_hidden_Action = &clientAction_ShowSuggestions{b.ShowSuggestions}
 	}
 	return m0
 }
@@ -546,6 +584,10 @@ type clientAction_AppendToMessageContent_ struct {
 	AppendToMessageContent *ClientAction_AppendToMessageContent `protobuf:"bytes,5,opt,name=append_to_message_content,json=appendToMessageContent,oneof"`
 }
 
+type clientAction_ShowSuggestions struct {
+	ShowSuggestions *Suggestions `protobuf:"bytes,6,opt,name=show_suggestions,json=showSuggestions,oneof"`
+}
+
 func (*clientAction_CreateTask_) isClientAction_Action() {}
 
 func (*clientAction_UpdateTaskStatus_) isClientAction_Action() {}
@@ -555,6 +597,8 @@ func (*clientAction_AddMessagesToTask_) isClientAction_Action() {}
 func (*clientAction_UpdateTaskMessage_) isClientAction_Action() {}
 
 func (*clientAction_AppendToMessageContent_) isClientAction_Action() {}
+
+func (*clientAction_ShowSuggestions) isClientAction_Action() {}
 
 type ResponseEvent_StreamInit struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
@@ -1615,7 +1659,7 @@ var File_response_proto protoreflect.FileDescriptor
 
 const file_response_proto_rawDesc = "" +
 	"\n" +
-	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\n" +
+	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\x11suggestions.proto\x1a\n" +
 	"task.proto\"\x83\x06\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
@@ -1636,14 +1680,15 @@ const file_response_proto_rawDesc = "" +
 	"\x04Done\x1a\x16\n" +
 	"\x14ReachedMaxTokenLimitB\b\n" +
 	"\x06reasonB\x06\n" +
-	"\x04type\"\xda\b\n" +
+	"\x04type\"\xa9\t\n" +
 	"\fClientAction\x12O\n" +
 	"\vcreate_task\x18\x01 \x01(\v2,.warp.multi_agent.v1.ClientAction.CreateTaskH\x00R\n" +
 	"createTask\x12b\n" +
 	"\x12update_task_status\x18\x02 \x01(\v22.warp.multi_agent.v1.ClientAction.UpdateTaskStatusH\x00R\x10updateTaskStatus\x12f\n" +
 	"\x14add_messages_to_task\x18\x03 \x01(\v23.warp.multi_agent.v1.ClientAction.AddMessagesToTaskH\x00R\x11addMessagesToTask\x12e\n" +
 	"\x13update_task_message\x18\x04 \x01(\v23.warp.multi_agent.v1.ClientAction.UpdateTaskMessageH\x00R\x11updateTaskMessage\x12u\n" +
-	"\x19append_to_message_content\x18\x05 \x01(\v28.warp.multi_agent.v1.ClientAction.AppendToMessageContentH\x00R\x16appendToMessageContent\x1a;\n" +
+	"\x19append_to_message_content\x18\x05 \x01(\v28.warp.multi_agent.v1.ClientAction.AppendToMessageContentH\x00R\x16appendToMessageContent\x12M\n" +
+	"\x10show_suggestions\x18\x06 \x01(\v2 .warp.multi_agent.v1.SuggestionsH\x00R\x0fshowSuggestions\x1a;\n" +
 	"\n" +
 	"CreateTask\x12-\n" +
 	"\x04task\x18\x01 \x01(\v2\x19.warp.multi_agent.v1.TaskR\x04task\x1am\n" +
@@ -1679,10 +1724,11 @@ var file_response_proto_goTypes = []any{
 	(*ClientAction_AddMessagesToTask)(nil),                    // 10: warp.multi_agent.v1.ClientAction.AddMessagesToTask
 	(*ClientAction_UpdateTaskMessage)(nil),                    // 11: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
 	(*ClientAction_AppendToMessageContent)(nil),               // 12: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*Task)(nil),                  // 13: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),            // 14: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),               // 15: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil), // 16: google.protobuf.FieldMask
+	(*Suggestions)(nil),                                       // 13: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                              // 14: warp.multi_agent.v1.Task
+	(*TaskStatus)(nil),                                        // 15: warp.multi_agent.v1.TaskStatus
+	(*Message)(nil),                                           // 16: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                             // 17: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
@@ -1693,22 +1739,23 @@ var file_response_proto_depIdxs = []int32{
 	10, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
 	11, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
 	12, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	1,  // 8: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	5,  // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	6,  // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	7,  // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	13, // 12: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	14, // 13: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
-	15, // 14: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	15, // 15: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	16, // 16: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	15, // 17: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	16, // 18: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	13, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	1,  // 9: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
+	5,  // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	6,  // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	7,  // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	14, // 13: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	15, // 14: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
+	16, // 15: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	16, // 16: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	17, // 17: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	16, // 18: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	17, // 19: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -1716,6 +1763,7 @@ func file_response_proto_init() {
 	if File_response_proto != nil {
 		return
 	}
+	file_suggestions_proto_init()
 	file_task_proto_init()
 	file_response_proto_msgTypes[0].OneofWrappers = []any{
 		(*responseEvent_Init)(nil),
@@ -1728,6 +1776,7 @@ func file_response_proto_init() {
 		(*clientAction_AddMessagesToTask_)(nil),
 		(*clientAction_UpdateTaskMessage_)(nil),
 		(*clientAction_AppendToMessageContent_)(nil),
+		(*clientAction_ShowSuggestions)(nil),
 	}
 	file_response_proto_msgTypes[4].OneofWrappers = []any{
 		(*responseEvent_StreamFinished_Other_)(nil),

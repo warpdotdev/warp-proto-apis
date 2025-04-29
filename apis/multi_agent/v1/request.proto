@@ -9,6 +9,7 @@ import "google/protobuf/struct.proto";
 
 import "options.proto";
 import "task.proto";
+import "suggestions.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -26,6 +27,9 @@ message Request {
 
   // General metadata for the request.
   Metadata metadata = 4;
+
+  // The list of suggestions received from the previous request.
+  Suggestions existing_suggestions = 5;
 
   message TaskContext {
     // List of all known tasks.
@@ -112,6 +116,8 @@ message Request {
         ApplyFileDiffsResult apply_file_diffs = 5;
         SuggestPlanResult suggest_plan = 6;
         SuggestCreatePlanResult suggest_create_plan = 7;
+        GrepResult grep = 8;
+        FileGlobResult file_glob = 9;
       }
     }
 

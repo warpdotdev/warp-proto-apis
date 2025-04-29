@@ -5,6 +5,7 @@ package warp.multi_agent.v1;
 
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
+import "suggestions.proto";
 
 import "task.proto";
 
@@ -68,6 +69,7 @@ message ClientAction {
     AddMessagesToTask add_messages_to_task = 3;
     UpdateTaskMessage update_task_message = 4;
     AppendToMessageContent append_to_message_content = 5;
+    Suggestions show_suggestions = 6;
   }
 
   // Create task action
