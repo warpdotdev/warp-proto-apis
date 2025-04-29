@@ -4935,9 +4935,9 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_lines\x18\x02 \x03(\v2;.warp.multi_agent.v1.GrepResult.GrepFileMatch.GrepLineMatchR\fmatchedLines\x1a0\n" +
 	"\rGrepLineMatch\x12\x1f\n" +
 	"\vline_number\x18\x01 \x01(\x05R\n" +
-	"lineNumber\"5\n" +
-	"\x0eFileGlobResult\x12#\n" +
-	"\rmatched_files\x18\x01 \x01(\tR\fmatchedFilesB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"lineNumber\";\n" +
+	"\x0eFileGlobResult\x12)\n" +
+	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFilesB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 40)
 var file_task_proto_goTypes = []any{
