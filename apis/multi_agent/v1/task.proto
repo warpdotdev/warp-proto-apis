@@ -74,7 +74,33 @@ message Message {
   }
 
   // User query message type
-  message UserQuery { string query = 1 [ (sensitive) = true ]; }
+  message UserQuery { 
+    string query = 1 [ (sensitive) = true ];
+    // Optional canned response type.
+    CannedResponseType canned_response_type = 2;
+
+    // Canned responses correspond to hardcoded predefined responses from
+    // Agent Mode e.g. the zero-state chip for "Install" has a predefined 
+    // initial response asking the user for more information, before passing it
+    // off to "real AI".
+    message CannedResponseType {
+      oneof type {
+        Install install = 1;
+        Code code = 2;
+        Deploy deploy = 3;
+        SomethingElse something_else = 4;
+        CustomOnboardingRequest custom_onboarding_request = 5;
+      }
+
+      message Install {}
+      message Code {}
+      message Deploy {}
+      message SomethingElse {}
+      message CustomOnboardingRequest {}
+    }
+  }
+
+
 
   // Agent output message type
   message AgentOutput { string text = 1; }
