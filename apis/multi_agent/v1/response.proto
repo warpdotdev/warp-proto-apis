@@ -70,6 +70,7 @@ message ClientAction {
     UpdateTaskMessage update_task_message = 4;
     AppendToMessageContent append_to_message_content = 5;
     Suggestions show_suggestions = 6;
+    UpdateTaskSummary update_task_summary = 7;
   }
 
   // Create task action
@@ -102,5 +103,11 @@ message ClientAction {
     Message message = 1;
     // Fields in mask must be of type string; content is appended
     google.protobuf.FieldMask mask = 2;
+  }
+
+  // Updates the summary of a task
+  message UpdateTaskSummary {
+    string task_id = 1;
+    string summary = 2;
   }
 }
