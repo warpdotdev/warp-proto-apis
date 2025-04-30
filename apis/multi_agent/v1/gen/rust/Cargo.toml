@@ -11,3 +11,4 @@ prost-types.workspace = true
 
 [build-dependencies]
 prost-reflect-build.workspace = true
+regex = "1.11.1"
