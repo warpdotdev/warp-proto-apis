@@ -8,8 +8,8 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
 import "options.proto";
-import "task.proto";
 import "suggestions.proto";
+import "task.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;

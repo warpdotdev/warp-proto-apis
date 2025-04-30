@@ -64,6 +64,9 @@ message Message {
   // Globally-unique identifier for the message.
   string id = 1;
 
+  // An opaque token that the client should simply roundtrip.
+  string server_continuation_token = 7;
+
   // The type of message with its specific content
   oneof message {
     UserQuery user_query = 2;
