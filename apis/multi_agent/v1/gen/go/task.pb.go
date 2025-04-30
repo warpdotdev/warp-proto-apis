@@ -591,14 +591,14 @@ func (*taskStatus_Aborted_) isTaskStatus_Status() {}
 
 // A message within a task
 type Message struct {
-	state                              protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Id                      *string                `protobuf:"bytes,1,opt,name=id"`
-	xxx_hidden_ServerContinuationToken *string                `protobuf:"bytes,7,opt,name=server_continuation_token,json=serverContinuationToken"`
-	xxx_hidden_Message                 isMessage_Message      `protobuf_oneof:"message"`
-	XXX_raceDetectHookData             protoimpl.RaceDetectHookData
-	XXX_presence                       [1]uint32
-	unknownFields                      protoimpl.UnknownFields
-	sizeCache                          protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id                *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_ServerMessageData *string                `protobuf:"bytes,7,opt,name=server_message_data,json=serverMessageData"`
+	xxx_hidden_Message           isMessage_Message      `protobuf_oneof:"message"`
+	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
+	XXX_presence                 [1]uint32
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *Message) Reset() {
@@ -636,10 +636,10 @@ func (x *Message) GetId() string {
 	return ""
 }
 
-func (x *Message) GetServerContinuationToken() string {
+func (x *Message) GetServerMessageData() string {
 	if x != nil {
-		if x.xxx_hidden_ServerContinuationToken != nil {
-			return *x.xxx_hidden_ServerContinuationToken
+		if x.xxx_hidden_ServerMessageData != nil {
+			return *x.xxx_hidden_ServerMessageData
 		}
 		return ""
 	}
@@ -696,8 +696,8 @@ func (x *Message) SetId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Message) SetServerContinuationToken(v string) {
-	x.xxx_hidden_ServerContinuationToken = &v
+func (x *Message) SetServerMessageData(v string) {
+	x.xxx_hidden_ServerMessageData = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
@@ -748,7 +748,7 @@ func (x *Message) HasId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message) HasServerContinuationToken() bool {
+func (x *Message) HasServerMessageData() bool {
 	if x == nil {
 		return false
 	}
@@ -807,9 +807,9 @@ func (x *Message) ClearId() {
 	x.xxx_hidden_Id = nil
 }
 
-func (x *Message) ClearServerContinuationToken() {
+func (x *Message) ClearServerMessageData() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_ServerContinuationToken = nil
+	x.xxx_hidden_ServerMessageData = nil
 }
 
 func (x *Message) ClearMessage() {
@@ -878,8 +878,8 @@ type Message_builder struct {
 
 	// Globally-unique identifier for the message.
 	Id *string
-	// An opaque token that the client should simply roundtrip.
-	ServerContinuationToken *string
+	// An opaque payload that the client should simply roundtrip.
+	ServerMessageData *string
 	// The type of message with its specific content
 
 	// Fields of oneof xxx_hidden_Message:
@@ -899,9 +899,9 @@ func (b0 Message_builder) Build() *Message {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Id = b.Id
 	}
-	if b.ServerContinuationToken != nil {
+	if b.ServerMessageData != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_ServerContinuationToken = b.ServerContinuationToken
+		x.xxx_hidden_ServerMessageData = b.ServerMessageData
 	}
 	if b.UserQuery != nil {
 		x.xxx_hidden_Message = &message_UserQuery_{b.UserQuery}
@@ -4892,10 +4892,10 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xbd\x18\n" +
+	"\x06status\"\xb1\x18\n" +
 	"\aMessage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12:\n" +
-	"\x19server_continuation_token\x18\a \x01(\tR\x17serverContinuationToken\x12G\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
+	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12G\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryH\x00R\tuserQuery\x12M\n" +
 	"\fagent_output\x18\x03 \x01(\v2(.warp.multi_agent.v1.Message.AgentOutputH\x00R\vagentOutput\x12D\n" +
