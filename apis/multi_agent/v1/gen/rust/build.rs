@@ -28,7 +28,7 @@ fn main() -> Result<()> {
         let modified_content = re_features
             .replace_all(&proto_content, "")
             .replace(r#"edition = "2023";"#, r#"syntax = "proto3";"#)
-            .replace(r#"import "google\/protobuf\/go_features.proto";"#, "");
+            .replace(r#"import "google/protobuf/go_features.proto";"#, "");
 
         out_file
             .write_all(modified_content.as_bytes())
