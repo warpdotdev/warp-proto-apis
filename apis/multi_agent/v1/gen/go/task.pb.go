@@ -1334,8 +1334,8 @@ func (b0 SuggestCreatePlanResult_builder) Build() *SuggestCreatePlanResult {
 // A range of lines [start, end] that situate content in a file, 0-indexed.
 type FileContentLineRange struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Start       int32                  `protobuf:"varint,1,opt,name=start"`
-	xxx_hidden_End         int32                  `protobuf:"varint,2,opt,name=end"`
+	xxx_hidden_Start       uint32                 `protobuf:"varint,1,opt,name=start"`
+	xxx_hidden_End         uint32                 `protobuf:"varint,2,opt,name=end"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1367,26 +1367,26 @@ func (x *FileContentLineRange) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *FileContentLineRange) GetStart() int32 {
+func (x *FileContentLineRange) GetStart() uint32 {
 	if x != nil {
 		return x.xxx_hidden_Start
 	}
 	return 0
 }
 
-func (x *FileContentLineRange) GetEnd() int32 {
+func (x *FileContentLineRange) GetEnd() uint32 {
 	if x != nil {
 		return x.xxx_hidden_End
 	}
 	return 0
 }
 
-func (x *FileContentLineRange) SetStart(v int32) {
+func (x *FileContentLineRange) SetStart(v uint32) {
 	x.xxx_hidden_Start = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *FileContentLineRange) SetEnd(v int32) {
+func (x *FileContentLineRange) SetEnd(v uint32) {
 	x.xxx_hidden_End = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
@@ -1418,8 +1418,8 @@ func (x *FileContentLineRange) ClearEnd() {
 type FileContentLineRange_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Start *int32
-	End   *int32
+	Start *uint32
+	End   *uint32
 }
 
 func (b0 FileContentLineRange_builder) Build() *FileContentLineRange {
@@ -5030,7 +5030,7 @@ func (b0 GrepResult_GrepFileMatch_builder) Build() *GrepResult_GrepFileMatch {
 
 type GrepResult_GrepFileMatch_GrepLineMatch struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_LineNumber  int32                  `protobuf:"varint,1,opt,name=line_number,json=lineNumber"`
+	xxx_hidden_LineNumber  uint32                 `protobuf:"varint,1,opt,name=line_number,json=lineNumber"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -5062,14 +5062,14 @@ func (x *GrepResult_GrepFileMatch_GrepLineMatch) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-func (x *GrepResult_GrepFileMatch_GrepLineMatch) GetLineNumber() int32 {
+func (x *GrepResult_GrepFileMatch_GrepLineMatch) GetLineNumber() uint32 {
 	if x != nil {
 		return x.xxx_hidden_LineNumber
 	}
 	return 0
 }
 
-func (x *GrepResult_GrepFileMatch_GrepLineMatch) SetLineNumber(v int32) {
+func (x *GrepResult_GrepFileMatch_GrepLineMatch) SetLineNumber(v uint32) {
 	x.xxx_hidden_LineNumber = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
@@ -5092,7 +5092,7 @@ type GrepResult_GrepFileMatch_GrepLineMatch_builder struct {
 	// The matched line within the file. This currently only includes the line
 	// number, but could be extended to include the line content in the
 	// future.
-	LineNumber *int32
+	LineNumber *uint32
 }
 
 func (b0 GrepResult_GrepFileMatch_GrepLineMatch_builder) Build() *GrepResult_GrepFileMatch_GrepLineMatch {
@@ -5936,8 +5936,8 @@ const file_task_proto_rawDesc = "" +
 	"\x17SuggestCreatePlanResult\x12\x1a\n" +
 	"\baccepted\x18\x01 \x01(\bR\baccepted\">\n" +
 	"\x14FileContentLineRange\x12\x14\n" +
-	"\x05start\x18\x01 \x01(\x05R\x05start\x12\x10\n" +
-	"\x03end\x18\x02 \x01(\x05R\x03end\"\x9a\x01\n" +
+	"\x05start\x18\x01 \x01(\rR\x05start\x12\x10\n" +
+	"\x03end\x18\x02 \x01(\rR\x03end\"\x9a\x01\n" +
 	"\vFileContent\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
 	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12H\n" +
@@ -5956,7 +5956,7 @@ const file_task_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12`\n" +
 	"\rmatched_lines\x18\x02 \x03(\v2;.warp.multi_agent.v1.GrepResult.GrepFileMatch.GrepLineMatchR\fmatchedLines\x1a0\n" +
 	"\rGrepLineMatch\x12\x1f\n" +
-	"\vline_number\x18\x01 \x01(\x05R\n" +
+	"\vline_number\x18\x01 \x01(\rR\n" +
 	"lineNumber\";\n" +
 	"\x0eFileGlobResult\x12)\n" +
 	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFiles\"\x94\b\n" +

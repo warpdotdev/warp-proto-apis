@@ -230,8 +230,8 @@ message SuggestCreatePlanResult { bool accepted = 1; }
 
 // A range of lines [start, end] that situate content in a file, 0-indexed.
 message FileContentLineRange {
-  int32 start = 1;
-  int32 end = 2;
+  uint32 start = 1;
+  uint32 end = 2;
 }
 
 // A representation of raw content within a file.
@@ -272,7 +272,7 @@ message GrepResult {
       // The matched line within the file. This currently only includes the line
       // number, but could be extended to include the line content in the
       // future.
-      int32 line_number = 1;
+      uint32 line_number = 1;
     }
   }
 }
