@@ -71,15 +71,25 @@ message ClientAction {
     AppendToMessageContent append_to_message_content = 5;
     Suggestions show_suggestions = 6;
     UpdateTaskSummary update_task_summary = 7;
+    UpdateTaskDescription update_task_description = 8;
   }
 
   // Create task action
   message CreateTask { Task task = 1; }
 
+  // TODO(matthew): Ought to be able to combine 
+  // UpdateTask{Status,Description,Summary} at least.
+
   // Update task status action
   message UpdateTaskStatus {
     string task_id = 1;
     TaskStatus task_status = 2;
+  }
+
+  // Update task description action
+  message UpdateTaskDescription {
+    string task_id = 1;
+    string description = 2;
   }
 
   // Add message to task action
