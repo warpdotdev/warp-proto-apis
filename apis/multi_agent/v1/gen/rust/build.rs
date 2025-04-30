@@ -1,5 +1,5 @@
-use std::io::{Result, Write};
 use regex::Regex;
+use std::io::{Result, Write};
 
 fn main() -> Result<()> {
     let manifest_dir = std::path::PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
@@ -22,18 +22,16 @@ fn main() -> Result<()> {
         let out_path = out_dir.join(file_name);
         let mut out_file = std::fs::File::create(&out_path).unwrap();
 
-        let proto_content = std::fs::read_to_string(&proto)
-            .expect("Failed to read proto file");
-        
-        let content_step1 = proto_content.replace(r#"edition = "2023";"#, r#"syntax = "proto3";"#);
-        
-        let re_features = Regex::new(r"option features.*").unwrap();
-        let content_step2 = re_features.replace_all(&content_step1, "").to_string();
+        let proto_content = std::fs::read_to_string(&proto).expect("Failed to read proto file");
 
-        let modified_content = content_step2.replace(r#"import "google\/protobuf\/go_features.proto";"#, "");
-        
-        // Write the modified content to the output file
-        out_file.write_all(modified_content.as_bytes())
+        let re_features = Regex::new(r"option features.*").unwrap();
+        let modified_content = re_features
+            .replace_all(&proto_content, "")
+            .replace(r#"edition = "2023";"#, r#"syntax = "proto3";"#)
+            .replace(r#"import "google\/protobuf\/go_features.proto";"#, "");
+
+        out_file
+            .write_all(modified_content.as_bytes())
             .expect("Failed to write to output file");
 
         proto_files.push(out_path);
