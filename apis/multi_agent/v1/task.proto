@@ -5,6 +5,7 @@ package warp.multi_agent.v1;
 import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
 
 import "options.proto";
 
@@ -81,7 +82,12 @@ message Message {
   }
 
   // User query message type
-  message UserQuery { string query = 1 [ (sensitive) = true ]; }
+  message UserQuery { 
+    string query = 1 [ (sensitive) = true ];
+    
+    // Context that the client supplied as part of the user query input.
+    InputContext context = 2;
+  }
 
   // Agent output message type
   message AgentOutput { string text = 1; }
@@ -174,6 +180,11 @@ message Message {
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
     string tool_call_id = 1;
+
+    // Context that the client supplied as part of the tool call result input.
+    //
+    // Not included for `ServerResult`s.
+    InputContext context = 11;
 
     oneof result {
       RunShellCommandResult run_shell_command = 2;
@@ -270,4 +281,55 @@ message GrepResult {
 message FileGlobResult {
   // String containing list of file paths matching the glob patterns.
   string matched_files = 1 [ (sensitive) = true ];
+}
+
+message InputContext {
+  Directory directory = 1;
+  OperatingSystem operating_system = 2;
+  Shell shell = 3;
+  google.protobuf.Timestamp current_time = 4;
+  repeated ExecutedShellCommand executed_shell_commands = 5;
+  repeated SelectedText selected_text = 6;
+  repeated Image images = 7;
+
+  // Information about shell commands that the user has executed.
+  message ExecutedShellCommand {
+    string command = 1 [ (sensitive) = true ];
+    string output = 2 [ (sensitive) = true ];
+    int32 exit_code = 3;
+  }
+
+  message SelectedText { string text = 1 [ (sensitive) = true ]; }
+
+  // Information about the user's directories.
+  message Directory {
+    string pwd = 1 [ (sensitive) = true ];
+    string home = 2 [ (sensitive) = true ];
+    bool pwd_file_symbols_indexed = 3;
+  }
+
+  // Information about the user's terminal shell.
+  message Shell {
+    string name = 1;
+    string version = 2;
+  }
+
+  // Information about the user's operating system.
+  message OperatingSystem {
+    // The OS "category", e.g. "MacOS" or "Linux".
+    string platform = 1;
+
+    // The OS distribution, which is typically only populated for Linux,
+    // e.g. Fedora or Ubuntu.
+    string distribution = 2;
+  }
+
+  // Any attached images.
+  message Image {
+    // The base64-encoded image data.
+    string data = 1;
+
+    // MIME type of the image content (e.g., "image/jpeg", "image/png").
+    string mime_type = 2;
+  }
 }
