@@ -223,13 +223,42 @@ message RunShellCommandResult {
 }
 
 // Result of a `ReadFiles` tool call.
-message ReadFilesResult { repeated FileContent files = 1; }
+message ReadFilesResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { repeated FileContent files = 1; }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
 
 // Result of a `SearchCodebase` tool call.
-message SearchCodebaseResult { repeated FileContent files = 1; }
+message SearchCodebaseResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { repeated FileContent files = 1; }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
 
 // Result of a `ApplyFileDiffs` tool call.
-message ApplyFileDiffsResult { repeated FileContent updated_files = 1; }
+message ApplyFileDiffsResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { repeated FileContent updated_files = 1; }
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
 
 // Result of a `SuggestCreatePlan` tool call.
 message SuggestCreatePlanResult { bool accepted = 1; }
@@ -265,28 +294,46 @@ message SuggestPlanResult {
 
 // Result of a `Grep` tool call.
 message GrepResult {
-  // List of files containing lines that matched the grep query.
-  repeated GrepFileMatch matched_files = 1;
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
 
-  message GrepFileMatch {
-    // The path to the file that matched the grep query.
-    string file_path = 1 [ (sensitive) = true ];
-    // List of line matches within this file.
-    repeated GrepLineMatch matched_lines = 2;
+  message Success {
+    // List of files containing lines that matched the grep query.
+    repeated GrepFileMatch matched_files = 1;
 
-    message GrepLineMatch {
-      // The matched line within the file. This currently only includes the line
-      // number, but could be extended to include the line content in the
-      // future.
-      uint32 line_number = 1;
+    message GrepFileMatch {
+      // The path to the file that matched the grep query.
+      string file_path = 1 [ (sensitive) = true ];
+      // List of line matches within this file.
+      repeated GrepLineMatch matched_lines = 2;
+
+      message GrepLineMatch {
+        // The matched line within the file. This currently only includes the
+        // line number, but could be extended to include the line content in the
+        // future.
+        uint32 line_number = 1;
+      }
     }
   }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 // Result of a `FileGlob` tool call.
 message FileGlobResult {
-  // String containing list of file paths matching the glob patterns.
-  string matched_files = 1 [ (sensitive) = true ];
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // String containing list of file paths matching the glob patterns.
+    string matched_files = 1 [ (sensitive) = true ];
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 message InputContext {
