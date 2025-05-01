@@ -82,9 +82,9 @@ message Message {
   }
 
   // User query message type
-  message UserQuery { 
+  message UserQuery {
     string query = 1 [ (sensitive) = true ];
-    
+
     // Context that the client supplied as part of the user query input.
     InputContext context = 2;
   }
@@ -196,6 +196,7 @@ message Message {
       SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
       FileGlobResult file_glob = 10;
+      CancelledToolCallResult cancelled = 12;
     }
 
     // Result of a server-side tool call.
@@ -276,6 +277,9 @@ message GrepResult {
     }
   }
 }
+
+// Generic type for any tool call that was cancelled.
+message CancelledToolCallResult {}
 
 // Result of a `FileGlob` tool call.
 message FileGlobResult {

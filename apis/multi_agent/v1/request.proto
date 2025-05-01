@@ -63,11 +63,12 @@ message Request {
         SuggestCreatePlanResult suggest_create_plan = 7;
         GrepResult grep = 8;
         FileGlobResult file_glob = 9;
+        CancelledToolCallResult cancelled = 10;
       }
     }
 
     // Static queries correspond to hardcoded predefined responses from
-    // Agent Mode e.g. the zero-state chip for "Install" has a predefined 
+    // Agent Mode e.g. the zero-state chip for "Install" has a predefined
     // initial response asking the user for more information, before passing it
     // off to "real AI".
     message StaticQuery {
