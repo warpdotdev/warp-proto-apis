@@ -961,10 +961,10 @@ func (x *Request_Input_ToolCallResult) GetFileGlob() *FileGlobResult {
 	return nil
 }
 
-func (x *Request_Input_ToolCallResult) GetCancelled() *CancelledToolCallResult {
+func (x *Request_Input_ToolCallResult) GetRefine() *Request_Input_ToolCallResult_RefineResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Cancelled); ok {
-			return x.Cancelled
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Refine); ok {
+			return x.Refine
 		}
 	}
 	return nil
@@ -1039,12 +1039,12 @@ func (x *Request_Input_ToolCallResult) SetFileGlob(v *FileGlobResult) {
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_FileGlob{v}
 }
 
-func (x *Request_Input_ToolCallResult) SetCancelled(v *CancelledToolCallResult) {
+func (x *Request_Input_ToolCallResult) SetRefine(v *Request_Input_ToolCallResult_RefineResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &request_Input_ToolCallResult_Cancelled{v}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_Refine{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -1125,11 +1125,11 @@ func (x *Request_Input_ToolCallResult) HasFileGlob() bool {
 	return ok
 }
 
-func (x *Request_Input_ToolCallResult) HasCancelled() bool {
+func (x *Request_Input_ToolCallResult) HasRefine() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Cancelled)
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Refine)
 	return ok
 }
 
@@ -1190,8 +1190,8 @@ func (x *Request_Input_ToolCallResult) ClearFileGlob() {
 	}
 }
 
-func (x *Request_Input_ToolCallResult) ClearCancelled() {
-	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Cancelled); ok {
+func (x *Request_Input_ToolCallResult) ClearRefine() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Refine); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
@@ -1205,7 +1205,7 @@ const Request_Input_ToolCallResult_SuggestPlan_case case_Request_Input_ToolCallR
 const Request_Input_ToolCallResult_SuggestCreatePlan_case case_Request_Input_ToolCallResult_Result = 7
 const Request_Input_ToolCallResult_Grep_case case_Request_Input_ToolCallResult_Result = 8
 const Request_Input_ToolCallResult_FileGlob_case case_Request_Input_ToolCallResult_Result = 9
-const Request_Input_ToolCallResult_Cancelled_case case_Request_Input_ToolCallResult_Result = 10
+const Request_Input_ToolCallResult_Refine_case case_Request_Input_ToolCallResult_Result = 10
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -1228,8 +1228,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_Grep_case
 	case *request_Input_ToolCallResult_FileGlob:
 		return Request_Input_ToolCallResult_FileGlob_case
-	case *request_Input_ToolCallResult_Cancelled:
-		return Request_Input_ToolCallResult_Cancelled_case
+	case *request_Input_ToolCallResult_Refine:
+		return Request_Input_ToolCallResult_Refine_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -1248,7 +1248,7 @@ type Request_Input_ToolCallResult_builder struct {
 	SuggestCreatePlan *SuggestCreatePlanResult
 	Grep              *GrepResult
 	FileGlob          *FileGlobResult
-	Cancelled         *CancelledToolCallResult
+	Refine            *Request_Input_ToolCallResult_RefineResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -1284,8 +1284,8 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	if b.FileGlob != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_FileGlob{b.FileGlob}
 	}
-	if b.Cancelled != nil {
-		x.xxx_hidden_Result = &request_Input_ToolCallResult_Cancelled{b.Cancelled}
+	if b.Refine != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_Refine{b.Refine}
 	}
 	return m0
 }
@@ -1336,8 +1336,8 @@ type request_Input_ToolCallResult_FileGlob struct {
 	FileGlob *FileGlobResult `protobuf:"bytes,9,opt,name=file_glob,json=fileGlob,oneof"`
 }
 
-type request_Input_ToolCallResult_Cancelled struct {
-	Cancelled *CancelledToolCallResult `protobuf:"bytes,10,opt,name=cancelled,oneof"`
+type request_Input_ToolCallResult_Refine struct {
+	Refine *Request_Input_ToolCallResult_RefineResult `protobuf:"bytes,10,opt,name=refine,oneof"`
 }
 
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
@@ -1356,7 +1356,7 @@ func (*request_Input_ToolCallResult_Grep) isRequest_Input_ToolCallResult_Result(
 
 func (*request_Input_ToolCallResult_FileGlob) isRequest_Input_ToolCallResult_Result() {}
 
-func (*request_Input_ToolCallResult_Cancelled) isRequest_Input_ToolCallResult_Result() {}
+func (*request_Input_ToolCallResult_Refine) isRequest_Input_ToolCallResult_Result() {}
 
 // Static queries correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -1880,6 +1880,76 @@ func (b0 Request_Input_CustomOnboardingRequestStaticQuery_builder) Build() *Requ
 	return m0
 }
 
+// Generic tool call result for representing a user-requested refinement of the tool call
+// parameters.
+type Request_Input_ToolCallResult_RefineResult struct {
+	state                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_UserQuery *Request_Input_UserQuery `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *Request_Input_ToolCallResult_RefineResult) Reset() {
+	*x = Request_Input_ToolCallResult_RefineResult{}
+	mi := &file_request_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_ToolCallResult_RefineResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_ToolCallResult_RefineResult) ProtoMessage() {}
+
+func (x *Request_Input_ToolCallResult_RefineResult) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Input_ToolCallResult_RefineResult) GetUserQuery() *Request_Input_UserQuery {
+	if x != nil {
+		return x.xxx_hidden_UserQuery
+	}
+	return nil
+}
+
+func (x *Request_Input_ToolCallResult_RefineResult) SetUserQuery(v *Request_Input_UserQuery) {
+	x.xxx_hidden_UserQuery = v
+}
+
+func (x *Request_Input_ToolCallResult_RefineResult) HasUserQuery() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_UserQuery != nil
+}
+
+func (x *Request_Input_ToolCallResult_RefineResult) ClearUserQuery() {
+	x.xxx_hidden_UserQuery = nil
+}
+
+type Request_Input_ToolCallResult_RefineResult_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	UserQuery *Request_Input_UserQuery
+}
+
+func (b0 Request_Input_ToolCallResult_RefineResult_builder) Build() *Request_Input_ToolCallResult_RefineResult {
+	m0 := &Request_Input_ToolCallResult_RefineResult{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_UserQuery = b.UserQuery
+	return m0
+}
+
 type Request_Settings_ModelConfig struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Base        *string                `protobuf:"bytes,1,opt,name=base"`
@@ -1892,7 +1962,7 @@ type Request_Settings_ModelConfig struct {
 
 func (x *Request_Settings_ModelConfig) Reset() {
 	*x = Request_Settings_ModelConfig{}
-	mi := &file_request_proto_msgTypes[14]
+	mi := &file_request_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1904,7 +1974,7 @@ func (x *Request_Settings_ModelConfig) String() string {
 func (*Request_Settings_ModelConfig) ProtoMessage() {}
 
 func (x *Request_Settings_ModelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[14]
+	mi := &file_request_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1998,7 +2068,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xa2\x15\n" +
+	"task.proto\"\x8b\x16\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2007,7 +2077,7 @@ const file_request_proto_rawDesc = "" +
 	"\x14existing_suggestions\x18\x05 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xec\r\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xd5\x0e\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12M\n" +
 	"\n" +
@@ -2015,7 +2085,7 @@ const file_request_proto_rawDesc = "" +
 	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12S\n" +
 	"\fstatic_query\x18\x04 \x01(\v2..warp.multi_agent.v1.Request.Input.StaticQueryH\x00R\vstaticQuery\x1a'\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x80\x06\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xe9\x06\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2027,9 +2097,12 @@ const file_request_proto_rawDesc = "" +
 	"\fsuggest_plan\x18\x06 \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x12^\n" +
 	"\x13suggest_create_plan\x18\a \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlan\x125\n" +
 	"\x04grep\x18\b \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12B\n" +
-	"\tfile_glob\x18\t \x01(\v2#.warp.multi_agent.v1.FileGlobResultH\x00R\bfileGlob\x12L\n" +
-	"\tcancelled\x18\n" +
-	" \x01(\v2,.warp.multi_agent.v1.CancelledToolCallResultH\x00R\tcancelledB\b\n" +
+	"\tfile_glob\x18\t \x01(\v2#.warp.multi_agent.v1.FileGlobResultH\x00R\bfileGlob\x12X\n" +
+	"\x06refine\x18\n" +
+	" \x01(\v2>.warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResultH\x00R\x06refine\x1a[\n" +
+	"\fRefineResult\x12K\n" +
+	"\n" +
+	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
 	"\x06result\x1a\xee\x03\n" +
 	"\vStaticQuery\x12Q\n" +
 	"\ainstall\x18\x01 \x01(\v25.warp.multi_agent.v1.Request.Input.InstallStaticQueryH\x00R\ainstall\x12H\n" +
@@ -2058,7 +2131,7 @@ const file_request_proto_rawDesc = "" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanningB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_request_proto_goTypes = []any{
 	(*Request)(nil),                                          // 0: warp.multi_agent.v1.Request
 	(*Request_TaskContext)(nil),                              // 1: warp.multi_agent.v1.Request.TaskContext
@@ -2073,20 +2146,20 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_DeployStaticQuery)(nil),                  // 10: warp.multi_agent.v1.Request.Input.DeployStaticQuery
 	(*Request_Input_SomethingElseStaticQuery)(nil),           // 11: warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
 	(*Request_Input_CustomOnboardingRequestStaticQuery)(nil), // 12: warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
-	nil,                                  // 13: warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	(*Request_Settings_ModelConfig)(nil), // 14: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Suggestions)(nil),                  // 15: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                         // 16: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                 // 17: warp.multi_agent.v1.InputContext
-	(*RunShellCommandResult)(nil),        // 18: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),              // 19: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),         // 20: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),         // 21: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),            // 22: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),      // 23: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                   // 24: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),               // 25: warp.multi_agent.v1.FileGlobResult
-	(*CancelledToolCallResult)(nil),      // 26: warp.multi_agent.v1.CancelledToolCallResult
+	(*Request_Input_ToolCallResult_RefineResult)(nil),        // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	nil,                                  // 14: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil), // 15: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Suggestions)(nil),                  // 16: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                         // 17: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                 // 18: warp.multi_agent.v1.InputContext
+	(*RunShellCommandResult)(nil),        // 19: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),              // 20: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),         // 21: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),         // 22: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),            // 23: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),      // 24: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                   // 25: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),               // 26: warp.multi_agent.v1.FileGlobResult
 	(*structpb.Value)(nil),               // 27: google.protobuf.Value
 }
 var file_request_proto_depIdxs = []int32{
@@ -2094,34 +2167,35 @@ var file_request_proto_depIdxs = []int32{
 	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
 	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
 	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
-	15, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	16, // 5: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	17, // 6: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
+	16, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	17, // 5: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	18, // 6: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
 	5,  // 7: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	6,  // 8: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	7,  // 9: warp.multi_agent.v1.Request.Input.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQuery
-	13, // 10: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	14, // 11: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	18, // 12: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	19, // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	20, // 14: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	21, // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	22, // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	23, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	24, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.cancelled:type_name -> warp.multi_agent.v1.CancelledToolCallResult
+	14, // 10: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	15, // 11: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	19, // 12: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	20, // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	21, // 14: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	22, // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	23, // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	24, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	25, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	26, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	13, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	8,  // 21: warp.multi_agent.v1.Request.Input.StaticQuery.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
 	9,  // 22: warp.multi_agent.v1.Request.Input.StaticQuery.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
 	10, // 23: warp.multi_agent.v1.Request.Input.StaticQuery.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
 	11, // 24: warp.multi_agent.v1.Request.Input.StaticQuery.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
 	12, // 25: warp.multi_agent.v1.Request.Input.StaticQuery.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
-	27, // 26: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	5,  // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	27, // 27: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -2146,7 +2220,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_SuggestCreatePlan)(nil),
 		(*request_Input_ToolCallResult_Grep)(nil),
 		(*request_Input_ToolCallResult_FileGlob)(nil),
-		(*request_Input_ToolCallResult_Cancelled)(nil),
+		(*request_Input_ToolCallResult_Refine)(nil),
 	}
 	file_request_proto_msgTypes[7].OneofWrappers = []any{
 		(*request_Input_StaticQuery_Install)(nil),
@@ -2161,7 +2235,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

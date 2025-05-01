@@ -63,7 +63,13 @@ message Request {
         SuggestCreatePlanResult suggest_create_plan = 7;
         GrepResult grep = 8;
         FileGlobResult file_glob = 9;
-        CancelledToolCallResult cancelled = 10;
+        RefineResult refine = 10;
+      }
+
+      // Generic tool call result for representing a user-requested refinement of the tool call
+      // parameters.
+      message RefineResult  {
+        UserQuery user_query = 1;
       }
     }
 
