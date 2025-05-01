@@ -4940,8 +4940,8 @@ func (b0 Message_ToolCallResult_ServerResult_builder) Build() *Message_ToolCallR
 	return m0
 }
 
-// Generic tool call result for representing a user-requested refinement of the tool call
-// parameters.
+// Generic tool call result for representing a user-requested refinement of
+// the tool call parameters.
 type Message_ToolCallResult_RefineResult struct {
 	state                protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_UserQuery *Message_UserQuery     `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`

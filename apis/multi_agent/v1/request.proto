@@ -66,11 +66,9 @@ message Request {
         RefineResult refine = 10;
       }
 
-      // Generic tool call result for representing a user-requested refinement of the tool call
-      // parameters.
-      message RefineResult  {
-        UserQuery user_query = 1;
-      }
+      // Generic tool call result for representing a user-requested refinement
+      // of the tool call parameters.
+      message RefineResult { UserQuery user_query = 1; }
     }
 
     // Static queries correspond to hardcoded predefined responses from

@@ -204,11 +204,9 @@ message Message {
     // Provided by the server to simply roundtrip.
     message ServerResult { string serialized_result = 1; }
 
-    // Generic tool call result for representing a user-requested refinement of the tool call
-    // parameters.
-    message RefineResult {
-        UserQuery user_query  = 1;
-    }
+    // Generic tool call result for representing a user-requested refinement of
+    // the tool call parameters.
+    message RefineResult { UserQuery user_query = 1; }
   }
 
   // An event that is preserved in message history

@@ -1880,8 +1880,8 @@ func (b0 Request_Input_CustomOnboardingRequestStaticQuery_builder) Build() *Requ
 	return m0
 }
 
-// Generic tool call result for representing a user-requested refinement of the tool call
-// parameters.
+// Generic tool call result for representing a user-requested refinement
+// of the tool call parameters.
 type Request_Input_ToolCallResult_RefineResult struct {
 	state                protoimpl.MessageState   `protogen:"opaque.v1"`
 	xxx_hidden_UserQuery *Request_Input_UserQuery `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`
