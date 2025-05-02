@@ -117,6 +117,7 @@ message Message {
     message RunShellCommand {
       string command = 1;
       bool is_read_only = 2;
+      bool uses_pager = 3;
     }
 
     // A tool call to read files.
