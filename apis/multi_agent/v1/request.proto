@@ -64,6 +64,8 @@ message Request {
         GrepResult grep = 8;
         FileGlobResult file_glob = 9;
         RefineResult refine = 10;
+        ReadMCPResourceResult read_mcp_resource = 11;
+        CallMCPToolResult call_mcp_tool = 12;
       }
 
       // Generic tool call result for representing a user-requested refinement

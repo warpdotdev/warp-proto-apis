@@ -6,6 +6,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 import "options.proto";
 
@@ -107,6 +108,8 @@ message Message {
       SuggestCreatePlan suggest_create_plan = 8;
       Grep grep = 9;
       FileGlob file_glob = 10;
+      ReadMCPResource read_mcp_resource = 11;
+      CallMCPTool call_mcp_tool = 12;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -176,6 +179,15 @@ message Message {
       // The relative path to the directory to search in.
       string path = 2;
     }
+
+    // A tool call to read MCP resources
+    message ReadMCPResource { repeated string resource_uris = 1; }
+
+    // A tool call to execute an MCP tool
+    message CallMCPTool {
+      string tool_name = 1;
+      google.protobuf.Struct input = 2;
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -199,6 +211,8 @@ message Message {
       FileGlobResult file_glob = 10;
       RefineResult refine = 13;
       google.protobuf.Empty cancel = 14;
+      ReadMCPResourceResult read_mcp_resource = 15;
+      CallMCPToolResult call_mcp_tool = 16;
     }
 
     // Result of a server-side tool call.
@@ -256,9 +270,7 @@ message ApplyFileDiffsResult {
 
   message Success { repeated FileContent updated_files = 1; }
 
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 // Result of a `SuggestCreatePlan` tool call.
@@ -335,6 +347,35 @@ message FileGlobResult {
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+message MCPResourceContent {
+  string uri = 1 [ (sensitive) = true ];
+  string content = 2 [ (sensitive) = true ];
+}
+
+message ReadMCPResourceResult {
+  repeated MCPResourceContent contents = 1;
+  string error = 2 [ (sensitive) = true ];
+}
+
+message MCPToolCallTextResult { string text = 1 [ (sensitive) = true ]; }
+
+message MCPToolCallImageResult {
+  string data = 1;
+  string mime_type = 2;
+}
+
+message MCPToolCallResult {
+  oneof result {
+    MCPToolCallTextResult text = 1;
+    MCPToolCallImageResult image = 2;
+  }
+}
+
+message CallMCPToolResult {
+  repeated MCPToolCallResult results = 1;
+  string error = 2 [ (sensitive) = true ];
 }
 
 message InputContext {
