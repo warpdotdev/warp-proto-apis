@@ -929,6 +929,42 @@ func (x *ResponseEvent_StreamFinished) GetMaxTokenLimit() *ResponseEvent_StreamF
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished) GetQuotaLimit() *ResponseEvent_StreamFinished_QuotaLimit {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_QuotaLimit_); ok {
+			return x.QuotaLimit
+		}
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished) GetContextWindowExceeded() *ResponseEvent_StreamFinished_ContextWindowExceeded {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_ContextWindowExceeded_); ok {
+			return x.ContextWindowExceeded
+		}
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished) GetLlmUnavailable() *ResponseEvent_StreamFinished_LLMUnavailable {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_LlmUnavailable); ok {
+			return x.LlmUnavailable
+		}
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished) GetInternalError() *ResponseEvent_StreamFinished_InternalError {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_InternalError_); ok {
+			return x.InternalError
+		}
+	}
+	return nil
+}
+
 func (x *ResponseEvent_StreamFinished) SetOther(v *ResponseEvent_StreamFinished_Other) {
 	if v == nil {
 		x.xxx_hidden_Reason = nil
@@ -951,6 +987,38 @@ func (x *ResponseEvent_StreamFinished) SetMaxTokenLimit(v *ResponseEvent_StreamF
 		return
 	}
 	x.xxx_hidden_Reason = &responseEvent_StreamFinished_MaxTokenLimit{v}
+}
+
+func (x *ResponseEvent_StreamFinished) SetQuotaLimit(v *ResponseEvent_StreamFinished_QuotaLimit) {
+	if v == nil {
+		x.xxx_hidden_Reason = nil
+		return
+	}
+	x.xxx_hidden_Reason = &responseEvent_StreamFinished_QuotaLimit_{v}
+}
+
+func (x *ResponseEvent_StreamFinished) SetContextWindowExceeded(v *ResponseEvent_StreamFinished_ContextWindowExceeded) {
+	if v == nil {
+		x.xxx_hidden_Reason = nil
+		return
+	}
+	x.xxx_hidden_Reason = &responseEvent_StreamFinished_ContextWindowExceeded_{v}
+}
+
+func (x *ResponseEvent_StreamFinished) SetLlmUnavailable(v *ResponseEvent_StreamFinished_LLMUnavailable) {
+	if v == nil {
+		x.xxx_hidden_Reason = nil
+		return
+	}
+	x.xxx_hidden_Reason = &responseEvent_StreamFinished_LlmUnavailable{v}
+}
+
+func (x *ResponseEvent_StreamFinished) SetInternalError(v *ResponseEvent_StreamFinished_InternalError) {
+	if v == nil {
+		x.xxx_hidden_Reason = nil
+		return
+	}
+	x.xxx_hidden_Reason = &responseEvent_StreamFinished_InternalError_{v}
 }
 
 func (x *ResponseEvent_StreamFinished) HasReason() bool {
@@ -984,6 +1052,38 @@ func (x *ResponseEvent_StreamFinished) HasMaxTokenLimit() bool {
 	return ok
 }
 
+func (x *ResponseEvent_StreamFinished) HasQuotaLimit() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_QuotaLimit_)
+	return ok
+}
+
+func (x *ResponseEvent_StreamFinished) HasContextWindowExceeded() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_ContextWindowExceeded_)
+	return ok
+}
+
+func (x *ResponseEvent_StreamFinished) HasLlmUnavailable() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_LlmUnavailable)
+	return ok
+}
+
+func (x *ResponseEvent_StreamFinished) HasInternalError() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_InternalError_)
+	return ok
+}
+
 func (x *ResponseEvent_StreamFinished) ClearReason() {
 	x.xxx_hidden_Reason = nil
 }
@@ -1006,10 +1106,38 @@ func (x *ResponseEvent_StreamFinished) ClearMaxTokenLimit() {
 	}
 }
 
+func (x *ResponseEvent_StreamFinished) ClearQuotaLimit() {
+	if _, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_QuotaLimit_); ok {
+		x.xxx_hidden_Reason = nil
+	}
+}
+
+func (x *ResponseEvent_StreamFinished) ClearContextWindowExceeded() {
+	if _, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_ContextWindowExceeded_); ok {
+		x.xxx_hidden_Reason = nil
+	}
+}
+
+func (x *ResponseEvent_StreamFinished) ClearLlmUnavailable() {
+	if _, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_LlmUnavailable); ok {
+		x.xxx_hidden_Reason = nil
+	}
+}
+
+func (x *ResponseEvent_StreamFinished) ClearInternalError() {
+	if _, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_InternalError_); ok {
+		x.xxx_hidden_Reason = nil
+	}
+}
+
 const ResponseEvent_StreamFinished_Reason_not_set_case case_ResponseEvent_StreamFinished_Reason = 0
 const ResponseEvent_StreamFinished_Other_case case_ResponseEvent_StreamFinished_Reason = 1
 const ResponseEvent_StreamFinished_Done_case case_ResponseEvent_StreamFinished_Reason = 2
 const ResponseEvent_StreamFinished_MaxTokenLimit_case case_ResponseEvent_StreamFinished_Reason = 3
+const ResponseEvent_StreamFinished_QuotaLimit_case case_ResponseEvent_StreamFinished_Reason = 4
+const ResponseEvent_StreamFinished_ContextWindowExceeded_case case_ResponseEvent_StreamFinished_Reason = 5
+const ResponseEvent_StreamFinished_LlmUnavailable_case case_ResponseEvent_StreamFinished_Reason = 6
+const ResponseEvent_StreamFinished_InternalError_case case_ResponseEvent_StreamFinished_Reason = 7
 
 func (x *ResponseEvent_StreamFinished) WhichReason() case_ResponseEvent_StreamFinished_Reason {
 	if x == nil {
@@ -1022,6 +1150,14 @@ func (x *ResponseEvent_StreamFinished) WhichReason() case_ResponseEvent_StreamFi
 		return ResponseEvent_StreamFinished_Done_case
 	case *responseEvent_StreamFinished_MaxTokenLimit:
 		return ResponseEvent_StreamFinished_MaxTokenLimit_case
+	case *responseEvent_StreamFinished_QuotaLimit_:
+		return ResponseEvent_StreamFinished_QuotaLimit_case
+	case *responseEvent_StreamFinished_ContextWindowExceeded_:
+		return ResponseEvent_StreamFinished_ContextWindowExceeded_case
+	case *responseEvent_StreamFinished_LlmUnavailable:
+		return ResponseEvent_StreamFinished_LlmUnavailable_case
+	case *responseEvent_StreamFinished_InternalError_:
+		return ResponseEvent_StreamFinished_InternalError_case
 	default:
 		return ResponseEvent_StreamFinished_Reason_not_set_case
 	}
@@ -1031,9 +1167,13 @@ type ResponseEvent_StreamFinished_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Reason:
-	Other         *ResponseEvent_StreamFinished_Other
-	Done          *ResponseEvent_StreamFinished_Done
-	MaxTokenLimit *ResponseEvent_StreamFinished_ReachedMaxTokenLimit
+	Other                 *ResponseEvent_StreamFinished_Other
+	Done                  *ResponseEvent_StreamFinished_Done
+	MaxTokenLimit         *ResponseEvent_StreamFinished_ReachedMaxTokenLimit
+	QuotaLimit            *ResponseEvent_StreamFinished_QuotaLimit
+	ContextWindowExceeded *ResponseEvent_StreamFinished_ContextWindowExceeded
+	LlmUnavailable        *ResponseEvent_StreamFinished_LLMUnavailable
+	InternalError         *ResponseEvent_StreamFinished_InternalError
 	// -- end of xxx_hidden_Reason
 }
 
@@ -1049,6 +1189,18 @@ func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFini
 	}
 	if b.MaxTokenLimit != nil {
 		x.xxx_hidden_Reason = &responseEvent_StreamFinished_MaxTokenLimit{b.MaxTokenLimit}
+	}
+	if b.QuotaLimit != nil {
+		x.xxx_hidden_Reason = &responseEvent_StreamFinished_QuotaLimit_{b.QuotaLimit}
+	}
+	if b.ContextWindowExceeded != nil {
+		x.xxx_hidden_Reason = &responseEvent_StreamFinished_ContextWindowExceeded_{b.ContextWindowExceeded}
+	}
+	if b.LlmUnavailable != nil {
+		x.xxx_hidden_Reason = &responseEvent_StreamFinished_LlmUnavailable{b.LlmUnavailable}
+	}
+	if b.InternalError != nil {
+		x.xxx_hidden_Reason = &responseEvent_StreamFinished_InternalError_{b.InternalError}
 	}
 	return m0
 }
@@ -1079,11 +1231,35 @@ type responseEvent_StreamFinished_MaxTokenLimit struct {
 	MaxTokenLimit *ResponseEvent_StreamFinished_ReachedMaxTokenLimit `protobuf:"bytes,3,opt,name=max_token_limit,json=maxTokenLimit,oneof"`
 }
 
+type responseEvent_StreamFinished_QuotaLimit_ struct {
+	QuotaLimit *ResponseEvent_StreamFinished_QuotaLimit `protobuf:"bytes,4,opt,name=quota_limit,json=quotaLimit,oneof"`
+}
+
+type responseEvent_StreamFinished_ContextWindowExceeded_ struct {
+	ContextWindowExceeded *ResponseEvent_StreamFinished_ContextWindowExceeded `protobuf:"bytes,5,opt,name=context_window_exceeded,json=contextWindowExceeded,oneof"`
+}
+
+type responseEvent_StreamFinished_LlmUnavailable struct {
+	LlmUnavailable *ResponseEvent_StreamFinished_LLMUnavailable `protobuf:"bytes,6,opt,name=llm_unavailable,json=llmUnavailable,oneof"`
+}
+
+type responseEvent_StreamFinished_InternalError_ struct {
+	InternalError *ResponseEvent_StreamFinished_InternalError `protobuf:"bytes,7,opt,name=internal_error,json=internalError,oneof"`
+}
+
 func (*responseEvent_StreamFinished_Other_) isResponseEvent_StreamFinished_Reason() {}
 
 func (*responseEvent_StreamFinished_Done_) isResponseEvent_StreamFinished_Reason() {}
 
 func (*responseEvent_StreamFinished_MaxTokenLimit) isResponseEvent_StreamFinished_Reason() {}
+
+func (*responseEvent_StreamFinished_QuotaLimit_) isResponseEvent_StreamFinished_Reason() {}
+
+func (*responseEvent_StreamFinished_ContextWindowExceeded_) isResponseEvent_StreamFinished_Reason() {}
+
+func (*responseEvent_StreamFinished_LlmUnavailable) isResponseEvent_StreamFinished_Reason() {}
+
+func (*responseEvent_StreamFinished_InternalError_) isResponseEvent_StreamFinished_Reason() {}
 
 type ResponseEvent_StreamFinished_Other struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
@@ -1214,6 +1390,213 @@ func (b0 ResponseEvent_StreamFinished_ReachedMaxTokenLimit_builder) Build() *Res
 	return m0
 }
 
+type ResponseEvent_StreamFinished_QuotaLimit struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_QuotaLimit) Reset() {
+	*x = ResponseEvent_StreamFinished_QuotaLimit{}
+	mi := &file_response_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_QuotaLimit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_QuotaLimit) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_QuotaLimit) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ResponseEvent_StreamFinished_QuotaLimit_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ResponseEvent_StreamFinished_QuotaLimit_builder) Build() *ResponseEvent_StreamFinished_QuotaLimit {
+	m0 := &ResponseEvent_StreamFinished_QuotaLimit{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type ResponseEvent_StreamFinished_ContextWindowExceeded struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) Reset() {
+	*x = ResponseEvent_StreamFinished_ContextWindowExceeded{}
+	mi := &file_response_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_ContextWindowExceeded) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ResponseEvent_StreamFinished_ContextWindowExceeded_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ResponseEvent_StreamFinished_ContextWindowExceeded_builder) Build() *ResponseEvent_StreamFinished_ContextWindowExceeded {
+	m0 := &ResponseEvent_StreamFinished_ContextWindowExceeded{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type ResponseEvent_StreamFinished_LLMUnavailable struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_LLMUnavailable) Reset() {
+	*x = ResponseEvent_StreamFinished_LLMUnavailable{}
+	mi := &file_response_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_LLMUnavailable) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_LLMUnavailable) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_LLMUnavailable) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ResponseEvent_StreamFinished_LLMUnavailable_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ResponseEvent_StreamFinished_LLMUnavailable_builder) Build() *ResponseEvent_StreamFinished_LLMUnavailable {
+	m0 := &ResponseEvent_StreamFinished_LLMUnavailable{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type ResponseEvent_StreamFinished_InternalError struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Message     *string                `protobuf:"bytes,1,opt,name=message"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_InternalError) Reset() {
+	*x = ResponseEvent_StreamFinished_InternalError{}
+	mi := &file_response_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_InternalError) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_InternalError) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_InternalError) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResponseEvent_StreamFinished_InternalError) GetMessage() string {
+	if x != nil {
+		if x.xxx_hidden_Message != nil {
+			return *x.xxx_hidden_Message
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ResponseEvent_StreamFinished_InternalError) SetMessage(v string) {
+	x.xxx_hidden_Message = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *ResponseEvent_StreamFinished_InternalError) HasMessage() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ResponseEvent_StreamFinished_InternalError) ClearMessage() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Message = nil
+}
+
+type ResponseEvent_StreamFinished_InternalError_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Message *string
+}
+
+func (b0 ResponseEvent_StreamFinished_InternalError_builder) Build() *ResponseEvent_StreamFinished_InternalError {
+	m0 := &ResponseEvent_StreamFinished_InternalError{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Message != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Message = b.Message
+	}
+	return m0
+}
+
 // Create task action
 type ClientAction_CreateTask struct {
 	state           protoimpl.MessageState `protogen:"opaque.v1"`
@@ -1224,7 +1607,7 @@ type ClientAction_CreateTask struct {
 
 func (x *ClientAction_CreateTask) Reset() {
 	*x = ClientAction_CreateTask{}
-	mi := &file_response_proto_msgTypes[8]
+	mi := &file_response_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1236,7 +1619,7 @@ func (x *ClientAction_CreateTask) String() string {
 func (*ClientAction_CreateTask) ProtoMessage() {}
 
 func (x *ClientAction_CreateTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[8]
+	mi := &file_response_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1296,7 +1679,7 @@ type ClientAction_UpdateTaskStatus struct {
 
 func (x *ClientAction_UpdateTaskStatus) Reset() {
 	*x = ClientAction_UpdateTaskStatus{}
-	mi := &file_response_proto_msgTypes[9]
+	mi := &file_response_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1308,7 +1691,7 @@ func (x *ClientAction_UpdateTaskStatus) String() string {
 func (*ClientAction_UpdateTaskStatus) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[9]
+	mi := &file_response_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1400,7 +1783,7 @@ type ClientAction_UpdateTaskDescription struct {
 
 func (x *ClientAction_UpdateTaskDescription) Reset() {
 	*x = ClientAction_UpdateTaskDescription{}
-	mi := &file_response_proto_msgTypes[10]
+	mi := &file_response_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1412,7 +1795,7 @@ func (x *ClientAction_UpdateTaskDescription) String() string {
 func (*ClientAction_UpdateTaskDescription) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[10]
+	mi := &file_response_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1512,7 +1895,7 @@ type ClientAction_AddMessagesToTask struct {
 
 func (x *ClientAction_AddMessagesToTask) Reset() {
 	*x = ClientAction_AddMessagesToTask{}
-	mi := &file_response_proto_msgTypes[11]
+	mi := &file_response_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1524,7 +1907,7 @@ func (x *ClientAction_AddMessagesToTask) String() string {
 func (*ClientAction_AddMessagesToTask) ProtoMessage() {}
 
 func (x *ClientAction_AddMessagesToTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[11]
+	mi := &file_response_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1608,7 +1991,7 @@ type ClientAction_UpdateTaskMessage struct {
 
 func (x *ClientAction_UpdateTaskMessage) Reset() {
 	*x = ClientAction_UpdateTaskMessage{}
-	mi := &file_response_proto_msgTypes[12]
+	mi := &file_response_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1620,7 +2003,7 @@ func (x *ClientAction_UpdateTaskMessage) String() string {
 func (*ClientAction_UpdateTaskMessage) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[12]
+	mi := &file_response_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1738,7 +2121,7 @@ type ClientAction_AppendToMessageContent struct {
 
 func (x *ClientAction_AppendToMessageContent) Reset() {
 	*x = ClientAction_AppendToMessageContent{}
-	mi := &file_response_proto_msgTypes[13]
+	mi := &file_response_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1750,7 +2133,7 @@ func (x *ClientAction_AppendToMessageContent) String() string {
 func (*ClientAction_AppendToMessageContent) ProtoMessage() {}
 
 func (x *ClientAction_AppendToMessageContent) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[13]
+	mi := &file_response_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1868,7 +2251,7 @@ type ClientAction_UpdateTaskSummary struct {
 
 func (x *ClientAction_UpdateTaskSummary) Reset() {
 	*x = ClientAction_UpdateTaskSummary{}
-	mi := &file_response_proto_msgTypes[14]
+	mi := &file_response_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1880,7 +2263,7 @@ func (x *ClientAction_UpdateTaskSummary) String() string {
 func (*ClientAction_UpdateTaskSummary) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[14]
+	mi := &file_response_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1972,7 +2355,8 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x83\x06\n" +
+	"task.proto\"\xa3\n" +
+	"\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -1983,14 +2367,25 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xd4\x02\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xf4\x06\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
-	"\x0fmax_token_limit\x18\x03 \x01(\v2F.warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimitH\x00R\rmaxTokenLimit\x1a\a\n" +
+	"\x0fmax_token_limit\x18\x03 \x01(\v2F.warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimitH\x00R\rmaxTokenLimit\x12_\n" +
+	"\vquota_limit\x18\x04 \x01(\v2<.warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimitH\x00R\n" +
+	"quotaLimit\x12\x81\x01\n" +
+	"\x17context_window_exceeded\x18\x05 \x01(\v2G.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceededH\x00R\x15contextWindowExceeded\x12k\n" +
+	"\x0fllm_unavailable\x18\x06 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailableH\x00R\x0ellmUnavailable\x12h\n" +
+	"\x0einternal_error\x18\a \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalErrorH\x00R\rinternalError\x1a\a\n" +
 	"\x05Other\x1a\x06\n" +
 	"\x04Done\x1a\x16\n" +
-	"\x14ReachedMaxTokenLimitB\b\n" +
+	"\x14ReachedMaxTokenLimit\x1a\f\n" +
+	"\n" +
+	"QuotaLimit\x1a\x17\n" +
+	"\x15ContextWindowExceeded\x1a\x10\n" +
+	"\x0eLLMUnavailable\x1a)\n" +
+	"\rInternalError\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
 	"\x06reasonB\x06\n" +
 	"\x04type\"\x9f\f\n" +
 	"\fClientAction\x12O\n" +
@@ -2029,57 +2424,65 @@ const file_response_proto_rawDesc = "" +
 	"\asummary\x18\x02 \x01(\tR\asummaryB\b\n" +
 	"\x06actionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_response_proto_goTypes = []any{
-	(*ResponseEvent)(nil),                                     // 0: warp.multi_agent.v1.ResponseEvent
-	(*ClientAction)(nil),                                      // 1: warp.multi_agent.v1.ClientAction
-	(*ResponseEvent_StreamInit)(nil),                          // 2: warp.multi_agent.v1.ResponseEvent.StreamInit
-	(*ResponseEvent_ClientActions)(nil),                       // 3: warp.multi_agent.v1.ResponseEvent.ClientActions
-	(*ResponseEvent_StreamFinished)(nil),                      // 4: warp.multi_agent.v1.ResponseEvent.StreamFinished
-	(*ResponseEvent_StreamFinished_Other)(nil),                // 5: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	(*ResponseEvent_StreamFinished_Done)(nil),                 // 6: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil), // 7: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	(*ClientAction_CreateTask)(nil),                           // 8: warp.multi_agent.v1.ClientAction.CreateTask
-	(*ClientAction_UpdateTaskStatus)(nil),                     // 9: warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	(*ClientAction_UpdateTaskDescription)(nil),                // 10: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                    // 11: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                    // 12: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),               // 13: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                    // 14: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*Suggestions)(nil),                                       // 15: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                              // 16: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),                                        // 17: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),                                           // 18: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                             // 19: google.protobuf.FieldMask
+	(*ResponseEvent)(nil),                                      // 0: warp.multi_agent.v1.ResponseEvent
+	(*ClientAction)(nil),                                       // 1: warp.multi_agent.v1.ClientAction
+	(*ResponseEvent_StreamInit)(nil),                           // 2: warp.multi_agent.v1.ResponseEvent.StreamInit
+	(*ResponseEvent_ClientActions)(nil),                        // 3: warp.multi_agent.v1.ResponseEvent.ClientActions
+	(*ResponseEvent_StreamFinished)(nil),                       // 4: warp.multi_agent.v1.ResponseEvent.StreamFinished
+	(*ResponseEvent_StreamFinished_Other)(nil),                 // 5: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	(*ResponseEvent_StreamFinished_Done)(nil),                  // 6: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),  // 7: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),            // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil), // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),        // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	(*ResponseEvent_StreamFinished_InternalError)(nil),         // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	(*ClientAction_CreateTask)(nil),                            // 12: warp.multi_agent.v1.ClientAction.CreateTask
+	(*ClientAction_UpdateTaskStatus)(nil),                      // 13: warp.multi_agent.v1.ClientAction.UpdateTaskStatus
+	(*ClientAction_UpdateTaskDescription)(nil),                 // 14: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                     // 15: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                     // 16: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                // 17: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                     // 18: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*Suggestions)(nil),                                        // 19: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                               // 20: warp.multi_agent.v1.Task
+	(*TaskStatus)(nil),                                         // 21: warp.multi_agent.v1.TaskStatus
+	(*Message)(nil),                                            // 22: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                              // 23: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
 	3,  // 1: warp.multi_agent.v1.ResponseEvent.client_actions:type_name -> warp.multi_agent.v1.ResponseEvent.ClientActions
 	4,  // 2: warp.multi_agent.v1.ResponseEvent.finished:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished
-	8,  // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
-	9,  // 4: warp.multi_agent.v1.ClientAction.update_task_status:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	11, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	12, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	13, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	15, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	14, // 9: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	10, // 10: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	12, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
+	13, // 4: warp.multi_agent.v1.ClientAction.update_task_status:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskStatus
+	15, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	16, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	17, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	19, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	18, // 9: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	14, // 10: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
 	1,  // 11: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
 	5,  // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
 	6,  // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
 	7,  // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	16, // 15: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	17, // 16: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
-	18, // 17: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	18, // 18: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	19, // 19: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	18, // 20: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	19, // 21: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	8,  // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	9,  // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	10, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	11, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	20, // 19: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	21, // 20: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
+	22, // 21: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	22, // 22: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	23, // 23: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	22, // 24: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	23, // 25: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -2108,6 +2511,10 @@ func file_response_proto_init() {
 		(*responseEvent_StreamFinished_Other_)(nil),
 		(*responseEvent_StreamFinished_Done_)(nil),
 		(*responseEvent_StreamFinished_MaxTokenLimit)(nil),
+		(*responseEvent_StreamFinished_QuotaLimit_)(nil),
+		(*responseEvent_StreamFinished_ContextWindowExceeded_)(nil),
+		(*responseEvent_StreamFinished_LlmUnavailable)(nil),
+		(*responseEvent_StreamFinished_InternalError_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2115,7 +2522,7 @@ func file_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_response_proto_rawDesc), len(file_response_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

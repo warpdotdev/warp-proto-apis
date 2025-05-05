@@ -53,11 +53,19 @@ message ResponseEvent {
       Other other = 1;
       Done done = 2;
       ReachedMaxTokenLimit max_token_limit = 3;
+      QuotaLimit quota_limit = 4;
+      ContextWindowExceeded context_window_exceeded = 5;
+      LLMUnavailable llm_unavailable = 6;
+      InternalError internal_error = 7;
     }
 
     message Other {}
     message Done {}
     message ReachedMaxTokenLimit {}
+    message QuotaLimit {}
+    message ContextWindowExceeded {}
+    message LLMUnavailable {}
+    message InternalError { string message = 1; }
   }
 }
 
