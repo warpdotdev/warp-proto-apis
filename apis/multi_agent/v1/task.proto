@@ -345,6 +345,7 @@ message InputContext {
   repeated ExecutedShellCommand executed_shell_commands = 5;
   repeated SelectedText selected_text = 6;
   repeated Image images = 7;
+  repeated Codebase codebases = 8;
 
   // Information about shell commands that the user has executed.
   message ExecutedShellCommand {
@@ -385,5 +386,10 @@ message InputContext {
 
     // MIME type of the image content (e.g., "image/jpeg", "image/png").
     string mime_type = 2;
+  }
+
+  message Codebase {
+    string name = 1;
+    string path = 2;
   }
 }
