@@ -4687,13 +4687,14 @@ func (b0 Message_ToolCall_ReadFiles_builder) Build() *Message_ToolCall_ReadFiles
 
 // A tool call to search a codebase.
 type Message_ToolCall_SearchCodebase struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_PathFilters []string               `protobuf:"bytes,2,rep,name=path_filters,json=pathFilters"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query        *string                `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_PathFilters  []string               `protobuf:"bytes,2,rep,name=path_filters,json=pathFilters"`
+	xxx_hidden_CodebasePath *string                `protobuf:"bytes,3,opt,name=codebase_path,json=codebasePath"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_SearchCodebase) Reset() {
@@ -4738,13 +4739,28 @@ func (x *Message_ToolCall_SearchCodebase) GetPathFilters() []string {
 	return nil
 }
 
+func (x *Message_ToolCall_SearchCodebase) GetCodebasePath() string {
+	if x != nil {
+		if x.xxx_hidden_CodebasePath != nil {
+			return *x.xxx_hidden_CodebasePath
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_SearchCodebase) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Message_ToolCall_SearchCodebase) SetPathFilters(v []string) {
 	x.xxx_hidden_PathFilters = v
+}
+
+func (x *Message_ToolCall_SearchCodebase) SetCodebasePath(v string) {
+	x.xxx_hidden_CodebasePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Message_ToolCall_SearchCodebase) HasQuery() bool {
@@ -4754,16 +4770,29 @@ func (x *Message_ToolCall_SearchCodebase) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Message_ToolCall_SearchCodebase) HasCodebasePath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Message_ToolCall_SearchCodebase) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
 }
 
+func (x *Message_ToolCall_SearchCodebase) ClearCodebasePath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CodebasePath = nil
+}
+
 type Message_ToolCall_SearchCodebase_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query       *string
-	PathFilters []string
+	Query        *string
+	PathFilters  []string
+	CodebasePath *string
 }
 
 func (b0 Message_ToolCall_SearchCodebase_builder) Build() *Message_ToolCall_SearchCodebase {
@@ -4771,10 +4800,14 @@ func (b0 Message_ToolCall_SearchCodebase_builder) Build() *Message_ToolCall_Sear
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Query = b.Query
 	}
 	x.xxx_hidden_PathFilters = b.PathFilters
+	if b.CodebasePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_CodebasePath = b.CodebasePath
+	}
 	return m0
 }
 
@@ -7401,7 +7434,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xa7\x1b\n" +
+	"\x06status\"\xcc\x1b\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12G\n" +
@@ -7415,7 +7448,7 @@ const file_task_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a!\n" +
 	"\vAgentOutput\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1a\xb8\r\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x1a\xdd\r\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -7443,10 +7476,11 @@ const file_task_proto_rawDesc = "" +
 	"\x04File\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12J\n" +
 	"\vline_ranges\x18\x02 \x03(\v2).warp.multi_agent.v1.FileContentLineRangeR\n" +
-	"lineRanges\x1aI\n" +
+	"lineRanges\x1an\n" +
 	"\x0eSearchCodebase\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12!\n" +
-	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x1a\xda\x01\n" +
+	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x12#\n" +
+	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\xda\x01\n" +
 	"\x0eApplyFileDiffs\x12\x18\n" +
 	"\asummary\x18\x01 \x01(\tR\asummary\x12S\n" +
 	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x1aY\n" +

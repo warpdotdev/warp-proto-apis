@@ -134,6 +134,7 @@ message Message {
     message SearchCodebase {
       string query = 1;
       repeated string path_filters = 2;
+      string codebase_path = 3;
     }
 
     // A tool call to apply diffs to files.
@@ -256,9 +257,7 @@ message ApplyFileDiffsResult {
 
   message Success { repeated FileContent updated_files = 1; }
 
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 // Result of a `SuggestCreatePlan` tool call.
