@@ -4790,8 +4790,10 @@ func (x *Message_ToolCall_SearchCodebase) ClearCodebasePath() {
 type Message_ToolCall_SearchCodebase_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query        *string
-	PathFilters  []string
+	Query       *string
+	PathFilters []string
+	// Optional. The absolute path to the codebase that we want to search. If
+	// not provided, we will use the codebase in the user's current directory.
 	CodebasePath *string
 }
 
@@ -7291,6 +7293,7 @@ func (b0 InputContext_Image_builder) Build() *InputContext_Image {
 	return m0
 }
 
+// Information about a codebase on the user's machine that we can search.
 type InputContext_Codebase struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
@@ -7383,7 +7386,9 @@ func (x *InputContext_Codebase) ClearPath() {
 type InputContext_Codebase_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// The name of the codebase.
 	Name *string
+	// The absolute path to the codebase on the user's machine.
 	Path *string
 }
 

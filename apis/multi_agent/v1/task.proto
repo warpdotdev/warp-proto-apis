@@ -134,6 +134,8 @@ message Message {
     message SearchCodebase {
       string query = 1;
       repeated string path_filters = 2;
+      // Optional. The absolute path to the codebase that we want to search. If
+      // not provided, we will use the codebase in the user's current directory.
       string codebase_path = 3;
     }
 
@@ -387,8 +389,11 @@ message InputContext {
     string mime_type = 2;
   }
 
+  // Information about a codebase on the user's machine that we can search.
   message Codebase {
+    // The name of the codebase.
     string name = 1;
+    // The absolute path to the codebase on the user's machine.
     string path = 2;
   }
 }
