@@ -116,6 +116,9 @@ message Request {
 
       // The LLM of preference for reasoning tasks.
       string planning = 2;
+
+      // The LLM of preference for coding tasks.
+      string coding = 3;
     }
   }
 }
