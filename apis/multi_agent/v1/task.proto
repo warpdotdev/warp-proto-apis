@@ -265,7 +265,7 @@ message ApplyFileDiffsResult {
 // Result of a `SuggestCreatePlan` tool call.
 message SuggestCreatePlanResult { bool accepted = 1; }
 
-// A range of lines [start, end] that situate content in a file, 0-indexed.
+// A range of lines [start, end] that situate content in a file, 1-indexed.
 message FileContentLineRange {
   uint32 start = 1;
   uint32 end = 2;
