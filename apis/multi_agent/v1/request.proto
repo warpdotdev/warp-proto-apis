@@ -4,12 +4,11 @@ edition = "2023";
 package warp.multi_agent.v1;
 
 import "google/protobuf/go_features.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
 import "options.proto";
-import "task.proto";
 import "suggestions.proto";
+import "task.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -40,70 +39,16 @@ message Request {
   }
 
   message Input {
-    Context context = 1;
+    InputContext context = 1;
 
     // The type of input from the user.
     oneof type {
       UserQuery user_query = 2;
       ToolCallResult tool_call_result = 3;
+      StaticQuery static_query = 4;
     }
 
-    message Context {
-      Directory directory = 1;
-      OperatingSystem operating_system = 2;
-      Shell shell = 3;
-      google.protobuf.Timestamp current_time = 4;
-      repeated ExecutedShellCommand executed_shell_commands = 5;
-      repeated SelectedText selected_text = 6;
-      repeated Image images = 7;
-
-      // Information about shell commands that the user has executed.
-      message ExecutedShellCommand {
-        string command = 1 [ (sensitive) = true ];
-        string output = 2 [ (sensitive) = true ];
-        int32 exit_code = 3;
-      }
-
-      message SelectedText { string text = 1 [ (sensitive) = true ]; }
-
-      // Information about the user's directories.
-      message Directory {
-        string pwd = 1 [ (sensitive) = true ];
-        string home = 2 [ (sensitive) = true ];
-        bool pwd_file_symbols_indexed = 3;
-      }
-
-      // Information about the user's terminal shell.
-      message Shell {
-        string name = 1;
-        string version = 2;
-      }
-
-      // Information about the user's operating system.
-      message OperatingSystem {
-        // The OS "category", e.g. "MacOS" or "Linux".
-        string platform = 1;
-
-        // The OS distribution, which is typically only populated for Linux,
-        // e.g. Fedora or Ubuntu.
-        string distribution = 2;
-      }
-
-      // Any attached images.
-      message Image {
-        // The base64-encoded image data.
-        string data = 1;
-
-        // MIME type of the image content (e.g., "image/jpeg", "image/png").
-        string mime_type = 2;
-      }
-    }
-
-    message UserQuery { 
-      string query = 1 [ (sensitive) = true ];
-      // Optional canned response type.
-      CannedResponseType canned_response_type = 2;
-    }
+    message UserQuery { string query = 1 [ (sensitive) = true ]; }
 
     // Tool call result
     message ToolCallResult {
@@ -118,28 +63,33 @@ message Request {
         SuggestCreatePlanResult suggest_create_plan = 7;
         GrepResult grep = 8;
         FileGlobResult file_glob = 9;
+        RefineResult refine = 10;
       }
+
+      // Generic tool call result for representing a user-requested refinement
+      // of the tool call parameters.
+      message RefineResult { UserQuery user_query = 1; }
     }
 
-    // Canned responses correspond to hardcoded predefined responses from
-    // Agent Mode e.g. the zero-state chip for "Install" has a predefined 
+    // Static queries correspond to hardcoded predefined responses from
+    // Agent Mode e.g. the zero-state chip for "Install" has a predefined
     // initial response asking the user for more information, before passing it
     // off to "real AI".
-    message CannedResponseType {
+    message StaticQuery {
       oneof type {
-        Install install = 1;
-        Code code = 2;
-        Deploy deploy = 3;
-        SomethingElse something_else = 4;
-        CustomOnboardingRequest custom_onboarding_request = 5;
+        InstallStaticQuery install = 1;
+        CodeStaticQuery code = 2;
+        DeployStaticQuery deploy = 3;
+        SomethingElseStaticQuery something_else = 4;
+        CustomOnboardingRequestStaticQuery custom_onboarding_request = 5;
       }
-
-      message Install {}
-      message Code {}
-      message Deploy {}
-      message SomethingElse {}
-      message CustomOnboardingRequest {}
     }
+
+    message InstallStaticQuery {}
+    message CodeStaticQuery {}
+    message DeployStaticQuery {}
+    message SomethingElseStaticQuery {}
+    message CustomOnboardingRequestStaticQuery {}
   }
 
   message Metadata {

@@ -5,6 +5,7 @@ package warp.multi_agent.v1;
 import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
 
 import "options.proto";
 
@@ -27,6 +28,10 @@ message Task {
 
   // Messages associated with this task
   repeated Message messages = 5;
+
+  // The task summary. Differs from the task description in that it summarizes
+  // what has been done to accomplish the task.
+  string summary = 6;
 
   // Dependencies for task hierarchy and execution order.
   message Dependencies {
@@ -64,6 +69,9 @@ message Message {
   // Globally-unique identifier for the message.
   string id = 1;
 
+  // An opaque payload that the client should simply roundtrip.
+  string server_message_data = 7;
+
   // The type of message with its specific content
   oneof message {
     UserQuery user_query = 2;
@@ -74,33 +82,12 @@ message Message {
   }
 
   // User query message type
-  message UserQuery { 
+  message UserQuery {
     string query = 1 [ (sensitive) = true ];
-    // Optional canned response type.
-    CannedResponseType canned_response_type = 2;
 
-    // Canned responses correspond to hardcoded predefined responses from
-    // Agent Mode e.g. the zero-state chip for "Install" has a predefined 
-    // initial response asking the user for more information, before passing it
-    // off to "real AI".
-    message CannedResponseType {
-      oneof type {
-        Install install = 1;
-        Code code = 2;
-        Deploy deploy = 3;
-        SomethingElse something_else = 4;
-        CustomOnboardingRequest custom_onboarding_request = 5;
-      }
-
-      message Install {}
-      message Code {}
-      message Deploy {}
-      message SomethingElse {}
-      message CustomOnboardingRequest {}
-    }
+    // Context that the client supplied as part of the user query input.
+    InputContext context = 2;
   }
-
-
 
   // Agent output message type
   message AgentOutput { string text = 1; }
@@ -130,6 +117,7 @@ message Message {
     message RunShellCommand {
       string command = 1;
       bool is_read_only = 2;
+      bool uses_pager = 3;
     }
 
     // A tool call to read files.
@@ -146,6 +134,9 @@ message Message {
     message SearchCodebase {
       string query = 1;
       repeated string path_filters = 2;
+      // Optional. The absolute path to the codebase that we want to search. If
+      // not provided, we will use the codebase in the user's current directory.
+      string codebase_path = 3;
     }
 
     // A tool call to apply diffs to files.
@@ -194,6 +185,11 @@ message Message {
   message ToolCallResult {
     string tool_call_id = 1;
 
+    // Context that the client supplied as part of the tool call result input.
+    //
+    // Not included for `ServerResult`s.
+    InputContext context = 11;
+
     oneof result {
       RunShellCommandResult run_shell_command = 2;
       SearchCodebaseResult search_codebase = 3;
@@ -204,11 +200,17 @@ message Message {
       SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
       FileGlobResult file_glob = 10;
+      RefineResult refine = 13;
+      google.protobuf.Empty cancel = 14;
     }
 
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
     message ServerResult { string serialized_result = 1; }
+
+    // Generic tool call result for representing a user-requested refinement of
+    // the tool call parameters.
+    message RefineResult { UserQuery user_query = 1; }
   }
 
   // An event that is preserved in message history
@@ -225,21 +227,48 @@ message RunShellCommandResult {
 }
 
 // Result of a `ReadFiles` tool call.
-message ReadFilesResult { repeated FileContent files = 1; }
+message ReadFilesResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { repeated FileContent files = 1; }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
 
 // Result of a `SearchCodebase` tool call.
-message SearchCodebaseResult { repeated FileContent files = 1; }
+message SearchCodebaseResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { repeated FileContent files = 1; }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
 
 // Result of a `ApplyFileDiffs` tool call.
-message ApplyFileDiffsResult { repeated FileContent updated_files = 1; }
+message ApplyFileDiffsResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { repeated FileContent updated_files = 1; }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
 
 // Result of a `SuggestCreatePlan` tool call.
 message SuggestCreatePlanResult { bool accepted = 1; }
 
 // A range of lines [start, end] that situate content in a file, 0-indexed.
 message FileContentLineRange {
-  int32 start = 1;
-  int32 end = 2;
+  uint32 start = 1;
+  uint32 end = 2;
 }
 
 // A representation of raw content within a file.
@@ -267,26 +296,104 @@ message SuggestPlanResult {
 
 // Result of a `Grep` tool call.
 message GrepResult {
-  // List of files containing lines that matched the grep query.
-  repeated GrepFileMatch matched_files = 1;
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
 
-  message GrepFileMatch {
-    // The path to the file that matched the grep query.
-    string file_path = 1 [ (sensitive) = true ];
-    // List of line matches within this file.
-    repeated GrepLineMatch matched_lines = 2;
+  message Success {
+    // List of files containing lines that matched the grep query.
+    repeated GrepFileMatch matched_files = 1;
 
-    message GrepLineMatch {
-      // The matched line within the file. This currently only includes the line
-      // number, but could be extended to include the line content in the
-      // future.
-      int32 line_number = 1;
+    message GrepFileMatch {
+      // The path to the file that matched the grep query.
+      string file_path = 1 [ (sensitive) = true ];
+      // List of line matches within this file.
+      repeated GrepLineMatch matched_lines = 2;
+
+      message GrepLineMatch {
+        // The matched line within the file. This currently only includes the
+        // line number, but could be extended to include the line content in the
+        // future.
+        uint32 line_number = 1;
+      }
     }
   }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 // Result of a `FileGlob` tool call.
 message FileGlobResult {
-  // String containing list of file paths matching the glob patterns.
-  string matched_files = 1 [ (sensitive) = true ];
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // String containing list of file paths matching the glob patterns.
+    string matched_files = 1 [ (sensitive) = true ];
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+message InputContext {
+  Directory directory = 1;
+  OperatingSystem operating_system = 2;
+  Shell shell = 3;
+  google.protobuf.Timestamp current_time = 4;
+  repeated ExecutedShellCommand executed_shell_commands = 5;
+  repeated SelectedText selected_text = 6;
+  repeated Image images = 7;
+  repeated Codebase codebases = 8;
+
+  // Information about shell commands that the user has executed.
+  message ExecutedShellCommand {
+    string command = 1 [ (sensitive) = true ];
+    string output = 2 [ (sensitive) = true ];
+    int32 exit_code = 3;
+  }
+
+  message SelectedText { string text = 1 [ (sensitive) = true ]; }
+
+  // Information about the user's directories.
+  message Directory {
+    string pwd = 1 [ (sensitive) = true ];
+    string home = 2 [ (sensitive) = true ];
+    bool pwd_file_symbols_indexed = 3;
+  }
+
+  // Information about the user's terminal shell.
+  message Shell {
+    string name = 1;
+    string version = 2;
+  }
+
+  // Information about the user's operating system.
+  message OperatingSystem {
+    // The OS "category", e.g. "MacOS" or "Linux".
+    string platform = 1;
+
+    // The OS distribution, which is typically only populated for Linux,
+    // e.g. Fedora or Ubuntu.
+    string distribution = 2;
+  }
+
+  // Any attached images.
+  message Image {
+    // The base64-encoded image data.
+    string data = 1;
+
+    // MIME type of the image content (e.g., "image/jpeg", "image/png").
+    string mime_type = 2;
+  }
+
+  // Information about a codebase on the user's machine that we can search.
+  message Codebase {
+    // The name of the codebase.
+    string name = 1;
+    // The absolute path to the codebase on the user's machine.
+    string path = 2;
+  }
 }

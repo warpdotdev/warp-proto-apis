@@ -13,7 +13,6 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -297,7 +296,7 @@ func (b0 Request_TaskContext_builder) Build() *Request_TaskContext {
 
 type Request_Input struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Context *Request_Input_Context `protobuf:"bytes,1,opt,name=context"`
+	xxx_hidden_Context *InputContext          `protobuf:"bytes,1,opt,name=context"`
 	xxx_hidden_Type    isRequest_Input_Type   `protobuf_oneof:"type"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
@@ -328,7 +327,7 @@ func (x *Request_Input) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input) GetContext() *Request_Input_Context {
+func (x *Request_Input) GetContext() *InputContext {
 	if x != nil {
 		return x.xxx_hidden_Context
 	}
@@ -353,7 +352,16 @@ func (x *Request_Input) GetToolCallResult() *Request_Input_ToolCallResult {
 	return nil
 }
 
-func (x *Request_Input) SetContext(v *Request_Input_Context) {
+func (x *Request_Input) GetStaticQuery() *Request_Input_StaticQuery {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_); ok {
+			return x.StaticQuery
+		}
+	}
+	return nil
+}
+
+func (x *Request_Input) SetContext(v *InputContext) {
 	x.xxx_hidden_Context = v
 }
 
@@ -371,6 +379,14 @@ func (x *Request_Input) SetToolCallResult(v *Request_Input_ToolCallResult) {
 		return
 	}
 	x.xxx_hidden_Type = &request_Input_ToolCallResult_{v}
+}
+
+func (x *Request_Input) SetStaticQuery(v *Request_Input_StaticQuery) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &request_Input_StaticQuery_{v}
 }
 
 func (x *Request_Input) HasContext() bool {
@@ -403,6 +419,14 @@ func (x *Request_Input) HasToolCallResult() bool {
 	return ok
 }
 
+func (x *Request_Input) HasStaticQuery() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_)
+	return ok
+}
+
 func (x *Request_Input) ClearContext() {
 	x.xxx_hidden_Context = nil
 }
@@ -423,9 +447,16 @@ func (x *Request_Input) ClearToolCallResult() {
 	}
 }
 
+func (x *Request_Input) ClearStaticQuery() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
 const Request_Input_Type_not_set_case case_Request_Input_Type = 0
 const Request_Input_UserQuery_case case_Request_Input_Type = 2
 const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
+const Request_Input_StaticQuery_case case_Request_Input_Type = 4
 
 func (x *Request_Input) WhichType() case_Request_Input_Type {
 	if x == nil {
@@ -436,6 +467,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_UserQuery_case
 	case *request_Input_ToolCallResult_:
 		return Request_Input_ToolCallResult_case
+	case *request_Input_StaticQuery_:
+		return Request_Input_StaticQuery_case
 	default:
 		return Request_Input_Type_not_set_case
 	}
@@ -444,12 +477,13 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 type Request_Input_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Context *Request_Input_Context
+	Context *InputContext
 	// The type of input from the user.
 
 	// Fields of oneof xxx_hidden_Type:
 	UserQuery      *Request_Input_UserQuery
 	ToolCallResult *Request_Input_ToolCallResult
+	StaticQuery    *Request_Input_StaticQuery
 	// -- end of xxx_hidden_Type
 }
 
@@ -463,6 +497,9 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	}
 	if b.ToolCallResult != nil {
 		x.xxx_hidden_Type = &request_Input_ToolCallResult_{b.ToolCallResult}
+	}
+	if b.StaticQuery != nil {
+		x.xxx_hidden_Type = &request_Input_StaticQuery_{b.StaticQuery}
 	}
 	return m0
 }
@@ -489,9 +526,15 @@ type request_Input_ToolCallResult_ struct {
 	ToolCallResult *Request_Input_ToolCallResult `protobuf:"bytes,3,opt,name=tool_call_result,json=toolCallResult,oneof"`
 }
 
+type request_Input_StaticQuery_ struct {
+	StaticQuery *Request_Input_StaticQuery `protobuf:"bytes,4,opt,name=static_query,json=staticQuery,oneof"`
+}
+
 func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
+
+func (*request_Input_StaticQuery_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
 	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
@@ -722,210 +765,18 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	return m0
 }
 
-type Request_Input_Context struct {
-	state                            protoimpl.MessageState                         `protogen:"opaque.v1"`
-	xxx_hidden_Directory             *Request_Input_Context_Directory               `protobuf:"bytes,1,opt,name=directory"`
-	xxx_hidden_OperatingSystem       *Request_Input_Context_OperatingSystem         `protobuf:"bytes,2,opt,name=operating_system,json=operatingSystem"`
-	xxx_hidden_Shell                 *Request_Input_Context_Shell                   `protobuf:"bytes,3,opt,name=shell"`
-	xxx_hidden_CurrentTime           *timestamppb.Timestamp                         `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
-	xxx_hidden_ExecutedShellCommands *[]*Request_Input_Context_ExecutedShellCommand `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
-	xxx_hidden_SelectedText          *[]*Request_Input_Context_SelectedText         `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
-	xxx_hidden_Images                *[]*Request_Input_Context_Image                `protobuf:"bytes,7,rep,name=images"`
-	unknownFields                    protoimpl.UnknownFields
-	sizeCache                        protoimpl.SizeCache
-}
-
-func (x *Request_Input_Context) Reset() {
-	*x = Request_Input_Context{}
-	mi := &file_request_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_Context) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_Context) ProtoMessage() {}
-
-func (x *Request_Input_Context) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Request_Input_Context) GetDirectory() *Request_Input_Context_Directory {
-	if x != nil {
-		return x.xxx_hidden_Directory
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) GetOperatingSystem() *Request_Input_Context_OperatingSystem {
-	if x != nil {
-		return x.xxx_hidden_OperatingSystem
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) GetShell() *Request_Input_Context_Shell {
-	if x != nil {
-		return x.xxx_hidden_Shell
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) GetCurrentTime() *timestamppb.Timestamp {
-	if x != nil {
-		return x.xxx_hidden_CurrentTime
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) GetExecutedShellCommands() []*Request_Input_Context_ExecutedShellCommand {
-	if x != nil {
-		if x.xxx_hidden_ExecutedShellCommands != nil {
-			return *x.xxx_hidden_ExecutedShellCommands
-		}
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) GetSelectedText() []*Request_Input_Context_SelectedText {
-	if x != nil {
-		if x.xxx_hidden_SelectedText != nil {
-			return *x.xxx_hidden_SelectedText
-		}
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) GetImages() []*Request_Input_Context_Image {
-	if x != nil {
-		if x.xxx_hidden_Images != nil {
-			return *x.xxx_hidden_Images
-		}
-	}
-	return nil
-}
-
-func (x *Request_Input_Context) SetDirectory(v *Request_Input_Context_Directory) {
-	x.xxx_hidden_Directory = v
-}
-
-func (x *Request_Input_Context) SetOperatingSystem(v *Request_Input_Context_OperatingSystem) {
-	x.xxx_hidden_OperatingSystem = v
-}
-
-func (x *Request_Input_Context) SetShell(v *Request_Input_Context_Shell) {
-	x.xxx_hidden_Shell = v
-}
-
-func (x *Request_Input_Context) SetCurrentTime(v *timestamppb.Timestamp) {
-	x.xxx_hidden_CurrentTime = v
-}
-
-func (x *Request_Input_Context) SetExecutedShellCommands(v []*Request_Input_Context_ExecutedShellCommand) {
-	x.xxx_hidden_ExecutedShellCommands = &v
-}
-
-func (x *Request_Input_Context) SetSelectedText(v []*Request_Input_Context_SelectedText) {
-	x.xxx_hidden_SelectedText = &v
-}
-
-func (x *Request_Input_Context) SetImages(v []*Request_Input_Context_Image) {
-	x.xxx_hidden_Images = &v
-}
-
-func (x *Request_Input_Context) HasDirectory() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Directory != nil
-}
-
-func (x *Request_Input_Context) HasOperatingSystem() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_OperatingSystem != nil
-}
-
-func (x *Request_Input_Context) HasShell() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Shell != nil
-}
-
-func (x *Request_Input_Context) HasCurrentTime() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_CurrentTime != nil
-}
-
-func (x *Request_Input_Context) ClearDirectory() {
-	x.xxx_hidden_Directory = nil
-}
-
-func (x *Request_Input_Context) ClearOperatingSystem() {
-	x.xxx_hidden_OperatingSystem = nil
-}
-
-func (x *Request_Input_Context) ClearShell() {
-	x.xxx_hidden_Shell = nil
-}
-
-func (x *Request_Input_Context) ClearCurrentTime() {
-	x.xxx_hidden_CurrentTime = nil
-}
-
-type Request_Input_Context_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Directory             *Request_Input_Context_Directory
-	OperatingSystem       *Request_Input_Context_OperatingSystem
-	Shell                 *Request_Input_Context_Shell
-	CurrentTime           *timestamppb.Timestamp
-	ExecutedShellCommands []*Request_Input_Context_ExecutedShellCommand
-	SelectedText          []*Request_Input_Context_SelectedText
-	Images                []*Request_Input_Context_Image
-}
-
-func (b0 Request_Input_Context_builder) Build() *Request_Input_Context {
-	m0 := &Request_Input_Context{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_Directory = b.Directory
-	x.xxx_hidden_OperatingSystem = b.OperatingSystem
-	x.xxx_hidden_Shell = b.Shell
-	x.xxx_hidden_CurrentTime = b.CurrentTime
-	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
-	x.xxx_hidden_SelectedText = &b.SelectedText
-	x.xxx_hidden_Images = &b.Images
-	return m0
-}
-
 type Request_Input_UserQuery struct {
-	state                         protoimpl.MessageState            `protogen:"opaque.v1"`
-	xxx_hidden_Query              *string                           `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_CannedResponseType *Request_Input_CannedResponseType `protobuf:"bytes,2,opt,name=canned_response_type,json=cannedResponseType"`
-	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
-	XXX_presence                  [1]uint32
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Request_Input_UserQuery) Reset() {
 	*x = Request_Input_UserQuery{}
-	mi := &file_request_proto_msgTypes[6]
+	mi := &file_request_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -937,7 +788,7 @@ func (x *Request_Input_UserQuery) String() string {
 func (*Request_Input_UserQuery) ProtoMessage() {}
 
 func (x *Request_Input_UserQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[6]
+	mi := &file_request_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -958,20 +809,9 @@ func (x *Request_Input_UserQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Request_Input_UserQuery) GetCannedResponseType() *Request_Input_CannedResponseType {
-	if x != nil {
-		return x.xxx_hidden_CannedResponseType
-	}
-	return nil
-}
-
 func (x *Request_Input_UserQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *Request_Input_UserQuery) SetCannedResponseType(v *Request_Input_CannedResponseType) {
-	x.xxx_hidden_CannedResponseType = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -981,28 +821,15 @@ func (x *Request_Input_UserQuery) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_UserQuery) HasCannedResponseType() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_CannedResponseType != nil
-}
-
 func (x *Request_Input_UserQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
-}
-
-func (x *Request_Input_UserQuery) ClearCannedResponseType() {
-	x.xxx_hidden_CannedResponseType = nil
 }
 
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query *string
-	// Optional canned response type.
-	CannedResponseType *Request_Input_CannedResponseType
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -1010,10 +837,9 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
 		x.xxx_hidden_Query = b.Query
 	}
-	x.xxx_hidden_CannedResponseType = b.CannedResponseType
 	return m0
 }
 
@@ -1030,7 +856,7 @@ type Request_Input_ToolCallResult struct {
 
 func (x *Request_Input_ToolCallResult) Reset() {
 	*x = Request_Input_ToolCallResult{}
-	mi := &file_request_proto_msgTypes[7]
+	mi := &file_request_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1042,7 +868,7 @@ func (x *Request_Input_ToolCallResult) String() string {
 func (*Request_Input_ToolCallResult) ProtoMessage() {}
 
 func (x *Request_Input_ToolCallResult) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[7]
+	mi := &file_request_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1135,6 +961,15 @@ func (x *Request_Input_ToolCallResult) GetFileGlob() *FileGlobResult {
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetRefine() *Request_Input_ToolCallResult_RefineResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Refine); ok {
+			return x.Refine
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -1202,6 +1037,14 @@ func (x *Request_Input_ToolCallResult) SetFileGlob(v *FileGlobResult) {
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_FileGlob{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetRefine(v *Request_Input_ToolCallResult_RefineResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_Refine{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -1282,6 +1125,14 @@ func (x *Request_Input_ToolCallResult) HasFileGlob() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasRefine() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Refine)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -1339,6 +1190,12 @@ func (x *Request_Input_ToolCallResult) ClearFileGlob() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearRefine() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_Refine); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -1348,6 +1205,7 @@ const Request_Input_ToolCallResult_SuggestPlan_case case_Request_Input_ToolCallR
 const Request_Input_ToolCallResult_SuggestCreatePlan_case case_Request_Input_ToolCallResult_Result = 7
 const Request_Input_ToolCallResult_Grep_case case_Request_Input_ToolCallResult_Result = 8
 const Request_Input_ToolCallResult_FileGlob_case case_Request_Input_ToolCallResult_Result = 9
+const Request_Input_ToolCallResult_Refine_case case_Request_Input_ToolCallResult_Result = 10
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -1370,6 +1228,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_Grep_case
 	case *request_Input_ToolCallResult_FileGlob:
 		return Request_Input_ToolCallResult_FileGlob_case
+	case *request_Input_ToolCallResult_Refine:
+		return Request_Input_ToolCallResult_Refine_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -1388,6 +1248,7 @@ type Request_Input_ToolCallResult_builder struct {
 	SuggestCreatePlan *SuggestCreatePlanResult
 	Grep              *GrepResult
 	FileGlob          *FileGlobResult
+	Refine            *Request_Input_ToolCallResult_RefineResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -1423,13 +1284,16 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	if b.FileGlob != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_FileGlob{b.FileGlob}
 	}
+	if b.Refine != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_Refine{b.Refine}
+	}
 	return m0
 }
 
 type case_Request_Input_ToolCallResult_Result protoreflect.FieldNumber
 
 func (x case_Request_Input_ToolCallResult_Result) String() string {
-	md := file_request_proto_msgTypes[7].Descriptor()
+	md := file_request_proto_msgTypes[6].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -1472,6 +1336,10 @@ type request_Input_ToolCallResult_FileGlob struct {
 	FileGlob *FileGlobResult `protobuf:"bytes,9,opt,name=file_glob,json=fileGlob,oneof"`
 }
 
+type request_Input_ToolCallResult_Refine struct {
+	Refine *Request_Input_ToolCallResult_RefineResult `protobuf:"bytes,10,opt,name=refine,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -1488,32 +1356,34 @@ func (*request_Input_ToolCallResult_Grep) isRequest_Input_ToolCallResult_Result(
 
 func (*request_Input_ToolCallResult_FileGlob) isRequest_Input_ToolCallResult_Result() {}
 
-// Canned responses correspond to hardcoded predefined responses from
+func (*request_Input_ToolCallResult_Refine) isRequest_Input_ToolCallResult_Result() {}
+
+// Static queries correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
 // initial response asking the user for more information, before passing it
 // off to "real AI".
-type Request_Input_CannedResponseType struct {
-	state           protoimpl.MessageState                  `protogen:"opaque.v1"`
-	xxx_hidden_Type isRequest_Input_CannedResponseType_Type `protobuf_oneof:"type"`
+type Request_Input_StaticQuery struct {
+	state           protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_Type isRequest_Input_StaticQuery_Type `protobuf_oneof:"type"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *Request_Input_CannedResponseType) Reset() {
-	*x = Request_Input_CannedResponseType{}
-	mi := &file_request_proto_msgTypes[8]
+func (x *Request_Input_StaticQuery) Reset() {
+	*x = Request_Input_StaticQuery{}
+	mi := &file_request_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_CannedResponseType) String() string {
+func (x *Request_Input_StaticQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_CannedResponseType) ProtoMessage() {}
+func (*Request_Input_StaticQuery) ProtoMessage() {}
 
-func (x *Request_Input_CannedResponseType) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[8]
+func (x *Request_Input_StaticQuery) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1524,304 +1394,340 @@ func (x *Request_Input_CannedResponseType) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_CannedResponseType) GetInstall() *Request_Input_CannedResponseType_Install {
+func (x *Request_Input_StaticQuery) GetInstall() *Request_Input_InstallStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Install_); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Install); ok {
 			return x.Install
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_CannedResponseType) GetCode() *Request_Input_CannedResponseType_Code {
+func (x *Request_Input_StaticQuery) GetCode() *Request_Input_CodeStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Code_); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Code); ok {
 			return x.Code
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_CannedResponseType) GetDeploy() *Request_Input_CannedResponseType_Deploy {
+func (x *Request_Input_StaticQuery) GetDeploy() *Request_Input_DeployStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Deploy_); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Deploy); ok {
 			return x.Deploy
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_CannedResponseType) GetSomethingElse() *Request_Input_CannedResponseType_SomethingElse {
+func (x *Request_Input_StaticQuery) GetSomethingElse() *Request_Input_SomethingElseStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_SomethingElse_); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_SomethingElse); ok {
 			return x.SomethingElse
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_CannedResponseType) GetCustomOnboardingRequest() *Request_Input_CannedResponseType_CustomOnboardingRequest {
+func (x *Request_Input_StaticQuery) GetCustomOnboardingRequest() *Request_Input_CustomOnboardingRequestStaticQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_CustomOnboardingRequest_); ok {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_CustomOnboardingRequest); ok {
 			return x.CustomOnboardingRequest
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_CannedResponseType) SetInstall(v *Request_Input_CannedResponseType_Install) {
+func (x *Request_Input_StaticQuery) SetInstall(v *Request_Input_InstallStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_CannedResponseType_Install_{v}
+	x.xxx_hidden_Type = &request_Input_StaticQuery_Install{v}
 }
 
-func (x *Request_Input_CannedResponseType) SetCode(v *Request_Input_CannedResponseType_Code) {
+func (x *Request_Input_StaticQuery) SetCode(v *Request_Input_CodeStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_CannedResponseType_Code_{v}
+	x.xxx_hidden_Type = &request_Input_StaticQuery_Code{v}
 }
 
-func (x *Request_Input_CannedResponseType) SetDeploy(v *Request_Input_CannedResponseType_Deploy) {
+func (x *Request_Input_StaticQuery) SetDeploy(v *Request_Input_DeployStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_CannedResponseType_Deploy_{v}
+	x.xxx_hidden_Type = &request_Input_StaticQuery_Deploy{v}
 }
 
-func (x *Request_Input_CannedResponseType) SetSomethingElse(v *Request_Input_CannedResponseType_SomethingElse) {
+func (x *Request_Input_StaticQuery) SetSomethingElse(v *Request_Input_SomethingElseStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_CannedResponseType_SomethingElse_{v}
+	x.xxx_hidden_Type = &request_Input_StaticQuery_SomethingElse{v}
 }
 
-func (x *Request_Input_CannedResponseType) SetCustomOnboardingRequest(v *Request_Input_CannedResponseType_CustomOnboardingRequest) {
+func (x *Request_Input_StaticQuery) SetCustomOnboardingRequest(v *Request_Input_CustomOnboardingRequestStaticQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_CannedResponseType_CustomOnboardingRequest_{v}
+	x.xxx_hidden_Type = &request_Input_StaticQuery_CustomOnboardingRequest{v}
 }
 
-func (x *Request_Input_CannedResponseType) HasType() bool {
+func (x *Request_Input_StaticQuery) HasType() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Type != nil
 }
 
-func (x *Request_Input_CannedResponseType) HasInstall() bool {
+func (x *Request_Input_StaticQuery) HasInstall() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Install_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Install)
 	return ok
 }
 
-func (x *Request_Input_CannedResponseType) HasCode() bool {
+func (x *Request_Input_StaticQuery) HasCode() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Code_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Code)
 	return ok
 }
 
-func (x *Request_Input_CannedResponseType) HasDeploy() bool {
+func (x *Request_Input_StaticQuery) HasDeploy() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Deploy_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Deploy)
 	return ok
 }
 
-func (x *Request_Input_CannedResponseType) HasSomethingElse() bool {
+func (x *Request_Input_StaticQuery) HasSomethingElse() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_SomethingElse_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_SomethingElse)
 	return ok
 }
 
-func (x *Request_Input_CannedResponseType) HasCustomOnboardingRequest() bool {
+func (x *Request_Input_StaticQuery) HasCustomOnboardingRequest() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_CustomOnboardingRequest_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_CustomOnboardingRequest)
 	return ok
 }
 
-func (x *Request_Input_CannedResponseType) ClearType() {
+func (x *Request_Input_StaticQuery) ClearType() {
 	x.xxx_hidden_Type = nil
 }
 
-func (x *Request_Input_CannedResponseType) ClearInstall() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Install_); ok {
+func (x *Request_Input_StaticQuery) ClearInstall() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Install); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_CannedResponseType) ClearCode() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Code_); ok {
+func (x *Request_Input_StaticQuery) ClearCode() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Code); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_CannedResponseType) ClearDeploy() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_Deploy_); ok {
+func (x *Request_Input_StaticQuery) ClearDeploy() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_Deploy); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_CannedResponseType) ClearSomethingElse() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_SomethingElse_); ok {
+func (x *Request_Input_StaticQuery) ClearSomethingElse() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_SomethingElse); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-func (x *Request_Input_CannedResponseType) ClearCustomOnboardingRequest() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_CannedResponseType_CustomOnboardingRequest_); ok {
+func (x *Request_Input_StaticQuery) ClearCustomOnboardingRequest() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StaticQuery_CustomOnboardingRequest); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
 
-const Request_Input_CannedResponseType_Type_not_set_case case_Request_Input_CannedResponseType_Type = 0
-const Request_Input_CannedResponseType_Install_case case_Request_Input_CannedResponseType_Type = 1
-const Request_Input_CannedResponseType_Code_case case_Request_Input_CannedResponseType_Type = 2
-const Request_Input_CannedResponseType_Deploy_case case_Request_Input_CannedResponseType_Type = 3
-const Request_Input_CannedResponseType_SomethingElse_case case_Request_Input_CannedResponseType_Type = 4
-const Request_Input_CannedResponseType_CustomOnboardingRequest_case case_Request_Input_CannedResponseType_Type = 5
+const Request_Input_StaticQuery_Type_not_set_case case_Request_Input_StaticQuery_Type = 0
+const Request_Input_StaticQuery_Install_case case_Request_Input_StaticQuery_Type = 1
+const Request_Input_StaticQuery_Code_case case_Request_Input_StaticQuery_Type = 2
+const Request_Input_StaticQuery_Deploy_case case_Request_Input_StaticQuery_Type = 3
+const Request_Input_StaticQuery_SomethingElse_case case_Request_Input_StaticQuery_Type = 4
+const Request_Input_StaticQuery_CustomOnboardingRequest_case case_Request_Input_StaticQuery_Type = 5
 
-func (x *Request_Input_CannedResponseType) WhichType() case_Request_Input_CannedResponseType_Type {
+func (x *Request_Input_StaticQuery) WhichType() case_Request_Input_StaticQuery_Type {
 	if x == nil {
-		return Request_Input_CannedResponseType_Type_not_set_case
+		return Request_Input_StaticQuery_Type_not_set_case
 	}
 	switch x.xxx_hidden_Type.(type) {
-	case *request_Input_CannedResponseType_Install_:
-		return Request_Input_CannedResponseType_Install_case
-	case *request_Input_CannedResponseType_Code_:
-		return Request_Input_CannedResponseType_Code_case
-	case *request_Input_CannedResponseType_Deploy_:
-		return Request_Input_CannedResponseType_Deploy_case
-	case *request_Input_CannedResponseType_SomethingElse_:
-		return Request_Input_CannedResponseType_SomethingElse_case
-	case *request_Input_CannedResponseType_CustomOnboardingRequest_:
-		return Request_Input_CannedResponseType_CustomOnboardingRequest_case
+	case *request_Input_StaticQuery_Install:
+		return Request_Input_StaticQuery_Install_case
+	case *request_Input_StaticQuery_Code:
+		return Request_Input_StaticQuery_Code_case
+	case *request_Input_StaticQuery_Deploy:
+		return Request_Input_StaticQuery_Deploy_case
+	case *request_Input_StaticQuery_SomethingElse:
+		return Request_Input_StaticQuery_SomethingElse_case
+	case *request_Input_StaticQuery_CustomOnboardingRequest:
+		return Request_Input_StaticQuery_CustomOnboardingRequest_case
 	default:
-		return Request_Input_CannedResponseType_Type_not_set_case
+		return Request_Input_StaticQuery_Type_not_set_case
 	}
 }
 
-type Request_Input_CannedResponseType_builder struct {
+type Request_Input_StaticQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Type:
-	Install                 *Request_Input_CannedResponseType_Install
-	Code                    *Request_Input_CannedResponseType_Code
-	Deploy                  *Request_Input_CannedResponseType_Deploy
-	SomethingElse           *Request_Input_CannedResponseType_SomethingElse
-	CustomOnboardingRequest *Request_Input_CannedResponseType_CustomOnboardingRequest
+	Install                 *Request_Input_InstallStaticQuery
+	Code                    *Request_Input_CodeStaticQuery
+	Deploy                  *Request_Input_DeployStaticQuery
+	SomethingElse           *Request_Input_SomethingElseStaticQuery
+	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestStaticQuery
 	// -- end of xxx_hidden_Type
 }
 
-func (b0 Request_Input_CannedResponseType_builder) Build() *Request_Input_CannedResponseType {
-	m0 := &Request_Input_CannedResponseType{}
+func (b0 Request_Input_StaticQuery_builder) Build() *Request_Input_StaticQuery {
+	m0 := &Request_Input_StaticQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Install != nil {
-		x.xxx_hidden_Type = &request_Input_CannedResponseType_Install_{b.Install}
+		x.xxx_hidden_Type = &request_Input_StaticQuery_Install{b.Install}
 	}
 	if b.Code != nil {
-		x.xxx_hidden_Type = &request_Input_CannedResponseType_Code_{b.Code}
+		x.xxx_hidden_Type = &request_Input_StaticQuery_Code{b.Code}
 	}
 	if b.Deploy != nil {
-		x.xxx_hidden_Type = &request_Input_CannedResponseType_Deploy_{b.Deploy}
+		x.xxx_hidden_Type = &request_Input_StaticQuery_Deploy{b.Deploy}
 	}
 	if b.SomethingElse != nil {
-		x.xxx_hidden_Type = &request_Input_CannedResponseType_SomethingElse_{b.SomethingElse}
+		x.xxx_hidden_Type = &request_Input_StaticQuery_SomethingElse{b.SomethingElse}
 	}
 	if b.CustomOnboardingRequest != nil {
-		x.xxx_hidden_Type = &request_Input_CannedResponseType_CustomOnboardingRequest_{b.CustomOnboardingRequest}
+		x.xxx_hidden_Type = &request_Input_StaticQuery_CustomOnboardingRequest{b.CustomOnboardingRequest}
 	}
 	return m0
 }
 
-type case_Request_Input_CannedResponseType_Type protoreflect.FieldNumber
+type case_Request_Input_StaticQuery_Type protoreflect.FieldNumber
 
-func (x case_Request_Input_CannedResponseType_Type) String() string {
-	md := file_request_proto_msgTypes[8].Descriptor()
+func (x case_Request_Input_StaticQuery_Type) String() string {
+	md := file_request_proto_msgTypes[7].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_CannedResponseType_Type interface {
-	isRequest_Input_CannedResponseType_Type()
+type isRequest_Input_StaticQuery_Type interface {
+	isRequest_Input_StaticQuery_Type()
 }
 
-type request_Input_CannedResponseType_Install_ struct {
-	Install *Request_Input_CannedResponseType_Install `protobuf:"bytes,1,opt,name=install,oneof"`
+type request_Input_StaticQuery_Install struct {
+	Install *Request_Input_InstallStaticQuery `protobuf:"bytes,1,opt,name=install,oneof"`
 }
 
-type request_Input_CannedResponseType_Code_ struct {
-	Code *Request_Input_CannedResponseType_Code `protobuf:"bytes,2,opt,name=code,oneof"`
+type request_Input_StaticQuery_Code struct {
+	Code *Request_Input_CodeStaticQuery `protobuf:"bytes,2,opt,name=code,oneof"`
 }
 
-type request_Input_CannedResponseType_Deploy_ struct {
-	Deploy *Request_Input_CannedResponseType_Deploy `protobuf:"bytes,3,opt,name=deploy,oneof"`
+type request_Input_StaticQuery_Deploy struct {
+	Deploy *Request_Input_DeployStaticQuery `protobuf:"bytes,3,opt,name=deploy,oneof"`
 }
 
-type request_Input_CannedResponseType_SomethingElse_ struct {
-	SomethingElse *Request_Input_CannedResponseType_SomethingElse `protobuf:"bytes,4,opt,name=something_else,json=somethingElse,oneof"`
+type request_Input_StaticQuery_SomethingElse struct {
+	SomethingElse *Request_Input_SomethingElseStaticQuery `protobuf:"bytes,4,opt,name=something_else,json=somethingElse,oneof"`
 }
 
-type request_Input_CannedResponseType_CustomOnboardingRequest_ struct {
-	CustomOnboardingRequest *Request_Input_CannedResponseType_CustomOnboardingRequest `protobuf:"bytes,5,opt,name=custom_onboarding_request,json=customOnboardingRequest,oneof"`
+type request_Input_StaticQuery_CustomOnboardingRequest struct {
+	CustomOnboardingRequest *Request_Input_CustomOnboardingRequestStaticQuery `protobuf:"bytes,5,opt,name=custom_onboarding_request,json=customOnboardingRequest,oneof"`
 }
 
-func (*request_Input_CannedResponseType_Install_) isRequest_Input_CannedResponseType_Type() {}
+func (*request_Input_StaticQuery_Install) isRequest_Input_StaticQuery_Type() {}
 
-func (*request_Input_CannedResponseType_Code_) isRequest_Input_CannedResponseType_Type() {}
+func (*request_Input_StaticQuery_Code) isRequest_Input_StaticQuery_Type() {}
 
-func (*request_Input_CannedResponseType_Deploy_) isRequest_Input_CannedResponseType_Type() {}
+func (*request_Input_StaticQuery_Deploy) isRequest_Input_StaticQuery_Type() {}
 
-func (*request_Input_CannedResponseType_SomethingElse_) isRequest_Input_CannedResponseType_Type() {}
+func (*request_Input_StaticQuery_SomethingElse) isRequest_Input_StaticQuery_Type() {}
 
-func (*request_Input_CannedResponseType_CustomOnboardingRequest_) isRequest_Input_CannedResponseType_Type() {
+func (*request_Input_StaticQuery_CustomOnboardingRequest) isRequest_Input_StaticQuery_Type() {}
+
+type Request_Input_InstallStaticQuery struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-// Information about shell commands that the user has executed.
-type Request_Input_Context_ExecutedShellCommand struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
-	xxx_hidden_Output      *string                `protobuf:"bytes,2,opt,name=output"`
-	xxx_hidden_ExitCode    int32                  `protobuf:"varint,3,opt,name=exit_code,json=exitCode"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+func (x *Request_Input_InstallStaticQuery) Reset() {
+	*x = Request_Input_InstallStaticQuery{}
+	mi := &file_request_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_Context_ExecutedShellCommand) Reset() {
-	*x = Request_Input_Context_ExecutedShellCommand{}
+func (x *Request_Input_InstallStaticQuery) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_InstallStaticQuery) ProtoMessage() {}
+
+func (x *Request_Input_InstallStaticQuery) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Request_Input_InstallStaticQuery_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Request_Input_InstallStaticQuery_builder) Build() *Request_Input_InstallStaticQuery {
+	m0 := &Request_Input_InstallStaticQuery{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type Request_Input_CodeStaticQuery struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Request_Input_CodeStaticQuery) Reset() {
+	*x = Request_Input_CodeStaticQuery{}
 	mi := &file_request_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_Context_ExecutedShellCommand) String() string {
+func (x *Request_Input_CodeStaticQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_Context_ExecutedShellCommand) ProtoMessage() {}
+func (*Request_Input_CodeStaticQuery) ProtoMessage() {}
 
-func (x *Request_Input_Context_ExecutedShellCommand) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_CodeStaticQuery) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1833,134 +1739,38 @@ func (x *Request_Input_Context_ExecutedShellCommand) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_Context_ExecutedShellCommand) GetCommand() string {
-	if x != nil {
-		if x.xxx_hidden_Command != nil {
-			return *x.xxx_hidden_Command
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) GetOutput() string {
-	if x != nil {
-		if x.xxx_hidden_Output != nil {
-			return *x.xxx_hidden_Output
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) GetExitCode() int32 {
-	if x != nil {
-		return x.xxx_hidden_ExitCode
-	}
-	return 0
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) SetCommand(v string) {
-	x.xxx_hidden_Command = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) SetOutput(v string) {
-	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) SetExitCode(v int32) {
-	x.xxx_hidden_ExitCode = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) HasCommand() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) HasOutput() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) HasExitCode() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) ClearCommand() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Command = nil
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) ClearOutput() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Output = nil
-}
-
-func (x *Request_Input_Context_ExecutedShellCommand) ClearExitCode() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_ExitCode = 0
-}
-
-type Request_Input_Context_ExecutedShellCommand_builder struct {
+type Request_Input_CodeStaticQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Command  *string
-	Output   *string
-	ExitCode *int32
 }
 
-func (b0 Request_Input_Context_ExecutedShellCommand_builder) Build() *Request_Input_Context_ExecutedShellCommand {
-	m0 := &Request_Input_Context_ExecutedShellCommand{}
+func (b0 Request_Input_CodeStaticQuery_builder) Build() *Request_Input_CodeStaticQuery {
+	m0 := &Request_Input_CodeStaticQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Command != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
-		x.xxx_hidden_Command = b.Command
-	}
-	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Output = b.Output
-	}
-	if b.ExitCode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_ExitCode = *b.ExitCode
-	}
 	return m0
 }
 
-type Request_Input_Context_SelectedText struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Text        *string                `protobuf:"bytes,1,opt,name=text"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+type Request_Input_DeployStaticQuery struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_Context_SelectedText) Reset() {
-	*x = Request_Input_Context_SelectedText{}
+func (x *Request_Input_DeployStaticQuery) Reset() {
+	*x = Request_Input_DeployStaticQuery{}
 	mi := &file_request_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_Context_SelectedText) String() string {
+func (x *Request_Input_DeployStaticQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_Context_SelectedText) ProtoMessage() {}
+func (*Request_Input_DeployStaticQuery) ProtoMessage() {}
 
-func (x *Request_Input_Context_SelectedText) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_DeployStaticQuery) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1972,76 +1782,38 @@ func (x *Request_Input_Context_SelectedText) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_Context_SelectedText) GetText() string {
-	if x != nil {
-		if x.xxx_hidden_Text != nil {
-			return *x.xxx_hidden_Text
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_SelectedText) SetText(v string) {
-	x.xxx_hidden_Text = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
-}
-
-func (x *Request_Input_Context_SelectedText) HasText() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Request_Input_Context_SelectedText) ClearText() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Text = nil
-}
-
-type Request_Input_Context_SelectedText_builder struct {
+type Request_Input_DeployStaticQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Text *string
 }
 
-func (b0 Request_Input_Context_SelectedText_builder) Build() *Request_Input_Context_SelectedText {
-	m0 := &Request_Input_Context_SelectedText{}
+func (b0 Request_Input_DeployStaticQuery_builder) Build() *Request_Input_DeployStaticQuery {
+	m0 := &Request_Input_DeployStaticQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Text != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Text = b.Text
-	}
 	return m0
 }
 
-// Information about the user's directories.
-type Request_Input_Context_Directory struct {
-	state                            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Pwd                   *string                `protobuf:"bytes,1,opt,name=pwd"`
-	xxx_hidden_Home                  *string                `protobuf:"bytes,2,opt,name=home"`
-	xxx_hidden_PwdFileSymbolsIndexed bool                   `protobuf:"varint,3,opt,name=pwd_file_symbols_indexed,json=pwdFileSymbolsIndexed"`
-	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
-	XXX_presence                     [1]uint32
-	unknownFields                    protoimpl.UnknownFields
-	sizeCache                        protoimpl.SizeCache
+type Request_Input_SomethingElseStaticQuery struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_Context_Directory) Reset() {
-	*x = Request_Input_Context_Directory{}
+func (x *Request_Input_SomethingElseStaticQuery) Reset() {
+	*x = Request_Input_SomethingElseStaticQuery{}
 	mi := &file_request_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_Context_Directory) String() string {
+func (x *Request_Input_SomethingElseStaticQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_Context_Directory) ProtoMessage() {}
+func (*Request_Input_SomethingElseStaticQuery) ProtoMessage() {}
 
-func (x *Request_Input_Context_Directory) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_SomethingElseStaticQuery) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2053,136 +1825,38 @@ func (x *Request_Input_Context_Directory) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_Context_Directory) GetPwd() string {
-	if x != nil {
-		if x.xxx_hidden_Pwd != nil {
-			return *x.xxx_hidden_Pwd
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_Directory) GetHome() string {
-	if x != nil {
-		if x.xxx_hidden_Home != nil {
-			return *x.xxx_hidden_Home
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_Directory) GetPwdFileSymbolsIndexed() bool {
-	if x != nil {
-		return x.xxx_hidden_PwdFileSymbolsIndexed
-	}
-	return false
-}
-
-func (x *Request_Input_Context_Directory) SetPwd(v string) {
-	x.xxx_hidden_Pwd = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *Request_Input_Context_Directory) SetHome(v string) {
-	x.xxx_hidden_Home = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
-}
-
-func (x *Request_Input_Context_Directory) SetPwdFileSymbolsIndexed(v bool) {
-	x.xxx_hidden_PwdFileSymbolsIndexed = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
-}
-
-func (x *Request_Input_Context_Directory) HasPwd() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Request_Input_Context_Directory) HasHome() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *Request_Input_Context_Directory) HasPwdFileSymbolsIndexed() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *Request_Input_Context_Directory) ClearPwd() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Pwd = nil
-}
-
-func (x *Request_Input_Context_Directory) ClearHome() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Home = nil
-}
-
-func (x *Request_Input_Context_Directory) ClearPwdFileSymbolsIndexed() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_PwdFileSymbolsIndexed = false
-}
-
-type Request_Input_Context_Directory_builder struct {
+type Request_Input_SomethingElseStaticQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Pwd                   *string
-	Home                  *string
-	PwdFileSymbolsIndexed *bool
 }
 
-func (b0 Request_Input_Context_Directory_builder) Build() *Request_Input_Context_Directory {
-	m0 := &Request_Input_Context_Directory{}
+func (b0 Request_Input_SomethingElseStaticQuery_builder) Build() *Request_Input_SomethingElseStaticQuery {
+	m0 := &Request_Input_SomethingElseStaticQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Pwd != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
-		x.xxx_hidden_Pwd = b.Pwd
-	}
-	if b.Home != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Home = b.Home
-	}
-	if b.PwdFileSymbolsIndexed != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_PwdFileSymbolsIndexed = *b.PwdFileSymbolsIndexed
-	}
 	return m0
 }
 
-// Information about the user's terminal shell.
-type Request_Input_Context_Shell struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Version     *string                `protobuf:"bytes,2,opt,name=version"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+type Request_Input_CustomOnboardingRequestStaticQuery struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_Context_Shell) Reset() {
-	*x = Request_Input_Context_Shell{}
+func (x *Request_Input_CustomOnboardingRequestStaticQuery) Reset() {
+	*x = Request_Input_CustomOnboardingRequestStaticQuery{}
 	mi := &file_request_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_Context_Shell) String() string {
+func (x *Request_Input_CustomOnboardingRequestStaticQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_Context_Shell) ProtoMessage() {}
+func (*Request_Input_CustomOnboardingRequestStaticQuery) ProtoMessage() {}
 
-func (x *Request_Input_Context_Shell) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_CustomOnboardingRequestStaticQuery) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2194,107 +1868,41 @@ func (x *Request_Input_Context_Shell) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_Context_Shell) GetName() string {
-	if x != nil {
-		if x.xxx_hidden_Name != nil {
-			return *x.xxx_hidden_Name
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_Shell) GetVersion() string {
-	if x != nil {
-		if x.xxx_hidden_Version != nil {
-			return *x.xxx_hidden_Version
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_Shell) SetName(v string) {
-	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *Request_Input_Context_Shell) SetVersion(v string) {
-	x.xxx_hidden_Version = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *Request_Input_Context_Shell) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Request_Input_Context_Shell) HasVersion() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *Request_Input_Context_Shell) ClearName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Name = nil
-}
-
-func (x *Request_Input_Context_Shell) ClearVersion() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Version = nil
-}
-
-type Request_Input_Context_Shell_builder struct {
+type Request_Input_CustomOnboardingRequestStaticQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name    *string
-	Version *string
 }
 
-func (b0 Request_Input_Context_Shell_builder) Build() *Request_Input_Context_Shell {
-	m0 := &Request_Input_Context_Shell{}
+func (b0 Request_Input_CustomOnboardingRequestStaticQuery_builder) Build() *Request_Input_CustomOnboardingRequestStaticQuery {
+	m0 := &Request_Input_CustomOnboardingRequestStaticQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_Name = b.Name
-	}
-	if b.Version != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Version = b.Version
-	}
 	return m0
 }
 
-// Information about the user's operating system.
-type Request_Input_Context_OperatingSystem struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Platform     *string                `protobuf:"bytes,1,opt,name=platform"`
-	xxx_hidden_Distribution *string                `protobuf:"bytes,2,opt,name=distribution"`
-	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
-	XXX_presence            [1]uint32
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+// Generic tool call result for representing a user-requested refinement
+// of the tool call parameters.
+type Request_Input_ToolCallResult_RefineResult struct {
+	state                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_UserQuery *Request_Input_UserQuery `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
-func (x *Request_Input_Context_OperatingSystem) Reset() {
-	*x = Request_Input_Context_OperatingSystem{}
+func (x *Request_Input_ToolCallResult_RefineResult) Reset() {
+	*x = Request_Input_ToolCallResult_RefineResult{}
 	mi := &file_request_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_Context_OperatingSystem) String() string {
+func (x *Request_Input_ToolCallResult_RefineResult) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_Context_OperatingSystem) ProtoMessage() {}
+func (*Request_Input_ToolCallResult_RefineResult) ProtoMessage() {}
 
-func (x *Request_Input_Context_OperatingSystem) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_ToolCallResult_RefineResult) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2306,411 +1914,39 @@ func (x *Request_Input_Context_OperatingSystem) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_Context_OperatingSystem) GetPlatform() string {
+func (x *Request_Input_ToolCallResult_RefineResult) GetUserQuery() *Request_Input_UserQuery {
 	if x != nil {
-		if x.xxx_hidden_Platform != nil {
-			return *x.xxx_hidden_Platform
-		}
-		return ""
+		return x.xxx_hidden_UserQuery
 	}
-	return ""
+	return nil
 }
 
-func (x *Request_Input_Context_OperatingSystem) GetDistribution() string {
-	if x != nil {
-		if x.xxx_hidden_Distribution != nil {
-			return *x.xxx_hidden_Distribution
-		}
-		return ""
-	}
-	return ""
+func (x *Request_Input_ToolCallResult_RefineResult) SetUserQuery(v *Request_Input_UserQuery) {
+	x.xxx_hidden_UserQuery = v
 }
 
-func (x *Request_Input_Context_OperatingSystem) SetPlatform(v string) {
-	x.xxx_hidden_Platform = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *Request_Input_Context_OperatingSystem) SetDistribution(v string) {
-	x.xxx_hidden_Distribution = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *Request_Input_Context_OperatingSystem) HasPlatform() bool {
+func (x *Request_Input_ToolCallResult_RefineResult) HasUserQuery() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_UserQuery != nil
 }
 
-func (x *Request_Input_Context_OperatingSystem) HasDistribution() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+func (x *Request_Input_ToolCallResult_RefineResult) ClearUserQuery() {
+	x.xxx_hidden_UserQuery = nil
 }
 
-func (x *Request_Input_Context_OperatingSystem) ClearPlatform() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Platform = nil
-}
-
-func (x *Request_Input_Context_OperatingSystem) ClearDistribution() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Distribution = nil
-}
-
-type Request_Input_Context_OperatingSystem_builder struct {
+type Request_Input_ToolCallResult_RefineResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The OS "category", e.g. "MacOS" or "Linux".
-	Platform *string
-	// The OS distribution, which is typically only populated for Linux,
-	// e.g. Fedora or Ubuntu.
-	Distribution *string
+	UserQuery *Request_Input_UserQuery
 }
 
-func (b0 Request_Input_Context_OperatingSystem_builder) Build() *Request_Input_Context_OperatingSystem {
-	m0 := &Request_Input_Context_OperatingSystem{}
+func (b0 Request_Input_ToolCallResult_RefineResult_builder) Build() *Request_Input_ToolCallResult_RefineResult {
+	m0 := &Request_Input_ToolCallResult_RefineResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Platform != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_Platform = b.Platform
-	}
-	if b.Distribution != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Distribution = b.Distribution
-	}
-	return m0
-}
-
-// Any attached images.
-type Request_Input_Context_Image struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Data        *string                `protobuf:"bytes,1,opt,name=data"`
-	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *Request_Input_Context_Image) Reset() {
-	*x = Request_Input_Context_Image{}
-	mi := &file_request_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_Context_Image) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_Context_Image) ProtoMessage() {}
-
-func (x *Request_Input_Context_Image) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Request_Input_Context_Image) GetData() string {
-	if x != nil {
-		if x.xxx_hidden_Data != nil {
-			return *x.xxx_hidden_Data
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_Image) GetMimeType() string {
-	if x != nil {
-		if x.xxx_hidden_MimeType != nil {
-			return *x.xxx_hidden_MimeType
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_Context_Image) SetData(v string) {
-	x.xxx_hidden_Data = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *Request_Input_Context_Image) SetMimeType(v string) {
-	x.xxx_hidden_MimeType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *Request_Input_Context_Image) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Request_Input_Context_Image) HasMimeType() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *Request_Input_Context_Image) ClearData() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Data = nil
-}
-
-func (x *Request_Input_Context_Image) ClearMimeType() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_MimeType = nil
-}
-
-type Request_Input_Context_Image_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// The base64-encoded image data.
-	Data *string
-	// MIME type of the image content (e.g., "image/jpeg", "image/png").
-	MimeType *string
-}
-
-func (b0 Request_Input_Context_Image_builder) Build() *Request_Input_Context_Image {
-	m0 := &Request_Input_Context_Image{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Data != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_Data = b.Data
-	}
-	if b.MimeType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_MimeType = b.MimeType
-	}
-	return m0
-}
-
-type Request_Input_CannedResponseType_Install struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_CannedResponseType_Install) Reset() {
-	*x = Request_Input_CannedResponseType_Install{}
-	mi := &file_request_proto_msgTypes[15]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_CannedResponseType_Install) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_CannedResponseType_Install) ProtoMessage() {}
-
-func (x *Request_Input_CannedResponseType_Install) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[15]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_CannedResponseType_Install_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_CannedResponseType_Install_builder) Build() *Request_Input_CannedResponseType_Install {
-	m0 := &Request_Input_CannedResponseType_Install{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type Request_Input_CannedResponseType_Code struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_CannedResponseType_Code) Reset() {
-	*x = Request_Input_CannedResponseType_Code{}
-	mi := &file_request_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_CannedResponseType_Code) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_CannedResponseType_Code) ProtoMessage() {}
-
-func (x *Request_Input_CannedResponseType_Code) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_CannedResponseType_Code_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_CannedResponseType_Code_builder) Build() *Request_Input_CannedResponseType_Code {
-	m0 := &Request_Input_CannedResponseType_Code{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type Request_Input_CannedResponseType_Deploy struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_CannedResponseType_Deploy) Reset() {
-	*x = Request_Input_CannedResponseType_Deploy{}
-	mi := &file_request_proto_msgTypes[17]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_CannedResponseType_Deploy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_CannedResponseType_Deploy) ProtoMessage() {}
-
-func (x *Request_Input_CannedResponseType_Deploy) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[17]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_CannedResponseType_Deploy_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_CannedResponseType_Deploy_builder) Build() *Request_Input_CannedResponseType_Deploy {
-	m0 := &Request_Input_CannedResponseType_Deploy{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type Request_Input_CannedResponseType_SomethingElse struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_CannedResponseType_SomethingElse) Reset() {
-	*x = Request_Input_CannedResponseType_SomethingElse{}
-	mi := &file_request_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_CannedResponseType_SomethingElse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_CannedResponseType_SomethingElse) ProtoMessage() {}
-
-func (x *Request_Input_CannedResponseType_SomethingElse) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_CannedResponseType_SomethingElse_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_CannedResponseType_SomethingElse_builder) Build() *Request_Input_CannedResponseType_SomethingElse {
-	m0 := &Request_Input_CannedResponseType_SomethingElse{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type Request_Input_CannedResponseType_CustomOnboardingRequest struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_CannedResponseType_CustomOnboardingRequest) Reset() {
-	*x = Request_Input_CannedResponseType_CustomOnboardingRequest{}
-	mi := &file_request_proto_msgTypes[19]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_CannedResponseType_CustomOnboardingRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_CannedResponseType_CustomOnboardingRequest) ProtoMessage() {}
-
-func (x *Request_Input_CannedResponseType_CustomOnboardingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[19]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_CannedResponseType_CustomOnboardingRequest_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_CannedResponseType_CustomOnboardingRequest_builder) Build() *Request_Input_CannedResponseType_CustomOnboardingRequest {
-	m0 := &Request_Input_CannedResponseType_CustomOnboardingRequest{}
-	b, x := &b0, m0
-	_, _ = b, x
+	x.xxx_hidden_UserQuery = b.UserQuery
 	return m0
 }
 
@@ -2726,7 +1962,7 @@ type Request_Settings_ModelConfig struct {
 
 func (x *Request_Settings_ModelConfig) Reset() {
 	*x = Request_Settings_ModelConfig{}
-	mi := &file_request_proto_msgTypes[21]
+	mi := &file_request_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2738,7 +1974,7 @@ func (x *Request_Settings_ModelConfig) String() string {
 func (*Request_Settings_ModelConfig) ProtoMessage() {}
 
 func (x *Request_Settings_ModelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[21]
+	mi := &file_request_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2831,8 +2067,8 @@ var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
-	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\n" +
-	"task.proto\x1a\x11suggestions.proto\"\xb2\x1d\n" +
+	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
+	"task.proto\"\x8b\x16\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2841,42 +2077,15 @@ const file_request_proto_rawDesc = "" +
 	"\x14existing_suggestions\x18\x05 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfc\x15\n" +
-	"\x05Input\x12D\n" +
-	"\acontext\x18\x01 \x01(\v2*.warp.multi_agent.v1.Request.Input.ContextR\acontext\x12M\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xd5\x0e\n" +
+	"\x05Input\x12;\n" +
+	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12M\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x1a\xc5\b\n" +
-	"\aContext\x12R\n" +
-	"\tdirectory\x18\x01 \x01(\v24.warp.multi_agent.v1.Request.Input.Context.DirectoryR\tdirectory\x12e\n" +
-	"\x10operating_system\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.Context.OperatingSystemR\x0foperatingSystem\x12F\n" +
-	"\x05shell\x18\x03 \x01(\v20.warp.multi_agent.v1.Request.Input.Context.ShellR\x05shell\x12=\n" +
-	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12w\n" +
-	"\x17executed_shell_commands\x18\x05 \x03(\v2?.warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommandR\x15executedShellCommands\x12\\\n" +
-	"\rselected_text\x18\x06 \x03(\v27.warp.multi_agent.v1.Request.Input.Context.SelectedTextR\fselectedText\x12H\n" +
-	"\x06images\x18\a \x03(\v20.warp.multi_agent.v1.Request.Input.Context.ImageR\x06images\x1aq\n" +
-	"\x14ExecutedShellCommand\x12\x1e\n" +
-	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
-	"\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
-	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x1a(\n" +
-	"\fSelectedText\x12\x18\n" +
-	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1av\n" +
-	"\tDirectory\x12\x16\n" +
-	"\x03pwd\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03pwd\x12\x18\n" +
-	"\x04home\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04home\x127\n" +
-	"\x18pwd_file_symbols_indexed\x18\x03 \x01(\bR\x15pwdFileSymbolsIndexed\x1a5\n" +
-	"\x05Shell\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
-	"\aversion\x18\x02 \x01(\tR\aversion\x1aQ\n" +
-	"\x0fOperatingSystem\x12\x1a\n" +
-	"\bplatform\x18\x01 \x01(\tR\bplatform\x12\"\n" +
-	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
-	"\x05Image\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a\x90\x01\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12S\n" +
+	"\fstatic_query\x18\x04 \x01(\v2..warp.multi_agent.v1.Request.Input.StaticQueryH\x00R\vstaticQuery\x1a'\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12g\n" +
-	"\x14canned_response_type\x18\x02 \x01(\v25.warp.multi_agent.v1.Request.Input.CannedResponseTypeR\x12cannedResponseType\x1a\xb2\x05\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xe9\x06\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2888,20 +2097,25 @@ const file_request_proto_rawDesc = "" +
 	"\fsuggest_plan\x18\x06 \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x12^\n" +
 	"\x13suggest_create_plan\x18\a \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlan\x125\n" +
 	"\x04grep\x18\b \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12B\n" +
-	"\tfile_glob\x18\t \x01(\v2#.warp.multi_agent.v1.FileGlobResultH\x00R\bfileGlobB\b\n" +
-	"\x06result\x1a\xe6\x04\n" +
-	"\x12CannedResponseType\x12Y\n" +
-	"\ainstall\x18\x01 \x01(\v2=.warp.multi_agent.v1.Request.Input.CannedResponseType.InstallH\x00R\ainstall\x12P\n" +
-	"\x04code\x18\x02 \x01(\v2:.warp.multi_agent.v1.Request.Input.CannedResponseType.CodeH\x00R\x04code\x12V\n" +
-	"\x06deploy\x18\x03 \x01(\v2<.warp.multi_agent.v1.Request.Input.CannedResponseType.DeployH\x00R\x06deploy\x12l\n" +
-	"\x0esomething_else\x18\x04 \x01(\v2C.warp.multi_agent.v1.Request.Input.CannedResponseType.SomethingElseH\x00R\rsomethingElse\x12\x8b\x01\n" +
-	"\x19custom_onboarding_request\x18\x05 \x01(\v2M.warp.multi_agent.v1.Request.Input.CannedResponseType.CustomOnboardingRequestH\x00R\x17customOnboardingRequest\x1a\t\n" +
-	"\aInstall\x1a\x06\n" +
-	"\x04Code\x1a\b\n" +
-	"\x06Deploy\x1a\x0f\n" +
-	"\rSomethingElse\x1a\x19\n" +
-	"\x17CustomOnboardingRequestB\x06\n" +
-	"\x04typeB\x06\n" +
+	"\tfile_glob\x18\t \x01(\v2#.warp.multi_agent.v1.FileGlobResultH\x00R\bfileGlob\x12X\n" +
+	"\x06refine\x18\n" +
+	" \x01(\v2>.warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResultH\x00R\x06refine\x1a[\n" +
+	"\fRefineResult\x12K\n" +
+	"\n" +
+	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
+	"\x06result\x1a\xee\x03\n" +
+	"\vStaticQuery\x12Q\n" +
+	"\ainstall\x18\x01 \x01(\v25.warp.multi_agent.v1.Request.Input.InstallStaticQueryH\x00R\ainstall\x12H\n" +
+	"\x04code\x18\x02 \x01(\v22.warp.multi_agent.v1.Request.Input.CodeStaticQueryH\x00R\x04code\x12N\n" +
+	"\x06deploy\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.DeployStaticQueryH\x00R\x06deploy\x12d\n" +
+	"\x0esomething_else\x18\x04 \x01(\v2;.warp.multi_agent.v1.Request.Input.SomethingElseStaticQueryH\x00R\rsomethingElse\x12\x83\x01\n" +
+	"\x19custom_onboarding_request\x18\x05 \x01(\v2E.warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQueryH\x00R\x17customOnboardingRequestB\x06\n" +
+	"\x04type\x1a\x14\n" +
+	"\x12InstallStaticQuery\x1a\x11\n" +
+	"\x0fCodeStaticQuery\x1a\x13\n" +
+	"\x11DeployStaticQuery\x1a\x1a\n" +
+	"\x18SomethingElseStaticQuery\x1a$\n" +
+	"\"CustomOnboardingRequestStaticQueryB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -2917,82 +2131,71 @@ const file_request_proto_rawDesc = "" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanningB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_request_proto_goTypes = []any{
-	(*Request)(nil),                                                  // 0: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                      // 1: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                            // 2: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                         // 3: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                         // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_Input_Context)(nil),                                    // 5: warp.multi_agent.v1.Request.Input.Context
-	(*Request_Input_UserQuery)(nil),                                  // 6: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_ToolCallResult)(nil),                             // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_CannedResponseType)(nil),                         // 8: warp.multi_agent.v1.Request.Input.CannedResponseType
-	(*Request_Input_Context_ExecutedShellCommand)(nil),               // 9: warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
-	(*Request_Input_Context_SelectedText)(nil),                       // 10: warp.multi_agent.v1.Request.Input.Context.SelectedText
-	(*Request_Input_Context_Directory)(nil),                          // 11: warp.multi_agent.v1.Request.Input.Context.Directory
-	(*Request_Input_Context_Shell)(nil),                              // 12: warp.multi_agent.v1.Request.Input.Context.Shell
-	(*Request_Input_Context_OperatingSystem)(nil),                    // 13: warp.multi_agent.v1.Request.Input.Context.OperatingSystem
-	(*Request_Input_Context_Image)(nil),                              // 14: warp.multi_agent.v1.Request.Input.Context.Image
-	(*Request_Input_CannedResponseType_Install)(nil),                 // 15: warp.multi_agent.v1.Request.Input.CannedResponseType.Install
-	(*Request_Input_CannedResponseType_Code)(nil),                    // 16: warp.multi_agent.v1.Request.Input.CannedResponseType.Code
-	(*Request_Input_CannedResponseType_Deploy)(nil),                  // 17: warp.multi_agent.v1.Request.Input.CannedResponseType.Deploy
-	(*Request_Input_CannedResponseType_SomethingElse)(nil),           // 18: warp.multi_agent.v1.Request.Input.CannedResponseType.SomethingElse
-	(*Request_Input_CannedResponseType_CustomOnboardingRequest)(nil), // 19: warp.multi_agent.v1.Request.Input.CannedResponseType.CustomOnboardingRequest
-	nil,                                  // 20: warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	(*Request_Settings_ModelConfig)(nil), // 21: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Suggestions)(nil),                  // 22: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                         // 23: warp.multi_agent.v1.Task
-	(*timestamppb.Timestamp)(nil),        // 24: google.protobuf.Timestamp
-	(*RunShellCommandResult)(nil),        // 25: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),              // 26: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),         // 27: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),         // 28: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),            // 29: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),      // 30: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                   // 31: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),               // 32: warp.multi_agent.v1.FileGlobResult
-	(*structpb.Value)(nil),               // 33: google.protobuf.Value
+	(*Request)(nil),                                          // 0: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                              // 1: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                                    // 2: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                                 // 3: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                                 // 4: warp.multi_agent.v1.Request.Settings
+	(*Request_Input_UserQuery)(nil),                          // 5: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_ToolCallResult)(nil),                     // 6: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_StaticQuery)(nil),                        // 7: warp.multi_agent.v1.Request.Input.StaticQuery
+	(*Request_Input_InstallStaticQuery)(nil),                 // 8: warp.multi_agent.v1.Request.Input.InstallStaticQuery
+	(*Request_Input_CodeStaticQuery)(nil),                    // 9: warp.multi_agent.v1.Request.Input.CodeStaticQuery
+	(*Request_Input_DeployStaticQuery)(nil),                  // 10: warp.multi_agent.v1.Request.Input.DeployStaticQuery
+	(*Request_Input_SomethingElseStaticQuery)(nil),           // 11: warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
+	(*Request_Input_CustomOnboardingRequestStaticQuery)(nil), // 12: warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
+	(*Request_Input_ToolCallResult_RefineResult)(nil),        // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	nil,                                  // 14: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil), // 15: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Suggestions)(nil),                  // 16: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                         // 17: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                 // 18: warp.multi_agent.v1.InputContext
+	(*RunShellCommandResult)(nil),        // 19: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),              // 20: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),         // 21: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),         // 22: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),            // 23: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),      // 24: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                   // 25: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),               // 26: warp.multi_agent.v1.FileGlobResult
+	(*structpb.Value)(nil),               // 27: google.protobuf.Value
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
 	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
 	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
 	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
-	22, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	23, // 5: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	5,  // 6: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.Request.Input.Context
-	6,  // 7: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	7,  // 8: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	20, // 9: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	21, // 10: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	11, // 11: warp.multi_agent.v1.Request.Input.Context.directory:type_name -> warp.multi_agent.v1.Request.Input.Context.Directory
-	13, // 12: warp.multi_agent.v1.Request.Input.Context.operating_system:type_name -> warp.multi_agent.v1.Request.Input.Context.OperatingSystem
-	12, // 13: warp.multi_agent.v1.Request.Input.Context.shell:type_name -> warp.multi_agent.v1.Request.Input.Context.Shell
-	24, // 14: warp.multi_agent.v1.Request.Input.Context.current_time:type_name -> google.protobuf.Timestamp
-	9,  // 15: warp.multi_agent.v1.Request.Input.Context.executed_shell_commands:type_name -> warp.multi_agent.v1.Request.Input.Context.ExecutedShellCommand
-	10, // 16: warp.multi_agent.v1.Request.Input.Context.selected_text:type_name -> warp.multi_agent.v1.Request.Input.Context.SelectedText
-	14, // 17: warp.multi_agent.v1.Request.Input.Context.images:type_name -> warp.multi_agent.v1.Request.Input.Context.Image
-	8,  // 18: warp.multi_agent.v1.Request.Input.UserQuery.canned_response_type:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType
-	25, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	26, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	27, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	28, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	29, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	30, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	31, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	32, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	15, // 27: warp.multi_agent.v1.Request.Input.CannedResponseType.install:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType.Install
-	16, // 28: warp.multi_agent.v1.Request.Input.CannedResponseType.code:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType.Code
-	17, // 29: warp.multi_agent.v1.Request.Input.CannedResponseType.deploy:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType.Deploy
-	18, // 30: warp.multi_agent.v1.Request.Input.CannedResponseType.something_else:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType.SomethingElse
-	19, // 31: warp.multi_agent.v1.Request.Input.CannedResponseType.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CannedResponseType.CustomOnboardingRequest
-	33, // 32: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	33, // [33:33] is the sub-list for method output_type
-	33, // [33:33] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	16, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	17, // 5: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	18, // 6: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
+	5,  // 7: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	6,  // 8: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	7,  // 9: warp.multi_agent.v1.Request.Input.static_query:type_name -> warp.multi_agent.v1.Request.Input.StaticQuery
+	14, // 10: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	15, // 11: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	19, // 12: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	20, // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	21, // 14: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	22, // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	23, // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	24, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	25, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	26, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	13, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	8,  // 21: warp.multi_agent.v1.Request.Input.StaticQuery.install:type_name -> warp.multi_agent.v1.Request.Input.InstallStaticQuery
+	9,  // 22: warp.multi_agent.v1.Request.Input.StaticQuery.code:type_name -> warp.multi_agent.v1.Request.Input.CodeStaticQuery
+	10, // 23: warp.multi_agent.v1.Request.Input.StaticQuery.deploy:type_name -> warp.multi_agent.v1.Request.Input.DeployStaticQuery
+	11, // 24: warp.multi_agent.v1.Request.Input.StaticQuery.something_else:type_name -> warp.multi_agent.v1.Request.Input.SomethingElseStaticQuery
+	12, // 25: warp.multi_agent.v1.Request.Input.StaticQuery.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.CustomOnboardingRequestStaticQuery
+	5,  // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	27, // 27: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -3001,13 +2204,14 @@ func file_request_proto_init() {
 		return
 	}
 	file_options_proto_init()
-	file_task_proto_init()
 	file_suggestions_proto_init()
+	file_task_proto_init()
 	file_request_proto_msgTypes[2].OneofWrappers = []any{
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
+		(*request_Input_StaticQuery_)(nil),
 	}
-	file_request_proto_msgTypes[7].OneofWrappers = []any{
+	file_request_proto_msgTypes[6].OneofWrappers = []any{
 		(*request_Input_ToolCallResult_RunShellCommand)(nil),
 		(*request_Input_ToolCallResult_ReadFiles)(nil),
 		(*request_Input_ToolCallResult_SearchCodebase)(nil),
@@ -3016,13 +2220,14 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_SuggestCreatePlan)(nil),
 		(*request_Input_ToolCallResult_Grep)(nil),
 		(*request_Input_ToolCallResult_FileGlob)(nil),
+		(*request_Input_ToolCallResult_Refine)(nil),
 	}
-	file_request_proto_msgTypes[8].OneofWrappers = []any{
-		(*request_Input_CannedResponseType_Install_)(nil),
-		(*request_Input_CannedResponseType_Code_)(nil),
-		(*request_Input_CannedResponseType_Deploy_)(nil),
-		(*request_Input_CannedResponseType_SomethingElse_)(nil),
-		(*request_Input_CannedResponseType_CustomOnboardingRequest_)(nil),
+	file_request_proto_msgTypes[7].OneofWrappers = []any{
+		(*request_Input_StaticQuery_Install)(nil),
+		(*request_Input_StaticQuery_Code)(nil),
+		(*request_Input_StaticQuery_Deploy)(nil),
+		(*request_Input_StaticQuery_SomethingElse)(nil),
+		(*request_Input_StaticQuery_CustomOnboardingRequest)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -3030,7 +2235,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

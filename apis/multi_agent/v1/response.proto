@@ -5,8 +5,8 @@ package warp.multi_agent.v1;
 
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
-import "suggestions.proto";
 
+import "suggestions.proto";
 import "task.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
@@ -53,11 +53,19 @@ message ResponseEvent {
       Other other = 1;
       Done done = 2;
       ReachedMaxTokenLimit max_token_limit = 3;
+      QuotaLimit quota_limit = 4;
+      ContextWindowExceeded context_window_exceeded = 5;
+      LLMUnavailable llm_unavailable = 6;
+      InternalError internal_error = 7;
     }
 
     message Other {}
     message Done {}
     message ReachedMaxTokenLimit {}
+    message QuotaLimit {}
+    message ContextWindowExceeded {}
+    message LLMUnavailable {}
+    message InternalError { string message = 1; }
   }
 }
 
@@ -70,15 +78,26 @@ message ClientAction {
     UpdateTaskMessage update_task_message = 4;
     AppendToMessageContent append_to_message_content = 5;
     Suggestions show_suggestions = 6;
+    UpdateTaskSummary update_task_summary = 7;
+    UpdateTaskDescription update_task_description = 8;
   }
 
   // Create task action
   message CreateTask { Task task = 1; }
 
+  // TODO(matthew): Ought to be able to combine 
+  // UpdateTask{Status,Description,Summary} at least.
+
   // Update task status action
   message UpdateTaskStatus {
     string task_id = 1;
     TaskStatus task_status = 2;
+  }
+
+  // Update task description action
+  message UpdateTaskDescription {
+    string task_id = 1;
+    string description = 2;
   }
 
   // Add message to task action
@@ -102,5 +121,11 @@ message ClientAction {
     Message message = 1;
     // Fields in mask must be of type string; content is appended
     google.protobuf.FieldMask mask = 2;
+  }
+
+  // Updates the summary of a task
+  message UpdateTaskSummary {
+    string task_id = 1;
+    string summary = 2;
   }
 }
