@@ -84,13 +84,13 @@ message Request {
         SomethingElse something_else = 5;
         CustomOnboardingRequest custom_onboarding_request = 6;
       }
-    }
 
-    message InstallStaticQuery {}
-    message CodeStaticQuery {}
-    message DeployStaticQuery {}
-    message SomethingElseStaticQuery {}
-    message CustomOnboardingRequestStaticQuery {}
+      message Install {}
+      message Code {}
+      message Deploy {}
+      message SomethingElse {}
+      message CustomOnboardingRequest {}
+    }
   }
 
   message Metadata {
