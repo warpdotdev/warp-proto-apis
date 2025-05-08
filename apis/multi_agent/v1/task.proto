@@ -252,6 +252,7 @@ message Message {
 
 // Result of a `RunShellCommand` tool call.
 message RunShellCommandResult {
+  string command = 3 [ (sensitive) = true ];
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
 }

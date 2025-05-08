@@ -987,6 +987,7 @@ func (*message_ServerEvent_) isMessage_Message() {}
 // Result of a `RunShellCommand` tool call.
 type RunShellCommandResult struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Command     *string                `protobuf:"bytes,3,opt,name=command"`
 	xxx_hidden_Output      *string                `protobuf:"bytes,1,opt,name=output"`
 	xxx_hidden_ExitCode    int32                  `protobuf:"varint,2,opt,name=exit_code,json=exitCode"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -1020,6 +1021,16 @@ func (x *RunShellCommandResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *RunShellCommandResult) GetCommand() string {
+	if x != nil {
+		if x.xxx_hidden_Command != nil {
+			return *x.xxx_hidden_Command
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *RunShellCommandResult) GetOutput() string {
 	if x != nil {
 		if x.xxx_hidden_Output != nil {
@@ -1037,43 +1048,61 @@ func (x *RunShellCommandResult) GetExitCode() int32 {
 	return 0
 }
 
+func (x *RunShellCommandResult) SetCommand(v string) {
+	x.xxx_hidden_Command = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
 func (x *RunShellCommandResult) SetOutput(v string) {
 	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *RunShellCommandResult) SetExitCode(v int32) {
 	x.xxx_hidden_ExitCode = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *RunShellCommandResult) HasOutput() bool {
+func (x *RunShellCommandResult) HasCommand() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *RunShellCommandResult) HasExitCode() bool {
+func (x *RunShellCommandResult) HasOutput() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *RunShellCommandResult) ClearOutput() {
+func (x *RunShellCommandResult) HasExitCode() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *RunShellCommandResult) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Command = nil
+}
+
+func (x *RunShellCommandResult) ClearOutput() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Output = nil
 }
 
 func (x *RunShellCommandResult) ClearExitCode() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ExitCode = 0
 }
 
 type RunShellCommandResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	Command  *string
 	Output   *string
 	ExitCode *int32
 }
@@ -1082,12 +1111,16 @@ func (b0 RunShellCommandResult_builder) Build() *RunShellCommandResult {
 	m0 := &RunShellCommandResult{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.Command != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Command = b.Command
+	}
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Output = b.Output
 	}
 	if b.ExitCode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_ExitCode = *b.ExitCode
 	}
 	return m0
@@ -9546,8 +9579,9 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\x1a'\n" +
 	"\vServerEvent\x12\x18\n" +
 	"\apayload\x18\x01 \x01(\tR\apayloadB\t\n" +
-	"\amessage\"R\n" +
-	"\x15RunShellCommandResult\x12\x1c\n" +
+	"\amessage\"r\n" +
+	"\x15RunShellCommandResult\x12\x1e\n" +
+	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
 	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
 	"\texit_code\x18\x02 \x01(\x05R\bexitCode\"\x95\x02\n" +
 	"\x0fReadFilesResult\x12H\n" +
