@@ -45,9 +45,7 @@ message Request {
     oneof type {
       UserQuery user_query = 2;
       ToolCallResult tool_call_result = 3;
-      StaticQuery static_query = 4;
-      // Optional canned response type.
-      CannedResponseType canned_response_type = 5;
+      CannedResponseType canned_response_type = 4;
     }
 
     message UserQuery { string query = 1 [ (sensitive) = true ]; }
