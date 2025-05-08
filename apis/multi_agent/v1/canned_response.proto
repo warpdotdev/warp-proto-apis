@@ -1,0 +1,28 @@
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+
+// Canned responses correspond to hardcoded predefined responses from
+// Agent Mode e.g. the zero-state chip for "Install" has a predefined
+// initial response asking the user for more information, before passing it
+// off to "real AI".
+message CannedResponse {
+    string query = 1;
+    oneof type {
+        Install install = 2;
+        Code code = 3;
+        Deploy deploy = 4;
+        SomethingElse something_else = 5;
+        CustomOnboardingRequest custom_onboarding_request = 6;
+    }
+
+    message Install {}
+    message Code {}
+    message Deploy {}
+    message SomethingElse {}
+    message CustomOnboardingRequest {}
+}
