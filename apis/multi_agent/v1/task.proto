@@ -84,9 +84,6 @@ message Message {
   // User query message type
   message UserQuery {
     string query = 1 [ (sensitive) = true ];
-
-    // Context that the client supplied as part of the user query input.
-    InputContext context = 2;
   }
 
   // Agent output message type
