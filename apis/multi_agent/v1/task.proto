@@ -8,7 +8,6 @@ import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 
 import "options.proto";
-import "canned_response.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -80,7 +79,6 @@ message Message {
     ToolCall tool_call = 4;
     ToolCallResult tool_call_result = 5;
     ServerEvent server_event = 6;
-    CannedResponse canned_response = 8;
   }
 
   // User query message type
