@@ -1667,7 +1667,7 @@ func (b0 SuggestCreatePlanResult_builder) Build() *SuggestCreatePlanResult {
 	return m0
 }
 
-// A range of lines [start, end] that situate content in a file, 0-indexed.
+// A range of lines [start, end] that situate content in a file, 1-indexed.
 type FileContentLineRange struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Start       uint32                 `protobuf:"varint,1,opt,name=start"`
