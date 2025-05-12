@@ -30,6 +30,8 @@ message Request {
   // The list of suggestions received from the previous request.
   Suggestions existing_suggestions = 5;
 
+  MCPContext mcp_context = 6;
+
   message TaskContext {
     // List of all known tasks.
     repeated Task tasks = 1;
@@ -64,6 +66,8 @@ message Request {
         GrepResult grep = 8;
         FileGlobResult file_glob = 9;
         RefineResult refine = 10;
+        ReadMCPResourceResult read_mcp_resource = 11;
+        CallMCPToolResult call_mcp_tool = 12;
       }
 
       // Generic tool call result for representing a user-requested refinement
@@ -120,6 +124,25 @@ message Request {
 
       // The LLM of preference for coding tasks.
       string coding = 3;
+    }
+  }
+
+  // Information about the client's MCP capabilities.
+  message MCPContext {
+    repeated MCPResource resources = 1;
+    repeated MCPTool tools = 2;
+
+    message MCPResource {
+      string uri = 1 [ (sensitive) = true ];
+      string name = 2 [ (sensitive) = true ];
+      string description = 3 [ (sensitive) = true ];
+      string mime_type = 4;
+    }
+
+    message MCPTool {
+      string name = 1 [ (sensitive) = true ];
+      string description = 2 [ (sensitive) = true ];
+      google.protobuf.Struct input_schema = 3;
     }
   }
 }

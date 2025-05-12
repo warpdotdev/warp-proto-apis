@@ -32,6 +32,7 @@ type Request struct {
 	xxx_hidden_Settings            *Request_Settings      `protobuf:"bytes,3,opt,name=settings"`
 	xxx_hidden_Metadata            *Request_Metadata      `protobuf:"bytes,4,opt,name=metadata"`
 	xxx_hidden_ExistingSuggestions *Suggestions           `protobuf:"bytes,5,opt,name=existing_suggestions,json=existingSuggestions"`
+	xxx_hidden_McpContext          *Request_MCPContext    `protobuf:"bytes,6,opt,name=mcp_context,json=mcpContext"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -96,6 +97,13 @@ func (x *Request) GetExistingSuggestions() *Suggestions {
 	return nil
 }
 
+func (x *Request) GetMcpContext() *Request_MCPContext {
+	if x != nil {
+		return x.xxx_hidden_McpContext
+	}
+	return nil
+}
+
 func (x *Request) SetTaskContext(v *Request_TaskContext) {
 	x.xxx_hidden_TaskContext = v
 }
@@ -114,6 +122,10 @@ func (x *Request) SetMetadata(v *Request_Metadata) {
 
 func (x *Request) SetExistingSuggestions(v *Suggestions) {
 	x.xxx_hidden_ExistingSuggestions = v
+}
+
+func (x *Request) SetMcpContext(v *Request_MCPContext) {
+	x.xxx_hidden_McpContext = v
 }
 
 func (x *Request) HasTaskContext() bool {
@@ -151,6 +163,13 @@ func (x *Request) HasExistingSuggestions() bool {
 	return x.xxx_hidden_ExistingSuggestions != nil
 }
 
+func (x *Request) HasMcpContext() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_McpContext != nil
+}
+
 func (x *Request) ClearTaskContext() {
 	x.xxx_hidden_TaskContext = nil
 }
@@ -171,6 +190,10 @@ func (x *Request) ClearExistingSuggestions() {
 	x.xxx_hidden_ExistingSuggestions = nil
 }
 
+func (x *Request) ClearMcpContext() {
+	x.xxx_hidden_McpContext = nil
+}
+
 type Request_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -184,6 +207,7 @@ type Request_builder struct {
 	Metadata *Request_Metadata
 	// The list of suggestions received from the previous request.
 	ExistingSuggestions *Suggestions
+	McpContext          *Request_MCPContext
 }
 
 func (b0 Request_builder) Build() *Request {
@@ -195,6 +219,7 @@ func (b0 Request_builder) Build() *Request {
 	x.xxx_hidden_Settings = b.Settings
 	x.xxx_hidden_Metadata = b.Metadata
 	x.xxx_hidden_ExistingSuggestions = b.ExistingSuggestions
+	x.xxx_hidden_McpContext = b.McpContext
 	return m0
 }
 
@@ -765,6 +790,82 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	return m0
 }
 
+// Information about the client's MCP capabilities.
+type Request_MCPContext struct {
+	state                protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Resources *[]*Request_MCPContext_MCPResource `protobuf:"bytes,1,rep,name=resources"`
+	xxx_hidden_Tools     *[]*Request_MCPContext_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
+}
+
+func (x *Request_MCPContext) Reset() {
+	*x = Request_MCPContext{}
+	mi := &file_request_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_MCPContext) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_MCPContext) ProtoMessage() {}
+
+func (x *Request_MCPContext) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_MCPContext) GetResources() []*Request_MCPContext_MCPResource {
+	if x != nil {
+		if x.xxx_hidden_Resources != nil {
+			return *x.xxx_hidden_Resources
+		}
+	}
+	return nil
+}
+
+func (x *Request_MCPContext) GetTools() []*Request_MCPContext_MCPTool {
+	if x != nil {
+		if x.xxx_hidden_Tools != nil {
+			return *x.xxx_hidden_Tools
+		}
+	}
+	return nil
+}
+
+func (x *Request_MCPContext) SetResources(v []*Request_MCPContext_MCPResource) {
+	x.xxx_hidden_Resources = &v
+}
+
+func (x *Request_MCPContext) SetTools(v []*Request_MCPContext_MCPTool) {
+	x.xxx_hidden_Tools = &v
+}
+
+type Request_MCPContext_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Resources []*Request_MCPContext_MCPResource
+	Tools     []*Request_MCPContext_MCPTool
+}
+
+func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
+	m0 := &Request_MCPContext{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_Resources = &b.Resources
+	x.xxx_hidden_Tools = &b.Tools
+	return m0
+}
+
 type Request_Input_UserQuery struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
@@ -776,7 +877,7 @@ type Request_Input_UserQuery struct {
 
 func (x *Request_Input_UserQuery) Reset() {
 	*x = Request_Input_UserQuery{}
-	mi := &file_request_proto_msgTypes[5]
+	mi := &file_request_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -788,7 +889,7 @@ func (x *Request_Input_UserQuery) String() string {
 func (*Request_Input_UserQuery) ProtoMessage() {}
 
 func (x *Request_Input_UserQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[5]
+	mi := &file_request_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -856,7 +957,7 @@ type Request_Input_ToolCallResult struct {
 
 func (x *Request_Input_ToolCallResult) Reset() {
 	*x = Request_Input_ToolCallResult{}
-	mi := &file_request_proto_msgTypes[6]
+	mi := &file_request_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -868,7 +969,7 @@ func (x *Request_Input_ToolCallResult) String() string {
 func (*Request_Input_ToolCallResult) ProtoMessage() {}
 
 func (x *Request_Input_ToolCallResult) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[6]
+	mi := &file_request_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -970,6 +1071,24 @@ func (x *Request_Input_ToolCallResult) GetRefine() *Request_Input_ToolCallResult
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetReadMcpResource() *ReadMCPResourceResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadMcpResource); ok {
+			return x.ReadMcpResource
+		}
+	}
+	return nil
+}
+
+func (x *Request_Input_ToolCallResult) GetCallMcpTool() *CallMCPToolResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_CallMcpTool); ok {
+			return x.CallMcpTool
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -1045,6 +1164,22 @@ func (x *Request_Input_ToolCallResult) SetRefine(v *Request_Input_ToolCallResult
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_Refine{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetReadMcpResource(v *ReadMCPResourceResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadMcpResource{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetCallMcpTool(v *CallMCPToolResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_CallMcpTool{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -1133,6 +1268,22 @@ func (x *Request_Input_ToolCallResult) HasRefine() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasReadMcpResource() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadMcpResource)
+	return ok
+}
+
+func (x *Request_Input_ToolCallResult) HasCallMcpTool() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_CallMcpTool)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -1196,6 +1347,18 @@ func (x *Request_Input_ToolCallResult) ClearRefine() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearReadMcpResource() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadMcpResource); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
+func (x *Request_Input_ToolCallResult) ClearCallMcpTool() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_CallMcpTool); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -1206,6 +1369,8 @@ const Request_Input_ToolCallResult_SuggestCreatePlan_case case_Request_Input_Too
 const Request_Input_ToolCallResult_Grep_case case_Request_Input_ToolCallResult_Result = 8
 const Request_Input_ToolCallResult_FileGlob_case case_Request_Input_ToolCallResult_Result = 9
 const Request_Input_ToolCallResult_Refine_case case_Request_Input_ToolCallResult_Result = 10
+const Request_Input_ToolCallResult_ReadMcpResource_case case_Request_Input_ToolCallResult_Result = 11
+const Request_Input_ToolCallResult_CallMcpTool_case case_Request_Input_ToolCallResult_Result = 12
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -1230,6 +1395,10 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_FileGlob_case
 	case *request_Input_ToolCallResult_Refine:
 		return Request_Input_ToolCallResult_Refine_case
+	case *request_Input_ToolCallResult_ReadMcpResource:
+		return Request_Input_ToolCallResult_ReadMcpResource_case
+	case *request_Input_ToolCallResult_CallMcpTool:
+		return Request_Input_ToolCallResult_CallMcpTool_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -1249,6 +1418,8 @@ type Request_Input_ToolCallResult_builder struct {
 	Grep              *GrepResult
 	FileGlob          *FileGlobResult
 	Refine            *Request_Input_ToolCallResult_RefineResult
+	ReadMcpResource   *ReadMCPResourceResult
+	CallMcpTool       *CallMCPToolResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -1287,13 +1458,19 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	if b.Refine != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_Refine{b.Refine}
 	}
+	if b.ReadMcpResource != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadMcpResource{b.ReadMcpResource}
+	}
+	if b.CallMcpTool != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_CallMcpTool{b.CallMcpTool}
+	}
 	return m0
 }
 
 type case_Request_Input_ToolCallResult_Result protoreflect.FieldNumber
 
 func (x case_Request_Input_ToolCallResult_Result) String() string {
-	md := file_request_proto_msgTypes[6].Descriptor()
+	md := file_request_proto_msgTypes[7].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -1340,6 +1517,14 @@ type request_Input_ToolCallResult_Refine struct {
 	Refine *Request_Input_ToolCallResult_RefineResult `protobuf:"bytes,10,opt,name=refine,oneof"`
 }
 
+type request_Input_ToolCallResult_ReadMcpResource struct {
+	ReadMcpResource *ReadMCPResourceResult `protobuf:"bytes,11,opt,name=read_mcp_resource,json=readMcpResource,oneof"`
+}
+
+type request_Input_ToolCallResult_CallMcpTool struct {
+	CallMcpTool *CallMCPToolResult `protobuf:"bytes,12,opt,name=call_mcp_tool,json=callMcpTool,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -1358,6 +1543,10 @@ func (*request_Input_ToolCallResult_FileGlob) isRequest_Input_ToolCallResult_Res
 
 func (*request_Input_ToolCallResult_Refine) isRequest_Input_ToolCallResult_Result() {}
 
+func (*request_Input_ToolCallResult_ReadMcpResource) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_CallMcpTool) isRequest_Input_ToolCallResult_Result() {}
+
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
 // initial response asking the user for more information, before passing it
@@ -1374,7 +1563,7 @@ type Request_Input_QueryWithCannedResponse struct {
 
 func (x *Request_Input_QueryWithCannedResponse) Reset() {
 	*x = Request_Input_QueryWithCannedResponse{}
-	mi := &file_request_proto_msgTypes[7]
+	mi := &file_request_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1386,7 +1575,7 @@ func (x *Request_Input_QueryWithCannedResponse) String() string {
 func (*Request_Input_QueryWithCannedResponse) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[7]
+	mi := &file_request_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1659,7 +1848,7 @@ func (b0 Request_Input_QueryWithCannedResponse_builder) Build() *Request_Input_Q
 type case_Request_Input_QueryWithCannedResponse_Type protoreflect.FieldNumber
 
 func (x case_Request_Input_QueryWithCannedResponse_Type) String() string {
-	md := file_request_proto_msgTypes[7].Descriptor()
+	md := file_request_proto_msgTypes[8].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -1715,7 +1904,7 @@ type Request_Input_ToolCallResult_RefineResult struct {
 
 func (x *Request_Input_ToolCallResult_RefineResult) Reset() {
 	*x = Request_Input_ToolCallResult_RefineResult{}
-	mi := &file_request_proto_msgTypes[8]
+	mi := &file_request_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1727,7 +1916,7 @@ func (x *Request_Input_ToolCallResult_RefineResult) String() string {
 func (*Request_Input_ToolCallResult_RefineResult) ProtoMessage() {}
 
 func (x *Request_Input_ToolCallResult_RefineResult) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[8]
+	mi := &file_request_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1782,7 +1971,7 @@ type Request_Input_QueryWithCannedResponse_Install struct {
 
 func (x *Request_Input_QueryWithCannedResponse_Install) Reset() {
 	*x = Request_Input_QueryWithCannedResponse_Install{}
-	mi := &file_request_proto_msgTypes[9]
+	mi := &file_request_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1794,7 +1983,7 @@ func (x *Request_Input_QueryWithCannedResponse_Install) String() string {
 func (*Request_Input_QueryWithCannedResponse_Install) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse_Install) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[9]
+	mi := &file_request_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1825,7 +2014,7 @@ type Request_Input_QueryWithCannedResponse_Code struct {
 
 func (x *Request_Input_QueryWithCannedResponse_Code) Reset() {
 	*x = Request_Input_QueryWithCannedResponse_Code{}
-	mi := &file_request_proto_msgTypes[10]
+	mi := &file_request_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1837,7 +2026,7 @@ func (x *Request_Input_QueryWithCannedResponse_Code) String() string {
 func (*Request_Input_QueryWithCannedResponse_Code) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse_Code) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[10]
+	mi := &file_request_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1868,7 +2057,7 @@ type Request_Input_QueryWithCannedResponse_Deploy struct {
 
 func (x *Request_Input_QueryWithCannedResponse_Deploy) Reset() {
 	*x = Request_Input_QueryWithCannedResponse_Deploy{}
-	mi := &file_request_proto_msgTypes[11]
+	mi := &file_request_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1880,7 +2069,7 @@ func (x *Request_Input_QueryWithCannedResponse_Deploy) String() string {
 func (*Request_Input_QueryWithCannedResponse_Deploy) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse_Deploy) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[11]
+	mi := &file_request_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1911,7 +2100,7 @@ type Request_Input_QueryWithCannedResponse_SomethingElse struct {
 
 func (x *Request_Input_QueryWithCannedResponse_SomethingElse) Reset() {
 	*x = Request_Input_QueryWithCannedResponse_SomethingElse{}
-	mi := &file_request_proto_msgTypes[12]
+	mi := &file_request_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1923,7 +2112,7 @@ func (x *Request_Input_QueryWithCannedResponse_SomethingElse) String() string {
 func (*Request_Input_QueryWithCannedResponse_SomethingElse) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse_SomethingElse) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[12]
+	mi := &file_request_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1954,7 +2143,7 @@ type Request_Input_QueryWithCannedResponse_CustomOnboardingRequest struct {
 
 func (x *Request_Input_QueryWithCannedResponse_CustomOnboardingRequest) Reset() {
 	*x = Request_Input_QueryWithCannedResponse_CustomOnboardingRequest{}
-	mi := &file_request_proto_msgTypes[13]
+	mi := &file_request_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1966,7 +2155,7 @@ func (x *Request_Input_QueryWithCannedResponse_CustomOnboardingRequest) String()
 func (*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse_CustomOnboardingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[13]
+	mi := &file_request_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2002,7 +2191,7 @@ type Request_Settings_ModelConfig struct {
 
 func (x *Request_Settings_ModelConfig) Reset() {
 	*x = Request_Settings_ModelConfig{}
-	mi := &file_request_proto_msgTypes[15]
+	mi := &file_request_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2014,7 +2203,7 @@ func (x *Request_Settings_ModelConfig) String() string {
 func (*Request_Settings_ModelConfig) ProtoMessage() {}
 
 func (x *Request_Settings_ModelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[15]
+	mi := &file_request_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2136,21 +2325,336 @@ func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelCo
 	return m0
 }
 
+type Request_MCPContext_MCPResource struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Uri         *string                `protobuf:"bytes,1,opt,name=uri"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,2,opt,name=name"`
+	xxx_hidden_Description *string                `protobuf:"bytes,3,opt,name=description"`
+	xxx_hidden_MimeType    *string                `protobuf:"bytes,4,opt,name=mime_type,json=mimeType"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_MCPContext_MCPResource) Reset() {
+	*x = Request_MCPContext_MCPResource{}
+	mi := &file_request_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_MCPContext_MCPResource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_MCPContext_MCPResource) ProtoMessage() {}
+
+func (x *Request_MCPContext_MCPResource) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_MCPContext_MCPResource) GetUri() string {
+	if x != nil {
+		if x.xxx_hidden_Uri != nil {
+			return *x.xxx_hidden_Uri
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_MCPContext_MCPResource) GetName() string {
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_MCPContext_MCPResource) GetDescription() string {
+	if x != nil {
+		if x.xxx_hidden_Description != nil {
+			return *x.xxx_hidden_Description
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_MCPContext_MCPResource) GetMimeType() string {
+	if x != nil {
+		if x.xxx_hidden_MimeType != nil {
+			return *x.xxx_hidden_MimeType
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_MCPContext_MCPResource) SetUri(v string) {
+	x.xxx_hidden_Uri = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *Request_MCPContext_MCPResource) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *Request_MCPContext_MCPResource) SetDescription(v string) {
+	x.xxx_hidden_Description = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Request_MCPContext_MCPResource) SetMimeType(v string) {
+	x.xxx_hidden_MimeType = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *Request_MCPContext_MCPResource) HasUri() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_MCPContext_MCPResource) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_MCPContext_MCPResource) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Request_MCPContext_MCPResource) HasMimeType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *Request_MCPContext_MCPResource) ClearUri() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Uri = nil
+}
+
+func (x *Request_MCPContext_MCPResource) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *Request_MCPContext_MCPResource) ClearDescription() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Description = nil
+}
+
+func (x *Request_MCPContext_MCPResource) ClearMimeType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_MimeType = nil
+}
+
+type Request_MCPContext_MCPResource_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Uri         *string
+	Name        *string
+	Description *string
+	MimeType    *string
+}
+
+func (b0 Request_MCPContext_MCPResource_builder) Build() *Request_MCPContext_MCPResource {
+	m0 := &Request_MCPContext_MCPResource{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Uri != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Uri = b.Uri
+	}
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Description != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Description = b.Description
+	}
+	if b.MimeType != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_MimeType = b.MimeType
+	}
+	return m0
+}
+
+type Request_MCPContext_MCPTool struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Description *string                `protobuf:"bytes,2,opt,name=description"`
+	xxx_hidden_InputSchema *structpb.Struct       `protobuf:"bytes,3,opt,name=input_schema,json=inputSchema"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_MCPContext_MCPTool) Reset() {
+	*x = Request_MCPContext_MCPTool{}
+	mi := &file_request_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_MCPContext_MCPTool) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_MCPContext_MCPTool) ProtoMessage() {}
+
+func (x *Request_MCPContext_MCPTool) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_MCPContext_MCPTool) GetName() string {
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_MCPContext_MCPTool) GetDescription() string {
+	if x != nil {
+		if x.xxx_hidden_Description != nil {
+			return *x.xxx_hidden_Description
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_MCPContext_MCPTool) GetInputSchema() *structpb.Struct {
+	if x != nil {
+		return x.xxx_hidden_InputSchema
+	}
+	return nil
+}
+
+func (x *Request_MCPContext_MCPTool) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *Request_MCPContext_MCPTool) SetDescription(v string) {
+	x.xxx_hidden_Description = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Request_MCPContext_MCPTool) SetInputSchema(v *structpb.Struct) {
+	x.xxx_hidden_InputSchema = v
+}
+
+func (x *Request_MCPContext_MCPTool) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_MCPContext_MCPTool) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_MCPContext_MCPTool) HasInputSchema() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_InputSchema != nil
+}
+
+func (x *Request_MCPContext_MCPTool) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *Request_MCPContext_MCPTool) ClearDescription() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Description = nil
+}
+
+func (x *Request_MCPContext_MCPTool) ClearInputSchema() {
+	x.xxx_hidden_InputSchema = nil
+}
+
+type Request_MCPContext_MCPTool_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Name        *string
+	Description *string
+	InputSchema *structpb.Struct
+}
+
+func (b0 Request_MCPContext_MCPTool_builder) Build() *Request_MCPContext_MCPTool {
+	m0 := &Request_MCPContext_MCPTool{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Description != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Description = b.Description
+	}
+	x.xxx_hidden_InputSchema = b.InputSchema
+	return m0
+}
+
 var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xf5\x16\n" +
+	"task.proto\"\xa1\x1c\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
 	"\bsettings\x18\x03 \x01(\v2%.warp.multi_agent.v1.Request.SettingsR\bsettings\x12A\n" +
 	"\bmetadata\x18\x04 \x01(\v2%.warp.multi_agent.v1.Request.MetadataR\bmetadata\x12S\n" +
-	"\x14existing_suggestions\x18\x05 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x1ad\n" +
+	"\x14existing_suggestions\x18\x05 \x01(\v2 .warp.multi_agent.v1.SuggestionsR\x13existingSuggestions\x12H\n" +
+	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
+	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xa7\x0f\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xcf\x10\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12M\n" +
 	"\n" +
@@ -2158,7 +2662,7 @@ const file_request_proto_rawDesc = "" +
 	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12y\n" +
 	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x1a'\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xe9\x06\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x91\b\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -2172,7 +2676,9 @@ const file_request_proto_rawDesc = "" +
 	"\x04grep\x18\b \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12B\n" +
 	"\tfile_glob\x18\t \x01(\v2#.warp.multi_agent.v1.FileGlobResultH\x00R\bfileGlob\x12X\n" +
 	"\x06refine\x18\n" +
-	" \x01(\v2>.warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResultH\x00R\x06refine\x1a[\n" +
+	" \x01(\v2>.warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResultH\x00R\x06refine\x12X\n" +
+	"\x11read_mcp_resource\x18\v \x01(\v2*.warp.multi_agent.v1.ReadMCPResourceResultH\x00R\x0freadMcpResource\x12L\n" +
+	"\rcall_mcp_tool\x18\f \x01(\v2&.warp.multi_agent.v1.CallMCPToolResultH\x00R\vcallMcpTool\x1a[\n" +
 	"\fRefineResult\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
@@ -2204,73 +2710,98 @@ const file_request_proto_rawDesc = "" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
-	"\x06coding\x18\x03 \x01(\tR\x06codingB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\xb7\x03\n" +
+	"\n" +
+	"MCPContext\x12Q\n" +
+	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceR\tresources\x12E\n" +
+	"\x05tools\x18\x02 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolR\x05tools\x1a\x84\x01\n" +
+	"\vMCPResource\x12\x16\n" +
+	"\x03uri\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uri\x12\x18\n" +
+	"\x04name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
+	"\vdescription\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12\x1b\n" +
+	"\tmime_type\x18\x04 \x01(\tR\bmimeType\x1a\x87\x01\n" +
+	"\aMCPTool\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
+	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12:\n" +
+	"\finput_schema\x18\x03 \x01(\v2\x17.google.protobuf.StructR\vinputSchemaB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_request_proto_goTypes = []any{
 	(*Request)(nil),                                                       // 0: warp.multi_agent.v1.Request
 	(*Request_TaskContext)(nil),                                           // 1: warp.multi_agent.v1.Request.TaskContext
 	(*Request_Input)(nil),                                                 // 2: warp.multi_agent.v1.Request.Input
 	(*Request_Metadata)(nil),                                              // 3: warp.multi_agent.v1.Request.Metadata
 	(*Request_Settings)(nil),                                              // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_Input_UserQuery)(nil),                                       // 5: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_ToolCallResult)(nil),                                  // 6: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                         // 7: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_ToolCallResult_RefineResult)(nil),                     // 8: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	(*Request_Input_QueryWithCannedResponse_Install)(nil),                 // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	(*Request_Input_QueryWithCannedResponse_Code)(nil),                    // 10: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                  // 11: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),           // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil), // 13: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	nil,                                  // 14: warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	(*Request_Settings_ModelConfig)(nil), // 15: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Suggestions)(nil),                  // 16: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                         // 17: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                 // 18: warp.multi_agent.v1.InputContext
-	(*RunShellCommandResult)(nil),        // 19: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),              // 20: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),         // 21: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),         // 22: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),            // 23: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),      // 24: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                   // 25: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),               // 26: warp.multi_agent.v1.FileGlobResult
-	(*structpb.Value)(nil),               // 27: google.protobuf.Value
+	(*Request_MCPContext)(nil),                                            // 5: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),                                       // 6: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_ToolCallResult)(nil),                                  // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil),                         // 8: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_ToolCallResult_RefineResult)(nil),                     // 9: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	(*Request_Input_QueryWithCannedResponse_Install)(nil),                 // 10: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	(*Request_Input_QueryWithCannedResponse_Code)(nil),                    // 11: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                  // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),           // 13: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil), // 14: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	nil,                                    // 15: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil),   // 16: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Request_MCPContext_MCPResource)(nil), // 17: warp.multi_agent.v1.Request.MCPContext.MCPResource
+	(*Request_MCPContext_MCPTool)(nil),     // 18: warp.multi_agent.v1.Request.MCPContext.MCPTool
+	(*Suggestions)(nil),                    // 19: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                           // 20: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                   // 21: warp.multi_agent.v1.InputContext
+	(*RunShellCommandResult)(nil),          // 22: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                // 23: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),           // 24: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),           // 25: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),              // 26: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),        // 27: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                     // 28: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                 // 29: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),          // 30: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),              // 31: warp.multi_agent.v1.CallMCPToolResult
+	(*structpb.Value)(nil),                 // 32: google.protobuf.Value
+	(*structpb.Struct)(nil),                // 33: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
 	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
 	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
 	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
-	16, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	17, // 5: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	18, // 6: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
-	5,  // 7: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	6,  // 8: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	7,  // 9: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	14, // 10: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	15, // 11: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	19, // 12: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	20, // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	21, // 14: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	22, // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	23, // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	24, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	25, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	26, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	8,  // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	9,  // 21: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	10, // 22: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	11, // 23: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	12, // 24: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	13, // 25: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	5,  // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	27, // 27: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	28, // [28:28] is the sub-list for method output_type
-	28, // [28:28] is the sub-list for method input_type
-	28, // [28:28] is the sub-list for extension type_name
-	28, // [28:28] is the sub-list for extension extendee
-	0,  // [0:28] is the sub-list for field type_name
+	19, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	5,  // 5: warp.multi_agent.v1.Request.mcp_context:type_name -> warp.multi_agent.v1.Request.MCPContext
+	20, // 6: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	21, // 7: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
+	6,  // 8: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	7,  // 9: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	8,  // 10: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	15, // 11: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	16, // 12: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	17, // 13: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	18, // 14: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	22, // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	23, // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	24, // 17: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	25, // 18: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	26, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	27, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	28, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	29, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	9,  // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	30, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	31, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	10, // 26: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	11, // 27: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	12, // 28: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	13, // 29: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	14, // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	6,  // 31: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	32, // 32: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	33, // 33: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	34, // [34:34] is the sub-list for method output_type
+	34, // [34:34] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -2286,7 +2817,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_)(nil),
 		(*request_Input_QueryWithCannedResponse_)(nil),
 	}
-	file_request_proto_msgTypes[6].OneofWrappers = []any{
+	file_request_proto_msgTypes[7].OneofWrappers = []any{
 		(*request_Input_ToolCallResult_RunShellCommand)(nil),
 		(*request_Input_ToolCallResult_ReadFiles)(nil),
 		(*request_Input_ToolCallResult_SearchCodebase)(nil),
@@ -2296,8 +2827,10 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_Grep)(nil),
 		(*request_Input_ToolCallResult_FileGlob)(nil),
 		(*request_Input_ToolCallResult_Refine)(nil),
+		(*request_Input_ToolCallResult_ReadMcpResource)(nil),
+		(*request_Input_ToolCallResult_CallMcpTool)(nil),
 	}
-	file_request_proto_msgTypes[7].OneofWrappers = []any{
+	file_request_proto_msgTypes[8].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),
 		(*request_Input_QueryWithCannedResponse_Code_)(nil),
 		(*request_Input_QueryWithCannedResponse_Deploy_)(nil),
@@ -2310,7 +2843,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
