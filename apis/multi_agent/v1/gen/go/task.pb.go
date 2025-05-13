@@ -2440,6 +2440,7 @@ type InputContext struct {
 	xxx_hidden_SelectedText          *[]*InputContext_SelectedText         `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
 	xxx_hidden_Images                *[]*InputContext_Image                `protobuf:"bytes,7,rep,name=images"`
 	xxx_hidden_Codebases             *[]*InputContext_Codebase             `protobuf:"bytes,8,rep,name=codebases"`
+	xxx_hidden_Files                 *[]*InputContext_File                 `protobuf:"bytes,9,rep,name=files"`
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -2533,6 +2534,15 @@ func (x *InputContext) GetCodebases() []*InputContext_Codebase {
 	return nil
 }
 
+func (x *InputContext) GetFiles() []*InputContext_File {
+	if x != nil {
+		if x.xxx_hidden_Files != nil {
+			return *x.xxx_hidden_Files
+		}
+	}
+	return nil
+}
+
 func (x *InputContext) SetDirectory(v *InputContext_Directory) {
 	x.xxx_hidden_Directory = v
 }
@@ -2563,6 +2573,10 @@ func (x *InputContext) SetImages(v []*InputContext_Image) {
 
 func (x *InputContext) SetCodebases(v []*InputContext_Codebase) {
 	x.xxx_hidden_Codebases = &v
+}
+
+func (x *InputContext) SetFiles(v []*InputContext_File) {
+	x.xxx_hidden_Files = &v
 }
 
 func (x *InputContext) HasDirectory() bool {
@@ -2620,6 +2634,7 @@ type InputContext_builder struct {
 	SelectedText          []*InputContext_SelectedText
 	Images                []*InputContext_Image
 	Codebases             []*InputContext_Codebase
+	Files                 []*InputContext_File
 }
 
 func (b0 InputContext_builder) Build() *InputContext {
@@ -2634,6 +2649,7 @@ func (b0 InputContext_builder) Build() *InputContext {
 	x.xxx_hidden_SelectedText = &b.SelectedText
 	x.xxx_hidden_Images = &b.Images
 	x.xxx_hidden_Codebases = &b.Codebases
+	x.xxx_hidden_Files = &b.Files
 	return m0
 }
 
@@ -7407,6 +7423,144 @@ func (b0 InputContext_Codebase_builder) Build() *InputContext_Codebase {
 	return m0
 }
 
+// Any attached files. Purposely separated from `FileContent` schema which
+// is used solely for ReadFiles tool call results.
+type InputContext_File struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_Content     *string                `protobuf:"bytes,2,opt,name=content"`
+	xxx_hidden_LineRange   *FileContentLineRange  `protobuf:"bytes,3,opt,name=line_range,json=lineRange"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *InputContext_File) Reset() {
+	*x = InputContext_File{}
+	mi := &file_task_proto_msgTypes[59]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InputContext_File) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InputContext_File) ProtoMessage() {}
+
+func (x *InputContext_File) ProtoReflect() protoreflect.Message {
+	mi := &file_task_proto_msgTypes[59]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *InputContext_File) GetFilePath() string {
+	if x != nil {
+		if x.xxx_hidden_FilePath != nil {
+			return *x.xxx_hidden_FilePath
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_File) GetContent() string {
+	if x != nil {
+		if x.xxx_hidden_Content != nil {
+			return *x.xxx_hidden_Content
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_File) GetLineRange() *FileContentLineRange {
+	if x != nil {
+		return x.xxx_hidden_LineRange
+	}
+	return nil
+}
+
+func (x *InputContext_File) SetFilePath(v string) {
+	x.xxx_hidden_FilePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *InputContext_File) SetContent(v string) {
+	x.xxx_hidden_Content = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *InputContext_File) SetLineRange(v *FileContentLineRange) {
+	x.xxx_hidden_LineRange = v
+}
+
+func (x *InputContext_File) HasFilePath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *InputContext_File) HasContent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *InputContext_File) HasLineRange() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_LineRange != nil
+}
+
+func (x *InputContext_File) ClearFilePath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_FilePath = nil
+}
+
+func (x *InputContext_File) ClearContent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Content = nil
+}
+
+func (x *InputContext_File) ClearLineRange() {
+	x.xxx_hidden_LineRange = nil
+}
+
+type InputContext_File_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	FilePath  *string
+	Content   *string
+	LineRange *FileContentLineRange
+}
+
+func (b0 InputContext_File_builder) Build() *InputContext_File {
+	m0 := &InputContext_File{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.FilePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_FilePath = b.FilePath
+	}
+	if b.Content != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Content = b.Content
+	}
+	x.xxx_hidden_LineRange = b.LineRange
+	return m0
+}
+
 var File_task_proto protoreflect.FileDescriptor
 
 const file_task_proto_rawDesc = "" +
@@ -7595,7 +7749,8 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\x92\t\n" +
+	"\x06result\"\xe6\n" +
+	"\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -7604,7 +7759,8 @@ const file_task_proto_rawDesc = "" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v26.warp.multi_agent.v1.InputContext.ExecutedShellCommandR\x15executedShellCommands\x12S\n" +
 	"\rselected_text\x18\x06 \x03(\v2..warp.multi_agent.v1.InputContext.SelectedTextR\fselectedText\x12?\n" +
 	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12H\n" +
-	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x1aq\n" +
+	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x12<\n" +
+	"\x05files\x18\t \x03(\v2&.warp.multi_agent.v1.InputContext.FileR\x05files\x1aq\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
 	"\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
@@ -7626,9 +7782,14 @@ const file_task_proto_rawDesc = "" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a2\n" +
 	"\bCodebase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04pathB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04path\x18\x02 \x01(\tR\x04path\x1a\x93\x01\n" +
+	"\x04File\x12!\n" +
+	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
+	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12H\n" +
+	"\n" +
+	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRangeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 59)
+var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_task_proto_goTypes = []any{
 	(*Task)(nil),                                           // 0: warp.multi_agent.v1.Task
 	(*TaskStatus)(nil),                                     // 1: warp.multi_agent.v1.TaskStatus
@@ -7689,8 +7850,9 @@ var file_task_proto_goTypes = []any{
 	(*InputContext_OperatingSystem)(nil),                   // 56: warp.multi_agent.v1.InputContext.OperatingSystem
 	(*InputContext_Image)(nil),                             // 57: warp.multi_agent.v1.InputContext.Image
 	(*InputContext_Codebase)(nil),                          // 58: warp.multi_agent.v1.InputContext.Codebase
-	(*emptypb.Empty)(nil),                                  // 59: google.protobuf.Empty
-	(*timestamppb.Timestamp)(nil),                          // 60: google.protobuf.Timestamp
+	(*InputContext_File)(nil),                              // 59: warp.multi_agent.v1.InputContext.File
+	(*emptypb.Empty)(nil),                                  // 60: google.protobuf.Empty
+	(*timestamppb.Timestamp)(nil),                          // 61: google.protobuf.Timestamp
 }
 var file_task_proto_depIdxs = []int32{
 	14, // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -7714,7 +7876,7 @@ var file_task_proto_depIdxs = []int32{
 	43, // 18: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
 	44, // 19: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
 	8,  // 20: warp.multi_agent.v1.FileContent.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	59, // 21: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	60, // 21: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
 	45, // 22: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
 	46, // 23: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
 	47, // 24: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
@@ -7723,48 +7885,50 @@ var file_task_proto_depIdxs = []int32{
 	54, // 27: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
 	56, // 28: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
 	55, // 29: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	60, // 30: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	61, // 30: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
 	52, // 31: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.InputContext.ExecutedShellCommand
 	53, // 32: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
 	57, // 33: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
 	58, // 34: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
-	13, // 35: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	27, // 36: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	29, // 37: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	26, // 38: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
-	28, // 39: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	30, // 40: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	31, // 41: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	32, // 42: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	33, // 43: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
-	34, // 44: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
-	13, // 45: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
-	3,  // 46: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	5,  // 47: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	37, // 48: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	4,  // 49: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	6,  // 50: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	10, // 51: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	7,  // 52: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	11, // 53: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	12, // 54: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	38, // 55: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
-	59, // 56: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
-	35, // 57: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	36, // 58: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	0,  // 59: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	8,  // 60: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	21, // 61: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	9,  // 62: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	9,  // 63: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	9,  // 64: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	48, // 65: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	49, // 66: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	67, // [67:67] is the sub-list for method output_type
-	67, // [67:67] is the sub-list for method input_type
-	67, // [67:67] is the sub-list for extension type_name
-	67, // [67:67] is the sub-list for extension extendee
-	0,  // [0:67] is the sub-list for field type_name
+	59, // 35: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	13, // 36: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	27, // 37: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	29, // 38: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	26, // 39: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
+	28, // 40: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	30, // 41: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	31, // 42: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	32, // 43: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	33, // 44: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
+	34, // 45: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
+	13, // 46: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	3,  // 47: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	5,  // 48: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	37, // 49: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	4,  // 50: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	6,  // 51: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	10, // 52: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	7,  // 53: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	11, // 54: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	12, // 55: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	38, // 56: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	60, // 57: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	35, // 58: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	36, // 59: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	0,  // 60: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	8,  // 61: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	21, // 62: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	9,  // 63: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	9,  // 64: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	9,  // 65: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	48, // 66: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	49, // 67: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	8,  // 68: warp.multi_agent.v1.InputContext.File.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	69, // [69:69] is the sub-list for method output_type
+	69, // [69:69] is the sub-list for method input_type
+	69, // [69:69] is the sub-list for extension type_name
+	69, // [69:69] is the sub-list for extension extendee
+	0,  // [0:69] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
@@ -7842,7 +8006,7 @@ func file_task_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_task_proto_rawDesc), len(file_task_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   59,
+			NumMessages:   60,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
