@@ -207,7 +207,8 @@ type Request_builder struct {
 	Metadata *Request_Metadata
 	// The list of suggestions received from the previous request.
 	ExistingSuggestions *Suggestions
-	McpContext          *Request_MCPContext
+	// Information about the client's MCP capabilities.
+	McpContext *Request_MCPContext
 }
 
 func (b0 Request_builder) Build() *Request {
@@ -790,7 +791,6 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	return m0
 }
 
-// Information about the client's MCP capabilities.
 type Request_MCPContext struct {
 	state                protoimpl.MessageState             `protogen:"opaque.v1"`
 	xxx_hidden_Resources *[]*Request_MCPContext_MCPResource `protobuf:"bytes,1,rep,name=resources"`
@@ -2619,6 +2619,8 @@ type Request_MCPContext_MCPTool_builder struct {
 
 	Name        *string
 	Description *string
+	// The input schema for an MCP Tool is specified as
+	// as JSON schema, which is a JSON struct at root.
 	InputSchema *structpb.Struct
 }
 

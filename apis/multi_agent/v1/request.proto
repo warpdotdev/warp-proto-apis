@@ -30,6 +30,7 @@ message Request {
   // The list of suggestions received from the previous request.
   Suggestions existing_suggestions = 5;
 
+  // Information about the client's MCP capabilities.
   MCPContext mcp_context = 6;
 
   message TaskContext {
@@ -127,7 +128,6 @@ message Request {
     }
   }
 
-  // Information about the client's MCP capabilities.
   message MCPContext {
     repeated MCPResource resources = 1;
     repeated MCPTool tools = 2;
@@ -142,6 +142,8 @@ message Request {
     message MCPTool {
       string name = 1 [ (sensitive) = true ];
       string description = 2 [ (sensitive) = true ];
+      // The input schema for an MCP Tool is specified as
+      // as JSON schema, which is a JSON struct at root.
       google.protobuf.Struct input_schema = 3;
     }
   }

@@ -190,6 +190,8 @@ message Message {
     message CallMCPTool {
       // Name of the tool call.
       string name = 1;
+      // An MCP tool call specifies args as named JSON arguments
+      // (not arbitrary JSON, e.g. a string).
       google.protobuf.Struct args = 2;
     }
   }
@@ -397,7 +399,7 @@ message CallMCPToolResult {
   }
 
   message Success { 
-    repeated Result result = 1;
+    repeated Result results = 1;
 
     message Result {
       oneof result {

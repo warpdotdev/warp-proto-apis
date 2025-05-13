@@ -6136,6 +6136,8 @@ type Message_ToolCall_CallMCPTool_builder struct {
 
 	// Name of the tool call.
 	Name *string
+	// An MCP tool call specifies args as named JSON arguments
+	// (not arbitrary JSON, e.g. a string).
 	Args *structpb.Struct
 }
 
@@ -7865,10 +7867,10 @@ func (b0 ReadMCPResourceResult_Error_builder) Build() *ReadMCPResourceResult_Err
 }
 
 type CallMCPToolResult_Success struct {
-	state             protoimpl.MessageState               `protogen:"opaque.v1"`
-	xxx_hidden_Result *[]*CallMCPToolResult_Success_Result `protobuf:"bytes,1,rep,name=result"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state              protoimpl.MessageState               `protogen:"opaque.v1"`
+	xxx_hidden_Results *[]*CallMCPToolResult_Success_Result `protobuf:"bytes,1,rep,name=results"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *CallMCPToolResult_Success) Reset() {
@@ -7896,30 +7898,30 @@ func (x *CallMCPToolResult_Success) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *CallMCPToolResult_Success) GetResult() []*CallMCPToolResult_Success_Result {
+func (x *CallMCPToolResult_Success) GetResults() []*CallMCPToolResult_Success_Result {
 	if x != nil {
-		if x.xxx_hidden_Result != nil {
-			return *x.xxx_hidden_Result
+		if x.xxx_hidden_Results != nil {
+			return *x.xxx_hidden_Results
 		}
 	}
 	return nil
 }
 
-func (x *CallMCPToolResult_Success) SetResult(v []*CallMCPToolResult_Success_Result) {
-	x.xxx_hidden_Result = &v
+func (x *CallMCPToolResult_Success) SetResults(v []*CallMCPToolResult_Success_Result) {
+	x.xxx_hidden_Results = &v
 }
 
 type CallMCPToolResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Result []*CallMCPToolResult_Success_Result
+	Results []*CallMCPToolResult_Success_Result
 }
 
 func (b0 CallMCPToolResult_Success_builder) Build() *CallMCPToolResult_Success {
 	m0 := &CallMCPToolResult_Success{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Result = &b.Result
+	x.xxx_hidden_Results = &b.Results
 	return m0
 }
 
@@ -9441,12 +9443,12 @@ const file_task_proto_rawDesc = "" +
 	"\bcontents\x18\x01 \x03(\v2'.warp.multi_agent.v1.MCPResourceContentR\bcontents\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\x92\x05\n" +
+	"\x06result\"\x94\x05\n" +
 	"\x11CallMCPToolResult\x12J\n" +
 	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.CallMCPToolResult.SuccessH\x00R\asuccess\x12D\n" +
-	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.CallMCPToolResult.ErrorH\x00R\x05error\x1a\xb7\x03\n" +
-	"\aSuccess\x12M\n" +
-	"\x06result\x18\x01 \x03(\v25.warp.multi_agent.v1.CallMCPToolResult.Success.ResultR\x06result\x1a\xdc\x02\n" +
+	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.CallMCPToolResult.ErrorH\x00R\x05error\x1a\xb9\x03\n" +
+	"\aSuccess\x12O\n" +
+	"\aresults\x18\x01 \x03(\v25.warp.multi_agent.v1.CallMCPToolResult.Success.ResultR\aresults\x1a\xdc\x02\n" +
 	"\x06Result\x12P\n" +
 	"\x04text\x18\x01 \x01(\v2:.warp.multi_agent.v1.CallMCPToolResult.Success.Result.TextH\x00R\x04text\x12S\n" +
 	"\x05image\x18\x02 \x01(\v2;.warp.multi_agent.v1.CallMCPToolResult.Success.Result.ImageH\x00R\x05image\x12E\n" +
@@ -9651,7 +9653,7 @@ var file_task_proto_depIdxs = []int32{
 	53, // 76: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
 	54, // 77: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
 	13, // 78: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	63, // 79: warp.multi_agent.v1.CallMCPToolResult.Success.result:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	63, // 79: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
 	64, // 80: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	65, // 81: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
 	13, // 82: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
