@@ -79,6 +79,7 @@ message Message {
     ToolCall tool_call = 4;
     ToolCallResult tool_call_result = 5;
     ServerEvent server_event = 6;
+    PassiveCodeDiffQuery passive_code_diff_query = 8;
   }
 
   // User query message type
@@ -218,6 +219,10 @@ message Message {
   //
   // The client should treat the `payload` as an opaque blob.
   message ServerEvent { string payload = 1; }
+
+  message PassiveCodeDiffQuery {
+    string query = 1 [ (sensitive) = true ];
+  }
 }
 
 // Result of a `RunShellCommand` tool call.
