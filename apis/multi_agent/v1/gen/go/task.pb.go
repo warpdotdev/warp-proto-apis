@@ -7423,17 +7423,12 @@ func (b0 InputContext_Codebase_builder) Build() *InputContext_Codebase {
 	return m0
 }
 
-// Any attached files. Purposely separated from `FileContent` schema which
-// is used solely for ReadFiles tool call results.
+// Any attached files.
 type InputContext_File struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
-	xxx_hidden_Content     *string                `protobuf:"bytes,2,opt,name=content"`
-	xxx_hidden_LineRange   *FileContentLineRange  `protobuf:"bytes,3,opt,name=line_range,json=lineRange"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *FileContent           `protobuf:"bytes,1,opt,name=content"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *InputContext_File) Reset() {
@@ -7461,103 +7456,39 @@ func (x *InputContext_File) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InputContext_File) GetFilePath() string {
+func (x *InputContext_File) GetContent() *FileContent {
 	if x != nil {
-		if x.xxx_hidden_FilePath != nil {
-			return *x.xxx_hidden_FilePath
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *InputContext_File) GetContent() string {
-	if x != nil {
-		if x.xxx_hidden_Content != nil {
-			return *x.xxx_hidden_Content
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *InputContext_File) GetLineRange() *FileContentLineRange {
-	if x != nil {
-		return x.xxx_hidden_LineRange
+		return x.xxx_hidden_Content
 	}
 	return nil
 }
 
-func (x *InputContext_File) SetFilePath(v string) {
-	x.xxx_hidden_FilePath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *InputContext_File) SetContent(v string) {
-	x.xxx_hidden_Content = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
-}
-
-func (x *InputContext_File) SetLineRange(v *FileContentLineRange) {
-	x.xxx_hidden_LineRange = v
-}
-
-func (x *InputContext_File) HasFilePath() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+func (x *InputContext_File) SetContent(v *FileContent) {
+	x.xxx_hidden_Content = v
 }
 
 func (x *InputContext_File) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *InputContext_File) HasLineRange() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_LineRange != nil
-}
-
-func (x *InputContext_File) ClearFilePath() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_FilePath = nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *InputContext_File) ClearContent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Content = nil
-}
-
-func (x *InputContext_File) ClearLineRange() {
-	x.xxx_hidden_LineRange = nil
 }
 
 type InputContext_File_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	FilePath  *string
-	Content   *string
-	LineRange *FileContentLineRange
+	Content *FileContent
 }
 
 func (b0 InputContext_File_builder) Build() *InputContext_File {
 	m0 := &InputContext_File{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.FilePath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
-		x.xxx_hidden_FilePath = b.FilePath
-	}
-	if b.Content != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Content = b.Content
-	}
-	x.xxx_hidden_LineRange = b.LineRange
+	x.xxx_hidden_Content = b.Content
 	return m0
 }
 
@@ -7749,7 +7680,7 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xe6\n" +
+	"\x06result\"\x94\n" +
 	"\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
@@ -7782,12 +7713,9 @@ const file_task_proto_rawDesc = "" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a2\n" +
 	"\bCodebase\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04path\x1a\x93\x01\n" +
-	"\x04File\x12!\n" +
-	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
-	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12H\n" +
-	"\n" +
-	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRangeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04path\x18\x02 \x01(\tR\x04path\x1aB\n" +
+	"\x04File\x12:\n" +
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 60)
 var file_task_proto_goTypes = []any{
@@ -7923,7 +7851,7 @@ var file_task_proto_depIdxs = []int32{
 	9,  // 65: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
 	48, // 66: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
 	49, // 67: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	8,  // 68: warp.multi_agent.v1.InputContext.File.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	9,  // 68: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
 	69, // [69:69] is the sub-list for method output_type
 	69, // [69:69] is the sub-list for method input_type
 	69, // [69:69] is the sub-list for extension type_name
