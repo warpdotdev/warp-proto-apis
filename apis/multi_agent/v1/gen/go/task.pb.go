@@ -3653,6 +3653,7 @@ func (b0 Message_UserQuery_builder) Build() *Message_UserQuery {
 type Message_AgentOutput struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Text        *string                `protobuf:"bytes,1,opt,name=text"`
+	xxx_hidden_Reasoning   *string                `protobuf:"bytes,2,opt,name=reasoning"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -3694,9 +3695,24 @@ func (x *Message_AgentOutput) GetText() string {
 	return ""
 }
 
+func (x *Message_AgentOutput) GetReasoning() string {
+	if x != nil {
+		if x.xxx_hidden_Reasoning != nil {
+			return *x.xxx_hidden_Reasoning
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_AgentOutput) SetText(v string) {
 	x.xxx_hidden_Text = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Message_AgentOutput) SetReasoning(v string) {
+	x.xxx_hidden_Reasoning = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *Message_AgentOutput) HasText() bool {
@@ -3706,15 +3722,30 @@ func (x *Message_AgentOutput) HasText() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Message_AgentOutput) HasReasoning() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *Message_AgentOutput) ClearText() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Text = nil
 }
 
+func (x *Message_AgentOutput) ClearReasoning() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Reasoning = nil
+}
+
 type Message_AgentOutput_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Text to be shown to the user.
 	Text *string
+	// Internal "reasoning tokens" produced by the LLM.
+	Reasoning *string
 }
 
 func (b0 Message_AgentOutput_builder) Build() *Message_AgentOutput {
@@ -3722,8 +3753,12 @@ func (b0 Message_AgentOutput_builder) Build() *Message_AgentOutput {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Text != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Text = b.Text
+	}
+	if b.Reasoning != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Reasoning = b.Reasoning
 	}
 	return m0
 }
@@ -9258,7 +9293,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xa7\x1f\n" +
+	"\x06status\"\xc5\x1f\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12G\n" +
@@ -9270,9 +9305,10 @@ const file_task_proto_rawDesc = "" +
 	"\fserver_event\x18\x06 \x01(\v2(.warp.multi_agent.v1.Message.ServerEventH\x00R\vserverEvent\x1ad\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
-	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a!\n" +
+	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1a\x90\x10\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1c\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\x90\x10\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +

@@ -91,7 +91,12 @@ message Message {
   }
 
   // Agent output message type
-  message AgentOutput { string text = 1; }
+  message AgentOutput {
+    // Text to be shown to the user.
+    string text = 1;
+    // Internal "reasoning tokens" produced by the LLM.
+    string reasoning = 2;
+  }
 
   // Tool call message type
   message ToolCall {
