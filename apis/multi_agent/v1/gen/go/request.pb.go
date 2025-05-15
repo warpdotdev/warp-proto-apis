@@ -1372,6 +1372,15 @@ func (x *Request_Input_ToolCallResult) GetCallMcpTool() *CallMCPToolResult {
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetCreateFiles() *CreateFilesResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_CreateFiles); ok {
+			return x.CreateFiles
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -1463,6 +1472,14 @@ func (x *Request_Input_ToolCallResult) SetCallMcpTool(v *CallMCPToolResult) {
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_CallMcpTool{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetCreateFiles(v *CreateFilesResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_CreateFiles{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -1567,6 +1584,14 @@ func (x *Request_Input_ToolCallResult) HasCallMcpTool() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasCreateFiles() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_CreateFiles)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -1642,6 +1667,12 @@ func (x *Request_Input_ToolCallResult) ClearCallMcpTool() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearCreateFiles() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_CreateFiles); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -1654,6 +1685,7 @@ const Request_Input_ToolCallResult_FileGlob_case case_Request_Input_ToolCallResu
 const Request_Input_ToolCallResult_Refine_case case_Request_Input_ToolCallResult_Result = 10
 const Request_Input_ToolCallResult_ReadMcpResource_case case_Request_Input_ToolCallResult_Result = 11
 const Request_Input_ToolCallResult_CallMcpTool_case case_Request_Input_ToolCallResult_Result = 12
+const Request_Input_ToolCallResult_CreateFiles_case case_Request_Input_ToolCallResult_Result = 13
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -1682,6 +1714,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_ReadMcpResource_case
 	case *request_Input_ToolCallResult_CallMcpTool:
 		return Request_Input_ToolCallResult_CallMcpTool_case
+	case *request_Input_ToolCallResult_CreateFiles:
+		return Request_Input_ToolCallResult_CreateFiles_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -1703,6 +1737,7 @@ type Request_Input_ToolCallResult_builder struct {
 	Refine            *Request_Input_ToolCallResult_RefineResult
 	ReadMcpResource   *ReadMCPResourceResult
 	CallMcpTool       *CallMCPToolResult
+	CreateFiles       *CreateFilesResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -1746,6 +1781,9 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.CallMcpTool != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_CallMcpTool{b.CallMcpTool}
+	}
+	if b.CreateFiles != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_CreateFiles{b.CreateFiles}
 	}
 	return m0
 }
@@ -1808,6 +1846,10 @@ type request_Input_ToolCallResult_CallMcpTool struct {
 	CallMcpTool *CallMCPToolResult `protobuf:"bytes,12,opt,name=call_mcp_tool,json=callMcpTool,oneof"`
 }
 
+type request_Input_ToolCallResult_CreateFiles struct {
+	CreateFiles *CreateFilesResult `protobuf:"bytes,13,opt,name=create_files,json=createFiles,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -1829,6 +1871,8 @@ func (*request_Input_ToolCallResult_Refine) isRequest_Input_ToolCallResult_Resul
 func (*request_Input_ToolCallResult_ReadMcpResource) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_CallMcpTool) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_CreateFiles) isRequest_Input_ToolCallResult_Result() {}
 
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -3180,7 +3224,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xaf\"\n" +
+	"task.proto\"\xfc\"\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3191,7 +3235,7 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xee\x14\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xbb\x15\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -3210,7 +3254,7 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x04\x80\xb5\x18\x01H\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResultB\a\n" +
-	"\x05input\x1a\x91\b\n" +
+	"\x05input\x1a\xde\b\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -3226,7 +3270,8 @@ const file_request_proto_rawDesc = "" +
 	"\x06refine\x18\n" +
 	" \x01(\v2>.warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResultH\x00R\x06refine\x12X\n" +
 	"\x11read_mcp_resource\x18\v \x01(\v2*.warp.multi_agent.v1.ReadMCPResourceResultH\x00R\x0freadMcpResource\x12L\n" +
-	"\rcall_mcp_tool\x18\f \x01(\v2&.warp.multi_agent.v1.CallMCPToolResultH\x00R\vcallMcpTool\x1a[\n" +
+	"\rcall_mcp_tool\x18\f \x01(\v2&.warp.multi_agent.v1.CallMCPToolResultH\x00R\vcallMcpTool\x12K\n" +
+	"\fcreate_files\x18\r \x01(\v2&.warp.multi_agent.v1.CreateFilesResultH\x00R\vcreateFiles\x1a[\n" +
 	"\fRefineResult\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
@@ -3316,8 +3361,9 @@ var file_request_proto_goTypes = []any{
 	(*FileGlobResult)(nil),                 // 32: warp.multi_agent.v1.FileGlobResult
 	(*ReadMCPResourceResult)(nil),          // 33: warp.multi_agent.v1.ReadMCPResourceResult
 	(*CallMCPToolResult)(nil),              // 34: warp.multi_agent.v1.CallMCPToolResult
-	(*structpb.Value)(nil),                 // 35: google.protobuf.Value
-	(*structpb.Struct)(nil),                // 36: google.protobuf.Struct
+	(*CreateFilesResult)(nil),              // 35: warp.multi_agent.v1.CreateFilesResult
+	(*structpb.Value)(nil),                 // 36: google.protobuf.Value
+	(*structpb.Struct)(nil),                // 37: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -3349,21 +3395,22 @@ var file_request_proto_depIdxs = []int32{
 	12, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	33, // 27: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
 	34, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	13, // 29: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	14, // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	15, // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	16, // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	17, // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	6,  // 34: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 35: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	6,  // 36: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	35, // 37: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	36, // 38: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	39, // [39:39] is the sub-list for method output_type
-	39, // [39:39] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	35, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.create_files:type_name -> warp.multi_agent.v1.CreateFilesResult
+	13, // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	14, // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	15, // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	16, // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	17, // 34: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	6,  // 35: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	8,  // 36: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	6,  // 37: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	36, // 38: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	37, // 39: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	40, // [40:40] is the sub-list for method output_type
+	40, // [40:40] is the sub-list for method input_type
+	40, // [40:40] is the sub-list for extension type_name
+	40, // [40:40] is the sub-list for extension extendee
+	0,  // [0:40] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -3393,6 +3440,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_Refine)(nil),
 		(*request_Input_ToolCallResult_ReadMcpResource)(nil),
 		(*request_Input_ToolCallResult_CallMcpTool)(nil),
+		(*request_Input_ToolCallResult_CreateFiles)(nil),
 	}
 	file_request_proto_msgTypes[9].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),
