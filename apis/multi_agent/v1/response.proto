@@ -80,6 +80,9 @@ message ClientAction {
     Suggestions show_suggestions = 6;
     UpdateTaskSummary update_task_summary = 7;
     UpdateTaskDescription update_task_description = 8;
+    BeginTransaction begin_transaction = 9;
+    CommitTransaction commit_transaction = 10;
+    RollbackTransaction rollback_transaction = 11;
   }
 
   // Create task action
@@ -128,4 +131,15 @@ message ClientAction {
     string task_id = 1;
     string summary = 2;
   }
+
+  // Begins a transaction - messages created and updated during a transaction
+  // are provisional and subject to rollback if the server or client encounters
+  // an error.
+  message BeginTransaction {}
+
+  // Commits the active transaction - provisional messages are made permanent.
+  message CommitTransaction {}
+
+  // Rolls back the active transaction - provisional messages are discarded.
+  message RollbackTransaction {}
 }

@@ -6,6 +6,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
 
 import "options.proto";
 
@@ -91,7 +92,12 @@ message Message {
   }
 
   // Agent output message type
-  message AgentOutput { string text = 1; }
+  message AgentOutput {
+    // Text to be shown to the user.
+    string text = 1;
+    // Internal "reasoning tokens" produced by the LLM.
+    string reasoning = 2;
+  }
 
   // Tool call message type
   message ToolCall {
@@ -108,6 +114,8 @@ message Message {
       SuggestCreatePlan suggest_create_plan = 8;
       Grep grep = 9;
       FileGlob file_glob = 10;
+      ReadMCPResource read_mcp_resource = 11;
+      CallMCPTool call_mcp_tool = 12;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -180,6 +188,18 @@ message Message {
       // The relative path to the directory to search in.
       string path = 2;
     }
+
+    // A tool call to read an MCP resource identified by its URI.
+    message ReadMCPResource { string uri = 1; }
+
+    // A tool call to execute an MCP tool.
+    message CallMCPTool {
+      // Name of the tool call.
+      string name = 1;
+      // An MCP tool call specifies args as named JSON arguments
+      // (not arbitrary JSON, e.g. a string).
+      google.protobuf.Struct args = 2;
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -203,6 +223,8 @@ message Message {
       FileGlobResult file_glob = 10;
       RefineResult refine = 13;
       google.protobuf.Empty cancel = 14;
+      ReadMCPResourceResult read_mcp_resource = 15;
+      CallMCPToolResult call_mcp_tool = 16;
     }
 
     // Result of a server-side tool call.
@@ -340,6 +362,71 @@ message FileGlobResult {
     string matched_files = 1 [ (sensitive) = true ];
   }
 
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+message MCPResourceContent {
+  // Every MCP resource is uniquely identified by a URI.
+  string uri = 1 [ (sensitive) = true ];
+
+  // The type of content that this MCP resource contains.
+  oneof content_type {
+    Text text = 2;
+    Binary binary = 3;
+  }
+
+  message Text {
+    string content = 1 [ (sensitive) = true ];
+    string mime_type = 2;
+  }
+
+  message Binary {
+    // Data must be encoded.
+    string data = 1;
+    string mime_type = 2;
+  }
+}
+
+message ReadMCPResourceResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // Reading a single MCP resource can result in multiple resources.
+    // See https://modelcontextprotocol.io/docs/concepts/resources#reading-resources.
+    repeated MCPResourceContent contents = 1;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+message CallMCPToolResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success { 
+    repeated Result results = 1;
+
+    message Result {
+      oneof result {
+        Text text = 1;
+        Image image = 2;
+        // An MCP tool call can produce an embedded resource.
+        MCPResourceContent resource = 3;
+      }
+  
+      message Text { string text = 1 [ (sensitive) = true ]; }
+      message Image {
+        string data = 1;
+        string mime_type = 2;
+      }
+    }
+  }
+  
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
