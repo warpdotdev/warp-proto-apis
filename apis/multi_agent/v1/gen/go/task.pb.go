@@ -596,6 +596,7 @@ type Message struct {
 	state                        protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Id                *string                `protobuf:"bytes,1,opt,name=id"`
 	xxx_hidden_ServerMessageData *string                `protobuf:"bytes,7,opt,name=server_message_data,json=serverMessageData"`
+	xxx_hidden_Citations         *[]*Citation           `protobuf:"bytes,8,rep,name=citations"`
 	xxx_hidden_Message           isMessage_Message      `protobuf_oneof:"message"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
@@ -648,6 +649,15 @@ func (x *Message) GetServerMessageData() string {
 	return ""
 }
 
+func (x *Message) GetCitations() []*Citation {
+	if x != nil {
+		if x.xxx_hidden_Citations != nil {
+			return *x.xxx_hidden_Citations
+		}
+	}
+	return nil
+}
+
 func (x *Message) GetUserQuery() *Message_UserQuery {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Message.(*message_UserQuery_); ok {
@@ -695,12 +705,16 @@ func (x *Message) GetServerEvent() *Message_ServerEvent {
 
 func (x *Message) SetId(v string) {
 	x.xxx_hidden_Id = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Message) SetServerMessageData(v string) {
 	x.xxx_hidden_ServerMessageData = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *Message) SetCitations(v []*Citation) {
+	x.xxx_hidden_Citations = &v
 }
 
 func (x *Message) SetUserQuery(v *Message_UserQuery) {
@@ -882,6 +896,8 @@ type Message_builder struct {
 	Id *string
 	// An opaque payload that the client should simply roundtrip.
 	ServerMessageData *string
+	// Citations associated with this message
+	Citations []*Citation
 	// The type of message with its specific content
 
 	// Fields of oneof xxx_hidden_Message:
@@ -898,13 +914,14 @@ func (b0 Message_builder) Build() *Message {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Id != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Id = b.Id
 	}
 	if b.ServerMessageData != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_ServerMessageData = b.ServerMessageData
 	}
+	x.xxx_hidden_Citations = &b.Citations
 	if b.UserQuery != nil {
 		x.xxx_hidden_Message = &message_UserQuery_{b.UserQuery}
 	}
@@ -9350,7 +9367,7 @@ var File_task_proto protoreflect.FileDescriptor
 const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\"\xfa\x02\n" +
+	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x0fcitations.proto\"\xfa\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
@@ -9377,10 +9394,11 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xc5\x1f\n" +
+	"\x06status\"\x82 \n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
-	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12G\n" +
+	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
+	"\tcitations\x18\b \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12G\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryH\x00R\tuserQuery\x12M\n" +
 	"\fagent_output\x18\x03 \x01(\v2(.warp.multi_agent.v1.Message.AgentOutputH\x00R\vagentOutput\x12D\n" +
@@ -9694,6 +9712,7 @@ var file_task_proto_goTypes = []any{
 	(*InputContext_Image)(nil),                             // 71: warp.multi_agent.v1.InputContext.Image
 	(*InputContext_Codebase)(nil),                          // 72: warp.multi_agent.v1.InputContext.Codebase
 	(*InputContext_File)(nil),                              // 73: warp.multi_agent.v1.InputContext.File
+	(*Citation)(nil),                                       // 73: warp.multi_agent.v1.Citation
 	(*emptypb.Empty)(nil),                                  // 74: google.protobuf.Empty
 	(*timestamppb.Timestamp)(nil),                          // 75: google.protobuf.Timestamp
 	(*structpb.Struct)(nil),                                // 76: google.protobuf.Struct
@@ -9741,6 +9760,39 @@ var file_task_proto_depIdxs = []int32{
 	71, // 39: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
 	72, // 40: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
 	73, // 41: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	73, // 9: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+	24, // 10: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	25, // 11: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
+	26, // 12: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
+	27, // 13: warp.multi_agent.v1.Message.tool_call_result:type_name -> warp.multi_agent.v1.Message.ToolCallResult
+	28, // 14: warp.multi_agent.v1.Message.server_event:type_name -> warp.multi_agent.v1.Message.ServerEvent
+	44, // 15: warp.multi_agent.v1.ReadFilesResult.success:type_name -> warp.multi_agent.v1.ReadFilesResult.Success
+	45, // 16: warp.multi_agent.v1.ReadFilesResult.error:type_name -> warp.multi_agent.v1.ReadFilesResult.Error
+	46, // 17: warp.multi_agent.v1.SearchCodebaseResult.success:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Success
+	47, // 18: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
+	48, // 19: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
+	49, // 20: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
+	8,  // 21: warp.multi_agent.v1.FileContent.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	74, // 22: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	50, // 23: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	51, // 24: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
+	52, // 25: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
+	55, // 26: warp.multi_agent.v1.FileGlobResult.success:type_name -> warp.multi_agent.v1.FileGlobResult.Success
+	56, // 27: warp.multi_agent.v1.FileGlobResult.error:type_name -> warp.multi_agent.v1.FileGlobResult.Error
+	57, // 28: warp.multi_agent.v1.MCPResourceContent.text:type_name -> warp.multi_agent.v1.MCPResourceContent.Text
+	58, // 29: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
+	59, // 30: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
+	60, // 31: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
+	61, // 32: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
+	62, // 33: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
+	68, // 34: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
+	70, // 35: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
+	69, // 36: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
+	75, // 37: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	66, // 38: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.InputContext.ExecutedShellCommand
+	67, // 39: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	71, // 40: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	72, // 41: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
 	16, // 42: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
 	30, // 43: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
 	32, // 44: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
@@ -9783,12 +9835,20 @@ var file_task_proto_depIdxs = []int32{
 	64, // 81: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	65, // 82: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
 	13, // 83: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+<<<<<<< HEAD
 	9,  // 84: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
 	85, // [85:85] is the sub-list for method output_type
 	85, // [85:85] is the sub-list for method input_type
 	85, // [85:85] is the sub-list for extension type_name
 	85, // [85:85] is the sub-list for extension extendee
 	0,  // [0:85] is the sub-list for field type_name
+=======
+	84, // [84:84] is the sub-list for method output_type
+	84, // [84:84] is the sub-list for method input_type
+	84, // [84:84] is the sub-list for extension type_name
+	84, // [84:84] is the sub-list for extension extendee
+	0,  // [0:84] is the sub-list for field type_name
+>>>>>>> 32ac218 (ian/add_citation_to_proto_api)
 }
 
 func init() { file_task_proto_init() }
@@ -9797,6 +9857,7 @@ func file_task_proto_init() {
 		return
 	}
 	file_options_proto_init()
+	file_citations_proto_init()
 	file_task_proto_msgTypes[1].OneofWrappers = []any{
 		(*taskStatus_Pending_)(nil),
 		(*taskStatus_InProgress_)(nil),

@@ -9,6 +9,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
 
 import "options.proto";
+import "citations.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -72,6 +73,9 @@ message Message {
 
   // An opaque payload that the client should simply roundtrip.
   string server_message_data = 7;
+
+  // Citations associated with this message
+  repeated Citation citations = 8;
 
   // The type of message with its specific content
   oneof message {
