@@ -4492,6 +4492,7 @@ type Message_ToolCall_RunShellCommand struct {
 	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
 	xxx_hidden_IsReadOnly  bool                   `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
 	xxx_hidden_UsesPager   bool                   `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
+	xxx_hidden_IsRisky     bool                   `protobuf:"varint,4,opt,name=is_risky,json=isRisky"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -4547,19 +4548,31 @@ func (x *Message_ToolCall_RunShellCommand) GetUsesPager() bool {
 	return false
 }
 
+func (x *Message_ToolCall_RunShellCommand) GetIsRisky() bool {
+	if x != nil {
+		return x.xxx_hidden_IsRisky
+	}
+	return false
+}
+
 func (x *Message_ToolCall_RunShellCommand) SetCommand(v string) {
 	x.xxx_hidden_Command = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetIsReadOnly(v bool) {
 	x.xxx_hidden_IsReadOnly = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetUsesPager(v bool) {
 	x.xxx_hidden_UsesPager = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Message_ToolCall_RunShellCommand) SetIsRisky(v bool) {
+	x.xxx_hidden_IsRisky = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Message_ToolCall_RunShellCommand) HasCommand() bool {
@@ -4583,6 +4596,13 @@ func (x *Message_ToolCall_RunShellCommand) HasUsesPager() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *Message_ToolCall_RunShellCommand) HasIsRisky() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Message_ToolCall_RunShellCommand) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Command = nil
@@ -4598,12 +4618,18 @@ func (x *Message_ToolCall_RunShellCommand) ClearUsesPager() {
 	x.xxx_hidden_UsesPager = false
 }
 
+func (x *Message_ToolCall_RunShellCommand) ClearIsRisky() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_IsRisky = false
+}
+
 type Message_ToolCall_RunShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Command    *string
 	IsReadOnly *bool
 	UsesPager  *bool
+	IsRisky    *bool
 }
 
 func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_RunShellCommand {
@@ -4611,16 +4637,20 @@ func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_Run
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Command != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Command = b.Command
 	}
 	if b.IsReadOnly != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_IsReadOnly = *b.IsReadOnly
 	}
 	if b.UsesPager != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_UsesPager = *b.UsesPager
+	}
+	if b.IsRisky != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_IsRisky = *b.IsRisky
 	}
 	return m0
 }
@@ -7439,7 +7469,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xcc\x1b\n" +
+	"\x06status\"\xe8\x1b\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12G\n" +
@@ -7453,7 +7483,7 @@ const file_task_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a!\n" +
 	"\vAgentOutput\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1a\xdd\r\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x1a\xf9\r\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -7469,13 +7499,14 @@ const file_task_proto_rawDesc = "" +
 	"\tfile_glob\x18\n" +
 	" \x01(\v2..warp.multi_agent.v1.Message.ToolCall.FileGlobH\x00R\bfileGlob\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1al\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\x87\x01\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
 	"isReadOnly\x12\x1d\n" +
 	"\n" +
-	"uses_pager\x18\x03 \x01(\bR\tusesPager\x1a\xbf\x01\n" +
+	"uses_pager\x18\x03 \x01(\bR\tusesPager\x12\x19\n" +
+	"\bis_risky\x18\x04 \x01(\bR\aisRisky\x1a\xbf\x01\n" +
 	"\tReadFiles\x12J\n" +
 	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1af\n" +
 	"\x04File\x12\x12\n" +
