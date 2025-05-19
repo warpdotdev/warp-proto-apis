@@ -24,13 +24,13 @@ const (
 )
 
 type Citation struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
-	xxx_hidden_Type        *string                `protobuf:"bytes,2,opt,name=type"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DocumentId   *string                `protobuf:"bytes,1,opt,name=document_id,json=documentId"`
+	xxx_hidden_DocumentType *string                `protobuf:"bytes,2,opt,name=document_type,json=documentType"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *Citation) Reset() {
@@ -58,78 +58,78 @@ func (x *Citation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Citation) GetId() string {
+func (x *Citation) GetDocumentId() string {
 	if x != nil {
-		if x.xxx_hidden_Id != nil {
-			return *x.xxx_hidden_Id
+		if x.xxx_hidden_DocumentId != nil {
+			return *x.xxx_hidden_DocumentId
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Citation) GetType() string {
+func (x *Citation) GetDocumentType() string {
 	if x != nil {
-		if x.xxx_hidden_Type != nil {
-			return *x.xxx_hidden_Type
+		if x.xxx_hidden_DocumentType != nil {
+			return *x.xxx_hidden_DocumentType
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Citation) SetId(v string) {
-	x.xxx_hidden_Id = &v
+func (x *Citation) SetDocumentId(v string) {
+	x.xxx_hidden_DocumentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Citation) SetType(v string) {
-	x.xxx_hidden_Type = &v
+func (x *Citation) SetDocumentType(v string) {
+	x.xxx_hidden_DocumentType = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *Citation) HasId() bool {
+func (x *Citation) HasDocumentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Citation) HasType() bool {
+func (x *Citation) HasDocumentType() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Citation) ClearId() {
+func (x *Citation) ClearDocumentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Id = nil
+	x.xxx_hidden_DocumentId = nil
 }
 
-func (x *Citation) ClearType() {
+func (x *Citation) ClearDocumentType() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Type = nil
+	x.xxx_hidden_DocumentType = nil
 }
 
 type Citation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Id   *string
-	Type *string
+	DocumentId   *string
+	DocumentType *string
 }
 
 func (b0 Citation_builder) Build() *Citation {
 	m0 := &Citation{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Id != nil {
+	if b.DocumentId != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_Id = b.Id
+		x.xxx_hidden_DocumentId = b.DocumentId
 	}
-	if b.Type != nil {
+	if b.DocumentType != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Type = b.Type
+		x.xxx_hidden_DocumentType = b.DocumentType
 	}
 	return m0
 }
@@ -138,10 +138,11 @@ var File_citations_proto protoreflect.FileDescriptor
 
 const file_citations_proto_rawDesc = "" +
 	"\n" +
-	"\x0fcitations.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\".\n" +
-	"\bCitation\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04type\x18\x02 \x01(\tR\x04typeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x0fcitations.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"P\n" +
+	"\bCitation\x12\x1f\n" +
+	"\vdocument_id\x18\x01 \x01(\tR\n" +
+	"documentId\x12#\n" +
+	"\rdocument_type\x18\x02 \x01(\tR\fdocumentTypeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_citations_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_citations_proto_goTypes = []any{

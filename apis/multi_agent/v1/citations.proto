@@ -9,6 +9,6 @@ option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
 message Citation {
-    string id = 1;
-    string type = 2;
+    string document_id = 1;
+    string document_type = 2;
 }
