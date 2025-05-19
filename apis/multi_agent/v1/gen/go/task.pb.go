@@ -5289,6 +5289,7 @@ type Message_ToolCall_RunShellCommand struct {
 	xxx_hidden_IsReadOnly  bool                   `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
 	xxx_hidden_UsesPager   bool                   `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
 	xxx_hidden_Citations   *[]*Citation           `protobuf:"bytes,4,rep,name=citations"`
+	xxx_hidden_IsRisky     bool                   `protobuf:"varint,4,opt,name=is_risky,json=isRisky"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -5353,6 +5354,13 @@ func (x *Message_ToolCall_RunShellCommand) GetCitations() []*Citation {
 	return nil
 }
 
+func (x *Message_ToolCall_RunShellCommand) GetIsRisky() bool {
+	if x != nil {
+		return x.xxx_hidden_IsRisky
+	}
+	return false
+}
+
 func (x *Message_ToolCall_RunShellCommand) SetCommand(v string) {
 	x.xxx_hidden_Command = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
@@ -5370,6 +5378,12 @@ func (x *Message_ToolCall_RunShellCommand) SetUsesPager(v bool) {
 
 func (x *Message_ToolCall_RunShellCommand) SetCitations(v []*Citation) {
 	x.xxx_hidden_Citations = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *Message_ToolCall_RunShellCommand) SetIsRisky(v bool) {
+	x.xxx_hidden_IsRisky = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 4)
 }
 
 func (x *Message_ToolCall_RunShellCommand) HasCommand() bool {
@@ -5393,6 +5407,13 @@ func (x *Message_ToolCall_RunShellCommand) HasUsesPager() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *Message_ToolCall_RunShellCommand) HasIsRisky() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Message_ToolCall_RunShellCommand) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Command = nil
@@ -5408,6 +5429,11 @@ func (x *Message_ToolCall_RunShellCommand) ClearUsesPager() {
 	x.xxx_hidden_UsesPager = false
 }
 
+func (x *Message_ToolCall_RunShellCommand) ClearIsRisky() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_IsRisky = false
+}
+
 type Message_ToolCall_RunShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -5415,6 +5441,7 @@ type Message_ToolCall_RunShellCommand_builder struct {
 	IsReadOnly *bool
 	UsesPager  *bool
 	Citations  []*Citation
+	IsRisky    *bool
 }
 
 func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_RunShellCommand {
@@ -5434,6 +5461,10 @@ func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_Run
 		x.xxx_hidden_UsesPager = *b.UsesPager
 	}
 	x.xxx_hidden_Citations = &b.Citations
+	if b.IsRisky != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_IsRisky = *b.IsRisky
+	}
 	return m0
 }
 
@@ -9410,7 +9441,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xc0 \n" +
+	"\x06status\"\xe1\x1f\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
@@ -9426,7 +9457,7 @@ const file_task_proto_rawDesc = "" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1c\n" +
-	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\xce\x10\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\xac\x10\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -9444,7 +9475,7 @@ const file_task_proto_rawDesc = "" +
 	"\x11read_mcp_resource\x18\v \x01(\v25.warp.multi_agent.v1.Message.ToolCall.ReadMCPResourceH\x00R\x0freadMcpResource\x12W\n" +
 	"\rcall_mcp_tool\x18\f \x01(\v21.warp.multi_agent.v1.Message.ToolCall.CallMCPToolH\x00R\vcallMcpTool\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xa9\x01\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\x87\x01\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
@@ -9452,6 +9483,7 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"uses_pager\x18\x03 \x01(\bR\tusesPager\x12;\n" +
 	"\tcitations\x18\x04 \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x1a\xbf\x01\n" +
+	"\bis_risky\x18\x04 \x01(\bR\aisRisky\x1a\xbf\x01\n" +
 	"\tReadFiles\x12J\n" +
 	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1af\n" +
 	"\x04File\x12\x12\n" +
