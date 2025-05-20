@@ -135,7 +135,6 @@ message Message {
       FileGlob file_glob = 10;
       ReadMCPResource read_mcp_resource = 11;
       CallMCPTool call_mcp_tool = 12;
-      CreateFiles create_files = 13;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -176,6 +175,7 @@ message Message {
     message ApplyFileDiffs {
       string summary = 1;
       repeated FileDiff diffs = 2;
+      repeated NewFile new_files = 3;
 
       message FileDiff {
         string file_path = 1;
@@ -184,12 +184,6 @@ message Message {
         // The content that replaces `search`.
         string replace = 3;
       }
-    }
-
-    // A tool call to create new files.
-    message CreateFiles {
-      string summary = 1;
-      repeated NewFile files = 2;
 
       message NewFile {
         // Path of the file to create.
@@ -262,7 +256,6 @@ message Message {
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
-      CreateFilesResult create_files = 17;
     }
 
     // Result of a server-side tool call.
@@ -320,18 +313,6 @@ message ApplyFileDiffsResult {
   }
 
   message Success { repeated FileContent updated_files = 1; }
-
-  message Error { string message = 1 [ (sensitive) = true ]; }
-}
-
-// Result of a `CreateFiles` tool call.
-message CreateFilesResult {
-  oneof result {
-    Success success = 1;
-    Error error = 2;
-  }
-
-  message Success { repeated FileContent created_files = 1; }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
