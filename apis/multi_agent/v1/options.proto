@@ -13,4 +13,9 @@ extend google.protobuf.FieldOptions {
   // Secret redaction is applied in warp-server during the MAA request
   // processing.
   bool sensitive = 50000;
+
+  // Indicates the field should only be populated when the request is made by an internal user.
+  //
+  // E.g., comes from a WarpDev or WarpLocal client.
+  bool internal = 50001;
 }

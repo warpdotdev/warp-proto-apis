@@ -6,6 +6,7 @@ package warp.multi_agent.v1;
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
 
+import "options.proto";
 import "suggestions.proto";
 import "task.proto";
 
@@ -59,6 +60,32 @@ message ResponseEvent {
       InternalError internal_error = 7;
     }
 
+    // Internal-only field containing per-model token usage incurred in producing the response
+    // stream.
+    repeated TokenUsage token_usage = 8 [ (internal) = true];
+
+    message TokenUsage {
+        string model_id = 1;
+
+        // The total number of input tokens incurred for this model.
+        uint32 total_input = 2;
+
+        // The total number of output tokens incurred for this model.
+        uint32 output = 3;
+
+        // The total number of input cache read tokens incurred for this model.
+        //
+        // This is only populated for Anthropic models, which have the only API which provides such
+        // granular cached token usage information.
+        uint32 input_cache_read = 4;
+
+        // The total number of input cache write tokens incurred for this model.
+        //
+        // This is only populated for Anthropic models, which have the only API which provides such
+        // granular cached token usage information.
+        uint32 input_cache_write = 5;
+    }
+
     message Other {}
     message Done {}
     message ReachedMaxTokenLimit {}
@@ -88,7 +115,7 @@ message ClientAction {
   // Create task action
   message CreateTask { Task task = 1; }
 
-  // TODO(matthew): Ought to be able to combine 
+  // TODO(matthew): Ought to be able to combine
   // UpdateTask{Status,Description,Summary} at least.
 
   // Update task status action
