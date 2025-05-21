@@ -19,7 +19,7 @@ enum DocumentType {
 }
 
 // Citation represents a reference to a specific document or resource that was used by the LLM in generating 
-// the respose. Citations can included both on the message level or on induvidual tool calls
+// the response. Citations can be included both on the message level or on individual tool calls
 // It includes both the unique identifier of the document and its type classification.
 message Citation {
     string document_id = 1;
