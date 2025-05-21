@@ -133,7 +133,7 @@ message Message {
       repeated Citation citations = 4;
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
-      bool is_risky = 4;
+      bool is_risky = 5;
     }
 
     // A tool call to read files.
