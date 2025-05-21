@@ -23,10 +23,66 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type DocumentType int32
+
+const (
+	DocumentType_WARP_DRIVE_WORKFLOW DocumentType = 0
+	DocumentType_WARP_DRIVE_NOTEBOOK DocumentType = 1
+	DocumentType_WARP_DRIVE_ENV_VAR  DocumentType = 2
+	DocumentType_MEMORY              DocumentType = 3
+	DocumentType_WARP_DOCUMENTATION  DocumentType = 4
+	DocumentType_WEB_PAGE            DocumentType = 5
+	DocumentType_UNKNOWN             DocumentType = 6
+)
+
+// Enum value maps for DocumentType.
+var (
+	DocumentType_name = map[int32]string{
+		0: "WARP_DRIVE_WORKFLOW",
+		1: "WARP_DRIVE_NOTEBOOK",
+		2: "WARP_DRIVE_ENV_VAR",
+		3: "MEMORY",
+		4: "WARP_DOCUMENTATION",
+		5: "WEB_PAGE",
+		6: "UNKNOWN",
+	}
+	DocumentType_value = map[string]int32{
+		"WARP_DRIVE_WORKFLOW": 0,
+		"WARP_DRIVE_NOTEBOOK": 1,
+		"WARP_DRIVE_ENV_VAR":  2,
+		"MEMORY":              3,
+		"WARP_DOCUMENTATION":  4,
+		"WEB_PAGE":            5,
+		"UNKNOWN":             6,
+	}
+)
+
+func (x DocumentType) Enum() *DocumentType {
+	p := new(DocumentType)
+	*p = x
+	return p
+}
+
+func (x DocumentType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DocumentType) Descriptor() protoreflect.EnumDescriptor {
+	return file_citations_proto_enumTypes[0].Descriptor()
+}
+
+func (DocumentType) Type() protoreflect.EnumType {
+	return &file_citations_proto_enumTypes[0]
+}
+
+func (x DocumentType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 type Citation struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_DocumentId   *string                `protobuf:"bytes,1,opt,name=document_id,json=documentId"`
-	xxx_hidden_DocumentType *string                `protobuf:"bytes,2,opt,name=document_type,json=documentType"`
+	xxx_hidden_DocumentType DocumentType           `protobuf:"varint,2,opt,name=document_type,json=documentType,enum=warp.multi_agent.v1.DocumentType"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
@@ -68,14 +124,13 @@ func (x *Citation) GetDocumentId() string {
 	return ""
 }
 
-func (x *Citation) GetDocumentType() string {
+func (x *Citation) GetDocumentType() DocumentType {
 	if x != nil {
-		if x.xxx_hidden_DocumentType != nil {
-			return *x.xxx_hidden_DocumentType
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_DocumentType
 		}
-		return ""
 	}
-	return ""
+	return DocumentType_WARP_DRIVE_WORKFLOW
 }
 
 func (x *Citation) SetDocumentId(v string) {
@@ -83,8 +138,8 @@ func (x *Citation) SetDocumentId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Citation) SetDocumentType(v string) {
-	x.xxx_hidden_DocumentType = &v
+func (x *Citation) SetDocumentType(v DocumentType) {
+	x.xxx_hidden_DocumentType = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
@@ -109,14 +164,14 @@ func (x *Citation) ClearDocumentId() {
 
 func (x *Citation) ClearDocumentType() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_DocumentType = nil
+	x.xxx_hidden_DocumentType = DocumentType_WARP_DRIVE_WORKFLOW
 }
 
 type Citation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	DocumentId   *string
-	DocumentType *string
+	DocumentType *DocumentType
 }
 
 func (b0 Citation_builder) Build() *Citation {
@@ -129,7 +184,7 @@ func (b0 Citation_builder) Build() *Citation {
 	}
 	if b.DocumentType != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_DocumentType = b.DocumentType
+		x.xxx_hidden_DocumentType = *b.DocumentType
 	}
 	return m0
 }
@@ -138,22 +193,34 @@ var File_citations_proto protoreflect.FileDescriptor
 
 const file_citations_proto_rawDesc = "" +
 	"\n" +
-	"\x0fcitations.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"P\n" +
+	"\x0fcitations.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"s\n" +
 	"\bCitation\x12\x1f\n" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
-	"documentId\x12#\n" +
-	"\rdocument_type\x18\x02 \x01(\tR\fdocumentTypeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"documentId\x12F\n" +
+	"\rdocument_type\x18\x02 \x01(\x0e2!.warp.multi_agent.v1.DocumentTypeR\fdocumentType*\x97\x01\n" +
+	"\fDocumentType\x12\x17\n" +
+	"\x13WARP_DRIVE_WORKFLOW\x10\x00\x12\x17\n" +
+	"\x13WARP_DRIVE_NOTEBOOK\x10\x01\x12\x16\n" +
+	"\x12WARP_DRIVE_ENV_VAR\x10\x02\x12\n" +
+	"\n" +
+	"\x06MEMORY\x10\x03\x12\x16\n" +
+	"\x12WARP_DOCUMENTATION\x10\x04\x12\f\n" +
+	"\bWEB_PAGE\x10\x05\x12\v\n" +
+	"\aUNKNOWN\x10\x06B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
+var file_citations_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_citations_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_citations_proto_goTypes = []any{
-	(*Citation)(nil), // 0: warp.multi_agent.v1.Citation
+	(DocumentType)(0), // 0: warp.multi_agent.v1.DocumentType
+	(*Citation)(nil),  // 1: warp.multi_agent.v1.Citation
 }
 var file_citations_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0, // 0: warp.multi_agent.v1.Citation.document_type:type_name -> warp.multi_agent.v1.DocumentType
+	1, // [1:1] is the sub-list for method output_type
+	1, // [1:1] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_citations_proto_init() }
@@ -166,13 +233,14 @@ func file_citations_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_citations_proto_rawDesc), len(file_citations_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_citations_proto_goTypes,
 		DependencyIndexes: file_citations_proto_depIdxs,
+		EnumInfos:         file_citations_proto_enumTypes,
 		MessageInfos:      file_citations_proto_msgTypes,
 	}.Build()
 	File_citations_proto = out.File
