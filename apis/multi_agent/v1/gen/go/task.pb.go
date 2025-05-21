@@ -5441,7 +5441,9 @@ type Message_ToolCall_RunShellCommand_builder struct {
 	IsReadOnly *bool
 	UsesPager  *bool
 	Citations  []*Citation
-	IsRisky    *bool
+	// Whether the agent thinks this command is risky and therefore should be
+	// passed by the user first.
+	IsRisky *bool
 }
 
 func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_RunShellCommand {
