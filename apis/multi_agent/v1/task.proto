@@ -7,6 +7,7 @@ import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
 
 import "options.proto";
 
@@ -126,6 +127,7 @@ message Message {
       string command = 1;
       bool is_read_only = 2;
       bool uses_pager = 3;
+      google.protobuf.BoolValue is_risky = 4;
     }
 
     // A tool call to read files.

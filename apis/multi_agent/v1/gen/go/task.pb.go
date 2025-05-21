@@ -14,6 +14,7 @@ import (
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -5271,6 +5272,7 @@ type Message_ToolCall_RunShellCommand struct {
 	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
 	xxx_hidden_IsReadOnly  bool                   `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
 	xxx_hidden_UsesPager   bool                   `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
+	xxx_hidden_IsRisky     *wrapperspb.BoolValue  `protobuf:"bytes,4,opt,name=is_risky,json=isRisky"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -5326,19 +5328,30 @@ func (x *Message_ToolCall_RunShellCommand) GetUsesPager() bool {
 	return false
 }
 
+func (x *Message_ToolCall_RunShellCommand) GetIsRisky() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.xxx_hidden_IsRisky
+	}
+	return nil
+}
+
 func (x *Message_ToolCall_RunShellCommand) SetCommand(v string) {
 	x.xxx_hidden_Command = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetIsReadOnly(v bool) {
 	x.xxx_hidden_IsReadOnly = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetUsesPager(v bool) {
 	x.xxx_hidden_UsesPager = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Message_ToolCall_RunShellCommand) SetIsRisky(v *wrapperspb.BoolValue) {
+	x.xxx_hidden_IsRisky = v
 }
 
 func (x *Message_ToolCall_RunShellCommand) HasCommand() bool {
@@ -5362,6 +5375,13 @@ func (x *Message_ToolCall_RunShellCommand) HasUsesPager() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *Message_ToolCall_RunShellCommand) HasIsRisky() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_IsRisky != nil
+}
+
 func (x *Message_ToolCall_RunShellCommand) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Command = nil
@@ -5377,12 +5397,17 @@ func (x *Message_ToolCall_RunShellCommand) ClearUsesPager() {
 	x.xxx_hidden_UsesPager = false
 }
 
+func (x *Message_ToolCall_RunShellCommand) ClearIsRisky() {
+	x.xxx_hidden_IsRisky = nil
+}
+
 type Message_ToolCall_RunShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Command    *string
 	IsReadOnly *bool
 	UsesPager  *bool
+	IsRisky    *wrapperspb.BoolValue
 }
 
 func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_RunShellCommand {
@@ -5390,17 +5415,18 @@ func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_Run
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Command != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Command = b.Command
 	}
 	if b.IsReadOnly != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_IsReadOnly = *b.IsReadOnly
 	}
 	if b.UsesPager != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_UsesPager = *b.UsesPager
 	}
+	x.xxx_hidden_IsRisky = b.IsRisky
 	return m0
 }
 
@@ -9350,7 +9376,7 @@ var File_task_proto protoreflect.FileDescriptor
 const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\"\xfa\x02\n" +
+	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\roptions.proto\"\xfa\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
@@ -9377,7 +9403,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xc5\x1f\n" +
+	"\x06status\"\xfd\x1f\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12G\n" +
@@ -9392,7 +9418,7 @@ const file_task_proto_rawDesc = "" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1c\n" +
-	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\x90\x10\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\xc8\x10\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -9410,13 +9436,14 @@ const file_task_proto_rawDesc = "" +
 	"\x11read_mcp_resource\x18\v \x01(\v25.warp.multi_agent.v1.Message.ToolCall.ReadMCPResourceH\x00R\x0freadMcpResource\x12W\n" +
 	"\rcall_mcp_tool\x18\f \x01(\v21.warp.multi_agent.v1.Message.ToolCall.CallMCPToolH\x00R\vcallMcpTool\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1al\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xa3\x01\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
 	"isReadOnly\x12\x1d\n" +
 	"\n" +
-	"uses_pager\x18\x03 \x01(\bR\tusesPager\x1a\xbf\x01\n" +
+	"uses_pager\x18\x03 \x01(\bR\tusesPager\x125\n" +
+	"\bis_risky\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\aisRisky\x1a\xbf\x01\n" +
 	"\tReadFiles\x12J\n" +
 	"\x05files\x18\x01 \x03(\v24.warp.multi_agent.v1.Message.ToolCall.ReadFiles.FileR\x05files\x1af\n" +
 	"\x04File\x12\x12\n" +
@@ -9696,7 +9723,8 @@ var file_task_proto_goTypes = []any{
 	(*InputContext_File)(nil),                              // 73: warp.multi_agent.v1.InputContext.File
 	(*emptypb.Empty)(nil),                                  // 74: google.protobuf.Empty
 	(*timestamppb.Timestamp)(nil),                          // 75: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),                                // 76: google.protobuf.Struct
+	(*wrapperspb.BoolValue)(nil),                           // 76: google.protobuf.BoolValue
+	(*structpb.Struct)(nil),                                // 77: google.protobuf.Struct
 }
 var file_task_proto_depIdxs = []int32{
 	17, // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -9767,28 +9795,29 @@ var file_task_proto_depIdxs = []int32{
 	74, // 65: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
 	14, // 66: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
 	15, // 67: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	40, // 68: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	41, // 69: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	0,  // 70: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	76, // 71: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
-	8,  // 72: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	24, // 73: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	9,  // 74: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	9,  // 75: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	9,  // 76: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	53, // 77: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	54, // 78: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	13, // 79: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	63, // 80: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	64, // 81: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	65, // 82: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	13, // 83: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	9,  // 84: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	85, // [85:85] is the sub-list for method output_type
-	85, // [85:85] is the sub-list for method input_type
-	85, // [85:85] is the sub-list for extension type_name
-	85, // [85:85] is the sub-list for extension extendee
-	0,  // [0:85] is the sub-list for field type_name
+	76, // 68: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.is_risky:type_name -> google.protobuf.BoolValue
+	40, // 69: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	41, // 70: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	0,  // 71: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	77, // 72: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	8,  // 73: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	24, // 74: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	9,  // 75: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	9,  // 76: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	9,  // 77: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	53, // 78: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	54, // 79: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	13, // 80: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	63, // 81: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	64, // 82: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	65, // 83: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	13, // 84: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	9,  // 85: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	86, // [86:86] is the sub-list for method output_type
+	86, // [86:86] is the sub-list for method input_type
+	86, // [86:86] is the sub-list for extension type_name
+	86, // [86:86] is the sub-list for extension extendee
+	0,  // [0:86] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
