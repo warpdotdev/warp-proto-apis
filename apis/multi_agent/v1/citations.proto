@@ -1,4 +1,3 @@
-// Common types used in request and response for the multi-agent API.
 edition = "2023";
 
 package warp.multi_agent.v1;
@@ -8,6 +7,7 @@ import "google/protobuf/go_features.proto";
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
+// DocumentType represents the various types of documents that can be cited.
 enum DocumentType {
     WARP_DRIVE_WORKFLOW = 0;
     WARP_DRIVE_NOTEBOOK = 1;
@@ -18,6 +18,9 @@ enum DocumentType {
     UNKNOWN = 6;
 }
 
+// Citation represents a reference to a specific document or resource that was used by the LLM in generating 
+// the respose. Citations can included both on the message level or on induvidual tool calls
+// It includes both the unique identifier of the document and its type classification.
 message Citation {
     string document_id = 1;
     DocumentType document_type = 2;
