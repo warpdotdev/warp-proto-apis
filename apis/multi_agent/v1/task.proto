@@ -485,7 +485,6 @@ message InputContext {
     string path = 2;
   }
 
-  // Any attached files.
   message File {
     FileContent content = 1;
   }

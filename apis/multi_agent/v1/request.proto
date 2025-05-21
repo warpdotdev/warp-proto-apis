@@ -49,7 +49,7 @@ message Request {
       UserQuery user_query = 2;
       ToolCallResult tool_call_result = 3;
       QueryWithCannedResponse query_with_canned_response = 4;
-      PassiveCodeDiffQuery passive_code_diff_query = 5;
+      AutoCodeDiffQuery auto_code_diff_query = 5;
     }
 
     message UserQuery { string query = 1 [ (sensitive) = true ]; }
@@ -98,10 +98,9 @@ message Request {
       message CustomOnboardingRequest {}
     }
 
-    // A query to perform a passive code diff e.g. Warp detects compilation errors
-    // in the last run block, then auto-attaches relevant files to the request, and
-    // needs to get a code diff back to show to the user.
-    message PassiveCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
+    // A query to perform an automatic code diff e.g. Warp detects compilation errors
+    // in the last run block, and surfaces relevant a code diff to show to the user.
+    message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
   }
 
   message Metadata {

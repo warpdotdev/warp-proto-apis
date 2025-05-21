@@ -387,10 +387,10 @@ func (x *Request_Input) GetQueryWithCannedResponse() *Request_Input_QueryWithCan
 	return nil
 }
 
-func (x *Request_Input) GetPassiveCodeDiffQuery() *Request_Input_PassiveCodeDiffQuery {
+func (x *Request_Input) GetAutoCodeDiffQuery() *Request_Input_AutoCodeDiffQuery {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_PassiveCodeDiffQuery_); ok {
-			return x.PassiveCodeDiffQuery
+		if x, ok := x.xxx_hidden_Type.(*request_Input_AutoCodeDiffQuery_); ok {
+			return x.AutoCodeDiffQuery
 		}
 	}
 	return nil
@@ -424,12 +424,12 @@ func (x *Request_Input) SetQueryWithCannedResponse(v *Request_Input_QueryWithCan
 	x.xxx_hidden_Type = &request_Input_QueryWithCannedResponse_{v}
 }
 
-func (x *Request_Input) SetPassiveCodeDiffQuery(v *Request_Input_PassiveCodeDiffQuery) {
+func (x *Request_Input) SetAutoCodeDiffQuery(v *Request_Input_AutoCodeDiffQuery) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_PassiveCodeDiffQuery_{v}
+	x.xxx_hidden_Type = &request_Input_AutoCodeDiffQuery_{v}
 }
 
 func (x *Request_Input) HasContext() bool {
@@ -470,11 +470,11 @@ func (x *Request_Input) HasQueryWithCannedResponse() bool {
 	return ok
 }
 
-func (x *Request_Input) HasPassiveCodeDiffQuery() bool {
+func (x *Request_Input) HasAutoCodeDiffQuery() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_PassiveCodeDiffQuery_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_AutoCodeDiffQuery_)
 	return ok
 }
 
@@ -504,8 +504,8 @@ func (x *Request_Input) ClearQueryWithCannedResponse() {
 	}
 }
 
-func (x *Request_Input) ClearPassiveCodeDiffQuery() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_PassiveCodeDiffQuery_); ok {
+func (x *Request_Input) ClearAutoCodeDiffQuery() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_AutoCodeDiffQuery_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -514,7 +514,7 @@ const Request_Input_Type_not_set_case case_Request_Input_Type = 0
 const Request_Input_UserQuery_case case_Request_Input_Type = 2
 const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
 const Request_Input_QueryWithCannedResponse_case case_Request_Input_Type = 4
-const Request_Input_PassiveCodeDiffQuery_case case_Request_Input_Type = 5
+const Request_Input_AutoCodeDiffQuery_case case_Request_Input_Type = 5
 
 func (x *Request_Input) WhichType() case_Request_Input_Type {
 	if x == nil {
@@ -527,8 +527,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_ToolCallResult_case
 	case *request_Input_QueryWithCannedResponse_:
 		return Request_Input_QueryWithCannedResponse_case
-	case *request_Input_PassiveCodeDiffQuery_:
-		return Request_Input_PassiveCodeDiffQuery_case
+	case *request_Input_AutoCodeDiffQuery_:
+		return Request_Input_AutoCodeDiffQuery_case
 	default:
 		return Request_Input_Type_not_set_case
 	}
@@ -544,7 +544,7 @@ type Request_Input_builder struct {
 	UserQuery               *Request_Input_UserQuery
 	ToolCallResult          *Request_Input_ToolCallResult
 	QueryWithCannedResponse *Request_Input_QueryWithCannedResponse
-	PassiveCodeDiffQuery    *Request_Input_PassiveCodeDiffQuery
+	AutoCodeDiffQuery       *Request_Input_AutoCodeDiffQuery
 	// -- end of xxx_hidden_Type
 }
 
@@ -562,8 +562,8 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	if b.QueryWithCannedResponse != nil {
 		x.xxx_hidden_Type = &request_Input_QueryWithCannedResponse_{b.QueryWithCannedResponse}
 	}
-	if b.PassiveCodeDiffQuery != nil {
-		x.xxx_hidden_Type = &request_Input_PassiveCodeDiffQuery_{b.PassiveCodeDiffQuery}
+	if b.AutoCodeDiffQuery != nil {
+		x.xxx_hidden_Type = &request_Input_AutoCodeDiffQuery_{b.AutoCodeDiffQuery}
 	}
 	return m0
 }
@@ -594,8 +594,8 @@ type request_Input_QueryWithCannedResponse_ struct {
 	QueryWithCannedResponse *Request_Input_QueryWithCannedResponse `protobuf:"bytes,4,opt,name=query_with_canned_response,json=queryWithCannedResponse,oneof"`
 }
 
-type request_Input_PassiveCodeDiffQuery_ struct {
-	PassiveCodeDiffQuery *Request_Input_PassiveCodeDiffQuery `protobuf:"bytes,5,opt,name=passive_code_diff_query,json=passiveCodeDiffQuery,oneof"`
+type request_Input_AutoCodeDiffQuery_ struct {
+	AutoCodeDiffQuery *Request_Input_AutoCodeDiffQuery `protobuf:"bytes,5,opt,name=auto_code_diff_query,json=autoCodeDiffQuery,oneof"`
 }
 
 func (*request_Input_UserQuery_) isRequest_Input_Type() {}
@@ -604,7 +604,7 @@ func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 
 func (*request_Input_QueryWithCannedResponse_) isRequest_Input_Type() {}
 
-func (*request_Input_PassiveCodeDiffQuery_) isRequest_Input_Type() {}
+func (*request_Input_AutoCodeDiffQuery_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
 	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
@@ -1937,10 +1937,9 @@ func (*request_Input_QueryWithCannedResponse_SomethingElse_) isRequest_Input_Que
 func (*request_Input_QueryWithCannedResponse_CustomOnboardingRequest_) isRequest_Input_QueryWithCannedResponse_Type() {
 }
 
-// A query to perform a passive code diff e.g. Warp detects compilation errors
-// in the last run block, then auto-attaches relevant files to the request, and
-// needs to get a code diff back to show to the user.
-type Request_Input_PassiveCodeDiffQuery struct {
+// A query to perform an automatic code diff e.g. Warp detects compilation errors
+// in the last run block, and surfaces relevant a code diff to show to the user.
+type Request_Input_AutoCodeDiffQuery struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -1949,20 +1948,20 @@ type Request_Input_PassiveCodeDiffQuery struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Input_PassiveCodeDiffQuery) Reset() {
-	*x = Request_Input_PassiveCodeDiffQuery{}
+func (x *Request_Input_AutoCodeDiffQuery) Reset() {
+	*x = Request_Input_AutoCodeDiffQuery{}
 	mi := &file_request_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_PassiveCodeDiffQuery) String() string {
+func (x *Request_Input_AutoCodeDiffQuery) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_PassiveCodeDiffQuery) ProtoMessage() {}
+func (*Request_Input_AutoCodeDiffQuery) ProtoMessage() {}
 
-func (x *Request_Input_PassiveCodeDiffQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_AutoCodeDiffQuery) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1974,7 +1973,7 @@ func (x *Request_Input_PassiveCodeDiffQuery) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_PassiveCodeDiffQuery) GetQuery() string {
+func (x *Request_Input_AutoCodeDiffQuery) GetQuery() string {
 	if x != nil {
 		if x.xxx_hidden_Query != nil {
 			return *x.xxx_hidden_Query
@@ -1984,31 +1983,31 @@ func (x *Request_Input_PassiveCodeDiffQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Request_Input_PassiveCodeDiffQuery) SetQuery(v string) {
+func (x *Request_Input_AutoCodeDiffQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *Request_Input_PassiveCodeDiffQuery) HasQuery() bool {
+func (x *Request_Input_AutoCodeDiffQuery) HasQuery() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_PassiveCodeDiffQuery) ClearQuery() {
+func (x *Request_Input_AutoCodeDiffQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
 }
 
-type Request_Input_PassiveCodeDiffQuery_builder struct {
+type Request_Input_AutoCodeDiffQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query *string
 }
 
-func (b0 Request_Input_PassiveCodeDiffQuery_builder) Build() *Request_Input_PassiveCodeDiffQuery {
-	m0 := &Request_Input_PassiveCodeDiffQuery{}
+func (b0 Request_Input_AutoCodeDiffQuery_builder) Build() *Request_Input_AutoCodeDiffQuery {
+	m0 := &Request_Input_AutoCodeDiffQuery{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
@@ -2770,7 +2769,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc7\x1d\n" +
+	"task.proto\"\xbb\x1d\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -2781,14 +2780,14 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xf5\x11\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xe9\x11\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12M\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12y\n" +
-	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x12p\n" +
-	"\x17passive_code_diff_query\x18\x05 \x01(\v27.warp.multi_agent.v1.Request.Input.PassiveCodeDiffQueryH\x00R\x14passiveCodeDiffQuery\x1a'\n" +
+	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x12g\n" +
+	"\x14auto_code_diff_query\x18\x05 \x01(\v24.warp.multi_agent.v1.Request.Input.AutoCodeDiffQueryH\x00R\x11autoCodeDiffQuery\x1a'\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x91\b\n" +
 	"\x0eToolCallResult\x12 \n" +
@@ -2823,8 +2822,8 @@ const file_request_proto_rawDesc = "" +
 	"\x06Deploy\x1a\x0f\n" +
 	"\rSomethingElse\x1a\x19\n" +
 	"\x17CustomOnboardingRequestB\x06\n" +
-	"\x04type\x1a2\n" +
-	"\x14PassiveCodeDiffQuery\x12\x1a\n" +
+	"\x04type\x1a/\n" +
+	"\x11AutoCodeDiffQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05queryB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
@@ -2866,7 +2865,7 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_UserQuery)(nil),                                       // 6: warp.multi_agent.v1.Request.Input.UserQuery
 	(*Request_Input_ToolCallResult)(nil),                                  // 7: warp.multi_agent.v1.Request.Input.ToolCallResult
 	(*Request_Input_QueryWithCannedResponse)(nil),                         // 8: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_PassiveCodeDiffQuery)(nil),                            // 9: warp.multi_agent.v1.Request.Input.PassiveCodeDiffQuery
+	(*Request_Input_AutoCodeDiffQuery)(nil),                               // 9: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	(*Request_Input_ToolCallResult_RefineResult)(nil),                     // 10: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                 // 11: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	(*Request_Input_QueryWithCannedResponse_Code)(nil),                    // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
@@ -2905,7 +2904,7 @@ var file_request_proto_depIdxs = []int32{
 	6,  // 8: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	7,  // 9: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	8,  // 10: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	9,  // 11: warp.multi_agent.v1.Request.Input.passive_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.PassiveCodeDiffQuery
+	9,  // 11: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	16, // 12: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
 	17, // 13: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
 	18, // 14: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
@@ -2948,7 +2947,7 @@ func file_request_proto_init() {
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
 		(*request_Input_QueryWithCannedResponse_)(nil),
-		(*request_Input_PassiveCodeDiffQuery_)(nil),
+		(*request_Input_AutoCodeDiffQuery_)(nil),
 	}
 	file_request_proto_msgTypes[7].OneofWrappers = []any{
 		(*request_Input_ToolCallResult_RunShellCommand)(nil),

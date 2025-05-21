@@ -9277,7 +9277,6 @@ func (b0 InputContext_Codebase_builder) Build() *InputContext_Codebase {
 	return m0
 }
 
-// Any attached files.
 type InputContext_File struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Content *FileContent           `protobuf:"bytes,1,opt,name=content"`
