@@ -12,7 +12,7 @@ enum DocumentType {
     WARP_DRIVE_WORKFLOW = 0;
     WARP_DRIVE_NOTEBOOK = 1;
     WARP_DRIVE_ENV_VAR = 2;
-    MEMORY = 3;
+    RULE = 3;
     WARP_DOCUMENTATION = 4;
     WEB_PAGE = 5;
     UNKNOWN = 6;

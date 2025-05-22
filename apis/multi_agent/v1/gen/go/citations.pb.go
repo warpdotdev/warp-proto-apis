@@ -28,7 +28,7 @@ const (
 	DocumentType_WARP_DRIVE_WORKFLOW DocumentType = 0
 	DocumentType_WARP_DRIVE_NOTEBOOK DocumentType = 1
 	DocumentType_WARP_DRIVE_ENV_VAR  DocumentType = 2
-	DocumentType_MEMORY              DocumentType = 3
+	DocumentType_RULE                DocumentType = 3
 	DocumentType_WARP_DOCUMENTATION  DocumentType = 4
 	DocumentType_WEB_PAGE            DocumentType = 5
 	DocumentType_UNKNOWN             DocumentType = 6
@@ -40,7 +40,7 @@ var (
 		0: "WARP_DRIVE_WORKFLOW",
 		1: "WARP_DRIVE_NOTEBOOK",
 		2: "WARP_DRIVE_ENV_VAR",
-		3: "MEMORY",
+		3: "RULE",
 		4: "WARP_DOCUMENTATION",
 		5: "WEB_PAGE",
 		6: "UNKNOWN",
@@ -49,7 +49,7 @@ var (
 		"WARP_DRIVE_WORKFLOW": 0,
 		"WARP_DRIVE_NOTEBOOK": 1,
 		"WARP_DRIVE_ENV_VAR":  2,
-		"MEMORY":              3,
+		"RULE":                3,
 		"WARP_DOCUMENTATION":  4,
 		"WEB_PAGE":            5,
 		"UNKNOWN":             6,
@@ -199,13 +199,12 @@ const file_citations_proto_rawDesc = "" +
 	"\bCitation\x12\x1f\n" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
 	"documentId\x12F\n" +
-	"\rdocument_type\x18\x02 \x01(\x0e2!.warp.multi_agent.v1.DocumentTypeR\fdocumentType*\x97\x01\n" +
+	"\rdocument_type\x18\x02 \x01(\x0e2!.warp.multi_agent.v1.DocumentTypeR\fdocumentType*\x95\x01\n" +
 	"\fDocumentType\x12\x17\n" +
 	"\x13WARP_DRIVE_WORKFLOW\x10\x00\x12\x17\n" +
 	"\x13WARP_DRIVE_NOTEBOOK\x10\x01\x12\x16\n" +
-	"\x12WARP_DRIVE_ENV_VAR\x10\x02\x12\n" +
-	"\n" +
-	"\x06MEMORY\x10\x03\x12\x16\n" +
+	"\x12WARP_DRIVE_ENV_VAR\x10\x02\x12\b\n" +
+	"\x04RULE\x10\x03\x12\x16\n" +
 	"\x12WARP_DOCUMENTATION\x10\x04\x12\f\n" +
 	"\bWEB_PAGE\x10\x05\x12\v\n" +
 	"\aUNKNOWN\x10\x06B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
