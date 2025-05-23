@@ -84,6 +84,7 @@ message Message {
     ToolCall tool_call = 4;
     ToolCallResult tool_call_result = 5;
     ServerEvent server_event = 6;
+    SystemQuery system_query = 9;
   }
 
   // User query message type
@@ -91,6 +92,17 @@ message Message {
     string query = 1 [ (sensitive) = true ];
 
     // Context that the client supplied as part of the user query input.
+    InputContext context = 2;
+  }
+
+  message SystemQuery {
+    oneof system_query_type {
+      AutoCodeDiffQuery auto_code_diff_query = 1;
+    }
+  }
+
+  message AutoCodeDiffQuery {
+    string query = 1 [ (sensitive) = true ];
     InputContext context = 2;
   }
 
