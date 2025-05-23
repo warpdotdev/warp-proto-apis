@@ -3759,15 +3759,15 @@ func (b0 Message_UserQuery_builder) Build() *Message_UserQuery {
 	return m0
 }
 
-// System query message type, which corresponds to tasks created
-// automatically by Warp e.g. automatic code diff suggestions
-// for errors.
+// System queries represent prompts from the Warp client that were
+// not explicitly sent by the end-user e.g. automatic code diff
+// suggestions for errors.
 type Message_SystemQuery struct {
-	state                      protoimpl.MessageState                `protogen:"opaque.v1"`
-	xxx_hidden_SystemQueryType isMessage_SystemQuery_SystemQueryType `protobuf_oneof:"system_query_type"`
-	xxx_hidden_Context         *InputContext                         `protobuf:"bytes,2,opt,name=context"`
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state              protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Type    isMessage_SystemQuery_Type `protobuf_oneof:"type"`
+	xxx_hidden_Context *InputContext              `protobuf:"bytes,2,opt,name=context"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Message_SystemQuery) Reset() {
@@ -3797,7 +3797,7 @@ func (x *Message_SystemQuery) ProtoReflect() protoreflect.Message {
 
 func (x *Message_SystemQuery) GetAutoCodeDiff() *Message_AutoCodeDiff {
 	if x != nil {
-		if x, ok := x.xxx_hidden_SystemQueryType.(*message_SystemQuery_AutoCodeDiff); ok {
+		if x, ok := x.xxx_hidden_Type.(*message_SystemQuery_AutoCodeDiff); ok {
 			return x.AutoCodeDiff
 		}
 	}
@@ -3813,28 +3813,28 @@ func (x *Message_SystemQuery) GetContext() *InputContext {
 
 func (x *Message_SystemQuery) SetAutoCodeDiff(v *Message_AutoCodeDiff) {
 	if v == nil {
-		x.xxx_hidden_SystemQueryType = nil
+		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_SystemQueryType = &message_SystemQuery_AutoCodeDiff{v}
+	x.xxx_hidden_Type = &message_SystemQuery_AutoCodeDiff{v}
 }
 
 func (x *Message_SystemQuery) SetContext(v *InputContext) {
 	x.xxx_hidden_Context = v
 }
 
-func (x *Message_SystemQuery) HasSystemQueryType() bool {
+func (x *Message_SystemQuery) HasType() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_SystemQueryType != nil
+	return x.xxx_hidden_Type != nil
 }
 
 func (x *Message_SystemQuery) HasAutoCodeDiff() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_SystemQueryType.(*message_SystemQuery_AutoCodeDiff)
+	_, ok := x.xxx_hidden_Type.(*message_SystemQuery_AutoCodeDiff)
 	return ok
 }
 
@@ -3845,13 +3845,13 @@ func (x *Message_SystemQuery) HasContext() bool {
 	return x.xxx_hidden_Context != nil
 }
 
-func (x *Message_SystemQuery) ClearSystemQueryType() {
-	x.xxx_hidden_SystemQueryType = nil
+func (x *Message_SystemQuery) ClearType() {
+	x.xxx_hidden_Type = nil
 }
 
 func (x *Message_SystemQuery) ClearAutoCodeDiff() {
-	if _, ok := x.xxx_hidden_SystemQueryType.(*message_SystemQuery_AutoCodeDiff); ok {
-		x.xxx_hidden_SystemQueryType = nil
+	if _, ok := x.xxx_hidden_Type.(*message_SystemQuery_AutoCodeDiff); ok {
+		x.xxx_hidden_Type = nil
 	}
 }
 
@@ -3859,27 +3859,27 @@ func (x *Message_SystemQuery) ClearContext() {
 	x.xxx_hidden_Context = nil
 }
 
-const Message_SystemQuery_SystemQueryType_not_set_case case_Message_SystemQuery_SystemQueryType = 0
-const Message_SystemQuery_AutoCodeDiff_case case_Message_SystemQuery_SystemQueryType = 1
+const Message_SystemQuery_Type_not_set_case case_Message_SystemQuery_Type = 0
+const Message_SystemQuery_AutoCodeDiff_case case_Message_SystemQuery_Type = 1
 
-func (x *Message_SystemQuery) WhichSystemQueryType() case_Message_SystemQuery_SystemQueryType {
+func (x *Message_SystemQuery) WhichType() case_Message_SystemQuery_Type {
 	if x == nil {
-		return Message_SystemQuery_SystemQueryType_not_set_case
+		return Message_SystemQuery_Type_not_set_case
 	}
-	switch x.xxx_hidden_SystemQueryType.(type) {
+	switch x.xxx_hidden_Type.(type) {
 	case *message_SystemQuery_AutoCodeDiff:
 		return Message_SystemQuery_AutoCodeDiff_case
 	default:
-		return Message_SystemQuery_SystemQueryType_not_set_case
+		return Message_SystemQuery_Type_not_set_case
 	}
 }
 
 type Message_SystemQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof xxx_hidden_SystemQueryType:
+	// Fields of oneof xxx_hidden_Type:
 	AutoCodeDiff *Message_AutoCodeDiff
-	// -- end of xxx_hidden_SystemQueryType
+	// -- end of xxx_hidden_Type
 	Context *InputContext
 }
 
@@ -3888,15 +3888,15 @@ func (b0 Message_SystemQuery_builder) Build() *Message_SystemQuery {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.AutoCodeDiff != nil {
-		x.xxx_hidden_SystemQueryType = &message_SystemQuery_AutoCodeDiff{b.AutoCodeDiff}
+		x.xxx_hidden_Type = &message_SystemQuery_AutoCodeDiff{b.AutoCodeDiff}
 	}
 	x.xxx_hidden_Context = b.Context
 	return m0
 }
 
-type case_Message_SystemQuery_SystemQueryType protoreflect.FieldNumber
+type case_Message_SystemQuery_Type protoreflect.FieldNumber
 
-func (x case_Message_SystemQuery_SystemQueryType) String() string {
+func (x case_Message_SystemQuery_Type) String() string {
 	md := file_task_proto_msgTypes[25].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -3904,15 +3904,15 @@ func (x case_Message_SystemQuery_SystemQueryType) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isMessage_SystemQuery_SystemQueryType interface {
-	isMessage_SystemQuery_SystemQueryType()
+type isMessage_SystemQuery_Type interface {
+	isMessage_SystemQuery_Type()
 }
 
 type message_SystemQuery_AutoCodeDiff struct {
 	AutoCodeDiff *Message_AutoCodeDiff `protobuf:"bytes,1,opt,name=auto_code_diff,json=autoCodeDiff,oneof"`
 }
 
-func (*message_SystemQuery_AutoCodeDiff) isMessage_SystemQuery_SystemQueryType() {}
+func (*message_SystemQuery_AutoCodeDiff) isMessage_SystemQuery_Type() {}
 
 type Message_AutoCodeDiff struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -9752,7 +9752,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\x8b#\n" +
+	"\x06status\"\xfe\"\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
@@ -9766,11 +9766,11 @@ const file_task_proto_rawDesc = "" +
 	"\fsystem_query\x18\t \x01(\v2(.warp.multi_agent.v1.Message.SystemQueryH\x00R\vsystemQuery\x1ad\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
-	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a\xb2\x01\n" +
+	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a\xa5\x01\n" +
 	"\vSystemQuery\x12Q\n" +
 	"\x0eauto_code_diff\x18\x01 \x01(\v2).warp.multi_agent.v1.Message.AutoCodeDiffH\x00R\fautoCodeDiff\x12;\n" +
-	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontextB\x13\n" +
-	"\x11system_query_type\x1a*\n" +
+	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontextB\x06\n" +
+	"\x04type\x1a*\n" +
 	"\fAutoCodeDiff\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +

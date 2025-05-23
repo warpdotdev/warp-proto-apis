@@ -95,11 +95,11 @@ message Message {
     InputContext context = 2;
   }
 
-  // System query message type, which corresponds to tasks created 
-  // automatically by Warp e.g. automatic code diff suggestions 
-  // for errors.
+  // System queries represent prompts from the Warp client that were 
+  // not explicitly sent by the end-user e.g. automatic code diff 
+  // suggestions for errors.
   message SystemQuery {
-    oneof system_query_type {
+    oneof type {
       AutoCodeDiff auto_code_diff = 1;
     }
 
