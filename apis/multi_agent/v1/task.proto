@@ -95,15 +95,19 @@ message Message {
     InputContext context = 2;
   }
 
+  // System query message type, which corresponds to tasks created 
+  // automatically by Warp e.g. automatic code diff suggestions 
+  // for errors.
   message SystemQuery {
     oneof system_query_type {
-      AutoCodeDiffQuery auto_code_diff_query = 1;
+      AutoCodeDiff auto_code_diff = 1;
     }
+
+    InputContext context = 2;
   }
 
-  message AutoCodeDiffQuery {
+  message AutoCodeDiff {
     string query = 1 [ (sensitive) = true ];
-    InputContext context = 2;
   }
 
   // Agent output message type
