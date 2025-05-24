@@ -47,12 +47,17 @@ message Request {
     // The type of input from the user.
     oneof type {
       UserQuery user_query = 2;
-      ToolCallResult tool_call_result = 3;
+      ToolCallResult tool_call_result = 3 [deprecated = true];
+      ToolCallResults tool_call_results = 6;
       QueryWithCannedResponse query_with_canned_response = 4;
       AutoCodeDiffQuery auto_code_diff_query = 5;
     }
 
     message UserQuery { string query = 1 [ (sensitive) = true ]; }
+
+    message ToolCallResults {
+      repeated ToolCallResult tool_call_results = 1;
+    }
 
     // Tool call result
     message ToolCallResult {
@@ -120,6 +125,7 @@ message Request {
     ModelConfig model_config = 1;
     bool rules_enabled = 2;
     bool web_context_retrieval_enabled = 3;
+    bool supports_parallel_tool_calls = 4;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
