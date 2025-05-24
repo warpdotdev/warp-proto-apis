@@ -46,17 +46,25 @@ message Request {
 
     // The type of input from the user.
     oneof type {
-      UserQuery user_query = 2;
-      ToolCallResult tool_call_result = 3 [deprecated = true];
-      ToolCallResults tool_call_results = 6;
+      UserInputs user_inputs = 6;
       QueryWithCannedResponse query_with_canned_response = 4;
       AutoCodeDiffQuery auto_code_diff_query = 5;
+
+      UserQuery user_query = 2 [deprecated = true];
+      ToolCallResult tool_call_result = 3 [deprecated = true];
     }
 
     message UserQuery { string query = 1 [ (sensitive) = true ]; }
 
-    message ToolCallResults {
-      repeated ToolCallResult tool_call_results = 1;
+    message UserInputs {
+      repeated UserInput inputs = 1;
+
+      message UserInput {
+        oneof input {
+          UserQuery user_query = 1 [ (sensitive) = true ];
+          ToolCallResult tool_call_result = 2;
+        }
+      }
     }
 
     // Tool call result
