@@ -762,15 +762,16 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 }
 
 type Request_Settings struct {
-	state                                 protoimpl.MessageState        `protogen:"opaque.v1"`
-	xxx_hidden_ModelConfig                *Request_Settings_ModelConfig `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
-	xxx_hidden_RulesEnabled               bool                          `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
-	xxx_hidden_WebContextRetrievalEnabled bool                          `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
-	xxx_hidden_SupportsParallelToolCalls  bool                          `protobuf:"varint,4,opt,name=supports_parallel_tool_calls,json=supportsParallelToolCalls"`
-	XXX_raceDetectHookData                protoimpl.RaceDetectHookData
-	XXX_presence                          [1]uint32
-	unknownFields                         protoimpl.UnknownFields
-	sizeCache                             protoimpl.SizeCache
+	state                                  protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_ModelConfig                 *Request_Settings_ModelConfig `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
+	xxx_hidden_RulesEnabled                bool                          `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
+	xxx_hidden_WebContextRetrievalEnabled  bool                          `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
+	xxx_hidden_SupportsParallelToolCalls   bool                          `protobuf:"varint,4,opt,name=supports_parallel_tool_calls,json=supportsParallelToolCalls"`
+	xxx_hidden_UseAnthropicTextEditorTools bool                          `protobuf:"varint,5,opt,name=use_anthropic_text_editor_tools,json=useAnthropicTextEditorTools"`
+	XXX_raceDetectHookData                 protoimpl.RaceDetectHookData
+	XXX_presence                           [1]uint32
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *Request_Settings) Reset() {
@@ -826,23 +827,35 @@ func (x *Request_Settings) GetSupportsParallelToolCalls() bool {
 	return false
 }
 
+func (x *Request_Settings) GetUseAnthropicTextEditorTools() bool {
+	if x != nil {
+		return x.xxx_hidden_UseAnthropicTextEditorTools
+	}
+	return false
+}
+
 func (x *Request_Settings) SetModelConfig(v *Request_Settings_ModelConfig) {
 	x.xxx_hidden_ModelConfig = v
 }
 
 func (x *Request_Settings) SetRulesEnabled(v bool) {
 	x.xxx_hidden_RulesEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *Request_Settings) SetWebContextRetrievalEnabled(v bool) {
 	x.xxx_hidden_WebContextRetrievalEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *Request_Settings) SetSupportsParallelToolCalls(v bool) {
 	x.xxx_hidden_SupportsParallelToolCalls = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *Request_Settings) SetUseAnthropicTextEditorTools(v bool) {
+	x.xxx_hidden_UseAnthropicTextEditorTools = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -873,6 +886,13 @@ func (x *Request_Settings) HasSupportsParallelToolCalls() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *Request_Settings) HasUseAnthropicTextEditorTools() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *Request_Settings) ClearModelConfig() {
 	x.xxx_hidden_ModelConfig = nil
 }
@@ -892,6 +912,11 @@ func (x *Request_Settings) ClearSupportsParallelToolCalls() {
 	x.xxx_hidden_SupportsParallelToolCalls = false
 }
 
+func (x *Request_Settings) ClearUseAnthropicTextEditorTools() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_UseAnthropicTextEditorTools = false
+}
+
 type Request_Settings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -899,6 +924,8 @@ type Request_Settings_builder struct {
 	RulesEnabled               *bool
 	WebContextRetrievalEnabled *bool
 	SupportsParallelToolCalls  *bool
+	// Internal-only field for client to opt-in to using the Anthropic text editor tools.
+	UseAnthropicTextEditorTools *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -907,16 +934,20 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	_, _ = b, x
 	x.xxx_hidden_ModelConfig = b.ModelConfig
 	if b.RulesEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_RulesEnabled = *b.RulesEnabled
 	}
 	if b.WebContextRetrievalEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_WebContextRetrievalEnabled = *b.WebContextRetrievalEnabled
 	}
 	if b.SupportsParallelToolCalls != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_SupportsParallelToolCalls = *b.SupportsParallelToolCalls
+	}
+	if b.UseAnthropicTextEditorTools != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_UseAnthropicTextEditorTools = *b.UseAnthropicTextEditorTools
 	}
 	return m0
 }
@@ -3086,7 +3117,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x81!\n" +
+	"task.proto\"\xcd!\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3158,12 +3189,13 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xe0\x02\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xac\x03\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
 	"\x1dweb_context_retrieval_enabled\x18\x03 \x01(\bR\x1awebContextRetrievalEnabled\x12?\n" +
-	"\x1csupports_parallel_tool_calls\x18\x04 \x01(\bR\x19supportsParallelToolCalls\x1aU\n" +
+	"\x1csupports_parallel_tool_calls\x18\x04 \x01(\bR\x19supportsParallelToolCalls\x12J\n" +
+	"\x1fuse_anthropic_text_editor_tools\x18\x05 \x01(\bB\x04\x88\xb5\x18\x01R\x1buseAnthropicTextEditorTools\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
