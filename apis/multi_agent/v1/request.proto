@@ -136,7 +136,8 @@ message Request {
     bool supports_parallel_tool_calls = 4;
 
     // Internal-only field for client to opt-in to using the Anthropic text editor tools.
-    bool use_anthropic_text_editor_tools = 5 [ (internal) = true];
+    // This will be deprecated before launching MAA.
+    bool use_anthropic_text_editor_tools = 5;
 
     message ModelConfig {
       // The LLM of preference for general tasks.

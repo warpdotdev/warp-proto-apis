@@ -925,6 +925,7 @@ type Request_Settings_builder struct {
 	WebContextRetrievalEnabled *bool
 	SupportsParallelToolCalls  *bool
 	// Internal-only field for client to opt-in to using the Anthropic text editor tools.
+	// This will be deprecated before launching MAA.
 	UseAnthropicTextEditorTools *bool
 }
 
@@ -3117,7 +3118,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xcd!\n" +
+	"task.proto\"\xc7!\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3189,13 +3190,13 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xac\x03\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa6\x03\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
 	"\x1dweb_context_retrieval_enabled\x18\x03 \x01(\bR\x1awebContextRetrievalEnabled\x12?\n" +
-	"\x1csupports_parallel_tool_calls\x18\x04 \x01(\bR\x19supportsParallelToolCalls\x12J\n" +
-	"\x1fuse_anthropic_text_editor_tools\x18\x05 \x01(\bB\x04\x88\xb5\x18\x01R\x1buseAnthropicTextEditorTools\x1aU\n" +
+	"\x1csupports_parallel_tool_calls\x18\x04 \x01(\bR\x19supportsParallelToolCalls\x12D\n" +
+	"\x1fuse_anthropic_text_editor_tools\x18\x05 \x01(\bR\x1buseAnthropicTextEditorTools\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
