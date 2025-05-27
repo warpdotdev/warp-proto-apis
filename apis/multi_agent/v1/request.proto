@@ -139,6 +139,9 @@ message Request {
     // This will be deprecated before launching MAA.
     bool use_anthropic_text_editor_tools = 5;
 
+    // If `true`, planning is never suggested.
+    bool planning_enabled = 6;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
