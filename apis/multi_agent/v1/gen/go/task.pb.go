@@ -5972,6 +5972,8 @@ type Message_ToolCall_ApplyFileDiffs struct {
 	state                  protoimpl.MessageState                       `protogen:"opaque.v1"`
 	xxx_hidden_Summary     *string                                      `protobuf:"bytes,1,opt,name=summary"`
 	xxx_hidden_Diffs       *[]*Message_ToolCall_ApplyFileDiffs_FileDiff `protobuf:"bytes,2,rep,name=diffs"`
+	xxx_hidden_IsRisky     bool                                         `protobuf:"varint,3,opt,name=IsRisky"`
+	xxx_hidden_IsSimple    bool                                         `protobuf:"varint,4,opt,name=IsSimple"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -6022,13 +6024,37 @@ func (x *Message_ToolCall_ApplyFileDiffs) GetDiffs() []*Message_ToolCall_ApplyFi
 	return nil
 }
 
+func (x *Message_ToolCall_ApplyFileDiffs) GetIsRisky() bool {
+	if x != nil {
+		return x.xxx_hidden_IsRisky
+	}
+	return false
+}
+
+func (x *Message_ToolCall_ApplyFileDiffs) GetIsSimple() bool {
+	if x != nil {
+		return x.xxx_hidden_IsSimple
+	}
+	return false
+}
+
 func (x *Message_ToolCall_ApplyFileDiffs) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Message_ToolCall_ApplyFileDiffs) SetDiffs(v []*Message_ToolCall_ApplyFileDiffs_FileDiff) {
 	x.xxx_hidden_Diffs = &v
+}
+
+func (x *Message_ToolCall_ApplyFileDiffs) SetIsRisky(v bool) {
+	x.xxx_hidden_IsRisky = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Message_ToolCall_ApplyFileDiffs) SetIsSimple(v bool) {
+	x.xxx_hidden_IsSimple = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Message_ToolCall_ApplyFileDiffs) HasSummary() bool {
@@ -6038,16 +6064,42 @@ func (x *Message_ToolCall_ApplyFileDiffs) HasSummary() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Message_ToolCall_ApplyFileDiffs) HasIsRisky() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Message_ToolCall_ApplyFileDiffs) HasIsSimple() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Message_ToolCall_ApplyFileDiffs) ClearSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Summary = nil
 }
 
+func (x *Message_ToolCall_ApplyFileDiffs) ClearIsRisky() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_IsRisky = false
+}
+
+func (x *Message_ToolCall_ApplyFileDiffs) ClearIsSimple() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_IsSimple = false
+}
+
 type Message_ToolCall_ApplyFileDiffs_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Summary *string
-	Diffs   []*Message_ToolCall_ApplyFileDiffs_FileDiff
+	Summary  *string
+	Diffs    []*Message_ToolCall_ApplyFileDiffs_FileDiff
+	IsRisky  *bool
+	IsSimple *bool
 }
 
 func (b0 Message_ToolCall_ApplyFileDiffs_builder) Build() *Message_ToolCall_ApplyFileDiffs {
@@ -6055,10 +6107,18 @@ func (b0 Message_ToolCall_ApplyFileDiffs_builder) Build() *Message_ToolCall_Appl
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	x.xxx_hidden_Diffs = &b.Diffs
+	if b.IsRisky != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_IsRisky = *b.IsRisky
+	}
+	if b.IsSimple != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_IsSimple = *b.IsSimple
+	}
 	return m0
 }
 
@@ -9752,7 +9812,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xfe\"\n" +
+	"\x06status\"\xb4#\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
@@ -9775,7 +9835,7 @@ const file_task_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1c\n" +
-	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\xe9\x10\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\x9f\x11\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -9811,10 +9871,12 @@ const file_task_proto_rawDesc = "" +
 	"\x0eSearchCodebase\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12!\n" +
 	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x12#\n" +
-	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\xda\x01\n" +
+	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\x90\x02\n" +
 	"\x0eApplyFileDiffs\x12\x18\n" +
 	"\asummary\x18\x01 \x01(\tR\asummary\x12S\n" +
-	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x1aY\n" +
+	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x12\x18\n" +
+	"\aIsRisky\x18\x03 \x01(\bR\aIsRisky\x12\x1a\n" +
+	"\bIsSimple\x18\x04 \x01(\bR\bIsSimple\x1aY\n" +
 	"\bFileDiff\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x16\n" +
 	"\x06search\x18\x02 \x01(\tR\x06search\x12\x18\n" +

@@ -175,6 +175,8 @@ message Message {
     message ApplyFileDiffs {
       string summary = 1;
       repeated FileDiff diffs = 2;
+      bool IsRisky = 3;
+      bool IsSimple = 4;
 
       message FileDiff {
         string file_path = 1;
