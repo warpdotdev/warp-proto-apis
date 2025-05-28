@@ -1974,6 +1974,15 @@ func (x *Request_Input_QueryWithCannedResponse) GetCustomOnboardingRequest() *Re
 	return nil
 }
 
+func (x *Request_Input_QueryWithCannedResponse) GetAgenticOnboardingKickoff() *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_); ok {
+			return x.AgenticOnboardingKickoff
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_QueryWithCannedResponse) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -2017,6 +2026,14 @@ func (x *Request_Input_QueryWithCannedResponse) SetCustomOnboardingRequest(v *Re
 		return
 	}
 	x.xxx_hidden_Type = &request_Input_QueryWithCannedResponse_CustomOnboardingRequest_{v}
+}
+
+func (x *Request_Input_QueryWithCannedResponse) SetAgenticOnboardingKickoff(v *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_{v}
 }
 
 func (x *Request_Input_QueryWithCannedResponse) HasQuery() bool {
@@ -2073,6 +2090,14 @@ func (x *Request_Input_QueryWithCannedResponse) HasCustomOnboardingRequest() boo
 	return ok
 }
 
+func (x *Request_Input_QueryWithCannedResponse) HasAgenticOnboardingKickoff() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)
+	return ok
+}
+
 func (x *Request_Input_QueryWithCannedResponse) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
@@ -2112,12 +2137,19 @@ func (x *Request_Input_QueryWithCannedResponse) ClearCustomOnboardingRequest() {
 	}
 }
 
+func (x *Request_Input_QueryWithCannedResponse) ClearAgenticOnboardingKickoff() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
 const Request_Input_QueryWithCannedResponse_Type_not_set_case case_Request_Input_QueryWithCannedResponse_Type = 0
 const Request_Input_QueryWithCannedResponse_Install_case case_Request_Input_QueryWithCannedResponse_Type = 2
 const Request_Input_QueryWithCannedResponse_Code_case case_Request_Input_QueryWithCannedResponse_Type = 3
 const Request_Input_QueryWithCannedResponse_Deploy_case case_Request_Input_QueryWithCannedResponse_Type = 4
 const Request_Input_QueryWithCannedResponse_SomethingElse_case case_Request_Input_QueryWithCannedResponse_Type = 5
 const Request_Input_QueryWithCannedResponse_CustomOnboardingRequest_case case_Request_Input_QueryWithCannedResponse_Type = 6
+const Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_case case_Request_Input_QueryWithCannedResponse_Type = 7
 
 func (x *Request_Input_QueryWithCannedResponse) WhichType() case_Request_Input_QueryWithCannedResponse_Type {
 	if x == nil {
@@ -2134,6 +2166,8 @@ func (x *Request_Input_QueryWithCannedResponse) WhichType() case_Request_Input_Q
 		return Request_Input_QueryWithCannedResponse_SomethingElse_case
 	case *request_Input_QueryWithCannedResponse_CustomOnboardingRequest_:
 		return Request_Input_QueryWithCannedResponse_CustomOnboardingRequest_case
+	case *request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_:
+		return Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_case
 	default:
 		return Request_Input_QueryWithCannedResponse_Type_not_set_case
 	}
@@ -2144,11 +2178,12 @@ type Request_Input_QueryWithCannedResponse_builder struct {
 
 	Query *string
 	// Fields of oneof xxx_hidden_Type:
-	Install                 *Request_Input_QueryWithCannedResponse_Install
-	Code                    *Request_Input_QueryWithCannedResponse_Code
-	Deploy                  *Request_Input_QueryWithCannedResponse_Deploy
-	SomethingElse           *Request_Input_QueryWithCannedResponse_SomethingElse
-	CustomOnboardingRequest *Request_Input_QueryWithCannedResponse_CustomOnboardingRequest
+	Install                  *Request_Input_QueryWithCannedResponse_Install
+	Code                     *Request_Input_QueryWithCannedResponse_Code
+	Deploy                   *Request_Input_QueryWithCannedResponse_Deploy
+	SomethingElse            *Request_Input_QueryWithCannedResponse_SomethingElse
+	CustomOnboardingRequest  *Request_Input_QueryWithCannedResponse_CustomOnboardingRequest
+	AgenticOnboardingKickoff *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff
 	// -- end of xxx_hidden_Type
 }
 
@@ -2174,6 +2209,9 @@ func (b0 Request_Input_QueryWithCannedResponse_builder) Build() *Request_Input_Q
 	}
 	if b.CustomOnboardingRequest != nil {
 		x.xxx_hidden_Type = &request_Input_QueryWithCannedResponse_CustomOnboardingRequest_{b.CustomOnboardingRequest}
+	}
+	if b.AgenticOnboardingKickoff != nil {
+		x.xxx_hidden_Type = &request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_{b.AgenticOnboardingKickoff}
 	}
 	return m0
 }
@@ -2212,6 +2250,10 @@ type request_Input_QueryWithCannedResponse_CustomOnboardingRequest_ struct {
 	CustomOnboardingRequest *Request_Input_QueryWithCannedResponse_CustomOnboardingRequest `protobuf:"bytes,6,opt,name=custom_onboarding_request,json=customOnboardingRequest,oneof"`
 }
 
+type request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_ struct {
+	AgenticOnboardingKickoff *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff `protobuf:"bytes,7,opt,name=agentic_onboarding_kickoff,json=agenticOnboardingKickoff,oneof"`
+}
+
 func (*request_Input_QueryWithCannedResponse_Install_) isRequest_Input_QueryWithCannedResponse_Type() {
 }
 
@@ -2224,6 +2266,9 @@ func (*request_Input_QueryWithCannedResponse_SomethingElse_) isRequest_Input_Que
 }
 
 func (*request_Input_QueryWithCannedResponse_CustomOnboardingRequest_) isRequest_Input_QueryWithCannedResponse_Type() {
+}
+
+func (*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_) isRequest_Input_QueryWithCannedResponse_Type() {
 }
 
 // A query to perform an automatic code diff e.g. Warp detects compilation errors
@@ -2763,6 +2808,49 @@ func (b0 Request_Input_QueryWithCannedResponse_CustomOnboardingRequest_builder) 
 	return m0
 }
 
+type Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff) Reset() {
+	*x = Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff{}
+	mi := &file_request_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff) ProtoMessage() {}
+
+func (x *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder) Build() *Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff {
+	m0 := &Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 type Request_Settings_ModelConfig struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Base        *string                `protobuf:"bytes,1,opt,name=base"`
@@ -2776,7 +2864,7 @@ type Request_Settings_ModelConfig struct {
 
 func (x *Request_Settings_ModelConfig) Reset() {
 	*x = Request_Settings_ModelConfig{}
-	mi := &file_request_proto_msgTypes[19]
+	mi := &file_request_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2788,7 +2876,7 @@ func (x *Request_Settings_ModelConfig) String() string {
 func (*Request_Settings_ModelConfig) ProtoMessage() {}
 
 func (x *Request_Settings_ModelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[19]
+	mi := &file_request_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2924,7 +3012,7 @@ type Request_MCPContext_MCPResource struct {
 
 func (x *Request_MCPContext_MCPResource) Reset() {
 	*x = Request_MCPContext_MCPResource{}
-	mi := &file_request_proto_msgTypes[20]
+	mi := &file_request_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2936,7 +3024,7 @@ func (x *Request_MCPContext_MCPResource) String() string {
 func (*Request_MCPContext_MCPResource) ProtoMessage() {}
 
 func (x *Request_MCPContext_MCPResource) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[20]
+	mi := &file_request_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3100,7 +3188,7 @@ type Request_MCPContext_MCPTool struct {
 
 func (x *Request_MCPContext_MCPTool) Reset() {
 	*x = Request_MCPContext_MCPTool{}
-	mi := &file_request_proto_msgTypes[21]
+	mi := &file_request_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3112,7 +3200,7 @@ func (x *Request_MCPContext_MCPTool) String() string {
 func (*Request_MCPContext_MCPTool) ProtoMessage() {}
 
 func (x *Request_MCPContext_MCPTool) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[21]
+	mi := &file_request_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3230,7 +3318,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xab#\n" +
+	"task.proto\"\xdd$\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3241,7 +3329,7 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xee\x14\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xa0\x16\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -3280,19 +3368,21 @@ const file_request_proto_rawDesc = "" +
 	"\fRefineResult\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
-	"\x06result\x1a\x9a\x05\n" +
+	"\x06result\x1a\xcc\x06\n" +
 	"\x17QueryWithCannedResponse\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12^\n" +
 	"\ainstall\x18\x02 \x01(\v2B.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.InstallH\x00R\ainstall\x12U\n" +
 	"\x04code\x18\x03 \x01(\v2?.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CodeH\x00R\x04code\x12[\n" +
 	"\x06deploy\x18\x04 \x01(\v2A.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.DeployH\x00R\x06deploy\x12q\n" +
 	"\x0esomething_else\x18\x05 \x01(\v2H.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElseH\x00R\rsomethingElse\x12\x90\x01\n" +
-	"\x19custom_onboarding_request\x18\x06 \x01(\v2R.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequestH\x00R\x17customOnboardingRequest\x1a\t\n" +
+	"\x19custom_onboarding_request\x18\x06 \x01(\v2R.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequestH\x00R\x17customOnboardingRequest\x12\x93\x01\n" +
+	"\x1aagentic_onboarding_kickoff\x18\a \x01(\v2S.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoffH\x00R\x18agenticOnboardingKickoff\x1a\t\n" +
 	"\aInstall\x1a\x06\n" +
 	"\x04Code\x1a\b\n" +
 	"\x06Deploy\x1a\x0f\n" +
 	"\rSomethingElse\x1a\x19\n" +
-	"\x17CustomOnboardingRequestB\x06\n" +
+	"\x17CustomOnboardingRequest\x1a\x1a\n" +
+	"\x18AgenticOnboardingKickoffB\x06\n" +
 	"\x04type\x1a/\n" +
 	"\x11AutoCodeDiffQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05queryB\x06\n" +
@@ -3331,93 +3421,95 @@ const file_request_proto_rawDesc = "" +
 	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12:\n" +
 	"\finput_schema\x18\x03 \x01(\v2\x17.google.protobuf.StructR\vinputSchemaB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_request_proto_goTypes = []any{
-	(*Request)(nil),                                                       // 0: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                           // 1: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                 // 2: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                              // 3: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                              // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                            // 5: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                       // 6: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_UserInputs)(nil),                                      // 7: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                  // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                         // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                               // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_UserInputs_UserInput)(nil),                            // 11: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	(*Request_Input_ToolCallResult_RefineResult)(nil),                     // 12: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	(*Request_Input_QueryWithCannedResponse_Install)(nil),                 // 13: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	(*Request_Input_QueryWithCannedResponse_Code)(nil),                    // 14: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                  // 15: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),           // 16: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil), // 17: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	nil,                                    // 18: warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	(*Request_Settings_ModelConfig)(nil),   // 19: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Request_MCPContext_MCPResource)(nil), // 20: warp.multi_agent.v1.Request.MCPContext.MCPResource
-	(*Request_MCPContext_MCPTool)(nil),     // 21: warp.multi_agent.v1.Request.MCPContext.MCPTool
-	(*Suggestions)(nil),                    // 22: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                           // 23: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                   // 24: warp.multi_agent.v1.InputContext
-	(ToolType)(0),                          // 25: warp.multi_agent.v1.ToolType
-	(*RunShellCommandResult)(nil),          // 26: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                // 27: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),           // 28: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),           // 29: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),              // 30: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),        // 31: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                     // 32: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                 // 33: warp.multi_agent.v1.FileGlobResult
-	(*ReadMCPResourceResult)(nil),          // 34: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),              // 35: warp.multi_agent.v1.CallMCPToolResult
-	(*structpb.Value)(nil),                 // 36: google.protobuf.Value
-	(*structpb.Struct)(nil),                // 37: google.protobuf.Struct
+	(*Request)(nil),                                                        // 0: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                                            // 1: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                                                  // 2: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                                               // 3: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                                               // 4: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                                             // 5: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),                                        // 6: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_UserInputs)(nil),                                       // 7: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),                                   // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil),                          // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_UserInputs_UserInput)(nil),                             // 11: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
+	(*Request_Input_ToolCallResult_RefineResult)(nil),                      // 12: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 13: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	(*Request_Input_QueryWithCannedResponse_Code)(nil),                     // 14: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                   // 15: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),            // 16: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil),  // 17: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	(*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff)(nil), // 18: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	nil,                                    // 19: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil),   // 20: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Request_MCPContext_MCPResource)(nil), // 21: warp.multi_agent.v1.Request.MCPContext.MCPResource
+	(*Request_MCPContext_MCPTool)(nil),     // 22: warp.multi_agent.v1.Request.MCPContext.MCPTool
+	(*Suggestions)(nil),                    // 23: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                           // 24: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                   // 25: warp.multi_agent.v1.InputContext
+	(ToolType)(0),                          // 26: warp.multi_agent.v1.ToolType
+	(*RunShellCommandResult)(nil),          // 27: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                // 28: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),           // 29: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),           // 30: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),              // 31: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),        // 32: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                     // 33: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                 // 34: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),          // 35: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),              // 36: warp.multi_agent.v1.CallMCPToolResult
+	(*structpb.Value)(nil),                 // 37: google.protobuf.Value
+	(*structpb.Struct)(nil),                // 38: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
 	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
 	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
 	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
-	22, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	23, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
 	5,  // 5: warp.multi_agent.v1.Request.mcp_context:type_name -> warp.multi_agent.v1.Request.MCPContext
-	23, // 6: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	24, // 7: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
+	24, // 6: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	25, // 7: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
 	7,  // 8: warp.multi_agent.v1.Request.Input.user_inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs
 	9,  // 9: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
 	10, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	6,  // 11: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 12: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	18, // 13: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	19, // 14: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	25, // 15: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
-	20, // 16: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	21, // 17: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	19, // 13: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	20, // 14: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	26, // 15: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
+	21, // 16: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	22, // 17: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	11, // 18: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	26, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	27, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	28, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	29, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	30, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	31, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	32, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	33, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	27, // 19: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	28, // 20: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	29, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	30, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	31, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	32, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	33, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	34, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
 	12, // 27: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	34, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	35, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	35, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	36, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
 	13, // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	14, // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
 	15, // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
 	16, // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	17, // 34: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	6,  // 35: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 36: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	6,  // 37: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	36, // 38: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	37, // 39: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	40, // [40:40] is the sub-list for method output_type
-	40, // [40:40] is the sub-list for method input_type
-	40, // [40:40] is the sub-list for extension type_name
-	40, // [40:40] is the sub-list for extension extendee
-	0,  // [0:40] is the sub-list for field type_name
+	18, // 35: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	6,  // 36: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	8,  // 37: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	6,  // 38: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	37, // 39: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	38, // 40: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	41, // [41:41] is the sub-list for method output_type
+	41, // [41:41] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -3454,6 +3546,7 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_Deploy_)(nil),
 		(*request_Input_QueryWithCannedResponse_SomethingElse_)(nil),
 		(*request_Input_QueryWithCannedResponse_CustomOnboardingRequest_)(nil),
+		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
 	file_request_proto_msgTypes[11].OneofWrappers = []any{
 		(*request_Input_UserInputs_UserInput_UserQuery)(nil),
@@ -3465,7 +3558,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

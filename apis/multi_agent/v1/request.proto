@@ -102,6 +102,7 @@ message Request {
           Deploy deploy = 4;
           SomethingElse something_else = 5;
           CustomOnboardingRequest custom_onboarding_request = 6;
+          AgenticOnboardingKickoff agentic_onboarding_kickoff = 7;
       }
 
       message Install {}
@@ -109,6 +110,7 @@ message Request {
       message Deploy {}
       message SomethingElse {}
       message CustomOnboardingRequest {}
+      message AgenticOnboardingKickoff {}
     }
 
     // A query to perform an automatic code diff e.g. Warp detects compilation errors
