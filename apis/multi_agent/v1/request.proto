@@ -142,6 +142,9 @@ message Request {
     // If `true`, planning is never suggested.
     bool planning_enabled = 6;
 
+    // If `true`, the user's Warp Drive contents can be used as Agent Mode context.
+    bool warp_drive_context_enabled = 7;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
