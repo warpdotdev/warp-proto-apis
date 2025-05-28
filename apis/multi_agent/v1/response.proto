@@ -64,6 +64,10 @@ message ResponseEvent {
     // stream.
     repeated TokenUsage token_usage = 8 [ (internal) = true];
 
+    // `true` if the client should refresh its model config, typically if the model config in the
+    // request implies the client's model config is stale.
+    bool should_refresh_model_config = 9;
+
     message TokenUsage {
         string model_id = 1;
 
