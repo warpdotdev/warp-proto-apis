@@ -1007,6 +1007,7 @@ type ResponseEvent_StreamFinished struct {
 	xxx_hidden_Reason                   isResponseEvent_StreamFinished_Reason       `protobuf_oneof:"reason"`
 	xxx_hidden_TokenUsage               *[]*ResponseEvent_StreamFinished_TokenUsage `protobuf:"bytes,8,rep,name=token_usage,json=tokenUsage"`
 	xxx_hidden_ShouldRefreshModelConfig bool                                        `protobuf:"varint,9,opt,name=should_refresh_model_config,json=shouldRefreshModelConfig"`
+	xxx_hidden_RequestCost              float32                                     `protobuf:"fixed32,10,opt,name=request_cost,json=requestCost"`
 	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
 	XXX_presence                        [1]uint32
 	unknownFields                       protoimpl.UnknownFields
@@ -1117,6 +1118,13 @@ func (x *ResponseEvent_StreamFinished) GetShouldRefreshModelConfig() bool {
 	return false
 }
 
+func (x *ResponseEvent_StreamFinished) GetRequestCost() float32 {
+	if x != nil {
+		return x.xxx_hidden_RequestCost
+	}
+	return 0
+}
+
 func (x *ResponseEvent_StreamFinished) SetOther(v *ResponseEvent_StreamFinished_Other) {
 	if v == nil {
 		x.xxx_hidden_Reason = nil
@@ -1179,7 +1187,12 @@ func (x *ResponseEvent_StreamFinished) SetTokenUsage(v []*ResponseEvent_StreamFi
 
 func (x *ResponseEvent_StreamFinished) SetShouldRefreshModelConfig(v bool) {
 	x.xxx_hidden_ShouldRefreshModelConfig = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *ResponseEvent_StreamFinished) SetRequestCost(v float32) {
+	x.xxx_hidden_RequestCost = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *ResponseEvent_StreamFinished) HasReason() bool {
@@ -1252,6 +1265,13 @@ func (x *ResponseEvent_StreamFinished) HasShouldRefreshModelConfig() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *ResponseEvent_StreamFinished) HasRequestCost() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *ResponseEvent_StreamFinished) ClearReason() {
 	x.xxx_hidden_Reason = nil
 }
@@ -1301,6 +1321,11 @@ func (x *ResponseEvent_StreamFinished) ClearInternalError() {
 func (x *ResponseEvent_StreamFinished) ClearShouldRefreshModelConfig() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ShouldRefreshModelConfig = false
+}
+
+func (x *ResponseEvent_StreamFinished) ClearRequestCost() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_RequestCost = 0
 }
 
 const ResponseEvent_StreamFinished_Reason_not_set_case case_ResponseEvent_StreamFinished_Reason = 0
@@ -1354,6 +1379,8 @@ type ResponseEvent_StreamFinished_builder struct {
 	// `true` if the client should refresh its model config, typically if the model config in the
 	// request implies the client's model config is stale.
 	ShouldRefreshModelConfig *bool
+	// The fractional number of AM requests that were charged for this response.
+	RequestCost *float32
 }
 
 func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFinished {
@@ -1383,8 +1410,12 @@ func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFini
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
 	if b.ShouldRefreshModelConfig != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_ShouldRefreshModelConfig = *b.ShouldRefreshModelConfig
+	}
+	if b.RequestCost != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_RequestCost = *b.RequestCost
 	}
 	return m0
 }
@@ -2881,7 +2912,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x80\r\n" +
+	"task.proto\"\xa3\r\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -2892,7 +2923,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xd1\t\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xf4\t\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -2904,7 +2935,9 @@ const file_response_proto_rawDesc = "" +
 	"\x0einternal_error\x18\a \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalErrorH\x00R\rinternalError\x12c\n" +
 	"\vtoken_usage\x18\b \x03(\v2<.warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsageB\x04\x88\xb5\x18\x01R\n" +
 	"tokenUsage\x12=\n" +
-	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x1a\xb6\x01\n" +
+	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12!\n" +
+	"\frequest_cost\x18\n" +
+	" \x01(\x02R\vrequestCost\x1a\xb6\x01\n" +
 	"\n" +
 	"TokenUsage\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12\x1f\n" +
