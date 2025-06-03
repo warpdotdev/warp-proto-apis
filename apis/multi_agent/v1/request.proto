@@ -145,6 +145,10 @@ message Request {
     // If `true`, the user's Warp Drive contents can be used as Agent Mode context.
     bool warp_drive_context_enabled = 7;
 
+    // If `true`, the `ApplyFileDiffs` tool call may use the `new_files` argument for creating
+    // files. Otherwise, new files are created by emitting a diff with an empty `search` field.
+    bool supports_create_files = 8;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
