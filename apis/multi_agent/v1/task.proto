@@ -513,9 +513,9 @@ message InputContext {
   // Information about a codebase on the user's machine that we can search.
   message Codebase {
     // The name of the codebase.
-    string name = 1;
+    string name = 1 [ (sensitive) = true ];
     // The absolute path to the codebase on the user's machine.
-    string path = 2;
+    string path = 2 [ (sensitive) = true ];
   }
 
   message File {

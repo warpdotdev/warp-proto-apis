@@ -10100,7 +10100,7 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\x94\n" +
+	"\x06result\"\xa0\n" +
 	"\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
@@ -10130,10 +10130,10 @@ const file_task_proto_rawDesc = "" +
 	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
 	"\x05Image\x12\x12\n" +
 	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a2\n" +
-	"\bCodebase\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04path\x1aB\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a>\n" +
+	"\bCodebase\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +
+	"\x04path\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x1aB\n" +
 	"\x04File\x12:\n" +
 	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
