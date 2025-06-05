@@ -25,6 +25,76 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// An enumeration of the different types of client-server tools.
+// This must map 1:1 with the list of structured tool call / tool call result types.
+//
+// Note that the `Server` tool is omitted from this list as an exception;
+// it's not a tool call understood by the client.
+type ToolType int32
+
+const (
+	ToolType_RUN_SHELL_COMMAND   ToolType = 0
+	ToolType_SEARCH_CODEBASE     ToolType = 1
+	ToolType_READ_FILES          ToolType = 2
+	ToolType_APPLY_FILE_DIFFS    ToolType = 3
+	ToolType_SUGGEST_PLAN        ToolType = 4
+	ToolType_SUGGEST_CREATE_PLAN ToolType = 5
+	ToolType_GREP                ToolType = 6
+	ToolType_FILE_GLOB           ToolType = 7
+	ToolType_READ_MCP_RESOURCE   ToolType = 8
+	ToolType_CALL_MCP_TOOL       ToolType = 9
+)
+
+// Enum value maps for ToolType.
+var (
+	ToolType_name = map[int32]string{
+		0: "RUN_SHELL_COMMAND",
+		1: "SEARCH_CODEBASE",
+		2: "READ_FILES",
+		3: "APPLY_FILE_DIFFS",
+		4: "SUGGEST_PLAN",
+		5: "SUGGEST_CREATE_PLAN",
+		6: "GREP",
+		7: "FILE_GLOB",
+		8: "READ_MCP_RESOURCE",
+		9: "CALL_MCP_TOOL",
+	}
+	ToolType_value = map[string]int32{
+		"RUN_SHELL_COMMAND":   0,
+		"SEARCH_CODEBASE":     1,
+		"READ_FILES":          2,
+		"APPLY_FILE_DIFFS":    3,
+		"SUGGEST_PLAN":        4,
+		"SUGGEST_CREATE_PLAN": 5,
+		"GREP":                6,
+		"FILE_GLOB":           7,
+		"READ_MCP_RESOURCE":   8,
+		"CALL_MCP_TOOL":       9,
+	}
+)
+
+func (x ToolType) Enum() *ToolType {
+	p := new(ToolType)
+	*p = x
+	return p
+}
+
+func (x ToolType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ToolType) Descriptor() protoreflect.EnumDescriptor {
+	return file_task_proto_enumTypes[0].Descriptor()
+}
+
+func (ToolType) Type() protoreflect.EnumType {
+	return &file_task_proto_enumTypes[0]
+}
+
+func (x ToolType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // A task represents a unit of work with messages
 type Task struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
@@ -10135,184 +10205,198 @@ const file_task_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +
 	"\x04path\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x1aB\n" +
 	"\x04File\x12:\n" +
-	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent*\xca\x01\n" +
+	"\bToolType\x12\x15\n" +
+	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
+	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
+	"\n" +
+	"READ_FILES\x10\x02\x12\x14\n" +
+	"\x10APPLY_FILE_DIFFS\x10\x03\x12\x10\n" +
+	"\fSUGGEST_PLAN\x10\x04\x12\x17\n" +
+	"\x13SUGGEST_CREATE_PLAN\x10\x05\x12\b\n" +
+	"\x04GREP\x10\x06\x12\r\n" +
+	"\tFILE_GLOB\x10\a\x12\x15\n" +
+	"\x11READ_MCP_RESOURCE\x10\b\x12\x11\n" +
+	"\rCALL_MCP_TOOL\x10\tB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
+var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 77)
 var file_task_proto_goTypes = []any{
-	(*Task)(nil),                                           // 0: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),                                     // 1: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),                                        // 2: warp.multi_agent.v1.Message
-	(*RunShellCommandResult)(nil),                          // 3: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                // 4: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                           // 5: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                           // 6: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestCreatePlanResult)(nil),                        // 7: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*FileContentLineRange)(nil),                           // 8: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                    // 9: warp.multi_agent.v1.FileContent
-	(*SuggestPlanResult)(nil),                              // 10: warp.multi_agent.v1.SuggestPlanResult
-	(*GrepResult)(nil),                                     // 11: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                                 // 12: warp.multi_agent.v1.FileGlobResult
-	(*MCPResourceContent)(nil),                             // 13: warp.multi_agent.v1.MCPResourceContent
-	(*ReadMCPResourceResult)(nil),                          // 14: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),                              // 15: warp.multi_agent.v1.CallMCPToolResult
-	(*InputContext)(nil),                                   // 16: warp.multi_agent.v1.InputContext
-	(*Task_Dependencies)(nil),                              // 17: warp.multi_agent.v1.Task.Dependencies
-	(*TaskStatus_Pending)(nil),                             // 18: warp.multi_agent.v1.TaskStatus.Pending
-	(*TaskStatus_InProgress)(nil),                          // 19: warp.multi_agent.v1.TaskStatus.InProgress
-	(*TaskStatus_Blocked)(nil),                             // 20: warp.multi_agent.v1.TaskStatus.Blocked
-	(*TaskStatus_Succeeded)(nil),                           // 21: warp.multi_agent.v1.TaskStatus.Succeeded
-	(*TaskStatus_Failed)(nil),                              // 22: warp.multi_agent.v1.TaskStatus.Failed
-	(*TaskStatus_Aborted)(nil),                             // 23: warp.multi_agent.v1.TaskStatus.Aborted
-	(*Message_UserQuery)(nil),                              // 24: warp.multi_agent.v1.Message.UserQuery
-	(*Message_SystemQuery)(nil),                            // 25: warp.multi_agent.v1.Message.SystemQuery
-	(*Message_AutoCodeDiff)(nil),                           // 26: warp.multi_agent.v1.Message.AutoCodeDiff
-	(*Message_AgentOutput)(nil),                            // 27: warp.multi_agent.v1.Message.AgentOutput
-	(*Message_ToolCall)(nil),                               // 28: warp.multi_agent.v1.Message.ToolCall
-	(*Message_ToolCallResult)(nil),                         // 29: warp.multi_agent.v1.Message.ToolCallResult
-	(*Message_ServerEvent)(nil),                            // 30: warp.multi_agent.v1.Message.ServerEvent
-	(*Message_ToolCall_Server)(nil),                        // 31: warp.multi_agent.v1.Message.ToolCall.Server
-	(*Message_ToolCall_RunShellCommand)(nil),               // 32: warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	(*Message_ToolCall_ReadFiles)(nil),                     // 33: warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	(*Message_ToolCall_SearchCodebase)(nil),                // 34: warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	(*Message_ToolCall_ApplyFileDiffs)(nil),                // 35: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	(*Message_ToolCall_SuggestPlan)(nil),                   // 36: warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	(*Message_ToolCall_SuggestCreatePlan)(nil),             // 37: warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	(*Message_ToolCall_Grep)(nil),                          // 38: warp.multi_agent.v1.Message.ToolCall.Grep
-	(*Message_ToolCall_FileGlob)(nil),                      // 39: warp.multi_agent.v1.Message.ToolCall.FileGlob
-	(*Message_ToolCall_ReadMCPResource)(nil),               // 40: warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
-	(*Message_ToolCall_CallMCPTool)(nil),                   // 41: warp.multi_agent.v1.Message.ToolCall.CallMCPTool
-	(*Message_ToolCall_ReadFiles_File)(nil),                // 42: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil),       // 43: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	(*Message_ToolCall_ApplyFileDiffs_NewFile)(nil),        // 44: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	(*Message_ToolCallResult_ServerResult)(nil),            // 45: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	(*Message_ToolCallResult_RefineResult)(nil),            // 46: warp.multi_agent.v1.Message.ToolCallResult.RefineResult
-	(*ReadFilesResult_Success)(nil),                        // 47: warp.multi_agent.v1.ReadFilesResult.Success
-	(*ReadFilesResult_Error)(nil),                          // 48: warp.multi_agent.v1.ReadFilesResult.Error
-	(*SearchCodebaseResult_Success)(nil),                   // 49: warp.multi_agent.v1.SearchCodebaseResult.Success
-	(*SearchCodebaseResult_Error)(nil),                     // 50: warp.multi_agent.v1.SearchCodebaseResult.Error
-	(*ApplyFileDiffsResult_Success)(nil),                   // 51: warp.multi_agent.v1.ApplyFileDiffsResult.Success
-	(*ApplyFileDiffsResult_Error)(nil),                     // 52: warp.multi_agent.v1.ApplyFileDiffsResult.Error
-	(*SuggestPlanResult_UserEditedPlan)(nil),               // 53: warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
-	(*GrepResult_Success)(nil),                             // 54: warp.multi_agent.v1.GrepResult.Success
-	(*GrepResult_Error)(nil),                               // 55: warp.multi_agent.v1.GrepResult.Error
-	(*GrepResult_Success_GrepFileMatch)(nil),               // 56: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	(*GrepResult_Success_GrepFileMatch_GrepLineMatch)(nil), // 57: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	(*FileGlobResult_Success)(nil),                         // 58: warp.multi_agent.v1.FileGlobResult.Success
-	(*FileGlobResult_Error)(nil),                           // 59: warp.multi_agent.v1.FileGlobResult.Error
-	(*MCPResourceContent_Text)(nil),                        // 60: warp.multi_agent.v1.MCPResourceContent.Text
-	(*MCPResourceContent_Binary)(nil),                      // 61: warp.multi_agent.v1.MCPResourceContent.Binary
-	(*ReadMCPResourceResult_Success)(nil),                  // 62: warp.multi_agent.v1.ReadMCPResourceResult.Success
-	(*ReadMCPResourceResult_Error)(nil),                    // 63: warp.multi_agent.v1.ReadMCPResourceResult.Error
-	(*CallMCPToolResult_Success)(nil),                      // 64: warp.multi_agent.v1.CallMCPToolResult.Success
-	(*CallMCPToolResult_Error)(nil),                        // 65: warp.multi_agent.v1.CallMCPToolResult.Error
-	(*CallMCPToolResult_Success_Result)(nil),               // 66: warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	(*CallMCPToolResult_Success_Result_Text)(nil),          // 67: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	(*CallMCPToolResult_Success_Result_Image)(nil),         // 68: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	(*InputContext_ExecutedShellCommand)(nil),              // 69: warp.multi_agent.v1.InputContext.ExecutedShellCommand
-	(*InputContext_SelectedText)(nil),                      // 70: warp.multi_agent.v1.InputContext.SelectedText
-	(*InputContext_Directory)(nil),                         // 71: warp.multi_agent.v1.InputContext.Directory
-	(*InputContext_Shell)(nil),                             // 72: warp.multi_agent.v1.InputContext.Shell
-	(*InputContext_OperatingSystem)(nil),                   // 73: warp.multi_agent.v1.InputContext.OperatingSystem
-	(*InputContext_Image)(nil),                             // 74: warp.multi_agent.v1.InputContext.Image
-	(*InputContext_Codebase)(nil),                          // 75: warp.multi_agent.v1.InputContext.Codebase
-	(*InputContext_File)(nil),                              // 76: warp.multi_agent.v1.InputContext.File
-	(*Citation)(nil),                                       // 77: warp.multi_agent.v1.Citation
-	(*emptypb.Empty)(nil),                                  // 78: google.protobuf.Empty
-	(*timestamppb.Timestamp)(nil),                          // 79: google.protobuf.Timestamp
-	(*structpb.Struct)(nil),                                // 80: google.protobuf.Struct
+	(ToolType)(0),                                          // 0: warp.multi_agent.v1.ToolType
+	(*Task)(nil),                                           // 1: warp.multi_agent.v1.Task
+	(*TaskStatus)(nil),                                     // 2: warp.multi_agent.v1.TaskStatus
+	(*Message)(nil),                                        // 3: warp.multi_agent.v1.Message
+	(*RunShellCommandResult)(nil),                          // 4: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                // 5: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                           // 6: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                           // 7: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestCreatePlanResult)(nil),                        // 8: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*FileContentLineRange)(nil),                           // 9: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                    // 10: warp.multi_agent.v1.FileContent
+	(*SuggestPlanResult)(nil),                              // 11: warp.multi_agent.v1.SuggestPlanResult
+	(*GrepResult)(nil),                                     // 12: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                                 // 13: warp.multi_agent.v1.FileGlobResult
+	(*MCPResourceContent)(nil),                             // 14: warp.multi_agent.v1.MCPResourceContent
+	(*ReadMCPResourceResult)(nil),                          // 15: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),                              // 16: warp.multi_agent.v1.CallMCPToolResult
+	(*InputContext)(nil),                                   // 17: warp.multi_agent.v1.InputContext
+	(*Task_Dependencies)(nil),                              // 18: warp.multi_agent.v1.Task.Dependencies
+	(*TaskStatus_Pending)(nil),                             // 19: warp.multi_agent.v1.TaskStatus.Pending
+	(*TaskStatus_InProgress)(nil),                          // 20: warp.multi_agent.v1.TaskStatus.InProgress
+	(*TaskStatus_Blocked)(nil),                             // 21: warp.multi_agent.v1.TaskStatus.Blocked
+	(*TaskStatus_Succeeded)(nil),                           // 22: warp.multi_agent.v1.TaskStatus.Succeeded
+	(*TaskStatus_Failed)(nil),                              // 23: warp.multi_agent.v1.TaskStatus.Failed
+	(*TaskStatus_Aborted)(nil),                             // 24: warp.multi_agent.v1.TaskStatus.Aborted
+	(*Message_UserQuery)(nil),                              // 25: warp.multi_agent.v1.Message.UserQuery
+	(*Message_SystemQuery)(nil),                            // 26: warp.multi_agent.v1.Message.SystemQuery
+	(*Message_AutoCodeDiff)(nil),                           // 27: warp.multi_agent.v1.Message.AutoCodeDiff
+	(*Message_AgentOutput)(nil),                            // 28: warp.multi_agent.v1.Message.AgentOutput
+	(*Message_ToolCall)(nil),                               // 29: warp.multi_agent.v1.Message.ToolCall
+	(*Message_ToolCallResult)(nil),                         // 30: warp.multi_agent.v1.Message.ToolCallResult
+	(*Message_ServerEvent)(nil),                            // 31: warp.multi_agent.v1.Message.ServerEvent
+	(*Message_ToolCall_Server)(nil),                        // 32: warp.multi_agent.v1.Message.ToolCall.Server
+	(*Message_ToolCall_RunShellCommand)(nil),               // 33: warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	(*Message_ToolCall_ReadFiles)(nil),                     // 34: warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	(*Message_ToolCall_SearchCodebase)(nil),                // 35: warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	(*Message_ToolCall_ApplyFileDiffs)(nil),                // 36: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	(*Message_ToolCall_SuggestPlan)(nil),                   // 37: warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	(*Message_ToolCall_SuggestCreatePlan)(nil),             // 38: warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	(*Message_ToolCall_Grep)(nil),                          // 39: warp.multi_agent.v1.Message.ToolCall.Grep
+	(*Message_ToolCall_FileGlob)(nil),                      // 40: warp.multi_agent.v1.Message.ToolCall.FileGlob
+	(*Message_ToolCall_ReadMCPResource)(nil),               // 41: warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	(*Message_ToolCall_CallMCPTool)(nil),                   // 42: warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	(*Message_ToolCall_ReadFiles_File)(nil),                // 43: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil),       // 44: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	(*Message_ToolCall_ApplyFileDiffs_NewFile)(nil),        // 45: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	(*Message_ToolCallResult_ServerResult)(nil),            // 46: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	(*Message_ToolCallResult_RefineResult)(nil),            // 47: warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	(*ReadFilesResult_Success)(nil),                        // 48: warp.multi_agent.v1.ReadFilesResult.Success
+	(*ReadFilesResult_Error)(nil),                          // 49: warp.multi_agent.v1.ReadFilesResult.Error
+	(*SearchCodebaseResult_Success)(nil),                   // 50: warp.multi_agent.v1.SearchCodebaseResult.Success
+	(*SearchCodebaseResult_Error)(nil),                     // 51: warp.multi_agent.v1.SearchCodebaseResult.Error
+	(*ApplyFileDiffsResult_Success)(nil),                   // 52: warp.multi_agent.v1.ApplyFileDiffsResult.Success
+	(*ApplyFileDiffsResult_Error)(nil),                     // 53: warp.multi_agent.v1.ApplyFileDiffsResult.Error
+	(*SuggestPlanResult_UserEditedPlan)(nil),               // 54: warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	(*GrepResult_Success)(nil),                             // 55: warp.multi_agent.v1.GrepResult.Success
+	(*GrepResult_Error)(nil),                               // 56: warp.multi_agent.v1.GrepResult.Error
+	(*GrepResult_Success_GrepFileMatch)(nil),               // 57: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	(*GrepResult_Success_GrepFileMatch_GrepLineMatch)(nil), // 58: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	(*FileGlobResult_Success)(nil),                         // 59: warp.multi_agent.v1.FileGlobResult.Success
+	(*FileGlobResult_Error)(nil),                           // 60: warp.multi_agent.v1.FileGlobResult.Error
+	(*MCPResourceContent_Text)(nil),                        // 61: warp.multi_agent.v1.MCPResourceContent.Text
+	(*MCPResourceContent_Binary)(nil),                      // 62: warp.multi_agent.v1.MCPResourceContent.Binary
+	(*ReadMCPResourceResult_Success)(nil),                  // 63: warp.multi_agent.v1.ReadMCPResourceResult.Success
+	(*ReadMCPResourceResult_Error)(nil),                    // 64: warp.multi_agent.v1.ReadMCPResourceResult.Error
+	(*CallMCPToolResult_Success)(nil),                      // 65: warp.multi_agent.v1.CallMCPToolResult.Success
+	(*CallMCPToolResult_Error)(nil),                        // 66: warp.multi_agent.v1.CallMCPToolResult.Error
+	(*CallMCPToolResult_Success_Result)(nil),               // 67: warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	(*CallMCPToolResult_Success_Result_Text)(nil),          // 68: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	(*CallMCPToolResult_Success_Result_Image)(nil),         // 69: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	(*InputContext_ExecutedShellCommand)(nil),              // 70: warp.multi_agent.v1.InputContext.ExecutedShellCommand
+	(*InputContext_SelectedText)(nil),                      // 71: warp.multi_agent.v1.InputContext.SelectedText
+	(*InputContext_Directory)(nil),                         // 72: warp.multi_agent.v1.InputContext.Directory
+	(*InputContext_Shell)(nil),                             // 73: warp.multi_agent.v1.InputContext.Shell
+	(*InputContext_OperatingSystem)(nil),                   // 74: warp.multi_agent.v1.InputContext.OperatingSystem
+	(*InputContext_Image)(nil),                             // 75: warp.multi_agent.v1.InputContext.Image
+	(*InputContext_Codebase)(nil),                          // 76: warp.multi_agent.v1.InputContext.Codebase
+	(*InputContext_File)(nil),                              // 77: warp.multi_agent.v1.InputContext.File
+	(*Citation)(nil),                                       // 78: warp.multi_agent.v1.Citation
+	(*emptypb.Empty)(nil),                                  // 79: google.protobuf.Empty
+	(*timestamppb.Timestamp)(nil),                          // 80: google.protobuf.Timestamp
+	(*structpb.Struct)(nil),                                // 81: google.protobuf.Struct
 }
 var file_task_proto_depIdxs = []int32{
-	17, // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
-	1,  // 1: warp.multi_agent.v1.Task.status:type_name -> warp.multi_agent.v1.TaskStatus
-	2,  // 2: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
-	18, // 3: warp.multi_agent.v1.TaskStatus.pending:type_name -> warp.multi_agent.v1.TaskStatus.Pending
-	19, // 4: warp.multi_agent.v1.TaskStatus.in_progress:type_name -> warp.multi_agent.v1.TaskStatus.InProgress
-	20, // 5: warp.multi_agent.v1.TaskStatus.blocked:type_name -> warp.multi_agent.v1.TaskStatus.Blocked
-	21, // 6: warp.multi_agent.v1.TaskStatus.succeeded:type_name -> warp.multi_agent.v1.TaskStatus.Succeeded
-	22, // 7: warp.multi_agent.v1.TaskStatus.failed:type_name -> warp.multi_agent.v1.TaskStatus.Failed
-	23, // 8: warp.multi_agent.v1.TaskStatus.aborted:type_name -> warp.multi_agent.v1.TaskStatus.Aborted
-	77, // 9: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
-	24, // 10: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	27, // 11: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
-	28, // 12: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
-	29, // 13: warp.multi_agent.v1.Message.tool_call_result:type_name -> warp.multi_agent.v1.Message.ToolCallResult
-	30, // 14: warp.multi_agent.v1.Message.server_event:type_name -> warp.multi_agent.v1.Message.ServerEvent
-	25, // 15: warp.multi_agent.v1.Message.system_query:type_name -> warp.multi_agent.v1.Message.SystemQuery
-	47, // 16: warp.multi_agent.v1.ReadFilesResult.success:type_name -> warp.multi_agent.v1.ReadFilesResult.Success
-	48, // 17: warp.multi_agent.v1.ReadFilesResult.error:type_name -> warp.multi_agent.v1.ReadFilesResult.Error
-	49, // 18: warp.multi_agent.v1.SearchCodebaseResult.success:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Success
-	50, // 19: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
-	51, // 20: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
-	52, // 21: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
-	8,  // 22: warp.multi_agent.v1.FileContent.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	78, // 23: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
-	53, // 24: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
-	54, // 25: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
-	55, // 26: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
-	58, // 27: warp.multi_agent.v1.FileGlobResult.success:type_name -> warp.multi_agent.v1.FileGlobResult.Success
-	59, // 28: warp.multi_agent.v1.FileGlobResult.error:type_name -> warp.multi_agent.v1.FileGlobResult.Error
-	60, // 29: warp.multi_agent.v1.MCPResourceContent.text:type_name -> warp.multi_agent.v1.MCPResourceContent.Text
-	61, // 30: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
-	62, // 31: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
-	63, // 32: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
-	64, // 33: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
-	65, // 34: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
-	71, // 35: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
-	73, // 36: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
-	72, // 37: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	79, // 38: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
-	69, // 39: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.InputContext.ExecutedShellCommand
-	70, // 40: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	74, // 41: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	75, // 42: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
-	76, // 43: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	16, // 44: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	26, // 45: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
-	16, // 46: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	32, // 47: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	34, // 48: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	31, // 49: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
-	33, // 50: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	35, // 51: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	36, // 52: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	37, // 53: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	38, // 54: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
-	39, // 55: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
-	40, // 56: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
-	41, // 57: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
-	16, // 58: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
-	3,  // 59: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	5,  // 60: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	45, // 61: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	4,  // 62: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	6,  // 63: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	10, // 64: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	7,  // 65: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	11, // 66: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	12, // 67: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	46, // 68: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
-	78, // 69: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
-	14, // 70: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	15, // 71: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	77, // 72: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
-	42, // 73: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	43, // 74: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	44, // 75: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	0,  // 76: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	80, // 77: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
-	8,  // 78: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	24, // 79: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	9,  // 80: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	9,  // 81: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	9,  // 82: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	56, // 83: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	57, // 84: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	13, // 85: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	66, // 86: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	67, // 87: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	68, // 88: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	13, // 89: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	9,  // 90: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	18, // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
+	2,  // 1: warp.multi_agent.v1.Task.status:type_name -> warp.multi_agent.v1.TaskStatus
+	3,  // 2: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
+	19, // 3: warp.multi_agent.v1.TaskStatus.pending:type_name -> warp.multi_agent.v1.TaskStatus.Pending
+	20, // 4: warp.multi_agent.v1.TaskStatus.in_progress:type_name -> warp.multi_agent.v1.TaskStatus.InProgress
+	21, // 5: warp.multi_agent.v1.TaskStatus.blocked:type_name -> warp.multi_agent.v1.TaskStatus.Blocked
+	22, // 6: warp.multi_agent.v1.TaskStatus.succeeded:type_name -> warp.multi_agent.v1.TaskStatus.Succeeded
+	23, // 7: warp.multi_agent.v1.TaskStatus.failed:type_name -> warp.multi_agent.v1.TaskStatus.Failed
+	24, // 8: warp.multi_agent.v1.TaskStatus.aborted:type_name -> warp.multi_agent.v1.TaskStatus.Aborted
+	78, // 9: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+	25, // 10: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	28, // 11: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
+	29, // 12: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
+	30, // 13: warp.multi_agent.v1.Message.tool_call_result:type_name -> warp.multi_agent.v1.Message.ToolCallResult
+	31, // 14: warp.multi_agent.v1.Message.server_event:type_name -> warp.multi_agent.v1.Message.ServerEvent
+	26, // 15: warp.multi_agent.v1.Message.system_query:type_name -> warp.multi_agent.v1.Message.SystemQuery
+	48, // 16: warp.multi_agent.v1.ReadFilesResult.success:type_name -> warp.multi_agent.v1.ReadFilesResult.Success
+	49, // 17: warp.multi_agent.v1.ReadFilesResult.error:type_name -> warp.multi_agent.v1.ReadFilesResult.Error
+	50, // 18: warp.multi_agent.v1.SearchCodebaseResult.success:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Success
+	51, // 19: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
+	52, // 20: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
+	53, // 21: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
+	9,  // 22: warp.multi_agent.v1.FileContent.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	79, // 23: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	54, // 24: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	55, // 25: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
+	56, // 26: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
+	59, // 27: warp.multi_agent.v1.FileGlobResult.success:type_name -> warp.multi_agent.v1.FileGlobResult.Success
+	60, // 28: warp.multi_agent.v1.FileGlobResult.error:type_name -> warp.multi_agent.v1.FileGlobResult.Error
+	61, // 29: warp.multi_agent.v1.MCPResourceContent.text:type_name -> warp.multi_agent.v1.MCPResourceContent.Text
+	62, // 30: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
+	63, // 31: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
+	64, // 32: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
+	65, // 33: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
+	66, // 34: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
+	72, // 35: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
+	74, // 36: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
+	73, // 37: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
+	80, // 38: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	70, // 39: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.InputContext.ExecutedShellCommand
+	71, // 40: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	75, // 41: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	76, // 42: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
+	77, // 43: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	17, // 44: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	27, // 45: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
+	17, // 46: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	33, // 47: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	35, // 48: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	32, // 49: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
+	34, // 50: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	36, // 51: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	37, // 52: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	38, // 53: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	39, // 54: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
+	40, // 55: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
+	41, // 56: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	42, // 57: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	17, // 58: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	4,  // 59: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	6,  // 60: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	46, // 61: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	5,  // 62: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	7,  // 63: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	11, // 64: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	8,  // 65: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	12, // 66: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	13, // 67: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	47, // 68: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	79, // 69: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	15, // 70: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	16, // 71: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	78, // 72: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	43, // 73: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	44, // 74: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	45, // 75: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	1,  // 76: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	81, // 77: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	9,  // 78: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	25, // 79: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	10, // 80: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	10, // 81: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	10, // 82: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	57, // 83: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	58, // 84: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	14, // 85: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	67, // 86: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	68, // 87: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	69, // 88: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	14, // 89: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	10, // 90: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
 	91, // [91:91] is the sub-list for method output_type
 	91, // [91:91] is the sub-list for method input_type
 	91, // [91:91] is the sub-list for extension type_name
@@ -10420,13 +10504,14 @@ func file_task_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_task_proto_rawDesc), len(file_task_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   77,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_task_proto_goTypes,
 		DependencyIndexes: file_task_proto_depIdxs,
+		EnumInfos:         file_task_proto_enumTypes,
 		MessageInfos:      file_task_proto_msgTypes,
 	}.Build()
 	File_task_proto = out.File

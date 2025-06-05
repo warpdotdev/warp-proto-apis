@@ -522,3 +522,21 @@ message InputContext {
     FileContent content = 1;
   }
 }
+
+// An enumeration of the different types of client-server tools.
+// This must map 1:1 with the list of structured tool call / tool call result types.
+//
+// Note that the `Server` tool is omitted from this list as an exception;
+// it's not a tool call understood by the client.
+enum ToolType {
+  RUN_SHELL_COMMAND = 0;
+  SEARCH_CODEBASE = 1;
+  READ_FILES = 2;
+  APPLY_FILE_DIFFS = 3;
+  SUGGEST_PLAN = 4;
+  SUGGEST_CREATE_PLAN = 5;
+  GREP = 6;
+  FILE_GLOB = 7;
+  READ_MCP_RESOURCE = 8;
+  CALL_MCP_TOOL = 9;
+}

@@ -149,6 +149,10 @@ message Request {
     // files. Otherwise, new files are created by emitting a diff with an empty `search` field.
     bool supports_create_files = 8;
 
+    // The set of tools that are supported by the client.
+    // By contract, the server will only emit tool calls that are in this list.
+    repeated ToolType supported_tools = 9;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
