@@ -150,7 +150,9 @@ message Request {
     bool supports_create_files = 8;
 
     // The set of tools that are supported by the client.
+    //
     // By contract, the server will only emit tool calls that are in this list.
+    // If the list is empty / unspecified, the server can use any tool.
     repeated ToolType supported_tools = 9;
 
     message ModelConfig {

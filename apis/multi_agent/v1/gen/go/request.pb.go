@@ -1022,7 +1022,9 @@ type Request_Settings_builder struct {
 	// files. Otherwise, new files are created by emitting a diff with an empty `search` field.
 	SupportsCreateFiles *bool
 	// The set of tools that are supported by the client.
+	//
 	// By contract, the server will only emit tool calls that are in this list.
+	// If the list is empty / unspecified, the server can use any tool.
 	SupportedTools []ToolType
 }
 
