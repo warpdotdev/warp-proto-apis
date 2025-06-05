@@ -468,6 +468,7 @@ message InputContext {
   repeated Image images = 7;
   repeated Codebase codebases = 8;
   repeated File files = 9;
+  TerminalSession active_terminal_session = 10;
 
   // Information about shell commands that the user has executed.
   message ExecutedShellCommand {
@@ -485,13 +486,13 @@ message InputContext {
     bool pwd_file_symbols_indexed = 3;
   }
 
-  // Information about the user's terminal shell.
+  // Information about a terminal shell.
   message Shell {
     string name = 1;
     string version = 2;
   }
 
-  // Information about the user's operating system.
+  // Information about an operating system.
   message OperatingSystem {
     // The OS "category", e.g. "MacOS" or "Linux".
     string platform = 1;
@@ -499,6 +500,15 @@ message InputContext {
     // The OS distribution, which is typically only populated for Linux,
     // e.g. Fedora or Ubuntu.
     string distribution = 2;
+  }
+
+  message TerminalSession {
+    SessionType type = 1;
+
+    enum SessionType {
+      LOCAL = 0;
+      REMOTE = 1;
+    }
   }
 
   // Any attached images.
