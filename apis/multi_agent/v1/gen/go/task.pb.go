@@ -10144,16 +10144,16 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xca\x02\n" +
+	"\x06result\"\xd0\x02\n" +
 	"\x12MCPResourceContent\x12\x16\n" +
 	"\x03uri\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uri\x12B\n" +
 	"\x04text\x18\x02 \x01(\v2,.warp.multi_agent.v1.MCPResourceContent.TextH\x00R\x04text\x12H\n" +
 	"\x06binary\x18\x03 \x01(\v2..warp.multi_agent.v1.MCPResourceContent.BinaryH\x00R\x06binary\x1aC\n" +
 	"\x04Text\x12\x1e\n" +
 	"\acontent\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a9\n" +
-	"\x06Binary\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\x12\x1b\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a?\n" +
+	"\x06Binary\x12\x18\n" +
+	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeTypeB\x0e\n" +
 	"\fcontent_type\"\xb4\x02\n" +
 	"\x15ReadMCPResourceResult\x12N\n" +
@@ -10163,25 +10163,25 @@ const file_task_proto_rawDesc = "" +
 	"\bcontents\x18\x01 \x03(\v2'.warp.multi_agent.v1.MCPResourceContentR\bcontents\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\x94\x05\n" +
+	"\x06result\"\x9a\x05\n" +
 	"\x11CallMCPToolResult\x12J\n" +
 	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.CallMCPToolResult.SuccessH\x00R\asuccess\x12D\n" +
-	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.CallMCPToolResult.ErrorH\x00R\x05error\x1a\xb9\x03\n" +
+	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.CallMCPToolResult.ErrorH\x00R\x05error\x1a\xbf\x03\n" +
 	"\aSuccess\x12O\n" +
-	"\aresults\x18\x01 \x03(\v25.warp.multi_agent.v1.CallMCPToolResult.Success.ResultR\aresults\x1a\xdc\x02\n" +
+	"\aresults\x18\x01 \x03(\v25.warp.multi_agent.v1.CallMCPToolResult.Success.ResultR\aresults\x1a\xe2\x02\n" +
 	"\x06Result\x12P\n" +
 	"\x04text\x18\x01 \x01(\v2:.warp.multi_agent.v1.CallMCPToolResult.Success.Result.TextH\x00R\x04text\x12S\n" +
 	"\x05image\x18\x02 \x01(\v2;.warp.multi_agent.v1.CallMCPToolResult.Success.Result.ImageH\x00R\x05image\x12E\n" +
 	"\bresource\x18\x03 \x01(\v2'.warp.multi_agent.v1.MCPResourceContentH\x00R\bresource\x1a \n" +
 	"\x04Text\x12\x18\n" +
-	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a8\n" +
-	"\x05Image\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\x12\x1b\n" +
+	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a>\n" +
+	"\x05Image\x12\x18\n" +
+	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeTypeB\b\n" +
 	"\x06result\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xa0\n" +
+	"\x06result\"\xa6\n" +
 	"\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
@@ -10208,9 +10208,9 @@ const file_task_proto_rawDesc = "" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x1aQ\n" +
 	"\x0fOperatingSystem\x12\x1a\n" +
 	"\bplatform\x18\x01 \x01(\tR\bplatform\x12\"\n" +
-	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
-	"\x05Image\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\fR\x04data\x12\x1b\n" +
+	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a>\n" +
+	"\x05Image\x12\x18\n" +
+	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a>\n" +
 	"\bCodebase\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +

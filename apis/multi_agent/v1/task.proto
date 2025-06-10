@@ -413,7 +413,7 @@ message MCPResourceContent {
     //
     // This should be b64-encoded already because of the MCP contract:
     // https://github.com/modelcontextprotocol/modelcontextprotocol/blob/4161f02acc841010004b7357b7907e6a270ad093/schema/2025-03-26/schema.json#L54
-    bytes data = 1;
+    bytes data = 1 [ (sensitive) = true ];
     string mime_type = 2;
   }
 }
@@ -456,7 +456,7 @@ message CallMCPToolResult {
         //
         // This should be b64-encoded already because of the MCP contract:
         // https://github.com/modelcontextprotocol/modelcontextprotocol/blob/42273f11b9b3d5d5a93d3af8fd9a942b220adc01/schema/2025-03-26/schema.json#L566
-        bytes data = 1;
+        bytes data = 1 [ (sensitive) = true ];
         string mime_type = 2;
       }
     }
@@ -515,7 +515,7 @@ message InputContext {
     // TODO: the client should NOT base64 encode the image data.
     // It should send up raw binary data and the server should
     // do what it needs to (e.g. b64 encode before sending to LLM).
-    bytes data = 1;
+    bytes data = 1 [ (sensitive) = true ];
 
     // MIME type of the image content (e.g., "image/jpeg", "image/png").
     string mime_type = 2;

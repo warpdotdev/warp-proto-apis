@@ -61,7 +61,7 @@ message Request {
 
       message UserInput {
         oneof input {
-          UserQuery user_query = 1 [ (sensitive) = true ];
+          UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
         }
       }
