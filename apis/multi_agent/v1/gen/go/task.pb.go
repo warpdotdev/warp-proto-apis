@@ -8242,7 +8242,7 @@ func (b0 MCPResourceContent_Text_builder) Build() *MCPResourceContent_Text {
 
 type MCPResourceContent_Binary struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Data        *string                `protobuf:"bytes,1,opt,name=data"`
+	xxx_hidden_Data        []byte                 `protobuf:"bytes,1,opt,name=data"`
 	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
@@ -8275,14 +8275,11 @@ func (x *MCPResourceContent_Binary) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *MCPResourceContent_Binary) GetData() string {
+func (x *MCPResourceContent_Binary) GetData() []byte {
 	if x != nil {
-		if x.xxx_hidden_Data != nil {
-			return *x.xxx_hidden_Data
-		}
-		return ""
+		return x.xxx_hidden_Data
 	}
-	return ""
+	return nil
 }
 
 func (x *MCPResourceContent_Binary) GetMimeType() string {
@@ -8295,8 +8292,11 @@ func (x *MCPResourceContent_Binary) GetMimeType() string {
 	return ""
 }
 
-func (x *MCPResourceContent_Binary) SetData(v string) {
-	x.xxx_hidden_Data = &v
+func (x *MCPResourceContent_Binary) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
@@ -8332,8 +8332,11 @@ func (x *MCPResourceContent_Binary) ClearMimeType() {
 type MCPResourceContent_Binary_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Data must be encoded.
-	Data     *string
+	// The raw binary payload.
+	//
+	// This should be b64-encoded already because of the MCP contract:
+	// https://github.com/modelcontextprotocol/modelcontextprotocol/blob/4161f02acc841010004b7357b7907e6a270ad093/schema/2025-03-26/schema.json#L54
+	Data     []byte
 	MimeType *string
 }
 
@@ -8925,7 +8928,7 @@ func (b0 CallMCPToolResult_Success_Result_Text_builder) Build() *CallMCPToolResu
 
 type CallMCPToolResult_Success_Result_Image struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Data        *string                `protobuf:"bytes,1,opt,name=data"`
+	xxx_hidden_Data        []byte                 `protobuf:"bytes,1,opt,name=data"`
 	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
@@ -8958,14 +8961,11 @@ func (x *CallMCPToolResult_Success_Result_Image) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-func (x *CallMCPToolResult_Success_Result_Image) GetData() string {
+func (x *CallMCPToolResult_Success_Result_Image) GetData() []byte {
 	if x != nil {
-		if x.xxx_hidden_Data != nil {
-			return *x.xxx_hidden_Data
-		}
-		return ""
+		return x.xxx_hidden_Data
 	}
-	return ""
+	return nil
 }
 
 func (x *CallMCPToolResult_Success_Result_Image) GetMimeType() string {
@@ -8978,8 +8978,11 @@ func (x *CallMCPToolResult_Success_Result_Image) GetMimeType() string {
 	return ""
 }
 
-func (x *CallMCPToolResult_Success_Result_Image) SetData(v string) {
-	x.xxx_hidden_Data = &v
+func (x *CallMCPToolResult_Success_Result_Image) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
@@ -9015,7 +9018,11 @@ func (x *CallMCPToolResult_Success_Result_Image) ClearMimeType() {
 type CallMCPToolResult_Success_Result_Image_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Data     *string
+	// The image payload.
+	//
+	// This should be b64-encoded already because of the MCP contract:
+	// https://github.com/modelcontextprotocol/modelcontextprotocol/blob/42273f11b9b3d5d5a93d3af8fd9a942b220adc01/schema/2025-03-26/schema.json#L566
+	Data     []byte
 	MimeType *string
 }
 
@@ -9626,7 +9633,7 @@ func (b0 InputContext_OperatingSystem_builder) Build() *InputContext_OperatingSy
 // Any attached images.
 type InputContext_Image struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Data        *string                `protobuf:"bytes,1,opt,name=data"`
+	xxx_hidden_Data        []byte                 `protobuf:"bytes,1,opt,name=data"`
 	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
@@ -9659,14 +9666,11 @@ func (x *InputContext_Image) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InputContext_Image) GetData() string {
+func (x *InputContext_Image) GetData() []byte {
 	if x != nil {
-		if x.xxx_hidden_Data != nil {
-			return *x.xxx_hidden_Data
-		}
-		return ""
+		return x.xxx_hidden_Data
 	}
-	return ""
+	return nil
 }
 
 func (x *InputContext_Image) GetMimeType() string {
@@ -9679,8 +9683,11 @@ func (x *InputContext_Image) GetMimeType() string {
 	return ""
 }
 
-func (x *InputContext_Image) SetData(v string) {
-	x.xxx_hidden_Data = &v
+func (x *InputContext_Image) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
@@ -9716,8 +9723,12 @@ func (x *InputContext_Image) ClearMimeType() {
 type InputContext_Image_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The base64-encoded image data.
-	Data *string
+	// The image payload.
+	//
+	// TODO: the client should NOT base64 encode the image data.
+	// It should send up raw binary data and the server should
+	// do what it needs to (e.g. b64 encode before sending to LLM).
+	Data []byte
 	// MIME type of the image content (e.g., "image/jpeg", "image/png").
 	MimeType *string
 }
@@ -10142,7 +10153,7 @@ const file_task_proto_rawDesc = "" +
 	"\acontent\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a9\n" +
 	"\x06Binary\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeTypeB\x0e\n" +
 	"\fcontent_type\"\xb4\x02\n" +
 	"\x15ReadMCPResourceResult\x12N\n" +
@@ -10165,7 +10176,7 @@ const file_task_proto_rawDesc = "" +
 	"\x04Text\x12\x18\n" +
 	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1a8\n" +
 	"\x05Image\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeTypeB\b\n" +
 	"\x06result\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
@@ -10199,7 +10210,7 @@ const file_task_proto_rawDesc = "" +
 	"\bplatform\x18\x01 \x01(\tR\bplatform\x12\"\n" +
 	"\fdistribution\x18\x02 \x01(\tR\fdistribution\x1a8\n" +
 	"\x05Image\x12\x12\n" +
-	"\x04data\x18\x01 \x01(\tR\x04data\x12\x1b\n" +
+	"\x04data\x18\x01 \x01(\fR\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a>\n" +
 	"\bCodebase\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +
