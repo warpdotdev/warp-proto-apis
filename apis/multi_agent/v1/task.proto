@@ -135,6 +135,7 @@ message Message {
       FileGlob file_glob = 10;
       ReadMCPResource read_mcp_resource = 11;
       CallMCPTool call_mcp_tool = 12;
+      WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -150,6 +151,12 @@ message Message {
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
       bool is_risky = 5;
+    }
+
+    // A tool call to write bytes to the PTY when a command is running in the foreground.
+    message WriteToLongRunningShellCommand {
+      // The exact set of bytes that the client should write to PTY.
+      bytes input = 1;
     }
 
     // A tool call to read files.
@@ -256,6 +263,7 @@ message Message {
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
+      WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 17;
     }
 
     // Result of a server-side tool call.
@@ -276,9 +284,24 @@ message Message {
 
 // Result of a `RunShellCommand` tool call.
 message RunShellCommandResult {
+  // The command that was actually run. This might be different
+  // from the command in the corresponding tool-call payload if the user
+  // edited it before running.
   string command = 3 [ (sensitive) = true ];
-  string output = 1 [ (sensitive) = true ];
-  int32 exit_code = 2;
+
+  oneof result {
+    // The command is now considered long-running and this is it's latest snapshot.
+    LongRunningShellCommandSnapshot long_running_command_snapshot = 4;
+
+    // The command completed.
+    ShellCommandFinished command_finished = 5;
+  }
+
+  // Deprecated; use [ShellCommandFinished::output] instead;
+  string output = 1 [ deprecated = true, (sensitive) = true ];
+
+  // Deprecated; use [ShellCommandFinished::exit_code] instead;
+  int32 exit_code = 2 [ deprecated = true ];
 }
 
 // Result of a `ReadFiles` tool call.
@@ -433,6 +456,25 @@ message ReadMCPResourceResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+message WriteToLongRunningShellCommandResult {
+  oneof result {
+    LongRunningShellCommandSnapshot long_running_command_snapshot = 1;
+    ShellCommandFinished command_finished = 2;
+  }
+}
+
+// The output when a shell command is finished.
+message ShellCommandFinished {
+  string output = 1 [ (sensitive) = true ];
+  int32 exit_code = 2;
+}
+
+// A snapshot of the terminal grid for a long-running command.
+message LongRunningShellCommandSnapshot {
+  // The formatted grid contents.
+  string output = 1 [ (sensitive) = true ];
+}
+
 message CallMCPToolResult {
   oneof result {
     Success success = 1;
@@ -550,4 +592,5 @@ enum ToolType {
   FILE_GLOB = 7;
   READ_MCP_RESOURCE = 8;
   CALL_MCP_TOOL = 9;
+  WRITE_TO_LONG_RUNNING_SHELL_COMMAND = 10;
 }
