@@ -158,6 +158,13 @@ message Request {
     // If the list is empty / unspecified, the server can use any tool.
     repeated ToolType supported_tools = 9;
 
+    // If `true`, the client generally supports long-running commands.
+    //
+    // This is different from declaring tool support for `WriteToLongRunningShellCommand`;
+    // that should be used on a per-request basis to indicate if the client can consume
+    // that tool in its current state.
+    bool supports_long_running_commands = 10;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;

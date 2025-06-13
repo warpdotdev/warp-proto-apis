@@ -772,6 +772,7 @@ type Request_Settings struct {
 	xxx_hidden_WarpDriveContextEnabled     bool                          `protobuf:"varint,7,opt,name=warp_drive_context_enabled,json=warpDriveContextEnabled"`
 	xxx_hidden_SupportsCreateFiles         bool                          `protobuf:"varint,8,opt,name=supports_create_files,json=supportsCreateFiles"`
 	xxx_hidden_SupportedTools              []ToolType                    `protobuf:"varint,9,rep,packed,name=supported_tools,json=supportedTools,enum=warp.multi_agent.v1.ToolType"`
+	xxx_hidden_SupportsLongRunningCommands bool                          `protobuf:"varint,10,opt,name=supports_long_running_commands,json=supportsLongRunningCommands"`
 	XXX_raceDetectHookData                 protoimpl.RaceDetectHookData
 	XXX_presence                           [1]uint32
 	unknownFields                          protoimpl.UnknownFields
@@ -866,47 +867,59 @@ func (x *Request_Settings) GetSupportedTools() []ToolType {
 	return nil
 }
 
+func (x *Request_Settings) GetSupportsLongRunningCommands() bool {
+	if x != nil {
+		return x.xxx_hidden_SupportsLongRunningCommands
+	}
+	return false
+}
+
 func (x *Request_Settings) SetModelConfig(v *Request_Settings_ModelConfig) {
 	x.xxx_hidden_ModelConfig = v
 }
 
 func (x *Request_Settings) SetRulesEnabled(v bool) {
 	x.xxx_hidden_RulesEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 10)
 }
 
 func (x *Request_Settings) SetWebContextRetrievalEnabled(v bool) {
 	x.xxx_hidden_WebContextRetrievalEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 10)
 }
 
 func (x *Request_Settings) SetSupportsParallelToolCalls(v bool) {
 	x.xxx_hidden_SupportsParallelToolCalls = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 10)
 }
 
 func (x *Request_Settings) SetUseAnthropicTextEditorTools(v bool) {
 	x.xxx_hidden_UseAnthropicTextEditorTools = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 10)
 }
 
 func (x *Request_Settings) SetPlanningEnabled(v bool) {
 	x.xxx_hidden_PlanningEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 10)
 }
 
 func (x *Request_Settings) SetWarpDriveContextEnabled(v bool) {
 	x.xxx_hidden_WarpDriveContextEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 10)
 }
 
 func (x *Request_Settings) SetSupportsCreateFiles(v bool) {
 	x.xxx_hidden_SupportsCreateFiles = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 10)
 }
 
 func (x *Request_Settings) SetSupportedTools(v []ToolType) {
 	x.xxx_hidden_SupportedTools = v
+}
+
+func (x *Request_Settings) SetSupportsLongRunningCommands(v bool) {
+	x.xxx_hidden_SupportsLongRunningCommands = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 10)
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -965,6 +978,13 @@ func (x *Request_Settings) HasSupportsCreateFiles() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
 }
 
+func (x *Request_Settings) HasSupportsLongRunningCommands() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 9)
+}
+
 func (x *Request_Settings) ClearModelConfig() {
 	x.xxx_hidden_ModelConfig = nil
 }
@@ -1004,6 +1024,11 @@ func (x *Request_Settings) ClearSupportsCreateFiles() {
 	x.xxx_hidden_SupportsCreateFiles = false
 }
 
+func (x *Request_Settings) ClearSupportsLongRunningCommands() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 9)
+	x.xxx_hidden_SupportsLongRunningCommands = false
+}
+
 type Request_Settings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1026,6 +1051,12 @@ type Request_Settings_builder struct {
 	// By contract, the server will only emit tool calls that are in this list.
 	// If the list is empty / unspecified, the server can use any tool.
 	SupportedTools []ToolType
+	// If `true`, the client generally supports long-running commands.
+	//
+	// This is different from declaring tool support for `WriteToLongRunningShellCommand`;
+	// that should be used on a per-request basis to indicate if the client can consume
+	// that tool in its current state.
+	SupportsLongRunningCommands *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -1034,34 +1065,38 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	_, _ = b, x
 	x.xxx_hidden_ModelConfig = b.ModelConfig
 	if b.RulesEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 10)
 		x.xxx_hidden_RulesEnabled = *b.RulesEnabled
 	}
 	if b.WebContextRetrievalEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 10)
 		x.xxx_hidden_WebContextRetrievalEnabled = *b.WebContextRetrievalEnabled
 	}
 	if b.SupportsParallelToolCalls != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 10)
 		x.xxx_hidden_SupportsParallelToolCalls = *b.SupportsParallelToolCalls
 	}
 	if b.UseAnthropicTextEditorTools != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 10)
 		x.xxx_hidden_UseAnthropicTextEditorTools = *b.UseAnthropicTextEditorTools
 	}
 	if b.PlanningEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 10)
 		x.xxx_hidden_PlanningEnabled = *b.PlanningEnabled
 	}
 	if b.WarpDriveContextEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 10)
 		x.xxx_hidden_WarpDriveContextEnabled = *b.WarpDriveContextEnabled
 	}
 	if b.SupportsCreateFiles != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 10)
 		x.xxx_hidden_SupportsCreateFiles = *b.SupportsCreateFiles
 	}
 	x.xxx_hidden_SupportedTools = b.SupportedTools
+	if b.SupportsLongRunningCommands != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 10)
+		x.xxx_hidden_SupportsLongRunningCommands = *b.SupportsLongRunningCommands
+	}
 	return m0
 }
 
@@ -3363,7 +3398,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xe2%\n" +
+	"task.proto\"\xa7&\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3438,7 +3473,7 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x8a\x05\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xcf\x05\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -3448,7 +3483,9 @@ const file_request_proto_rawDesc = "" +
 	"\x10planning_enabled\x18\x06 \x01(\bR\x0fplanningEnabled\x12;\n" +
 	"\x1awarp_drive_context_enabled\x18\a \x01(\bR\x17warpDriveContextEnabled\x122\n" +
 	"\x15supports_create_files\x18\b \x01(\bR\x13supportsCreateFiles\x12F\n" +
-	"\x0fsupported_tools\x18\t \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x0esupportedTools\x1aU\n" +
+	"\x0fsupported_tools\x18\t \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x0esupportedTools\x12C\n" +
+	"\x1esupports_long_running_commands\x18\n" +
+	" \x01(\bR\x1bsupportsLongRunningCommands\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
