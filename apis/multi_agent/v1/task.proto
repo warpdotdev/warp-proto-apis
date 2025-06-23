@@ -101,6 +101,7 @@ message Message {
   message SystemQuery {
     oneof type {
       AutoCodeDiff auto_code_diff = 1;
+      ResumeConversation resume_conversation = 3;
     }
 
     InputContext context = 2;
@@ -108,6 +109,10 @@ message Message {
 
   message AutoCodeDiff {
     string query = 1 [ (sensitive) = true ];
+  }
+
+  message ResumeConversation {
+    string query = 1; // "Continue this"
   }
 
   // Agent output message type

@@ -49,6 +49,7 @@ message Request {
       UserInputs user_inputs = 6;
       QueryWithCannedResponse query_with_canned_response = 4;
       AutoCodeDiffQuery auto_code_diff_query = 5;
+      ResumeConversationQuery resume_conversation_query = 7;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -117,6 +118,9 @@ message Request {
     // A query to perform an automatic code diff e.g. Warp detects compilation errors
     // in the last run block, and surfaces relevant a code diff to show to the user.
     message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
+
+    // A query to resume a conversation.
+    message ResumeConversationQuery { string query = 1 [ (sensitive) = true ]; }
   }
 
   message Metadata {
