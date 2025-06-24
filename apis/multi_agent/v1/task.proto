@@ -111,9 +111,7 @@ message Message {
     string query = 1 [ (sensitive) = true ];
   }
 
-  message ResumeConversation {
-    string query = 1; // "Continue this"
-  }
+  message ResumeConversation {}
 
   // Agent output message type
   message AgentOutput {
