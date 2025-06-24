@@ -120,7 +120,7 @@ message Request {
     message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
 
     // A query to resume a conversation.
-    message ResumeConversationQuery { string query = 1 [ (sensitive) = true ]; }
+    message ResumeConversationQuery { }
   }
 
   message Metadata {
