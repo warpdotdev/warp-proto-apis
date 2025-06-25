@@ -1554,6 +1554,7 @@ type ResponseEvent_StreamFinished_TokenUsage struct {
 	xxx_hidden_Output          uint32                 `protobuf:"varint,3,opt,name=output"`
 	xxx_hidden_InputCacheRead  uint32                 `protobuf:"varint,4,opt,name=input_cache_read,json=inputCacheRead"`
 	xxx_hidden_InputCacheWrite uint32                 `protobuf:"varint,5,opt,name=input_cache_write,json=inputCacheWrite"`
+	xxx_hidden_CostInCents     int64                  `protobuf:"varint,6,opt,name=cost_in_cents,json=costInCents"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -1623,29 +1624,41 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) GetInputCacheWrite() uint32 {
 	return 0
 }
 
+func (x *ResponseEvent_StreamFinished_TokenUsage) GetCostInCents() int64 {
+	if x != nil {
+		return x.xxx_hidden_CostInCents
+	}
+	return 0
+}
+
 func (x *ResponseEvent_StreamFinished_TokenUsage) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) SetTotalInput(v uint32) {
 	x.xxx_hidden_TotalInput = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) SetOutput(v uint32) {
 	x.xxx_hidden_Output = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) SetInputCacheRead(v uint32) {
 	x.xxx_hidden_InputCacheRead = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) SetInputCacheWrite(v uint32) {
 	x.xxx_hidden_InputCacheWrite = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *ResponseEvent_StreamFinished_TokenUsage) SetCostInCents(v int64) {
+	x.xxx_hidden_CostInCents = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) HasModelId() bool {
@@ -1683,6 +1696,13 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) HasInputCacheWrite() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
+func (x *ResponseEvent_StreamFinished_TokenUsage) HasCostInCents() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
 func (x *ResponseEvent_StreamFinished_TokenUsage) ClearModelId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ModelId = nil
@@ -1708,6 +1728,11 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) ClearInputCacheWrite() {
 	x.xxx_hidden_InputCacheWrite = 0
 }
 
+func (x *ResponseEvent_StreamFinished_TokenUsage) ClearCostInCents() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_CostInCents = 0
+}
+
 type ResponseEvent_StreamFinished_TokenUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1726,6 +1751,9 @@ type ResponseEvent_StreamFinished_TokenUsage_builder struct {
 	// This is only populated for Anthropic models, which have the only API which provides such
 	// granular cached token usage information.
 	InputCacheWrite *uint32
+	// The cost of this model's token usage in cents.
+	// Uses integer representation to avoid floating-point precision issues.
+	CostInCents *int64
 }
 
 func (b0 ResponseEvent_StreamFinished_TokenUsage_builder) Build() *ResponseEvent_StreamFinished_TokenUsage {
@@ -1733,24 +1761,28 @@ func (b0 ResponseEvent_StreamFinished_TokenUsage_builder) Build() *ResponseEvent
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	if b.TotalInput != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_TotalInput = *b.TotalInput
 	}
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_Output = *b.Output
 	}
 	if b.InputCacheRead != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_InputCacheRead = *b.InputCacheRead
 	}
 	if b.InputCacheWrite != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_InputCacheWrite = *b.InputCacheWrite
+	}
+	if b.CostInCents != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_CostInCents = *b.CostInCents
 	}
 	return m0
 }
@@ -2983,7 +3015,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x87\x0e\n" +
+	"task.proto\"\xab\x0e\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -2994,7 +3026,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xd8\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xfc\n" +
 	"\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
@@ -3011,7 +3043,7 @@ const file_response_proto_rawDesc = "" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x1a#\n" +
 	"\vRequestCost\x12\x14\n" +
-	"\x05exact\x18\x01 \x01(\x02R\x05exact\x1a\xb6\x01\n" +
+	"\x05exact\x18\x01 \x01(\x02R\x05exact\x1a\xda\x01\n" +
 	"\n" +
 	"TokenUsage\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12\x1f\n" +
@@ -3019,7 +3051,8 @@ const file_response_proto_rawDesc = "" +
 	"totalInput\x12\x16\n" +
 	"\x06output\x18\x03 \x01(\rR\x06output\x12(\n" +
 	"\x10input_cache_read\x18\x04 \x01(\rR\x0einputCacheRead\x12*\n" +
-	"\x11input_cache_write\x18\x05 \x01(\rR\x0finputCacheWrite\x1a\a\n" +
+	"\x11input_cache_write\x18\x05 \x01(\rR\x0finputCacheWrite\x12\"\n" +
+	"\rcost_in_cents\x18\x06 \x01(\x03R\vcostInCents\x1a\a\n" +
 	"\x05Other\x1a\x06\n" +
 	"\x04Done\x1a\x16\n" +
 	"\x14ReachedMaxTokenLimit\x1a\f\n" +
