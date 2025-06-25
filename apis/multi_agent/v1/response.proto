@@ -98,7 +98,6 @@ message ResponseEvent {
         uint32 input_cache_write = 5;
 
         // The cost of this model's token usage in cents.
-        // Uses integer representation to avoid floating-point precision issues.
         uint32 cost_in_cents = 6;
     }
 

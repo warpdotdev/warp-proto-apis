@@ -1752,7 +1752,6 @@ type ResponseEvent_StreamFinished_TokenUsage_builder struct {
 	// granular cached token usage information.
 	InputCacheWrite *uint32
 	// The cost of this model's token usage in cents.
-	// Uses integer representation to avoid floating-point precision issues.
 	CostInCents *uint32
 }
 
