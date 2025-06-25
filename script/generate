@@ -53,7 +53,7 @@ echo "Generating bindings for $API $VERSION..."
 
 echo "Source protos:"
 API_PATH="apis/$API/$VERSION"
-PROTO_FILES=($(cd "$API_PATH" && ls -1 *.proto))
+PROTO_FILES=($(cd "$API_PATH" > /dev/null && ls -1 *.proto))
 for proto in "${PROTO_FILES[@]}"; do
   echo " - $API_PATH/$proto"
 done
