@@ -1554,7 +1554,7 @@ type ResponseEvent_StreamFinished_TokenUsage struct {
 	xxx_hidden_Output          uint32                 `protobuf:"varint,3,opt,name=output"`
 	xxx_hidden_InputCacheRead  uint32                 `protobuf:"varint,4,opt,name=input_cache_read,json=inputCacheRead"`
 	xxx_hidden_InputCacheWrite uint32                 `protobuf:"varint,5,opt,name=input_cache_write,json=inputCacheWrite"`
-	xxx_hidden_CostInCents     int64                  `protobuf:"varint,6,opt,name=cost_in_cents,json=costInCents"`
+	xxx_hidden_CostInCents     uint32                 `protobuf:"varint,6,opt,name=cost_in_cents,json=costInCents"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -1624,7 +1624,7 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) GetInputCacheWrite() uint32 {
 	return 0
 }
 
-func (x *ResponseEvent_StreamFinished_TokenUsage) GetCostInCents() int64 {
+func (x *ResponseEvent_StreamFinished_TokenUsage) GetCostInCents() uint32 {
 	if x != nil {
 		return x.xxx_hidden_CostInCents
 	}
@@ -1656,7 +1656,7 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) SetInputCacheWrite(v uint32) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
-func (x *ResponseEvent_StreamFinished_TokenUsage) SetCostInCents(v int64) {
+func (x *ResponseEvent_StreamFinished_TokenUsage) SetCostInCents(v uint32) {
 	x.xxx_hidden_CostInCents = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
@@ -1753,7 +1753,7 @@ type ResponseEvent_StreamFinished_TokenUsage_builder struct {
 	InputCacheWrite *uint32
 	// The cost of this model's token usage in cents.
 	// Uses integer representation to avoid floating-point precision issues.
-	CostInCents *int64
+	CostInCents *uint32
 }
 
 func (b0 ResponseEvent_StreamFinished_TokenUsage_builder) Build() *ResponseEvent_StreamFinished_TokenUsage {
@@ -3052,7 +3052,7 @@ const file_response_proto_rawDesc = "" +
 	"\x06output\x18\x03 \x01(\rR\x06output\x12(\n" +
 	"\x10input_cache_read\x18\x04 \x01(\rR\x0einputCacheRead\x12*\n" +
 	"\x11input_cache_write\x18\x05 \x01(\rR\x0finputCacheWrite\x12\"\n" +
-	"\rcost_in_cents\x18\x06 \x01(\x03R\vcostInCents\x1a\a\n" +
+	"\rcost_in_cents\x18\x06 \x01(\rR\vcostInCents\x1a\a\n" +
 	"\x05Other\x1a\x06\n" +
 	"\x04Done\x1a\x16\n" +
 	"\x14ReachedMaxTokenLimit\x1a\f\n" +

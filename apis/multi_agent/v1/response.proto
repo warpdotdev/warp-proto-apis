@@ -99,7 +99,7 @@ message ResponseEvent {
 
         // The cost of this model's token usage in cents.
         // Uses integer representation to avoid floating-point precision issues.
-        int64 cost_in_cents = 6;
+        uint32 cost_in_cents = 6;
     }
 
     message Other {}
