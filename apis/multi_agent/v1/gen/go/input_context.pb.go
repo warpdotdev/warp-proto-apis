@@ -22,16 +22,17 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Context that may be relevant to the input in a request.
 type InputContext struct {
 	state                            protoimpl.MessageState        `protogen:"opaque.v1"`
 	xxx_hidden_Directory             *InputContext_Directory       `protobuf:"bytes,1,opt,name=directory"`
 	xxx_hidden_OperatingSystem       *InputContext_OperatingSystem `protobuf:"bytes,2,opt,name=operating_system,json=operatingSystem"`
 	xxx_hidden_Shell                 *InputContext_Shell           `protobuf:"bytes,3,opt,name=shell"`
 	xxx_hidden_CurrentTime           *timestamppb.Timestamp        `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
+	xxx_hidden_Codebases             *[]*InputContext_Codebase     `protobuf:"bytes,8,rep,name=codebases"`
 	xxx_hidden_ExecutedShellCommands *[]*ExecutedShellCommand      `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
 	xxx_hidden_SelectedText          *[]*InputContext_SelectedText `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
 	xxx_hidden_Images                *[]*InputContext_Image        `protobuf:"bytes,7,rep,name=images"`
-	xxx_hidden_Codebases             *[]*InputContext_Codebase     `protobuf:"bytes,8,rep,name=codebases"`
 	xxx_hidden_Files                 *[]*InputContext_File         `protobuf:"bytes,9,rep,name=files"`
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
@@ -90,6 +91,15 @@ func (x *InputContext) GetCurrentTime() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *InputContext) GetCodebases() []*InputContext_Codebase {
+	if x != nil {
+		if x.xxx_hidden_Codebases != nil {
+			return *x.xxx_hidden_Codebases
+		}
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) GetExecutedShellCommands() []*ExecutedShellCommand {
 	if x != nil {
@@ -113,15 +123,6 @@ func (x *InputContext) GetImages() []*InputContext_Image {
 	if x != nil {
 		if x.xxx_hidden_Images != nil {
 			return *x.xxx_hidden_Images
-		}
-	}
-	return nil
-}
-
-func (x *InputContext) GetCodebases() []*InputContext_Codebase {
-	if x != nil {
-		if x.xxx_hidden_Codebases != nil {
-			return *x.xxx_hidden_Codebases
 		}
 	}
 	return nil
@@ -152,6 +153,10 @@ func (x *InputContext) SetCurrentTime(v *timestamppb.Timestamp) {
 	x.xxx_hidden_CurrentTime = v
 }
 
+func (x *InputContext) SetCodebases(v []*InputContext_Codebase) {
+	x.xxx_hidden_Codebases = &v
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) SetExecutedShellCommands(v []*ExecutedShellCommand) {
 	x.xxx_hidden_ExecutedShellCommands = &v
@@ -163,10 +168,6 @@ func (x *InputContext) SetSelectedText(v []*InputContext_SelectedText) {
 
 func (x *InputContext) SetImages(v []*InputContext_Image) {
 	x.xxx_hidden_Images = &v
-}
-
-func (x *InputContext) SetCodebases(v []*InputContext_Codebase) {
-	x.xxx_hidden_Codebases = &v
 }
 
 func (x *InputContext) SetFiles(v []*InputContext_File) {
@@ -224,11 +225,13 @@ type InputContext_builder struct {
 	OperatingSystem *InputContext_OperatingSystem
 	Shell           *InputContext_Shell
 	CurrentTime     *timestamppb.Timestamp
+	Codebases       []*InputContext_Codebase
+	// TODO: these fields should be _attachments_, not part of the input context.
+	//
 	// Deprecated: Marked as deprecated in input_context.proto.
 	ExecutedShellCommands []*ExecutedShellCommand
 	SelectedText          []*InputContext_SelectedText
 	Images                []*InputContext_Image
-	Codebases             []*InputContext_Codebase
 	Files                 []*InputContext_File
 }
 
@@ -240,10 +243,10 @@ func (b0 InputContext_builder) Build() *InputContext {
 	x.xxx_hidden_OperatingSystem = b.OperatingSystem
 	x.xxx_hidden_Shell = b.Shell
 	x.xxx_hidden_CurrentTime = b.CurrentTime
+	x.xxx_hidden_Codebases = &b.Codebases
 	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
 	x.xxx_hidden_SelectedText = &b.SelectedText
 	x.xxx_hidden_Images = &b.Images
-	x.xxx_hidden_Codebases = &b.Codebases
 	x.xxx_hidden_Files = &b.Files
 	return m0
 }
@@ -1146,11 +1149,11 @@ const file_input_context_proto_rawDesc = "" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
 	"\x05shell\x18\x03 \x01(\v2'.warp.multi_agent.v1.InputContext.ShellR\x05shell\x12=\n" +
-	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12e\n" +
+	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12H\n" +
+	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x12e\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2).warp.multi_agent.v1.ExecutedShellCommandB\x02\x18\x01R\x15executedShellCommands\x12S\n" +
 	"\rselected_text\x18\x06 \x03(\v2..warp.multi_agent.v1.InputContext.SelectedTextR\fselectedText\x12?\n" +
-	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12H\n" +
-	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x12<\n" +
+	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12<\n" +
 	"\x05files\x18\t \x03(\v2&.warp.multi_agent.v1.InputContext.FileR\x05files\x1a(\n" +
 	"\fSelectedText\x12\x18\n" +
 	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1av\n" +
@@ -1196,10 +1199,10 @@ var file_input_context_proto_depIdxs = []int32{
 	5,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
 	4,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
 	9,  // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
-	1,  // 4: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	2,  // 5: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	6,  // 6: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	7,  // 7: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
+	7,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
+	1,  // 5: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	2,  // 6: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	6,  // 7: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
 	8,  // 8: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
 	10, // 9: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
 	10, // [10:10] is the sub-list for method output_type

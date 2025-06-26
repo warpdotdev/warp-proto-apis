@@ -1295,7 +1295,9 @@ func (x *Request_Input_UserQuery) ClearQuery() {
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query       *string
+	Query *string
+	// An attachment.  It may be referenced by key in the query text,
+	// but does not need to be.
 	Attachments map[string]*Request_Input_UserQuery_Attachment
 }
 
@@ -2533,6 +2535,7 @@ func (b0 Request_Input_ResumeConversation_builder) Build() *Request_Input_Resume
 	return m0
 }
 
+// Something attached to the query by the user.
 type Request_Input_UserQuery_Attachment struct {
 	state            protoimpl.MessageState                     `protogen:"opaque.v1"`
 	xxx_hidden_Value isRequest_Input_UserQuery_Attachment_Value `protobuf_oneof:"value"`

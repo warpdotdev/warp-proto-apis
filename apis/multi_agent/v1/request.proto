@@ -58,8 +58,11 @@ message Request {
 
     message UserQuery {
       string query = 1 [ (sensitive) = true ];
+      // An attachment.  It may be referenced by key in the query text,
+      // but does not need to be.
       map<string, Attachment> attachments = 2;
 
+      // Something attached to the query by the user.
       message Attachment {
         oneof value {
           ExecutedShellCommand executed_shell_command = 1;
