@@ -119,7 +119,7 @@ message Request {
     // in the last run block, and surfaces relevant a code diff to show to the user.
     message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
 
-    // A query to resume a conversation.
+    // An input to resume a conversation.
     message ResumeConversation { }
   }
 
