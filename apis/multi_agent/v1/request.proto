@@ -58,9 +58,9 @@ message Request {
 
     message UserQuery {
       string query = 1 [ (sensitive) = true ];
-      map<string, ContextItem> referenceable_context = 2;
+      map<string, Attachment> attachments = 2;
 
-      message ContextItem {
+      message Attachment {
         oneof value {
           ExecutedShellCommand executed_shell_command = 1;
         }

@@ -1220,13 +1220,13 @@ func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
 }
 
 type Request_Input_UserQuery struct {
-	state                           protoimpl.MessageState                          `protogen:"opaque.v1"`
-	xxx_hidden_Query                *string                                         `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_ReferenceableContext map[string]*Request_Input_UserQuery_ContextItem `protobuf:"bytes,2,rep,name=referenceable_context,json=referenceableContext" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData          protoimpl.RaceDetectHookData
-	XXX_presence                    [1]uint32
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	state                  protoimpl.MessageState                         `protogen:"opaque.v1"`
+	xxx_hidden_Query       *string                                        `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_Attachments map[string]*Request_Input_UserQuery_Attachment `protobuf:"bytes,2,rep,name=attachments" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Request_Input_UserQuery) Reset() {
@@ -1264,9 +1264,9 @@ func (x *Request_Input_UserQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Request_Input_UserQuery) GetReferenceableContext() map[string]*Request_Input_UserQuery_ContextItem {
+func (x *Request_Input_UserQuery) GetAttachments() map[string]*Request_Input_UserQuery_Attachment {
 	if x != nil {
-		return x.xxx_hidden_ReferenceableContext
+		return x.xxx_hidden_Attachments
 	}
 	return nil
 }
@@ -1276,8 +1276,8 @@ func (x *Request_Input_UserQuery) SetQuery(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Input_UserQuery) SetReferenceableContext(v map[string]*Request_Input_UserQuery_ContextItem) {
-	x.xxx_hidden_ReferenceableContext = v
+func (x *Request_Input_UserQuery) SetAttachments(v map[string]*Request_Input_UserQuery_Attachment) {
+	x.xxx_hidden_Attachments = v
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -1295,8 +1295,8 @@ func (x *Request_Input_UserQuery) ClearQuery() {
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query                *string
-	ReferenceableContext map[string]*Request_Input_UserQuery_ContextItem
+	Query       *string
+	Attachments map[string]*Request_Input_UserQuery_Attachment
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -1307,7 +1307,7 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Query = b.Query
 	}
-	x.xxx_hidden_ReferenceableContext = b.ReferenceableContext
+	x.xxx_hidden_Attachments = b.Attachments
 	return m0
 }
 
@@ -2533,27 +2533,27 @@ func (b0 Request_Input_ResumeConversation_builder) Build() *Request_Input_Resume
 	return m0
 }
 
-type Request_Input_UserQuery_ContextItem struct {
-	state            protoimpl.MessageState                      `protogen:"opaque.v1"`
-	xxx_hidden_Value isRequest_Input_UserQuery_ContextItem_Value `protobuf_oneof:"value"`
+type Request_Input_UserQuery_Attachment struct {
+	state            protoimpl.MessageState                     `protogen:"opaque.v1"`
+	xxx_hidden_Value isRequest_Input_UserQuery_Attachment_Value `protobuf_oneof:"value"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
 
-func (x *Request_Input_UserQuery_ContextItem) Reset() {
-	*x = Request_Input_UserQuery_ContextItem{}
+func (x *Request_Input_UserQuery_Attachment) Reset() {
+	*x = Request_Input_UserQuery_Attachment{}
 	mi := &file_request_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_UserQuery_ContextItem) String() string {
+func (x *Request_Input_UserQuery_Attachment) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_UserQuery_ContextItem) ProtoMessage() {}
+func (*Request_Input_UserQuery_Attachment) ProtoMessage() {}
 
-func (x *Request_Input_UserQuery_ContextItem) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_UserQuery_Attachment) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2565,64 +2565,64 @@ func (x *Request_Input_UserQuery_ContextItem) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_UserQuery_ContextItem) GetExecutedShellCommand() *ExecutedShellCommand {
+func (x *Request_Input_UserQuery_Attachment) GetExecutedShellCommand() *ExecutedShellCommand {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_ContextItem_ExecutedShellCommand); ok {
+		if x, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_Attachment_ExecutedShellCommand); ok {
 			return x.ExecutedShellCommand
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_UserQuery_ContextItem) SetExecutedShellCommand(v *ExecutedShellCommand) {
+func (x *Request_Input_UserQuery_Attachment) SetExecutedShellCommand(v *ExecutedShellCommand) {
 	if v == nil {
 		x.xxx_hidden_Value = nil
 		return
 	}
-	x.xxx_hidden_Value = &request_Input_UserQuery_ContextItem_ExecutedShellCommand{v}
+	x.xxx_hidden_Value = &request_Input_UserQuery_Attachment_ExecutedShellCommand{v}
 }
 
-func (x *Request_Input_UserQuery_ContextItem) HasValue() bool {
+func (x *Request_Input_UserQuery_Attachment) HasValue() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Value != nil
 }
 
-func (x *Request_Input_UserQuery_ContextItem) HasExecutedShellCommand() bool {
+func (x *Request_Input_UserQuery_Attachment) HasExecutedShellCommand() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_ContextItem_ExecutedShellCommand)
+	_, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_Attachment_ExecutedShellCommand)
 	return ok
 }
 
-func (x *Request_Input_UserQuery_ContextItem) ClearValue() {
+func (x *Request_Input_UserQuery_Attachment) ClearValue() {
 	x.xxx_hidden_Value = nil
 }
 
-func (x *Request_Input_UserQuery_ContextItem) ClearExecutedShellCommand() {
-	if _, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_ContextItem_ExecutedShellCommand); ok {
+func (x *Request_Input_UserQuery_Attachment) ClearExecutedShellCommand() {
+	if _, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_Attachment_ExecutedShellCommand); ok {
 		x.xxx_hidden_Value = nil
 	}
 }
 
-const Request_Input_UserQuery_ContextItem_Value_not_set_case case_Request_Input_UserQuery_ContextItem_Value = 0
-const Request_Input_UserQuery_ContextItem_ExecutedShellCommand_case case_Request_Input_UserQuery_ContextItem_Value = 1
+const Request_Input_UserQuery_Attachment_Value_not_set_case case_Request_Input_UserQuery_Attachment_Value = 0
+const Request_Input_UserQuery_Attachment_ExecutedShellCommand_case case_Request_Input_UserQuery_Attachment_Value = 1
 
-func (x *Request_Input_UserQuery_ContextItem) WhichValue() case_Request_Input_UserQuery_ContextItem_Value {
+func (x *Request_Input_UserQuery_Attachment) WhichValue() case_Request_Input_UserQuery_Attachment_Value {
 	if x == nil {
-		return Request_Input_UserQuery_ContextItem_Value_not_set_case
+		return Request_Input_UserQuery_Attachment_Value_not_set_case
 	}
 	switch x.xxx_hidden_Value.(type) {
-	case *request_Input_UserQuery_ContextItem_ExecutedShellCommand:
-		return Request_Input_UserQuery_ContextItem_ExecutedShellCommand_case
+	case *request_Input_UserQuery_Attachment_ExecutedShellCommand:
+		return Request_Input_UserQuery_Attachment_ExecutedShellCommand_case
 	default:
-		return Request_Input_UserQuery_ContextItem_Value_not_set_case
+		return Request_Input_UserQuery_Attachment_Value_not_set_case
 	}
 }
 
-type Request_Input_UserQuery_ContextItem_builder struct {
+type Request_Input_UserQuery_Attachment_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Value:
@@ -2630,19 +2630,19 @@ type Request_Input_UserQuery_ContextItem_builder struct {
 	// -- end of xxx_hidden_Value
 }
 
-func (b0 Request_Input_UserQuery_ContextItem_builder) Build() *Request_Input_UserQuery_ContextItem {
-	m0 := &Request_Input_UserQuery_ContextItem{}
+func (b0 Request_Input_UserQuery_Attachment_builder) Build() *Request_Input_UserQuery_Attachment {
+	m0 := &Request_Input_UserQuery_Attachment{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ExecutedShellCommand != nil {
-		x.xxx_hidden_Value = &request_Input_UserQuery_ContextItem_ExecutedShellCommand{b.ExecutedShellCommand}
+		x.xxx_hidden_Value = &request_Input_UserQuery_Attachment_ExecutedShellCommand{b.ExecutedShellCommand}
 	}
 	return m0
 }
 
-type case_Request_Input_UserQuery_ContextItem_Value protoreflect.FieldNumber
+type case_Request_Input_UserQuery_Attachment_Value protoreflect.FieldNumber
 
-func (x case_Request_Input_UserQuery_ContextItem_Value) String() string {
+func (x case_Request_Input_UserQuery_Attachment_Value) String() string {
 	md := file_request_proto_msgTypes[13].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -2650,15 +2650,15 @@ func (x case_Request_Input_UserQuery_ContextItem_Value) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_UserQuery_ContextItem_Value interface {
-	isRequest_Input_UserQuery_ContextItem_Value()
+type isRequest_Input_UserQuery_Attachment_Value interface {
+	isRequest_Input_UserQuery_Attachment_Value()
 }
 
-type request_Input_UserQuery_ContextItem_ExecutedShellCommand struct {
+type request_Input_UserQuery_Attachment_ExecutedShellCommand struct {
 	ExecutedShellCommand *ExecutedShellCommand `protobuf:"bytes,1,opt,name=executed_shell_command,json=executedShellCommand,oneof"`
 }
 
-func (*request_Input_UserQuery_ContextItem_ExecutedShellCommand) isRequest_Input_UserQuery_ContextItem_Value() {
+func (*request_Input_UserQuery_Attachment_ExecutedShellCommand) isRequest_Input_UserQuery_Attachment_Value() {
 }
 
 type Request_Input_UserInputs_UserInput struct {
@@ -3628,7 +3628,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xa4*\n" +
+	"task.proto\"\xfc)\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3639,7 +3639,7 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xa2\x1b\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfa\x1a\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -3649,14 +3649,15 @@ const file_request_proto_rawDesc = "" +
 	"\x13resume_conversation\x18\a \x01(\v25.warp.multi_agent.v1.Request.Input.ResumeConversationH\x00R\x12resumeConversation\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\xa3\x03\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\xfb\x02\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12{\n" +
-	"\x15referenceable_context\x18\x02 \x03(\v2F.warp.multi_agent.v1.Request.Input.UserQuery.ReferenceableContextEntryR\x14referenceableContext\x1a\x81\x01\n" +
-	"\x19ReferenceableContextEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12N\n" +
-	"\x05value\x18\x02 \x01(\v28.warp.multi_agent.v1.Request.Input.UserQuery.ContextItemR\x05value:\x028\x01\x1ay\n" +
-	"\vContextItem\x12a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12_\n" +
+	"\vattachments\x18\x02 \x03(\v2=.warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntryR\vattachments\x1aw\n" +
+	"\x10AttachmentsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12M\n" +
+	"\x05value\x18\x02 \x01(\v27.warp.multi_agent.v1.Request.Input.UserQuery.AttachmentR\x05value:\x028\x01\x1ax\n" +
+	"\n" +
+	"Attachment\x12a\n" +
 	"\x16executed_shell_command\x18\x01 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommandB\a\n" +
 	"\x05value\x1a\xa2\x02\n" +
 	"\n" +
@@ -3757,8 +3758,8 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_QueryWithCannedResponse)(nil),                          // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
 	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	(*Request_Input_ResumeConversation)(nil),                               // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
-	nil,                                                                    // 12: warp.multi_agent.v1.Request.Input.UserQuery.ReferenceableContextEntry
-	(*Request_Input_UserQuery_ContextItem)(nil),                            // 13: warp.multi_agent.v1.Request.Input.UserQuery.ContextItem
+	nil,                                                                    // 12: warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntry
+	(*Request_Input_UserQuery_Attachment)(nil),                             // 13: warp.multi_agent.v1.Request.Input.UserQuery.Attachment
 	(*Request_Input_UserInputs_UserInput)(nil),                             // 14: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_ToolCallResult_RefineResult)(nil),                      // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 16: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
@@ -3810,7 +3811,7 @@ var file_request_proto_depIdxs = []int32{
 	29, // 16: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
 	24, // 17: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
 	25, // 18: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	12, // 19: warp.multi_agent.v1.Request.Input.UserQuery.referenceable_context:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.ReferenceableContextEntry
+	12, // 19: warp.multi_agent.v1.Request.Input.UserQuery.attachments:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntry
 	14, // 20: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	30, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	31, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
@@ -3830,8 +3831,8 @@ var file_request_proto_depIdxs = []int32{
 	19, // 36: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	20, // 37: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	21, // 38: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	13, // 39: warp.multi_agent.v1.Request.Input.UserQuery.ReferenceableContextEntry.value:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.ContextItem
-	41, // 40: warp.multi_agent.v1.Request.Input.UserQuery.ContextItem.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	13, // 39: warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntry.value:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.Attachment
+	41, // 40: warp.multi_agent.v1.Request.Input.UserQuery.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	6,  // 41: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 42: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	6,  // 43: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
@@ -3884,7 +3885,7 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
 	file_request_proto_msgTypes[13].OneofWrappers = []any{
-		(*request_Input_UserQuery_ContextItem_ExecutedShellCommand)(nil),
+		(*request_Input_UserQuery_Attachment_ExecutedShellCommand)(nil),
 	}
 	file_request_proto_msgTypes[14].OneofWrappers = []any{
 		(*request_Input_UserInputs_UserInput_UserQuery)(nil),
