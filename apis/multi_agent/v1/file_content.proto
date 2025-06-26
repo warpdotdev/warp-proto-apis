@@ -1,0 +1,23 @@
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+
+import "options.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A range of lines [start, end] that situate content in a file, 1-indexed.
+message FileContentLineRange {
+    uint32 start = 1;
+    uint32 end = 2;
+  }
+  
+  // A representation of raw content within a file.
+  message FileContent {
+    string file_path = 1 [ (sensitive) = true ];
+    string content = 2 [ (sensitive) = true ];
+    FileContentLineRange line_range = 3;
+  }

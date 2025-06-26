@@ -6,6 +6,7 @@ package warp.multi_agent.v1;
 import "google/protobuf/go_features.proto";
 import "google/protobuf/struct.proto";
 
+import "input_context.proto";
 import "options.proto";
 import "suggestions.proto";
 import "task.proto";
@@ -55,7 +56,16 @@ message Request {
       ToolCallResult tool_call_result = 3 [deprecated = true];
     }
 
-    message UserQuery { string query = 1 [ (sensitive) = true ]; }
+    message UserQuery {
+      string query = 1 [ (sensitive) = true ];
+      map<string, ContextItem> referenceable_context = 2;
+
+      message ContextItem {
+        oneof value {
+          ExecutedShellCommand executed_shell_command = 1;
+        }
+      }
+    }
 
     message UserInputs {
       repeated UserInput inputs = 1;
