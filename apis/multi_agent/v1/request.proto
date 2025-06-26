@@ -49,7 +49,7 @@ message Request {
       UserInputs user_inputs = 6;
       QueryWithCannedResponse query_with_canned_response = 4;
       AutoCodeDiffQuery auto_code_diff_query = 5;
-      ResumeConversationQuery resume_conversation_query = 7;
+      ResumeConversation resume_conversation = 7;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -120,7 +120,7 @@ message Request {
     message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
 
     // A query to resume a conversation.
-    message ResumeConversationQuery { }
+    message ResumeConversation { }
   }
 
   message Metadata {
