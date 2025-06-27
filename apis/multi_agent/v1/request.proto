@@ -50,6 +50,11 @@ message Request {
     }
   }
 
+  message RunningShellCommand {
+    string command = 1 [ (sensitive) = true ];
+    LongRunningShellCommandSnapshot snapshot = 2;
+  }
+
   message Input {
     InputContext context = 1;
 
