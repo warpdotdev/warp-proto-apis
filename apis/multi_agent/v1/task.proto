@@ -460,6 +460,11 @@ message ShellCommandFinished {
   int32 exit_code = 2;
 }
 
+message RunningShellCommand {
+  string command = 1 [ (sensitive) = true ];
+  LongRunningShellCommandSnapshot snapshot = 2;
+}
+
 // A snapshot of the terminal grid for a long-running command.
 message LongRunningShellCommandSnapshot {
   // The formatted grid contents.

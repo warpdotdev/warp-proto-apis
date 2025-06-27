@@ -320,6 +320,217 @@ func (b0 Request_TaskContext_builder) Build() *Request_TaskContext {
 	return m0
 }
 
+type Request_Attachment struct {
+	state            protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_Value isRequest_Attachment_Value `protobuf_oneof:"value"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *Request_Attachment) Reset() {
+	*x = Request_Attachment{}
+	mi := &file_request_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Attachment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Attachment) ProtoMessage() {}
+
+func (x *Request_Attachment) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Attachment) GetPlainText() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Value.(*request_Attachment_PlainText); ok {
+			return x.PlainText
+		}
+	}
+	return ""
+}
+
+func (x *Request_Attachment) GetExecutedShellCommand() *ExecutedShellCommand {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Value.(*request_Attachment_ExecutedShellCommand); ok {
+			return x.ExecutedShellCommand
+		}
+	}
+	return nil
+}
+
+func (x *Request_Attachment) GetRunningShellCommand() *RunningShellCommand {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Value.(*request_Attachment_RunningShellCommand); ok {
+			return x.RunningShellCommand
+		}
+	}
+	return nil
+}
+
+func (x *Request_Attachment) SetPlainText(v string) {
+	x.xxx_hidden_Value = &request_Attachment_PlainText{v}
+}
+
+func (x *Request_Attachment) SetExecutedShellCommand(v *ExecutedShellCommand) {
+	if v == nil {
+		x.xxx_hidden_Value = nil
+		return
+	}
+	x.xxx_hidden_Value = &request_Attachment_ExecutedShellCommand{v}
+}
+
+func (x *Request_Attachment) SetRunningShellCommand(v *RunningShellCommand) {
+	if v == nil {
+		x.xxx_hidden_Value = nil
+		return
+	}
+	x.xxx_hidden_Value = &request_Attachment_RunningShellCommand{v}
+}
+
+func (x *Request_Attachment) HasValue() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Value != nil
+}
+
+func (x *Request_Attachment) HasPlainText() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*request_Attachment_PlainText)
+	return ok
+}
+
+func (x *Request_Attachment) HasExecutedShellCommand() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*request_Attachment_ExecutedShellCommand)
+	return ok
+}
+
+func (x *Request_Attachment) HasRunningShellCommand() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*request_Attachment_RunningShellCommand)
+	return ok
+}
+
+func (x *Request_Attachment) ClearValue() {
+	x.xxx_hidden_Value = nil
+}
+
+func (x *Request_Attachment) ClearPlainText() {
+	if _, ok := x.xxx_hidden_Value.(*request_Attachment_PlainText); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Request_Attachment) ClearExecutedShellCommand() {
+	if _, ok := x.xxx_hidden_Value.(*request_Attachment_ExecutedShellCommand); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+func (x *Request_Attachment) ClearRunningShellCommand() {
+	if _, ok := x.xxx_hidden_Value.(*request_Attachment_RunningShellCommand); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
+const Request_Attachment_Value_not_set_case case_Request_Attachment_Value = 0
+const Request_Attachment_PlainText_case case_Request_Attachment_Value = 1
+const Request_Attachment_ExecutedShellCommand_case case_Request_Attachment_Value = 2
+const Request_Attachment_RunningShellCommand_case case_Request_Attachment_Value = 3
+
+func (x *Request_Attachment) WhichValue() case_Request_Attachment_Value {
+	if x == nil {
+		return Request_Attachment_Value_not_set_case
+	}
+	switch x.xxx_hidden_Value.(type) {
+	case *request_Attachment_PlainText:
+		return Request_Attachment_PlainText_case
+	case *request_Attachment_ExecutedShellCommand:
+		return Request_Attachment_ExecutedShellCommand_case
+	case *request_Attachment_RunningShellCommand:
+		return Request_Attachment_RunningShellCommand_case
+	default:
+		return Request_Attachment_Value_not_set_case
+	}
+}
+
+type Request_Attachment_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Value:
+	PlainText            *string
+	ExecutedShellCommand *ExecutedShellCommand
+	RunningShellCommand  *RunningShellCommand
+	// -- end of xxx_hidden_Value
+}
+
+func (b0 Request_Attachment_builder) Build() *Request_Attachment {
+	m0 := &Request_Attachment{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.PlainText != nil {
+		x.xxx_hidden_Value = &request_Attachment_PlainText{*b.PlainText}
+	}
+	if b.ExecutedShellCommand != nil {
+		x.xxx_hidden_Value = &request_Attachment_ExecutedShellCommand{b.ExecutedShellCommand}
+	}
+	if b.RunningShellCommand != nil {
+		x.xxx_hidden_Value = &request_Attachment_RunningShellCommand{b.RunningShellCommand}
+	}
+	return m0
+}
+
+type case_Request_Attachment_Value protoreflect.FieldNumber
+
+func (x case_Request_Attachment_Value) String() string {
+	md := file_request_proto_msgTypes[2].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isRequest_Attachment_Value interface {
+	isRequest_Attachment_Value()
+}
+
+type request_Attachment_PlainText struct {
+	PlainText string `protobuf:"bytes,1,opt,name=plain_text,json=plainText,oneof"`
+}
+
+type request_Attachment_ExecutedShellCommand struct {
+	ExecutedShellCommand *ExecutedShellCommand `protobuf:"bytes,2,opt,name=executed_shell_command,json=executedShellCommand,oneof"`
+}
+
+type request_Attachment_RunningShellCommand struct {
+	RunningShellCommand *RunningShellCommand `protobuf:"bytes,3,opt,name=running_shell_command,json=runningShellCommand,oneof"`
+}
+
+func (*request_Attachment_PlainText) isRequest_Attachment_Value() {}
+
+func (*request_Attachment_ExecutedShellCommand) isRequest_Attachment_Value() {}
+
+func (*request_Attachment_RunningShellCommand) isRequest_Attachment_Value() {}
+
 type Request_Input struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Context *InputContext          `protobuf:"bytes,1,opt,name=context"`
@@ -330,7 +541,7 @@ type Request_Input struct {
 
 func (x *Request_Input) Reset() {
 	*x = Request_Input{}
-	mi := &file_request_proto_msgTypes[2]
+	mi := &file_request_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -342,7 +553,7 @@ func (x *Request_Input) String() string {
 func (*Request_Input) ProtoMessage() {}
 
 func (x *Request_Input) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[2]
+	mi := &file_request_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -657,7 +868,7 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 type case_Request_Input_Type protoreflect.FieldNumber
 
 func (x case_Request_Input_Type) String() string {
-	md := file_request_proto_msgTypes[2].Descriptor()
+	md := file_request_proto_msgTypes[3].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -718,7 +929,7 @@ type Request_Metadata struct {
 
 func (x *Request_Metadata) Reset() {
 	*x = Request_Metadata{}
-	mi := &file_request_proto_msgTypes[3]
+	mi := &file_request_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -730,7 +941,7 @@ func (x *Request_Metadata) String() string {
 func (*Request_Metadata) ProtoMessage() {}
 
 func (x *Request_Metadata) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[3]
+	mi := &file_request_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -825,7 +1036,7 @@ type Request_Settings struct {
 
 func (x *Request_Settings) Reset() {
 	*x = Request_Settings{}
-	mi := &file_request_proto_msgTypes[4]
+	mi := &file_request_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -837,7 +1048,7 @@ func (x *Request_Settings) String() string {
 func (*Request_Settings) ProtoMessage() {}
 
 func (x *Request_Settings) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[4]
+	mi := &file_request_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1154,7 +1365,7 @@ type Request_MCPContext struct {
 
 func (x *Request_MCPContext) Reset() {
 	*x = Request_MCPContext{}
-	mi := &file_request_proto_msgTypes[5]
+	mi := &file_request_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1166,7 +1377,7 @@ func (x *Request_MCPContext) String() string {
 func (*Request_MCPContext) ProtoMessage() {}
 
 func (x *Request_MCPContext) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[5]
+	mi := &file_request_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1220,18 +1431,18 @@ func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
 }
 
 type Request_Input_UserQuery struct {
-	state                  protoimpl.MessageState                         `protogen:"opaque.v1"`
-	xxx_hidden_Query       *string                                        `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_Attachments map[string]*Request_Input_UserQuery_Attachment `protobuf:"bytes,2,rep,name=attachments" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                            protoimpl.MessageState         `protogen:"opaque.v1"`
+	xxx_hidden_Query                 *string                        `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_ReferencedAttachments map[string]*Request_Attachment `protobuf:"bytes,2,rep,name=referenced_attachments,json=referencedAttachments" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *Request_Input_UserQuery) Reset() {
 	*x = Request_Input_UserQuery{}
-	mi := &file_request_proto_msgTypes[6]
+	mi := &file_request_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1243,7 +1454,7 @@ func (x *Request_Input_UserQuery) String() string {
 func (*Request_Input_UserQuery) ProtoMessage() {}
 
 func (x *Request_Input_UserQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[6]
+	mi := &file_request_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1264,9 +1475,9 @@ func (x *Request_Input_UserQuery) GetQuery() string {
 	return ""
 }
 
-func (x *Request_Input_UserQuery) GetAttachments() map[string]*Request_Input_UserQuery_Attachment {
+func (x *Request_Input_UserQuery) GetReferencedAttachments() map[string]*Request_Attachment {
 	if x != nil {
-		return x.xxx_hidden_Attachments
+		return x.xxx_hidden_ReferencedAttachments
 	}
 	return nil
 }
@@ -1276,8 +1487,8 @@ func (x *Request_Input_UserQuery) SetQuery(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Input_UserQuery) SetAttachments(v map[string]*Request_Input_UserQuery_Attachment) {
-	x.xxx_hidden_Attachments = v
+func (x *Request_Input_UserQuery) SetReferencedAttachments(v map[string]*Request_Attachment) {
+	x.xxx_hidden_ReferencedAttachments = v
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -1296,9 +1507,8 @@ type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query *string
-	// An attachment.  It may be referenced by key in the query text,
-	// but does not need to be.
-	Attachments map[string]*Request_Input_UserQuery_Attachment
+	// An attachment referenced by key in the query text.
+	ReferencedAttachments map[string]*Request_Attachment
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -1309,7 +1519,7 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Query = b.Query
 	}
-	x.xxx_hidden_Attachments = b.Attachments
+	x.xxx_hidden_ReferencedAttachments = b.ReferencedAttachments
 	return m0
 }
 
@@ -1322,7 +1532,7 @@ type Request_Input_UserInputs struct {
 
 func (x *Request_Input_UserInputs) Reset() {
 	*x = Request_Input_UserInputs{}
-	mi := &file_request_proto_msgTypes[7]
+	mi := &file_request_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1334,7 +1544,7 @@ func (x *Request_Input_UserInputs) String() string {
 func (*Request_Input_UserInputs) ProtoMessage() {}
 
 func (x *Request_Input_UserInputs) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[7]
+	mi := &file_request_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1385,7 +1595,7 @@ type Request_Input_ToolCallResult struct {
 
 func (x *Request_Input_ToolCallResult) Reset() {
 	*x = Request_Input_ToolCallResult{}
-	mi := &file_request_proto_msgTypes[8]
+	mi := &file_request_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1397,7 +1607,7 @@ func (x *Request_Input_ToolCallResult) String() string {
 func (*Request_Input_ToolCallResult) ProtoMessage() {}
 
 func (x *Request_Input_ToolCallResult) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[8]
+	mi := &file_request_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1936,7 +2146,7 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 type case_Request_Input_ToolCallResult_Result protoreflect.FieldNumber
 
 func (x case_Request_Input_ToolCallResult_Result) String() string {
-	md := file_request_proto_msgTypes[8].Descriptor()
+	md := file_request_proto_msgTypes[9].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2036,7 +2246,7 @@ type Request_Input_QueryWithCannedResponse struct {
 
 func (x *Request_Input_QueryWithCannedResponse) Reset() {
 	*x = Request_Input_QueryWithCannedResponse{}
-	mi := &file_request_proto_msgTypes[9]
+	mi := &file_request_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2048,7 +2258,7 @@ func (x *Request_Input_QueryWithCannedResponse) String() string {
 func (*Request_Input_QueryWithCannedResponse) ProtoMessage() {}
 
 func (x *Request_Input_QueryWithCannedResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[9]
+	mi := &file_request_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2359,7 +2569,7 @@ func (b0 Request_Input_QueryWithCannedResponse_builder) Build() *Request_Input_Q
 type case_Request_Input_QueryWithCannedResponse_Type protoreflect.FieldNumber
 
 func (x case_Request_Input_QueryWithCannedResponse_Type) String() string {
-	md := file_request_proto_msgTypes[9].Descriptor()
+	md := file_request_proto_msgTypes[10].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2424,7 +2634,7 @@ type Request_Input_AutoCodeDiffQuery struct {
 
 func (x *Request_Input_AutoCodeDiffQuery) Reset() {
 	*x = Request_Input_AutoCodeDiffQuery{}
-	mi := &file_request_proto_msgTypes[10]
+	mi := &file_request_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2436,7 +2646,7 @@ func (x *Request_Input_AutoCodeDiffQuery) String() string {
 func (*Request_Input_AutoCodeDiffQuery) ProtoMessage() {}
 
 func (x *Request_Input_AutoCodeDiffQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[10]
+	mi := &file_request_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2500,7 +2710,7 @@ type Request_Input_ResumeConversation struct {
 
 func (x *Request_Input_ResumeConversation) Reset() {
 	*x = Request_Input_ResumeConversation{}
-	mi := &file_request_proto_msgTypes[11]
+	mi := &file_request_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2512,7 +2722,7 @@ func (x *Request_Input_ResumeConversation) String() string {
 func (*Request_Input_ResumeConversation) ProtoMessage() {}
 
 func (x *Request_Input_ResumeConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[11]
+	mi := &file_request_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2533,135 +2743,6 @@ func (b0 Request_Input_ResumeConversation_builder) Build() *Request_Input_Resume
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
-}
-
-// Something attached to the query by the user.
-type Request_Input_UserQuery_Attachment struct {
-	state            protoimpl.MessageState                     `protogen:"opaque.v1"`
-	xxx_hidden_Value isRequest_Input_UserQuery_Attachment_Value `protobuf_oneof:"value"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *Request_Input_UserQuery_Attachment) Reset() {
-	*x = Request_Input_UserQuery_Attachment{}
-	mi := &file_request_proto_msgTypes[13]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_UserQuery_Attachment) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_UserQuery_Attachment) ProtoMessage() {}
-
-func (x *Request_Input_UserQuery_Attachment) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[13]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Request_Input_UserQuery_Attachment) GetExecutedShellCommand() *ExecutedShellCommand {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_Attachment_ExecutedShellCommand); ok {
-			return x.ExecutedShellCommand
-		}
-	}
-	return nil
-}
-
-func (x *Request_Input_UserQuery_Attachment) SetExecutedShellCommand(v *ExecutedShellCommand) {
-	if v == nil {
-		x.xxx_hidden_Value = nil
-		return
-	}
-	x.xxx_hidden_Value = &request_Input_UserQuery_Attachment_ExecutedShellCommand{v}
-}
-
-func (x *Request_Input_UserQuery_Attachment) HasValue() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Value != nil
-}
-
-func (x *Request_Input_UserQuery_Attachment) HasExecutedShellCommand() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_Attachment_ExecutedShellCommand)
-	return ok
-}
-
-func (x *Request_Input_UserQuery_Attachment) ClearValue() {
-	x.xxx_hidden_Value = nil
-}
-
-func (x *Request_Input_UserQuery_Attachment) ClearExecutedShellCommand() {
-	if _, ok := x.xxx_hidden_Value.(*request_Input_UserQuery_Attachment_ExecutedShellCommand); ok {
-		x.xxx_hidden_Value = nil
-	}
-}
-
-const Request_Input_UserQuery_Attachment_Value_not_set_case case_Request_Input_UserQuery_Attachment_Value = 0
-const Request_Input_UserQuery_Attachment_ExecutedShellCommand_case case_Request_Input_UserQuery_Attachment_Value = 1
-
-func (x *Request_Input_UserQuery_Attachment) WhichValue() case_Request_Input_UserQuery_Attachment_Value {
-	if x == nil {
-		return Request_Input_UserQuery_Attachment_Value_not_set_case
-	}
-	switch x.xxx_hidden_Value.(type) {
-	case *request_Input_UserQuery_Attachment_ExecutedShellCommand:
-		return Request_Input_UserQuery_Attachment_ExecutedShellCommand_case
-	default:
-		return Request_Input_UserQuery_Attachment_Value_not_set_case
-	}
-}
-
-type Request_Input_UserQuery_Attachment_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_Value:
-	ExecutedShellCommand *ExecutedShellCommand
-	// -- end of xxx_hidden_Value
-}
-
-func (b0 Request_Input_UserQuery_Attachment_builder) Build() *Request_Input_UserQuery_Attachment {
-	m0 := &Request_Input_UserQuery_Attachment{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.ExecutedShellCommand != nil {
-		x.xxx_hidden_Value = &request_Input_UserQuery_Attachment_ExecutedShellCommand{b.ExecutedShellCommand}
-	}
-	return m0
-}
-
-type case_Request_Input_UserQuery_Attachment_Value protoreflect.FieldNumber
-
-func (x case_Request_Input_UserQuery_Attachment_Value) String() string {
-	md := file_request_proto_msgTypes[13].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isRequest_Input_UserQuery_Attachment_Value interface {
-	isRequest_Input_UserQuery_Attachment_Value()
-}
-
-type request_Input_UserQuery_Attachment_ExecutedShellCommand struct {
-	ExecutedShellCommand *ExecutedShellCommand `protobuf:"bytes,1,opt,name=executed_shell_command,json=executedShellCommand,oneof"`
-}
-
-func (*request_Input_UserQuery_Attachment_ExecutedShellCommand) isRequest_Input_UserQuery_Attachment_Value() {
 }
 
 type Request_Input_UserInputs_UserInput struct {
@@ -3631,7 +3712,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xfc)\n" +
+	"task.proto\"\x97+\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3642,7 +3723,14 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfa\x1a\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xf9\x01\n" +
+	"\n" +
+	"Attachment\x12\x1f\n" +
+	"\n" +
+	"plain_text\x18\x01 \x01(\tH\x00R\tplainText\x12a\n" +
+	"\x16executed_shell_command\x18\x02 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommand\x12^\n" +
+	"\x15running_shell_command\x18\x03 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandH\x00R\x13runningShellCommandB\a\n" +
+	"\x05value\x1a\x99\x1a\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -3652,17 +3740,13 @@ const file_request_proto_rawDesc = "" +
 	"\x13resume_conversation\x18\a \x01(\v25.warp.multi_agent.v1.Request.Input.ResumeConversationH\x00R\x12resumeConversation\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\xfb\x02\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\x9a\x02\n" +
 	"\tUserQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12_\n" +
-	"\vattachments\x18\x02 \x03(\v2=.warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntryR\vattachments\x1aw\n" +
-	"\x10AttachmentsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12M\n" +
-	"\x05value\x18\x02 \x01(\v27.warp.multi_agent.v1.Request.Input.UserQuery.AttachmentR\x05value:\x028\x01\x1ax\n" +
-	"\n" +
-	"Attachment\x12a\n" +
-	"\x16executed_shell_command\x18\x01 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommandB\a\n" +
-	"\x05value\x1a\xa2\x02\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12~\n" +
+	"\x16referenced_attachments\x18\x02 \x03(\v2G.warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntryR\x15referencedAttachments\x1aq\n" +
+	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12=\n" +
+	"\x05value\x18\x02 \x01(\v2'.warp.multi_agent.v1.Request.AttachmentR\x05value:\x028\x01\x1a\xa2\x02\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
 	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xc2\x01\n" +
@@ -3751,18 +3835,18 @@ var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_request_proto_goTypes = []any{
 	(*Request)(nil),                                                        // 0: warp.multi_agent.v1.Request
 	(*Request_TaskContext)(nil),                                            // 1: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                  // 2: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                               // 3: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                               // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                             // 5: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                        // 6: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_UserInputs)(nil),                                       // 7: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                   // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                          // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversation)(nil),                               // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
-	nil,                                                                    // 12: warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntry
-	(*Request_Input_UserQuery_Attachment)(nil),                             // 13: warp.multi_agent.v1.Request.Input.UserQuery.Attachment
+	(*Request_Attachment)(nil),                                             // 2: warp.multi_agent.v1.Request.Attachment
+	(*Request_Input)(nil),                                                  // 3: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                                               // 4: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                                               // 5: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                                             // 6: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),                                        // 7: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_UserInputs)(nil),                                       // 8: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),                                   // 9: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil),                          // 10: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 11: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_ResumeConversation)(nil),                               // 12: warp.multi_agent.v1.Request.Input.ResumeConversation
+	nil,                                                                    // 13: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	(*Request_Input_UserInputs_UserInput)(nil),                             // 14: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_ToolCallResult_RefineResult)(nil),                      // 15: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 16: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
@@ -3777,75 +3861,77 @@ var file_request_proto_goTypes = []any{
 	(*Request_MCPContext_MCPTool)(nil),           // 25: warp.multi_agent.v1.Request.MCPContext.MCPTool
 	(*Suggestions)(nil),                          // 26: warp.multi_agent.v1.Suggestions
 	(*Task)(nil),                                 // 27: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                         // 28: warp.multi_agent.v1.InputContext
-	(ToolType)(0),                                // 29: warp.multi_agent.v1.ToolType
-	(*RunShellCommandResult)(nil),                // 30: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                      // 31: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                 // 32: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                 // 33: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                    // 34: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),              // 35: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                           // 36: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                       // 37: warp.multi_agent.v1.FileGlobResult
-	(*ReadMCPResourceResult)(nil),                // 38: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),                    // 39: warp.multi_agent.v1.CallMCPToolResult
-	(*WriteToLongRunningShellCommandResult)(nil), // 40: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*ExecutedShellCommand)(nil),                 // 41: warp.multi_agent.v1.ExecutedShellCommand
-	(*structpb.Value)(nil),                       // 42: google.protobuf.Value
-	(*structpb.Struct)(nil),                      // 43: google.protobuf.Struct
+	(*ExecutedShellCommand)(nil),                 // 28: warp.multi_agent.v1.ExecutedShellCommand
+	(*RunningShellCommand)(nil),                  // 29: warp.multi_agent.v1.RunningShellCommand
+	(*InputContext)(nil),                         // 30: warp.multi_agent.v1.InputContext
+	(ToolType)(0),                                // 31: warp.multi_agent.v1.ToolType
+	(*RunShellCommandResult)(nil),                // 32: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                      // 33: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                 // 34: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                 // 35: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                    // 36: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),              // 37: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                           // 38: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                       // 39: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),                // 40: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),                    // 41: warp.multi_agent.v1.CallMCPToolResult
+	(*WriteToLongRunningShellCommandResult)(nil), // 42: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*structpb.Value)(nil),                       // 43: google.protobuf.Value
+	(*structpb.Struct)(nil),                      // 44: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
-	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
-	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
-	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
+	3,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
+	5,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
+	4,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
 	26, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	5,  // 5: warp.multi_agent.v1.Request.mcp_context:type_name -> warp.multi_agent.v1.Request.MCPContext
+	6,  // 5: warp.multi_agent.v1.Request.mcp_context:type_name -> warp.multi_agent.v1.Request.MCPContext
 	27, // 6: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	28, // 7: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
-	7,  // 8: warp.multi_agent.v1.Request.Input.user_inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs
-	9,  // 9: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	10, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	11, // 11: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
-	6,  // 12: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 13: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	22, // 14: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	23, // 15: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	29, // 16: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
-	24, // 17: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	25, // 18: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	12, // 19: warp.multi_agent.v1.Request.Input.UserQuery.attachments:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntry
-	14, // 20: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	30, // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	31, // 22: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	32, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	33, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	34, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	35, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	36, // 27: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	37, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	15, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	38, // 30: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	39, // 31: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	40, // 32: warp.multi_agent.v1.Request.Input.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	16, // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	17, // 34: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	18, // 35: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	19, // 36: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	20, // 37: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	21, // 38: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	13, // 39: warp.multi_agent.v1.Request.Input.UserQuery.AttachmentsEntry.value:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.Attachment
-	41, // 40: warp.multi_agent.v1.Request.Input.UserQuery.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	6,  // 41: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 42: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	6,  // 43: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	42, // 44: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	43, // 45: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	46, // [46:46] is the sub-list for method output_type
-	46, // [46:46] is the sub-list for method input_type
-	46, // [46:46] is the sub-list for extension type_name
-	46, // [46:46] is the sub-list for extension extendee
-	0,  // [0:46] is the sub-list for field type_name
+	28, // 7: warp.multi_agent.v1.Request.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	29, // 8: warp.multi_agent.v1.Request.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
+	30, // 9: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
+	8,  // 10: warp.multi_agent.v1.Request.Input.user_inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs
+	10, // 11: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	11, // 12: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	12, // 13: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
+	7,  // 14: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	9,  // 15: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	22, // 16: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	23, // 17: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	31, // 18: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
+	24, // 19: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	25, // 20: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	13, // 21: warp.multi_agent.v1.Request.Input.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
+	14, // 22: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
+	32, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	33, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	34, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	35, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	36, // 27: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	37, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	38, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	39, // 30: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	15, // 31: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	40, // 32: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	41, // 33: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	42, // 34: warp.multi_agent.v1.Request.Input.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	16, // 35: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	17, // 36: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	18, // 37: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	19, // 38: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	20, // 39: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	21, // 40: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	2,  // 41: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Request.Attachment
+	7,  // 42: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	9,  // 43: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	7,  // 44: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	43, // 45: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	44, // 46: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	47, // [47:47] is the sub-list for method output_type
+	47, // [47:47] is the sub-list for method input_type
+	47, // [47:47] is the sub-list for extension type_name
+	47, // [47:47] is the sub-list for extension extendee
+	0,  // [0:47] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -3858,6 +3944,11 @@ func file_request_proto_init() {
 	file_suggestions_proto_init()
 	file_task_proto_init()
 	file_request_proto_msgTypes[2].OneofWrappers = []any{
+		(*request_Attachment_PlainText)(nil),
+		(*request_Attachment_ExecutedShellCommand)(nil),
+		(*request_Attachment_RunningShellCommand)(nil),
+	}
+	file_request_proto_msgTypes[3].OneofWrappers = []any{
 		(*request_Input_UserInputs_)(nil),
 		(*request_Input_QueryWithCannedResponse_)(nil),
 		(*request_Input_AutoCodeDiffQuery_)(nil),
@@ -3865,7 +3956,7 @@ func file_request_proto_init() {
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
 	}
-	file_request_proto_msgTypes[8].OneofWrappers = []any{
+	file_request_proto_msgTypes[9].OneofWrappers = []any{
 		(*request_Input_ToolCallResult_RunShellCommand)(nil),
 		(*request_Input_ToolCallResult_ReadFiles)(nil),
 		(*request_Input_ToolCallResult_SearchCodebase)(nil),
@@ -3879,16 +3970,13 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_CallMcpTool)(nil),
 		(*request_Input_ToolCallResult_WriteToLongRunningShellCommand)(nil),
 	}
-	file_request_proto_msgTypes[9].OneofWrappers = []any{
+	file_request_proto_msgTypes[10].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),
 		(*request_Input_QueryWithCannedResponse_Code_)(nil),
 		(*request_Input_QueryWithCannedResponse_Deploy_)(nil),
 		(*request_Input_QueryWithCannedResponse_SomethingElse_)(nil),
 		(*request_Input_QueryWithCannedResponse_CustomOnboardingRequest_)(nil),
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
-	}
-	file_request_proto_msgTypes[13].OneofWrappers = []any{
-		(*request_Input_UserQuery_Attachment_ExecutedShellCommand)(nil),
 	}
 	file_request_proto_msgTypes[14].OneofWrappers = []any{
 		(*request_Input_UserInputs_UserInput_UserQuery)(nil),
