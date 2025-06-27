@@ -387,10 +387,10 @@ func (x *Request_Input) GetAutoCodeDiffQuery() *Request_Input_AutoCodeDiffQuery 
 	return nil
 }
 
-func (x *Request_Input) GetResumeConversationQuery() *Request_Input_ResumeConversationQuery {
+func (x *Request_Input) GetResumeConversation() *Request_Input_ResumeConversation {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_ResumeConversationQuery_); ok {
-			return x.ResumeConversationQuery
+		if x, ok := x.xxx_hidden_Type.(*request_Input_ResumeConversation_); ok {
+			return x.ResumeConversation
 		}
 	}
 	return nil
@@ -444,12 +444,12 @@ func (x *Request_Input) SetAutoCodeDiffQuery(v *Request_Input_AutoCodeDiffQuery)
 	x.xxx_hidden_Type = &request_Input_AutoCodeDiffQuery_{v}
 }
 
-func (x *Request_Input) SetResumeConversationQuery(v *Request_Input_ResumeConversationQuery) {
+func (x *Request_Input) SetResumeConversation(v *Request_Input_ResumeConversation) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_ResumeConversationQuery_{v}
+	x.xxx_hidden_Type = &request_Input_ResumeConversation_{v}
 }
 
 // Deprecated: Marked as deprecated in request.proto.
@@ -508,11 +508,11 @@ func (x *Request_Input) HasAutoCodeDiffQuery() bool {
 	return ok
 }
 
-func (x *Request_Input) HasResumeConversationQuery() bool {
+func (x *Request_Input) HasResumeConversation() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_ResumeConversationQuery_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_ResumeConversation_)
 	return ok
 }
 
@@ -560,8 +560,8 @@ func (x *Request_Input) ClearAutoCodeDiffQuery() {
 	}
 }
 
-func (x *Request_Input) ClearResumeConversationQuery() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_ResumeConversationQuery_); ok {
+func (x *Request_Input) ClearResumeConversation() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_ResumeConversation_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -584,7 +584,7 @@ const Request_Input_Type_not_set_case case_Request_Input_Type = 0
 const Request_Input_UserInputs_case case_Request_Input_Type = 6
 const Request_Input_QueryWithCannedResponse_case case_Request_Input_Type = 4
 const Request_Input_AutoCodeDiffQuery_case case_Request_Input_Type = 5
-const Request_Input_ResumeConversationQuery_case case_Request_Input_Type = 7
+const Request_Input_ResumeConversation_case case_Request_Input_Type = 7
 const Request_Input_UserQuery_case case_Request_Input_Type = 2
 const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
 
@@ -599,8 +599,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_QueryWithCannedResponse_case
 	case *request_Input_AutoCodeDiffQuery_:
 		return Request_Input_AutoCodeDiffQuery_case
-	case *request_Input_ResumeConversationQuery_:
-		return Request_Input_ResumeConversationQuery_case
+	case *request_Input_ResumeConversation_:
+		return Request_Input_ResumeConversation_case
 	case *request_Input_UserQuery_:
 		return Request_Input_UserQuery_case
 	case *request_Input_ToolCallResult_:
@@ -620,7 +620,7 @@ type Request_Input_builder struct {
 	UserInputs              *Request_Input_UserInputs
 	QueryWithCannedResponse *Request_Input_QueryWithCannedResponse
 	AutoCodeDiffQuery       *Request_Input_AutoCodeDiffQuery
-	ResumeConversationQuery *Request_Input_ResumeConversationQuery
+	ResumeConversation      *Request_Input_ResumeConversation
 	// Deprecated: Marked as deprecated in request.proto.
 	UserQuery *Request_Input_UserQuery
 	// Deprecated: Marked as deprecated in request.proto.
@@ -642,8 +642,8 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	if b.AutoCodeDiffQuery != nil {
 		x.xxx_hidden_Type = &request_Input_AutoCodeDiffQuery_{b.AutoCodeDiffQuery}
 	}
-	if b.ResumeConversationQuery != nil {
-		x.xxx_hidden_Type = &request_Input_ResumeConversationQuery_{b.ResumeConversationQuery}
+	if b.ResumeConversation != nil {
+		x.xxx_hidden_Type = &request_Input_ResumeConversation_{b.ResumeConversation}
 	}
 	if b.UserQuery != nil {
 		x.xxx_hidden_Type = &request_Input_UserQuery_{b.UserQuery}
@@ -680,8 +680,8 @@ type request_Input_AutoCodeDiffQuery_ struct {
 	AutoCodeDiffQuery *Request_Input_AutoCodeDiffQuery `protobuf:"bytes,5,opt,name=auto_code_diff_query,json=autoCodeDiffQuery,oneof"`
 }
 
-type request_Input_ResumeConversationQuery_ struct {
-	ResumeConversationQuery *Request_Input_ResumeConversationQuery `protobuf:"bytes,7,opt,name=resume_conversation_query,json=resumeConversationQuery,oneof"`
+type request_Input_ResumeConversation_ struct {
+	ResumeConversation *Request_Input_ResumeConversation `protobuf:"bytes,7,opt,name=resume_conversation,json=resumeConversation,oneof"`
 }
 
 type request_Input_UserQuery_ struct {
@@ -700,7 +700,7 @@ func (*request_Input_QueryWithCannedResponse_) isRequest_Input_Type() {}
 
 func (*request_Input_AutoCodeDiffQuery_) isRequest_Input_Type() {}
 
-func (*request_Input_ResumeConversationQuery_) isRequest_Input_Type() {}
+func (*request_Input_ResumeConversation_) isRequest_Input_Type() {}
 
 func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 
@@ -2475,30 +2475,27 @@ func (b0 Request_Input_AutoCodeDiffQuery_builder) Build() *Request_Input_AutoCod
 	return m0
 }
 
-// A query to resume a conversation.
-type Request_Input_ResumeConversationQuery struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Query       *string                `protobuf:"bytes,1,opt,name=query"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+// An input to resume a conversation.
+type Request_Input_ResumeConversation struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_ResumeConversationQuery) Reset() {
-	*x = Request_Input_ResumeConversationQuery{}
+func (x *Request_Input_ResumeConversation) Reset() {
+	*x = Request_Input_ResumeConversation{}
 	mi := &file_request_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_ResumeConversationQuery) String() string {
+func (x *Request_Input_ResumeConversation) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_ResumeConversationQuery) ProtoMessage() {}
+func (*Request_Input_ResumeConversation) ProtoMessage() {}
 
-func (x *Request_Input_ResumeConversationQuery) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_ResumeConversation) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2510,47 +2507,15 @@ func (x *Request_Input_ResumeConversationQuery) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_ResumeConversationQuery) GetQuery() string {
-	if x != nil {
-		if x.xxx_hidden_Query != nil {
-			return *x.xxx_hidden_Query
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Request_Input_ResumeConversationQuery) SetQuery(v string) {
-	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
-}
-
-func (x *Request_Input_ResumeConversationQuery) HasQuery() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *Request_Input_ResumeConversationQuery) ClearQuery() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Query = nil
-}
-
-type Request_Input_ResumeConversationQuery_builder struct {
+type Request_Input_ResumeConversation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Query *string
 }
 
-func (b0 Request_Input_ResumeConversationQuery_builder) Build() *Request_Input_ResumeConversationQuery {
-	m0 := &Request_Input_ResumeConversationQuery{}
+func (b0 Request_Input_ResumeConversation_builder) Build() *Request_Input_ResumeConversation {
+	m0 := &Request_Input_ResumeConversation{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Query = b.Query
-	}
 	return m0
 }
 
@@ -3521,7 +3486,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xd8'\n" +
+	"task.proto\"\xa7'\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3532,14 +3497,14 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xd6\x18\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xa5\x18\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
 	"userInputs\x12y\n" +
 	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x12g\n" +
-	"\x14auto_code_diff_query\x18\x05 \x01(\v24.warp.multi_agent.v1.Request.Input.AutoCodeDiffQueryH\x00R\x11autoCodeDiffQuery\x12x\n" +
-	"\x19resume_conversation_query\x18\a \x01(\v2:.warp.multi_agent.v1.Request.Input.ResumeConversationQueryH\x00R\x17resumeConversationQuery\x12Q\n" +
+	"\x14auto_code_diff_query\x18\x05 \x01(\v24.warp.multi_agent.v1.Request.Input.AutoCodeDiffQueryH\x00R\x11autoCodeDiffQuery\x12h\n" +
+	"\x13resume_conversation\x18\a \x01(\v25.warp.multi_agent.v1.Request.Input.ResumeConversationH\x00R\x12resumeConversation\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
 	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a'\n" +
@@ -3590,9 +3555,8 @@ const file_request_proto_rawDesc = "" +
 	"\x18AgenticOnboardingKickoffB\x06\n" +
 	"\x04type\x1a/\n" +
 	"\x11AutoCodeDiffQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a5\n" +
-	"\x17ResumeConversationQuery\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05queryB\x06\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x14\n" +
+	"\x12ResumeConversationB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -3643,7 +3607,7 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_ToolCallResult)(nil),                                   // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
 	(*Request_Input_QueryWithCannedResponse)(nil),                          // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
 	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversationQuery)(nil),                          // 11: warp.multi_agent.v1.Request.Input.ResumeConversationQuery
+	(*Request_Input_ResumeConversation)(nil),                               // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
 	(*Request_Input_UserInputs_UserInput)(nil),                             // 12: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_ToolCallResult_RefineResult)(nil),                      // 13: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 14: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
@@ -3686,7 +3650,7 @@ var file_request_proto_depIdxs = []int32{
 	7,  // 8: warp.multi_agent.v1.Request.Input.user_inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs
 	9,  // 9: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
 	10, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	11, // 11: warp.multi_agent.v1.Request.Input.resume_conversation_query:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversationQuery
+	11, // 11: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
 	6,  // 12: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 13: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	20, // 14: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
@@ -3737,7 +3701,7 @@ func file_request_proto_init() {
 		(*request_Input_UserInputs_)(nil),
 		(*request_Input_QueryWithCannedResponse_)(nil),
 		(*request_Input_AutoCodeDiffQuery_)(nil),
-		(*request_Input_ResumeConversationQuery_)(nil),
+		(*request_Input_ResumeConversation_)(nil),
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
 	}
