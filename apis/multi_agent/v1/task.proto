@@ -139,6 +139,7 @@ message Message {
       ReadMCPResource read_mcp_resource = 11;
       CallMCPTool call_mcp_tool = 12;
       WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
+      SuggestNewConversation suggest_new_conversation = 14;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -160,6 +161,11 @@ message Message {
     message WriteToLongRunningShellCommand {
       // The exact set of bytes that the client should write to PTY.
       bytes input = 1;
+    }
+
+    message SuggestNewConversation {
+      // The id of the message where we'd branch a new conversation.
+      string message_id = 1;
     }
 
     // A tool call to read files.
@@ -267,6 +273,7 @@ message Message {
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
       WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 17;
+      SuggestNewConversationResult suggest_new_conversation = 18;
     }
 
     // Result of a server-side tool call.
@@ -466,6 +473,11 @@ message WriteToLongRunningShellCommandResult {
   }
 }
 
+message SuggestNewConversationResult {
+  string message_id = 1;
+  bool accepted = 2;
+}
+
 // The output when a shell command is finished.
 message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
@@ -596,4 +608,5 @@ enum ToolType {
   READ_MCP_RESOURCE = 8;
   CALL_MCP_TOOL = 9;
   WRITE_TO_LONG_RUNNING_SHELL_COMMAND = 10;
+  SUGGEST_NEW_CONVERSATION = 11;
 }
