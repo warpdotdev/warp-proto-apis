@@ -474,8 +474,16 @@ message WriteToLongRunningShellCommandResult {
 }
 
 message SuggestNewConversationResult {
-  string message_id = 1;
-  bool accepted = 2;
+  oneof result {
+    Accepted accepted = 1;
+    Rejected rejected = 2;
+  }
+
+  message Accepted {
+    string message_id = 1;
+  }
+
+  message Rejected {}
 }
 
 // The output when a shell command is finished.

@@ -170,9 +170,6 @@ message Request {
     // that tool in its current state.
     bool supports_long_running_commands = 10;
 
-    // If `true`, the client is ready for new conversation suggestions.
-    bool supports_suggest_new_conversation = 11;
-
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
