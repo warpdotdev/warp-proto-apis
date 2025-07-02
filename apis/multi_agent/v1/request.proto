@@ -103,6 +103,7 @@ message Request {
         ReadMCPResourceResult read_mcp_resource = 11;
         CallMCPToolResult call_mcp_tool = 12;
         WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 13;
+        SuggestNewConversationResult suggest_new_conversation = 14;
       }
 
       // Generic tool call result for representing a user-requested refinement

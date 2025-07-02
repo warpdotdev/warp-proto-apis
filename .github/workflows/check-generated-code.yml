@@ -1,0 +1,36 @@
+name: Check Generated Code
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-generated-code:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Bootstrap dependencies
+      run: ./script/bootstrap
+    
+    - name: Run code generation
+      run: ./script/generate -a multi_agent -v v1
+    
+    - name: Check for changes
+      run: |
+        # Check if there are any changes in the git working directory
+        if ! git diff --quiet; then
+          echo "❌ Generated code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
+          exit 1
+        else
+          echo "✅ Code generation produced no changes - generated code is up to date!"
+        fi
