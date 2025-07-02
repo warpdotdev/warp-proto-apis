@@ -384,6 +384,15 @@ func (x *ClientAction) GetRollbackTransaction() *ClientAction_RollbackTransactio
 	return nil
 }
 
+func (x *ClientAction) GetStartNewConversation() *ClientAction_StartNewConversation {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Action.(*clientAction_StartNewConversation_); ok {
+			return x.StartNewConversation
+		}
+	}
+	return nil
+}
+
 func (x *ClientAction) SetCreateTask(v *ClientAction_CreateTask) {
 	if v == nil {
 		x.xxx_hidden_Action = nil
@@ -470,6 +479,14 @@ func (x *ClientAction) SetRollbackTransaction(v *ClientAction_RollbackTransactio
 		return
 	}
 	x.xxx_hidden_Action = &clientAction_RollbackTransaction_{v}
+}
+
+func (x *ClientAction) SetStartNewConversation(v *ClientAction_StartNewConversation) {
+	if v == nil {
+		x.xxx_hidden_Action = nil
+		return
+	}
+	x.xxx_hidden_Action = &clientAction_StartNewConversation_{v}
 }
 
 func (x *ClientAction) HasAction() bool {
@@ -567,6 +584,14 @@ func (x *ClientAction) HasRollbackTransaction() bool {
 	return ok
 }
 
+func (x *ClientAction) HasStartNewConversation() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*clientAction_StartNewConversation_)
+	return ok
+}
+
 func (x *ClientAction) ClearAction() {
 	x.xxx_hidden_Action = nil
 }
@@ -637,6 +662,12 @@ func (x *ClientAction) ClearRollbackTransaction() {
 	}
 }
 
+func (x *ClientAction) ClearStartNewConversation() {
+	if _, ok := x.xxx_hidden_Action.(*clientAction_StartNewConversation_); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
 const ClientAction_Action_not_set_case case_ClientAction_Action = 0
 const ClientAction_CreateTask_case case_ClientAction_Action = 1
 const ClientAction_UpdateTaskStatus_case case_ClientAction_Action = 2
@@ -649,6 +680,7 @@ const ClientAction_UpdateTaskDescription_case case_ClientAction_Action = 8
 const ClientAction_BeginTransaction_case case_ClientAction_Action = 9
 const ClientAction_CommitTransaction_case case_ClientAction_Action = 10
 const ClientAction_RollbackTransaction_case case_ClientAction_Action = 11
+const ClientAction_StartNewConversation_case case_ClientAction_Action = 12
 
 func (x *ClientAction) WhichAction() case_ClientAction_Action {
 	if x == nil {
@@ -677,6 +709,8 @@ func (x *ClientAction) WhichAction() case_ClientAction_Action {
 		return ClientAction_CommitTransaction_case
 	case *clientAction_RollbackTransaction_:
 		return ClientAction_RollbackTransaction_case
+	case *clientAction_StartNewConversation_:
+		return ClientAction_StartNewConversation_case
 	default:
 		return ClientAction_Action_not_set_case
 	}
@@ -697,6 +731,7 @@ type ClientAction_builder struct {
 	BeginTransaction       *ClientAction_BeginTransaction
 	CommitTransaction      *ClientAction_CommitTransaction
 	RollbackTransaction    *ClientAction_RollbackTransaction
+	StartNewConversation   *ClientAction_StartNewConversation
 	// -- end of xxx_hidden_Action
 }
 
@@ -736,6 +771,9 @@ func (b0 ClientAction_builder) Build() *ClientAction {
 	}
 	if b.RollbackTransaction != nil {
 		x.xxx_hidden_Action = &clientAction_RollbackTransaction_{b.RollbackTransaction}
+	}
+	if b.StartNewConversation != nil {
+		x.xxx_hidden_Action = &clientAction_StartNewConversation_{b.StartNewConversation}
 	}
 	return m0
 }
@@ -798,6 +836,10 @@ type clientAction_RollbackTransaction_ struct {
 	RollbackTransaction *ClientAction_RollbackTransaction `protobuf:"bytes,11,opt,name=rollback_transaction,json=rollbackTransaction,oneof"`
 }
 
+type clientAction_StartNewConversation_ struct {
+	StartNewConversation *ClientAction_StartNewConversation `protobuf:"bytes,12,opt,name=start_new_conversation,json=startNewConversation,oneof"`
+}
+
 func (*clientAction_CreateTask_) isClientAction_Action() {}
 
 func (*clientAction_UpdateTaskStatus_) isClientAction_Action() {}
@@ -819,6 +861,8 @@ func (*clientAction_BeginTransaction_) isClientAction_Action() {}
 func (*clientAction_CommitTransaction_) isClientAction_Action() {}
 
 func (*clientAction_RollbackTransaction_) isClientAction_Action() {}
+
+func (*clientAction_StartNewConversation_) isClientAction_Action() {}
 
 type ResponseEvent_StreamInit struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
@@ -3009,6 +3053,49 @@ func (b0 ClientAction_RollbackTransaction_builder) Build() *ClientAction_Rollbac
 	return m0
 }
 
+type ClientAction_StartNewConversation struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClientAction_StartNewConversation) Reset() {
+	*x = ClientAction_StartNewConversation{}
+	mi := &file_response_proto_msgTypes[24]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClientAction_StartNewConversation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClientAction_StartNewConversation) ProtoMessage() {}
+
+func (x *ClientAction_StartNewConversation) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[24]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type ClientAction_StartNewConversation_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 ClientAction_StartNewConversation_builder) Build() *ClientAction_StartNewConversation {
+	m0 := &ClientAction_StartNewConversation{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 var File_response_proto protoreflect.FileDescriptor
 
 const file_response_proto_rawDesc = "" +
@@ -3062,7 +3149,7 @@ const file_response_proto_rawDesc = "" +
 	"\rInternalError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
 	"\x06reasonB\x06\n" +
-	"\x04type\"\x94\x0f\n" +
+	"\x04type\"\x9c\x10\n" +
 	"\fClientAction\x12O\n" +
 	"\vcreate_task\x18\x01 \x01(\v2,.warp.multi_agent.v1.ClientAction.CreateTaskH\x00R\n" +
 	"createTask\x12b\n" +
@@ -3076,7 +3163,8 @@ const file_response_proto_rawDesc = "" +
 	"\x11begin_transaction\x18\t \x01(\v22.warp.multi_agent.v1.ClientAction.BeginTransactionH\x00R\x10beginTransaction\x12d\n" +
 	"\x12commit_transaction\x18\n" +
 	" \x01(\v23.warp.multi_agent.v1.ClientAction.CommitTransactionH\x00R\x11commitTransaction\x12j\n" +
-	"\x14rollback_transaction\x18\v \x01(\v25.warp.multi_agent.v1.ClientAction.RollbackTransactionH\x00R\x13rollbackTransaction\x1a;\n" +
+	"\x14rollback_transaction\x18\v \x01(\v25.warp.multi_agent.v1.ClientAction.RollbackTransactionH\x00R\x13rollbackTransaction\x12n\n" +
+	"\x16start_new_conversation\x18\f \x01(\v26.warp.multi_agent.v1.ClientAction.StartNewConversationH\x00R\x14startNewConversation\x1a;\n" +
 	"\n" +
 	"CreateTask\x12-\n" +
 	"\x04task\x18\x01 \x01(\v2\x19.warp.multi_agent.v1.TaskR\x04task\x1am\n" +
@@ -3103,10 +3191,11 @@ const file_response_proto_rawDesc = "" +
 	"\asummary\x18\x02 \x01(\tR\asummary\x1a\x12\n" +
 	"\x10BeginTransaction\x1a\x13\n" +
 	"\x11CommitTransaction\x1a\x15\n" +
-	"\x13RollbackTransactionB\b\n" +
+	"\x13RollbackTransaction\x1a\x16\n" +
+	"\x14StartNewConversationB\b\n" +
 	"\x06actionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_response_proto_goTypes = []any{
 	(*ResponseEvent)(nil),                                      // 0: warp.multi_agent.v1.ResponseEvent
 	(*ClientAction)(nil),                                       // 1: warp.multi_agent.v1.ClientAction
@@ -3132,11 +3221,12 @@ var file_response_proto_goTypes = []any{
 	(*ClientAction_BeginTransaction)(nil),                      // 21: warp.multi_agent.v1.ClientAction.BeginTransaction
 	(*ClientAction_CommitTransaction)(nil),                     // 22: warp.multi_agent.v1.ClientAction.CommitTransaction
 	(*ClientAction_RollbackTransaction)(nil),                   // 23: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*Suggestions)(nil),                                        // 24: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                               // 25: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),                                         // 26: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),                                            // 27: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                              // 28: google.protobuf.FieldMask
+	(*ClientAction_StartNewConversation)(nil),                  // 24: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*Suggestions)(nil),                                        // 25: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                               // 26: warp.multi_agent.v1.Task
+	(*TaskStatus)(nil),                                         // 27: warp.multi_agent.v1.TaskStatus
+	(*Message)(nil),                                            // 28: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                              // 29: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
@@ -3147,34 +3237,35 @@ var file_response_proto_depIdxs = []int32{
 	17, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
 	18, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
 	19, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	24, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	25, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
 	20, // 9: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
 	16, // 10: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
 	21, // 11: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
 	22, // 12: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
 	23, // 13: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
-	1,  // 14: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	7,  // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	8,  // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	9,  // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	10, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	11, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	12, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	13, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	6,  // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	5,  // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	25, // 24: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	26, // 25: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
-	27, // 26: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	27, // 27: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	28, // 28: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	27, // 29: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	28, // 30: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	31, // [31:31] is the sub-list for method output_type
-	31, // [31:31] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	24, // 14: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
+	1,  // 15: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
+	7,  // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	8,  // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	9,  // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	10, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	11, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	12, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	13, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	6,  // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	5,  // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	26, // 25: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	27, // 26: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
+	28, // 27: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	28, // 28: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	29, // 29: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	28, // 30: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	29, // 31: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	32, // [32:32] is the sub-list for method output_type
+	32, // [32:32] is the sub-list for method input_type
+	32, // [32:32] is the sub-list for extension type_name
+	32, // [32:32] is the sub-list for extension extendee
+	0,  // [0:32] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -3202,6 +3293,7 @@ func file_response_proto_init() {
 		(*clientAction_BeginTransaction_)(nil),
 		(*clientAction_CommitTransaction_)(nil),
 		(*clientAction_RollbackTransaction_)(nil),
+		(*clientAction_StartNewConversation_)(nil),
 	}
 	file_response_proto_msgTypes[4].OneofWrappers = []any{
 		(*responseEvent_StreamFinished_Other_)(nil),
@@ -3218,7 +3310,7 @@ func file_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_response_proto_rawDesc), len(file_response_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
