@@ -186,5 +186,6 @@ message ClientAction {
   // Rolls back the active transaction - provisional messages are discarded.
   message RollbackTransaction {}
 
+  // Tells the client that a new conversation is started hereafter.
   message StartNewConversation {}
 }

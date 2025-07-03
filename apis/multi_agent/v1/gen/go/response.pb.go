@@ -3053,6 +3053,7 @@ func (b0 ClientAction_RollbackTransaction_builder) Build() *ClientAction_Rollbac
 	return m0
 }
 
+// Tells the client that a new conversation is started hereafter.
 type ClientAction_StartNewConversation struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
