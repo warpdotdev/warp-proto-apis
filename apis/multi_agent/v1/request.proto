@@ -188,6 +188,12 @@ message Request {
     // that tool in its current state.
     bool supports_long_running_commands = 10;
 
+    // `true` if the server should preserve file contents in conversation history, instead of
+    // eliding old file contents and marking them as stale.
+    //
+    // This is the default behavior for clients released 7/3/2025 and newer.
+    bool should_preserve_file_content_in_history = 11;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
