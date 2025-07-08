@@ -237,6 +237,10 @@ message Message {
       repeated string patterns = 1;
       // The relative path to the directory to search in.
       string path = 2;
+      // The maximum number of matches to return. Zero indicates no limit.
+      int32 max_matches = 3;
+      // The maximum depth to search in. Zero indicates no limit. A depth of 1 will direct children of the path directory.
+      int32 max_depth = 4;
     }
 
     // A tool call to read an MCP resource identified by its URI.

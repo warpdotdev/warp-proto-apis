@@ -7398,6 +7398,8 @@ type Message_ToolCall_FileGlob struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Patterns    []string               `protobuf:"bytes,1,rep,name=patterns"`
 	xxx_hidden_Path        *string                `protobuf:"bytes,2,opt,name=path"`
+	xxx_hidden_MaxMatches  int32                  `protobuf:"varint,3,opt,name=max_matches,json=maxMatches"`
+	xxx_hidden_MaxDepth    int32                  `protobuf:"varint,4,opt,name=max_depth,json=maxDepth"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -7446,13 +7448,37 @@ func (x *Message_ToolCall_FileGlob) GetPath() string {
 	return ""
 }
 
+func (x *Message_ToolCall_FileGlob) GetMaxMatches() int32 {
+	if x != nil {
+		return x.xxx_hidden_MaxMatches
+	}
+	return 0
+}
+
+func (x *Message_ToolCall_FileGlob) GetMaxDepth() int32 {
+	if x != nil {
+		return x.xxx_hidden_MaxDepth
+	}
+	return 0
+}
+
 func (x *Message_ToolCall_FileGlob) SetPatterns(v []string) {
 	x.xxx_hidden_Patterns = v
 }
 
 func (x *Message_ToolCall_FileGlob) SetPath(v string) {
 	x.xxx_hidden_Path = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *Message_ToolCall_FileGlob) SetMaxMatches(v int32) {
+	x.xxx_hidden_MaxMatches = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Message_ToolCall_FileGlob) SetMaxDepth(v int32) {
+	x.xxx_hidden_MaxDepth = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Message_ToolCall_FileGlob) HasPath() bool {
@@ -7462,9 +7488,33 @@ func (x *Message_ToolCall_FileGlob) HasPath() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *Message_ToolCall_FileGlob) HasMaxMatches() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Message_ToolCall_FileGlob) HasMaxDepth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Message_ToolCall_FileGlob) ClearPath() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Path = nil
+}
+
+func (x *Message_ToolCall_FileGlob) ClearMaxMatches() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_MaxMatches = 0
+}
+
+func (x *Message_ToolCall_FileGlob) ClearMaxDepth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_MaxDepth = 0
 }
 
 type Message_ToolCall_FileGlob_builder struct {
@@ -7474,6 +7524,10 @@ type Message_ToolCall_FileGlob_builder struct {
 	Patterns []string
 	// The relative path to the directory to search in.
 	Path *string
+	// The maximum number of matches to return. Zero indicates no limit.
+	MaxMatches *int32
+	// The maximum depth to search in. Zero indicates no limit. A depth of 1 will direct children of the path directory.
+	MaxDepth *int32
 }
 
 func (b0 Message_ToolCall_FileGlob_builder) Build() *Message_ToolCall_FileGlob {
@@ -7482,8 +7536,16 @@ func (b0 Message_ToolCall_FileGlob_builder) Build() *Message_ToolCall_FileGlob {
 	_, _ = b, x
 	x.xxx_hidden_Patterns = b.Patterns
 	if b.Path != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_Path = b.Path
+	}
+	if b.MaxMatches != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_MaxMatches = *b.MaxMatches
+	}
+	if b.MaxDepth != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_MaxDepth = *b.MaxDepth
 	}
 	return m0
 }
@@ -10204,7 +10266,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xa9-\n" +
+	"\x06status\"\xe7-\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
@@ -10231,7 +10293,7 @@ const file_task_proto_rawDesc = "" +
 	"\x12ResumeConversation\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1c\n" +
-	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\x87\x15\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\xc5\x15\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -10292,10 +10354,13 @@ const file_task_proto_rawDesc = "" +
 	"\x11SuggestCreatePlan\x1a4\n" +
 	"\x04Grep\x12\x18\n" +
 	"\aqueries\x18\x01 \x03(\tR\aqueries\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04path\x1a:\n" +
+	"\x04path\x18\x02 \x01(\tR\x04path\x1ax\n" +
 	"\bFileGlob\x12\x1a\n" +
 	"\bpatterns\x18\x01 \x03(\tR\bpatterns\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04path\x1a#\n" +
+	"\x04path\x18\x02 \x01(\tR\x04path\x12\x1f\n" +
+	"\vmax_matches\x18\x03 \x01(\x05R\n" +
+	"maxMatches\x12\x1b\n" +
+	"\tmax_depth\x18\x04 \x01(\x05R\bmaxDepth\x1a#\n" +
 	"\x0fReadMCPResource\x12\x10\n" +
 	"\x03uri\x18\x01 \x01(\tR\x03uri\x1aN\n" +
 	"\vCallMCPTool\x12\x12\n" +
