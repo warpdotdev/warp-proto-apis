@@ -1632,6 +1632,15 @@ func (x *Request_Input_ToolCallResult) GetSuggestNewConversation() *SuggestNewCo
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetFileGlobV2() *FileGlobV2Result {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_FileGlobV2); ok {
+			return x.FileGlobV2
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -1739,6 +1748,14 @@ func (x *Request_Input_ToolCallResult) SetSuggestNewConversation(v *SuggestNewCo
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_SuggestNewConversation{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetFileGlobV2(v *FileGlobV2Result) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_FileGlobV2{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -1859,6 +1876,14 @@ func (x *Request_Input_ToolCallResult) HasSuggestNewConversation() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasFileGlobV2() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_FileGlobV2)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -1946,6 +1971,12 @@ func (x *Request_Input_ToolCallResult) ClearSuggestNewConversation() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearFileGlobV2() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_FileGlobV2); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -1960,6 +1991,7 @@ const Request_Input_ToolCallResult_ReadMcpResource_case case_Request_Input_ToolC
 const Request_Input_ToolCallResult_CallMcpTool_case case_Request_Input_ToolCallResult_Result = 12
 const Request_Input_ToolCallResult_WriteToLongRunningShellCommand_case case_Request_Input_ToolCallResult_Result = 13
 const Request_Input_ToolCallResult_SuggestNewConversation_case case_Request_Input_ToolCallResult_Result = 14
+const Request_Input_ToolCallResult_FileGlobV2_case case_Request_Input_ToolCallResult_Result = 15
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -1992,6 +2024,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_WriteToLongRunningShellCommand_case
 	case *request_Input_ToolCallResult_SuggestNewConversation:
 		return Request_Input_ToolCallResult_SuggestNewConversation_case
+	case *request_Input_ToolCallResult_FileGlobV2:
+		return Request_Input_ToolCallResult_FileGlobV2_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -2015,6 +2049,7 @@ type Request_Input_ToolCallResult_builder struct {
 	CallMcpTool                    *CallMCPToolResult
 	WriteToLongRunningShellCommand *WriteToLongRunningShellCommandResult
 	SuggestNewConversation         *SuggestNewConversationResult
+	FileGlobV2                     *FileGlobV2Result
 	// -- end of xxx_hidden_Result
 }
 
@@ -2064,6 +2099,9 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.SuggestNewConversation != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_SuggestNewConversation{b.SuggestNewConversation}
+	}
+	if b.FileGlobV2 != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_FileGlobV2{b.FileGlobV2}
 	}
 	return m0
 }
@@ -2134,6 +2172,10 @@ type request_Input_ToolCallResult_SuggestNewConversation struct {
 	SuggestNewConversation *SuggestNewConversationResult `protobuf:"bytes,14,opt,name=suggest_new_conversation,json=suggestNewConversation,oneof"`
 }
 
+type request_Input_ToolCallResult_FileGlobV2 struct {
+	FileGlobV2 *FileGlobV2Result `protobuf:"bytes,15,opt,name=file_glob_v2,json=fileGlobV2,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -2160,6 +2202,8 @@ func (*request_Input_ToolCallResult_WriteToLongRunningShellCommand) isRequest_In
 }
 
 func (*request_Input_ToolCallResult_SuggestNewConversation) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_FileGlobV2) isRequest_Input_ToolCallResult_Result() {}
 
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -3678,7 +3722,7 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResultB\a\n" +
-	"\x05input\x1a\x8b\n" +
+	"\x05input\x1a\xd6\n" +
 	"\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
@@ -3697,7 +3741,9 @@ const file_request_proto_rawDesc = "" +
 	"\x11read_mcp_resource\x18\v \x01(\v2*.warp.multi_agent.v1.ReadMCPResourceResultH\x00R\x0freadMcpResource\x12L\n" +
 	"\rcall_mcp_tool\x18\f \x01(\v2&.warp.multi_agent.v1.CallMCPToolResultH\x00R\vcallMcpTool\x12\x88\x01\n" +
 	"#write_to_long_running_shell_command\x18\r \x01(\v29.warp.multi_agent.v1.WriteToLongRunningShellCommandResultH\x00R\x1ewriteToLongRunningShellCommand\x12m\n" +
-	"\x18suggest_new_conversation\x18\x0e \x01(\v21.warp.multi_agent.v1.SuggestNewConversationResultH\x00R\x16suggestNewConversation\x1a[\n" +
+	"\x18suggest_new_conversation\x18\x0e \x01(\v21.warp.multi_agent.v1.SuggestNewConversationResultH\x00R\x16suggestNewConversation\x12I\n" +
+	"\ffile_glob_v2\x18\x0f \x01(\v2%.warp.multi_agent.v1.FileGlobV2ResultH\x00R\n" +
+	"fileGlobV2\x1a[\n" +
 	"\fRefineResult\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
@@ -3893,6 +3939,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_CallMcpTool)(nil),
 		(*request_Input_ToolCallResult_WriteToLongRunningShellCommand)(nil),
 		(*request_Input_ToolCallResult_SuggestNewConversation)(nil),
+		(*request_Input_ToolCallResult_FileGlobV2)(nil),
 	}
 	file_request_proto_msgTypes[9].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),

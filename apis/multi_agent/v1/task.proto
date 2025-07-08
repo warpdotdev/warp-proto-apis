@@ -146,6 +146,7 @@ message Message {
       CallMCPTool call_mcp_tool = 12;
       WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
       SuggestNewConversation suggest_new_conversation = 14;
+      FileGlobV2 file_glob_v2 = 15;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -241,6 +242,20 @@ message Message {
       // The relative path to the directory to search in.
       string path = 2;
     }
+    
+    // A tool call to find files matching glob patterns. 
+    message FileGlobV2 {
+      // The glob patterns to match file names against.
+      repeated string patterns = 1;
+      // The relative path to the directory to search in.
+      string path = 2;
+      // The maximum number of matches to return. Zero indicates no limit.
+      int32 max_matches = 3;
+      // The maximum depth to search in. Zero indicates no limit. A max depth of 1 will match children of the path directory only.
+      int32 max_depth = 4;
+      // The minimum depth to search in. Zero indicates no limit. A min depth of 1 will match children of the path directory and below.
+      int32 min_depth = 5;
+    }
 
     // A tool call to read an MCP resource identified by its URI.
     message ReadMCPResource { string uri = 1; }
@@ -280,6 +295,7 @@ message Message {
       CallMCPToolResult call_mcp_tool = 16;
       WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 17;
       SuggestNewConversationResult suggest_new_conversation = 18;
+      FileGlobV2Result file_glob_v2 = 19;
     }
 
     // Result of a server-side tool call.
@@ -442,6 +458,25 @@ message FileGlobResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+// Result of a `FileGlobV2` tool call.
+message FileGlobV2Result {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // List of file paths matching the glob patterns.
+    repeated FileGlobMatch matched_files = 1;
+    message FileGlobMatch {
+      // The path to the file that matched the glob patterns.
+      string file_path = 1 [ (sensitive) = true ];
+    }
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
 message MCPResourceContent {
   // Every MCP resource is uniquely identified by a URI.
   string uri = 1 [ (sensitive) = true ];
@@ -558,5 +593,6 @@ enum ToolType {
   CALL_MCP_TOOL = 9;
   WRITE_TO_LONG_RUNNING_SHELL_COMMAND = 10;
   SUGGEST_NEW_CONVERSATION = 11;
+  FILE_GLOB_V2 = 12;
 }
 

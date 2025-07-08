@@ -92,6 +92,7 @@ message Request {
         CallMCPToolResult call_mcp_tool = 12;
         WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 13;
         SuggestNewConversationResult suggest_new_conversation = 14;
+        FileGlobV2Result file_glob_v2 = 15;
       }
 
       // Generic tool call result for representing a user-requested refinement
