@@ -194,6 +194,10 @@ message Request {
     // This is the default behavior for clients released 7/3/2025 and newer.
     bool should_preserve_file_content_in_history = 11;
 
+    // If `true`, the client supports the todos UI and should receive todo-related public API messages.
+    // If `false`, todo-related public API messages should not be sent to the client.
+    bool supports_todos_ui = 12;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
