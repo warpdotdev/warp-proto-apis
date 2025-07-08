@@ -187,5 +187,7 @@ message ClientAction {
   message RollbackTransaction {}
 
   // Tells the client that a new conversation is started hereafter.
-  message StartNewConversation {}
+  message StartNewConversation {
+    string message_id = 1;
+  }
 }
