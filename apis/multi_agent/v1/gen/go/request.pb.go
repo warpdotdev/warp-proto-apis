@@ -1132,6 +1132,7 @@ type Request_Settings struct {
 	xxx_hidden_SupportedTools                     []ToolType                    `protobuf:"varint,9,rep,packed,name=supported_tools,json=supportedTools,enum=warp.multi_agent.v1.ToolType"`
 	xxx_hidden_SupportsLongRunningCommands        bool                          `protobuf:"varint,10,opt,name=supports_long_running_commands,json=supportsLongRunningCommands"`
 	xxx_hidden_ShouldPreserveFileContentInHistory bool                          `protobuf:"varint,11,opt,name=should_preserve_file_content_in_history,json=shouldPreserveFileContentInHistory"`
+	xxx_hidden_SupportsTodosUi                    bool                          `protobuf:"varint,12,opt,name=supports_todos_ui,json=supportsTodosUi"`
 	XXX_raceDetectHookData                        protoimpl.RaceDetectHookData
 	XXX_presence                                  [1]uint32
 	unknownFields                                 protoimpl.UnknownFields
@@ -1240,43 +1241,50 @@ func (x *Request_Settings) GetShouldPreserveFileContentInHistory() bool {
 	return false
 }
 
+func (x *Request_Settings) GetSupportsTodosUi() bool {
+	if x != nil {
+		return x.xxx_hidden_SupportsTodosUi
+	}
+	return false
+}
+
 func (x *Request_Settings) SetModelConfig(v *Request_Settings_ModelConfig) {
 	x.xxx_hidden_ModelConfig = v
 }
 
 func (x *Request_Settings) SetRulesEnabled(v bool) {
 	x.xxx_hidden_RulesEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 12)
 }
 
 func (x *Request_Settings) SetWebContextRetrievalEnabled(v bool) {
 	x.xxx_hidden_WebContextRetrievalEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 12)
 }
 
 func (x *Request_Settings) SetSupportsParallelToolCalls(v bool) {
 	x.xxx_hidden_SupportsParallelToolCalls = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 12)
 }
 
 func (x *Request_Settings) SetUseAnthropicTextEditorTools(v bool) {
 	x.xxx_hidden_UseAnthropicTextEditorTools = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 12)
 }
 
 func (x *Request_Settings) SetPlanningEnabled(v bool) {
 	x.xxx_hidden_PlanningEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 12)
 }
 
 func (x *Request_Settings) SetWarpDriveContextEnabled(v bool) {
 	x.xxx_hidden_WarpDriveContextEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 12)
 }
 
 func (x *Request_Settings) SetSupportsCreateFiles(v bool) {
 	x.xxx_hidden_SupportsCreateFiles = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 12)
 }
 
 func (x *Request_Settings) SetSupportedTools(v []ToolType) {
@@ -1285,12 +1293,17 @@ func (x *Request_Settings) SetSupportedTools(v []ToolType) {
 
 func (x *Request_Settings) SetSupportsLongRunningCommands(v bool) {
 	x.xxx_hidden_SupportsLongRunningCommands = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 12)
 }
 
 func (x *Request_Settings) SetShouldPreserveFileContentInHistory(v bool) {
 	x.xxx_hidden_ShouldPreserveFileContentInHistory = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 11)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 12)
+}
+
+func (x *Request_Settings) SetSupportsTodosUi(v bool) {
+	x.xxx_hidden_SupportsTodosUi = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 12)
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -1363,6 +1376,13 @@ func (x *Request_Settings) HasShouldPreserveFileContentInHistory() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 10)
 }
 
+func (x *Request_Settings) HasSupportsTodosUi() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 11)
+}
+
 func (x *Request_Settings) ClearModelConfig() {
 	x.xxx_hidden_ModelConfig = nil
 }
@@ -1412,6 +1432,11 @@ func (x *Request_Settings) ClearShouldPreserveFileContentInHistory() {
 	x.xxx_hidden_ShouldPreserveFileContentInHistory = false
 }
 
+func (x *Request_Settings) ClearSupportsTodosUi() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 11)
+	x.xxx_hidden_SupportsTodosUi = false
+}
+
 type Request_Settings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1445,6 +1470,9 @@ type Request_Settings_builder struct {
 	//
 	// This is the default behavior for clients released 7/3/2025 and newer.
 	ShouldPreserveFileContentInHistory *bool
+	// If `true`, the client supports the todos UI and should receive todo-related public API messages.
+	// If `false`, todo-related public API messages should not be sent to the client.
+	SupportsTodosUi *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -1453,41 +1481,45 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	_, _ = b, x
 	x.xxx_hidden_ModelConfig = b.ModelConfig
 	if b.RulesEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 12)
 		x.xxx_hidden_RulesEnabled = *b.RulesEnabled
 	}
 	if b.WebContextRetrievalEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 12)
 		x.xxx_hidden_WebContextRetrievalEnabled = *b.WebContextRetrievalEnabled
 	}
 	if b.SupportsParallelToolCalls != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 12)
 		x.xxx_hidden_SupportsParallelToolCalls = *b.SupportsParallelToolCalls
 	}
 	if b.UseAnthropicTextEditorTools != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 12)
 		x.xxx_hidden_UseAnthropicTextEditorTools = *b.UseAnthropicTextEditorTools
 	}
 	if b.PlanningEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 12)
 		x.xxx_hidden_PlanningEnabled = *b.PlanningEnabled
 	}
 	if b.WarpDriveContextEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 12)
 		x.xxx_hidden_WarpDriveContextEnabled = *b.WarpDriveContextEnabled
 	}
 	if b.SupportsCreateFiles != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 12)
 		x.xxx_hidden_SupportsCreateFiles = *b.SupportsCreateFiles
 	}
 	x.xxx_hidden_SupportedTools = b.SupportedTools
 	if b.SupportsLongRunningCommands != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 12)
 		x.xxx_hidden_SupportsLongRunningCommands = *b.SupportsLongRunningCommands
 	}
 	if b.ShouldPreserveFileContentInHistory != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 11)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 12)
 		x.xxx_hidden_ShouldPreserveFileContentInHistory = *b.ShouldPreserveFileContentInHistory
+	}
+	if b.SupportsTodosUi != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 12)
+		x.xxx_hidden_SupportsTodosUi = *b.SupportsTodosUi
 	}
 	return m0
 }
@@ -3893,7 +3925,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xed-\n" +
+	"task.proto\"\x99.\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -3986,7 +4018,7 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa4\x06\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xd0\x06\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -3999,7 +4031,8 @@ const file_request_proto_rawDesc = "" +
 	"\x0fsupported_tools\x18\t \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x0esupportedTools\x12C\n" +
 	"\x1esupports_long_running_commands\x18\n" +
 	" \x01(\bR\x1bsupportsLongRunningCommands\x12S\n" +
-	"'should_preserve_file_content_in_history\x18\v \x01(\bR\"shouldPreserveFileContentInHistory\x1aU\n" +
+	"'should_preserve_file_content_in_history\x18\v \x01(\bR\"shouldPreserveFileContentInHistory\x12*\n" +
+	"\x11supports_todos_ui\x18\f \x01(\bR\x0fsupportsTodosUi\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +

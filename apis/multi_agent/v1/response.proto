@@ -125,6 +125,7 @@ message ClientAction {
     BeginTransaction begin_transaction = 9;
     CommitTransaction commit_transaction = 10;
     RollbackTransaction rollback_transaction = 11;
+    StartNewConversation start_new_conversation = 12;
   }
 
   // Create task action
@@ -184,4 +185,9 @@ message ClientAction {
 
   // Rolls back the active transaction - provisional messages are discarded.
   message RollbackTransaction {}
+
+  // Tells the client that a new conversation is started hereafter.
+  message StartNewConversation {
+    string start_from_message_id = 1;
+  }
 }

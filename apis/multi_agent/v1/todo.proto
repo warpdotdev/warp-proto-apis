@@ -1,0 +1,60 @@
+// TODO list types and operations for the multi-agent API.
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/go_features.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A single TODO item.
+message TodoItem {
+  // Unique identifier for the TODO item.
+  string id = 1;
+
+  // The title/summary of the TODO item.
+  string title = 2;
+
+  // Detailed description of the TODO item.
+  string description = 3;
+
+  // Current status of the TODO item.
+  TodoStatus status = 4;
+}
+
+// The status of a TODO item.
+message TodoStatus {
+  oneof status {
+    google.protobuf.Empty pending = 1;
+    google.protobuf.Empty completed = 2;
+  }
+}
+
+// Tool call to add one or more TODO items to a list.
+message AddTodos {
+  // The TODO items to add.
+  repeated TodoItem todos = 1;
+}
+
+// Tool call to remove one or more TODO items from a list.
+message RemoveTodos {
+  // The IDs of the TODO items to remove.
+  repeated string todo_ids = 1;
+}
+
+// Tool call to create a new TODO list.
+message CreateTodoList {
+  // Initial TODO items for the new list (optional).
+  repeated TodoItem initial_todos = 1;
+}
+
+// Tool call to update the status of a TODO item.
+message UpdateTodoStatus {
+  // The ID of the TODO item to mark as completed.
+  string todo_id = 1;
+
+  // The new status for the todo item.
+  TodoStatus status = 2;
+}

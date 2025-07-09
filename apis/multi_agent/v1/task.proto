@@ -11,6 +11,7 @@ import "citations.proto";
 import "input_context.proto";
 import "file_content.proto";
 import "options.proto";
+import "todo.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -86,6 +87,7 @@ message Message {
     ToolCallResult tool_call_result = 5;
     ServerEvent server_event = 6;
     SystemQuery system_query = 9;
+    UpdateTodos update_todos = 10;
   }
 
   // User query message type
@@ -96,8 +98,8 @@ message Message {
     InputContext context = 2;
   }
 
-  // System queries represent prompts from the Warp client that were 
-  // not explicitly sent by the end-user e.g. automatic code diff 
+  // System queries represent prompts from the Warp client that were
+  // not explicitly sent by the end-user e.g. automatic code diff
   // suggestions for errors.
   message SystemQuery {
     oneof type {
@@ -291,6 +293,16 @@ message Message {
   //
   // The client should treat the `payload` as an opaque blob.
   message ServerEvent { string payload = 1; }
+
+  // Message for TODO list operations.
+  message UpdateTodos {
+    oneof operation {
+      AddTodos add_todos = 1;
+      RemoveTodos remove_todos = 2;
+      CreateTodoList create_todo_list = 3;
+      UpdateTodoStatus update_todo_status = 4;
+    }
+  }
 }
 
 // Result of a `RunShellCommand` tool call.
@@ -492,7 +504,7 @@ message CallMCPToolResult {
     Error error = 2;
   }
 
-  message Success { 
+  message Success {
     repeated Result results = 1;
 
     message Result {
@@ -502,7 +514,7 @@ message CallMCPToolResult {
         // An MCP tool call can produce an embedded resource.
         MCPResourceContent resource = 3;
       }
-  
+
       message Text { string text = 1 [ (sensitive) = true ]; }
       message Image {
         // The image payload.
@@ -514,7 +526,7 @@ message CallMCPToolResult {
       }
     }
   }
-  
+
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
