@@ -3055,12 +3055,12 @@ func (b0 ClientAction_RollbackTransaction_builder) Build() *ClientAction_Rollbac
 
 // Tells the client that a new conversation is started hereafter.
 type ClientAction_StartNewConversation struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MessageId   *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_StartFromMessageId *string                `protobuf:"bytes,1,opt,name=start_from_message_id,json=startFromMessageId"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ClientAction_StartNewConversation) Reset() {
@@ -3088,46 +3088,46 @@ func (x *ClientAction_StartNewConversation) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-func (x *ClientAction_StartNewConversation) GetMessageId() string {
+func (x *ClientAction_StartNewConversation) GetStartFromMessageId() string {
 	if x != nil {
-		if x.xxx_hidden_MessageId != nil {
-			return *x.xxx_hidden_MessageId
+		if x.xxx_hidden_StartFromMessageId != nil {
+			return *x.xxx_hidden_StartFromMessageId
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *ClientAction_StartNewConversation) SetMessageId(v string) {
-	x.xxx_hidden_MessageId = &v
+func (x *ClientAction_StartNewConversation) SetStartFromMessageId(v string) {
+	x.xxx_hidden_StartFromMessageId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *ClientAction_StartNewConversation) HasMessageId() bool {
+func (x *ClientAction_StartNewConversation) HasStartFromMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ClientAction_StartNewConversation) ClearMessageId() {
+func (x *ClientAction_StartNewConversation) ClearStartFromMessageId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_MessageId = nil
+	x.xxx_hidden_StartFromMessageId = nil
 }
 
 type ClientAction_StartNewConversation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	MessageId *string
+	StartFromMessageId *string
 }
 
 func (b0 ClientAction_StartNewConversation_builder) Build() *ClientAction_StartNewConversation {
 	m0 := &ClientAction_StartNewConversation{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.MessageId != nil {
+	if b.StartFromMessageId != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_MessageId = b.MessageId
+		x.xxx_hidden_StartFromMessageId = b.StartFromMessageId
 	}
 	return m0
 }
@@ -3185,7 +3185,7 @@ const file_response_proto_rawDesc = "" +
 	"\rInternalError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
 	"\x06reasonB\x06\n" +
-	"\x04type\"\xbb\x10\n" +
+	"\x04type\"\xcf\x10\n" +
 	"\fClientAction\x12O\n" +
 	"\vcreate_task\x18\x01 \x01(\v2,.warp.multi_agent.v1.ClientAction.CreateTaskH\x00R\n" +
 	"createTask\x12b\n" +
@@ -3227,10 +3227,9 @@ const file_response_proto_rawDesc = "" +
 	"\asummary\x18\x02 \x01(\tR\asummary\x1a\x12\n" +
 	"\x10BeginTransaction\x1a\x13\n" +
 	"\x11CommitTransaction\x1a\x15\n" +
-	"\x13RollbackTransaction\x1a5\n" +
-	"\x14StartNewConversation\x12\x1d\n" +
-	"\n" +
-	"message_id\x18\x01 \x01(\tR\tmessageIdB\b\n" +
+	"\x13RollbackTransaction\x1aI\n" +
+	"\x14StartNewConversation\x121\n" +
+	"\x15start_from_message_id\x18\x01 \x01(\tR\x12startFromMessageIdB\b\n" +
 	"\x06actionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 25)

@@ -188,6 +188,6 @@ message ClientAction {
 
   // Tells the client that a new conversation is started hereafter.
   message StartNewConversation {
-    string message_id = 1;
+    string start_from_message_id = 1;
   }
 }
