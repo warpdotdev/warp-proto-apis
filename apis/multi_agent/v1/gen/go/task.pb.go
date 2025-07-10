@@ -3634,7 +3634,9 @@ func (*callMCPToolResult_Success_) isCallMCPToolResult_Result() {}
 
 func (*callMCPToolResult_Error_) isCallMCPToolResult_Result() {}
 
-// Wrapper for a list of tasks that can be serialized.
+// Wrapper for a list of tasks that can be serialized/deserialized.
+// This is used as the response type for serving the final task list
+// after applying client actions in an MAA debug API.
 type TaskList struct {
 	state            protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Tasks *[]*Task               `protobuf:"bytes,1,rep,name=tasks"`
