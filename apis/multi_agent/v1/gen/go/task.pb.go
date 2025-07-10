@@ -44,6 +44,7 @@ const (
 	ToolType_CALL_MCP_TOOL                       ToolType = 9
 	ToolType_WRITE_TO_LONG_RUNNING_SHELL_COMMAND ToolType = 10
 	ToolType_SUGGEST_NEW_CONVERSATION            ToolType = 11
+	ToolType_FILE_GLOB_V2                        ToolType = 12
 )
 
 // Enum value maps for ToolType.
@@ -61,6 +62,7 @@ var (
 		9:  "CALL_MCP_TOOL",
 		10: "WRITE_TO_LONG_RUNNING_SHELL_COMMAND",
 		11: "SUGGEST_NEW_CONVERSATION",
+		12: "FILE_GLOB_V2",
 	}
 	ToolType_value = map[string]int32{
 		"RUN_SHELL_COMMAND":                   0,
@@ -75,6 +77,7 @@ var (
 		"CALL_MCP_TOOL":                       9,
 		"WRITE_TO_LONG_RUNNING_SHELL_COMMAND": 10,
 		"SUGGEST_NEW_CONVERSATION":            11,
+		"FILE_GLOB_V2":                        12,
 	}
 )
 
@@ -10521,7 +10524,7 @@ const file_task_proto_rawDesc = "" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\";\n" +
 	"\bTaskList\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks*\x91\x02\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks*\xa3\x02\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -10536,7 +10539,8 @@ const file_task_proto_rawDesc = "" +
 	"\rCALL_MCP_TOOL\x10\t\x12'\n" +
 	"#WRITE_TO_LONG_RUNNING_SHELL_COMMAND\x10\n" +
 	"\x12\x1c\n" +
-	"\x18SUGGEST_NEW_CONVERSATION\x10\vB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x18SUGGEST_NEW_CONVERSATION\x10\v\x12\x10\n" +
+	"\fFILE_GLOB_V2\x10\fB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 77)
