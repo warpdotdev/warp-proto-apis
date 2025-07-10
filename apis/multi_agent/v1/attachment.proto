@@ -1,0 +1,38 @@
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// Context that may be relevant to the input in a request.
+import "options.proto";
+
+message Attachment {
+  oneof value {
+    string plain_text = 1;
+    ExecutedShellCommand executed_shell_command = 2;
+    RunningShellCommand running_shell_command = 3;
+  }
+}
+
+// Information about shell commands that the user has executed.
+message ExecutedShellCommand {
+  string command = 1 [ (sensitive) = true ];
+  string output = 2 [ (sensitive) = true ];
+  int32 exit_code = 3;
+}
+
+message RunningShellCommand {
+  string command = 1 [ (sensitive) = true ];
+  LongRunningShellCommandSnapshot snapshot = 2;
+}
+
+// A snapshot of the terminal grid for a long-running command.
+message LongRunningShellCommandSnapshot {
+  // The formatted grid contents.
+  string output = 1 [ (sensitive) = true ];
+}
+

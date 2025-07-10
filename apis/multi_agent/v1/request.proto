@@ -7,6 +7,7 @@ import "google/protobuf/go_features.proto";
 import "google/protobuf/struct.proto";
 
 import "input_context.proto";
+import "attachment.proto";
 import "options.proto";
 import "suggestions.proto";
 import "task.proto";
@@ -40,19 +41,6 @@ message Request {
 
     // Currently active task ID, if there is one.
     string active_task_id = 2;
-  }
-
-  message Attachment {
-    oneof value {
-      string plain_text = 1;
-      ExecutedShellCommand executed_shell_command = 2;
-      RunningShellCommand running_shell_command = 3;
-    }
-  }
-
-  message RunningShellCommand {
-    string command = 1 [ (sensitive) = true ];
-    LongRunningShellCommandSnapshot snapshot = 2;
   }
 
   message Input {

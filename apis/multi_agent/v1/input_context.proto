@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/go_features.proto";
 
 import "file_content.proto";
+import "attachment.proto";
 import "options.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
@@ -75,11 +76,4 @@ message InputContext {
   message File {
     FileContent content = 1;
   }
-}
-
-// Information about shell commands that the user has executed.
-message ExecutedShellCommand {
-  string command = 1 [ (sensitive) = true ];
-  string output = 2 [ (sensitive) = true ];
-  int32 exit_code = 3;
 }

@@ -9,6 +9,7 @@ import "google/protobuf/struct.proto";
 
 import "citations.proto";
 import "input_context.proto";
+import "attachment.proto";
 import "file_content.proto";
 import "options.proto";
 import "todo.proto";
@@ -96,6 +97,8 @@ message Message {
 
     // Context that the client supplied as part of the user query input.
     InputContext context = 2;
+
+    map<string, Attachment> referenced_attachments = 3;
   }
 
   // System queries represent prompts from the Warp client that were
@@ -490,12 +493,6 @@ message SuggestNewConversationResult {
 message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
-}
-
-// A snapshot of the terminal grid for a long-running command.
-message LongRunningShellCommandSnapshot {
-  // The formatted grid contents.
-  string output = 1 [ (sensitive) = true ];
 }
 
 message CallMCPToolResult {
