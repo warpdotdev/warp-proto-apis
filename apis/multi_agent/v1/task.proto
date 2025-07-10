@@ -552,6 +552,7 @@ enum ToolType {
   CALL_MCP_TOOL = 9;
   WRITE_TO_LONG_RUNNING_SHELL_COMMAND = 10;
   SUGGEST_NEW_CONVERSATION = 11;
+  FILE_GLOB_V2 = 12;
 }
 
 // Wrapper for a list of tasks that can be serialized/deserialized.
