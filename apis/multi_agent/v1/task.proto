@@ -361,7 +361,16 @@ message ApplyFileDiffsResult {
     Error error = 2;
   }
 
-  message Success { repeated FileContent updated_files = 1; }
+  message Success {
+    repeated UpdatedFileContent updated_files = 1;
+
+    message UpdatedFileContent {
+      // Content of the updated file.
+      FileContent file = 1;
+      // Whether the applied update contains user edit.
+      bool was_user_edited = 2;
+    }
+  }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
