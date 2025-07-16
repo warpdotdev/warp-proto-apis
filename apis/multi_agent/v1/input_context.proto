@@ -25,6 +25,7 @@ message InputContext {
   repeated SelectedText selected_text = 6;
   repeated Image images = 7;
   repeated File files = 9;
+  repeated ProjectRule project_rules = 10;
   // END TODO
 
   message SelectedText { string text = 1 [ (sensitive) = true ]; }
@@ -75,5 +76,10 @@ message InputContext {
 
   message File {
     FileContent content = 1;
+  }
+
+  message ProjectRule {
+    string file_path = 1;
+    string content = 2;
   }
 }
