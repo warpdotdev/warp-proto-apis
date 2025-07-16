@@ -3558,10 +3558,11 @@ func (*callMCPToolResult_Error_) isCallMCPToolResult_Result() {}
 // This is used as the response type for serving the final task list
 // after applying client actions in an MAA debug API.
 type TaskList struct {
-	state            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Tasks *[]*Task               `protobuf:"bytes,1,rep,name=tasks"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Tasks             *[]*Task               `protobuf:"bytes,1,rep,name=tasks"`
+	xxx_hidden_OrderedMessageIds []string               `protobuf:"bytes,2,rep,name=ordered_message_ids,json=orderedMessageIds"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *TaskList) Reset() {
@@ -3598,14 +3599,30 @@ func (x *TaskList) GetTasks() []*Task {
 	return nil
 }
 
+func (x *TaskList) GetOrderedMessageIds() []string {
+	if x != nil {
+		return x.xxx_hidden_OrderedMessageIds
+	}
+	return nil
+}
+
 func (x *TaskList) SetTasks(v []*Task) {
 	x.xxx_hidden_Tasks = &v
+}
+
+func (x *TaskList) SetOrderedMessageIds(v []string) {
+	x.xxx_hidden_OrderedMessageIds = v
 }
 
 type TaskList_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Tasks []*Task
+	// The linearized message IDs from the tasks above.
+	// The client cannot derive this from tasks because
+	// starting child tasks is a ServerEvent opaque to the client,
+	// and those events are necessary to know the ordering of messages.
+	OrderedMessageIds []string
 }
 
 func (b0 TaskList_builder) Build() *TaskList {
@@ -3613,6 +3630,7 @@ func (b0 TaskList_builder) Build() *TaskList {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Tasks = &b.Tasks
+	x.xxx_hidden_OrderedMessageIds = b.OrderedMessageIds
 	return m0
 }
 
@@ -10390,9 +10408,10 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\";\n" +
+	"\x06result\"k\n" +
 	"\bTaskList\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks*\x91\x02\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12.\n" +
+	"\x13ordered_message_ids\x18\x02 \x03(\tR\x11orderedMessageIds*\x91\x02\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
