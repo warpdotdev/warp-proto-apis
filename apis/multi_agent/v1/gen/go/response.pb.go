@@ -1448,7 +1448,8 @@ type ResponseEvent_StreamFinished_builder struct {
 	ShouldRefreshModelConfig *bool
 	// Describes what we charged the user for this AM request.
 	RequestCost *ResponseEvent_StreamFinished_RequestCost
-	// The fraction of the model's context window that is used in the current exchange (i.e. total tokens / model context window)
+	// The fraction of the primary model's context window that is used in the current conversation (i.e. total tokens / model context window).
+	// On the client, this will be recorded on a per exchange basis and will be referenced based on the most recent exchange.
 	ContextWindowUsage *float32
 }
 

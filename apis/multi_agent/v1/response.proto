@@ -71,7 +71,8 @@ message ResponseEvent {
     // Describes what we charged the user for this AM request.
     RequestCost request_cost = 10;
 
-    // The fraction of the model's context window that is used in the current exchange (i.e. total tokens / model context window)
+    // The fraction of the primary model's context window that is used in the current conversation (i.e. total tokens / model context window).
+    // On the client, this will be recorded on a per exchange basis and will be referenced based on the most recent exchange.
     float context_window_usage = 11;
 
     message RequestCost {
