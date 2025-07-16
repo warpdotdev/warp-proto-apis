@@ -71,6 +71,9 @@ message ResponseEvent {
     // Describes what we charged the user for this AM request.
     RequestCost request_cost = 10;
 
+    // The percentage of the model's context window that is used in this conversation (i.e. total tokens / model context window)
+    float context_window_used = 11;
+
     message RequestCost {
         // The exact, fractional cost of the request.
         float exact = 1;
