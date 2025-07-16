@@ -72,7 +72,7 @@ message ResponseEvent {
     RequestCost request_cost = 10;
 
     // The percentage of the model's context window that is used in this conversation (i.e. total tokens / model context window)
-    float context_window_used = 11;
+    float context_window_usage = 11;
 
     message RequestCost {
         // The exact, fractional cost of the request.
