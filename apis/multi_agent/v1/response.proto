@@ -71,9 +71,17 @@ message ResponseEvent {
     // Describes what we charged the user for this AM request.
     RequestCost request_cost = 10;
 
-    // The fraction of the primary model's context window that is used in the current conversation (i.e. total tokens / model context window).
-    // On the client, this will be recorded on a per exchange basis and will be referenced based on the most recent exchange.
-    float context_window_usage = 11;
+    // provides info on how full the context window is and whether the conversation has just been summarized
+    ContextWindowInfo context_window_info = 11;
+
+    message ContextWindowInfo {
+      // The fraction of the primary model's context window that is used in the current conversation (i.e. total tokens / model context window).
+      // On the client, this will be recorded on a per exchange basis and will be referenced based on the most recent exchange.
+      float context_window_usage = 1;
+
+      // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
+      bool summarization_happened = 2;
+    }
 
     message RequestCost {
         // The exact, fractional cost of the request.
