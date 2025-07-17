@@ -1445,8 +1445,7 @@ type ResponseEvent_StreamFinished_builder struct {
 	// request implies the client's model config is stale.
 	ShouldRefreshModelConfig *bool
 	// Describes what we charged the user for this AM request.
-	RequestCost *ResponseEvent_StreamFinished_RequestCost
-	// provides info on how full the context window is and whether the conversation has just been summarized
+	RequestCost       *ResponseEvent_StreamFinished_RequestCost
 	ContextWindowInfo *ResponseEvent_StreamFinished_ContextWindowInfo
 }
 
@@ -1542,13 +1541,13 @@ func (*responseEvent_StreamFinished_LlmUnavailable) isResponseEvent_StreamFinish
 func (*responseEvent_StreamFinished_InternalError_) isResponseEvent_StreamFinished_Reason() {}
 
 type ResponseEvent_StreamFinished_ContextWindowInfo struct {
-	state                            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_ContextWindowUsage    float32                `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
-	xxx_hidden_SummarizationHappened bool                   `protobuf:"varint,2,opt,name=summarization_happened,json=summarizationHappened"`
-	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
-	XXX_presence                     [1]uint32
-	unknownFields                    protoimpl.UnknownFields
-	sizeCache                        protoimpl.SizeCache
+	state                         protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ContextWindowUsage float32                `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
+	xxx_hidden_Summarized         bool                   `protobuf:"varint,2,opt,name=summarized"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *ResponseEvent_StreamFinished_ContextWindowInfo) Reset() {
@@ -1583,9 +1582,9 @@ func (x *ResponseEvent_StreamFinished_ContextWindowInfo) GetContextWindowUsage()
 	return 0
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) GetSummarizationHappened() bool {
+func (x *ResponseEvent_StreamFinished_ContextWindowInfo) GetSummarized() bool {
 	if x != nil {
-		return x.xxx_hidden_SummarizationHappened
+		return x.xxx_hidden_Summarized
 	}
 	return false
 }
@@ -1595,8 +1594,8 @@ func (x *ResponseEvent_StreamFinished_ContextWindowInfo) SetContextWindowUsage(v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) SetSummarizationHappened(v bool) {
-	x.xxx_hidden_SummarizationHappened = v
+func (x *ResponseEvent_StreamFinished_ContextWindowInfo) SetSummarized(v bool) {
+	x.xxx_hidden_Summarized = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
@@ -1607,7 +1606,7 @@ func (x *ResponseEvent_StreamFinished_ContextWindowInfo) HasContextWindowUsage()
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) HasSummarizationHappened() bool {
+func (x *ResponseEvent_StreamFinished_ContextWindowInfo) HasSummarized() bool {
 	if x == nil {
 		return false
 	}
@@ -1619,19 +1618,18 @@ func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ClearContextWindowUsage
 	x.xxx_hidden_ContextWindowUsage = 0
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ClearSummarizationHappened() {
+func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ClearSummarized() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_SummarizationHappened = false
+	x.xxx_hidden_Summarized = false
 }
 
 type ResponseEvent_StreamFinished_ContextWindowInfo_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The fraction of the primary model's context window that is used in the current conversation (i.e. total tokens / model context window).
-	// On the client, this will be recorded on a per exchange basis and will be referenced based on the most recent exchange.
+	// The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
 	ContextWindowUsage *float32
 	// Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
-	SummarizationHappened *bool
+	Summarized *bool
 }
 
 func (b0 ResponseEvent_StreamFinished_ContextWindowInfo_builder) Build() *ResponseEvent_StreamFinished_ContextWindowInfo {
@@ -1642,9 +1640,9 @@ func (b0 ResponseEvent_StreamFinished_ContextWindowInfo_builder) Build() *Respon
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
-	if b.SummarizationHappened != nil {
+	if b.Summarized != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_SummarizationHappened = *b.SummarizationHappened
+		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	return m0
 }
@@ -3271,7 +3269,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x9e\x10\n" +
+	"task.proto\"\x87\x10\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -3282,7 +3280,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xef\f\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xd8\f\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -3297,10 +3295,12 @@ const file_response_proto_rawDesc = "" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12s\n" +
-	"\x13context_window_info\x18\v \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfoR\x11contextWindowInfo\x1a|\n" +
+	"\x13context_window_info\x18\v \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfoR\x11contextWindowInfo\x1ae\n" +
 	"\x11ContextWindowInfo\x120\n" +
-	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x125\n" +
-	"\x16summarization_happened\x18\x02 \x01(\bR\x15summarizationHappened\x1a#\n" +
+	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12\x1e\n" +
+	"\n" +
+	"summarized\x18\x02 \x01(\bR\n" +
+	"summarized\x1a#\n" +
 	"\vRequestCost\x12\x14\n" +
 	"\x05exact\x18\x01 \x01(\x02R\x05exact\x1a\xda\x01\n" +
 	"\n" +
