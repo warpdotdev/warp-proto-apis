@@ -1015,13 +1015,10 @@ func (b0 InputContext_File_builder) Build() *InputContext_File {
 }
 
 type InputContext_ProjectRulesFile struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
-	xxx_hidden_Content     *string                `protobuf:"bytes,2,opt,name=content"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *FileContent           `protobuf:"bytes,1,opt,name=content"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *InputContext_ProjectRulesFile) Reset() {
@@ -1049,79 +1046,39 @@ func (x *InputContext_ProjectRulesFile) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InputContext_ProjectRulesFile) GetFilePath() string {
+func (x *InputContext_ProjectRulesFile) GetContent() *FileContent {
 	if x != nil {
-		if x.xxx_hidden_FilePath != nil {
-			return *x.xxx_hidden_FilePath
-		}
-		return ""
+		return x.xxx_hidden_Content
 	}
-	return ""
+	return nil
 }
 
-func (x *InputContext_ProjectRulesFile) GetContent() string {
-	if x != nil {
-		if x.xxx_hidden_Content != nil {
-			return *x.xxx_hidden_Content
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *InputContext_ProjectRulesFile) SetFilePath(v string) {
-	x.xxx_hidden_FilePath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *InputContext_ProjectRulesFile) SetContent(v string) {
-	x.xxx_hidden_Content = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *InputContext_ProjectRulesFile) HasFilePath() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+func (x *InputContext_ProjectRulesFile) SetContent(v *FileContent) {
+	x.xxx_hidden_Content = v
 }
 
 func (x *InputContext_ProjectRulesFile) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *InputContext_ProjectRulesFile) ClearFilePath() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_FilePath = nil
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *InputContext_ProjectRulesFile) ClearContent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Content = nil
 }
 
 type InputContext_ProjectRulesFile_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	FilePath *string
-	Content  *string
+	Content *FileContent
 }
 
 func (b0 InputContext_ProjectRulesFile_builder) Build() *InputContext_ProjectRulesFile {
 	m0 := &InputContext_ProjectRulesFile{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.FilePath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_FilePath = b.FilePath
-	}
-	if b.Content != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Content = b.Content
-	}
+	x.xxx_hidden_Content = b.Content
 	return m0
 }
 
@@ -1129,7 +1086,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xd9\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xde\n" +
 	"\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
@@ -1162,10 +1119,9 @@ const file_input_context_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +
 	"\x04path\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x1aB\n" +
 	"\x04File\x12:\n" +
-	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1aI\n" +
-	"\x10ProjectRulesFile\x12\x1b\n" +
-	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x18\n" +
-	"\acontent\x18\x02 \x01(\tR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1aN\n" +
+	"\x10ProjectRulesFile\x12:\n" +
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_input_context_proto_goTypes = []any{
@@ -1194,11 +1150,12 @@ var file_input_context_proto_depIdxs = []int32{
 	7,  // 8: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
 	8,  // 9: warp.multi_agent.v1.InputContext.project_rules_files:type_name -> warp.multi_agent.v1.InputContext.ProjectRulesFile
 	11, // 10: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	11, // 11: warp.multi_agent.v1.InputContext.ProjectRulesFile.content:type_name -> warp.multi_agent.v1.FileContent
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_input_context_proto_init() }

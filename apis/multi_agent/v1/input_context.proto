@@ -79,7 +79,6 @@ message InputContext {
   }
 
   message ProjectRulesFile {
-    string file_path = 1;
-    string content = 2;
+    FileContent content = 1;
   }
 }
