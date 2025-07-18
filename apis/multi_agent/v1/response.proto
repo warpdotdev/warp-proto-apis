@@ -71,6 +71,16 @@ message ResponseEvent {
     // Describes what we charged the user for this AM request.
     RequestCost request_cost = 10;
 
+    ContextWindowInfo context_window_info = 11;
+
+    message ContextWindowInfo {
+      // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
+      float context_window_usage = 1;
+
+      // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
+      bool summarized = 2;
+    }
+
     message RequestCost {
         // The exact, fractional cost of the request.
         float exact = 1;
