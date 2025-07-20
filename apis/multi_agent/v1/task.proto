@@ -362,7 +362,13 @@ message ApplyFileDiffsResult {
   }
 
   message Success {
-    repeated UpdatedFileContent updated_files = 1;
+    // Deprecated: Use updated_files_v2 instead. This field is kept for backward compatibility
+    // with older clients and will be removed in a future version.
+    repeated FileContent updated_files = 1 [deprecated = true];
+    
+    // New field that includes additional metadata like was_user_edited flag.
+    // Newer clients should use this field instead of the deprecated updated_files.
+    repeated UpdatedFileContent updated_files_v2 = 2;
 
     message UpdatedFileContent {
       // Content of the updated file.
