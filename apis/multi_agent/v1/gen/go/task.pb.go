@@ -8392,9 +8392,7 @@ type ApplyFileDiffsResult_Success_builder struct {
 	// with older clients and will be removed in a future version.
 	//
 	// Deprecated: Marked as deprecated in task.proto.
-	UpdatedFiles []*FileContent
-	// New field that includes additional metadata like was_user_edited flag.
-	// Newer clients should use this field instead of the deprecated updated_files.
+	UpdatedFiles   []*FileContent
 	UpdatedFilesV2 []*ApplyFileDiffsResult_Success_UpdatedFileContent
 }
 
@@ -8486,13 +8484,13 @@ func (b0 ApplyFileDiffsResult_Error_builder) Build() *ApplyFileDiffsResult_Error
 }
 
 type ApplyFileDiffsResult_Success_UpdatedFileContent struct {
-	state                    protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_File          *FileContent           `protobuf:"bytes,1,opt,name=file"`
-	xxx_hidden_WasUserEdited bool                   `protobuf:"varint,2,opt,name=was_user_edited,json=wasUserEdited"`
-	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
-	XXX_presence             [1]uint32
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_File            *FileContent           `protobuf:"bytes,1,opt,name=file"`
+	xxx_hidden_WasEditedByUser bool                   `protobuf:"varint,2,opt,name=was_edited_by_user,json=wasEditedByUser"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) Reset() {
@@ -8527,9 +8525,9 @@ func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) GetFile() *FileContent
 	return nil
 }
 
-func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) GetWasUserEdited() bool {
+func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) GetWasEditedByUser() bool {
 	if x != nil {
-		return x.xxx_hidden_WasUserEdited
+		return x.xxx_hidden_WasEditedByUser
 	}
 	return false
 }
@@ -8538,8 +8536,8 @@ func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) SetFile(v *FileContent
 	x.xxx_hidden_File = v
 }
 
-func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) SetWasUserEdited(v bool) {
-	x.xxx_hidden_WasUserEdited = v
+func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) SetWasEditedByUser(v bool) {
+	x.xxx_hidden_WasEditedByUser = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
@@ -8550,7 +8548,7 @@ func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) HasFile() bool {
 	return x.xxx_hidden_File != nil
 }
 
-func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) HasWasUserEdited() bool {
+func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) HasWasEditedByUser() bool {
 	if x == nil {
 		return false
 	}
@@ -8561,9 +8559,9 @@ func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) ClearFile() {
 	x.xxx_hidden_File = nil
 }
 
-func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) ClearWasUserEdited() {
+func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) ClearWasEditedByUser() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_WasUserEdited = false
+	x.xxx_hidden_WasEditedByUser = false
 }
 
 type ApplyFileDiffsResult_Success_UpdatedFileContent_builder struct {
@@ -8572,7 +8570,7 @@ type ApplyFileDiffsResult_Success_UpdatedFileContent_builder struct {
 	// Content of the updated file.
 	File *FileContent
 	// Whether the applied update contains user edit.
-	WasUserEdited *bool
+	WasEditedByUser *bool
 }
 
 func (b0 ApplyFileDiffsResult_Success_UpdatedFileContent_builder) Build() *ApplyFileDiffsResult_Success_UpdatedFileContent {
@@ -8580,9 +8578,9 @@ func (b0 ApplyFileDiffsResult_Success_UpdatedFileContent_builder) Build() *Apply
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_File = b.File
-	if b.WasUserEdited != nil {
+	if b.WasEditedByUser != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_WasUserEdited = *b.WasUserEdited
+		x.xxx_hidden_WasEditedByUser = *b.WasEditedByUser
 	}
 	return m0
 }
@@ -10362,16 +10360,16 @@ const file_task_proto_rawDesc = "" +
 	"\x05files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentR\x05files\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\x9c\x04\n" +
+	"\x06result\"\xa1\x04\n" +
 	"\x14ApplyFileDiffsResult\x12M\n" +
 	"\asuccess\x18\x01 \x01(\v21.warp.multi_agent.v1.ApplyFileDiffsResult.SuccessH\x00R\asuccess\x12G\n" +
-	"\x05error\x18\x02 \x01(\v2/.warp.multi_agent.v1.ApplyFileDiffsResult.ErrorH\x00R\x05error\x1a\xb8\x02\n" +
+	"\x05error\x18\x02 \x01(\v2/.warp.multi_agent.v1.ApplyFileDiffsResult.ErrorH\x00R\x05error\x1a\xbd\x02\n" +
 	"\aSuccess\x12I\n" +
 	"\rupdated_files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentB\x02\x18\x01R\fupdatedFiles\x12n\n" +
-	"\x10updated_files_v2\x18\x02 \x03(\v2D.warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContentR\x0eupdatedFilesV2\x1ar\n" +
+	"\x10updated_files_v2\x18\x02 \x03(\v2D.warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContentR\x0eupdatedFilesV2\x1aw\n" +
 	"\x12UpdatedFileContent\x124\n" +
-	"\x04file\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\x04file\x12&\n" +
-	"\x0fwas_user_edited\x18\x02 \x01(\bR\rwasUserEdited\x1a'\n" +
+	"\x04file\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\x04file\x12+\n" +
+	"\x12was_edited_by_user\x18\x02 \x01(\bR\x0fwasEditedByUser\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"5\n" +
