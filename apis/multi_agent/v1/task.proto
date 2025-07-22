@@ -246,7 +246,7 @@ message Message {
     
     // A tool call to find files with names matching patterns. 
     message FileGlobV2 {
-      // The patterns to match file names against. Supports ?, *. [].
+      // The patterns to match file names against. Supports ?, *, [].
       repeated string patterns = 1;
       // The relative path to the directory to search in.
       string search_dir = 2;
@@ -290,7 +290,7 @@ message Message {
       SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2Result.
-      FileGlobResult file_glob = 10; [deprecated=true]
+      FileGlobResult file_glob = 10 [deprecated=true];
       RefineResult refine = 13;
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;

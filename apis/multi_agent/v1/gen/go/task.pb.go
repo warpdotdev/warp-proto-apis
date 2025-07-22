@@ -4755,6 +4755,7 @@ func (x *Message_ToolCall) GetGrep() *Message_ToolCall_Grep {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall) GetFileGlob() *Message_ToolCall_FileGlob {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_); ok {
@@ -4878,6 +4879,7 @@ func (x *Message_ToolCall) SetGrep(v *Message_ToolCall_Grep) {
 	x.xxx_hidden_Tool = &message_ToolCall_Grep_{v}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall) SetFileGlob(v *Message_ToolCall_FileGlob) {
 	if v == nil {
 		x.xxx_hidden_Tool = nil
@@ -5004,6 +5006,7 @@ func (x *Message_ToolCall) HasGrep() bool {
 	return ok
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall) HasFileGlob() bool {
 	if x == nil {
 		return false
@@ -5109,6 +5112,7 @@ func (x *Message_ToolCall) ClearGrep() {
 	}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall) ClearFileGlob() {
 	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_); ok {
 		x.xxx_hidden_Tool = nil
@@ -5206,14 +5210,17 @@ type Message_ToolCall_builder struct {
 	// The specific tool being called
 
 	// Fields of oneof xxx_hidden_Tool:
-	RunShellCommand                *Message_ToolCall_RunShellCommand
-	SearchCodebase                 *Message_ToolCall_SearchCodebase
-	Server                         *Message_ToolCall_Server
-	ReadFiles                      *Message_ToolCall_ReadFiles
-	ApplyFileDiffs                 *Message_ToolCall_ApplyFileDiffs
-	SuggestPlan                    *Message_ToolCall_SuggestPlan
-	SuggestCreatePlan              *Message_ToolCall_SuggestCreatePlan
-	Grep                           *Message_ToolCall_Grep
+	RunShellCommand   *Message_ToolCall_RunShellCommand
+	SearchCodebase    *Message_ToolCall_SearchCodebase
+	Server            *Message_ToolCall_Server
+	ReadFiles         *Message_ToolCall_ReadFiles
+	ApplyFileDiffs    *Message_ToolCall_ApplyFileDiffs
+	SuggestPlan       *Message_ToolCall_SuggestPlan
+	SuggestCreatePlan *Message_ToolCall_SuggestCreatePlan
+	Grep              *Message_ToolCall_Grep
+	// DEPRECATED: Being replaced by FileGlobV2.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	FileGlob                       *Message_ToolCall_FileGlob
 	ReadMcpResource                *Message_ToolCall_ReadMCPResource
 	CallMcpTool                    *Message_ToolCall_CallMCPTool
@@ -5323,6 +5330,9 @@ type message_ToolCall_Grep_ struct {
 }
 
 type message_ToolCall_FileGlob_ struct {
+	// DEPRECATED: Being replaced by FileGlobV2.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	FileGlob *Message_ToolCall_FileGlob `protobuf:"bytes,10,opt,name=file_glob,json=fileGlob,oneof"`
 }
 
@@ -5500,6 +5510,7 @@ func (x *Message_ToolCallResult) GetGrep() *GrepResult {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) GetFileGlob() *FileGlobResult {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob); ok {
@@ -5645,6 +5656,7 @@ func (x *Message_ToolCallResult) SetGrep(v *GrepResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_Grep{v}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) SetFileGlob(v *FileGlobResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
@@ -5794,6 +5806,7 @@ func (x *Message_ToolCallResult) HasGrep() bool {
 	return ok
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) HasFileGlob() bool {
 	if x == nil {
 		return false
@@ -5919,6 +5932,7 @@ func (x *Message_ToolCallResult) ClearGrep() {
 	}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) ClearFileGlob() {
 	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob); ok {
 		x.xxx_hidden_Result = nil
@@ -6036,14 +6050,17 @@ type Message_ToolCallResult_builder struct {
 	// Not included for `ServerResult`s.
 	Context *InputContext
 	// Fields of oneof xxx_hidden_Result:
-	RunShellCommand                *RunShellCommandResult
-	SearchCodebase                 *SearchCodebaseResult
-	Server                         *Message_ToolCallResult_ServerResult
-	ReadFiles                      *ReadFilesResult
-	ApplyFileDiffs                 *ApplyFileDiffsResult
-	SuggestPlan                    *SuggestPlanResult
-	SuggestCreatePlan              *SuggestCreatePlanResult
-	Grep                           *GrepResult
+	RunShellCommand   *RunShellCommandResult
+	SearchCodebase    *SearchCodebaseResult
+	Server            *Message_ToolCallResult_ServerResult
+	ReadFiles         *ReadFilesResult
+	ApplyFileDiffs    *ApplyFileDiffsResult
+	SuggestPlan       *SuggestPlanResult
+	SuggestCreatePlan *SuggestCreatePlanResult
+	Grep              *GrepResult
+	// DEPRECATED: Being replaced by FileGlobV2Result.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	FileGlob                       *FileGlobResult
 	Refine                         *Message_ToolCallResult_RefineResult
 	Cancel                         *emptypb.Empty
@@ -6162,6 +6179,9 @@ type message_ToolCallResult_Grep struct {
 }
 
 type message_ToolCallResult_FileGlob struct {
+	// DEPRECATED: Being replaced by FileGlobV2Result.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	FileGlob *FileGlobResult `protobuf:"bytes,10,opt,name=file_glob,json=fileGlob,oneof"`
 }
 
@@ -7623,11 +7643,11 @@ func (b0 Message_ToolCall_FileGlob_builder) Build() *Message_ToolCall_FileGlob {
 	return m0
 }
 
-// A tool call to find files matching glob patterns.
+// A tool call to find files with names matching patterns.
 type Message_ToolCall_FileGlobV2 struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Patterns    []string               `protobuf:"bytes,1,rep,name=patterns"`
-	xxx_hidden_Path        *string                `protobuf:"bytes,2,opt,name=path"`
+	xxx_hidden_SearchDir   *string                `protobuf:"bytes,2,opt,name=search_dir,json=searchDir"`
 	xxx_hidden_MaxMatches  int32                  `protobuf:"varint,3,opt,name=max_matches,json=maxMatches"`
 	xxx_hidden_MaxDepth    int32                  `protobuf:"varint,4,opt,name=max_depth,json=maxDepth"`
 	xxx_hidden_MinDepth    int32                  `protobuf:"varint,5,opt,name=min_depth,json=minDepth"`
@@ -7669,10 +7689,10 @@ func (x *Message_ToolCall_FileGlobV2) GetPatterns() []string {
 	return nil
 }
 
-func (x *Message_ToolCall_FileGlobV2) GetPath() string {
+func (x *Message_ToolCall_FileGlobV2) GetSearchDir() string {
 	if x != nil {
-		if x.xxx_hidden_Path != nil {
-			return *x.xxx_hidden_Path
+		if x.xxx_hidden_SearchDir != nil {
+			return *x.xxx_hidden_SearchDir
 		}
 		return ""
 	}
@@ -7704,8 +7724,8 @@ func (x *Message_ToolCall_FileGlobV2) SetPatterns(v []string) {
 	x.xxx_hidden_Patterns = v
 }
 
-func (x *Message_ToolCall_FileGlobV2) SetPath(v string) {
-	x.xxx_hidden_Path = &v
+func (x *Message_ToolCall_FileGlobV2) SetSearchDir(v string) {
+	x.xxx_hidden_SearchDir = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
@@ -7724,7 +7744,7 @@ func (x *Message_ToolCall_FileGlobV2) SetMinDepth(v int32) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
-func (x *Message_ToolCall_FileGlobV2) HasPath() bool {
+func (x *Message_ToolCall_FileGlobV2) HasSearchDir() bool {
 	if x == nil {
 		return false
 	}
@@ -7752,9 +7772,9 @@ func (x *Message_ToolCall_FileGlobV2) HasMinDepth() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Message_ToolCall_FileGlobV2) ClearPath() {
+func (x *Message_ToolCall_FileGlobV2) ClearSearchDir() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Path = nil
+	x.xxx_hidden_SearchDir = nil
 }
 
 func (x *Message_ToolCall_FileGlobV2) ClearMaxMatches() {
@@ -7775,15 +7795,15 @@ func (x *Message_ToolCall_FileGlobV2) ClearMinDepth() {
 type Message_ToolCall_FileGlobV2_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The glob patterns to match file names against.
+	// The patterns to match file names against. Supports ?, *, [].
 	Patterns []string
 	// The relative path to the directory to search in.
-	Path *string
+	SearchDir *string
 	// The maximum number of matches to return. Zero indicates no limit.
 	MaxMatches *int32
 	// The maximum depth to search in. Zero indicates no limit. A max depth of 1 will match children of the path directory only.
 	MaxDepth *int32
-	// The minimum depth to search in. Zero indicates no limit. A min depth of 1 will match children of the path directory and below.
+	// The minimum depth to search in. Zero indicates no limit.
 	MinDepth *int32
 }
 
@@ -7792,9 +7812,9 @@ func (b0 Message_ToolCall_FileGlobV2_builder) Build() *Message_ToolCall_FileGlob
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Patterns = b.Patterns
-	if b.Path != nil {
+	if b.SearchDir != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
-		x.xxx_hidden_Path = b.Path
+		x.xxx_hidden_SearchDir = b.SearchDir
 	}
 	if b.MaxMatches != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
@@ -9633,7 +9653,7 @@ func (x *FileGlobV2Result_Success) SetMatchedFiles(v []*FileGlobV2Result_Success
 type FileGlobV2Result_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// List of file paths matching the glob patterns.
+	// List of file paths matching the file name patterns.
 	MatchedFiles []*FileGlobV2Result_Success_FileGlobMatch
 }
 
@@ -9787,7 +9807,7 @@ func (x *FileGlobV2Result_Success_FileGlobMatch) ClearFilePath() {
 type FileGlobV2Result_Success_FileGlobMatch_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The path to the file that matched the glob patterns.
+	// The path to the file that matched a file name pattern.
 	FilePath *string
 }
 
@@ -10868,7 +10888,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xca1\n" +
+	"\x06status\"\xdd1\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
@@ -10899,7 +10919,7 @@ const file_task_proto_rawDesc = "" +
 	"\x12ResumeConversation\x1a?\n" +
 	"\vAgentOutput\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04text\x12\x1c\n" +
-	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\xf7\x16\n" +
+	"\treasoning\x18\x02 \x01(\tR\treasoning\x1a\x86\x17\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -10911,9 +10931,9 @@ const file_task_proto_rawDesc = "" +
 	"\x10apply_file_diffs\x18\x06 \x01(\v24.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffsH\x00R\x0eapplyFileDiffs\x12V\n" +
 	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x12i\n" +
 	"\x13suggest_create_plan\x18\b \x01(\v27.warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlanH\x00R\x11suggestCreatePlan\x12@\n" +
-	"\x04grep\x18\t \x01(\v2*.warp.multi_agent.v1.Message.ToolCall.GrepH\x00R\x04grep\x12M\n" +
+	"\x04grep\x18\t \x01(\v2*.warp.multi_agent.v1.Message.ToolCall.GrepH\x00R\x04grep\x12Q\n" +
 	"\tfile_glob\x18\n" +
-	" \x01(\v2..warp.multi_agent.v1.Message.ToolCall.FileGlobH\x00R\bfileGlob\x12c\n" +
+	" \x01(\v2..warp.multi_agent.v1.Message.ToolCall.FileGlobB\x02\x18\x01H\x00R\bfileGlob\x12c\n" +
 	"\x11read_mcp_resource\x18\v \x01(\v25.warp.multi_agent.v1.Message.ToolCall.ReadMCPResourceH\x00R\x0freadMcpResource\x12W\n" +
 	"\rcall_mcp_tool\x18\f \x01(\v21.warp.multi_agent.v1.Message.ToolCall.CallMCPToolH\x00R\vcallMcpTool\x12\x93\x01\n" +
 	"#write_to_long_running_shell_command\x18\r \x01(\v2D.warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommandH\x00R\x1ewriteToLongRunningShellCommand\x12x\n" +
@@ -10965,11 +10985,12 @@ const file_task_proto_rawDesc = "" +
 	"\x04path\x18\x02 \x01(\tR\x04path\x1a:\n" +
 	"\bFileGlob\x12\x1a\n" +
 	"\bpatterns\x18\x01 \x03(\tR\bpatterns\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04path\x1a\x97\x01\n" +
+	"\x04path\x18\x02 \x01(\tR\x04path\x1a\xa2\x01\n" +
 	"\n" +
 	"FileGlobV2\x12\x1a\n" +
-	"\bpatterns\x18\x01 \x03(\tR\bpatterns\x12\x12\n" +
-	"\x04path\x18\x02 \x01(\tR\x04path\x12\x1f\n" +
+	"\bpatterns\x18\x01 \x03(\tR\bpatterns\x12\x1d\n" +
+	"\n" +
+	"search_dir\x18\x02 \x01(\tR\tsearchDir\x12\x1f\n" +
 	"\vmax_matches\x18\x03 \x01(\x05R\n" +
 	"maxMatches\x12\x1b\n" +
 	"\tmax_depth\x18\x04 \x01(\x05R\bmaxDepth\x12\x1b\n" +
@@ -10979,7 +11000,7 @@ const file_task_proto_rawDesc = "" +
 	"\vCallMCPTool\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12+\n" +
 	"\x04args\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04argsB\x06\n" +
-	"\x04tool\x1a\xca\f\n" +
+	"\x04tool\x1a\xce\f\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -10992,9 +11013,9 @@ const file_task_proto_rawDesc = "" +
 	"\x10apply_file_diffs\x18\x06 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
 	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x12^\n" +
 	"\x13suggest_create_plan\x18\b \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlan\x125\n" +
-	"\x04grep\x18\t \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12B\n" +
+	"\x04grep\x18\t \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12F\n" +
 	"\tfile_glob\x18\n" +
-	" \x01(\v2#.warp.multi_agent.v1.FileGlobResultH\x00R\bfileGlob\x12R\n" +
+	" \x01(\v2#.warp.multi_agent.v1.FileGlobResultB\x02\x18\x01H\x00R\bfileGlob\x12R\n" +
 	"\x06refine\x18\r \x01(\v28.warp.multi_agent.v1.Message.ToolCallResult.RefineResultH\x00R\x06refine\x120\n" +
 	"\x06cancel\x18\x0e \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06cancel\x12X\n" +
 	"\x11read_mcp_resource\x18\x0f \x01(\v2*.warp.multi_agent.v1.ReadMCPResourceResultH\x00R\x0freadMcpResource\x12L\n" +
