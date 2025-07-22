@@ -15,6 +15,7 @@ message Attachment {
     string plain_text = 1;
     ExecutedShellCommand executed_shell_command = 2;
     RunningShellCommand running_shell_command = 3;
+    DriveObject drive_object = 4;
   }
 }
 
@@ -36,3 +37,6 @@ message LongRunningShellCommandSnapshot {
   string output = 1 [ (sensitive) = true ];
 }
 
+message DriveObject {
+  string uid = 1 [ (sensitive) = true ];
+}

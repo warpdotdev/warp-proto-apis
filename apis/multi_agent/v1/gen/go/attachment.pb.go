@@ -80,6 +80,15 @@ func (x *Attachment) GetRunningShellCommand() *RunningShellCommand {
 	return nil
 }
 
+func (x *Attachment) GetDriveObject() *DriveObject {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Value.(*attachment_DriveObject); ok {
+			return x.DriveObject
+		}
+	}
+	return nil
+}
+
 func (x *Attachment) SetPlainText(v string) {
 	x.xxx_hidden_Value = &attachment_PlainText{v}
 }
@@ -98,6 +107,14 @@ func (x *Attachment) SetRunningShellCommand(v *RunningShellCommand) {
 		return
 	}
 	x.xxx_hidden_Value = &attachment_RunningShellCommand{v}
+}
+
+func (x *Attachment) SetDriveObject(v *DriveObject) {
+	if v == nil {
+		x.xxx_hidden_Value = nil
+		return
+	}
+	x.xxx_hidden_Value = &attachment_DriveObject{v}
 }
 
 func (x *Attachment) HasValue() bool {
@@ -131,6 +148,14 @@ func (x *Attachment) HasRunningShellCommand() bool {
 	return ok
 }
 
+func (x *Attachment) HasDriveObject() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*attachment_DriveObject)
+	return ok
+}
+
 func (x *Attachment) ClearValue() {
 	x.xxx_hidden_Value = nil
 }
@@ -153,10 +178,17 @@ func (x *Attachment) ClearRunningShellCommand() {
 	}
 }
 
+func (x *Attachment) ClearDriveObject() {
+	if _, ok := x.xxx_hidden_Value.(*attachment_DriveObject); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
 const Attachment_Value_not_set_case case_Attachment_Value = 0
 const Attachment_PlainText_case case_Attachment_Value = 1
 const Attachment_ExecutedShellCommand_case case_Attachment_Value = 2
 const Attachment_RunningShellCommand_case case_Attachment_Value = 3
+const Attachment_DriveObject_case case_Attachment_Value = 4
 
 func (x *Attachment) WhichValue() case_Attachment_Value {
 	if x == nil {
@@ -169,6 +201,8 @@ func (x *Attachment) WhichValue() case_Attachment_Value {
 		return Attachment_ExecutedShellCommand_case
 	case *attachment_RunningShellCommand:
 		return Attachment_RunningShellCommand_case
+	case *attachment_DriveObject:
+		return Attachment_DriveObject_case
 	default:
 		return Attachment_Value_not_set_case
 	}
@@ -181,6 +215,7 @@ type Attachment_builder struct {
 	PlainText            *string
 	ExecutedShellCommand *ExecutedShellCommand
 	RunningShellCommand  *RunningShellCommand
+	DriveObject          *DriveObject
 	// -- end of xxx_hidden_Value
 }
 
@@ -196,6 +231,9 @@ func (b0 Attachment_builder) Build() *Attachment {
 	}
 	if b.RunningShellCommand != nil {
 		x.xxx_hidden_Value = &attachment_RunningShellCommand{b.RunningShellCommand}
+	}
+	if b.DriveObject != nil {
+		x.xxx_hidden_Value = &attachment_DriveObject{b.DriveObject}
 	}
 	return m0
 }
@@ -226,11 +264,17 @@ type attachment_RunningShellCommand struct {
 	RunningShellCommand *RunningShellCommand `protobuf:"bytes,3,opt,name=running_shell_command,json=runningShellCommand,oneof"`
 }
 
+type attachment_DriveObject struct {
+	DriveObject *DriveObject `protobuf:"bytes,4,opt,name=drive_object,json=driveObject,oneof"`
+}
+
 func (*attachment_PlainText) isAttachment_Value() {}
 
 func (*attachment_ExecutedShellCommand) isAttachment_Value() {}
 
 func (*attachment_RunningShellCommand) isAttachment_Value() {}
+
+func (*attachment_DriveObject) isAttachment_Value() {}
 
 // Information about shell commands that the user has executed.
 type ExecutedShellCommand struct {
@@ -557,17 +601,96 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 	return m0
 }
 
+type DriveObject struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Uid         *string                `protobuf:"bytes,1,opt,name=uid"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *DriveObject) Reset() {
+	*x = DriveObject{}
+	mi := &file_attachment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DriveObject) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DriveObject) ProtoMessage() {}
+
+func (x *DriveObject) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *DriveObject) GetUid() string {
+	if x != nil {
+		if x.xxx_hidden_Uid != nil {
+			return *x.xxx_hidden_Uid
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *DriveObject) SetUid(v string) {
+	x.xxx_hidden_Uid = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *DriveObject) HasUid() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *DriveObject) ClearUid() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Uid = nil
+}
+
+type DriveObject_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Uid *string
+}
+
+func (b0 DriveObject_builder) Build() *DriveObject {
+	m0 := &DriveObject{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Uid != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Uid = b.Uid
+	}
+	return m0
+}
+
 var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\"\xf9\x01\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\"\xc0\x02\n" +
 	"\n" +
 	"Attachment\x12\x1f\n" +
 	"\n" +
 	"plain_text\x18\x01 \x01(\tH\x00R\tplainText\x12a\n" +
 	"\x16executed_shell_command\x18\x02 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommand\x12^\n" +
-	"\x15running_shell_command\x18\x03 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandH\x00R\x13runningShellCommandB\a\n" +
+	"\x15running_shell_command\x18\x03 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandH\x00R\x13runningShellCommand\x12E\n" +
+	"\fdrive_object\x18\x04 \x01(\v2 .warp.multi_agent.v1.DriveObjectH\x00R\vdriveObjectB\a\n" +
 	"\x05value\"q\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
@@ -577,24 +700,28 @@ const file_attachment_proto_rawDesc = "" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
 	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"?\n" +
 	"\x1fLongRunningShellCommandSnapshot\x12\x1c\n" +
-	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06outputB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\"%\n" +
+	"\vDriveObject\x12\x16\n" +
+	"\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uidB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_attachment_proto_goTypes = []any{
 	(*Attachment)(nil),                      // 0: warp.multi_agent.v1.Attachment
 	(*ExecutedShellCommand)(nil),            // 1: warp.multi_agent.v1.ExecutedShellCommand
 	(*RunningShellCommand)(nil),             // 2: warp.multi_agent.v1.RunningShellCommand
 	(*LongRunningShellCommandSnapshot)(nil), // 3: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*DriveObject)(nil),                     // 4: warp.multi_agent.v1.DriveObject
 }
 var file_attachment_proto_depIdxs = []int32{
 	1, // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	2, // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
-	3, // 2: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
+	3, // 3: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -607,6 +734,7 @@ func file_attachment_proto_init() {
 		(*attachment_PlainText)(nil),
 		(*attachment_ExecutedShellCommand)(nil),
 		(*attachment_RunningShellCommand)(nil),
+		(*attachment_DriveObject)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -614,7 +742,7 @@ func file_attachment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attachment_proto_rawDesc), len(file_attachment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
