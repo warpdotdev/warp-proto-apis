@@ -673,6 +673,7 @@ func (*taskStatus_Aborted_) isTaskStatus_Status() {}
 type Message struct {
 	state                        protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Id                *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_TaskId            *string                `protobuf:"bytes,11,opt,name=task_id,json=taskId"`
 	xxx_hidden_ServerMessageData *string                `protobuf:"bytes,7,opt,name=server_message_data,json=serverMessageData"`
 	xxx_hidden_Citations         *[]*Citation           `protobuf:"bytes,8,rep,name=citations"`
 	xxx_hidden_Message           isMessage_Message      `protobuf_oneof:"message"`
@@ -711,6 +712,16 @@ func (x *Message) GetId() string {
 	if x != nil {
 		if x.xxx_hidden_Id != nil {
 			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Message) GetTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_TaskId != nil {
+			return *x.xxx_hidden_TaskId
 		}
 		return ""
 	}
@@ -801,12 +812,17 @@ func (x *Message) GetUpdateTodos() *Message_UpdateTodos {
 
 func (x *Message) SetId(v string) {
 	x.xxx_hidden_Id = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+}
+
+func (x *Message) SetTaskId(v string) {
+	x.xxx_hidden_TaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *Message) SetServerMessageData(v string) {
 	x.xxx_hidden_ServerMessageData = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *Message) SetCitations(v []*Citation) {
@@ -876,11 +892,18 @@ func (x *Message) HasId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message) HasServerMessageData() bool {
+func (x *Message) HasTaskId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message) HasServerMessageData() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
 func (x *Message) HasMessage() bool {
@@ -951,8 +974,13 @@ func (x *Message) ClearId() {
 	x.xxx_hidden_Id = nil
 }
 
-func (x *Message) ClearServerMessageData() {
+func (x *Message) ClearTaskId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_TaskId = nil
+}
+
+func (x *Message) ClearServerMessageData() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ServerMessageData = nil
 }
 
@@ -1040,6 +1068,8 @@ type Message_builder struct {
 
 	// Globally-unique identifier for the message.
 	Id *string
+	// The ID of the task this message belongs to.
+	TaskId *string
 	// An opaque payload that the client should simply roundtrip.
 	ServerMessageData *string
 	// Citations associated with this message
@@ -1062,11 +1092,15 @@ func (b0 Message_builder) Build() *Message {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Id != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Id = b.Id
 	}
+	if b.TaskId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		x.xxx_hidden_TaskId = b.TaskId
+	}
 	if b.ServerMessageData != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_ServerMessageData = b.ServerMessageData
 	}
 	x.xxx_hidden_Citations = &b.Citations
@@ -10888,9 +10922,10 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xdd1\n" +
+	"\x06status\"\xf61\n" +
 	"\aMessage\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12.\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
+	"\atask_id\x18\v \x01(\tR\x06taskId\x12.\n" +
 	"\x13server_message_data\x18\a \x01(\tR\x11serverMessageData\x12;\n" +
 	"\tcitations\x18\b \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12G\n" +
 	"\n" +
