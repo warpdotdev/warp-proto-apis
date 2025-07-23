@@ -321,10 +321,9 @@ message Message {
   // Message for TODO list operations.
   message UpdateTodos {
     oneof operation {
-      AddTodos add_todos = 1;
-      RemoveTodos remove_todos = 2;
-      CreateTodoList create_todo_list = 3;
-      UpdateTodoStatus update_todo_status = 4;
+      CreateTodoList create_todo_list = 1;
+      UpdatePendingTodos update_pending_todos = 2;
+      MarkTodosCompleted mark_todos_completed = 3;
     }
   }
 }

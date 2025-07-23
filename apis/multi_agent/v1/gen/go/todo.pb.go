@@ -12,7 +12,6 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -30,7 +29,6 @@ type TodoItem struct {
 	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
 	xxx_hidden_Title       *string                `protobuf:"bytes,2,opt,name=title"`
 	xxx_hidden_Description *string                `protobuf:"bytes,3,opt,name=description"`
-	xxx_hidden_Status      *TodoStatus            `protobuf:"bytes,4,opt,name=status"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -92,30 +90,19 @@ func (x *TodoItem) GetDescription() string {
 	return ""
 }
 
-func (x *TodoItem) GetStatus() *TodoStatus {
-	if x != nil {
-		return x.xxx_hidden_Status
-	}
-	return nil
-}
-
 func (x *TodoItem) SetId(v string) {
 	x.xxx_hidden_Id = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *TodoItem) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *TodoItem) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
-}
-
-func (x *TodoItem) SetStatus(v *TodoStatus) {
-	x.xxx_hidden_Status = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *TodoItem) HasId() bool {
@@ -139,13 +126,6 @@ func (x *TodoItem) HasDescription() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *TodoItem) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Status != nil
-}
-
 func (x *TodoItem) ClearId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Id = nil
@@ -161,10 +141,6 @@ func (x *TodoItem) ClearDescription() {
 	x.xxx_hidden_Description = nil
 }
 
-func (x *TodoItem) ClearStatus() {
-	x.xxx_hidden_Status = nil
-}
-
 type TodoItem_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -174,8 +150,6 @@ type TodoItem_builder struct {
 	Title *string
 	// Detailed description of the TODO item.
 	Description *string
-	// Current status of the TODO item.
-	Status *TodoStatus
 }
 
 func (b0 TodoItem_builder) Build() *TodoItem {
@@ -183,310 +157,17 @@ func (b0 TodoItem_builder) Build() *TodoItem {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Id != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Id = b.Id
 	}
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_Description = b.Description
 	}
-	x.xxx_hidden_Status = b.Status
-	return m0
-}
-
-// The status of a TODO item.
-type TodoStatus struct {
-	state             protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Status isTodoStatus_Status    `protobuf_oneof:"status"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
-}
-
-func (x *TodoStatus) Reset() {
-	*x = TodoStatus{}
-	mi := &file_todo_proto_msgTypes[1]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TodoStatus) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TodoStatus) ProtoMessage() {}
-
-func (x *TodoStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_todo_proto_msgTypes[1]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *TodoStatus) GetPending() *emptypb.Empty {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Status.(*todoStatus_Pending); ok {
-			return x.Pending
-		}
-	}
-	return nil
-}
-
-func (x *TodoStatus) GetCompleted() *emptypb.Empty {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Status.(*todoStatus_Completed); ok {
-			return x.Completed
-		}
-	}
-	return nil
-}
-
-func (x *TodoStatus) SetPending(v *emptypb.Empty) {
-	if v == nil {
-		x.xxx_hidden_Status = nil
-		return
-	}
-	x.xxx_hidden_Status = &todoStatus_Pending{v}
-}
-
-func (x *TodoStatus) SetCompleted(v *emptypb.Empty) {
-	if v == nil {
-		x.xxx_hidden_Status = nil
-		return
-	}
-	x.xxx_hidden_Status = &todoStatus_Completed{v}
-}
-
-func (x *TodoStatus) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Status != nil
-}
-
-func (x *TodoStatus) HasPending() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Status.(*todoStatus_Pending)
-	return ok
-}
-
-func (x *TodoStatus) HasCompleted() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Status.(*todoStatus_Completed)
-	return ok
-}
-
-func (x *TodoStatus) ClearStatus() {
-	x.xxx_hidden_Status = nil
-}
-
-func (x *TodoStatus) ClearPending() {
-	if _, ok := x.xxx_hidden_Status.(*todoStatus_Pending); ok {
-		x.xxx_hidden_Status = nil
-	}
-}
-
-func (x *TodoStatus) ClearCompleted() {
-	if _, ok := x.xxx_hidden_Status.(*todoStatus_Completed); ok {
-		x.xxx_hidden_Status = nil
-	}
-}
-
-const TodoStatus_Status_not_set_case case_TodoStatus_Status = 0
-const TodoStatus_Pending_case case_TodoStatus_Status = 1
-const TodoStatus_Completed_case case_TodoStatus_Status = 2
-
-func (x *TodoStatus) WhichStatus() case_TodoStatus_Status {
-	if x == nil {
-		return TodoStatus_Status_not_set_case
-	}
-	switch x.xxx_hidden_Status.(type) {
-	case *todoStatus_Pending:
-		return TodoStatus_Pending_case
-	case *todoStatus_Completed:
-		return TodoStatus_Completed_case
-	default:
-		return TodoStatus_Status_not_set_case
-	}
-}
-
-type TodoStatus_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_Status:
-	Pending   *emptypb.Empty
-	Completed *emptypb.Empty
-	// -- end of xxx_hidden_Status
-}
-
-func (b0 TodoStatus_builder) Build() *TodoStatus {
-	m0 := &TodoStatus{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Pending != nil {
-		x.xxx_hidden_Status = &todoStatus_Pending{b.Pending}
-	}
-	if b.Completed != nil {
-		x.xxx_hidden_Status = &todoStatus_Completed{b.Completed}
-	}
-	return m0
-}
-
-type case_TodoStatus_Status protoreflect.FieldNumber
-
-func (x case_TodoStatus_Status) String() string {
-	md := file_todo_proto_msgTypes[1].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isTodoStatus_Status interface {
-	isTodoStatus_Status()
-}
-
-type todoStatus_Pending struct {
-	Pending *emptypb.Empty `protobuf:"bytes,1,opt,name=pending,oneof"`
-}
-
-type todoStatus_Completed struct {
-	Completed *emptypb.Empty `protobuf:"bytes,2,opt,name=completed,oneof"`
-}
-
-func (*todoStatus_Pending) isTodoStatus_Status() {}
-
-func (*todoStatus_Completed) isTodoStatus_Status() {}
-
-// Tool call to add one or more TODO items to a list.
-type AddTodos struct {
-	state            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Todos *[]*TodoItem           `protobuf:"bytes,1,rep,name=todos"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *AddTodos) Reset() {
-	*x = AddTodos{}
-	mi := &file_todo_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AddTodos) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AddTodos) ProtoMessage() {}
-
-func (x *AddTodos) ProtoReflect() protoreflect.Message {
-	mi := &file_todo_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *AddTodos) GetTodos() []*TodoItem {
-	if x != nil {
-		if x.xxx_hidden_Todos != nil {
-			return *x.xxx_hidden_Todos
-		}
-	}
-	return nil
-}
-
-func (x *AddTodos) SetTodos(v []*TodoItem) {
-	x.xxx_hidden_Todos = &v
-}
-
-type AddTodos_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// The TODO items to add.
-	Todos []*TodoItem
-}
-
-func (b0 AddTodos_builder) Build() *AddTodos {
-	m0 := &AddTodos{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_Todos = &b.Todos
-	return m0
-}
-
-// Tool call to remove one or more TODO items from a list.
-type RemoveTodos struct {
-	state              protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TodoIds []string               `protobuf:"bytes,1,rep,name=todo_ids,json=todoIds"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
-}
-
-func (x *RemoveTodos) Reset() {
-	*x = RemoveTodos{}
-	mi := &file_todo_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *RemoveTodos) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RemoveTodos) ProtoMessage() {}
-
-func (x *RemoveTodos) ProtoReflect() protoreflect.Message {
-	mi := &file_todo_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *RemoveTodos) GetTodoIds() []string {
-	if x != nil {
-		return x.xxx_hidden_TodoIds
-	}
-	return nil
-}
-
-func (x *RemoveTodos) SetTodoIds(v []string) {
-	x.xxx_hidden_TodoIds = v
-}
-
-type RemoveTodos_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// The IDs of the TODO items to remove.
-	TodoIds []string
-}
-
-func (b0 RemoveTodos_builder) Build() *RemoveTodos {
-	m0 := &RemoveTodos{}
-	b, x := &b0, m0
-	_, _ = b, x
-	x.xxx_hidden_TodoIds = b.TodoIds
 	return m0
 }
 
@@ -500,7 +181,7 @@ type CreateTodoList struct {
 
 func (x *CreateTodoList) Reset() {
 	*x = CreateTodoList{}
-	mi := &file_todo_proto_msgTypes[4]
+	mi := &file_todo_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -512,7 +193,7 @@ func (x *CreateTodoList) String() string {
 func (*CreateTodoList) ProtoMessage() {}
 
 func (x *CreateTodoList) ProtoReflect() protoreflect.Message {
-	mi := &file_todo_proto_msgTypes[4]
+	mi := &file_todo_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -551,32 +232,28 @@ func (b0 CreateTodoList_builder) Build() *CreateTodoList {
 	return m0
 }
 
-// Tool call to update the status of a TODO item.
-type UpdateTodoStatus struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TodoId      *string                `protobuf:"bytes,1,opt,name=todo_id,json=todoId"`
-	xxx_hidden_Status      *TodoStatus            `protobuf:"bytes,2,opt,name=status"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+type UpdatePendingTodos struct {
+	state                          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_UpdatedPendingTodos *[]*TodoItem           `protobuf:"bytes,1,rep,name=updated_pending_todos,json=updatedPendingTodos"`
+	unknownFields                  protoimpl.UnknownFields
+	sizeCache                      protoimpl.SizeCache
 }
 
-func (x *UpdateTodoStatus) Reset() {
-	*x = UpdateTodoStatus{}
-	mi := &file_todo_proto_msgTypes[5]
+func (x *UpdatePendingTodos) Reset() {
+	*x = UpdatePendingTodos{}
+	mi := &file_todo_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UpdateTodoStatus) String() string {
+func (x *UpdatePendingTodos) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UpdateTodoStatus) ProtoMessage() {}
+func (*UpdatePendingTodos) ProtoMessage() {}
 
-func (x *UpdateTodoStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_todo_proto_msgTypes[5]
+func (x *UpdatePendingTodos) ProtoReflect() protoreflect.Message {
+	mi := &file_todo_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -587,73 +264,87 @@ func (x *UpdateTodoStatus) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *UpdateTodoStatus) GetTodoId() string {
+func (x *UpdatePendingTodos) GetUpdatedPendingTodos() []*TodoItem {
 	if x != nil {
-		if x.xxx_hidden_TodoId != nil {
-			return *x.xxx_hidden_TodoId
+		if x.xxx_hidden_UpdatedPendingTodos != nil {
+			return *x.xxx_hidden_UpdatedPendingTodos
 		}
-		return ""
-	}
-	return ""
-}
-
-func (x *UpdateTodoStatus) GetStatus() *TodoStatus {
-	if x != nil {
-		return x.xxx_hidden_Status
 	}
 	return nil
 }
 
-func (x *UpdateTodoStatus) SetTodoId(v string) {
-	x.xxx_hidden_TodoId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+func (x *UpdatePendingTodos) SetUpdatedPendingTodos(v []*TodoItem) {
+	x.xxx_hidden_UpdatedPendingTodos = &v
 }
 
-func (x *UpdateTodoStatus) SetStatus(v *TodoStatus) {
-	x.xxx_hidden_Status = v
-}
-
-func (x *UpdateTodoStatus) HasTodoId() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *UpdateTodoStatus) HasStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Status != nil
-}
-
-func (x *UpdateTodoStatus) ClearTodoId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_TodoId = nil
-}
-
-func (x *UpdateTodoStatus) ClearStatus() {
-	x.xxx_hidden_Status = nil
-}
-
-type UpdateTodoStatus_builder struct {
+type UpdatePendingTodos_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The ID of the TODO item to mark as completed.
-	TodoId *string
-	// The new status for the todo item.
-	Status *TodoStatus
+	UpdatedPendingTodos []*TodoItem
 }
 
-func (b0 UpdateTodoStatus_builder) Build() *UpdateTodoStatus {
-	m0 := &UpdateTodoStatus{}
+func (b0 UpdatePendingTodos_builder) Build() *UpdatePendingTodos {
+	m0 := &UpdatePendingTodos{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.TodoId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_TodoId = b.TodoId
+	x.xxx_hidden_UpdatedPendingTodos = &b.UpdatedPendingTodos
+	return m0
+}
+
+type MarkTodosCompleted struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TodoIds []string               `protobuf:"bytes,1,rep,name=todo_ids,json=todoIds"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *MarkTodosCompleted) Reset() {
+	*x = MarkTodosCompleted{}
+	mi := &file_todo_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MarkTodosCompleted) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MarkTodosCompleted) ProtoMessage() {}
+
+func (x *MarkTodosCompleted) ProtoReflect() protoreflect.Message {
+	mi := &file_todo_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
 	}
-	x.xxx_hidden_Status = b.Status
+	return mi.MessageOf(x)
+}
+
+func (x *MarkTodosCompleted) GetTodoIds() []string {
+	if x != nil {
+		return x.xxx_hidden_TodoIds
+	}
+	return nil
+}
+
+func (x *MarkTodosCompleted) SetTodoIds(v []string) {
+	x.xxx_hidden_TodoIds = v
+}
+
+type MarkTodosCompleted_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TodoIds []string
+}
+
+func (b0 MarkTodosCompleted_builder) Build() *MarkTodosCompleted {
+	m0 := &MarkTodosCompleted{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TodoIds = b.TodoIds
 	return m0
 }
 
@@ -662,49 +353,33 @@ var File_todo_proto protoreflect.FileDescriptor
 const file_todo_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"todo.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\"\x8b\x01\n" +
+	"todo.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"R\n" +
 	"\bTodoItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x127\n" +
-	"\x06status\x18\x04 \x01(\v2\x1f.warp.multi_agent.v1.TodoStatusR\x06status\"\x82\x01\n" +
-	"\n" +
-	"TodoStatus\x122\n" +
-	"\apending\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\apending\x126\n" +
-	"\tcompleted\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\tcompletedB\b\n" +
-	"\x06status\"?\n" +
-	"\bAddTodos\x123\n" +
-	"\x05todos\x18\x01 \x03(\v2\x1d.warp.multi_agent.v1.TodoItemR\x05todos\"(\n" +
-	"\vRemoveTodos\x12\x19\n" +
-	"\btodo_ids\x18\x01 \x03(\tR\atodoIds\"T\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\"T\n" +
 	"\x0eCreateTodoList\x12B\n" +
-	"\rinitial_todos\x18\x01 \x03(\v2\x1d.warp.multi_agent.v1.TodoItemR\finitialTodos\"d\n" +
-	"\x10UpdateTodoStatus\x12\x17\n" +
-	"\atodo_id\x18\x01 \x01(\tR\x06todoId\x127\n" +
-	"\x06status\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.TodoStatusR\x06statusB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\rinitial_todos\x18\x01 \x03(\v2\x1d.warp.multi_agent.v1.TodoItemR\finitialTodos\"g\n" +
+	"\x12UpdatePendingTodos\x12Q\n" +
+	"\x15updated_pending_todos\x18\x01 \x03(\v2\x1d.warp.multi_agent.v1.TodoItemR\x13updatedPendingTodos\"/\n" +
+	"\x12MarkTodosCompleted\x12\x19\n" +
+	"\btodo_ids\x18\x01 \x03(\tR\atodoIdsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_todo_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_todo_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_todo_proto_goTypes = []any{
-	(*TodoItem)(nil),         // 0: warp.multi_agent.v1.TodoItem
-	(*TodoStatus)(nil),       // 1: warp.multi_agent.v1.TodoStatus
-	(*AddTodos)(nil),         // 2: warp.multi_agent.v1.AddTodos
-	(*RemoveTodos)(nil),      // 3: warp.multi_agent.v1.RemoveTodos
-	(*CreateTodoList)(nil),   // 4: warp.multi_agent.v1.CreateTodoList
-	(*UpdateTodoStatus)(nil), // 5: warp.multi_agent.v1.UpdateTodoStatus
-	(*emptypb.Empty)(nil),    // 6: google.protobuf.Empty
+	(*TodoItem)(nil),           // 0: warp.multi_agent.v1.TodoItem
+	(*CreateTodoList)(nil),     // 1: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil), // 2: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil), // 3: warp.multi_agent.v1.MarkTodosCompleted
 }
 var file_todo_proto_depIdxs = []int32{
-	1, // 0: warp.multi_agent.v1.TodoItem.status:type_name -> warp.multi_agent.v1.TodoStatus
-	6, // 1: warp.multi_agent.v1.TodoStatus.pending:type_name -> google.protobuf.Empty
-	6, // 2: warp.multi_agent.v1.TodoStatus.completed:type_name -> google.protobuf.Empty
-	0, // 3: warp.multi_agent.v1.AddTodos.todos:type_name -> warp.multi_agent.v1.TodoItem
-	0, // 4: warp.multi_agent.v1.CreateTodoList.initial_todos:type_name -> warp.multi_agent.v1.TodoItem
-	1, // 5: warp.multi_agent.v1.UpdateTodoStatus.status:type_name -> warp.multi_agent.v1.TodoStatus
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	0, // 0: warp.multi_agent.v1.CreateTodoList.initial_todos:type_name -> warp.multi_agent.v1.TodoItem
+	0, // 1: warp.multi_agent.v1.UpdatePendingTodos.updated_pending_todos:type_name -> warp.multi_agent.v1.TodoItem
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_todo_proto_init() }
@@ -712,17 +387,13 @@ func file_todo_proto_init() {
 	if File_todo_proto != nil {
 		return
 	}
-	file_todo_proto_msgTypes[1].OneofWrappers = []any{
-		(*todoStatus_Pending)(nil),
-		(*todoStatus_Completed)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_todo_proto_rawDesc), len(file_todo_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
