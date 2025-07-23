@@ -52,6 +52,7 @@ message Request {
       QueryWithCannedResponse query_with_canned_response = 4;
       AutoCodeDiffQuery auto_code_diff_query = 5;
       ResumeConversation resume_conversation = 7;
+      InitProjectRules init_project_rules = 8;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -129,6 +130,9 @@ message Request {
 
     // An input to resume a conversation.
     message ResumeConversation { }
+
+    // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back. 
+    message InitProjectRules { }
   }
 
   message Metadata {
