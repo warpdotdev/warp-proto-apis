@@ -74,6 +74,9 @@ message Message {
   // Globally-unique identifier for the message.
   string id = 1;
 
+  // The ID of the task this message belongs to.
+  string task_id = 11;
+
   // An opaque payload that the client should simply roundtrip.
   string server_message_data = 7;
 
