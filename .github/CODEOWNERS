@@ -2,5 +2,5 @@
 # These users will be automatically requested for review when PRs are opened.
 
 # Global code owners
-* @zachbai @szgupta @vorporeal @cephalonaut
+* @warpdotdev/proto-api-reviewers
 
