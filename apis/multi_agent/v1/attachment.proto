@@ -39,4 +39,24 @@ message LongRunningShellCommandSnapshot {
 
 message DriveObject {
   string uid = 1 [ (sensitive) = true ];
+  oneof object_type {
+    Workflow workflow = 2;
+    Notebook notebook = 3;
+    GenericStringObject generic_string_object = 4;
+  }
+}
+
+message Workflow {
+  string name = 1 [ (sensitive) = true ];
+  string description = 2 [ (sensitive) = true ];
+  string command = 3 [ (sensitive) = true ];
+}
+
+message Notebook {
+  string title = 1 [ (sensitive) = true ];
+  string content = 2 [ (sensitive) = true ];
+}
+
+message GenericStringObject {
+  string payload = 1 [ (sensitive) = true ];
 }
