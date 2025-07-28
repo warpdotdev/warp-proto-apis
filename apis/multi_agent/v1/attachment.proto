@@ -39,7 +39,7 @@ message LongRunningShellCommandSnapshot {
 
 message DriveObject {
   string uid = 1 [ (sensitive) = true ];
-  oneof object_type {
+  oneof object_payload  {
     Workflow workflow = 2;
     Notebook notebook = 3;
     GenericStringObject generic_string_object = 4;

@@ -602,13 +602,13 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 }
 
 type DriveObject struct {
-	state                  protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_Uid         *string                  `protobuf:"bytes,1,opt,name=uid"`
-	xxx_hidden_ObjectType  isDriveObject_ObjectType `protobuf_oneof:"object_type"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                    protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_Uid           *string                     `protobuf:"bytes,1,opt,name=uid"`
+	xxx_hidden_ObjectPayload isDriveObject_ObjectPayload `protobuf_oneof:"object_payload"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *DriveObject) Reset() {
@@ -648,7 +648,7 @@ func (x *DriveObject) GetUid() string {
 
 func (x *DriveObject) GetWorkflow() *Workflow {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ObjectType.(*driveObject_Workflow); ok {
+		if x, ok := x.xxx_hidden_ObjectPayload.(*driveObject_Workflow); ok {
 			return x.Workflow
 		}
 	}
@@ -657,7 +657,7 @@ func (x *DriveObject) GetWorkflow() *Workflow {
 
 func (x *DriveObject) GetNotebook() *Notebook {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ObjectType.(*driveObject_Notebook); ok {
+		if x, ok := x.xxx_hidden_ObjectPayload.(*driveObject_Notebook); ok {
 			return x.Notebook
 		}
 	}
@@ -666,7 +666,7 @@ func (x *DriveObject) GetNotebook() *Notebook {
 
 func (x *DriveObject) GetGenericStringObject() *GenericStringObject {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ObjectType.(*driveObject_GenericStringObject); ok {
+		if x, ok := x.xxx_hidden_ObjectPayload.(*driveObject_GenericStringObject); ok {
 			return x.GenericStringObject
 		}
 	}
@@ -680,26 +680,26 @@ func (x *DriveObject) SetUid(v string) {
 
 func (x *DriveObject) SetWorkflow(v *Workflow) {
 	if v == nil {
-		x.xxx_hidden_ObjectType = nil
+		x.xxx_hidden_ObjectPayload = nil
 		return
 	}
-	x.xxx_hidden_ObjectType = &driveObject_Workflow{v}
+	x.xxx_hidden_ObjectPayload = &driveObject_Workflow{v}
 }
 
 func (x *DriveObject) SetNotebook(v *Notebook) {
 	if v == nil {
-		x.xxx_hidden_ObjectType = nil
+		x.xxx_hidden_ObjectPayload = nil
 		return
 	}
-	x.xxx_hidden_ObjectType = &driveObject_Notebook{v}
+	x.xxx_hidden_ObjectPayload = &driveObject_Notebook{v}
 }
 
 func (x *DriveObject) SetGenericStringObject(v *GenericStringObject) {
 	if v == nil {
-		x.xxx_hidden_ObjectType = nil
+		x.xxx_hidden_ObjectPayload = nil
 		return
 	}
-	x.xxx_hidden_ObjectType = &driveObject_GenericStringObject{v}
+	x.xxx_hidden_ObjectPayload = &driveObject_GenericStringObject{v}
 }
 
 func (x *DriveObject) HasUid() bool {
@@ -709,18 +709,18 @@ func (x *DriveObject) HasUid() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *DriveObject) HasObjectType() bool {
+func (x *DriveObject) HasObjectPayload() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_ObjectType != nil
+	return x.xxx_hidden_ObjectPayload != nil
 }
 
 func (x *DriveObject) HasWorkflow() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ObjectType.(*driveObject_Workflow)
+	_, ok := x.xxx_hidden_ObjectPayload.(*driveObject_Workflow)
 	return ok
 }
 
@@ -728,7 +728,7 @@ func (x *DriveObject) HasNotebook() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ObjectType.(*driveObject_Notebook)
+	_, ok := x.xxx_hidden_ObjectPayload.(*driveObject_Notebook)
 	return ok
 }
 
@@ -736,7 +736,7 @@ func (x *DriveObject) HasGenericStringObject() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ObjectType.(*driveObject_GenericStringObject)
+	_, ok := x.xxx_hidden_ObjectPayload.(*driveObject_GenericStringObject)
 	return ok
 }
 
@@ -745,38 +745,38 @@ func (x *DriveObject) ClearUid() {
 	x.xxx_hidden_Uid = nil
 }
 
-func (x *DriveObject) ClearObjectType() {
-	x.xxx_hidden_ObjectType = nil
+func (x *DriveObject) ClearObjectPayload() {
+	x.xxx_hidden_ObjectPayload = nil
 }
 
 func (x *DriveObject) ClearWorkflow() {
-	if _, ok := x.xxx_hidden_ObjectType.(*driveObject_Workflow); ok {
-		x.xxx_hidden_ObjectType = nil
+	if _, ok := x.xxx_hidden_ObjectPayload.(*driveObject_Workflow); ok {
+		x.xxx_hidden_ObjectPayload = nil
 	}
 }
 
 func (x *DriveObject) ClearNotebook() {
-	if _, ok := x.xxx_hidden_ObjectType.(*driveObject_Notebook); ok {
-		x.xxx_hidden_ObjectType = nil
+	if _, ok := x.xxx_hidden_ObjectPayload.(*driveObject_Notebook); ok {
+		x.xxx_hidden_ObjectPayload = nil
 	}
 }
 
 func (x *DriveObject) ClearGenericStringObject() {
-	if _, ok := x.xxx_hidden_ObjectType.(*driveObject_GenericStringObject); ok {
-		x.xxx_hidden_ObjectType = nil
+	if _, ok := x.xxx_hidden_ObjectPayload.(*driveObject_GenericStringObject); ok {
+		x.xxx_hidden_ObjectPayload = nil
 	}
 }
 
-const DriveObject_ObjectType_not_set_case case_DriveObject_ObjectType = 0
-const DriveObject_Workflow_case case_DriveObject_ObjectType = 2
-const DriveObject_Notebook_case case_DriveObject_ObjectType = 3
-const DriveObject_GenericStringObject_case case_DriveObject_ObjectType = 4
+const DriveObject_ObjectPayload_not_set_case case_DriveObject_ObjectPayload = 0
+const DriveObject_Workflow_case case_DriveObject_ObjectPayload = 2
+const DriveObject_Notebook_case case_DriveObject_ObjectPayload = 3
+const DriveObject_GenericStringObject_case case_DriveObject_ObjectPayload = 4
 
-func (x *DriveObject) WhichObjectType() case_DriveObject_ObjectType {
+func (x *DriveObject) WhichObjectPayload() case_DriveObject_ObjectPayload {
 	if x == nil {
-		return DriveObject_ObjectType_not_set_case
+		return DriveObject_ObjectPayload_not_set_case
 	}
-	switch x.xxx_hidden_ObjectType.(type) {
+	switch x.xxx_hidden_ObjectPayload.(type) {
 	case *driveObject_Workflow:
 		return DriveObject_Workflow_case
 	case *driveObject_Notebook:
@@ -784,7 +784,7 @@ func (x *DriveObject) WhichObjectType() case_DriveObject_ObjectType {
 	case *driveObject_GenericStringObject:
 		return DriveObject_GenericStringObject_case
 	default:
-		return DriveObject_ObjectType_not_set_case
+		return DriveObject_ObjectPayload_not_set_case
 	}
 }
 
@@ -792,11 +792,11 @@ type DriveObject_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Uid *string
-	// Fields of oneof xxx_hidden_ObjectType:
+	// Fields of oneof xxx_hidden_ObjectPayload:
 	Workflow            *Workflow
 	Notebook            *Notebook
 	GenericStringObject *GenericStringObject
-	// -- end of xxx_hidden_ObjectType
+	// -- end of xxx_hidden_ObjectPayload
 }
 
 func (b0 DriveObject_builder) Build() *DriveObject {
@@ -808,20 +808,20 @@ func (b0 DriveObject_builder) Build() *DriveObject {
 		x.xxx_hidden_Uid = b.Uid
 	}
 	if b.Workflow != nil {
-		x.xxx_hidden_ObjectType = &driveObject_Workflow{b.Workflow}
+		x.xxx_hidden_ObjectPayload = &driveObject_Workflow{b.Workflow}
 	}
 	if b.Notebook != nil {
-		x.xxx_hidden_ObjectType = &driveObject_Notebook{b.Notebook}
+		x.xxx_hidden_ObjectPayload = &driveObject_Notebook{b.Notebook}
 	}
 	if b.GenericStringObject != nil {
-		x.xxx_hidden_ObjectType = &driveObject_GenericStringObject{b.GenericStringObject}
+		x.xxx_hidden_ObjectPayload = &driveObject_GenericStringObject{b.GenericStringObject}
 	}
 	return m0
 }
 
-type case_DriveObject_ObjectType protoreflect.FieldNumber
+type case_DriveObject_ObjectPayload protoreflect.FieldNumber
 
-func (x case_DriveObject_ObjectType) String() string {
+func (x case_DriveObject_ObjectPayload) String() string {
 	md := file_attachment_proto_msgTypes[4].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -829,8 +829,8 @@ func (x case_DriveObject_ObjectType) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isDriveObject_ObjectType interface {
-	isDriveObject_ObjectType()
+type isDriveObject_ObjectPayload interface {
+	isDriveObject_ObjectPayload()
 }
 
 type driveObject_Workflow struct {
@@ -845,11 +845,11 @@ type driveObject_GenericStringObject struct {
 	GenericStringObject *GenericStringObject `protobuf:"bytes,4,opt,name=generic_string_object,json=genericStringObject,oneof"`
 }
 
-func (*driveObject_Workflow) isDriveObject_ObjectType() {}
+func (*driveObject_Workflow) isDriveObject_ObjectPayload() {}
 
-func (*driveObject_Notebook) isDriveObject_ObjectType() {}
+func (*driveObject_Notebook) isDriveObject_ObjectPayload() {}
 
-func (*driveObject_GenericStringObject) isDriveObject_ObjectType() {}
+func (*driveObject_GenericStringObject) isDriveObject_ObjectPayload() {}
 
 type Workflow struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -1205,13 +1205,13 @@ const file_attachment_proto_rawDesc = "" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
 	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"?\n" +
 	"\x1fLongRunningShellCommandSnapshot\x12\x1c\n" +
-	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\"\x8e\x02\n" +
+	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\"\x91\x02\n" +
 	"\vDriveObject\x12\x16\n" +
 	"\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uid\x12;\n" +
 	"\bworkflow\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.WorkflowH\x00R\bworkflow\x12;\n" +
 	"\bnotebook\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.NotebookH\x00R\bnotebook\x12^\n" +
-	"\x15generic_string_object\x18\x04 \x01(\v2(.warp.multi_agent.v1.GenericStringObjectH\x00R\x13genericStringObjectB\r\n" +
-	"\vobject_type\"l\n" +
+	"\x15generic_string_object\x18\x04 \x01(\v2(.warp.multi_agent.v1.GenericStringObjectH\x00R\x13genericStringObjectB\x10\n" +
+	"\x0eobject_payload\"l\n" +
 	"\bWorkflow\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
 	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12\x1e\n" +
