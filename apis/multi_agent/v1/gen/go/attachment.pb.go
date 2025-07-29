@@ -1109,6 +1109,7 @@ func (b0 Notebook_builder) Build() *Notebook {
 type GenericStringObject struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Payload     *string                `protobuf:"bytes,1,opt,name=payload"`
+	xxx_hidden_ObjectType  *string                `protobuf:"bytes,2,opt,name=object_type,json=objectType"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1150,9 +1151,24 @@ func (x *GenericStringObject) GetPayload() string {
 	return ""
 }
 
+func (x *GenericStringObject) GetObjectType() string {
+	if x != nil {
+		if x.xxx_hidden_ObjectType != nil {
+			return *x.xxx_hidden_ObjectType
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *GenericStringObject) SetPayload(v string) {
 	x.xxx_hidden_Payload = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *GenericStringObject) SetObjectType(v string) {
+	x.xxx_hidden_ObjectType = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *GenericStringObject) HasPayload() bool {
@@ -1162,15 +1178,28 @@ func (x *GenericStringObject) HasPayload() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *GenericStringObject) HasObjectType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *GenericStringObject) ClearPayload() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Payload = nil
 }
 
+func (x *GenericStringObject) ClearObjectType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ObjectType = nil
+}
+
 type GenericStringObject_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Payload *string
+	Payload    *string
+	ObjectType *string
 }
 
 func (b0 GenericStringObject_builder) Build() *GenericStringObject {
@@ -1178,8 +1207,12 @@ func (b0 GenericStringObject_builder) Build() *GenericStringObject {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Payload != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Payload = b.Payload
+	}
+	if b.ObjectType != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_ObjectType = b.ObjectType
 	}
 	return m0
 }
@@ -1218,9 +1251,11 @@ const file_attachment_proto_rawDesc = "" +
 	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\"F\n" +
 	"\bNotebook\x12\x1a\n" +
 	"\x05title\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x12\x1e\n" +
-	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\"5\n" +
+	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\"V\n" +
 	"\x13GenericStringObject\x12\x1e\n" +
-	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayloadB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayload\x12\x1f\n" +
+	"\vobject_type\x18\x02 \x01(\tR\n" +
+	"objectTypeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_attachment_proto_goTypes = []any{

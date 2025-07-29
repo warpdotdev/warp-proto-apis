@@ -59,4 +59,5 @@ message Notebook {
 
 message GenericStringObject {
   string payload = 1 [ (sensitive) = true ];
+  string object_type = 2;
 }
