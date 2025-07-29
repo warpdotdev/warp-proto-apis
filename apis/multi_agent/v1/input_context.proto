@@ -26,7 +26,7 @@ message InputContext {
   repeated Image images = 7;
   repeated File files = 9;
   repeated ProjectRulesFile project_rules_files = 10;
-  repeated SubdirectoryRules subdirectory_rules = 11;
+  repeated RepositoryRules repository_rules = 11;
   // END TODO
 
   message SelectedText { string text = 1 [ (sensitive) = true ]; }
@@ -84,7 +84,7 @@ message InputContext {
   }
 
   // Rules that are in the project but is in a different subdirectory.
-  message SubdirectoryRules {
+  message RepositoryRules {
     string path = 1 [ (sensitive) = true ];
   }
 }
