@@ -1098,7 +1098,7 @@ func (b0 InputContext_ProjectRulesFile_builder) Build() *InputContext_ProjectRul
 	return m0
 }
 
-// Rules that are in the project but is in a different subdirectory.
+// All project-scoped rules in the current repository.
 type InputContext_RepositoryRules struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Path        *string                `protobuf:"bytes,1,opt,name=path"`
