@@ -30,11 +30,11 @@ type InputContext struct {
 	xxx_hidden_Shell                 *InputContext_Shell           `protobuf:"bytes,3,opt,name=shell"`
 	xxx_hidden_CurrentTime           *timestamppb.Timestamp        `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
 	xxx_hidden_Codebases             *[]*InputContext_Codebase     `protobuf:"bytes,8,rep,name=codebases"`
+	xxx_hidden_ProjectRules          *[]*InputContext_ProjectRules `protobuf:"bytes,10,rep,name=project_rules,json=projectRules"`
 	xxx_hidden_ExecutedShellCommands *[]*ExecutedShellCommand      `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
 	xxx_hidden_SelectedText          *[]*InputContext_SelectedText `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
 	xxx_hidden_Images                *[]*InputContext_Image        `protobuf:"bytes,7,rep,name=images"`
 	xxx_hidden_Files                 *[]*InputContext_File         `protobuf:"bytes,9,rep,name=files"`
-	xxx_hidden_ProjectRules          *[]*InputContext_ProjectRules `protobuf:"bytes,10,rep,name=project_rules,json=projectRules"`
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -101,6 +101,15 @@ func (x *InputContext) GetCodebases() []*InputContext_Codebase {
 	return nil
 }
 
+func (x *InputContext) GetProjectRules() []*InputContext_ProjectRules {
+	if x != nil {
+		if x.xxx_hidden_ProjectRules != nil {
+			return *x.xxx_hidden_ProjectRules
+		}
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) GetExecutedShellCommands() []*ExecutedShellCommand {
 	if x != nil {
@@ -138,15 +147,6 @@ func (x *InputContext) GetFiles() []*InputContext_File {
 	return nil
 }
 
-func (x *InputContext) GetProjectRules() []*InputContext_ProjectRules {
-	if x != nil {
-		if x.xxx_hidden_ProjectRules != nil {
-			return *x.xxx_hidden_ProjectRules
-		}
-	}
-	return nil
-}
-
 func (x *InputContext) SetDirectory(v *InputContext_Directory) {
 	x.xxx_hidden_Directory = v
 }
@@ -167,6 +167,10 @@ func (x *InputContext) SetCodebases(v []*InputContext_Codebase) {
 	x.xxx_hidden_Codebases = &v
 }
 
+func (x *InputContext) SetProjectRules(v []*InputContext_ProjectRules) {
+	x.xxx_hidden_ProjectRules = &v
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) SetExecutedShellCommands(v []*ExecutedShellCommand) {
 	x.xxx_hidden_ExecutedShellCommands = &v
@@ -182,10 +186,6 @@ func (x *InputContext) SetImages(v []*InputContext_Image) {
 
 func (x *InputContext) SetFiles(v []*InputContext_File) {
 	x.xxx_hidden_Files = &v
-}
-
-func (x *InputContext) SetProjectRules(v []*InputContext_ProjectRules) {
-	x.xxx_hidden_ProjectRules = &v
 }
 
 func (x *InputContext) HasDirectory() bool {
@@ -240,6 +240,7 @@ type InputContext_builder struct {
 	Shell           *InputContext_Shell
 	CurrentTime     *timestamppb.Timestamp
 	Codebases       []*InputContext_Codebase
+	ProjectRules    []*InputContext_ProjectRules
 	// TODO: these fields should be _attachments_, not part of the input context.
 	//
 	// Deprecated: Marked as deprecated in input_context.proto.
@@ -247,7 +248,6 @@ type InputContext_builder struct {
 	SelectedText          []*InputContext_SelectedText
 	Images                []*InputContext_Image
 	Files                 []*InputContext_File
-	ProjectRules          []*InputContext_ProjectRules
 }
 
 func (b0 InputContext_builder) Build() *InputContext {
@@ -259,11 +259,11 @@ func (b0 InputContext_builder) Build() *InputContext {
 	x.xxx_hidden_Shell = b.Shell
 	x.xxx_hidden_CurrentTime = b.CurrentTime
 	x.xxx_hidden_Codebases = &b.Codebases
+	x.xxx_hidden_ProjectRules = &b.ProjectRules
 	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
 	x.xxx_hidden_SelectedText = &b.SelectedText
 	x.xxx_hidden_Images = &b.Images
 	x.xxx_hidden_Files = &b.Files
-	x.xxx_hidden_ProjectRules = &b.ProjectRules
 	return m0
 }
 
@@ -1099,13 +1099,13 @@ const file_input_context_proto_rawDesc = "" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
 	"\x05shell\x18\x03 \x01(\v2'.warp.multi_agent.v1.InputContext.ShellR\x05shell\x12=\n" +
 	"\fcurrent_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\vcurrentTime\x12H\n" +
-	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x12e\n" +
+	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x12S\n" +
+	"\rproject_rules\x18\n" +
+	" \x03(\v2..warp.multi_agent.v1.InputContext.ProjectRulesR\fprojectRules\x12e\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2).warp.multi_agent.v1.ExecutedShellCommandB\x02\x18\x01R\x15executedShellCommands\x12S\n" +
 	"\rselected_text\x18\x06 \x03(\v2..warp.multi_agent.v1.InputContext.SelectedTextR\fselectedText\x12?\n" +
 	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12<\n" +
-	"\x05files\x18\t \x03(\v2&.warp.multi_agent.v1.InputContext.FileR\x05files\x12S\n" +
-	"\rproject_rules\x18\n" +
-	" \x03(\v2..warp.multi_agent.v1.InputContext.ProjectRulesR\fprojectRules\x1a(\n" +
+	"\x05files\x18\t \x03(\v2&.warp.multi_agent.v1.InputContext.FileR\x05files\x1a(\n" +
 	"\fSelectedText\x12\x18\n" +
 	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1av\n" +
 	"\tDirectory\x12\x16\n" +
@@ -1151,11 +1151,11 @@ var file_input_context_proto_depIdxs = []int32{
 	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
 	9,  // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
 	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
-	10, // 5: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	1,  // 6: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	5,  // 7: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	7,  // 8: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	8,  // 9: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
+	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
+	10, // 6: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	1,  // 7: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	5,  // 8: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	7,  // 9: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
 	11, // 10: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
 	11, // 11: warp.multi_agent.v1.InputContext.ProjectRules.top_level_rules:type_name -> warp.multi_agent.v1.FileContent
 	12, // [12:12] is the sub-list for method output_type

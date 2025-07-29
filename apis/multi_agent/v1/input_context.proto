@@ -19,13 +19,13 @@ message InputContext {
   Shell shell = 3;
   google.protobuf.Timestamp current_time = 4;
   repeated Codebase codebases = 8;
+  repeated ProjectRules project_rules = 10;
 
   // TODO: these fields should be _attachments_, not part of the input context.
   repeated ExecutedShellCommand executed_shell_commands = 5 [deprecated = true];
   repeated SelectedText selected_text = 6;
   repeated Image images = 7;
   repeated File files = 9;
-  repeated ProjectRules project_rules = 10;
   // END TODO
 
   message SelectedText { string text = 1 [ (sensitive) = true ]; }
