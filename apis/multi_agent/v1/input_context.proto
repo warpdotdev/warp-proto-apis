@@ -83,7 +83,7 @@ message InputContext {
     FileContent content = 1;
   }
 
-  // Rules that are in the project but is in a different subdirectory.
+  // All project-scoped rules in the current repository.
   message RepositoryRules {
     string path = 1 [ (sensitive) = true ];
   }
