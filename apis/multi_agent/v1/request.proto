@@ -131,7 +131,7 @@ message Request {
     // An input to resume a conversation.
     message ResumeConversation { }
 
-    // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back. 
+    // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back.
     message InitProjectRules { }
   }
 
@@ -190,7 +190,7 @@ message Request {
     // If `true`, the client supports the todos UI and should receive todo-related public API messages.
     // If `false`, todo-related public API messages should not be sent to the client.
     bool supports_todos_ui = 12;
-    
+
     // If `true`, the client supports rendering linked code blocks, and the agent will prefer to output them in its responses.
     // If `false` or unset, the agent will use plain text code block formatting in its responses.
     bool supports_linked_code_blocks = 13;
