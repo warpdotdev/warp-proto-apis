@@ -1016,8 +1016,11 @@ func (b0 InputContext_File_builder) Build() *InputContext_File {
 
 type InputContext_ProjectRules struct {
 	state                            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TopLevelRules         *[]*FileContent        `protobuf:"bytes,1,rep,name=top_level_rules,json=topLevelRules"`
-	xxx_hidden_SubdirectoryRulePaths []string               `protobuf:"bytes,2,rep,name=subdirectory_rule_paths,json=subdirectoryRulePaths"`
+	xxx_hidden_RootPath              *string                `protobuf:"bytes,1,opt,name=root_path,json=rootPath"`
+	xxx_hidden_TopLevelRules         *[]*FileContent        `protobuf:"bytes,2,rep,name=top_level_rules,json=topLevelRules"`
+	xxx_hidden_SubdirectoryRulePaths []string               `protobuf:"bytes,3,rep,name=subdirectory_rule_paths,json=subdirectoryRulePaths"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -1047,6 +1050,16 @@ func (x *InputContext_ProjectRules) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *InputContext_ProjectRules) GetRootPath() string {
+	if x != nil {
+		if x.xxx_hidden_RootPath != nil {
+			return *x.xxx_hidden_RootPath
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *InputContext_ProjectRules) GetTopLevelRules() []*FileContent {
 	if x != nil {
 		if x.xxx_hidden_TopLevelRules != nil {
@@ -1063,6 +1076,11 @@ func (x *InputContext_ProjectRules) GetSubdirectoryRulePaths() []string {
 	return nil
 }
 
+func (x *InputContext_ProjectRules) SetRootPath(v string) {
+	x.xxx_hidden_RootPath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
 func (x *InputContext_ProjectRules) SetTopLevelRules(v []*FileContent) {
 	x.xxx_hidden_TopLevelRules = &v
 }
@@ -1071,9 +1089,22 @@ func (x *InputContext_ProjectRules) SetSubdirectoryRulePaths(v []string) {
 	x.xxx_hidden_SubdirectoryRulePaths = v
 }
 
+func (x *InputContext_ProjectRules) HasRootPath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *InputContext_ProjectRules) ClearRootPath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_RootPath = nil
+}
+
 type InputContext_ProjectRules_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	RootPath *string
 	// Top level rules that should be eagerly applied to the conversation.
 	TopLevelRules []*FileContent
 	// Subdirectory rules that are available to be retrieved.
@@ -1084,6 +1115,10 @@ func (b0 InputContext_ProjectRules_builder) Build() *InputContext_ProjectRules {
 	m0 := &InputContext_ProjectRules{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.RootPath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_RootPath = b.RootPath
+	}
 	x.xxx_hidden_TopLevelRules = &b.TopLevelRules
 	x.xxx_hidden_SubdirectoryRulePaths = b.SubdirectoryRulePaths
 	return m0
@@ -1093,7 +1128,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x92\v\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xaf\v\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1125,10 +1160,11 @@ const file_input_context_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +
 	"\x04path\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x1aB\n" +
 	"\x04File\x12:\n" +
-	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a\x90\x01\n" +
-	"\fProjectRules\x12H\n" +
-	"\x0ftop_level_rules\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentR\rtopLevelRules\x126\n" +
-	"\x17subdirectory_rule_paths\x18\x02 \x03(\tR\x15subdirectoryRulePathsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a\xad\x01\n" +
+	"\fProjectRules\x12\x1b\n" +
+	"\troot_path\x18\x01 \x01(\tR\brootPath\x12H\n" +
+	"\x0ftop_level_rules\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\rtopLevelRules\x126\n" +
+	"\x17subdirectory_rule_paths\x18\x03 \x03(\tR\x15subdirectoryRulePathsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_input_context_proto_goTypes = []any{

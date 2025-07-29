@@ -79,9 +79,10 @@ message InputContext {
   }
 
   message ProjectRules {
+    string root_path = 1;
     // Top level rules that should be eagerly applied to the conversation.
-    repeated FileContent top_level_rules = 1;
+    repeated FileContent top_level_rules = 2;
     // Subdirectory rules that are available to be retrieved.
-    repeated string subdirectory_rule_paths = 2;
+    repeated string subdirectory_rule_paths = 3;
   }
 }
