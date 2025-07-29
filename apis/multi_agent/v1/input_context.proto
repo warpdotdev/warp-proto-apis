@@ -25,8 +25,7 @@ message InputContext {
   repeated SelectedText selected_text = 6;
   repeated Image images = 7;
   repeated File files = 9;
-  repeated ProjectRulesFile project_rules_files = 10;
-  repeated RepositoryRules repository_rules = 11;
+  repeated ProjectRules project_rules = 10;
   // END TODO
 
   message SelectedText { string text = 1 [ (sensitive) = true ]; }
@@ -79,12 +78,10 @@ message InputContext {
     FileContent content = 1;
   }
 
-  message ProjectRulesFile {
-    FileContent content = 1;
-  }
-
-  // All project-scoped rules in the current repository.
-  message RepositoryRules {
-    string path = 1 [ (sensitive) = true ];
+  message ProjectRules {
+    // Top level rules that should be eagerly applied to the conversation.
+    repeated FileContent top_level_rules = 1;
+    // Subdirectory rules that are available to be retrieved.
+    repeated string subdirectory_rule_paths = 2;
   }
 }
