@@ -1098,7 +1098,7 @@ func (b0 InputContext_ProjectRulesFile_builder) Build() *InputContext_ProjectRul
 	return m0
 }
 
-// Rules that are in the project but is in a different subproject.
+// Rules that are in the project but is in a different subdirectory.
 type InputContext_SubdirectoryRules struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Path        *string                `protobuf:"bytes,1,opt,name=path"`
@@ -1181,7 +1181,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xeb\v\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xf1\v\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1216,9 +1216,9 @@ const file_input_context_proto_rawDesc = "" +
 	"\x04File\x12:\n" +
 	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1aN\n" +
 	"\x10ProjectRulesFile\x12:\n" +
-	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a'\n" +
-	"\x11SubdirectoryRules\x12\x12\n" +
-	"\x04path\x18\x01 \x01(\tR\x04pathB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a-\n" +
+	"\x11SubdirectoryRules\x12\x18\n" +
+	"\x04path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04pathB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_input_context_proto_goTypes = []any{

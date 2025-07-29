@@ -85,6 +85,6 @@ message InputContext {
 
   // Rules that are in the project but is in a different subdirectory.
   message SubdirectoryRules {
-    string path = 1;
+    string path = 1 [ (sensitive) = true ];
   }
 }
