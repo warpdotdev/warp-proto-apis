@@ -1198,7 +1198,8 @@ func (x *GenericStringObject) ClearObjectType() {
 type GenericStringObject_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Payload    *string
+	Payload *string
+	// Refers to the JSON type of the object such as "JsonEnvVarCollection" or "JsonAIFact"
 	ObjectType *string
 }
 
