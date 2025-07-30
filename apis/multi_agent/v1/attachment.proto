@@ -59,5 +59,6 @@ message Notebook {
 
 message GenericStringObject {
   string payload = 1 [ (sensitive) = true ];
+  // Refers to the JSON type of the object such as "JsonEnvVarCollection" or "JsonAIFact" 
   string object_type = 2;
 }
