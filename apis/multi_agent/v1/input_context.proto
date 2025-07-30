@@ -83,6 +83,6 @@ message InputContext {
     // Active rules that should be eagerly applied to the conversation.
     repeated FileContent active_rule_files = 2;
     // Additional rules that are available to be retrieved.
-    repeated string addition_rule_file_paths = 3;
+    repeated string additional_rule_file_paths = 3;
   }
 }
