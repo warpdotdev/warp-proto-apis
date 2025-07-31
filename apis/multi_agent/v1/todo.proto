@@ -33,3 +33,7 @@ message UpdatePendingTodos {
 message MarkTodosCompleted {
    repeated string todo_ids = 1;
 }
+
+message MarkTodosPending {
+   repeated string todo_ids = 1;
+}

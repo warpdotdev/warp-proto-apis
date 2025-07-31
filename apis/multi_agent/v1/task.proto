@@ -324,6 +324,7 @@ message Message {
       CreateTodoList create_todo_list = 1;
       UpdatePendingTodos update_pending_todos = 2;
       MarkTodosCompleted mark_todos_completed = 3;
+      MarkTodosPending mark_todos_pending = 4;
     }
   }
 }
