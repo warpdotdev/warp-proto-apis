@@ -129,14 +129,16 @@ func (b0 FileContentLineRange_builder) Build() *FileContentLineRange {
 
 // A representation of raw content within a file.
 type FileContent struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
-	xxx_hidden_Content     *string                `protobuf:"bytes,2,opt,name=content"`
-	xxx_hidden_LineRange   *FileContentLineRange  `protobuf:"bytes,3,opt,name=line_range,json=lineRange"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FilePath      *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_Content       *string                `protobuf:"bytes,2,opt,name=content"`
+	xxx_hidden_LineRange     *FileContentLineRange  `protobuf:"bytes,3,opt,name=line_range,json=lineRange"`
+	xxx_hidden_MimeType      *string                `protobuf:"bytes,4,opt,name=mime_type,json=mimeType"`
+	xxx_hidden_BinaryContent []byte                 `protobuf:"bytes,5,opt,name=binary_content,json=binaryContent"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *FileContent) Reset() {
@@ -191,18 +193,48 @@ func (x *FileContent) GetLineRange() *FileContentLineRange {
 	return nil
 }
 
+func (x *FileContent) GetMimeType() string {
+	if x != nil {
+		if x.xxx_hidden_MimeType != nil {
+			return *x.xxx_hidden_MimeType
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *FileContent) GetBinaryContent() []byte {
+	if x != nil {
+		return x.xxx_hidden_BinaryContent
+	}
+	return nil
+}
+
 func (x *FileContent) SetFilePath(v string) {
 	x.xxx_hidden_FilePath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *FileContent) SetContent(v string) {
 	x.xxx_hidden_Content = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *FileContent) SetLineRange(v *FileContentLineRange) {
 	x.xxx_hidden_LineRange = v
+}
+
+func (x *FileContent) SetMimeType(v string) {
+	x.xxx_hidden_MimeType = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *FileContent) SetBinaryContent(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_BinaryContent = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *FileContent) HasFilePath() bool {
@@ -226,6 +258,20 @@ func (x *FileContent) HasLineRange() bool {
 	return x.xxx_hidden_LineRange != nil
 }
 
+func (x *FileContent) HasMimeType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *FileContent) HasBinaryContent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *FileContent) ClearFilePath() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_FilePath = nil
@@ -240,12 +286,26 @@ func (x *FileContent) ClearLineRange() {
 	x.xxx_hidden_LineRange = nil
 }
 
+func (x *FileContent) ClearMimeType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_MimeType = nil
+}
+
+func (x *FileContent) ClearBinaryContent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_BinaryContent = nil
+}
+
 type FileContent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	FilePath  *string
+	FilePath *string
+	// Old file content - for base64 encoded or text files
 	Content   *string
 	LineRange *FileContentLineRange
+	// New file content - for all file types
+	MimeType      *string
+	BinaryContent []byte
 }
 
 func (b0 FileContent_builder) Build() *FileContent {
@@ -253,14 +313,22 @@ func (b0 FileContent_builder) Build() *FileContent {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.FilePath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_FilePath = b.FilePath
 	}
 	if b.Content != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Content = b.Content
 	}
 	x.xxx_hidden_LineRange = b.LineRange
+	if b.MimeType != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		x.xxx_hidden_MimeType = b.MimeType
+	}
+	if b.BinaryContent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_BinaryContent = b.BinaryContent
+	}
 	return m0
 }
 
@@ -271,12 +339,14 @@ const file_file_content_proto_rawDesc = "" +
 	"\x12file_content.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\">\n" +
 	"\x14FileContentLineRange\x12\x14\n" +
 	"\x05start\x18\x01 \x01(\rR\x05start\x12\x10\n" +
-	"\x03end\x18\x02 \x01(\rR\x03end\"\x9a\x01\n" +
+	"\x03end\x18\x02 \x01(\rR\x03end\"\xde\x01\n" +
 	"\vFileContent\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
 	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12H\n" +
 	"\n" +
-	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRangeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\x12\x1b\n" +
+	"\tmime_type\x18\x04 \x01(\tR\bmimeType\x12%\n" +
+	"\x0ebinary_content\x18\x05 \x01(\fR\rbinaryContentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_file_content_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_file_content_proto_goTypes = []any{
