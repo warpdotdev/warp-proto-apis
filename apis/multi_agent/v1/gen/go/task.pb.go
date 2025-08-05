@@ -6421,15 +6421,6 @@ func (x *Message_UpdateTodos) GetMarkTodosCompleted() *MarkTodosCompleted {
 	return nil
 }
 
-func (x *Message_UpdateTodos) GetMarkTodosPending() *MarkTodosPending {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Operation.(*message_UpdateTodos_MarkTodosPending); ok {
-			return x.MarkTodosPending
-		}
-	}
-	return nil
-}
-
 func (x *Message_UpdateTodos) SetCreateTodoList(v *CreateTodoList) {
 	if v == nil {
 		x.xxx_hidden_Operation = nil
@@ -6452,14 +6443,6 @@ func (x *Message_UpdateTodos) SetMarkTodosCompleted(v *MarkTodosCompleted) {
 		return
 	}
 	x.xxx_hidden_Operation = &message_UpdateTodos_MarkTodosCompleted{v}
-}
-
-func (x *Message_UpdateTodos) SetMarkTodosPending(v *MarkTodosPending) {
-	if v == nil {
-		x.xxx_hidden_Operation = nil
-		return
-	}
-	x.xxx_hidden_Operation = &message_UpdateTodos_MarkTodosPending{v}
 }
 
 func (x *Message_UpdateTodos) HasOperation() bool {
@@ -6493,14 +6476,6 @@ func (x *Message_UpdateTodos) HasMarkTodosCompleted() bool {
 	return ok
 }
 
-func (x *Message_UpdateTodos) HasMarkTodosPending() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Operation.(*message_UpdateTodos_MarkTodosPending)
-	return ok
-}
-
 func (x *Message_UpdateTodos) ClearOperation() {
 	x.xxx_hidden_Operation = nil
 }
@@ -6523,17 +6498,10 @@ func (x *Message_UpdateTodos) ClearMarkTodosCompleted() {
 	}
 }
 
-func (x *Message_UpdateTodos) ClearMarkTodosPending() {
-	if _, ok := x.xxx_hidden_Operation.(*message_UpdateTodos_MarkTodosPending); ok {
-		x.xxx_hidden_Operation = nil
-	}
-}
-
 const Message_UpdateTodos_Operation_not_set_case case_Message_UpdateTodos_Operation = 0
 const Message_UpdateTodos_CreateTodoList_case case_Message_UpdateTodos_Operation = 1
 const Message_UpdateTodos_UpdatePendingTodos_case case_Message_UpdateTodos_Operation = 2
 const Message_UpdateTodos_MarkTodosCompleted_case case_Message_UpdateTodos_Operation = 3
-const Message_UpdateTodos_MarkTodosPending_case case_Message_UpdateTodos_Operation = 4
 
 func (x *Message_UpdateTodos) WhichOperation() case_Message_UpdateTodos_Operation {
 	if x == nil {
@@ -6546,8 +6514,6 @@ func (x *Message_UpdateTodos) WhichOperation() case_Message_UpdateTodos_Operatio
 		return Message_UpdateTodos_UpdatePendingTodos_case
 	case *message_UpdateTodos_MarkTodosCompleted:
 		return Message_UpdateTodos_MarkTodosCompleted_case
-	case *message_UpdateTodos_MarkTodosPending:
-		return Message_UpdateTodos_MarkTodosPending_case
 	default:
 		return Message_UpdateTodos_Operation_not_set_case
 	}
@@ -6560,7 +6526,6 @@ type Message_UpdateTodos_builder struct {
 	CreateTodoList     *CreateTodoList
 	UpdatePendingTodos *UpdatePendingTodos
 	MarkTodosCompleted *MarkTodosCompleted
-	MarkTodosPending   *MarkTodosPending
 	// -- end of xxx_hidden_Operation
 }
 
@@ -6576,9 +6541,6 @@ func (b0 Message_UpdateTodos_builder) Build() *Message_UpdateTodos {
 	}
 	if b.MarkTodosCompleted != nil {
 		x.xxx_hidden_Operation = &message_UpdateTodos_MarkTodosCompleted{b.MarkTodosCompleted}
-	}
-	if b.MarkTodosPending != nil {
-		x.xxx_hidden_Operation = &message_UpdateTodos_MarkTodosPending{b.MarkTodosPending}
 	}
 	return m0
 }
@@ -6609,17 +6571,11 @@ type message_UpdateTodos_MarkTodosCompleted struct {
 	MarkTodosCompleted *MarkTodosCompleted `protobuf:"bytes,3,opt,name=mark_todos_completed,json=markTodosCompleted,oneof"`
 }
 
-type message_UpdateTodos_MarkTodosPending struct {
-	MarkTodosPending *MarkTodosPending `protobuf:"bytes,4,opt,name=mark_todos_pending,json=markTodosPending,oneof"`
-}
-
 func (*message_UpdateTodos_CreateTodoList) isMessage_UpdateTodos_Operation() {}
 
 func (*message_UpdateTodos_UpdatePendingTodos) isMessage_UpdateTodos_Operation() {}
 
 func (*message_UpdateTodos_MarkTodosCompleted) isMessage_UpdateTodos_Operation() {}
-
-func (*message_UpdateTodos_MarkTodosPending) isMessage_UpdateTodos_Operation() {}
 
 // A tool call that is totally resolved server-side and hence opaque to
 // clients. It's included in the message history for bookkeeping purposes.
@@ -10922,7 +10878,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xab2\n" +
+	"\x06status\"\xd41\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12.\n" +
@@ -11066,12 +11022,11 @@ const file_task_proto_rawDesc = "" +
 	"user_query\x18\x01 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQueryB\b\n" +
 	"\x06result\x1a'\n" +
 	"\vServerEvent\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xfc\x02\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xa5\x02\n" +
 	"\vUpdateTodos\x12O\n" +
 	"\x10create_todo_list\x18\x01 \x01(\v2#.warp.multi_agent.v1.CreateTodoListH\x00R\x0ecreateTodoList\x12[\n" +
 	"\x14update_pending_todos\x18\x02 \x01(\v2'.warp.multi_agent.v1.UpdatePendingTodosH\x00R\x12updatePendingTodos\x12[\n" +
-	"\x14mark_todos_completed\x18\x03 \x01(\v2'.warp.multi_agent.v1.MarkTodosCompletedH\x00R\x12markTodosCompleted\x12U\n" +
-	"\x12mark_todos_pending\x18\x04 \x01(\v2%.warp.multi_agent.v1.MarkTodosPendingH\x00R\x10markTodosPendingB\v\n" +
+	"\x14mark_todos_completed\x18\x03 \x01(\v2'.warp.multi_agent.v1.MarkTodosCompletedH\x00R\x12markTodosCompletedB\v\n" +
 	"\toperationB\t\n" +
 	"\amessage\"\xd5\x02\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
@@ -11313,11 +11268,10 @@ var file_task_proto_goTypes = []any{
 	(*CreateTodoList)(nil),                                  // 87: warp.multi_agent.v1.CreateTodoList
 	(*UpdatePendingTodos)(nil),                              // 88: warp.multi_agent.v1.UpdatePendingTodos
 	(*MarkTodosCompleted)(nil),                              // 89: warp.multi_agent.v1.MarkTodosCompleted
-	(*MarkTodosPending)(nil),                                // 90: warp.multi_agent.v1.MarkTodosPending
-	(*Attachment)(nil),                                      // 91: warp.multi_agent.v1.Attachment
-	(*structpb.Struct)(nil),                                 // 92: google.protobuf.Struct
-	(*FileContentLineRange)(nil),                            // 93: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                     // 94: warp.multi_agent.v1.FileContent
+	(*Attachment)(nil),                                      // 90: warp.multi_agent.v1.Attachment
+	(*structpb.Struct)(nil),                                 // 91: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                            // 92: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                     // 93: warp.multi_agent.v1.FileContent
 }
 var file_task_proto_depIdxs = []int32{
 	19,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -11402,34 +11356,33 @@ var file_task_proto_depIdxs = []int32{
 	87,  // 79: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
 	88,  // 80: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
 	89,  // 81: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
-	90,  // 82: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_pending:type_name -> warp.multi_agent.v1.MarkTodosPending
-	91,  // 83: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	83,  // 84: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
-	50,  // 85: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	51,  // 86: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	52,  // 87: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	1,   // 88: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	92,  // 89: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
-	93,  // 90: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	26,  // 91: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	94,  // 92: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	94,  // 93: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	94,  // 94: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	61,  // 95: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	94,  // 96: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	65,  // 97: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	66,  // 98: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	71,  // 99: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	13,  // 100: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	80,  // 101: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	81,  // 102: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	82,  // 103: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	13,  // 104: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	105, // [105:105] is the sub-list for method output_type
-	105, // [105:105] is the sub-list for method input_type
-	105, // [105:105] is the sub-list for extension type_name
-	105, // [105:105] is the sub-list for extension extendee
-	0,   // [0:105] is the sub-list for field type_name
+	90,  // 82: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	83,  // 83: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	50,  // 84: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	51,  // 85: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	52,  // 86: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	1,   // 87: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	91,  // 88: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	92,  // 89: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	26,  // 90: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	93,  // 91: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	93,  // 92: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	93,  // 93: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	61,  // 94: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	93,  // 95: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	65,  // 96: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	66,  // 97: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	71,  // 98: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	13,  // 99: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	80,  // 100: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	81,  // 101: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	82,  // 102: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	13,  // 103: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	104, // [104:104] is the sub-list for method output_type
+	104, // [104:104] is the sub-list for method input_type
+	104, // [104:104] is the sub-list for extension type_name
+	104, // [104:104] is the sub-list for extension extendee
+	0,   // [0:104] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
@@ -11554,7 +11507,6 @@ func file_task_proto_init() {
 		(*message_UpdateTodos_CreateTodoList)(nil),
 		(*message_UpdateTodos_UpdatePendingTodos)(nil),
 		(*message_UpdateTodos_MarkTodosCompleted)(nil),
-		(*message_UpdateTodos_MarkTodosPending)(nil),
 	}
 	file_task_proto_msgTypes[79].OneofWrappers = []any{
 		(*callMCPToolResult_Success_Result_Text_)(nil),
