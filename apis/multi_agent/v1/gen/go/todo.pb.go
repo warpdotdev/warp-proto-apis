@@ -348,6 +348,63 @@ func (b0 MarkTodosCompleted_builder) Build() *MarkTodosCompleted {
 	return m0
 }
 
+type MarkTodosPending struct {
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TodoIds []string               `protobuf:"bytes,1,rep,name=todo_ids,json=todoIds"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *MarkTodosPending) Reset() {
+	*x = MarkTodosPending{}
+	mi := &file_todo_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *MarkTodosPending) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MarkTodosPending) ProtoMessage() {}
+
+func (x *MarkTodosPending) ProtoReflect() protoreflect.Message {
+	mi := &file_todo_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *MarkTodosPending) GetTodoIds() []string {
+	if x != nil {
+		return x.xxx_hidden_TodoIds
+	}
+	return nil
+}
+
+func (x *MarkTodosPending) SetTodoIds(v []string) {
+	x.xxx_hidden_TodoIds = v
+}
+
+type MarkTodosPending_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TodoIds []string
+}
+
+func (b0 MarkTodosPending_builder) Build() *MarkTodosPending {
+	m0 := &MarkTodosPending{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_TodoIds = b.TodoIds
+	return m0
+}
+
 var File_todo_proto protoreflect.FileDescriptor
 
 const file_todo_proto_rawDesc = "" +
@@ -363,14 +420,17 @@ const file_todo_proto_rawDesc = "" +
 	"\x12UpdatePendingTodos\x12Q\n" +
 	"\x15updated_pending_todos\x18\x01 \x03(\v2\x1d.warp.multi_agent.v1.TodoItemR\x13updatedPendingTodos\"/\n" +
 	"\x12MarkTodosCompleted\x12\x19\n" +
+	"\btodo_ids\x18\x01 \x03(\tR\atodoIds\"-\n" +
+	"\x10MarkTodosPending\x12\x19\n" +
 	"\btodo_ids\x18\x01 \x03(\tR\atodoIdsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_todo_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_todo_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_todo_proto_goTypes = []any{
 	(*TodoItem)(nil),           // 0: warp.multi_agent.v1.TodoItem
 	(*CreateTodoList)(nil),     // 1: warp.multi_agent.v1.CreateTodoList
 	(*UpdatePendingTodos)(nil), // 2: warp.multi_agent.v1.UpdatePendingTodos
 	(*MarkTodosCompleted)(nil), // 3: warp.multi_agent.v1.MarkTodosCompleted
+	(*MarkTodosPending)(nil),   // 4: warp.multi_agent.v1.MarkTodosPending
 }
 var file_todo_proto_depIdxs = []int32{
 	0, // 0: warp.multi_agent.v1.CreateTodoList.initial_todos:type_name -> warp.multi_agent.v1.TodoItem
@@ -393,7 +453,7 @@ func file_todo_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_todo_proto_rawDesc), len(file_todo_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
