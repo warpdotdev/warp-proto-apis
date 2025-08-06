@@ -152,6 +152,7 @@ message Message {
       WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
       SuggestNewConversation suggest_new_conversation = 14;
       FileGlobV2 file_glob_v2 = 15;
+      SuggestPrompt suggest_prompt = 16;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -273,6 +274,19 @@ message Message {
       // (not arbitrary JSON, e.g. a string).
       google.protobuf.Struct args = 2;
     }
+
+    // A tool call to suggest a prompt.
+    message SuggestPrompt {
+      oneof display_mode {
+        InlineQueryBanner inline_query_banner = 1;
+      }
+
+      message InlineQueryBanner {
+        string title = 1;
+        string description = 2;
+        string query = 3;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -302,6 +316,7 @@ message Message {
       WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 17;
       SuggestNewConversationResult suggest_new_conversation = 18;
       FileGlobV2Result file_glob_v2 = 19;
+      SuggestPromptResult suggest_prompt = 20;
     }
 
     // Result of a server-side tool call.
@@ -585,6 +600,16 @@ message CallMCPToolResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+message SuggestPromptResult {
+  oneof result {
+    Accepted accepted = 1;
+    Rejected rejected = 2;
+  }
+
+  message Accepted {}
+  message Rejected {}
+}
+
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result types.
 //
@@ -604,5 +629,6 @@ enum ToolType {
   WRITE_TO_LONG_RUNNING_SHELL_COMMAND = 10;
   SUGGEST_NEW_CONVERSATION = 11;
   FILE_GLOB_V2 = 12;
+  SUGGEST_PROMPT = 13;
 }
 
