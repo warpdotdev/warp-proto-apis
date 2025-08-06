@@ -19,12 +19,13 @@ message FileContentLineRange {
 message FileContent {
   string file_path = 1 [ (sensitive) = true ];
   
-  // Old file content - for base64 encoded or text files
-  string content = 2 [ (sensitive) = true ];
+  oneof content {
+    // For string content like base64 and text
+    string string_content = 2 [ (sensitive) = true ];
+    
+    // For binary content like png and pdf
+    bytes binary_content = 4 [ (sensitive) = true ];
+  }
 
   FileContentLineRange line_range = 3;
-
-  // New file content - for all file types
-  string mime_type = 4;
-  bytes binary_content = 5;
 }
