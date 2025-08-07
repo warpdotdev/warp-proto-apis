@@ -195,6 +195,11 @@ message Request {
     // If `false` or unset, the agent will use plain text code block formatting in its responses.
     bool supports_linked_code_blocks = 13;
 
+    // If 'true', the client supports the StartedChildTask message.
+    // If 'false', the server needs to use the legacy ServerEvent.StartedChildTask, since the
+    // client can't deserialize and pass back up the new message.
+    bool supports_started_child_task_message = 14;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
