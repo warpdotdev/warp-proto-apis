@@ -143,9 +143,6 @@ message Request {
         FilesChanged files_changed = 2;
         CommandRun command_run = 3;
       }
-
-      message FilesChanged {}
-      message CommandRun {}
     }
   }
 

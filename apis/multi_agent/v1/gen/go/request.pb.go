@@ -2959,18 +2959,18 @@ func (x *Request_Input_AutoSuggestPrompt) GetAttachments() []*Attachment {
 	return nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) GetFilesChanged() *Request_Input_AutoSuggestPrompt_FilesChanged {
+func (x *Request_Input_AutoSuggestPrompt) GetFilesChanged() *FilesChanged {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged_); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged); ok {
 			return x.FilesChanged
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) GetCommandRun() *Request_Input_AutoSuggestPrompt_CommandRun {
+func (x *Request_Input_AutoSuggestPrompt) GetCommandRun() *CommandRun {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun_); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun); ok {
 			return x.CommandRun
 		}
 	}
@@ -2981,20 +2981,20 @@ func (x *Request_Input_AutoSuggestPrompt) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-func (x *Request_Input_AutoSuggestPrompt) SetFilesChanged(v *Request_Input_AutoSuggestPrompt_FilesChanged) {
+func (x *Request_Input_AutoSuggestPrompt) SetFilesChanged(v *FilesChanged) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_FilesChanged_{v}
+	x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_FilesChanged{v}
 }
 
-func (x *Request_Input_AutoSuggestPrompt) SetCommandRun(v *Request_Input_AutoSuggestPrompt_CommandRun) {
+func (x *Request_Input_AutoSuggestPrompt) SetCommandRun(v *CommandRun) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_CommandRun_{v}
+	x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_CommandRun{v}
 }
 
 func (x *Request_Input_AutoSuggestPrompt) HasTrigger() bool {
@@ -3008,7 +3008,7 @@ func (x *Request_Input_AutoSuggestPrompt) HasFilesChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged_)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged)
 	return ok
 }
 
@@ -3016,7 +3016,7 @@ func (x *Request_Input_AutoSuggestPrompt) HasCommandRun() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun_)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun)
 	return ok
 }
 
@@ -3025,13 +3025,13 @@ func (x *Request_Input_AutoSuggestPrompt) ClearTrigger() {
 }
 
 func (x *Request_Input_AutoSuggestPrompt) ClearFilesChanged() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged_); ok {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
 func (x *Request_Input_AutoSuggestPrompt) ClearCommandRun() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun_); ok {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
@@ -3045,9 +3045,9 @@ func (x *Request_Input_AutoSuggestPrompt) WhichTrigger() case_Request_Input_Auto
 		return Request_Input_AutoSuggestPrompt_Trigger_not_set_case
 	}
 	switch x.xxx_hidden_Trigger.(type) {
-	case *request_Input_AutoSuggestPrompt_FilesChanged_:
+	case *request_Input_AutoSuggestPrompt_FilesChanged:
 		return Request_Input_AutoSuggestPrompt_FilesChanged_case
-	case *request_Input_AutoSuggestPrompt_CommandRun_:
+	case *request_Input_AutoSuggestPrompt_CommandRun:
 		return Request_Input_AutoSuggestPrompt_CommandRun_case
 	default:
 		return Request_Input_AutoSuggestPrompt_Trigger_not_set_case
@@ -3059,8 +3059,8 @@ type Request_Input_AutoSuggestPrompt_builder struct {
 
 	Attachments []*Attachment
 	// Fields of oneof xxx_hidden_Trigger:
-	FilesChanged *Request_Input_AutoSuggestPrompt_FilesChanged
-	CommandRun   *Request_Input_AutoSuggestPrompt_CommandRun
+	FilesChanged *FilesChanged
+	CommandRun   *CommandRun
 	// -- end of xxx_hidden_Trigger
 }
 
@@ -3070,10 +3070,10 @@ func (b0 Request_Input_AutoSuggestPrompt_builder) Build() *Request_Input_AutoSug
 	_, _ = b, x
 	x.xxx_hidden_Attachments = &b.Attachments
 	if b.FilesChanged != nil {
-		x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_FilesChanged_{b.FilesChanged}
+		x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_FilesChanged{b.FilesChanged}
 	}
 	if b.CommandRun != nil {
-		x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_CommandRun_{b.CommandRun}
+		x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_CommandRun{b.CommandRun}
 	}
 	return m0
 }
@@ -3092,17 +3092,17 @@ type isRequest_Input_AutoSuggestPrompt_Trigger interface {
 	isRequest_Input_AutoSuggestPrompt_Trigger()
 }
 
-type request_Input_AutoSuggestPrompt_FilesChanged_ struct {
-	FilesChanged *Request_Input_AutoSuggestPrompt_FilesChanged `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
+type request_Input_AutoSuggestPrompt_FilesChanged struct {
+	FilesChanged *FilesChanged `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
-type request_Input_AutoSuggestPrompt_CommandRun_ struct {
-	CommandRun *Request_Input_AutoSuggestPrompt_CommandRun `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
+type request_Input_AutoSuggestPrompt_CommandRun struct {
+	CommandRun *CommandRun `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
-func (*request_Input_AutoSuggestPrompt_FilesChanged_) isRequest_Input_AutoSuggestPrompt_Trigger() {}
+func (*request_Input_AutoSuggestPrompt_FilesChanged) isRequest_Input_AutoSuggestPrompt_Trigger() {}
 
-func (*request_Input_AutoSuggestPrompt_CommandRun_) isRequest_Input_AutoSuggestPrompt_Trigger() {}
+func (*request_Input_AutoSuggestPrompt_CommandRun) isRequest_Input_AutoSuggestPrompt_Trigger() {}
 
 type Request_Input_UserInputs_UserInput struct {
 	state            protoimpl.MessageState                     `protogen:"opaque.v1"`
@@ -3604,92 +3604,6 @@ func (b0 Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder)
 	return m0
 }
 
-type Request_Input_AutoSuggestPrompt_FilesChanged struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_AutoSuggestPrompt_FilesChanged) Reset() {
-	*x = Request_Input_AutoSuggestPrompt_FilesChanged{}
-	mi := &file_request_proto_msgTypes[23]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_AutoSuggestPrompt_FilesChanged) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_AutoSuggestPrompt_FilesChanged) ProtoMessage() {}
-
-func (x *Request_Input_AutoSuggestPrompt_FilesChanged) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[23]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_AutoSuggestPrompt_FilesChanged_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_AutoSuggestPrompt_FilesChanged_builder) Build() *Request_Input_AutoSuggestPrompt_FilesChanged {
-	m0 := &Request_Input_AutoSuggestPrompt_FilesChanged{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type Request_Input_AutoSuggestPrompt_CommandRun struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_AutoSuggestPrompt_CommandRun) Reset() {
-	*x = Request_Input_AutoSuggestPrompt_CommandRun{}
-	mi := &file_request_proto_msgTypes[24]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_AutoSuggestPrompt_CommandRun) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_AutoSuggestPrompt_CommandRun) ProtoMessage() {}
-
-func (x *Request_Input_AutoSuggestPrompt_CommandRun) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[24]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_AutoSuggestPrompt_CommandRun_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_AutoSuggestPrompt_CommandRun_builder) Build() *Request_Input_AutoSuggestPrompt_CommandRun {
-	m0 := &Request_Input_AutoSuggestPrompt_CommandRun{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
 type Request_Settings_ModelConfig struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Base        *string                `protobuf:"bytes,1,opt,name=base"`
@@ -3703,7 +3617,7 @@ type Request_Settings_ModelConfig struct {
 
 func (x *Request_Settings_ModelConfig) Reset() {
 	*x = Request_Settings_ModelConfig{}
-	mi := &file_request_proto_msgTypes[26]
+	mi := &file_request_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3715,7 +3629,7 @@ func (x *Request_Settings_ModelConfig) String() string {
 func (*Request_Settings_ModelConfig) ProtoMessage() {}
 
 func (x *Request_Settings_ModelConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[26]
+	mi := &file_request_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3851,7 +3765,7 @@ type Request_MCPContext_MCPResource struct {
 
 func (x *Request_MCPContext_MCPResource) Reset() {
 	*x = Request_MCPContext_MCPResource{}
-	mi := &file_request_proto_msgTypes[27]
+	mi := &file_request_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3863,7 +3777,7 @@ func (x *Request_MCPContext_MCPResource) String() string {
 func (*Request_MCPContext_MCPResource) ProtoMessage() {}
 
 func (x *Request_MCPContext_MCPResource) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[27]
+	mi := &file_request_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4027,7 +3941,7 @@ type Request_MCPContext_MCPTool struct {
 
 func (x *Request_MCPContext_MCPTool) Reset() {
 	*x = Request_MCPContext_MCPTool{}
-	mi := &file_request_proto_msgTypes[28]
+	mi := &file_request_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4039,7 +3953,7 @@ func (x *Request_MCPContext_MCPTool) String() string {
 func (*Request_MCPContext_MCPTool) ProtoMessage() {}
 
 func (x *Request_MCPContext_MCPTool) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[28]
+	mi := &file_request_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4157,7 +4071,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xcd1\n" +
+	"task.proto\"\xef0\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -4168,7 +4082,7 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfc\x1f\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\x9e\x1f\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -4238,15 +4152,12 @@ const file_request_proto_rawDesc = "" +
 	"\x11AutoCodeDiffQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x14\n" +
 	"\x12ResumeConversation\x1a\x12\n" +
-	"\x10InitProjectRules\x1a\xcd\x02\n" +
+	"\x10InitProjectRules\x1a\xef\x01\n" +
 	"\x11AutoSuggestPrompt\x12A\n" +
-	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12h\n" +
-	"\rfiles_changed\x18\x02 \x01(\v2A.warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.FilesChangedH\x00R\ffilesChanged\x12b\n" +
-	"\vcommand_run\x18\x03 \x01(\v2?.warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.CommandRunH\x00R\n" +
-	"commandRun\x1a\x0e\n" +
-	"\fFilesChanged\x1a\f\n" +
-	"\n" +
-	"CommandRunB\t\n" +
+	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12H\n" +
+	"\rfiles_changed\x18\x02 \x01(\v2!.warp.multi_agent.v1.FilesChangedH\x00R\ffilesChanged\x12B\n" +
+	"\vcommand_run\x18\x03 \x01(\v2\x1f.warp.multi_agent.v1.CommandRunH\x00R\n" +
+	"commandRunB\t\n" +
 	"\atriggerB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
@@ -4290,7 +4201,7 @@ const file_request_proto_rawDesc = "" +
 	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12:\n" +
 	"\finput_schema\x18\x03 \x01(\v2\x17.google.protobuf.StructR\vinputSchemaB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
+var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_request_proto_goTypes = []any{
 	(*Request)(nil),                                                        // 0: warp.multi_agent.v1.Request
 	(*Request_TaskContext)(nil),                                            // 1: warp.multi_agent.v1.Request.TaskContext
@@ -4315,30 +4226,30 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),            // 20: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil),  // 21: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	(*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff)(nil), // 22: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	(*Request_Input_AutoSuggestPrompt_FilesChanged)(nil),                   // 23: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.FilesChanged
-	(*Request_Input_AutoSuggestPrompt_CommandRun)(nil),                     // 24: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.CommandRun
-	nil,                                          // 25: warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	(*Request_Settings_ModelConfig)(nil),         // 26: warp.multi_agent.v1.Request.Settings.ModelConfig
-	(*Request_MCPContext_MCPResource)(nil),       // 27: warp.multi_agent.v1.Request.MCPContext.MCPResource
-	(*Request_MCPContext_MCPTool)(nil),           // 28: warp.multi_agent.v1.Request.MCPContext.MCPTool
-	(*Suggestions)(nil),                          // 29: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                 // 30: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                         // 31: warp.multi_agent.v1.InputContext
-	(ToolType)(0),                                // 32: warp.multi_agent.v1.ToolType
-	(*RunShellCommandResult)(nil),                // 33: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                      // 34: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                 // 35: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                 // 36: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                    // 37: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),              // 38: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                           // 39: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                       // 40: warp.multi_agent.v1.FileGlobResult
-	(*ReadMCPResourceResult)(nil),                // 41: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),                    // 42: warp.multi_agent.v1.CallMCPToolResult
-	(*WriteToLongRunningShellCommandResult)(nil), // 43: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),         // 44: warp.multi_agent.v1.SuggestNewConversationResult
-	(*FileGlobV2Result)(nil),                     // 45: warp.multi_agent.v1.FileGlobV2Result
-	(*Attachment)(nil),                           // 46: warp.multi_agent.v1.Attachment
+	nil,                                          // 23: warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	(*Request_Settings_ModelConfig)(nil),         // 24: warp.multi_agent.v1.Request.Settings.ModelConfig
+	(*Request_MCPContext_MCPResource)(nil),       // 25: warp.multi_agent.v1.Request.MCPContext.MCPResource
+	(*Request_MCPContext_MCPTool)(nil),           // 26: warp.multi_agent.v1.Request.MCPContext.MCPTool
+	(*Suggestions)(nil),                          // 27: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                 // 28: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                         // 29: warp.multi_agent.v1.InputContext
+	(ToolType)(0),                                // 30: warp.multi_agent.v1.ToolType
+	(*RunShellCommandResult)(nil),                // 31: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                      // 32: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                 // 33: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                 // 34: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                    // 35: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),              // 36: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                           // 37: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                       // 38: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),                // 39: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),                    // 40: warp.multi_agent.v1.CallMCPToolResult
+	(*WriteToLongRunningShellCommandResult)(nil), // 41: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),         // 42: warp.multi_agent.v1.SuggestNewConversationResult
+	(*FileGlobV2Result)(nil),                     // 43: warp.multi_agent.v1.FileGlobV2Result
+	(*Attachment)(nil),                           // 44: warp.multi_agent.v1.Attachment
+	(*FilesChanged)(nil),                         // 45: warp.multi_agent.v1.FilesChanged
+	(*CommandRun)(nil),                           // 46: warp.multi_agent.v1.CommandRun
 	(*structpb.Value)(nil),                       // 47: google.protobuf.Value
 	(*structpb.Struct)(nil),                      // 48: google.protobuf.Struct
 }
@@ -4347,10 +4258,10 @@ var file_request_proto_depIdxs = []int32{
 	2,  // 1: warp.multi_agent.v1.Request.input:type_name -> warp.multi_agent.v1.Request.Input
 	4,  // 2: warp.multi_agent.v1.Request.settings:type_name -> warp.multi_agent.v1.Request.Settings
 	3,  // 3: warp.multi_agent.v1.Request.metadata:type_name -> warp.multi_agent.v1.Request.Metadata
-	29, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	27, // 4: warp.multi_agent.v1.Request.existing_suggestions:type_name -> warp.multi_agent.v1.Suggestions
 	5,  // 5: warp.multi_agent.v1.Request.mcp_context:type_name -> warp.multi_agent.v1.Request.MCPContext
-	30, // 6: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
-	31, // 7: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
+	28, // 6: warp.multi_agent.v1.Request.TaskContext.tasks:type_name -> warp.multi_agent.v1.Task
+	29, // 7: warp.multi_agent.v1.Request.Input.context:type_name -> warp.multi_agent.v1.InputContext
 	7,  // 8: warp.multi_agent.v1.Request.Input.user_inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs
 	9,  // 9: warp.multi_agent.v1.Request.Input.query_with_canned_response:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
 	10, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
@@ -4359,37 +4270,37 @@ var file_request_proto_depIdxs = []int32{
 	13, // 13: warp.multi_agent.v1.Request.Input.auto_suggest_prompt:type_name -> warp.multi_agent.v1.Request.Input.AutoSuggestPrompt
 	6,  // 14: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 15: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	25, // 16: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
-	26, // 17: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
-	32, // 18: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
-	27, // 19: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	28, // 20: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	23, // 16: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
+	24, // 17: warp.multi_agent.v1.Request.Settings.model_config:type_name -> warp.multi_agent.v1.Request.Settings.ModelConfig
+	30, // 18: warp.multi_agent.v1.Request.Settings.supported_tools:type_name -> warp.multi_agent.v1.ToolType
+	25, // 19: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	26, // 20: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	14, // 21: warp.multi_agent.v1.Request.Input.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	15, // 22: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	33, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	34, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	35, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	36, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	37, // 27: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	38, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	39, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	40, // 30: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	31, // 23: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	32, // 24: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	33, // 25: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	34, // 26: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	35, // 27: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	36, // 28: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	37, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	38, // 30: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
 	16, // 31: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	41, // 32: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	42, // 33: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	43, // 34: warp.multi_agent.v1.Request.Input.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	44, // 35: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
-	45, // 36: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
+	39, // 32: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	40, // 33: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	41, // 34: warp.multi_agent.v1.Request.Input.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	42, // 35: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
+	43, // 36: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
 	17, // 37: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	18, // 38: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
 	19, // 39: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
 	20, // 40: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	21, // 41: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	22, // 42: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	46, // 43: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	23, // 44: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.FilesChanged
-	24, // 45: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.CommandRun
-	46, // 46: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	44, // 43: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	45, // 44: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.FilesChanged
+	46, // 45: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.CommandRun
+	44, // 46: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
 	6,  // 47: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 48: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	6,  // 49: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
@@ -4447,8 +4358,8 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
 	file_request_proto_msgTypes[13].OneofWrappers = []any{
-		(*request_Input_AutoSuggestPrompt_FilesChanged_)(nil),
-		(*request_Input_AutoSuggestPrompt_CommandRun_)(nil),
+		(*request_Input_AutoSuggestPrompt_FilesChanged)(nil),
+		(*request_Input_AutoSuggestPrompt_CommandRun)(nil),
 	}
 	file_request_proto_msgTypes[15].OneofWrappers = []any{
 		(*request_Input_UserInputs_UserInput_UserQuery)(nil),
@@ -4460,7 +4371,7 @@ func file_request_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   29,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

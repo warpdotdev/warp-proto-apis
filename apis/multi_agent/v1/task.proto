@@ -13,6 +13,7 @@ import "attachment.proto";
 import "file_content.proto";
 import "options.proto";
 import "todo.proto";
+import "suggestions.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -112,6 +113,7 @@ message Message {
     oneof type {
       AutoCodeDiff auto_code_diff = 1;
       ResumeConversation resume_conversation = 3;
+      AutoSuggestPrompt auto_suggest_prompt = 4;
     }
 
     InputContext context = 2;
@@ -122,6 +124,15 @@ message Message {
   }
 
   message ResumeConversation {}
+
+  message AutoSuggestPrompt {
+    repeated Attachment attachments = 1;
+
+    oneof trigger {
+      FilesChanged files_changed = 2;
+      CommandRun command_run = 3;
+    }
+  }
 
   // Agent output message type
   message AgentOutput {

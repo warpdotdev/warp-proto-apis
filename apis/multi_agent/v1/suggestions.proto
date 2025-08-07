@@ -24,3 +24,7 @@ message SuggestedAgentModeWorkflow {
   string prompt = 2;
   string logging_id = 3;
 }
+
+// Triggers for auto-suggest prompt.
+message FilesChanged {}
+message CommandRun {}

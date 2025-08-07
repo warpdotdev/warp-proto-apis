@@ -386,6 +386,93 @@ func (b0 SuggestedAgentModeWorkflow_builder) Build() *SuggestedAgentModeWorkflow
 	return m0
 }
 
+// Triggers for auto-suggest prompt.
+type FilesChanged struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FilesChanged) Reset() {
+	*x = FilesChanged{}
+	mi := &file_suggestions_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FilesChanged) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FilesChanged) ProtoMessage() {}
+
+func (x *FilesChanged) ProtoReflect() protoreflect.Message {
+	mi := &file_suggestions_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type FilesChanged_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 FilesChanged_builder) Build() *FilesChanged {
+	m0 := &FilesChanged{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type CommandRun struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CommandRun) Reset() {
+	*x = CommandRun{}
+	mi := &file_suggestions_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CommandRun) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CommandRun) ProtoMessage() {}
+
+func (x *CommandRun) ProtoReflect() protoreflect.Message {
+	mi := &file_suggestions_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type CommandRun_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 CommandRun_builder) Build() *CommandRun {
+	m0 := &CommandRun{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 var File_suggestions_proto protoreflect.FileDescriptor
 
 const file_suggestions_proto_rawDesc = "" +
@@ -403,13 +490,18 @@ const file_suggestions_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06prompt\x18\x02 \x01(\tR\x06prompt\x12\x1d\n" +
 	"\n" +
-	"logging_id\x18\x03 \x01(\tR\tloggingIdB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"logging_id\x18\x03 \x01(\tR\tloggingId\"\x0e\n" +
+	"\fFilesChanged\"\f\n" +
+	"\n" +
+	"CommandRunB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_suggestions_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_suggestions_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_suggestions_proto_goTypes = []any{
 	(*Suggestions)(nil),                // 0: warp.multi_agent.v1.Suggestions
 	(*SuggestedRule)(nil),              // 1: warp.multi_agent.v1.SuggestedRule
 	(*SuggestedAgentModeWorkflow)(nil), // 2: warp.multi_agent.v1.SuggestedAgentModeWorkflow
+	(*FilesChanged)(nil),               // 3: warp.multi_agent.v1.FilesChanged
+	(*CommandRun)(nil),                 // 4: warp.multi_agent.v1.CommandRun
 }
 var file_suggestions_proto_depIdxs = []int32{
 	1, // 0: warp.multi_agent.v1.Suggestions.rules:type_name -> warp.multi_agent.v1.SuggestedRule
@@ -432,7 +524,7 @@ func file_suggestions_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_suggestions_proto_rawDesc), len(file_suggestions_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
