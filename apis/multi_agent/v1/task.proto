@@ -92,6 +92,7 @@ message Message {
     ServerEvent server_event = 6;
     SystemQuery system_query = 9;
     UpdateTodos update_todos = 10;
+    StartedChildTask started_child_task = 12;
   }
 
   // User query message type
@@ -325,6 +326,11 @@ message Message {
       UpdatePendingTodos update_pending_todos = 2;
       MarkTodosCompleted mark_todos_completed = 3;
     }
+  }
+
+  // Message for starting child tasks.
+  message StartedChildTask {
+    repeated string task_ids = 1;
   }
 }
 
