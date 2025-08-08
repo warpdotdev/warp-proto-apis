@@ -95,6 +95,7 @@ message Request {
         WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 13;
         SuggestNewConversationResult suggest_new_conversation = 14;
         FileGlobV2Result file_glob_v2 = 15;
+        SuggestPromptResult suggest_prompt = 16;
       }
 
       // Generic tool call result for representing a user-requested refinement
