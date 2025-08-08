@@ -15,17 +15,29 @@ message FileContentLineRange {
   uint32 end = 2;
 }
   
-// A representation of raw content within a file.
+// A representation of text content within a file.
 message FileContent {
   string file_path = 1 [ (sensitive) = true ];
-  
-  oneof content {
-    // For string content like base64 and text
-    string string_content = 2 [ (sensitive) = true ];
-    
-    // For binary content like png and pdf
-    bytes binary_content = 4 [ (sensitive) = true ];
+  string content = 2 [ (sensitive) = true ];
+  FileContentLineRange line_range = 3;
+}
+
+
+// A representation of binary content within a file.
+message FlexibleFileContent {
+  string file_path = 1[ (sensitive) = true ];
+
+  message TextFileContent {
+    string text = 2 [ (sensitive) = true ];
+    FileContentLineRange line_range = 3;
   }
 
-  FileContentLineRange line_range = 3;
+  message BinaryFileContent {
+    bytes data = 4;
+  }
+
+  oneof content {
+    BinaryFileContent binary_content = 5;
+    TextFileContent text_content = 6;
+  }
 }

@@ -8614,10 +8614,11 @@ func (b0 Message_ToolCallResult_RefineResult_builder) Build() *Message_ToolCallR
 }
 
 type ReadFilesResult_Success struct {
-	state            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Files *[]*FileContent        `protobuf:"bytes,1,rep,name=files"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                    protoimpl.MessageState  `protogen:"opaque.v1"`
+	xxx_hidden_Files         *[]*FileContent         `protobuf:"bytes,1,rep,name=files"`
+	xxx_hidden_FlexibleFiles *[]*FlexibleFileContent `protobuf:"bytes,2,rep,name=flexible_files,json=flexibleFiles"`
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ReadFilesResult_Success) Reset() {
@@ -8645,6 +8646,7 @@ func (x *ReadFilesResult_Success) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *ReadFilesResult_Success) GetFiles() []*FileContent {
 	if x != nil {
 		if x.xxx_hidden_Files != nil {
@@ -8654,14 +8656,30 @@ func (x *ReadFilesResult_Success) GetFiles() []*FileContent {
 	return nil
 }
 
+func (x *ReadFilesResult_Success) GetFlexibleFiles() []*FlexibleFileContent {
+	if x != nil {
+		if x.xxx_hidden_FlexibleFiles != nil {
+			return *x.xxx_hidden_FlexibleFiles
+		}
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in task.proto.
 func (x *ReadFilesResult_Success) SetFiles(v []*FileContent) {
 	x.xxx_hidden_Files = &v
+}
+
+func (x *ReadFilesResult_Success) SetFlexibleFiles(v []*FlexibleFileContent) {
+	x.xxx_hidden_FlexibleFiles = &v
 }
 
 type ReadFilesResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Files []*FileContent
+	// Deprecated: Marked as deprecated in task.proto.
+	Files         []*FileContent
+	FlexibleFiles []*FlexibleFileContent
 }
 
 func (b0 ReadFilesResult_Success_builder) Build() *ReadFilesResult_Success {
@@ -8669,6 +8687,7 @@ func (b0 ReadFilesResult_Success_builder) Build() *ReadFilesResult_Success {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Files = &b.Files
+	x.xxx_hidden_FlexibleFiles = &b.FlexibleFiles
 	return m0
 }
 
@@ -11140,12 +11159,13 @@ const file_task_proto_rawDesc = "" +
 	"\x10command_finished\x18\x05 \x01(\v2).warp.multi_agent.v1.ShellCommandFinishedH\x00R\x0fcommandFinished\x12\x1e\n" +
 	"\x06output\x18\x01 \x01(\tB\x06\x80\xb5\x18\x01\x18\x01R\x06output\x12\x1f\n" +
 	"\texit_code\x18\x02 \x01(\x05B\x02\x18\x01R\bexitCodeB\b\n" +
-	"\x06result\"\x95\x02\n" +
+	"\x06result\"\xeb\x02\n" +
 	"\x0fReadFilesResult\x12H\n" +
 	"\asuccess\x18\x01 \x01(\v2,.warp.multi_agent.v1.ReadFilesResult.SuccessH\x00R\asuccess\x12B\n" +
-	"\x05error\x18\x02 \x01(\v2*.warp.multi_agent.v1.ReadFilesResult.ErrorH\x00R\x05error\x1aA\n" +
-	"\aSuccess\x126\n" +
-	"\x05files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentR\x05files\x1a'\n" +
+	"\x05error\x18\x02 \x01(\v2*.warp.multi_agent.v1.ReadFilesResult.ErrorH\x00R\x05error\x1a\x96\x01\n" +
+	"\aSuccess\x12:\n" +
+	"\x05files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentB\x02\x18\x01R\x05files\x12O\n" +
+	"\x0eflexible_files\x18\x02 \x03(\v2(.warp.multi_agent.v1.FlexibleFileContentR\rflexibleFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"\xa4\x02\n" +
@@ -11378,6 +11398,7 @@ var file_task_proto_goTypes = []any{
 	(*structpb.Struct)(nil),                                 // 92: google.protobuf.Struct
 	(*FileContentLineRange)(nil),                            // 93: warp.multi_agent.v1.FileContentLineRange
 	(*FileContent)(nil),                                     // 94: warp.multi_agent.v1.FileContent
+	(*FlexibleFileContent)(nil),                             // 95: warp.multi_agent.v1.FlexibleFileContent
 }
 var file_task_proto_depIdxs = []int32{
 	19,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -11473,23 +11494,24 @@ var file_task_proto_depIdxs = []int32{
 	93,  // 90: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	26,  // 91: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	94,  // 92: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	94,  // 93: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	94,  // 94: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	62,  // 95: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	94,  // 96: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	66,  // 97: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	67,  // 98: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	72,  // 99: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	13,  // 100: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	81,  // 101: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	82,  // 102: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	83,  // 103: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	13,  // 104: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	105, // [105:105] is the sub-list for method output_type
-	105, // [105:105] is the sub-list for method input_type
-	105, // [105:105] is the sub-list for extension type_name
-	105, // [105:105] is the sub-list for extension extendee
-	0,   // [0:105] is the sub-list for field type_name
+	95,  // 93: warp.multi_agent.v1.ReadFilesResult.Success.flexible_files:type_name -> warp.multi_agent.v1.FlexibleFileContent
+	94,  // 94: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	94,  // 95: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	62,  // 96: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	94,  // 97: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	66,  // 98: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	67,  // 99: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	72,  // 100: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	13,  // 101: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	81,  // 102: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	82,  // 103: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	83,  // 104: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	13,  // 105: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	106, // [106:106] is the sub-list for method output_type
+	106, // [106:106] is the sub-list for method input_type
+	106, // [106:106] is the sub-list for extension type_name
+	106, // [106:106] is the sub-list for extension extendee
+	0,   // [0:106] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }

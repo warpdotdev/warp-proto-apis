@@ -363,7 +363,10 @@ message ReadFilesResult {
     Error error = 2;
   }
 
-  message Success { repeated FileContent files = 1; }
+  message Success { 
+    repeated FileContent files = 1 [ deprecated = true ]; 
+    repeated FlexibleFileContent flexible_files = 2; 
+  }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
