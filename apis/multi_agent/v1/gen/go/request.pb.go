@@ -405,10 +405,10 @@ func (x *Request_Input) GetInitProjectRules() *Request_Input_InitProjectRules {
 	return nil
 }
 
-func (x *Request_Input) GetAutoSuggestPrompt() *Request_Input_AutoSuggestPrompt {
+func (x *Request_Input) GetTriggerSuggestPrompt() *Request_Input_TriggerSuggestPrompt {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_AutoSuggestPrompt_); ok {
-			return x.AutoSuggestPrompt
+		if x, ok := x.xxx_hidden_Type.(*request_Input_TriggerSuggestPrompt_); ok {
+			return x.TriggerSuggestPrompt
 		}
 	}
 	return nil
@@ -478,12 +478,12 @@ func (x *Request_Input) SetInitProjectRules(v *Request_Input_InitProjectRules) {
 	x.xxx_hidden_Type = &request_Input_InitProjectRules_{v}
 }
 
-func (x *Request_Input) SetAutoSuggestPrompt(v *Request_Input_AutoSuggestPrompt) {
+func (x *Request_Input) SetTriggerSuggestPrompt(v *Request_Input_TriggerSuggestPrompt) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_AutoSuggestPrompt_{v}
+	x.xxx_hidden_Type = &request_Input_TriggerSuggestPrompt_{v}
 }
 
 // Deprecated: Marked as deprecated in request.proto.
@@ -558,11 +558,11 @@ func (x *Request_Input) HasInitProjectRules() bool {
 	return ok
 }
 
-func (x *Request_Input) HasAutoSuggestPrompt() bool {
+func (x *Request_Input) HasTriggerSuggestPrompt() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_AutoSuggestPrompt_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_TriggerSuggestPrompt_)
 	return ok
 }
 
@@ -622,8 +622,8 @@ func (x *Request_Input) ClearInitProjectRules() {
 	}
 }
 
-func (x *Request_Input) ClearAutoSuggestPrompt() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_AutoSuggestPrompt_); ok {
+func (x *Request_Input) ClearTriggerSuggestPrompt() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_TriggerSuggestPrompt_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -648,7 +648,7 @@ const Request_Input_QueryWithCannedResponse_case case_Request_Input_Type = 4
 const Request_Input_AutoCodeDiffQuery_case case_Request_Input_Type = 5
 const Request_Input_ResumeConversation_case case_Request_Input_Type = 7
 const Request_Input_InitProjectRules_case case_Request_Input_Type = 8
-const Request_Input_AutoSuggestPrompt_case case_Request_Input_Type = 9
+const Request_Input_TriggerSuggestPrompt_case case_Request_Input_Type = 9
 const Request_Input_UserQuery_case case_Request_Input_Type = 2
 const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
 
@@ -667,8 +667,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_ResumeConversation_case
 	case *request_Input_InitProjectRules_:
 		return Request_Input_InitProjectRules_case
-	case *request_Input_AutoSuggestPrompt_:
-		return Request_Input_AutoSuggestPrompt_case
+	case *request_Input_TriggerSuggestPrompt_:
+		return Request_Input_TriggerSuggestPrompt_case
 	case *request_Input_UserQuery_:
 		return Request_Input_UserQuery_case
 	case *request_Input_ToolCallResult_:
@@ -690,7 +690,7 @@ type Request_Input_builder struct {
 	AutoCodeDiffQuery       *Request_Input_AutoCodeDiffQuery
 	ResumeConversation      *Request_Input_ResumeConversation
 	InitProjectRules        *Request_Input_InitProjectRules
-	AutoSuggestPrompt       *Request_Input_AutoSuggestPrompt
+	TriggerSuggestPrompt    *Request_Input_TriggerSuggestPrompt
 	// Deprecated: Marked as deprecated in request.proto.
 	UserQuery *Request_Input_UserQuery
 	// Deprecated: Marked as deprecated in request.proto.
@@ -718,8 +718,8 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	if b.InitProjectRules != nil {
 		x.xxx_hidden_Type = &request_Input_InitProjectRules_{b.InitProjectRules}
 	}
-	if b.AutoSuggestPrompt != nil {
-		x.xxx_hidden_Type = &request_Input_AutoSuggestPrompt_{b.AutoSuggestPrompt}
+	if b.TriggerSuggestPrompt != nil {
+		x.xxx_hidden_Type = &request_Input_TriggerSuggestPrompt_{b.TriggerSuggestPrompt}
 	}
 	if b.UserQuery != nil {
 		x.xxx_hidden_Type = &request_Input_UserQuery_{b.UserQuery}
@@ -764,8 +764,8 @@ type request_Input_InitProjectRules_ struct {
 	InitProjectRules *Request_Input_InitProjectRules `protobuf:"bytes,8,opt,name=init_project_rules,json=initProjectRules,oneof"`
 }
 
-type request_Input_AutoSuggestPrompt_ struct {
-	AutoSuggestPrompt *Request_Input_AutoSuggestPrompt `protobuf:"bytes,9,opt,name=auto_suggest_prompt,json=autoSuggestPrompt,oneof"`
+type request_Input_TriggerSuggestPrompt_ struct {
+	TriggerSuggestPrompt *Request_Input_TriggerSuggestPrompt `protobuf:"bytes,9,opt,name=trigger_suggest_prompt,json=triggerSuggestPrompt,oneof"`
 }
 
 type request_Input_UserQuery_ struct {
@@ -788,7 +788,7 @@ func (*request_Input_ResumeConversation_) isRequest_Input_Type() {}
 
 func (*request_Input_InitProjectRules_) isRequest_Input_Type() {}
 
-func (*request_Input_AutoSuggestPrompt_) isRequest_Input_Type() {}
+func (*request_Input_TriggerSuggestPrompt_) isRequest_Input_Type() {}
 
 func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 
@@ -909,7 +909,7 @@ type Request_Settings struct {
 	xxx_hidden_SupportsTodosUi                    bool                          `protobuf:"varint,12,opt,name=supports_todos_ui,json=supportsTodosUi"`
 	xxx_hidden_SupportsLinkedCodeBlocks           bool                          `protobuf:"varint,13,opt,name=supports_linked_code_blocks,json=supportsLinkedCodeBlocks"`
 	xxx_hidden_SupportsStartedChildTaskMessage    bool                          `protobuf:"varint,14,opt,name=supports_started_child_task_message,json=supportsStartedChildTaskMessage"`
-	xxx_hidden_SupportsAutoSuggestPrompt          bool                          `protobuf:"varint,15,opt,name=supports_auto_suggest_prompt,json=supportsAutoSuggestPrompt"`
+	xxx_hidden_SupportsSuggestPrompt              bool                          `protobuf:"varint,15,opt,name=supports_suggest_prompt,json=supportsSuggestPrompt"`
 	XXX_raceDetectHookData                        protoimpl.RaceDetectHookData
 	XXX_presence                                  [1]uint32
 	unknownFields                                 protoimpl.UnknownFields
@@ -1039,9 +1039,9 @@ func (x *Request_Settings) GetSupportsStartedChildTaskMessage() bool {
 	return false
 }
 
-func (x *Request_Settings) GetSupportsAutoSuggestPrompt() bool {
+func (x *Request_Settings) GetSupportsSuggestPrompt() bool {
 	if x != nil {
-		return x.xxx_hidden_SupportsAutoSuggestPrompt
+		return x.xxx_hidden_SupportsSuggestPrompt
 	}
 	return false
 }
@@ -1114,8 +1114,8 @@ func (x *Request_Settings) SetSupportsStartedChildTaskMessage(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 15)
 }
 
-func (x *Request_Settings) SetSupportsAutoSuggestPrompt(v bool) {
-	x.xxx_hidden_SupportsAutoSuggestPrompt = v
+func (x *Request_Settings) SetSupportsSuggestPrompt(v bool) {
+	x.xxx_hidden_SupportsSuggestPrompt = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 15)
 }
 
@@ -1210,7 +1210,7 @@ func (x *Request_Settings) HasSupportsStartedChildTaskMessage() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 13)
 }
 
-func (x *Request_Settings) HasSupportsAutoSuggestPrompt() bool {
+func (x *Request_Settings) HasSupportsSuggestPrompt() bool {
 	if x == nil {
 		return false
 	}
@@ -1281,9 +1281,9 @@ func (x *Request_Settings) ClearSupportsStartedChildTaskMessage() {
 	x.xxx_hidden_SupportsStartedChildTaskMessage = false
 }
 
-func (x *Request_Settings) ClearSupportsAutoSuggestPrompt() {
+func (x *Request_Settings) ClearSupportsSuggestPrompt() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 14)
-	x.xxx_hidden_SupportsAutoSuggestPrompt = false
+	x.xxx_hidden_SupportsSuggestPrompt = false
 }
 
 type Request_Settings_builder struct {
@@ -1329,8 +1329,8 @@ type Request_Settings_builder struct {
 	// If 'false', the server needs to use the legacy ServerEvent.StartedChildTask, since the
 	// client can't deserialize and pass back up the new message.
 	SupportsStartedChildTaskMessage *bool
-	// If `true`, the client supports the auto-suggest prompt input.
-	SupportsAutoSuggestPrompt *bool
+	// If `true`, the client supports suggested/passive prompts.
+	SupportsSuggestPrompt *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -1387,9 +1387,9 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 15)
 		x.xxx_hidden_SupportsStartedChildTaskMessage = *b.SupportsStartedChildTaskMessage
 	}
-	if b.SupportsAutoSuggestPrompt != nil {
+	if b.SupportsSuggestPrompt != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 15)
-		x.xxx_hidden_SupportsAutoSuggestPrompt = *b.SupportsAutoSuggestPrompt
+		x.xxx_hidden_SupportsSuggestPrompt = *b.SupportsSuggestPrompt
 	}
 	return m0
 }
@@ -2960,29 +2960,29 @@ func (b0 Request_Input_InitProjectRules_builder) Build() *Request_Input_InitProj
 	return m0
 }
 
-// An input to auto-suggest a prompt.
-type Request_Input_AutoSuggestPrompt struct {
-	state                  protoimpl.MessageState                    `protogen:"opaque.v1"`
-	xxx_hidden_Attachments *[]*Attachment                            `protobuf:"bytes,1,rep,name=attachments"`
-	xxx_hidden_Trigger     isRequest_Input_AutoSuggestPrompt_Trigger `protobuf_oneof:"trigger"`
+// An input to trigger a suggested prompt.
+type Request_Input_TriggerSuggestPrompt struct {
+	state                  protoimpl.MessageState                       `protogen:"opaque.v1"`
+	xxx_hidden_Attachments *[]*Attachment                               `protobuf:"bytes,1,rep,name=attachments"`
+	xxx_hidden_Trigger     isRequest_Input_TriggerSuggestPrompt_Trigger `protobuf_oneof:"trigger"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Input_AutoSuggestPrompt) Reset() {
-	*x = Request_Input_AutoSuggestPrompt{}
+func (x *Request_Input_TriggerSuggestPrompt) Reset() {
+	*x = Request_Input_TriggerSuggestPrompt{}
 	mi := &file_request_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_AutoSuggestPrompt) String() string {
+func (x *Request_Input_TriggerSuggestPrompt) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_AutoSuggestPrompt) ProtoMessage() {}
+func (*Request_Input_TriggerSuggestPrompt) ProtoMessage() {}
 
-func (x *Request_Input_AutoSuggestPrompt) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_TriggerSuggestPrompt) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2994,7 +2994,7 @@ func (x *Request_Input_AutoSuggestPrompt) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_AutoSuggestPrompt) GetAttachments() []*Attachment {
+func (x *Request_Input_TriggerSuggestPrompt) GetAttachments() []*Attachment {
 	if x != nil {
 		if x.xxx_hidden_Attachments != nil {
 			return *x.xxx_hidden_Attachments
@@ -3003,102 +3003,102 @@ func (x *Request_Input_AutoSuggestPrompt) GetAttachments() []*Attachment {
 	return nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) GetFilesChanged() *FilesChanged {
+func (x *Request_Input_TriggerSuggestPrompt) GetFilesChanged() *FilesChanged {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged); ok {
 			return x.FilesChanged
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) GetCommandRun() *CommandRun {
+func (x *Request_Input_TriggerSuggestPrompt) GetCommandRun() *CommandRun {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun); ok {
 			return x.CommandRun
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) SetAttachments(v []*Attachment) {
+func (x *Request_Input_TriggerSuggestPrompt) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-func (x *Request_Input_AutoSuggestPrompt) SetFilesChanged(v *FilesChanged) {
+func (x *Request_Input_TriggerSuggestPrompt) SetFilesChanged(v *FilesChanged) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_FilesChanged{v}
+	x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_FilesChanged{v}
 }
 
-func (x *Request_Input_AutoSuggestPrompt) SetCommandRun(v *CommandRun) {
+func (x *Request_Input_TriggerSuggestPrompt) SetCommandRun(v *CommandRun) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_CommandRun{v}
+	x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_CommandRun{v}
 }
 
-func (x *Request_Input_AutoSuggestPrompt) HasTrigger() bool {
+func (x *Request_Input_TriggerSuggestPrompt) HasTrigger() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Trigger != nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) HasFilesChanged() bool {
+func (x *Request_Input_TriggerSuggestPrompt) HasFilesChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged)
 	return ok
 }
 
-func (x *Request_Input_AutoSuggestPrompt) HasCommandRun() bool {
+func (x *Request_Input_TriggerSuggestPrompt) HasCommandRun() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun)
 	return ok
 }
 
-func (x *Request_Input_AutoSuggestPrompt) ClearTrigger() {
+func (x *Request_Input_TriggerSuggestPrompt) ClearTrigger() {
 	x.xxx_hidden_Trigger = nil
 }
 
-func (x *Request_Input_AutoSuggestPrompt) ClearFilesChanged() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_FilesChanged); ok {
+func (x *Request_Input_TriggerSuggestPrompt) ClearFilesChanged() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Request_Input_AutoSuggestPrompt) ClearCommandRun() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_AutoSuggestPrompt_CommandRun); ok {
+func (x *Request_Input_TriggerSuggestPrompt) ClearCommandRun() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-const Request_Input_AutoSuggestPrompt_Trigger_not_set_case case_Request_Input_AutoSuggestPrompt_Trigger = 0
-const Request_Input_AutoSuggestPrompt_FilesChanged_case case_Request_Input_AutoSuggestPrompt_Trigger = 2
-const Request_Input_AutoSuggestPrompt_CommandRun_case case_Request_Input_AutoSuggestPrompt_Trigger = 3
+const Request_Input_TriggerSuggestPrompt_Trigger_not_set_case case_Request_Input_TriggerSuggestPrompt_Trigger = 0
+const Request_Input_TriggerSuggestPrompt_FilesChanged_case case_Request_Input_TriggerSuggestPrompt_Trigger = 2
+const Request_Input_TriggerSuggestPrompt_CommandRun_case case_Request_Input_TriggerSuggestPrompt_Trigger = 3
 
-func (x *Request_Input_AutoSuggestPrompt) WhichTrigger() case_Request_Input_AutoSuggestPrompt_Trigger {
+func (x *Request_Input_TriggerSuggestPrompt) WhichTrigger() case_Request_Input_TriggerSuggestPrompt_Trigger {
 	if x == nil {
-		return Request_Input_AutoSuggestPrompt_Trigger_not_set_case
+		return Request_Input_TriggerSuggestPrompt_Trigger_not_set_case
 	}
 	switch x.xxx_hidden_Trigger.(type) {
-	case *request_Input_AutoSuggestPrompt_FilesChanged:
-		return Request_Input_AutoSuggestPrompt_FilesChanged_case
-	case *request_Input_AutoSuggestPrompt_CommandRun:
-		return Request_Input_AutoSuggestPrompt_CommandRun_case
+	case *request_Input_TriggerSuggestPrompt_FilesChanged:
+		return Request_Input_TriggerSuggestPrompt_FilesChanged_case
+	case *request_Input_TriggerSuggestPrompt_CommandRun:
+		return Request_Input_TriggerSuggestPrompt_CommandRun_case
 	default:
-		return Request_Input_AutoSuggestPrompt_Trigger_not_set_case
+		return Request_Input_TriggerSuggestPrompt_Trigger_not_set_case
 	}
 }
 
-type Request_Input_AutoSuggestPrompt_builder struct {
+type Request_Input_TriggerSuggestPrompt_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Attachments []*Attachment
@@ -3108,23 +3108,23 @@ type Request_Input_AutoSuggestPrompt_builder struct {
 	// -- end of xxx_hidden_Trigger
 }
 
-func (b0 Request_Input_AutoSuggestPrompt_builder) Build() *Request_Input_AutoSuggestPrompt {
-	m0 := &Request_Input_AutoSuggestPrompt{}
+func (b0 Request_Input_TriggerSuggestPrompt_builder) Build() *Request_Input_TriggerSuggestPrompt {
+	m0 := &Request_Input_TriggerSuggestPrompt{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Attachments = &b.Attachments
 	if b.FilesChanged != nil {
-		x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_FilesChanged{b.FilesChanged}
+		x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_FilesChanged{b.FilesChanged}
 	}
 	if b.CommandRun != nil {
-		x.xxx_hidden_Trigger = &request_Input_AutoSuggestPrompt_CommandRun{b.CommandRun}
+		x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_CommandRun{b.CommandRun}
 	}
 	return m0
 }
 
-type case_Request_Input_AutoSuggestPrompt_Trigger protoreflect.FieldNumber
+type case_Request_Input_TriggerSuggestPrompt_Trigger protoreflect.FieldNumber
 
-func (x case_Request_Input_AutoSuggestPrompt_Trigger) String() string {
+func (x case_Request_Input_TriggerSuggestPrompt_Trigger) String() string {
 	md := file_request_proto_msgTypes[13].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -3132,21 +3132,23 @@ func (x case_Request_Input_AutoSuggestPrompt_Trigger) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_AutoSuggestPrompt_Trigger interface {
-	isRequest_Input_AutoSuggestPrompt_Trigger()
+type isRequest_Input_TriggerSuggestPrompt_Trigger interface {
+	isRequest_Input_TriggerSuggestPrompt_Trigger()
 }
 
-type request_Input_AutoSuggestPrompt_FilesChanged struct {
+type request_Input_TriggerSuggestPrompt_FilesChanged struct {
 	FilesChanged *FilesChanged `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
-type request_Input_AutoSuggestPrompt_CommandRun struct {
+type request_Input_TriggerSuggestPrompt_CommandRun struct {
 	CommandRun *CommandRun `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
-func (*request_Input_AutoSuggestPrompt_FilesChanged) isRequest_Input_AutoSuggestPrompt_Trigger() {}
+func (*request_Input_TriggerSuggestPrompt_FilesChanged) isRequest_Input_TriggerSuggestPrompt_Trigger() {
+}
 
-func (*request_Input_AutoSuggestPrompt_CommandRun) isRequest_Input_AutoSuggestPrompt_Trigger() {}
+func (*request_Input_TriggerSuggestPrompt_CommandRun) isRequest_Input_TriggerSuggestPrompt_Trigger() {
+}
 
 type Request_Input_UserInputs_UserInput struct {
 	state            protoimpl.MessageState                     `protogen:"opaque.v1"`
@@ -4115,7 +4117,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc21\n" +
+	"task.proto\"\xc51\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -4126,7 +4128,7 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xf1\x1f\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfd\x1f\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -4134,8 +4136,8 @@ const file_request_proto_rawDesc = "" +
 	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x12g\n" +
 	"\x14auto_code_diff_query\x18\x05 \x01(\v24.warp.multi_agent.v1.Request.Input.AutoCodeDiffQueryH\x00R\x11autoCodeDiffQuery\x12h\n" +
 	"\x13resume_conversation\x18\a \x01(\v25.warp.multi_agent.v1.Request.Input.ResumeConversationH\x00R\x12resumeConversation\x12c\n" +
-	"\x12init_project_rules\x18\b \x01(\v23.warp.multi_agent.v1.Request.Input.InitProjectRulesH\x00R\x10initProjectRules\x12f\n" +
-	"\x13auto_suggest_prompt\x18\t \x01(\v24.warp.multi_agent.v1.Request.Input.AutoSuggestPromptH\x00R\x11autoSuggestPrompt\x12Q\n" +
+	"\x12init_project_rules\x18\b \x01(\v23.warp.multi_agent.v1.Request.Input.InitProjectRulesH\x00R\x10initProjectRules\x12o\n" +
+	"\x16trigger_suggest_prompt\x18\t \x01(\v27.warp.multi_agent.v1.Request.Input.TriggerSuggestPromptH\x00R\x14triggerSuggestPrompt\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
 	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\x92\x02\n" +
@@ -4196,8 +4198,8 @@ const file_request_proto_rawDesc = "" +
 	"\x11AutoCodeDiffQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x14\n" +
 	"\x12ResumeConversation\x1a\x12\n" +
-	"\x10InitProjectRules\x1a\xef\x01\n" +
-	"\x11AutoSuggestPrompt\x12A\n" +
+	"\x10InitProjectRules\x1a\xf2\x01\n" +
+	"\x14TriggerSuggestPrompt\x12A\n" +
 	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12H\n" +
 	"\rfiles_changed\x18\x02 \x01(\v2!.warp.multi_agent.v1.FilesChangedH\x00R\ffilesChanged\x12B\n" +
 	"\vcommand_run\x18\x03 \x01(\v2\x1f.warp.multi_agent.v1.CommandRunH\x00R\n" +
@@ -4209,7 +4211,7 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x9e\b\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x95\b\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -4225,8 +4227,8 @@ const file_request_proto_rawDesc = "" +
 	"'should_preserve_file_content_in_history\x18\v \x01(\bR\"shouldPreserveFileContentInHistory\x12*\n" +
 	"\x11supports_todos_ui\x18\f \x01(\bR\x0fsupportsTodosUi\x12=\n" +
 	"\x1bsupports_linked_code_blocks\x18\r \x01(\bR\x18supportsLinkedCodeBlocks\x12L\n" +
-	"#supports_started_child_task_message\x18\x0e \x01(\bR\x1fsupportsStartedChildTaskMessage\x12?\n" +
-	"\x1csupports_auto_suggest_prompt\x18\x0f \x01(\bR\x19supportsAutoSuggestPrompt\x1aU\n" +
+	"#supports_started_child_task_message\x18\x0e \x01(\bR\x1fsupportsStartedChildTaskMessage\x126\n" +
+	"\x17supports_suggest_prompt\x18\x0f \x01(\bR\x15supportsSuggestPrompt\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
@@ -4247,21 +4249,21 @@ const file_request_proto_rawDesc = "" +
 
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_request_proto_goTypes = []any{
-	(*Request)(nil),                                                        // 0: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                            // 1: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                  // 2: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                               // 3: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                               // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                             // 5: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                        // 6: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_UserInputs)(nil),                                       // 7: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                   // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                          // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversation)(nil),                               // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
-	(*Request_Input_InitProjectRules)(nil),                                 // 12: warp.multi_agent.v1.Request.Input.InitProjectRules
-	(*Request_Input_AutoSuggestPrompt)(nil),                                // 13: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt
-	nil,                                                                    // 14: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
+	(*Request)(nil),                               // 0: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                   // 1: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                         // 2: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                      // 3: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                      // 4: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                    // 5: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),               // 6: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_UserInputs)(nil),              // 7: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),          // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil), // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),       // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_ResumeConversation)(nil),      // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
+	(*Request_Input_InitProjectRules)(nil),        // 12: warp.multi_agent.v1.Request.Input.InitProjectRules
+	(*Request_Input_TriggerSuggestPrompt)(nil),    // 13: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
+	nil, // 14: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	(*Request_Input_UserInputs_UserInput)(nil),                             // 15: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_ToolCallResult_RefineResult)(nil),                      // 16: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 17: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
@@ -4312,7 +4314,7 @@ var file_request_proto_depIdxs = []int32{
 	10, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	11, // 11: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
 	12, // 12: warp.multi_agent.v1.Request.Input.init_project_rules:type_name -> warp.multi_agent.v1.Request.Input.InitProjectRules
-	13, // 13: warp.multi_agent.v1.Request.Input.auto_suggest_prompt:type_name -> warp.multi_agent.v1.Request.Input.AutoSuggestPrompt
+	13, // 13: warp.multi_agent.v1.Request.Input.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
 	6,  // 14: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 15: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	23, // 16: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
@@ -4343,9 +4345,9 @@ var file_request_proto_depIdxs = []int32{
 	20, // 41: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	21, // 42: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	22, // 43: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	45, // 44: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	46, // 45: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.FilesChanged
-	47, // 46: warp.multi_agent.v1.Request.Input.AutoSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.CommandRun
+	45, // 44: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	46, // 45: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.FilesChanged
+	47, // 46: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.CommandRun
 	45, // 47: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
 	6,  // 48: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 49: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
@@ -4375,7 +4377,7 @@ func file_request_proto_init() {
 		(*request_Input_AutoCodeDiffQuery_)(nil),
 		(*request_Input_ResumeConversation_)(nil),
 		(*request_Input_InitProjectRules_)(nil),
-		(*request_Input_AutoSuggestPrompt_)(nil),
+		(*request_Input_TriggerSuggestPrompt_)(nil),
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
 	}
@@ -4405,8 +4407,8 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
 	file_request_proto_msgTypes[13].OneofWrappers = []any{
-		(*request_Input_AutoSuggestPrompt_FilesChanged)(nil),
-		(*request_Input_AutoSuggestPrompt_CommandRun)(nil),
+		(*request_Input_TriggerSuggestPrompt_FilesChanged)(nil),
+		(*request_Input_TriggerSuggestPrompt_CommandRun)(nil),
 	}
 	file_request_proto_msgTypes[15].OneofWrappers = []any{
 		(*request_Input_UserInputs_UserInput_UserQuery)(nil),

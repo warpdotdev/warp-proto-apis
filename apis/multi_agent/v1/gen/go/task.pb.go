@@ -4509,10 +4509,10 @@ func (x *Message_SystemQuery) GetResumeConversation() *Message_ResumeConversatio
 	return nil
 }
 
-func (x *Message_SystemQuery) GetAutoSuggestPrompt() *Message_AutoSuggestPrompt {
+func (x *Message_SystemQuery) GetTriggerSuggestPrompt() *Message_TriggerSuggestPrompt {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*message_SystemQuery_AutoSuggestPrompt); ok {
-			return x.AutoSuggestPrompt
+		if x, ok := x.xxx_hidden_Type.(*message_SystemQuery_TriggerSuggestPrompt); ok {
+			return x.TriggerSuggestPrompt
 		}
 	}
 	return nil
@@ -4541,12 +4541,12 @@ func (x *Message_SystemQuery) SetResumeConversation(v *Message_ResumeConversatio
 	x.xxx_hidden_Type = &message_SystemQuery_ResumeConversation{v}
 }
 
-func (x *Message_SystemQuery) SetAutoSuggestPrompt(v *Message_AutoSuggestPrompt) {
+func (x *Message_SystemQuery) SetTriggerSuggestPrompt(v *Message_TriggerSuggestPrompt) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &message_SystemQuery_AutoSuggestPrompt{v}
+	x.xxx_hidden_Type = &message_SystemQuery_TriggerSuggestPrompt{v}
 }
 
 func (x *Message_SystemQuery) SetContext(v *InputContext) {
@@ -4576,11 +4576,11 @@ func (x *Message_SystemQuery) HasResumeConversation() bool {
 	return ok
 }
 
-func (x *Message_SystemQuery) HasAutoSuggestPrompt() bool {
+func (x *Message_SystemQuery) HasTriggerSuggestPrompt() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*message_SystemQuery_AutoSuggestPrompt)
+	_, ok := x.xxx_hidden_Type.(*message_SystemQuery_TriggerSuggestPrompt)
 	return ok
 }
 
@@ -4607,8 +4607,8 @@ func (x *Message_SystemQuery) ClearResumeConversation() {
 	}
 }
 
-func (x *Message_SystemQuery) ClearAutoSuggestPrompt() {
-	if _, ok := x.xxx_hidden_Type.(*message_SystemQuery_AutoSuggestPrompt); ok {
+func (x *Message_SystemQuery) ClearTriggerSuggestPrompt() {
+	if _, ok := x.xxx_hidden_Type.(*message_SystemQuery_TriggerSuggestPrompt); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -4620,7 +4620,7 @@ func (x *Message_SystemQuery) ClearContext() {
 const Message_SystemQuery_Type_not_set_case case_Message_SystemQuery_Type = 0
 const Message_SystemQuery_AutoCodeDiff_case case_Message_SystemQuery_Type = 1
 const Message_SystemQuery_ResumeConversation_case case_Message_SystemQuery_Type = 3
-const Message_SystemQuery_AutoSuggestPrompt_case case_Message_SystemQuery_Type = 4
+const Message_SystemQuery_TriggerSuggestPrompt_case case_Message_SystemQuery_Type = 4
 
 func (x *Message_SystemQuery) WhichType() case_Message_SystemQuery_Type {
 	if x == nil {
@@ -4631,8 +4631,8 @@ func (x *Message_SystemQuery) WhichType() case_Message_SystemQuery_Type {
 		return Message_SystemQuery_AutoCodeDiff_case
 	case *message_SystemQuery_ResumeConversation:
 		return Message_SystemQuery_ResumeConversation_case
-	case *message_SystemQuery_AutoSuggestPrompt:
-		return Message_SystemQuery_AutoSuggestPrompt_case
+	case *message_SystemQuery_TriggerSuggestPrompt:
+		return Message_SystemQuery_TriggerSuggestPrompt_case
 	default:
 		return Message_SystemQuery_Type_not_set_case
 	}
@@ -4642,9 +4642,9 @@ type Message_SystemQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Type:
-	AutoCodeDiff       *Message_AutoCodeDiff
-	ResumeConversation *Message_ResumeConversation
-	AutoSuggestPrompt  *Message_AutoSuggestPrompt
+	AutoCodeDiff         *Message_AutoCodeDiff
+	ResumeConversation   *Message_ResumeConversation
+	TriggerSuggestPrompt *Message_TriggerSuggestPrompt
 	// -- end of xxx_hidden_Type
 	Context *InputContext
 }
@@ -4659,8 +4659,8 @@ func (b0 Message_SystemQuery_builder) Build() *Message_SystemQuery {
 	if b.ResumeConversation != nil {
 		x.xxx_hidden_Type = &message_SystemQuery_ResumeConversation{b.ResumeConversation}
 	}
-	if b.AutoSuggestPrompt != nil {
-		x.xxx_hidden_Type = &message_SystemQuery_AutoSuggestPrompt{b.AutoSuggestPrompt}
+	if b.TriggerSuggestPrompt != nil {
+		x.xxx_hidden_Type = &message_SystemQuery_TriggerSuggestPrompt{b.TriggerSuggestPrompt}
 	}
 	x.xxx_hidden_Context = b.Context
 	return m0
@@ -4688,15 +4688,15 @@ type message_SystemQuery_ResumeConversation struct {
 	ResumeConversation *Message_ResumeConversation `protobuf:"bytes,3,opt,name=resume_conversation,json=resumeConversation,oneof"`
 }
 
-type message_SystemQuery_AutoSuggestPrompt struct {
-	AutoSuggestPrompt *Message_AutoSuggestPrompt `protobuf:"bytes,4,opt,name=auto_suggest_prompt,json=autoSuggestPrompt,oneof"`
+type message_SystemQuery_TriggerSuggestPrompt struct {
+	TriggerSuggestPrompt *Message_TriggerSuggestPrompt `protobuf:"bytes,4,opt,name=trigger_suggest_prompt,json=triggerSuggestPrompt,oneof"`
 }
 
 func (*message_SystemQuery_AutoCodeDiff) isMessage_SystemQuery_Type() {}
 
 func (*message_SystemQuery_ResumeConversation) isMessage_SystemQuery_Type() {}
 
-func (*message_SystemQuery_AutoSuggestPrompt) isMessage_SystemQuery_Type() {}
+func (*message_SystemQuery_TriggerSuggestPrompt) isMessage_SystemQuery_Type() {}
 
 type Message_AutoCodeDiff struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -4819,28 +4819,28 @@ func (b0 Message_ResumeConversation_builder) Build() *Message_ResumeConversation
 	return m0
 }
 
-type Message_AutoSuggestPrompt struct {
-	state                  protoimpl.MessageState              `protogen:"opaque.v1"`
-	xxx_hidden_Attachments *[]*Attachment                      `protobuf:"bytes,1,rep,name=attachments"`
-	xxx_hidden_Trigger     isMessage_AutoSuggestPrompt_Trigger `protobuf_oneof:"trigger"`
+type Message_TriggerSuggestPrompt struct {
+	state                  protoimpl.MessageState                 `protogen:"opaque.v1"`
+	xxx_hidden_Attachments *[]*Attachment                         `protobuf:"bytes,1,rep,name=attachments"`
+	xxx_hidden_Trigger     isMessage_TriggerSuggestPrompt_Trigger `protobuf_oneof:"trigger"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Message_AutoSuggestPrompt) Reset() {
-	*x = Message_AutoSuggestPrompt{}
+func (x *Message_TriggerSuggestPrompt) Reset() {
+	*x = Message_TriggerSuggestPrompt{}
 	mi := &file_task_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_AutoSuggestPrompt) String() string {
+func (x *Message_TriggerSuggestPrompt) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_AutoSuggestPrompt) ProtoMessage() {}
+func (*Message_TriggerSuggestPrompt) ProtoMessage() {}
 
-func (x *Message_AutoSuggestPrompt) ProtoReflect() protoreflect.Message {
+func (x *Message_TriggerSuggestPrompt) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4852,7 +4852,7 @@ func (x *Message_AutoSuggestPrompt) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Message_AutoSuggestPrompt) GetAttachments() []*Attachment {
+func (x *Message_TriggerSuggestPrompt) GetAttachments() []*Attachment {
 	if x != nil {
 		if x.xxx_hidden_Attachments != nil {
 			return *x.xxx_hidden_Attachments
@@ -4861,102 +4861,102 @@ func (x *Message_AutoSuggestPrompt) GetAttachments() []*Attachment {
 	return nil
 }
 
-func (x *Message_AutoSuggestPrompt) GetFilesChanged() *FilesChanged {
+func (x *Message_TriggerSuggestPrompt) GetFilesChanged() *FilesChanged {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*message_AutoSuggestPrompt_FilesChanged); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*message_TriggerSuggestPrompt_FilesChanged); ok {
 			return x.FilesChanged
 		}
 	}
 	return nil
 }
 
-func (x *Message_AutoSuggestPrompt) GetCommandRun() *CommandRun {
+func (x *Message_TriggerSuggestPrompt) GetCommandRun() *CommandRun {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*message_AutoSuggestPrompt_CommandRun); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*message_TriggerSuggestPrompt_CommandRun); ok {
 			return x.CommandRun
 		}
 	}
 	return nil
 }
 
-func (x *Message_AutoSuggestPrompt) SetAttachments(v []*Attachment) {
+func (x *Message_TriggerSuggestPrompt) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-func (x *Message_AutoSuggestPrompt) SetFilesChanged(v *FilesChanged) {
+func (x *Message_TriggerSuggestPrompt) SetFilesChanged(v *FilesChanged) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &message_AutoSuggestPrompt_FilesChanged{v}
+	x.xxx_hidden_Trigger = &message_TriggerSuggestPrompt_FilesChanged{v}
 }
 
-func (x *Message_AutoSuggestPrompt) SetCommandRun(v *CommandRun) {
+func (x *Message_TriggerSuggestPrompt) SetCommandRun(v *CommandRun) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &message_AutoSuggestPrompt_CommandRun{v}
+	x.xxx_hidden_Trigger = &message_TriggerSuggestPrompt_CommandRun{v}
 }
 
-func (x *Message_AutoSuggestPrompt) HasTrigger() bool {
+func (x *Message_TriggerSuggestPrompt) HasTrigger() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Trigger != nil
 }
 
-func (x *Message_AutoSuggestPrompt) HasFilesChanged() bool {
+func (x *Message_TriggerSuggestPrompt) HasFilesChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*message_AutoSuggestPrompt_FilesChanged)
+	_, ok := x.xxx_hidden_Trigger.(*message_TriggerSuggestPrompt_FilesChanged)
 	return ok
 }
 
-func (x *Message_AutoSuggestPrompt) HasCommandRun() bool {
+func (x *Message_TriggerSuggestPrompt) HasCommandRun() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*message_AutoSuggestPrompt_CommandRun)
+	_, ok := x.xxx_hidden_Trigger.(*message_TriggerSuggestPrompt_CommandRun)
 	return ok
 }
 
-func (x *Message_AutoSuggestPrompt) ClearTrigger() {
+func (x *Message_TriggerSuggestPrompt) ClearTrigger() {
 	x.xxx_hidden_Trigger = nil
 }
 
-func (x *Message_AutoSuggestPrompt) ClearFilesChanged() {
-	if _, ok := x.xxx_hidden_Trigger.(*message_AutoSuggestPrompt_FilesChanged); ok {
+func (x *Message_TriggerSuggestPrompt) ClearFilesChanged() {
+	if _, ok := x.xxx_hidden_Trigger.(*message_TriggerSuggestPrompt_FilesChanged); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Message_AutoSuggestPrompt) ClearCommandRun() {
-	if _, ok := x.xxx_hidden_Trigger.(*message_AutoSuggestPrompt_CommandRun); ok {
+func (x *Message_TriggerSuggestPrompt) ClearCommandRun() {
+	if _, ok := x.xxx_hidden_Trigger.(*message_TriggerSuggestPrompt_CommandRun); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-const Message_AutoSuggestPrompt_Trigger_not_set_case case_Message_AutoSuggestPrompt_Trigger = 0
-const Message_AutoSuggestPrompt_FilesChanged_case case_Message_AutoSuggestPrompt_Trigger = 2
-const Message_AutoSuggestPrompt_CommandRun_case case_Message_AutoSuggestPrompt_Trigger = 3
+const Message_TriggerSuggestPrompt_Trigger_not_set_case case_Message_TriggerSuggestPrompt_Trigger = 0
+const Message_TriggerSuggestPrompt_FilesChanged_case case_Message_TriggerSuggestPrompt_Trigger = 2
+const Message_TriggerSuggestPrompt_CommandRun_case case_Message_TriggerSuggestPrompt_Trigger = 3
 
-func (x *Message_AutoSuggestPrompt) WhichTrigger() case_Message_AutoSuggestPrompt_Trigger {
+func (x *Message_TriggerSuggestPrompt) WhichTrigger() case_Message_TriggerSuggestPrompt_Trigger {
 	if x == nil {
-		return Message_AutoSuggestPrompt_Trigger_not_set_case
+		return Message_TriggerSuggestPrompt_Trigger_not_set_case
 	}
 	switch x.xxx_hidden_Trigger.(type) {
-	case *message_AutoSuggestPrompt_FilesChanged:
-		return Message_AutoSuggestPrompt_FilesChanged_case
-	case *message_AutoSuggestPrompt_CommandRun:
-		return Message_AutoSuggestPrompt_CommandRun_case
+	case *message_TriggerSuggestPrompt_FilesChanged:
+		return Message_TriggerSuggestPrompt_FilesChanged_case
+	case *message_TriggerSuggestPrompt_CommandRun:
+		return Message_TriggerSuggestPrompt_CommandRun_case
 	default:
-		return Message_AutoSuggestPrompt_Trigger_not_set_case
+		return Message_TriggerSuggestPrompt_Trigger_not_set_case
 	}
 }
 
-type Message_AutoSuggestPrompt_builder struct {
+type Message_TriggerSuggestPrompt_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Attachments []*Attachment
@@ -4966,23 +4966,23 @@ type Message_AutoSuggestPrompt_builder struct {
 	// -- end of xxx_hidden_Trigger
 }
 
-func (b0 Message_AutoSuggestPrompt_builder) Build() *Message_AutoSuggestPrompt {
-	m0 := &Message_AutoSuggestPrompt{}
+func (b0 Message_TriggerSuggestPrompt_builder) Build() *Message_TriggerSuggestPrompt {
+	m0 := &Message_TriggerSuggestPrompt{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Attachments = &b.Attachments
 	if b.FilesChanged != nil {
-		x.xxx_hidden_Trigger = &message_AutoSuggestPrompt_FilesChanged{b.FilesChanged}
+		x.xxx_hidden_Trigger = &message_TriggerSuggestPrompt_FilesChanged{b.FilesChanged}
 	}
 	if b.CommandRun != nil {
-		x.xxx_hidden_Trigger = &message_AutoSuggestPrompt_CommandRun{b.CommandRun}
+		x.xxx_hidden_Trigger = &message_TriggerSuggestPrompt_CommandRun{b.CommandRun}
 	}
 	return m0
 }
 
-type case_Message_AutoSuggestPrompt_Trigger protoreflect.FieldNumber
+type case_Message_TriggerSuggestPrompt_Trigger protoreflect.FieldNumber
 
-func (x case_Message_AutoSuggestPrompt_Trigger) String() string {
+func (x case_Message_TriggerSuggestPrompt_Trigger) String() string {
 	md := file_task_proto_msgTypes[30].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -4990,21 +4990,21 @@ func (x case_Message_AutoSuggestPrompt_Trigger) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isMessage_AutoSuggestPrompt_Trigger interface {
-	isMessage_AutoSuggestPrompt_Trigger()
+type isMessage_TriggerSuggestPrompt_Trigger interface {
+	isMessage_TriggerSuggestPrompt_Trigger()
 }
 
-type message_AutoSuggestPrompt_FilesChanged struct {
+type message_TriggerSuggestPrompt_FilesChanged struct {
 	FilesChanged *FilesChanged `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
-type message_AutoSuggestPrompt_CommandRun struct {
+type message_TriggerSuggestPrompt_CommandRun struct {
 	CommandRun *CommandRun `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
-func (*message_AutoSuggestPrompt_FilesChanged) isMessage_AutoSuggestPrompt_Trigger() {}
+func (*message_TriggerSuggestPrompt_FilesChanged) isMessage_TriggerSuggestPrompt_Trigger() {}
 
-func (*message_AutoSuggestPrompt_CommandRun) isMessage_AutoSuggestPrompt_Trigger() {}
+func (*message_TriggerSuggestPrompt_CommandRun) isMessage_TriggerSuggestPrompt_Trigger() {}
 
 // Agent output message type
 type Message_AgentOutput struct {
@@ -11832,7 +11832,7 @@ const file_task_proto_rawDesc = "" +
 	"\tSucceeded\x1a\b\n" +
 	"\x06Failed\x1a\t\n" +
 	"\aAbortedB\b\n" +
-	"\x06status\"\xe58\n" +
+	"\x06status\"\xf18\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12.\n" +
@@ -11854,17 +11854,17 @@ const file_task_proto_rawDesc = "" +
 	"\x16referenced_attachments\x18\x03 \x03(\v2A.warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntryR\x15referencedAttachments\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
-	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xeb\x02\n" +
+	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xf4\x02\n" +
 	"\vSystemQuery\x12Q\n" +
 	"\x0eauto_code_diff\x18\x01 \x01(\v2).warp.multi_agent.v1.Message.AutoCodeDiffH\x00R\fautoCodeDiff\x12b\n" +
-	"\x13resume_conversation\x18\x03 \x01(\v2/.warp.multi_agent.v1.Message.ResumeConversationH\x00R\x12resumeConversation\x12`\n" +
-	"\x13auto_suggest_prompt\x18\x04 \x01(\v2..warp.multi_agent.v1.Message.AutoSuggestPromptH\x00R\x11autoSuggestPrompt\x12;\n" +
+	"\x13resume_conversation\x18\x03 \x01(\v2/.warp.multi_agent.v1.Message.ResumeConversationH\x00R\x12resumeConversation\x12i\n" +
+	"\x16trigger_suggest_prompt\x18\x04 \x01(\v21.warp.multi_agent.v1.Message.TriggerSuggestPromptH\x00R\x14triggerSuggestPrompt\x12;\n" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontextB\x06\n" +
 	"\x04type\x1a*\n" +
 	"\fAutoCodeDiff\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x14\n" +
-	"\x12ResumeConversation\x1a\xef\x01\n" +
-	"\x11AutoSuggestPrompt\x12A\n" +
+	"\x12ResumeConversation\x1a\xf2\x01\n" +
+	"\x14TriggerSuggestPrompt\x12A\n" +
 	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12H\n" +
 	"\rfiles_changed\x18\x02 \x01(\v2!.warp.multi_agent.v1.FilesChangedH\x00R\ffilesChanged\x12B\n" +
 	"\vcommand_run\x18\x03 \x01(\v2\x1f.warp.multi_agent.v1.CommandRunH\x00R\n" +
@@ -12191,7 +12191,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_SystemQuery)(nil),                              // 28: warp.multi_agent.v1.Message.SystemQuery
 	(*Message_AutoCodeDiff)(nil),                             // 29: warp.multi_agent.v1.Message.AutoCodeDiff
 	(*Message_ResumeConversation)(nil),                       // 30: warp.multi_agent.v1.Message.ResumeConversation
-	(*Message_AutoSuggestPrompt)(nil),                        // 31: warp.multi_agent.v1.Message.AutoSuggestPrompt
+	(*Message_TriggerSuggestPrompt)(nil),                     // 31: warp.multi_agent.v1.Message.TriggerSuggestPrompt
 	(*Message_AgentOutput)(nil),                              // 32: warp.multi_agent.v1.Message.AgentOutput
 	(*Message_ToolCall)(nil),                                 // 33: warp.multi_agent.v1.Message.ToolCall
 	(*Message_ToolCallResult)(nil),                           // 34: warp.multi_agent.v1.Message.ToolCallResult
@@ -12315,11 +12315,11 @@ var file_task_proto_depIdxs = []int32{
 	38,  // 47: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	29,  // 48: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
 	30,  // 49: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
-	31,  // 50: warp.multi_agent.v1.Message.SystemQuery.auto_suggest_prompt:type_name -> warp.multi_agent.v1.Message.AutoSuggestPrompt
+	31,  // 50: warp.multi_agent.v1.Message.SystemQuery.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Message.TriggerSuggestPrompt
 	93,  // 51: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	94,  // 52: warp.multi_agent.v1.Message.AutoSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	95,  // 53: warp.multi_agent.v1.Message.AutoSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.FilesChanged
-	96,  // 54: warp.multi_agent.v1.Message.AutoSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.CommandRun
+	94,  // 52: warp.multi_agent.v1.Message.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	95,  // 53: warp.multi_agent.v1.Message.TriggerSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.FilesChanged
+	96,  // 54: warp.multi_agent.v1.Message.TriggerSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.CommandRun
 	40,  // 55: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
 	44,  // 56: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
 	39,  // 57: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
@@ -12475,11 +12475,11 @@ func file_task_proto_init() {
 	file_task_proto_msgTypes[27].OneofWrappers = []any{
 		(*message_SystemQuery_AutoCodeDiff)(nil),
 		(*message_SystemQuery_ResumeConversation)(nil),
-		(*message_SystemQuery_AutoSuggestPrompt)(nil),
+		(*message_SystemQuery_TriggerSuggestPrompt)(nil),
 	}
 	file_task_proto_msgTypes[30].OneofWrappers = []any{
-		(*message_AutoSuggestPrompt_FilesChanged)(nil),
-		(*message_AutoSuggestPrompt_CommandRun)(nil),
+		(*message_TriggerSuggestPrompt_FilesChanged)(nil),
+		(*message_TriggerSuggestPrompt_CommandRun)(nil),
 	}
 	file_task_proto_msgTypes[32].OneofWrappers = []any{
 		(*message_ToolCall_RunShellCommand_)(nil),

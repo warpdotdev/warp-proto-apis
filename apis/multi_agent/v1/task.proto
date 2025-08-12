@@ -113,7 +113,7 @@ message Message {
     oneof type {
       AutoCodeDiff auto_code_diff = 1;
       ResumeConversation resume_conversation = 3;
-      AutoSuggestPrompt auto_suggest_prompt = 4;
+      TriggerSuggestPrompt trigger_suggest_prompt = 4;
     }
 
     InputContext context = 2;
@@ -125,7 +125,7 @@ message Message {
 
   message ResumeConversation {}
 
-  message AutoSuggestPrompt {
+  message TriggerSuggestPrompt {
     repeated Attachment attachments = 1;
 
     oneof trigger {

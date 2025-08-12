@@ -53,7 +53,7 @@ message Request {
       AutoCodeDiffQuery auto_code_diff_query = 5;
       ResumeConversation resume_conversation = 7;
       InitProjectRules init_project_rules = 8;
-      AutoSuggestPrompt auto_suggest_prompt = 9;
+      TriggerSuggestPrompt trigger_suggest_prompt = 9;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -136,8 +136,8 @@ message Request {
     // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back.
     message InitProjectRules { }
 
-    // An input to auto-suggest a prompt.
-    message AutoSuggestPrompt {
+    // An input to trigger a suggested prompt.
+    message TriggerSuggestPrompt {
       repeated Attachment attachments = 1;
 
       oneof trigger {
@@ -212,8 +212,8 @@ message Request {
     // client can't deserialize and pass back up the new message.
     bool supports_started_child_task_message = 14;
 
-    // If `true`, the client supports the auto-suggest prompt input.
-    bool supports_auto_suggest_prompt = 15;
+    // If `true`, the client supports suggested/passive prompts.
+    bool supports_suggest_prompt = 15;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
