@@ -3,6 +3,7 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/struct.proto";
 
@@ -53,6 +54,7 @@ message Request {
       AutoCodeDiffQuery auto_code_diff_query = 5;
       ResumeConversation resume_conversation = 7;
       InitProjectRules init_project_rules = 8;
+      TriggerSuggestPrompt trigger_suggest_prompt = 9;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -94,6 +96,7 @@ message Request {
         WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 13;
         SuggestNewConversationResult suggest_new_conversation = 14;
         FileGlobV2Result file_glob_v2 = 15;
+        SuggestPromptResult suggest_prompt = 16;
       }
 
       // Generic tool call result for representing a user-requested refinement
@@ -133,6 +136,16 @@ message Request {
 
     // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back.
     message InitProjectRules { }
+
+    // An input to trigger a suggested prompt.
+    message TriggerSuggestPrompt {
+      repeated Attachment attachments = 1;
+
+      oneof trigger {
+        google.protobuf.Empty files_changed = 2;
+        google.protobuf.Empty command_run = 3;
+      }
+    }
   }
 
   message Metadata {
@@ -194,6 +207,14 @@ message Request {
     // If `true`, the client supports rendering linked code blocks, and the agent will prefer to output them in its responses.
     // If `false` or unset, the agent will use plain text code block formatting in its responses.
     bool supports_linked_code_blocks = 13;
+
+    // If 'true', the client supports the StartedChildTask message.
+    // If 'false', the server needs to use the legacy ServerEvent.StartedChildTask, since the
+    // client can't deserialize and pass back up the new message.
+    bool supports_started_child_task_message = 14;
+
+    // If `true`, the client supports suggested/passive prompts.
+    bool supports_suggest_prompt = 15;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
