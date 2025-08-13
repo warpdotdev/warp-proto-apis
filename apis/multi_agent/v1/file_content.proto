@@ -24,20 +24,14 @@ message FileContent {
 
 
 // A representation of binary content within a file.
-message FlexibleFileContent {
-  string file_path = 1[ (sensitive) = true ];
-
-  message TextFileContent {
-    string text = 2 [ (sensitive) = true ];
-    FileContentLineRange line_range = 3;
-  }
-
+message AnyFileContent {
   message BinaryFileContent {
+    string file_path = 1[ (sensitive) = true ];
     bytes data = 4;
   }
 
   oneof content {
     BinaryFileContent binary_content = 5;
-    TextFileContent text_content = 6;
+    FileContent text_content = 6;
   }
 }

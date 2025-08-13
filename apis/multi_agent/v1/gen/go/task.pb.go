@@ -8614,11 +8614,11 @@ func (b0 Message_ToolCallResult_RefineResult_builder) Build() *Message_ToolCallR
 }
 
 type ReadFilesResult_Success struct {
-	state                    protoimpl.MessageState  `protogen:"opaque.v1"`
-	xxx_hidden_Files         *[]*FileContent         `protobuf:"bytes,1,rep,name=files"`
-	xxx_hidden_FlexibleFiles *[]*FlexibleFileContent `protobuf:"bytes,2,rep,name=flexible_files,json=flexibleFiles"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Files    *[]*FileContent        `protobuf:"bytes,1,rep,name=files"`
+	xxx_hidden_AnyFiles *[]*AnyFileContent     `protobuf:"bytes,2,rep,name=any_files,json=anyFiles"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ReadFilesResult_Success) Reset() {
@@ -8656,10 +8656,10 @@ func (x *ReadFilesResult_Success) GetFiles() []*FileContent {
 	return nil
 }
 
-func (x *ReadFilesResult_Success) GetFlexibleFiles() []*FlexibleFileContent {
+func (x *ReadFilesResult_Success) GetAnyFiles() []*AnyFileContent {
 	if x != nil {
-		if x.xxx_hidden_FlexibleFiles != nil {
-			return *x.xxx_hidden_FlexibleFiles
+		if x.xxx_hidden_AnyFiles != nil {
+			return *x.xxx_hidden_AnyFiles
 		}
 	}
 	return nil
@@ -8670,16 +8670,16 @@ func (x *ReadFilesResult_Success) SetFiles(v []*FileContent) {
 	x.xxx_hidden_Files = &v
 }
 
-func (x *ReadFilesResult_Success) SetFlexibleFiles(v []*FlexibleFileContent) {
-	x.xxx_hidden_FlexibleFiles = &v
+func (x *ReadFilesResult_Success) SetAnyFiles(v []*AnyFileContent) {
+	x.xxx_hidden_AnyFiles = &v
 }
 
 type ReadFilesResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Deprecated: Marked as deprecated in task.proto.
-	Files         []*FileContent
-	FlexibleFiles []*FlexibleFileContent
+	Files    []*FileContent
+	AnyFiles []*AnyFileContent
 }
 
 func (b0 ReadFilesResult_Success_builder) Build() *ReadFilesResult_Success {
@@ -8687,7 +8687,7 @@ func (b0 ReadFilesResult_Success_builder) Build() *ReadFilesResult_Success {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Files = &b.Files
-	x.xxx_hidden_FlexibleFiles = &b.FlexibleFiles
+	x.xxx_hidden_AnyFiles = &b.AnyFiles
 	return m0
 }
 
@@ -11159,13 +11159,13 @@ const file_task_proto_rawDesc = "" +
 	"\x10command_finished\x18\x05 \x01(\v2).warp.multi_agent.v1.ShellCommandFinishedH\x00R\x0fcommandFinished\x12\x1e\n" +
 	"\x06output\x18\x01 \x01(\tB\x06\x80\xb5\x18\x01\x18\x01R\x06output\x12\x1f\n" +
 	"\texit_code\x18\x02 \x01(\x05B\x02\x18\x01R\bexitCodeB\b\n" +
-	"\x06result\"\xeb\x02\n" +
+	"\x06result\"\xdc\x02\n" +
 	"\x0fReadFilesResult\x12H\n" +
 	"\asuccess\x18\x01 \x01(\v2,.warp.multi_agent.v1.ReadFilesResult.SuccessH\x00R\asuccess\x12B\n" +
-	"\x05error\x18\x02 \x01(\v2*.warp.multi_agent.v1.ReadFilesResult.ErrorH\x00R\x05error\x1a\x96\x01\n" +
+	"\x05error\x18\x02 \x01(\v2*.warp.multi_agent.v1.ReadFilesResult.ErrorH\x00R\x05error\x1a\x87\x01\n" +
 	"\aSuccess\x12:\n" +
-	"\x05files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentB\x02\x18\x01R\x05files\x12O\n" +
-	"\x0eflexible_files\x18\x02 \x03(\v2(.warp.multi_agent.v1.FlexibleFileContentR\rflexibleFiles\x1a'\n" +
+	"\x05files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentB\x02\x18\x01R\x05files\x12@\n" +
+	"\tany_files\x18\x02 \x03(\v2#.warp.multi_agent.v1.AnyFileContentR\banyFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"\xa4\x02\n" +
@@ -11398,7 +11398,7 @@ var file_task_proto_goTypes = []any{
 	(*structpb.Struct)(nil),                                 // 92: google.protobuf.Struct
 	(*FileContentLineRange)(nil),                            // 93: warp.multi_agent.v1.FileContentLineRange
 	(*FileContent)(nil),                                     // 94: warp.multi_agent.v1.FileContent
-	(*FlexibleFileContent)(nil),                             // 95: warp.multi_agent.v1.FlexibleFileContent
+	(*AnyFileContent)(nil),                                  // 95: warp.multi_agent.v1.AnyFileContent
 }
 var file_task_proto_depIdxs = []int32{
 	19,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -11494,7 +11494,7 @@ var file_task_proto_depIdxs = []int32{
 	93,  // 90: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	26,  // 91: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	94,  // 92: warp.multi_agent.v1.ReadFilesResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	95,  // 93: warp.multi_agent.v1.ReadFilesResult.Success.flexible_files:type_name -> warp.multi_agent.v1.FlexibleFileContent
+	95,  // 93: warp.multi_agent.v1.ReadFilesResult.Success.any_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	94,  // 94: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
 	94,  // 95: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
 	62,  // 96: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
