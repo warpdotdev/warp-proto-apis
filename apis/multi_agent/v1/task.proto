@@ -13,7 +13,6 @@ import "attachment.proto";
 import "file_content.proto";
 import "options.proto";
 import "todo.proto";
-import "suggestions.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -129,8 +128,8 @@ message Message {
     repeated Attachment attachments = 1;
 
     oneof trigger {
-      FilesChanged files_changed = 2;
-      CommandRun command_run = 3;
+      google.protobuf.Empty files_changed = 2;
+      google.protobuf.Empty command_run = 3;
     }
   }
 
@@ -613,12 +612,9 @@ message CallMCPToolResult {
 
 message SuggestPromptResult {
   oneof result {
-    Accepted accepted = 1;
-    Rejected rejected = 2;
+    google.protobuf.Empty accepted = 1;
+    google.protobuf.Empty rejected = 2;
   }
-
-  message Accepted {}
-  message Rejected {}
 }
 
 // An enumeration of the different types of client-server tools.

@@ -12,6 +12,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	unsafe "unsafe"
@@ -3003,7 +3004,7 @@ func (x *Request_Input_TriggerSuggestPrompt) GetAttachments() []*Attachment {
 	return nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) GetFilesChanged() *FilesChanged {
+func (x *Request_Input_TriggerSuggestPrompt) GetFilesChanged() *emptypb.Empty {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged); ok {
 			return x.FilesChanged
@@ -3012,7 +3013,7 @@ func (x *Request_Input_TriggerSuggestPrompt) GetFilesChanged() *FilesChanged {
 	return nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) GetCommandRun() *CommandRun {
+func (x *Request_Input_TriggerSuggestPrompt) GetCommandRun() *emptypb.Empty {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun); ok {
 			return x.CommandRun
@@ -3025,7 +3026,7 @@ func (x *Request_Input_TriggerSuggestPrompt) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) SetFilesChanged(v *FilesChanged) {
+func (x *Request_Input_TriggerSuggestPrompt) SetFilesChanged(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
@@ -3033,7 +3034,7 @@ func (x *Request_Input_TriggerSuggestPrompt) SetFilesChanged(v *FilesChanged) {
 	x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_FilesChanged{v}
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) SetCommandRun(v *CommandRun) {
+func (x *Request_Input_TriggerSuggestPrompt) SetCommandRun(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
@@ -3103,8 +3104,8 @@ type Request_Input_TriggerSuggestPrompt_builder struct {
 
 	Attachments []*Attachment
 	// Fields of oneof xxx_hidden_Trigger:
-	FilesChanged *FilesChanged
-	CommandRun   *CommandRun
+	FilesChanged *emptypb.Empty
+	CommandRun   *emptypb.Empty
 	// -- end of xxx_hidden_Trigger
 }
 
@@ -3137,11 +3138,11 @@ type isRequest_Input_TriggerSuggestPrompt_Trigger interface {
 }
 
 type request_Input_TriggerSuggestPrompt_FilesChanged struct {
-	FilesChanged *FilesChanged `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
+	FilesChanged *emptypb.Empty `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
 type request_Input_TriggerSuggestPrompt_CommandRun struct {
-	CommandRun *CommandRun `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
+	CommandRun *emptypb.Empty `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
 func (*request_Input_TriggerSuggestPrompt_FilesChanged) isRequest_Input_TriggerSuggestPrompt_Trigger() {
@@ -4116,8 +4117,8 @@ var File_request_proto protoreflect.FileDescriptor
 
 const file_request_proto_rawDesc = "" +
 	"\n" +
-	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc51\n" +
+	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
+	"task.proto\"\xb11\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -4128,7 +4129,7 @@ const file_request_proto_rawDesc = "" +
 	"mcpContext\x1ad\n" +
 	"\vTaskContext\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x12$\n" +
-	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xfd\x1f\n" +
+	"\x0eactive_task_id\x18\x02 \x01(\tR\factiveTaskId\x1a\xe9\x1f\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -4198,11 +4199,11 @@ const file_request_proto_rawDesc = "" +
 	"\x11AutoCodeDiffQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x14\n" +
 	"\x12ResumeConversation\x1a\x12\n" +
-	"\x10InitProjectRules\x1a\xf2\x01\n" +
+	"\x10InitProjectRules\x1a\xde\x01\n" +
 	"\x14TriggerSuggestPrompt\x12A\n" +
-	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12H\n" +
-	"\rfiles_changed\x18\x02 \x01(\v2!.warp.multi_agent.v1.FilesChangedH\x00R\ffilesChanged\x12B\n" +
-	"\vcommand_run\x18\x03 \x01(\v2\x1f.warp.multi_agent.v1.CommandRunH\x00R\n" +
+	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12=\n" +
+	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
+	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
 	"commandRunB\t\n" +
 	"\atriggerB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
@@ -4295,10 +4296,9 @@ var file_request_proto_goTypes = []any{
 	(*FileGlobV2Result)(nil),                     // 43: warp.multi_agent.v1.FileGlobV2Result
 	(*SuggestPromptResult)(nil),                  // 44: warp.multi_agent.v1.SuggestPromptResult
 	(*Attachment)(nil),                           // 45: warp.multi_agent.v1.Attachment
-	(*FilesChanged)(nil),                         // 46: warp.multi_agent.v1.FilesChanged
-	(*CommandRun)(nil),                           // 47: warp.multi_agent.v1.CommandRun
-	(*structpb.Value)(nil),                       // 48: google.protobuf.Value
-	(*structpb.Struct)(nil),                      // 49: google.protobuf.Struct
+	(*emptypb.Empty)(nil),                        // 46: google.protobuf.Empty
+	(*structpb.Value)(nil),                       // 47: google.protobuf.Value
+	(*structpb.Struct)(nil),                      // 48: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -4346,14 +4346,14 @@ var file_request_proto_depIdxs = []int32{
 	21, // 42: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	22, // 43: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
 	45, // 44: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	46, // 45: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> warp.multi_agent.v1.FilesChanged
-	47, // 46: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> warp.multi_agent.v1.CommandRun
+	46, // 45: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	46, // 46: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
 	45, // 47: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
 	6,  // 48: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 49: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	6,  // 50: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	48, // 51: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	49, // 52: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	47, // 51: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	48, // 52: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
 	53, // [53:53] is the sub-list for method output_type
 	53, // [53:53] is the sub-list for method input_type
 	53, // [53:53] is the sub-list for extension type_name

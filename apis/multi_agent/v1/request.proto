@@ -3,6 +3,7 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/struct.proto";
 
@@ -141,8 +142,8 @@ message Request {
       repeated Attachment attachments = 1;
 
       oneof trigger {
-        FilesChanged files_changed = 2;
-        CommandRun command_run = 3;
+        google.protobuf.Empty files_changed = 2;
+        google.protobuf.Empty command_run = 3;
       }
     }
   }
