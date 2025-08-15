@@ -1266,11 +1266,11 @@ func (b0 GenericStringObject_builder) Build() *GenericStringObject {
 type DiffHunk struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_FileName     *string                `protobuf:"bytes,1,opt,name=file_name,json=fileName"`
-	xxx_hidden_LineStart    int32                  `protobuf:"varint,2,opt,name=line_start,json=lineStart"`
-	xxx_hidden_LineEnd      int32                  `protobuf:"varint,3,opt,name=line_end,json=lineEnd"`
+	xxx_hidden_LineStart    uint32                 `protobuf:"varint,2,opt,name=line_start,json=lineStart"`
+	xxx_hidden_LineEnd      uint32                 `protobuf:"varint,3,opt,name=line_end,json=lineEnd"`
 	xxx_hidden_DiffContent  *string                `protobuf:"bytes,4,opt,name=diff_content,json=diffContent"`
-	xxx_hidden_LinesAdded   int32                  `protobuf:"varint,5,opt,name=lines_added,json=linesAdded"`
-	xxx_hidden_LinesRemoved int32                  `protobuf:"varint,6,opt,name=lines_removed,json=linesRemoved"`
+	xxx_hidden_LinesAdded   uint32                 `protobuf:"varint,5,opt,name=lines_added,json=linesAdded"`
+	xxx_hidden_LinesRemoved uint32                 `protobuf:"varint,6,opt,name=lines_removed,json=linesRemoved"`
 	xxx_hidden_Base         isDiffHunk_Base        `protobuf_oneof:"base"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
@@ -1313,14 +1313,14 @@ func (x *DiffHunk) GetFileName() string {
 	return ""
 }
 
-func (x *DiffHunk) GetLineStart() int32 {
+func (x *DiffHunk) GetLineStart() uint32 {
 	if x != nil {
 		return x.xxx_hidden_LineStart
 	}
 	return 0
 }
 
-func (x *DiffHunk) GetLineEnd() int32 {
+func (x *DiffHunk) GetLineEnd() uint32 {
 	if x != nil {
 		return x.xxx_hidden_LineEnd
 	}
@@ -1337,14 +1337,14 @@ func (x *DiffHunk) GetDiffContent() string {
 	return ""
 }
 
-func (x *DiffHunk) GetLinesAdded() int32 {
+func (x *DiffHunk) GetLinesAdded() uint32 {
 	if x != nil {
 		return x.xxx_hidden_LinesAdded
 	}
 	return 0
 }
 
-func (x *DiffHunk) GetLinesRemoved() int32 {
+func (x *DiffHunk) GetLinesRemoved() uint32 {
 	if x != nil {
 		return x.xxx_hidden_LinesRemoved
 	}
@@ -1374,12 +1374,12 @@ func (x *DiffHunk) SetFileName(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
-func (x *DiffHunk) SetLineStart(v int32) {
+func (x *DiffHunk) SetLineStart(v uint32) {
 	x.xxx_hidden_LineStart = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
-func (x *DiffHunk) SetLineEnd(v int32) {
+func (x *DiffHunk) SetLineEnd(v uint32) {
 	x.xxx_hidden_LineEnd = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
@@ -1389,12 +1389,12 @@ func (x *DiffHunk) SetDiffContent(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
-func (x *DiffHunk) SetLinesAdded(v int32) {
+func (x *DiffHunk) SetLinesAdded(v uint32) {
 	x.xxx_hidden_LinesAdded = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
 }
 
-func (x *DiffHunk) SetLinesRemoved(v int32) {
+func (x *DiffHunk) SetLinesRemoved(v uint32) {
 	x.xxx_hidden_LinesRemoved = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
 }
@@ -1544,11 +1544,11 @@ type DiffHunk_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	FileName     *string
-	LineStart    *int32
-	LineEnd      *int32
+	LineStart    *uint32
+	LineEnd      *uint32
 	DiffContent  *string
-	LinesAdded   *int32
-	LinesRemoved *int32
+	LinesAdded   *uint32
+	LinesRemoved *uint32
 	// Fields of oneof xxx_hidden_Base:
 	BranchName         *string
 	UncommittedChanges *emptypb.Empty
@@ -1661,12 +1661,12 @@ const file_attachment_proto_rawDesc = "" +
 	"\bDiffHunk\x12!\n" +
 	"\tfile_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfileName\x12\x1d\n" +
 	"\n" +
-	"line_start\x18\x02 \x01(\x05R\tlineStart\x12\x19\n" +
-	"\bline_end\x18\x03 \x01(\x05R\alineEnd\x12'\n" +
+	"line_start\x18\x02 \x01(\rR\tlineStart\x12\x19\n" +
+	"\bline_end\x18\x03 \x01(\rR\alineEnd\x12'\n" +
 	"\fdiff_content\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\vdiffContent\x12\x1f\n" +
-	"\vlines_added\x18\x05 \x01(\x05R\n" +
+	"\vlines_added\x18\x05 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
-	"\rlines_removed\x18\x06 \x01(\x05R\flinesRemoved\x12!\n" +
+	"\rlines_removed\x18\x06 \x01(\rR\flinesRemoved\x12!\n" +
 	"\vbranch_name\x18\a \x01(\tH\x00R\n" +
 	"branchName\x12I\n" +
 	"\x13uncommitted_changes\x18\b \x01(\v2\x16.google.protobuf.EmptyH\x00R\x12uncommittedChangesB\x06\n" +

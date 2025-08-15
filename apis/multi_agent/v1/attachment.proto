@@ -67,11 +67,11 @@ message GenericStringObject {
 
 message DiffHunk {
   string file_name = 1 [ (sensitive) = true ];
-  int32 line_start = 2;
-  int32 line_end = 3;
+  uint32 line_start = 2;
+  uint32 line_end = 3;
   string diff_content = 4 [ (sensitive) = true ];
-  int32 lines_added = 5;
-  int32 lines_removed = 6;
+  uint32 lines_added = 5;
+  uint32 lines_removed = 6;
   oneof base {
     string branch_name = 7;
     google.protobuf.Empty uncommitted_changes = 8;
