@@ -1263,7 +1263,6 @@ func (b0 GenericStringObject_builder) Build() *GenericStringObject {
 	return m0
 }
 
-// A diff hunk attachment containing a portion of a diff for a specific file.
 type DiffHunk struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_FileName     *string                `protobuf:"bytes,1,opt,name=file_name,json=fileName"`
@@ -1544,20 +1543,12 @@ func (x *DiffHunk) WhichBase() case_DiffHunk_Base {
 type DiffHunk_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The name/path of the file this diff hunk applies to.
-	FileName *string
-	// The start line number for this hunk.
-	LineStart *int32
-	// The end line number for this hunk.
-	LineEnd *int32
-	// The actual diff content as a string.
-	DiffContent *string
-	// The number of lines added in this hunk.
-	LinesAdded *int32
-	// The number of lines removed in this hunk.
+	FileName     *string
+	LineStart    *int32
+	LineEnd      *int32
+	DiffContent  *string
+	LinesAdded   *int32
 	LinesRemoved *int32
-	// The base for this diff - either a branch name or uncommitted changes.
-
 	// Fields of oneof xxx_hidden_Base:
 	BranchName         *string
 	UncommittedChanges *emptypb.Empty
