@@ -1353,10 +1353,10 @@ func (x *DiffHunk) GetCurrentBranchName() string {
 	return ""
 }
 
-func (x *DiffHunk) GetHeadlessCommitSha() string {
+func (x *DiffHunk) GetCurrentHeadlessCommitSha() string {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Current.(*diffHunk_HeadlessCommitSha); ok {
-			return x.HeadlessCommitSha
+		if x, ok := x.xxx_hidden_Current.(*diffHunk_CurrentHeadlessCommitSha); ok {
+			return x.CurrentHeadlessCommitSha
 		}
 	}
 	return ""
@@ -1366,6 +1366,15 @@ func (x *DiffHunk) GetBaseBranchName() string {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Base.(*diffHunk_BaseBranchName); ok {
 			return x.BaseBranchName
+		}
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetBaseHeadlessCommitSha() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Base.(*diffHunk_BaseHeadlessCommitSha); ok {
+			return x.BaseHeadlessCommitSha
 		}
 	}
 	return ""
@@ -1408,12 +1417,16 @@ func (x *DiffHunk) SetCurrentBranchName(v string) {
 	x.xxx_hidden_Current = &diffHunk_CurrentBranchName{v}
 }
 
-func (x *DiffHunk) SetHeadlessCommitSha(v string) {
-	x.xxx_hidden_Current = &diffHunk_HeadlessCommitSha{v}
+func (x *DiffHunk) SetCurrentHeadlessCommitSha(v string) {
+	x.xxx_hidden_Current = &diffHunk_CurrentHeadlessCommitSha{v}
 }
 
 func (x *DiffHunk) SetBaseBranchName(v string) {
 	x.xxx_hidden_Base = &diffHunk_BaseBranchName{v}
+}
+
+func (x *DiffHunk) SetBaseHeadlessCommitSha(v string) {
+	x.xxx_hidden_Base = &diffHunk_BaseHeadlessCommitSha{v}
 }
 
 func (x *DiffHunk) SetUncommittedChanges(v *emptypb.Empty) {
@@ -1474,11 +1487,11 @@ func (x *DiffHunk) HasCurrentBranchName() bool {
 	return ok
 }
 
-func (x *DiffHunk) HasHeadlessCommitSha() bool {
+func (x *DiffHunk) HasCurrentHeadlessCommitSha() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Current.(*diffHunk_HeadlessCommitSha)
+	_, ok := x.xxx_hidden_Current.(*diffHunk_CurrentHeadlessCommitSha)
 	return ok
 }
 
@@ -1494,6 +1507,14 @@ func (x *DiffHunk) HasBaseBranchName() bool {
 		return false
 	}
 	_, ok := x.xxx_hidden_Base.(*diffHunk_BaseBranchName)
+	return ok
+}
+
+func (x *DiffHunk) HasBaseHeadlessCommitSha() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Base.(*diffHunk_BaseHeadlessCommitSha)
 	return ok
 }
 
@@ -1539,8 +1560,8 @@ func (x *DiffHunk) ClearCurrentBranchName() {
 	}
 }
 
-func (x *DiffHunk) ClearHeadlessCommitSha() {
-	if _, ok := x.xxx_hidden_Current.(*diffHunk_HeadlessCommitSha); ok {
+func (x *DiffHunk) ClearCurrentHeadlessCommitSha() {
+	if _, ok := x.xxx_hidden_Current.(*diffHunk_CurrentHeadlessCommitSha); ok {
 		x.xxx_hidden_Current = nil
 	}
 }
@@ -1555,6 +1576,12 @@ func (x *DiffHunk) ClearBaseBranchName() {
 	}
 }
 
+func (x *DiffHunk) ClearBaseHeadlessCommitSha() {
+	if _, ok := x.xxx_hidden_Base.(*diffHunk_BaseHeadlessCommitSha); ok {
+		x.xxx_hidden_Base = nil
+	}
+}
+
 func (x *DiffHunk) ClearUncommittedChanges() {
 	if _, ok := x.xxx_hidden_Base.(*diffHunk_UncommittedChanges); ok {
 		x.xxx_hidden_Base = nil
@@ -1563,7 +1590,7 @@ func (x *DiffHunk) ClearUncommittedChanges() {
 
 const DiffHunk_Current_not_set_case case_DiffHunk_Current = 0
 const DiffHunk_CurrentBranchName_case case_DiffHunk_Current = 6
-const DiffHunk_HeadlessCommitSha_case case_DiffHunk_Current = 7
+const DiffHunk_CurrentHeadlessCommitSha_case case_DiffHunk_Current = 7
 
 func (x *DiffHunk) WhichCurrent() case_DiffHunk_Current {
 	if x == nil {
@@ -1572,8 +1599,8 @@ func (x *DiffHunk) WhichCurrent() case_DiffHunk_Current {
 	switch x.xxx_hidden_Current.(type) {
 	case *diffHunk_CurrentBranchName:
 		return DiffHunk_CurrentBranchName_case
-	case *diffHunk_HeadlessCommitSha:
-		return DiffHunk_HeadlessCommitSha_case
+	case *diffHunk_CurrentHeadlessCommitSha:
+		return DiffHunk_CurrentHeadlessCommitSha_case
 	default:
 		return DiffHunk_Current_not_set_case
 	}
@@ -1581,7 +1608,8 @@ func (x *DiffHunk) WhichCurrent() case_DiffHunk_Current {
 
 const DiffHunk_Base_not_set_case case_DiffHunk_Base = 0
 const DiffHunk_BaseBranchName_case case_DiffHunk_Base = 8
-const DiffHunk_UncommittedChanges_case case_DiffHunk_Base = 9
+const DiffHunk_BaseHeadlessCommitSha_case case_DiffHunk_Base = 9
+const DiffHunk_UncommittedChanges_case case_DiffHunk_Base = 10
 
 func (x *DiffHunk) WhichBase() case_DiffHunk_Base {
 	if x == nil {
@@ -1590,6 +1618,8 @@ func (x *DiffHunk) WhichBase() case_DiffHunk_Base {
 	switch x.xxx_hidden_Base.(type) {
 	case *diffHunk_BaseBranchName:
 		return DiffHunk_BaseBranchName_case
+	case *diffHunk_BaseHeadlessCommitSha:
+		return DiffHunk_BaseHeadlessCommitSha_case
 	case *diffHunk_UncommittedChanges:
 		return DiffHunk_UncommittedChanges_case
 	default:
@@ -1606,12 +1636,13 @@ type DiffHunk_builder struct {
 	LinesAdded   *uint32
 	LinesRemoved *uint32
 	// Fields of oneof xxx_hidden_Current:
-	CurrentBranchName *string
-	HeadlessCommitSha *string
+	CurrentBranchName        *string
+	CurrentHeadlessCommitSha *string
 	// -- end of xxx_hidden_Current
 	// Fields of oneof xxx_hidden_Base:
-	BaseBranchName     *string
-	UncommittedChanges *emptypb.Empty
+	BaseBranchName        *string
+	BaseHeadlessCommitSha *string
+	UncommittedChanges    *emptypb.Empty
 	// -- end of xxx_hidden_Base
 }
 
@@ -1639,11 +1670,14 @@ func (b0 DiffHunk_builder) Build() *DiffHunk {
 	if b.CurrentBranchName != nil {
 		x.xxx_hidden_Current = &diffHunk_CurrentBranchName{*b.CurrentBranchName}
 	}
-	if b.HeadlessCommitSha != nil {
-		x.xxx_hidden_Current = &diffHunk_HeadlessCommitSha{*b.HeadlessCommitSha}
+	if b.CurrentHeadlessCommitSha != nil {
+		x.xxx_hidden_Current = &diffHunk_CurrentHeadlessCommitSha{*b.CurrentHeadlessCommitSha}
 	}
 	if b.BaseBranchName != nil {
 		x.xxx_hidden_Base = &diffHunk_BaseBranchName{*b.BaseBranchName}
+	}
+	if b.BaseHeadlessCommitSha != nil {
+		x.xxx_hidden_Base = &diffHunk_BaseHeadlessCommitSha{*b.BaseHeadlessCommitSha}
 	}
 	if b.UncommittedChanges != nil {
 		x.xxx_hidden_Base = &diffHunk_UncommittedChanges{b.UncommittedChanges}
@@ -1679,13 +1713,13 @@ type diffHunk_CurrentBranchName struct {
 	CurrentBranchName string `protobuf:"bytes,6,opt,name=current_branch_name,json=currentBranchName,oneof"`
 }
 
-type diffHunk_HeadlessCommitSha struct {
-	HeadlessCommitSha string `protobuf:"bytes,7,opt,name=headless_commit_sha,json=headlessCommitSha,oneof"`
+type diffHunk_CurrentHeadlessCommitSha struct {
+	CurrentHeadlessCommitSha string `protobuf:"bytes,7,opt,name=current_headless_commit_sha,json=currentHeadlessCommitSha,oneof"`
 }
 
 func (*diffHunk_CurrentBranchName) isDiffHunk_Current() {}
 
-func (*diffHunk_HeadlessCommitSha) isDiffHunk_Current() {}
+func (*diffHunk_CurrentHeadlessCommitSha) isDiffHunk_Current() {}
 
 type isDiffHunk_Base interface {
 	isDiffHunk_Base()
@@ -1695,11 +1729,17 @@ type diffHunk_BaseBranchName struct {
 	BaseBranchName string `protobuf:"bytes,8,opt,name=base_branch_name,json=baseBranchName,oneof"`
 }
 
+type diffHunk_BaseHeadlessCommitSha struct {
+	BaseHeadlessCommitSha string `protobuf:"bytes,9,opt,name=base_headless_commit_sha,json=baseHeadlessCommitSha,oneof"`
+}
+
 type diffHunk_UncommittedChanges struct {
-	UncommittedChanges *emptypb.Empty `protobuf:"bytes,9,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
+	UncommittedChanges *emptypb.Empty `protobuf:"bytes,10,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
 }
 
 func (*diffHunk_BaseBranchName) isDiffHunk_Base() {}
+
+func (*diffHunk_BaseHeadlessCommitSha) isDiffHunk_Base() {}
 
 func (*diffHunk_UncommittedChanges) isDiffHunk_Base() {}
 
@@ -1742,7 +1782,7 @@ const file_attachment_proto_rawDesc = "" +
 	"\x13GenericStringObject\x12\x1e\n" +
 	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayload\x12\x1f\n" +
 	"\vobject_type\x18\x02 \x01(\tR\n" +
-	"objectType\"\xd4\x03\n" +
+	"objectType\"\x9e\x04\n" +
 	"\bDiffHunk\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12H\n" +
 	"\n" +
@@ -1751,10 +1791,12 @@ const file_attachment_proto_rawDesc = "" +
 	"\vlines_added\x18\x04 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
 	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x120\n" +
-	"\x13current_branch_name\x18\x06 \x01(\tH\x00R\x11currentBranchName\x120\n" +
-	"\x13headless_commit_sha\x18\a \x01(\tH\x00R\x11headlessCommitSha\x12*\n" +
-	"\x10base_branch_name\x18\b \x01(\tH\x01R\x0ebaseBranchName\x12I\n" +
-	"\x13uncommitted_changes\x18\t \x01(\v2\x16.google.protobuf.EmptyH\x01R\x12uncommittedChangesB\t\n" +
+	"\x13current_branch_name\x18\x06 \x01(\tH\x00R\x11currentBranchName\x12?\n" +
+	"\x1bcurrent_headless_commit_sha\x18\a \x01(\tH\x00R\x18currentHeadlessCommitSha\x12*\n" +
+	"\x10base_branch_name\x18\b \x01(\tH\x01R\x0ebaseBranchName\x129\n" +
+	"\x18base_headless_commit_sha\x18\t \x01(\tH\x01R\x15baseHeadlessCommitSha\x12I\n" +
+	"\x13uncommitted_changes\x18\n" +
+	" \x01(\v2\x16.google.protobuf.EmptyH\x01R\x12uncommittedChangesB\t\n" +
 	"\acurrentB\x06\n" +
 	"\x04baseB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
@@ -1811,8 +1853,9 @@ func file_attachment_proto_init() {
 	}
 	file_attachment_proto_msgTypes[8].OneofWrappers = []any{
 		(*diffHunk_CurrentBranchName)(nil),
-		(*diffHunk_HeadlessCommitSha)(nil),
+		(*diffHunk_CurrentHeadlessCommitSha)(nil),
 		(*diffHunk_BaseBranchName)(nil),
+		(*diffHunk_BaseHeadlessCommitSha)(nil),
 		(*diffHunk_UncommittedChanges)(nil),
 	}
 	type x struct{}
