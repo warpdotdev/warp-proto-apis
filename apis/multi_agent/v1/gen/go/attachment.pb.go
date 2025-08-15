@@ -1265,12 +1265,11 @@ func (b0 GenericStringObject_builder) Build() *GenericStringObject {
 
 type DiffHunk struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_FileName     *string                `protobuf:"bytes,1,opt,name=file_name,json=fileName"`
-	xxx_hidden_LineStart    uint32                 `protobuf:"varint,2,opt,name=line_start,json=lineStart"`
-	xxx_hidden_LineEnd      uint32                 `protobuf:"varint,3,opt,name=line_end,json=lineEnd"`
-	xxx_hidden_DiffContent  *string                `protobuf:"bytes,4,opt,name=diff_content,json=diffContent"`
-	xxx_hidden_LinesAdded   uint32                 `protobuf:"varint,5,opt,name=lines_added,json=linesAdded"`
-	xxx_hidden_LinesRemoved uint32                 `protobuf:"varint,6,opt,name=lines_removed,json=linesRemoved"`
+	xxx_hidden_FilePath     *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_LineRange    *FileContentLineRange  `protobuf:"bytes,2,opt,name=line_range,json=lineRange"`
+	xxx_hidden_DiffContent  *string                `protobuf:"bytes,3,opt,name=diff_content,json=diffContent"`
+	xxx_hidden_LinesAdded   uint32                 `protobuf:"varint,4,opt,name=lines_added,json=linesAdded"`
+	xxx_hidden_LinesRemoved uint32                 `protobuf:"varint,5,opt,name=lines_removed,json=linesRemoved"`
 	xxx_hidden_Base         isDiffHunk_Base        `protobuf_oneof:"base"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
@@ -1303,28 +1302,21 @@ func (x *DiffHunk) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *DiffHunk) GetFileName() string {
+func (x *DiffHunk) GetFilePath() string {
 	if x != nil {
-		if x.xxx_hidden_FileName != nil {
-			return *x.xxx_hidden_FileName
+		if x.xxx_hidden_FilePath != nil {
+			return *x.xxx_hidden_FilePath
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *DiffHunk) GetLineStart() uint32 {
+func (x *DiffHunk) GetLineRange() *FileContentLineRange {
 	if x != nil {
-		return x.xxx_hidden_LineStart
+		return x.xxx_hidden_LineRange
 	}
-	return 0
-}
-
-func (x *DiffHunk) GetLineEnd() uint32 {
-	if x != nil {
-		return x.xxx_hidden_LineEnd
-	}
-	return 0
+	return nil
 }
 
 func (x *DiffHunk) GetDiffContent() string {
@@ -1369,34 +1361,28 @@ func (x *DiffHunk) GetUncommittedChanges() *emptypb.Empty {
 	return nil
 }
 
-func (x *DiffHunk) SetFileName(v string) {
-	x.xxx_hidden_FileName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+func (x *DiffHunk) SetFilePath(v string) {
+	x.xxx_hidden_FilePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
-func (x *DiffHunk) SetLineStart(v uint32) {
-	x.xxx_hidden_LineStart = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
-}
-
-func (x *DiffHunk) SetLineEnd(v uint32) {
-	x.xxx_hidden_LineEnd = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+func (x *DiffHunk) SetLineRange(v *FileContentLineRange) {
+	x.xxx_hidden_LineRange = v
 }
 
 func (x *DiffHunk) SetDiffContent(v string) {
 	x.xxx_hidden_DiffContent = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *DiffHunk) SetLinesAdded(v uint32) {
 	x.xxx_hidden_LinesAdded = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *DiffHunk) SetLinesRemoved(v uint32) {
 	x.xxx_hidden_LinesRemoved = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
 func (x *DiffHunk) SetBranchName(v string) {
@@ -1411,46 +1397,39 @@ func (x *DiffHunk) SetUncommittedChanges(v *emptypb.Empty) {
 	x.xxx_hidden_Base = &diffHunk_UncommittedChanges{v}
 }
 
-func (x *DiffHunk) HasFileName() bool {
+func (x *DiffHunk) HasFilePath() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *DiffHunk) HasLineStart() bool {
+func (x *DiffHunk) HasLineRange() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *DiffHunk) HasLineEnd() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+	return x.xxx_hidden_LineRange != nil
 }
 
 func (x *DiffHunk) HasDiffContent() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
 func (x *DiffHunk) HasLinesAdded() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *DiffHunk) HasLinesRemoved() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
 func (x *DiffHunk) HasBase() bool {
@@ -1476,33 +1455,27 @@ func (x *DiffHunk) HasUncommittedChanges() bool {
 	return ok
 }
 
-func (x *DiffHunk) ClearFileName() {
+func (x *DiffHunk) ClearFilePath() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_FileName = nil
+	x.xxx_hidden_FilePath = nil
 }
 
-func (x *DiffHunk) ClearLineStart() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_LineStart = 0
-}
-
-func (x *DiffHunk) ClearLineEnd() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_LineEnd = 0
+func (x *DiffHunk) ClearLineRange() {
+	x.xxx_hidden_LineRange = nil
 }
 
 func (x *DiffHunk) ClearDiffContent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_DiffContent = nil
 }
 
 func (x *DiffHunk) ClearLinesAdded() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_LinesAdded = 0
 }
 
 func (x *DiffHunk) ClearLinesRemoved() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_LinesRemoved = 0
 }
 
@@ -1523,8 +1496,8 @@ func (x *DiffHunk) ClearUncommittedChanges() {
 }
 
 const DiffHunk_Base_not_set_case case_DiffHunk_Base = 0
-const DiffHunk_BranchName_case case_DiffHunk_Base = 7
-const DiffHunk_UncommittedChanges_case case_DiffHunk_Base = 8
+const DiffHunk_BranchName_case case_DiffHunk_Base = 6
+const DiffHunk_UncommittedChanges_case case_DiffHunk_Base = 7
 
 func (x *DiffHunk) WhichBase() case_DiffHunk_Base {
 	if x == nil {
@@ -1543,9 +1516,8 @@ func (x *DiffHunk) WhichBase() case_DiffHunk_Base {
 type DiffHunk_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	FileName     *string
-	LineStart    *uint32
-	LineEnd      *uint32
+	FilePath     *string
+	LineRange    *FileContentLineRange
 	DiffContent  *string
 	LinesAdded   *uint32
 	LinesRemoved *uint32
@@ -1559,28 +1531,21 @@ func (b0 DiffHunk_builder) Build() *DiffHunk {
 	m0 := &DiffHunk{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.FileName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
-		x.xxx_hidden_FileName = b.FileName
+	if b.FilePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		x.xxx_hidden_FilePath = b.FilePath
 	}
-	if b.LineStart != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
-		x.xxx_hidden_LineStart = *b.LineStart
-	}
-	if b.LineEnd != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
-		x.xxx_hidden_LineEnd = *b.LineEnd
-	}
+	x.xxx_hidden_LineRange = b.LineRange
 	if b.DiffContent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_DiffContent = b.DiffContent
 	}
 	if b.LinesAdded != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_LinesAdded = *b.LinesAdded
 	}
 	if b.LinesRemoved != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_LinesRemoved = *b.LinesRemoved
 	}
 	if b.BranchName != nil {
@@ -1607,11 +1572,11 @@ type isDiffHunk_Base interface {
 }
 
 type diffHunk_BranchName struct {
-	BranchName string `protobuf:"bytes,7,opt,name=branch_name,json=branchName,oneof"`
+	BranchName string `protobuf:"bytes,6,opt,name=branch_name,json=branchName,oneof"`
 }
 
 type diffHunk_UncommittedChanges struct {
-	UncommittedChanges *emptypb.Empty `protobuf:"bytes,8,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
+	UncommittedChanges *emptypb.Empty `protobuf:"bytes,7,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
 }
 
 func (*diffHunk_BranchName) isDiffHunk_Base() {}
@@ -1622,7 +1587,7 @@ var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\"\xfe\x02\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xfe\x02\n" +
 	"\n" +
 	"Attachment\x12\x1f\n" +
 	"\n" +
@@ -1657,19 +1622,18 @@ const file_attachment_proto_rawDesc = "" +
 	"\x13GenericStringObject\x12\x1e\n" +
 	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayload\x12\x1f\n" +
 	"\vobject_type\x18\x02 \x01(\tR\n" +
-	"objectType\"\xcc\x02\n" +
+	"objectType\"\xdc\x02\n" +
 	"\bDiffHunk\x12!\n" +
-	"\tfile_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfileName\x12\x1d\n" +
+	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12H\n" +
 	"\n" +
-	"line_start\x18\x02 \x01(\rR\tlineStart\x12\x19\n" +
-	"\bline_end\x18\x03 \x01(\rR\alineEnd\x12'\n" +
-	"\fdiff_content\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\vdiffContent\x12\x1f\n" +
-	"\vlines_added\x18\x05 \x01(\rR\n" +
+	"line_range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\x12'\n" +
+	"\fdiff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdiffContent\x12\x1f\n" +
+	"\vlines_added\x18\x04 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
-	"\rlines_removed\x18\x06 \x01(\rR\flinesRemoved\x12!\n" +
-	"\vbranch_name\x18\a \x01(\tH\x00R\n" +
+	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x12!\n" +
+	"\vbranch_name\x18\x06 \x01(\tH\x00R\n" +
 	"branchName\x12I\n" +
-	"\x13uncommitted_changes\x18\b \x01(\v2\x16.google.protobuf.EmptyH\x00R\x12uncommittedChangesB\x06\n" +
+	"\x13uncommitted_changes\x18\a \x01(\v2\x16.google.protobuf.EmptyH\x00R\x12uncommittedChangesB\x06\n" +
 	"\x04baseB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
@@ -1683,23 +1647,25 @@ var file_attachment_proto_goTypes = []any{
 	(*Notebook)(nil),                        // 6: warp.multi_agent.v1.Notebook
 	(*GenericStringObject)(nil),             // 7: warp.multi_agent.v1.GenericStringObject
 	(*DiffHunk)(nil),                        // 8: warp.multi_agent.v1.DiffHunk
-	(*emptypb.Empty)(nil),                   // 9: google.protobuf.Empty
+	(*FileContentLineRange)(nil),            // 9: warp.multi_agent.v1.FileContentLineRange
+	(*emptypb.Empty)(nil),                   // 10: google.protobuf.Empty
 }
 var file_attachment_proto_depIdxs = []int32{
-	1, // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	2, // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
-	4, // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
-	8, // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
-	3, // 4: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	5, // 5: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
-	6, // 6: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
-	7, // 7: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
-	9, // 8: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	1,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	2,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
+	4,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
+	8,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
+	3,  // 4: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	5,  // 5: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
+	6,  // 6: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
+	7,  // 7: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
+	9,  // 8: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	10, // 9: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -1708,6 +1674,7 @@ func file_attachment_proto_init() {
 		return
 	}
 	file_options_proto_init()
+	file_file_content_proto_init()
 	file_attachment_proto_msgTypes[0].OneofWrappers = []any{
 		(*attachment_PlainText)(nil),
 		(*attachment_ExecutedShellCommand)(nil),
