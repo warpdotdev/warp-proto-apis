@@ -264,7 +264,7 @@ func (b0 FileContent_builder) Build() *FileContent {
 	return m0
 }
 
-// A representation of binary content within a file.
+// A representation of binary or text content within a file.
 type AnyFileContent struct {
 	state              protoimpl.MessageState   `protogen:"opaque.v1"`
 	xxx_hidden_Content isAnyFileContent_Content `protobuf_oneof:"content"`
@@ -436,6 +436,7 @@ func (*anyFileContent_BinaryContent) isAnyFileContent_Content() {}
 
 func (*anyFileContent_TextContent) isAnyFileContent_Content() {}
 
+// A representation of binary content within a file.
 type AnyFileContent_BinaryFileContent struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`

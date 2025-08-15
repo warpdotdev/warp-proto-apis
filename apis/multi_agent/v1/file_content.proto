@@ -23,8 +23,9 @@ message FileContent {
 }
 
 
-// A representation of binary content within a file.
+// A representation of binary or text content within a file.
 message AnyFileContent {
+  // A representation of binary content within a file.
   message BinaryFileContent {
     string file_path = 1[ (sensitive) = true ];
     bytes data = 4;
