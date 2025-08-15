@@ -72,8 +72,12 @@ message DiffHunk {
   string diff_content = 3 [ (sensitive) = true ];
   uint32 lines_added = 4;
   uint32 lines_removed = 5;
+  oneof current {
+    string current_branch_name = 6;
+    string headless_commit_sha = 7;
+  }
   oneof base {
-    string branch_name = 6;
-    google.protobuf.Empty uncommitted_changes = 7;
+    string base_branch_name = 8;
+    google.protobuf.Empty uncommitted_changes = 9;
   }
 }
