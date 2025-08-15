@@ -65,21 +65,13 @@ message GenericStringObject {
   string object_type = 2;
 }
 
-// A diff hunk attachment containing a portion of a diff for a specific file.
 message DiffHunk {
-  // The name/path of the file this diff hunk applies to.
   string file_name = 1 [ (sensitive) = true ];
-  // The start line number for this hunk.
   int32 line_start = 2;
-  // The end line number for this hunk.
   int32 line_end = 3;
-  // The actual diff content as a string.
   string diff_content = 4 [ (sensitive) = true ];
-  // The number of lines added in this hunk.
   int32 lines_added = 5;
-  // The number of lines removed in this hunk.
   int32 lines_removed = 6;
-  // The base for this diff - either a branch name or uncommitted changes.
   oneof base {
     string branch_name = 7;
     google.protobuf.Empty uncommitted_changes = 8;
