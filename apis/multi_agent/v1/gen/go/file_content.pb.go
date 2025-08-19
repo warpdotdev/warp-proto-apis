@@ -264,28 +264,31 @@ func (b0 FileContent_builder) Build() *FileContent {
 	return m0
 }
 
-// A representation of binary or text content within a file.
-type AnyFileContent struct {
-	state              protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_Content isAnyFileContent_Content `protobuf_oneof:"content"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+// A representation of binary content within a file.
+type BinaryFileContent struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_Data        []byte                 `protobuf:"bytes,2,opt,name=data"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
-func (x *AnyFileContent) Reset() {
-	*x = AnyFileContent{}
+func (x *BinaryFileContent) Reset() {
+	*x = BinaryFileContent{}
 	mi := &file_file_content_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *AnyFileContent) String() string {
+func (x *BinaryFileContent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*AnyFileContent) ProtoMessage() {}
+func (*BinaryFileContent) ProtoMessage() {}
 
-func (x *AnyFileContent) ProtoReflect() protoreflect.Message {
+func (x *BinaryFileContent) ProtoReflect() protoreflect.Message {
 	mi := &file_file_content_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -297,7 +300,116 @@ func (x *AnyFileContent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *AnyFileContent) GetBinaryContent() *AnyFileContent_BinaryFileContent {
+func (x *BinaryFileContent) GetFilePath() string {
+	if x != nil {
+		if x.xxx_hidden_FilePath != nil {
+			return *x.xxx_hidden_FilePath
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *BinaryFileContent) GetData() []byte {
+	if x != nil {
+		return x.xxx_hidden_Data
+	}
+	return nil
+}
+
+func (x *BinaryFileContent) SetFilePath(v string) {
+	x.xxx_hidden_FilePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *BinaryFileContent) SetData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_Data = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *BinaryFileContent) HasFilePath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *BinaryFileContent) HasData() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *BinaryFileContent) ClearFilePath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_FilePath = nil
+}
+
+func (x *BinaryFileContent) ClearData() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Data = nil
+}
+
+type BinaryFileContent_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	FilePath *string
+	Data     []byte
+}
+
+func (b0 BinaryFileContent_builder) Build() *BinaryFileContent {
+	m0 := &BinaryFileContent{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.FilePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_FilePath = b.FilePath
+	}
+	if b.Data != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Data = b.Data
+	}
+	return m0
+}
+
+// A representation of binary or text content within a file.
+type AnyFileContent struct {
+	state              protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Content isAnyFileContent_Content `protobuf_oneof:"content"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *AnyFileContent) Reset() {
+	*x = AnyFileContent{}
+	mi := &file_file_content_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AnyFileContent) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AnyFileContent) ProtoMessage() {}
+
+func (x *AnyFileContent) ProtoReflect() protoreflect.Message {
+	mi := &file_file_content_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *AnyFileContent) GetBinaryContent() *BinaryFileContent {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Content.(*anyFileContent_BinaryContent); ok {
 			return x.BinaryContent
@@ -315,7 +427,7 @@ func (x *AnyFileContent) GetTextContent() *FileContent {
 	return nil
 }
 
-func (x *AnyFileContent) SetBinaryContent(v *AnyFileContent_BinaryFileContent) {
+func (x *AnyFileContent) SetBinaryContent(v *BinaryFileContent) {
 	if v == nil {
 		x.xxx_hidden_Content = nil
 		return
@@ -371,8 +483,8 @@ func (x *AnyFileContent) ClearTextContent() {
 }
 
 const AnyFileContent_Content_not_set_case case_AnyFileContent_Content = 0
-const AnyFileContent_BinaryContent_case case_AnyFileContent_Content = 5
-const AnyFileContent_TextContent_case case_AnyFileContent_Content = 6
+const AnyFileContent_BinaryContent_case case_AnyFileContent_Content = 1
+const AnyFileContent_TextContent_case case_AnyFileContent_Content = 2
 
 func (x *AnyFileContent) WhichContent() case_AnyFileContent_Content {
 	if x == nil {
@@ -392,7 +504,7 @@ type AnyFileContent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Content:
-	BinaryContent *AnyFileContent_BinaryFileContent
+	BinaryContent *BinaryFileContent
 	TextContent   *FileContent
 	// -- end of xxx_hidden_Content
 }
@@ -413,7 +525,7 @@ func (b0 AnyFileContent_builder) Build() *AnyFileContent {
 type case_AnyFileContent_Content protoreflect.FieldNumber
 
 func (x case_AnyFileContent_Content) String() string {
-	md := file_file_content_proto_msgTypes[2].Descriptor()
+	md := file_file_content_proto_msgTypes[3].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -425,128 +537,16 @@ type isAnyFileContent_Content interface {
 }
 
 type anyFileContent_BinaryContent struct {
-	BinaryContent *AnyFileContent_BinaryFileContent `protobuf:"bytes,5,opt,name=binary_content,json=binaryContent,oneof"`
+	BinaryContent *BinaryFileContent `protobuf:"bytes,1,opt,name=binary_content,json=binaryContent,oneof"`
 }
 
 type anyFileContent_TextContent struct {
-	TextContent *FileContent `protobuf:"bytes,6,opt,name=text_content,json=textContent,oneof"`
+	TextContent *FileContent `protobuf:"bytes,2,opt,name=text_content,json=textContent,oneof"`
 }
 
 func (*anyFileContent_BinaryContent) isAnyFileContent_Content() {}
 
 func (*anyFileContent_TextContent) isAnyFileContent_Content() {}
-
-// A representation of binary content within a file.
-type AnyFileContent_BinaryFileContent struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
-	xxx_hidden_Data        []byte                 `protobuf:"bytes,4,opt,name=data"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *AnyFileContent_BinaryFileContent) Reset() {
-	*x = AnyFileContent_BinaryFileContent{}
-	mi := &file_file_content_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AnyFileContent_BinaryFileContent) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AnyFileContent_BinaryFileContent) ProtoMessage() {}
-
-func (x *AnyFileContent_BinaryFileContent) ProtoReflect() protoreflect.Message {
-	mi := &file_file_content_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *AnyFileContent_BinaryFileContent) GetFilePath() string {
-	if x != nil {
-		if x.xxx_hidden_FilePath != nil {
-			return *x.xxx_hidden_FilePath
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *AnyFileContent_BinaryFileContent) GetData() []byte {
-	if x != nil {
-		return x.xxx_hidden_Data
-	}
-	return nil
-}
-
-func (x *AnyFileContent_BinaryFileContent) SetFilePath(v string) {
-	x.xxx_hidden_FilePath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *AnyFileContent_BinaryFileContent) SetData(v []byte) {
-	if v == nil {
-		v = []byte{}
-	}
-	x.xxx_hidden_Data = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *AnyFileContent_BinaryFileContent) HasFilePath() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *AnyFileContent_BinaryFileContent) HasData() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *AnyFileContent_BinaryFileContent) ClearFilePath() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_FilePath = nil
-}
-
-func (x *AnyFileContent_BinaryFileContent) ClearData() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Data = nil
-}
-
-type AnyFileContent_BinaryFileContent_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	FilePath *string
-	Data     []byte
-}
-
-func (b0 AnyFileContent_BinaryFileContent_builder) Build() *AnyFileContent_BinaryFileContent {
-	m0 := &AnyFileContent_BinaryFileContent{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.FilePath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_FilePath = b.FilePath
-	}
-	if b.Data != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Data = b.Data
-	}
-	return m0
-}
 
 var File_file_content_proto protoreflect.FileDescriptor
 
@@ -560,25 +560,25 @@ const file_file_content_proto_rawDesc = "" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
 	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12H\n" +
 	"\n" +
-	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\"\x8e\x02\n" +
-	"\x0eAnyFileContent\x12^\n" +
-	"\x0ebinary_content\x18\x05 \x01(\v25.warp.multi_agent.v1.AnyFileContent.BinaryFileContentH\x00R\rbinaryContent\x12E\n" +
-	"\ftext_content\x18\x06 \x01(\v2 .warp.multi_agent.v1.FileContentH\x00R\vtextContent\x1aJ\n" +
+	"line_range\x18\x03 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\"J\n" +
 	"\x11BinaryFileContent\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x12\n" +
-	"\x04data\x18\x04 \x01(\fR\x04dataB\t\n" +
+	"\x04data\x18\x02 \x01(\fR\x04data\"\xb3\x01\n" +
+	"\x0eAnyFileContent\x12O\n" +
+	"\x0ebinary_content\x18\x01 \x01(\v2&.warp.multi_agent.v1.BinaryFileContentH\x00R\rbinaryContent\x12E\n" +
+	"\ftext_content\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentH\x00R\vtextContentB\t\n" +
 	"\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_file_content_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_file_content_proto_goTypes = []any{
-	(*FileContentLineRange)(nil),             // 0: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                      // 1: warp.multi_agent.v1.FileContent
-	(*AnyFileContent)(nil),                   // 2: warp.multi_agent.v1.AnyFileContent
-	(*AnyFileContent_BinaryFileContent)(nil), // 3: warp.multi_agent.v1.AnyFileContent.BinaryFileContent
+	(*FileContentLineRange)(nil), // 0: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),          // 1: warp.multi_agent.v1.FileContent
+	(*BinaryFileContent)(nil),    // 2: warp.multi_agent.v1.BinaryFileContent
+	(*AnyFileContent)(nil),       // 3: warp.multi_agent.v1.AnyFileContent
 }
 var file_file_content_proto_depIdxs = []int32{
 	0, // 0: warp.multi_agent.v1.FileContent.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	3, // 1: warp.multi_agent.v1.AnyFileContent.binary_content:type_name -> warp.multi_agent.v1.AnyFileContent.BinaryFileContent
+	2, // 1: warp.multi_agent.v1.AnyFileContent.binary_content:type_name -> warp.multi_agent.v1.BinaryFileContent
 	1, // 2: warp.multi_agent.v1.AnyFileContent.text_content:type_name -> warp.multi_agent.v1.FileContent
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
@@ -593,7 +593,7 @@ func file_file_content_proto_init() {
 		return
 	}
 	file_options_proto_init()
-	file_file_content_proto_msgTypes[2].OneofWrappers = []any{
+	file_file_content_proto_msgTypes[3].OneofWrappers = []any{
 		(*anyFileContent_BinaryContent)(nil),
 		(*anyFileContent_TextContent)(nil),
 	}

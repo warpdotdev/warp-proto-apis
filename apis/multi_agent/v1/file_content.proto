@@ -22,17 +22,17 @@ message FileContent {
   FileContentLineRange line_range = 3;
 }
 
+// A representation of binary content within a file.
+message BinaryFileContent {
+  string file_path = 1[ (sensitive) = true ];
+  bytes data = 2;
+}
+
 
 // A representation of binary or text content within a file.
 message AnyFileContent {
-  // A representation of binary content within a file.
-  message BinaryFileContent {
-    string file_path = 1[ (sensitive) = true ];
-    bytes data = 4;
-  }
-
   oneof content {
-    BinaryFileContent binary_content = 5;
-    FileContent text_content = 6;
+    BinaryFileContent binary_content = 1;
+    FileContent text_content = 2;
   }
 }

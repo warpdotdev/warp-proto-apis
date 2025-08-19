@@ -384,13 +384,17 @@ message RunShellCommandResult {
 // Result of a `ReadFiles` tool call.
 message ReadFilesResult {
   oneof result {
-    Success success = 1;
+    TextFilesSuccess text_files_success = 1;
+    AnyFilesSuccess any_files_success = 3;
     Error error = 2;
   }
+  
+  message TextFilesSuccess {
+    repeated FileContent files = 1;
+  }
 
-  message Success { 
-    repeated FileContent files = 1 [ deprecated = true ]; 
-    repeated AnyFileContent any_files = 2; 
+  message AnyFilesSuccess {
+    repeated AnyFileContent files = 1;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
