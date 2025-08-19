@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -89,6 +90,15 @@ func (x *Attachment) GetDriveObject() *DriveObject {
 	return nil
 }
 
+func (x *Attachment) GetDiffHunk() *DiffHunk {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Value.(*attachment_DiffHunk); ok {
+			return x.DiffHunk
+		}
+	}
+	return nil
+}
+
 func (x *Attachment) SetPlainText(v string) {
 	x.xxx_hidden_Value = &attachment_PlainText{v}
 }
@@ -115,6 +125,14 @@ func (x *Attachment) SetDriveObject(v *DriveObject) {
 		return
 	}
 	x.xxx_hidden_Value = &attachment_DriveObject{v}
+}
+
+func (x *Attachment) SetDiffHunk(v *DiffHunk) {
+	if v == nil {
+		x.xxx_hidden_Value = nil
+		return
+	}
+	x.xxx_hidden_Value = &attachment_DiffHunk{v}
 }
 
 func (x *Attachment) HasValue() bool {
@@ -156,6 +174,14 @@ func (x *Attachment) HasDriveObject() bool {
 	return ok
 }
 
+func (x *Attachment) HasDiffHunk() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*attachment_DiffHunk)
+	return ok
+}
+
 func (x *Attachment) ClearValue() {
 	x.xxx_hidden_Value = nil
 }
@@ -184,11 +210,18 @@ func (x *Attachment) ClearDriveObject() {
 	}
 }
 
+func (x *Attachment) ClearDiffHunk() {
+	if _, ok := x.xxx_hidden_Value.(*attachment_DiffHunk); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
 const Attachment_Value_not_set_case case_Attachment_Value = 0
 const Attachment_PlainText_case case_Attachment_Value = 1
 const Attachment_ExecutedShellCommand_case case_Attachment_Value = 2
 const Attachment_RunningShellCommand_case case_Attachment_Value = 3
 const Attachment_DriveObject_case case_Attachment_Value = 4
+const Attachment_DiffHunk_case case_Attachment_Value = 5
 
 func (x *Attachment) WhichValue() case_Attachment_Value {
 	if x == nil {
@@ -203,6 +236,8 @@ func (x *Attachment) WhichValue() case_Attachment_Value {
 		return Attachment_RunningShellCommand_case
 	case *attachment_DriveObject:
 		return Attachment_DriveObject_case
+	case *attachment_DiffHunk:
+		return Attachment_DiffHunk_case
 	default:
 		return Attachment_Value_not_set_case
 	}
@@ -216,6 +251,7 @@ type Attachment_builder struct {
 	ExecutedShellCommand *ExecutedShellCommand
 	RunningShellCommand  *RunningShellCommand
 	DriveObject          *DriveObject
+	DiffHunk             *DiffHunk
 	// -- end of xxx_hidden_Value
 }
 
@@ -234,6 +270,9 @@ func (b0 Attachment_builder) Build() *Attachment {
 	}
 	if b.DriveObject != nil {
 		x.xxx_hidden_Value = &attachment_DriveObject{b.DriveObject}
+	}
+	if b.DiffHunk != nil {
+		x.xxx_hidden_Value = &attachment_DiffHunk{b.DiffHunk}
 	}
 	return m0
 }
@@ -268,6 +307,10 @@ type attachment_DriveObject struct {
 	DriveObject *DriveObject `protobuf:"bytes,4,opt,name=drive_object,json=driveObject,oneof"`
 }
 
+type attachment_DiffHunk struct {
+	DiffHunk *DiffHunk `protobuf:"bytes,5,opt,name=diff_hunk,json=diffHunk,oneof"`
+}
+
 func (*attachment_PlainText) isAttachment_Value() {}
 
 func (*attachment_ExecutedShellCommand) isAttachment_Value() {}
@@ -275,6 +318,8 @@ func (*attachment_ExecutedShellCommand) isAttachment_Value() {}
 func (*attachment_RunningShellCommand) isAttachment_Value() {}
 
 func (*attachment_DriveObject) isAttachment_Value() {}
+
+func (*attachment_DiffHunk) isAttachment_Value() {}
 
 // Information about shell commands that the user has executed.
 type ExecutedShellCommand struct {
@@ -1218,18 +1263,499 @@ func (b0 GenericStringObject_builder) Build() *GenericStringObject {
 	return m0
 }
 
+type DiffHunk struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FilePath     *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_LineRange    *FileContentLineRange  `protobuf:"bytes,2,opt,name=line_range,json=lineRange"`
+	xxx_hidden_DiffContent  *string                `protobuf:"bytes,3,opt,name=diff_content,json=diffContent"`
+	xxx_hidden_LinesAdded   uint32                 `protobuf:"varint,4,opt,name=lines_added,json=linesAdded"`
+	xxx_hidden_LinesRemoved uint32                 `protobuf:"varint,5,opt,name=lines_removed,json=linesRemoved"`
+	xxx_hidden_Current      isDiffHunk_Current     `protobuf_oneof:"current"`
+	xxx_hidden_Base         isDiffHunk_Base        `protobuf_oneof:"base"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *DiffHunk) Reset() {
+	*x = DiffHunk{}
+	mi := &file_attachment_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DiffHunk) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DiffHunk) ProtoMessage() {}
+
+func (x *DiffHunk) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *DiffHunk) GetFilePath() string {
+	if x != nil {
+		if x.xxx_hidden_FilePath != nil {
+			return *x.xxx_hidden_FilePath
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetLineRange() *FileContentLineRange {
+	if x != nil {
+		return x.xxx_hidden_LineRange
+	}
+	return nil
+}
+
+func (x *DiffHunk) GetDiffContent() string {
+	if x != nil {
+		if x.xxx_hidden_DiffContent != nil {
+			return *x.xxx_hidden_DiffContent
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetLinesAdded() uint32 {
+	if x != nil {
+		return x.xxx_hidden_LinesAdded
+	}
+	return 0
+}
+
+func (x *DiffHunk) GetLinesRemoved() uint32 {
+	if x != nil {
+		return x.xxx_hidden_LinesRemoved
+	}
+	return 0
+}
+
+func (x *DiffHunk) GetCurrentBranchName() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Current.(*diffHunk_CurrentBranchName); ok {
+			return x.CurrentBranchName
+		}
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetCurrentHeadlessCommitSha() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Current.(*diffHunk_CurrentHeadlessCommitSha); ok {
+			return x.CurrentHeadlessCommitSha
+		}
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetBaseBranchName() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Base.(*diffHunk_BaseBranchName); ok {
+			return x.BaseBranchName
+		}
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetBaseHeadlessCommitSha() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Base.(*diffHunk_BaseHeadlessCommitSha); ok {
+			return x.BaseHeadlessCommitSha
+		}
+	}
+	return ""
+}
+
+func (x *DiffHunk) GetUncommittedChanges() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Base.(*diffHunk_UncommittedChanges); ok {
+			return x.UncommittedChanges
+		}
+	}
+	return nil
+}
+
+func (x *DiffHunk) SetFilePath(v string) {
+	x.xxx_hidden_FilePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+}
+
+func (x *DiffHunk) SetLineRange(v *FileContentLineRange) {
+	x.xxx_hidden_LineRange = v
+}
+
+func (x *DiffHunk) SetDiffContent(v string) {
+	x.xxx_hidden_DiffContent = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+}
+
+func (x *DiffHunk) SetLinesAdded(v uint32) {
+	x.xxx_hidden_LinesAdded = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+}
+
+func (x *DiffHunk) SetLinesRemoved(v uint32) {
+	x.xxx_hidden_LinesRemoved = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
+}
+
+func (x *DiffHunk) SetCurrentBranchName(v string) {
+	x.xxx_hidden_Current = &diffHunk_CurrentBranchName{v}
+}
+
+func (x *DiffHunk) SetCurrentHeadlessCommitSha(v string) {
+	x.xxx_hidden_Current = &diffHunk_CurrentHeadlessCommitSha{v}
+}
+
+func (x *DiffHunk) SetBaseBranchName(v string) {
+	x.xxx_hidden_Base = &diffHunk_BaseBranchName{v}
+}
+
+func (x *DiffHunk) SetBaseHeadlessCommitSha(v string) {
+	x.xxx_hidden_Base = &diffHunk_BaseHeadlessCommitSha{v}
+}
+
+func (x *DiffHunk) SetUncommittedChanges(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Base = nil
+		return
+	}
+	x.xxx_hidden_Base = &diffHunk_UncommittedChanges{v}
+}
+
+func (x *DiffHunk) HasFilePath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *DiffHunk) HasLineRange() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_LineRange != nil
+}
+
+func (x *DiffHunk) HasDiffContent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *DiffHunk) HasLinesAdded() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *DiffHunk) HasLinesRemoved() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *DiffHunk) HasCurrent() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Current != nil
+}
+
+func (x *DiffHunk) HasCurrentBranchName() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Current.(*diffHunk_CurrentBranchName)
+	return ok
+}
+
+func (x *DiffHunk) HasCurrentHeadlessCommitSha() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Current.(*diffHunk_CurrentHeadlessCommitSha)
+	return ok
+}
+
+func (x *DiffHunk) HasBase() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Base != nil
+}
+
+func (x *DiffHunk) HasBaseBranchName() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Base.(*diffHunk_BaseBranchName)
+	return ok
+}
+
+func (x *DiffHunk) HasBaseHeadlessCommitSha() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Base.(*diffHunk_BaseHeadlessCommitSha)
+	return ok
+}
+
+func (x *DiffHunk) HasUncommittedChanges() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Base.(*diffHunk_UncommittedChanges)
+	return ok
+}
+
+func (x *DiffHunk) ClearFilePath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_FilePath = nil
+}
+
+func (x *DiffHunk) ClearLineRange() {
+	x.xxx_hidden_LineRange = nil
+}
+
+func (x *DiffHunk) ClearDiffContent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_DiffContent = nil
+}
+
+func (x *DiffHunk) ClearLinesAdded() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_LinesAdded = 0
+}
+
+func (x *DiffHunk) ClearLinesRemoved() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_LinesRemoved = 0
+}
+
+func (x *DiffHunk) ClearCurrent() {
+	x.xxx_hidden_Current = nil
+}
+
+func (x *DiffHunk) ClearCurrentBranchName() {
+	if _, ok := x.xxx_hidden_Current.(*diffHunk_CurrentBranchName); ok {
+		x.xxx_hidden_Current = nil
+	}
+}
+
+func (x *DiffHunk) ClearCurrentHeadlessCommitSha() {
+	if _, ok := x.xxx_hidden_Current.(*diffHunk_CurrentHeadlessCommitSha); ok {
+		x.xxx_hidden_Current = nil
+	}
+}
+
+func (x *DiffHunk) ClearBase() {
+	x.xxx_hidden_Base = nil
+}
+
+func (x *DiffHunk) ClearBaseBranchName() {
+	if _, ok := x.xxx_hidden_Base.(*diffHunk_BaseBranchName); ok {
+		x.xxx_hidden_Base = nil
+	}
+}
+
+func (x *DiffHunk) ClearBaseHeadlessCommitSha() {
+	if _, ok := x.xxx_hidden_Base.(*diffHunk_BaseHeadlessCommitSha); ok {
+		x.xxx_hidden_Base = nil
+	}
+}
+
+func (x *DiffHunk) ClearUncommittedChanges() {
+	if _, ok := x.xxx_hidden_Base.(*diffHunk_UncommittedChanges); ok {
+		x.xxx_hidden_Base = nil
+	}
+}
+
+const DiffHunk_Current_not_set_case case_DiffHunk_Current = 0
+const DiffHunk_CurrentBranchName_case case_DiffHunk_Current = 6
+const DiffHunk_CurrentHeadlessCommitSha_case case_DiffHunk_Current = 7
+
+func (x *DiffHunk) WhichCurrent() case_DiffHunk_Current {
+	if x == nil {
+		return DiffHunk_Current_not_set_case
+	}
+	switch x.xxx_hidden_Current.(type) {
+	case *diffHunk_CurrentBranchName:
+		return DiffHunk_CurrentBranchName_case
+	case *diffHunk_CurrentHeadlessCommitSha:
+		return DiffHunk_CurrentHeadlessCommitSha_case
+	default:
+		return DiffHunk_Current_not_set_case
+	}
+}
+
+const DiffHunk_Base_not_set_case case_DiffHunk_Base = 0
+const DiffHunk_BaseBranchName_case case_DiffHunk_Base = 8
+const DiffHunk_BaseHeadlessCommitSha_case case_DiffHunk_Base = 9
+const DiffHunk_UncommittedChanges_case case_DiffHunk_Base = 10
+
+func (x *DiffHunk) WhichBase() case_DiffHunk_Base {
+	if x == nil {
+		return DiffHunk_Base_not_set_case
+	}
+	switch x.xxx_hidden_Base.(type) {
+	case *diffHunk_BaseBranchName:
+		return DiffHunk_BaseBranchName_case
+	case *diffHunk_BaseHeadlessCommitSha:
+		return DiffHunk_BaseHeadlessCommitSha_case
+	case *diffHunk_UncommittedChanges:
+		return DiffHunk_UncommittedChanges_case
+	default:
+		return DiffHunk_Base_not_set_case
+	}
+}
+
+type DiffHunk_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	FilePath     *string
+	LineRange    *FileContentLineRange
+	DiffContent  *string
+	LinesAdded   *uint32
+	LinesRemoved *uint32
+	// Fields of oneof xxx_hidden_Current:
+	CurrentBranchName        *string
+	CurrentHeadlessCommitSha *string
+	// -- end of xxx_hidden_Current
+	// Fields of oneof xxx_hidden_Base:
+	BaseBranchName        *string
+	BaseHeadlessCommitSha *string
+	UncommittedChanges    *emptypb.Empty
+	// -- end of xxx_hidden_Base
+}
+
+func (b0 DiffHunk_builder) Build() *DiffHunk {
+	m0 := &DiffHunk{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.FilePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
+		x.xxx_hidden_FilePath = b.FilePath
+	}
+	x.xxx_hidden_LineRange = b.LineRange
+	if b.DiffContent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
+		x.xxx_hidden_DiffContent = b.DiffContent
+	}
+	if b.LinesAdded != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		x.xxx_hidden_LinesAdded = *b.LinesAdded
+	}
+	if b.LinesRemoved != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
+		x.xxx_hidden_LinesRemoved = *b.LinesRemoved
+	}
+	if b.CurrentBranchName != nil {
+		x.xxx_hidden_Current = &diffHunk_CurrentBranchName{*b.CurrentBranchName}
+	}
+	if b.CurrentHeadlessCommitSha != nil {
+		x.xxx_hidden_Current = &diffHunk_CurrentHeadlessCommitSha{*b.CurrentHeadlessCommitSha}
+	}
+	if b.BaseBranchName != nil {
+		x.xxx_hidden_Base = &diffHunk_BaseBranchName{*b.BaseBranchName}
+	}
+	if b.BaseHeadlessCommitSha != nil {
+		x.xxx_hidden_Base = &diffHunk_BaseHeadlessCommitSha{*b.BaseHeadlessCommitSha}
+	}
+	if b.UncommittedChanges != nil {
+		x.xxx_hidden_Base = &diffHunk_UncommittedChanges{b.UncommittedChanges}
+	}
+	return m0
+}
+
+type case_DiffHunk_Current protoreflect.FieldNumber
+
+func (x case_DiffHunk_Current) String() string {
+	md := file_attachment_proto_msgTypes[8].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type case_DiffHunk_Base protoreflect.FieldNumber
+
+func (x case_DiffHunk_Base) String() string {
+	md := file_attachment_proto_msgTypes[8].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isDiffHunk_Current interface {
+	isDiffHunk_Current()
+}
+
+type diffHunk_CurrentBranchName struct {
+	CurrentBranchName string `protobuf:"bytes,6,opt,name=current_branch_name,json=currentBranchName,oneof"`
+}
+
+type diffHunk_CurrentHeadlessCommitSha struct {
+	CurrentHeadlessCommitSha string `protobuf:"bytes,7,opt,name=current_headless_commit_sha,json=currentHeadlessCommitSha,oneof"`
+}
+
+func (*diffHunk_CurrentBranchName) isDiffHunk_Current() {}
+
+func (*diffHunk_CurrentHeadlessCommitSha) isDiffHunk_Current() {}
+
+type isDiffHunk_Base interface {
+	isDiffHunk_Base()
+}
+
+type diffHunk_BaseBranchName struct {
+	BaseBranchName string `protobuf:"bytes,8,opt,name=base_branch_name,json=baseBranchName,oneof"`
+}
+
+type diffHunk_BaseHeadlessCommitSha struct {
+	BaseHeadlessCommitSha string `protobuf:"bytes,9,opt,name=base_headless_commit_sha,json=baseHeadlessCommitSha,oneof"`
+}
+
+type diffHunk_UncommittedChanges struct {
+	UncommittedChanges *emptypb.Empty `protobuf:"bytes,10,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
+}
+
+func (*diffHunk_BaseBranchName) isDiffHunk_Base() {}
+
+func (*diffHunk_BaseHeadlessCommitSha) isDiffHunk_Base() {}
+
+func (*diffHunk_UncommittedChanges) isDiffHunk_Base() {}
+
 var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\"\xc0\x02\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xfe\x02\n" +
 	"\n" +
 	"Attachment\x12\x1f\n" +
 	"\n" +
 	"plain_text\x18\x01 \x01(\tH\x00R\tplainText\x12a\n" +
 	"\x16executed_shell_command\x18\x02 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommand\x12^\n" +
 	"\x15running_shell_command\x18\x03 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandH\x00R\x13runningShellCommand\x12E\n" +
-	"\fdrive_object\x18\x04 \x01(\v2 .warp.multi_agent.v1.DriveObjectH\x00R\vdriveObjectB\a\n" +
+	"\fdrive_object\x18\x04 \x01(\v2 .warp.multi_agent.v1.DriveObjectH\x00R\vdriveObject\x12<\n" +
+	"\tdiff_hunk\x18\x05 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkH\x00R\bdiffHunkB\a\n" +
 	"\x05value\"q\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
@@ -1256,9 +1782,25 @@ const file_attachment_proto_rawDesc = "" +
 	"\x13GenericStringObject\x12\x1e\n" +
 	"\apayload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\apayload\x12\x1f\n" +
 	"\vobject_type\x18\x02 \x01(\tR\n" +
-	"objectTypeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"objectType\"\x9e\x04\n" +
+	"\bDiffHunk\x12!\n" +
+	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12H\n" +
+	"\n" +
+	"line_range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\tlineRange\x12'\n" +
+	"\fdiff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdiffContent\x12\x1f\n" +
+	"\vlines_added\x18\x04 \x01(\rR\n" +
+	"linesAdded\x12#\n" +
+	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x120\n" +
+	"\x13current_branch_name\x18\x06 \x01(\tH\x00R\x11currentBranchName\x12?\n" +
+	"\x1bcurrent_headless_commit_sha\x18\a \x01(\tH\x00R\x18currentHeadlessCommitSha\x12*\n" +
+	"\x10base_branch_name\x18\b \x01(\tH\x01R\x0ebaseBranchName\x129\n" +
+	"\x18base_headless_commit_sha\x18\t \x01(\tH\x01R\x15baseHeadlessCommitSha\x12I\n" +
+	"\x13uncommitted_changes\x18\n" +
+	" \x01(\v2\x16.google.protobuf.EmptyH\x01R\x12uncommittedChangesB\t\n" +
+	"\acurrentB\x06\n" +
+	"\x04baseB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_attachment_proto_goTypes = []any{
 	(*Attachment)(nil),                      // 0: warp.multi_agent.v1.Attachment
 	(*ExecutedShellCommand)(nil),            // 1: warp.multi_agent.v1.ExecutedShellCommand
@@ -1268,20 +1810,26 @@ var file_attachment_proto_goTypes = []any{
 	(*Workflow)(nil),                        // 5: warp.multi_agent.v1.Workflow
 	(*Notebook)(nil),                        // 6: warp.multi_agent.v1.Notebook
 	(*GenericStringObject)(nil),             // 7: warp.multi_agent.v1.GenericStringObject
+	(*DiffHunk)(nil),                        // 8: warp.multi_agent.v1.DiffHunk
+	(*FileContentLineRange)(nil),            // 9: warp.multi_agent.v1.FileContentLineRange
+	(*emptypb.Empty)(nil),                   // 10: google.protobuf.Empty
 }
 var file_attachment_proto_depIdxs = []int32{
-	1, // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	2, // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
-	4, // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
-	3, // 3: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	5, // 4: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
-	6, // 5: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
-	7, // 6: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	1,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	2,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
+	4,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
+	8,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
+	3,  // 4: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	5,  // 5: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
+	6,  // 6: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
+	7,  // 7: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
+	9,  // 8: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	10, // 9: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
+	10, // [10:10] is the sub-list for method output_type
+	10, // [10:10] is the sub-list for method input_type
+	10, // [10:10] is the sub-list for extension type_name
+	10, // [10:10] is the sub-list for extension extendee
+	0,  // [0:10] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -1290,16 +1838,25 @@ func file_attachment_proto_init() {
 		return
 	}
 	file_options_proto_init()
+	file_file_content_proto_init()
 	file_attachment_proto_msgTypes[0].OneofWrappers = []any{
 		(*attachment_PlainText)(nil),
 		(*attachment_ExecutedShellCommand)(nil),
 		(*attachment_RunningShellCommand)(nil),
 		(*attachment_DriveObject)(nil),
+		(*attachment_DiffHunk)(nil),
 	}
 	file_attachment_proto_msgTypes[4].OneofWrappers = []any{
 		(*driveObject_Workflow)(nil),
 		(*driveObject_Notebook)(nil),
 		(*driveObject_GenericStringObject)(nil),
+	}
+	file_attachment_proto_msgTypes[8].OneofWrappers = []any{
+		(*diffHunk_CurrentBranchName)(nil),
+		(*diffHunk_CurrentHeadlessCommitSha)(nil),
+		(*diffHunk_BaseBranchName)(nil),
+		(*diffHunk_BaseHeadlessCommitSha)(nil),
+		(*diffHunk_UncommittedChanges)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1307,7 +1864,7 @@ func file_attachment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attachment_proto_rawDesc), len(file_attachment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

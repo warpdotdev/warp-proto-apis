@@ -2,6 +2,7 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
@@ -9,6 +10,7 @@ option features.(pb.go).api_level = API_OPAQUE;
 
 // Context that may be relevant to the input in a request.
 import "options.proto";
+import "file_content.proto";
 
 message Attachment {
   oneof value {
@@ -16,6 +18,7 @@ message Attachment {
     ExecutedShellCommand executed_shell_command = 2;
     RunningShellCommand running_shell_command = 3;
     DriveObject drive_object = 4;
+    DiffHunk diff_hunk = 5;
   }
 }
 
@@ -61,4 +64,21 @@ message GenericStringObject {
   string payload = 1 [ (sensitive) = true ];
   // Refers to the JSON type of the object such as "JsonEnvVarCollection" or "JsonAIFact" 
   string object_type = 2;
+}
+
+message DiffHunk {
+  string file_path = 1 [ (sensitive) = true ];
+  FileContentLineRange line_range = 2;
+  string diff_content = 3 [ (sensitive) = true ];
+  uint32 lines_added = 4;
+  uint32 lines_removed = 5;
+  oneof current {
+    string current_branch_name = 6;
+    string current_headless_commit_sha = 7;
+  }
+  oneof base {
+    string base_branch_name = 8;
+    string base_headless_commit_sha = 9;
+    google.protobuf.Empty uncommitted_changes = 10;
+  }
 }
