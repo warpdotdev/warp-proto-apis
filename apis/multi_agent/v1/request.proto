@@ -55,6 +55,7 @@ message Request {
       ResumeConversation resume_conversation = 7;
       InitProjectRules init_project_rules = 8;
       TriggerSuggestPrompt trigger_suggest_prompt = 9;
+      CreateNewProject create_new_project = 10;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -136,6 +137,12 @@ message Request {
 
     // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back.
     message InitProjectRules { }
+
+    // An input to create a new project. When present, the runtime will prepend a predefined
+    // prefix to the user-provided description and send that as the effective user query.
+    message CreateNewProject {
+      string query = 1 [ (sensitive) = true ];
+    }
 
     // An input to trigger a suggested prompt.
     message TriggerSuggestPrompt {

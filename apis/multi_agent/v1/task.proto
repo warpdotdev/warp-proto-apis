@@ -113,6 +113,7 @@ message Message {
       AutoCodeDiff auto_code_diff = 1;
       ResumeConversation resume_conversation = 3;
       TriggerSuggestPrompt trigger_suggest_prompt = 4;
+      CreateNewProject create_new_project = 5;
     }
 
     InputContext context = 2;
@@ -131,6 +132,10 @@ message Message {
       google.protobuf.Empty files_changed = 2;
       google.protobuf.Empty command_run = 3;
     }
+  }
+
+  message CreateNewProject {
+    string query = 1 [ (sensitive) = true ];
   }
 
   // Agent output message type
