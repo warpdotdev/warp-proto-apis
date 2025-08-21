@@ -911,7 +911,7 @@ type Request_Settings struct {
 	xxx_hidden_SupportsLinkedCodeBlocks           bool                          `protobuf:"varint,13,opt,name=supports_linked_code_blocks,json=supportsLinkedCodeBlocks"`
 	xxx_hidden_SupportsStartedChildTaskMessage    bool                          `protobuf:"varint,14,opt,name=supports_started_child_task_message,json=supportsStartedChildTaskMessage"`
 	xxx_hidden_SupportsSuggestPrompt              bool                          `protobuf:"varint,15,opt,name=supports_suggest_prompt,json=supportsSuggestPrompt"`
-	xxx_hidden_SupportsReadFilesForImages         bool                          `protobuf:"varint,16,opt,name=supports_read_files_for_images,json=supportsReadFilesForImages"`
+	xxx_hidden_SupportsReadImageFiles             bool                          `protobuf:"varint,16,opt,name=supports_read_image_files,json=supportsReadImageFiles"`
 	XXX_raceDetectHookData                        protoimpl.RaceDetectHookData
 	XXX_presence                                  [1]uint32
 	unknownFields                                 protoimpl.UnknownFields
@@ -1048,9 +1048,9 @@ func (x *Request_Settings) GetSupportsSuggestPrompt() bool {
 	return false
 }
 
-func (x *Request_Settings) GetSupportsReadFilesForImages() bool {
+func (x *Request_Settings) GetSupportsReadImageFiles() bool {
 	if x != nil {
-		return x.xxx_hidden_SupportsReadFilesForImages
+		return x.xxx_hidden_SupportsReadImageFiles
 	}
 	return false
 }
@@ -1128,8 +1128,8 @@ func (x *Request_Settings) SetSupportsSuggestPrompt(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 16)
 }
 
-func (x *Request_Settings) SetSupportsReadFilesForImages(v bool) {
-	x.xxx_hidden_SupportsReadFilesForImages = v
+func (x *Request_Settings) SetSupportsReadImageFiles(v bool) {
+	x.xxx_hidden_SupportsReadImageFiles = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 16)
 }
 
@@ -1231,7 +1231,7 @@ func (x *Request_Settings) HasSupportsSuggestPrompt() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 14)
 }
 
-func (x *Request_Settings) HasSupportsReadFilesForImages() bool {
+func (x *Request_Settings) HasSupportsReadImageFiles() bool {
 	if x == nil {
 		return false
 	}
@@ -1307,9 +1307,9 @@ func (x *Request_Settings) ClearSupportsSuggestPrompt() {
 	x.xxx_hidden_SupportsSuggestPrompt = false
 }
 
-func (x *Request_Settings) ClearSupportsReadFilesForImages() {
+func (x *Request_Settings) ClearSupportsReadImageFiles() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 15)
-	x.xxx_hidden_SupportsReadFilesForImages = false
+	x.xxx_hidden_SupportsReadImageFiles = false
 }
 
 type Request_Settings_builder struct {
@@ -1358,7 +1358,7 @@ type Request_Settings_builder struct {
 	// If `true`, the client supports suggested/passive prompts.
 	SupportsSuggestPrompt *bool
 	// If `true`, the client supports using `read_files` to read images.
-	SupportsReadFilesForImages *bool
+	SupportsReadImageFiles *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -1419,9 +1419,9 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 16)
 		x.xxx_hidden_SupportsSuggestPrompt = *b.SupportsSuggestPrompt
 	}
-	if b.SupportsReadFilesForImages != nil {
+	if b.SupportsReadImageFiles != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 16)
-		x.xxx_hidden_SupportsReadFilesForImages = *b.SupportsReadFilesForImages
+		x.xxx_hidden_SupportsReadImageFiles = *b.SupportsReadImageFiles
 	}
 	return m0
 }
@@ -4149,7 +4149,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xf51\n" +
+	"task.proto\"\xec1\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -4243,7 +4243,7 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xd9\b\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xd0\b\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -4260,8 +4260,8 @@ const file_request_proto_rawDesc = "" +
 	"\x11supports_todos_ui\x18\f \x01(\bR\x0fsupportsTodosUi\x12=\n" +
 	"\x1bsupports_linked_code_blocks\x18\r \x01(\bR\x18supportsLinkedCodeBlocks\x12L\n" +
 	"#supports_started_child_task_message\x18\x0e \x01(\bR\x1fsupportsStartedChildTaskMessage\x126\n" +
-	"\x17supports_suggest_prompt\x18\x0f \x01(\bR\x15supportsSuggestPrompt\x12B\n" +
-	"\x1esupports_read_files_for_images\x18\x10 \x01(\bR\x1asupportsReadFilesForImages\x1aU\n" +
+	"\x17supports_suggest_prompt\x18\x0f \x01(\bR\x15supportsSuggestPrompt\x129\n" +
+	"\x19supports_read_image_files\x18\x10 \x01(\bR\x16supportsReadImageFiles\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +

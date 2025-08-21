@@ -217,7 +217,7 @@ message Request {
     bool supports_suggest_prompt = 15;
 
     // If `true`, the client supports using `read_files` to read images.
-    bool supports_read_files_for_images = 16;
+    bool supports_read_image_files = 16;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
