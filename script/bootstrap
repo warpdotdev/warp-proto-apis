@@ -2,7 +2,7 @@
 
 # Install Homebrew dependencies.
 if [ "$(uname -s)" = "Darwin" ]; then
-  brew install protobuf
+  brew install protobuf@29
 fi
 
 # Install protoc go plugin.
