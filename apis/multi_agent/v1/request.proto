@@ -216,6 +216,9 @@ message Request {
     // If `true`, the client supports suggested/passive prompts.
     bool supports_suggest_prompt = 15;
 
+    // If `true`, the client supports using `read_files` to read images.
+    bool supports_read_files_for_images = 16;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
