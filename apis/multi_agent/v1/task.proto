@@ -93,6 +93,7 @@ message Message {
     SystemQuery system_query = 9;
     UpdateTodos update_todos = 10;
     StartedChildTask started_child_task = 12;
+    Summary summary = 13;
   }
 
   // User query message type
@@ -361,6 +362,11 @@ message Message {
   // Message for starting child tasks.
   message StartedChildTask {
     repeated string task_ids = 1;
+  }
+
+  // A summary of preceding messages.
+  message Summary {
+    // Just a marker - the summary itself is stored in the server message data.
   }
 }
 
