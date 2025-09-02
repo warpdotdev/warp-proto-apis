@@ -56,6 +56,7 @@ message Request {
       InitProjectRules init_project_rules = 8;
       TriggerSuggestPrompt trigger_suggest_prompt = 9;
       CreateNewProject create_new_project = 10;
+      CloneRepository clone_repository = 11;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -142,6 +143,12 @@ message Request {
     // prefix to the user-provided description and send that as the effective user query.
     message CreateNewProject {
       string query = 1 [ (sensitive) = true ];
+    }
+
+    // An input to clone a repository. Similar to CreateNewProject, it adds a prefix to the user
+    // input.
+    message CloneRepository {
+      string url = 1 [ (sensitive) = true ];
     }
 
     // An input to trigger a suggested prompt.

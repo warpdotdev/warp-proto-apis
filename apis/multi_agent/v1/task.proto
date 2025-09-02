@@ -114,6 +114,7 @@ message Message {
       ResumeConversation resume_conversation = 3;
       TriggerSuggestPrompt trigger_suggest_prompt = 4;
       CreateNewProject create_new_project = 5;
+      CloneRepository clone_repository = 6;
     }
 
     InputContext context = 2;
@@ -136,6 +137,10 @@ message Message {
 
   message CreateNewProject {
     string query = 1 [ (sensitive) = true ];
+  }
+
+  message CloneRepository {
+    string url = 1 [ (sensitive) = true ];
   }
 
   // Agent output message type
