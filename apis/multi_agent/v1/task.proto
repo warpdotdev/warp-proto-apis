@@ -208,6 +208,7 @@ message Message {
       SuggestPrompt suggest_prompt = 16;
       OpenCodeReview open_code_review = 17;
       InitProject init_project = 18;
+      Subagent subagent = 19;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -348,6 +349,16 @@ message Message {
 
     // Initialize project setup flow on the client.
     message InitProject {}
+
+    message Subagent {
+      string task_id = 1;
+      string payload = 2;
+
+      // Optional metadata about the subagent required to render the appropriate UI.
+      oneof metadata {
+        google.protobuf.Empty cli = 3;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -380,6 +391,7 @@ message Message {
       SuggestPromptResult suggest_prompt = 20;
       OpenCodeReviewResult open_code_review = 21;
       InitProjectResult init_project = 22;
+      SubagentResult subagent = 23;
     }
 
     // Result of a server-side tool call.
@@ -389,6 +401,10 @@ message Message {
     // Generic tool call result for representing a user-requested refinement of
     // the tool call parameters.
     message RefineResult { UserQuery user_query = 1; }
+
+    message SubagentResult {
+        string payload = 1;
+    }
   }
 
   // An event that is preserved in message history
@@ -705,5 +721,6 @@ enum ToolType {
   SUGGEST_PROMPT = 13;
   OPEN_CODE_REVIEW = 14;
   INIT_PROJECT = 15;
+  SUBAGENT = 16;
 }
 

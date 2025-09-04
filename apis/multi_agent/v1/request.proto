@@ -62,6 +62,12 @@ message Request {
       ToolCallResult tool_call_result = 3 [deprecated = true];
     }
 
+    message UserQuery {
+      string query = 1 [ (sensitive) = true ];
+      // An attachment referenced by key in the query text.
+      map<string, Attachment> referenced_attachments = 2;
+    }
+
     message UserInputs {
       repeated UserInput inputs = 1;
 
@@ -69,15 +75,8 @@ message Request {
         oneof input {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
-          FinishedCommand finished_command = 3;
         }
       }
-    }
-
-    message UserQuery {
-      string query = 1 [ (sensitive) = true ];
-      // An attachment referenced by key in the query text.
-      map<string, Attachment> referenced_attachments = 2;
     }
 
     // Tool call result
@@ -107,11 +106,6 @@ message Request {
       // Generic tool call result for representing a user-requested refinement
       // of the tool call parameters.
       message RefineResult { UserQuery user_query = 1; }
-    }
-
-    message FinishedCommand {
-        string command = 1;
-        ShellCommandFinished command_finished = 2;
     }
 
     // Canned responses correspond to hardcoded predefined responses from
