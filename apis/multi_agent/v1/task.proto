@@ -6,6 +6,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
 
 import "citations.proto";
 import "input_context.proto";
@@ -76,6 +77,14 @@ message Message {
 
   // The ID of the task this message belongs to.
   string task_id = 11;
+
+  // The ID of the request that produced this message.
+  string request_id = 13;
+
+  // The timestamp that this message was produced.
+  // For input messages, this is the timestamp the server received the request.
+  // For output messages, this is the timestamp the server finished the response for the request.
+  google.protobuf.Timestamp timestamp = 14;
 
   // An opaque payload that the client should simply roundtrip.
   string server_message_data = 7;
