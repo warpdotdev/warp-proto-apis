@@ -78,7 +78,7 @@ message Message {
   // The ID of the task this message belongs to.
   string task_id = 11;
 
-  // The ID of the request that produced this message.
+  // The ID of the request that originally added this message to the task.
   string request_id = 13;
 
   // The timestamp that this message was produced.

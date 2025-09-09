@@ -1159,7 +1159,7 @@ type Message_builder struct {
 	Id *string
 	// The ID of the task this message belongs to.
 	TaskId *string
-	// The ID of the request that produced this message.
+	// The ID of the request that originally added this message to the task.
 	RequestId *string
 	// The timestamp that this message was produced.
 	// For input messages, this is the timestamp the server received the request.
