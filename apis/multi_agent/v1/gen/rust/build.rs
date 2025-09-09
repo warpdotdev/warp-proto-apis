@@ -7,13 +7,16 @@ fn main() -> Result<()> {
 
     let out_dir = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
 
+    let re_features = Regex::new(r"option features.*").unwrap();
+    let re_reserved = Regex::new(r"reserved\s+([a-zA-Z_][a-zA-Z0-9_]*);").unwrap();
+
     let mut proto_files = Vec::new();
     for proto in proto_path
         .read_dir()
         .unwrap()
         .map(|entry| entry.unwrap().path())
     {
-        if !proto.extension().is_some_and(|ext| ext == "proto") {
+        if proto.extension().is_none_or(|ext| ext != "proto") {
             continue;
         }
         println!("cargo:rerun-if-changed={}", proto.display());
@@ -24,11 +27,13 @@ fn main() -> Result<()> {
 
         let proto_content = std::fs::read_to_string(&proto).expect("Failed to read proto file");
 
-        let re_features = Regex::new(r"option features.*").unwrap();
         let modified_content = re_features
             .replace_all(&proto_content, "")
             .replace(r#"edition = "2023";"#, r#"syntax = "proto3";"#)
             .replace(r#"import "google/protobuf/go_features.proto";"#, "");
+
+        // Quote reserved identifiers
+        let modified_content = re_reserved.replace_all(&modified_content, "reserved \"$1\";");
 
         out_file
             .write_all(modified_content.as_bytes())
