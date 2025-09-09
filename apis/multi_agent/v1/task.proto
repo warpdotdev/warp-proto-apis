@@ -7,6 +7,7 @@ import "google/protobuf/go_features.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 import "citations.proto";
 import "input_context.proto";
@@ -102,6 +103,7 @@ message Message {
     SystemQuery system_query = 9;
     UpdateTodos update_todos = 10;
     StartedChildTask started_child_task = 12;
+    AgentReasoning agent_reasoning = 15;
   }
 
   // User query message type
@@ -156,8 +158,26 @@ message Message {
   message AgentOutput {
     // Text to be shown to the user.
     string text = 1;
-    // Internal "reasoning tokens" produced by the LLM.
-    string reasoning = 2;
+
+    // Previously used for internal "reasoning tokens" produced by the LLM.
+    // Use the dedicated [AgentReasoning] type instead.
+    reserved 2;
+    reserved reasoning;
+  }
+
+  message AgentReasoning {
+    // The user-visible reasoning tokens.
+    string reasoning = 1;
+
+    oneof status {
+      google.protobuf.Empty in_progress = 2;
+      Finished finished = 3;
+    }
+
+    message Finished {
+      // How long the agent spent reasoning.
+      google.protobuf.Duration duration = 1;
+    }
   }
 
   // Tool call message type
