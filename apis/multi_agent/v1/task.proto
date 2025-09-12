@@ -199,6 +199,8 @@ message Message {
       SuggestNewConversation suggest_new_conversation = 14;
       FileGlobV2 file_glob_v2 = 15;
       SuggestPrompt suggest_prompt = 16;
+      OpenCodeReview open_code_review = 17;
+      InitProject init_project = 18;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -294,8 +296,8 @@ message Message {
       // The relative path to the directory to search in.
       string path = 2;
     }
-    
-    // A tool call to find files with names matching patterns. 
+
+    // A tool call to find files with names matching patterns.
     message FileGlobV2 {
       // The patterns to match file names against. Supports ?, *, [].
       repeated string patterns = 1;
@@ -333,6 +335,12 @@ message Message {
         string query = 3;
       }
     }
+
+    // Trigger the client to open the code review pane.
+    message OpenCodeReview {}
+
+    // Initialize project setup flow on the client.
+    message InitProject {}
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -363,6 +371,8 @@ message Message {
       SuggestNewConversationResult suggest_new_conversation = 18;
       FileGlobV2Result file_glob_v2 = 19;
       SuggestPromptResult suggest_prompt = 20;
+      OpenCodeReviewResult open_code_review = 21;
+      InitProjectResult init_project = 22;
     }
 
     // Result of a server-side tool call.
@@ -424,7 +434,7 @@ message ReadFilesResult {
     AnyFilesSuccess any_files_success = 3;
     Error error = 2;
   }
-  
+
   message TextFilesSuccess {
     repeated FileContent files = 1;
   }
@@ -660,6 +670,30 @@ message SuggestPromptResult {
   }
 }
 
+// Result of an `OpenCodeReview` tool call.
+message OpenCodeReviewResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  // Currently empty; can be extended with fields if needed.
+  message Success {}
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+// Result of an `InitProject` tool call.
+message InitProjectResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  // Currently empty; can be extended with fields if needed.
+  message Success {}
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result types.
 //
@@ -680,5 +714,7 @@ enum ToolType {
   SUGGEST_NEW_CONVERSATION = 11;
   FILE_GLOB_V2 = 12;
   SUGGEST_PROMPT = 13;
+  OPEN_CODE_REVIEW = 14;
+  INIT_PROJECT = 15;
 }
 

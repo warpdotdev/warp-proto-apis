@@ -99,6 +99,8 @@ message Request {
         SuggestNewConversationResult suggest_new_conversation = 14;
         FileGlobV2Result file_glob_v2 = 15;
         SuggestPromptResult suggest_prompt = 16;
+        google.protobuf.Empty open_code_review = 17;
+        google.protobuf.Empty init_project = 18;
       }
 
       // Generic tool call result for representing a user-requested refinement
