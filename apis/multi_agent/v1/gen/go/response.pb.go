@@ -393,6 +393,15 @@ func (x *ClientAction) GetStartNewConversation() *ClientAction_StartNewConversat
 	return nil
 }
 
+func (x *ClientAction) GetUpdateTaskServerData() *ClientAction_UpdateTaskServerData {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Action.(*clientAction_UpdateTaskServerData_); ok {
+			return x.UpdateTaskServerData
+		}
+	}
+	return nil
+}
+
 func (x *ClientAction) SetCreateTask(v *ClientAction_CreateTask) {
 	if v == nil {
 		x.xxx_hidden_Action = nil
@@ -487,6 +496,14 @@ func (x *ClientAction) SetStartNewConversation(v *ClientAction_StartNewConversat
 		return
 	}
 	x.xxx_hidden_Action = &clientAction_StartNewConversation_{v}
+}
+
+func (x *ClientAction) SetUpdateTaskServerData(v *ClientAction_UpdateTaskServerData) {
+	if v == nil {
+		x.xxx_hidden_Action = nil
+		return
+	}
+	x.xxx_hidden_Action = &clientAction_UpdateTaskServerData_{v}
 }
 
 func (x *ClientAction) HasAction() bool {
@@ -592,6 +609,14 @@ func (x *ClientAction) HasStartNewConversation() bool {
 	return ok
 }
 
+func (x *ClientAction) HasUpdateTaskServerData() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Action.(*clientAction_UpdateTaskServerData_)
+	return ok
+}
+
 func (x *ClientAction) ClearAction() {
 	x.xxx_hidden_Action = nil
 }
@@ -668,6 +693,12 @@ func (x *ClientAction) ClearStartNewConversation() {
 	}
 }
 
+func (x *ClientAction) ClearUpdateTaskServerData() {
+	if _, ok := x.xxx_hidden_Action.(*clientAction_UpdateTaskServerData_); ok {
+		x.xxx_hidden_Action = nil
+	}
+}
+
 const ClientAction_Action_not_set_case case_ClientAction_Action = 0
 const ClientAction_CreateTask_case case_ClientAction_Action = 1
 const ClientAction_UpdateTaskStatus_case case_ClientAction_Action = 2
@@ -681,6 +712,7 @@ const ClientAction_BeginTransaction_case case_ClientAction_Action = 9
 const ClientAction_CommitTransaction_case case_ClientAction_Action = 10
 const ClientAction_RollbackTransaction_case case_ClientAction_Action = 11
 const ClientAction_StartNewConversation_case case_ClientAction_Action = 12
+const ClientAction_UpdateTaskServerData_case case_ClientAction_Action = 13
 
 func (x *ClientAction) WhichAction() case_ClientAction_Action {
 	if x == nil {
@@ -711,6 +743,8 @@ func (x *ClientAction) WhichAction() case_ClientAction_Action {
 		return ClientAction_RollbackTransaction_case
 	case *clientAction_StartNewConversation_:
 		return ClientAction_StartNewConversation_case
+	case *clientAction_UpdateTaskServerData_:
+		return ClientAction_UpdateTaskServerData_case
 	default:
 		return ClientAction_Action_not_set_case
 	}
@@ -732,6 +766,7 @@ type ClientAction_builder struct {
 	CommitTransaction      *ClientAction_CommitTransaction
 	RollbackTransaction    *ClientAction_RollbackTransaction
 	StartNewConversation   *ClientAction_StartNewConversation
+	UpdateTaskServerData   *ClientAction_UpdateTaskServerData
 	// -- end of xxx_hidden_Action
 }
 
@@ -774,6 +809,9 @@ func (b0 ClientAction_builder) Build() *ClientAction {
 	}
 	if b.StartNewConversation != nil {
 		x.xxx_hidden_Action = &clientAction_StartNewConversation_{b.StartNewConversation}
+	}
+	if b.UpdateTaskServerData != nil {
+		x.xxx_hidden_Action = &clientAction_UpdateTaskServerData_{b.UpdateTaskServerData}
 	}
 	return m0
 }
@@ -840,6 +878,10 @@ type clientAction_StartNewConversation_ struct {
 	StartNewConversation *ClientAction_StartNewConversation `protobuf:"bytes,12,opt,name=start_new_conversation,json=startNewConversation,oneof"`
 }
 
+type clientAction_UpdateTaskServerData_ struct {
+	UpdateTaskServerData *ClientAction_UpdateTaskServerData `protobuf:"bytes,13,opt,name=update_task_server_data,json=updateTaskServerData,oneof"`
+}
+
 func (*clientAction_CreateTask_) isClientAction_Action() {}
 
 func (*clientAction_UpdateTaskStatus_) isClientAction_Action() {}
@@ -863,6 +905,8 @@ func (*clientAction_CommitTransaction_) isClientAction_Action() {}
 func (*clientAction_RollbackTransaction_) isClientAction_Action() {}
 
 func (*clientAction_StartNewConversation_) isClientAction_Action() {}
+
+func (*clientAction_UpdateTaskServerData_) isClientAction_Action() {}
 
 type ResponseEvent_StreamInit struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
@@ -2471,6 +2515,117 @@ func (b0 ClientAction_UpdateTaskStatus_builder) Build() *ClientAction_UpdateTask
 	return m0
 }
 
+type ClientAction_UpdateTaskServerData struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskId      *string                `protobuf:"bytes,1,opt,name=task_id,json=taskId"`
+	xxx_hidden_ServerData  *string                `protobuf:"bytes,2,opt,name=server_data,json=serverData"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ClientAction_UpdateTaskServerData) Reset() {
+	*x = ClientAction_UpdateTaskServerData{}
+	mi := &file_response_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClientAction_UpdateTaskServerData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClientAction_UpdateTaskServerData) ProtoMessage() {}
+
+func (x *ClientAction_UpdateTaskServerData) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ClientAction_UpdateTaskServerData) GetTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_TaskId != nil {
+			return *x.xxx_hidden_TaskId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ClientAction_UpdateTaskServerData) GetServerData() string {
+	if x != nil {
+		if x.xxx_hidden_ServerData != nil {
+			return *x.xxx_hidden_ServerData
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ClientAction_UpdateTaskServerData) SetTaskId(v string) {
+	x.xxx_hidden_TaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *ClientAction_UpdateTaskServerData) SetServerData(v string) {
+	x.xxx_hidden_ServerData = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *ClientAction_UpdateTaskServerData) HasTaskId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ClientAction_UpdateTaskServerData) HasServerData() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ClientAction_UpdateTaskServerData) ClearTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_TaskId = nil
+}
+
+func (x *ClientAction_UpdateTaskServerData) ClearServerData() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ServerData = nil
+}
+
+type ClientAction_UpdateTaskServerData_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	TaskId     *string
+	ServerData *string
+}
+
+func (b0 ClientAction_UpdateTaskServerData_builder) Build() *ClientAction_UpdateTaskServerData {
+	m0 := &ClientAction_UpdateTaskServerData{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.TaskId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_TaskId = b.TaskId
+	}
+	if b.ServerData != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_ServerData = b.ServerData
+	}
+	return m0
+}
+
 // Update task description action
 type ClientAction_UpdateTaskDescription struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -2484,7 +2639,7 @@ type ClientAction_UpdateTaskDescription struct {
 
 func (x *ClientAction_UpdateTaskDescription) Reset() {
 	*x = ClientAction_UpdateTaskDescription{}
-	mi := &file_response_proto_msgTypes[17]
+	mi := &file_response_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2496,7 +2651,7 @@ func (x *ClientAction_UpdateTaskDescription) String() string {
 func (*ClientAction_UpdateTaskDescription) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[17]
+	mi := &file_response_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2596,7 +2751,7 @@ type ClientAction_AddMessagesToTask struct {
 
 func (x *ClientAction_AddMessagesToTask) Reset() {
 	*x = ClientAction_AddMessagesToTask{}
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2608,7 +2763,7 @@ func (x *ClientAction_AddMessagesToTask) String() string {
 func (*ClientAction_AddMessagesToTask) ProtoMessage() {}
 
 func (x *ClientAction_AddMessagesToTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2692,7 +2847,7 @@ type ClientAction_UpdateTaskMessage struct {
 
 func (x *ClientAction_UpdateTaskMessage) Reset() {
 	*x = ClientAction_UpdateTaskMessage{}
-	mi := &file_response_proto_msgTypes[19]
+	mi := &file_response_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2704,7 +2859,7 @@ func (x *ClientAction_UpdateTaskMessage) String() string {
 func (*ClientAction_UpdateTaskMessage) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[19]
+	mi := &file_response_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2822,7 +2977,7 @@ type ClientAction_AppendToMessageContent struct {
 
 func (x *ClientAction_AppendToMessageContent) Reset() {
 	*x = ClientAction_AppendToMessageContent{}
-	mi := &file_response_proto_msgTypes[20]
+	mi := &file_response_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2834,7 +2989,7 @@ func (x *ClientAction_AppendToMessageContent) String() string {
 func (*ClientAction_AppendToMessageContent) ProtoMessage() {}
 
 func (x *ClientAction_AppendToMessageContent) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[20]
+	mi := &file_response_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2952,7 +3107,7 @@ type ClientAction_UpdateTaskSummary struct {
 
 func (x *ClientAction_UpdateTaskSummary) Reset() {
 	*x = ClientAction_UpdateTaskSummary{}
-	mi := &file_response_proto_msgTypes[21]
+	mi := &file_response_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2964,7 +3119,7 @@ func (x *ClientAction_UpdateTaskSummary) String() string {
 func (*ClientAction_UpdateTaskSummary) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[21]
+	mi := &file_response_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3062,7 +3217,7 @@ type ClientAction_BeginTransaction struct {
 
 func (x *ClientAction_BeginTransaction) Reset() {
 	*x = ClientAction_BeginTransaction{}
-	mi := &file_response_proto_msgTypes[22]
+	mi := &file_response_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3074,7 +3229,7 @@ func (x *ClientAction_BeginTransaction) String() string {
 func (*ClientAction_BeginTransaction) ProtoMessage() {}
 
 func (x *ClientAction_BeginTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[22]
+	mi := &file_response_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3106,7 +3261,7 @@ type ClientAction_CommitTransaction struct {
 
 func (x *ClientAction_CommitTransaction) Reset() {
 	*x = ClientAction_CommitTransaction{}
-	mi := &file_response_proto_msgTypes[23]
+	mi := &file_response_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3118,7 +3273,7 @@ func (x *ClientAction_CommitTransaction) String() string {
 func (*ClientAction_CommitTransaction) ProtoMessage() {}
 
 func (x *ClientAction_CommitTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[23]
+	mi := &file_response_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3150,7 +3305,7 @@ type ClientAction_RollbackTransaction struct {
 
 func (x *ClientAction_RollbackTransaction) Reset() {
 	*x = ClientAction_RollbackTransaction{}
-	mi := &file_response_proto_msgTypes[24]
+	mi := &file_response_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3162,7 +3317,7 @@ func (x *ClientAction_RollbackTransaction) String() string {
 func (*ClientAction_RollbackTransaction) ProtoMessage() {}
 
 func (x *ClientAction_RollbackTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[24]
+	mi := &file_response_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3197,7 +3352,7 @@ type ClientAction_StartNewConversation struct {
 
 func (x *ClientAction_StartNewConversation) Reset() {
 	*x = ClientAction_StartNewConversation{}
-	mi := &file_response_proto_msgTypes[25]
+	mi := &file_response_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3209,7 +3364,7 @@ func (x *ClientAction_StartNewConversation) String() string {
 func (*ClientAction_StartNewConversation) ProtoMessage() {}
 
 func (x *ClientAction_StartNewConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[25]
+	mi := &file_response_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3322,7 +3477,7 @@ const file_response_proto_rawDesc = "" +
 	"\rInternalError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
 	"\x06reasonB\x06\n" +
-	"\x04type\"\xcf\x10\n" +
+	"\x04type\"\x92\x12\n" +
 	"\fClientAction\x12O\n" +
 	"\vcreate_task\x18\x01 \x01(\v2,.warp.multi_agent.v1.ClientAction.CreateTaskH\x00R\n" +
 	"createTask\x12b\n" +
@@ -3337,14 +3492,19 @@ const file_response_proto_rawDesc = "" +
 	"\x12commit_transaction\x18\n" +
 	" \x01(\v23.warp.multi_agent.v1.ClientAction.CommitTransactionH\x00R\x11commitTransaction\x12j\n" +
 	"\x14rollback_transaction\x18\v \x01(\v25.warp.multi_agent.v1.ClientAction.RollbackTransactionH\x00R\x13rollbackTransaction\x12n\n" +
-	"\x16start_new_conversation\x18\f \x01(\v26.warp.multi_agent.v1.ClientAction.StartNewConversationH\x00R\x14startNewConversation\x1a;\n" +
+	"\x16start_new_conversation\x18\f \x01(\v26.warp.multi_agent.v1.ClientAction.StartNewConversationH\x00R\x14startNewConversation\x12o\n" +
+	"\x17update_task_server_data\x18\r \x01(\v26.warp.multi_agent.v1.ClientAction.UpdateTaskServerDataH\x00R\x14updateTaskServerData\x1a;\n" +
 	"\n" +
 	"CreateTask\x12-\n" +
 	"\x04task\x18\x01 \x01(\v2\x19.warp.multi_agent.v1.TaskR\x04task\x1am\n" +
 	"\x10UpdateTaskStatus\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12@\n" +
 	"\vtask_status\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.TaskStatusR\n" +
-	"taskStatus\x1aR\n" +
+	"taskStatus\x1aP\n" +
+	"\x14UpdateTaskServerData\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x1f\n" +
+	"\vserver_data\x18\x02 \x01(\tR\n" +
+	"serverData\x1aR\n" +
 	"\x15UpdateTaskDescription\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x1af\n" +
@@ -3369,7 +3529,7 @@ const file_response_proto_rawDesc = "" +
 	"\x15start_from_message_id\x18\x01 \x01(\tR\x12startFromMessageIdB\b\n" +
 	"\x06actionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_response_proto_goTypes = []any{
 	(*ResponseEvent)(nil),                                      // 0: warp.multi_agent.v1.ResponseEvent
 	(*ClientAction)(nil),                                       // 1: warp.multi_agent.v1.ClientAction
@@ -3388,20 +3548,21 @@ var file_response_proto_goTypes = []any{
 	(*ResponseEvent_StreamFinished_InternalError)(nil),         // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
 	(*ClientAction_CreateTask)(nil),                            // 15: warp.multi_agent.v1.ClientAction.CreateTask
 	(*ClientAction_UpdateTaskStatus)(nil),                      // 16: warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	(*ClientAction_UpdateTaskDescription)(nil),                 // 17: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                     // 18: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                     // 19: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),                // 20: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                     // 21: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*ClientAction_BeginTransaction)(nil),                      // 22: warp.multi_agent.v1.ClientAction.BeginTransaction
-	(*ClientAction_CommitTransaction)(nil),                     // 23: warp.multi_agent.v1.ClientAction.CommitTransaction
-	(*ClientAction_RollbackTransaction)(nil),                   // 24: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*ClientAction_StartNewConversation)(nil),                  // 25: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*Suggestions)(nil),                                        // 26: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                               // 27: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),                                         // 28: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),                                            // 29: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                              // 30: google.protobuf.FieldMask
+	(*ClientAction_UpdateTaskServerData)(nil),                  // 17: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	(*ClientAction_UpdateTaskDescription)(nil),                 // 18: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                     // 19: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                     // 20: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                // 21: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                     // 22: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*ClientAction_BeginTransaction)(nil),                      // 23: warp.multi_agent.v1.ClientAction.BeginTransaction
+	(*ClientAction_CommitTransaction)(nil),                     // 24: warp.multi_agent.v1.ClientAction.CommitTransaction
+	(*ClientAction_RollbackTransaction)(nil),                   // 25: warp.multi_agent.v1.ClientAction.RollbackTransaction
+	(*ClientAction_StartNewConversation)(nil),                  // 26: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*Suggestions)(nil),                                        // 27: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                               // 28: warp.multi_agent.v1.Task
+	(*TaskStatus)(nil),                                         // 29: warp.multi_agent.v1.TaskStatus
+	(*Message)(nil),                                            // 30: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                              // 31: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
@@ -3409,39 +3570,40 @@ var file_response_proto_depIdxs = []int32{
 	4,  // 2: warp.multi_agent.v1.ResponseEvent.finished:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished
 	15, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
 	16, // 4: warp.multi_agent.v1.ClientAction.update_task_status:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	18, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	19, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	20, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	26, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	21, // 9: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	17, // 10: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	22, // 11: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
-	23, // 12: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
-	24, // 13: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
-	25, // 14: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
-	1,  // 15: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	8,  // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	9,  // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	10, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	11, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	12, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	13, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	14, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	7,  // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	6,  // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	5,  // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_info:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfo
-	27, // 26: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	28, // 27: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
-	29, // 28: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	29, // 29: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	30, // 30: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	29, // 31: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	30, // 32: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	33, // [33:33] is the sub-list for method output_type
-	33, // [33:33] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	19, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	20, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	21, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	27, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	22, // 9: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	18, // 10: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	23, // 11: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
+	24, // 12: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
+	25, // 13: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
+	26, // 14: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
+	17, // 15: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	1,  // 16: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
+	8,  // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	9,  // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	10, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	11, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	12, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	13, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	14, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	7,  // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	6,  // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	5,  // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_info:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfo
+	28, // 27: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	29, // 28: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
+	30, // 29: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	30, // 30: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	31, // 31: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	30, // 32: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	31, // 33: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	34, // [34:34] is the sub-list for method output_type
+	34, // [34:34] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -3470,6 +3632,7 @@ func file_response_proto_init() {
 		(*clientAction_CommitTransaction_)(nil),
 		(*clientAction_RollbackTransaction_)(nil),
 		(*clientAction_StartNewConversation_)(nil),
+		(*clientAction_UpdateTaskServerData_)(nil),
 	}
 	file_response_proto_msgTypes[4].OneofWrappers = []any{
 		(*responseEvent_StreamFinished_Other_)(nil),
@@ -3486,7 +3649,7 @@ func file_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_response_proto_rawDesc), len(file_response_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

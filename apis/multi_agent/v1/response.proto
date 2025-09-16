@@ -136,6 +136,7 @@ message ClientAction {
     CommitTransaction commit_transaction = 10;
     RollbackTransaction rollback_transaction = 11;
     StartNewConversation start_new_conversation = 12;
+    UpdateTaskServerData update_task_server_data = 13;
   }
 
   // Create task action
@@ -150,6 +151,11 @@ message ClientAction {
     TaskStatus task_status = 2;
   }
 
+  message UpdateTaskServerData {
+    string task_id = 1;
+    string server_data = 2;
+  }
+  
   // Update task description action
   message UpdateTaskDescription {
     string task_id = 1;

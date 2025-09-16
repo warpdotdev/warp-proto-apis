@@ -50,6 +50,9 @@ message Task {
     // executing until all listed siblings have completed executing.
     repeated string sibling_dependencies = 2;
   }
+
+  // An opaque payload that the client should simply roundtrip.
+  string server_data = 8;
 }
 
 // A status for a task.

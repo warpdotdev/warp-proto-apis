@@ -117,6 +117,7 @@ type Task struct {
 	xxx_hidden_Status       *TaskStatus            `protobuf:"bytes,4,opt,name=status"`
 	xxx_hidden_Messages     *[]*Message            `protobuf:"bytes,5,rep,name=messages"`
 	xxx_hidden_Summary      *string                `protobuf:"bytes,6,opt,name=summary"`
+	xxx_hidden_ServerData   *string                `protobuf:"bytes,8,opt,name=server_data,json=serverData"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
@@ -201,14 +202,24 @@ func (x *Task) GetSummary() string {
 	return ""
 }
 
+func (x *Task) GetServerData() string {
+	if x != nil {
+		if x.xxx_hidden_ServerData != nil {
+			return *x.xxx_hidden_ServerData
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Task) SetId(v string) {
 	x.xxx_hidden_Id = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 func (x *Task) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
 func (x *Task) SetDependencies(v *Task_Dependencies) {
@@ -225,7 +236,12 @@ func (x *Task) SetMessages(v []*Message) {
 
 func (x *Task) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+}
+
+func (x *Task) SetServerData(v string) {
+	x.xxx_hidden_ServerData = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 7)
 }
 
 func (x *Task) HasId() bool {
@@ -263,6 +279,13 @@ func (x *Task) HasSummary() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
+func (x *Task) HasServerData() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
 func (x *Task) ClearId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Id = nil
@@ -286,6 +309,11 @@ func (x *Task) ClearSummary() {
 	x.xxx_hidden_Summary = nil
 }
 
+func (x *Task) ClearServerData() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_ServerData = nil
+}
+
 type Task_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -302,6 +330,8 @@ type Task_builder struct {
 	// The task summary. Differs from the task description in that it summarizes
 	// what has been done to accomplish the task.
 	Summary *string
+	// An opaque payload that the client should simply roundtrip.
+	ServerData *string
 }
 
 func (b0 Task_builder) Build() *Task {
@@ -309,19 +339,23 @@ func (b0 Task_builder) Build() *Task {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Id != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_Id = b.Id
 	}
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
 		x.xxx_hidden_Description = b.Description
 	}
 	x.xxx_hidden_Dependencies = b.Dependencies
 	x.xxx_hidden_Status = b.Status
 	x.xxx_hidden_Messages = &b.Messages
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
 		x.xxx_hidden_Summary = b.Summary
+	}
+	if b.ServerData != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
+		x.xxx_hidden_ServerData = b.ServerData
 	}
 	return m0
 }
@@ -12246,14 +12280,16 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x0fcitations.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\n" +
-	"todo.proto\"\xfa\x02\n" +
+	"todo.proto\"\x9b\x03\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
 	"\fdependencies\x18\x03 \x01(\v2&.warp.multi_agent.v1.Task.DependenciesR\fdependencies\x127\n" +
 	"\x06status\x18\x04 \x01(\v2\x1f.warp.multi_agent.v1.TaskStatusR\x06status\x128\n" +
 	"\bmessages\x18\x05 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\bmessages\x12\x18\n" +
-	"\asummary\x18\x06 \x01(\tR\asummary\x1ag\n" +
+	"\asummary\x18\x06 \x01(\tR\asummary\x12\x1f\n" +
+	"\vserver_data\x18\b \x01(\tR\n" +
+	"serverData\x1ag\n" +
 	"\fDependencies\x12$\n" +
 	"\x0eparent_task_id\x18\x01 \x01(\tR\fparentTaskId\x121\n" +
 	"\x14sibling_dependencies\x18\x02 \x03(\tR\x13siblingDependencies\"\x87\x04\n" +
