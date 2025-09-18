@@ -671,28 +671,10 @@ message SuggestPromptResult {
 }
 
 // Result of an `OpenCodeReview` tool call.
-message OpenCodeReviewResult {
-  oneof result {
-    Success success = 1;
-    Error error = 2;
-  }
-
-  // Currently empty; can be extended with fields if needed.
-  message Success {}
-  message Error { string message = 1 [ (sensitive) = true ]; }
-}
+message OpenCodeReviewResult {}
 
 // Result of an `InitProject` tool call.
-message InitProjectResult {
-  oneof result {
-    Success success = 1;
-    Error error = 2;
-  }
-
-  // Currently empty; can be extended with fields if needed.
-  message Success {}
-  message Error { string message = 1 [ (sensitive) = true ]; }
-}
+message InitProjectResult {}
 
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result types.

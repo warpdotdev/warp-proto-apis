@@ -4175,10 +4175,9 @@ func (*suggestPromptResult_Rejected) isSuggestPromptResult_Result() {}
 
 // Result of an `OpenCodeReview` tool call.
 type OpenCodeReviewResult struct {
-	state             protoimpl.MessageState        `protogen:"opaque.v1"`
-	xxx_hidden_Result isOpenCodeReviewResult_Result `protobuf_oneof:"result"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *OpenCodeReviewResult) Reset() {
@@ -4206,151 +4205,23 @@ func (x *OpenCodeReviewResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OpenCodeReviewResult) GetSuccess() *OpenCodeReviewResult_Success {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*openCodeReviewResult_Success_); ok {
-			return x.Success
-		}
-	}
-	return nil
-}
-
-func (x *OpenCodeReviewResult) GetError() *OpenCodeReviewResult_Error {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*openCodeReviewResult_Error_); ok {
-			return x.Error
-		}
-	}
-	return nil
-}
-
-func (x *OpenCodeReviewResult) SetSuccess(v *OpenCodeReviewResult_Success) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &openCodeReviewResult_Success_{v}
-}
-
-func (x *OpenCodeReviewResult) SetError(v *OpenCodeReviewResult_Error) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &openCodeReviewResult_Error_{v}
-}
-
-func (x *OpenCodeReviewResult) HasResult() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Result != nil
-}
-
-func (x *OpenCodeReviewResult) HasSuccess() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*openCodeReviewResult_Success_)
-	return ok
-}
-
-func (x *OpenCodeReviewResult) HasError() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*openCodeReviewResult_Error_)
-	return ok
-}
-
-func (x *OpenCodeReviewResult) ClearResult() {
-	x.xxx_hidden_Result = nil
-}
-
-func (x *OpenCodeReviewResult) ClearSuccess() {
-	if _, ok := x.xxx_hidden_Result.(*openCodeReviewResult_Success_); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-func (x *OpenCodeReviewResult) ClearError() {
-	if _, ok := x.xxx_hidden_Result.(*openCodeReviewResult_Error_); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-const OpenCodeReviewResult_Result_not_set_case case_OpenCodeReviewResult_Result = 0
-const OpenCodeReviewResult_Success_case case_OpenCodeReviewResult_Result = 1
-const OpenCodeReviewResult_Error_case case_OpenCodeReviewResult_Result = 2
-
-func (x *OpenCodeReviewResult) WhichResult() case_OpenCodeReviewResult_Result {
-	if x == nil {
-		return OpenCodeReviewResult_Result_not_set_case
-	}
-	switch x.xxx_hidden_Result.(type) {
-	case *openCodeReviewResult_Success_:
-		return OpenCodeReviewResult_Success_case
-	case *openCodeReviewResult_Error_:
-		return OpenCodeReviewResult_Error_case
-	default:
-		return OpenCodeReviewResult_Result_not_set_case
-	}
-}
-
 type OpenCodeReviewResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof xxx_hidden_Result:
-	Success *OpenCodeReviewResult_Success
-	Error   *OpenCodeReviewResult_Error
-	// -- end of xxx_hidden_Result
 }
 
 func (b0 OpenCodeReviewResult_builder) Build() *OpenCodeReviewResult {
 	m0 := &OpenCodeReviewResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Success != nil {
-		x.xxx_hidden_Result = &openCodeReviewResult_Success_{b.Success}
-	}
-	if b.Error != nil {
-		x.xxx_hidden_Result = &openCodeReviewResult_Error_{b.Error}
-	}
 	return m0
 }
 
-type case_OpenCodeReviewResult_Result protoreflect.FieldNumber
-
-func (x case_OpenCodeReviewResult_Result) String() string {
-	md := file_task_proto_msgTypes[19].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isOpenCodeReviewResult_Result interface {
-	isOpenCodeReviewResult_Result()
-}
-
-type openCodeReviewResult_Success_ struct {
-	Success *OpenCodeReviewResult_Success `protobuf:"bytes,1,opt,name=success,oneof"`
-}
-
-type openCodeReviewResult_Error_ struct {
-	Error *OpenCodeReviewResult_Error `protobuf:"bytes,2,opt,name=error,oneof"`
-}
-
-func (*openCodeReviewResult_Success_) isOpenCodeReviewResult_Result() {}
-
-func (*openCodeReviewResult_Error_) isOpenCodeReviewResult_Result() {}
-
 // Result of an `InitProject` tool call.
 type InitProjectResult struct {
-	state             protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_Result isInitProjectResult_Result `protobuf_oneof:"result"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *InitProjectResult) Reset() {
@@ -4378,144 +4249,17 @@ func (x *InitProjectResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InitProjectResult) GetSuccess() *InitProjectResult_Success {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*initProjectResult_Success_); ok {
-			return x.Success
-		}
-	}
-	return nil
-}
-
-func (x *InitProjectResult) GetError() *InitProjectResult_Error {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*initProjectResult_Error_); ok {
-			return x.Error
-		}
-	}
-	return nil
-}
-
-func (x *InitProjectResult) SetSuccess(v *InitProjectResult_Success) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &initProjectResult_Success_{v}
-}
-
-func (x *InitProjectResult) SetError(v *InitProjectResult_Error) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &initProjectResult_Error_{v}
-}
-
-func (x *InitProjectResult) HasResult() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Result != nil
-}
-
-func (x *InitProjectResult) HasSuccess() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*initProjectResult_Success_)
-	return ok
-}
-
-func (x *InitProjectResult) HasError() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*initProjectResult_Error_)
-	return ok
-}
-
-func (x *InitProjectResult) ClearResult() {
-	x.xxx_hidden_Result = nil
-}
-
-func (x *InitProjectResult) ClearSuccess() {
-	if _, ok := x.xxx_hidden_Result.(*initProjectResult_Success_); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-func (x *InitProjectResult) ClearError() {
-	if _, ok := x.xxx_hidden_Result.(*initProjectResult_Error_); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-const InitProjectResult_Result_not_set_case case_InitProjectResult_Result = 0
-const InitProjectResult_Success_case case_InitProjectResult_Result = 1
-const InitProjectResult_Error_case case_InitProjectResult_Result = 2
-
-func (x *InitProjectResult) WhichResult() case_InitProjectResult_Result {
-	if x == nil {
-		return InitProjectResult_Result_not_set_case
-	}
-	switch x.xxx_hidden_Result.(type) {
-	case *initProjectResult_Success_:
-		return InitProjectResult_Success_case
-	case *initProjectResult_Error_:
-		return InitProjectResult_Error_case
-	default:
-		return InitProjectResult_Result_not_set_case
-	}
-}
-
 type InitProjectResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Fields of oneof xxx_hidden_Result:
-	Success *InitProjectResult_Success
-	Error   *InitProjectResult_Error
-	// -- end of xxx_hidden_Result
 }
 
 func (b0 InitProjectResult_builder) Build() *InitProjectResult {
 	m0 := &InitProjectResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Success != nil {
-		x.xxx_hidden_Result = &initProjectResult_Success_{b.Success}
-	}
-	if b.Error != nil {
-		x.xxx_hidden_Result = &initProjectResult_Error_{b.Error}
-	}
 	return m0
 }
-
-type case_InitProjectResult_Result protoreflect.FieldNumber
-
-func (x case_InitProjectResult_Result) String() string {
-	md := file_task_proto_msgTypes[20].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isInitProjectResult_Result interface {
-	isInitProjectResult_Result()
-}
-
-type initProjectResult_Success_ struct {
-	Success *InitProjectResult_Success `protobuf:"bytes,1,opt,name=success,oneof"`
-}
-
-type initProjectResult_Error_ struct {
-	Error *InitProjectResult_Error `protobuf:"bytes,2,opt,name=error,oneof"`
-}
-
-func (*initProjectResult_Success_) isInitProjectResult_Result() {}
-
-func (*initProjectResult_Error_) isInitProjectResult_Result() {}
 
 // Dependencies for task hierarchy and execution order.
 type Task_Dependencies struct {
@@ -12888,250 +12632,6 @@ func (b0 CallMCPToolResult_Success_Result_Image_builder) Build() *CallMCPToolRes
 	return m0
 }
 
-// Currently empty; can be extended with fields if needed.
-type OpenCodeReviewResult_Success struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OpenCodeReviewResult_Success) Reset() {
-	*x = OpenCodeReviewResult_Success{}
-	mi := &file_task_proto_msgTypes[95]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenCodeReviewResult_Success) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenCodeReviewResult_Success) ProtoMessage() {}
-
-func (x *OpenCodeReviewResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[95]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type OpenCodeReviewResult_Success_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 OpenCodeReviewResult_Success_builder) Build() *OpenCodeReviewResult_Success {
-	m0 := &OpenCodeReviewResult_Success{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type OpenCodeReviewResult_Error struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Message     *string                `protobuf:"bytes,1,opt,name=message"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *OpenCodeReviewResult_Error) Reset() {
-	*x = OpenCodeReviewResult_Error{}
-	mi := &file_task_proto_msgTypes[96]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OpenCodeReviewResult_Error) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OpenCodeReviewResult_Error) ProtoMessage() {}
-
-func (x *OpenCodeReviewResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[96]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *OpenCodeReviewResult_Error) GetMessage() string {
-	if x != nil {
-		if x.xxx_hidden_Message != nil {
-			return *x.xxx_hidden_Message
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *OpenCodeReviewResult_Error) SetMessage(v string) {
-	x.xxx_hidden_Message = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
-}
-
-func (x *OpenCodeReviewResult_Error) HasMessage() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *OpenCodeReviewResult_Error) ClearMessage() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Message = nil
-}
-
-type OpenCodeReviewResult_Error_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Message *string
-}
-
-func (b0 OpenCodeReviewResult_Error_builder) Build() *OpenCodeReviewResult_Error {
-	m0 := &OpenCodeReviewResult_Error{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Message != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Message = b.Message
-	}
-	return m0
-}
-
-// Currently empty; can be extended with fields if needed.
-type InitProjectResult_Success struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *InitProjectResult_Success) Reset() {
-	*x = InitProjectResult_Success{}
-	mi := &file_task_proto_msgTypes[97]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitProjectResult_Success) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitProjectResult_Success) ProtoMessage() {}
-
-func (x *InitProjectResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[97]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type InitProjectResult_Success_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 InitProjectResult_Success_builder) Build() *InitProjectResult_Success {
-	m0 := &InitProjectResult_Success{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-type InitProjectResult_Error struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Message     *string                `protobuf:"bytes,1,opt,name=message"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *InitProjectResult_Error) Reset() {
-	*x = InitProjectResult_Error{}
-	mi := &file_task_proto_msgTypes[98]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InitProjectResult_Error) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InitProjectResult_Error) ProtoMessage() {}
-
-func (x *InitProjectResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[98]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *InitProjectResult_Error) GetMessage() string {
-	if x != nil {
-		if x.xxx_hidden_Message != nil {
-			return *x.xxx_hidden_Message
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *InitProjectResult_Error) SetMessage(v string) {
-	x.xxx_hidden_Message = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
-}
-
-func (x *InitProjectResult_Error) HasMessage() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *InitProjectResult_Error) ClearMessage() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Message = nil
-}
-
-type InitProjectResult_Error_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	Message *string
-}
-
-func (b0 InitProjectResult_Error_builder) Build() *InitProjectResult_Error {
-	m0 := &InitProjectResult_Error{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Message != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Message = b.Message
-	}
-	return m0
-}
-
 var File_task_proto protoreflect.FileDescriptor
 
 const file_task_proto_rawDesc = "" +
@@ -13490,21 +12990,9 @@ const file_task_proto_rawDesc = "" +
 	"\x13SuggestPromptResult\x124\n" +
 	"\baccepted\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\baccepted\x124\n" +
 	"\brejected\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\brejectedB\b\n" +
-	"\x06result\"\xec\x01\n" +
-	"\x14OpenCodeReviewResult\x12M\n" +
-	"\asuccess\x18\x01 \x01(\v21.warp.multi_agent.v1.OpenCodeReviewResult.SuccessH\x00R\asuccess\x12G\n" +
-	"\x05error\x18\x02 \x01(\v2/.warp.multi_agent.v1.OpenCodeReviewResult.ErrorH\x00R\x05error\x1a\t\n" +
-	"\aSuccess\x1a'\n" +
-	"\x05Error\x12\x1e\n" +
-	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xe3\x01\n" +
-	"\x11InitProjectResult\x12J\n" +
-	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.InitProjectResult.SuccessH\x00R\asuccess\x12D\n" +
-	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.InitProjectResult.ErrorH\x00R\x05error\x1a\t\n" +
-	"\aSuccess\x1a'\n" +
-	"\x05Error\x12\x1e\n" +
-	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result*\xdf\x02\n" +
+	"\x06result\"\x16\n" +
+	"\x14OpenCodeReviewResult\"\x13\n" +
+	"\x11InitProjectResult*\xdf\x02\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -13526,7 +13014,7 @@ const file_task_proto_rawDesc = "" +
 	"\fINIT_PROJECT\x10\x0fB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 99)
+var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 95)
 var file_task_proto_goTypes = []any{
 	(ToolType)(0),                                            // 0: warp.multi_agent.v1.ToolType
 	(*Task)(nil),                                             // 1: warp.multi_agent.v1.Task
@@ -13624,24 +13112,20 @@ var file_task_proto_goTypes = []any{
 	(*CallMCPToolResult_Success_Result)(nil),                 // 93: warp.multi_agent.v1.CallMCPToolResult.Success.Result
 	(*CallMCPToolResult_Success_Result_Text)(nil),            // 94: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	(*CallMCPToolResult_Success_Result_Image)(nil),           // 95: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	(*OpenCodeReviewResult_Success)(nil),                     // 96: warp.multi_agent.v1.OpenCodeReviewResult.Success
-	(*OpenCodeReviewResult_Error)(nil),                       // 97: warp.multi_agent.v1.OpenCodeReviewResult.Error
-	(*InitProjectResult_Success)(nil),                        // 98: warp.multi_agent.v1.InitProjectResult.Success
-	(*InitProjectResult_Error)(nil),                          // 99: warp.multi_agent.v1.InitProjectResult.Error
-	(*timestamppb.Timestamp)(nil),                            // 100: google.protobuf.Timestamp
-	(*Citation)(nil),                                         // 101: warp.multi_agent.v1.Citation
-	(*LongRunningShellCommandSnapshot)(nil),                  // 102: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*emptypb.Empty)(nil),                                    // 103: google.protobuf.Empty
-	(*InputContext)(nil),                                     // 104: warp.multi_agent.v1.InputContext
-	(*Attachment)(nil),                                       // 105: warp.multi_agent.v1.Attachment
-	(*durationpb.Duration)(nil),                              // 106: google.protobuf.Duration
-	(*CreateTodoList)(nil),                                   // 107: warp.multi_agent.v1.CreateTodoList
-	(*UpdatePendingTodos)(nil),                               // 108: warp.multi_agent.v1.UpdatePendingTodos
-	(*MarkTodosCompleted)(nil),                               // 109: warp.multi_agent.v1.MarkTodosCompleted
-	(*structpb.Struct)(nil),                                  // 110: google.protobuf.Struct
-	(*FileContentLineRange)(nil),                             // 111: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                      // 112: warp.multi_agent.v1.FileContent
-	(*AnyFileContent)(nil),                                   // 113: warp.multi_agent.v1.AnyFileContent
+	(*timestamppb.Timestamp)(nil),                            // 96: google.protobuf.Timestamp
+	(*Citation)(nil),                                         // 97: warp.multi_agent.v1.Citation
+	(*LongRunningShellCommandSnapshot)(nil),                  // 98: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*emptypb.Empty)(nil),                                    // 99: google.protobuf.Empty
+	(*InputContext)(nil),                                     // 100: warp.multi_agent.v1.InputContext
+	(*Attachment)(nil),                                       // 101: warp.multi_agent.v1.Attachment
+	(*durationpb.Duration)(nil),                              // 102: google.protobuf.Duration
+	(*CreateTodoList)(nil),                                   // 103: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil),                               // 104: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil),                               // 105: warp.multi_agent.v1.MarkTodosCompleted
+	(*structpb.Struct)(nil),                                  // 106: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                             // 107: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                      // 108: warp.multi_agent.v1.FileContent
+	(*AnyFileContent)(nil),                                   // 109: warp.multi_agent.v1.AnyFileContent
 }
 var file_task_proto_depIdxs = []int32{
 	22,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -13653,8 +13137,8 @@ var file_task_proto_depIdxs = []int32{
 	26,  // 6: warp.multi_agent.v1.TaskStatus.succeeded:type_name -> warp.multi_agent.v1.TaskStatus.Succeeded
 	27,  // 7: warp.multi_agent.v1.TaskStatus.failed:type_name -> warp.multi_agent.v1.TaskStatus.Failed
 	28,  // 8: warp.multi_agent.v1.TaskStatus.aborted:type_name -> warp.multi_agent.v1.TaskStatus.Aborted
-	100, // 9: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
-	101, // 10: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+	96,  // 9: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
+	97,  // 10: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
 	29,  // 11: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	36,  // 12: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
 	38,  // 13: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
@@ -13664,7 +13148,7 @@ var file_task_proto_depIdxs = []int32{
 	41,  // 17: warp.multi_agent.v1.Message.update_todos:type_name -> warp.multi_agent.v1.Message.UpdateTodos
 	42,  // 18: warp.multi_agent.v1.Message.started_child_task:type_name -> warp.multi_agent.v1.Message.StartedChildTask
 	37,  // 19: warp.multi_agent.v1.Message.agent_reasoning:type_name -> warp.multi_agent.v1.Message.AgentReasoning
-	102, // 20: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	98,  // 20: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	17,  // 21: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	67,  // 22: warp.multi_agent.v1.ReadFilesResult.text_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
 	68,  // 23: warp.multi_agent.v1.ReadFilesResult.any_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
@@ -13673,7 +13157,7 @@ var file_task_proto_depIdxs = []int32{
 	71,  // 26: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
 	72,  // 27: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
 	73,  // 28: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
-	103, // 29: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	99,  // 29: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
 	75,  // 30: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
 	76,  // 31: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
 	77,  // 32: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
@@ -13685,99 +13169,95 @@ var file_task_proto_depIdxs = []int32{
 	86,  // 38: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
 	87,  // 39: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
 	88,  // 40: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
-	102, // 41: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	98,  // 41: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	17,  // 42: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	89,  // 43: warp.multi_agent.v1.SuggestNewConversationResult.accepted:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Accepted
 	90,  // 44: warp.multi_agent.v1.SuggestNewConversationResult.rejected:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Rejected
 	91,  // 45: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
 	92,  // 46: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
-	103, // 47: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
-	103, // 48: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
-	96,  // 49: warp.multi_agent.v1.OpenCodeReviewResult.success:type_name -> warp.multi_agent.v1.OpenCodeReviewResult.Success
-	97,  // 50: warp.multi_agent.v1.OpenCodeReviewResult.error:type_name -> warp.multi_agent.v1.OpenCodeReviewResult.Error
-	98,  // 51: warp.multi_agent.v1.InitProjectResult.success:type_name -> warp.multi_agent.v1.InitProjectResult.Success
-	99,  // 52: warp.multi_agent.v1.InitProjectResult.error:type_name -> warp.multi_agent.v1.InitProjectResult.Error
-	104, // 53: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	43,  // 54: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
-	31,  // 55: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
-	32,  // 56: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
-	33,  // 57: warp.multi_agent.v1.Message.SystemQuery.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Message.TriggerSuggestPrompt
-	34,  // 58: warp.multi_agent.v1.Message.SystemQuery.create_new_project:type_name -> warp.multi_agent.v1.Message.CreateNewProject
-	35,  // 59: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
-	104, // 60: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	105, // 61: warp.multi_agent.v1.Message.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	103, // 62: warp.multi_agent.v1.Message.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	103, // 63: warp.multi_agent.v1.Message.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	106, // 64: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
-	45,  // 65: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	49,  // 66: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	44,  // 67: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
-	48,  // 68: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	50,  // 69: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	51,  // 70: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	52,  // 71: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	53,  // 72: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
-	54,  // 73: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
-	56,  // 74: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
-	57,  // 75: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
-	46,  // 76: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
-	47,  // 77: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
-	55,  // 78: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
-	58,  // 79: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
-	59,  // 80: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
-	60,  // 81: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
-	104, // 82: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
-	4,   // 83: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	6,   // 84: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	65,  // 85: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	5,   // 86: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	7,   // 87: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	9,   // 88: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	8,   // 89: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	10,  // 90: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	11,  // 91: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	66,  // 92: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
-	103, // 93: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
-	14,  // 94: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	18,  // 95: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	15,  // 96: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	16,  // 97: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
-	12,  // 98: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
-	19,  // 99: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
-	20,  // 100: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
-	21,  // 101: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
-	107, // 102: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
-	108, // 103: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
-	109, // 104: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
-	105, // 105: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	101, // 106: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
-	61,  // 107: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	62,  // 108: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	63,  // 109: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	1,   // 110: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	110, // 111: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
-	64,  // 112: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
-	111, // 113: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	29,  // 114: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	112, // 115: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	113, // 116: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	112, // 117: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	112, // 118: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	74,  // 119: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	112, // 120: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	78,  // 121: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	79,  // 122: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	84,  // 123: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	13,  // 124: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	93,  // 125: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	94,  // 126: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	95,  // 127: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	13,  // 128: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	129, // [129:129] is the sub-list for method output_type
-	129, // [129:129] is the sub-list for method input_type
-	129, // [129:129] is the sub-list for extension type_name
-	129, // [129:129] is the sub-list for extension extendee
-	0,   // [0:129] is the sub-list for field type_name
+	99,  // 47: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
+	99,  // 48: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
+	100, // 49: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	43,  // 50: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
+	31,  // 51: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
+	32,  // 52: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
+	33,  // 53: warp.multi_agent.v1.Message.SystemQuery.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Message.TriggerSuggestPrompt
+	34,  // 54: warp.multi_agent.v1.Message.SystemQuery.create_new_project:type_name -> warp.multi_agent.v1.Message.CreateNewProject
+	35,  // 55: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
+	100, // 56: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	101, // 57: warp.multi_agent.v1.Message.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	99,  // 58: warp.multi_agent.v1.Message.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	99,  // 59: warp.multi_agent.v1.Message.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	102, // 60: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
+	45,  // 61: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	49,  // 62: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	44,  // 63: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
+	48,  // 64: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	50,  // 65: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	51,  // 66: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	52,  // 67: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	53,  // 68: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
+	54,  // 69: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
+	56,  // 70: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	57,  // 71: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	46,  // 72: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
+	47,  // 73: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
+	55,  // 74: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
+	58,  // 75: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
+	59,  // 76: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
+	60,  // 77: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
+	100, // 78: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	4,   // 79: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	6,   // 80: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	65,  // 81: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	5,   // 82: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	7,   // 83: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	9,   // 84: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	8,   // 85: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	10,  // 86: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	11,  // 87: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	66,  // 88: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	99,  // 89: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	14,  // 90: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	18,  // 91: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	15,  // 92: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	16,  // 93: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
+	12,  // 94: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
+	19,  // 95: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
+	20,  // 96: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
+	21,  // 97: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
+	103, // 98: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
+	104, // 99: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
+	105, // 100: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
+	101, // 101: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	97,  // 102: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	61,  // 103: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	62,  // 104: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	63,  // 105: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	1,   // 106: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	106, // 107: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	64,  // 108: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
+	107, // 109: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	29,  // 110: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	108, // 111: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	109, // 112: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	108, // 113: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	108, // 114: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	74,  // 115: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	108, // 116: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	78,  // 117: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	79,  // 118: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	84,  // 119: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	13,  // 120: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	93,  // 121: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	94,  // 122: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	95,  // 123: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	13,  // 124: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	125, // [125:125] is the sub-list for method output_type
+	125, // [125:125] is the sub-list for method input_type
+	125, // [125:125] is the sub-list for extension type_name
+	125, // [125:125] is the sub-list for extension extendee
+	0,   // [0:125] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
@@ -13867,14 +13347,6 @@ func file_task_proto_init() {
 		(*suggestPromptResult_Accepted)(nil),
 		(*suggestPromptResult_Rejected)(nil),
 	}
-	file_task_proto_msgTypes[19].OneofWrappers = []any{
-		(*openCodeReviewResult_Success_)(nil),
-		(*openCodeReviewResult_Error_)(nil),
-	}
-	file_task_proto_msgTypes[20].OneofWrappers = []any{
-		(*initProjectResult_Success_)(nil),
-		(*initProjectResult_Error_)(nil),
-	}
 	file_task_proto_msgTypes[29].OneofWrappers = []any{
 		(*message_SystemQuery_AutoCodeDiff)(nil),
 		(*message_SystemQuery_ResumeConversation)(nil),
@@ -13945,7 +13417,7 @@ func file_task_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_task_proto_rawDesc), len(file_task_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   99,
+			NumMessages:   95,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
