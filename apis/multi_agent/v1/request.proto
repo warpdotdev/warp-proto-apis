@@ -233,6 +233,9 @@ message Request {
     // If `true`, the client supports using `read_files` to read images.
     bool supports_read_image_files = 16;
 
+    // If `true`, the client supports the `Reasoning` message type.
+    bool supports_reasoning_message = 17;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
