@@ -224,6 +224,11 @@ message Message {
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
       bool is_risky = 5;
+      // The reason the agent is running command, to be used in result
+      // summarization.
+      string reason = 6;
+      // Whether the agent wants to allow summarization of output.
+      bool can_summarize_output = 7;
     }
 
     // A tool call to write bytes to the PTY when a command is running in the foreground.
