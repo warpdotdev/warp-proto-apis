@@ -107,6 +107,7 @@ message Message {
     UpdateTodos update_todos = 10;
     StartedChildTask started_child_task = 12;
     AgentReasoning agent_reasoning = 15;
+    Summarization summarization = 16;
   }
 
   // User query message type
@@ -174,6 +175,12 @@ message Message {
 
     // How long the agent spent reasoning.
     // Only set when the reasoning is finished.
+    google.protobuf.Duration finished_duration = 2;
+  }
+
+  message Summarization {
+    // How long the agent spent summarizing
+    // Only set when the summarization is finished.
     google.protobuf.Duration finished_duration = 2;
   }
 
