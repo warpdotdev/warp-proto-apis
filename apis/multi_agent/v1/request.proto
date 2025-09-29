@@ -57,6 +57,7 @@ message Request {
       TriggerSuggestPrompt trigger_suggest_prompt = 9;
       CreateNewProject create_new_project = 10;
       CloneRepository clone_repository = 11;
+      SummarizeConversation summarize_conversation = 12;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -151,6 +152,13 @@ message Request {
     // input.
     message CloneRepository {
       string url = 1 [ (sensitive) = true ];
+    }
+
+    // An input to trigger summarization of the current conversation.
+    // This does not produce a follow-up message; the server responds with ClientAction.UpdateTaskSummary.
+    message SummarizeConversation {
+      // Optional: if unset, server uses the active task ID.
+      string task_id = 1;
     }
 
     // An input to trigger a suggested prompt.
