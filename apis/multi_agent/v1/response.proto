@@ -73,12 +73,47 @@ message ResponseEvent {
 
     ContextWindowInfo context_window_info = 11;
 
+    // Aggregated usage metadata for a given conversation.
+    MaaConversationUsage conversation_usage = 12;
+
     message ContextWindowInfo {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
       float context_window_usage = 1;
 
       // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
       bool summarized = 2;
+    }
+
+    // Token usage by model.
+    message ModelTokenUsage {
+      string model_id = 1;
+      uint32 total_tokens = 2;
+    }
+
+    // Diff metadata capturing added/removed line counts.
+    message DiffMetadata {
+      int32 lines_added = 1;
+      int32 lines_removed = 2;
+    }
+
+    // Usage metadata across tools, commands, and token usage.
+    message UsageMetadata {
+      int32 tool_call_count = 1;
+      int32 commands_executed_count = 2;
+      repeated ModelTokenUsage token_usage = 3;
+      DiffMetadata diff_metadata = 4;
+      double context_window_usage = 5;
+    }
+
+    // Aggregated usage metadata for a given conversation.
+    message MaaConversationUsage {
+      int32 user_id = 1;
+      string conversation_id = 2;
+      string title = 3;
+      string last_updated = 4;
+      string credits_spent = 5;
+      string primary_model = 6;
+      UsageMetadata usage_metadata = 7;
     }
 
     message RequestCost {
