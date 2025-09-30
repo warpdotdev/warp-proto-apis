@@ -101,6 +101,8 @@ message Request {
         SuggestPromptResult suggest_prompt = 16;
         OpenCodeReviewResult open_code_review = 17;
         InitProjectResult init_project = 18;
+        ReadDocumentsResult read_documents = 19;
+        ApplyDocumentDiffsResult apply_document_diffs = 20;
       }
 
       // Generic tool call result for representing a user-requested refinement
