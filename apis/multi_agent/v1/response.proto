@@ -107,13 +107,11 @@ message ResponseEvent {
 
     // Aggregated usage metadata for a given conversation.
     message MaaConversationUsage {
-      int32 user_id = 1;
-      string conversation_id = 2;
-      string title = 3;
-      string last_updated = 4;
-      string credits_spent = 5;
-      string primary_model = 6;
-      UsageMetadata usage_metadata = 7;
+      string title = 1;
+      string last_updated = 2;
+      float credits_spent = 3;
+      string primary_model = 4;
+      UsageMetadata usage_metadata = 5;
     }
 
     message RequestCost {

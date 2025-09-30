@@ -2111,18 +2111,16 @@ func (b0 ResponseEvent_StreamFinished_UsageMetadata_builder) Build() *ResponseEv
 
 // Aggregated usage metadata for a given conversation.
 type ResponseEvent_StreamFinished_MaaConversationUsage struct {
-	state                     protoimpl.MessageState                      `protogen:"opaque.v1"`
-	xxx_hidden_UserId         int32                                       `protobuf:"varint,1,opt,name=user_id,json=userId"`
-	xxx_hidden_ConversationId *string                                     `protobuf:"bytes,2,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Title          *string                                     `protobuf:"bytes,3,opt,name=title"`
-	xxx_hidden_LastUpdated    *string                                     `protobuf:"bytes,4,opt,name=last_updated,json=lastUpdated"`
-	xxx_hidden_CreditsSpent   *string                                     `protobuf:"bytes,5,opt,name=credits_spent,json=creditsSpent"`
-	xxx_hidden_PrimaryModel   *string                                     `protobuf:"bytes,6,opt,name=primary_model,json=primaryModel"`
-	xxx_hidden_UsageMetadata  *ResponseEvent_StreamFinished_UsageMetadata `protobuf:"bytes,7,opt,name=usage_metadata,json=usageMetadata"`
-	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
-	XXX_presence              [1]uint32
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                    protoimpl.MessageState                      `protogen:"opaque.v1"`
+	xxx_hidden_Title         *string                                     `protobuf:"bytes,1,opt,name=title"`
+	xxx_hidden_LastUpdated   *string                                     `protobuf:"bytes,2,opt,name=last_updated,json=lastUpdated"`
+	xxx_hidden_CreditsSpent  float32                                     `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
+	xxx_hidden_PrimaryModel  *string                                     `protobuf:"bytes,4,opt,name=primary_model,json=primaryModel"`
+	xxx_hidden_UsageMetadata *ResponseEvent_StreamFinished_UsageMetadata `protobuf:"bytes,5,opt,name=usage_metadata,json=usageMetadata"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) Reset() {
@@ -2150,23 +2148,6 @@ func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ProtoReflect() proto
 	return mi.MessageOf(x)
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetUserId() int32 {
-	if x != nil {
-		return x.xxx_hidden_UserId
-	}
-	return 0
-}
-
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetConversationId() string {
-	if x != nil {
-		if x.xxx_hidden_ConversationId != nil {
-			return *x.xxx_hidden_ConversationId
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetTitle() string {
 	if x != nil {
 		if x.xxx_hidden_Title != nil {
@@ -2187,14 +2168,11 @@ func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetLastUpdated() str
 	return ""
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetCreditsSpent() string {
+func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetCreditsSpent() float32 {
 	if x != nil {
-		if x.xxx_hidden_CreditsSpent != nil {
-			return *x.xxx_hidden_CreditsSpent
-		}
-		return ""
+		return x.xxx_hidden_CreditsSpent
 	}
-	return ""
+	return 0
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetPrimaryModel() string {
@@ -2214,80 +2192,56 @@ func (x *ResponseEvent_StreamFinished_MaaConversationUsage) GetUsageMetadata() *
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetUserId(v int32) {
-	x.xxx_hidden_UserId = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
-}
-
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetConversationId(v string) {
-	x.xxx_hidden_ConversationId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
-}
-
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetLastUpdated(v string) {
 	x.xxx_hidden_LastUpdated = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetCreditsSpent(v string) {
-	x.xxx_hidden_CreditsSpent = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
+func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetCreditsSpent(v float32) {
+	x.xxx_hidden_CreditsSpent = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetPrimaryModel(v string) {
 	x.xxx_hidden_PrimaryModel = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) SetUsageMetadata(v *ResponseEvent_StreamFinished_UsageMetadata) {
 	x.xxx_hidden_UsageMetadata = v
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasUserId() bool {
+func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasTitle() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasConversationId() bool {
+func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasLastUpdated() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasTitle() bool {
+func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasCreditsSpent() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasLastUpdated() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
-}
-
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasCreditsSpent() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
-}
-
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasPrimaryModel() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasUsageMetadata() bool {
@@ -2297,33 +2251,23 @@ func (x *ResponseEvent_StreamFinished_MaaConversationUsage) HasUsageMetadata() b
 	return x.xxx_hidden_UsageMetadata != nil
 }
 
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearUserId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_UserId = 0
-}
-
-func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearConversationId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_ConversationId = nil
-}
-
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearTitle() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Title = nil
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearLastUpdated() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_LastUpdated = nil
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearCreditsSpent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_CreditsSpent = nil
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CreditsSpent = 0
 }
 
 func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearPrimaryModel() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_PrimaryModel = nil
 }
 
@@ -2334,41 +2278,31 @@ func (x *ResponseEvent_StreamFinished_MaaConversationUsage) ClearUsageMetadata()
 type ResponseEvent_StreamFinished_MaaConversationUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	UserId         *int32
-	ConversationId *string
-	Title          *string
-	LastUpdated    *string
-	CreditsSpent   *string
-	PrimaryModel   *string
-	UsageMetadata  *ResponseEvent_StreamFinished_UsageMetadata
+	Title         *string
+	LastUpdated   *string
+	CreditsSpent  *float32
+	PrimaryModel  *string
+	UsageMetadata *ResponseEvent_StreamFinished_UsageMetadata
 }
 
 func (b0 ResponseEvent_StreamFinished_MaaConversationUsage_builder) Build() *ResponseEvent_StreamFinished_MaaConversationUsage {
 	m0 := &ResponseEvent_StreamFinished_MaaConversationUsage{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.UserId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
-		x.xxx_hidden_UserId = *b.UserId
-	}
-	if b.ConversationId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
-		x.xxx_hidden_ConversationId = b.ConversationId
-	}
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.LastUpdated != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_LastUpdated = b.LastUpdated
 	}
 	if b.CreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
-		x.xxx_hidden_CreditsSpent = b.CreditsSpent
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
 	}
 	if b.PrimaryModel != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_PrimaryModel = b.PrimaryModel
 	}
 	x.xxx_hidden_UsageMetadata = b.UsageMetadata
@@ -4108,7 +4042,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xd8\x17\n" +
+	"task.proto\"\x96\x17\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4119,7 +4053,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xa9\x14\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xe7\x13\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4154,15 +4088,13 @@ const file_response_proto_rawDesc = "" +
 	"\vtoken_usage\x18\x03 \x03(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\n" +
 	"tokenUsage\x12c\n" +
 	"\rdiff_metadata\x18\x04 \x01(\v2>.warp.multi_agent.v1.ResponseEvent.StreamFinished.DiffMetadataR\fdiffMetadata\x120\n" +
-	"\x14context_window_usage\x18\x05 \x01(\x01R\x12contextWindowUsage\x1a\xc3\x02\n" +
-	"\x14MaaConversationUsage\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\x05R\x06userId\x12'\n" +
-	"\x0fconversation_id\x18\x02 \x01(\tR\x0econversationId\x12\x14\n" +
-	"\x05title\x18\x03 \x01(\tR\x05title\x12!\n" +
-	"\flast_updated\x18\x04 \x01(\tR\vlastUpdated\x12#\n" +
-	"\rcredits_spent\x18\x05 \x01(\tR\fcreditsSpent\x12#\n" +
-	"\rprimary_model\x18\x06 \x01(\tR\fprimaryModel\x12f\n" +
-	"\x0eusage_metadata\x18\a \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.UsageMetadataR\rusageMetadata\x1a#\n" +
+	"\x14context_window_usage\x18\x05 \x01(\x01R\x12contextWindowUsage\x1a\x81\x02\n" +
+	"\x14MaaConversationUsage\x12\x14\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title\x12!\n" +
+	"\flast_updated\x18\x02 \x01(\tR\vlastUpdated\x12#\n" +
+	"\rcredits_spent\x18\x03 \x01(\x02R\fcreditsSpent\x12#\n" +
+	"\rprimary_model\x18\x04 \x01(\tR\fprimaryModel\x12f\n" +
+	"\x0eusage_metadata\x18\x05 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.UsageMetadataR\rusageMetadata\x1a#\n" +
 	"\vRequestCost\x12\x14\n" +
 	"\x05exact\x18\x01 \x01(\x02R\x05exact\x1a\xda\x01\n" +
 	"\n" +
