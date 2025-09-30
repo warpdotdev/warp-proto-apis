@@ -165,9 +165,11 @@ message ResponseEvent {
 
 // Client actions that can be requested in a response
 message ClientAction {
+  reserved update_task_status;
+  reserved 2;
+
   oneof action {
     CreateTask create_task = 1;
-    UpdateTaskStatus update_task_status = 2;
     AddMessagesToTask add_messages_to_task = 3;
     UpdateTaskMessage update_task_message = 4;
     AppendToMessageContent append_to_message_content = 5;
@@ -185,19 +187,13 @@ message ClientAction {
   message CreateTask { Task task = 1; }
 
   // TODO(matthew): Ought to be able to combine
-  // UpdateTask{Status,Description,Summary} at least.
-
-  // Update task status action
-  message UpdateTaskStatus {
-    string task_id = 1;
-    TaskStatus task_status = 2;
-  }
+  // UpdateTask{Description,Summary} at least.
 
   message UpdateTaskServerData {
     string task_id = 1;
     string server_data = 2;
   }
-  
+
   // Update task description action
   message UpdateTaskDescription {
     string task_id = 1;
