@@ -1939,7 +1939,7 @@ type ResponseEvent_StreamFinished_UsageMetadata struct {
 	xxx_hidden_CommandsExecutedCount int32                                            `protobuf:"varint,2,opt,name=commands_executed_count,json=commandsExecutedCount"`
 	xxx_hidden_TokenUsage            *[]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,3,rep,name=token_usage,json=tokenUsage"`
 	xxx_hidden_DiffMetadata          *ResponseEvent_StreamFinished_DiffMetadata       `protobuf:"bytes,4,opt,name=diff_metadata,json=diffMetadata"`
-	xxx_hidden_ContextWindowUsage    float64                                          `protobuf:"fixed64,5,opt,name=context_window_usage,json=contextWindowUsage"`
+	xxx_hidden_ContextWindowUsage    float32                                          `protobuf:"fixed32,5,opt,name=context_window_usage,json=contextWindowUsage"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -2001,7 +2001,7 @@ func (x *ResponseEvent_StreamFinished_UsageMetadata) GetDiffMetadata() *Response
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_UsageMetadata) GetContextWindowUsage() float64 {
+func (x *ResponseEvent_StreamFinished_UsageMetadata) GetContextWindowUsage() float32 {
 	if x != nil {
 		return x.xxx_hidden_ContextWindowUsage
 	}
@@ -2026,7 +2026,7 @@ func (x *ResponseEvent_StreamFinished_UsageMetadata) SetDiffMetadata(v *Response
 	x.xxx_hidden_DiffMetadata = v
 }
 
-func (x *ResponseEvent_StreamFinished_UsageMetadata) SetContextWindowUsage(v float64) {
+func (x *ResponseEvent_StreamFinished_UsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
@@ -2085,7 +2085,7 @@ type ResponseEvent_StreamFinished_UsageMetadata_builder struct {
 	CommandsExecutedCount *int32
 	TokenUsage            []*ResponseEvent_StreamFinished_ModelTokenUsage
 	DiffMetadata          *ResponseEvent_StreamFinished_DiffMetadata
-	ContextWindowUsage    *float64
+	ContextWindowUsage    *float32
 }
 
 func (b0 ResponseEvent_StreamFinished_UsageMetadata_builder) Build() *ResponseEvent_StreamFinished_UsageMetadata {
@@ -4088,7 +4088,7 @@ const file_response_proto_rawDesc = "" +
 	"\vtoken_usage\x18\x03 \x03(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\n" +
 	"tokenUsage\x12c\n" +
 	"\rdiff_metadata\x18\x04 \x01(\v2>.warp.multi_agent.v1.ResponseEvent.StreamFinished.DiffMetadataR\fdiffMetadata\x120\n" +
-	"\x14context_window_usage\x18\x05 \x01(\x01R\x12contextWindowUsage\x1a\x81\x02\n" +
+	"\x14context_window_usage\x18\x05 \x01(\x02R\x12contextWindowUsage\x1a\x81\x02\n" +
 	"\x14MaaConversationUsage\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12!\n" +
 	"\flast_updated\x18\x02 \x01(\tR\vlastUpdated\x12#\n" +

@@ -102,7 +102,7 @@ message ResponseEvent {
       int32 commands_executed_count = 2;
       repeated ModelTokenUsage token_usage = 3;
       DiffMetadata diff_metadata = 4;
-      double context_window_usage = 5;
+      float context_window_usage = 5;
     }
 
     // Aggregated usage metadata for a given conversation.
