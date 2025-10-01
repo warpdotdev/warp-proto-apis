@@ -1741,7 +1741,7 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	CreditsSpent *float32
 	// Token usage across every model used so far in the conversation.
 	TokenUsage []*ResponseEvent_StreamFinished_ModelTokenUsage
-	// Tool usage data across every tool the agent could use.
+	// Tool usage data across every tool the agent could use (excluding some passive and server tools).
 	ToolUsageMetadata *ResponseEvent_StreamFinished_ToolUsageMetadata
 }
 
