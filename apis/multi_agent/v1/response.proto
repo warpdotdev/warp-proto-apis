@@ -71,17 +71,24 @@ message ResponseEvent {
     // Describes what we charged the user for this AM request.
     RequestCost request_cost = 10;
 
-    ContextWindowInfo context_window_info = 11;
-
     // Aggregated usage metadata for a given conversation.
-    MaaConversationUsage conversation_usage = 12;
+    ConversationUsageMetadata conversation_usage_metadata = 11;
 
-    message ContextWindowInfo {
+    message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
       float context_window_usage = 1;
 
       // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
       bool summarized = 2;
+
+      // The total number of credits spent so far in the conversation.
+      float credits_spent = 3;
+
+      // Token usage across every model used so far in the conversation.
+      repeated ModelTokenUsage token_usage = 4;
+
+      // Tool usage data across every tool the agent could use.
+      ToolUsageMetadata tool_usage_metadata = 5;
     }
 
     // Token usage by model.
@@ -90,28 +97,30 @@ message ResponseEvent {
       uint32 total_tokens = 2;
     }
 
-    // Diff metadata capturing added/removed line counts.
-    message DiffMetadata {
-      int32 lines_added = 1;
-      int32 lines_removed = 2;
+    // Tool usage by tool.
+    message ToolUsageMetadata {
+      ToolCallStats       run_command_stats = 1;
+      ToolCallStats       read_files_stats = 2;
+      ToolCallStats       search_codebase_stats = 3;
+      ToolCallStats       grep_stats = 4;
+      ToolCallStats       file_glob_stats = 5;
+      ApplyFileDiffStats  apply_file_diff_stats = 6;
+      ToolCallStats       write_to_long_running_shell_command_stats = 7;
+      ToolCallStats       read_mcp_resource_stats = 8;
+      ToolCallStats       call_mcp_tool_stats = 9;
+      ToolCallStats       suggest_plan_stats = 10;
+      ToolCallStats       suggest_create_plan_stats = 11;
     }
 
-    // Usage metadata across tools, commands, and token usage.
-    message UsageMetadata {
-      int32 tool_call_count = 1;
-      int32 commands_executed_count = 2;
-      repeated ModelTokenUsage token_usage = 3;
-      DiffMetadata diff_metadata = 4;
-      float context_window_usage = 5;
+    message ToolCallStats {
+      // The number of times this tool has been called in the conversation thus far.
+      int32 count = 1;
     }
 
-    // Aggregated usage metadata for a given conversation.
-    message MaaConversationUsage {
-      string title = 1;
-      string last_updated = 2;
-      float credits_spent = 3;
-      string primary_model = 4;
-      UsageMetadata usage_metadata = 5;
+    message ApplyFileDiffStats {
+      int32 count = 1;
+      int32 lines_added = 2;
+      int32 lines_removed = 3;
     }
 
     message RequestCost {
