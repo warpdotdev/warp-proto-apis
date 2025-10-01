@@ -87,7 +87,7 @@ message ResponseEvent {
       // Token usage across every model used so far in the conversation.
       repeated ModelTokenUsage token_usage = 4;
 
-      // Tool usage data across every tool the agent could use.
+      // Tool usage data across every tool the agent could use (excluding some passive and server tools).
       ToolUsageMetadata tool_usage_metadata = 5;
     }
 
