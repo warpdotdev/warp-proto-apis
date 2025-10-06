@@ -738,14 +738,7 @@ message EditDocumentsResult {
   }
 
   message Success {
-    repeated UpdatedDocumentContent updated_documents = 1;
-
-    message UpdatedDocumentContent {
-      // Content of the updated document.
-      DocumentContent document = 1;
-      // Whether the applied update contains user edit.
-      bool was_edited_by_user = 2;
-    }
+    repeated DocumentContent updated_documents = 1;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -759,14 +752,7 @@ message CreateDocumentsResult {
   }
 
   message Success {
-    repeated CreatedDocumentContent created_documents = 1;
-
-    message CreatedDocumentContent {
-      // Content of the created document.
-      DocumentContent document = 1;
-      // Whether the creation contains user edit.
-      bool was_edited_by_user = 2;
-    }
+    repeated DocumentContent created_documents = 1;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
