@@ -193,8 +193,8 @@ message Message {
       InitProject init_project = 18;
       Subagent subagent = 19;
       ReadDocuments read_documents = 20;
-      EditDocument edit_document = 21;
-      CreateDocument create_document = 22;
+      EditDocuments edit_documents = 21;
+      CreateDocuments create_documents = 22;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -356,19 +356,27 @@ message Message {
       }
     }
 
-    // A tool call to edit an existing document.
-    message EditDocument {
-      string document_id = 1;
-      // The content to be replaced.
-      string search = 2;
-      // The content that replaces `search`.
-      string replace = 3;
+    // A tool call to edit one or more existing documents.
+    message EditDocuments {
+      repeated DocumentDiff diffs = 1;
+
+      message DocumentDiff {
+        string document_id = 1;
+        // The content to be replaced.
+        string search = 2;
+        // The content that replaces `search`.
+        string replace = 3;
+      }
     }
 
-    // A tool call to create a new document.
-    message CreateDocument {
-      // The new document contents.
-      string content = 1;
+    // A tool call to create one or more new documents.
+    message CreateDocuments {
+      repeated NewDocument new_documents = 1;
+
+      message NewDocument {
+        // The new document contents.
+        string content = 1;
+      }
     }
   }
 
@@ -404,8 +412,8 @@ message Message {
       InitProjectResult init_project = 22;
       SubagentResult subagent = 23;
       ReadDocumentsResult read_documents = 24;
-      EditDocumentResult edit_document = 25;
-      CreateDocumentResult create_document = 26;
+      EditDocumentsResult edit_documents = 25;
+      CreateDocumentsResult create_documents = 26;
     }
 
     // Result of a server-side tool call.
@@ -722,35 +730,43 @@ message ReadDocumentsResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
-// Result of an `EditDocument` tool call.
-message EditDocumentResult {
+// Result of an `EditDocuments` tool call.
+message EditDocumentsResult {
   oneof result {
     Success success = 1;
     Error error = 2;
   }
 
   message Success {
-    // Content of the updated document.
-    DocumentContent document = 1;
-    // Whether the applied update contains user edit.
-    bool was_edited_by_user = 2;
+    repeated UpdatedDocumentContent updated_documents = 1;
+
+    message UpdatedDocumentContent {
+      // Content of the updated document.
+      DocumentContent document = 1;
+      // Whether the applied update contains user edit.
+      bool was_edited_by_user = 2;
+    }
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
-// Result of a `CreateDocument` tool call.
-message CreateDocumentResult {
+// Result of a `CreateDocuments` tool call.
+message CreateDocumentsResult {
   oneof result {
     Success success = 1;
     Error error = 2;
   }
 
   message Success {
-    // Content of the created document.
-    DocumentContent document = 1;
-    // Whether the creation contains user edit.
-    bool was_edited_by_user = 2;
+    repeated CreatedDocumentContent created_documents = 1;
+
+    message CreatedDocumentContent {
+      // Content of the created document.
+      DocumentContent document = 1;
+      // Whether the creation contains user edit.
+      bool was_edited_by_user = 2;
+    }
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -780,7 +796,7 @@ enum ToolType {
   INIT_PROJECT = 15;
   SUBAGENT = 16;
   READ_DOCUMENTS = 17;
-  EDIT_DOCUMENT = 18;
-  CREATE_DOCUMENT = 19;
+  EDIT_DOCUMENTS = 18;
+  CREATE_DOCUMENTS = 19;
 }
 
