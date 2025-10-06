@@ -193,7 +193,8 @@ message Message {
       InitProject init_project = 18;
       Subagent subagent = 19;
       ReadDocuments read_documents = 20;
-      ApplyDocumentDiffs apply_document_diffs = 21;
+      EditDocument edit_document = 21;
+      CreateDocument create_document = 22;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -355,26 +356,19 @@ message Message {
       }
     }
 
-    // A tool call to apply diffs to documents.
-    message ApplyDocumentDiffs {
-      string summary = 1;
-      repeated DocumentDiff diffs = 2;
-      repeated NewDocument new_documents = 3;
+    // A tool call to edit an existing document.
+    message EditDocument {
+      string document_id = 1;
+      // The content to be replaced.
+      string search = 2;
+      // The content that replaces `search`.
+      string replace = 3;
+    }
 
-      message DocumentDiff {
-        string document_id = 1;
-        // The content to be replaced.
-        string search = 2;
-        // The content that replaces `search`.
-        string replace = 3;
-      }
-
-      message NewDocument {
-        // ID of the document to create.
-        string document_id = 1;
-        // The new document contents.
-        string content = 2;
-      }
+    // A tool call to create a new document.
+    message CreateDocument {
+      // The new document contents.
+      string content = 1;
     }
   }
 
@@ -410,7 +404,8 @@ message Message {
       InitProjectResult init_project = 22;
       SubagentResult subagent = 23;
       ReadDocumentsResult read_documents = 24;
-      ApplyDocumentDiffsResult apply_document_diffs = 25;
+      EditDocumentResult edit_document = 25;
+      CreateDocumentResult create_document = 26;
     }
 
     // Result of a server-side tool call.
@@ -727,22 +722,35 @@ message ReadDocumentsResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
-// Result of a `ApplyDocumentDiffs` tool call.
-message ApplyDocumentDiffsResult {
+// Result of an `EditDocument` tool call.
+message EditDocumentResult {
   oneof result {
     Success success = 1;
     Error error = 2;
   }
 
   message Success {
-    repeated UpdatedDocumentContent updated_documents = 1;
+    // Content of the updated document.
+    DocumentContent document = 1;
+    // Whether the applied update contains user edit.
+    bool was_edited_by_user = 2;
+  }
 
-    message UpdatedDocumentContent {
-      // Content of the updated document.
-      DocumentContent document = 1;
-      // Whether the applied update contains user edit.
-      bool was_edited_by_user = 2;
-    }
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+// Result of a `CreateDocument` tool call.
+message CreateDocumentResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // Content of the created document.
+    DocumentContent document = 1;
+    // Whether the creation contains user edit.
+    bool was_edited_by_user = 2;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -772,6 +780,7 @@ enum ToolType {
   INIT_PROJECT = 15;
   SUBAGENT = 16;
   READ_DOCUMENTS = 17;
-  APPLY_DOCUMENT_DIFFS = 18;
+  EDIT_DOCUMENT = 18;
+  CREATE_DOCUMENT = 19;
 }
 
