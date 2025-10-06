@@ -37,11 +37,11 @@ message Request {
   MCPContext mcp_context = 6;
 
   message TaskContext {
+    reserved active_task_id;
+    reserved 2;
+
     // List of all known tasks.
     repeated Task tasks = 1;
-
-    // Currently active task ID, if there is one.
-    string active_task_id = 2;
   }
 
   message Input {

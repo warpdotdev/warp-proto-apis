@@ -71,14 +71,56 @@ message ResponseEvent {
     // Describes what we charged the user for this AM request.
     RequestCost request_cost = 10;
 
-    ContextWindowInfo context_window_info = 11;
+    // Aggregated usage metadata for a given conversation.
+    ConversationUsageMetadata conversation_usage_metadata = 11;
 
-    message ContextWindowInfo {
+    message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
       float context_window_usage = 1;
 
       // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
       bool summarized = 2;
+
+      // The total number of credits spent so far in the conversation.
+      float credits_spent = 3;
+
+      // Token usage across every model used so far in the conversation.
+      repeated ModelTokenUsage token_usage = 4;
+
+      // Tool usage data across every tool the agent could use (excluding some passive and server tools).
+      ToolUsageMetadata tool_usage_metadata = 5;
+    }
+
+    // Token usage by model.
+    message ModelTokenUsage {
+      string model_id = 1;
+      uint32 total_tokens = 2;
+    }
+
+    // Tool usage by tool.
+    message ToolUsageMetadata {
+      ToolCallStats       run_command_stats = 1;
+      ToolCallStats       read_files_stats = 2;
+      ToolCallStats       search_codebase_stats = 3;
+      ToolCallStats       grep_stats = 4;
+      ToolCallStats       file_glob_stats = 5;
+      ApplyFileDiffStats  apply_file_diff_stats = 6;
+      ToolCallStats       write_to_long_running_shell_command_stats = 7;
+      ToolCallStats       read_mcp_resource_stats = 8;
+      ToolCallStats       call_mcp_tool_stats = 9;
+      ToolCallStats       suggest_plan_stats = 10;
+      ToolCallStats       suggest_create_plan_stats = 11;
+    }
+
+    message ToolCallStats {
+      // The number of times this tool has been called in the conversation thus far.
+      int32 count = 1;
+    }
+
+    message ApplyFileDiffStats {
+      int32 count = 1;
+      int32 lines_added = 2;
+      int32 lines_removed = 3;
     }
 
     message RequestCost {
@@ -123,9 +165,11 @@ message ResponseEvent {
 
 // Client actions that can be requested in a response
 message ClientAction {
+  reserved update_task_status;
+  reserved 2;
+
   oneof action {
     CreateTask create_task = 1;
-    UpdateTaskStatus update_task_status = 2;
     AddMessagesToTask add_messages_to_task = 3;
     UpdateTaskMessage update_task_message = 4;
     AppendToMessageContent append_to_message_content = 5;
@@ -143,19 +187,13 @@ message ClientAction {
   message CreateTask { Task task = 1; }
 
   // TODO(matthew): Ought to be able to combine
-  // UpdateTask{Status,Description,Summary} at least.
-
-  // Update task status action
-  message UpdateTaskStatus {
-    string task_id = 1;
-    TaskStatus task_status = 2;
-  }
+  // UpdateTask{Description,Summary} at least.
 
   message UpdateTaskServerData {
     string task_id = 1;
     string server_data = 2;
   }
-  
+
   // Update task description action
   message UpdateTaskDescription {
     string task_id = 1;

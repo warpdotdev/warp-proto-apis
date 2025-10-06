@@ -294,15 +294,6 @@ func (x *ClientAction) GetCreateTask() *ClientAction_CreateTask {
 	return nil
 }
 
-func (x *ClientAction) GetUpdateTaskStatus() *ClientAction_UpdateTaskStatus {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Action.(*clientAction_UpdateTaskStatus_); ok {
-			return x.UpdateTaskStatus
-		}
-	}
-	return nil
-}
-
 func (x *ClientAction) GetAddMessagesToTask() *ClientAction_AddMessagesToTask {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Action.(*clientAction_AddMessagesToTask_); ok {
@@ -410,14 +401,6 @@ func (x *ClientAction) SetCreateTask(v *ClientAction_CreateTask) {
 	x.xxx_hidden_Action = &clientAction_CreateTask_{v}
 }
 
-func (x *ClientAction) SetUpdateTaskStatus(v *ClientAction_UpdateTaskStatus) {
-	if v == nil {
-		x.xxx_hidden_Action = nil
-		return
-	}
-	x.xxx_hidden_Action = &clientAction_UpdateTaskStatus_{v}
-}
-
 func (x *ClientAction) SetAddMessagesToTask(v *ClientAction_AddMessagesToTask) {
 	if v == nil {
 		x.xxx_hidden_Action = nil
@@ -521,14 +504,6 @@ func (x *ClientAction) HasCreateTask() bool {
 	return ok
 }
 
-func (x *ClientAction) HasUpdateTaskStatus() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Action.(*clientAction_UpdateTaskStatus_)
-	return ok
-}
-
 func (x *ClientAction) HasAddMessagesToTask() bool {
 	if x == nil {
 		return false
@@ -627,12 +602,6 @@ func (x *ClientAction) ClearCreateTask() {
 	}
 }
 
-func (x *ClientAction) ClearUpdateTaskStatus() {
-	if _, ok := x.xxx_hidden_Action.(*clientAction_UpdateTaskStatus_); ok {
-		x.xxx_hidden_Action = nil
-	}
-}
-
 func (x *ClientAction) ClearAddMessagesToTask() {
 	if _, ok := x.xxx_hidden_Action.(*clientAction_AddMessagesToTask_); ok {
 		x.xxx_hidden_Action = nil
@@ -701,7 +670,6 @@ func (x *ClientAction) ClearUpdateTaskServerData() {
 
 const ClientAction_Action_not_set_case case_ClientAction_Action = 0
 const ClientAction_CreateTask_case case_ClientAction_Action = 1
-const ClientAction_UpdateTaskStatus_case case_ClientAction_Action = 2
 const ClientAction_AddMessagesToTask_case case_ClientAction_Action = 3
 const ClientAction_UpdateTaskMessage_case case_ClientAction_Action = 4
 const ClientAction_AppendToMessageContent_case case_ClientAction_Action = 5
@@ -721,8 +689,6 @@ func (x *ClientAction) WhichAction() case_ClientAction_Action {
 	switch x.xxx_hidden_Action.(type) {
 	case *clientAction_CreateTask_:
 		return ClientAction_CreateTask_case
-	case *clientAction_UpdateTaskStatus_:
-		return ClientAction_UpdateTaskStatus_case
 	case *clientAction_AddMessagesToTask_:
 		return ClientAction_AddMessagesToTask_case
 	case *clientAction_UpdateTaskMessage_:
@@ -755,7 +721,6 @@ type ClientAction_builder struct {
 
 	// Fields of oneof xxx_hidden_Action:
 	CreateTask             *ClientAction_CreateTask
-	UpdateTaskStatus       *ClientAction_UpdateTaskStatus
 	AddMessagesToTask      *ClientAction_AddMessagesToTask
 	UpdateTaskMessage      *ClientAction_UpdateTaskMessage
 	AppendToMessageContent *ClientAction_AppendToMessageContent
@@ -776,9 +741,6 @@ func (b0 ClientAction_builder) Build() *ClientAction {
 	_, _ = b, x
 	if b.CreateTask != nil {
 		x.xxx_hidden_Action = &clientAction_CreateTask_{b.CreateTask}
-	}
-	if b.UpdateTaskStatus != nil {
-		x.xxx_hidden_Action = &clientAction_UpdateTaskStatus_{b.UpdateTaskStatus}
 	}
 	if b.AddMessagesToTask != nil {
 		x.xxx_hidden_Action = &clientAction_AddMessagesToTask_{b.AddMessagesToTask}
@@ -834,10 +796,6 @@ type clientAction_CreateTask_ struct {
 	CreateTask *ClientAction_CreateTask `protobuf:"bytes,1,opt,name=create_task,json=createTask,oneof"`
 }
 
-type clientAction_UpdateTaskStatus_ struct {
-	UpdateTaskStatus *ClientAction_UpdateTaskStatus `protobuf:"bytes,2,opt,name=update_task_status,json=updateTaskStatus,oneof"`
-}
-
 type clientAction_AddMessagesToTask_ struct {
 	AddMessagesToTask *ClientAction_AddMessagesToTask `protobuf:"bytes,3,opt,name=add_messages_to_task,json=addMessagesToTask,oneof"`
 }
@@ -883,8 +841,6 @@ type clientAction_UpdateTaskServerData_ struct {
 }
 
 func (*clientAction_CreateTask_) isClientAction_Action() {}
-
-func (*clientAction_UpdateTaskStatus_) isClientAction_Action() {}
 
 func (*clientAction_AddMessagesToTask_) isClientAction_Action() {}
 
@@ -1091,16 +1047,16 @@ func (b0 ResponseEvent_ClientActions_builder) Build() *ResponseEvent_ClientActio
 }
 
 type ResponseEvent_StreamFinished struct {
-	state                               protoimpl.MessageState                          `protogen:"opaque.v1"`
-	xxx_hidden_Reason                   isResponseEvent_StreamFinished_Reason           `protobuf_oneof:"reason"`
-	xxx_hidden_TokenUsage               *[]*ResponseEvent_StreamFinished_TokenUsage     `protobuf:"bytes,8,rep,name=token_usage,json=tokenUsage"`
-	xxx_hidden_ShouldRefreshModelConfig bool                                            `protobuf:"varint,9,opt,name=should_refresh_model_config,json=shouldRefreshModelConfig"`
-	xxx_hidden_RequestCost              *ResponseEvent_StreamFinished_RequestCost       `protobuf:"bytes,10,opt,name=request_cost,json=requestCost"`
-	xxx_hidden_ContextWindowInfo        *ResponseEvent_StreamFinished_ContextWindowInfo `protobuf:"bytes,11,opt,name=context_window_info,json=contextWindowInfo"`
-	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
-	XXX_presence                        [1]uint32
-	unknownFields                       protoimpl.UnknownFields
-	sizeCache                           protoimpl.SizeCache
+	state                                protoimpl.MessageState                                  `protogen:"opaque.v1"`
+	xxx_hidden_Reason                    isResponseEvent_StreamFinished_Reason                   `protobuf_oneof:"reason"`
+	xxx_hidden_TokenUsage                *[]*ResponseEvent_StreamFinished_TokenUsage             `protobuf:"bytes,8,rep,name=token_usage,json=tokenUsage"`
+	xxx_hidden_ShouldRefreshModelConfig  bool                                                    `protobuf:"varint,9,opt,name=should_refresh_model_config,json=shouldRefreshModelConfig"`
+	xxx_hidden_RequestCost               *ResponseEvent_StreamFinished_RequestCost               `protobuf:"bytes,10,opt,name=request_cost,json=requestCost"`
+	xxx_hidden_ConversationUsageMetadata *ResponseEvent_StreamFinished_ConversationUsageMetadata `protobuf:"bytes,11,opt,name=conversation_usage_metadata,json=conversationUsageMetadata"`
+	XXX_raceDetectHookData               protoimpl.RaceDetectHookData
+	XXX_presence                         [1]uint32
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *ResponseEvent_StreamFinished) Reset() {
@@ -1214,9 +1170,9 @@ func (x *ResponseEvent_StreamFinished) GetRequestCost() *ResponseEvent_StreamFin
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished) GetContextWindowInfo() *ResponseEvent_StreamFinished_ContextWindowInfo {
+func (x *ResponseEvent_StreamFinished) GetConversationUsageMetadata() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
 	if x != nil {
-		return x.xxx_hidden_ContextWindowInfo
+		return x.xxx_hidden_ConversationUsageMetadata
 	}
 	return nil
 }
@@ -1290,8 +1246,8 @@ func (x *ResponseEvent_StreamFinished) SetRequestCost(v *ResponseEvent_StreamFin
 	x.xxx_hidden_RequestCost = v
 }
 
-func (x *ResponseEvent_StreamFinished) SetContextWindowInfo(v *ResponseEvent_StreamFinished_ContextWindowInfo) {
-	x.xxx_hidden_ContextWindowInfo = v
+func (x *ResponseEvent_StreamFinished) SetConversationUsageMetadata(v *ResponseEvent_StreamFinished_ConversationUsageMetadata) {
+	x.xxx_hidden_ConversationUsageMetadata = v
 }
 
 func (x *ResponseEvent_StreamFinished) HasReason() bool {
@@ -1371,11 +1327,11 @@ func (x *ResponseEvent_StreamFinished) HasRequestCost() bool {
 	return x.xxx_hidden_RequestCost != nil
 }
 
-func (x *ResponseEvent_StreamFinished) HasContextWindowInfo() bool {
+func (x *ResponseEvent_StreamFinished) HasConversationUsageMetadata() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_ContextWindowInfo != nil
+	return x.xxx_hidden_ConversationUsageMetadata != nil
 }
 
 func (x *ResponseEvent_StreamFinished) ClearReason() {
@@ -1433,8 +1389,8 @@ func (x *ResponseEvent_StreamFinished) ClearRequestCost() {
 	x.xxx_hidden_RequestCost = nil
 }
 
-func (x *ResponseEvent_StreamFinished) ClearContextWindowInfo() {
-	x.xxx_hidden_ContextWindowInfo = nil
+func (x *ResponseEvent_StreamFinished) ClearConversationUsageMetadata() {
+	x.xxx_hidden_ConversationUsageMetadata = nil
 }
 
 const ResponseEvent_StreamFinished_Reason_not_set_case case_ResponseEvent_StreamFinished_Reason = 0
@@ -1489,8 +1445,9 @@ type ResponseEvent_StreamFinished_builder struct {
 	// request implies the client's model config is stale.
 	ShouldRefreshModelConfig *bool
 	// Describes what we charged the user for this AM request.
-	RequestCost       *ResponseEvent_StreamFinished_RequestCost
-	ContextWindowInfo *ResponseEvent_StreamFinished_ContextWindowInfo
+	RequestCost *ResponseEvent_StreamFinished_RequestCost
+	// Aggregated usage metadata for a given conversation.
+	ConversationUsageMetadata *ResponseEvent_StreamFinished_ConversationUsageMetadata
 }
 
 func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFinished {
@@ -1524,7 +1481,7 @@ func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFini
 		x.xxx_hidden_ShouldRefreshModelConfig = *b.ShouldRefreshModelConfig
 	}
 	x.xxx_hidden_RequestCost = b.RequestCost
-	x.xxx_hidden_ContextWindowInfo = b.ContextWindowInfo
+	x.xxx_hidden_ConversationUsageMetadata = b.ConversationUsageMetadata
 	return m0
 }
 
@@ -1584,30 +1541,33 @@ func (*responseEvent_StreamFinished_LlmUnavailable) isResponseEvent_StreamFinish
 
 func (*responseEvent_StreamFinished_InternalError_) isResponseEvent_StreamFinished_Reason() {}
 
-type ResponseEvent_StreamFinished_ContextWindowInfo struct {
-	state                         protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_ContextWindowUsage float32                `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
-	xxx_hidden_Summarized         bool                   `protobuf:"varint,2,opt,name=summarized"`
+type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
+	state                         protoimpl.MessageState                           `protogen:"opaque.v1"`
+	xxx_hidden_ContextWindowUsage float32                                          `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
+	xxx_hidden_Summarized         bool                                             `protobuf:"varint,2,opt,name=summarized"`
+	xxx_hidden_CreditsSpent       float32                                          `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
+	xxx_hidden_TokenUsage         *[]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,4,rep,name=token_usage,json=tokenUsage"`
+	xxx_hidden_ToolUsageMetadata  *ResponseEvent_StreamFinished_ToolUsageMetadata  `protobuf:"bytes,5,opt,name=tool_usage_metadata,json=toolUsageMetadata"`
 	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
 	XXX_presence                  [1]uint32
 	unknownFields                 protoimpl.UnknownFields
 	sizeCache                     protoimpl.SizeCache
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) Reset() {
-	*x = ResponseEvent_StreamFinished_ContextWindowInfo{}
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) Reset() {
+	*x = ResponseEvent_StreamFinished_ConversationUsageMetadata{}
 	mi := &file_response_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) String() string {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResponseEvent_StreamFinished_ContextWindowInfo) ProtoMessage() {}
+func (*ResponseEvent_StreamFinished_ConversationUsageMetadata) ProtoMessage() {}
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ProtoReflect() protoreflect.Message {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ProtoReflect() protoreflect.Message {
 	mi := &file_response_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1619,74 +1579,784 @@ func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ProtoReflect() protoref
 	return mi.MessageOf(x)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) GetContextWindowUsage() float32 {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetContextWindowUsage() float32 {
 	if x != nil {
 		return x.xxx_hidden_ContextWindowUsage
 	}
 	return 0
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) GetSummarized() bool {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetSummarized() bool {
 	if x != nil {
 		return x.xxx_hidden_Summarized
 	}
 	return false
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) SetContextWindowUsage(v float32) {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetCreditsSpent() float32 {
+	if x != nil {
+		return x.xxx_hidden_CreditsSpent
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTokenUsage() []*ResponseEvent_StreamFinished_ModelTokenUsage {
+	if x != nil {
+		if x.xxx_hidden_TokenUsage != nil {
+			return *x.xxx_hidden_TokenUsage
+		}
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetToolUsageMetadata() *ResponseEvent_StreamFinished_ToolUsageMetadata {
+	if x != nil {
+		return x.xxx_hidden_ToolUsageMetadata
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) SetSummarized(v bool) {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetSummarized(v bool) {
 	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) HasContextWindowUsage() bool {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCreditsSpent(v float32) {
+	x.xxx_hidden_CreditsSpent = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTokenUsage(v []*ResponseEvent_StreamFinished_ModelTokenUsage) {
+	x.xxx_hidden_TokenUsage = &v
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetToolUsageMetadata(v *ResponseEvent_StreamFinished_ToolUsageMetadata) {
+	x.xxx_hidden_ToolUsageMetadata = v
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindowUsage() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) HasSummarized() bool {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasSummarized() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ClearContextWindowUsage() {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasCreditsSpent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasToolUsageMetadata() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ToolUsageMetadata != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearContextWindowUsage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ContextWindowUsage = 0
 }
 
-func (x *ResponseEvent_StreamFinished_ContextWindowInfo) ClearSummarized() {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearSummarized() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Summarized = false
 }
 
-type ResponseEvent_StreamFinished_ContextWindowInfo_builder struct {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearCreditsSpent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CreditsSpent = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearToolUsageMetadata() {
+	x.xxx_hidden_ToolUsageMetadata = nil
+}
+
+type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
 	ContextWindowUsage *float32
 	// Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
 	Summarized *bool
+	// The total number of credits spent so far in the conversation.
+	CreditsSpent *float32
+	// Token usage across every model used so far in the conversation.
+	TokenUsage []*ResponseEvent_StreamFinished_ModelTokenUsage
+	// Tool usage data across every tool the agent could use (excluding some passive and server tools).
+	ToolUsageMetadata *ResponseEvent_StreamFinished_ToolUsageMetadata
 }
 
-func (b0 ResponseEvent_StreamFinished_ContextWindowInfo_builder) Build() *ResponseEvent_StreamFinished_ContextWindowInfo {
-	m0 := &ResponseEvent_StreamFinished_ContextWindowInfo{}
+func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
+	m0 := &ResponseEvent_StreamFinished_ConversationUsageMetadata{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ContextWindowUsage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
 	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Summarized = *b.Summarized
+	}
+	if b.CreditsSpent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
+	}
+	x.xxx_hidden_TokenUsage = &b.TokenUsage
+	x.xxx_hidden_ToolUsageMetadata = b.ToolUsageMetadata
+	return m0
+}
+
+// Token usage by model.
+type ResponseEvent_StreamFinished_ModelTokenUsage struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ModelId     *string                `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
+	xxx_hidden_TotalTokens uint32                 `protobuf:"varint,2,opt,name=total_tokens,json=totalTokens"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) Reset() {
+	*x = ResponseEvent_StreamFinished_ModelTokenUsage{}
+	mi := &file_response_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_ModelTokenUsage) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetModelId() string {
+	if x != nil {
+		if x.xxx_hidden_ModelId != nil {
+			return *x.xxx_hidden_ModelId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetTotalTokens() uint32 {
+	if x != nil {
+		return x.xxx_hidden_TotalTokens
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetModelId(v string) {
+	x.xxx_hidden_ModelId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetTotalTokens(v uint32) {
+	x.xxx_hidden_TotalTokens = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasModelId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasTotalTokens() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearModelId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_ModelId = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearTotalTokens() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_TotalTokens = 0
+}
+
+type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	ModelId     *string
+	TotalTokens *uint32
+}
+
+func (b0 ResponseEvent_StreamFinished_ModelTokenUsage_builder) Build() *ResponseEvent_StreamFinished_ModelTokenUsage {
+	m0 := &ResponseEvent_StreamFinished_ModelTokenUsage{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.ModelId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_ModelId = b.ModelId
+	}
+	if b.TotalTokens != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_TotalTokens = *b.TotalTokens
+	}
+	return m0
+}
+
+// Tool usage by tool.
+type ResponseEvent_StreamFinished_ToolUsageMetadata struct {
+	state                                          protoimpl.MessageState                           `protogen:"opaque.v1"`
+	xxx_hidden_RunCommandStats                     *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,1,opt,name=run_command_stats,json=runCommandStats"`
+	xxx_hidden_ReadFilesStats                      *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,2,opt,name=read_files_stats,json=readFilesStats"`
+	xxx_hidden_SearchCodebaseStats                 *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,3,opt,name=search_codebase_stats,json=searchCodebaseStats"`
+	xxx_hidden_GrepStats                           *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,4,opt,name=grep_stats,json=grepStats"`
+	xxx_hidden_FileGlobStats                       *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,5,opt,name=file_glob_stats,json=fileGlobStats"`
+	xxx_hidden_ApplyFileDiffStats                  *ResponseEvent_StreamFinished_ApplyFileDiffStats `protobuf:"bytes,6,opt,name=apply_file_diff_stats,json=applyFileDiffStats"`
+	xxx_hidden_WriteToLongRunningShellCommandStats *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,7,opt,name=write_to_long_running_shell_command_stats,json=writeToLongRunningShellCommandStats"`
+	xxx_hidden_ReadMcpResourceStats                *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,8,opt,name=read_mcp_resource_stats,json=readMcpResourceStats"`
+	xxx_hidden_CallMcpToolStats                    *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,9,opt,name=call_mcp_tool_stats,json=callMcpToolStats"`
+	xxx_hidden_SuggestPlanStats                    *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,10,opt,name=suggest_plan_stats,json=suggestPlanStats"`
+	xxx_hidden_SuggestCreatePlanStats              *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,11,opt,name=suggest_create_plan_stats,json=suggestCreatePlanStats"`
+	unknownFields                                  protoimpl.UnknownFields
+	sizeCache                                      protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) Reset() {
+	*x = ResponseEvent_StreamFinished_ToolUsageMetadata{}
+	mi := &file_response_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_ToolUsageMetadata) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetRunCommandStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_RunCommandStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetReadFilesStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_ReadFilesStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetSearchCodebaseStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_SearchCodebaseStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetGrepStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_GrepStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetFileGlobStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_FileGlobStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetApplyFileDiffStats() *ResponseEvent_StreamFinished_ApplyFileDiffStats {
+	if x != nil {
+		return x.xxx_hidden_ApplyFileDiffStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetWriteToLongRunningShellCommandStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_WriteToLongRunningShellCommandStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetReadMcpResourceStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_ReadMcpResourceStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetCallMcpToolStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_CallMcpToolStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetSuggestPlanStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_SuggestPlanStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetSuggestCreatePlanStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_SuggestCreatePlanStats
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetRunCommandStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_RunCommandStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetReadFilesStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_ReadFilesStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetSearchCodebaseStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_SearchCodebaseStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetGrepStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_GrepStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetFileGlobStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_FileGlobStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetApplyFileDiffStats(v *ResponseEvent_StreamFinished_ApplyFileDiffStats) {
+	x.xxx_hidden_ApplyFileDiffStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetWriteToLongRunningShellCommandStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_WriteToLongRunningShellCommandStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetReadMcpResourceStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_ReadMcpResourceStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetCallMcpToolStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_CallMcpToolStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetSuggestPlanStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_SuggestPlanStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetSuggestCreatePlanStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_SuggestCreatePlanStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasRunCommandStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_RunCommandStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasReadFilesStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReadFilesStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasSearchCodebaseStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SearchCodebaseStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasGrepStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_GrepStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasFileGlobStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_FileGlobStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasApplyFileDiffStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ApplyFileDiffStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasWriteToLongRunningShellCommandStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WriteToLongRunningShellCommandStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasReadMcpResourceStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_ReadMcpResourceStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasCallMcpToolStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_CallMcpToolStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasSuggestPlanStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SuggestPlanStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasSuggestCreatePlanStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SuggestCreatePlanStats != nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearRunCommandStats() {
+	x.xxx_hidden_RunCommandStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearReadFilesStats() {
+	x.xxx_hidden_ReadFilesStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearSearchCodebaseStats() {
+	x.xxx_hidden_SearchCodebaseStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearGrepStats() {
+	x.xxx_hidden_GrepStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearFileGlobStats() {
+	x.xxx_hidden_FileGlobStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearApplyFileDiffStats() {
+	x.xxx_hidden_ApplyFileDiffStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearWriteToLongRunningShellCommandStats() {
+	x.xxx_hidden_WriteToLongRunningShellCommandStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearReadMcpResourceStats() {
+	x.xxx_hidden_ReadMcpResourceStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearCallMcpToolStats() {
+	x.xxx_hidden_CallMcpToolStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearSuggestPlanStats() {
+	x.xxx_hidden_SuggestPlanStats = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearSuggestCreatePlanStats() {
+	x.xxx_hidden_SuggestCreatePlanStats = nil
+}
+
+type ResponseEvent_StreamFinished_ToolUsageMetadata_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	RunCommandStats                     *ResponseEvent_StreamFinished_ToolCallStats
+	ReadFilesStats                      *ResponseEvent_StreamFinished_ToolCallStats
+	SearchCodebaseStats                 *ResponseEvent_StreamFinished_ToolCallStats
+	GrepStats                           *ResponseEvent_StreamFinished_ToolCallStats
+	FileGlobStats                       *ResponseEvent_StreamFinished_ToolCallStats
+	ApplyFileDiffStats                  *ResponseEvent_StreamFinished_ApplyFileDiffStats
+	WriteToLongRunningShellCommandStats *ResponseEvent_StreamFinished_ToolCallStats
+	ReadMcpResourceStats                *ResponseEvent_StreamFinished_ToolCallStats
+	CallMcpToolStats                    *ResponseEvent_StreamFinished_ToolCallStats
+	SuggestPlanStats                    *ResponseEvent_StreamFinished_ToolCallStats
+	SuggestCreatePlanStats              *ResponseEvent_StreamFinished_ToolCallStats
+}
+
+func (b0 ResponseEvent_StreamFinished_ToolUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ToolUsageMetadata {
+	m0 := &ResponseEvent_StreamFinished_ToolUsageMetadata{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_RunCommandStats = b.RunCommandStats
+	x.xxx_hidden_ReadFilesStats = b.ReadFilesStats
+	x.xxx_hidden_SearchCodebaseStats = b.SearchCodebaseStats
+	x.xxx_hidden_GrepStats = b.GrepStats
+	x.xxx_hidden_FileGlobStats = b.FileGlobStats
+	x.xxx_hidden_ApplyFileDiffStats = b.ApplyFileDiffStats
+	x.xxx_hidden_WriteToLongRunningShellCommandStats = b.WriteToLongRunningShellCommandStats
+	x.xxx_hidden_ReadMcpResourceStats = b.ReadMcpResourceStats
+	x.xxx_hidden_CallMcpToolStats = b.CallMcpToolStats
+	x.xxx_hidden_SuggestPlanStats = b.SuggestPlanStats
+	x.xxx_hidden_SuggestCreatePlanStats = b.SuggestCreatePlanStats
+	return m0
+}
+
+type ResponseEvent_StreamFinished_ToolCallStats struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Count       int32                  `protobuf:"varint,1,opt,name=count"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) Reset() {
+	*x = ResponseEvent_StreamFinished_ToolCallStats{}
+	mi := &file_response_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_ToolCallStats) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) GetCount() int32 {
+	if x != nil {
+		return x.xxx_hidden_Count
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) SetCount(v int32) {
+	x.xxx_hidden_Count = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) HasCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ResponseEvent_StreamFinished_ToolCallStats) ClearCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Count = 0
+}
+
+type ResponseEvent_StreamFinished_ToolCallStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The number of times this tool has been called in the conversation thus far.
+	Count *int32
+}
+
+func (b0 ResponseEvent_StreamFinished_ToolCallStats_builder) Build() *ResponseEvent_StreamFinished_ToolCallStats {
+	m0 := &ResponseEvent_StreamFinished_ToolCallStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Count != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Count = *b.Count
+	}
+	return m0
+}
+
+type ResponseEvent_StreamFinished_ApplyFileDiffStats struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Count        int32                  `protobuf:"varint,1,opt,name=count"`
+	xxx_hidden_LinesAdded   int32                  `protobuf:"varint,2,opt,name=lines_added,json=linesAdded"`
+	xxx_hidden_LinesRemoved int32                  `protobuf:"varint,3,opt,name=lines_removed,json=linesRemoved"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) Reset() {
+	*x = ResponseEvent_StreamFinished_ApplyFileDiffStats{}
+	mi := &file_response_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_ApplyFileDiffStats) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) GetCount() int32 {
+	if x != nil {
+		return x.xxx_hidden_Count
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) GetLinesAdded() int32 {
+	if x != nil {
+		return x.xxx_hidden_LinesAdded
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) GetLinesRemoved() int32 {
+	if x != nil {
+		return x.xxx_hidden_LinesRemoved
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) SetCount(v int32) {
+	x.xxx_hidden_Count = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) SetLinesAdded(v int32) {
+	x.xxx_hidden_LinesAdded = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) SetLinesRemoved(v int32) {
+	x.xxx_hidden_LinesRemoved = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) HasCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) HasLinesAdded() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) HasLinesRemoved() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) ClearCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Count = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) ClearLinesAdded() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_LinesAdded = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) ClearLinesRemoved() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_LinesRemoved = 0
+}
+
+type ResponseEvent_StreamFinished_ApplyFileDiffStats_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Count        *int32
+	LinesAdded   *int32
+	LinesRemoved *int32
+}
+
+func (b0 ResponseEvent_StreamFinished_ApplyFileDiffStats_builder) Build() *ResponseEvent_StreamFinished_ApplyFileDiffStats {
+	m0 := &ResponseEvent_StreamFinished_ApplyFileDiffStats{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Count != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Count = *b.Count
+	}
+	if b.LinesAdded != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_LinesAdded = *b.LinesAdded
+	}
+	if b.LinesRemoved != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_LinesRemoved = *b.LinesRemoved
 	}
 	return m0
 }
@@ -1702,7 +2372,7 @@ type ResponseEvent_StreamFinished_RequestCost struct {
 
 func (x *ResponseEvent_StreamFinished_RequestCost) Reset() {
 	*x = ResponseEvent_StreamFinished_RequestCost{}
-	mi := &file_response_proto_msgTypes[6]
+	mi := &file_response_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1714,7 +2384,7 @@ func (x *ResponseEvent_StreamFinished_RequestCost) String() string {
 func (*ResponseEvent_StreamFinished_RequestCost) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_RequestCost) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[6]
+	mi := &file_response_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1783,7 +2453,7 @@ type ResponseEvent_StreamFinished_TokenUsage struct {
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) Reset() {
 	*x = ResponseEvent_StreamFinished_TokenUsage{}
-	mi := &file_response_proto_msgTypes[7]
+	mi := &file_response_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1795,7 +2465,7 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) String() string {
 func (*ResponseEvent_StreamFinished_TokenUsage) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[7]
+	mi := &file_response_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2014,7 +2684,7 @@ type ResponseEvent_StreamFinished_Other struct {
 
 func (x *ResponseEvent_StreamFinished_Other) Reset() {
 	*x = ResponseEvent_StreamFinished_Other{}
-	mi := &file_response_proto_msgTypes[8]
+	mi := &file_response_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2026,7 +2696,7 @@ func (x *ResponseEvent_StreamFinished_Other) String() string {
 func (*ResponseEvent_StreamFinished_Other) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_Other) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[8]
+	mi := &file_response_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2057,7 +2727,7 @@ type ResponseEvent_StreamFinished_Done struct {
 
 func (x *ResponseEvent_StreamFinished_Done) Reset() {
 	*x = ResponseEvent_StreamFinished_Done{}
-	mi := &file_response_proto_msgTypes[9]
+	mi := &file_response_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2069,7 +2739,7 @@ func (x *ResponseEvent_StreamFinished_Done) String() string {
 func (*ResponseEvent_StreamFinished_Done) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_Done) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[9]
+	mi := &file_response_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2100,7 +2770,7 @@ type ResponseEvent_StreamFinished_ReachedMaxTokenLimit struct {
 
 func (x *ResponseEvent_StreamFinished_ReachedMaxTokenLimit) Reset() {
 	*x = ResponseEvent_StreamFinished_ReachedMaxTokenLimit{}
-	mi := &file_response_proto_msgTypes[10]
+	mi := &file_response_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2112,7 +2782,7 @@ func (x *ResponseEvent_StreamFinished_ReachedMaxTokenLimit) String() string {
 func (*ResponseEvent_StreamFinished_ReachedMaxTokenLimit) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ReachedMaxTokenLimit) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[10]
+	mi := &file_response_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2143,7 +2813,7 @@ type ResponseEvent_StreamFinished_QuotaLimit struct {
 
 func (x *ResponseEvent_StreamFinished_QuotaLimit) Reset() {
 	*x = ResponseEvent_StreamFinished_QuotaLimit{}
-	mi := &file_response_proto_msgTypes[11]
+	mi := &file_response_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2155,7 +2825,7 @@ func (x *ResponseEvent_StreamFinished_QuotaLimit) String() string {
 func (*ResponseEvent_StreamFinished_QuotaLimit) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_QuotaLimit) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[11]
+	mi := &file_response_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2186,7 +2856,7 @@ type ResponseEvent_StreamFinished_ContextWindowExceeded struct {
 
 func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) Reset() {
 	*x = ResponseEvent_StreamFinished_ContextWindowExceeded{}
-	mi := &file_response_proto_msgTypes[12]
+	mi := &file_response_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2198,7 +2868,7 @@ func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) String() string {
 func (*ResponseEvent_StreamFinished_ContextWindowExceeded) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[12]
+	mi := &file_response_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2229,7 +2899,7 @@ type ResponseEvent_StreamFinished_LLMUnavailable struct {
 
 func (x *ResponseEvent_StreamFinished_LLMUnavailable) Reset() {
 	*x = ResponseEvent_StreamFinished_LLMUnavailable{}
-	mi := &file_response_proto_msgTypes[13]
+	mi := &file_response_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2241,7 +2911,7 @@ func (x *ResponseEvent_StreamFinished_LLMUnavailable) String() string {
 func (*ResponseEvent_StreamFinished_LLMUnavailable) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_LLMUnavailable) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[13]
+	mi := &file_response_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2275,7 +2945,7 @@ type ResponseEvent_StreamFinished_InternalError struct {
 
 func (x *ResponseEvent_StreamFinished_InternalError) Reset() {
 	*x = ResponseEvent_StreamFinished_InternalError{}
-	mi := &file_response_proto_msgTypes[14]
+	mi := &file_response_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2287,7 +2957,7 @@ func (x *ResponseEvent_StreamFinished_InternalError) String() string {
 func (*ResponseEvent_StreamFinished_InternalError) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_InternalError) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[14]
+	mi := &file_response_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2352,7 +3022,7 @@ type ClientAction_CreateTask struct {
 
 func (x *ClientAction_CreateTask) Reset() {
 	*x = ClientAction_CreateTask{}
-	mi := &file_response_proto_msgTypes[15]
+	mi := &file_response_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2364,7 +3034,7 @@ func (x *ClientAction_CreateTask) String() string {
 func (*ClientAction_CreateTask) ProtoMessage() {}
 
 func (x *ClientAction_CreateTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[15]
+	mi := &file_response_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2411,110 +3081,6 @@ func (b0 ClientAction_CreateTask_builder) Build() *ClientAction_CreateTask {
 	return m0
 }
 
-// Update task status action
-type ClientAction_UpdateTaskStatus struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TaskId      *string                `protobuf:"bytes,1,opt,name=task_id,json=taskId"`
-	xxx_hidden_TaskStatus  *TaskStatus            `protobuf:"bytes,2,opt,name=task_status,json=taskStatus"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *ClientAction_UpdateTaskStatus) Reset() {
-	*x = ClientAction_UpdateTaskStatus{}
-	mi := &file_response_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ClientAction_UpdateTaskStatus) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ClientAction_UpdateTaskStatus) ProtoMessage() {}
-
-func (x *ClientAction_UpdateTaskStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ClientAction_UpdateTaskStatus) GetTaskId() string {
-	if x != nil {
-		if x.xxx_hidden_TaskId != nil {
-			return *x.xxx_hidden_TaskId
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *ClientAction_UpdateTaskStatus) GetTaskStatus() *TaskStatus {
-	if x != nil {
-		return x.xxx_hidden_TaskStatus
-	}
-	return nil
-}
-
-func (x *ClientAction_UpdateTaskStatus) SetTaskId(v string) {
-	x.xxx_hidden_TaskId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *ClientAction_UpdateTaskStatus) SetTaskStatus(v *TaskStatus) {
-	x.xxx_hidden_TaskStatus = v
-}
-
-func (x *ClientAction_UpdateTaskStatus) HasTaskId() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *ClientAction_UpdateTaskStatus) HasTaskStatus() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_TaskStatus != nil
-}
-
-func (x *ClientAction_UpdateTaskStatus) ClearTaskId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_TaskId = nil
-}
-
-func (x *ClientAction_UpdateTaskStatus) ClearTaskStatus() {
-	x.xxx_hidden_TaskStatus = nil
-}
-
-type ClientAction_UpdateTaskStatus_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	TaskId     *string
-	TaskStatus *TaskStatus
-}
-
-func (b0 ClientAction_UpdateTaskStatus_builder) Build() *ClientAction_UpdateTaskStatus {
-	m0 := &ClientAction_UpdateTaskStatus{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.TaskId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_TaskId = b.TaskId
-	}
-	x.xxx_hidden_TaskStatus = b.TaskStatus
-	return m0
-}
-
 type ClientAction_UpdateTaskServerData struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_TaskId      *string                `protobuf:"bytes,1,opt,name=task_id,json=taskId"`
@@ -2527,7 +3093,7 @@ type ClientAction_UpdateTaskServerData struct {
 
 func (x *ClientAction_UpdateTaskServerData) Reset() {
 	*x = ClientAction_UpdateTaskServerData{}
-	mi := &file_response_proto_msgTypes[17]
+	mi := &file_response_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2539,7 +3105,7 @@ func (x *ClientAction_UpdateTaskServerData) String() string {
 func (*ClientAction_UpdateTaskServerData) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskServerData) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[17]
+	mi := &file_response_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2639,7 +3205,7 @@ type ClientAction_UpdateTaskDescription struct {
 
 func (x *ClientAction_UpdateTaskDescription) Reset() {
 	*x = ClientAction_UpdateTaskDescription{}
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2651,7 +3217,7 @@ func (x *ClientAction_UpdateTaskDescription) String() string {
 func (*ClientAction_UpdateTaskDescription) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2751,7 +3317,7 @@ type ClientAction_AddMessagesToTask struct {
 
 func (x *ClientAction_AddMessagesToTask) Reset() {
 	*x = ClientAction_AddMessagesToTask{}
-	mi := &file_response_proto_msgTypes[19]
+	mi := &file_response_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2763,7 +3329,7 @@ func (x *ClientAction_AddMessagesToTask) String() string {
 func (*ClientAction_AddMessagesToTask) ProtoMessage() {}
 
 func (x *ClientAction_AddMessagesToTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[19]
+	mi := &file_response_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2847,7 +3413,7 @@ type ClientAction_UpdateTaskMessage struct {
 
 func (x *ClientAction_UpdateTaskMessage) Reset() {
 	*x = ClientAction_UpdateTaskMessage{}
-	mi := &file_response_proto_msgTypes[20]
+	mi := &file_response_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2859,7 +3425,7 @@ func (x *ClientAction_UpdateTaskMessage) String() string {
 func (*ClientAction_UpdateTaskMessage) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[20]
+	mi := &file_response_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2977,7 +3543,7 @@ type ClientAction_AppendToMessageContent struct {
 
 func (x *ClientAction_AppendToMessageContent) Reset() {
 	*x = ClientAction_AppendToMessageContent{}
-	mi := &file_response_proto_msgTypes[21]
+	mi := &file_response_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2989,7 +3555,7 @@ func (x *ClientAction_AppendToMessageContent) String() string {
 func (*ClientAction_AppendToMessageContent) ProtoMessage() {}
 
 func (x *ClientAction_AppendToMessageContent) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[21]
+	mi := &file_response_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3107,7 +3673,7 @@ type ClientAction_UpdateTaskSummary struct {
 
 func (x *ClientAction_UpdateTaskSummary) Reset() {
 	*x = ClientAction_UpdateTaskSummary{}
-	mi := &file_response_proto_msgTypes[22]
+	mi := &file_response_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3119,7 +3685,7 @@ func (x *ClientAction_UpdateTaskSummary) String() string {
 func (*ClientAction_UpdateTaskSummary) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[22]
+	mi := &file_response_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3217,7 +3783,7 @@ type ClientAction_BeginTransaction struct {
 
 func (x *ClientAction_BeginTransaction) Reset() {
 	*x = ClientAction_BeginTransaction{}
-	mi := &file_response_proto_msgTypes[23]
+	mi := &file_response_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3229,7 +3795,7 @@ func (x *ClientAction_BeginTransaction) String() string {
 func (*ClientAction_BeginTransaction) ProtoMessage() {}
 
 func (x *ClientAction_BeginTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[23]
+	mi := &file_response_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3261,7 +3827,7 @@ type ClientAction_CommitTransaction struct {
 
 func (x *ClientAction_CommitTransaction) Reset() {
 	*x = ClientAction_CommitTransaction{}
-	mi := &file_response_proto_msgTypes[24]
+	mi := &file_response_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3273,7 +3839,7 @@ func (x *ClientAction_CommitTransaction) String() string {
 func (*ClientAction_CommitTransaction) ProtoMessage() {}
 
 func (x *ClientAction_CommitTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[24]
+	mi := &file_response_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3305,7 +3871,7 @@ type ClientAction_RollbackTransaction struct {
 
 func (x *ClientAction_RollbackTransaction) Reset() {
 	*x = ClientAction_RollbackTransaction{}
-	mi := &file_response_proto_msgTypes[25]
+	mi := &file_response_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3317,7 +3883,7 @@ func (x *ClientAction_RollbackTransaction) String() string {
 func (*ClientAction_RollbackTransaction) ProtoMessage() {}
 
 func (x *ClientAction_RollbackTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[25]
+	mi := &file_response_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3352,7 +3918,7 @@ type ClientAction_StartNewConversation struct {
 
 func (x *ClientAction_StartNewConversation) Reset() {
 	*x = ClientAction_StartNewConversation{}
-	mi := &file_response_proto_msgTypes[26]
+	mi := &file_response_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3364,7 +3930,7 @@ func (x *ClientAction_StartNewConversation) String() string {
 func (*ClientAction_StartNewConversation) ProtoMessage() {}
 
 func (x *ClientAction_StartNewConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[26]
+	mi := &file_response_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3424,7 +3990,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x87\x10\n" +
+	"task.proto\"\xa3\x1e\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -3435,7 +4001,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xd8\f\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xf4\x1a\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -3449,13 +4015,42 @@ const file_response_proto_rawDesc = "" +
 	"tokenUsage\x12=\n" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
 	"\frequest_cost\x18\n" +
-	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12s\n" +
-	"\x13context_window_info\x18\v \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfoR\x11contextWindowInfo\x1ae\n" +
-	"\x11ContextWindowInfo\x120\n" +
+	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12\x8b\x01\n" +
+	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\xeb\x02\n" +
+	"\x19ConversationUsageMetadata\x120\n" +
 	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12\x1e\n" +
 	"\n" +
 	"summarized\x18\x02 \x01(\bR\n" +
-	"summarized\x1a#\n" +
+	"summarized\x12#\n" +
+	"\rcredits_spent\x18\x03 \x01(\x02R\fcreditsSpent\x12b\n" +
+	"\vtoken_usage\x18\x04 \x03(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\n" +
+	"tokenUsage\x12s\n" +
+	"\x13tool_usage_metadata\x18\x05 \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadataR\x11toolUsageMetadata\x1aO\n" +
+	"\x0fModelTokenUsage\x12\x19\n" +
+	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12!\n" +
+	"\ftotal_tokens\x18\x02 \x01(\rR\vtotalTokens\x1a\x8f\n" +
+	"\n" +
+	"\x11ToolUsageMetadata\x12k\n" +
+	"\x11run_command_stats\x18\x01 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x0frunCommandStats\x12i\n" +
+	"\x10read_files_stats\x18\x02 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x0ereadFilesStats\x12s\n" +
+	"\x15search_codebase_stats\x18\x03 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x13searchCodebaseStats\x12^\n" +
+	"\n" +
+	"grep_stats\x18\x04 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\tgrepStats\x12g\n" +
+	"\x0ffile_glob_stats\x18\x05 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\rfileGlobStats\x12w\n" +
+	"\x15apply_file_diff_stats\x18\x06 \x01(\v2D.warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStatsR\x12applyFileDiffStats\x12\x97\x01\n" +
+	")write_to_long_running_shell_command_stats\x18\a \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR#writeToLongRunningShellCommandStats\x12v\n" +
+	"\x17read_mcp_resource_stats\x18\b \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x14readMcpResourceStats\x12n\n" +
+	"\x13call_mcp_tool_stats\x18\t \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x10callMcpToolStats\x12m\n" +
+	"\x12suggest_plan_stats\x18\n" +
+	" \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x10suggestPlanStats\x12z\n" +
+	"\x19suggest_create_plan_stats\x18\v \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x16suggestCreatePlanStats\x1a%\n" +
+	"\rToolCallStats\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x05R\x05count\x1ap\n" +
+	"\x12ApplyFileDiffStats\x12\x14\n" +
+	"\x05count\x18\x01 \x01(\x05R\x05count\x12\x1f\n" +
+	"\vlines_added\x18\x02 \x01(\x05R\n" +
+	"linesAdded\x12#\n" +
+	"\rlines_removed\x18\x03 \x01(\x05R\flinesRemoved\x1a#\n" +
 	"\vRequestCost\x12\x14\n" +
 	"\x05exact\x18\x01 \x01(\x02R\x05exact\x1a\xda\x01\n" +
 	"\n" +
@@ -3477,11 +4072,10 @@ const file_response_proto_rawDesc = "" +
 	"\rInternalError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
 	"\x06reasonB\x06\n" +
-	"\x04type\"\x92\x12\n" +
+	"\x04type\"\xd9\x10\n" +
 	"\fClientAction\x12O\n" +
 	"\vcreate_task\x18\x01 \x01(\v2,.warp.multi_agent.v1.ClientAction.CreateTaskH\x00R\n" +
-	"createTask\x12b\n" +
-	"\x12update_task_status\x18\x02 \x01(\v22.warp.multi_agent.v1.ClientAction.UpdateTaskStatusH\x00R\x10updateTaskStatus\x12f\n" +
+	"createTask\x12f\n" +
 	"\x14add_messages_to_task\x18\x03 \x01(\v23.warp.multi_agent.v1.ClientAction.AddMessagesToTaskH\x00R\x11addMessagesToTask\x12e\n" +
 	"\x13update_task_message\x18\x04 \x01(\v23.warp.multi_agent.v1.ClientAction.UpdateTaskMessageH\x00R\x11updateTaskMessage\x12u\n" +
 	"\x19append_to_message_content\x18\x05 \x01(\v28.warp.multi_agent.v1.ClientAction.AppendToMessageContentH\x00R\x16appendToMessageContent\x12M\n" +
@@ -3496,11 +4090,7 @@ const file_response_proto_rawDesc = "" +
 	"\x17update_task_server_data\x18\r \x01(\v26.warp.multi_agent.v1.ClientAction.UpdateTaskServerDataH\x00R\x14updateTaskServerData\x1a;\n" +
 	"\n" +
 	"CreateTask\x12-\n" +
-	"\x04task\x18\x01 \x01(\v2\x19.warp.multi_agent.v1.TaskR\x04task\x1am\n" +
-	"\x10UpdateTaskStatus\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12@\n" +
-	"\vtask_status\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.TaskStatusR\n" +
-	"taskStatus\x1aP\n" +
+	"\x04task\x18\x01 \x01(\v2\x19.warp.multi_agent.v1.TaskR\x04task\x1aP\n" +
 	"\x14UpdateTaskServerData\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x1f\n" +
 	"\vserver_data\x18\x02 \x01(\tR\n" +
@@ -3527,83 +4117,96 @@ const file_response_proto_rawDesc = "" +
 	"\x13RollbackTransaction\x1aI\n" +
 	"\x14StartNewConversation\x121\n" +
 	"\x15start_from_message_id\x18\x01 \x01(\tR\x12startFromMessageIdB\b\n" +
-	"\x06actionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x06actionJ\x04\b\x02\x10\x03R\x12update_task_statusB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_response_proto_goTypes = []any{
-	(*ResponseEvent)(nil),                                      // 0: warp.multi_agent.v1.ResponseEvent
-	(*ClientAction)(nil),                                       // 1: warp.multi_agent.v1.ClientAction
-	(*ResponseEvent_StreamInit)(nil),                           // 2: warp.multi_agent.v1.ResponseEvent.StreamInit
-	(*ResponseEvent_ClientActions)(nil),                        // 3: warp.multi_agent.v1.ResponseEvent.ClientActions
-	(*ResponseEvent_StreamFinished)(nil),                       // 4: warp.multi_agent.v1.ResponseEvent.StreamFinished
-	(*ResponseEvent_StreamFinished_ContextWindowInfo)(nil),     // 5: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfo
-	(*ResponseEvent_StreamFinished_RequestCost)(nil),           // 6: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	(*ResponseEvent_StreamFinished_TokenUsage)(nil),            // 7: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	(*ResponseEvent_StreamFinished_Other)(nil),                 // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	(*ResponseEvent_StreamFinished_Done)(nil),                  // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),  // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),            // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil), // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),        // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	(*ResponseEvent_StreamFinished_InternalError)(nil),         // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	(*ClientAction_CreateTask)(nil),                            // 15: warp.multi_agent.v1.ClientAction.CreateTask
-	(*ClientAction_UpdateTaskStatus)(nil),                      // 16: warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	(*ClientAction_UpdateTaskServerData)(nil),                  // 17: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	(*ClientAction_UpdateTaskDescription)(nil),                 // 18: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                     // 19: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                     // 20: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),                // 21: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                     // 22: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*ClientAction_BeginTransaction)(nil),                      // 23: warp.multi_agent.v1.ClientAction.BeginTransaction
-	(*ClientAction_CommitTransaction)(nil),                     // 24: warp.multi_agent.v1.ClientAction.CommitTransaction
-	(*ClientAction_RollbackTransaction)(nil),                   // 25: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*ClientAction_StartNewConversation)(nil),                  // 26: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*Suggestions)(nil),                                        // 27: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                               // 28: warp.multi_agent.v1.Task
-	(*TaskStatus)(nil),                                         // 29: warp.multi_agent.v1.TaskStatus
-	(*Message)(nil),                                            // 30: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                              // 31: google.protobuf.FieldMask
+	(*ResponseEvent)(nil),                                          // 0: warp.multi_agent.v1.ResponseEvent
+	(*ClientAction)(nil),                                           // 1: warp.multi_agent.v1.ClientAction
+	(*ResponseEvent_StreamInit)(nil),                               // 2: warp.multi_agent.v1.ResponseEvent.StreamInit
+	(*ResponseEvent_ClientActions)(nil),                            // 3: warp.multi_agent.v1.ResponseEvent.ClientActions
+	(*ResponseEvent_StreamFinished)(nil),                           // 4: warp.multi_agent.v1.ResponseEvent.StreamFinished
+	(*ResponseEvent_StreamFinished_ConversationUsageMetadata)(nil), // 5: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
+	(*ResponseEvent_StreamFinished_ModelTokenUsage)(nil),           // 6: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	(*ResponseEvent_StreamFinished_ToolUsageMetadata)(nil),         // 7: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
+	(*ResponseEvent_StreamFinished_ToolCallStats)(nil),             // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	(*ResponseEvent_StreamFinished_ApplyFileDiffStats)(nil),        // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
+	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	(*ResponseEvent_StreamFinished_Other)(nil),                     // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	(*ResponseEvent_StreamFinished_Done)(nil),                      // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	(*ClientAction_CreateTask)(nil),                                // 19: warp.multi_agent.v1.ClientAction.CreateTask
+	(*ClientAction_UpdateTaskServerData)(nil),                      // 20: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	(*ClientAction_UpdateTaskDescription)(nil),                     // 21: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                         // 22: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                         // 23: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                    // 24: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                         // 25: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*ClientAction_BeginTransaction)(nil),                          // 26: warp.multi_agent.v1.ClientAction.BeginTransaction
+	(*ClientAction_CommitTransaction)(nil),                         // 27: warp.multi_agent.v1.ClientAction.CommitTransaction
+	(*ClientAction_RollbackTransaction)(nil),                       // 28: warp.multi_agent.v1.ClientAction.RollbackTransaction
+	(*ClientAction_StartNewConversation)(nil),                      // 29: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*Suggestions)(nil),                                            // 30: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                                   // 31: warp.multi_agent.v1.Task
+	(*Message)(nil),                                                // 32: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                                  // 33: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
 	3,  // 1: warp.multi_agent.v1.ResponseEvent.client_actions:type_name -> warp.multi_agent.v1.ResponseEvent.ClientActions
 	4,  // 2: warp.multi_agent.v1.ResponseEvent.finished:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished
-	15, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
-	16, // 4: warp.multi_agent.v1.ClientAction.update_task_status:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskStatus
-	19, // 5: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	20, // 6: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	21, // 7: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	27, // 8: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	22, // 9: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	18, // 10: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	23, // 11: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
-	24, // 12: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
-	25, // 13: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
-	26, // 14: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
-	17, // 15: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	1,  // 16: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	8,  // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	9,  // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	10, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	11, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	12, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	13, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	14, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	7,  // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	6,  // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	5,  // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_info:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowInfo
-	28, // 27: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	29, // 28: warp.multi_agent.v1.ClientAction.UpdateTaskStatus.task_status:type_name -> warp.multi_agent.v1.TaskStatus
-	30, // 29: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	30, // 30: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	31, // 31: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	30, // 32: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	31, // 33: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	34, // [34:34] is the sub-list for method output_type
-	34, // [34:34] is the sub-list for method input_type
-	34, // [34:34] is the sub-list for extension type_name
-	34, // [34:34] is the sub-list for extension extendee
-	0,  // [0:34] is the sub-list for field type_name
+	19, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
+	22, // 4: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	23, // 5: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	24, // 6: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	30, // 7: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	25, // 8: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	21, // 9: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	26, // 10: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
+	27, // 11: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
+	28, // 12: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
+	29, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
+	20, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	1,  // 15: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
+	12, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	13, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	14, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	15, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	16, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	17, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	18, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	11, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	10, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	5,  // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
+	6,  // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	7,  // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
+	8,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_files_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.search_codebase_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.grep_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.file_glob_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.apply_file_diff_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
+	8,  // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.write_to_long_running_shell_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_mcp_resource_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.call_mcp_tool_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	8,  // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	31, // 39: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	32, // 40: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	32, // 41: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	33, // 42: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	32, // 43: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	33, // 44: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	45, // [45:45] is the sub-list for method output_type
+	45, // [45:45] is the sub-list for method input_type
+	45, // [45:45] is the sub-list for extension type_name
+	45, // [45:45] is the sub-list for extension extendee
+	0,  // [0:45] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -3621,7 +4224,6 @@ func file_response_proto_init() {
 	}
 	file_response_proto_msgTypes[1].OneofWrappers = []any{
 		(*clientAction_CreateTask_)(nil),
-		(*clientAction_UpdateTaskStatus_)(nil),
 		(*clientAction_AddMessagesToTask_)(nil),
 		(*clientAction_UpdateTaskMessage_)(nil),
 		(*clientAction_AppendToMessageContent_)(nil),
@@ -3649,7 +4251,7 @@ func file_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_response_proto_rawDesc), len(file_response_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   27,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
