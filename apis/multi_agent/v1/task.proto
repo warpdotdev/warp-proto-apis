@@ -195,6 +195,7 @@ message Message {
       ReadDocuments read_documents = 20;
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
+      WebSearch web_search = 23;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -378,6 +379,28 @@ message Message {
         string content = 1;
       }
     }
+
+    // A tool call to search the web.
+    // This represents a provider-native web search (e.g., Anthropic, OpenAI)
+    // where the actual search is performed by the LLM provider.
+    message WebSearch {
+      // The search query used.
+      string query = 1;
+      
+      // The status of the web search.
+      Status status = 2;
+      
+      // URLs that were searched, if available.
+      repeated string urls = 3;
+      
+      enum Status {
+        STATUS_UNSPECIFIED = 0;
+        // The web search is in progress.
+        STATUS_SEARCHING = 1;
+        // The web search has completed.
+        STATUS_COMPLETE = 2;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -414,6 +437,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
+      WebSearchResult web_search = 27;
     }
 
     // Result of a server-side tool call.
@@ -758,6 +782,21 @@ message CreateDocumentsResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+// Result of a `WebSearch` tool call.
+message WebSearchResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The URLs that were searched.
+    repeated string urls = 1;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result types.
 //
@@ -784,5 +823,6 @@ enum ToolType {
   READ_DOCUMENTS = 17;
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
+  WEB_SEARCH = 20;
 }
 
