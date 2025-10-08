@@ -165,6 +165,17 @@ message Message {
     // How long the agent spent summarizing
     // Only set when the summarization is finished.
     google.protobuf.Duration finished_duration = 2;
+
+    // Type of summarization being performed.
+    oneof summary_type {
+      ConversationSummary conversation_summary = 1;
+      ToolCallResultSummary tool_call_result_summary = 3;
+    }
+
+    // Summarize the overall conversation.
+    message ConversationSummary {}
+    // Summarize the result of a tool call.
+    message ToolCallResultSummary {}
   }
 
   // Tool call message type
