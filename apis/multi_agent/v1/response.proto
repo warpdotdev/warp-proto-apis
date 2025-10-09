@@ -58,6 +58,7 @@ message ResponseEvent {
       ContextWindowExceeded context_window_exceeded = 5;
       LLMUnavailable llm_unavailable = 6;
       InternalError internal_error = 7;
+      MissingApiKey missing_api_key = 12;
     }
 
     // Internal-only field containing per-model token usage incurred in producing the response
@@ -159,6 +160,10 @@ message ResponseEvent {
     message QuotaLimit {}
     message ContextWindowExceeded {}
     message LLMUnavailable {}
+    message MissingApiKey {
+      LLMProvider provider = 1;
+      string model_name = 2;
+    }
     message InternalError { string message = 1; }
   }
 }
@@ -244,4 +249,13 @@ message ClientAction {
   message StartNewConversation {
     string start_from_message_id = 1;
   }
+}
+
+enum LLMProvider {
+  LLM_PROVIDER_UNKNOWN = 0;
+  LLM_PROVIDER_ANTHROPIC = 1;
+  LLM_PROVIDER_OPENAI = 2;
+  LLM_PROVIDER_GOOGLE = 3;
+  LLM_PROVIDER_XAI = 4;
+  LLM_PROVIDER_OPENROUTER = 5;
 }

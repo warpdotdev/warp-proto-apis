@@ -241,6 +241,10 @@ message Request {
     // If `true`, the client supports the `Reasoning` message type.
     bool supports_reasoning_message = 17;
 
+    // Optional user-provided API keys for LLM providers.
+    // If provided, these keys will be used instead of Warp's default keys.
+    ApiKeys api_keys = 18;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
@@ -250,6 +254,13 @@ message Request {
 
       // The LLM of preference for coding tasks.
       string coding = 3;
+    }
+
+    message ApiKeys {
+      string anthropic = 1 [ (sensitive) = true ];
+      string openai = 2 [ (sensitive) = true ];
+      string google = 3 [ (sensitive) = true ];
+      string open_router = 4 [ (sensitive) = true ];
     }
   }
 
