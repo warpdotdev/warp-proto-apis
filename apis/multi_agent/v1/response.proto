@@ -95,6 +95,8 @@ message ResponseEvent {
     message ModelTokenUsage {
       string model_id = 1;
       uint32 total_tokens = 2;
+      // A rough heuristic to indicate how much this model generally costs to query
+      uint32 model_cost = 3;
     }
 
     // Tool usage by tool.
