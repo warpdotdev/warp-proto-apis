@@ -104,7 +104,6 @@ message Request {
         ReadDocumentsResult read_documents = 19;
         EditDocumentsResult edit_documents = 20;
         CreateDocumentsResult create_documents = 21;
-        WebSearchResult web_search = 22;
       }
 
       // Generic tool call result for representing a user-requested refinement

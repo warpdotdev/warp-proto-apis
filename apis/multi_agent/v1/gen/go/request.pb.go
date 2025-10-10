@@ -1962,15 +1962,6 @@ func (x *Request_Input_ToolCallResult) GetCreateDocuments() *CreateDocumentsResu
 	return nil
 }
 
-func (x *Request_Input_ToolCallResult) GetWebSearch() *WebSearchResult {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_WebSearch); ok {
-			return x.WebSearch
-		}
-	}
-	return nil
-}
-
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -2134,14 +2125,6 @@ func (x *Request_Input_ToolCallResult) SetCreateDocuments(v *CreateDocumentsResu
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_CreateDocuments{v}
-}
-
-func (x *Request_Input_ToolCallResult) SetWebSearch(v *WebSearchResult) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &request_Input_ToolCallResult_WebSearch{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -2318,14 +2301,6 @@ func (x *Request_Input_ToolCallResult) HasCreateDocuments() bool {
 	return ok
 }
 
-func (x *Request_Input_ToolCallResult) HasWebSearch() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_WebSearch)
-	return ok
-}
-
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -2455,12 +2430,6 @@ func (x *Request_Input_ToolCallResult) ClearCreateDocuments() {
 	}
 }
 
-func (x *Request_Input_ToolCallResult) ClearWebSearch() {
-	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_WebSearch); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -2482,7 +2451,6 @@ const Request_Input_ToolCallResult_InitProject_case case_Request_Input_ToolCallR
 const Request_Input_ToolCallResult_ReadDocuments_case case_Request_Input_ToolCallResult_Result = 19
 const Request_Input_ToolCallResult_EditDocuments_case case_Request_Input_ToolCallResult_Result = 20
 const Request_Input_ToolCallResult_CreateDocuments_case case_Request_Input_ToolCallResult_Result = 21
-const Request_Input_ToolCallResult_WebSearch_case case_Request_Input_ToolCallResult_Result = 22
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -2529,8 +2497,6 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_EditDocuments_case
 	case *request_Input_ToolCallResult_CreateDocuments:
 		return Request_Input_ToolCallResult_CreateDocuments_case
-	case *request_Input_ToolCallResult_WebSearch:
-		return Request_Input_ToolCallResult_WebSearch_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -2561,7 +2527,6 @@ type Request_Input_ToolCallResult_builder struct {
 	ReadDocuments                  *ReadDocumentsResult
 	EditDocuments                  *EditDocumentsResult
 	CreateDocuments                *CreateDocumentsResult
-	WebSearch                      *WebSearchResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -2632,9 +2597,6 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.CreateDocuments != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_CreateDocuments{b.CreateDocuments}
-	}
-	if b.WebSearch != nil {
-		x.xxx_hidden_Result = &request_Input_ToolCallResult_WebSearch{b.WebSearch}
 	}
 	return m0
 }
@@ -2733,10 +2695,6 @@ type request_Input_ToolCallResult_CreateDocuments struct {
 	CreateDocuments *CreateDocumentsResult `protobuf:"bytes,21,opt,name=create_documents,json=createDocuments,oneof"`
 }
 
-type request_Input_ToolCallResult_WebSearch struct {
-	WebSearch *WebSearchResult `protobuf:"bytes,22,opt,name=web_search,json=webSearch,oneof"`
-}
-
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -2777,8 +2735,6 @@ func (*request_Input_ToolCallResult_ReadDocuments) isRequest_Input_ToolCallResul
 func (*request_Input_ToolCallResult_EditDocuments) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_CreateDocuments) isRequest_Input_ToolCallResult_Result() {}
-
-func (*request_Input_ToolCallResult_WebSearch) isRequest_Input_ToolCallResult_Result() {}
 
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -4656,7 +4612,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xa58\n" +
+	"task.proto\"\xde7\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -4666,7 +4622,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xf4%\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xad%\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -4695,7 +4651,7 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResultB\a\n" +
-	"\x05input\x1a\x93\x0f\n" +
+	"\x05input\x1a\xcc\x0e\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -4721,9 +4677,7 @@ const file_request_proto_rawDesc = "" +
 	"\finit_project\x18\x12 \x01(\v2&.warp.multi_agent.v1.InitProjectResultH\x00R\vinitProject\x12Q\n" +
 	"\x0eread_documents\x18\x13 \x01(\v2(.warp.multi_agent.v1.ReadDocumentsResultH\x00R\rreadDocuments\x12Q\n" +
 	"\x0eedit_documents\x18\x14 \x01(\v2(.warp.multi_agent.v1.EditDocumentsResultH\x00R\reditDocuments\x12W\n" +
-	"\x10create_documents\x18\x15 \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12E\n" +
-	"\n" +
-	"web_search\x18\x16 \x01(\v2$.warp.multi_agent.v1.WebSearchResultH\x00R\twebSearch\x1a[\n" +
+	"\x10create_documents\x18\x15 \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x1a[\n" +
 	"\fRefineResult\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
@@ -4855,11 +4809,10 @@ var file_request_proto_goTypes = []any{
 	(*ReadDocumentsResult)(nil),                  // 49: warp.multi_agent.v1.ReadDocumentsResult
 	(*EditDocumentsResult)(nil),                  // 50: warp.multi_agent.v1.EditDocumentsResult
 	(*CreateDocumentsResult)(nil),                // 51: warp.multi_agent.v1.CreateDocumentsResult
-	(*WebSearchResult)(nil),                      // 52: warp.multi_agent.v1.WebSearchResult
-	(*Attachment)(nil),                           // 53: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                        // 54: google.protobuf.Empty
-	(*structpb.Value)(nil),                       // 55: google.protobuf.Value
-	(*structpb.Struct)(nil),                      // 56: google.protobuf.Struct
+	(*Attachment)(nil),                           // 52: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                        // 53: google.protobuf.Empty
+	(*structpb.Value)(nil),                       // 54: google.protobuf.Value
+	(*structpb.Struct)(nil),                      // 55: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -4907,27 +4860,26 @@ var file_request_proto_depIdxs = []int32{
 	49, // 42: warp.multi_agent.v1.Request.Input.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
 	50, // 43: warp.multi_agent.v1.Request.Input.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
 	51, // 44: warp.multi_agent.v1.Request.Input.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	52, // 45: warp.multi_agent.v1.Request.Input.ToolCallResult.web_search:type_name -> warp.multi_agent.v1.WebSearchResult
-	19, // 46: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	20, // 47: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	21, // 48: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	22, // 49: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	23, // 50: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	24, // 51: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	53, // 52: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	54, // 53: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	54, // 54: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	53, // 55: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	6,  // 56: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 57: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	6,  // 58: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	55, // 59: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	56, // 60: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	61, // [61:61] is the sub-list for method output_type
-	61, // [61:61] is the sub-list for method input_type
-	61, // [61:61] is the sub-list for extension type_name
-	61, // [61:61] is the sub-list for extension extendee
-	0,  // [0:61] is the sub-list for field type_name
+	19, // 45: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	20, // 46: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	21, // 47: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	22, // 48: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	23, // 49: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	24, // 50: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	52, // 51: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	53, // 52: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	53, // 53: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	52, // 54: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	6,  // 55: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	8,  // 56: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	6,  // 57: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	54, // 58: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	55, // 59: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	60, // [60:60] is the sub-list for method output_type
+	60, // [60:60] is the sub-list for method input_type
+	60, // [60:60] is the sub-list for extension type_name
+	60, // [60:60] is the sub-list for extension extendee
+	0,  // [0:60] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -4973,7 +4925,6 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_ReadDocuments)(nil),
 		(*request_Input_ToolCallResult_EditDocuments)(nil),
 		(*request_Input_ToolCallResult_CreateDocuments)(nil),
-		(*request_Input_ToolCallResult_WebSearch)(nil),
 	}
 	file_request_proto_msgTypes[9].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),
