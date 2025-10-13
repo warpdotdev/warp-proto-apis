@@ -306,6 +306,12 @@ message Request {
 
       // Optional description of the server's purpose.
       string description = 2 [ (sensitive) = true ];
+
+      // Resources provided by this server.
+      repeated MCPResource resources = 3;
+
+      // Tools provided by this server.
+      repeated MCPTool tools = 4;
     }
   }
 }

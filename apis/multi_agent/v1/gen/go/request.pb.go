@@ -1660,8 +1660,8 @@ type Request_MCPContext_builder struct {
 	// Kept for backwards compatibility with older clients.
 	Resources []*Request_MCPContext_MCPResource
 	Tools     []*Request_MCPContext_MCPTool
-	// Server-grouped MCP context. Each entry represents a single MCP server
-	// with its associated tools and resources.
+	// Server-grouped MCP context. Each entry represents a single MCP server summary.
+	// MCP Server tools/resources could be retrieved fetched via `ListRelevantMCPContext`.
 	Servers []*Request_MCPContext_MCPServer
 }
 

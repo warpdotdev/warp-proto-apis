@@ -3943,28 +3943,28 @@ func (*callMCPToolResult_Success_) isCallMCPToolResult_Result() {}
 
 func (*callMCPToolResult_Error_) isCallMCPToolResult_Result() {}
 
-// Result of a `ListRelevantMCPConfig` tool call.
-type ListRelevantMCPConfigResult struct {
-	state             protoimpl.MessageState               `protogen:"opaque.v1"`
-	xxx_hidden_Result isListRelevantMCPConfigResult_Result `protobuf_oneof:"result"`
+// Result of a `ListRelevantMCPContext` tool call.
+type ListRelevantMCPContextResult struct {
+	state             protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_Result isListRelevantMCPContextResult_Result `protobuf_oneof:"result"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
 
-func (x *ListRelevantMCPConfigResult) Reset() {
-	*x = ListRelevantMCPConfigResult{}
+func (x *ListRelevantMCPContextResult) Reset() {
+	*x = ListRelevantMCPContextResult{}
 	mi := &file_task_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListRelevantMCPConfigResult) String() string {
+func (x *ListRelevantMCPContextResult) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListRelevantMCPConfigResult) ProtoMessage() {}
+func (*ListRelevantMCPContextResult) ProtoMessage() {}
 
-func (x *ListRelevantMCPConfigResult) ProtoReflect() protoreflect.Message {
+func (x *ListRelevantMCPContextResult) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3976,122 +3976,122 @@ func (x *ListRelevantMCPConfigResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *ListRelevantMCPConfigResult) GetSuccess() *ListRelevantMCPConfigResult_Success {
+func (x *ListRelevantMCPContextResult) GetSuccess() *ListRelevantMCPContextResult_Success {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*listRelevantMCPConfigResult_Success_); ok {
+		if x, ok := x.xxx_hidden_Result.(*listRelevantMCPContextResult_Success_); ok {
 			return x.Success
 		}
 	}
 	return nil
 }
 
-func (x *ListRelevantMCPConfigResult) GetError() *ListRelevantMCPConfigResult_Error {
+func (x *ListRelevantMCPContextResult) GetError() *ListRelevantMCPContextResult_Error {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*listRelevantMCPConfigResult_Error_); ok {
+		if x, ok := x.xxx_hidden_Result.(*listRelevantMCPContextResult_Error_); ok {
 			return x.Error
 		}
 	}
 	return nil
 }
 
-func (x *ListRelevantMCPConfigResult) SetSuccess(v *ListRelevantMCPConfigResult_Success) {
+func (x *ListRelevantMCPContextResult) SetSuccess(v *ListRelevantMCPContextResult_Success) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &listRelevantMCPConfigResult_Success_{v}
+	x.xxx_hidden_Result = &listRelevantMCPContextResult_Success_{v}
 }
 
-func (x *ListRelevantMCPConfigResult) SetError(v *ListRelevantMCPConfigResult_Error) {
+func (x *ListRelevantMCPContextResult) SetError(v *ListRelevantMCPContextResult_Error) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &listRelevantMCPConfigResult_Error_{v}
+	x.xxx_hidden_Result = &listRelevantMCPContextResult_Error_{v}
 }
 
-func (x *ListRelevantMCPConfigResult) HasResult() bool {
+func (x *ListRelevantMCPContextResult) HasResult() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Result != nil
 }
 
-func (x *ListRelevantMCPConfigResult) HasSuccess() bool {
+func (x *ListRelevantMCPContextResult) HasSuccess() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*listRelevantMCPConfigResult_Success_)
+	_, ok := x.xxx_hidden_Result.(*listRelevantMCPContextResult_Success_)
 	return ok
 }
 
-func (x *ListRelevantMCPConfigResult) HasError() bool {
+func (x *ListRelevantMCPContextResult) HasError() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*listRelevantMCPConfigResult_Error_)
+	_, ok := x.xxx_hidden_Result.(*listRelevantMCPContextResult_Error_)
 	return ok
 }
 
-func (x *ListRelevantMCPConfigResult) ClearResult() {
+func (x *ListRelevantMCPContextResult) ClearResult() {
 	x.xxx_hidden_Result = nil
 }
 
-func (x *ListRelevantMCPConfigResult) ClearSuccess() {
-	if _, ok := x.xxx_hidden_Result.(*listRelevantMCPConfigResult_Success_); ok {
+func (x *ListRelevantMCPContextResult) ClearSuccess() {
+	if _, ok := x.xxx_hidden_Result.(*listRelevantMCPContextResult_Success_); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *ListRelevantMCPConfigResult) ClearError() {
-	if _, ok := x.xxx_hidden_Result.(*listRelevantMCPConfigResult_Error_); ok {
+func (x *ListRelevantMCPContextResult) ClearError() {
+	if _, ok := x.xxx_hidden_Result.(*listRelevantMCPContextResult_Error_); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-const ListRelevantMCPConfigResult_Result_not_set_case case_ListRelevantMCPConfigResult_Result = 0
-const ListRelevantMCPConfigResult_Success_case case_ListRelevantMCPConfigResult_Result = 1
-const ListRelevantMCPConfigResult_Error_case case_ListRelevantMCPConfigResult_Result = 2
+const ListRelevantMCPContextResult_Result_not_set_case case_ListRelevantMCPContextResult_Result = 0
+const ListRelevantMCPContextResult_Success_case case_ListRelevantMCPContextResult_Result = 1
+const ListRelevantMCPContextResult_Error_case case_ListRelevantMCPContextResult_Result = 2
 
-func (x *ListRelevantMCPConfigResult) WhichResult() case_ListRelevantMCPConfigResult_Result {
+func (x *ListRelevantMCPContextResult) WhichResult() case_ListRelevantMCPContextResult_Result {
 	if x == nil {
-		return ListRelevantMCPConfigResult_Result_not_set_case
+		return ListRelevantMCPContextResult_Result_not_set_case
 	}
 	switch x.xxx_hidden_Result.(type) {
-	case *listRelevantMCPConfigResult_Success_:
-		return ListRelevantMCPConfigResult_Success_case
-	case *listRelevantMCPConfigResult_Error_:
-		return ListRelevantMCPConfigResult_Error_case
+	case *listRelevantMCPContextResult_Success_:
+		return ListRelevantMCPContextResult_Success_case
+	case *listRelevantMCPContextResult_Error_:
+		return ListRelevantMCPContextResult_Error_case
 	default:
-		return ListRelevantMCPConfigResult_Result_not_set_case
+		return ListRelevantMCPContextResult_Result_not_set_case
 	}
 }
 
-type ListRelevantMCPConfigResult_builder struct {
+type ListRelevantMCPContextResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Result:
-	Success *ListRelevantMCPConfigResult_Success
-	Error   *ListRelevantMCPConfigResult_Error
+	Success *ListRelevantMCPContextResult_Success
+	Error   *ListRelevantMCPContextResult_Error
 	// -- end of xxx_hidden_Result
 }
 
-func (b0 ListRelevantMCPConfigResult_builder) Build() *ListRelevantMCPConfigResult {
-	m0 := &ListRelevantMCPConfigResult{}
+func (b0 ListRelevantMCPContextResult_builder) Build() *ListRelevantMCPContextResult {
+	m0 := &ListRelevantMCPContextResult{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Success != nil {
-		x.xxx_hidden_Result = &listRelevantMCPConfigResult_Success_{b.Success}
+		x.xxx_hidden_Result = &listRelevantMCPContextResult_Success_{b.Success}
 	}
 	if b.Error != nil {
-		x.xxx_hidden_Result = &listRelevantMCPConfigResult_Error_{b.Error}
+		x.xxx_hidden_Result = &listRelevantMCPContextResult_Error_{b.Error}
 	}
 	return m0
 }
 
-type case_ListRelevantMCPConfigResult_Result protoreflect.FieldNumber
+type case_ListRelevantMCPContextResult_Result protoreflect.FieldNumber
 
-func (x case_ListRelevantMCPConfigResult_Result) String() string {
+func (x case_ListRelevantMCPContextResult_Result) String() string {
 	md := file_task_proto_msgTypes[19].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -4099,21 +4099,21 @@ func (x case_ListRelevantMCPConfigResult_Result) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isListRelevantMCPConfigResult_Result interface {
-	isListRelevantMCPConfigResult_Result()
+type isListRelevantMCPContextResult_Result interface {
+	isListRelevantMCPContextResult_Result()
 }
 
-type listRelevantMCPConfigResult_Success_ struct {
-	Success *ListRelevantMCPConfigResult_Success `protobuf:"bytes,1,opt,name=success,oneof"`
+type listRelevantMCPContextResult_Success_ struct {
+	Success *ListRelevantMCPContextResult_Success `protobuf:"bytes,1,opt,name=success,oneof"`
 }
 
-type listRelevantMCPConfigResult_Error_ struct {
-	Error *ListRelevantMCPConfigResult_Error `protobuf:"bytes,2,opt,name=error,oneof"`
+type listRelevantMCPContextResult_Error_ struct {
+	Error *ListRelevantMCPContextResult_Error `protobuf:"bytes,2,opt,name=error,oneof"`
 }
 
-func (*listRelevantMCPConfigResult_Success_) isListRelevantMCPConfigResult_Result() {}
+func (*listRelevantMCPContextResult_Success_) isListRelevantMCPContextResult_Result() {}
 
-func (*listRelevantMCPConfigResult_Error_) isListRelevantMCPConfigResult_Result() {}
+func (*listRelevantMCPContextResult_Error_) isListRelevantMCPContextResult_Result() {}
 
 type SuggestPromptResult struct {
 	state             protoimpl.MessageState       `protogen:"opaque.v1"`
@@ -6575,7 +6575,7 @@ func (x *Message_ToolCall) GetCreateDocuments() *Message_ToolCall_CreateDocument
 	return nil
 }
 
-func (x *Message_ToolCall) GetListRelevantMcpConfig() *Message_ToolCall_ListRelevantMCPConfig {
+func (x *Message_ToolCall) GetListRelevantMcpConfig() *Message_ToolCall_ListRelevantMCPContext {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpConfig); ok {
 			return x.ListRelevantMcpConfig
@@ -6758,7 +6758,7 @@ func (x *Message_ToolCall) SetCreateDocuments(v *Message_ToolCall_CreateDocument
 	x.xxx_hidden_Tool = &message_ToolCall_CreateDocuments_{v}
 }
 
-func (x *Message_ToolCall) SetListRelevantMcpConfig(v *Message_ToolCall_ListRelevantMCPConfig) {
+func (x *Message_ToolCall) SetListRelevantMcpConfig(v *Message_ToolCall_ListRelevantMCPContext) {
 	if v == nil {
 		x.xxx_hidden_Tool = nil
 		return
@@ -7208,7 +7208,7 @@ type Message_ToolCall_builder struct {
 	ReadDocuments                  *Message_ToolCall_ReadDocuments
 	EditDocuments                  *Message_ToolCall_EditDocuments
 	CreateDocuments                *Message_ToolCall_CreateDocuments
-	ListRelevantMcpConfig          *Message_ToolCall_ListRelevantMCPConfig
+	ListRelevantMcpConfig          *Message_ToolCall_ListRelevantMCPContext
 	// -- end of xxx_hidden_Tool
 }
 
@@ -7391,7 +7391,7 @@ type message_ToolCall_CreateDocuments_ struct {
 }
 
 type message_ToolCall_ListRelevantMcpConfig struct {
-	ListRelevantMcpConfig *Message_ToolCall_ListRelevantMCPConfig `protobuf:"bytes,23,opt,name=list_relevant_mcp_config,json=listRelevantMcpConfig,oneof"`
+	ListRelevantMcpConfig *Message_ToolCall_ListRelevantMCPContext `protobuf:"bytes,23,opt,name=list_relevant_mcp_config,json=listRelevantMcpConfig,oneof"`
 }
 
 func (*message_ToolCall_RunShellCommand_) isMessage_ToolCall_Tool() {}
@@ -7700,7 +7700,7 @@ func (x *Message_ToolCallResult) GetCreateDocuments() *CreateDocumentsResult {
 	return nil
 }
 
-func (x *Message_ToolCallResult) GetListRelevantMcpConfig() *ListRelevantMCPConfigResult {
+func (x *Message_ToolCallResult) GetListRelevantMcpConfig() *ListRelevantMCPContextResult {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpConfig); ok {
 			return x.ListRelevantMcpConfig
@@ -7903,7 +7903,7 @@ func (x *Message_ToolCallResult) SetCreateDocuments(v *CreateDocumentsResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_CreateDocuments{v}
 }
 
-func (x *Message_ToolCallResult) SetListRelevantMcpConfig(v *ListRelevantMCPConfigResult) {
+func (x *Message_ToolCallResult) SetListRelevantMcpConfig(v *ListRelevantMCPContextResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
@@ -8402,7 +8402,7 @@ type Message_ToolCallResult_builder struct {
 	ReadDocuments                  *ReadDocumentsResult
 	EditDocuments                  *EditDocumentsResult
 	CreateDocuments                *CreateDocumentsResult
-	ListRelevantMcpConfig          *ListRelevantMCPConfigResult
+	ListRelevantMcpConfig          *ListRelevantMCPContextResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -8600,7 +8600,7 @@ type message_ToolCallResult_CreateDocuments struct {
 }
 
 type message_ToolCallResult_ListRelevantMcpConfig struct {
-	ListRelevantMcpConfig *ListRelevantMCPConfigResult `protobuf:"bytes,27,opt,name=list_relevant_mcp_config,json=listRelevantMcpConfig,oneof"`
+	ListRelevantMcpConfig *ListRelevantMCPContextResult `protobuf:"bytes,27,opt,name=list_relevant_mcp_config,json=listRelevantMcpConfig,oneof"`
 }
 
 func (*message_ToolCallResult_RunShellCommand) isMessage_ToolCallResult_Result() {}
@@ -11235,7 +11235,7 @@ func (b0 Message_ToolCall_CreateDocuments_builder) Build() *Message_ToolCall_Cre
 }
 
 // A tool call to retrieve tools and resources from a specific MCP server.
-type Message_ToolCall_ListRelevantMCPConfig struct {
+type Message_ToolCall_ListRelevantMCPContext struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ServerName  *string                `protobuf:"bytes,1,opt,name=server_name,json=serverName"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -11244,20 +11244,20 @@ type Message_ToolCall_ListRelevantMCPConfig struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) Reset() {
-	*x = Message_ToolCall_ListRelevantMCPConfig{}
+func (x *Message_ToolCall_ListRelevantMCPContext) Reset() {
+	*x = Message_ToolCall_ListRelevantMCPContext{}
 	mi := &file_task_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) String() string {
+func (x *Message_ToolCall_ListRelevantMCPContext) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_ToolCall_ListRelevantMCPConfig) ProtoMessage() {}
+func (*Message_ToolCall_ListRelevantMCPContext) ProtoMessage() {}
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) ProtoReflect() protoreflect.Message {
+func (x *Message_ToolCall_ListRelevantMCPContext) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -11269,7 +11269,7 @@ func (x *Message_ToolCall_ListRelevantMCPConfig) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) GetServerName() string {
+func (x *Message_ToolCall_ListRelevantMCPContext) GetServerName() string {
 	if x != nil {
 		if x.xxx_hidden_ServerName != nil {
 			return *x.xxx_hidden_ServerName
@@ -11279,32 +11279,32 @@ func (x *Message_ToolCall_ListRelevantMCPConfig) GetServerName() string {
 	return ""
 }
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) SetServerName(v string) {
+func (x *Message_ToolCall_ListRelevantMCPContext) SetServerName(v string) {
 	x.xxx_hidden_ServerName = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) HasServerName() bool {
+func (x *Message_ToolCall_ListRelevantMCPContext) HasServerName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ToolCall_ListRelevantMCPConfig) ClearServerName() {
+func (x *Message_ToolCall_ListRelevantMCPContext) ClearServerName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ServerName = nil
 }
 
-type Message_ToolCall_ListRelevantMCPConfig_builder struct {
+type Message_ToolCall_ListRelevantMCPContext_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Name of the MCP server to retrieve context for.
 	ServerName *string
 }
 
-func (b0 Message_ToolCall_ListRelevantMCPConfig_builder) Build() *Message_ToolCall_ListRelevantMCPConfig {
-	m0 := &Message_ToolCall_ListRelevantMCPConfig{}
+func (b0 Message_ToolCall_ListRelevantMCPContext_builder) Build() *Message_ToolCall_ListRelevantMCPContext {
+	m0 := &Message_ToolCall_ListRelevantMCPContext{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ServerName != nil {
@@ -14810,31 +14810,31 @@ func (b0 CallMCPToolResult_Success_Result_Image_builder) Build() *CallMCPToolRes
 	return m0
 }
 
-type ListRelevantMCPConfigResult_Success struct {
-	state                  protoimpl.MessageState                              `protogen:"opaque.v1"`
-	xxx_hidden_ServerName  *string                                             `protobuf:"bytes,1,opt,name=server_name,json=serverName"`
-	xxx_hidden_Tools       *[]*ListRelevantMCPConfigResult_Success_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
-	xxx_hidden_Resources   *[]*ListRelevantMCPConfigResult_Success_MCPResource `protobuf:"bytes,3,rep,name=resources"`
+type ListRelevantMCPContextResult_Success struct {
+	state                  protoimpl.MessageState                               `protogen:"opaque.v1"`
+	xxx_hidden_ServerName  *string                                              `protobuf:"bytes,1,opt,name=server_name,json=serverName"`
+	xxx_hidden_Tools       *[]*ListRelevantMCPContextResult_Success_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
+	xxx_hidden_Resources   *[]*ListRelevantMCPContextResult_Success_MCPResource `protobuf:"bytes,3,rep,name=resources"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListRelevantMCPConfigResult_Success) Reset() {
-	*x = ListRelevantMCPConfigResult_Success{}
+func (x *ListRelevantMCPContextResult_Success) Reset() {
+	*x = ListRelevantMCPContextResult_Success{}
 	mi := &file_task_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListRelevantMCPConfigResult_Success) String() string {
+func (x *ListRelevantMCPContextResult_Success) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListRelevantMCPConfigResult_Success) ProtoMessage() {}
+func (*ListRelevantMCPContextResult_Success) ProtoMessage() {}
 
-func (x *ListRelevantMCPConfigResult_Success) ProtoReflect() protoreflect.Message {
+func (x *ListRelevantMCPContextResult_Success) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -14846,7 +14846,7 @@ func (x *ListRelevantMCPConfigResult_Success) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-func (x *ListRelevantMCPConfigResult_Success) GetServerName() string {
+func (x *ListRelevantMCPContextResult_Success) GetServerName() string {
 	if x != nil {
 		if x.xxx_hidden_ServerName != nil {
 			return *x.xxx_hidden_ServerName
@@ -14856,7 +14856,7 @@ func (x *ListRelevantMCPConfigResult_Success) GetServerName() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success) GetTools() []*ListRelevantMCPConfigResult_Success_MCPTool {
+func (x *ListRelevantMCPContextResult_Success) GetTools() []*ListRelevantMCPContextResult_Success_MCPTool {
 	if x != nil {
 		if x.xxx_hidden_Tools != nil {
 			return *x.xxx_hidden_Tools
@@ -14865,7 +14865,7 @@ func (x *ListRelevantMCPConfigResult_Success) GetTools() []*ListRelevantMCPConfi
 	return nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success) GetResources() []*ListRelevantMCPConfigResult_Success_MCPResource {
+func (x *ListRelevantMCPContextResult_Success) GetResources() []*ListRelevantMCPContextResult_Success_MCPResource {
 	if x != nil {
 		if x.xxx_hidden_Resources != nil {
 			return *x.xxx_hidden_Resources
@@ -14874,44 +14874,44 @@ func (x *ListRelevantMCPConfigResult_Success) GetResources() []*ListRelevantMCPC
 	return nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success) SetServerName(v string) {
+func (x *ListRelevantMCPContextResult_Success) SetServerName(v string) {
 	x.xxx_hidden_ServerName = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *ListRelevantMCPConfigResult_Success) SetTools(v []*ListRelevantMCPConfigResult_Success_MCPTool) {
+func (x *ListRelevantMCPContextResult_Success) SetTools(v []*ListRelevantMCPContextResult_Success_MCPTool) {
 	x.xxx_hidden_Tools = &v
 }
 
-func (x *ListRelevantMCPConfigResult_Success) SetResources(v []*ListRelevantMCPConfigResult_Success_MCPResource) {
+func (x *ListRelevantMCPContextResult_Success) SetResources(v []*ListRelevantMCPContextResult_Success_MCPResource) {
 	x.xxx_hidden_Resources = &v
 }
 
-func (x *ListRelevantMCPConfigResult_Success) HasServerName() bool {
+func (x *ListRelevantMCPContextResult_Success) HasServerName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ListRelevantMCPConfigResult_Success) ClearServerName() {
+func (x *ListRelevantMCPContextResult_Success) ClearServerName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ServerName = nil
 }
 
-type ListRelevantMCPConfigResult_Success_builder struct {
+type ListRelevantMCPContextResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The name of the MCP server.
 	ServerName *string
 	// Tools provided by this server.
-	Tools []*ListRelevantMCPConfigResult_Success_MCPTool
+	Tools []*ListRelevantMCPContextResult_Success_MCPTool
 	// Resources provided by this server.
-	Resources []*ListRelevantMCPConfigResult_Success_MCPResource
+	Resources []*ListRelevantMCPContextResult_Success_MCPResource
 }
 
-func (b0 ListRelevantMCPConfigResult_Success_builder) Build() *ListRelevantMCPConfigResult_Success {
-	m0 := &ListRelevantMCPConfigResult_Success{}
+func (b0 ListRelevantMCPContextResult_Success_builder) Build() *ListRelevantMCPContextResult_Success {
+	m0 := &ListRelevantMCPContextResult_Success{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ServerName != nil {
@@ -14923,7 +14923,7 @@ func (b0 ListRelevantMCPConfigResult_Success_builder) Build() *ListRelevantMCPCo
 	return m0
 }
 
-type ListRelevantMCPConfigResult_Error struct {
+type ListRelevantMCPContextResult_Error struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Message     *string                `protobuf:"bytes,1,opt,name=message"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -14932,20 +14932,20 @@ type ListRelevantMCPConfigResult_Error struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListRelevantMCPConfigResult_Error) Reset() {
-	*x = ListRelevantMCPConfigResult_Error{}
+func (x *ListRelevantMCPContextResult_Error) Reset() {
+	*x = ListRelevantMCPContextResult_Error{}
 	mi := &file_task_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListRelevantMCPConfigResult_Error) String() string {
+func (x *ListRelevantMCPContextResult_Error) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListRelevantMCPConfigResult_Error) ProtoMessage() {}
+func (*ListRelevantMCPContextResult_Error) ProtoMessage() {}
 
-func (x *ListRelevantMCPConfigResult_Error) ProtoReflect() protoreflect.Message {
+func (x *ListRelevantMCPContextResult_Error) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -14957,7 +14957,7 @@ func (x *ListRelevantMCPConfigResult_Error) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-func (x *ListRelevantMCPConfigResult_Error) GetMessage() string {
+func (x *ListRelevantMCPContextResult_Error) GetMessage() string {
 	if x != nil {
 		if x.xxx_hidden_Message != nil {
 			return *x.xxx_hidden_Message
@@ -14967,31 +14967,31 @@ func (x *ListRelevantMCPConfigResult_Error) GetMessage() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Error) SetMessage(v string) {
+func (x *ListRelevantMCPContextResult_Error) SetMessage(v string) {
 	x.xxx_hidden_Message = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *ListRelevantMCPConfigResult_Error) HasMessage() bool {
+func (x *ListRelevantMCPContextResult_Error) HasMessage() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ListRelevantMCPConfigResult_Error) ClearMessage() {
+func (x *ListRelevantMCPContextResult_Error) ClearMessage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Message = nil
 }
 
-type ListRelevantMCPConfigResult_Error_builder struct {
+type ListRelevantMCPContextResult_Error_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Message *string
 }
 
-func (b0 ListRelevantMCPConfigResult_Error_builder) Build() *ListRelevantMCPConfigResult_Error {
-	m0 := &ListRelevantMCPConfigResult_Error{}
+func (b0 ListRelevantMCPContextResult_Error_builder) Build() *ListRelevantMCPContextResult_Error {
+	m0 := &ListRelevantMCPContextResult_Error{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Message != nil {
@@ -15001,7 +15001,7 @@ func (b0 ListRelevantMCPConfigResult_Error_builder) Build() *ListRelevantMCPConf
 	return m0
 }
 
-type ListRelevantMCPConfigResult_Success_MCPTool struct {
+type ListRelevantMCPContextResult_Success_MCPTool struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
 	xxx_hidden_Description *string                `protobuf:"bytes,2,opt,name=description"`
@@ -15012,20 +15012,20 @@ type ListRelevantMCPConfigResult_Success_MCPTool struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) Reset() {
-	*x = ListRelevantMCPConfigResult_Success_MCPTool{}
+func (x *ListRelevantMCPContextResult_Success_MCPTool) Reset() {
+	*x = ListRelevantMCPContextResult_Success_MCPTool{}
 	mi := &file_task_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) String() string {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListRelevantMCPConfigResult_Success_MCPTool) ProtoMessage() {}
+func (*ListRelevantMCPContextResult_Success_MCPTool) ProtoMessage() {}
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) ProtoReflect() protoreflect.Message {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -15037,7 +15037,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPTool) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) GetName() string {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) GetName() string {
 	if x != nil {
 		if x.xxx_hidden_Name != nil {
 			return *x.xxx_hidden_Name
@@ -15047,7 +15047,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPTool) GetName() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) GetDescription() string {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) GetDescription() string {
 	if x != nil {
 		if x.xxx_hidden_Description != nil {
 			return *x.xxx_hidden_Description
@@ -15057,7 +15057,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPTool) GetDescription() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) GetInputSchema() string {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) GetInputSchema() string {
 	if x != nil {
 		if x.xxx_hidden_InputSchema != nil {
 			return *x.xxx_hidden_InputSchema
@@ -15067,58 +15067,58 @@ func (x *ListRelevantMCPConfigResult_Success_MCPTool) GetInputSchema() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) SetName(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) SetName(v string) {
 	x.xxx_hidden_Name = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) SetDescription(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) SetInputSchema(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) SetInputSchema(v string) {
 	x.xxx_hidden_InputSchema = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) HasName() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) HasName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) HasDescription() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) HasDescription() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) HasInputSchema() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) HasInputSchema() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) ClearName() {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) ClearDescription() {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) ClearDescription() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Description = nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPTool) ClearInputSchema() {
+func (x *ListRelevantMCPContextResult_Success_MCPTool) ClearInputSchema() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_InputSchema = nil
 }
 
-type ListRelevantMCPConfigResult_Success_MCPTool_builder struct {
+type ListRelevantMCPContextResult_Success_MCPTool_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Name        *string
@@ -15127,8 +15127,8 @@ type ListRelevantMCPConfigResult_Success_MCPTool_builder struct {
 	InputSchema *string
 }
 
-func (b0 ListRelevantMCPConfigResult_Success_MCPTool_builder) Build() *ListRelevantMCPConfigResult_Success_MCPTool {
-	m0 := &ListRelevantMCPConfigResult_Success_MCPTool{}
+func (b0 ListRelevantMCPContextResult_Success_MCPTool_builder) Build() *ListRelevantMCPContextResult_Success_MCPTool {
+	m0 := &ListRelevantMCPContextResult_Success_MCPTool{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
@@ -15146,7 +15146,7 @@ func (b0 ListRelevantMCPConfigResult_Success_MCPTool_builder) Build() *ListRelev
 	return m0
 }
 
-type ListRelevantMCPConfigResult_Success_MCPResource struct {
+type ListRelevantMCPContextResult_Success_MCPResource struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Uri         *string                `protobuf:"bytes,1,opt,name=uri"`
 	xxx_hidden_Name        *string                `protobuf:"bytes,2,opt,name=name"`
@@ -15158,20 +15158,20 @@ type ListRelevantMCPConfigResult_Success_MCPResource struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) Reset() {
-	*x = ListRelevantMCPConfigResult_Success_MCPResource{}
+func (x *ListRelevantMCPContextResult_Success_MCPResource) Reset() {
+	*x = ListRelevantMCPContextResult_Success_MCPResource{}
 	mi := &file_task_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) String() string {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListRelevantMCPConfigResult_Success_MCPResource) ProtoMessage() {}
+func (*ListRelevantMCPContextResult_Success_MCPResource) ProtoMessage() {}
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) ProtoReflect() protoreflect.Message {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -15183,7 +15183,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPResource) ProtoReflect() protore
 	return mi.MessageOf(x)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetUri() string {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) GetUri() string {
 	if x != nil {
 		if x.xxx_hidden_Uri != nil {
 			return *x.xxx_hidden_Uri
@@ -15193,7 +15193,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetUri() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetName() string {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) GetName() string {
 	if x != nil {
 		if x.xxx_hidden_Name != nil {
 			return *x.xxx_hidden_Name
@@ -15203,7 +15203,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetName() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetDescription() string {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) GetDescription() string {
 	if x != nil {
 		if x.xxx_hidden_Description != nil {
 			return *x.xxx_hidden_Description
@@ -15213,7 +15213,7 @@ func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetDescription() strin
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetMimeType() string {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) GetMimeType() string {
 	if x != nil {
 		if x.xxx_hidden_MimeType != nil {
 			return *x.xxx_hidden_MimeType
@@ -15223,75 +15223,75 @@ func (x *ListRelevantMCPConfigResult_Success_MCPResource) GetMimeType() string {
 	return ""
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) SetUri(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) SetUri(v string) {
 	x.xxx_hidden_Uri = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) SetName(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) SetName(v string) {
 	x.xxx_hidden_Name = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) SetDescription(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) SetMimeType(v string) {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) SetMimeType(v string) {
 	x.xxx_hidden_MimeType = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) HasUri() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) HasUri() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) HasName() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) HasName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) HasDescription() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) HasDescription() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) HasMimeType() bool {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) HasMimeType() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) ClearUri() {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) ClearUri() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Uri = nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) ClearName() {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Name = nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) ClearDescription() {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) ClearDescription() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_Description = nil
 }
 
-func (x *ListRelevantMCPConfigResult_Success_MCPResource) ClearMimeType() {
+func (x *ListRelevantMCPContextResult_Success_MCPResource) ClearMimeType() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_MimeType = nil
 }
 
-type ListRelevantMCPConfigResult_Success_MCPResource_builder struct {
+type ListRelevantMCPContextResult_Success_MCPResource_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Uri         *string
@@ -15300,8 +15300,8 @@ type ListRelevantMCPConfigResult_Success_MCPResource_builder struct {
 	MimeType    *string
 }
 
-func (b0 ListRelevantMCPConfigResult_Success_MCPResource_builder) Build() *ListRelevantMCPConfigResult_Success_MCPResource {
-	m0 := &ListRelevantMCPConfigResult_Success_MCPResource{}
+func (b0 ListRelevantMCPContextResult_Success_MCPResource_builder) Build() *ListRelevantMCPContextResult_Success_MCPResource {
+	m0 := &ListRelevantMCPContextResult_Success_MCPResource{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Uri != nil {
@@ -15757,7 +15757,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x82U\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x85U\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -15822,7 +15822,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xea%\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xec%\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -15849,8 +15849,8 @@ const file_task_proto_rawDesc = "" +
 	"\bsubagent\x18\x13 \x01(\v2..warp.multi_agent.v1.Message.ToolCall.SubagentH\x00R\bsubagent\x12\\\n" +
 	"\x0eread_documents\x18\x14 \x01(\v23.warp.multi_agent.v1.Message.ToolCall.ReadDocumentsH\x00R\rreadDocuments\x12\\\n" +
 	"\x0eedit_documents\x18\x15 \x01(\v23.warp.multi_agent.v1.Message.ToolCall.EditDocumentsH\x00R\reditDocuments\x12b\n" +
-	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12v\n" +
-	"\x18list_relevant_mcp_config\x18\x17 \x01(\v2;.warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPConfigH\x00R\x15listRelevantMcpConfig\x1a\"\n" +
+	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12w\n" +
+	"\x18list_relevant_mcp_config\x18\x17 \x01(\v2<.warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContextH\x00R\x15listRelevantMcpConfig\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
 	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xc4\x01\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
@@ -15944,11 +15944,11 @@ const file_task_proto_rawDesc = "" +
 	"\x0fCreateDocuments\x12f\n" +
 	"\rnew_documents\x18\x01 \x03(\v2A.warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocumentR\fnewDocuments\x1a'\n" +
 	"\vNewDocument\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\tR\acontent\x1a>\n" +
-	"\x15ListRelevantMCPConfig\x12%\n" +
+	"\acontent\x18\x01 \x01(\tR\acontent\x1a?\n" +
+	"\x16ListRelevantMCPContext\x12%\n" +
 	"\vserver_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"serverNameB\x06\n" +
-	"\x04tool\x1a\xb7\x12\n" +
+	"\x04tool\x1a\xb8\x12\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -15978,8 +15978,8 @@ const file_task_proto_rawDesc = "" +
 	"\bsubagent\x18\x17 \x01(\v2:.warp.multi_agent.v1.Message.ToolCallResult.SubagentResultH\x00R\bsubagent\x12Q\n" +
 	"\x0eread_documents\x18\x18 \x01(\v2(.warp.multi_agent.v1.ReadDocumentsResultH\x00R\rreadDocuments\x12Q\n" +
 	"\x0eedit_documents\x18\x19 \x01(\v2(.warp.multi_agent.v1.EditDocumentsResultH\x00R\reditDocuments\x12W\n" +
-	"\x10create_documents\x18\x1a \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12k\n" +
-	"\x18list_relevant_mcp_config\x18\x1b \x01(\v20.warp.multi_agent.v1.ListRelevantMCPConfigResultH\x00R\x15listRelevantMcpConfig\x1a;\n" +
+	"\x10create_documents\x18\x1a \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12l\n" +
+	"\x18list_relevant_mcp_config\x18\x1b \x01(\v21.warp.multi_agent.v1.ListRelevantMCPContextResultH\x00R\x15listRelevantMcpConfig\x1a;\n" +
 	"\fServerResult\x12+\n" +
 	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1aU\n" +
 	"\fRefineResult\x12E\n" +
@@ -16133,15 +16133,15 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xe2\x05\n" +
-	"\x1bListRelevantMCPConfigResult\x12T\n" +
-	"\asuccess\x18\x01 \x01(\v28.warp.multi_agent.v1.ListRelevantMCPConfigResult.SuccessH\x00R\asuccess\x12N\n" +
-	"\x05error\x18\x02 \x01(\v26.warp.multi_agent.v1.ListRelevantMCPConfigResult.ErrorH\x00R\x05error\x1a\xe9\x03\n" +
+	"\x06result\"\xe7\x05\n" +
+	"\x1cListRelevantMCPContextResult\x12U\n" +
+	"\asuccess\x18\x01 \x01(\v29.warp.multi_agent.v1.ListRelevantMCPContextResult.SuccessH\x00R\asuccess\x12O\n" +
+	"\x05error\x18\x02 \x01(\v27.warp.multi_agent.v1.ListRelevantMCPContextResult.ErrorH\x00R\x05error\x1a\xeb\x03\n" +
 	"\aSuccess\x12%\n" +
 	"\vserver_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"serverName\x12V\n" +
-	"\x05tools\x18\x02 \x03(\v2@.warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.MCPToolR\x05tools\x12b\n" +
-	"\tresources\x18\x03 \x03(\v2D.warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.MCPResourceR\tresources\x1at\n" +
+	"serverName\x12W\n" +
+	"\x05tools\x18\x02 \x03(\v2A.warp.multi_agent.v1.ListRelevantMCPContextResult.Success.MCPToolR\x05tools\x12c\n" +
+	"\tresources\x18\x03 \x03(\v2E.warp.multi_agent.v1.ListRelevantMCPContextResult.Success.MCPResourceR\tresources\x1at\n" +
 	"\aMCPTool\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
 	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12'\n" +
@@ -16232,7 +16232,7 @@ var file_task_proto_goTypes = []any{
 	(*SuggestNewConversationResult)(nil),                       // 17: warp.multi_agent.v1.SuggestNewConversationResult
 	(*ShellCommandFinished)(nil),                               // 18: warp.multi_agent.v1.ShellCommandFinished
 	(*CallMCPToolResult)(nil),                                  // 19: warp.multi_agent.v1.CallMCPToolResult
-	(*ListRelevantMCPConfigResult)(nil),                        // 20: warp.multi_agent.v1.ListRelevantMCPConfigResult
+	(*ListRelevantMCPContextResult)(nil),                       // 20: warp.multi_agent.v1.ListRelevantMCPContextResult
 	(*SuggestPromptResult)(nil),                                // 21: warp.multi_agent.v1.SuggestPromptResult
 	(*OpenCodeReviewResult)(nil),                               // 22: warp.multi_agent.v1.OpenCodeReviewResult
 	(*InitProjectResult)(nil),                                  // 23: warp.multi_agent.v1.InitProjectResult
@@ -16280,7 +16280,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_ToolCall_ReadDocuments)(nil),                     // 65: warp.multi_agent.v1.Message.ToolCall.ReadDocuments
 	(*Message_ToolCall_EditDocuments)(nil),                     // 66: warp.multi_agent.v1.Message.ToolCall.EditDocuments
 	(*Message_ToolCall_CreateDocuments)(nil),                   // 67: warp.multi_agent.v1.Message.ToolCall.CreateDocuments
-	(*Message_ToolCall_ListRelevantMCPConfig)(nil),             // 68: warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPConfig
+	(*Message_ToolCall_ListRelevantMCPContext)(nil),            // 68: warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContext
 	(*Message_ToolCall_ReadFiles_File)(nil),                    // 69: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
 	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil),           // 70: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
 	(*Message_ToolCall_ApplyFileDiffs_NewFile)(nil),            // 71: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
@@ -16321,10 +16321,10 @@ var file_task_proto_goTypes = []any{
 	(*CallMCPToolResult_Success_Result)(nil),                   // 106: warp.multi_agent.v1.CallMCPToolResult.Success.Result
 	(*CallMCPToolResult_Success_Result_Text)(nil),              // 107: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	(*CallMCPToolResult_Success_Result_Image)(nil),             // 108: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	(*ListRelevantMCPConfigResult_Success)(nil),                // 109: warp.multi_agent.v1.ListRelevantMCPConfigResult.Success
-	(*ListRelevantMCPConfigResult_Error)(nil),                  // 110: warp.multi_agent.v1.ListRelevantMCPConfigResult.Error
-	(*ListRelevantMCPConfigResult_Success_MCPTool)(nil),        // 111: warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.MCPTool
-	(*ListRelevantMCPConfigResult_Success_MCPResource)(nil),    // 112: warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.MCPResource
+	(*ListRelevantMCPContextResult_Success)(nil),               // 109: warp.multi_agent.v1.ListRelevantMCPContextResult.Success
+	(*ListRelevantMCPContextResult_Error)(nil),                 // 110: warp.multi_agent.v1.ListRelevantMCPContextResult.Error
+	(*ListRelevantMCPContextResult_Success_MCPTool)(nil),       // 111: warp.multi_agent.v1.ListRelevantMCPContextResult.Success.MCPTool
+	(*ListRelevantMCPContextResult_Success_MCPResource)(nil),   // 112: warp.multi_agent.v1.ListRelevantMCPContextResult.Success.MCPResource
 	(*ReadDocumentsResult_Success)(nil),                        // 113: warp.multi_agent.v1.ReadDocumentsResult.Success
 	(*ReadDocumentsResult_Error)(nil),                          // 114: warp.multi_agent.v1.ReadDocumentsResult.Error
 	(*EditDocumentsResult_Success)(nil),                        // 115: warp.multi_agent.v1.EditDocumentsResult.Success
@@ -16394,8 +16394,8 @@ var file_task_proto_depIdxs = []int32{
 	103, // 42: warp.multi_agent.v1.SuggestNewConversationResult.rejected:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Rejected
 	104, // 43: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
 	105, // 44: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
-	109, // 45: warp.multi_agent.v1.ListRelevantMCPConfigResult.success:type_name -> warp.multi_agent.v1.ListRelevantMCPConfigResult.Success
-	110, // 46: warp.multi_agent.v1.ListRelevantMCPConfigResult.error:type_name -> warp.multi_agent.v1.ListRelevantMCPConfigResult.Error
+	109, // 45: warp.multi_agent.v1.ListRelevantMCPContextResult.success:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult.Success
+	110, // 46: warp.multi_agent.v1.ListRelevantMCPContextResult.error:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult.Error
 	123, // 47: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
 	123, // 48: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
 	113, // 49: warp.multi_agent.v1.ReadDocumentsResult.success:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Success
@@ -16441,7 +16441,7 @@ var file_task_proto_depIdxs = []int32{
 	65,  // 89: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
 	66,  // 90: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
 	67,  // 91: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
-	68,  // 92: warp.multi_agent.v1.Message.ToolCall.list_relevant_mcp_config:type_name -> warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPConfig
+	68,  // 92: warp.multi_agent.v1.Message.ToolCall.list_relevant_mcp_config:type_name -> warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContext
 	124, // 93: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	5,   // 94: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	7,   // 95: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
@@ -16466,7 +16466,7 @@ var file_task_proto_depIdxs = []int32{
 	24,  // 114: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
 	25,  // 115: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
 	26,  // 116: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	20,  // 117: warp.multi_agent.v1.Message.ToolCallResult.list_relevant_mcp_config:type_name -> warp.multi_agent.v1.ListRelevantMCPConfigResult
+	20,  // 117: warp.multi_agent.v1.Message.ToolCallResult.list_relevant_mcp_config:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult
 	127, // 118: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
 	128, // 119: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
 	129, // 120: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
@@ -16501,8 +16501,8 @@ var file_task_proto_depIdxs = []int32{
 	107, // 149: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	108, // 150: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
 	14,  // 151: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	111, // 152: warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.tools:type_name -> warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.MCPTool
-	112, // 153: warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.resources:type_name -> warp.multi_agent.v1.ListRelevantMCPConfigResult.Success.MCPResource
+	111, // 152: warp.multi_agent.v1.ListRelevantMCPContextResult.Success.tools:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult.Success.MCPTool
+	112, // 153: warp.multi_agent.v1.ListRelevantMCPContextResult.Success.resources:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult.Success.MCPResource
 	134, // 154: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
 	134, // 155: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	134, // 156: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
@@ -16592,8 +16592,8 @@ func file_task_proto_init() {
 		(*callMCPToolResult_Error_)(nil),
 	}
 	file_task_proto_msgTypes[19].OneofWrappers = []any{
-		(*listRelevantMCPConfigResult_Success_)(nil),
-		(*listRelevantMCPConfigResult_Error_)(nil),
+		(*listRelevantMCPContextResult_Success_)(nil),
+		(*listRelevantMCPContextResult_Error_)(nil),
 	}
 	file_task_proto_msgTypes[20].OneofWrappers = []any{
 		(*suggestPromptResult_Accepted)(nil),
