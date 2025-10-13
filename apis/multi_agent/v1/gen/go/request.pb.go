@@ -3718,7 +3718,7 @@ func (*request_Input_TriggerSuggestPrompt_CommandRun) isRequest_Input_TriggerSug
 
 type Request_Input_CodeReview struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_ReviewComments *[]*Task_ReviewComment `protobuf:"bytes,1,rep,name=review_comments,json=reviewComments"`
+	xxx_hidden_ReviewComments *[]*ReviewComment      `protobuf:"bytes,1,rep,name=review_comments,json=reviewComments"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -3748,7 +3748,7 @@ func (x *Request_Input_CodeReview) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_CodeReview) GetReviewComments() []*Task_ReviewComment {
+func (x *Request_Input_CodeReview) GetReviewComments() []*ReviewComment {
 	if x != nil {
 		if x.xxx_hidden_ReviewComments != nil {
 			return *x.xxx_hidden_ReviewComments
@@ -3757,14 +3757,14 @@ func (x *Request_Input_CodeReview) GetReviewComments() []*Task_ReviewComment {
 	return nil
 }
 
-func (x *Request_Input_CodeReview) SetReviewComments(v []*Task_ReviewComment) {
+func (x *Request_Input_CodeReview) SetReviewComments(v []*ReviewComment) {
 	x.xxx_hidden_ReviewComments = &v
 }
 
 type Request_Input_CodeReview_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ReviewComments []*Task_ReviewComment
+	ReviewComments []*ReviewComment
 }
 
 func (b0 Request_Input_CodeReview_builder) Build() *Request_Input_CodeReview {
@@ -4919,7 +4919,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xed:\n" +
+	"task.proto\"\xe8:\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -4929,7 +4929,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xdf&\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xda&\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5019,10 +5019,10 @@ const file_request_proto_rawDesc = "" +
 	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
 	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
 	"commandRunB\t\n" +
-	"\atrigger\x1a^\n" +
+	"\atrigger\x1aY\n" +
 	"\n" +
-	"CodeReview\x12P\n" +
-	"\x0freview_comments\x18\x01 \x03(\v2'.warp.multi_agent.v1.Task.ReviewCommentR\x0ereviewCommentsB\x06\n" +
+	"CodeReview\x12K\n" +
+	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewCommentsB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -5133,7 +5133,7 @@ var file_request_proto_goTypes = []any{
 	(*CreateDocumentsResult)(nil),                // 53: warp.multi_agent.v1.CreateDocumentsResult
 	(*Attachment)(nil),                           // 54: warp.multi_agent.v1.Attachment
 	(*emptypb.Empty)(nil),                        // 55: google.protobuf.Empty
-	(*Task_ReviewComment)(nil),                   // 56: warp.multi_agent.v1.Task.ReviewComment
+	(*ReviewComment)(nil),                        // 56: warp.multi_agent.v1.ReviewComment
 	(*structpb.Value)(nil),                       // 57: google.protobuf.Value
 	(*structpb.Struct)(nil),                      // 58: google.protobuf.Struct
 }
@@ -5194,7 +5194,7 @@ var file_request_proto_depIdxs = []int32{
 	54, // 53: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
 	55, // 54: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
 	55, // 55: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	56, // 56: warp.multi_agent.v1.Request.Input.CodeReview.review_comments:type_name -> warp.multi_agent.v1.Task.ReviewComment
+	56, // 56: warp.multi_agent.v1.Request.Input.CodeReview.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	54, // 57: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
 	6,  // 58: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 59: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult

@@ -168,7 +168,7 @@ message Request {
     }
 
     message CodeReview {
-      repeated Task.ReviewComment review_comments = 1;
+      repeated ReviewComment review_comments = 1;
     }
   }
 

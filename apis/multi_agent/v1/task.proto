@@ -53,21 +53,19 @@ message Task {
 
   // An opaque payload that the client should simply roundtrip.
   string server_data = 8;
+}
 
-  ReviewComments review_comments = 9;
+message ReviewComments {
+  repeated ReviewComment pending_comments = 1;
+  repeated ReviewComment completed_comments = 2;
+}
 
-  message ReviewComments {
-    repeated ReviewComment pending_comments = 1;
-    repeated ReviewComment completed_comments = 2;
-  }
+message ReviewComment {
+  // Unique identifier for the review comment.
+  string id = 1;
 
-  message ReviewComment {
-    // Unique identifier for the review comment.
-    string id = 1;
-    
-    string comment = 2 [ (sensitive) = true];
-    DiffSet diff_set = 3;
-  }
+  string comment = 2 [ (sensitive) = true ];
+  DiffSet diff_set = 3;
 }
 
 // A message within a task
@@ -106,7 +104,7 @@ message Message {
     UpdateTodos update_todos = 10;
     AgentReasoning agent_reasoning = 15;
     Summarization summarization = 16;
-    UpdateReviewComments update_review_comments = 17;
+    CodeReview code_review = 17;
   }
 
   // User query message type
@@ -193,6 +191,8 @@ message Message {
     // Summarize the result of a tool call.
     message ToolCallResultSummary {}
   }
+
+  message CodeReview { ReviewComments comments = 1; }
 
   // Tool call message type
   message ToolCall {
@@ -479,12 +479,10 @@ message Message {
     }
 
     message CreateReviewComments {
-      repeated Task.ReviewComment review_comments = 1;
+      repeated ReviewComment review_comments = 1;
     }
 
-    message MarkReviewCommentsCompleted {
-      repeated string comment_ids = 1;
-    }
+    message MarkReviewCommentsCompleted { repeated string comment_ids = 1; }
   }
 }
 
