@@ -58,7 +58,7 @@ message ResponseEvent {
       ContextWindowExceeded context_window_exceeded = 5;
       LLMUnavailable llm_unavailable = 6;
       InternalError internal_error = 7;
-      MissingApiKey missing_api_key = 12;
+      InvalidApiKey invalid_api_key = 12;
     }
 
     // Internal-only field containing per-model token usage incurred in producing the response
@@ -160,7 +160,7 @@ message ResponseEvent {
     message QuotaLimit {}
     message ContextWindowExceeded {}
     message LLMUnavailable {}
-    message MissingApiKey {
+    message InvalidApiKey {
       LLMProvider provider = 1;
       string model_name = 2;
     }
