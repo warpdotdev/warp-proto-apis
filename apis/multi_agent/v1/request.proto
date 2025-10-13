@@ -168,7 +168,13 @@ message Request {
     }
 
     message CodeReview {
-      repeated Task.ReviewComment review_comments = 1;
+      oneof operation {
+        InitialReviewComments initial_review_comments = 1;
+      }
+
+      message InitialReviewComments {
+        repeated ReviewComment review_comments = 1;
+      }
     }
   }
 
