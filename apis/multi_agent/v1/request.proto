@@ -276,8 +276,14 @@ message Request {
   }
 
   message MCPContext {
+    // DEPRECATED: Use `servers` field instead for server-attributed tools/resources.
+    // Kept for backwards compatibility with older clients.
     repeated MCPResource resources = 1;
     repeated MCPTool tools = 2;
+
+    // Server-grouped MCP context. Each entry represents a single MCP server
+    // with its associated tools and resources.
+    repeated MCPServer servers = 3;
 
     message MCPResource {
       string uri = 1 [ (sensitive) = true ];
@@ -292,6 +298,20 @@ message Request {
       // The input schema for an MCP Tool is specified as
       // as JSON schema, which is a JSON struct at root.
       google.protobuf.Struct input_schema = 3;
+    }
+
+    message MCPServer {
+      // The name of the MCP server (e.g., "Sentry", "Linear", "GitHub").
+      string name = 1 [ (sensitive) = true ];
+
+      // Optional description of the server's purpose.
+      string description = 2 [ (sensitive) = true ];
+
+      // Resources provided by this server.
+      repeated MCPResource resources = 3;
+
+      // Tools provided by this server.
+      repeated MCPTool tools = 4;
     }
   }
 }
