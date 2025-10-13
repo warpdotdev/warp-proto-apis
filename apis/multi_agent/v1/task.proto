@@ -223,6 +223,7 @@ message Message {
       ReadDocuments read_documents = 20;
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
+      ListRelevantMCPConfig list_relevant_mcp_config = 23;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -407,6 +408,12 @@ message Message {
         string content = 1;
       }
     }
+
+    // A tool call to retrieve tools and resources from a specific MCP server.
+    message ListRelevantMCPConfig {
+      // Name of the MCP server to retrieve context for.
+      string server_name = 1 [ (sensitive) = true ];
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -443,6 +450,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
+      ListRelevantMCPConfigResult list_relevant_mcp_config = 27;
     }
 
     // Result of a server-side tool call.
@@ -741,6 +749,41 @@ message CallMCPToolResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+// Result of a `ListRelevantMCPConfig` tool call.
+message ListRelevantMCPConfigResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The name of the MCP server.
+    string server_name = 1 [ (sensitive) = true ];
+
+    // Tools provided by this server.
+    repeated MCPTool tools = 2;
+
+    // Resources provided by this server.
+    repeated MCPResource resources = 3;
+
+    message MCPTool {
+      string name = 1 [ (sensitive) = true ];
+      string description = 2 [ (sensitive) = true ];
+      // The input schema as a JSON string.
+      string input_schema = 3 [ (sensitive) = true ];
+    }
+
+    message MCPResource {
+      string uri = 1 [ (sensitive) = true ];
+      string name = 2 [ (sensitive) = true ];
+      string description = 3 [ (sensitive) = true ];
+      string mime_type = 4;
+    }
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
 message SuggestPromptResult {
   oneof result {
     google.protobuf.Empty accepted = 1;
@@ -822,5 +865,6 @@ enum ToolType {
   READ_DOCUMENTS = 17;
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
+  LIST_RELEVANT_MCP_CONFIG = 20;
 }
 
