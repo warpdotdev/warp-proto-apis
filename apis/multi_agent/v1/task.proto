@@ -223,7 +223,7 @@ message Message {
       ReadDocuments read_documents = 20;
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
-      ListRelevantMCPConfig list_relevant_mcp_config = 23;
+      ListRelevantMCPContext list_relevant_mcp_config = 23;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -410,7 +410,7 @@ message Message {
     }
 
     // A tool call to retrieve tools and resources from a specific MCP server.
-    message ListRelevantMCPConfig {
+    message ListRelevantMCPContext {
       // Name of the MCP server to retrieve context for.
       string server_name = 1 [ (sensitive) = true ];
     }
@@ -450,7 +450,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
-      ListRelevantMCPConfigResult list_relevant_mcp_config = 27;
+      ListRelevantMCPContextResult list_relevant_mcp_config = 27;
     }
 
     // Result of a server-side tool call.
@@ -749,8 +749,8 @@ message CallMCPToolResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
-// Result of a `ListRelevantMCPConfig` tool call.
-message ListRelevantMCPConfigResult {
+// Result of a `ListRelevantMCPContext` tool call.
+message ListRelevantMCPContextResult {
   oneof result {
     Success success = 1;
     Error error = 2;
