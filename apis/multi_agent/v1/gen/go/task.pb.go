@@ -31,9 +31,6 @@ const (
 //
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
-//
-// Note that `ListRelevantMCPContext` is also omitted as it's handled server-side only;
-// the server already receives all MCP context via Request.MCPContext.
 type ToolType int32
 
 const (
