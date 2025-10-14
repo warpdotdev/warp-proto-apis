@@ -54,7 +54,7 @@ const (
 	ToolType_READ_DOCUMENTS                      ToolType = 17
 	ToolType_EDIT_DOCUMENTS                      ToolType = 18
 	ToolType_CREATE_DOCUMENTS                    ToolType = 19
-	ToolType_LIST_RELEVANT_MCP_CONFIG            ToolType = 20
+	ToolType_LIST_RELEVANT_MCP_CONTEXT           ToolType = 20
 )
 
 // Enum value maps for ToolType.
@@ -80,7 +80,7 @@ var (
 		17: "READ_DOCUMENTS",
 		18: "EDIT_DOCUMENTS",
 		19: "CREATE_DOCUMENTS",
-		20: "LIST_RELEVANT_MCP_CONFIG",
+		20: "LIST_RELEVANT_MCP_CONTEXT",
 	}
 	ToolType_value = map[string]int32{
 		"RUN_SHELL_COMMAND":                   0,
@@ -103,7 +103,7 @@ var (
 		"READ_DOCUMENTS":                      17,
 		"EDIT_DOCUMENTS":                      18,
 		"CREATE_DOCUMENTS":                    19,
-		"LIST_RELEVANT_MCP_CONFIG":            20,
+		"LIST_RELEVANT_MCP_CONTEXT":           20,
 	}
 )
 
@@ -6575,10 +6575,10 @@ func (x *Message_ToolCall) GetCreateDocuments() *Message_ToolCall_CreateDocument
 	return nil
 }
 
-func (x *Message_ToolCall) GetListRelevantMcpConfig() *Message_ToolCall_ListRelevantMCPContext {
+func (x *Message_ToolCall) GetListRelevantMcpContext() *Message_ToolCall_ListRelevantMCPContext {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpConfig); ok {
-			return x.ListRelevantMcpConfig
+		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpContext); ok {
+			return x.ListRelevantMcpContext
 		}
 	}
 	return nil
@@ -6758,12 +6758,12 @@ func (x *Message_ToolCall) SetCreateDocuments(v *Message_ToolCall_CreateDocument
 	x.xxx_hidden_Tool = &message_ToolCall_CreateDocuments_{v}
 }
 
-func (x *Message_ToolCall) SetListRelevantMcpConfig(v *Message_ToolCall_ListRelevantMCPContext) {
+func (x *Message_ToolCall) SetListRelevantMcpContext(v *Message_ToolCall_ListRelevantMCPContext) {
 	if v == nil {
 		x.xxx_hidden_Tool = nil
 		return
 	}
-	x.xxx_hidden_Tool = &message_ToolCall_ListRelevantMcpConfig{v}
+	x.xxx_hidden_Tool = &message_ToolCall_ListRelevantMcpContext{v}
 }
 
 func (x *Message_ToolCall) HasToolCallId() bool {
@@ -6949,11 +6949,11 @@ func (x *Message_ToolCall) HasCreateDocuments() bool {
 	return ok
 }
 
-func (x *Message_ToolCall) HasListRelevantMcpConfig() bool {
+func (x *Message_ToolCall) HasListRelevantMcpContext() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpConfig)
+	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpContext)
 	return ok
 }
 
@@ -7093,8 +7093,8 @@ func (x *Message_ToolCall) ClearCreateDocuments() {
 	}
 }
 
-func (x *Message_ToolCall) ClearListRelevantMcpConfig() {
-	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpConfig); ok {
+func (x *Message_ToolCall) ClearListRelevantMcpContext() {
+	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_ListRelevantMcpContext); ok {
 		x.xxx_hidden_Tool = nil
 	}
 }
@@ -7121,7 +7121,7 @@ const Message_ToolCall_Subagent_case case_Message_ToolCall_Tool = 19
 const Message_ToolCall_ReadDocuments_case case_Message_ToolCall_Tool = 20
 const Message_ToolCall_EditDocuments_case case_Message_ToolCall_Tool = 21
 const Message_ToolCall_CreateDocuments_case case_Message_ToolCall_Tool = 22
-const Message_ToolCall_ListRelevantMcpConfig_case case_Message_ToolCall_Tool = 23
+const Message_ToolCall_ListRelevantMcpContext_case case_Message_ToolCall_Tool = 23
 
 func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 	if x == nil {
@@ -7170,8 +7170,8 @@ func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 		return Message_ToolCall_EditDocuments_case
 	case *message_ToolCall_CreateDocuments_:
 		return Message_ToolCall_CreateDocuments_case
-	case *message_ToolCall_ListRelevantMcpConfig:
-		return Message_ToolCall_ListRelevantMcpConfig_case
+	case *message_ToolCall_ListRelevantMcpContext:
+		return Message_ToolCall_ListRelevantMcpContext_case
 	default:
 		return Message_ToolCall_Tool_not_set_case
 	}
@@ -7208,7 +7208,7 @@ type Message_ToolCall_builder struct {
 	ReadDocuments                  *Message_ToolCall_ReadDocuments
 	EditDocuments                  *Message_ToolCall_EditDocuments
 	CreateDocuments                *Message_ToolCall_CreateDocuments
-	ListRelevantMcpConfig          *Message_ToolCall_ListRelevantMCPContext
+	ListRelevantMcpContext         *Message_ToolCall_ListRelevantMCPContext
 	// -- end of xxx_hidden_Tool
 }
 
@@ -7283,8 +7283,8 @@ func (b0 Message_ToolCall_builder) Build() *Message_ToolCall {
 	if b.CreateDocuments != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_CreateDocuments_{b.CreateDocuments}
 	}
-	if b.ListRelevantMcpConfig != nil {
-		x.xxx_hidden_Tool = &message_ToolCall_ListRelevantMcpConfig{b.ListRelevantMcpConfig}
+	if b.ListRelevantMcpContext != nil {
+		x.xxx_hidden_Tool = &message_ToolCall_ListRelevantMcpContext{b.ListRelevantMcpContext}
 	}
 	return m0
 }
@@ -7390,8 +7390,8 @@ type message_ToolCall_CreateDocuments_ struct {
 	CreateDocuments *Message_ToolCall_CreateDocuments `protobuf:"bytes,22,opt,name=create_documents,json=createDocuments,oneof"`
 }
 
-type message_ToolCall_ListRelevantMcpConfig struct {
-	ListRelevantMcpConfig *Message_ToolCall_ListRelevantMCPContext `protobuf:"bytes,23,opt,name=list_relevant_mcp_config,json=listRelevantMcpConfig,oneof"`
+type message_ToolCall_ListRelevantMcpContext struct {
+	ListRelevantMcpContext *Message_ToolCall_ListRelevantMCPContext `protobuf:"bytes,23,opt,name=list_relevant_mcp_context,json=listRelevantMcpContext,oneof"`
 }
 
 func (*message_ToolCall_RunShellCommand_) isMessage_ToolCall_Tool() {}
@@ -7436,7 +7436,7 @@ func (*message_ToolCall_EditDocuments_) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_CreateDocuments_) isMessage_ToolCall_Tool() {}
 
-func (*message_ToolCall_ListRelevantMcpConfig) isMessage_ToolCall_Tool() {}
+func (*message_ToolCall_ListRelevantMcpContext) isMessage_ToolCall_Tool() {}
 
 // Entry in the message log representing the result of a tool call.
 type Message_ToolCallResult struct {
@@ -7700,10 +7700,10 @@ func (x *Message_ToolCallResult) GetCreateDocuments() *CreateDocumentsResult {
 	return nil
 }
 
-func (x *Message_ToolCallResult) GetListRelevantMcpConfig() *ListRelevantMCPContextResult {
+func (x *Message_ToolCallResult) GetListRelevantMcpContext() *ListRelevantMCPContextResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpConfig); ok {
-			return x.ListRelevantMcpConfig
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpContext); ok {
+			return x.ListRelevantMcpContext
 		}
 	}
 	return nil
@@ -7903,12 +7903,12 @@ func (x *Message_ToolCallResult) SetCreateDocuments(v *CreateDocumentsResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_CreateDocuments{v}
 }
 
-func (x *Message_ToolCallResult) SetListRelevantMcpConfig(v *ListRelevantMCPContextResult) {
+func (x *Message_ToolCallResult) SetListRelevantMcpContext(v *ListRelevantMCPContextResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &message_ToolCallResult_ListRelevantMcpConfig{v}
+	x.xxx_hidden_Result = &message_ToolCallResult_ListRelevantMcpContext{v}
 }
 
 func (x *Message_ToolCallResult) HasToolCallId() bool {
@@ -8117,11 +8117,11 @@ func (x *Message_ToolCallResult) HasCreateDocuments() bool {
 	return ok
 }
 
-func (x *Message_ToolCallResult) HasListRelevantMcpConfig() bool {
+func (x *Message_ToolCallResult) HasListRelevantMcpContext() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpConfig)
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpContext)
 	return ok
 }
 
@@ -8277,8 +8277,8 @@ func (x *Message_ToolCallResult) ClearCreateDocuments() {
 	}
 }
 
-func (x *Message_ToolCallResult) ClearListRelevantMcpConfig() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpConfig); ok {
+func (x *Message_ToolCallResult) ClearListRelevantMcpContext() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_ListRelevantMcpContext); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
@@ -8307,7 +8307,7 @@ const Message_ToolCallResult_Subagent_case case_Message_ToolCallResult_Result = 
 const Message_ToolCallResult_ReadDocuments_case case_Message_ToolCallResult_Result = 24
 const Message_ToolCallResult_EditDocuments_case case_Message_ToolCallResult_Result = 25
 const Message_ToolCallResult_CreateDocuments_case case_Message_ToolCallResult_Result = 26
-const Message_ToolCallResult_ListRelevantMcpConfig_case case_Message_ToolCallResult_Result = 27
+const Message_ToolCallResult_ListRelevantMcpContext_case case_Message_ToolCallResult_Result = 27
 
 func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Result {
 	if x == nil {
@@ -8360,8 +8360,8 @@ func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Resul
 		return Message_ToolCallResult_EditDocuments_case
 	case *message_ToolCallResult_CreateDocuments:
 		return Message_ToolCallResult_CreateDocuments_case
-	case *message_ToolCallResult_ListRelevantMcpConfig:
-		return Message_ToolCallResult_ListRelevantMcpConfig_case
+	case *message_ToolCallResult_ListRelevantMcpContext:
+		return Message_ToolCallResult_ListRelevantMcpContext_case
 	default:
 		return Message_ToolCallResult_Result_not_set_case
 	}
@@ -8402,7 +8402,7 @@ type Message_ToolCallResult_builder struct {
 	ReadDocuments                  *ReadDocumentsResult
 	EditDocuments                  *EditDocumentsResult
 	CreateDocuments                *CreateDocumentsResult
-	ListRelevantMcpConfig          *ListRelevantMCPContextResult
+	ListRelevantMcpContext         *ListRelevantMCPContextResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -8484,8 +8484,8 @@ func (b0 Message_ToolCallResult_builder) Build() *Message_ToolCallResult {
 	if b.CreateDocuments != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_CreateDocuments{b.CreateDocuments}
 	}
-	if b.ListRelevantMcpConfig != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_ListRelevantMcpConfig{b.ListRelevantMcpConfig}
+	if b.ListRelevantMcpContext != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_ListRelevantMcpContext{b.ListRelevantMcpContext}
 	}
 	return m0
 }
@@ -8599,8 +8599,8 @@ type message_ToolCallResult_CreateDocuments struct {
 	CreateDocuments *CreateDocumentsResult `protobuf:"bytes,26,opt,name=create_documents,json=createDocuments,oneof"`
 }
 
-type message_ToolCallResult_ListRelevantMcpConfig struct {
-	ListRelevantMcpConfig *ListRelevantMCPContextResult `protobuf:"bytes,27,opt,name=list_relevant_mcp_config,json=listRelevantMcpConfig,oneof"`
+type message_ToolCallResult_ListRelevantMcpContext struct {
+	ListRelevantMcpContext *ListRelevantMCPContextResult `protobuf:"bytes,27,opt,name=list_relevant_mcp_context,json=listRelevantMcpContext,oneof"`
 }
 
 func (*message_ToolCallResult_RunShellCommand) isMessage_ToolCallResult_Result() {}
@@ -8649,7 +8649,7 @@ func (*message_ToolCallResult_EditDocuments) isMessage_ToolCallResult_Result() {
 
 func (*message_ToolCallResult_CreateDocuments) isMessage_ToolCallResult_Result() {}
 
-func (*message_ToolCallResult_ListRelevantMcpConfig) isMessage_ToolCallResult_Result() {}
+func (*message_ToolCallResult_ListRelevantMcpContext) isMessage_ToolCallResult_Result() {}
 
 // An event that is preserved in message history
 // for server-side processing.
@@ -15757,7 +15757,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x85U\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x89U\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -15822,7 +15822,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xec%\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xee%\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -15849,8 +15849,8 @@ const file_task_proto_rawDesc = "" +
 	"\bsubagent\x18\x13 \x01(\v2..warp.multi_agent.v1.Message.ToolCall.SubagentH\x00R\bsubagent\x12\\\n" +
 	"\x0eread_documents\x18\x14 \x01(\v23.warp.multi_agent.v1.Message.ToolCall.ReadDocumentsH\x00R\rreadDocuments\x12\\\n" +
 	"\x0eedit_documents\x18\x15 \x01(\v23.warp.multi_agent.v1.Message.ToolCall.EditDocumentsH\x00R\reditDocuments\x12b\n" +
-	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12w\n" +
-	"\x18list_relevant_mcp_config\x18\x17 \x01(\v2<.warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContextH\x00R\x15listRelevantMcpConfig\x1a\"\n" +
+	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12y\n" +
+	"\x19list_relevant_mcp_context\x18\x17 \x01(\v2<.warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContextH\x00R\x16listRelevantMcpContext\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
 	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xc4\x01\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
@@ -15948,7 +15948,7 @@ const file_task_proto_rawDesc = "" +
 	"\x16ListRelevantMCPContext\x12%\n" +
 	"\vserver_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"serverNameB\x06\n" +
-	"\x04tool\x1a\xb8\x12\n" +
+	"\x04tool\x1a\xba\x12\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -15978,8 +15978,8 @@ const file_task_proto_rawDesc = "" +
 	"\bsubagent\x18\x17 \x01(\v2:.warp.multi_agent.v1.Message.ToolCallResult.SubagentResultH\x00R\bsubagent\x12Q\n" +
 	"\x0eread_documents\x18\x18 \x01(\v2(.warp.multi_agent.v1.ReadDocumentsResultH\x00R\rreadDocuments\x12Q\n" +
 	"\x0eedit_documents\x18\x19 \x01(\v2(.warp.multi_agent.v1.EditDocumentsResultH\x00R\reditDocuments\x12W\n" +
-	"\x10create_documents\x18\x1a \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12l\n" +
-	"\x18list_relevant_mcp_config\x18\x1b \x01(\v21.warp.multi_agent.v1.ListRelevantMCPContextResultH\x00R\x15listRelevantMcpConfig\x1a;\n" +
+	"\x10create_documents\x18\x1a \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12n\n" +
+	"\x19list_relevant_mcp_context\x18\x1b \x01(\v21.warp.multi_agent.v1.ListRelevantMCPContextResultH\x00R\x16listRelevantMcpContext\x1a;\n" +
 	"\fServerResult\x12+\n" +
 	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1aU\n" +
 	"\fRefineResult\x12E\n" +
@@ -16183,7 +16183,7 @@ const file_task_proto_rawDesc = "" +
 	"\x11created_documents\x18\x01 \x03(\v2$.warp.multi_agent.v1.DocumentContentR\x10createdDocuments\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result*\xc9\x03\n" +
+	"\x06result*\xca\x03\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -16206,8 +16206,8 @@ const file_task_proto_rawDesc = "" +
 	"\bSUBAGENT\x10\x10\x12\x12\n" +
 	"\x0eREAD_DOCUMENTS\x10\x11\x12\x12\n" +
 	"\x0eEDIT_DOCUMENTS\x10\x12\x12\x14\n" +
-	"\x10CREATE_DOCUMENTS\x10\x13\x12\x1c\n" +
-	"\x18LIST_RELEVANT_MCP_CONFIG\x10\x14B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x10CREATE_DOCUMENTS\x10\x13\x12\x1d\n" +
+	"\x19LIST_RELEVANT_MCP_CONTEXT\x10\x14B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 118)
@@ -16441,7 +16441,7 @@ var file_task_proto_depIdxs = []int32{
 	65,  // 89: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
 	66,  // 90: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
 	67,  // 91: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
-	68,  // 92: warp.multi_agent.v1.Message.ToolCall.list_relevant_mcp_config:type_name -> warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContext
+	68,  // 92: warp.multi_agent.v1.Message.ToolCall.list_relevant_mcp_context:type_name -> warp.multi_agent.v1.Message.ToolCall.ListRelevantMCPContext
 	124, // 93: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	5,   // 94: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	7,   // 95: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
@@ -16466,7 +16466,7 @@ var file_task_proto_depIdxs = []int32{
 	24,  // 114: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
 	25,  // 115: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
 	26,  // 116: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	20,  // 117: warp.multi_agent.v1.Message.ToolCallResult.list_relevant_mcp_config:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult
+	20,  // 117: warp.multi_agent.v1.Message.ToolCallResult.list_relevant_mcp_context:type_name -> warp.multi_agent.v1.ListRelevantMCPContextResult
 	127, // 118: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
 	128, // 119: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
 	129, // 120: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
@@ -16648,7 +16648,7 @@ func file_task_proto_init() {
 		(*message_ToolCall_ReadDocuments_)(nil),
 		(*message_ToolCall_EditDocuments_)(nil),
 		(*message_ToolCall_CreateDocuments_)(nil),
-		(*message_ToolCall_ListRelevantMcpConfig)(nil),
+		(*message_ToolCall_ListRelevantMcpContext)(nil),
 	}
 	file_task_proto_msgTypes[39].OneofWrappers = []any{
 		(*message_ToolCallResult_RunShellCommand)(nil),
@@ -16674,7 +16674,7 @@ func file_task_proto_init() {
 		(*message_ToolCallResult_ReadDocuments)(nil),
 		(*message_ToolCallResult_EditDocuments)(nil),
 		(*message_ToolCallResult_CreateDocuments)(nil),
-		(*message_ToolCallResult_ListRelevantMcpConfig)(nil),
+		(*message_ToolCallResult_ListRelevantMcpContext)(nil),
 	}
 	file_task_proto_msgTypes[41].OneofWrappers = []any{
 		(*message_UpdateTodos_CreateTodoList)(nil),

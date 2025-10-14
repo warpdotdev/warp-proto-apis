@@ -223,7 +223,7 @@ message Message {
       ReadDocuments read_documents = 20;
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
-      ListRelevantMCPContext list_relevant_mcp_config = 23;
+      ListRelevantMCPContext list_relevant_mcp_context = 23;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -450,7 +450,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
-      ListRelevantMCPContextResult list_relevant_mcp_config = 27;
+      ListRelevantMCPContextResult list_relevant_mcp_context = 27;
     }
 
     // Result of a server-side tool call.
@@ -865,6 +865,6 @@ enum ToolType {
   READ_DOCUMENTS = 17;
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
-  LIST_RELEVANT_MCP_CONFIG = 20;
+  LIST_RELEVANT_MCP_CONTEXT = 20;
 }
 
