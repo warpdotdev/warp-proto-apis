@@ -1614,6 +1614,7 @@ func (x *Request_MCPContext) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_MCPContext) GetResources() []*Request_MCPContext_MCPResource {
 	if x != nil {
 		if x.xxx_hidden_Resources != nil {
@@ -1623,6 +1624,7 @@ func (x *Request_MCPContext) GetResources() []*Request_MCPContext_MCPResource {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_MCPContext) GetTools() []*Request_MCPContext_MCPTool {
 	if x != nil {
 		if x.xxx_hidden_Tools != nil {
@@ -1641,10 +1643,12 @@ func (x *Request_MCPContext) GetServers() []*Request_MCPContext_MCPServer {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_MCPContext) SetResources(v []*Request_MCPContext_MCPResource) {
 	x.xxx_hidden_Resources = &v
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_MCPContext) SetTools(v []*Request_MCPContext_MCPTool) {
 	x.xxx_hidden_Tools = &v
 }
@@ -1658,8 +1662,11 @@ type Request_MCPContext_builder struct {
 
 	// DEPRECATED: Use `servers` field instead for server-attributed tools/resources.
 	// Kept for backwards compatibility with older clients.
+	//
+	// Deprecated: Marked as deprecated in request.proto.
 	Resources []*Request_MCPContext_MCPResource
-	Tools     []*Request_MCPContext_MCPTool
+	// Deprecated: Marked as deprecated in request.proto.
+	Tools []*Request_MCPContext_MCPTool
 	// Server-grouped MCP context. Each entry represents a single MCP server summary.
 	Servers []*Request_MCPContext_MCPServer
 }
@@ -5212,7 +5219,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc5>\n" +
+	"task.proto\"\xcd>\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5356,11 +5363,11 @@ const file_request_proto_rawDesc = "" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +
 	"\x06google\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06google\x12%\n" +
 	"\vopen_router\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"openRouter\x1a\xee\x05\n" +
+	"openRouter\x1a\xf6\x05\n" +
 	"\n" +
-	"MCPContext\x12Q\n" +
-	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceR\tresources\x12E\n" +
-	"\x05tools\x18\x02 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolR\x05tools\x12K\n" +
+	"MCPContext\x12U\n" +
+	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
+	"\x05tools\x18\x02 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolB\x02\x18\x01R\x05tools\x12K\n" +
 	"\aservers\x18\x03 \x03(\v21.warp.multi_agent.v1.Request.MCPContext.MCPServerR\aservers\x1a\x84\x01\n" +
 	"\vMCPResource\x12\x16\n" +
 	"\x03uri\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uri\x12\x18\n" +

@@ -278,8 +278,8 @@ message Request {
   message MCPContext {
     // DEPRECATED: Use `servers` field instead for server-attributed tools/resources.
     // Kept for backwards compatibility with older clients.
-    repeated MCPResource resources = 1;
-    repeated MCPTool tools = 2;
+    repeated MCPResource resources = 1 [deprecated = true];
+    repeated MCPTool tools = 2 [deprecated = true];
 
     // Server-grouped MCP context. Each entry represents a single MCP server summary.
     repeated MCPServer servers = 3;
