@@ -31,6 +31,9 @@ const (
 //
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
+//
+// Note that `ListRelevantMCPContext` is also omitted as it's handled server-side only;
+// the server already receives all MCP context via Request.MCPContext.
 type ToolType int32
 
 const (
@@ -54,7 +57,6 @@ const (
 	ToolType_READ_DOCUMENTS                      ToolType = 17
 	ToolType_EDIT_DOCUMENTS                      ToolType = 18
 	ToolType_CREATE_DOCUMENTS                    ToolType = 19
-	ToolType_LIST_RELEVANT_MCP_CONTEXT           ToolType = 20
 )
 
 // Enum value maps for ToolType.
@@ -80,7 +82,6 @@ var (
 		17: "READ_DOCUMENTS",
 		18: "EDIT_DOCUMENTS",
 		19: "CREATE_DOCUMENTS",
-		20: "LIST_RELEVANT_MCP_CONTEXT",
 	}
 	ToolType_value = map[string]int32{
 		"RUN_SHELL_COMMAND":                   0,
@@ -103,7 +104,6 @@ var (
 		"READ_DOCUMENTS":                      17,
 		"EDIT_DOCUMENTS":                      18,
 		"CREATE_DOCUMENTS":                    19,
-		"LIST_RELEVANT_MCP_CONTEXT":           20,
 	}
 )
 
@@ -16183,7 +16183,7 @@ const file_task_proto_rawDesc = "" +
 	"\x11created_documents\x18\x01 \x03(\v2$.warp.multi_agent.v1.DocumentContentR\x10createdDocuments\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result*\xca\x03\n" +
+	"\x06result*\xab\x03\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -16206,8 +16206,7 @@ const file_task_proto_rawDesc = "" +
 	"\bSUBAGENT\x10\x10\x12\x12\n" +
 	"\x0eREAD_DOCUMENTS\x10\x11\x12\x12\n" +
 	"\x0eEDIT_DOCUMENTS\x10\x12\x12\x14\n" +
-	"\x10CREATE_DOCUMENTS\x10\x13\x12\x1d\n" +
-	"\x19LIST_RELEVANT_MCP_CONTEXT\x10\x14B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x10CREATE_DOCUMENTS\x10\x13B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 118)

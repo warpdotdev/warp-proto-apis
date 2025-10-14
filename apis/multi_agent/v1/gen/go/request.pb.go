@@ -1661,7 +1661,6 @@ type Request_MCPContext_builder struct {
 	Resources []*Request_MCPContext_MCPResource
 	Tools     []*Request_MCPContext_MCPTool
 	// Server-grouped MCP context. Each entry represents a single MCP server summary.
-	// MCP Server tools/resources could be retrieved fetched via `ListRelevantMCPContext`.
 	Servers []*Request_MCPContext_MCPServer
 }
 

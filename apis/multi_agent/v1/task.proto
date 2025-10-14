@@ -844,6 +844,9 @@ message CreateDocumentsResult {
 //
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
+//
+// Note that `ListRelevantMCPContext` is also omitted as it's handled server-side only;
+// the server already receives all MCP context via Request.MCPContext.
 enum ToolType {
   RUN_SHELL_COMMAND = 0;
   SEARCH_CODEBASE = 1;
@@ -865,6 +868,5 @@ enum ToolType {
   READ_DOCUMENTS = 17;
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
-  LIST_RELEVANT_MCP_CONTEXT = 20;
 }
 

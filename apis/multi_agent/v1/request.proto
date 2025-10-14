@@ -282,7 +282,6 @@ message Request {
     repeated MCPTool tools = 2;
 
     // Server-grouped MCP context. Each entry represents a single MCP server summary.
-    // MCP Server tools/resources could be retrieved fetched via `ListRelevantMCPContext`.
     repeated MCPServer servers = 3;
 
     message MCPResource {
