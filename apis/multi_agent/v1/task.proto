@@ -371,6 +371,7 @@ message Message {
       // Optional metadata about the subagent required to render the appropriate UI.
       oneof metadata {
         google.protobuf.Empty cli = 3;
+        google.protobuf.Empty research = 4;
       }
     }
 

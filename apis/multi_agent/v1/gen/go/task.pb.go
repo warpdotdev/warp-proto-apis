@@ -10615,6 +10615,15 @@ func (x *Message_ToolCall_Subagent) GetCli() *emptypb.Empty {
 	return nil
 }
 
+func (x *Message_ToolCall_Subagent) GetResearch() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metadata.(*message_ToolCall_Subagent_Research); ok {
+			return x.Research
+		}
+	}
+	return nil
+}
+
 func (x *Message_ToolCall_Subagent) SetTaskId(v string) {
 	x.xxx_hidden_TaskId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
@@ -10631,6 +10640,14 @@ func (x *Message_ToolCall_Subagent) SetCli(v *emptypb.Empty) {
 		return
 	}
 	x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Cli{v}
+}
+
+func (x *Message_ToolCall_Subagent) SetResearch(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Metadata = nil
+		return
+	}
+	x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Research{v}
 }
 
 func (x *Message_ToolCall_Subagent) HasTaskId() bool {
@@ -10662,6 +10679,14 @@ func (x *Message_ToolCall_Subagent) HasCli() bool {
 	return ok
 }
 
+func (x *Message_ToolCall_Subagent) HasResearch() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metadata.(*message_ToolCall_Subagent_Research)
+	return ok
+}
+
 func (x *Message_ToolCall_Subagent) ClearTaskId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_TaskId = nil
@@ -10682,8 +10707,15 @@ func (x *Message_ToolCall_Subagent) ClearCli() {
 	}
 }
 
+func (x *Message_ToolCall_Subagent) ClearResearch() {
+	if _, ok := x.xxx_hidden_Metadata.(*message_ToolCall_Subagent_Research); ok {
+		x.xxx_hidden_Metadata = nil
+	}
+}
+
 const Message_ToolCall_Subagent_Metadata_not_set_case case_Message_ToolCall_Subagent_Metadata = 0
 const Message_ToolCall_Subagent_Cli_case case_Message_ToolCall_Subagent_Metadata = 3
+const Message_ToolCall_Subagent_Research_case case_Message_ToolCall_Subagent_Metadata = 4
 
 func (x *Message_ToolCall_Subagent) WhichMetadata() case_Message_ToolCall_Subagent_Metadata {
 	if x == nil {
@@ -10692,6 +10724,8 @@ func (x *Message_ToolCall_Subagent) WhichMetadata() case_Message_ToolCall_Subage
 	switch x.xxx_hidden_Metadata.(type) {
 	case *message_ToolCall_Subagent_Cli:
 		return Message_ToolCall_Subagent_Cli_case
+	case *message_ToolCall_Subagent_Research:
+		return Message_ToolCall_Subagent_Research_case
 	default:
 		return Message_ToolCall_Subagent_Metadata_not_set_case
 	}
@@ -10705,7 +10739,8 @@ type Message_ToolCall_Subagent_builder struct {
 	// Optional metadata about the subagent required to render the appropriate UI.
 
 	// Fields of oneof xxx_hidden_Metadata:
-	Cli *emptypb.Empty
+	Cli      *emptypb.Empty
+	Research *emptypb.Empty
 	// -- end of xxx_hidden_Metadata
 }
 
@@ -10723,6 +10758,9 @@ func (b0 Message_ToolCall_Subagent_builder) Build() *Message_ToolCall_Subagent {
 	}
 	if b.Cli != nil {
 		x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Cli{b.Cli}
+	}
+	if b.Research != nil {
+		x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Research{b.Research}
 	}
 	return m0
 }
@@ -10745,7 +10783,13 @@ type message_ToolCall_Subagent_Cli struct {
 	Cli *emptypb.Empty `protobuf:"bytes,3,opt,name=cli,oneof"`
 }
 
+type message_ToolCall_Subagent_Research struct {
+	Research *emptypb.Empty `protobuf:"bytes,4,opt,name=research,oneof"`
+}
+
 func (*message_ToolCall_Subagent_Cli) isMessage_ToolCall_Subagent_Metadata() {}
+
+func (*message_ToolCall_Subagent_Research) isMessage_ToolCall_Subagent_Metadata() {}
 
 // A tool call to read documents.
 type Message_ToolCall_ReadDocuments struct {
@@ -14857,7 +14901,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xa6R\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xddR\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -14922,7 +14966,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xfb#\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xb2$\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -15018,11 +15062,12 @@ const file_task_proto_rawDesc = "" +
 	"\x05query\x18\x03 \x01(\tR\x05queryB\x0e\n" +
 	"\fdisplay_mode\x1a\x10\n" +
 	"\x0eOpenCodeReview\x1a\r\n" +
-	"\vInitProject\x1au\n" +
+	"\vInitProject\x1a\xab\x01\n" +
 	"\bSubagent\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x18\n" +
 	"\apayload\x18\x02 \x01(\tR\apayload\x12*\n" +
-	"\x03cli\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x03cliB\n" +
+	"\x03cli\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x03cli\x124\n" +
+	"\bresearch\x18\x04 \x01(\v2\x16.google.protobuf.EmptyH\x00R\bresearchB\n" +
 	"\n" +
 	"\bmetadata\x1a\xe4\x01\n" +
 	"\rReadDocuments\x12Z\n" +
@@ -15543,34 +15588,35 @@ var file_task_proto_depIdxs = []int32{
 	124, // 124: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
 	70,  // 125: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
 	117, // 126: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> google.protobuf.Empty
-	71,  // 127: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
-	72,  // 128: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
-	73,  // 129: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	125, // 130: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	125, // 131: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	27,  // 132: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	126, // 133: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	127, // 134: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	126, // 135: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	126, // 136: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	85,  // 137: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	126, // 138: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	89,  // 139: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	90,  // 140: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	95,  // 141: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	14,  // 142: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	104, // 143: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	105, // 144: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	106, // 145: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	14,  // 146: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	128, // 147: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	128, // 148: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	128, // 149: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	150, // [150:150] is the sub-list for method output_type
-	150, // [150:150] is the sub-list for method input_type
-	150, // [150:150] is the sub-list for extension type_name
-	150, // [150:150] is the sub-list for extension extendee
-	0,   // [0:150] is the sub-list for field type_name
+	117, // 127: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
+	71,  // 128: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
+	72,  // 129: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
+	73,  // 130: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
+	125, // 131: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	125, // 132: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	27,  // 133: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	126, // 134: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	127, // 135: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	126, // 136: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	126, // 137: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	85,  // 138: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	126, // 139: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	89,  // 140: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	90,  // 141: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	95,  // 142: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	14,  // 143: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	104, // 144: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	105, // 145: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	106, // 146: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	14,  // 147: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	128, // 148: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	128, // 149: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	128, // 150: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	151, // [151:151] is the sub-list for method output_type
+	151, // [151:151] is the sub-list for method input_type
+	151, // [151:151] is the sub-list for extension type_name
+	151, // [151:151] is the sub-list for extension extendee
+	0,   // [0:151] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
@@ -15743,6 +15789,7 @@ func file_task_proto_init() {
 	}
 	file_task_proto_msgTypes[62].OneofWrappers = []any{
 		(*message_ToolCall_Subagent_Cli)(nil),
+		(*message_ToolCall_Subagent_Research)(nil),
 	}
 	file_task_proto_msgTypes[103].OneofWrappers = []any{
 		(*callMCPToolResult_Success_Result_Text_)(nil),
