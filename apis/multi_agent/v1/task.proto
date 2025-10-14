@@ -426,6 +426,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
+      WebSearchResult web_search = 27;
     }
 
     // Result of a server-side tool call.
@@ -768,6 +769,13 @@ message CreateDocumentsResult {
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+// Result of a `WebSearch` tool call.
+// This represents URLs that were searched by a provider-native web search.
+message WebSearchResult {
+  // URLs that were searched by the provider.
+  repeated string urls = 1;
 }
 
 // An enumeration of the different types of client-server tools.
