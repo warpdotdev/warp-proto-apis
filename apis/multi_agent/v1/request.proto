@@ -179,10 +179,7 @@ message Request {
     }
 
     // An input to summarize the active conversation.
-    message SummarizeConversation {
-      // Optional instructions to help focus or modify the default summarizer prompt.
-      string instructions = 1 [ (sensitive) = true ];
-    }
+    message SummarizeConversation {}
   }
 
   message Metadata {
