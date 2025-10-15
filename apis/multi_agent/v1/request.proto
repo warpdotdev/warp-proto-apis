@@ -58,6 +58,7 @@ message Request {
       CreateNewProject create_new_project = 10;
       CloneRepository clone_repository = 11;
       CodeReview code_review = 12;
+      SummarizeConversation summarize_conversation = 13;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -175,6 +176,12 @@ message Request {
       message InitialReviewComments {
         repeated ReviewComment review_comments = 1;
       }
+    }
+
+    // An input to summarize the active conversation.
+    message SummarizeConversation {
+      // Optional instructions to help focus or modify the default summarizer prompt.
+      string instructions = 1 [ (sensitive) = true ];
     }
   }
 
