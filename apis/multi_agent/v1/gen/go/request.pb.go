@@ -1729,6 +1729,7 @@ type Request_Input_UserQuery struct {
 	state                            protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Query                 *string                `protobuf:"bytes,1,opt,name=query"`
 	xxx_hidden_ReferencedAttachments map[string]*Attachment `protobuf:"bytes,2,rep,name=referenced_attachments,json=referencedAttachments" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_Mode                  *UserQueryMode         `protobuf:"bytes,3,opt,name=mode"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -1777,13 +1778,24 @@ func (x *Request_Input_UserQuery) GetReferencedAttachments() map[string]*Attachm
 	return nil
 }
 
+func (x *Request_Input_UserQuery) GetMode() *UserQueryMode {
+	if x != nil {
+		return x.xxx_hidden_Mode
+	}
+	return nil
+}
+
 func (x *Request_Input_UserQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Request_Input_UserQuery) SetReferencedAttachments(v map[string]*Attachment) {
 	x.xxx_hidden_ReferencedAttachments = v
+}
+
+func (x *Request_Input_UserQuery) SetMode(v *UserQueryMode) {
+	x.xxx_hidden_Mode = v
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -1793,9 +1805,20 @@ func (x *Request_Input_UserQuery) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Request_Input_UserQuery) HasMode() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Mode != nil
+}
+
 func (x *Request_Input_UserQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
+}
+
+func (x *Request_Input_UserQuery) ClearMode() {
+	x.xxx_hidden_Mode = nil
 }
 
 type Request_Input_UserQuery_builder struct {
@@ -1804,6 +1827,7 @@ type Request_Input_UserQuery_builder struct {
 	Query *string
 	// An attachment referenced by key in the query text.
 	ReferencedAttachments map[string]*Attachment
+	Mode                  *UserQueryMode
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -1811,10 +1835,11 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Query = b.Query
 	}
 	x.xxx_hidden_ReferencedAttachments = b.ReferencedAttachments
+	x.xxx_hidden_Mode = b.Mode
 	return m0
 }
 
@@ -5307,7 +5332,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xd9?\n" +
+	"task.proto\"\x91@\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5317,7 +5342,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x8c)\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc4)\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5335,10 +5360,11 @@ const file_request_proto_rawDesc = "" +
 	"\x16summarize_conversation\x18\r \x01(\v28.warp.multi_agent.v1.Request.Input.SummarizeConversationH\x00R\x15summarizeConversation\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\x92\x02\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\xca\x02\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12~\n" +
-	"\x16referenced_attachments\x18\x02 \x03(\v2G.warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntryR\x15referencedAttachments\x1ai\n" +
+	"\x16referenced_attachments\x18\x02 \x03(\v2G.warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntryR\x15referencedAttachments\x126\n" +
+	"\x04mode\x18\x03 \x01(\v2\".warp.multi_agent.v1.UserQueryModeR\x04mode\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
 	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xa2\x02\n" +
@@ -5514,30 +5540,31 @@ var file_request_proto_goTypes = []any{
 	(*Task)(nil),                                 // 35: warp.multi_agent.v1.Task
 	(*InputContext)(nil),                         // 36: warp.multi_agent.v1.InputContext
 	(ToolType)(0),                                // 37: warp.multi_agent.v1.ToolType
-	(*RunShellCommandResult)(nil),                // 38: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                      // 39: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                 // 40: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                 // 41: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                    // 42: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),              // 43: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                           // 44: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                       // 45: warp.multi_agent.v1.FileGlobResult
-	(*ReadMCPResourceResult)(nil),                // 46: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),                    // 47: warp.multi_agent.v1.CallMCPToolResult
-	(*WriteToLongRunningShellCommandResult)(nil), // 48: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),         // 49: warp.multi_agent.v1.SuggestNewConversationResult
-	(*FileGlobV2Result)(nil),                     // 50: warp.multi_agent.v1.FileGlobV2Result
-	(*SuggestPromptResult)(nil),                  // 51: warp.multi_agent.v1.SuggestPromptResult
-	(*OpenCodeReviewResult)(nil),                 // 52: warp.multi_agent.v1.OpenCodeReviewResult
-	(*InitProjectResult)(nil),                    // 53: warp.multi_agent.v1.InitProjectResult
-	(*ReadDocumentsResult)(nil),                  // 54: warp.multi_agent.v1.ReadDocumentsResult
-	(*EditDocumentsResult)(nil),                  // 55: warp.multi_agent.v1.EditDocumentsResult
-	(*CreateDocumentsResult)(nil),                // 56: warp.multi_agent.v1.CreateDocumentsResult
-	(*Attachment)(nil),                           // 57: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                        // 58: google.protobuf.Empty
-	(*ReviewComment)(nil),                        // 59: warp.multi_agent.v1.ReviewComment
-	(*structpb.Value)(nil),                       // 60: google.protobuf.Value
-	(*structpb.Struct)(nil),                      // 61: google.protobuf.Struct
+	(*UserQueryMode)(nil),                        // 38: warp.multi_agent.v1.UserQueryMode
+	(*RunShellCommandResult)(nil),                // 39: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                      // 40: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                 // 41: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                 // 42: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                    // 43: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),              // 44: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                           // 45: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                       // 46: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),                // 47: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),                    // 48: warp.multi_agent.v1.CallMCPToolResult
+	(*WriteToLongRunningShellCommandResult)(nil), // 49: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),         // 50: warp.multi_agent.v1.SuggestNewConversationResult
+	(*FileGlobV2Result)(nil),                     // 51: warp.multi_agent.v1.FileGlobV2Result
+	(*SuggestPromptResult)(nil),                  // 52: warp.multi_agent.v1.SuggestPromptResult
+	(*OpenCodeReviewResult)(nil),                 // 53: warp.multi_agent.v1.OpenCodeReviewResult
+	(*InitProjectResult)(nil),                    // 54: warp.multi_agent.v1.InitProjectResult
+	(*ReadDocumentsResult)(nil),                  // 55: warp.multi_agent.v1.ReadDocumentsResult
+	(*EditDocumentsResult)(nil),                  // 56: warp.multi_agent.v1.EditDocumentsResult
+	(*CreateDocumentsResult)(nil),                // 57: warp.multi_agent.v1.CreateDocumentsResult
+	(*Attachment)(nil),                           // 58: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                        // 59: google.protobuf.Empty
+	(*ReviewComment)(nil),                        // 60: warp.multi_agent.v1.ReviewComment
+	(*structpb.Value)(nil),                       // 61: google.protobuf.Value
+	(*structpb.Struct)(nil),                      // 62: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -5568,51 +5595,52 @@ var file_request_proto_depIdxs = []int32{
 	32, // 25: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	33, // 26: warp.multi_agent.v1.Request.MCPContext.servers:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPServer
 	18, // 27: warp.multi_agent.v1.Request.Input.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
-	19, // 28: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	38, // 29: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	39, // 30: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	40, // 31: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	41, // 32: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	42, // 33: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	43, // 34: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	44, // 35: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	45, // 36: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	20, // 37: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
-	46, // 38: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	47, // 39: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	48, // 40: warp.multi_agent.v1.Request.Input.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	49, // 41: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
-	50, // 42: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
-	51, // 43: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
-	52, // 44: warp.multi_agent.v1.Request.Input.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
-	53, // 45: warp.multi_agent.v1.Request.Input.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
-	54, // 46: warp.multi_agent.v1.Request.Input.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
-	55, // 47: warp.multi_agent.v1.Request.Input.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
-	56, // 48: warp.multi_agent.v1.Request.Input.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	21, // 49: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	22, // 50: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	23, // 51: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	24, // 52: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	25, // 53: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	26, // 54: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	57, // 55: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	58, // 56: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	58, // 57: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	27, // 58: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
-	57, // 59: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	6,  // 60: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 61: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	6,  // 62: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	59, // 63: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	60, // 64: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	61, // 65: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	31, // 66: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	32, // 67: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	68, // [68:68] is the sub-list for method output_type
-	68, // [68:68] is the sub-list for method input_type
-	68, // [68:68] is the sub-list for extension type_name
-	68, // [68:68] is the sub-list for extension extendee
-	0,  // [0:68] is the sub-list for field type_name
+	38, // 28: warp.multi_agent.v1.Request.Input.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
+	19, // 29: warp.multi_agent.v1.Request.Input.UserInputs.inputs:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.UserInput
+	39, // 30: warp.multi_agent.v1.Request.Input.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	40, // 31: warp.multi_agent.v1.Request.Input.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	41, // 32: warp.multi_agent.v1.Request.Input.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	42, // 33: warp.multi_agent.v1.Request.Input.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	43, // 34: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	44, // 35: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	45, // 36: warp.multi_agent.v1.Request.Input.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	46, // 37: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	20, // 38: warp.multi_agent.v1.Request.Input.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
+	47, // 39: warp.multi_agent.v1.Request.Input.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	48, // 40: warp.multi_agent.v1.Request.Input.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	49, // 41: warp.multi_agent.v1.Request.Input.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	50, // 42: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
+	51, // 43: warp.multi_agent.v1.Request.Input.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
+	52, // 44: warp.multi_agent.v1.Request.Input.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
+	53, // 45: warp.multi_agent.v1.Request.Input.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
+	54, // 46: warp.multi_agent.v1.Request.Input.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
+	55, // 47: warp.multi_agent.v1.Request.Input.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
+	56, // 48: warp.multi_agent.v1.Request.Input.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
+	57, // 49: warp.multi_agent.v1.Request.Input.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
+	21, // 50: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	22, // 51: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	23, // 52: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	24, // 53: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	25, // 54: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	26, // 55: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	58, // 56: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	59, // 57: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	59, // 58: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	27, // 59: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
+	58, // 60: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	6,  // 61: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	8,  // 62: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	6,  // 63: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	60, // 64: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	61, // 65: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	62, // 66: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	31, // 67: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	32, // 68: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	69, // [69:69] is the sub-list for method output_type
+	69, // [69:69] is the sub-list for method input_type
+	69, // [69:69] is the sub-list for extension type_name
+	69, // [69:69] is the sub-list for extension extendee
+	0,  // [0:69] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }

@@ -126,47 +126,6 @@ func (x ToolType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-type UserQueryMode int32
-
-const (
-	UserQueryMode_AGENT UserQueryMode = 0
-	UserQueryMode_PLAN  UserQueryMode = 1
-)
-
-// Enum value maps for UserQueryMode.
-var (
-	UserQueryMode_name = map[int32]string{
-		0: "AGENT",
-		1: "PLAN",
-	}
-	UserQueryMode_value = map[string]int32{
-		"AGENT": 0,
-		"PLAN":  1,
-	}
-)
-
-func (x UserQueryMode) Enum() *UserQueryMode {
-	p := new(UserQueryMode)
-	*p = x
-	return p
-}
-
-func (x UserQueryMode) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (UserQueryMode) Descriptor() protoreflect.EnumDescriptor {
-	return file_task_proto_enumTypes[1].Descriptor()
-}
-
-func (UserQueryMode) Type() protoreflect.EnumType {
-	return &file_task_proto_enumTypes[1]
-}
-
-func (x UserQueryMode) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
 // A task represents a unit of work with messages
 type Task struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
@@ -4756,6 +4715,181 @@ func (*createDocumentsResult_Success_) isCreateDocumentsResult_Result() {}
 
 func (*createDocumentsResult_Error_) isCreateDocumentsResult_Result() {}
 
+type UserQueryMode struct {
+	state           protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type isUserQueryMode_Type   `protobuf_oneof:"type"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *UserQueryMode) Reset() {
+	*x = UserQueryMode{}
+	mi := &file_task_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserQueryMode) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserQueryMode) ProtoMessage() {}
+
+func (x *UserQueryMode) ProtoReflect() protoreflect.Message {
+	mi := &file_task_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *UserQueryMode) GetAgent() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*userQueryMode_Agent); ok {
+			return x.Agent
+		}
+	}
+	return nil
+}
+
+func (x *UserQueryMode) GetPlan() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*userQueryMode_Plan); ok {
+			return x.Plan
+		}
+	}
+	return nil
+}
+
+func (x *UserQueryMode) SetAgent(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &userQueryMode_Agent{v}
+}
+
+func (x *UserQueryMode) SetPlan(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &userQueryMode_Plan{v}
+}
+
+func (x *UserQueryMode) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *UserQueryMode) HasAgent() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*userQueryMode_Agent)
+	return ok
+}
+
+func (x *UserQueryMode) HasPlan() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*userQueryMode_Plan)
+	return ok
+}
+
+func (x *UserQueryMode) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *UserQueryMode) ClearAgent() {
+	if _, ok := x.xxx_hidden_Type.(*userQueryMode_Agent); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *UserQueryMode) ClearPlan() {
+	if _, ok := x.xxx_hidden_Type.(*userQueryMode_Plan); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const UserQueryMode_Type_not_set_case case_UserQueryMode_Type = 0
+const UserQueryMode_Agent_case case_UserQueryMode_Type = 1
+const UserQueryMode_Plan_case case_UserQueryMode_Type = 2
+
+func (x *UserQueryMode) WhichType() case_UserQueryMode_Type {
+	if x == nil {
+		return UserQueryMode_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *userQueryMode_Agent:
+		return UserQueryMode_Agent_case
+	case *userQueryMode_Plan:
+		return UserQueryMode_Plan_case
+	default:
+		return UserQueryMode_Type_not_set_case
+	}
+}
+
+type UserQueryMode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Type:
+	// Default mode
+	Agent *emptypb.Empty
+	// We can change this to a non-empty `Plan` type later, this is backwards compatible
+	Plan *emptypb.Empty
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 UserQueryMode_builder) Build() *UserQueryMode {
+	m0 := &UserQueryMode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Agent != nil {
+		x.xxx_hidden_Type = &userQueryMode_Agent{b.Agent}
+	}
+	if b.Plan != nil {
+		x.xxx_hidden_Type = &userQueryMode_Plan{b.Plan}
+	}
+	return m0
+}
+
+type case_UserQueryMode_Type protoreflect.FieldNumber
+
+func (x case_UserQueryMode_Type) String() string {
+	md := file_task_proto_msgTypes[25].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isUserQueryMode_Type interface {
+	isUserQueryMode_Type()
+}
+
+type userQueryMode_Agent struct {
+	// Default mode
+	Agent *emptypb.Empty `protobuf:"bytes,1,opt,name=agent,oneof"`
+}
+
+type userQueryMode_Plan struct {
+	// We can change this to a non-empty `Plan` type later, this is backwards compatible
+	Plan *emptypb.Empty `protobuf:"bytes,2,opt,name=plan,oneof"`
+}
+
+func (*userQueryMode_Agent) isUserQueryMode_Type() {}
+
+func (*userQueryMode_Plan) isUserQueryMode_Type() {}
+
 // Dependencies for task hierarchy and execution order.
 type Task_Dependencies struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
@@ -4768,7 +4902,7 @@ type Task_Dependencies struct {
 
 func (x *Task_Dependencies) Reset() {
 	*x = Task_Dependencies{}
-	mi := &file_task_proto_msgTypes[25]
+	mi := &file_task_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4780,7 +4914,7 @@ func (x *Task_Dependencies) String() string {
 func (*Task_Dependencies) ProtoMessage() {}
 
 func (x *Task_Dependencies) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[25]
+	mi := &file_task_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4843,7 +4977,7 @@ type Message_UserQuery struct {
 	xxx_hidden_Query                 *string                `protobuf:"bytes,1,opt,name=query"`
 	xxx_hidden_Context               *InputContext          `protobuf:"bytes,2,opt,name=context"`
 	xxx_hidden_ReferencedAttachments map[string]*Attachment `protobuf:"bytes,3,rep,name=referenced_attachments,json=referencedAttachments" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_Mode                  UserQueryMode          `protobuf:"varint,4,opt,name=mode,enum=warp.multi_agent.v1.UserQueryMode"`
+	xxx_hidden_Mode                  *UserQueryMode         `protobuf:"bytes,4,opt,name=mode"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -4852,7 +4986,7 @@ type Message_UserQuery struct {
 
 func (x *Message_UserQuery) Reset() {
 	*x = Message_UserQuery{}
-	mi := &file_task_proto_msgTypes[26]
+	mi := &file_task_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4864,7 +4998,7 @@ func (x *Message_UserQuery) String() string {
 func (*Message_UserQuery) ProtoMessage() {}
 
 func (x *Message_UserQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[26]
+	mi := &file_task_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4899,13 +5033,11 @@ func (x *Message_UserQuery) GetReferencedAttachments() map[string]*Attachment {
 	return nil
 }
 
-func (x *Message_UserQuery) GetMode() UserQueryMode {
+func (x *Message_UserQuery) GetMode() *UserQueryMode {
 	if x != nil {
-		if protoimpl.X.Present(&(x.XXX_presence[0]), 3) {
-			return x.xxx_hidden_Mode
-		}
+		return x.xxx_hidden_Mode
 	}
-	return UserQueryMode_AGENT
+	return nil
 }
 
 func (x *Message_UserQuery) SetQuery(v string) {
@@ -4921,9 +5053,8 @@ func (x *Message_UserQuery) SetReferencedAttachments(v map[string]*Attachment) {
 	x.xxx_hidden_ReferencedAttachments = v
 }
 
-func (x *Message_UserQuery) SetMode(v UserQueryMode) {
+func (x *Message_UserQuery) SetMode(v *UserQueryMode) {
 	x.xxx_hidden_Mode = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Message_UserQuery) HasQuery() bool {
@@ -4944,7 +5075,7 @@ func (x *Message_UserQuery) HasMode() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+	return x.xxx_hidden_Mode != nil
 }
 
 func (x *Message_UserQuery) ClearQuery() {
@@ -4957,8 +5088,7 @@ func (x *Message_UserQuery) ClearContext() {
 }
 
 func (x *Message_UserQuery) ClearMode() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_Mode = UserQueryMode_AGENT
+	x.xxx_hidden_Mode = nil
 }
 
 type Message_UserQuery_builder struct {
@@ -4981,10 +5111,7 @@ func (b0 Message_UserQuery_builder) Build() *Message_UserQuery {
 	}
 	x.xxx_hidden_Context = b.Context
 	x.xxx_hidden_ReferencedAttachments = b.ReferencedAttachments
-	if b.Mode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
-		x.xxx_hidden_Mode = *b.Mode
-	}
+	x.xxx_hidden_Mode = b.Mode
 	return m0
 }
 
@@ -5001,7 +5128,7 @@ type Message_SystemQuery struct {
 
 func (x *Message_SystemQuery) Reset() {
 	*x = Message_SystemQuery{}
-	mi := &file_task_proto_msgTypes[27]
+	mi := &file_task_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5013,7 +5140,7 @@ func (x *Message_SystemQuery) String() string {
 func (*Message_SystemQuery) ProtoMessage() {}
 
 func (x *Message_SystemQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[27]
+	mi := &file_task_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5278,7 +5405,7 @@ func (b0 Message_SystemQuery_builder) Build() *Message_SystemQuery {
 type case_Message_SystemQuery_Type protoreflect.FieldNumber
 
 func (x case_Message_SystemQuery_Type) String() string {
-	md := file_task_proto_msgTypes[27].Descriptor()
+	md := file_task_proto_msgTypes[28].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -5330,7 +5457,7 @@ type Message_AutoCodeDiff struct {
 
 func (x *Message_AutoCodeDiff) Reset() {
 	*x = Message_AutoCodeDiff{}
-	mi := &file_task_proto_msgTypes[28]
+	mi := &file_task_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5342,7 +5469,7 @@ func (x *Message_AutoCodeDiff) String() string {
 func (*Message_AutoCodeDiff) ProtoMessage() {}
 
 func (x *Message_AutoCodeDiff) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[28]
+	mi := &file_task_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5405,7 +5532,7 @@ type Message_ResumeConversation struct {
 
 func (x *Message_ResumeConversation) Reset() {
 	*x = Message_ResumeConversation{}
-	mi := &file_task_proto_msgTypes[29]
+	mi := &file_task_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5417,7 +5544,7 @@ func (x *Message_ResumeConversation) String() string {
 func (*Message_ResumeConversation) ProtoMessage() {}
 
 func (x *Message_ResumeConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[29]
+	mi := &file_task_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5450,7 +5577,7 @@ type Message_TriggerSuggestPrompt struct {
 
 func (x *Message_TriggerSuggestPrompt) Reset() {
 	*x = Message_TriggerSuggestPrompt{}
-	mi := &file_task_proto_msgTypes[30]
+	mi := &file_task_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5462,7 +5589,7 @@ func (x *Message_TriggerSuggestPrompt) String() string {
 func (*Message_TriggerSuggestPrompt) ProtoMessage() {}
 
 func (x *Message_TriggerSuggestPrompt) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[30]
+	mi := &file_task_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5604,7 +5731,7 @@ func (b0 Message_TriggerSuggestPrompt_builder) Build() *Message_TriggerSuggestPr
 type case_Message_TriggerSuggestPrompt_Trigger protoreflect.FieldNumber
 
 func (x case_Message_TriggerSuggestPrompt_Trigger) String() string {
-	md := file_task_proto_msgTypes[30].Descriptor()
+	md := file_task_proto_msgTypes[31].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -5638,7 +5765,7 @@ type Message_CreateNewProject struct {
 
 func (x *Message_CreateNewProject) Reset() {
 	*x = Message_CreateNewProject{}
-	mi := &file_task_proto_msgTypes[31]
+	mi := &file_task_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5650,7 +5777,7 @@ func (x *Message_CreateNewProject) String() string {
 func (*Message_CreateNewProject) ProtoMessage() {}
 
 func (x *Message_CreateNewProject) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[31]
+	mi := &file_task_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5716,7 +5843,7 @@ type Message_CloneRepository struct {
 
 func (x *Message_CloneRepository) Reset() {
 	*x = Message_CloneRepository{}
-	mi := &file_task_proto_msgTypes[32]
+	mi := &file_task_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5728,7 +5855,7 @@ func (x *Message_CloneRepository) String() string {
 func (*Message_CloneRepository) ProtoMessage() {}
 
 func (x *Message_CloneRepository) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[32]
+	mi := &file_task_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5795,7 +5922,7 @@ type Message_AgentOutput struct {
 
 func (x *Message_AgentOutput) Reset() {
 	*x = Message_AgentOutput{}
-	mi := &file_task_proto_msgTypes[33]
+	mi := &file_task_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5807,7 +5934,7 @@ func (x *Message_AgentOutput) String() string {
 func (*Message_AgentOutput) ProtoMessage() {}
 
 func (x *Message_AgentOutput) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[33]
+	mi := &file_task_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5875,7 +6002,7 @@ type Message_AgentReasoning struct {
 
 func (x *Message_AgentReasoning) Reset() {
 	*x = Message_AgentReasoning{}
-	mi := &file_task_proto_msgTypes[34]
+	mi := &file_task_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5887,7 +6014,7 @@ func (x *Message_AgentReasoning) String() string {
 func (*Message_AgentReasoning) ProtoMessage() {}
 
 func (x *Message_AgentReasoning) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[34]
+	mi := &file_task_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5979,7 +6106,7 @@ type Message_Summarization struct {
 
 func (x *Message_Summarization) Reset() {
 	*x = Message_Summarization{}
-	mi := &file_task_proto_msgTypes[35]
+	mi := &file_task_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5991,7 +6118,7 @@ func (x *Message_Summarization) String() string {
 func (*Message_Summarization) ProtoMessage() {}
 
 func (x *Message_Summarization) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[35]
+	mi := &file_task_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6146,7 +6273,7 @@ func (b0 Message_Summarization_builder) Build() *Message_Summarization {
 type case_Message_Summarization_SummaryType protoreflect.FieldNumber
 
 func (x case_Message_Summarization_SummaryType) String() string {
-	md := file_task_proto_msgTypes[35].Descriptor()
+	md := file_task_proto_msgTypes[36].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -6178,7 +6305,7 @@ type Message_CodeReview struct {
 
 func (x *Message_CodeReview) Reset() {
 	*x = Message_CodeReview{}
-	mi := &file_task_proto_msgTypes[36]
+	mi := &file_task_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6190,7 +6317,7 @@ func (x *Message_CodeReview) String() string {
 func (*Message_CodeReview) ProtoMessage() {}
 
 func (x *Message_CodeReview) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[36]
+	mi := &file_task_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6250,7 +6377,7 @@ type Message_ToolCall struct {
 
 func (x *Message_ToolCall) Reset() {
 	*x = Message_ToolCall{}
-	mi := &file_task_proto_msgTypes[37]
+	mi := &file_task_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6262,7 +6389,7 @@ func (x *Message_ToolCall) String() string {
 func (*Message_ToolCall) ProtoMessage() {}
 
 func (x *Message_ToolCall) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[37]
+	mi := &file_task_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7152,7 +7279,7 @@ func (b0 Message_ToolCall_builder) Build() *Message_ToolCall {
 type case_Message_ToolCall_Tool protoreflect.FieldNumber
 
 func (x case_Message_ToolCall_Tool) String() string {
-	md := file_task_proto_msgTypes[37].Descriptor()
+	md := file_task_proto_msgTypes[38].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -7306,7 +7433,7 @@ type Message_ToolCallResult struct {
 
 func (x *Message_ToolCallResult) Reset() {
 	*x = Message_ToolCallResult{}
-	mi := &file_task_proto_msgTypes[38]
+	mi := &file_task_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7318,7 +7445,7 @@ func (x *Message_ToolCallResult) String() string {
 func (*Message_ToolCallResult) ProtoMessage() {}
 
 func (x *Message_ToolCallResult) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[38]
+	mi := &file_task_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8309,7 +8436,7 @@ func (b0 Message_ToolCallResult_builder) Build() *Message_ToolCallResult {
 type case_Message_ToolCallResult_Result protoreflect.FieldNumber
 
 func (x case_Message_ToolCallResult_Result) String() string {
-	md := file_task_proto_msgTypes[38].Descriptor()
+	md := file_task_proto_msgTypes[39].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -8476,7 +8603,7 @@ type Message_ServerEvent struct {
 
 func (x *Message_ServerEvent) Reset() {
 	*x = Message_ServerEvent{}
-	mi := &file_task_proto_msgTypes[39]
+	mi := &file_task_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8488,7 +8615,7 @@ func (x *Message_ServerEvent) String() string {
 func (*Message_ServerEvent) ProtoMessage() {}
 
 func (x *Message_ServerEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[39]
+	mi := &file_task_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8553,7 +8680,7 @@ type Message_UpdateTodos struct {
 
 func (x *Message_UpdateTodos) Reset() {
 	*x = Message_UpdateTodos{}
-	mi := &file_task_proto_msgTypes[40]
+	mi := &file_task_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8565,7 +8692,7 @@ func (x *Message_UpdateTodos) String() string {
 func (*Message_UpdateTodos) ProtoMessage() {}
 
 func (x *Message_UpdateTodos) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[40]
+	mi := &file_task_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8730,7 +8857,7 @@ func (b0 Message_UpdateTodos_builder) Build() *Message_UpdateTodos {
 type case_Message_UpdateTodos_Operation protoreflect.FieldNumber
 
 func (x case_Message_UpdateTodos_Operation) String() string {
-	md := file_task_proto_msgTypes[40].Descriptor()
+	md := file_task_proto_msgTypes[41].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -8769,7 +8896,7 @@ type Message_UpdateReviewComments struct {
 
 func (x *Message_UpdateReviewComments) Reset() {
 	*x = Message_UpdateReviewComments{}
-	mi := &file_task_proto_msgTypes[41]
+	mi := &file_task_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8781,7 +8908,7 @@ func (x *Message_UpdateReviewComments) String() string {
 func (*Message_UpdateReviewComments) ProtoMessage() {}
 
 func (x *Message_UpdateReviewComments) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[41]
+	mi := &file_task_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8870,7 +8997,7 @@ func (b0 Message_UpdateReviewComments_builder) Build() *Message_UpdateReviewComm
 type case_Message_UpdateReviewComments_Operation protoreflect.FieldNumber
 
 func (x case_Message_UpdateReviewComments_Operation) String() string {
-	md := file_task_proto_msgTypes[41].Descriptor()
+	md := file_task_proto_msgTypes[42].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -8897,7 +9024,7 @@ type Message_Summarization_ConversationSummary struct {
 
 func (x *Message_Summarization_ConversationSummary) Reset() {
 	*x = Message_Summarization_ConversationSummary{}
-	mi := &file_task_proto_msgTypes[43]
+	mi := &file_task_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8909,7 +9036,7 @@ func (x *Message_Summarization_ConversationSummary) String() string {
 func (*Message_Summarization_ConversationSummary) ProtoMessage() {}
 
 func (x *Message_Summarization_ConversationSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[43]
+	mi := &file_task_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8941,7 +9068,7 @@ type Message_Summarization_ToolCallResultSummary struct {
 
 func (x *Message_Summarization_ToolCallResultSummary) Reset() {
 	*x = Message_Summarization_ToolCallResultSummary{}
-	mi := &file_task_proto_msgTypes[44]
+	mi := &file_task_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -8953,7 +9080,7 @@ func (x *Message_Summarization_ToolCallResultSummary) String() string {
 func (*Message_Summarization_ToolCallResultSummary) ProtoMessage() {}
 
 func (x *Message_Summarization_ToolCallResultSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[44]
+	mi := &file_task_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8989,7 +9116,7 @@ type Message_ToolCall_Server struct {
 
 func (x *Message_ToolCall_Server) Reset() {
 	*x = Message_ToolCall_Server{}
-	mi := &file_task_proto_msgTypes[45]
+	mi := &file_task_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9001,7 +9128,7 @@ func (x *Message_ToolCall_Server) String() string {
 func (*Message_ToolCall_Server) ProtoMessage() {}
 
 func (x *Message_ToolCall_Server) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[45]
+	mi := &file_task_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9072,7 +9199,7 @@ type Message_ToolCall_RunShellCommand struct {
 
 func (x *Message_ToolCall_RunShellCommand) Reset() {
 	*x = Message_ToolCall_RunShellCommand{}
-	mi := &file_task_proto_msgTypes[46]
+	mi := &file_task_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9084,7 +9211,7 @@ func (x *Message_ToolCall_RunShellCommand) String() string {
 func (*Message_ToolCall_RunShellCommand) ProtoMessage() {}
 
 func (x *Message_ToolCall_RunShellCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[46]
+	mi := &file_task_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9255,7 +9382,7 @@ type Message_ToolCall_WriteToLongRunningShellCommand struct {
 
 func (x *Message_ToolCall_WriteToLongRunningShellCommand) Reset() {
 	*x = Message_ToolCall_WriteToLongRunningShellCommand{}
-	mi := &file_task_proto_msgTypes[47]
+	mi := &file_task_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9267,7 +9394,7 @@ func (x *Message_ToolCall_WriteToLongRunningShellCommand) String() string {
 func (*Message_ToolCall_WriteToLongRunningShellCommand) ProtoMessage() {}
 
 func (x *Message_ToolCall_WriteToLongRunningShellCommand) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[47]
+	mi := &file_task_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9334,7 +9461,7 @@ type Message_ToolCall_SuggestNewConversation struct {
 
 func (x *Message_ToolCall_SuggestNewConversation) Reset() {
 	*x = Message_ToolCall_SuggestNewConversation{}
-	mi := &file_task_proto_msgTypes[48]
+	mi := &file_task_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9346,7 +9473,7 @@ func (x *Message_ToolCall_SuggestNewConversation) String() string {
 func (*Message_ToolCall_SuggestNewConversation) ProtoMessage() {}
 
 func (x *Message_ToolCall_SuggestNewConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[48]
+	mi := &file_task_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9412,7 +9539,7 @@ type Message_ToolCall_ReadFiles struct {
 
 func (x *Message_ToolCall_ReadFiles) Reset() {
 	*x = Message_ToolCall_ReadFiles{}
-	mi := &file_task_proto_msgTypes[49]
+	mi := &file_task_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9424,7 +9551,7 @@ func (x *Message_ToolCall_ReadFiles) String() string {
 func (*Message_ToolCall_ReadFiles) ProtoMessage() {}
 
 func (x *Message_ToolCall_ReadFiles) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[49]
+	mi := &file_task_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9476,7 +9603,7 @@ type Message_ToolCall_SearchCodebase struct {
 
 func (x *Message_ToolCall_SearchCodebase) Reset() {
 	*x = Message_ToolCall_SearchCodebase{}
-	mi := &file_task_proto_msgTypes[50]
+	mi := &file_task_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9488,7 +9615,7 @@ func (x *Message_ToolCall_SearchCodebase) String() string {
 func (*Message_ToolCall_SearchCodebase) ProtoMessage() {}
 
 func (x *Message_ToolCall_SearchCodebase) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[50]
+	mi := &file_task_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9604,7 +9731,7 @@ type Message_ToolCall_ApplyFileDiffs struct {
 
 func (x *Message_ToolCall_ApplyFileDiffs) Reset() {
 	*x = Message_ToolCall_ApplyFileDiffs{}
-	mi := &file_task_proto_msgTypes[51]
+	mi := &file_task_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9616,7 +9743,7 @@ func (x *Message_ToolCall_ApplyFileDiffs) String() string {
 func (*Message_ToolCall_ApplyFileDiffs) ProtoMessage() {}
 
 func (x *Message_ToolCall_ApplyFileDiffs) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[51]
+	mi := &file_task_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9714,7 +9841,7 @@ type Message_ToolCall_SuggestPlan struct {
 
 func (x *Message_ToolCall_SuggestPlan) Reset() {
 	*x = Message_ToolCall_SuggestPlan{}
-	mi := &file_task_proto_msgTypes[52]
+	mi := &file_task_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9726,7 +9853,7 @@ func (x *Message_ToolCall_SuggestPlan) String() string {
 func (*Message_ToolCall_SuggestPlan) ProtoMessage() {}
 
 func (x *Message_ToolCall_SuggestPlan) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[52]
+	mi := &file_task_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9807,7 +9934,7 @@ type Message_ToolCall_SuggestCreatePlan struct {
 
 func (x *Message_ToolCall_SuggestCreatePlan) Reset() {
 	*x = Message_ToolCall_SuggestCreatePlan{}
-	mi := &file_task_proto_msgTypes[53]
+	mi := &file_task_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9819,7 +9946,7 @@ func (x *Message_ToolCall_SuggestCreatePlan) String() string {
 func (*Message_ToolCall_SuggestCreatePlan) ProtoMessage() {}
 
 func (x *Message_ToolCall_SuggestCreatePlan) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[53]
+	mi := &file_task_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9855,7 +9982,7 @@ type Message_ToolCall_Grep struct {
 
 func (x *Message_ToolCall_Grep) Reset() {
 	*x = Message_ToolCall_Grep{}
-	mi := &file_task_proto_msgTypes[54]
+	mi := &file_task_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9867,7 +9994,7 @@ func (x *Message_ToolCall_Grep) String() string {
 func (*Message_ToolCall_Grep) ProtoMessage() {}
 
 func (x *Message_ToolCall_Grep) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[54]
+	mi := &file_task_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -9950,7 +10077,7 @@ type Message_ToolCall_FileGlob struct {
 
 func (x *Message_ToolCall_FileGlob) Reset() {
 	*x = Message_ToolCall_FileGlob{}
-	mi := &file_task_proto_msgTypes[55]
+	mi := &file_task_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -9962,7 +10089,7 @@ func (x *Message_ToolCall_FileGlob) String() string {
 func (*Message_ToolCall_FileGlob) ProtoMessage() {}
 
 func (x *Message_ToolCall_FileGlob) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[55]
+	mi := &file_task_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10048,7 +10175,7 @@ type Message_ToolCall_FileGlobV2 struct {
 
 func (x *Message_ToolCall_FileGlobV2) Reset() {
 	*x = Message_ToolCall_FileGlobV2{}
-	mi := &file_task_proto_msgTypes[56]
+	mi := &file_task_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10060,7 +10187,7 @@ func (x *Message_ToolCall_FileGlobV2) String() string {
 func (*Message_ToolCall_FileGlobV2) ProtoMessage() {}
 
 func (x *Message_ToolCall_FileGlobV2) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[56]
+	mi := &file_task_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10232,7 +10359,7 @@ type Message_ToolCall_ReadMCPResource struct {
 
 func (x *Message_ToolCall_ReadMCPResource) Reset() {
 	*x = Message_ToolCall_ReadMCPResource{}
-	mi := &file_task_proto_msgTypes[57]
+	mi := &file_task_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10244,7 +10371,7 @@ func (x *Message_ToolCall_ReadMCPResource) String() string {
 func (*Message_ToolCall_ReadMCPResource) ProtoMessage() {}
 
 func (x *Message_ToolCall_ReadMCPResource) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[57]
+	mi := &file_task_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10312,7 +10439,7 @@ type Message_ToolCall_CallMCPTool struct {
 
 func (x *Message_ToolCall_CallMCPTool) Reset() {
 	*x = Message_ToolCall_CallMCPTool{}
-	mi := &file_task_proto_msgTypes[58]
+	mi := &file_task_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10324,7 +10451,7 @@ func (x *Message_ToolCall_CallMCPTool) String() string {
 func (*Message_ToolCall_CallMCPTool) ProtoMessage() {}
 
 func (x *Message_ToolCall_CallMCPTool) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[58]
+	mi := &file_task_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10416,7 +10543,7 @@ type Message_ToolCall_SuggestPrompt struct {
 
 func (x *Message_ToolCall_SuggestPrompt) Reset() {
 	*x = Message_ToolCall_SuggestPrompt{}
-	mi := &file_task_proto_msgTypes[59]
+	mi := &file_task_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10428,7 +10555,7 @@ func (x *Message_ToolCall_SuggestPrompt) String() string {
 func (*Message_ToolCall_SuggestPrompt) ProtoMessage() {}
 
 func (x *Message_ToolCall_SuggestPrompt) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[59]
+	mi := &file_task_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10517,7 +10644,7 @@ func (b0 Message_ToolCall_SuggestPrompt_builder) Build() *Message_ToolCall_Sugge
 type case_Message_ToolCall_SuggestPrompt_DisplayMode protoreflect.FieldNumber
 
 func (x case_Message_ToolCall_SuggestPrompt_DisplayMode) String() string {
-	md := file_task_proto_msgTypes[59].Descriptor()
+	md := file_task_proto_msgTypes[60].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -10544,7 +10671,7 @@ type Message_ToolCall_OpenCodeReview struct {
 
 func (x *Message_ToolCall_OpenCodeReview) Reset() {
 	*x = Message_ToolCall_OpenCodeReview{}
-	mi := &file_task_proto_msgTypes[60]
+	mi := &file_task_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10556,7 +10683,7 @@ func (x *Message_ToolCall_OpenCodeReview) String() string {
 func (*Message_ToolCall_OpenCodeReview) ProtoMessage() {}
 
 func (x *Message_ToolCall_OpenCodeReview) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[60]
+	mi := &file_task_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10588,7 +10715,7 @@ type Message_ToolCall_InitProject struct {
 
 func (x *Message_ToolCall_InitProject) Reset() {
 	*x = Message_ToolCall_InitProject{}
-	mi := &file_task_proto_msgTypes[61]
+	mi := &file_task_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10600,7 +10727,7 @@ func (x *Message_ToolCall_InitProject) String() string {
 func (*Message_ToolCall_InitProject) ProtoMessage() {}
 
 func (x *Message_ToolCall_InitProject) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[61]
+	mi := &file_task_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10636,7 +10763,7 @@ type Message_ToolCall_Subagent struct {
 
 func (x *Message_ToolCall_Subagent) Reset() {
 	*x = Message_ToolCall_Subagent{}
-	mi := &file_task_proto_msgTypes[62]
+	mi := &file_task_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10648,7 +10775,7 @@ func (x *Message_ToolCall_Subagent) String() string {
 func (*Message_ToolCall_Subagent) ProtoMessage() {}
 
 func (x *Message_ToolCall_Subagent) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[62]
+	mi := &file_task_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10841,7 +10968,7 @@ func (b0 Message_ToolCall_Subagent_builder) Build() *Message_ToolCall_Subagent {
 type case_Message_ToolCall_Subagent_Metadata protoreflect.FieldNumber
 
 func (x case_Message_ToolCall_Subagent_Metadata) String() string {
-	md := file_task_proto_msgTypes[62].Descriptor()
+	md := file_task_proto_msgTypes[63].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -10874,7 +11001,7 @@ type Message_ToolCall_ReadDocuments struct {
 
 func (x *Message_ToolCall_ReadDocuments) Reset() {
 	*x = Message_ToolCall_ReadDocuments{}
-	mi := &file_task_proto_msgTypes[63]
+	mi := &file_task_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10886,7 +11013,7 @@ func (x *Message_ToolCall_ReadDocuments) String() string {
 func (*Message_ToolCall_ReadDocuments) ProtoMessage() {}
 
 func (x *Message_ToolCall_ReadDocuments) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[63]
+	mi := &file_task_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10934,7 +11061,7 @@ type Message_ToolCall_EditDocuments struct {
 
 func (x *Message_ToolCall_EditDocuments) Reset() {
 	*x = Message_ToolCall_EditDocuments{}
-	mi := &file_task_proto_msgTypes[64]
+	mi := &file_task_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -10946,7 +11073,7 @@ func (x *Message_ToolCall_EditDocuments) String() string {
 func (*Message_ToolCall_EditDocuments) ProtoMessage() {}
 
 func (x *Message_ToolCall_EditDocuments) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[64]
+	mi := &file_task_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -10994,7 +11121,7 @@ type Message_ToolCall_CreateDocuments struct {
 
 func (x *Message_ToolCall_CreateDocuments) Reset() {
 	*x = Message_ToolCall_CreateDocuments{}
-	mi := &file_task_proto_msgTypes[65]
+	mi := &file_task_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11006,7 +11133,7 @@ func (x *Message_ToolCall_CreateDocuments) String() string {
 func (*Message_ToolCall_CreateDocuments) ProtoMessage() {}
 
 func (x *Message_ToolCall_CreateDocuments) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[65]
+	mi := &file_task_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11056,7 +11183,7 @@ type Message_ToolCall_ReadFiles_File struct {
 
 func (x *Message_ToolCall_ReadFiles_File) Reset() {
 	*x = Message_ToolCall_ReadFiles_File{}
-	mi := &file_task_proto_msgTypes[66]
+	mi := &file_task_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11068,7 +11195,7 @@ func (x *Message_ToolCall_ReadFiles_File) String() string {
 func (*Message_ToolCall_ReadFiles_File) ProtoMessage() {}
 
 func (x *Message_ToolCall_ReadFiles_File) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[66]
+	mi := &file_task_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11152,7 +11279,7 @@ type Message_ToolCall_ApplyFileDiffs_FileDiff struct {
 
 func (x *Message_ToolCall_ApplyFileDiffs_FileDiff) Reset() {
 	*x = Message_ToolCall_ApplyFileDiffs_FileDiff{}
-	mi := &file_task_proto_msgTypes[67]
+	mi := &file_task_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11164,7 +11291,7 @@ func (x *Message_ToolCall_ApplyFileDiffs_FileDiff) String() string {
 func (*Message_ToolCall_ApplyFileDiffs_FileDiff) ProtoMessage() {}
 
 func (x *Message_ToolCall_ApplyFileDiffs_FileDiff) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[67]
+	mi := &file_task_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11297,7 +11424,7 @@ type Message_ToolCall_ApplyFileDiffs_NewFile struct {
 
 func (x *Message_ToolCall_ApplyFileDiffs_NewFile) Reset() {
 	*x = Message_ToolCall_ApplyFileDiffs_NewFile{}
-	mi := &file_task_proto_msgTypes[68]
+	mi := &file_task_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11309,7 +11436,7 @@ func (x *Message_ToolCall_ApplyFileDiffs_NewFile) String() string {
 func (*Message_ToolCall_ApplyFileDiffs_NewFile) ProtoMessage() {}
 
 func (x *Message_ToolCall_ApplyFileDiffs_NewFile) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[68]
+	mi := &file_task_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11411,7 +11538,7 @@ type Message_ToolCall_SuggestPrompt_InlineQueryBanner struct {
 
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) Reset() {
 	*x = Message_ToolCall_SuggestPrompt_InlineQueryBanner{}
-	mi := &file_task_proto_msgTypes[69]
+	mi := &file_task_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11423,7 +11550,7 @@ func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) String() string {
 func (*Message_ToolCall_SuggestPrompt_InlineQueryBanner) ProtoMessage() {}
 
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[69]
+	mi := &file_task_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11554,7 +11681,7 @@ type Message_ToolCall_ReadDocuments_Document struct {
 
 func (x *Message_ToolCall_ReadDocuments_Document) Reset() {
 	*x = Message_ToolCall_ReadDocuments_Document{}
-	mi := &file_task_proto_msgTypes[70]
+	mi := &file_task_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11566,7 +11693,7 @@ func (x *Message_ToolCall_ReadDocuments_Document) String() string {
 func (*Message_ToolCall_ReadDocuments_Document) ProtoMessage() {}
 
 func (x *Message_ToolCall_ReadDocuments_Document) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[70]
+	mi := &file_task_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11650,7 +11777,7 @@ type Message_ToolCall_EditDocuments_DocumentDiff struct {
 
 func (x *Message_ToolCall_EditDocuments_DocumentDiff) Reset() {
 	*x = Message_ToolCall_EditDocuments_DocumentDiff{}
-	mi := &file_task_proto_msgTypes[71]
+	mi := &file_task_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11662,7 +11789,7 @@ func (x *Message_ToolCall_EditDocuments_DocumentDiff) String() string {
 func (*Message_ToolCall_EditDocuments_DocumentDiff) ProtoMessage() {}
 
 func (x *Message_ToolCall_EditDocuments_DocumentDiff) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[71]
+	mi := &file_task_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11794,7 +11921,7 @@ type Message_ToolCall_CreateDocuments_NewDocument struct {
 
 func (x *Message_ToolCall_CreateDocuments_NewDocument) Reset() {
 	*x = Message_ToolCall_CreateDocuments_NewDocument{}
-	mi := &file_task_proto_msgTypes[72]
+	mi := &file_task_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11806,7 +11933,7 @@ func (x *Message_ToolCall_CreateDocuments_NewDocument) String() string {
 func (*Message_ToolCall_CreateDocuments_NewDocument) ProtoMessage() {}
 
 func (x *Message_ToolCall_CreateDocuments_NewDocument) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[72]
+	mi := &file_task_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11875,7 +12002,7 @@ type Message_ToolCallResult_ServerResult struct {
 
 func (x *Message_ToolCallResult_ServerResult) Reset() {
 	*x = Message_ToolCallResult_ServerResult{}
-	mi := &file_task_proto_msgTypes[73]
+	mi := &file_task_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11887,7 +12014,7 @@ func (x *Message_ToolCallResult_ServerResult) String() string {
 func (*Message_ToolCallResult_ServerResult) ProtoMessage() {}
 
 func (x *Message_ToolCallResult_ServerResult) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[73]
+	mi := &file_task_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -11953,7 +12080,7 @@ type Message_ToolCallResult_RefineResult struct {
 
 func (x *Message_ToolCallResult_RefineResult) Reset() {
 	*x = Message_ToolCallResult_RefineResult{}
-	mi := &file_task_proto_msgTypes[74]
+	mi := &file_task_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -11965,7 +12092,7 @@ func (x *Message_ToolCallResult_RefineResult) String() string {
 func (*Message_ToolCallResult_RefineResult) ProtoMessage() {}
 
 func (x *Message_ToolCallResult_RefineResult) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[74]
+	mi := &file_task_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12023,7 +12150,7 @@ type Message_ToolCallResult_SubagentResult struct {
 
 func (x *Message_ToolCallResult_SubagentResult) Reset() {
 	*x = Message_ToolCallResult_SubagentResult{}
-	mi := &file_task_proto_msgTypes[75]
+	mi := &file_task_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12035,7 +12162,7 @@ func (x *Message_ToolCallResult_SubagentResult) String() string {
 func (*Message_ToolCallResult_SubagentResult) ProtoMessage() {}
 
 func (x *Message_ToolCallResult_SubagentResult) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[75]
+	mi := &file_task_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12099,7 +12226,7 @@ type Message_UpdateReviewComments_AddressReviewComments struct {
 
 func (x *Message_UpdateReviewComments_AddressReviewComments) Reset() {
 	*x = Message_UpdateReviewComments_AddressReviewComments{}
-	mi := &file_task_proto_msgTypes[76]
+	mi := &file_task_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12111,7 +12238,7 @@ func (x *Message_UpdateReviewComments_AddressReviewComments) String() string {
 func (*Message_UpdateReviewComments_AddressReviewComments) ProtoMessage() {}
 
 func (x *Message_UpdateReviewComments_AddressReviewComments) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[76]
+	mi := &file_task_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12156,7 +12283,7 @@ type ReadFilesResult_TextFilesSuccess struct {
 
 func (x *ReadFilesResult_TextFilesSuccess) Reset() {
 	*x = ReadFilesResult_TextFilesSuccess{}
-	mi := &file_task_proto_msgTypes[77]
+	mi := &file_task_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12168,7 +12295,7 @@ func (x *ReadFilesResult_TextFilesSuccess) String() string {
 func (*ReadFilesResult_TextFilesSuccess) ProtoMessage() {}
 
 func (x *ReadFilesResult_TextFilesSuccess) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[77]
+	mi := &file_task_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12215,7 +12342,7 @@ type ReadFilesResult_AnyFilesSuccess struct {
 
 func (x *ReadFilesResult_AnyFilesSuccess) Reset() {
 	*x = ReadFilesResult_AnyFilesSuccess{}
-	mi := &file_task_proto_msgTypes[78]
+	mi := &file_task_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12227,7 +12354,7 @@ func (x *ReadFilesResult_AnyFilesSuccess) String() string {
 func (*ReadFilesResult_AnyFilesSuccess) ProtoMessage() {}
 
 func (x *ReadFilesResult_AnyFilesSuccess) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[78]
+	mi := &file_task_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12276,7 +12403,7 @@ type ReadFilesResult_Error struct {
 
 func (x *ReadFilesResult_Error) Reset() {
 	*x = ReadFilesResult_Error{}
-	mi := &file_task_proto_msgTypes[79]
+	mi := &file_task_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12288,7 +12415,7 @@ func (x *ReadFilesResult_Error) String() string {
 func (*ReadFilesResult_Error) ProtoMessage() {}
 
 func (x *ReadFilesResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[79]
+	mi := &file_task_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12352,7 +12479,7 @@ type SearchCodebaseResult_Success struct {
 
 func (x *SearchCodebaseResult_Success) Reset() {
 	*x = SearchCodebaseResult_Success{}
-	mi := &file_task_proto_msgTypes[80]
+	mi := &file_task_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12364,7 +12491,7 @@ func (x *SearchCodebaseResult_Success) String() string {
 func (*SearchCodebaseResult_Success) ProtoMessage() {}
 
 func (x *SearchCodebaseResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[80]
+	mi := &file_task_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12413,7 +12540,7 @@ type SearchCodebaseResult_Error struct {
 
 func (x *SearchCodebaseResult_Error) Reset() {
 	*x = SearchCodebaseResult_Error{}
-	mi := &file_task_proto_msgTypes[81]
+	mi := &file_task_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12425,7 +12552,7 @@ func (x *SearchCodebaseResult_Error) String() string {
 func (*SearchCodebaseResult_Error) ProtoMessage() {}
 
 func (x *SearchCodebaseResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[81]
+	mi := &file_task_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12490,7 +12617,7 @@ type ApplyFileDiffsResult_Success struct {
 
 func (x *ApplyFileDiffsResult_Success) Reset() {
 	*x = ApplyFileDiffsResult_Success{}
-	mi := &file_task_proto_msgTypes[82]
+	mi := &file_task_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12502,7 +12629,7 @@ func (x *ApplyFileDiffsResult_Success) String() string {
 func (*ApplyFileDiffsResult_Success) ProtoMessage() {}
 
 func (x *ApplyFileDiffsResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[82]
+	mi := &file_task_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12572,7 +12699,7 @@ type ApplyFileDiffsResult_Error struct {
 
 func (x *ApplyFileDiffsResult_Error) Reset() {
 	*x = ApplyFileDiffsResult_Error{}
-	mi := &file_task_proto_msgTypes[83]
+	mi := &file_task_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12584,7 +12711,7 @@ func (x *ApplyFileDiffsResult_Error) String() string {
 func (*ApplyFileDiffsResult_Error) ProtoMessage() {}
 
 func (x *ApplyFileDiffsResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[83]
+	mi := &file_task_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12651,7 +12778,7 @@ type ApplyFileDiffsResult_Success_UpdatedFileContent struct {
 
 func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) Reset() {
 	*x = ApplyFileDiffsResult_Success_UpdatedFileContent{}
-	mi := &file_task_proto_msgTypes[84]
+	mi := &file_task_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12663,7 +12790,7 @@ func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) String() string {
 func (*ApplyFileDiffsResult_Success_UpdatedFileContent) ProtoMessage() {}
 
 func (x *ApplyFileDiffsResult_Success_UpdatedFileContent) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[84]
+	mi := &file_task_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12753,7 +12880,7 @@ type SuggestPlanResult_UserEditedPlan struct {
 
 func (x *SuggestPlanResult_UserEditedPlan) Reset() {
 	*x = SuggestPlanResult_UserEditedPlan{}
-	mi := &file_task_proto_msgTypes[85]
+	mi := &file_task_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12765,7 +12892,7 @@ func (x *SuggestPlanResult_UserEditedPlan) String() string {
 func (*SuggestPlanResult_UserEditedPlan) ProtoMessage() {}
 
 func (x *SuggestPlanResult_UserEditedPlan) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[85]
+	mi := &file_task_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12830,7 +12957,7 @@ type GrepResult_Success struct {
 
 func (x *GrepResult_Success) Reset() {
 	*x = GrepResult_Success{}
-	mi := &file_task_proto_msgTypes[86]
+	mi := &file_task_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12842,7 +12969,7 @@ func (x *GrepResult_Success) String() string {
 func (*GrepResult_Success) ProtoMessage() {}
 
 func (x *GrepResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[86]
+	mi := &file_task_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12892,7 +13019,7 @@ type GrepResult_Error struct {
 
 func (x *GrepResult_Error) Reset() {
 	*x = GrepResult_Error{}
-	mi := &file_task_proto_msgTypes[87]
+	mi := &file_task_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12904,7 +13031,7 @@ func (x *GrepResult_Error) String() string {
 func (*GrepResult_Error) ProtoMessage() {}
 
 func (x *GrepResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[87]
+	mi := &file_task_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -12971,7 +13098,7 @@ type GrepResult_Success_GrepFileMatch struct {
 
 func (x *GrepResult_Success_GrepFileMatch) Reset() {
 	*x = GrepResult_Success_GrepFileMatch{}
-	mi := &file_task_proto_msgTypes[88]
+	mi := &file_task_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -12983,7 +13110,7 @@ func (x *GrepResult_Success_GrepFileMatch) String() string {
 func (*GrepResult_Success_GrepFileMatch) ProtoMessage() {}
 
 func (x *GrepResult_Success_GrepFileMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[88]
+	mi := &file_task_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13066,7 +13193,7 @@ type GrepResult_Success_GrepFileMatch_GrepLineMatch struct {
 
 func (x *GrepResult_Success_GrepFileMatch_GrepLineMatch) Reset() {
 	*x = GrepResult_Success_GrepFileMatch_GrepLineMatch{}
-	mi := &file_task_proto_msgTypes[89]
+	mi := &file_task_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13078,7 +13205,7 @@ func (x *GrepResult_Success_GrepFileMatch_GrepLineMatch) String() string {
 func (*GrepResult_Success_GrepFileMatch_GrepLineMatch) ProtoMessage() {}
 
 func (x *GrepResult_Success_GrepFileMatch_GrepLineMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[89]
+	mi := &file_task_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13144,7 +13271,7 @@ type FileGlobResult_Success struct {
 
 func (x *FileGlobResult_Success) Reset() {
 	*x = FileGlobResult_Success{}
-	mi := &file_task_proto_msgTypes[90]
+	mi := &file_task_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13156,7 +13283,7 @@ func (x *FileGlobResult_Success) String() string {
 func (*FileGlobResult_Success) ProtoMessage() {}
 
 func (x *FileGlobResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[90]
+	mi := &file_task_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13223,7 +13350,7 @@ type FileGlobResult_Error struct {
 
 func (x *FileGlobResult_Error) Reset() {
 	*x = FileGlobResult_Error{}
-	mi := &file_task_proto_msgTypes[91]
+	mi := &file_task_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13235,7 +13362,7 @@ func (x *FileGlobResult_Error) String() string {
 func (*FileGlobResult_Error) ProtoMessage() {}
 
 func (x *FileGlobResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[91]
+	mi := &file_task_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13299,7 +13426,7 @@ type FileGlobV2Result_Success struct {
 
 func (x *FileGlobV2Result_Success) Reset() {
 	*x = FileGlobV2Result_Success{}
-	mi := &file_task_proto_msgTypes[92]
+	mi := &file_task_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13311,7 +13438,7 @@ func (x *FileGlobV2Result_Success) String() string {
 func (*FileGlobV2Result_Success) ProtoMessage() {}
 
 func (x *FileGlobV2Result_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[92]
+	mi := &file_task_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13361,7 +13488,7 @@ type FileGlobV2Result_Error struct {
 
 func (x *FileGlobV2Result_Error) Reset() {
 	*x = FileGlobV2Result_Error{}
-	mi := &file_task_proto_msgTypes[93]
+	mi := &file_task_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13373,7 +13500,7 @@ func (x *FileGlobV2Result_Error) String() string {
 func (*FileGlobV2Result_Error) ProtoMessage() {}
 
 func (x *FileGlobV2Result_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[93]
+	mi := &file_task_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13439,7 +13566,7 @@ type FileGlobV2Result_Success_FileGlobMatch struct {
 
 func (x *FileGlobV2Result_Success_FileGlobMatch) Reset() {
 	*x = FileGlobV2Result_Success_FileGlobMatch{}
-	mi := &file_task_proto_msgTypes[94]
+	mi := &file_task_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13451,7 +13578,7 @@ func (x *FileGlobV2Result_Success_FileGlobMatch) String() string {
 func (*FileGlobV2Result_Success_FileGlobMatch) ProtoMessage() {}
 
 func (x *FileGlobV2Result_Success_FileGlobMatch) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[94]
+	mi := &file_task_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13519,7 +13646,7 @@ type MCPResourceContent_Text struct {
 
 func (x *MCPResourceContent_Text) Reset() {
 	*x = MCPResourceContent_Text{}
-	mi := &file_task_proto_msgTypes[95]
+	mi := &file_task_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13531,7 +13658,7 @@ func (x *MCPResourceContent_Text) String() string {
 func (*MCPResourceContent_Text) ProtoMessage() {}
 
 func (x *MCPResourceContent_Text) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[95]
+	mi := &file_task_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13630,7 +13757,7 @@ type MCPResourceContent_Binary struct {
 
 func (x *MCPResourceContent_Binary) Reset() {
 	*x = MCPResourceContent_Binary{}
-	mi := &file_task_proto_msgTypes[96]
+	mi := &file_task_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13642,7 +13769,7 @@ func (x *MCPResourceContent_Binary) String() string {
 func (*MCPResourceContent_Binary) ProtoMessage() {}
 
 func (x *MCPResourceContent_Binary) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[96]
+	mi := &file_task_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13742,7 +13869,7 @@ type ReadMCPResourceResult_Success struct {
 
 func (x *ReadMCPResourceResult_Success) Reset() {
 	*x = ReadMCPResourceResult_Success{}
-	mi := &file_task_proto_msgTypes[97]
+	mi := &file_task_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13754,7 +13881,7 @@ func (x *ReadMCPResourceResult_Success) String() string {
 func (*ReadMCPResourceResult_Success) ProtoMessage() {}
 
 func (x *ReadMCPResourceResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[97]
+	mi := &file_task_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13805,7 +13932,7 @@ type ReadMCPResourceResult_Error struct {
 
 func (x *ReadMCPResourceResult_Error) Reset() {
 	*x = ReadMCPResourceResult_Error{}
-	mi := &file_task_proto_msgTypes[98]
+	mi := &file_task_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13817,7 +13944,7 @@ func (x *ReadMCPResourceResult_Error) String() string {
 func (*ReadMCPResourceResult_Error) ProtoMessage() {}
 
 func (x *ReadMCPResourceResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[98]
+	mi := &file_task_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13883,7 +14010,7 @@ type SuggestNewConversationResult_Accepted struct {
 
 func (x *SuggestNewConversationResult_Accepted) Reset() {
 	*x = SuggestNewConversationResult_Accepted{}
-	mi := &file_task_proto_msgTypes[99]
+	mi := &file_task_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13895,7 +14022,7 @@ func (x *SuggestNewConversationResult_Accepted) String() string {
 func (*SuggestNewConversationResult_Accepted) ProtoMessage() {}
 
 func (x *SuggestNewConversationResult_Accepted) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[99]
+	mi := &file_task_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -13958,7 +14085,7 @@ type SuggestNewConversationResult_Rejected struct {
 
 func (x *SuggestNewConversationResult_Rejected) Reset() {
 	*x = SuggestNewConversationResult_Rejected{}
-	mi := &file_task_proto_msgTypes[100]
+	mi := &file_task_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -13970,7 +14097,7 @@ func (x *SuggestNewConversationResult_Rejected) String() string {
 func (*SuggestNewConversationResult_Rejected) ProtoMessage() {}
 
 func (x *SuggestNewConversationResult_Rejected) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[100]
+	mi := &file_task_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14002,7 +14129,7 @@ type CallMCPToolResult_Success struct {
 
 func (x *CallMCPToolResult_Success) Reset() {
 	*x = CallMCPToolResult_Success{}
-	mi := &file_task_proto_msgTypes[101]
+	mi := &file_task_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14014,7 +14141,7 @@ func (x *CallMCPToolResult_Success) String() string {
 func (*CallMCPToolResult_Success) ProtoMessage() {}
 
 func (x *CallMCPToolResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[101]
+	mi := &file_task_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14063,7 +14190,7 @@ type CallMCPToolResult_Error struct {
 
 func (x *CallMCPToolResult_Error) Reset() {
 	*x = CallMCPToolResult_Error{}
-	mi := &file_task_proto_msgTypes[102]
+	mi := &file_task_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14075,7 +14202,7 @@ func (x *CallMCPToolResult_Error) String() string {
 func (*CallMCPToolResult_Error) ProtoMessage() {}
 
 func (x *CallMCPToolResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[102]
+	mi := &file_task_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14139,7 +14266,7 @@ type CallMCPToolResult_Success_Result struct {
 
 func (x *CallMCPToolResult_Success_Result) Reset() {
 	*x = CallMCPToolResult_Success_Result{}
-	mi := &file_task_proto_msgTypes[103]
+	mi := &file_task_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14151,7 +14278,7 @@ func (x *CallMCPToolResult_Success_Result) String() string {
 func (*CallMCPToolResult_Success_Result) ProtoMessage() {}
 
 func (x *CallMCPToolResult_Success_Result) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[103]
+	mi := &file_task_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14317,7 +14444,7 @@ func (b0 CallMCPToolResult_Success_Result_builder) Build() *CallMCPToolResult_Su
 type case_CallMCPToolResult_Success_Result_Result protoreflect.FieldNumber
 
 func (x case_CallMCPToolResult_Success_Result_Result) String() string {
-	md := file_task_proto_msgTypes[103].Descriptor()
+	md := file_task_proto_msgTypes[104].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -14358,7 +14485,7 @@ type CallMCPToolResult_Success_Result_Text struct {
 
 func (x *CallMCPToolResult_Success_Result_Text) Reset() {
 	*x = CallMCPToolResult_Success_Result_Text{}
-	mi := &file_task_proto_msgTypes[104]
+	mi := &file_task_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14370,7 +14497,7 @@ func (x *CallMCPToolResult_Success_Result_Text) String() string {
 func (*CallMCPToolResult_Success_Result_Text) ProtoMessage() {}
 
 func (x *CallMCPToolResult_Success_Result_Text) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[104]
+	mi := &file_task_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14437,7 +14564,7 @@ type CallMCPToolResult_Success_Result_Image struct {
 
 func (x *CallMCPToolResult_Success_Result_Image) Reset() {
 	*x = CallMCPToolResult_Success_Result_Image{}
-	mi := &file_task_proto_msgTypes[105]
+	mi := &file_task_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14449,7 +14576,7 @@ func (x *CallMCPToolResult_Success_Result_Image) String() string {
 func (*CallMCPToolResult_Success_Result_Image) ProtoMessage() {}
 
 func (x *CallMCPToolResult_Success_Result_Image) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[105]
+	mi := &file_task_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14549,7 +14676,7 @@ type ReadDocumentsResult_Success struct {
 
 func (x *ReadDocumentsResult_Success) Reset() {
 	*x = ReadDocumentsResult_Success{}
-	mi := &file_task_proto_msgTypes[106]
+	mi := &file_task_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14561,7 +14688,7 @@ func (x *ReadDocumentsResult_Success) String() string {
 func (*ReadDocumentsResult_Success) ProtoMessage() {}
 
 func (x *ReadDocumentsResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[106]
+	mi := &file_task_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14610,7 +14737,7 @@ type ReadDocumentsResult_Error struct {
 
 func (x *ReadDocumentsResult_Error) Reset() {
 	*x = ReadDocumentsResult_Error{}
-	mi := &file_task_proto_msgTypes[107]
+	mi := &file_task_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14622,7 +14749,7 @@ func (x *ReadDocumentsResult_Error) String() string {
 func (*ReadDocumentsResult_Error) ProtoMessage() {}
 
 func (x *ReadDocumentsResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[107]
+	mi := &file_task_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14686,7 +14813,7 @@ type EditDocumentsResult_Success struct {
 
 func (x *EditDocumentsResult_Success) Reset() {
 	*x = EditDocumentsResult_Success{}
-	mi := &file_task_proto_msgTypes[108]
+	mi := &file_task_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14698,7 +14825,7 @@ func (x *EditDocumentsResult_Success) String() string {
 func (*EditDocumentsResult_Success) ProtoMessage() {}
 
 func (x *EditDocumentsResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[108]
+	mi := &file_task_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14747,7 +14874,7 @@ type EditDocumentsResult_Error struct {
 
 func (x *EditDocumentsResult_Error) Reset() {
 	*x = EditDocumentsResult_Error{}
-	mi := &file_task_proto_msgTypes[109]
+	mi := &file_task_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14759,7 +14886,7 @@ func (x *EditDocumentsResult_Error) String() string {
 func (*EditDocumentsResult_Error) ProtoMessage() {}
 
 func (x *EditDocumentsResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[109]
+	mi := &file_task_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14823,7 +14950,7 @@ type CreateDocumentsResult_Success struct {
 
 func (x *CreateDocumentsResult_Success) Reset() {
 	*x = CreateDocumentsResult_Success{}
-	mi := &file_task_proto_msgTypes[110]
+	mi := &file_task_proto_msgTypes[111]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14835,7 +14962,7 @@ func (x *CreateDocumentsResult_Success) String() string {
 func (*CreateDocumentsResult_Success) ProtoMessage() {}
 
 func (x *CreateDocumentsResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[110]
+	mi := &file_task_proto_msgTypes[111]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14884,7 +15011,7 @@ type CreateDocumentsResult_Error struct {
 
 func (x *CreateDocumentsResult_Error) Reset() {
 	*x = CreateDocumentsResult_Error{}
-	mi := &file_task_proto_msgTypes[111]
+	mi := &file_task_proto_msgTypes[112]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14896,7 +15023,7 @@ func (x *CreateDocumentsResult_Error) String() string {
 func (*CreateDocumentsResult_Error) ProtoMessage() {}
 
 func (x *CreateDocumentsResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[111]
+	mi := &file_task_proto_msgTypes[112]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15001,7 +15128,7 @@ const file_task_proto_rawDesc = "" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12x\n" +
 	"\x16referenced_attachments\x18\x03 \x03(\v2A.warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntryR\x15referencedAttachments\x126\n" +
-	"\x04mode\x18\x04 \x01(\x0e2\".warp.multi_agent.v1.UserQueryModeR\x04mode\x1ai\n" +
+	"\x04mode\x18\x04 \x01(\v2\".warp.multi_agent.v1.UserQueryModeR\x04mode\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
 	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xae\x04\n" +
@@ -15376,7 +15503,11 @@ const file_task_proto_rawDesc = "" +
 	"\x11created_documents\x18\x01 \x03(\v2$.warp.multi_agent.v1.DocumentContentR\x10createdDocuments\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result*\xab\x03\n" +
+	"\x06result\"u\n" +
+	"\rUserQueryMode\x12.\n" +
+	"\x05agent\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05agent\x12,\n" +
+	"\x04plan\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04planB\x06\n" +
+	"\x04type*\xab\x03\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -15399,41 +15530,38 @@ const file_task_proto_rawDesc = "" +
 	"\bSUBAGENT\x10\x10\x12\x12\n" +
 	"\x0eREAD_DOCUMENTS\x10\x11\x12\x12\n" +
 	"\x0eEDIT_DOCUMENTS\x10\x12\x12\x14\n" +
-	"\x10CREATE_DOCUMENTS\x10\x13*$\n" +
-	"\rUserQueryMode\x12\t\n" +
-	"\x05AGENT\x10\x00\x12\b\n" +
-	"\x04PLAN\x10\x01B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x10CREATE_DOCUMENTS\x10\x13B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 112)
+var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 113)
 var file_task_proto_goTypes = []any{
 	(ToolType)(0),                                              // 0: warp.multi_agent.v1.ToolType
-	(UserQueryMode)(0),                                         // 1: warp.multi_agent.v1.UserQueryMode
-	(*Task)(nil),                                               // 2: warp.multi_agent.v1.Task
-	(*ReviewComments)(nil),                                     // 3: warp.multi_agent.v1.ReviewComments
-	(*ReviewComment)(nil),                                      // 4: warp.multi_agent.v1.ReviewComment
-	(*Message)(nil),                                            // 5: warp.multi_agent.v1.Message
-	(*RunShellCommandResult)(nil),                              // 6: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                    // 7: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                               // 8: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                               // 9: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestCreatePlanResult)(nil),                            // 10: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*SuggestPlanResult)(nil),                                  // 11: warp.multi_agent.v1.SuggestPlanResult
-	(*GrepResult)(nil),                                         // 12: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                                     // 13: warp.multi_agent.v1.FileGlobResult
-	(*FileGlobV2Result)(nil),                                   // 14: warp.multi_agent.v1.FileGlobV2Result
-	(*MCPResourceContent)(nil),                                 // 15: warp.multi_agent.v1.MCPResourceContent
-	(*ReadMCPResourceResult)(nil),                              // 16: warp.multi_agent.v1.ReadMCPResourceResult
-	(*WriteToLongRunningShellCommandResult)(nil),               // 17: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),                       // 18: warp.multi_agent.v1.SuggestNewConversationResult
-	(*ShellCommandFinished)(nil),                               // 19: warp.multi_agent.v1.ShellCommandFinished
-	(*CallMCPToolResult)(nil),                                  // 20: warp.multi_agent.v1.CallMCPToolResult
-	(*SuggestPromptResult)(nil),                                // 21: warp.multi_agent.v1.SuggestPromptResult
-	(*OpenCodeReviewResult)(nil),                               // 22: warp.multi_agent.v1.OpenCodeReviewResult
-	(*InitProjectResult)(nil),                                  // 23: warp.multi_agent.v1.InitProjectResult
-	(*ReadDocumentsResult)(nil),                                // 24: warp.multi_agent.v1.ReadDocumentsResult
-	(*EditDocumentsResult)(nil),                                // 25: warp.multi_agent.v1.EditDocumentsResult
-	(*CreateDocumentsResult)(nil),                              // 26: warp.multi_agent.v1.CreateDocumentsResult
+	(*Task)(nil),                                               // 1: warp.multi_agent.v1.Task
+	(*ReviewComments)(nil),                                     // 2: warp.multi_agent.v1.ReviewComments
+	(*ReviewComment)(nil),                                      // 3: warp.multi_agent.v1.ReviewComment
+	(*Message)(nil),                                            // 4: warp.multi_agent.v1.Message
+	(*RunShellCommandResult)(nil),                              // 5: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                    // 6: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                               // 7: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                               // 8: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestCreatePlanResult)(nil),                            // 9: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*SuggestPlanResult)(nil),                                  // 10: warp.multi_agent.v1.SuggestPlanResult
+	(*GrepResult)(nil),                                         // 11: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                                     // 12: warp.multi_agent.v1.FileGlobResult
+	(*FileGlobV2Result)(nil),                                   // 13: warp.multi_agent.v1.FileGlobV2Result
+	(*MCPResourceContent)(nil),                                 // 14: warp.multi_agent.v1.MCPResourceContent
+	(*ReadMCPResourceResult)(nil),                              // 15: warp.multi_agent.v1.ReadMCPResourceResult
+	(*WriteToLongRunningShellCommandResult)(nil),               // 16: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),                       // 17: warp.multi_agent.v1.SuggestNewConversationResult
+	(*ShellCommandFinished)(nil),                               // 18: warp.multi_agent.v1.ShellCommandFinished
+	(*CallMCPToolResult)(nil),                                  // 19: warp.multi_agent.v1.CallMCPToolResult
+	(*SuggestPromptResult)(nil),                                // 20: warp.multi_agent.v1.SuggestPromptResult
+	(*OpenCodeReviewResult)(nil),                               // 21: warp.multi_agent.v1.OpenCodeReviewResult
+	(*InitProjectResult)(nil),                                  // 22: warp.multi_agent.v1.InitProjectResult
+	(*ReadDocumentsResult)(nil),                                // 23: warp.multi_agent.v1.ReadDocumentsResult
+	(*EditDocumentsResult)(nil),                                // 24: warp.multi_agent.v1.EditDocumentsResult
+	(*CreateDocumentsResult)(nil),                              // 25: warp.multi_agent.v1.CreateDocumentsResult
+	(*UserQueryMode)(nil),                                      // 26: warp.multi_agent.v1.UserQueryMode
 	(*Task_Dependencies)(nil),                                  // 27: warp.multi_agent.v1.Task.Dependencies
 	(*Message_UserQuery)(nil),                                  // 28: warp.multi_agent.v1.Message.UserQuery
 	(*Message_SystemQuery)(nil),                                // 29: warp.multi_agent.v1.Message.SystemQuery
@@ -15540,9 +15668,9 @@ var file_task_proto_goTypes = []any{
 }
 var file_task_proto_depIdxs = []int32{
 	27,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
-	5,   // 1: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
-	4,   // 2: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	4,   // 3: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	4,   // 1: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
+	3,   // 2: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	3,   // 3: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	114, // 4: warp.multi_agent.v1.ReviewComment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
 	115, // 5: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
 	116, // 6: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
@@ -15558,7 +15686,7 @@ var file_task_proto_depIdxs = []int32{
 	38,  // 16: warp.multi_agent.v1.Message.code_review:type_name -> warp.multi_agent.v1.Message.CodeReview
 	43,  // 17: warp.multi_agent.v1.Message.update_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments
 	117, // 18: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	19,  // 19: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
+	18,  // 19: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	79,  // 20: warp.multi_agent.v1.ReadFilesResult.text_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
 	80,  // 21: warp.multi_agent.v1.ReadFilesResult.any_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
 	81,  // 22: warp.multi_agent.v1.ReadFilesResult.error:type_name -> warp.multi_agent.v1.ReadFilesResult.Error
@@ -15579,7 +15707,7 @@ var file_task_proto_depIdxs = []int32{
 	99,  // 37: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
 	100, // 38: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
 	117, // 39: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	19,  // 40: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
+	18,  // 40: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	101, // 41: warp.multi_agent.v1.SuggestNewConversationResult.accepted:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Accepted
 	102, // 42: warp.multi_agent.v1.SuggestNewConversationResult.rejected:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Rejected
 	103, // 43: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
@@ -15592,110 +15720,112 @@ var file_task_proto_depIdxs = []int32{
 	111, // 50: warp.multi_agent.v1.EditDocumentsResult.error:type_name -> warp.multi_agent.v1.EditDocumentsResult.Error
 	112, // 51: warp.multi_agent.v1.CreateDocumentsResult.success:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Success
 	113, // 52: warp.multi_agent.v1.CreateDocumentsResult.error:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Error
-	119, // 53: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	44,  // 54: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
-	1,   // 55: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
-	30,  // 56: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
-	31,  // 57: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
-	32,  // 58: warp.multi_agent.v1.Message.SystemQuery.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Message.TriggerSuggestPrompt
-	33,  // 59: warp.multi_agent.v1.Message.SystemQuery.create_new_project:type_name -> warp.multi_agent.v1.Message.CreateNewProject
-	34,  // 60: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
-	119, // 61: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	120, // 62: warp.multi_agent.v1.Message.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	118, // 63: warp.multi_agent.v1.Message.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	118, // 64: warp.multi_agent.v1.Message.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	121, // 65: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
-	121, // 66: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
-	45,  // 67: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
-	46,  // 68: warp.multi_agent.v1.Message.Summarization.tool_call_result_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
-	3,   // 69: warp.multi_agent.v1.Message.CodeReview.comments:type_name -> warp.multi_agent.v1.ReviewComments
-	48,  // 70: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	52,  // 71: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	47,  // 72: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
-	51,  // 73: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	53,  // 74: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	54,  // 75: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	55,  // 76: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	56,  // 77: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
-	57,  // 78: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
-	59,  // 79: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
-	60,  // 80: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
-	49,  // 81: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
-	50,  // 82: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
-	58,  // 83: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
-	61,  // 84: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
-	62,  // 85: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
-	63,  // 86: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
-	64,  // 87: warp.multi_agent.v1.Message.ToolCall.subagent:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent
-	65,  // 88: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
-	66,  // 89: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
-	67,  // 90: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
-	119, // 91: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
-	6,   // 92: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
-	8,   // 93: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
-	75,  // 94: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	7,   // 95: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
-	9,   // 96: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	11,  // 97: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	10,  // 98: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	12,  // 99: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	13,  // 100: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	76,  // 101: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
-	118, // 102: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
-	16,  // 103: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	20,  // 104: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	17,  // 105: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	18,  // 106: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
-	14,  // 107: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
-	21,  // 108: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
-	22,  // 109: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
-	23,  // 110: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
-	77,  // 111: warp.multi_agent.v1.Message.ToolCallResult.subagent:type_name -> warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
-	24,  // 112: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
-	25,  // 113: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
-	26,  // 114: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	122, // 115: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
-	123, // 116: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
-	124, // 117: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
-	78,  // 118: warp.multi_agent.v1.Message.UpdateReviewComments.address_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
-	120, // 119: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	116, // 120: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
-	68,  // 121: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	69,  // 122: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	70,  // 123: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	2,   // 124: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	125, // 125: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
-	71,  // 126: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
-	118, // 127: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> google.protobuf.Empty
-	118, // 128: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
-	72,  // 129: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
-	73,  // 130: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
-	74,  // 131: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	126, // 132: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	126, // 133: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	28,  // 134: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	127, // 135: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	128, // 136: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	127, // 137: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	127, // 138: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	86,  // 139: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	127, // 140: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	90,  // 141: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	91,  // 142: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	96,  // 143: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	15,  // 144: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	105, // 145: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	106, // 146: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	107, // 147: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	15,  // 148: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	129, // 149: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	129, // 150: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	129, // 151: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	152, // [152:152] is the sub-list for method output_type
-	152, // [152:152] is the sub-list for method input_type
-	152, // [152:152] is the sub-list for extension type_name
-	152, // [152:152] is the sub-list for extension extendee
-	0,   // [0:152] is the sub-list for field type_name
+	118, // 53: warp.multi_agent.v1.UserQueryMode.agent:type_name -> google.protobuf.Empty
+	118, // 54: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
+	119, // 55: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	44,  // 56: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
+	26,  // 57: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
+	30,  // 58: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
+	31,  // 59: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
+	32,  // 60: warp.multi_agent.v1.Message.SystemQuery.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Message.TriggerSuggestPrompt
+	33,  // 61: warp.multi_agent.v1.Message.SystemQuery.create_new_project:type_name -> warp.multi_agent.v1.Message.CreateNewProject
+	34,  // 62: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
+	119, // 63: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	120, // 64: warp.multi_agent.v1.Message.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	118, // 65: warp.multi_agent.v1.Message.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	118, // 66: warp.multi_agent.v1.Message.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	121, // 67: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
+	121, // 68: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
+	45,  // 69: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
+	46,  // 70: warp.multi_agent.v1.Message.Summarization.tool_call_result_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
+	2,   // 71: warp.multi_agent.v1.Message.CodeReview.comments:type_name -> warp.multi_agent.v1.ReviewComments
+	48,  // 72: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	52,  // 73: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	47,  // 74: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
+	51,  // 75: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	53,  // 76: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	54,  // 77: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	55,  // 78: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	56,  // 79: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
+	57,  // 80: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
+	59,  // 81: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	60,  // 82: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	49,  // 83: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
+	50,  // 84: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
+	58,  // 85: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
+	61,  // 86: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
+	62,  // 87: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
+	63,  // 88: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
+	64,  // 89: warp.multi_agent.v1.Message.ToolCall.subagent:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent
+	65,  // 90: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
+	66,  // 91: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
+	67,  // 92: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
+	119, // 93: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	5,   // 94: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	7,   // 95: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	75,  // 96: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	6,   // 97: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	8,   // 98: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	10,  // 99: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	9,   // 100: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	11,  // 101: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	12,  // 102: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	76,  // 103: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	118, // 104: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	15,  // 105: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	19,  // 106: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	16,  // 107: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	17,  // 108: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
+	13,  // 109: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
+	20,  // 110: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
+	21,  // 111: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
+	22,  // 112: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
+	77,  // 113: warp.multi_agent.v1.Message.ToolCallResult.subagent:type_name -> warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
+	23,  // 114: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
+	24,  // 115: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
+	25,  // 116: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
+	122, // 117: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
+	123, // 118: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
+	124, // 119: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
+	78,  // 120: warp.multi_agent.v1.Message.UpdateReviewComments.address_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
+	120, // 121: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	116, // 122: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	68,  // 123: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	69,  // 124: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	70,  // 125: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	1,   // 126: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	125, // 127: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	71,  // 128: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
+	118, // 129: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> google.protobuf.Empty
+	118, // 130: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
+	72,  // 131: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
+	73,  // 132: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
+	74,  // 133: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
+	126, // 134: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	126, // 135: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	28,  // 136: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	127, // 137: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	128, // 138: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	127, // 139: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	127, // 140: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	86,  // 141: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	127, // 142: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	90,  // 143: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	91,  // 144: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	96,  // 145: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	14,  // 146: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	105, // 147: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	106, // 148: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	107, // 149: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	14,  // 150: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	129, // 151: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	129, // 152: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	129, // 153: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	154, // [154:154] is the sub-list for method output_type
+	154, // [154:154] is the sub-list for method input_type
+	154, // [154:154] is the sub-list for extension type_name
+	154, // [154:154] is the sub-list for extension extendee
+	0,   // [0:154] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
@@ -15792,22 +15922,26 @@ func file_task_proto_init() {
 		(*createDocumentsResult_Success_)(nil),
 		(*createDocumentsResult_Error_)(nil),
 	}
-	file_task_proto_msgTypes[27].OneofWrappers = []any{
+	file_task_proto_msgTypes[25].OneofWrappers = []any{
+		(*userQueryMode_Agent)(nil),
+		(*userQueryMode_Plan)(nil),
+	}
+	file_task_proto_msgTypes[28].OneofWrappers = []any{
 		(*message_SystemQuery_AutoCodeDiff)(nil),
 		(*message_SystemQuery_ResumeConversation)(nil),
 		(*message_SystemQuery_TriggerSuggestPrompt)(nil),
 		(*message_SystemQuery_CreateNewProject)(nil),
 		(*message_SystemQuery_CloneRepository)(nil),
 	}
-	file_task_proto_msgTypes[30].OneofWrappers = []any{
+	file_task_proto_msgTypes[31].OneofWrappers = []any{
 		(*message_TriggerSuggestPrompt_FilesChanged)(nil),
 		(*message_TriggerSuggestPrompt_CommandRun)(nil),
 	}
-	file_task_proto_msgTypes[35].OneofWrappers = []any{
+	file_task_proto_msgTypes[36].OneofWrappers = []any{
 		(*message_Summarization_ConversationSummary_)(nil),
 		(*message_Summarization_ToolCallResultSummary_)(nil),
 	}
-	file_task_proto_msgTypes[37].OneofWrappers = []any{
+	file_task_proto_msgTypes[38].OneofWrappers = []any{
 		(*message_ToolCall_RunShellCommand_)(nil),
 		(*message_ToolCall_SearchCodebase_)(nil),
 		(*message_ToolCall_Server_)(nil),
@@ -15830,7 +15964,7 @@ func file_task_proto_init() {
 		(*message_ToolCall_EditDocuments_)(nil),
 		(*message_ToolCall_CreateDocuments_)(nil),
 	}
-	file_task_proto_msgTypes[38].OneofWrappers = []any{
+	file_task_proto_msgTypes[39].OneofWrappers = []any{
 		(*message_ToolCallResult_RunShellCommand)(nil),
 		(*message_ToolCallResult_SearchCodebase)(nil),
 		(*message_ToolCallResult_Server)(nil),
@@ -15855,22 +15989,22 @@ func file_task_proto_init() {
 		(*message_ToolCallResult_EditDocuments)(nil),
 		(*message_ToolCallResult_CreateDocuments)(nil),
 	}
-	file_task_proto_msgTypes[40].OneofWrappers = []any{
+	file_task_proto_msgTypes[41].OneofWrappers = []any{
 		(*message_UpdateTodos_CreateTodoList)(nil),
 		(*message_UpdateTodos_UpdatePendingTodos)(nil),
 		(*message_UpdateTodos_MarkTodosCompleted)(nil),
 	}
-	file_task_proto_msgTypes[41].OneofWrappers = []any{
+	file_task_proto_msgTypes[42].OneofWrappers = []any{
 		(*message_UpdateReviewComments_AddressReviewComments_)(nil),
 	}
-	file_task_proto_msgTypes[59].OneofWrappers = []any{
+	file_task_proto_msgTypes[60].OneofWrappers = []any{
 		(*message_ToolCall_SuggestPrompt_InlineQueryBanner_)(nil),
 	}
-	file_task_proto_msgTypes[62].OneofWrappers = []any{
+	file_task_proto_msgTypes[63].OneofWrappers = []any{
 		(*message_ToolCall_Subagent_Cli)(nil),
 		(*message_ToolCall_Subagent_Research)(nil),
 	}
-	file_task_proto_msgTypes[103].OneofWrappers = []any{
+	file_task_proto_msgTypes[104].OneofWrappers = []any{
 		(*callMCPToolResult_Success_Result_Text_)(nil),
 		(*callMCPToolResult_Success_Result_Image_)(nil),
 		(*callMCPToolResult_Success_Result_Resource)(nil),
@@ -15880,8 +16014,8 @@ func file_task_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_task_proto_rawDesc), len(file_task_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   112,
+			NumEnums:      1,
+			NumMessages:   113,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

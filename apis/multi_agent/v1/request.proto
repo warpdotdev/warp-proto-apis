@@ -68,6 +68,7 @@ message Request {
       string query = 1 [ (sensitive) = true ];
       // An attachment referenced by key in the query text.
       map<string, Attachment> referenced_attachments = 2;
+      UserQueryMode mode = 3;
     }
 
     message UserInputs {
