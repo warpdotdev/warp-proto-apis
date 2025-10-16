@@ -116,6 +116,8 @@ message Message {
     InputContext context = 2;
 
     map<string, Attachment> referenced_attachments = 3;
+
+    UserQueryMode mode = 4;
   }
 
   // System queries represent prompts from the Warp client that were
@@ -824,3 +826,7 @@ enum ToolType {
   CREATE_DOCUMENTS = 19;
 }
 
+enum UserQueryMode {
+  AGENT = 0;
+  PLAN = 1;
+}
