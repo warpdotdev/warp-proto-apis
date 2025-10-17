@@ -57,6 +57,8 @@ message Request {
       TriggerSuggestPrompt trigger_suggest_prompt = 9;
       CreateNewProject create_new_project = 10;
       CloneRepository clone_repository = 11;
+      CodeReview code_review = 12;
+      SummarizeConversation summarize_conversation = 13;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -66,6 +68,7 @@ message Request {
       string query = 1 [ (sensitive) = true ];
       // An attachment referenced by key in the query text.
       map<string, Attachment> referenced_attachments = 2;
+      UserQueryMode mode = 3;
     }
 
     message UserInputs {
@@ -165,6 +168,19 @@ message Request {
         google.protobuf.Empty command_run = 3;
       }
     }
+
+    message CodeReview {
+      oneof operation {
+        InitialReviewComments initial_review_comments = 1;
+      }
+
+      message InitialReviewComments {
+        repeated ReviewComment review_comments = 1;
+      }
+    }
+
+    // An input to summarize the active conversation.
+    message SummarizeConversation {}
   }
 
   message Metadata {
@@ -265,8 +281,13 @@ message Request {
   }
 
   message MCPContext {
-    repeated MCPResource resources = 1;
-    repeated MCPTool tools = 2;
+    // DEPRECATED: Use `servers` field instead for server-attributed tools/resources.
+    // Kept for backwards compatibility with older clients.
+    repeated MCPResource resources = 1 [deprecated = true];
+    repeated MCPTool tools = 2 [deprecated = true];
+
+    // Server-grouped MCP context. Each entry represents a single MCP server summary.
+    repeated MCPServer servers = 3;
 
     message MCPResource {
       string uri = 1 [ (sensitive) = true ];
@@ -281,6 +302,20 @@ message Request {
       // The input schema for an MCP Tool is specified as
       // as JSON schema, which is a JSON struct at root.
       google.protobuf.Struct input_schema = 3;
+    }
+
+    message MCPServer {
+      // The name of the MCP server (e.g., "Sentry", "Linear", "GitHub").
+      string name = 1 [ (sensitive) = true ];
+
+      // Optional description of the server's purpose.
+      string description = 2 [ (sensitive) = true ];
+
+      // Resources provided by this server.
+      repeated MCPResource resources = 3;
+
+      // Tools provided by this server.
+      repeated MCPTool tools = 4;
     }
   }
 }

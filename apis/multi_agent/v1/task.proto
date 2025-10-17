@@ -55,6 +55,19 @@ message Task {
   string server_data = 8;
 }
 
+message ReviewComments {
+  repeated ReviewComment pending_comments = 1;
+  repeated ReviewComment completed_comments = 2;
+}
+
+message ReviewComment {
+  // Unique identifier for the review comment.
+  string id = 1;
+
+  string comment = 2 [ (sensitive) = true ];
+  DiffSet diff_set = 3;
+}
+
 // A message within a task
 message Message {
   reserved started_child_task;
@@ -91,6 +104,8 @@ message Message {
     UpdateTodos update_todos = 10;
     AgentReasoning agent_reasoning = 15;
     Summarization summarization = 16;
+    CodeReview code_review = 17;
+    UpdateReviewComments update_review_comments = 18;
   }
 
   // User query message type
@@ -101,6 +116,8 @@ message Message {
     InputContext context = 2;
 
     map<string, Attachment> referenced_attachments = 3;
+
+    UserQueryMode mode = 4;
   }
 
   // System queries represent prompts from the Warp client that were
@@ -177,6 +194,8 @@ message Message {
     // Summarize the result of a tool call.
     message ToolCallResultSummary {}
   }
+
+  message CodeReview { ReviewComments comments = 1; }
 
   // Tool call message type
   message ToolCall {
@@ -354,6 +373,7 @@ message Message {
       // Optional metadata about the subagent required to render the appropriate UI.
       oneof metadata {
         google.protobuf.Empty cli = 3;
+        google.protobuf.Empty research = 4;
       }
     }
 
@@ -453,6 +473,15 @@ message Message {
       UpdatePendingTodos update_pending_todos = 2;
       MarkTodosCompleted mark_todos_completed = 3;
     }
+  }
+
+  // Message for review comment operations.
+  message UpdateReviewComments {
+    oneof operation {
+      AddressReviewComments address_review_comments = 1;
+    }
+
+    message AddressReviewComments { repeated string comment_ids = 1; }
   }
 }
 
@@ -797,3 +826,9 @@ enum ToolType {
   CREATE_DOCUMENTS = 19;
 }
 
+message UserQueryMode {
+  oneof type {
+    // We can change this to a non-empty `Plan` type later, this is backwards compatible
+    google.protobuf.Empty plan = 1;
+  }
+}

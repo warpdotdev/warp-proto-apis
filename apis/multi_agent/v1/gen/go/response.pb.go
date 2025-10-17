@@ -1200,10 +1200,10 @@ func (x *ResponseEvent_StreamFinished) GetInternalError() *ResponseEvent_StreamF
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished) GetMissingApiKey() *ResponseEvent_StreamFinished_MissingApiKey {
+func (x *ResponseEvent_StreamFinished) GetInvalidApiKey() *ResponseEvent_StreamFinished_InvalidApiKey {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_MissingApiKey_); ok {
-			return x.MissingApiKey
+		if x, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_InvalidApiKey_); ok {
+			return x.InvalidApiKey
 		}
 	}
 	return nil
@@ -1295,12 +1295,12 @@ func (x *ResponseEvent_StreamFinished) SetInternalError(v *ResponseEvent_StreamF
 	x.xxx_hidden_Reason = &responseEvent_StreamFinished_InternalError_{v}
 }
 
-func (x *ResponseEvent_StreamFinished) SetMissingApiKey(v *ResponseEvent_StreamFinished_MissingApiKey) {
+func (x *ResponseEvent_StreamFinished) SetInvalidApiKey(v *ResponseEvent_StreamFinished_InvalidApiKey) {
 	if v == nil {
 		x.xxx_hidden_Reason = nil
 		return
 	}
-	x.xxx_hidden_Reason = &responseEvent_StreamFinished_MissingApiKey_{v}
+	x.xxx_hidden_Reason = &responseEvent_StreamFinished_InvalidApiKey_{v}
 }
 
 func (x *ResponseEvent_StreamFinished) SetTokenUsage(v []*ResponseEvent_StreamFinished_TokenUsage) {
@@ -1383,11 +1383,11 @@ func (x *ResponseEvent_StreamFinished) HasInternalError() bool {
 	return ok
 }
 
-func (x *ResponseEvent_StreamFinished) HasMissingApiKey() bool {
+func (x *ResponseEvent_StreamFinished) HasInvalidApiKey() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_MissingApiKey_)
+	_, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_InvalidApiKey_)
 	return ok
 }
 
@@ -1458,8 +1458,8 @@ func (x *ResponseEvent_StreamFinished) ClearInternalError() {
 	}
 }
 
-func (x *ResponseEvent_StreamFinished) ClearMissingApiKey() {
-	if _, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_MissingApiKey_); ok {
+func (x *ResponseEvent_StreamFinished) ClearInvalidApiKey() {
+	if _, ok := x.xxx_hidden_Reason.(*responseEvent_StreamFinished_InvalidApiKey_); ok {
 		x.xxx_hidden_Reason = nil
 	}
 }
@@ -1485,7 +1485,7 @@ const ResponseEvent_StreamFinished_QuotaLimit_case case_ResponseEvent_StreamFini
 const ResponseEvent_StreamFinished_ContextWindowExceeded_case case_ResponseEvent_StreamFinished_Reason = 5
 const ResponseEvent_StreamFinished_LlmUnavailable_case case_ResponseEvent_StreamFinished_Reason = 6
 const ResponseEvent_StreamFinished_InternalError_case case_ResponseEvent_StreamFinished_Reason = 7
-const ResponseEvent_StreamFinished_MissingApiKey_case case_ResponseEvent_StreamFinished_Reason = 12
+const ResponseEvent_StreamFinished_InvalidApiKey_case case_ResponseEvent_StreamFinished_Reason = 12
 
 func (x *ResponseEvent_StreamFinished) WhichReason() case_ResponseEvent_StreamFinished_Reason {
 	if x == nil {
@@ -1506,8 +1506,8 @@ func (x *ResponseEvent_StreamFinished) WhichReason() case_ResponseEvent_StreamFi
 		return ResponseEvent_StreamFinished_LlmUnavailable_case
 	case *responseEvent_StreamFinished_InternalError_:
 		return ResponseEvent_StreamFinished_InternalError_case
-	case *responseEvent_StreamFinished_MissingApiKey_:
-		return ResponseEvent_StreamFinished_MissingApiKey_case
+	case *responseEvent_StreamFinished_InvalidApiKey_:
+		return ResponseEvent_StreamFinished_InvalidApiKey_case
 	default:
 		return ResponseEvent_StreamFinished_Reason_not_set_case
 	}
@@ -1524,7 +1524,7 @@ type ResponseEvent_StreamFinished_builder struct {
 	ContextWindowExceeded *ResponseEvent_StreamFinished_ContextWindowExceeded
 	LlmUnavailable        *ResponseEvent_StreamFinished_LLMUnavailable
 	InternalError         *ResponseEvent_StreamFinished_InternalError
-	MissingApiKey         *ResponseEvent_StreamFinished_MissingApiKey
+	InvalidApiKey         *ResponseEvent_StreamFinished_InvalidApiKey
 	// -- end of xxx_hidden_Reason
 	// Internal-only field containing per-model token usage incurred in producing the response
 	// stream.
@@ -1563,8 +1563,8 @@ func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFini
 	if b.InternalError != nil {
 		x.xxx_hidden_Reason = &responseEvent_StreamFinished_InternalError_{b.InternalError}
 	}
-	if b.MissingApiKey != nil {
-		x.xxx_hidden_Reason = &responseEvent_StreamFinished_MissingApiKey_{b.MissingApiKey}
+	if b.InvalidApiKey != nil {
+		x.xxx_hidden_Reason = &responseEvent_StreamFinished_InvalidApiKey_{b.InvalidApiKey}
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
 	if b.ShouldRefreshModelConfig != nil {
@@ -1618,8 +1618,8 @@ type responseEvent_StreamFinished_InternalError_ struct {
 	InternalError *ResponseEvent_StreamFinished_InternalError `protobuf:"bytes,7,opt,name=internal_error,json=internalError,oneof"`
 }
 
-type responseEvent_StreamFinished_MissingApiKey_ struct {
-	MissingApiKey *ResponseEvent_StreamFinished_MissingApiKey `protobuf:"bytes,12,opt,name=missing_api_key,json=missingApiKey,oneof"`
+type responseEvent_StreamFinished_InvalidApiKey_ struct {
+	InvalidApiKey *ResponseEvent_StreamFinished_InvalidApiKey `protobuf:"bytes,12,opt,name=invalid_api_key,json=invalidApiKey,oneof"`
 }
 
 func (*responseEvent_StreamFinished_Other_) isResponseEvent_StreamFinished_Reason() {}
@@ -1636,7 +1636,7 @@ func (*responseEvent_StreamFinished_LlmUnavailable) isResponseEvent_StreamFinish
 
 func (*responseEvent_StreamFinished_InternalError_) isResponseEvent_StreamFinished_Reason() {}
 
-func (*responseEvent_StreamFinished_MissingApiKey_) isResponseEvent_StreamFinished_Reason() {}
+func (*responseEvent_StreamFinished_InvalidApiKey_) isResponseEvent_StreamFinished_Reason() {}
 
 type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
 	state                         protoimpl.MessageState                           `protogen:"opaque.v1"`
@@ -3170,7 +3170,7 @@ func (b0 ResponseEvent_StreamFinished_LLMUnavailable_builder) Build() *ResponseE
 	return m0
 }
 
-type ResponseEvent_StreamFinished_MissingApiKey struct {
+type ResponseEvent_StreamFinished_InvalidApiKey struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Provider    LLMProvider            `protobuf:"varint,1,opt,name=provider,enum=warp.multi_agent.v1.LLMProvider"`
 	xxx_hidden_ModelName   *string                `protobuf:"bytes,2,opt,name=model_name,json=modelName"`
@@ -3180,21 +3180,21 @@ type ResponseEvent_StreamFinished_MissingApiKey struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) Reset() {
-	*x = ResponseEvent_StreamFinished_MissingApiKey{}
-	mi := &file_response_proto_msgTypes[19]
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) Reset() {
+	*x = ResponseEvent_StreamFinished_InvalidApiKey{}
+	mi := &file_response_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) String() string {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResponseEvent_StreamFinished_MissingApiKey) ProtoMessage() {}
+func (*ResponseEvent_StreamFinished_InvalidApiKey) ProtoMessage() {}
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[19]
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3205,7 +3205,7 @@ func (x *ResponseEvent_StreamFinished_MissingApiKey) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) GetProvider() LLMProvider {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) GetProvider() LLMProvider {
 	if x != nil {
 		if protoimpl.X.Present(&(x.XXX_presence[0]), 0) {
 			return x.xxx_hidden_Provider
@@ -3214,7 +3214,7 @@ func (x *ResponseEvent_StreamFinished_MissingApiKey) GetProvider() LLMProvider {
 	return LLMProvider_LLM_PROVIDER_UNKNOWN
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) GetModelName() string {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) GetModelName() string {
 	if x != nil {
 		if x.xxx_hidden_ModelName != nil {
 			return *x.xxx_hidden_ModelName
@@ -3224,49 +3224,49 @@ func (x *ResponseEvent_StreamFinished_MissingApiKey) GetModelName() string {
 	return ""
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) SetProvider(v LLMProvider) {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) SetProvider(v LLMProvider) {
 	x.xxx_hidden_Provider = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) SetModelName(v string) {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) SetModelName(v string) {
 	x.xxx_hidden_ModelName = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) HasProvider() bool {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) HasProvider() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) HasModelName() bool {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) HasModelName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) ClearProvider() {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) ClearProvider() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Provider = LLMProvider_LLM_PROVIDER_UNKNOWN
 }
 
-func (x *ResponseEvent_StreamFinished_MissingApiKey) ClearModelName() {
+func (x *ResponseEvent_StreamFinished_InvalidApiKey) ClearModelName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_ModelName = nil
 }
 
-type ResponseEvent_StreamFinished_MissingApiKey_builder struct {
+type ResponseEvent_StreamFinished_InvalidApiKey_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Provider  *LLMProvider
 	ModelName *string
 }
 
-func (b0 ResponseEvent_StreamFinished_MissingApiKey_builder) Build() *ResponseEvent_StreamFinished_MissingApiKey {
-	m0 := &ResponseEvent_StreamFinished_MissingApiKey{}
+func (b0 ResponseEvent_StreamFinished_InvalidApiKey_builder) Build() *ResponseEvent_StreamFinished_InvalidApiKey {
+	m0 := &ResponseEvent_StreamFinished_InvalidApiKey{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Provider != nil {
@@ -4357,7 +4357,7 @@ const file_response_proto_rawDesc = "" +
 	"\x17context_window_exceeded\x18\x05 \x01(\v2G.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceededH\x00R\x15contextWindowExceeded\x12k\n" +
 	"\x0fllm_unavailable\x18\x06 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailableH\x00R\x0ellmUnavailable\x12h\n" +
 	"\x0einternal_error\x18\a \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalErrorH\x00R\rinternalError\x12i\n" +
-	"\x0fmissing_api_key\x18\f \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.MissingApiKeyH\x00R\rmissingApiKey\x12c\n" +
+	"\x0finvalid_api_key\x18\f \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKeyH\x00R\rinvalidApiKey\x12c\n" +
 	"\vtoken_usage\x18\b \x03(\v2<.warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsageB\x04\x88\xb5\x18\x01R\n" +
 	"tokenUsage\x12=\n" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
@@ -4420,7 +4420,7 @@ const file_response_proto_rawDesc = "" +
 	"QuotaLimit\x1a\x17\n" +
 	"\x15ContextWindowExceeded\x1a\x10\n" +
 	"\x0eLLMUnavailable\x1al\n" +
-	"\rMissingApiKey\x12<\n" +
+	"\rInvalidApiKey\x12<\n" +
 	"\bprovider\x18\x01 \x01(\x0e2 .warp.multi_agent.v1.LLMProviderR\bprovider\x12\x1d\n" +
 	"\n" +
 	"model_name\x18\x02 \x01(\tR\tmodelName\x1a)\n" +
@@ -4495,32 +4495,31 @@ var file_response_proto_goTypes = []any{
 	(*ResponseEvent_StreamFinished_ToolUsageMetadata)(nil),         // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
 	(*ResponseEvent_StreamFinished_ToolCallStats)(nil),             // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	(*ResponseEvent_StreamFinished_ApplyFileDiffStats)(nil),        // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
-	(*ResponseEvent_StreamFinished_RunCommandStats)(nil),           // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStats
-	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	(*ResponseEvent_StreamFinished_Other)(nil),                     // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	(*ResponseEvent_StreamFinished_Done)(nil),                      // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	(*ResponseEvent_StreamFinished_MissingApiKey)(nil),             // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.MissingApiKey
-	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	(*ClientAction_CreateTask)(nil),                                // 22: warp.multi_agent.v1.ClientAction.CreateTask
-	(*ClientAction_UpdateTaskServerData)(nil),                      // 23: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	(*ClientAction_UpdateTaskDescription)(nil),                     // 24: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                         // 25: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                         // 26: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),                    // 27: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                         // 28: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*ClientAction_BeginTransaction)(nil),                          // 29: warp.multi_agent.v1.ClientAction.BeginTransaction
-	(*ClientAction_CommitTransaction)(nil),                         // 30: warp.multi_agent.v1.ClientAction.CommitTransaction
-	(*ClientAction_RollbackTransaction)(nil),                       // 31: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*ClientAction_StartNewConversation)(nil),                      // 32: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*Suggestions)(nil),                                            // 33: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                                   // 34: warp.multi_agent.v1.Task
-	(*Message)(nil),                                                // 35: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                                  // 36: google.protobuf.FieldMask
+	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	(*ResponseEvent_StreamFinished_Other)(nil),                     // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	(*ResponseEvent_StreamFinished_Done)(nil),                      // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	(*ResponseEvent_StreamFinished_InvalidApiKey)(nil),             // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
+	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	(*ClientAction_CreateTask)(nil),                                // 21: warp.multi_agent.v1.ClientAction.CreateTask
+	(*ClientAction_UpdateTaskServerData)(nil),                      // 22: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	(*ClientAction_UpdateTaskDescription)(nil),                     // 23: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                         // 24: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                         // 25: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                    // 26: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                         // 27: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*ClientAction_BeginTransaction)(nil),                          // 28: warp.multi_agent.v1.ClientAction.BeginTransaction
+	(*ClientAction_CommitTransaction)(nil),                         // 29: warp.multi_agent.v1.ClientAction.CommitTransaction
+	(*ClientAction_RollbackTransaction)(nil),                       // 30: warp.multi_agent.v1.ClientAction.RollbackTransaction
+	(*ClientAction_StartNewConversation)(nil),                      // 31: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*Suggestions)(nil),                                            // 32: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                                   // 33: warp.multi_agent.v1.Task
+	(*Message)(nil),                                                // 34: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                                  // 35: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	3,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
@@ -4539,16 +4538,16 @@ var file_response_proto_depIdxs = []int32{
 	32, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
 	23, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
 	2,  // 15: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	14, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	15, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	16, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	17, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	18, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	19, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	21, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	20, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.missing_api_key:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.MissingApiKey
-	13, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	12, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	13, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	14, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	15, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	16, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	17, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	18, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	20, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	19, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.invalid_api_key:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
+	12, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	11, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
 	6,  // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
 	7,  // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	8,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
@@ -4563,13 +4562,13 @@ var file_response_proto_depIdxs = []int32{
 	9,  // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.call_mcp_tool_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	9,  // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	9,  // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	0,  // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.MissingApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
-	34, // 41: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	35, // 42: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	35, // 43: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	36, // 44: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	35, // 45: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	36, // 46: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	0,  // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
+	33, // 41: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	34, // 42: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	34, // 43: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	35, // 44: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	34, // 45: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	35, // 46: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
 	47, // [47:47] is the sub-list for method output_type
 	47, // [47:47] is the sub-list for method input_type
 	47, // [47:47] is the sub-list for extension type_name
@@ -4612,7 +4611,7 @@ func file_response_proto_init() {
 		(*responseEvent_StreamFinished_ContextWindowExceeded_)(nil),
 		(*responseEvent_StreamFinished_LlmUnavailable)(nil),
 		(*responseEvent_StreamFinished_InternalError_)(nil),
-		(*responseEvent_StreamFinished_MissingApiKey_)(nil),
+		(*responseEvent_StreamFinished_InvalidApiKey_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
