@@ -1855,7 +1855,6 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 }
 
 // Token usage by model.
-// This has been deprecated. Use DifferentiatedTokenUsage instead.
 type ResponseEvent_StreamFinished_ModelTokenUsage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ModelId     *string                `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
