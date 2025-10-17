@@ -828,9 +828,7 @@ enum ToolType {
 
 message UserQueryMode {
   oneof type {
-    // Default mode
-    google.protobuf.Empty agent = 1;
     // We can change this to a non-empty `Plan` type later, this is backwards compatible
-    google.protobuf.Empty plan = 2;
+    google.protobuf.Empty plan = 1;
   }
 }
