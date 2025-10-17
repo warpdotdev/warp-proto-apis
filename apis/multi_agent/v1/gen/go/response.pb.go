@@ -1639,13 +1639,14 @@ func (*responseEvent_StreamFinished_InternalError_) isResponseEvent_StreamFinish
 func (*responseEvent_StreamFinished_InvalidApiKey_) isResponseEvent_StreamFinished_Reason() {}
 
 type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
-	state                         protoimpl.MessageState                                            `protogen:"opaque.v1"`
-	xxx_hidden_ContextWindowUsage float32                                                           `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
-	xxx_hidden_Summarized         bool                                                              `protobuf:"varint,2,opt,name=summarized"`
-	xxx_hidden_CreditsSpent       float32                                                           `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
-	xxx_hidden_TokenUsage         *[]*ResponseEvent_StreamFinished_ModelTokenUsage                  `protobuf:"bytes,4,rep,name=token_usage,json=tokenUsage"`
-	xxx_hidden_ToolUsageMetadata  *ResponseEvent_StreamFinished_ToolUsageMetadata                   `protobuf:"bytes,5,opt,name=tool_usage_metadata,json=toolUsageMetadata"`
-	xxx_hidden_LlmTokenUsage      map[string]*ResponseEvent_StreamFinished_DifferentiatedTokenUsage `protobuf:"bytes,6,rep,name=llm_token_usage,json=llmTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state                         protoimpl.MessageState                                   `protogen:"opaque.v1"`
+	xxx_hidden_ContextWindowUsage float32                                                  `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
+	xxx_hidden_Summarized         bool                                                     `protobuf:"varint,2,opt,name=summarized"`
+	xxx_hidden_CreditsSpent       float32                                                  `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
+	xxx_hidden_TokenUsage         *[]*ResponseEvent_StreamFinished_ModelTokenUsage         `protobuf:"bytes,4,rep,name=token_usage,json=tokenUsage"`
+	xxx_hidden_ToolUsageMetadata  *ResponseEvent_StreamFinished_ToolUsageMetadata          `protobuf:"bytes,5,opt,name=tool_usage_metadata,json=toolUsageMetadata"`
+	xxx_hidden_WarpTokenUsage     map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,6,rep,name=warp_token_usage,json=warpTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ByokTokenUsage     map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,7,rep,name=byok_token_usage,json=byokTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
 	XXX_presence                  [1]uint32
 	unknownFields                 protoimpl.UnknownFields
@@ -1698,6 +1699,7 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetCreditsSpent
 	return 0
 }
 
+// Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTokenUsage() []*ResponseEvent_StreamFinished_ModelTokenUsage {
 	if x != nil {
 		if x.xxx_hidden_TokenUsage != nil {
@@ -1714,28 +1716,36 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetToolUsageMet
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetLlmTokenUsage() map[string]*ResponseEvent_StreamFinished_DifferentiatedTokenUsage {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetWarpTokenUsage() map[string]*ResponseEvent_StreamFinished_ModelTokenUsage {
 	if x != nil {
-		return x.xxx_hidden_LlmTokenUsage
+		return x.xxx_hidden_WarpTokenUsage
+	}
+	return nil
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetByokTokenUsage() map[string]*ResponseEvent_StreamFinished_ModelTokenUsage {
+	if x != nil {
+		return x.xxx_hidden_ByokTokenUsage
 	}
 	return nil
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetSummarized(v bool) {
 	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCreditsSpent(v float32) {
 	x.xxx_hidden_CreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
+// Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTokenUsage(v []*ResponseEvent_StreamFinished_ModelTokenUsage) {
 	x.xxx_hidden_TokenUsage = &v
 }
@@ -1744,8 +1754,12 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetToolUsageMet
 	x.xxx_hidden_ToolUsageMetadata = v
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetLlmTokenUsage(v map[string]*ResponseEvent_StreamFinished_DifferentiatedTokenUsage) {
-	x.xxx_hidden_LlmTokenUsage = v
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetWarpTokenUsage(v map[string]*ResponseEvent_StreamFinished_ModelTokenUsage) {
+	x.xxx_hidden_WarpTokenUsage = v
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetByokTokenUsage(v map[string]*ResponseEvent_StreamFinished_ModelTokenUsage) {
+	x.xxx_hidden_ByokTokenUsage = v
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindowUsage() bool {
@@ -1806,11 +1820,15 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	CreditsSpent *float32
 	// Token usage across every model used so far in the conversation.
 	// This has been deprecated. Use llm_token_usage instead.
+	//
+	// Deprecated: Marked as deprecated in response.proto.
 	TokenUsage []*ResponseEvent_StreamFinished_ModelTokenUsage
 	// Tool usage data across every tool the agent could use (excluding some passive and server tools).
 	ToolUsageMetadata *ResponseEvent_StreamFinished_ToolUsageMetadata
-	// Map from LLM ID to differentiated token usage (user API key vs Warp API key).
-	LlmTokenUsage map[string]*ResponseEvent_StreamFinished_DifferentiatedTokenUsage
+	// Token usage using the warp API key.
+	WarpTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage
+	// Token usage using a user's API key.
+	ByokTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage
 }
 
 func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
@@ -1818,20 +1836,21 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ContextWindowUsage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
 	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
 		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	if b.CreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
 	x.xxx_hidden_ToolUsageMetadata = b.ToolUsageMetadata
-	x.xxx_hidden_LlmTokenUsage = b.LlmTokenUsage
+	x.xxx_hidden_WarpTokenUsage = b.WarpTokenUsage
+	x.xxx_hidden_ByokTokenUsage = b.ByokTokenUsage
 	return m0
 }
 
@@ -1872,6 +1891,7 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ProtoReflect() protorefle
 	return mi.MessageOf(x)
 }
 
+// Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetModelId() string {
 	if x != nil {
 		if x.xxx_hidden_ModelId != nil {
@@ -1889,6 +1909,7 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetTotalTokens() uint32 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -1899,6 +1920,7 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetTotalTokens(v uint32) 
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
+// Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasModelId() bool {
 	if x == nil {
 		return false
@@ -1913,6 +1935,7 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasTotalTokens() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+// Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearModelId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ModelId = nil
@@ -1927,6 +1950,9 @@ type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The internal id of the model.
+	// This has been dprecated, as we now store the model id as the key to access this value.
+	//
+	// Deprecated: Marked as deprecated in response.proto.
 	ModelId *string
 	// The total tokens that we have used with the given model in this conversation.
 	TotalTokens *uint32
@@ -1943,113 +1969,6 @@ func (b0 ResponseEvent_StreamFinished_ModelTokenUsage_builder) Build() *Response
 	if b.TotalTokens != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
 		x.xxx_hidden_TotalTokens = *b.TotalTokens
-	}
-	return m0
-}
-
-type ResponseEvent_StreamFinished_DifferentiatedTokenUsage struct {
-	state                       protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_UserApiKeyTokens uint32                 `protobuf:"varint,1,opt,name=user_api_key_tokens,json=userApiKeyTokens"`
-	xxx_hidden_WarpApiKeyTokens uint32                 `protobuf:"varint,2,opt,name=warp_api_key_tokens,json=warpApiKeyTokens"`
-	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
-	XXX_presence                [1]uint32
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) Reset() {
-	*x = ResponseEvent_StreamFinished_DifferentiatedTokenUsage{}
-	mi := &file_response_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResponseEvent_StreamFinished_DifferentiatedTokenUsage) ProtoMessage() {}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) GetUserApiKeyTokens() uint32 {
-	if x != nil {
-		return x.xxx_hidden_UserApiKeyTokens
-	}
-	return 0
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) GetWarpApiKeyTokens() uint32 {
-	if x != nil {
-		return x.xxx_hidden_WarpApiKeyTokens
-	}
-	return 0
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) SetUserApiKeyTokens(v uint32) {
-	x.xxx_hidden_UserApiKeyTokens = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) SetWarpApiKeyTokens(v uint32) {
-	x.xxx_hidden_WarpApiKeyTokens = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) HasUserApiKeyTokens() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) HasWarpApiKeyTokens() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) ClearUserApiKeyTokens() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_UserApiKeyTokens = 0
-}
-
-func (x *ResponseEvent_StreamFinished_DifferentiatedTokenUsage) ClearWarpApiKeyTokens() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_WarpApiKeyTokens = 0
-}
-
-type ResponseEvent_StreamFinished_DifferentiatedTokenUsage_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Tokens payed for using a user's API key.
-	UserApiKeyTokens *uint32
-	// Tokens payed for using warp's API key.
-	WarpApiKeyTokens *uint32
-}
-
-func (b0 ResponseEvent_StreamFinished_DifferentiatedTokenUsage_builder) Build() *ResponseEvent_StreamFinished_DifferentiatedTokenUsage {
-	m0 := &ResponseEvent_StreamFinished_DifferentiatedTokenUsage{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.UserApiKeyTokens != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_UserApiKeyTokens = *b.UserApiKeyTokens
-	}
-	if b.WarpApiKeyTokens != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_WarpApiKeyTokens = *b.WarpApiKeyTokens
 	}
 	return m0
 }
@@ -2074,7 +1993,7 @@ type ResponseEvent_StreamFinished_ToolUsageMetadata struct {
 
 func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) Reset() {
 	*x = ResponseEvent_StreamFinished_ToolUsageMetadata{}
-	mi := &file_response_proto_msgTypes[8]
+	mi := &file_response_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2086,7 +2005,7 @@ func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) String() string {
 func (*ResponseEvent_StreamFinished_ToolUsageMetadata) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[8]
+	mi := &file_response_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2384,7 +2303,7 @@ type ResponseEvent_StreamFinished_ToolCallStats struct {
 
 func (x *ResponseEvent_StreamFinished_ToolCallStats) Reset() {
 	*x = ResponseEvent_StreamFinished_ToolCallStats{}
-	mi := &file_response_proto_msgTypes[9]
+	mi := &file_response_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2396,7 +2315,7 @@ func (x *ResponseEvent_StreamFinished_ToolCallStats) String() string {
 func (*ResponseEvent_StreamFinished_ToolCallStats) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ToolCallStats) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[9]
+	mi := &file_response_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2462,7 +2381,7 @@ type ResponseEvent_StreamFinished_ApplyFileDiffStats struct {
 
 func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) Reset() {
 	*x = ResponseEvent_StreamFinished_ApplyFileDiffStats{}
-	mi := &file_response_proto_msgTypes[10]
+	mi := &file_response_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2474,7 +2393,7 @@ func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) String() string {
 func (*ResponseEvent_StreamFinished_ApplyFileDiffStats) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ApplyFileDiffStats) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[10]
+	mi := &file_response_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2595,7 +2514,7 @@ type ResponseEvent_StreamFinished_RequestCost struct {
 
 func (x *ResponseEvent_StreamFinished_RequestCost) Reset() {
 	*x = ResponseEvent_StreamFinished_RequestCost{}
-	mi := &file_response_proto_msgTypes[11]
+	mi := &file_response_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2607,7 +2526,7 @@ func (x *ResponseEvent_StreamFinished_RequestCost) String() string {
 func (*ResponseEvent_StreamFinished_RequestCost) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_RequestCost) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[11]
+	mi := &file_response_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2676,7 +2595,7 @@ type ResponseEvent_StreamFinished_TokenUsage struct {
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) Reset() {
 	*x = ResponseEvent_StreamFinished_TokenUsage{}
-	mi := &file_response_proto_msgTypes[12]
+	mi := &file_response_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2688,7 +2607,7 @@ func (x *ResponseEvent_StreamFinished_TokenUsage) String() string {
 func (*ResponseEvent_StreamFinished_TokenUsage) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_TokenUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[12]
+	mi := &file_response_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2907,7 +2826,7 @@ type ResponseEvent_StreamFinished_Other struct {
 
 func (x *ResponseEvent_StreamFinished_Other) Reset() {
 	*x = ResponseEvent_StreamFinished_Other{}
-	mi := &file_response_proto_msgTypes[13]
+	mi := &file_response_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2919,7 +2838,7 @@ func (x *ResponseEvent_StreamFinished_Other) String() string {
 func (*ResponseEvent_StreamFinished_Other) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_Other) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[13]
+	mi := &file_response_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2950,7 +2869,7 @@ type ResponseEvent_StreamFinished_Done struct {
 
 func (x *ResponseEvent_StreamFinished_Done) Reset() {
 	*x = ResponseEvent_StreamFinished_Done{}
-	mi := &file_response_proto_msgTypes[14]
+	mi := &file_response_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2962,7 +2881,7 @@ func (x *ResponseEvent_StreamFinished_Done) String() string {
 func (*ResponseEvent_StreamFinished_Done) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_Done) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[14]
+	mi := &file_response_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2993,7 +2912,7 @@ type ResponseEvent_StreamFinished_ReachedMaxTokenLimit struct {
 
 func (x *ResponseEvent_StreamFinished_ReachedMaxTokenLimit) Reset() {
 	*x = ResponseEvent_StreamFinished_ReachedMaxTokenLimit{}
-	mi := &file_response_proto_msgTypes[15]
+	mi := &file_response_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3005,7 +2924,7 @@ func (x *ResponseEvent_StreamFinished_ReachedMaxTokenLimit) String() string {
 func (*ResponseEvent_StreamFinished_ReachedMaxTokenLimit) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ReachedMaxTokenLimit) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[15]
+	mi := &file_response_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3036,7 +2955,7 @@ type ResponseEvent_StreamFinished_QuotaLimit struct {
 
 func (x *ResponseEvent_StreamFinished_QuotaLimit) Reset() {
 	*x = ResponseEvent_StreamFinished_QuotaLimit{}
-	mi := &file_response_proto_msgTypes[16]
+	mi := &file_response_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3048,7 +2967,7 @@ func (x *ResponseEvent_StreamFinished_QuotaLimit) String() string {
 func (*ResponseEvent_StreamFinished_QuotaLimit) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_QuotaLimit) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[16]
+	mi := &file_response_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3079,7 +2998,7 @@ type ResponseEvent_StreamFinished_ContextWindowExceeded struct {
 
 func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) Reset() {
 	*x = ResponseEvent_StreamFinished_ContextWindowExceeded{}
-	mi := &file_response_proto_msgTypes[17]
+	mi := &file_response_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3091,7 +3010,7 @@ func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) String() string {
 func (*ResponseEvent_StreamFinished_ContextWindowExceeded) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ContextWindowExceeded) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[17]
+	mi := &file_response_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3122,7 +3041,7 @@ type ResponseEvent_StreamFinished_LLMUnavailable struct {
 
 func (x *ResponseEvent_StreamFinished_LLMUnavailable) Reset() {
 	*x = ResponseEvent_StreamFinished_LLMUnavailable{}
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3134,7 +3053,7 @@ func (x *ResponseEvent_StreamFinished_LLMUnavailable) String() string {
 func (*ResponseEvent_StreamFinished_LLMUnavailable) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_LLMUnavailable) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3169,7 +3088,7 @@ type ResponseEvent_StreamFinished_InvalidApiKey struct {
 
 func (x *ResponseEvent_StreamFinished_InvalidApiKey) Reset() {
 	*x = ResponseEvent_StreamFinished_InvalidApiKey{}
-	mi := &file_response_proto_msgTypes[19]
+	mi := &file_response_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3181,7 +3100,7 @@ func (x *ResponseEvent_StreamFinished_InvalidApiKey) String() string {
 func (*ResponseEvent_StreamFinished_InvalidApiKey) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_InvalidApiKey) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[19]
+	mi := &file_response_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3278,7 +3197,7 @@ type ResponseEvent_StreamFinished_InternalError struct {
 
 func (x *ResponseEvent_StreamFinished_InternalError) Reset() {
 	*x = ResponseEvent_StreamFinished_InternalError{}
-	mi := &file_response_proto_msgTypes[20]
+	mi := &file_response_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3290,7 +3209,7 @@ func (x *ResponseEvent_StreamFinished_InternalError) String() string {
 func (*ResponseEvent_StreamFinished_InternalError) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_InternalError) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[20]
+	mi := &file_response_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4323,7 +4242,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x8e#\n" +
+	"task.proto\"\xaa$\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4334,7 +4253,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xdf\x1f\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xfb \n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4350,26 +4269,27 @@ const file_response_proto_rawDesc = "" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12\x8b\x01\n" +
-	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\x83\x05\n" +
+	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\x95\a\n" +
 	"\x19ConversationUsageMetadata\x120\n" +
 	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12\x1e\n" +
 	"\n" +
 	"summarized\x18\x02 \x01(\bR\n" +
 	"summarized\x12#\n" +
-	"\rcredits_spent\x18\x03 \x01(\x02R\fcreditsSpent\x12b\n" +
-	"\vtoken_usage\x18\x04 \x03(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\n" +
+	"\rcredits_spent\x18\x03 \x01(\x02R\fcreditsSpent\x12f\n" +
+	"\vtoken_usage\x18\x04 \x03(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageB\x02\x18\x01R\n" +
 	"tokenUsage\x12s\n" +
-	"\x13tool_usage_metadata\x18\x05 \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadataR\x11toolUsageMetadata\x12\x86\x01\n" +
-	"\x0fllm_token_usage\x18\x06 \x03(\v2^.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.LlmTokenUsageEntryR\rllmTokenUsage\x1a\x8c\x01\n" +
-	"\x12LlmTokenUsageEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12`\n" +
-	"\x05value\x18\x02 \x01(\v2J.warp.multi_agent.v1.ResponseEvent.StreamFinished.DifferentiatedTokenUsageR\x05value:\x028\x01\x1aO\n" +
-	"\x0fModelTokenUsage\x12\x19\n" +
-	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12!\n" +
-	"\ftotal_tokens\x18\x02 \x01(\rR\vtotalTokens\x1ax\n" +
-	"\x18DifferentiatedTokenUsage\x12-\n" +
-	"\x13user_api_key_tokens\x18\x01 \x01(\rR\x10userApiKeyTokens\x12-\n" +
-	"\x13warp_api_key_tokens\x18\x02 \x01(\rR\x10warpApiKeyTokens\x1a\x8f\n" +
+	"\x13tool_usage_metadata\x18\x05 \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadataR\x11toolUsageMetadata\x12\x89\x01\n" +
+	"\x10warp_token_usage\x18\x06 \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntryR\x0ewarpTokenUsage\x12\x89\x01\n" +
+	"\x10byok_token_usage\x18\a \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntryR\x0ebyokTokenUsage\x1a\x84\x01\n" +
+	"\x13WarpTokenUsageEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
+	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x84\x01\n" +
+	"\x13ByokTokenUsageEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
+	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1aS\n" +
+	"\x0fModelTokenUsage\x12\x1d\n" +
+	"\bmodel_id\x18\x01 \x01(\tB\x02\x18\x01R\amodelId\x12!\n" +
+	"\ftotal_tokens\x18\x02 \x01(\rR\vtotalTokens\x1a\x8f\n" +
 	"\n" +
 	"\x11ToolUsageMetadata\x12k\n" +
 	"\x11run_command_stats\x18\x01 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x0frunCommandStats\x12i\n" +
@@ -4482,21 +4402,21 @@ var file_response_proto_goTypes = []any{
 	(*ResponseEvent_StreamFinished)(nil),                           // 5: warp.multi_agent.v1.ResponseEvent.StreamFinished
 	(*ResponseEvent_StreamFinished_ConversationUsageMetadata)(nil), // 6: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
 	(*ResponseEvent_StreamFinished_ModelTokenUsage)(nil),           // 7: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	(*ResponseEvent_StreamFinished_DifferentiatedTokenUsage)(nil),  // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.DifferentiatedTokenUsage
-	(*ResponseEvent_StreamFinished_ToolUsageMetadata)(nil),         // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
-	(*ResponseEvent_StreamFinished_ToolCallStats)(nil),             // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	(*ResponseEvent_StreamFinished_ApplyFileDiffStats)(nil),        // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
-	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	(*ResponseEvent_StreamFinished_Other)(nil),                     // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	(*ResponseEvent_StreamFinished_Done)(nil),                      // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	(*ResponseEvent_StreamFinished_InvalidApiKey)(nil),             // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
-	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	nil,                             // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.LlmTokenUsageEntry
+	(*ResponseEvent_StreamFinished_ToolUsageMetadata)(nil),         // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
+	(*ResponseEvent_StreamFinished_ToolCallStats)(nil),             // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	(*ResponseEvent_StreamFinished_ApplyFileDiffStats)(nil),        // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
+	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	(*ResponseEvent_StreamFinished_Other)(nil),                     // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	(*ResponseEvent_StreamFinished_Done)(nil),                      // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	(*ResponseEvent_StreamFinished_InvalidApiKey)(nil),             // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
+	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	nil,                             // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry
+	nil,                             // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
 	(*ClientAction_CreateTask)(nil), // 23: warp.multi_agent.v1.ClientAction.CreateTask
 	(*ClientAction_UpdateTaskServerData)(nil),   // 24: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
 	(*ClientAction_UpdateTaskDescription)(nil),  // 25: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
@@ -4530,44 +4450,46 @@ var file_response_proto_depIdxs = []int32{
 	33, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
 	24, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
 	2,  // 15: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	14, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	15, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	16, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	17, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	18, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	19, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	21, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	20, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.invalid_api_key:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
-	13, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	12, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	13, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	14, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	15, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	16, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	17, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	18, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	20, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	19, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.invalid_api_key:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
+	12, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	11, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
 	6,  // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
 	7,  // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	9,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
-	22, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.llm_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.LlmTokenUsageEntry
-	10, // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_files_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.search_codebase_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.grep_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.file_glob_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.apply_file_diff_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
-	10, // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.write_to_long_running_shell_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_mcp_resource_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.call_mcp_tool_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	10, // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	0,  // 41: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
-	8,  // 42: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.LlmTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.DifferentiatedTokenUsage
-	35, // 43: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	36, // 44: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	36, // 45: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	37, // 46: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	36, // 47: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	37, // 48: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	49, // [49:49] is the sub-list for method output_type
-	49, // [49:49] is the sub-list for method input_type
-	49, // [49:49] is the sub-list for extension type_name
-	49, // [49:49] is the sub-list for extension extendee
-	0,  // [0:49] is the sub-list for field type_name
+	8,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
+	21, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.warp_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry
+	22, // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.byok_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
+	9,  // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_files_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.search_codebase_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.grep_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.file_glob_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	10, // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.apply_file_diff_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
+	9,  // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.write_to_long_running_shell_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_mcp_resource_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.call_mcp_tool_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	9,  // 41: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	0,  // 42: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
+	7,  // 43: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	7,  // 44: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	35, // 45: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	36, // 46: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	36, // 47: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	37, // 48: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	36, // 49: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	37, // 50: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	51, // [51:51] is the sub-list for method output_type
+	51, // [51:51] is the sub-list for method input_type
+	51, // [51:51] is the sub-list for extension type_name
+	51, // [51:51] is the sub-list for extension extendee
+	0,  // [0:51] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
