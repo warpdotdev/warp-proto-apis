@@ -1824,7 +1824,6 @@ type ResponseEvent_StreamFinished_ModelTokenUsage struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ModelId        *string                `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
 	xxx_hidden_TotalTokens    uint32                 `protobuf:"varint,2,opt,name=total_tokens,json=totalTokens"`
-	xxx_hidden_ModelName      *string                `protobuf:"bytes,3,opt,name=model_name,json=modelName"`
 	xxx_hidden_WithUserApiKey bool                   `protobuf:"varint,4,opt,name=with_user_api_key,json=withUserApiKey"`
 	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
 	XXX_presence              [1]uint32
@@ -1874,16 +1873,6 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetTotalTokens() uint32 {
 	return 0
 }
 
-func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetModelName() string {
-	if x != nil {
-		if x.xxx_hidden_ModelName != nil {
-			return *x.xxx_hidden_ModelName
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetWithUserApiKey() bool {
 	if x != nil {
 		return x.xxx_hidden_WithUserApiKey
@@ -1893,22 +1882,17 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) GetWithUserApiKey() bool 
 
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetTotalTokens(v uint32) {
 	x.xxx_hidden_TotalTokens = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
-}
-
-func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetModelName(v string) {
-	x.xxx_hidden_ModelName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) SetWithUserApiKey(v bool) {
 	x.xxx_hidden_WithUserApiKey = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasModelId() bool {
@@ -1925,18 +1909,11 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasTotalTokens() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasModelName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) HasWithUserApiKey() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearModelId() {
@@ -1949,13 +1926,8 @@ func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearTotalTokens() {
 	x.xxx_hidden_TotalTokens = 0
 }
 
-func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearModelName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_ModelName = nil
-}
-
 func (x *ResponseEvent_StreamFinished_ModelTokenUsage) ClearWithUserApiKey() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_WithUserApiKey = false
 }
 
@@ -1966,8 +1938,6 @@ type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
 	ModelId *string
 	// The total tokens that we have used with the given model in this conversation.
 	TotalTokens *uint32
-	// The human readable name of the model.
-	ModelName *string
 	// Whether this usage is associated with a user's api key or Warp's api key
 	WithUserApiKey *bool
 }
@@ -1977,19 +1947,15 @@ func (b0 ResponseEvent_StreamFinished_ModelTokenUsage_builder) Build() *Response
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	if b.TotalTokens != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_TotalTokens = *b.TotalTokens
 	}
-	if b.ModelName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
-		x.xxx_hidden_ModelName = b.ModelName
-	}
 	if b.WithUserApiKey != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_WithUserApiKey = *b.WithUserApiKey
 	}
 	return m0
@@ -4264,7 +4230,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc7 \n" +
+	"task.proto\"\xa7 \n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4275,7 +4241,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\x98\x1d\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xf8\x1c\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4300,12 +4266,10 @@ const file_response_proto_rawDesc = "" +
 	"\rcredits_spent\x18\x03 \x01(\x02R\fcreditsSpent\x12b\n" +
 	"\vtoken_usage\x18\x04 \x03(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\n" +
 	"tokenUsage\x12s\n" +
-	"\x13tool_usage_metadata\x18\x05 \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadataR\x11toolUsageMetadata\x1a\x99\x01\n" +
+	"\x13tool_usage_metadata\x18\x05 \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadataR\x11toolUsageMetadata\x1az\n" +
 	"\x0fModelTokenUsage\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12!\n" +
-	"\ftotal_tokens\x18\x02 \x01(\rR\vtotalTokens\x12\x1d\n" +
-	"\n" +
-	"model_name\x18\x03 \x01(\tR\tmodelName\x12)\n" +
+	"\ftotal_tokens\x18\x02 \x01(\rR\vtotalTokens\x12)\n" +
 	"\x11with_user_api_key\x18\x04 \x01(\bR\x0ewithUserApiKey\x1a\x8f\n" +
 	"\n" +
 	"\x11ToolUsageMetadata\x12k\n" +
