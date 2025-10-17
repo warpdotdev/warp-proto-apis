@@ -94,8 +94,17 @@ message ResponseEvent {
 
     // Token usage by model.
     message ModelTokenUsage {
+      // The internal id of the model.
       string model_id = 1;
+
+      // The total tokens that we have used with the given model in this conversation.
       uint32 total_tokens = 2;
+
+      // The human readable name of the model.
+      string model_name = 3;
+
+      // Whether this usage is associated with a user's api key or Warp's api key
+      bool with_user_api_key = 4;
     }
 
     // Tool usage by tool.
