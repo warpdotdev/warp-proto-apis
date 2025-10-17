@@ -100,7 +100,6 @@ message ResponseEvent {
     }
 
     // Token usage by model.
-    // This has been deprecated. Use DifferentiatedTokenUsage instead.
     message ModelTokenUsage {
       // The internal id of the model.
       // This has been dprecated, as we now store the model id as the key to access this value.
