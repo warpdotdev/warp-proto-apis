@@ -86,22 +86,32 @@ message ResponseEvent {
       float credits_spent = 3;
 
       // Token usage across every model used so far in the conversation.
+      // This has been deprecated. Use llm_token_usage instead.
       repeated ModelTokenUsage token_usage = 4;
 
       // Tool usage data across every tool the agent could use (excluding some passive and server tools).
       ToolUsageMetadata tool_usage_metadata = 5;
+
+      // Map from LLM ID to differentiated token usage (user API key vs Warp API key).
+      map<string, DifferentiatedTokenUsage> llm_token_usage = 6;
     }
 
     // Token usage by model.
+    // This has been deprecated. Use DifferentiatedTokenUsage instead.
     message ModelTokenUsage {
       // The internal id of the model.
       string model_id = 1;
 
       // The total tokens that we have used with the given model in this conversation.
       uint32 total_tokens = 2;
+    }
 
-      // Whether this usage is associated with a user's api key or Warp's api key
-      bool with_user_api_key = 4;
+    message DifferentiatedTokenUsage {
+      // Tokens payed for using a user's API key.
+      uint32 user_api_key_tokens = 1;
+
+      // Tokens payed for using warp's API key.
+      uint32 warp_api_key_tokens = 2;
     }
 
     // Tool usage by tool.
