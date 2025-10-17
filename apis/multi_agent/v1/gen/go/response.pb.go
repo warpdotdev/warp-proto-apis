@@ -3182,7 +3182,7 @@ type ResponseEvent_StreamFinished_InvalidApiKey struct {
 
 func (x *ResponseEvent_StreamFinished_InvalidApiKey) Reset() {
 	*x = ResponseEvent_StreamFinished_InvalidApiKey{}
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3194,7 +3194,7 @@ func (x *ResponseEvent_StreamFinished_InvalidApiKey) String() string {
 func (*ResponseEvent_StreamFinished_InvalidApiKey) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_InvalidApiKey) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[18]
+	mi := &file_response_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4495,31 +4495,32 @@ var file_response_proto_goTypes = []any{
 	(*ResponseEvent_StreamFinished_ToolUsageMetadata)(nil),         // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
 	(*ResponseEvent_StreamFinished_ToolCallStats)(nil),             // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	(*ResponseEvent_StreamFinished_ApplyFileDiffStats)(nil),        // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
-	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
-	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	(*ResponseEvent_StreamFinished_Other)(nil),                     // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	(*ResponseEvent_StreamFinished_Done)(nil),                      // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	(*ResponseEvent_StreamFinished_InvalidApiKey)(nil),             // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
-	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	(*ClientAction_CreateTask)(nil),                                // 21: warp.multi_agent.v1.ClientAction.CreateTask
-	(*ClientAction_UpdateTaskServerData)(nil),                      // 22: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	(*ClientAction_UpdateTaskDescription)(nil),                     // 23: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                         // 24: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                         // 25: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),                    // 26: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                         // 27: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*ClientAction_BeginTransaction)(nil),                          // 28: warp.multi_agent.v1.ClientAction.BeginTransaction
-	(*ClientAction_CommitTransaction)(nil),                         // 29: warp.multi_agent.v1.ClientAction.CommitTransaction
-	(*ClientAction_RollbackTransaction)(nil),                       // 30: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*ClientAction_StartNewConversation)(nil),                      // 31: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*Suggestions)(nil),                                            // 32: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                                   // 33: warp.multi_agent.v1.Task
-	(*Message)(nil),                                                // 34: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                                  // 35: google.protobuf.FieldMask
+	(*ResponseEvent_StreamFinished_RunCommandStats)(nil),           // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStats
+	(*ResponseEvent_StreamFinished_RequestCost)(nil),               // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	(*ResponseEvent_StreamFinished_TokenUsage)(nil),                // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	(*ResponseEvent_StreamFinished_Other)(nil),                     // 14: warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	(*ResponseEvent_StreamFinished_Done)(nil),                      // 15: warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	(*ResponseEvent_StreamFinished_ReachedMaxTokenLimit)(nil),      // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	(*ResponseEvent_StreamFinished_QuotaLimit)(nil),                // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	(*ResponseEvent_StreamFinished_ContextWindowExceeded)(nil),     // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	(*ResponseEvent_StreamFinished_LLMUnavailable)(nil),            // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	(*ResponseEvent_StreamFinished_InvalidApiKey)(nil),             // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
+	(*ResponseEvent_StreamFinished_InternalError)(nil),             // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	(*ClientAction_CreateTask)(nil),                                // 22: warp.multi_agent.v1.ClientAction.CreateTask
+	(*ClientAction_UpdateTaskServerData)(nil),                      // 23: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	(*ClientAction_UpdateTaskDescription)(nil),                     // 24: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                         // 25: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                         // 26: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                    // 27: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                         // 28: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*ClientAction_BeginTransaction)(nil),                          // 29: warp.multi_agent.v1.ClientAction.BeginTransaction
+	(*ClientAction_CommitTransaction)(nil),                         // 30: warp.multi_agent.v1.ClientAction.CommitTransaction
+	(*ClientAction_RollbackTransaction)(nil),                       // 31: warp.multi_agent.v1.ClientAction.RollbackTransaction
+	(*ClientAction_StartNewConversation)(nil),                      // 32: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*Suggestions)(nil),                                            // 33: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                                   // 34: warp.multi_agent.v1.Task
+	(*Message)(nil),                                                // 35: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil),                                  // 36: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	3,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
@@ -4538,16 +4539,16 @@ var file_response_proto_depIdxs = []int32{
 	32, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
 	23, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
 	2,  // 15: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
-	13, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
-	14, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
-	15, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
-	16, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
-	17, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
-	18, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
-	20, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
-	19, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.invalid_api_key:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
-	12, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
-	11, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
+	14, // 16: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
+	15, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
+	16, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.max_token_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ReachedMaxTokenLimit
+	17, // 19: warp.multi_agent.v1.ResponseEvent.StreamFinished.quota_limit:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.QuotaLimit
+	18, // 20: warp.multi_agent.v1.ResponseEvent.StreamFinished.context_window_exceeded:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowExceeded
+	19, // 21: warp.multi_agent.v1.ResponseEvent.StreamFinished.llm_unavailable:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.LLMUnavailable
+	21, // 22: warp.multi_agent.v1.ResponseEvent.StreamFinished.internal_error:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InternalError
+	20, // 23: warp.multi_agent.v1.ResponseEvent.StreamFinished.invalid_api_key:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey
+	13, // 24: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
+	12, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
 	6,  // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
 	7,  // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	8,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
@@ -4563,12 +4564,12 @@ var file_response_proto_depIdxs = []int32{
 	9,  // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	9,  // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	0,  // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
-	33, // 41: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	34, // 42: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	34, // 43: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	35, // 44: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	34, // 45: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	35, // 46: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	34, // 41: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	35, // 42: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	35, // 43: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	36, // 44: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	35, // 45: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	36, // 46: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
 	47, // [47:47] is the sub-list for method output_type
 	47, // [47:47] is the sub-list for method input_type
 	47, // [47:47] is the sub-list for extension type_name
