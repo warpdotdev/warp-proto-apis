@@ -1819,7 +1819,7 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	// The total number of credits spent so far in the conversation.
 	CreditsSpent *float32
 	// Token usage across every model used so far in the conversation.
-	// This has been deprecated. Use llm_token_usage instead.
+	// This has been deprecated. Use warp_token_usage and byok_token_usage instead.
 	//
 	// Deprecated: Marked as deprecated in response.proto.
 	TokenUsage []*ResponseEvent_StreamFinished_ModelTokenUsage
@@ -1949,7 +1949,7 @@ type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The internal id of the model.
-	// This has been dprecated, as we now store the model id as the key to access this value.
+	// This has been dprecated, as we now use the model id as a key to access this value.
 	//
 	// Deprecated: Marked as deprecated in response.proto.
 	ModelId *string

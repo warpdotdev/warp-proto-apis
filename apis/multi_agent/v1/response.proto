@@ -86,7 +86,7 @@ message ResponseEvent {
       float credits_spent = 3;
 
       // Token usage across every model used so far in the conversation.
-      // This has been deprecated. Use llm_token_usage instead.
+      // This has been deprecated. Use warp_token_usage and byok_token_usage instead.
       repeated ModelTokenUsage token_usage = 4 [deprecated = true];
 
       // Tool usage data across every tool the agent could use (excluding some passive and server tools).
@@ -102,7 +102,7 @@ message ResponseEvent {
     // Token usage by model.
     message ModelTokenUsage {
       // The internal id of the model.
-      // This has been dprecated, as we now store the model id as the key to access this value.
+      // This has been dprecated, as we now use the model id as a key to access this value.
       string model_id = 1 [deprecated = true];
 
       // The total tokens that we have used with the given model in this conversation.
