@@ -11867,6 +11867,7 @@ func (b0 Message_ToolCall_EditDocuments_DocumentDiff_builder) Build() *Message_T
 type Message_ToolCall_CreateDocuments_NewDocument struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Content     *string                `protobuf:"bytes,1,opt,name=content"`
+	xxx_hidden_Title       *string                `protobuf:"bytes,2,opt,name=title"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -11908,9 +11909,24 @@ func (x *Message_ToolCall_CreateDocuments_NewDocument) GetContent() string {
 	return ""
 }
 
+func (x *Message_ToolCall_CreateDocuments_NewDocument) GetTitle() string {
+	if x != nil {
+		if x.xxx_hidden_Title != nil {
+			return *x.xxx_hidden_Title
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_CreateDocuments_NewDocument) SetContent(v string) {
 	x.xxx_hidden_Content = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Message_ToolCall_CreateDocuments_NewDocument) SetTitle(v string) {
+	x.xxx_hidden_Title = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *Message_ToolCall_CreateDocuments_NewDocument) HasContent() bool {
@@ -11920,9 +11936,21 @@ func (x *Message_ToolCall_CreateDocuments_NewDocument) HasContent() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Message_ToolCall_CreateDocuments_NewDocument) HasTitle() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *Message_ToolCall_CreateDocuments_NewDocument) ClearContent() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Content = nil
+}
+
+func (x *Message_ToolCall_CreateDocuments_NewDocument) ClearTitle() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Title = nil
 }
 
 type Message_ToolCall_CreateDocuments_NewDocument_builder struct {
@@ -11930,6 +11958,7 @@ type Message_ToolCall_CreateDocuments_NewDocument_builder struct {
 
 	// The new document contents.
 	Content *string
+	Title   *string
 }
 
 func (b0 Message_ToolCall_CreateDocuments_NewDocument_builder) Build() *Message_ToolCall_CreateDocuments_NewDocument {
@@ -11937,8 +11966,12 @@ func (b0 Message_ToolCall_CreateDocuments_NewDocument_builder) Build() *Message_
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Content != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Content = b.Content
+	}
+	if b.Title != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Title = b.Title
 	}
 	return m0
 }
@@ -15055,7 +15088,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x95S\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xabS\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -15121,7 +15154,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xb2$\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xc8$\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -15238,11 +15271,12 @@ const file_task_proto_rawDesc = "" +
 	"\vdocument_id\x18\x01 \x01(\tR\n" +
 	"documentId\x12\x16\n" +
 	"\x06search\x18\x02 \x01(\tR\x06search\x12\x18\n" +
-	"\areplace\x18\x03 \x01(\tR\areplace\x1a\xa2\x01\n" +
+	"\areplace\x18\x03 \x01(\tR\areplace\x1a\xb8\x01\n" +
 	"\x0fCreateDocuments\x12f\n" +
-	"\rnew_documents\x18\x01 \x03(\v2A.warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocumentR\fnewDocuments\x1a'\n" +
+	"\rnew_documents\x18\x01 \x03(\v2A.warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocumentR\fnewDocuments\x1a=\n" +
 	"\vNewDocument\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\tR\acontentB\x06\n" +
+	"\acontent\x18\x01 \x01(\tR\acontent\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05titleB\x06\n" +
 	"\x04tool\x1a\xca\x11\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +

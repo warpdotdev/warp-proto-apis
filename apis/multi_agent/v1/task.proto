@@ -407,6 +407,7 @@ message Message {
       message NewDocument {
         // The new document contents.
         string content = 1;
+        string title = 2;
       }
     }
   }
