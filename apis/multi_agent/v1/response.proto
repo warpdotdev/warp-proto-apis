@@ -86,15 +86,29 @@ message ResponseEvent {
       float credits_spent = 3;
 
       // Token usage across every model used so far in the conversation.
-      repeated ModelTokenUsage token_usage = 4;
+      // This has been deprecated. Use warp_token_usage and byok_token_usage instead.
+      repeated ModelTokenUsage token_usage = 4 [deprecated = true];
 
       // Tool usage data across every tool the agent could use (excluding some passive and server tools).
       ToolUsageMetadata tool_usage_metadata = 5;
+
+      // Token usage using the warp API key.
+      map<string, ModelTokenUsage> warp_token_usage = 6;
+
+      // Token usage using a user's API key.
+      map<string, ModelTokenUsage> byok_token_usage = 7;
     }
 
     // Token usage by model.
+    // We maintain this message type in addition to the more detailed TokenUsage
+    // type as this message is used to track simple token usage stats on a per-model
+    // basis, while TokenUsage is used to track much more granular data.
     message ModelTokenUsage {
-      string model_id = 1;
+      // The internal id of the model.
+      // This has been deprecated, as we now use the model id as a key to access this value.
+      string model_id = 1 [deprecated = true];
+
+      // The total tokens that we have used with the given model in this conversation.
       uint32 total_tokens = 2;
     }
 
@@ -141,6 +155,9 @@ message ResponseEvent {
         float exact = 1;
     }
 
+    // We maintain this message type in addition to the more sparse ModelTokenUsage
+    // type as that message is used to track simple token usage stats on a per-model
+    // basis, while this is used to track much more granular data.
     message TokenUsage {
         string model_id = 1;
 
