@@ -1855,6 +1855,9 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 }
 
 // Token usage by model.
+// We maintain this message type in addition to the more detailed TokenUsage
+// type as this message is used to track simple token usage stats on a per-model
+// basis, while TokenUsage is used to track much more granular data.
 type ResponseEvent_StreamFinished_ModelTokenUsage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ModelId     *string                `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
@@ -1949,7 +1952,7 @@ type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The internal id of the model.
-	// This has been dprecated, as we now use the model id as a key to access this value.
+	// This has been deprecated, as we now use the model id as a key to access this value.
 	//
 	// Deprecated: Marked as deprecated in response.proto.
 	ModelId *string
@@ -2578,6 +2581,9 @@ func (b0 ResponseEvent_StreamFinished_RequestCost_builder) Build() *ResponseEven
 	return m0
 }
 
+// We maintain this message type in addition to the more sparse ModelTokenUsage
+// type as that message is used to track simple token usage stats on a per-model
+// basis, while this is used to track much more granular data.
 type ResponseEvent_StreamFinished_TokenUsage struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ModelId         *string                `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
