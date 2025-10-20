@@ -100,9 +100,12 @@ message ResponseEvent {
     }
 
     // Token usage by model.
+    // We maintain this message type in addition to the more detailed TokenUsage
+    // type as this message is used to track simple token usage stats on a per-model
+    // basis, while TokenUsage is used to track much more granular data.
     message ModelTokenUsage {
       // The internal id of the model.
-      // This has been dprecated, as we now use the model id as a key to access this value.
+      // This has been deprecated, as we now use the model id as a key to access this value.
       string model_id = 1 [deprecated = true];
 
       // The total tokens that we have used with the given model in this conversation.
@@ -140,6 +143,9 @@ message ResponseEvent {
         float exact = 1;
     }
 
+    // We maintain this message type in addition to the more sparse ModelTokenUsage
+    // type as that message is used to track simple token usage stats on a per-model
+    // basis, while this is used to track much more granular data.
     message TokenUsage {
         string model_id = 1;
 
