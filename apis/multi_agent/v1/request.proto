@@ -160,6 +160,9 @@ message Request {
       string url = 1 [ (sensitive) = true ];
     }
 
+    // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
+    message CreateEnvironment { }
+
     // An input to trigger a suggested prompt.
     message TriggerSuggestPrompt {
       repeated Attachment attachments = 1;
@@ -182,8 +185,6 @@ message Request {
 
     // An input to summarize the active conversation.
     message SummarizeConversation {}
-    // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
-    message CreateEnvironment { }
   }
 
   message Metadata {
