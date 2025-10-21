@@ -3665,6 +3665,50 @@ func (b0 Request_Input_CloneRepository_builder) Build() *Request_Input_CloneRepo
 	return m0
 }
 
+// An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
+type Request_Input_CreateEnvironment struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Request_Input_CreateEnvironment) Reset() {
+	*x = Request_Input_CreateEnvironment{}
+	mi := &file_request_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Input_CreateEnvironment) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Input_CreateEnvironment) ProtoMessage() {}
+
+func (x *Request_Input_CreateEnvironment) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Request_Input_CreateEnvironment_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Request_Input_CreateEnvironment_builder) Build() *Request_Input_CreateEnvironment {
+	m0 := &Request_Input_CreateEnvironment{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 // An input to trigger a suggested prompt.
 type Request_Input_TriggerSuggestPrompt struct {
 	state                  protoimpl.MessageState                       `protogen:"opaque.v1"`
@@ -3676,7 +3720,7 @@ type Request_Input_TriggerSuggestPrompt struct {
 
 func (x *Request_Input_TriggerSuggestPrompt) Reset() {
 	*x = Request_Input_TriggerSuggestPrompt{}
-	mi := &file_request_proto_msgTypes[15]
+	mi := &file_request_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3688,7 +3732,7 @@ func (x *Request_Input_TriggerSuggestPrompt) String() string {
 func (*Request_Input_TriggerSuggestPrompt) ProtoMessage() {}
 
 func (x *Request_Input_TriggerSuggestPrompt) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[15]
+	mi := &file_request_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3830,7 +3874,7 @@ func (b0 Request_Input_TriggerSuggestPrompt_builder) Build() *Request_Input_Trig
 type case_Request_Input_TriggerSuggestPrompt_Trigger protoreflect.FieldNumber
 
 func (x case_Request_Input_TriggerSuggestPrompt_Trigger) String() string {
-	md := file_request_proto_msgTypes[15].Descriptor()
+	md := file_request_proto_msgTypes[16].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -3864,7 +3908,7 @@ type Request_Input_CodeReview struct {
 
 func (x *Request_Input_CodeReview) Reset() {
 	*x = Request_Input_CodeReview{}
-	mi := &file_request_proto_msgTypes[16]
+	mi := &file_request_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3876,7 +3920,7 @@ func (x *Request_Input_CodeReview) String() string {
 func (*Request_Input_CodeReview) ProtoMessage() {}
 
 func (x *Request_Input_CodeReview) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[16]
+	mi := &file_request_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3965,7 +4009,7 @@ func (b0 Request_Input_CodeReview_builder) Build() *Request_Input_CodeReview {
 type case_Request_Input_CodeReview_Operation protoreflect.FieldNumber
 
 func (x case_Request_Input_CodeReview_Operation) String() string {
-	md := file_request_proto_msgTypes[16].Descriptor()
+	md := file_request_proto_msgTypes[17].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -3991,7 +4035,7 @@ type Request_Input_SummarizeConversation struct {
 
 func (x *Request_Input_SummarizeConversation) Reset() {
 	*x = Request_Input_SummarizeConversation{}
-	mi := &file_request_proto_msgTypes[17]
+	mi := &file_request_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4003,7 +4047,7 @@ func (x *Request_Input_SummarizeConversation) String() string {
 func (*Request_Input_SummarizeConversation) ProtoMessage() {}
 
 func (x *Request_Input_SummarizeConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[17]
+	mi := &file_request_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4021,50 +4065,6 @@ type Request_Input_SummarizeConversation_builder struct {
 
 func (b0 Request_Input_SummarizeConversation_builder) Build() *Request_Input_SummarizeConversation {
 	m0 := &Request_Input_SummarizeConversation{}
-	b, x := &b0, m0
-	_, _ = b, x
-	return m0
-}
-
-// An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
-type Request_Input_CreateEnvironment struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *Request_Input_CreateEnvironment) Reset() {
-	*x = Request_Input_CreateEnvironment{}
-	mi := &file_request_proto_msgTypes[18]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Input_CreateEnvironment) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Input_CreateEnvironment) ProtoMessage() {}
-
-func (x *Request_Input_CreateEnvironment) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[18]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-type Request_Input_CreateEnvironment_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-}
-
-func (b0 Request_Input_CreateEnvironment_builder) Build() *Request_Input_CreateEnvironment {
-	m0 := &Request_Input_CreateEnvironment{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -5517,7 +5517,8 @@ const file_request_proto_rawDesc = "" +
 	"\x10CreateNewProject\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a)\n" +
 	"\x0fCloneRepository\x12\x16\n" +
-	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a\xde\x01\n" +
+	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a\x13\n" +
+	"\x11CreateEnvironment\x1a\xde\x01\n" +
 	"\x14TriggerSuggestPrompt\x12A\n" +
 	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12=\n" +
 	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
@@ -5530,8 +5531,7 @@ const file_request_proto_rawDesc = "" +
 	"\x15InitialReviewComments\x12K\n" +
 	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewCommentsB\v\n" +
 	"\toperation\x1a\x17\n" +
-	"\x15SummarizeConversation\x1a\x13\n" +
-	"\x11CreateEnvironmentB\x06\n" +
+	"\x15SummarizeConversationB\x06\n" +
 	"\x04type\x1a\xd5\x01\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -5592,26 +5592,26 @@ const file_request_proto_rawDesc = "" +
 
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_request_proto_goTypes = []any{
-	(*Request)(nil),                                                        // 0: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                            // 1: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                  // 2: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                               // 3: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                               // 4: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                             // 5: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                        // 6: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_UserInputs)(nil),                                       // 7: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                   // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                          // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversation)(nil),                               // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
-	(*Request_Input_InitProjectRules)(nil),                                 // 12: warp.multi_agent.v1.Request.Input.InitProjectRules
-	(*Request_Input_CreateNewProject)(nil),                                 // 13: warp.multi_agent.v1.Request.Input.CreateNewProject
-	(*Request_Input_CloneRepository)(nil),                                  // 14: warp.multi_agent.v1.Request.Input.CloneRepository
-	(*Request_Input_TriggerSuggestPrompt)(nil),                             // 15: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
-	(*Request_Input_CodeReview)(nil),                                       // 16: warp.multi_agent.v1.Request.Input.CodeReview
-	(*Request_Input_SummarizeConversation)(nil),                            // 17: warp.multi_agent.v1.Request.Input.SummarizeConversation
-	(*Request_Input_CreateEnvironment)(nil),                                // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
-	nil,                                                                    // 19: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
+	(*Request)(nil),                               // 0: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                   // 1: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                         // 2: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                      // 3: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                      // 4: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                    // 5: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),               // 6: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_UserInputs)(nil),              // 7: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),          // 8: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil), // 9: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),       // 10: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_ResumeConversation)(nil),      // 11: warp.multi_agent.v1.Request.Input.ResumeConversation
+	(*Request_Input_InitProjectRules)(nil),        // 12: warp.multi_agent.v1.Request.Input.InitProjectRules
+	(*Request_Input_CreateNewProject)(nil),        // 13: warp.multi_agent.v1.Request.Input.CreateNewProject
+	(*Request_Input_CloneRepository)(nil),         // 14: warp.multi_agent.v1.Request.Input.CloneRepository
+	(*Request_Input_CreateEnvironment)(nil),       // 15: warp.multi_agent.v1.Request.Input.CreateEnvironment
+	(*Request_Input_TriggerSuggestPrompt)(nil),    // 16: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
+	(*Request_Input_CodeReview)(nil),              // 17: warp.multi_agent.v1.Request.Input.CodeReview
+	(*Request_Input_SummarizeConversation)(nil),   // 18: warp.multi_agent.v1.Request.Input.SummarizeConversation
+	nil, // 19: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	(*Request_Input_UserInputs_UserInput)(nil),                             // 20: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_ToolCallResult_RefineResult)(nil),                      // 21: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 22: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
@@ -5671,12 +5671,12 @@ var file_request_proto_depIdxs = []int32{
 	10, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	11, // 11: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
 	12, // 12: warp.multi_agent.v1.Request.Input.init_project_rules:type_name -> warp.multi_agent.v1.Request.Input.InitProjectRules
-	15, // 13: warp.multi_agent.v1.Request.Input.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
+	16, // 13: warp.multi_agent.v1.Request.Input.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
 	13, // 14: warp.multi_agent.v1.Request.Input.create_new_project:type_name -> warp.multi_agent.v1.Request.Input.CreateNewProject
 	14, // 15: warp.multi_agent.v1.Request.Input.clone_repository:type_name -> warp.multi_agent.v1.Request.Input.CloneRepository
-	16, // 16: warp.multi_agent.v1.Request.Input.code_review:type_name -> warp.multi_agent.v1.Request.Input.CodeReview
-	17, // 17: warp.multi_agent.v1.Request.Input.summarize_conversation:type_name -> warp.multi_agent.v1.Request.Input.SummarizeConversation
-	18, // 18: warp.multi_agent.v1.Request.Input.create_environment:type_name -> warp.multi_agent.v1.Request.Input.CreateEnvironment
+	17, // 16: warp.multi_agent.v1.Request.Input.code_review:type_name -> warp.multi_agent.v1.Request.Input.CodeReview
+	18, // 17: warp.multi_agent.v1.Request.Input.summarize_conversation:type_name -> warp.multi_agent.v1.Request.Input.SummarizeConversation
+	15, // 18: warp.multi_agent.v1.Request.Input.create_environment:type_name -> warp.multi_agent.v1.Request.Input.CreateEnvironment
 	6,  // 19: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	8,  // 20: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	29, // 21: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
@@ -5790,11 +5790,11 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_CustomOnboardingRequest_)(nil),
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
-	file_request_proto_msgTypes[15].OneofWrappers = []any{
+	file_request_proto_msgTypes[16].OneofWrappers = []any{
 		(*request_Input_TriggerSuggestPrompt_FilesChanged)(nil),
 		(*request_Input_TriggerSuggestPrompt_CommandRun)(nil),
 	}
-	file_request_proto_msgTypes[16].OneofWrappers = []any{
+	file_request_proto_msgTypes[17].OneofWrappers = []any{
 		(*request_Input_CodeReview_InitialReviewComments_)(nil),
 	}
 	file_request_proto_msgTypes[20].OneofWrappers = []any{
