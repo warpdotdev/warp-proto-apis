@@ -59,6 +59,7 @@ message Request {
       CloneRepository clone_repository = 11;
       CodeReview code_review = 12;
       SummarizeConversation summarize_conversation = 13;
+      CreateEnvironment create_environment = 14;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -158,6 +159,9 @@ message Request {
     message CloneRepository {
       string url = 1 [ (sensitive) = true ];
     }
+
+    // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
+    message CreateEnvironment { }
 
     // An input to trigger a suggested prompt.
     message TriggerSuggestPrompt {

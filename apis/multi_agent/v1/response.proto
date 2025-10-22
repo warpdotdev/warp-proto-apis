@@ -114,7 +114,7 @@ message ResponseEvent {
 
     // Tool usage by tool.
     message ToolUsageMetadata {
-      ToolCallStats       run_command_stats = 1;
+      RunCommandStats     run_command_stats = 1;
       ToolCallStats       read_files_stats = 2;
       ToolCallStats       search_codebase_stats = 3;
       ToolCallStats       grep_stats = 4;
@@ -129,6 +129,7 @@ message ResponseEvent {
 
     message ToolCallStats {
       // The number of times this tool has been called in the conversation thus far.
+      // This includes tool calls that were rejected or cancelled by the user.
       int32 count = 1;
     }
 
@@ -136,6 +137,17 @@ message ResponseEvent {
       int32 count = 1;
       int32 lines_added = 2;
       int32 lines_removed = 3;
+
+      // The total number of unique files that have been changed in this conversation.
+      int32 files_changed = 4;
+    }
+
+    message RunCommandStats {
+      int32 count = 1;
+
+      // The number of commands that have been succesfully executed
+      // (i.e. accepted by the user and run)
+      int32 command_executed = 2;
     }
 
     message RequestCost {
