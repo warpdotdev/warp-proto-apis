@@ -2477,11 +2477,11 @@ var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xc3\x03\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xbd\x03\n" +
 	"\n" +
-	"Attachment\x12%\n" +
+	"Attachment\x12\x1f\n" +
 	"\n" +
-	"plain_text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00R\tplainText\x12a\n" +
+	"plain_text\x18\x01 \x01(\tH\x00R\tplainText\x12a\n" +
 	"\x16executed_shell_command\x18\x02 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommand\x12^\n" +
 	"\x15running_shell_command\x18\x03 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandH\x00R\x13runningShellCommand\x12E\n" +
 	"\fdrive_object\x18\x04 \x01(\v2 .warp.multi_agent.v1.DriveObjectH\x00R\vdriveObject\x12@\n" +

@@ -14,7 +14,7 @@ import "file_content.proto";
 
 message Attachment {
   oneof value {
-    string plain_text = 1 [ (sensitive) = true ];
+    string plain_text = 1;
     ExecutedShellCommand executed_shell_command = 2;
     RunningShellCommand running_shell_command = 3;
     DriveObject drive_object = 4;
