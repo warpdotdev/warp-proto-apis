@@ -38,8 +38,13 @@ message RunningShellCommand {
 
 // A snapshot of the terminal grid for a long-running command.
 message LongRunningShellCommandSnapshot {
-  // The formatted grid contents.
+  // Raw output grid contents.
   string output = 1 [ (sensitive) = true ];
+
+  // The substring in 'output' used to represent the current cursor.
+  //
+  // This may be used by the server to find the cursor in `output` and change its formatting.
+  string cursor = 2;
 }
 
 message DriveObject {
@@ -64,7 +69,7 @@ message Notebook {
 
 message GenericStringObject {
   string payload = 1 [ (sensitive) = true ];
-  // Refers to the JSON type of the object such as "JsonEnvVarCollection" or "JsonAIFact" 
+  // Refers to the JSON type of the object such as "JsonEnvVarCollection" or "JsonAIFact"
   string object_type = 2;
 }
 
