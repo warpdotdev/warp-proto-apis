@@ -4777,15 +4777,16 @@ func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelCo
 }
 
 type Request_Settings_ApiKeys struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Anthropic   *string                `protobuf:"bytes,1,opt,name=anthropic"`
-	xxx_hidden_Openai      *string                `protobuf:"bytes,2,opt,name=openai"`
-	xxx_hidden_Google      *string                `protobuf:"bytes,3,opt,name=google"`
-	xxx_hidden_OpenRouter  *string                `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Anthropic             *string                `protobuf:"bytes,1,opt,name=anthropic"`
+	xxx_hidden_Openai                *string                `protobuf:"bytes,2,opt,name=openai"`
+	xxx_hidden_Google                *string                `protobuf:"bytes,3,opt,name=google"`
+	xxx_hidden_OpenRouter            *string                `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
+	xxx_hidden_AllowUseOfWarpCredits bool                   `protobuf:"varint,5,opt,name=allow_use_of_warp_credits,json=allowUseOfWarpCredits"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *Request_Settings_ApiKeys) Reset() {
@@ -4853,24 +4854,36 @@ func (x *Request_Settings_ApiKeys) GetOpenRouter() string {
 	return ""
 }
 
+func (x *Request_Settings_ApiKeys) GetAllowUseOfWarpCredits() bool {
+	if x != nil {
+		return x.xxx_hidden_AllowUseOfWarpCredits
+	}
+	return false
+}
+
 func (x *Request_Settings_ApiKeys) SetAnthropic(v string) {
 	x.xxx_hidden_Anthropic = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenai(v string) {
 	x.xxx_hidden_Openai = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *Request_Settings_ApiKeys) SetGoogle(v string) {
 	x.xxx_hidden_Google = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenRouter(v string) {
 	x.xxx_hidden_OpenRouter = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *Request_Settings_ApiKeys) SetAllowUseOfWarpCredits(v bool) {
+	x.xxx_hidden_AllowUseOfWarpCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *Request_Settings_ApiKeys) HasAnthropic() bool {
@@ -4901,6 +4914,13 @@ func (x *Request_Settings_ApiKeys) HasOpenRouter() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *Request_Settings_ApiKeys) HasAllowUseOfWarpCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *Request_Settings_ApiKeys) ClearAnthropic() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Anthropic = nil
@@ -4921,6 +4941,11 @@ func (x *Request_Settings_ApiKeys) ClearOpenRouter() {
 	x.xxx_hidden_OpenRouter = nil
 }
 
+func (x *Request_Settings_ApiKeys) ClearAllowUseOfWarpCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_AllowUseOfWarpCredits = false
+}
+
 type Request_Settings_ApiKeys_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -4928,6 +4953,9 @@ type Request_Settings_ApiKeys_builder struct {
 	Openai     *string
 	Google     *string
 	OpenRouter *string
+	// If `true`, the client allows the use of Warp credits for LLM calls when
+	// keys are provided.
+	AllowUseOfWarpCredits *bool
 }
 
 func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
@@ -4935,20 +4963,24 @@ func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Anthropic != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Anthropic = b.Anthropic
 	}
 	if b.Openai != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Openai = b.Openai
 	}
 	if b.Google != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_Google = b.Google
 	}
 	if b.OpenRouter != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_OpenRouter = b.OpenRouter
+	}
+	if b.AllowUseOfWarpCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_AllowUseOfWarpCredits = *b.AllowUseOfWarpCredits
 	}
 	return m0
 }
@@ -5420,7 +5452,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x8dA\n" +
+	"task.proto\"\xc7A\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5538,8 +5570,7 @@ const file_request_proto_rawDesc = "" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xeb\n" +
-	"\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa5\v\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -5563,13 +5594,14 @@ const file_request_proto_rawDesc = "" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
-	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\x90\x01\n" +
+	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\xca\x01\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +
 	"\x06google\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06google\x12%\n" +
 	"\vopen_router\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"openRouter\x1a\xf6\x05\n" +
+	"openRouter\x128\n" +
+	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x1a\xf6\x05\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
