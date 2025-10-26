@@ -281,6 +281,10 @@ message Request {
       string openai = 2 [ (sensitive) = true ];
       string google = 3 [ (sensitive) = true ];
       string open_router = 4 [ (sensitive) = true ];
+
+      // If `true`, the client allows the use of Warp credits for LLM calls when
+      // keys are provided.
+      bool allow_use_of_warp_credits = 5;
     }
   }
 
