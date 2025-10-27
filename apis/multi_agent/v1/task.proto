@@ -246,6 +246,27 @@ message Message {
     message WriteToLongRunningShellCommand {
       // The exact set of bytes that the client should write to PTY.
       bytes input = 1;
+
+      // The "mode" for the write.
+      Mode mode = 2;
+
+      message Mode {
+        oneof mode {
+            // Write raw bytes directly.
+            google.protobuf.Empty raw = 1;
+
+            // Write a line of text input.
+            //
+            // This write mode is designed to be used with REPLs/shell-like TUIs. Ensures the cursor is at the
+            // beginnning of the input buffer and sends an enter keystroke after `line`.
+            google.protobuf.Empty line = 2;
+
+            // Writes a block of multi-line text input.
+            //
+            // Under the hood, this uses bracketed paste to insert the text as-is.
+            google.protobuf.Empty block = 3;
+        }
+      }
     }
 
     message SuggestNewConversation {
