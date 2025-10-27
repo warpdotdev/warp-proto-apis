@@ -225,6 +225,7 @@ message Message {
       ReadDocuments read_documents = 20;
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
+      ReadShellCommandOutput read_shell_command_output = 23;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -431,6 +432,16 @@ message Message {
         string title = 2;
       }
     }
+
+    // A tool call to read the output of a shell command.
+    message ReadShellCommandOutput {
+      oneof delay {
+        // Return the output after a certain delay.
+        google.protobuf.Duration duration = 2;
+        // Return the output when the command completes.
+        google.protobuf.Empty on_completion = 3;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -467,6 +478,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
+      ReadShellCommandOutputResult read_shell_command_output = 27;
     }
 
     // Result of a server-side tool call.
@@ -820,6 +832,14 @@ message CreateDocumentsResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+message ReadShellCommandOutputResult {
+  string command = 1 [ (sensitive) = true ];
+  oneof result {
+    LongRunningShellCommandSnapshot long_running_command_snapshot = 2;
+    ShellCommandFinished command_finished = 3;
+  }
+}
+
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result types.
 //
@@ -846,6 +866,7 @@ enum ToolType {
   READ_DOCUMENTS = 17;
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
+  READ_SHELL_COMMAND_OUTPUT = 20;
 }
 
 message UserQueryMode {

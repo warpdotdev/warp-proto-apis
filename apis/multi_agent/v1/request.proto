@@ -108,6 +108,7 @@ message Request {
         ReadDocumentsResult read_documents = 19;
         EditDocumentsResult edit_documents = 20;
         CreateDocumentsResult create_documents = 21;
+        ReadShellCommandOutputResult read_shell_command_output = 22;
       }
 
       // Generic tool call result for representing a user-requested refinement

@@ -125,6 +125,7 @@ message ResponseEvent {
       ToolCallStats       call_mcp_tool_stats = 9;
       ToolCallStats       suggest_plan_stats = 10;
       ToolCallStats       suggest_create_plan_stats = 11;
+      ToolCallStats       read_shell_command_output_stats = 12;
     }
 
     message ToolCallStats {
