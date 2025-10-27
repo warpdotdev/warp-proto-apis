@@ -11491,10 +11491,10 @@ func (x *Message_ToolCall_ReadShellCommandOutput) GetDuration() *durationpb.Dura
 	return nil
 }
 
-func (x *Message_ToolCall_ReadShellCommandOutput) GetUntilCompletion() *emptypb.Empty {
+func (x *Message_ToolCall_ReadShellCommandOutput) GetOnCompletion() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_UntilCompletion); ok {
-			return x.UntilCompletion
+		if x, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_OnCompletion); ok {
+			return x.OnCompletion
 		}
 	}
 	return nil
@@ -11508,12 +11508,12 @@ func (x *Message_ToolCall_ReadShellCommandOutput) SetDuration(v *durationpb.Dura
 	x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_Duration{v}
 }
 
-func (x *Message_ToolCall_ReadShellCommandOutput) SetUntilCompletion(v *emptypb.Empty) {
+func (x *Message_ToolCall_ReadShellCommandOutput) SetOnCompletion(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Delay = nil
 		return
 	}
-	x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_UntilCompletion{v}
+	x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_OnCompletion{v}
 }
 
 func (x *Message_ToolCall_ReadShellCommandOutput) HasDelay() bool {
@@ -11531,11 +11531,11 @@ func (x *Message_ToolCall_ReadShellCommandOutput) HasDuration() bool {
 	return ok
 }
 
-func (x *Message_ToolCall_ReadShellCommandOutput) HasUntilCompletion() bool {
+func (x *Message_ToolCall_ReadShellCommandOutput) HasOnCompletion() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_UntilCompletion)
+	_, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_OnCompletion)
 	return ok
 }
 
@@ -11549,15 +11549,15 @@ func (x *Message_ToolCall_ReadShellCommandOutput) ClearDuration() {
 	}
 }
 
-func (x *Message_ToolCall_ReadShellCommandOutput) ClearUntilCompletion() {
-	if _, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_UntilCompletion); ok {
+func (x *Message_ToolCall_ReadShellCommandOutput) ClearOnCompletion() {
+	if _, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_OnCompletion); ok {
 		x.xxx_hidden_Delay = nil
 	}
 }
 
 const Message_ToolCall_ReadShellCommandOutput_Delay_not_set_case case_Message_ToolCall_ReadShellCommandOutput_Delay = 0
 const Message_ToolCall_ReadShellCommandOutput_Duration_case case_Message_ToolCall_ReadShellCommandOutput_Delay = 2
-const Message_ToolCall_ReadShellCommandOutput_UntilCompletion_case case_Message_ToolCall_ReadShellCommandOutput_Delay = 3
+const Message_ToolCall_ReadShellCommandOutput_OnCompletion_case case_Message_ToolCall_ReadShellCommandOutput_Delay = 3
 
 func (x *Message_ToolCall_ReadShellCommandOutput) WhichDelay() case_Message_ToolCall_ReadShellCommandOutput_Delay {
 	if x == nil {
@@ -11566,8 +11566,8 @@ func (x *Message_ToolCall_ReadShellCommandOutput) WhichDelay() case_Message_Tool
 	switch x.xxx_hidden_Delay.(type) {
 	case *message_ToolCall_ReadShellCommandOutput_Duration:
 		return Message_ToolCall_ReadShellCommandOutput_Duration_case
-	case *message_ToolCall_ReadShellCommandOutput_UntilCompletion:
-		return Message_ToolCall_ReadShellCommandOutput_UntilCompletion_case
+	case *message_ToolCall_ReadShellCommandOutput_OnCompletion:
+		return Message_ToolCall_ReadShellCommandOutput_OnCompletion_case
 	default:
 		return Message_ToolCall_ReadShellCommandOutput_Delay_not_set_case
 	}
@@ -11580,7 +11580,7 @@ type Message_ToolCall_ReadShellCommandOutput_builder struct {
 	// Return the output after a certain delay.
 	Duration *durationpb.Duration
 	// Return the output when the command completes.
-	UntilCompletion *emptypb.Empty
+	OnCompletion *emptypb.Empty
 	// -- end of xxx_hidden_Delay
 }
 
@@ -11591,8 +11591,8 @@ func (b0 Message_ToolCall_ReadShellCommandOutput_builder) Build() *Message_ToolC
 	if b.Duration != nil {
 		x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_Duration{b.Duration}
 	}
-	if b.UntilCompletion != nil {
-		x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_UntilCompletion{b.UntilCompletion}
+	if b.OnCompletion != nil {
+		x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_OnCompletion{b.OnCompletion}
 	}
 	return m0
 }
@@ -11616,15 +11616,15 @@ type message_ToolCall_ReadShellCommandOutput_Duration struct {
 	Duration *durationpb.Duration `protobuf:"bytes,2,opt,name=duration,oneof"`
 }
 
-type message_ToolCall_ReadShellCommandOutput_UntilCompletion struct {
+type message_ToolCall_ReadShellCommandOutput_OnCompletion struct {
 	// Return the output when the command completes.
-	UntilCompletion *emptypb.Empty `protobuf:"bytes,3,opt,name=until_completion,json=untilCompletion,oneof"`
+	OnCompletion *emptypb.Empty `protobuf:"bytes,3,opt,name=on_completion,json=onCompletion,oneof"`
 }
 
 func (*message_ToolCall_ReadShellCommandOutput_Duration) isMessage_ToolCall_ReadShellCommandOutput_Delay() {
 }
 
-func (*message_ToolCall_ReadShellCommandOutput_UntilCompletion) isMessage_ToolCall_ReadShellCommandOutput_Delay() {
+func (*message_ToolCall_ReadShellCommandOutput_OnCompletion) isMessage_ToolCall_ReadShellCommandOutput_Delay() {
 }
 
 type Message_ToolCall_WriteToLongRunningShellCommand_Mode struct {
@@ -15824,7 +15824,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xb3X\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xadX\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -15890,7 +15890,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xe0(\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xda(\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -16019,10 +16019,10 @@ const file_task_proto_rawDesc = "" +
 	"\rnew_documents\x18\x01 \x03(\v2A.warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocumentR\fnewDocuments\x1a=\n" +
 	"\vNewDocument\x12\x18\n" +
 	"\acontent\x18\x01 \x01(\tR\acontent\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x1a\x9f\x01\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x1a\x99\x01\n" +
 	"\x16ReadShellCommandOutput\x127\n" +
-	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12C\n" +
-	"\x10until_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x0funtilCompletionB\a\n" +
+	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
+	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
 	"\x05delayB\x06\n" +
 	"\x04tool\x1a\xba\x12\n" +
 	"\x0eToolCallResult\x12 \n" +
@@ -16550,7 +16550,7 @@ var file_task_proto_depIdxs = []int32{
 	76,  // 136: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
 	77,  // 137: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
 	124, // 138: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
-	121, // 139: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.until_completion:type_name -> google.protobuf.Empty
+	121, // 139: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
 	121, // 140: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
 	121, // 141: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
 	121, // 142: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
@@ -16764,7 +16764,7 @@ func file_task_proto_init() {
 	}
 	file_task_proto_msgTypes[68].OneofWrappers = []any{
 		(*message_ToolCall_ReadShellCommandOutput_Duration)(nil),
-		(*message_ToolCall_ReadShellCommandOutput_UntilCompletion)(nil),
+		(*message_ToolCall_ReadShellCommandOutput_OnCompletion)(nil),
 	}
 	file_task_proto_msgTypes[69].OneofWrappers = []any{
 		(*message_ToolCall_WriteToLongRunningShellCommand_Mode_Raw)(nil),

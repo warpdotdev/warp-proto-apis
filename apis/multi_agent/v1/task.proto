@@ -439,7 +439,7 @@ message Message {
         // Return the output after a certain delay.
         google.protobuf.Duration duration = 2;
         // Return the output when the command completes.
-        google.protobuf.Empty until_completion = 3;
+        google.protobuf.Empty on_completion = 3;
       }
     }
   }
