@@ -9527,16 +9527,17 @@ func (b0 Message_ToolCall_Server_builder) Build() *Message_ToolCall_Server {
 
 // A tool call to run a shell command.
 type Message_ToolCall_RunShellCommand struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
-	xxx_hidden_IsReadOnly  bool                   `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
-	xxx_hidden_UsesPager   bool                   `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
-	xxx_hidden_Citations   *[]*Citation           `protobuf:"bytes,4,rep,name=citations"`
-	xxx_hidden_IsRisky     bool                   `protobuf:"varint,5,opt,name=is_risky,json=isRisky"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState                                    `protogen:"opaque.v1"`
+	xxx_hidden_Command                *string                                                   `protobuf:"bytes,1,opt,name=command"`
+	xxx_hidden_IsReadOnly             bool                                                      `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
+	xxx_hidden_UsesPager              bool                                                      `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
+	xxx_hidden_Citations              *[]*Citation                                              `protobuf:"bytes,4,rep,name=citations"`
+	xxx_hidden_IsRisky                bool                                                      `protobuf:"varint,5,opt,name=is_risky,json=isRisky"`
+	xxx_hidden_WaitUntilCompleteValue isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue `protobuf_oneof:"wait_until_complete_value"`
+	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
+	XXX_presence                      [1]uint32
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_RunShellCommand) Reset() {
@@ -9604,19 +9605,28 @@ func (x *Message_ToolCall_RunShellCommand) GetIsRisky() bool {
 	return false
 }
 
+func (x *Message_ToolCall_RunShellCommand) GetWaitUntilComplete() bool {
+	if x != nil {
+		if x, ok := x.xxx_hidden_WaitUntilCompleteValue.(*message_ToolCall_RunShellCommand_WaitUntilComplete); ok {
+			return x.WaitUntilComplete
+		}
+	}
+	return false
+}
+
 func (x *Message_ToolCall_RunShellCommand) SetCommand(v string) {
 	x.xxx_hidden_Command = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetIsReadOnly(v bool) {
 	x.xxx_hidden_IsReadOnly = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetUsesPager(v bool) {
 	x.xxx_hidden_UsesPager = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetCitations(v []*Citation) {
@@ -9625,7 +9635,11 @@ func (x *Message_ToolCall_RunShellCommand) SetCitations(v []*Citation) {
 
 func (x *Message_ToolCall_RunShellCommand) SetIsRisky(v bool) {
 	x.xxx_hidden_IsRisky = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *Message_ToolCall_RunShellCommand) SetWaitUntilComplete(v bool) {
+	x.xxx_hidden_WaitUntilCompleteValue = &message_ToolCall_RunShellCommand_WaitUntilComplete{v}
 }
 
 func (x *Message_ToolCall_RunShellCommand) HasCommand() bool {
@@ -9656,6 +9670,21 @@ func (x *Message_ToolCall_RunShellCommand) HasIsRisky() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
+func (x *Message_ToolCall_RunShellCommand) HasWaitUntilCompleteValue() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WaitUntilCompleteValue != nil
+}
+
+func (x *Message_ToolCall_RunShellCommand) HasWaitUntilComplete() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_WaitUntilCompleteValue.(*message_ToolCall_RunShellCommand_WaitUntilComplete)
+	return ok
+}
+
 func (x *Message_ToolCall_RunShellCommand) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Command = nil
@@ -9676,6 +9705,31 @@ func (x *Message_ToolCall_RunShellCommand) ClearIsRisky() {
 	x.xxx_hidden_IsRisky = false
 }
 
+func (x *Message_ToolCall_RunShellCommand) ClearWaitUntilCompleteValue() {
+	x.xxx_hidden_WaitUntilCompleteValue = nil
+}
+
+func (x *Message_ToolCall_RunShellCommand) ClearWaitUntilComplete() {
+	if _, ok := x.xxx_hidden_WaitUntilCompleteValue.(*message_ToolCall_RunShellCommand_WaitUntilComplete); ok {
+		x.xxx_hidden_WaitUntilCompleteValue = nil
+	}
+}
+
+const Message_ToolCall_RunShellCommand_WaitUntilCompleteValue_not_set_case case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue = 0
+const Message_ToolCall_RunShellCommand_WaitUntilComplete_case case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue = 6
+
+func (x *Message_ToolCall_RunShellCommand) WhichWaitUntilCompleteValue() case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue {
+	if x == nil {
+		return Message_ToolCall_RunShellCommand_WaitUntilCompleteValue_not_set_case
+	}
+	switch x.xxx_hidden_WaitUntilCompleteValue.(type) {
+	case *message_ToolCall_RunShellCommand_WaitUntilComplete:
+		return Message_ToolCall_RunShellCommand_WaitUntilComplete_case
+	default:
+		return Message_ToolCall_RunShellCommand_WaitUntilCompleteValue_not_set_case
+	}
+}
+
 type Message_ToolCall_RunShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -9686,6 +9740,14 @@ type Message_ToolCall_RunShellCommand_builder struct {
 	// Whether the agent thinks this command is risky and therefore should be
 	// passed by the user first.
 	IsRisky *bool
+	// Whether or not the harness should wait until the command is complete to report a result.
+	//
+	// This is wrapped in a oneof to preserve field presence, which isn't preserved for scalar
+	// fields in prost-generated rust bindings. If unset, the client should wait until completion.
+
+	// Fields of oneof xxx_hidden_WaitUntilCompleteValue:
+	WaitUntilComplete *bool
+	// -- end of xxx_hidden_WaitUntilCompleteValue
 }
 
 func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_RunShellCommand {
@@ -9693,23 +9755,47 @@ func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_Run
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Command != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_Command = b.Command
 	}
 	if b.IsReadOnly != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_IsReadOnly = *b.IsReadOnly
 	}
 	if b.UsesPager != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_UsesPager = *b.UsesPager
 	}
 	x.xxx_hidden_Citations = &b.Citations
 	if b.IsRisky != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_IsRisky = *b.IsRisky
 	}
+	if b.WaitUntilComplete != nil {
+		x.xxx_hidden_WaitUntilCompleteValue = &message_ToolCall_RunShellCommand_WaitUntilComplete{*b.WaitUntilComplete}
+	}
 	return m0
+}
+
+type case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue protoreflect.FieldNumber
+
+func (x case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue) String() string {
+	md := file_task_proto_msgTypes[48].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue interface {
+	isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue()
+}
+
+type message_ToolCall_RunShellCommand_WaitUntilComplete struct {
+	WaitUntilComplete bool `protobuf:"varint,6,opt,name=wait_until_complete,json=waitUntilComplete,oneof"`
+}
+
+func (*message_ToolCall_RunShellCommand_WaitUntilComplete) isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue() {
 }
 
 // A tool call to write bytes to the PTY when a command is running in the foreground.
@@ -15915,7 +16001,7 @@ const file_task_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
 	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\x12W\n" +
-	"\x12comment_line_range\x18\x04 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x10commentLineRange\"\xe8X\n" +
+	"\x12comment_line_range\x18\x04 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x10commentLineRange\"\xb7Y\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -15984,7 +16070,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xda(\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa9)\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -16014,7 +16100,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12y\n" +
 	"\x19read_shell_command_output\x18\x17 \x01(\v2<.warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutputH\x00R\x16readShellCommandOutput\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xc4\x01\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\x93\x02\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
@@ -16022,7 +16108,9 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"uses_pager\x18\x03 \x01(\bR\tusesPager\x12;\n" +
 	"\tcitations\x18\x04 \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12\x19\n" +
-	"\bis_risky\x18\x05 \x01(\bR\aisRisky\x1a\xb0\x02\n" +
+	"\bis_risky\x18\x05 \x01(\bR\aisRisky\x120\n" +
+	"\x13wait_until_complete\x18\x06 \x01(\bH\x00R\x11waitUntilCompleteB\x1b\n" +
+	"\x19wait_until_complete_value\x1a\xb0\x02\n" +
 	"\x1eWriteToLongRunningShellCommand\x12\x14\n" +
 	"\x05input\x18\x01 \x01(\fR\x05input\x12]\n" +
 	"\x04mode\x18\x02 \x01(\v2I.warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.ModeR\x04mode\x1a\x98\x01\n" +
@@ -16849,6 +16937,9 @@ func file_task_proto_init() {
 	}
 	file_task_proto_msgTypes[43].OneofWrappers = []any{
 		(*message_UpdateReviewComments_AddressReviewComments_)(nil),
+	}
+	file_task_proto_msgTypes[48].OneofWrappers = []any{
+		(*message_ToolCall_RunShellCommand_WaitUntilComplete)(nil),
 	}
 	file_task_proto_msgTypes[61].OneofWrappers = []any{
 		(*message_ToolCall_SuggestPrompt_InlineQueryBanner_)(nil),

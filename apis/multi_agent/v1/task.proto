@@ -246,6 +246,14 @@ message Message {
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
       bool is_risky = 5;
+
+      // Whether or not the harness should wait until the command is complete to report a result.
+      //
+      // This is wrapped in a oneof to preserve field presence, which isn't preserved for scalar
+      // fields in prost-generated rust bindings. If unset, the client should wait until completion.
+      oneof wait_until_complete_value {
+        bool wait_until_complete = 6;
+      }
     }
 
     // A tool call to write bytes to the PTY when a command is running in the foreground.
