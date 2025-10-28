@@ -9269,9 +9269,13 @@ func (*message_UpdateReviewComments_AddressReviewComments_) isMessage_UpdateRevi
 
 // Summarize the overall conversation.
 type Message_Summarization_ConversationSummary struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Summary     *string                `protobuf:"bytes,1,opt,name=summary"`
+	xxx_hidden_TokenCount  int32                  `protobuf:"varint,2,opt,name=token_count,json=tokenCount"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Message_Summarization_ConversationSummary) Reset() {
@@ -9299,15 +9303,76 @@ func (x *Message_Summarization_ConversationSummary) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
+func (x *Message_Summarization_ConversationSummary) GetSummary() string {
+	if x != nil {
+		if x.xxx_hidden_Summary != nil {
+			return *x.xxx_hidden_Summary
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Message_Summarization_ConversationSummary) GetTokenCount() int32 {
+	if x != nil {
+		return x.xxx_hidden_TokenCount
+	}
+	return 0
+}
+
+func (x *Message_Summarization_ConversationSummary) SetSummary(v string) {
+	x.xxx_hidden_Summary = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Message_Summarization_ConversationSummary) SetTokenCount(v int32) {
+	x.xxx_hidden_TokenCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Message_Summarization_ConversationSummary) HasSummary() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Message_Summarization_ConversationSummary) HasTokenCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message_Summarization_ConversationSummary) ClearSummary() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Summary = nil
+}
+
+func (x *Message_Summarization_ConversationSummary) ClearTokenCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_TokenCount = 0
+}
+
 type Message_Summarization_ConversationSummary_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	Summary    *string
+	TokenCount *int32
 }
 
 func (b0 Message_Summarization_ConversationSummary_builder) Build() *Message_Summarization_ConversationSummary {
 	m0 := &Message_Summarization_ConversationSummary{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.Summary != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Summary = b.Summary
+	}
+	if b.TokenCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_TokenCount = *b.TokenCount
+	}
 	return m0
 }
 
@@ -15824,7 +15889,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xadX\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xe8X\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -15880,12 +15945,15 @@ const file_task_proto_rawDesc = "" +
 	"\x04text\x18\x01 \x01(\tR\x04textJ\x04\b\x02\x10\x03R\treasoning\x1av\n" +
 	"\x0eAgentReasoning\x12\x1c\n" +
 	"\treasoning\x18\x01 \x01(\tR\treasoning\x12F\n" +
-	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x1a\x89\x03\n" +
+	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x1a\xc4\x03\n" +
 	"\rSummarization\x12F\n" +
 	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x12s\n" +
 	"\x14conversation_summary\x18\x01 \x01(\v2>.warp.multi_agent.v1.Message.Summarization.ConversationSummaryH\x00R\x13conversationSummary\x12{\n" +
-	"\x18tool_call_result_summary\x18\x03 \x01(\v2@.warp.multi_agent.v1.Message.Summarization.ToolCallResultSummaryH\x00R\x15toolCallResultSummary\x1a\x15\n" +
-	"\x13ConversationSummary\x1a\x17\n" +
+	"\x18tool_call_result_summary\x18\x03 \x01(\v2@.warp.multi_agent.v1.Message.Summarization.ToolCallResultSummaryH\x00R\x15toolCallResultSummary\x1aP\n" +
+	"\x13ConversationSummary\x12\x18\n" +
+	"\asummary\x18\x01 \x01(\tR\asummary\x12\x1f\n" +
+	"\vtoken_count\x18\x02 \x01(\x05R\n" +
+	"tokenCount\x1a\x17\n" +
 	"\x15ToolCallResultSummaryB\x0e\n" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +

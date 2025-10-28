@@ -190,7 +190,11 @@ message Message {
     }
 
     // Summarize the overall conversation.
-    message ConversationSummary {}
+    message ConversationSummary {
+      string summary = 1;
+      int32 token_count = 2;
+    }
+
     // Summarize the result of a tool call.
     message ToolCallResultSummary {}
   }
