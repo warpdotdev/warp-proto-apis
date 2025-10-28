@@ -22,6 +22,93 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type AutonomyLevel int32
+
+const (
+	// This is the default and lowest level of autonomy. This assumes a user is
+	// present to answer clarifying questions, approve requested commands, etc.
+	AutonomyLevel_LOW AutonomyLevel = 0
+	// No user is present to answer questions.
+	AutonomyLevel_HIGH AutonomyLevel = 1
+)
+
+// Enum value maps for AutonomyLevel.
+var (
+	AutonomyLevel_name = map[int32]string{
+		0: "LOW",
+		1: "HIGH",
+	}
+	AutonomyLevel_value = map[string]int32{
+		"LOW":  0,
+		"HIGH": 1,
+	}
+)
+
+func (x AutonomyLevel) Enum() *AutonomyLevel {
+	p := new(AutonomyLevel)
+	*p = x
+	return p
+}
+
+func (x AutonomyLevel) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AutonomyLevel) Descriptor() protoreflect.EnumDescriptor {
+	return file_input_context_proto_enumTypes[0].Descriptor()
+}
+
+func (AutonomyLevel) Type() protoreflect.EnumType {
+	return &file_input_context_proto_enumTypes[0]
+}
+
+func (x AutonomyLevel) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+type IsolationLevel int32
+
+const (
+	// i.e. on a user's machine with no isolation from their environment.
+	IsolationLevel_NONE IsolationLevel = 0
+	// Fully sandboxed.
+	IsolationLevel_SANDBOX IsolationLevel = 1
+)
+
+// Enum value maps for IsolationLevel.
+var (
+	IsolationLevel_name = map[int32]string{
+		0: "NONE",
+		1: "SANDBOX",
+	}
+	IsolationLevel_value = map[string]int32{
+		"NONE":    0,
+		"SANDBOX": 1,
+	}
+)
+
+func (x IsolationLevel) Enum() *IsolationLevel {
+	p := new(IsolationLevel)
+	*p = x
+	return p
+}
+
+func (x IsolationLevel) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (IsolationLevel) Descriptor() protoreflect.EnumDescriptor {
+	return file_input_context_proto_enumTypes[1].Descriptor()
+}
+
+func (IsolationLevel) Type() protoreflect.EnumType {
+	return &file_input_context_proto_enumTypes[1]
+}
+
+func (x IsolationLevel) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // Context that may be relevant to the input in a request.
 type InputContext struct {
 	state                            protoimpl.MessageState        `protogen:"opaque.v1"`
@@ -35,6 +122,10 @@ type InputContext struct {
 	xxx_hidden_SelectedText          *[]*InputContext_SelectedText `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
 	xxx_hidden_Images                *[]*InputContext_Image        `protobuf:"bytes,7,rep,name=images"`
 	xxx_hidden_Files                 *[]*InputContext_File         `protobuf:"bytes,9,rep,name=files"`
+	xxx_hidden_AutonomyLevel         AutonomyLevel                 `protobuf:"varint,11,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
+	xxx_hidden_IsolationLevel        IsolationLevel                `protobuf:"varint,12,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -147,6 +238,24 @@ func (x *InputContext) GetFiles() []*InputContext_File {
 	return nil
 }
 
+func (x *InputContext) GetAutonomyLevel() AutonomyLevel {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 10) {
+			return x.xxx_hidden_AutonomyLevel
+		}
+	}
+	return AutonomyLevel_LOW
+}
+
+func (x *InputContext) GetIsolationLevel() IsolationLevel {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 11) {
+			return x.xxx_hidden_IsolationLevel
+		}
+	}
+	return IsolationLevel_NONE
+}
+
 func (x *InputContext) SetDirectory(v *InputContext_Directory) {
 	x.xxx_hidden_Directory = v
 }
@@ -188,6 +297,16 @@ func (x *InputContext) SetFiles(v []*InputContext_File) {
 	x.xxx_hidden_Files = &v
 }
 
+func (x *InputContext) SetAutonomyLevel(v AutonomyLevel) {
+	x.xxx_hidden_AutonomyLevel = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 12)
+}
+
+func (x *InputContext) SetIsolationLevel(v IsolationLevel) {
+	x.xxx_hidden_IsolationLevel = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 12)
+}
+
 func (x *InputContext) HasDirectory() bool {
 	if x == nil {
 		return false
@@ -216,6 +335,20 @@ func (x *InputContext) HasCurrentTime() bool {
 	return x.xxx_hidden_CurrentTime != nil
 }
 
+func (x *InputContext) HasAutonomyLevel() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 10)
+}
+
+func (x *InputContext) HasIsolationLevel() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 11)
+}
+
 func (x *InputContext) ClearDirectory() {
 	x.xxx_hidden_Directory = nil
 }
@@ -230,6 +363,16 @@ func (x *InputContext) ClearShell() {
 
 func (x *InputContext) ClearCurrentTime() {
 	x.xxx_hidden_CurrentTime = nil
+}
+
+func (x *InputContext) ClearAutonomyLevel() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 10)
+	x.xxx_hidden_AutonomyLevel = AutonomyLevel_LOW
+}
+
+func (x *InputContext) ClearIsolationLevel() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 11)
+	x.xxx_hidden_IsolationLevel = IsolationLevel_NONE
 }
 
 type InputContext_builder struct {
@@ -248,6 +391,8 @@ type InputContext_builder struct {
 	SelectedText          []*InputContext_SelectedText
 	Images                []*InputContext_Image
 	Files                 []*InputContext_File
+	AutonomyLevel         *AutonomyLevel
+	IsolationLevel        *IsolationLevel
 }
 
 func (b0 InputContext_builder) Build() *InputContext {
@@ -264,6 +409,14 @@ func (b0 InputContext_builder) Build() *InputContext {
 	x.xxx_hidden_SelectedText = &b.SelectedText
 	x.xxx_hidden_Images = &b.Images
 	x.xxx_hidden_Files = &b.Files
+	if b.AutonomyLevel != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 12)
+		x.xxx_hidden_AutonomyLevel = *b.AutonomyLevel
+	}
+	if b.IsolationLevel != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 12)
+		x.xxx_hidden_IsolationLevel = *b.IsolationLevel
+	}
 	return m0
 }
 
@@ -1128,7 +1281,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xb8\v\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xd1\f\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1140,7 +1293,9 @@ const file_input_context_proto_rawDesc = "" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2).warp.multi_agent.v1.ExecutedShellCommandB\x02\x18\x01R\x15executedShellCommands\x12S\n" +
 	"\rselected_text\x18\x06 \x03(\v2..warp.multi_agent.v1.InputContext.SelectedTextR\fselectedText\x12?\n" +
 	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12<\n" +
-	"\x05files\x18\t \x03(\v2&.warp.multi_agent.v1.InputContext.FileR\x05files\x1a(\n" +
+	"\x05files\x18\t \x03(\v2&.warp.multi_agent.v1.InputContext.FileR\x05files\x12I\n" +
+	"\x0eautonomy_level\x18\v \x01(\x0e2\".warp.multi_agent.v1.AutonomyLevelR\rautonomyLevel\x12L\n" +
+	"\x0fisolation_level\x18\f \x01(\x0e2#.warp.multi_agent.v1.IsolationLevelR\x0eisolationLevel\x1a(\n" +
 	"\fSelectedText\x12\x18\n" +
 	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x1av\n" +
 	"\tDirectory\x12\x16\n" +
@@ -1164,41 +1319,52 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePathsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths*\"\n" +
+	"\rAutonomyLevel\x12\a\n" +
+	"\x03LOW\x10\x00\x12\b\n" +
+	"\x04HIGH\x10\x01*'\n" +
+	"\x0eIsolationLevel\x12\b\n" +
+	"\x04NONE\x10\x00\x12\v\n" +
+	"\aSANDBOX\x10\x01B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
+var file_input_context_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_input_context_proto_goTypes = []any{
-	(*InputContext)(nil),                 // 0: warp.multi_agent.v1.InputContext
-	(*InputContext_SelectedText)(nil),    // 1: warp.multi_agent.v1.InputContext.SelectedText
-	(*InputContext_Directory)(nil),       // 2: warp.multi_agent.v1.InputContext.Directory
-	(*InputContext_Shell)(nil),           // 3: warp.multi_agent.v1.InputContext.Shell
-	(*InputContext_OperatingSystem)(nil), // 4: warp.multi_agent.v1.InputContext.OperatingSystem
-	(*InputContext_Image)(nil),           // 5: warp.multi_agent.v1.InputContext.Image
-	(*InputContext_Codebase)(nil),        // 6: warp.multi_agent.v1.InputContext.Codebase
-	(*InputContext_File)(nil),            // 7: warp.multi_agent.v1.InputContext.File
-	(*InputContext_ProjectRules)(nil),    // 8: warp.multi_agent.v1.InputContext.ProjectRules
-	(*timestamppb.Timestamp)(nil),        // 9: google.protobuf.Timestamp
-	(*ExecutedShellCommand)(nil),         // 10: warp.multi_agent.v1.ExecutedShellCommand
-	(*FileContent)(nil),                  // 11: warp.multi_agent.v1.FileContent
+	(AutonomyLevel)(0),                   // 0: warp.multi_agent.v1.AutonomyLevel
+	(IsolationLevel)(0),                  // 1: warp.multi_agent.v1.IsolationLevel
+	(*InputContext)(nil),                 // 2: warp.multi_agent.v1.InputContext
+	(*InputContext_SelectedText)(nil),    // 3: warp.multi_agent.v1.InputContext.SelectedText
+	(*InputContext_Directory)(nil),       // 4: warp.multi_agent.v1.InputContext.Directory
+	(*InputContext_Shell)(nil),           // 5: warp.multi_agent.v1.InputContext.Shell
+	(*InputContext_OperatingSystem)(nil), // 6: warp.multi_agent.v1.InputContext.OperatingSystem
+	(*InputContext_Image)(nil),           // 7: warp.multi_agent.v1.InputContext.Image
+	(*InputContext_Codebase)(nil),        // 8: warp.multi_agent.v1.InputContext.Codebase
+	(*InputContext_File)(nil),            // 9: warp.multi_agent.v1.InputContext.File
+	(*InputContext_ProjectRules)(nil),    // 10: warp.multi_agent.v1.InputContext.ProjectRules
+	(*timestamppb.Timestamp)(nil),        // 11: google.protobuf.Timestamp
+	(*ExecutedShellCommand)(nil),         // 12: warp.multi_agent.v1.ExecutedShellCommand
+	(*FileContent)(nil),                  // 13: warp.multi_agent.v1.FileContent
 }
 var file_input_context_proto_depIdxs = []int32{
-	2,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
-	4,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
-	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	9,  // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
-	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
-	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
-	10, // 6: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	1,  // 7: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	5,  // 8: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	7,  // 9: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	11, // 10: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	11, // 11: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	4,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
+	6,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
+	5,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
+	11, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	8,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
+	10, // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
+	12, // 6: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	3,  // 7: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	7,  // 8: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	9,  // 9: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	0,  // 10: warp.multi_agent.v1.InputContext.autonomy_level:type_name -> warp.multi_agent.v1.AutonomyLevel
+	1,  // 11: warp.multi_agent.v1.InputContext.isolation_level:type_name -> warp.multi_agent.v1.IsolationLevel
+	13, // 12: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	13, // 13: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_input_context_proto_init() }
@@ -1214,13 +1380,14 @@ func file_input_context_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_input_context_proto_rawDesc), len(file_input_context_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      2,
 			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_input_context_proto_goTypes,
 		DependencyIndexes: file_input_context_proto_depIdxs,
+		EnumInfos:         file_input_context_proto_enumTypes,
 		MessageInfos:      file_input_context_proto_msgTypes,
 	}.Build()
 	File_input_context_proto = out.File
