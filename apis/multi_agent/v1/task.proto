@@ -58,7 +58,7 @@ message Task {
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
   repeated ReviewComment completed_comments = 2;
-  repeated DiffSet diff_set = 3;
+  DiffSet diff_set = 3;
 }
 
 message ReviewComment {
@@ -70,7 +70,7 @@ message ReviewComment {
   // The exact file location and line content that this comment is associated with.
   // We need a diff set rather than just a starting and ending line number
   // because the latter cannot uniquely identify a deleted line.
-  DiffSet commented_line = 3;
+  DiffHunk commented_line = 3;
 }
 
 // A message within a task

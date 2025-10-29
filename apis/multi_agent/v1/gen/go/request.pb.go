@@ -4653,7 +4653,7 @@ func (b0 Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder)
 type Request_Input_CodeReview_InitialReviewComments struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ReviewComments *[]*ReviewComment      `protobuf:"bytes,1,rep,name=review_comments,json=reviewComments"`
-	xxx_hidden_DiffSet        *[]*DiffSet            `protobuf:"bytes,2,rep,name=diff_set,json=diffSet"`
+	xxx_hidden_DiffSet        *DiffSet               `protobuf:"bytes,2,opt,name=diff_set,json=diffSet"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -4692,11 +4692,9 @@ func (x *Request_Input_CodeReview_InitialReviewComments) GetReviewComments() []*
 	return nil
 }
 
-func (x *Request_Input_CodeReview_InitialReviewComments) GetDiffSet() []*DiffSet {
+func (x *Request_Input_CodeReview_InitialReviewComments) GetDiffSet() *DiffSet {
 	if x != nil {
-		if x.xxx_hidden_DiffSet != nil {
-			return *x.xxx_hidden_DiffSet
-		}
+		return x.xxx_hidden_DiffSet
 	}
 	return nil
 }
@@ -4705,15 +4703,26 @@ func (x *Request_Input_CodeReview_InitialReviewComments) SetReviewComments(v []*
 	x.xxx_hidden_ReviewComments = &v
 }
 
-func (x *Request_Input_CodeReview_InitialReviewComments) SetDiffSet(v []*DiffSet) {
-	x.xxx_hidden_DiffSet = &v
+func (x *Request_Input_CodeReview_InitialReviewComments) SetDiffSet(v *DiffSet) {
+	x.xxx_hidden_DiffSet = v
+}
+
+func (x *Request_Input_CodeReview_InitialReviewComments) HasDiffSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DiffSet != nil
+}
+
+func (x *Request_Input_CodeReview_InitialReviewComments) ClearDiffSet() {
+	x.xxx_hidden_DiffSet = nil
 }
 
 type Request_Input_CodeReview_InitialReviewComments_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ReviewComments []*ReviewComment
-	DiffSet        []*DiffSet
+	DiffSet        *DiffSet
 }
 
 func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Request_Input_CodeReview_InitialReviewComments {
@@ -4721,7 +4730,7 @@ func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Reques
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ReviewComments = &b.ReviewComments
-	x.xxx_hidden_DiffSet = &b.DiffSet
+	x.xxx_hidden_DiffSet = b.DiffSet
 	return m0
 }
 
@@ -5659,7 +5668,7 @@ const file_request_proto_rawDesc = "" +
 	"\x17initial_review_comments\x18\x01 \x01(\v2C.warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewCommentsH\x00R\x15initialReviewComments\x1a\x9d\x01\n" +
 	"\x15InitialReviewComments\x12K\n" +
 	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewComments\x127\n" +
-	"\bdiff_set\x18\x02 \x03(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSetB\v\n" +
+	"\bdiff_set\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSetB\v\n" +
 	"\toperation\x1a\x17\n" +
 	"\x15SummarizeConversationB\x06\n" +
 	"\x04type\x1a\x88\x02\n" +
