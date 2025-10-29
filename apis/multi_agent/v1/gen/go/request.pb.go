@@ -980,13 +980,14 @@ func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging        map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
-	XXX_presence              [1]uint32
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                         protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId     *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging            map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AmbientAgentTaskId *string                    `protobuf:"bytes,3,opt,name=ambient_agent_task_id,json=ambientAgentTaskId"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *Request_Metadata) Reset() {
@@ -1031,13 +1032,28 @@ func (x *Request_Metadata) GetLogging() map[string]*structpb.Value {
 	return nil
 }
 
+func (x *Request_Metadata) GetAmbientAgentTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_AmbientAgentTaskId != nil {
+			return *x.xxx_hidden_AmbientAgentTaskId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Metadata) SetConversationId(v string) {
 	x.xxx_hidden_ConversationId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 	x.xxx_hidden_Logging = v
+}
+
+func (x *Request_Metadata) SetAmbientAgentTaskId(v string) {
+	x.xxx_hidden_AmbientAgentTaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Request_Metadata) HasConversationId() bool {
@@ -1047,9 +1063,21 @@ func (x *Request_Metadata) HasConversationId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Request_Metadata) HasAmbientAgentTaskId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Request_Metadata) ClearConversationId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ConversationId = nil
+}
+
+func (x *Request_Metadata) ClearAmbientAgentTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_AmbientAgentTaskId = nil
 }
 
 type Request_Metadata_builder struct {
@@ -1064,6 +1092,10 @@ type Request_Metadata_builder struct {
 	// Map of metadata to inline in server analytic events for this request.
 	// Values in the map should be valid JSON values.
 	Logging map[string]*structpb.Value
+	// Optional ambient agent task ID.
+	//
+	// This is set if the client is working autonomously on an ambient agent task.
+	AmbientAgentTaskId *string
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -1071,10 +1103,14 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ConversationId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ConversationId = b.ConversationId
 	}
 	x.xxx_hidden_Logging = b.Logging
+	if b.AmbientAgentTaskId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_AmbientAgentTaskId = b.AmbientAgentTaskId
+	}
 	return m0
 }
 
@@ -5496,7 +5532,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xb7B\n" +
+	"task.proto\"\xeaB\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5609,10 +5645,11 @@ const file_request_proto_rawDesc = "" +
 	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewCommentsB\v\n" +
 	"\toperation\x1a\x17\n" +
 	"\x15SummarizeConversationB\x06\n" +
-	"\x04type\x1a\xd5\x01\n" +
+	"\x04type\x1a\x88\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
-	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x121\n" +
+	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa5\v\n" +

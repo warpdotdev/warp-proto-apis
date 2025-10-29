@@ -199,6 +199,11 @@ message Request {
     // Map of metadata to inline in server analytic events for this request.
     // Values in the map should be valid JSON values.
     map<string, google.protobuf.Value> logging = 2;
+
+    // Optional ambient agent task ID.
+    //
+    // This is set if the client is working autonomously on an ambient agent task.
+    string ambient_agent_task_id = 3;
   }
 
   message Settings {
