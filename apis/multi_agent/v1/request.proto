@@ -181,6 +181,7 @@ message Request {
 
       message InitialReviewComments {
         repeated ReviewComment review_comments = 1;
+        repeated DiffSet diff_set = 2;
       }
     }
 

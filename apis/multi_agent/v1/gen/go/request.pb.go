@@ -4653,6 +4653,7 @@ func (b0 Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder)
 type Request_Input_CodeReview_InitialReviewComments struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ReviewComments *[]*ReviewComment      `protobuf:"bytes,1,rep,name=review_comments,json=reviewComments"`
+	xxx_hidden_DiffSet        *[]*DiffSet            `protobuf:"bytes,2,rep,name=diff_set,json=diffSet"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -4691,14 +4692,28 @@ func (x *Request_Input_CodeReview_InitialReviewComments) GetReviewComments() []*
 	return nil
 }
 
+func (x *Request_Input_CodeReview_InitialReviewComments) GetDiffSet() []*DiffSet {
+	if x != nil {
+		if x.xxx_hidden_DiffSet != nil {
+			return *x.xxx_hidden_DiffSet
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_CodeReview_InitialReviewComments) SetReviewComments(v []*ReviewComment) {
 	x.xxx_hidden_ReviewComments = &v
+}
+
+func (x *Request_Input_CodeReview_InitialReviewComments) SetDiffSet(v []*DiffSet) {
+	x.xxx_hidden_DiffSet = &v
 }
 
 type Request_Input_CodeReview_InitialReviewComments_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ReviewComments []*ReviewComment
+	DiffSet        []*DiffSet
 }
 
 func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Request_Input_CodeReview_InitialReviewComments {
@@ -4706,6 +4721,7 @@ func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Reques
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ReviewComments = &b.ReviewComments
+	x.xxx_hidden_DiffSet = &b.DiffSet
 	return m0
 }
 
@@ -5532,7 +5548,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xeaB\n" +
+	"task.proto\"\xa4C\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5542,7 +5558,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xb0+\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xea+\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5637,12 +5653,13 @@ const file_request_proto_rawDesc = "" +
 	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
 	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
 	"commandRunB\t\n" +
-	"\atrigger\x1a\xfe\x01\n" +
+	"\atrigger\x1a\xb8\x02\n" +
 	"\n" +
 	"CodeReview\x12}\n" +
-	"\x17initial_review_comments\x18\x01 \x01(\v2C.warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewCommentsH\x00R\x15initialReviewComments\x1ad\n" +
+	"\x17initial_review_comments\x18\x01 \x01(\v2C.warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewCommentsH\x00R\x15initialReviewComments\x1a\x9d\x01\n" +
 	"\x15InitialReviewComments\x12K\n" +
-	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewCommentsB\v\n" +
+	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewComments\x127\n" +
+	"\bdiff_set\x18\x02 \x03(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSetB\v\n" +
 	"\toperation\x1a\x17\n" +
 	"\x15SummarizeConversationB\x06\n" +
 	"\x04type\x1a\x88\x02\n" +
@@ -5769,8 +5786,9 @@ var file_request_proto_goTypes = []any{
 	(*Attachment)(nil),                           // 60: warp.multi_agent.v1.Attachment
 	(*emptypb.Empty)(nil),                        // 61: google.protobuf.Empty
 	(*ReviewComment)(nil),                        // 62: warp.multi_agent.v1.ReviewComment
-	(*structpb.Value)(nil),                       // 63: google.protobuf.Value
-	(*structpb.Struct)(nil),                      // 64: google.protobuf.Struct
+	(*DiffSet)(nil),                              // 63: warp.multi_agent.v1.DiffSet
+	(*structpb.Value)(nil),                       // 64: google.protobuf.Value
+	(*structpb.Struct)(nil),                      // 65: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -5840,15 +5858,16 @@ var file_request_proto_depIdxs = []int32{
 	8,  // 64: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	6,  // 65: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	62, // 66: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	63, // 67: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	64, // 68: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	32, // 69: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	33, // 70: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	71, // [71:71] is the sub-list for method output_type
-	71, // [71:71] is the sub-list for method input_type
-	71, // [71:71] is the sub-list for extension type_name
-	71, // [71:71] is the sub-list for extension extendee
-	0,  // [0:71] is the sub-list for field type_name
+	63, // 67: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	64, // 68: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	65, // 69: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	32, // 70: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	33, // 71: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	72, // [72:72] is the sub-list for method output_type
+	72, // [72:72] is the sub-list for method input_type
+	72, // [72:72] is the sub-list for extension type_name
+	72, // [72:72] is the sub-list for extension extendee
+	0,  // [0:72] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
