@@ -566,7 +566,7 @@ type ReviewComment_builder struct {
 	Comment *string
 	// The exact file location and line content that this comment is associated with.
 	// We need a diff set rather than just a starting and ending line number
-	// because we don't have a great way to uniquely identify a deleted line.
+	// because the latter cannot uniquely identify a deleted line.
 	CommentedLine *DiffSet
 }
 
