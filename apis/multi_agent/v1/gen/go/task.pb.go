@@ -447,14 +447,14 @@ func (b0 ReviewComments_builder) Build() *ReviewComments {
 }
 
 type ReviewComment struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
-	xxx_hidden_Comment     *string                `protobuf:"bytes,2,opt,name=comment"`
-	xxx_hidden_DiffSet     *DiffSet               `protobuf:"bytes,3,opt,name=diff_set,json=diffSet"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id            *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Comment       *string                `protobuf:"bytes,2,opt,name=comment"`
+	xxx_hidden_CommentedLine *DiffSet               `protobuf:"bytes,3,opt,name=commented_line,json=commentedLine"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ReviewComment) Reset() {
@@ -502,9 +502,9 @@ func (x *ReviewComment) GetComment() string {
 	return ""
 }
 
-func (x *ReviewComment) GetDiffSet() *DiffSet {
+func (x *ReviewComment) GetCommentedLine() *DiffSet {
 	if x != nil {
-		return x.xxx_hidden_DiffSet
+		return x.xxx_hidden_CommentedLine
 	}
 	return nil
 }
@@ -519,8 +519,8 @@ func (x *ReviewComment) SetComment(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *ReviewComment) SetDiffSet(v *DiffSet) {
-	x.xxx_hidden_DiffSet = v
+func (x *ReviewComment) SetCommentedLine(v *DiffSet) {
+	x.xxx_hidden_CommentedLine = v
 }
 
 func (x *ReviewComment) HasId() bool {
@@ -537,11 +537,11 @@ func (x *ReviewComment) HasComment() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ReviewComment) HasDiffSet() bool {
+func (x *ReviewComment) HasCommentedLine() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_DiffSet != nil
+	return x.xxx_hidden_CommentedLine != nil
 }
 
 func (x *ReviewComment) ClearId() {
@@ -554,8 +554,8 @@ func (x *ReviewComment) ClearComment() {
 	x.xxx_hidden_Comment = nil
 }
 
-func (x *ReviewComment) ClearDiffSet() {
-	x.xxx_hidden_DiffSet = nil
+func (x *ReviewComment) ClearCommentedLine() {
+	x.xxx_hidden_CommentedLine = nil
 }
 
 type ReviewComment_builder struct {
@@ -564,7 +564,10 @@ type ReviewComment_builder struct {
 	// Unique identifier for the review comment.
 	Id      *string
 	Comment *string
-	DiffSet *DiffSet
+	// The exact file location and line content that this comment is associated with.
+	// We need a diff set rather than just a starting and ending line number
+	// because we don't have a great way to uniquely identify a deleted line.
+	CommentedLine *DiffSet
 }
 
 func (b0 ReviewComment_builder) Build() *ReviewComment {
@@ -579,7 +582,7 @@ func (b0 ReviewComment_builder) Build() *ReviewComment {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Comment = b.Comment
 	}
-	x.xxx_hidden_DiffSet = b.DiffSet
+	x.xxx_hidden_CommentedLine = b.CommentedLine
 	return m0
 }
 
@@ -15988,11 +15991,11 @@ const file_task_proto_rawDesc = "" +
 	"\x0eReviewComments\x12M\n" +
 	"\x10pending_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0fpendingComments\x12Q\n" +
 	"\x12completed_comments\x18\x02 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x11completedComments\x127\n" +
-	"\bdiff_set\x18\x03 \x03(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"x\n" +
+	"\bdiff_set\x18\x03 \x03(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x84\x01\n" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
-	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
-	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\xb7Y\n" +
+	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12C\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\rcommentedLine\"\xb7Y\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16589,7 +16592,7 @@ var file_task_proto_depIdxs = []int32{
 	3,   // 2: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	3,   // 3: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	117, // 4: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	117, // 5: warp.multi_agent.v1.ReviewComment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	117, // 5: warp.multi_agent.v1.ReviewComment.commented_line:type_name -> warp.multi_agent.v1.DiffSet
 	118, // 6: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
 	119, // 7: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
 	29,  // 8: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
