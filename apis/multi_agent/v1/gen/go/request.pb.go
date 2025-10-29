@@ -9,13 +9,14 @@
 package v1
 
 import (
+	reflect "reflect"
+	unsafe "unsafe"
+
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
-	reflect "reflect"
-	unsafe "unsafe"
 )
 
 const (
@@ -24,6 +25,93 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+type AutonomyLevel int32
+
+const (
+	// This is the default and lowest level of autonomy. This assumes a user is
+	// present to answer clarifying questions, approve requested commands, etc.
+	AutonomyLevel_SUPERVISED AutonomyLevel = 0
+	// No user is available to answer questions.
+	AutonomyLevel_UNSUPERVISED AutonomyLevel = 1
+)
+
+// Enum value maps for AutonomyLevel.
+var (
+	AutonomyLevel_name = map[int32]string{
+		0: "SUPERVISED",
+		1: "UNSUPERVISED",
+	}
+	AutonomyLevel_value = map[string]int32{
+		"SUPERVISED":   0,
+		"UNSUPERVISED": 1,
+	}
+)
+
+func (x AutonomyLevel) Enum() *AutonomyLevel {
+	p := new(AutonomyLevel)
+	*p = x
+	return p
+}
+
+func (x AutonomyLevel) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AutonomyLevel) Descriptor() protoreflect.EnumDescriptor {
+	return file_request_proto_enumTypes[0].Descriptor()
+}
+
+func (AutonomyLevel) Type() protoreflect.EnumType {
+	return &file_request_proto_enumTypes[0]
+}
+
+func (x AutonomyLevel) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+type IsolationLevel int32
+
+const (
+	// i.e. on a user's machine with no isolation from their environment.
+	IsolationLevel_NONE IsolationLevel = 0
+	// Fully sandboxed.
+	IsolationLevel_SANDBOX IsolationLevel = 1
+)
+
+// Enum value maps for IsolationLevel.
+var (
+	IsolationLevel_name = map[int32]string{
+		0: "NONE",
+		1: "SANDBOX",
+	}
+	IsolationLevel_value = map[string]int32{
+		"NONE":    0,
+		"SANDBOX": 1,
+	}
+)
+
+func (x IsolationLevel) Enum() *IsolationLevel {
+	p := new(IsolationLevel)
+	*p = x
+	return p
+}
+
+func (x IsolationLevel) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (IsolationLevel) Descriptor() protoreflect.EnumDescriptor {
+	return file_request_proto_enumTypes[1].Descriptor()
+}
+
+func (IsolationLevel) Type() protoreflect.EnumType {
+	return &file_request_proto_enumTypes[1]
+}
+
+func (x IsolationLevel) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
 
 // The main request type. Every multi-agent API call begins with a `Request`.
 type Request struct {
@@ -1134,6 +1222,8 @@ type Request_Settings struct {
 	xxx_hidden_SupportsReadImageFiles             bool                          `protobuf:"varint,16,opt,name=supports_read_image_files,json=supportsReadImageFiles"`
 	xxx_hidden_SupportsReasoningMessage           bool                          `protobuf:"varint,17,opt,name=supports_reasoning_message,json=supportsReasoningMessage"`
 	xxx_hidden_ApiKeys                            *Request_Settings_ApiKeys     `protobuf:"bytes,18,opt,name=api_keys,json=apiKeys"`
+	xxx_hidden_AutonomyLevel                      AutonomyLevel                 `protobuf:"varint,19,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
+	xxx_hidden_IsolationLevel                     IsolationLevel                `protobuf:"varint,20,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
 	XXX_raceDetectHookData                        protoimpl.RaceDetectHookData
 	XXX_presence                                  [1]uint32
 	unknownFields                                 protoimpl.UnknownFields
@@ -1291,43 +1381,61 @@ func (x *Request_Settings) GetApiKeys() *Request_Settings_ApiKeys {
 	return nil
 }
 
+func (x *Request_Settings) GetAutonomyLevel() AutonomyLevel {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 18) {
+			return x.xxx_hidden_AutonomyLevel
+		}
+	}
+	return AutonomyLevel_SUPERVISED
+}
+
+func (x *Request_Settings) GetIsolationLevel() IsolationLevel {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 19) {
+			return x.xxx_hidden_IsolationLevel
+		}
+	}
+	return IsolationLevel_NONE
+}
+
 func (x *Request_Settings) SetModelConfig(v *Request_Settings_ModelConfig) {
 	x.xxx_hidden_ModelConfig = v
 }
 
 func (x *Request_Settings) SetRulesEnabled(v bool) {
 	x.xxx_hidden_RulesEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 20)
 }
 
 func (x *Request_Settings) SetWebContextRetrievalEnabled(v bool) {
 	x.xxx_hidden_WebContextRetrievalEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 20)
 }
 
 func (x *Request_Settings) SetSupportsParallelToolCalls(v bool) {
 	x.xxx_hidden_SupportsParallelToolCalls = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 20)
 }
 
 func (x *Request_Settings) SetUseAnthropicTextEditorTools(v bool) {
 	x.xxx_hidden_UseAnthropicTextEditorTools = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 20)
 }
 
 func (x *Request_Settings) SetPlanningEnabled(v bool) {
 	x.xxx_hidden_PlanningEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 20)
 }
 
 func (x *Request_Settings) SetWarpDriveContextEnabled(v bool) {
 	x.xxx_hidden_WarpDriveContextEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 20)
 }
 
 func (x *Request_Settings) SetSupportsCreateFiles(v bool) {
 	x.xxx_hidden_SupportsCreateFiles = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 20)
 }
 
 func (x *Request_Settings) SetSupportedTools(v []ToolType) {
@@ -1336,46 +1444,56 @@ func (x *Request_Settings) SetSupportedTools(v []ToolType) {
 
 func (x *Request_Settings) SetSupportsLongRunningCommands(v bool) {
 	x.xxx_hidden_SupportsLongRunningCommands = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 20)
 }
 
 func (x *Request_Settings) SetShouldPreserveFileContentInHistory(v bool) {
 	x.xxx_hidden_ShouldPreserveFileContentInHistory = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 20)
 }
 
 func (x *Request_Settings) SetSupportsTodosUi(v bool) {
 	x.xxx_hidden_SupportsTodosUi = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 20)
 }
 
 func (x *Request_Settings) SetSupportsLinkedCodeBlocks(v bool) {
 	x.xxx_hidden_SupportsLinkedCodeBlocks = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 20)
 }
 
 func (x *Request_Settings) SetSupportsStartedChildTaskMessage(v bool) {
 	x.xxx_hidden_SupportsStartedChildTaskMessage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 20)
 }
 
 func (x *Request_Settings) SetSupportsSuggestPrompt(v bool) {
 	x.xxx_hidden_SupportsSuggestPrompt = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 20)
 }
 
 func (x *Request_Settings) SetSupportsReadImageFiles(v bool) {
 	x.xxx_hidden_SupportsReadImageFiles = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 20)
 }
 
 func (x *Request_Settings) SetSupportsReasoningMessage(v bool) {
 	x.xxx_hidden_SupportsReasoningMessage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 18)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 20)
 }
 
 func (x *Request_Settings) SetApiKeys(v *Request_Settings_ApiKeys) {
 	x.xxx_hidden_ApiKeys = v
+}
+
+func (x *Request_Settings) SetAutonomyLevel(v AutonomyLevel) {
+	x.xxx_hidden_AutonomyLevel = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 20)
+}
+
+func (x *Request_Settings) SetIsolationLevel(v IsolationLevel) {
+	x.xxx_hidden_IsolationLevel = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 20)
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -1497,6 +1615,20 @@ func (x *Request_Settings) HasApiKeys() bool {
 	return x.xxx_hidden_ApiKeys != nil
 }
 
+func (x *Request_Settings) HasAutonomyLevel() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 18)
+}
+
+func (x *Request_Settings) HasIsolationLevel() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 19)
+}
+
 func (x *Request_Settings) ClearModelConfig() {
 	x.xxx_hidden_ModelConfig = nil
 }
@@ -1580,6 +1712,16 @@ func (x *Request_Settings) ClearApiKeys() {
 	x.xxx_hidden_ApiKeys = nil
 }
 
+func (x *Request_Settings) ClearAutonomyLevel() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 18)
+	x.xxx_hidden_AutonomyLevel = AutonomyLevel_SUPERVISED
+}
+
+func (x *Request_Settings) ClearIsolationLevel() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 19)
+	x.xxx_hidden_IsolationLevel = IsolationLevel_NONE
+}
+
 type Request_Settings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1631,7 +1773,9 @@ type Request_Settings_builder struct {
 	SupportsReasoningMessage *bool
 	// Optional user-provided API keys for LLM providers.
 	// If provided, these keys will be used instead of Warp's default keys.
-	ApiKeys *Request_Settings_ApiKeys
+	ApiKeys        *Request_Settings_ApiKeys
+	AutonomyLevel  *AutonomyLevel
+	IsolationLevel *IsolationLevel
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -1640,67 +1784,75 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	_, _ = b, x
 	x.xxx_hidden_ModelConfig = b.ModelConfig
 	if b.RulesEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 20)
 		x.xxx_hidden_RulesEnabled = *b.RulesEnabled
 	}
 	if b.WebContextRetrievalEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 20)
 		x.xxx_hidden_WebContextRetrievalEnabled = *b.WebContextRetrievalEnabled
 	}
 	if b.SupportsParallelToolCalls != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 20)
 		x.xxx_hidden_SupportsParallelToolCalls = *b.SupportsParallelToolCalls
 	}
 	if b.UseAnthropicTextEditorTools != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 20)
 		x.xxx_hidden_UseAnthropicTextEditorTools = *b.UseAnthropicTextEditorTools
 	}
 	if b.PlanningEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 20)
 		x.xxx_hidden_PlanningEnabled = *b.PlanningEnabled
 	}
 	if b.WarpDriveContextEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 20)
 		x.xxx_hidden_WarpDriveContextEnabled = *b.WarpDriveContextEnabled
 	}
 	if b.SupportsCreateFiles != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 20)
 		x.xxx_hidden_SupportsCreateFiles = *b.SupportsCreateFiles
 	}
 	x.xxx_hidden_SupportedTools = b.SupportedTools
 	if b.SupportsLongRunningCommands != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 20)
 		x.xxx_hidden_SupportsLongRunningCommands = *b.SupportsLongRunningCommands
 	}
 	if b.ShouldPreserveFileContentInHistory != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 20)
 		x.xxx_hidden_ShouldPreserveFileContentInHistory = *b.ShouldPreserveFileContentInHistory
 	}
 	if b.SupportsTodosUi != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 20)
 		x.xxx_hidden_SupportsTodosUi = *b.SupportsTodosUi
 	}
 	if b.SupportsLinkedCodeBlocks != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 20)
 		x.xxx_hidden_SupportsLinkedCodeBlocks = *b.SupportsLinkedCodeBlocks
 	}
 	if b.SupportsStartedChildTaskMessage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 20)
 		x.xxx_hidden_SupportsStartedChildTaskMessage = *b.SupportsStartedChildTaskMessage
 	}
 	if b.SupportsSuggestPrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 20)
 		x.xxx_hidden_SupportsSuggestPrompt = *b.SupportsSuggestPrompt
 	}
 	if b.SupportsReadImageFiles != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 20)
 		x.xxx_hidden_SupportsReadImageFiles = *b.SupportsReadImageFiles
 	}
 	if b.SupportsReasoningMessage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 18)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 20)
 		x.xxx_hidden_SupportsReasoningMessage = *b.SupportsReasoningMessage
 	}
 	x.xxx_hidden_ApiKeys = b.ApiKeys
+	if b.AutonomyLevel != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 20)
+		x.xxx_hidden_AutonomyLevel = *b.AutonomyLevel
+	}
+	if b.IsolationLevel != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 20)
+		x.xxx_hidden_IsolationLevel = *b.IsolationLevel
+	}
 	return m0
 }
 
@@ -5678,7 +5830,7 @@ const file_request_proto_rawDesc = "" +
 	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa5\v\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xbe\f\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -5698,7 +5850,9 @@ const file_request_proto_rawDesc = "" +
 	"\x17supports_suggest_prompt\x18\x0f \x01(\bR\x15supportsSuggestPrompt\x129\n" +
 	"\x19supports_read_image_files\x18\x10 \x01(\bR\x16supportsReadImageFiles\x12<\n" +
 	"\x1asupports_reasoning_message\x18\x11 \x01(\bR\x18supportsReasoningMessage\x12H\n" +
-	"\bapi_keys\x18\x12 \x01(\v2-.warp.multi_agent.v1.Request.Settings.ApiKeysR\aapiKeys\x1aU\n" +
+	"\bapi_keys\x18\x12 \x01(\v2-.warp.multi_agent.v1.Request.Settings.ApiKeysR\aapiKeys\x12I\n" +
+	"\x0eautonomy_level\x18\x13 \x01(\x0e2\".warp.multi_agent.v1.AutonomyLevelR\rautonomyLevel\x12L\n" +
+	"\x0fisolation_level\x18\x14 \x01(\x0e2#.warp.multi_agent.v1.IsolationLevelR\x0eisolationLevel\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
@@ -5728,8 +5882,16 @@ const file_request_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
 	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12Q\n" +
 	"\tresources\x18\x03 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceR\tresources\x12E\n" +
-	"\x05tools\x18\x04 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolR\x05toolsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x05tools\x18\x04 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolR\x05tools*1\n" +
+	"\rAutonomyLevel\x12\x0e\n" +
+	"\n" +
+	"SUPERVISED\x10\x00\x12\x10\n" +
+	"\fUNSUPERVISED\x10\x01*'\n" +
+	"\x0eIsolationLevel\x12\b\n" +
+	"\x04NONE\x10\x00\x12\v\n" +
+	"\aSANDBOX\x10\x01B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
+var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
 var file_request_proto_goTypes = []any{
 	(*Request)(nil),                               // 0: warp.multi_agent.v1.Request
@@ -5951,13 +6113,14 @@ func file_request_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_request_proto_rawDesc), len(file_request_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      2,
 			NumMessages:   35,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_request_proto_goTypes,
 		DependencyIndexes: file_request_proto_depIdxs,
+		EnumInfos:         file_request_proto_enumTypes,
 		MessageInfos:      file_request_proto_msgTypes,
 	}.Build()
 	File_request_proto = out.File

@@ -85,22 +85,4 @@ message InputContext {
     // Additional rules that are available to be retrieved.
     repeated string additional_rule_file_paths = 3;
   }
-
-  AutonomyLevel autonomy_level = 11;
-  IsolationLevel isolation_level = 12;
-}
-
-enum AutonomyLevel {
-  // This is the default and lowest level of autonomy. This assumes a user is
-  // present to answer clarifying questions, approve requested commands, etc.
-  LOW = 0;
-  // No user is present to answer questions.
-  HIGH = 1;
-}
-
-enum IsolationLevel {
-  // i.e. on a user's machine with no isolation from their environment.
-  NONE = 0;
-  // Fully sandboxed.
-  SANDBOX = 1;
 }

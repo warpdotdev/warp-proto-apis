@@ -293,6 +293,9 @@ message Request {
       // keys are provided.
       bool allow_use_of_warp_credits = 5;
     }
+
+    AutonomyLevel autonomy_level = 19;
+    IsolationLevel isolation_level = 20;
   }
 
   message MCPContext {
@@ -333,4 +336,19 @@ message Request {
       repeated MCPTool tools = 4;
     }
   }
+}
+
+enum AutonomyLevel {
+  // This is the default and lowest level of autonomy. This assumes a user is
+  // present to answer clarifying questions, approve requested commands, etc.
+  SUPERVISED = 0;
+  // No user is available to answer questions.
+  UNSUPERVISED = 1;
+}
+
+enum IsolationLevel {
+  // i.e. on a user's machine with no isolation from their environment.
+  NONE = 0;
+  // Fully sandboxed.
+  SANDBOX = 1;
 }
