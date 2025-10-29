@@ -575,7 +575,7 @@ type ReviewComment_builder struct {
 	Id      *string
 	Comment *string
 	// The exact file location and line content that this comment is associated with.
-	// We need a diff set rather than just a starting and ending line number
+	// We need a diff hunk rather than just a starting and ending line number
 	// because the latter cannot uniquely identify a deleted line.
 	CommentedLine *DiffHunk
 }
