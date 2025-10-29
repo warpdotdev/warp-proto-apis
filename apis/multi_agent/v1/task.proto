@@ -58,6 +58,7 @@ message Task {
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
   repeated ReviewComment completed_comments = 2;
+  DiffSet diff_set = 3;
 }
 
 message ReviewComment {
@@ -65,7 +66,11 @@ message ReviewComment {
   string id = 1;
 
   string comment = 2 [ (sensitive) = true ];
-  DiffSet diff_set = 3;
+
+  // The exact file location and line content that this comment is associated with.
+  // We need a diff hunk rather than just a starting and ending line number
+  // because the latter cannot uniquely identify a deleted line.
+  DiffHunk commented_line = 3;
 }
 
 // A message within a task
@@ -190,7 +195,11 @@ message Message {
     }
 
     // Summarize the overall conversation.
-    message ConversationSummary {}
+    message ConversationSummary {
+      string summary = 1;
+      int32 token_count = 2;
+    }
+
     // Summarize the result of a tool call.
     message ToolCallResultSummary {}
   }
@@ -225,6 +234,7 @@ message Message {
       ReadDocuments read_documents = 20;
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
+      ReadShellCommandOutput read_shell_command_output = 23;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -240,12 +250,41 @@ message Message {
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
       bool is_risky = 5;
+
+      // Whether or not the harness should wait until the command is complete to report a result.
+      //
+      // This is wrapped in a oneof to preserve field presence, which isn't preserved for scalar
+      // fields in prost-generated rust bindings. If unset, the client should wait until completion.
+      oneof wait_until_complete_value {
+        bool wait_until_complete = 6;
+      }
     }
 
     // A tool call to write bytes to the PTY when a command is running in the foreground.
     message WriteToLongRunningShellCommand {
       // The exact set of bytes that the client should write to PTY.
       bytes input = 1;
+
+      // The "mode" for the write.
+      Mode mode = 2;
+
+      message Mode {
+        oneof mode {
+            // Write raw bytes directly.
+            google.protobuf.Empty raw = 1;
+
+            // Write a line of text input.
+            //
+            // This write mode is designed to be used with REPLs/shell-like TUIs. Ensures the cursor is at the
+            // beginnning of the input buffer and sends an enter keystroke after `line`.
+            google.protobuf.Empty line = 2;
+
+            // Writes a block of multi-line text input.
+            //
+            // Under the hood, this uses bracketed paste to insert the text as-is.
+            google.protobuf.Empty block = 3;
+        }
+      }
     }
 
     message SuggestNewConversation {
@@ -410,6 +449,16 @@ message Message {
         string title = 2;
       }
     }
+
+    // A tool call to read the output of a shell command.
+    message ReadShellCommandOutput {
+      oneof delay {
+        // Return the output after a certain delay.
+        google.protobuf.Duration duration = 2;
+        // Return the output when the command completes.
+        google.protobuf.Empty on_completion = 3;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -446,6 +495,7 @@ message Message {
       ReadDocumentsResult read_documents = 24;
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
+      ReadShellCommandOutputResult read_shell_command_output = 27;
     }
 
     // Result of a server-side tool call.
@@ -799,6 +849,14 @@ message CreateDocumentsResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+message ReadShellCommandOutputResult {
+  string command = 1 [ (sensitive) = true ];
+  oneof result {
+    LongRunningShellCommandSnapshot long_running_command_snapshot = 2;
+    ShellCommandFinished command_finished = 3;
+  }
+}
+
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result types.
 //
@@ -825,6 +883,7 @@ enum ToolType {
   READ_DOCUMENTS = 17;
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
+  READ_SHELL_COMMAND_OUTPUT = 20;
 }
 
 message UserQueryMode {

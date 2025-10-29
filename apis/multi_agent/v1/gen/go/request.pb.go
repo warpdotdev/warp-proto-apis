@@ -980,13 +980,14 @@ func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                     protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging        map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
-	XXX_presence              [1]uint32
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                         protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId     *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging            map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AmbientAgentTaskId *string                    `protobuf:"bytes,3,opt,name=ambient_agent_task_id,json=ambientAgentTaskId"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *Request_Metadata) Reset() {
@@ -1031,13 +1032,28 @@ func (x *Request_Metadata) GetLogging() map[string]*structpb.Value {
 	return nil
 }
 
+func (x *Request_Metadata) GetAmbientAgentTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_AmbientAgentTaskId != nil {
+			return *x.xxx_hidden_AmbientAgentTaskId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Metadata) SetConversationId(v string) {
 	x.xxx_hidden_ConversationId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 	x.xxx_hidden_Logging = v
+}
+
+func (x *Request_Metadata) SetAmbientAgentTaskId(v string) {
+	x.xxx_hidden_AmbientAgentTaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Request_Metadata) HasConversationId() bool {
@@ -1047,9 +1063,21 @@ func (x *Request_Metadata) HasConversationId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Request_Metadata) HasAmbientAgentTaskId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Request_Metadata) ClearConversationId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ConversationId = nil
+}
+
+func (x *Request_Metadata) ClearAmbientAgentTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_AmbientAgentTaskId = nil
 }
 
 type Request_Metadata_builder struct {
@@ -1064,6 +1092,10 @@ type Request_Metadata_builder struct {
 	// Map of metadata to inline in server analytic events for this request.
 	// Values in the map should be valid JSON values.
 	Logging map[string]*structpb.Value
+	// Optional ambient agent task ID.
+	//
+	// This is set if the client is working autonomously on an ambient agent task.
+	AmbientAgentTaskId *string
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -1071,10 +1103,14 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ConversationId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ConversationId = b.ConversationId
 	}
 	x.xxx_hidden_Logging = b.Logging
+	if b.AmbientAgentTaskId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_AmbientAgentTaskId = b.AmbientAgentTaskId
+	}
 	return m0
 }
 
@@ -2172,6 +2208,15 @@ func (x *Request_Input_ToolCallResult) GetCreateDocuments() *CreateDocumentsResu
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetReadShellCommandOutput() *ReadShellCommandOutputResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadShellCommandOutput); ok {
+			return x.ReadShellCommandOutput
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -2335,6 +2380,14 @@ func (x *Request_Input_ToolCallResult) SetCreateDocuments(v *CreateDocumentsResu
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_CreateDocuments{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetReadShellCommandOutput(v *ReadShellCommandOutputResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadShellCommandOutput{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -2511,6 +2564,14 @@ func (x *Request_Input_ToolCallResult) HasCreateDocuments() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasReadShellCommandOutput() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadShellCommandOutput)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -2640,6 +2701,12 @@ func (x *Request_Input_ToolCallResult) ClearCreateDocuments() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearReadShellCommandOutput() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_ReadShellCommandOutput); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -2661,6 +2728,7 @@ const Request_Input_ToolCallResult_InitProject_case case_Request_Input_ToolCallR
 const Request_Input_ToolCallResult_ReadDocuments_case case_Request_Input_ToolCallResult_Result = 19
 const Request_Input_ToolCallResult_EditDocuments_case case_Request_Input_ToolCallResult_Result = 20
 const Request_Input_ToolCallResult_CreateDocuments_case case_Request_Input_ToolCallResult_Result = 21
+const Request_Input_ToolCallResult_ReadShellCommandOutput_case case_Request_Input_ToolCallResult_Result = 22
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -2707,6 +2775,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_EditDocuments_case
 	case *request_Input_ToolCallResult_CreateDocuments:
 		return Request_Input_ToolCallResult_CreateDocuments_case
+	case *request_Input_ToolCallResult_ReadShellCommandOutput:
+		return Request_Input_ToolCallResult_ReadShellCommandOutput_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -2737,6 +2807,7 @@ type Request_Input_ToolCallResult_builder struct {
 	ReadDocuments                  *ReadDocumentsResult
 	EditDocuments                  *EditDocumentsResult
 	CreateDocuments                *CreateDocumentsResult
+	ReadShellCommandOutput         *ReadShellCommandOutputResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -2807,6 +2878,9 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.CreateDocuments != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_CreateDocuments{b.CreateDocuments}
+	}
+	if b.ReadShellCommandOutput != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadShellCommandOutput{b.ReadShellCommandOutput}
 	}
 	return m0
 }
@@ -2905,6 +2979,10 @@ type request_Input_ToolCallResult_CreateDocuments struct {
 	CreateDocuments *CreateDocumentsResult `protobuf:"bytes,21,opt,name=create_documents,json=createDocuments,oneof"`
 }
 
+type request_Input_ToolCallResult_ReadShellCommandOutput struct {
+	ReadShellCommandOutput *ReadShellCommandOutputResult `protobuf:"bytes,22,opt,name=read_shell_command_output,json=readShellCommandOutput,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -2945,6 +3023,8 @@ func (*request_Input_ToolCallResult_ReadDocuments) isRequest_Input_ToolCallResul
 func (*request_Input_ToolCallResult_EditDocuments) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_CreateDocuments) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_ReadShellCommandOutput) isRequest_Input_ToolCallResult_Result() {}
 
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -4573,6 +4653,7 @@ func (b0 Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder)
 type Request_Input_CodeReview_InitialReviewComments struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ReviewComments *[]*ReviewComment      `protobuf:"bytes,1,rep,name=review_comments,json=reviewComments"`
+	xxx_hidden_DiffSet        *DiffSet               `protobuf:"bytes,2,opt,name=diff_set,json=diffSet"`
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
 }
@@ -4611,14 +4692,37 @@ func (x *Request_Input_CodeReview_InitialReviewComments) GetReviewComments() []*
 	return nil
 }
 
+func (x *Request_Input_CodeReview_InitialReviewComments) GetDiffSet() *DiffSet {
+	if x != nil {
+		return x.xxx_hidden_DiffSet
+	}
+	return nil
+}
+
 func (x *Request_Input_CodeReview_InitialReviewComments) SetReviewComments(v []*ReviewComment) {
 	x.xxx_hidden_ReviewComments = &v
+}
+
+func (x *Request_Input_CodeReview_InitialReviewComments) SetDiffSet(v *DiffSet) {
+	x.xxx_hidden_DiffSet = v
+}
+
+func (x *Request_Input_CodeReview_InitialReviewComments) HasDiffSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DiffSet != nil
+}
+
+func (x *Request_Input_CodeReview_InitialReviewComments) ClearDiffSet() {
+	x.xxx_hidden_DiffSet = nil
 }
 
 type Request_Input_CodeReview_InitialReviewComments_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ReviewComments []*ReviewComment
+	DiffSet        *DiffSet
 }
 
 func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Request_Input_CodeReview_InitialReviewComments {
@@ -4626,6 +4730,7 @@ func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Reques
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ReviewComments = &b.ReviewComments
+	x.xxx_hidden_DiffSet = b.DiffSet
 	return m0
 }
 
@@ -4777,15 +4882,16 @@ func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelCo
 }
 
 type Request_Settings_ApiKeys struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Anthropic   *string                `protobuf:"bytes,1,opt,name=anthropic"`
-	xxx_hidden_Openai      *string                `protobuf:"bytes,2,opt,name=openai"`
-	xxx_hidden_Google      *string                `protobuf:"bytes,3,opt,name=google"`
-	xxx_hidden_OpenRouter  *string                `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                            protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Anthropic             *string                `protobuf:"bytes,1,opt,name=anthropic"`
+	xxx_hidden_Openai                *string                `protobuf:"bytes,2,opt,name=openai"`
+	xxx_hidden_Google                *string                `protobuf:"bytes,3,opt,name=google"`
+	xxx_hidden_OpenRouter            *string                `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
+	xxx_hidden_AllowUseOfWarpCredits bool                   `protobuf:"varint,5,opt,name=allow_use_of_warp_credits,json=allowUseOfWarpCredits"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
 func (x *Request_Settings_ApiKeys) Reset() {
@@ -4853,24 +4959,36 @@ func (x *Request_Settings_ApiKeys) GetOpenRouter() string {
 	return ""
 }
 
+func (x *Request_Settings_ApiKeys) GetAllowUseOfWarpCredits() bool {
+	if x != nil {
+		return x.xxx_hidden_AllowUseOfWarpCredits
+	}
+	return false
+}
+
 func (x *Request_Settings_ApiKeys) SetAnthropic(v string) {
 	x.xxx_hidden_Anthropic = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenai(v string) {
 	x.xxx_hidden_Openai = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *Request_Settings_ApiKeys) SetGoogle(v string) {
 	x.xxx_hidden_Google = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenRouter(v string) {
 	x.xxx_hidden_OpenRouter = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *Request_Settings_ApiKeys) SetAllowUseOfWarpCredits(v bool) {
+	x.xxx_hidden_AllowUseOfWarpCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *Request_Settings_ApiKeys) HasAnthropic() bool {
@@ -4901,6 +5019,13 @@ func (x *Request_Settings_ApiKeys) HasOpenRouter() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *Request_Settings_ApiKeys) HasAllowUseOfWarpCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *Request_Settings_ApiKeys) ClearAnthropic() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Anthropic = nil
@@ -4921,6 +5046,11 @@ func (x *Request_Settings_ApiKeys) ClearOpenRouter() {
 	x.xxx_hidden_OpenRouter = nil
 }
 
+func (x *Request_Settings_ApiKeys) ClearAllowUseOfWarpCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_AllowUseOfWarpCredits = false
+}
+
 type Request_Settings_ApiKeys_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -4928,6 +5058,9 @@ type Request_Settings_ApiKeys_builder struct {
 	Openai     *string
 	Google     *string
 	OpenRouter *string
+	// If `true`, the client allows the use of Warp credits for LLM calls when
+	// keys are provided.
+	AllowUseOfWarpCredits *bool
 }
 
 func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
@@ -4935,20 +5068,24 @@ func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Anthropic != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Anthropic = b.Anthropic
 	}
 	if b.Openai != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Openai = b.Openai
 	}
 	if b.Google != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_Google = b.Google
 	}
 	if b.OpenRouter != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_OpenRouter = b.OpenRouter
+	}
+	if b.AllowUseOfWarpCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_AllowUseOfWarpCredits = *b.AllowUseOfWarpCredits
 	}
 	return m0
 }
@@ -5420,7 +5557,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x8dA\n" +
+	"task.proto\"\xa4C\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5430,7 +5567,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc0*\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xea+\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5464,7 +5601,7 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResultB\a\n" +
-	"\x05input\x1a\xcc\x0e\n" +
+	"\x05input\x1a\xbc\x0f\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -5490,7 +5627,8 @@ const file_request_proto_rawDesc = "" +
 	"\finit_project\x18\x12 \x01(\v2&.warp.multi_agent.v1.InitProjectResultH\x00R\vinitProject\x12Q\n" +
 	"\x0eread_documents\x18\x13 \x01(\v2(.warp.multi_agent.v1.ReadDocumentsResultH\x00R\rreadDocuments\x12Q\n" +
 	"\x0eedit_documents\x18\x14 \x01(\v2(.warp.multi_agent.v1.EditDocumentsResultH\x00R\reditDocuments\x12W\n" +
-	"\x10create_documents\x18\x15 \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x1a[\n" +
+	"\x10create_documents\x18\x15 \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12n\n" +
+	"\x19read_shell_command_output\x18\x16 \x01(\v21.warp.multi_agent.v1.ReadShellCommandOutputResultH\x00R\x16readShellCommandOutput\x1a[\n" +
 	"\fRefineResult\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\b\n" +
@@ -5524,22 +5662,23 @@ const file_request_proto_rawDesc = "" +
 	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
 	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
 	"commandRunB\t\n" +
-	"\atrigger\x1a\xfe\x01\n" +
+	"\atrigger\x1a\xb8\x02\n" +
 	"\n" +
 	"CodeReview\x12}\n" +
-	"\x17initial_review_comments\x18\x01 \x01(\v2C.warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewCommentsH\x00R\x15initialReviewComments\x1ad\n" +
+	"\x17initial_review_comments\x18\x01 \x01(\v2C.warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewCommentsH\x00R\x15initialReviewComments\x1a\x9d\x01\n" +
 	"\x15InitialReviewComments\x12K\n" +
-	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewCommentsB\v\n" +
+	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewComments\x127\n" +
+	"\bdiff_set\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSetB\v\n" +
 	"\toperation\x1a\x17\n" +
 	"\x15SummarizeConversationB\x06\n" +
-	"\x04type\x1a\xd5\x01\n" +
+	"\x04type\x1a\x88\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
-	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x1aR\n" +
+	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x121\n" +
+	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xeb\n" +
-	"\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa5\v\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -5563,13 +5702,14 @@ const file_request_proto_rawDesc = "" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
-	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\x90\x01\n" +
+	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\xca\x01\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +
 	"\x06google\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06google\x12%\n" +
 	"\vopen_router\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"openRouter\x1a\xf6\x05\n" +
+	"openRouter\x128\n" +
+	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x1a\xf6\x05\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
@@ -5651,11 +5791,13 @@ var file_request_proto_goTypes = []any{
 	(*ReadDocumentsResult)(nil),                  // 56: warp.multi_agent.v1.ReadDocumentsResult
 	(*EditDocumentsResult)(nil),                  // 57: warp.multi_agent.v1.EditDocumentsResult
 	(*CreateDocumentsResult)(nil),                // 58: warp.multi_agent.v1.CreateDocumentsResult
-	(*Attachment)(nil),                           // 59: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                        // 60: google.protobuf.Empty
-	(*ReviewComment)(nil),                        // 61: warp.multi_agent.v1.ReviewComment
-	(*structpb.Value)(nil),                       // 62: google.protobuf.Value
-	(*structpb.Struct)(nil),                      // 63: google.protobuf.Struct
+	(*ReadShellCommandOutputResult)(nil),         // 59: warp.multi_agent.v1.ReadShellCommandOutputResult
+	(*Attachment)(nil),                           // 60: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                        // 61: google.protobuf.Empty
+	(*ReviewComment)(nil),                        // 62: warp.multi_agent.v1.ReviewComment
+	(*DiffSet)(nil),                              // 63: warp.multi_agent.v1.DiffSet
+	(*structpb.Value)(nil),                       // 64: google.protobuf.Value
+	(*structpb.Struct)(nil),                      // 65: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -5709,30 +5851,32 @@ var file_request_proto_depIdxs = []int32{
 	56, // 48: warp.multi_agent.v1.Request.Input.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
 	57, // 49: warp.multi_agent.v1.Request.Input.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
 	58, // 50: warp.multi_agent.v1.Request.Input.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	22, // 51: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	23, // 52: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	24, // 53: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	25, // 54: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	26, // 55: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	27, // 56: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	59, // 57: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	60, // 58: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	60, // 59: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	28, // 60: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
-	59, // 61: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	6,  // 62: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	8,  // 63: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	6,  // 64: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	61, // 65: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	62, // 66: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	63, // 67: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	32, // 68: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	33, // 69: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	70, // [70:70] is the sub-list for method output_type
-	70, // [70:70] is the sub-list for method input_type
-	70, // [70:70] is the sub-list for extension type_name
-	70, // [70:70] is the sub-list for extension extendee
-	0,  // [0:70] is the sub-list for field type_name
+	59, // 51: warp.multi_agent.v1.Request.Input.ToolCallResult.read_shell_command_output:type_name -> warp.multi_agent.v1.ReadShellCommandOutputResult
+	22, // 52: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	23, // 53: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	24, // 54: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	25, // 55: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	26, // 56: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	27, // 57: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	60, // 58: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	61, // 59: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	61, // 60: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	28, // 61: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
+	60, // 62: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	6,  // 63: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	8,  // 64: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	6,  // 65: warp.multi_agent.v1.Request.Input.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	62, // 66: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	63, // 67: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	64, // 68: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	65, // 69: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	32, // 70: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	33, // 71: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	72, // [72:72] is the sub-list for method output_type
+	72, // [72:72] is the sub-list for method input_type
+	72, // [72:72] is the sub-list for extension type_name
+	72, // [72:72] is the sub-list for extension extendee
+	0,  // [0:72] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -5781,6 +5925,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_ReadDocuments)(nil),
 		(*request_Input_ToolCallResult_EditDocuments)(nil),
 		(*request_Input_ToolCallResult_CreateDocuments)(nil),
+		(*request_Input_ToolCallResult_ReadShellCommandOutput)(nil),
 	}
 	file_request_proto_msgTypes[9].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),
