@@ -66,6 +66,7 @@ message ReviewComment {
 
   string comment = 2 [ (sensitive) = true ];
   DiffSet diff_set = 3;
+  FileContentLineRange comment_line_range = 4;
 }
 
 // A message within a task
