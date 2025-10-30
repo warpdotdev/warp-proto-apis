@@ -272,6 +272,9 @@ message Request {
     // If provided, these keys will be used instead of Warp's default keys.
     ApiKeys api_keys = 18;
 
+    AutonomyLevel autonomy_level = 19;
+    IsolationLevel isolation_level = 20;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
@@ -293,9 +296,6 @@ message Request {
       // keys are provided.
       bool allow_use_of_warp_credits = 5;
     }
-
-    AutonomyLevel autonomy_level = 19;
-    IsolationLevel isolation_level = 20;
   }
 
   message MCPContext {
