@@ -535,17 +535,17 @@ message Message {
       }
   
       message Searching {
-        string query = 1;
+        string query = 1 [ (sensitive) = true ];
       }
   
       message Success {
-        string query = 1;
+        string query = 1 [ (sensitive) = true ];
         repeated SearchedPage pages = 2;
       }
   
       message SearchedPage {
-        string url = 1;
-        string title = 2;
+        string url = 1 [ (sensitive) = true ];
+        string title = 2 [ (sensitive) = true ];
       }
     }
   }
