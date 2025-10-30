@@ -107,6 +107,7 @@ message Message {
     Summarization summarization = 16;
     CodeReview code_review = 17;
     UpdateReviewComments update_review_comments = 18;
+    WebSearch web_search = 19;
   }
 
   // User query message type
@@ -521,6 +522,32 @@ message Message {
     }
 
     message AddressReviewComments { repeated string comment_ids = 1; }
+  }
+  
+  message WebSearch {
+    Status status = 1;
+
+    message Status {
+      oneof type {
+        Searching searching = 1;
+        Success success = 2;
+        google.protobuf.Empty error = 3;
+      }
+  
+      message Searching {
+        string query = 1;
+      }
+  
+      message Success {
+        string query = 1;
+        repeated SearchedPage pages = 2;
+      }
+  
+      message SearchedPage {
+        string url = 1;
+        string title = 2;
+      }
+    }
   }
 }
 
