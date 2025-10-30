@@ -384,6 +384,9 @@ message Message {
       // An MCP tool call specifies args as named JSON arguments
       // (not arbitrary JSON, e.g. a string).
       google.protobuf.Struct args = 2;
+      // Optional server name to disambiguate since multiple MCP servers provide
+      // tools with the same name (e.g., "Sentry", "Linear", "GitHub").
+      string server_name = 3;
     }
 
     // A tool call to suggest a prompt.
