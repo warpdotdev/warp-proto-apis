@@ -16525,7 +16525,7 @@ const file_task_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
 	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\x12W\n" +
-	"\x12comment_line_range\x18\x04 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x10commentLineRange\"\xc3]\n" +
+	"\x12comment_line_range\x18\x04 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x10commentLineRange\"\xdb]\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16782,21 +16782,21 @@ const file_task_proto_rawDesc = "" +
 	"\x15AddressReviewComments\x12\x1f\n" +
 	"\vcomment_ids\x18\x01 \x03(\tR\n" +
 	"commentIdsB\v\n" +
-	"\toperation\x1a\x8f\x04\n" +
+	"\toperation\x1a\xa7\x04\n" +
 	"\tWebSearch\x12E\n" +
-	"\x06status\x18\x01 \x01(\v2-.warp.multi_agent.v1.Message.WebSearch.StatusR\x06status\x1a\xba\x03\n" +
+	"\x06status\x18\x01 \x01(\v2-.warp.multi_agent.v1.Message.WebSearch.StatusR\x06status\x1a\xd2\x03\n" +
 	"\x06Status\x12W\n" +
 	"\tsearching\x18\x01 \x01(\v27.warp.multi_agent.v1.Message.WebSearch.Status.SearchingH\x00R\tsearching\x12Q\n" +
 	"\asuccess\x18\x02 \x01(\v25.warp.multi_agent.v1.Message.WebSearch.Status.SuccessH\x00R\asuccess\x12.\n" +
-	"\x05error\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05error\x1a!\n" +
-	"\tSearching\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x1aq\n" +
-	"\aSuccess\x12\x14\n" +
-	"\x05query\x18\x01 \x01(\tR\x05query\x12P\n" +
-	"\x05pages\x18\x02 \x03(\v2:.warp.multi_agent.v1.Message.WebSearch.Status.SearchedPageR\x05pages\x1a6\n" +
-	"\fSearchedPage\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05titleB\x06\n" +
+	"\x05error\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05error\x1a'\n" +
+	"\tSearching\x12\x1a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1aw\n" +
+	"\aSuccess\x12\x1a\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12P\n" +
+	"\x05pages\x18\x02 \x03(\v2:.warp.multi_agent.v1.Message.WebSearch.Status.SearchedPageR\x05pages\x1aB\n" +
+	"\fSearchedPage\x12\x16\n" +
+	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x12\x1a\n" +
+	"\x05title\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05titleB\x06\n" +
 	"\x04typeB\t\n" +
 	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xd5\x02\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
