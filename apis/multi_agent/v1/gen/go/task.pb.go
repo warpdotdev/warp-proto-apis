@@ -10808,6 +10808,8 @@ func (b0 Message_ToolCall_FileGlobV2_builder) Build() *Message_ToolCall_FileGlob
 type Message_ToolCall_ReadMCPResource struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Uri         *string                `protobuf:"bytes,1,opt,name=uri"`
+	xxx_hidden_ServerName  *string                `protobuf:"bytes,2,opt,name=server_name,json=serverName"`
+	xxx_hidden_ServerId    *string                `protobuf:"bytes,3,opt,name=server_id,json=serverId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -10849,9 +10851,39 @@ func (x *Message_ToolCall_ReadMCPResource) GetUri() string {
 	return ""
 }
 
+func (x *Message_ToolCall_ReadMCPResource) GetServerName() string {
+	if x != nil {
+		if x.xxx_hidden_ServerName != nil {
+			return *x.xxx_hidden_ServerName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Message_ToolCall_ReadMCPResource) GetServerId() string {
+	if x != nil {
+		if x.xxx_hidden_ServerId != nil {
+			return *x.xxx_hidden_ServerId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_ReadMCPResource) SetUri(v string) {
 	x.xxx_hidden_Uri = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *Message_ToolCall_ReadMCPResource) SetServerName(v string) {
+	x.xxx_hidden_ServerName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Message_ToolCall_ReadMCPResource) SetServerId(v string) {
+	x.xxx_hidden_ServerId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Message_ToolCall_ReadMCPResource) HasUri() bool {
@@ -10861,15 +10893,43 @@ func (x *Message_ToolCall_ReadMCPResource) HasUri() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *Message_ToolCall_ReadMCPResource) HasServerName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message_ToolCall_ReadMCPResource) HasServerId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Message_ToolCall_ReadMCPResource) ClearUri() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Uri = nil
+}
+
+func (x *Message_ToolCall_ReadMCPResource) ClearServerName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ServerName = nil
+}
+
+func (x *Message_ToolCall_ReadMCPResource) ClearServerId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ServerId = nil
 }
 
 type Message_ToolCall_ReadMCPResource_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Uri *string
+	// Optional server name to disambiguate resources across MCP servers.
+	ServerName *string
+	// Optional server ID for precise server identification.
+	ServerId *string
 }
 
 func (b0 Message_ToolCall_ReadMCPResource_builder) Build() *Message_ToolCall_ReadMCPResource {
@@ -10877,8 +10937,16 @@ func (b0 Message_ToolCall_ReadMCPResource_builder) Build() *Message_ToolCall_Rea
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Uri != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Uri = b.Uri
+	}
+	if b.ServerName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_ServerName = b.ServerName
+	}
+	if b.ServerId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_ServerId = b.ServerId
 	}
 	return m0
 }
@@ -10889,6 +10957,7 @@ type Message_ToolCall_CallMCPTool struct {
 	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
 	xxx_hidden_Args        *structpb.Struct       `protobuf:"bytes,2,opt,name=args"`
 	xxx_hidden_ServerName  *string                `protobuf:"bytes,3,opt,name=server_name,json=serverName"`
+	xxx_hidden_ServerId    *string                `protobuf:"bytes,4,opt,name=server_id,json=serverId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -10947,9 +11016,19 @@ func (x *Message_ToolCall_CallMCPTool) GetServerName() string {
 	return ""
 }
 
+func (x *Message_ToolCall_CallMCPTool) GetServerId() string {
+	if x != nil {
+		if x.xxx_hidden_ServerId != nil {
+			return *x.xxx_hidden_ServerId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_CallMCPTool) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Message_ToolCall_CallMCPTool) SetArgs(v *structpb.Struct) {
@@ -10958,7 +11037,12 @@ func (x *Message_ToolCall_CallMCPTool) SetArgs(v *structpb.Struct) {
 
 func (x *Message_ToolCall_CallMCPTool) SetServerName(v string) {
 	x.xxx_hidden_ServerName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Message_ToolCall_CallMCPTool) SetServerId(v string) {
+	x.xxx_hidden_ServerId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Message_ToolCall_CallMCPTool) HasName() bool {
@@ -10982,6 +11066,13 @@ func (x *Message_ToolCall_CallMCPTool) HasServerName() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *Message_ToolCall_CallMCPTool) HasServerId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Message_ToolCall_CallMCPTool) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
@@ -10996,6 +11087,11 @@ func (x *Message_ToolCall_CallMCPTool) ClearServerName() {
 	x.xxx_hidden_ServerName = nil
 }
 
+func (x *Message_ToolCall_CallMCPTool) ClearServerId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_ServerId = nil
+}
+
 type Message_ToolCall_CallMCPTool_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -11007,6 +11103,8 @@ type Message_ToolCall_CallMCPTool_builder struct {
 	// Optional server name to disambiguate since multiple MCP servers provide
 	// tools with the same name (e.g., "Sentry", "Linear", "GitHub").
 	ServerName *string
+	// Optional server ID for precise server identification.
+	ServerId *string
 }
 
 func (b0 Message_ToolCall_CallMCPTool_builder) Build() *Message_ToolCall_CallMCPTool {
@@ -11014,13 +11112,17 @@ func (b0 Message_ToolCall_CallMCPTool_builder) Build() *Message_ToolCall_CallMCP
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Name = b.Name
 	}
 	x.xxx_hidden_Args = b.Args
 	if b.ServerName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_ServerName = b.ServerName
+	}
+	if b.ServerId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_ServerId = b.ServerId
 	}
 	return m0
 }
@@ -16039,7 +16141,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xd8Y\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xb4Z\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16108,7 +16210,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xca)\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa6*\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -16199,14 +16301,18 @@ const file_task_proto_rawDesc = "" +
 	"\vmax_matches\x18\x03 \x01(\x05R\n" +
 	"maxMatches\x12\x1b\n" +
 	"\tmax_depth\x18\x04 \x01(\x05R\bmaxDepth\x12\x1b\n" +
-	"\tmin_depth\x18\x05 \x01(\x05R\bminDepth\x1a#\n" +
+	"\tmin_depth\x18\x05 \x01(\x05R\bminDepth\x1aa\n" +
 	"\x0fReadMCPResource\x12\x10\n" +
-	"\x03uri\x18\x01 \x01(\tR\x03uri\x1ao\n" +
+	"\x03uri\x18\x01 \x01(\tR\x03uri\x12\x1f\n" +
+	"\vserver_name\x18\x02 \x01(\tR\n" +
+	"serverName\x12\x1b\n" +
+	"\tserver_id\x18\x03 \x01(\tR\bserverId\x1a\x8c\x01\n" +
 	"\vCallMCPTool\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12+\n" +
 	"\x04args\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04args\x12\x1f\n" +
 	"\vserver_name\x18\x03 \x01(\tR\n" +
-	"serverName\x1a\xfb\x01\n" +
+	"serverName\x12\x1b\n" +
+	"\tserver_id\x18\x04 \x01(\tR\bserverId\x1a\xfb\x01\n" +
 	"\rSuggestPrompt\x12w\n" +
 	"\x13inline_query_banner\x18\x01 \x01(\v2E.warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBannerH\x00R\x11inlineQueryBanner\x1aa\n" +
 	"\x11InlineQueryBanner\x12\x14\n" +

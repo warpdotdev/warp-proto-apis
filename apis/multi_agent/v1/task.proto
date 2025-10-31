@@ -375,7 +375,13 @@ message Message {
     }
 
     // A tool call to read an MCP resource identified by its URI.
-    message ReadMCPResource { string uri = 1; }
+    message ReadMCPResource {
+      string uri = 1;
+      // Optional server name to disambiguate resources across MCP servers.
+      string server_name = 2;
+      // Optional server ID for precise server identification.
+      string server_id = 3;
+    }
 
     // A tool call to execute an MCP tool.
     message CallMCPTool {
@@ -387,6 +393,8 @@ message Message {
       // Optional server name to disambiguate since multiple MCP servers provide
       // tools with the same name (e.g., "Sentry", "Linear", "GitHub").
       string server_name = 3;
+      // Optional server ID for precise server identification.
+      string server_id = 4;
     }
 
     // A tool call to suggest a prompt.
