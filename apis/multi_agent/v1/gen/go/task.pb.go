@@ -9300,6 +9300,7 @@ type Message_Summarization_ConversationSummary struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Summary     *string                `protobuf:"bytes,1,opt,name=summary"`
 	xxx_hidden_TokenCount  int32                  `protobuf:"varint,2,opt,name=token_count,json=tokenCount"`
+	xxx_hidden_Prompt      *string                `protobuf:"bytes,3,opt,name=prompt"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -9348,14 +9349,29 @@ func (x *Message_Summarization_ConversationSummary) GetTokenCount() int32 {
 	return 0
 }
 
+func (x *Message_Summarization_ConversationSummary) GetPrompt() string {
+	if x != nil {
+		if x.xxx_hidden_Prompt != nil {
+			return *x.xxx_hidden_Prompt
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_Summarization_ConversationSummary) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Message_Summarization_ConversationSummary) SetTokenCount(v int32) {
 	x.xxx_hidden_TokenCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Message_Summarization_ConversationSummary) SetPrompt(v string) {
+	x.xxx_hidden_Prompt = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Message_Summarization_ConversationSummary) HasSummary() bool {
@@ -9372,6 +9388,13 @@ func (x *Message_Summarization_ConversationSummary) HasTokenCount() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *Message_Summarization_ConversationSummary) HasPrompt() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Message_Summarization_ConversationSummary) ClearSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Summary = nil
@@ -9382,11 +9405,18 @@ func (x *Message_Summarization_ConversationSummary) ClearTokenCount() {
 	x.xxx_hidden_TokenCount = 0
 }
 
+func (x *Message_Summarization_ConversationSummary) ClearPrompt() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Prompt = nil
+}
+
 type Message_Summarization_ConversationSummary_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Summary    *string
 	TokenCount *int32
+	// Optional additional instructions to focus or augment the summary.
+	Prompt *string
 }
 
 func (b0 Message_Summarization_ConversationSummary_builder) Build() *Message_Summarization_ConversationSummary {
@@ -9394,12 +9424,16 @@ func (b0 Message_Summarization_ConversationSummary_builder) Build() *Message_Sum
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	if b.TokenCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_TokenCount = *b.TokenCount
+	}
+	if b.Prompt != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Prompt = b.Prompt
 	}
 	return m0
 }
@@ -16004,7 +16038,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xb7Y\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xcfY\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16060,15 +16094,16 @@ const file_task_proto_rawDesc = "" +
 	"\x04text\x18\x01 \x01(\tR\x04textJ\x04\b\x02\x10\x03R\treasoning\x1av\n" +
 	"\x0eAgentReasoning\x12\x1c\n" +
 	"\treasoning\x18\x01 \x01(\tR\treasoning\x12F\n" +
-	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x1a\xc4\x03\n" +
+	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x1a\xdc\x03\n" +
 	"\rSummarization\x12F\n" +
 	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x12s\n" +
 	"\x14conversation_summary\x18\x01 \x01(\v2>.warp.multi_agent.v1.Message.Summarization.ConversationSummaryH\x00R\x13conversationSummary\x12{\n" +
-	"\x18tool_call_result_summary\x18\x03 \x01(\v2@.warp.multi_agent.v1.Message.Summarization.ToolCallResultSummaryH\x00R\x15toolCallResultSummary\x1aP\n" +
+	"\x18tool_call_result_summary\x18\x03 \x01(\v2@.warp.multi_agent.v1.Message.Summarization.ToolCallResultSummaryH\x00R\x15toolCallResultSummary\x1ah\n" +
 	"\x13ConversationSummary\x12\x18\n" +
 	"\asummary\x18\x01 \x01(\tR\asummary\x12\x1f\n" +
 	"\vtoken_count\x18\x02 \x01(\x05R\n" +
-	"tokenCount\x1a\x17\n" +
+	"tokenCount\x12\x16\n" +
+	"\x06prompt\x18\x03 \x01(\tR\x06prompt\x1a\x17\n" +
 	"\x15ToolCallResultSummaryB\x0e\n" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +

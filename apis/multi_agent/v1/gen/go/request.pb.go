@@ -4259,9 +4259,12 @@ func (*request_Input_CodeReview_InitialReviewComments_) isRequest_Input_CodeRevi
 
 // An input to summarize the active conversation.
 type Request_Input_SummarizeConversation struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Prompt      *string                `protobuf:"bytes,1,opt,name=prompt"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Request_Input_SummarizeConversation) Reset() {
@@ -4289,15 +4292,48 @@ func (x *Request_Input_SummarizeConversation) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
+func (x *Request_Input_SummarizeConversation) GetPrompt() string {
+	if x != nil {
+		if x.xxx_hidden_Prompt != nil {
+			return *x.xxx_hidden_Prompt
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Input_SummarizeConversation) SetPrompt(v string) {
+	x.xxx_hidden_Prompt = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *Request_Input_SummarizeConversation) HasPrompt() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_SummarizeConversation) ClearPrompt() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Prompt = nil
+}
+
 type Request_Input_SummarizeConversation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Optional additional instructions to focus or augment the summary.
+	Prompt *string
 }
 
 func (b0 Request_Input_SummarizeConversation_builder) Build() *Request_Input_SummarizeConversation {
 	m0 := &Request_Input_SummarizeConversation{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.Prompt != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Prompt = b.Prompt
+	}
 	return m0
 }
 
@@ -5708,7 +5744,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xbdD\n" +
+	"task.proto\"\xd5D\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5718,7 +5754,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xea+\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x82,\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5820,8 +5856,9 @@ const file_request_proto_rawDesc = "" +
 	"\x15InitialReviewComments\x12K\n" +
 	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewComments\x127\n" +
 	"\bdiff_set\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSetB\v\n" +
-	"\toperation\x1a\x17\n" +
-	"\x15SummarizeConversationB\x06\n" +
+	"\toperation\x1a/\n" +
+	"\x15SummarizeConversation\x12\x16\n" +
+	"\x06prompt\x18\x01 \x01(\tR\x06promptB\x06\n" +
 	"\x04type\x1a\x88\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
