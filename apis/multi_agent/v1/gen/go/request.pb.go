@@ -5712,7 +5712,7 @@ type Request_MCPContext_MCPServer_builder struct {
 	Resources []*Request_MCPContext_MCPResource
 	// Tools provided by this server.
 	Tools []*Request_MCPContext_MCPTool
-	// Unique identifier for server instance from the MCP server manager.
+	// Optional unique identifier for server instance from the MCP server manager.
 	Id *string
 }
 
