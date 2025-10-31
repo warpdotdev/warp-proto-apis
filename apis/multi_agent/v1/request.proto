@@ -187,7 +187,7 @@ message Request {
 
     // An input to summarize the active conversation.
     message SummarizeConversation {
-      // Optional additional instructions to focus or augment the summary.
+      // Optional user-specified instructions to focus or augment the summary.
       string prompt = 1;
     }
   }

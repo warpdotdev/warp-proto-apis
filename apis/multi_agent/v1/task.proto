@@ -194,11 +194,11 @@ message Message {
       ToolCallResultSummary tool_call_result_summary = 3;
     }
 
-    // Summarize the overall conversation.
+    // A summary of the overall conversation.
     message ConversationSummary {
       string summary = 1;
       int32 token_count = 2;
-      // Optional additional instructions to focus or augment the summary.
+      // Optional user-specified instructions used to focus or augment the summary.
       string prompt = 3;
     }
 

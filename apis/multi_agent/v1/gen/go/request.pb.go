@@ -4322,7 +4322,7 @@ func (x *Request_Input_SummarizeConversation) ClearPrompt() {
 type Request_Input_SummarizeConversation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Optional additional instructions to focus or augment the summary.
+	// Optional user-specified instructions to focus or augment the summary.
 	Prompt *string
 }
 

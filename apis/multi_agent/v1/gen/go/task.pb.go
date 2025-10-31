@@ -9295,7 +9295,7 @@ type message_UpdateReviewComments_AddressReviewComments_ struct {
 func (*message_UpdateReviewComments_AddressReviewComments_) isMessage_UpdateReviewComments_Operation() {
 }
 
-// Summarize the overall conversation.
+// A summary of the overall conversation.
 type Message_Summarization_ConversationSummary struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Summary     *string                `protobuf:"bytes,1,opt,name=summary"`
@@ -9415,7 +9415,7 @@ type Message_Summarization_ConversationSummary_builder struct {
 
 	Summary    *string
 	TokenCount *int32
-	// Optional additional instructions to focus or augment the summary.
+	// Optional user-specified instructions used to focus or augment the summary.
 	Prompt *string
 }
 
