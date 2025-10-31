@@ -334,6 +334,9 @@ message Request {
 
       // Tools provided by this server.
       repeated MCPTool tools = 4;
+
+      // Unique identifier for server instance from the MCP server manager.
+      string id = 5;
     }
   }
 }
