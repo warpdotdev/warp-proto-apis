@@ -6146,6 +6146,7 @@ func (b0 Message_CloneRepository_builder) Build() *Message_CloneRepository {
 	return m0
 }
 
+// A user-requested summarization.
 type Message_SummarizeConversation struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Prompt      *string                `protobuf:"bytes,1,opt,name=prompt"`
