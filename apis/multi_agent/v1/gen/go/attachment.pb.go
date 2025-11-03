@@ -669,6 +669,7 @@ type LongRunningShellCommandSnapshot struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Output      *string                `protobuf:"bytes,1,opt,name=output"`
 	xxx_hidden_Cursor      *string                `protobuf:"bytes,2,opt,name=cursor"`
+	xxx_hidden_CommandId   *string                `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -720,14 +721,29 @@ func (x *LongRunningShellCommandSnapshot) GetCursor() string {
 	return ""
 }
 
+func (x *LongRunningShellCommandSnapshot) GetCommandId() string {
+	if x != nil {
+		if x.xxx_hidden_CommandId != nil {
+			return *x.xxx_hidden_CommandId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *LongRunningShellCommandSnapshot) SetOutput(v string) {
 	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetCursor(v string) {
 	x.xxx_hidden_Cursor = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *LongRunningShellCommandSnapshot) SetCommandId(v string) {
+	x.xxx_hidden_CommandId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *LongRunningShellCommandSnapshot) HasOutput() bool {
@@ -744,6 +760,13 @@ func (x *LongRunningShellCommandSnapshot) HasCursor() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *LongRunningShellCommandSnapshot) HasCommandId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *LongRunningShellCommandSnapshot) ClearOutput() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Output = nil
@@ -752,6 +775,11 @@ func (x *LongRunningShellCommandSnapshot) ClearOutput() {
 func (x *LongRunningShellCommandSnapshot) ClearCursor() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Cursor = nil
+}
+
+func (x *LongRunningShellCommandSnapshot) ClearCommandId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CommandId = nil
 }
 
 type LongRunningShellCommandSnapshot_builder struct {
@@ -763,6 +791,9 @@ type LongRunningShellCommandSnapshot_builder struct {
 	//
 	// This may be used by the server to find the cursor in `output` and change its formatting.
 	Cursor *string
+	// "ID" of the command execution to be included in tool calls to write to or read from the
+	// snapshotted command.
+	CommandId *string
 }
 
 func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellCommandSnapshot {
@@ -770,12 +801,16 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Output = b.Output
 	}
 	if b.Cursor != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Cursor = b.Cursor
+	}
+	if b.CommandId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_CommandId = b.CommandId
 	}
 	return m0
 }
@@ -2575,10 +2610,12 @@ const file_attachment_proto_rawDesc = "" +
 	"\texit_code\x18\x03 \x01(\x05R\bexitCode\"\x87\x01\n" +
 	"\x13RunningShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
-	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"W\n" +
+	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"v\n" +
 	"\x1fLongRunningShellCommandSnapshot\x12\x1c\n" +
 	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x16\n" +
-	"\x06cursor\x18\x02 \x01(\tR\x06cursor\"\x91\x02\n" +
+	"\x06cursor\x18\x02 \x01(\tR\x06cursor\x12\x1d\n" +
+	"\n" +
+	"command_id\x18\x03 \x01(\tR\tcommandId\"\x91\x02\n" +
 	"\vDriveObject\x12\x16\n" +
 	"\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uid\x12;\n" +
 	"\bworkflow\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.WorkflowH\x00R\bworkflow\x12;\n" +

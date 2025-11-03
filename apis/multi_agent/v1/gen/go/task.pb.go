@@ -3696,6 +3696,7 @@ type ShellCommandFinished struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Output      *string                `protobuf:"bytes,1,opt,name=output"`
 	xxx_hidden_ExitCode    int32                  `protobuf:"varint,2,opt,name=exit_code,json=exitCode"`
+	xxx_hidden_CommandId   *string                `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -3744,14 +3745,29 @@ func (x *ShellCommandFinished) GetExitCode() int32 {
 	return 0
 }
 
+func (x *ShellCommandFinished) GetCommandId() string {
+	if x != nil {
+		if x.xxx_hidden_CommandId != nil {
+			return *x.xxx_hidden_CommandId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ShellCommandFinished) SetOutput(v string) {
 	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *ShellCommandFinished) SetExitCode(v int32) {
 	x.xxx_hidden_ExitCode = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *ShellCommandFinished) SetCommandId(v string) {
+	x.xxx_hidden_CommandId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *ShellCommandFinished) HasOutput() bool {
@@ -3768,6 +3784,13 @@ func (x *ShellCommandFinished) HasExitCode() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *ShellCommandFinished) HasCommandId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *ShellCommandFinished) ClearOutput() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Output = nil
@@ -3778,11 +3801,17 @@ func (x *ShellCommandFinished) ClearExitCode() {
 	x.xxx_hidden_ExitCode = 0
 }
 
+func (x *ShellCommandFinished) ClearCommandId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CommandId = nil
+}
+
 type ShellCommandFinished_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Output   *string
-	ExitCode *int32
+	Output    *string
+	ExitCode  *int32
+	CommandId *string
 }
 
 func (b0 ShellCommandFinished_builder) Build() *ShellCommandFinished {
@@ -3790,12 +3819,16 @@ func (b0 ShellCommandFinished_builder) Build() *ShellCommandFinished {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Output = b.Output
 	}
 	if b.ExitCode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_ExitCode = *b.ExitCode
+	}
+	if b.CommandId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_CommandId = b.CommandId
 	}
 	return m0
 }
@@ -9930,6 +9963,7 @@ type Message_ToolCall_WriteToLongRunningShellCommand struct {
 	state                  protoimpl.MessageState                                `protogen:"opaque.v1"`
 	xxx_hidden_Input       []byte                                                `protobuf:"bytes,1,opt,name=input"`
 	xxx_hidden_Mode        *Message_ToolCall_WriteToLongRunningShellCommand_Mode `protobuf:"bytes,2,opt,name=mode"`
+	xxx_hidden_CommandId   *string                                               `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -9975,16 +10009,31 @@ func (x *Message_ToolCall_WriteToLongRunningShellCommand) GetMode() *Message_Too
 	return nil
 }
 
+func (x *Message_ToolCall_WriteToLongRunningShellCommand) GetCommandId() string {
+	if x != nil {
+		if x.xxx_hidden_CommandId != nil {
+			return *x.xxx_hidden_CommandId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_WriteToLongRunningShellCommand) SetInput(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
 	x.xxx_hidden_Input = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Message_ToolCall_WriteToLongRunningShellCommand) SetMode(v *Message_ToolCall_WriteToLongRunningShellCommand_Mode) {
 	x.xxx_hidden_Mode = v
+}
+
+func (x *Message_ToolCall_WriteToLongRunningShellCommand) SetCommandId(v string) {
+	x.xxx_hidden_CommandId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Message_ToolCall_WriteToLongRunningShellCommand) HasInput() bool {
@@ -10001,6 +10050,13 @@ func (x *Message_ToolCall_WriteToLongRunningShellCommand) HasMode() bool {
 	return x.xxx_hidden_Mode != nil
 }
 
+func (x *Message_ToolCall_WriteToLongRunningShellCommand) HasCommandId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Message_ToolCall_WriteToLongRunningShellCommand) ClearInput() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Input = nil
@@ -10010,6 +10066,11 @@ func (x *Message_ToolCall_WriteToLongRunningShellCommand) ClearMode() {
 	x.xxx_hidden_Mode = nil
 }
 
+func (x *Message_ToolCall_WriteToLongRunningShellCommand) ClearCommandId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_CommandId = nil
+}
+
 type Message_ToolCall_WriteToLongRunningShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -10017,6 +10078,9 @@ type Message_ToolCall_WriteToLongRunningShellCommand_builder struct {
 	Input []byte
 	// The "mode" for the write.
 	Mode *Message_ToolCall_WriteToLongRunningShellCommand_Mode
+	// The 'ID' of the command to write to, taken from the initial
+	// `LongRunningShellCommandSnapshot` for the command.
+	CommandId *string
 }
 
 func (b0 Message_ToolCall_WriteToLongRunningShellCommand_builder) Build() *Message_ToolCall_WriteToLongRunningShellCommand {
@@ -10024,10 +10088,14 @@ func (b0 Message_ToolCall_WriteToLongRunningShellCommand_builder) Build() *Messa
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Input != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Input = b.Input
 	}
 	x.xxx_hidden_Mode = b.Mode
+	if b.CommandId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_CommandId = b.CommandId
+	}
 	return m0
 }
 
@@ -11754,10 +11822,13 @@ func (b0 Message_ToolCall_CreateDocuments_builder) Build() *Message_ToolCall_Cre
 
 // A tool call to read the output of a shell command.
 type Message_ToolCall_ReadShellCommandOutput struct {
-	state            protoimpl.MessageState                          `protogen:"opaque.v1"`
-	xxx_hidden_Delay isMessage_ToolCall_ReadShellCommandOutput_Delay `protobuf_oneof:"delay"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                  protoimpl.MessageState                          `protogen:"opaque.v1"`
+	xxx_hidden_CommandId   *string                                         `protobuf:"bytes,1,opt,name=command_id,json=commandId"`
+	xxx_hidden_Delay       isMessage_ToolCall_ReadShellCommandOutput_Delay `protobuf_oneof:"delay"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_ReadShellCommandOutput) Reset() {
@@ -11785,6 +11856,16 @@ func (x *Message_ToolCall_ReadShellCommandOutput) ProtoReflect() protoreflect.Me
 	return mi.MessageOf(x)
 }
 
+func (x *Message_ToolCall_ReadShellCommandOutput) GetCommandId() string {
+	if x != nil {
+		if x.xxx_hidden_CommandId != nil {
+			return *x.xxx_hidden_CommandId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_ReadShellCommandOutput) GetDuration() *durationpb.Duration {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_Duration); ok {
@@ -11803,6 +11884,11 @@ func (x *Message_ToolCall_ReadShellCommandOutput) GetOnCompletion() *emptypb.Emp
 	return nil
 }
 
+func (x *Message_ToolCall_ReadShellCommandOutput) SetCommandId(v string) {
+	x.xxx_hidden_CommandId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
 func (x *Message_ToolCall_ReadShellCommandOutput) SetDuration(v *durationpb.Duration) {
 	if v == nil {
 		x.xxx_hidden_Delay = nil
@@ -11817,6 +11903,13 @@ func (x *Message_ToolCall_ReadShellCommandOutput) SetOnCompletion(v *emptypb.Emp
 		return
 	}
 	x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_OnCompletion{v}
+}
+
+func (x *Message_ToolCall_ReadShellCommandOutput) HasCommandId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
 func (x *Message_ToolCall_ReadShellCommandOutput) HasDelay() bool {
@@ -11840,6 +11933,11 @@ func (x *Message_ToolCall_ReadShellCommandOutput) HasOnCompletion() bool {
 	}
 	_, ok := x.xxx_hidden_Delay.(*message_ToolCall_ReadShellCommandOutput_OnCompletion)
 	return ok
+}
+
+func (x *Message_ToolCall_ReadShellCommandOutput) ClearCommandId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_CommandId = nil
 }
 
 func (x *Message_ToolCall_ReadShellCommandOutput) ClearDelay() {
@@ -11879,6 +11977,9 @@ func (x *Message_ToolCall_ReadShellCommandOutput) WhichDelay() case_Message_Tool
 type Message_ToolCall_ReadShellCommandOutput_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// The 'ID' of the command to write to, taken from the initial
+	// `LongRunningShellCommandSnapshot` for the command.
+	CommandId *string
 	// Fields of oneof xxx_hidden_Delay:
 	// Return the output after a certain delay.
 	Duration *durationpb.Duration
@@ -11891,6 +11992,10 @@ func (b0 Message_ToolCall_ReadShellCommandOutput_builder) Build() *Message_ToolC
 	m0 := &Message_ToolCall_ReadShellCommandOutput{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.CommandId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_CommandId = b.CommandId
+	}
 	if b.Duration != nil {
 		x.xxx_hidden_Delay = &message_ToolCall_ReadShellCommandOutput_Duration{b.Duration}
 	}
@@ -16128,7 +16233,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xd5Z\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x93[\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16200,7 +16305,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa9)\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xe7)\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -16240,10 +16345,12 @@ const file_task_proto_rawDesc = "" +
 	"\tcitations\x18\x04 \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12\x19\n" +
 	"\bis_risky\x18\x05 \x01(\bR\aisRisky\x120\n" +
 	"\x13wait_until_complete\x18\x06 \x01(\bH\x00R\x11waitUntilCompleteB\x1b\n" +
-	"\x19wait_until_complete_value\x1a\xb0\x02\n" +
+	"\x19wait_until_complete_value\x1a\xcf\x02\n" +
 	"\x1eWriteToLongRunningShellCommand\x12\x14\n" +
 	"\x05input\x18\x01 \x01(\fR\x05input\x12]\n" +
-	"\x04mode\x18\x02 \x01(\v2I.warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.ModeR\x04mode\x1a\x98\x01\n" +
+	"\x04mode\x18\x02 \x01(\v2I.warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.ModeR\x04mode\x12\x1d\n" +
+	"\n" +
+	"command_id\x18\x03 \x01(\tR\tcommandId\x1a\x98\x01\n" +
 	"\x04Mode\x12*\n" +
 	"\x03raw\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x03raw\x12,\n" +
 	"\x04line\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04line\x12.\n" +
@@ -16331,8 +16438,10 @@ const file_task_proto_rawDesc = "" +
 	"\rnew_documents\x18\x01 \x03(\v2A.warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocumentR\fnewDocuments\x1a=\n" +
 	"\vNewDocument\x12\x18\n" +
 	"\acontent\x18\x01 \x01(\tR\acontent\x12\x14\n" +
-	"\x05title\x18\x02 \x01(\tR\x05title\x1a\x99\x01\n" +
-	"\x16ReadShellCommandOutput\x127\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x1a\xb8\x01\n" +
+	"\x16ReadShellCommandOutput\x12\x1d\n" +
+	"\n" +
+	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
 	"\x05delayB\x06\n" +
@@ -16500,10 +16609,12 @@ const file_task_proto_rawDesc = "" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x1a\n" +
 	"\n" +
 	"\bRejectedB\b\n" +
-	"\x06result\"Q\n" +
+	"\x06result\"p\n" +
 	"\x14ShellCommandFinished\x12\x1c\n" +
 	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
-	"\texit_code\x18\x02 \x01(\x05R\bexitCode\"\x9a\x05\n" +
+	"\texit_code\x18\x02 \x01(\x05R\bexitCode\x12\x1d\n" +
+	"\n" +
+	"command_id\x18\x03 \x01(\tR\tcommandId\"\x9a\x05\n" +
 	"\x11CallMCPToolResult\x12J\n" +
 	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.CallMCPToolResult.SuccessH\x00R\asuccess\x12D\n" +
 	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.CallMCPToolResult.ErrorH\x00R\x05error\x1a\xbf\x03\n" +

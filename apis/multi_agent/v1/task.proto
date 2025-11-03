@@ -275,6 +275,10 @@ message Message {
       // The "mode" for the write.
       Mode mode = 2;
 
+      // The 'ID' of the command to write to, taken from the initial
+      // `LongRunningShellCommandSnapshot` for the command.
+      string command_id = 3;
+
       message Mode {
         oneof mode {
             // Write raw bytes directly.
@@ -459,6 +463,10 @@ message Message {
 
     // A tool call to read the output of a shell command.
     message ReadShellCommandOutput {
+      // The 'ID' of the command to write to, taken from the initial
+      // `LongRunningShellCommandSnapshot` for the command.
+      string command_id = 1;
+
       oneof delay {
         // Return the output after a certain delay.
         google.protobuf.Duration duration = 2;
@@ -767,6 +775,7 @@ message SuggestNewConversationResult {
 message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
+  string command_id = 3;
 }
 
 message CallMCPToolResult {
