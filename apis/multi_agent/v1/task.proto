@@ -58,6 +58,7 @@ message Task {
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
   repeated ReviewComment completed_comments = 2;
+  DiffSet diff_set = 3;
 }
 
 message ReviewComment {
@@ -65,8 +66,11 @@ message ReviewComment {
   string id = 1;
 
   string comment = 2 [ (sensitive) = true ];
-  DiffSet diff_set = 3;
-  FileContentLineRange comment_line_range = 4;
+
+  // The exact file location and line content that this comment is associated with.
+  // We need a diff hunk rather than just a starting and ending line number
+  // because the latter cannot uniquely identify a deleted line.
+  DiffHunk commented_line = 3;
 }
 
 // A message within a task
@@ -191,10 +195,12 @@ message Message {
       ToolCallResultSummary tool_call_result_summary = 3;
     }
 
-    // Summarize the overall conversation.
+    // A summary of the overall conversation.
     message ConversationSummary {
       string summary = 1;
       int32 token_count = 2;
+      // Optional user-specified instructions used to focus or augment the summary.
+      string prompt = 3;
     }
 
     // Summarize the result of a tool call.
@@ -247,6 +253,14 @@ message Message {
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
       bool is_risky = 5;
+
+      // Whether or not the harness should wait until the command is complete to report a result.
+      //
+      // This is wrapped in a oneof to preserve field presence, which isn't preserved for scalar
+      // fields in prost-generated rust bindings. If unset, the client should wait until completion.
+      oneof wait_until_complete_value {
+        bool wait_until_complete = 6;
+      }
     }
 
     // A tool call to write bytes to the PTY when a command is running in the foreground.

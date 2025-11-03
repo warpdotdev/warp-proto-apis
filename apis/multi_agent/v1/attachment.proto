@@ -9,6 +9,7 @@ option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
 // Context that may be relevant to the input in a request.
+import "document_content.proto";
 import "options.proto";
 import "file_content.proto";
 
@@ -21,6 +22,7 @@ message Attachment {
     // Deprecated: Represent a hunk as a DiffSet of size 1.
     DiffHunk diff_hunk = 5 [deprecated = true];
     DiffSet diff_set = 6;
+    DocumentContent document_content = 7;
   }
 }
 

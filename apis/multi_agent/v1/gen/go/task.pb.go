@@ -359,6 +359,7 @@ type ReviewComments struct {
 	state                        protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_PendingComments   *[]*ReviewComment      `protobuf:"bytes,1,rep,name=pending_comments,json=pendingComments"`
 	xxx_hidden_CompletedComments *[]*ReviewComment      `protobuf:"bytes,2,rep,name=completed_comments,json=completedComments"`
+	xxx_hidden_DiffSet           *DiffSet               `protobuf:"bytes,3,opt,name=diff_set,json=diffSet"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -406,6 +407,13 @@ func (x *ReviewComments) GetCompletedComments() []*ReviewComment {
 	return nil
 }
 
+func (x *ReviewComments) GetDiffSet() *DiffSet {
+	if x != nil {
+		return x.xxx_hidden_DiffSet
+	}
+	return nil
+}
+
 func (x *ReviewComments) SetPendingComments(v []*ReviewComment) {
 	x.xxx_hidden_PendingComments = &v
 }
@@ -414,11 +422,27 @@ func (x *ReviewComments) SetCompletedComments(v []*ReviewComment) {
 	x.xxx_hidden_CompletedComments = &v
 }
 
+func (x *ReviewComments) SetDiffSet(v *DiffSet) {
+	x.xxx_hidden_DiffSet = v
+}
+
+func (x *ReviewComments) HasDiffSet() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_DiffSet != nil
+}
+
+func (x *ReviewComments) ClearDiffSet() {
+	x.xxx_hidden_DiffSet = nil
+}
+
 type ReviewComments_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	PendingComments   []*ReviewComment
 	CompletedComments []*ReviewComment
+	DiffSet           *DiffSet
 }
 
 func (b0 ReviewComments_builder) Build() *ReviewComments {
@@ -427,19 +451,19 @@ func (b0 ReviewComments_builder) Build() *ReviewComments {
 	_, _ = b, x
 	x.xxx_hidden_PendingComments = &b.PendingComments
 	x.xxx_hidden_CompletedComments = &b.CompletedComments
+	x.xxx_hidden_DiffSet = b.DiffSet
 	return m0
 }
 
 type ReviewComment struct {
-	state                       protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Id               *string                `protobuf:"bytes,1,opt,name=id"`
-	xxx_hidden_Comment          *string                `protobuf:"bytes,2,opt,name=comment"`
-	xxx_hidden_DiffSet          *DiffSet               `protobuf:"bytes,3,opt,name=diff_set,json=diffSet"`
-	xxx_hidden_CommentLineRange *FileContentLineRange  `protobuf:"bytes,4,opt,name=comment_line_range,json=commentLineRange"`
-	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
-	XXX_presence                [1]uint32
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id            *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_Comment       *string                `protobuf:"bytes,2,opt,name=comment"`
+	xxx_hidden_CommentedLine *DiffHunk              `protobuf:"bytes,3,opt,name=commented_line,json=commentedLine"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *ReviewComment) Reset() {
@@ -487,36 +511,25 @@ func (x *ReviewComment) GetComment() string {
 	return ""
 }
 
-func (x *ReviewComment) GetDiffSet() *DiffSet {
+func (x *ReviewComment) GetCommentedLine() *DiffHunk {
 	if x != nil {
-		return x.xxx_hidden_DiffSet
-	}
-	return nil
-}
-
-func (x *ReviewComment) GetCommentLineRange() *FileContentLineRange {
-	if x != nil {
-		return x.xxx_hidden_CommentLineRange
+		return x.xxx_hidden_CommentedLine
 	}
 	return nil
 }
 
 func (x *ReviewComment) SetId(v string) {
 	x.xxx_hidden_Id = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *ReviewComment) SetComment(v string) {
 	x.xxx_hidden_Comment = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *ReviewComment) SetDiffSet(v *DiffSet) {
-	x.xxx_hidden_DiffSet = v
-}
-
-func (x *ReviewComment) SetCommentLineRange(v *FileContentLineRange) {
-	x.xxx_hidden_CommentLineRange = v
+func (x *ReviewComment) SetCommentedLine(v *DiffHunk) {
+	x.xxx_hidden_CommentedLine = v
 }
 
 func (x *ReviewComment) HasId() bool {
@@ -533,18 +546,11 @@ func (x *ReviewComment) HasComment() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ReviewComment) HasDiffSet() bool {
+func (x *ReviewComment) HasCommentedLine() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_DiffSet != nil
-}
-
-func (x *ReviewComment) HasCommentLineRange() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_CommentLineRange != nil
+	return x.xxx_hidden_CommentedLine != nil
 }
 
 func (x *ReviewComment) ClearId() {
@@ -557,22 +563,20 @@ func (x *ReviewComment) ClearComment() {
 	x.xxx_hidden_Comment = nil
 }
 
-func (x *ReviewComment) ClearDiffSet() {
-	x.xxx_hidden_DiffSet = nil
-}
-
-func (x *ReviewComment) ClearCommentLineRange() {
-	x.xxx_hidden_CommentLineRange = nil
+func (x *ReviewComment) ClearCommentedLine() {
+	x.xxx_hidden_CommentedLine = nil
 }
 
 type ReviewComment_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Unique identifier for the review comment.
-	Id               *string
-	Comment          *string
-	DiffSet          *DiffSet
-	CommentLineRange *FileContentLineRange
+	Id      *string
+	Comment *string
+	// The exact file location and line content that this comment is associated with.
+	// We need a diff hunk rather than just a starting and ending line number
+	// because the latter cannot uniquely identify a deleted line.
+	CommentedLine *DiffHunk
 }
 
 func (b0 ReviewComment_builder) Build() *ReviewComment {
@@ -580,15 +584,14 @@ func (b0 ReviewComment_builder) Build() *ReviewComment {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Id != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Id = b.Id
 	}
 	if b.Comment != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Comment = b.Comment
 	}
-	x.xxx_hidden_DiffSet = b.DiffSet
-	x.xxx_hidden_CommentLineRange = b.CommentLineRange
+	x.xxx_hidden_CommentedLine = b.CommentedLine
 	return m0
 }
 
@@ -9336,6 +9339,7 @@ type message_UpdateReviewComments_AddressReviewComments_ struct {
 func (*message_UpdateReviewComments_AddressReviewComments_) isMessage_UpdateReviewComments_Operation() {
 }
 
+<<<<<<< HEAD
 type Message_WebSearch struct {
 	state             protoimpl.MessageState    `protogen:"opaque.v1"`
 	xxx_hidden_Status *Message_WebSearch_Status `protobuf:"bytes,1,opt,name=status"`
@@ -9405,10 +9409,14 @@ func (b0 Message_WebSearch_builder) Build() *Message_WebSearch {
 }
 
 // Summarize the overall conversation.
+=======
+// A summary of the overall conversation.
+>>>>>>> main
 type Message_Summarization_ConversationSummary struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Summary     *string                `protobuf:"bytes,1,opt,name=summary"`
 	xxx_hidden_TokenCount  int32                  `protobuf:"varint,2,opt,name=token_count,json=tokenCount"`
+	xxx_hidden_Prompt      *string                `protobuf:"bytes,3,opt,name=prompt"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -9457,14 +9465,29 @@ func (x *Message_Summarization_ConversationSummary) GetTokenCount() int32 {
 	return 0
 }
 
+func (x *Message_Summarization_ConversationSummary) GetPrompt() string {
+	if x != nil {
+		if x.xxx_hidden_Prompt != nil {
+			return *x.xxx_hidden_Prompt
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_Summarization_ConversationSummary) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Message_Summarization_ConversationSummary) SetTokenCount(v int32) {
 	x.xxx_hidden_TokenCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Message_Summarization_ConversationSummary) SetPrompt(v string) {
+	x.xxx_hidden_Prompt = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Message_Summarization_ConversationSummary) HasSummary() bool {
@@ -9481,6 +9504,13 @@ func (x *Message_Summarization_ConversationSummary) HasTokenCount() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *Message_Summarization_ConversationSummary) HasPrompt() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Message_Summarization_ConversationSummary) ClearSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Summary = nil
@@ -9491,11 +9521,18 @@ func (x *Message_Summarization_ConversationSummary) ClearTokenCount() {
 	x.xxx_hidden_TokenCount = 0
 }
 
+func (x *Message_Summarization_ConversationSummary) ClearPrompt() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Prompt = nil
+}
+
 type Message_Summarization_ConversationSummary_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Summary    *string
 	TokenCount *int32
+	// Optional user-specified instructions used to focus or augment the summary.
+	Prompt *string
 }
 
 func (b0 Message_Summarization_ConversationSummary_builder) Build() *Message_Summarization_ConversationSummary {
@@ -9503,12 +9540,16 @@ func (b0 Message_Summarization_ConversationSummary_builder) Build() *Message_Sum
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	if b.TokenCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_TokenCount = *b.TokenCount
+	}
+	if b.Prompt != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Prompt = b.Prompt
 	}
 	return m0
 }
@@ -9639,16 +9680,17 @@ func (b0 Message_ToolCall_Server_builder) Build() *Message_ToolCall_Server {
 
 // A tool call to run a shell command.
 type Message_ToolCall_RunShellCommand struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
-	xxx_hidden_IsReadOnly  bool                   `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
-	xxx_hidden_UsesPager   bool                   `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
-	xxx_hidden_Citations   *[]*Citation           `protobuf:"bytes,4,rep,name=citations"`
-	xxx_hidden_IsRisky     bool                   `protobuf:"varint,5,opt,name=is_risky,json=isRisky"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                             protoimpl.MessageState                                    `protogen:"opaque.v1"`
+	xxx_hidden_Command                *string                                                   `protobuf:"bytes,1,opt,name=command"`
+	xxx_hidden_IsReadOnly             bool                                                      `protobuf:"varint,2,opt,name=is_read_only,json=isReadOnly"`
+	xxx_hidden_UsesPager              bool                                                      `protobuf:"varint,3,opt,name=uses_pager,json=usesPager"`
+	xxx_hidden_Citations              *[]*Citation                                              `protobuf:"bytes,4,rep,name=citations"`
+	xxx_hidden_IsRisky                bool                                                      `protobuf:"varint,5,opt,name=is_risky,json=isRisky"`
+	xxx_hidden_WaitUntilCompleteValue isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue `protobuf_oneof:"wait_until_complete_value"`
+	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
+	XXX_presence                      [1]uint32
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_RunShellCommand) Reset() {
@@ -9716,19 +9758,28 @@ func (x *Message_ToolCall_RunShellCommand) GetIsRisky() bool {
 	return false
 }
 
+func (x *Message_ToolCall_RunShellCommand) GetWaitUntilComplete() bool {
+	if x != nil {
+		if x, ok := x.xxx_hidden_WaitUntilCompleteValue.(*message_ToolCall_RunShellCommand_WaitUntilComplete); ok {
+			return x.WaitUntilComplete
+		}
+	}
+	return false
+}
+
 func (x *Message_ToolCall_RunShellCommand) SetCommand(v string) {
 	x.xxx_hidden_Command = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetIsReadOnly(v bool) {
 	x.xxx_hidden_IsReadOnly = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetUsesPager(v bool) {
 	x.xxx_hidden_UsesPager = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *Message_ToolCall_RunShellCommand) SetCitations(v []*Citation) {
@@ -9737,7 +9788,11 @@ func (x *Message_ToolCall_RunShellCommand) SetCitations(v []*Citation) {
 
 func (x *Message_ToolCall_RunShellCommand) SetIsRisky(v bool) {
 	x.xxx_hidden_IsRisky = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *Message_ToolCall_RunShellCommand) SetWaitUntilComplete(v bool) {
+	x.xxx_hidden_WaitUntilCompleteValue = &message_ToolCall_RunShellCommand_WaitUntilComplete{v}
 }
 
 func (x *Message_ToolCall_RunShellCommand) HasCommand() bool {
@@ -9768,6 +9823,21 @@ func (x *Message_ToolCall_RunShellCommand) HasIsRisky() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
+func (x *Message_ToolCall_RunShellCommand) HasWaitUntilCompleteValue() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_WaitUntilCompleteValue != nil
+}
+
+func (x *Message_ToolCall_RunShellCommand) HasWaitUntilComplete() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_WaitUntilCompleteValue.(*message_ToolCall_RunShellCommand_WaitUntilComplete)
+	return ok
+}
+
 func (x *Message_ToolCall_RunShellCommand) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Command = nil
@@ -9788,6 +9858,31 @@ func (x *Message_ToolCall_RunShellCommand) ClearIsRisky() {
 	x.xxx_hidden_IsRisky = false
 }
 
+func (x *Message_ToolCall_RunShellCommand) ClearWaitUntilCompleteValue() {
+	x.xxx_hidden_WaitUntilCompleteValue = nil
+}
+
+func (x *Message_ToolCall_RunShellCommand) ClearWaitUntilComplete() {
+	if _, ok := x.xxx_hidden_WaitUntilCompleteValue.(*message_ToolCall_RunShellCommand_WaitUntilComplete); ok {
+		x.xxx_hidden_WaitUntilCompleteValue = nil
+	}
+}
+
+const Message_ToolCall_RunShellCommand_WaitUntilCompleteValue_not_set_case case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue = 0
+const Message_ToolCall_RunShellCommand_WaitUntilComplete_case case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue = 6
+
+func (x *Message_ToolCall_RunShellCommand) WhichWaitUntilCompleteValue() case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue {
+	if x == nil {
+		return Message_ToolCall_RunShellCommand_WaitUntilCompleteValue_not_set_case
+	}
+	switch x.xxx_hidden_WaitUntilCompleteValue.(type) {
+	case *message_ToolCall_RunShellCommand_WaitUntilComplete:
+		return Message_ToolCall_RunShellCommand_WaitUntilComplete_case
+	default:
+		return Message_ToolCall_RunShellCommand_WaitUntilCompleteValue_not_set_case
+	}
+}
+
 type Message_ToolCall_RunShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -9798,6 +9893,14 @@ type Message_ToolCall_RunShellCommand_builder struct {
 	// Whether the agent thinks this command is risky and therefore should be
 	// passed by the user first.
 	IsRisky *bool
+	// Whether or not the harness should wait until the command is complete to report a result.
+	//
+	// This is wrapped in a oneof to preserve field presence, which isn't preserved for scalar
+	// fields in prost-generated rust bindings. If unset, the client should wait until completion.
+
+	// Fields of oneof xxx_hidden_WaitUntilCompleteValue:
+	WaitUntilComplete *bool
+	// -- end of xxx_hidden_WaitUntilCompleteValue
 }
 
 func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_RunShellCommand {
@@ -9805,23 +9908,47 @@ func (b0 Message_ToolCall_RunShellCommand_builder) Build() *Message_ToolCall_Run
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Command != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_Command = b.Command
 	}
 	if b.IsReadOnly != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_IsReadOnly = *b.IsReadOnly
 	}
 	if b.UsesPager != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_UsesPager = *b.UsesPager
 	}
 	x.xxx_hidden_Citations = &b.Citations
 	if b.IsRisky != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_IsRisky = *b.IsRisky
 	}
+	if b.WaitUntilComplete != nil {
+		x.xxx_hidden_WaitUntilCompleteValue = &message_ToolCall_RunShellCommand_WaitUntilComplete{*b.WaitUntilComplete}
+	}
 	return m0
+}
+
+type case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue protoreflect.FieldNumber
+
+func (x case_Message_ToolCall_RunShellCommand_WaitUntilCompleteValue) String() string {
+	md := file_task_proto_msgTypes[48].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue interface {
+	isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue()
+}
+
+type message_ToolCall_RunShellCommand_WaitUntilComplete struct {
+	WaitUntilComplete bool `protobuf:"varint,6,opt,name=wait_until_complete,json=waitUntilComplete,oneof"`
+}
+
+func (*message_ToolCall_RunShellCommand_WaitUntilComplete) isMessage_ToolCall_RunShellCommand_WaitUntilCompleteValue() {
 }
 
 // A tool call to write bytes to the PTY when a command is running in the foreground.
@@ -16517,15 +16644,21 @@ const file_task_proto_rawDesc = "" +
 	"\vserver_data\x18\b \x01(\tR\n" +
 	"serverData\x1aP\n" +
 	"\fDependencies\x12$\n" +
-	"\x0eparent_task_id\x18\x01 \x01(\tR\fparentTaskIdJ\x04\b\x02\x10\x03R\x14sibling_dependenciesJ\x04\b\x04\x10\x05R\x06status\"\xb2\x01\n" +
+	"\x0eparent_task_id\x18\x01 \x01(\tR\fparentTaskIdJ\x04\b\x02\x10\x03R\x14sibling_dependenciesJ\x04\b\x04\x10\x05R\x06status\"\xeb\x01\n" +
 	"\x0eReviewComments\x12M\n" +
 	"\x10pending_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0fpendingComments\x12Q\n" +
-	"\x12completed_comments\x18\x02 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x11completedComments\"\xd1\x01\n" +
+	"\x12completed_comments\x18\x02 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x11completedComments\x127\n" +
+	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\"\x85\x01\n" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
+<<<<<<< HEAD
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x127\n" +
 	"\bdiff_set\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSet\x12W\n" +
 	"\x12comment_line_range\x18\x04 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x10commentLineRange\"\xdb]\n" +
+=======
+	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xcfY\n" +
+>>>>>>> main
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16583,20 +16716,21 @@ const file_task_proto_rawDesc = "" +
 	"\x04text\x18\x01 \x01(\tR\x04textJ\x04\b\x02\x10\x03R\treasoning\x1av\n" +
 	"\x0eAgentReasoning\x12\x1c\n" +
 	"\treasoning\x18\x01 \x01(\tR\treasoning\x12F\n" +
-	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x1a\xc4\x03\n" +
+	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x1a\xdc\x03\n" +
 	"\rSummarization\x12F\n" +
 	"\x11finished_duration\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\x10finishedDuration\x12s\n" +
 	"\x14conversation_summary\x18\x01 \x01(\v2>.warp.multi_agent.v1.Message.Summarization.ConversationSummaryH\x00R\x13conversationSummary\x12{\n" +
-	"\x18tool_call_result_summary\x18\x03 \x01(\v2@.warp.multi_agent.v1.Message.Summarization.ToolCallResultSummaryH\x00R\x15toolCallResultSummary\x1aP\n" +
+	"\x18tool_call_result_summary\x18\x03 \x01(\v2@.warp.multi_agent.v1.Message.Summarization.ToolCallResultSummaryH\x00R\x15toolCallResultSummary\x1ah\n" +
 	"\x13ConversationSummary\x12\x18\n" +
 	"\asummary\x18\x01 \x01(\tR\asummary\x12\x1f\n" +
 	"\vtoken_count\x18\x02 \x01(\x05R\n" +
-	"tokenCount\x1a\x17\n" +
+	"tokenCount\x12\x16\n" +
+	"\x06prompt\x18\x03 \x01(\tR\x06prompt\x1a\x17\n" +
 	"\x15ToolCallResultSummaryB\x0e\n" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xda(\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa9)\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -16626,7 +16760,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12y\n" +
 	"\x19read_shell_command_output\x18\x17 \x01(\v2<.warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutputH\x00R\x16readShellCommandOutput\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xc4\x01\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\x93\x02\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
 	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
 	"\fis_read_only\x18\x02 \x01(\bR\n" +
@@ -16634,7 +16768,9 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"uses_pager\x18\x03 \x01(\bR\tusesPager\x12;\n" +
 	"\tcitations\x18\x04 \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12\x19\n" +
-	"\bis_risky\x18\x05 \x01(\bR\aisRisky\x1a\xb0\x02\n" +
+	"\bis_risky\x18\x05 \x01(\bR\aisRisky\x120\n" +
+	"\x13wait_until_complete\x18\x06 \x01(\bH\x00R\x11waitUntilCompleteB\x1b\n" +
+	"\x19wait_until_complete_value\x1a\xb0\x02\n" +
 	"\x1eWriteToLongRunningShellCommand\x12\x14\n" +
 	"\x05input\x18\x01 \x01(\fR\x05input\x12]\n" +
 	"\x04mode\x18\x02 \x01(\v2I.warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.ModeR\x04mode\x1a\x98\x01\n" +
@@ -17042,6 +17178,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_ServerEvent)(nil),                                  // 42: warp.multi_agent.v1.Message.ServerEvent
 	(*Message_UpdateTodos)(nil),                                  // 43: warp.multi_agent.v1.Message.UpdateTodos
 	(*Message_UpdateReviewComments)(nil),                         // 44: warp.multi_agent.v1.Message.UpdateReviewComments
+<<<<<<< HEAD
 	(*Message_WebSearch)(nil),                                    // 45: warp.multi_agent.v1.Message.WebSearch
 	nil,                                                          // 46: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	(*Message_Summarization_ConversationSummary)(nil),            // 47: warp.multi_agent.v1.Message.Summarization.ConversationSummary
@@ -17135,16 +17272,114 @@ var file_task_proto_goTypes = []any{
 	(*FileContent)(nil),                                          // 135: warp.multi_agent.v1.FileContent
 	(*AnyFileContent)(nil),                                       // 136: warp.multi_agent.v1.AnyFileContent
 	(*DocumentContent)(nil),                                      // 137: warp.multi_agent.v1.DocumentContent
+=======
+	nil,                                                          // 45: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
+	(*Message_Summarization_ConversationSummary)(nil),            // 46: warp.multi_agent.v1.Message.Summarization.ConversationSummary
+	(*Message_Summarization_ToolCallResultSummary)(nil),          // 47: warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
+	(*Message_ToolCall_Server)(nil),                              // 48: warp.multi_agent.v1.Message.ToolCall.Server
+	(*Message_ToolCall_RunShellCommand)(nil),                     // 49: warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	(*Message_ToolCall_WriteToLongRunningShellCommand)(nil),      // 50: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
+	(*Message_ToolCall_SuggestNewConversation)(nil),              // 51: warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
+	(*Message_ToolCall_ReadFiles)(nil),                           // 52: warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	(*Message_ToolCall_SearchCodebase)(nil),                      // 53: warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	(*Message_ToolCall_ApplyFileDiffs)(nil),                      // 54: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	(*Message_ToolCall_SuggestPlan)(nil),                         // 55: warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	(*Message_ToolCall_SuggestCreatePlan)(nil),                   // 56: warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	(*Message_ToolCall_Grep)(nil),                                // 57: warp.multi_agent.v1.Message.ToolCall.Grep
+	(*Message_ToolCall_FileGlob)(nil),                            // 58: warp.multi_agent.v1.Message.ToolCall.FileGlob
+	(*Message_ToolCall_FileGlobV2)(nil),                          // 59: warp.multi_agent.v1.Message.ToolCall.FileGlobV2
+	(*Message_ToolCall_ReadMCPResource)(nil),                     // 60: warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	(*Message_ToolCall_CallMCPTool)(nil),                         // 61: warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	(*Message_ToolCall_SuggestPrompt)(nil),                       // 62: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
+	(*Message_ToolCall_OpenCodeReview)(nil),                      // 63: warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
+	(*Message_ToolCall_InitProject)(nil),                         // 64: warp.multi_agent.v1.Message.ToolCall.InitProject
+	(*Message_ToolCall_Subagent)(nil),                            // 65: warp.multi_agent.v1.Message.ToolCall.Subagent
+	(*Message_ToolCall_ReadDocuments)(nil),                       // 66: warp.multi_agent.v1.Message.ToolCall.ReadDocuments
+	(*Message_ToolCall_EditDocuments)(nil),                       // 67: warp.multi_agent.v1.Message.ToolCall.EditDocuments
+	(*Message_ToolCall_CreateDocuments)(nil),                     // 68: warp.multi_agent.v1.Message.ToolCall.CreateDocuments
+	(*Message_ToolCall_ReadShellCommandOutput)(nil),              // 69: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput
+	(*Message_ToolCall_WriteToLongRunningShellCommand_Mode)(nil), // 70: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
+	(*Message_ToolCall_ReadFiles_File)(nil),                      // 71: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil),             // 72: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	(*Message_ToolCall_ApplyFileDiffs_NewFile)(nil),              // 73: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	(*Message_ToolCall_SuggestPrompt_InlineQueryBanner)(nil),     // 74: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
+	(*Message_ToolCall_ReadDocuments_Document)(nil),              // 75: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
+	(*Message_ToolCall_EditDocuments_DocumentDiff)(nil),          // 76: warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
+	(*Message_ToolCall_CreateDocuments_NewDocument)(nil),         // 77: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
+	(*Message_ToolCallResult_ServerResult)(nil),                  // 78: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	(*Message_ToolCallResult_RefineResult)(nil),                  // 79: warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	(*Message_ToolCallResult_SubagentResult)(nil),                // 80: warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
+	(*Message_UpdateReviewComments_AddressReviewComments)(nil),   // 81: warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
+	(*ReadFilesResult_TextFilesSuccess)(nil),                     // 82: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
+	(*ReadFilesResult_AnyFilesSuccess)(nil),                      // 83: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
+	(*ReadFilesResult_Error)(nil),                                // 84: warp.multi_agent.v1.ReadFilesResult.Error
+	(*SearchCodebaseResult_Success)(nil),                         // 85: warp.multi_agent.v1.SearchCodebaseResult.Success
+	(*SearchCodebaseResult_Error)(nil),                           // 86: warp.multi_agent.v1.SearchCodebaseResult.Error
+	(*ApplyFileDiffsResult_Success)(nil),                         // 87: warp.multi_agent.v1.ApplyFileDiffsResult.Success
+	(*ApplyFileDiffsResult_Error)(nil),                           // 88: warp.multi_agent.v1.ApplyFileDiffsResult.Error
+	(*ApplyFileDiffsResult_Success_UpdatedFileContent)(nil),      // 89: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	(*SuggestPlanResult_UserEditedPlan)(nil),                     // 90: warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	(*GrepResult_Success)(nil),                                   // 91: warp.multi_agent.v1.GrepResult.Success
+	(*GrepResult_Error)(nil),                                     // 92: warp.multi_agent.v1.GrepResult.Error
+	(*GrepResult_Success_GrepFileMatch)(nil),                     // 93: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	(*GrepResult_Success_GrepFileMatch_GrepLineMatch)(nil),       // 94: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	(*FileGlobResult_Success)(nil),                               // 95: warp.multi_agent.v1.FileGlobResult.Success
+	(*FileGlobResult_Error)(nil),                                 // 96: warp.multi_agent.v1.FileGlobResult.Error
+	(*FileGlobV2Result_Success)(nil),                             // 97: warp.multi_agent.v1.FileGlobV2Result.Success
+	(*FileGlobV2Result_Error)(nil),                               // 98: warp.multi_agent.v1.FileGlobV2Result.Error
+	(*FileGlobV2Result_Success_FileGlobMatch)(nil),               // 99: warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	(*MCPResourceContent_Text)(nil),                              // 100: warp.multi_agent.v1.MCPResourceContent.Text
+	(*MCPResourceContent_Binary)(nil),                            // 101: warp.multi_agent.v1.MCPResourceContent.Binary
+	(*ReadMCPResourceResult_Success)(nil),                        // 102: warp.multi_agent.v1.ReadMCPResourceResult.Success
+	(*ReadMCPResourceResult_Error)(nil),                          // 103: warp.multi_agent.v1.ReadMCPResourceResult.Error
+	(*SuggestNewConversationResult_Accepted)(nil),                // 104: warp.multi_agent.v1.SuggestNewConversationResult.Accepted
+	(*SuggestNewConversationResult_Rejected)(nil),                // 105: warp.multi_agent.v1.SuggestNewConversationResult.Rejected
+	(*CallMCPToolResult_Success)(nil),                            // 106: warp.multi_agent.v1.CallMCPToolResult.Success
+	(*CallMCPToolResult_Error)(nil),                              // 107: warp.multi_agent.v1.CallMCPToolResult.Error
+	(*CallMCPToolResult_Success_Result)(nil),                     // 108: warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	(*CallMCPToolResult_Success_Result_Text)(nil),                // 109: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	(*CallMCPToolResult_Success_Result_Image)(nil),               // 110: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	(*ReadDocumentsResult_Success)(nil),                          // 111: warp.multi_agent.v1.ReadDocumentsResult.Success
+	(*ReadDocumentsResult_Error)(nil),                            // 112: warp.multi_agent.v1.ReadDocumentsResult.Error
+	(*EditDocumentsResult_Success)(nil),                          // 113: warp.multi_agent.v1.EditDocumentsResult.Success
+	(*EditDocumentsResult_Error)(nil),                            // 114: warp.multi_agent.v1.EditDocumentsResult.Error
+	(*CreateDocumentsResult_Success)(nil),                        // 115: warp.multi_agent.v1.CreateDocumentsResult.Success
+	(*CreateDocumentsResult_Error)(nil),                          // 116: warp.multi_agent.v1.CreateDocumentsResult.Error
+	(*DiffSet)(nil),                                              // 117: warp.multi_agent.v1.DiffSet
+	(*DiffHunk)(nil),                                             // 118: warp.multi_agent.v1.DiffHunk
+	(*timestamppb.Timestamp)(nil),                                // 119: google.protobuf.Timestamp
+	(*Citation)(nil),                                             // 120: warp.multi_agent.v1.Citation
+	(*LongRunningShellCommandSnapshot)(nil),                      // 121: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*emptypb.Empty)(nil),                                        // 122: google.protobuf.Empty
+	(*InputContext)(nil),                                         // 123: warp.multi_agent.v1.InputContext
+	(*Attachment)(nil),                                           // 124: warp.multi_agent.v1.Attachment
+	(*durationpb.Duration)(nil),                                  // 125: google.protobuf.Duration
+	(*CreateTodoList)(nil),                                       // 126: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil),                                   // 127: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil),                                   // 128: warp.multi_agent.v1.MarkTodosCompleted
+	(*structpb.Struct)(nil),                                      // 129: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                                 // 130: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                          // 131: warp.multi_agent.v1.FileContent
+	(*AnyFileContent)(nil),                                       // 132: warp.multi_agent.v1.AnyFileContent
+	(*DocumentContent)(nil),                                      // 133: warp.multi_agent.v1.DocumentContent
+>>>>>>> main
 }
 var file_task_proto_depIdxs = []int32{
 	28,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
 	4,   // 1: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
 	3,   // 2: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	3,   // 3: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
+<<<<<<< HEAD
 	122, // 4: warp.multi_agent.v1.ReviewComment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
 	123, // 5: warp.multi_agent.v1.ReviewComment.comment_line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
 	124, // 6: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
 	125, // 7: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+=======
+	117, // 4: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	118, // 5: warp.multi_agent.v1.ReviewComment.commented_line:type_name -> warp.multi_agent.v1.DiffHunk
+	119, // 6: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
+	120, // 7: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+>>>>>>> main
 	29,  // 8: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	36,  // 9: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
 	40,  // 10: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
@@ -17156,6 +17391,7 @@ var file_task_proto_depIdxs = []int32{
 	38,  // 16: warp.multi_agent.v1.Message.summarization:type_name -> warp.multi_agent.v1.Message.Summarization
 	39,  // 17: warp.multi_agent.v1.Message.code_review:type_name -> warp.multi_agent.v1.Message.CodeReview
 	44,  // 18: warp.multi_agent.v1.Message.update_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments
+<<<<<<< HEAD
 	45,  // 19: warp.multi_agent.v1.Message.web_search:type_name -> warp.multi_agent.v1.Message.WebSearch
 	126, // 20: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	18,  // 21: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
@@ -17312,6 +17548,158 @@ var file_task_proto_depIdxs = []int32{
 	170, // [170:170] is the sub-list for extension type_name
 	170, // [170:170] is the sub-list for extension extendee
 	0,   // [0:170] is the sub-list for field type_name
+=======
+	121, // 19: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	18,  // 20: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
+	82,  // 21: warp.multi_agent.v1.ReadFilesResult.text_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
+	83,  // 22: warp.multi_agent.v1.ReadFilesResult.any_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
+	84,  // 23: warp.multi_agent.v1.ReadFilesResult.error:type_name -> warp.multi_agent.v1.ReadFilesResult.Error
+	85,  // 24: warp.multi_agent.v1.SearchCodebaseResult.success:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Success
+	86,  // 25: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
+	87,  // 26: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
+	88,  // 27: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
+	122, // 28: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	90,  // 29: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	91,  // 30: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
+	92,  // 31: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
+	95,  // 32: warp.multi_agent.v1.FileGlobResult.success:type_name -> warp.multi_agent.v1.FileGlobResult.Success
+	96,  // 33: warp.multi_agent.v1.FileGlobResult.error:type_name -> warp.multi_agent.v1.FileGlobResult.Error
+	97,  // 34: warp.multi_agent.v1.FileGlobV2Result.success:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success
+	98,  // 35: warp.multi_agent.v1.FileGlobV2Result.error:type_name -> warp.multi_agent.v1.FileGlobV2Result.Error
+	100, // 36: warp.multi_agent.v1.MCPResourceContent.text:type_name -> warp.multi_agent.v1.MCPResourceContent.Text
+	101, // 37: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
+	102, // 38: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
+	103, // 39: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
+	121, // 40: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	18,  // 41: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
+	104, // 42: warp.multi_agent.v1.SuggestNewConversationResult.accepted:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Accepted
+	105, // 43: warp.multi_agent.v1.SuggestNewConversationResult.rejected:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Rejected
+	106, // 44: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
+	107, // 45: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
+	122, // 46: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
+	122, // 47: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
+	111, // 48: warp.multi_agent.v1.ReadDocumentsResult.success:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Success
+	112, // 49: warp.multi_agent.v1.ReadDocumentsResult.error:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Error
+	113, // 50: warp.multi_agent.v1.EditDocumentsResult.success:type_name -> warp.multi_agent.v1.EditDocumentsResult.Success
+	114, // 51: warp.multi_agent.v1.EditDocumentsResult.error:type_name -> warp.multi_agent.v1.EditDocumentsResult.Error
+	115, // 52: warp.multi_agent.v1.CreateDocumentsResult.success:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Success
+	116, // 53: warp.multi_agent.v1.CreateDocumentsResult.error:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Error
+	121, // 54: warp.multi_agent.v1.ReadShellCommandOutputResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	18,  // 55: warp.multi_agent.v1.ReadShellCommandOutputResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
+	122, // 56: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
+	123, // 57: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	45,  // 58: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
+	27,  // 59: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
+	31,  // 60: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
+	32,  // 61: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
+	33,  // 62: warp.multi_agent.v1.Message.SystemQuery.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Message.TriggerSuggestPrompt
+	34,  // 63: warp.multi_agent.v1.Message.SystemQuery.create_new_project:type_name -> warp.multi_agent.v1.Message.CreateNewProject
+	35,  // 64: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
+	123, // 65: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	124, // 66: warp.multi_agent.v1.Message.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	122, // 67: warp.multi_agent.v1.Message.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	122, // 68: warp.multi_agent.v1.Message.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	125, // 69: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
+	125, // 70: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
+	46,  // 71: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
+	47,  // 72: warp.multi_agent.v1.Message.Summarization.tool_call_result_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
+	2,   // 73: warp.multi_agent.v1.Message.CodeReview.comments:type_name -> warp.multi_agent.v1.ReviewComments
+	49,  // 74: warp.multi_agent.v1.Message.ToolCall.run_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	53,  // 75: warp.multi_agent.v1.Message.ToolCall.search_codebase:type_name -> warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	48,  // 76: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
+	52,  // 77: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	54,  // 78: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	55,  // 79: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	56,  // 80: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	57,  // 81: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
+	58,  // 82: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
+	60,  // 83: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	61,  // 84: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	50,  // 85: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
+	51,  // 86: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
+	59,  // 87: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
+	62,  // 88: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
+	63,  // 89: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
+	64,  // 90: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
+	65,  // 91: warp.multi_agent.v1.Message.ToolCall.subagent:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent
+	66,  // 92: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
+	67,  // 93: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
+	68,  // 94: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
+	69,  // 95: warp.multi_agent.v1.Message.ToolCall.read_shell_command_output:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput
+	123, // 96: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	5,   // 97: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
+	7,   // 98: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
+	78,  // 99: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	6,   // 100: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
+	8,   // 101: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
+	10,  // 102: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	9,   // 103: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
+	11,  // 104: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	12,  // 105: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	79,  // 106: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	122, // 107: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	15,  // 108: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	19,  // 109: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	16,  // 110: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	17,  // 111: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
+	13,  // 112: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
+	20,  // 113: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
+	21,  // 114: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
+	22,  // 115: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
+	80,  // 116: warp.multi_agent.v1.Message.ToolCallResult.subagent:type_name -> warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
+	23,  // 117: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
+	24,  // 118: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
+	25,  // 119: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
+	26,  // 120: warp.multi_agent.v1.Message.ToolCallResult.read_shell_command_output:type_name -> warp.multi_agent.v1.ReadShellCommandOutputResult
+	126, // 121: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
+	127, // 122: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
+	128, // 123: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
+	81,  // 124: warp.multi_agent.v1.Message.UpdateReviewComments.address_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
+	124, // 125: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	120, // 126: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	70,  // 127: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
+	71,  // 128: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	72,  // 129: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	73,  // 130: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	1,   // 131: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	129, // 132: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	74,  // 133: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
+	122, // 134: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> google.protobuf.Empty
+	122, // 135: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
+	75,  // 136: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
+	76,  // 137: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
+	77,  // 138: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
+	125, // 139: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
+	122, // 140: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
+	122, // 141: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
+	122, // 142: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
+	122, // 143: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
+	130, // 144: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	130, // 145: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	29,  // 146: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	131, // 147: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	132, // 148: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	131, // 149: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	131, // 150: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	89,  // 151: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	131, // 152: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	93,  // 153: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	94,  // 154: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	99,  // 155: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	14,  // 156: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	108, // 157: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	109, // 158: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	110, // 159: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	14,  // 160: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	133, // 161: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	133, // 162: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	133, // 163: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	164, // [164:164] is the sub-list for method output_type
+	164, // [164:164] is the sub-list for method input_type
+	164, // [164:164] is the sub-list for extension type_name
+	164, // [164:164] is the sub-list for extension extendee
+	0,   // [0:164] is the sub-list for field type_name
+>>>>>>> main
 }
 
 func init() { file_task_proto_init() }
@@ -17489,7 +17877,14 @@ func file_task_proto_init() {
 	file_task_proto_msgTypes[43].OneofWrappers = []any{
 		(*message_UpdateReviewComments_AddressReviewComments_)(nil),
 	}
+<<<<<<< HEAD
 	file_task_proto_msgTypes[62].OneofWrappers = []any{
+=======
+	file_task_proto_msgTypes[48].OneofWrappers = []any{
+		(*message_ToolCall_RunShellCommand_WaitUntilComplete)(nil),
+	}
+	file_task_proto_msgTypes[61].OneofWrappers = []any{
+>>>>>>> main
 		(*message_ToolCall_SuggestPrompt_InlineQueryBanner_)(nil),
 	}
 	file_task_proto_msgTypes[65].OneofWrappers = []any{

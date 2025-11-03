@@ -181,11 +181,15 @@ message Request {
 
       message InitialReviewComments {
         repeated ReviewComment review_comments = 1;
+        DiffSet diff_set = 2;
       }
     }
 
     // An input to summarize the active conversation.
-    message SummarizeConversation {}
+    message SummarizeConversation {
+      // Optional user-specified instructions to focus or augment the summary.
+      string prompt = 1;
+    }
   }
 
   message Metadata {
@@ -271,6 +275,9 @@ message Request {
     // If provided, these keys will be used instead of Warp's default keys.
     ApiKeys api_keys = 18;
 
+    AutonomyLevel autonomy_level = 19;
+    IsolationLevel isolation_level = 20;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
@@ -332,4 +339,19 @@ message Request {
       repeated MCPTool tools = 4;
     }
   }
+}
+
+enum AutonomyLevel {
+  // This is the default and lowest level of autonomy. This assumes a user is
+  // present to answer clarifying questions, approve requested commands, etc.
+  SUPERVISED = 0;
+  // No user is available to answer questions.
+  UNSUPERVISED = 1;
+}
+
+enum IsolationLevel {
+  // i.e. on a user's machine with no isolation from their environment.
+  NONE = 0;
+  // Fully sandboxed.
+  SANDBOX = 1;
 }

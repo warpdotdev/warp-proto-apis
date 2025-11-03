@@ -109,6 +109,15 @@ func (x *Attachment) GetDiffSet() *DiffSet {
 	return nil
 }
 
+func (x *Attachment) GetDocumentContent() *DocumentContent {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Value.(*attachment_DocumentContent); ok {
+			return x.DocumentContent
+		}
+	}
+	return nil
+}
+
 func (x *Attachment) SetPlainText(v string) {
 	x.xxx_hidden_Value = &attachment_PlainText{v}
 }
@@ -152,6 +161,14 @@ func (x *Attachment) SetDiffSet(v *DiffSet) {
 		return
 	}
 	x.xxx_hidden_Value = &attachment_DiffSet{v}
+}
+
+func (x *Attachment) SetDocumentContent(v *DocumentContent) {
+	if v == nil {
+		x.xxx_hidden_Value = nil
+		return
+	}
+	x.xxx_hidden_Value = &attachment_DocumentContent{v}
 }
 
 func (x *Attachment) HasValue() bool {
@@ -210,6 +227,14 @@ func (x *Attachment) HasDiffSet() bool {
 	return ok
 }
 
+func (x *Attachment) HasDocumentContent() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Value.(*attachment_DocumentContent)
+	return ok
+}
+
 func (x *Attachment) ClearValue() {
 	x.xxx_hidden_Value = nil
 }
@@ -251,6 +276,12 @@ func (x *Attachment) ClearDiffSet() {
 	}
 }
 
+func (x *Attachment) ClearDocumentContent() {
+	if _, ok := x.xxx_hidden_Value.(*attachment_DocumentContent); ok {
+		x.xxx_hidden_Value = nil
+	}
+}
+
 const Attachment_Value_not_set_case case_Attachment_Value = 0
 const Attachment_PlainText_case case_Attachment_Value = 1
 const Attachment_ExecutedShellCommand_case case_Attachment_Value = 2
@@ -258,6 +289,7 @@ const Attachment_RunningShellCommand_case case_Attachment_Value = 3
 const Attachment_DriveObject_case case_Attachment_Value = 4
 const Attachment_DiffHunk_case case_Attachment_Value = 5
 const Attachment_DiffSet_case case_Attachment_Value = 6
+const Attachment_DocumentContent_case case_Attachment_Value = 7
 
 func (x *Attachment) WhichValue() case_Attachment_Value {
 	if x == nil {
@@ -276,6 +308,8 @@ func (x *Attachment) WhichValue() case_Attachment_Value {
 		return Attachment_DiffHunk_case
 	case *attachment_DiffSet:
 		return Attachment_DiffSet_case
+	case *attachment_DocumentContent:
+		return Attachment_DocumentContent_case
 	default:
 		return Attachment_Value_not_set_case
 	}
@@ -292,8 +326,9 @@ type Attachment_builder struct {
 	// Deprecated: Represent a hunk as a DiffSet of size 1.
 	//
 	// Deprecated: Marked as deprecated in attachment.proto.
-	DiffHunk *DiffHunk
-	DiffSet  *DiffSet
+	DiffHunk        *DiffHunk
+	DiffSet         *DiffSet
+	DocumentContent *DocumentContent
 	// -- end of xxx_hidden_Value
 }
 
@@ -318,6 +353,9 @@ func (b0 Attachment_builder) Build() *Attachment {
 	}
 	if b.DiffSet != nil {
 		x.xxx_hidden_Value = &attachment_DiffSet{b.DiffSet}
+	}
+	if b.DocumentContent != nil {
+		x.xxx_hidden_Value = &attachment_DocumentContent{b.DocumentContent}
 	}
 	return m0
 }
@@ -363,6 +401,10 @@ type attachment_DiffSet struct {
 	DiffSet *DiffSet `protobuf:"bytes,6,opt,name=diff_set,json=diffSet,oneof"`
 }
 
+type attachment_DocumentContent struct {
+	DocumentContent *DocumentContent `protobuf:"bytes,7,opt,name=document_content,json=documentContent,oneof"`
+}
+
 func (*attachment_PlainText) isAttachment_Value() {}
 
 func (*attachment_ExecutedShellCommand) isAttachment_Value() {}
@@ -374,6 +416,8 @@ func (*attachment_DriveObject) isAttachment_Value() {}
 func (*attachment_DiffHunk) isAttachment_Value() {}
 
 func (*attachment_DiffSet) isAttachment_Value() {}
+
+func (*attachment_DocumentContent) isAttachment_Value() {}
 
 // Information about shell commands that the user has executed.
 type ExecutedShellCommand struct {
@@ -2513,7 +2557,7 @@ var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xc3\x03\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\x96\x04\n" +
 	"\n" +
 	"Attachment\x12%\n" +
 	"\n" +
@@ -2522,7 +2566,8 @@ const file_attachment_proto_rawDesc = "" +
 	"\x15running_shell_command\x18\x03 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandH\x00R\x13runningShellCommand\x12E\n" +
 	"\fdrive_object\x18\x04 \x01(\v2 .warp.multi_agent.v1.DriveObjectH\x00R\vdriveObject\x12@\n" +
 	"\tdiff_hunk\x18\x05 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkB\x02\x18\x01H\x00R\bdiffHunk\x129\n" +
-	"\bdiff_set\x18\x06 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetH\x00R\adiffSetB\a\n" +
+	"\bdiff_set\x18\x06 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetH\x00R\adiffSet\x12Q\n" +
+	"\x10document_content\x18\a \x01(\v2$.warp.multi_agent.v1.DocumentContentH\x00R\x0fdocumentContentB\a\n" +
 	"\x05value\"q\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
@@ -2607,8 +2652,9 @@ var file_attachment_proto_goTypes = []any{
 	(*DiffSet_DiffHunk)(nil),                // 10: warp.multi_agent.v1.DiffSet.DiffHunk
 	(*DiffSet_CurrentRef)(nil),              // 11: warp.multi_agent.v1.DiffSet.CurrentRef
 	(*DiffSet_BaseRef)(nil),                 // 12: warp.multi_agent.v1.DiffSet.BaseRef
-	(*FileContentLineRange)(nil),            // 13: warp.multi_agent.v1.FileContentLineRange
-	(*emptypb.Empty)(nil),                   // 14: google.protobuf.Empty
+	(*DocumentContent)(nil),                 // 13: warp.multi_agent.v1.DocumentContent
+	(*FileContentLineRange)(nil),            // 14: warp.multi_agent.v1.FileContentLineRange
+	(*emptypb.Empty)(nil),                   // 15: google.protobuf.Empty
 }
 var file_attachment_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
@@ -2616,22 +2662,23 @@ var file_attachment_proto_depIdxs = []int32{
 	4,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
 	8,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
 	9,  // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	3,  // 5: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	5,  // 6: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
-	6,  // 7: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
-	7,  // 8: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
-	13, // 9: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	14, // 10: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
-	10, // 11: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
-	11, // 12: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.DiffSet.CurrentRef
-	12, // 13: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.DiffSet.BaseRef
-	13, // 14: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	14, // 15: warp.multi_agent.v1.DiffSet.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	13, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
+	3,  // 6: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	5,  // 7: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
+	6,  // 8: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
+	7,  // 9: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
+	14, // 10: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	15, // 11: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
+	10, // 12: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
+	11, // 13: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.DiffSet.CurrentRef
+	12, // 14: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.DiffSet.BaseRef
+	14, // 15: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	15, // 16: warp.multi_agent.v1.DiffSet.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -2639,6 +2686,7 @@ func file_attachment_proto_init() {
 	if File_attachment_proto != nil {
 		return
 	}
+	file_document_content_proto_init()
 	file_options_proto_init()
 	file_file_content_proto_init()
 	file_attachment_proto_msgTypes[0].OneofWrappers = []any{
@@ -2648,6 +2696,7 @@ func file_attachment_proto_init() {
 		(*attachment_DriveObject)(nil),
 		(*attachment_DiffHunk)(nil),
 		(*attachment_DiffSet)(nil),
+		(*attachment_DocumentContent)(nil),
 	}
 	file_attachment_proto_msgTypes[4].OneofWrappers = []any{
 		(*driveObject_Workflow)(nil),
