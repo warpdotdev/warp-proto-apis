@@ -135,6 +135,7 @@ message Message {
       TriggerSuggestPrompt trigger_suggest_prompt = 4;
       CreateNewProject create_new_project = 5;
       CloneRepository clone_repository = 6;
+      SummarizeConversation summarize_conversation = 7;
     }
 
     InputContext context = 2;
@@ -161,6 +162,12 @@ message Message {
 
   message CloneRepository {
     string url = 1 [ (sensitive) = true ];
+  }
+
+  // A user-requested summarization.
+  message SummarizeConversation {
+    // Optional user-specified instructions to focus or augment the summary.
+    string prompt = 1;
   }
 
   // Agent output message type
@@ -198,8 +205,6 @@ message Message {
     message ConversationSummary {
       string summary = 1;
       int32 token_count = 2;
-      // Optional user-specified instructions used to focus or augment the summary.
-      string prompt = 3;
     }
 
     // Summarize the result of a tool call.
