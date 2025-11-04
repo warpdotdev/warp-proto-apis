@@ -167,7 +167,7 @@ message Message {
   // A user-requested summarization.
   message SummarizeConversation {
     // Optional user-specified instructions to focus or augment the summary.
-    string prompt = 1;
+    string prompt = 1 [ (sensitive) = true ];
   }
 
   // Agent output message type
