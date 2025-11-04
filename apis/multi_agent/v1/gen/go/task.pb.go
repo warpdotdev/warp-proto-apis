@@ -7948,6 +7948,7 @@ func (x *Message_ToolCallResult) GetFileGlob() *FileGlobResult {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) GetRefine() *Message_ToolCallResult_RefineResult {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine); ok {
@@ -8165,6 +8166,7 @@ func (x *Message_ToolCallResult) SetFileGlob(v *FileGlobResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_FileGlob{v}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) SetRefine(v *Message_ToolCallResult_RefineResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
@@ -8379,6 +8381,7 @@ func (x *Message_ToolCallResult) HasFileGlob() bool {
 	return ok
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) HasRefine() bool {
 	if x == nil {
 		return false
@@ -8567,6 +8570,7 @@ func (x *Message_ToolCallResult) ClearFileGlob() {
 	}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCallResult) ClearRefine() {
 	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine); ok {
 		x.xxx_hidden_Result = nil
@@ -8761,7 +8765,10 @@ type Message_ToolCallResult_builder struct {
 	// DEPRECATED: Being replaced by FileGlobV2Result.
 	//
 	// Deprecated: Marked as deprecated in task.proto.
-	FileGlob                       *FileGlobResult
+	FileGlob *FileGlobResult
+	// DEPRECATED: No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	Refine                         *Message_ToolCallResult_RefineResult
 	Cancel                         *emptypb.Empty
 	ReadMcpResource                *ReadMCPResourceResult
@@ -8918,6 +8925,9 @@ type message_ToolCallResult_FileGlob struct {
 }
 
 type message_ToolCallResult_Refine struct {
+	// DEPRECATED: No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	Refine *Message_ToolCallResult_RefineResult `protobuf:"bytes,13,opt,name=refine,oneof"`
 }
 
@@ -13201,7 +13211,9 @@ func (b0 Message_ToolCallResult_ServerResult_builder) Build() *Message_ToolCallR
 }
 
 // Generic tool call result for representing a user-requested refinement of
-// the tool call parameters.
+// the tool call parameters. DEPRECATED: No longer used by client.
+//
+// Deprecated: Marked as deprecated in task.proto.
 type Message_ToolCallResult_RefineResult struct {
 	state                protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_UserQuery *Message_UserQuery     `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`
@@ -13256,6 +13268,7 @@ func (x *Message_ToolCallResult_RefineResult) ClearUserQuery() {
 	x.xxx_hidden_UserQuery = nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 type Message_ToolCallResult_RefineResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -16233,7 +16246,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x99[\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xa1[\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16445,7 +16458,7 @@ const file_task_proto_rawDesc = "" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
 	"\x05delayB\x06\n" +
-	"\x04tool\x1a\xba\x12\n" +
+	"\x04tool\x1a\xc2\x12\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -16460,8 +16473,8 @@ const file_task_proto_rawDesc = "" +
 	"\x13suggest_create_plan\x18\b \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlan\x125\n" +
 	"\x04grep\x18\t \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12F\n" +
 	"\tfile_glob\x18\n" +
-	" \x01(\v2#.warp.multi_agent.v1.FileGlobResultB\x02\x18\x01H\x00R\bfileGlob\x12R\n" +
-	"\x06refine\x18\r \x01(\v28.warp.multi_agent.v1.Message.ToolCallResult.RefineResultH\x00R\x06refine\x120\n" +
+	" \x01(\v2#.warp.multi_agent.v1.FileGlobResultB\x02\x18\x01H\x00R\bfileGlob\x12V\n" +
+	"\x06refine\x18\r \x01(\v28.warp.multi_agent.v1.Message.ToolCallResult.RefineResultB\x02\x18\x01H\x00R\x06refine\x120\n" +
 	"\x06cancel\x18\x0e \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06cancel\x12X\n" +
 	"\x11read_mcp_resource\x18\x0f \x01(\v2*.warp.multi_agent.v1.ReadMCPResourceResultH\x00R\x0freadMcpResource\x12L\n" +
 	"\rcall_mcp_tool\x18\x10 \x01(\v2&.warp.multi_agent.v1.CallMCPToolResultH\x00R\vcallMcpTool\x12\x88\x01\n" +
@@ -16478,10 +16491,10 @@ const file_task_proto_rawDesc = "" +
 	"\x10create_documents\x18\x1a \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12n\n" +
 	"\x19read_shell_command_output\x18\x1b \x01(\v21.warp.multi_agent.v1.ReadShellCommandOutputResultH\x00R\x16readShellCommandOutput\x1a;\n" +
 	"\fServerResult\x12+\n" +
-	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1aU\n" +
+	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1aY\n" +
 	"\fRefineResult\x12E\n" +
 	"\n" +
-	"user_query\x18\x01 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQuery\x1a*\n" +
+	"user_query\x18\x01 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQuery:\x02\x18\x01\x1a*\n" +
 	"\x0eSubagentResult\x12\x18\n" +
 	"\apayload\x18\x01 \x01(\tR\apayloadB\b\n" +
 	"\x06result\x1a'\n" +
