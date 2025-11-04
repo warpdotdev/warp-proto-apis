@@ -496,7 +496,8 @@ message Message {
       GrepResult grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2Result.
       FileGlobResult file_glob = 10 [deprecated=true];
-      RefineResult refine = 13;
+      // DEPRECATED: No longer used by client.
+      RefineResult refine = 13 [deprecated=true];
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
@@ -518,8 +519,11 @@ message Message {
     message ServerResult { string serialized_result = 1; }
 
     // Generic tool call result for representing a user-requested refinement of
-    // the tool call parameters.
-    message RefineResult { UserQuery user_query = 1; }
+    // the tool call parameters. DEPRECATED: No longer used by client.
+    message RefineResult { 
+      option deprecated = true;
+      UserQuery user_query = 1; 
+    }
 
     message SubagentResult {
         string payload = 1;
