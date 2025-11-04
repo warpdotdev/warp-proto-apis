@@ -16233,7 +16233,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x93[\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x99[\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -16285,9 +16285,9 @@ const file_task_proto_rawDesc = "" +
 	"\x10CreateNewProject\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a)\n" +
 	"\x0fCloneRepository\x12\x16\n" +
-	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a/\n" +
-	"\x15SummarizeConversation\x12\x16\n" +
-	"\x06prompt\x18\x01 \x01(\tR\x06prompt\x1a2\n" +
+	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a5\n" +
+	"\x15SummarizeConversation\x12\x1c\n" +
+	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1a2\n" +
 	"\vAgentOutput\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\tR\x04textJ\x04\b\x02\x10\x03R\treasoning\x1av\n" +
 	"\x0eAgentReasoning\x12\x1c\n" +
