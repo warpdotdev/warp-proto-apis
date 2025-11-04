@@ -163,7 +163,7 @@ message Request {
 
     // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
     message CreateEnvironment {
-      repeated string repo_paths = 1;
+      repeated string repo_paths = 1 [ (sensitive) = true ];
     }
 
     // An input to trigger a suggested prompt.
