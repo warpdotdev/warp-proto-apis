@@ -188,7 +188,7 @@ message Request {
     // An input to summarize the active conversation.
     message SummarizeConversation {
       // Optional user-specified instructions to focus or augment the summary.
-      // string prompt = 1;
+      string prompt = 1;
     }
   }
 
@@ -275,8 +275,8 @@ message Request {
     // If provided, these keys will be used instead of Warp's default keys.
     ApiKeys api_keys = 18;
 
-    // AutonomyLevel autonomy_level = 19;
-    // IsolationLevel isolation_level = 20;
+    AutonomyLevel autonomy_level = 19;
+    IsolationLevel isolation_level = 20;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
