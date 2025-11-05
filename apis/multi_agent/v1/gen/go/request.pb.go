@@ -3898,9 +3898,10 @@ func (b0 Request_Input_CloneRepository_builder) Build() *Request_Input_CloneRepo
 
 // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
 type Request_Input_CreateEnvironment struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_RepoPaths []string               `protobuf:"bytes,1,rep,name=repo_paths,json=repoPaths"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Request_Input_CreateEnvironment) Reset() {
@@ -3928,15 +3929,28 @@ func (x *Request_Input_CreateEnvironment) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *Request_Input_CreateEnvironment) GetRepoPaths() []string {
+	if x != nil {
+		return x.xxx_hidden_RepoPaths
+	}
+	return nil
+}
+
+func (x *Request_Input_CreateEnvironment) SetRepoPaths(v []string) {
+	x.xxx_hidden_RepoPaths = v
+}
+
 type Request_Input_CreateEnvironment_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	RepoPaths []string
 }
 
 func (b0 Request_Input_CreateEnvironment_builder) Build() *Request_Input_CreateEnvironment {
 	m0 := &Request_Input_CreateEnvironment{}
 	b, x := &b0, m0
 	_, _ = b, x
+	x.xxx_hidden_RepoPaths = b.RepoPaths
 	return m0
 }
 
@@ -5744,7 +5758,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xd5D\n" +
+	"task.proto\"\x80E\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5754,7 +5768,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x82,\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xad,\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5842,8 +5856,10 @@ const file_request_proto_rawDesc = "" +
 	"\x10CreateNewProject\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a)\n" +
 	"\x0fCloneRepository\x12\x16\n" +
-	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a\x13\n" +
-	"\x11CreateEnvironment\x1a\xde\x01\n" +
+	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a8\n" +
+	"\x11CreateEnvironment\x12#\n" +
+	"\n" +
+	"repo_paths\x18\x01 \x03(\tB\x04\x80\xb5\x18\x01R\trepoPaths\x1a\xde\x01\n" +
 	"\x14TriggerSuggestPrompt\x12A\n" +
 	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12=\n" +
 	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
@@ -5856,9 +5872,9 @@ const file_request_proto_rawDesc = "" +
 	"\x15InitialReviewComments\x12K\n" +
 	"\x0freview_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0ereviewComments\x127\n" +
 	"\bdiff_set\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetR\adiffSetB\v\n" +
-	"\toperation\x1a/\n" +
-	"\x15SummarizeConversation\x12\x16\n" +
-	"\x06prompt\x18\x01 \x01(\tR\x06promptB\x06\n" +
+	"\toperation\x1a5\n" +
+	"\x15SummarizeConversation\x12\x1c\n" +
+	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06promptB\x06\n" +
 	"\x04type\x1a\x88\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +

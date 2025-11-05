@@ -162,7 +162,9 @@ message Request {
     }
 
     // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
-    message CreateEnvironment { }
+    message CreateEnvironment {
+      repeated string repo_paths = 1 [ (sensitive) = true ];
+    }
 
     // An input to trigger a suggested prompt.
     message TriggerSuggestPrompt {
@@ -188,7 +190,7 @@ message Request {
     // An input to summarize the active conversation.
     message SummarizeConversation {
       // Optional user-specified instructions to focus or augment the summary.
-      string prompt = 1;
+      string prompt = 1 [ (sensitive) = true ];
     }
   }
 

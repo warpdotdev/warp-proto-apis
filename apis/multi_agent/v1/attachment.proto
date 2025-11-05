@@ -47,6 +47,10 @@ message LongRunningShellCommandSnapshot {
   //
   // This may be used by the server to find the cursor in `output` and change its formatting.
   string cursor = 2;
+
+  // "ID" of the command execution to be included in tool calls to write to or read from the
+  // snapshotted command.
+  string command_id = 3;
 }
 
 message DriveObject {

@@ -136,6 +136,7 @@ message Message {
       TriggerSuggestPrompt trigger_suggest_prompt = 4;
       CreateNewProject create_new_project = 5;
       CloneRepository clone_repository = 6;
+      SummarizeConversation summarize_conversation = 7;
     }
 
     InputContext context = 2;
@@ -162,6 +163,12 @@ message Message {
 
   message CloneRepository {
     string url = 1 [ (sensitive) = true ];
+  }
+
+  // A user-requested summarization.
+  message SummarizeConversation {
+    // Optional user-specified instructions to focus or augment the summary.
+    string prompt = 1 [ (sensitive) = true ];
   }
 
   // Agent output message type
@@ -199,8 +206,6 @@ message Message {
     message ConversationSummary {
       string summary = 1;
       int32 token_count = 2;
-      // Optional user-specified instructions used to focus or augment the summary.
-      string prompt = 3;
     }
 
     // Summarize the result of a tool call.
@@ -270,6 +275,10 @@ message Message {
 
       // The "mode" for the write.
       Mode mode = 2;
+
+      // The 'ID' of the command to write to, taken from the initial
+      // `LongRunningShellCommandSnapshot` for the command.
+      string command_id = 3;
 
       message Mode {
         oneof mode {
@@ -455,6 +464,10 @@ message Message {
 
     // A tool call to read the output of a shell command.
     message ReadShellCommandOutput {
+      // The 'ID' of the command to write to, taken from the initial
+      // `LongRunningShellCommandSnapshot` for the command.
+      string command_id = 1;
+
       oneof delay {
         // Return the output after a certain delay.
         google.protobuf.Duration duration = 2;
@@ -484,7 +497,8 @@ message Message {
       GrepResult grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2Result.
       FileGlobResult file_glob = 10 [deprecated=true];
-      RefineResult refine = 13;
+      // DEPRECATED: No longer used by client.
+      RefineResult refine = 13 [deprecated=true];
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
@@ -506,8 +520,11 @@ message Message {
     message ServerResult { string serialized_result = 1; }
 
     // Generic tool call result for representing a user-requested refinement of
-    // the tool call parameters.
-    message RefineResult { UserQuery user_query = 1; }
+    // the tool call parameters. DEPRECATED: No longer used by client.
+    message RefineResult { 
+      option deprecated = true;
+      UserQuery user_query = 1; 
+    }
 
     message SubagentResult {
         string payload = 1;
@@ -789,6 +806,7 @@ message SuggestNewConversationResult {
 message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
+  string command_id = 3;
 }
 
 message CallMCPToolResult {
