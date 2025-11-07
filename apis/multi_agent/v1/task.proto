@@ -572,11 +572,11 @@ message Message {
       message Success {
         string query = 1 [ (sensitive) = true ];
         repeated SearchedPage pages = 2;
-      }
-  
-      message SearchedPage {
-        string url = 1 [ (sensitive) = true ];
-        string title = 2 [ (sensitive) = true ];
+
+        message SearchedPage {
+          string url = 1 [ (sensitive) = true ];
+          string title = 2 [ (sensitive) = true ];
+        }
       }
     }
   }

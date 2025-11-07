@@ -13824,9 +13824,9 @@ func (b0 Message_WebSearch_Status_Searching_builder) Build() *Message_WebSearch_
 }
 
 type Message_WebSearch_Status_Success struct {
-	state                  protoimpl.MessageState                    `protogen:"opaque.v1"`
-	xxx_hidden_Query       *string                                   `protobuf:"bytes,1,opt,name=query"`
-	xxx_hidden_Pages       *[]*Message_WebSearch_Status_SearchedPage `protobuf:"bytes,2,rep,name=pages"`
+	state                  protoimpl.MessageState                            `protogen:"opaque.v1"`
+	xxx_hidden_Query       *string                                           `protobuf:"bytes,1,opt,name=query"`
+	xxx_hidden_Pages       *[]*Message_WebSearch_Status_Success_SearchedPage `protobuf:"bytes,2,rep,name=pages"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -13868,7 +13868,7 @@ func (x *Message_WebSearch_Status_Success) GetQuery() string {
 	return ""
 }
 
-func (x *Message_WebSearch_Status_Success) GetPages() []*Message_WebSearch_Status_SearchedPage {
+func (x *Message_WebSearch_Status_Success) GetPages() []*Message_WebSearch_Status_Success_SearchedPage {
 	if x != nil {
 		if x.xxx_hidden_Pages != nil {
 			return *x.xxx_hidden_Pages
@@ -13882,7 +13882,7 @@ func (x *Message_WebSearch_Status_Success) SetQuery(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Message_WebSearch_Status_Success) SetPages(v []*Message_WebSearch_Status_SearchedPage) {
+func (x *Message_WebSearch_Status_Success) SetPages(v []*Message_WebSearch_Status_Success_SearchedPage) {
 	x.xxx_hidden_Pages = &v
 }
 
@@ -13902,7 +13902,7 @@ type Message_WebSearch_Status_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Query *string
-	Pages []*Message_WebSearch_Status_SearchedPage
+	Pages []*Message_WebSearch_Status_Success_SearchedPage
 }
 
 func (b0 Message_WebSearch_Status_Success_builder) Build() *Message_WebSearch_Status_Success {
@@ -13917,7 +13917,7 @@ func (b0 Message_WebSearch_Status_Success_builder) Build() *Message_WebSearch_St
 	return m0
 }
 
-type Message_WebSearch_Status_SearchedPage struct {
+type Message_WebSearch_Status_Success_SearchedPage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Url         *string                `protobuf:"bytes,1,opt,name=url"`
 	xxx_hidden_Title       *string                `protobuf:"bytes,2,opt,name=title"`
@@ -13927,20 +13927,20 @@ type Message_WebSearch_Status_SearchedPage struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) Reset() {
-	*x = Message_WebSearch_Status_SearchedPage{}
+func (x *Message_WebSearch_Status_Success_SearchedPage) Reset() {
+	*x = Message_WebSearch_Status_Success_SearchedPage{}
 	mi := &file_task_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) String() string {
+func (x *Message_WebSearch_Status_Success_SearchedPage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_WebSearch_Status_SearchedPage) ProtoMessage() {}
+func (*Message_WebSearch_Status_Success_SearchedPage) ProtoMessage() {}
 
-func (x *Message_WebSearch_Status_SearchedPage) ProtoReflect() protoreflect.Message {
+func (x *Message_WebSearch_Status_Success_SearchedPage) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -13952,7 +13952,7 @@ func (x *Message_WebSearch_Status_SearchedPage) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) GetUrl() string {
+func (x *Message_WebSearch_Status_Success_SearchedPage) GetUrl() string {
 	if x != nil {
 		if x.xxx_hidden_Url != nil {
 			return *x.xxx_hidden_Url
@@ -13962,7 +13962,7 @@ func (x *Message_WebSearch_Status_SearchedPage) GetUrl() string {
 	return ""
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) GetTitle() string {
+func (x *Message_WebSearch_Status_Success_SearchedPage) GetTitle() string {
 	if x != nil {
 		if x.xxx_hidden_Title != nil {
 			return *x.xxx_hidden_Title
@@ -13972,49 +13972,49 @@ func (x *Message_WebSearch_Status_SearchedPage) GetTitle() string {
 	return ""
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) SetUrl(v string) {
+func (x *Message_WebSearch_Status_Success_SearchedPage) SetUrl(v string) {
 	x.xxx_hidden_Url = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) SetTitle(v string) {
+func (x *Message_WebSearch_Status_Success_SearchedPage) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) HasUrl() bool {
+func (x *Message_WebSearch_Status_Success_SearchedPage) HasUrl() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) HasTitle() bool {
+func (x *Message_WebSearch_Status_Success_SearchedPage) HasTitle() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) ClearUrl() {
+func (x *Message_WebSearch_Status_Success_SearchedPage) ClearUrl() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Url = nil
 }
 
-func (x *Message_WebSearch_Status_SearchedPage) ClearTitle() {
+func (x *Message_WebSearch_Status_Success_SearchedPage) ClearTitle() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Title = nil
 }
 
-type Message_WebSearch_Status_SearchedPage_builder struct {
+type Message_WebSearch_Status_Success_SearchedPage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Url   *string
 	Title *string
 }
 
-func (b0 Message_WebSearch_Status_SearchedPage_builder) Build() *Message_WebSearch_Status_SearchedPage {
-	m0 := &Message_WebSearch_Status_SearchedPage{}
+func (b0 Message_WebSearch_Status_Success_SearchedPage_builder) Build() *Message_WebSearch_Status_Success_SearchedPage {
+	m0 := &Message_WebSearch_Status_Success_SearchedPage{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Url != nil {
@@ -16856,7 +16856,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x94`\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x9d`\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -17122,18 +17122,18 @@ const file_task_proto_rawDesc = "" +
 	"\x15AddressReviewComments\x12\x1f\n" +
 	"\vcomment_ids\x18\x01 \x03(\tR\n" +
 	"commentIdsB\v\n" +
-	"\toperation\x1a\xa7\x04\n" +
+	"\toperation\x1a\xb0\x04\n" +
 	"\tWebSearch\x12E\n" +
-	"\x06status\x18\x01 \x01(\v2-.warp.multi_agent.v1.Message.WebSearch.StatusR\x06status\x1a\xd2\x03\n" +
+	"\x06status\x18\x01 \x01(\v2-.warp.multi_agent.v1.Message.WebSearch.StatusR\x06status\x1a\xdb\x03\n" +
 	"\x06Status\x12W\n" +
 	"\tsearching\x18\x01 \x01(\v27.warp.multi_agent.v1.Message.WebSearch.Status.SearchingH\x00R\tsearching\x12Q\n" +
 	"\asuccess\x18\x02 \x01(\v25.warp.multi_agent.v1.Message.WebSearch.Status.SuccessH\x00R\asuccess\x12.\n" +
 	"\x05error\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05error\x1a'\n" +
 	"\tSearching\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1aw\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\xc3\x01\n" +
 	"\aSuccess\x12\x1a\n" +
-	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12P\n" +
-	"\x05pages\x18\x02 \x03(\v2:.warp.multi_agent.v1.Message.WebSearch.Status.SearchedPageR\x05pages\x1aB\n" +
+	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12X\n" +
+	"\x05pages\x18\x02 \x03(\v2B.warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPageR\x05pages\x1aB\n" +
 	"\fSearchedPage\x12\x16\n" +
 	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x12\x1a\n" +
 	"\x05title\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05titleB\x06\n" +
@@ -17426,7 +17426,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_WebSearch_Status)(nil),                             // 84: warp.multi_agent.v1.Message.WebSearch.Status
 	(*Message_WebSearch_Status_Searching)(nil),                   // 85: warp.multi_agent.v1.Message.WebSearch.Status.Searching
 	(*Message_WebSearch_Status_Success)(nil),                     // 86: warp.multi_agent.v1.Message.WebSearch.Status.Success
-	(*Message_WebSearch_Status_SearchedPage)(nil),                // 87: warp.multi_agent.v1.Message.WebSearch.Status.SearchedPage
+	(*Message_WebSearch_Status_Success_SearchedPage)(nil),        // 87: warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
 	(*ReadFilesResult_TextFilesSuccess)(nil),                     // 88: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
 	(*ReadFilesResult_AnyFilesSuccess)(nil),                      // 89: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
 	(*ReadFilesResult_Error)(nil),                                // 90: warp.multi_agent.v1.ReadFilesResult.Error
@@ -17634,7 +17634,7 @@ var file_task_proto_depIdxs = []int32{
 	85,  // 150: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
 	86,  // 151: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
 	128, // 152: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
-	87,  // 153: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.SearchedPage
+	87,  // 153: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
 	137, // 154: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
 	138, // 155: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
 	137, // 156: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
