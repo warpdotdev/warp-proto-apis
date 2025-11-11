@@ -9507,10 +9507,13 @@ func (*message_UpdateReviewComments_AddressReviewComments_) isMessage_UpdateRevi
 }
 
 type Message_WebSearch struct {
-	state             protoimpl.MessageState    `protogen:"opaque.v1"`
-	xxx_hidden_Status *Message_WebSearch_Status `protobuf:"bytes,1,opt,name=status"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state                  protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_ToolCallId  *string                   `protobuf:"bytes,2,opt,name=tool_call_id,json=toolCallId"`
+	xxx_hidden_Status      *Message_WebSearch_Status `protobuf:"bytes,1,opt,name=status"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Message_WebSearch) Reset() {
@@ -9538,6 +9541,16 @@ func (x *Message_WebSearch) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *Message_WebSearch) GetToolCallId() string {
+	if x != nil {
+		if x.xxx_hidden_ToolCallId != nil {
+			return *x.xxx_hidden_ToolCallId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_WebSearch) GetStatus() *Message_WebSearch_Status {
 	if x != nil {
 		return x.xxx_hidden_Status
@@ -9545,8 +9558,20 @@ func (x *Message_WebSearch) GetStatus() *Message_WebSearch_Status {
 	return nil
 }
 
+func (x *Message_WebSearch) SetToolCallId(v string) {
+	x.xxx_hidden_ToolCallId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
 func (x *Message_WebSearch) SetStatus(v *Message_WebSearch_Status) {
 	x.xxx_hidden_Status = v
+}
+
+func (x *Message_WebSearch) HasToolCallId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
 func (x *Message_WebSearch) HasStatus() bool {
@@ -9556,6 +9581,11 @@ func (x *Message_WebSearch) HasStatus() bool {
 	return x.xxx_hidden_Status != nil
 }
 
+func (x *Message_WebSearch) ClearToolCallId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_ToolCallId = nil
+}
+
 func (x *Message_WebSearch) ClearStatus() {
 	x.xxx_hidden_Status = nil
 }
@@ -9563,13 +9593,20 @@ func (x *Message_WebSearch) ClearStatus() {
 type Message_WebSearch_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Status *Message_WebSearch_Status
+	// The tool call ID that triggered this web search.
+	// Used to link the WebSearch status message to the corresponding tool call.
+	ToolCallId *string
+	Status     *Message_WebSearch_Status
 }
 
 func (b0 Message_WebSearch_builder) Build() *Message_WebSearch {
 	m0 := &Message_WebSearch{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.ToolCallId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_ToolCallId = b.ToolCallId
+	}
 	x.xxx_hidden_Status = b.Status
 	return m0
 }
@@ -16856,7 +16893,7 @@ const file_task_proto_rawDesc = "" +
 	"\rReviewComment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1e\n" +
 	"\acomment\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acomment\x12D\n" +
-	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\x9d`\n" +
+	"\x0ecommented_line\x18\x03 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkR\rcommentedLine\"\xbf`\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -17122,8 +17159,10 @@ const file_task_proto_rawDesc = "" +
 	"\x15AddressReviewComments\x12\x1f\n" +
 	"\vcomment_ids\x18\x01 \x03(\tR\n" +
 	"commentIdsB\v\n" +
-	"\toperation\x1a\xb0\x04\n" +
-	"\tWebSearch\x12E\n" +
+	"\toperation\x1a\xd2\x04\n" +
+	"\tWebSearch\x12 \n" +
+	"\ftool_call_id\x18\x02 \x01(\tR\n" +
+	"toolCallId\x12E\n" +
 	"\x06status\x18\x01 \x01(\v2-.warp.multi_agent.v1.Message.WebSearch.StatusR\x06status\x1a\xdb\x03\n" +
 	"\x06Status\x12W\n" +
 	"\tsearching\x18\x01 \x01(\v27.warp.multi_agent.v1.Message.WebSearch.Status.SearchingH\x00R\tsearching\x12Q\n" +

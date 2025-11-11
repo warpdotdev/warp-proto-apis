@@ -556,6 +556,10 @@ message Message {
   }
   
   message WebSearch {
+    // The tool call ID that triggered this web search.
+    // Used to link the WebSearch status message to the corresponding tool call.
+    string tool_call_id = 2;
+    
     Status status = 1;
 
     message Status {
