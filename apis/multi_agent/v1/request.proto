@@ -72,6 +72,11 @@ message Request {
       UserQueryMode mode = 3;
     }
 
+    message CLIAgentUserQuery {
+        UserQuery user_query = 1;
+        RunningShellCommand running_command = 2;
+    }
+
     message UserInputs {
       repeated UserInput inputs = 1;
 
@@ -79,6 +84,7 @@ message Request {
         oneof input {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
+          CLIAgentUserQuery cli_agent_user_query = 3;
         }
       }
     }

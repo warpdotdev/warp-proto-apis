@@ -423,8 +423,12 @@ message Message {
 
       // Optional metadata about the subagent required to render the appropriate UI.
       oneof metadata {
-        google.protobuf.Empty cli = 3;
+        CLISubagent cli = 3;
         google.protobuf.Empty research = 4;
+      }
+
+      message CLISubagent {
+        string command_id = 1;
       }
     }
 
@@ -521,9 +525,9 @@ message Message {
 
     // Generic tool call result for representing a user-requested refinement of
     // the tool call parameters. DEPRECATED: No longer used by client.
-    message RefineResult { 
+    message RefineResult {
       option deprecated = true;
-      UserQuery user_query = 1; 
+      UserQuery user_query = 1;
     }
 
     message SubagentResult {
@@ -554,7 +558,7 @@ message Message {
 
     message AddressReviewComments { repeated string comment_ids = 1; }
   }
-  
+
   message WebSearch {
     Status status = 1;
 
@@ -564,11 +568,11 @@ message Message {
         Success success = 2;
         google.protobuf.Empty error = 3;
       }
-  
+
       message Searching {
         string query = 1 [ (sensitive) = true ];
       }
-  
+
       message Success {
         string query = 1 [ (sensitive) = true ];
         repeated SearchedPage pages = 2;
@@ -937,5 +941,9 @@ message UserQueryMode {
   oneof type {
     // We can change this to a non-empty `Plan` type later, this is backwards compatible
     google.protobuf.Empty plan = 1;
+  }
+
+  message CLI {
+    RunningShellCommand command = 1;
   }
 }
