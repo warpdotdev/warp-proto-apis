@@ -5748,6 +5748,7 @@ type Request_MCPContext_MCPServer struct {
 	state                  protoimpl.MessageState             `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                            `protobuf:"bytes,1,opt,name=name"`
 	xxx_hidden_Description *string                            `protobuf:"bytes,2,opt,name=description"`
+	xxx_hidden_Id          *string                            `protobuf:"bytes,5,opt,name=id"`
 	xxx_hidden_Resources   *[]*Request_MCPContext_MCPResource `protobuf:"bytes,3,rep,name=resources"`
 	xxx_hidden_Tools       *[]*Request_MCPContext_MCPTool     `protobuf:"bytes,4,rep,name=tools"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -5801,6 +5802,16 @@ func (x *Request_MCPContext_MCPServer) GetDescription() string {
 	return ""
 }
 
+func (x *Request_MCPContext_MCPServer) GetId() string {
+	if x != nil {
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_MCPContext_MCPServer) GetResources() []*Request_MCPContext_MCPResource {
 	if x != nil {
 		if x.xxx_hidden_Resources != nil {
@@ -5821,12 +5832,17 @@ func (x *Request_MCPContext_MCPServer) GetTools() []*Request_MCPContext_MCPTool 
 
 func (x *Request_MCPContext_MCPServer) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *Request_MCPContext_MCPServer) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+}
+
+func (x *Request_MCPContext_MCPServer) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *Request_MCPContext_MCPServer) SetResources(v []*Request_MCPContext_MCPResource) {
@@ -5851,6 +5867,13 @@ func (x *Request_MCPContext_MCPServer) HasDescription() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *Request_MCPContext_MCPServer) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Request_MCPContext_MCPServer) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
@@ -5861,6 +5884,11 @@ func (x *Request_MCPContext_MCPServer) ClearDescription() {
 	x.xxx_hidden_Description = nil
 }
 
+func (x *Request_MCPContext_MCPServer) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Id = nil
+}
+
 type Request_MCPContext_MCPServer_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -5868,6 +5896,8 @@ type Request_MCPContext_MCPServer_builder struct {
 	Name *string
 	// Optional description of the server's purpose.
 	Description *string
+	// Unique identifier for this MCP server.
+	Id *string
 	// Resources provided by this server.
 	Resources []*Request_MCPContext_MCPResource
 	// Tools provided by this server.
@@ -5879,12 +5909,16 @@ func (b0 Request_MCPContext_MCPServer_builder) Build() *Request_MCPContext_MCPSe
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Name = b.Name
 	}
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Description = b.Description
+	}
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		x.xxx_hidden_Id = b.Id
 	}
 	x.xxx_hidden_Resources = &b.Resources
 	x.xxx_hidden_Tools = &b.Tools
@@ -5896,7 +5930,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x9fG\n" +
+	"task.proto\"\xafG\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6058,7 +6092,7 @@ const file_request_proto_rawDesc = "" +
 	"\x06google\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06google\x12%\n" +
 	"\vopen_router\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"openRouter\x128\n" +
-	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x1a\xf6\x05\n" +
+	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x1a\x86\x06\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
@@ -6072,10 +6106,11 @@ const file_request_proto_rawDesc = "" +
 	"\aMCPTool\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
 	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12:\n" +
-	"\finput_schema\x18\x03 \x01(\v2\x17.google.protobuf.StructR\vinputSchema\x1a\xe7\x01\n" +
+	"\finput_schema\x18\x03 \x01(\v2\x17.google.protobuf.StructR\vinputSchema\x1a\xf7\x01\n" +
 	"\tMCPServer\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
-	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12Q\n" +
+	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12\x0e\n" +
+	"\x02id\x18\x05 \x01(\tR\x02id\x12Q\n" +
 	"\tresources\x18\x03 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceR\tresources\x12E\n" +
 	"\x05tools\x18\x04 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolR\x05tools*1\n" +
 	"\rAutonomyLevel\x12\x0e\n" +

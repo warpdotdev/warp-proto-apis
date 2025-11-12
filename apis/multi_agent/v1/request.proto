@@ -340,6 +340,9 @@ message Request {
       // Optional description of the server's purpose.
       string description = 2 [ (sensitive) = true ];
 
+      // Unique identifier for this MCP server.   
+      string id = 5;
+
       // Resources provided by this server.
       repeated MCPResource resources = 3;
 

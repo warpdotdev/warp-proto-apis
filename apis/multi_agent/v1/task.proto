@@ -387,7 +387,13 @@ message Message {
     }
 
     // A tool call to read an MCP resource identified by its URI.
-    message ReadMCPResource { string uri = 1; }
+    message ReadMCPResource { 
+      string uri = 1; 
+
+      // Optional identifier of the MCP server that provides this tool.
+      // If set, this should match the `id` of an MCPServer in the request's MCPContext.
+      string server_id = 2;
+    }
 
     // A tool call to execute an MCP tool.
     message CallMCPTool {
@@ -396,6 +402,10 @@ message Message {
       // An MCP tool call specifies args as named JSON arguments
       // (not arbitrary JSON, e.g. a string).
       google.protobuf.Struct args = 2;
+
+      // Optional identifier of the MCP server that provides this tool.
+      // If set, this should match the `id` of an MCPServer in the request's MCPContext.
+      string server_id = 3;
     }
 
     // A tool call to suggest a prompt.
