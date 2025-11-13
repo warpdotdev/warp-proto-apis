@@ -97,6 +97,23 @@ message DiffHunk {
   }
 }
 
+// Reference to the current state (branch or commit)
+message CurrentRef {
+  oneof ref {
+      string branch_name = 1 [ (sensitive) = true ];
+      string headless_commit_sha = 2;
+  }
+}
+
+// Reference to the base state (branch, commit, or uncommitted changes)
+message BaseRef {
+  oneof ref {
+      string branch_name = 1 [ (sensitive) = true ];
+      string headless_commit_sha = 2;
+      google.protobuf.Empty uncommitted_changes = 3;
+  }
+}
+
 message DiffSet {
   message DiffHunk {
     string file_path = 1 [ (sensitive) = true ];
@@ -104,21 +121,6 @@ message DiffSet {
     string diff_content = 3 [ (sensitive) = true ];
     uint32 lines_added = 4;
     uint32 lines_removed = 5;
-  }
-
-  message CurrentRef {
-    oneof ref {
-        string branch_name = 1 [ (sensitive) = true ];
-        string headless_commit_sha = 2;
-    }
-  }
-
-  message BaseRef {
-    oneof ref {
-        string branch_name = 1 [ (sensitive) = true ];
-        string headless_commit_sha = 2;
-        google.protobuf.Empty uncommitted_changes = 3;
-    }
   }
 
   repeated DiffHunk hunks = 1;

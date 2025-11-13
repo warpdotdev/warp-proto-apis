@@ -67,10 +67,32 @@ message ReviewComment {
 
   string comment = 2 [ (sensitive) = true ];
 
-  // The exact file location and line content that this comment is associated with.
-  // We need a diff hunk rather than just a starting and ending line number
-  // because the latter cannot uniquely identify a deleted line.
-  DiffHunk commented_line = 3;
+  // The context this comment is associated with. At least one of these must be provided.
+  oneof comment_target {
+    // The exact file location and line content that this comment is associated with.
+    // We need a diff hunk rather than just a starting and ending line number
+    // because the latter cannot uniquely identify a deleted line.
+    DiffHunk commented_line = 3;
+    
+    // The file path that this comment is associated with.
+    CommentedFile commented_file = 4;
+    
+    // Indicates this comment is associated with the entire diff set.
+    CommentedDiffset commented_diffset = 5;
+  }
+
+  // File-level comment with current and base reference information.
+  message CommentedFile {
+    string file_path = 1 [ (sensitive) = true ];
+    CurrentRef current = 2;
+    BaseRef base = 3;
+  }
+
+  // Diffset-level comment with current and base reference information.
+  message CommentedDiffset {
+    CurrentRef current = 1;
+    BaseRef base = 2;
+  }
 }
 
 // A message within a task

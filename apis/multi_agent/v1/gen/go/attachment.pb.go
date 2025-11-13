@@ -1913,18 +1913,390 @@ func (*diffHunk_BaseHeadlessCommitSha) isDiffHunk_Base() {}
 
 func (*diffHunk_UncommittedChanges) isDiffHunk_Base() {}
 
+// Reference to the current state (branch or commit)
+type CurrentRef struct {
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Ref isCurrentRef_Ref       `protobuf_oneof:"ref"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *CurrentRef) Reset() {
+	*x = CurrentRef{}
+	mi := &file_attachment_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CurrentRef) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CurrentRef) ProtoMessage() {}
+
+func (x *CurrentRef) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *CurrentRef) GetBranchName() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Ref.(*currentRef_BranchName); ok {
+			return x.BranchName
+		}
+	}
+	return ""
+}
+
+func (x *CurrentRef) GetHeadlessCommitSha() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Ref.(*currentRef_HeadlessCommitSha); ok {
+			return x.HeadlessCommitSha
+		}
+	}
+	return ""
+}
+
+func (x *CurrentRef) SetBranchName(v string) {
+	x.xxx_hidden_Ref = &currentRef_BranchName{v}
+}
+
+func (x *CurrentRef) SetHeadlessCommitSha(v string) {
+	x.xxx_hidden_Ref = &currentRef_HeadlessCommitSha{v}
+}
+
+func (x *CurrentRef) HasRef() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Ref != nil
+}
+
+func (x *CurrentRef) HasBranchName() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Ref.(*currentRef_BranchName)
+	return ok
+}
+
+func (x *CurrentRef) HasHeadlessCommitSha() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Ref.(*currentRef_HeadlessCommitSha)
+	return ok
+}
+
+func (x *CurrentRef) ClearRef() {
+	x.xxx_hidden_Ref = nil
+}
+
+func (x *CurrentRef) ClearBranchName() {
+	if _, ok := x.xxx_hidden_Ref.(*currentRef_BranchName); ok {
+		x.xxx_hidden_Ref = nil
+	}
+}
+
+func (x *CurrentRef) ClearHeadlessCommitSha() {
+	if _, ok := x.xxx_hidden_Ref.(*currentRef_HeadlessCommitSha); ok {
+		x.xxx_hidden_Ref = nil
+	}
+}
+
+const CurrentRef_Ref_not_set_case case_CurrentRef_Ref = 0
+const CurrentRef_BranchName_case case_CurrentRef_Ref = 1
+const CurrentRef_HeadlessCommitSha_case case_CurrentRef_Ref = 2
+
+func (x *CurrentRef) WhichRef() case_CurrentRef_Ref {
+	if x == nil {
+		return CurrentRef_Ref_not_set_case
+	}
+	switch x.xxx_hidden_Ref.(type) {
+	case *currentRef_BranchName:
+		return CurrentRef_BranchName_case
+	case *currentRef_HeadlessCommitSha:
+		return CurrentRef_HeadlessCommitSha_case
+	default:
+		return CurrentRef_Ref_not_set_case
+	}
+}
+
+type CurrentRef_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Ref:
+	BranchName        *string
+	HeadlessCommitSha *string
+	// -- end of xxx_hidden_Ref
+}
+
+func (b0 CurrentRef_builder) Build() *CurrentRef {
+	m0 := &CurrentRef{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.BranchName != nil {
+		x.xxx_hidden_Ref = &currentRef_BranchName{*b.BranchName}
+	}
+	if b.HeadlessCommitSha != nil {
+		x.xxx_hidden_Ref = &currentRef_HeadlessCommitSha{*b.HeadlessCommitSha}
+	}
+	return m0
+}
+
+type case_CurrentRef_Ref protoreflect.FieldNumber
+
+func (x case_CurrentRef_Ref) String() string {
+	md := file_attachment_proto_msgTypes[9].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isCurrentRef_Ref interface {
+	isCurrentRef_Ref()
+}
+
+type currentRef_BranchName struct {
+	BranchName string `protobuf:"bytes,1,opt,name=branch_name,json=branchName,oneof"`
+}
+
+type currentRef_HeadlessCommitSha struct {
+	HeadlessCommitSha string `protobuf:"bytes,2,opt,name=headless_commit_sha,json=headlessCommitSha,oneof"`
+}
+
+func (*currentRef_BranchName) isCurrentRef_Ref() {}
+
+func (*currentRef_HeadlessCommitSha) isCurrentRef_Ref() {}
+
+// Reference to the base state (branch, commit, or uncommitted changes)
+type BaseRef struct {
+	state          protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Ref isBaseRef_Ref          `protobuf_oneof:"ref"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *BaseRef) Reset() {
+	*x = BaseRef{}
+	mi := &file_attachment_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *BaseRef) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BaseRef) ProtoMessage() {}
+
+func (x *BaseRef) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *BaseRef) GetBranchName() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Ref.(*baseRef_BranchName); ok {
+			return x.BranchName
+		}
+	}
+	return ""
+}
+
+func (x *BaseRef) GetHeadlessCommitSha() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Ref.(*baseRef_HeadlessCommitSha); ok {
+			return x.HeadlessCommitSha
+		}
+	}
+	return ""
+}
+
+func (x *BaseRef) GetUncommittedChanges() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Ref.(*baseRef_UncommittedChanges); ok {
+			return x.UncommittedChanges
+		}
+	}
+	return nil
+}
+
+func (x *BaseRef) SetBranchName(v string) {
+	x.xxx_hidden_Ref = &baseRef_BranchName{v}
+}
+
+func (x *BaseRef) SetHeadlessCommitSha(v string) {
+	x.xxx_hidden_Ref = &baseRef_HeadlessCommitSha{v}
+}
+
+func (x *BaseRef) SetUncommittedChanges(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Ref = nil
+		return
+	}
+	x.xxx_hidden_Ref = &baseRef_UncommittedChanges{v}
+}
+
+func (x *BaseRef) HasRef() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Ref != nil
+}
+
+func (x *BaseRef) HasBranchName() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Ref.(*baseRef_BranchName)
+	return ok
+}
+
+func (x *BaseRef) HasHeadlessCommitSha() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Ref.(*baseRef_HeadlessCommitSha)
+	return ok
+}
+
+func (x *BaseRef) HasUncommittedChanges() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Ref.(*baseRef_UncommittedChanges)
+	return ok
+}
+
+func (x *BaseRef) ClearRef() {
+	x.xxx_hidden_Ref = nil
+}
+
+func (x *BaseRef) ClearBranchName() {
+	if _, ok := x.xxx_hidden_Ref.(*baseRef_BranchName); ok {
+		x.xxx_hidden_Ref = nil
+	}
+}
+
+func (x *BaseRef) ClearHeadlessCommitSha() {
+	if _, ok := x.xxx_hidden_Ref.(*baseRef_HeadlessCommitSha); ok {
+		x.xxx_hidden_Ref = nil
+	}
+}
+
+func (x *BaseRef) ClearUncommittedChanges() {
+	if _, ok := x.xxx_hidden_Ref.(*baseRef_UncommittedChanges); ok {
+		x.xxx_hidden_Ref = nil
+	}
+}
+
+const BaseRef_Ref_not_set_case case_BaseRef_Ref = 0
+const BaseRef_BranchName_case case_BaseRef_Ref = 1
+const BaseRef_HeadlessCommitSha_case case_BaseRef_Ref = 2
+const BaseRef_UncommittedChanges_case case_BaseRef_Ref = 3
+
+func (x *BaseRef) WhichRef() case_BaseRef_Ref {
+	if x == nil {
+		return BaseRef_Ref_not_set_case
+	}
+	switch x.xxx_hidden_Ref.(type) {
+	case *baseRef_BranchName:
+		return BaseRef_BranchName_case
+	case *baseRef_HeadlessCommitSha:
+		return BaseRef_HeadlessCommitSha_case
+	case *baseRef_UncommittedChanges:
+		return BaseRef_UncommittedChanges_case
+	default:
+		return BaseRef_Ref_not_set_case
+	}
+}
+
+type BaseRef_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Ref:
+	BranchName         *string
+	HeadlessCommitSha  *string
+	UncommittedChanges *emptypb.Empty
+	// -- end of xxx_hidden_Ref
+}
+
+func (b0 BaseRef_builder) Build() *BaseRef {
+	m0 := &BaseRef{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.BranchName != nil {
+		x.xxx_hidden_Ref = &baseRef_BranchName{*b.BranchName}
+	}
+	if b.HeadlessCommitSha != nil {
+		x.xxx_hidden_Ref = &baseRef_HeadlessCommitSha{*b.HeadlessCommitSha}
+	}
+	if b.UncommittedChanges != nil {
+		x.xxx_hidden_Ref = &baseRef_UncommittedChanges{b.UncommittedChanges}
+	}
+	return m0
+}
+
+type case_BaseRef_Ref protoreflect.FieldNumber
+
+func (x case_BaseRef_Ref) String() string {
+	md := file_attachment_proto_msgTypes[10].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isBaseRef_Ref interface {
+	isBaseRef_Ref()
+}
+
+type baseRef_BranchName struct {
+	BranchName string `protobuf:"bytes,1,opt,name=branch_name,json=branchName,oneof"`
+}
+
+type baseRef_HeadlessCommitSha struct {
+	HeadlessCommitSha string `protobuf:"bytes,2,opt,name=headless_commit_sha,json=headlessCommitSha,oneof"`
+}
+
+type baseRef_UncommittedChanges struct {
+	UncommittedChanges *emptypb.Empty `protobuf:"bytes,3,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
+}
+
+func (*baseRef_BranchName) isBaseRef_Ref() {}
+
+func (*baseRef_HeadlessCommitSha) isBaseRef_Ref() {}
+
+func (*baseRef_UncommittedChanges) isBaseRef_Ref() {}
+
 type DiffSet struct {
 	state              protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Hunks   *[]*DiffSet_DiffHunk   `protobuf:"bytes,1,rep,name=hunks"`
-	xxx_hidden_CurrRef *DiffSet_CurrentRef    `protobuf:"bytes,2,opt,name=curr_ref,json=currRef"`
-	xxx_hidden_BaseRef *DiffSet_BaseRef       `protobuf:"bytes,3,opt,name=base_ref,json=baseRef"`
+	xxx_hidden_CurrRef *CurrentRef            `protobuf:"bytes,2,opt,name=curr_ref,json=currRef"`
+	xxx_hidden_BaseRef *BaseRef               `protobuf:"bytes,3,opt,name=base_ref,json=baseRef"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
 
 func (x *DiffSet) Reset() {
 	*x = DiffSet{}
-	mi := &file_attachment_proto_msgTypes[9]
+	mi := &file_attachment_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1936,7 +2308,7 @@ func (x *DiffSet) String() string {
 func (*DiffSet) ProtoMessage() {}
 
 func (x *DiffSet) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[9]
+	mi := &file_attachment_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1956,14 +2328,14 @@ func (x *DiffSet) GetHunks() []*DiffSet_DiffHunk {
 	return nil
 }
 
-func (x *DiffSet) GetCurrRef() *DiffSet_CurrentRef {
+func (x *DiffSet) GetCurrRef() *CurrentRef {
 	if x != nil {
 		return x.xxx_hidden_CurrRef
 	}
 	return nil
 }
 
-func (x *DiffSet) GetBaseRef() *DiffSet_BaseRef {
+func (x *DiffSet) GetBaseRef() *BaseRef {
 	if x != nil {
 		return x.xxx_hidden_BaseRef
 	}
@@ -1974,11 +2346,11 @@ func (x *DiffSet) SetHunks(v []*DiffSet_DiffHunk) {
 	x.xxx_hidden_Hunks = &v
 }
 
-func (x *DiffSet) SetCurrRef(v *DiffSet_CurrentRef) {
+func (x *DiffSet) SetCurrRef(v *CurrentRef) {
 	x.xxx_hidden_CurrRef = v
 }
 
-func (x *DiffSet) SetBaseRef(v *DiffSet_BaseRef) {
+func (x *DiffSet) SetBaseRef(v *BaseRef) {
 	x.xxx_hidden_BaseRef = v
 }
 
@@ -2008,8 +2380,8 @@ type DiffSet_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Hunks   []*DiffSet_DiffHunk
-	CurrRef *DiffSet_CurrentRef
-	BaseRef *DiffSet_BaseRef
+	CurrRef *CurrentRef
+	BaseRef *BaseRef
 }
 
 func (b0 DiffSet_builder) Build() *DiffSet {
@@ -2037,7 +2409,7 @@ type DiffSet_DiffHunk struct {
 
 func (x *DiffSet_DiffHunk) Reset() {
 	*x = DiffSet_DiffHunk{}
-	mi := &file_attachment_proto_msgTypes[10]
+	mi := &file_attachment_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2049,7 +2421,7 @@ func (x *DiffSet_DiffHunk) String() string {
 func (*DiffSet_DiffHunk) ProtoMessage() {}
 
 func (x *DiffSet_DiffHunk) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[10]
+	mi := &file_attachment_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2218,376 +2590,6 @@ func (b0 DiffSet_DiffHunk_builder) Build() *DiffSet_DiffHunk {
 	return m0
 }
 
-type DiffSet_CurrentRef struct {
-	state          protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_Ref isDiffSet_CurrentRef_Ref `protobuf_oneof:"ref"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *DiffSet_CurrentRef) Reset() {
-	*x = DiffSet_CurrentRef{}
-	mi := &file_attachment_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DiffSet_CurrentRef) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DiffSet_CurrentRef) ProtoMessage() {}
-
-func (x *DiffSet_CurrentRef) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *DiffSet_CurrentRef) GetBranchName() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Ref.(*diffSet_CurrentRef_BranchName); ok {
-			return x.BranchName
-		}
-	}
-	return ""
-}
-
-func (x *DiffSet_CurrentRef) GetHeadlessCommitSha() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Ref.(*diffSet_CurrentRef_HeadlessCommitSha); ok {
-			return x.HeadlessCommitSha
-		}
-	}
-	return ""
-}
-
-func (x *DiffSet_CurrentRef) SetBranchName(v string) {
-	x.xxx_hidden_Ref = &diffSet_CurrentRef_BranchName{v}
-}
-
-func (x *DiffSet_CurrentRef) SetHeadlessCommitSha(v string) {
-	x.xxx_hidden_Ref = &diffSet_CurrentRef_HeadlessCommitSha{v}
-}
-
-func (x *DiffSet_CurrentRef) HasRef() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Ref != nil
-}
-
-func (x *DiffSet_CurrentRef) HasBranchName() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Ref.(*diffSet_CurrentRef_BranchName)
-	return ok
-}
-
-func (x *DiffSet_CurrentRef) HasHeadlessCommitSha() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Ref.(*diffSet_CurrentRef_HeadlessCommitSha)
-	return ok
-}
-
-func (x *DiffSet_CurrentRef) ClearRef() {
-	x.xxx_hidden_Ref = nil
-}
-
-func (x *DiffSet_CurrentRef) ClearBranchName() {
-	if _, ok := x.xxx_hidden_Ref.(*diffSet_CurrentRef_BranchName); ok {
-		x.xxx_hidden_Ref = nil
-	}
-}
-
-func (x *DiffSet_CurrentRef) ClearHeadlessCommitSha() {
-	if _, ok := x.xxx_hidden_Ref.(*diffSet_CurrentRef_HeadlessCommitSha); ok {
-		x.xxx_hidden_Ref = nil
-	}
-}
-
-const DiffSet_CurrentRef_Ref_not_set_case case_DiffSet_CurrentRef_Ref = 0
-const DiffSet_CurrentRef_BranchName_case case_DiffSet_CurrentRef_Ref = 1
-const DiffSet_CurrentRef_HeadlessCommitSha_case case_DiffSet_CurrentRef_Ref = 2
-
-func (x *DiffSet_CurrentRef) WhichRef() case_DiffSet_CurrentRef_Ref {
-	if x == nil {
-		return DiffSet_CurrentRef_Ref_not_set_case
-	}
-	switch x.xxx_hidden_Ref.(type) {
-	case *diffSet_CurrentRef_BranchName:
-		return DiffSet_CurrentRef_BranchName_case
-	case *diffSet_CurrentRef_HeadlessCommitSha:
-		return DiffSet_CurrentRef_HeadlessCommitSha_case
-	default:
-		return DiffSet_CurrentRef_Ref_not_set_case
-	}
-}
-
-type DiffSet_CurrentRef_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_Ref:
-	BranchName        *string
-	HeadlessCommitSha *string
-	// -- end of xxx_hidden_Ref
-}
-
-func (b0 DiffSet_CurrentRef_builder) Build() *DiffSet_CurrentRef {
-	m0 := &DiffSet_CurrentRef{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.BranchName != nil {
-		x.xxx_hidden_Ref = &diffSet_CurrentRef_BranchName{*b.BranchName}
-	}
-	if b.HeadlessCommitSha != nil {
-		x.xxx_hidden_Ref = &diffSet_CurrentRef_HeadlessCommitSha{*b.HeadlessCommitSha}
-	}
-	return m0
-}
-
-type case_DiffSet_CurrentRef_Ref protoreflect.FieldNumber
-
-func (x case_DiffSet_CurrentRef_Ref) String() string {
-	md := file_attachment_proto_msgTypes[11].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isDiffSet_CurrentRef_Ref interface {
-	isDiffSet_CurrentRef_Ref()
-}
-
-type diffSet_CurrentRef_BranchName struct {
-	BranchName string `protobuf:"bytes,1,opt,name=branch_name,json=branchName,oneof"`
-}
-
-type diffSet_CurrentRef_HeadlessCommitSha struct {
-	HeadlessCommitSha string `protobuf:"bytes,2,opt,name=headless_commit_sha,json=headlessCommitSha,oneof"`
-}
-
-func (*diffSet_CurrentRef_BranchName) isDiffSet_CurrentRef_Ref() {}
-
-func (*diffSet_CurrentRef_HeadlessCommitSha) isDiffSet_CurrentRef_Ref() {}
-
-type DiffSet_BaseRef struct {
-	state          protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Ref isDiffSet_BaseRef_Ref  `protobuf_oneof:"ref"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *DiffSet_BaseRef) Reset() {
-	*x = DiffSet_BaseRef{}
-	mi := &file_attachment_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *DiffSet_BaseRef) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*DiffSet_BaseRef) ProtoMessage() {}
-
-func (x *DiffSet_BaseRef) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *DiffSet_BaseRef) GetBranchName() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_BranchName); ok {
-			return x.BranchName
-		}
-	}
-	return ""
-}
-
-func (x *DiffSet_BaseRef) GetHeadlessCommitSha() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_HeadlessCommitSha); ok {
-			return x.HeadlessCommitSha
-		}
-	}
-	return ""
-}
-
-func (x *DiffSet_BaseRef) GetUncommittedChanges() *emptypb.Empty {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_UncommittedChanges); ok {
-			return x.UncommittedChanges
-		}
-	}
-	return nil
-}
-
-func (x *DiffSet_BaseRef) SetBranchName(v string) {
-	x.xxx_hidden_Ref = &diffSet_BaseRef_BranchName{v}
-}
-
-func (x *DiffSet_BaseRef) SetHeadlessCommitSha(v string) {
-	x.xxx_hidden_Ref = &diffSet_BaseRef_HeadlessCommitSha{v}
-}
-
-func (x *DiffSet_BaseRef) SetUncommittedChanges(v *emptypb.Empty) {
-	if v == nil {
-		x.xxx_hidden_Ref = nil
-		return
-	}
-	x.xxx_hidden_Ref = &diffSet_BaseRef_UncommittedChanges{v}
-}
-
-func (x *DiffSet_BaseRef) HasRef() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Ref != nil
-}
-
-func (x *DiffSet_BaseRef) HasBranchName() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_BranchName)
-	return ok
-}
-
-func (x *DiffSet_BaseRef) HasHeadlessCommitSha() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_HeadlessCommitSha)
-	return ok
-}
-
-func (x *DiffSet_BaseRef) HasUncommittedChanges() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_UncommittedChanges)
-	return ok
-}
-
-func (x *DiffSet_BaseRef) ClearRef() {
-	x.xxx_hidden_Ref = nil
-}
-
-func (x *DiffSet_BaseRef) ClearBranchName() {
-	if _, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_BranchName); ok {
-		x.xxx_hidden_Ref = nil
-	}
-}
-
-func (x *DiffSet_BaseRef) ClearHeadlessCommitSha() {
-	if _, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_HeadlessCommitSha); ok {
-		x.xxx_hidden_Ref = nil
-	}
-}
-
-func (x *DiffSet_BaseRef) ClearUncommittedChanges() {
-	if _, ok := x.xxx_hidden_Ref.(*diffSet_BaseRef_UncommittedChanges); ok {
-		x.xxx_hidden_Ref = nil
-	}
-}
-
-const DiffSet_BaseRef_Ref_not_set_case case_DiffSet_BaseRef_Ref = 0
-const DiffSet_BaseRef_BranchName_case case_DiffSet_BaseRef_Ref = 1
-const DiffSet_BaseRef_HeadlessCommitSha_case case_DiffSet_BaseRef_Ref = 2
-const DiffSet_BaseRef_UncommittedChanges_case case_DiffSet_BaseRef_Ref = 3
-
-func (x *DiffSet_BaseRef) WhichRef() case_DiffSet_BaseRef_Ref {
-	if x == nil {
-		return DiffSet_BaseRef_Ref_not_set_case
-	}
-	switch x.xxx_hidden_Ref.(type) {
-	case *diffSet_BaseRef_BranchName:
-		return DiffSet_BaseRef_BranchName_case
-	case *diffSet_BaseRef_HeadlessCommitSha:
-		return DiffSet_BaseRef_HeadlessCommitSha_case
-	case *diffSet_BaseRef_UncommittedChanges:
-		return DiffSet_BaseRef_UncommittedChanges_case
-	default:
-		return DiffSet_BaseRef_Ref_not_set_case
-	}
-}
-
-type DiffSet_BaseRef_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_Ref:
-	BranchName         *string
-	HeadlessCommitSha  *string
-	UncommittedChanges *emptypb.Empty
-	// -- end of xxx_hidden_Ref
-}
-
-func (b0 DiffSet_BaseRef_builder) Build() *DiffSet_BaseRef {
-	m0 := &DiffSet_BaseRef{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.BranchName != nil {
-		x.xxx_hidden_Ref = &diffSet_BaseRef_BranchName{*b.BranchName}
-	}
-	if b.HeadlessCommitSha != nil {
-		x.xxx_hidden_Ref = &diffSet_BaseRef_HeadlessCommitSha{*b.HeadlessCommitSha}
-	}
-	if b.UncommittedChanges != nil {
-		x.xxx_hidden_Ref = &diffSet_BaseRef_UncommittedChanges{b.UncommittedChanges}
-	}
-	return m0
-}
-
-type case_DiffSet_BaseRef_Ref protoreflect.FieldNumber
-
-func (x case_DiffSet_BaseRef_Ref) String() string {
-	md := file_attachment_proto_msgTypes[12].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isDiffSet_BaseRef_Ref interface {
-	isDiffSet_BaseRef_Ref()
-}
-
-type diffSet_BaseRef_BranchName struct {
-	BranchName string `protobuf:"bytes,1,opt,name=branch_name,json=branchName,oneof"`
-}
-
-type diffSet_BaseRef_HeadlessCommitSha struct {
-	HeadlessCommitSha string `protobuf:"bytes,2,opt,name=headless_commit_sha,json=headlessCommitSha,oneof"`
-}
-
-type diffSet_BaseRef_UncommittedChanges struct {
-	UncommittedChanges *emptypb.Empty `protobuf:"bytes,3,opt,name=uncommitted_changes,json=uncommittedChanges,oneof"`
-}
-
-func (*diffSet_BaseRef_BranchName) isDiffSet_BaseRef_Ref() {}
-
-func (*diffSet_BaseRef_HeadlessCommitSha) isDiffSet_BaseRef_Ref() {}
-
-func (*diffSet_BaseRef_UncommittedChanges) isDiffSet_BaseRef_Ref() {}
-
 var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
@@ -2648,11 +2650,23 @@ const file_attachment_proto_rawDesc = "" +
 	"\x13uncommitted_changes\x18\n" +
 	" \x01(\v2\x16.google.protobuf.EmptyH\x01R\x12uncommittedChangesB\t\n" +
 	"\acurrentB\x06\n" +
-	"\x04base\"\xdd\x05\n" +
+	"\x04base\"n\n" +
+	"\n" +
+	"CurrentRef\x12'\n" +
+	"\vbranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00R\n" +
+	"branchName\x120\n" +
+	"\x13headless_commit_sha\x18\x02 \x01(\tH\x00R\x11headlessCommitShaB\x05\n" +
+	"\x03ref\"\xb6\x01\n" +
+	"\aBaseRef\x12'\n" +
+	"\vbranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00R\n" +
+	"branchName\x120\n" +
+	"\x13headless_commit_sha\x18\x02 \x01(\tH\x00R\x11headlessCommitSha\x12I\n" +
+	"\x13uncommitted_changes\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x12uncommittedChangesB\x05\n" +
+	"\x03ref\"\xa4\x03\n" +
 	"\aDiffSet\x12;\n" +
-	"\x05hunks\x18\x01 \x03(\v2%.warp.multi_agent.v1.DiffSet.DiffHunkR\x05hunks\x12B\n" +
-	"\bcurr_ref\x18\x02 \x01(\v2'.warp.multi_agent.v1.DiffSet.CurrentRefR\acurrRef\x12?\n" +
-	"\bbase_ref\x18\x03 \x01(\v2$.warp.multi_agent.v1.DiffSet.BaseRefR\abaseRef\x1a\xe6\x01\n" +
+	"\x05hunks\x18\x01 \x03(\v2%.warp.multi_agent.v1.DiffSet.DiffHunkR\x05hunks\x12:\n" +
+	"\bcurr_ref\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrRef\x127\n" +
+	"\bbase_ref\x18\x03 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\abaseRef\x1a\xe6\x01\n" +
 	"\bDiffHunk\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12H\n" +
 	"\n" +
@@ -2660,19 +2674,7 @@ const file_attachment_proto_rawDesc = "" +
 	"\fdiff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdiffContent\x12\x1f\n" +
 	"\vlines_added\x18\x04 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
-	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x1an\n" +
-	"\n" +
-	"CurrentRef\x12'\n" +
-	"\vbranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00R\n" +
-	"branchName\x120\n" +
-	"\x13headless_commit_sha\x18\x02 \x01(\tH\x00R\x11headlessCommitShaB\x05\n" +
-	"\x03ref\x1a\xb6\x01\n" +
-	"\aBaseRef\x12'\n" +
-	"\vbranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00R\n" +
-	"branchName\x120\n" +
-	"\x13headless_commit_sha\x18\x02 \x01(\tH\x00R\x11headlessCommitSha\x12I\n" +
-	"\x13uncommitted_changes\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x12uncommittedChangesB\x05\n" +
-	"\x03refB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\rlines_removed\x18\x05 \x01(\rR\flinesRemovedB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_attachment_proto_goTypes = []any{
@@ -2685,10 +2687,10 @@ var file_attachment_proto_goTypes = []any{
 	(*Notebook)(nil),                        // 6: warp.multi_agent.v1.Notebook
 	(*GenericStringObject)(nil),             // 7: warp.multi_agent.v1.GenericStringObject
 	(*DiffHunk)(nil),                        // 8: warp.multi_agent.v1.DiffHunk
-	(*DiffSet)(nil),                         // 9: warp.multi_agent.v1.DiffSet
-	(*DiffSet_DiffHunk)(nil),                // 10: warp.multi_agent.v1.DiffSet.DiffHunk
-	(*DiffSet_CurrentRef)(nil),              // 11: warp.multi_agent.v1.DiffSet.CurrentRef
-	(*DiffSet_BaseRef)(nil),                 // 12: warp.multi_agent.v1.DiffSet.BaseRef
+	(*CurrentRef)(nil),                      // 9: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                         // 10: warp.multi_agent.v1.BaseRef
+	(*DiffSet)(nil),                         // 11: warp.multi_agent.v1.DiffSet
+	(*DiffSet_DiffHunk)(nil),                // 12: warp.multi_agent.v1.DiffSet.DiffHunk
 	(*DocumentContent)(nil),                 // 13: warp.multi_agent.v1.DocumentContent
 	(*FileContentLineRange)(nil),            // 14: warp.multi_agent.v1.FileContentLineRange
 	(*emptypb.Empty)(nil),                   // 15: google.protobuf.Empty
@@ -2698,7 +2700,7 @@ var file_attachment_proto_depIdxs = []int32{
 	2,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
 	4,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
 	8,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
-	9,  // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	11, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
 	13, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
 	3,  // 6: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	5,  // 7: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
@@ -2706,11 +2708,11 @@ var file_attachment_proto_depIdxs = []int32{
 	7,  // 9: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
 	14, // 10: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
 	15, // 11: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
-	10, // 12: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
-	11, // 13: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.DiffSet.CurrentRef
-	12, // 14: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.DiffSet.BaseRef
-	14, // 15: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	15, // 16: warp.multi_agent.v1.DiffSet.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
+	15, // 12: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
+	12, // 13: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
+	9,  // 14: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
+	10, // 15: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
+	14, // 16: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
 	17, // [17:17] is the sub-list for method output_type
 	17, // [17:17] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name
@@ -2747,14 +2749,14 @@ func file_attachment_proto_init() {
 		(*diffHunk_BaseHeadlessCommitSha)(nil),
 		(*diffHunk_UncommittedChanges)(nil),
 	}
-	file_attachment_proto_msgTypes[11].OneofWrappers = []any{
-		(*diffSet_CurrentRef_BranchName)(nil),
-		(*diffSet_CurrentRef_HeadlessCommitSha)(nil),
+	file_attachment_proto_msgTypes[9].OneofWrappers = []any{
+		(*currentRef_BranchName)(nil),
+		(*currentRef_HeadlessCommitSha)(nil),
 	}
-	file_attachment_proto_msgTypes[12].OneofWrappers = []any{
-		(*diffSet_BaseRef_BranchName)(nil),
-		(*diffSet_BaseRef_HeadlessCommitSha)(nil),
-		(*diffSet_BaseRef_UncommittedChanges)(nil),
+	file_attachment_proto_msgTypes[10].OneofWrappers = []any{
+		(*baseRef_BranchName)(nil),
+		(*baseRef_HeadlessCommitSha)(nil),
+		(*baseRef_UncommittedChanges)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
