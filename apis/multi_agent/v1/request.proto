@@ -286,6 +286,10 @@ message Request {
     AutonomyLevel autonomy_level = 19;
     IsolationLevel isolation_level = 20;
 
+    // If `true`, the agent may use web search when helpful for completing tasks.
+    // Controlled by the user's execution profile settings.
+    bool web_search_enabled = 21;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
