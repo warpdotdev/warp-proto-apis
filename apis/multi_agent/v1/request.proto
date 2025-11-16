@@ -72,9 +72,27 @@ message Request {
       UserQueryMode mode = 3;
     }
 
+    // Initial query to spawn the CLI (long-running command) subagent on a running command.
     message CLIAgentUserQuery {
+        // The user query to send to the subagent.
         UserQuery user_query = 1;
+
+        // The active (long-)running command.
         RunningShellCommand running_command = 2;
+
+        // The tool call ID of the RunShellCommand tool call that ran this command, if any.
+        //
+        // In most cases, this is not populated, because the user is actively 'spawning' the
+        // subagent for a command they ran themself.
+        //
+        // If, however, the agent runs a command (via `RunShellCommand`) and the user eagerly sends
+        // a query just after command execution but prior to the subagent being autumatically
+        // spawned (e.g. interrupts the response stream issuing client actions that are spawning
+        // the agent), this is populated. This enables the server to imperatively spawn the subagent
+        // on this request, along with the eagerly-sent user query, continuing execution in the same
+        // way as it would have had the original stream not been interrupted, albeit with the
+        // additional user query.
+        string run_shell_command_tool_call_id = 3;
     }
 
     message UserInputs {
@@ -344,7 +362,7 @@ message Request {
       // Optional description of the server's purpose.
       string description = 2 [ (sensitive) = true ];
 
-      // Unique identifier for this MCP server.   
+      // Unique identifier for this MCP server.
       string id = 5;
 
       // Resources provided by this server.

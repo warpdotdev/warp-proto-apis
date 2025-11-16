@@ -2106,12 +2106,16 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 	return m0
 }
 
+// Initial query to spawn the CLI (long-running command) subagent on a running command.
 type Request_Input_CLIAgentUserQuery struct {
-	state                     protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_UserQuery      *Request_Input_UserQuery `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`
-	xxx_hidden_RunningCommand *RunningShellCommand     `protobuf:"bytes,2,opt,name=running_command,json=runningCommand"`
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
+	state                                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_UserQuery                 *Request_Input_UserQuery `protobuf:"bytes,1,opt,name=user_query,json=userQuery"`
+	xxx_hidden_RunningCommand            *RunningShellCommand     `protobuf:"bytes,2,opt,name=running_command,json=runningCommand"`
+	xxx_hidden_RunShellCommandToolCallId *string                  `protobuf:"bytes,3,opt,name=run_shell_command_tool_call_id,json=runShellCommandToolCallId"`
+	XXX_raceDetectHookData               protoimpl.RaceDetectHookData
+	XXX_presence                         [1]uint32
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *Request_Input_CLIAgentUserQuery) Reset() {
@@ -2153,12 +2157,27 @@ func (x *Request_Input_CLIAgentUserQuery) GetRunningCommand() *RunningShellComma
 	return nil
 }
 
+func (x *Request_Input_CLIAgentUserQuery) GetRunShellCommandToolCallId() string {
+	if x != nil {
+		if x.xxx_hidden_RunShellCommandToolCallId != nil {
+			return *x.xxx_hidden_RunShellCommandToolCallId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Input_CLIAgentUserQuery) SetUserQuery(v *Request_Input_UserQuery) {
 	x.xxx_hidden_UserQuery = v
 }
 
 func (x *Request_Input_CLIAgentUserQuery) SetRunningCommand(v *RunningShellCommand) {
 	x.xxx_hidden_RunningCommand = v
+}
+
+func (x *Request_Input_CLIAgentUserQuery) SetRunShellCommandToolCallId(v string) {
+	x.xxx_hidden_RunShellCommandToolCallId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Request_Input_CLIAgentUserQuery) HasUserQuery() bool {
@@ -2175,6 +2194,13 @@ func (x *Request_Input_CLIAgentUserQuery) HasRunningCommand() bool {
 	return x.xxx_hidden_RunningCommand != nil
 }
 
+func (x *Request_Input_CLIAgentUserQuery) HasRunShellCommandToolCallId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *Request_Input_CLIAgentUserQuery) ClearUserQuery() {
 	x.xxx_hidden_UserQuery = nil
 }
@@ -2183,11 +2209,31 @@ func (x *Request_Input_CLIAgentUserQuery) ClearRunningCommand() {
 	x.xxx_hidden_RunningCommand = nil
 }
 
+func (x *Request_Input_CLIAgentUserQuery) ClearRunShellCommandToolCallId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_RunShellCommandToolCallId = nil
+}
+
 type Request_Input_CLIAgentUserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	UserQuery      *Request_Input_UserQuery
+	// The user query to send to the subagent.
+	UserQuery *Request_Input_UserQuery
+	// The active (long-)running command.
 	RunningCommand *RunningShellCommand
+	// The tool call ID of the RunShellCommand tool call that ran this command, if any.
+	//
+	// In most cases, this is not populated, because the user is actively 'spawning' the
+	// subagent for a command they ran themself.
+	//
+	// If, however, the agent runs a command (via `RunShellCommand`) and the user eagerly sends
+	// a query just after command execution but prior to the subagent being autumatically
+	// spawned (e.g. interrupts the response stream issuing client actions that are spawning
+	// the agent), this is populated. This enables the server to imperatively spawn the subagent
+	// on this request, along with the eagerly-sent user query, continuing execution in the same
+	// way as it would have had the original stream not been interrupted, albeit with the
+	// additional user query.
+	RunShellCommandToolCallId *string
 }
 
 func (b0 Request_Input_CLIAgentUserQuery_builder) Build() *Request_Input_CLIAgentUserQuery {
@@ -2196,6 +2242,10 @@ func (b0 Request_Input_CLIAgentUserQuery_builder) Build() *Request_Input_CLIAgen
 	_, _ = b, x
 	x.xxx_hidden_UserQuery = b.UserQuery
 	x.xxx_hidden_RunningCommand = b.RunningCommand
+	if b.RunShellCommandToolCallId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_RunShellCommandToolCallId = b.RunShellCommandToolCallId
+	}
 	return m0
 }
 
@@ -5962,7 +6012,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xddG\n" +
+	"task.proto\"\xa0H\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -5972,7 +6022,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xcc.\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x8f/\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -5998,11 +6048,12 @@ const file_request_proto_rawDesc = "" +
 	"\x04mode\x18\x03 \x01(\v2\".warp.multi_agent.v1.UserQueryModeR\x04mode\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
-	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xb3\x01\n" +
+	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xf6\x01\n" +
 	"\x11CLIAgentUserQuery\x12K\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQuery\x12Q\n" +
-	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x1a\x8b\x03\n" +
+	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x12A\n" +
+	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\x8b\x03\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
 	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xab\x02\n" +
