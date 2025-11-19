@@ -20,6 +20,7 @@ message InputContext {
   google.protobuf.Timestamp current_time = 4;
   repeated Codebase codebases = 8;
   repeated ProjectRules project_rules = 10;
+  Git git = 11;
 
   // TODO: these fields should be _attachments_, not part of the input context.
   repeated ExecutedShellCommand executed_shell_commands = 5 [deprecated = true];
@@ -84,5 +85,9 @@ message InputContext {
     repeated FileContent active_rule_files = 2;
     // Additional rules that are available to be retrieved.
     repeated string additional_rule_file_paths = 3;
+  }
+
+  message Git {
+    string branch = 1;
   }
 }
