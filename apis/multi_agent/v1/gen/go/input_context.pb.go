@@ -1231,7 +1231,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x90\f\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x96\f\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1268,9 +1268,9 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\x1d\n" +
-	"\x03Git\x12\x16\n" +
-	"\x06branch\x18\x01 \x01(\tR\x06branchB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a#\n" +
+	"\x03Git\x12\x1c\n" +
+	"\x06branch\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06branchB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_input_context_proto_goTypes = []any{

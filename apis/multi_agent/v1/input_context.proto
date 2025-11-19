@@ -88,6 +88,6 @@ message InputContext {
   }
 
   message Git {
-    string branch = 1;
+    string branch = 1 [ (sensitive) = true ];
   }
 }
