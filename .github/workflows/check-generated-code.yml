@@ -11,6 +11,13 @@ jobs:
     runs-on: macos-latest
     
     steps:
+    - name: Set up Homebrew
+      uses: Homebrew/actions/setup-homebrew@v5 # Use the latest version
+
+    - name: Update and Upgrade Homebrew packages
+      run: |
+        brew update
+
     - name: Checkout repository
       uses: actions/checkout@v4
     
