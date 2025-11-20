@@ -2,6 +2,7 @@
 
 # Install Homebrew dependencies.
 if [ "$(uname -s)" = "Darwin" ]; then
+  brew update
   brew install protobuf
 fi
 
