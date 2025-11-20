@@ -12,7 +12,7 @@ jobs:
     
     steps:
     - name: Set up Homebrew
-      uses: Homebrew/actions/setup-homebrew@v4 # Use the latest version
+      uses: Homebrew/actions/setup-homebrew
 
     - name: Update and Upgrade Homebrew packages
       run: |
