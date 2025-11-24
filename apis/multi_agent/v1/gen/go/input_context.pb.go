@@ -1149,9 +1149,10 @@ func (b0 InputContext_ProjectRules_builder) Build() *InputContext_ProjectRules {
 	return m0
 }
 
+// Context about the repo in the user's working directory.
 type InputContext_Git struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Branch      *string                `protobuf:"bytes,1,opt,name=branch"`
+	xxx_hidden_Head        *string                `protobuf:"bytes,1,opt,name=head"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1183,46 +1184,47 @@ func (x *InputContext_Git) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InputContext_Git) GetBranch() string {
+func (x *InputContext_Git) GetHead() string {
 	if x != nil {
-		if x.xxx_hidden_Branch != nil {
-			return *x.xxx_hidden_Branch
+		if x.xxx_hidden_Head != nil {
+			return *x.xxx_hidden_Head
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *InputContext_Git) SetBranch(v string) {
-	x.xxx_hidden_Branch = &v
+func (x *InputContext_Git) SetHead(v string) {
+	x.xxx_hidden_Head = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *InputContext_Git) HasBranch() bool {
+func (x *InputContext_Git) HasHead() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *InputContext_Git) ClearBranch() {
+func (x *InputContext_Git) ClearHead() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Branch = nil
+	x.xxx_hidden_Head = nil
 }
 
 type InputContext_Git_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Branch *string
+	// The user's current head.
+	Head *string
 }
 
 func (b0 InputContext_Git_builder) Build() *InputContext_Git {
 	m0 := &InputContext_Git{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Branch != nil {
+	if b.Head != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Branch = b.Branch
+		x.xxx_hidden_Head = b.Head
 	}
 	return m0
 }
@@ -1231,7 +1233,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x96\f\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x92\f\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1268,9 +1270,9 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a#\n" +
-	"\x03Git\x12\x1c\n" +
-	"\x06branch\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06branchB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\x1f\n" +
+	"\x03Git\x12\x18\n" +
+	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04headB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_input_context_proto_goTypes = []any{

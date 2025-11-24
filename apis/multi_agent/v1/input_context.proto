@@ -87,7 +87,9 @@ message InputContext {
     repeated string additional_rule_file_paths = 3;
   }
 
+  // Context about the repo in the user's working directory.
   message Git {
-    string branch = 1 [ (sensitive) = true ];
+    // The user's current head (i.e. branch name or commit hash).
+    string head = 1 [ (sensitive) = true ];
   }
 }
