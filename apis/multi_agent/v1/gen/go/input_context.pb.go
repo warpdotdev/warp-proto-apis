@@ -1214,7 +1214,7 @@ func (x *InputContext_Git) ClearHead() {
 type InputContext_Git_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The user's current head.
+	// The user's current head (i.e. branch name or commit hash).
 	Head *string
 }
 
