@@ -308,6 +308,9 @@ message Request {
     // Controlled by the user's execution profile settings.
     bool web_search_enabled = 21;
 
+    // The set of CLI tools that are supported by the client.
+    repeated ToolType supported_cli_tools = 22;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
