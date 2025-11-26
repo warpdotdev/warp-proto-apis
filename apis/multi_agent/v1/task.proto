@@ -409,8 +409,8 @@ message Message {
     }
 
     // A tool call to read an MCP resource identified by its URI.
-    message ReadMCPResource { 
-      string uri = 1; 
+    message ReadMCPResource {
+      string uri = 1;
 
       // Optional identifier of the MCP server that provides this tool.
       // If set, this should match the `id` of an MCPServer in the request's MCPContext.
@@ -822,6 +822,7 @@ message WriteToLongRunningShellCommandResult {
   oneof result {
     LongRunningShellCommandSnapshot long_running_command_snapshot = 1;
     ShellCommandFinished command_finished = 2;
+    ShellCommandError error = 3;
   }
 }
 
@@ -937,6 +938,14 @@ message ReadShellCommandOutputResult {
   oneof result {
     LongRunningShellCommandSnapshot long_running_command_snapshot = 2;
     ShellCommandFinished command_finished = 3;
+    ShellCommandError error = 4;
+  }
+}
+
+message ShellCommandError {
+  oneof type {
+    // There was no command execution found with the given command_id in the tool call.
+    google.protobuf.Empty command_not_found = 1;
   }
 }
 
