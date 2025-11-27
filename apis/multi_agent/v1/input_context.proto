@@ -21,6 +21,7 @@ message InputContext {
   repeated Codebase codebases = 8;
   repeated ProjectRules project_rules = 10;
   Git git = 11;
+  repeated RevertedFileEdit reverted_file_edits = 12;
 
   // TODO: these fields should be _attachments_, not part of the input context.
   repeated ExecutedShellCommand executed_shell_commands = 5 [deprecated = true];
@@ -91,5 +92,14 @@ message InputContext {
   message Git {
     // The user's current head (i.e. branch name or commit hash).
     string head = 1 [ (sensitive) = true ];
+  }
+
+  // Information about a file edit that was reverted by the user.
+  message RevertedFileEdit {
+    // The action ID of the original file edit that was reverted.
+    string action_id = 1;
+    // Full unified diffs (with header) showing what was reverted (one per file).
+    // Each file path is included in its diff header (--- file / +++ file).
+    repeated string unified_diffs = 2;
   }
 }

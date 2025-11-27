@@ -24,18 +24,19 @@ const (
 
 // Context that may be relevant to the input in a request.
 type InputContext struct {
-	state                            protoimpl.MessageState        `protogen:"opaque.v1"`
-	xxx_hidden_Directory             *InputContext_Directory       `protobuf:"bytes,1,opt,name=directory"`
-	xxx_hidden_OperatingSystem       *InputContext_OperatingSystem `protobuf:"bytes,2,opt,name=operating_system,json=operatingSystem"`
-	xxx_hidden_Shell                 *InputContext_Shell           `protobuf:"bytes,3,opt,name=shell"`
-	xxx_hidden_CurrentTime           *timestamppb.Timestamp        `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
-	xxx_hidden_Codebases             *[]*InputContext_Codebase     `protobuf:"bytes,8,rep,name=codebases"`
-	xxx_hidden_ProjectRules          *[]*InputContext_ProjectRules `protobuf:"bytes,10,rep,name=project_rules,json=projectRules"`
-	xxx_hidden_Git                   *InputContext_Git             `protobuf:"bytes,11,opt,name=git"`
-	xxx_hidden_ExecutedShellCommands *[]*ExecutedShellCommand      `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
-	xxx_hidden_SelectedText          *[]*InputContext_SelectedText `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
-	xxx_hidden_Images                *[]*InputContext_Image        `protobuf:"bytes,7,rep,name=images"`
-	xxx_hidden_Files                 *[]*InputContext_File         `protobuf:"bytes,9,rep,name=files"`
+	state                            protoimpl.MessageState            `protogen:"opaque.v1"`
+	xxx_hidden_Directory             *InputContext_Directory           `protobuf:"bytes,1,opt,name=directory"`
+	xxx_hidden_OperatingSystem       *InputContext_OperatingSystem     `protobuf:"bytes,2,opt,name=operating_system,json=operatingSystem"`
+	xxx_hidden_Shell                 *InputContext_Shell               `protobuf:"bytes,3,opt,name=shell"`
+	xxx_hidden_CurrentTime           *timestamppb.Timestamp            `protobuf:"bytes,4,opt,name=current_time,json=currentTime"`
+	xxx_hidden_Codebases             *[]*InputContext_Codebase         `protobuf:"bytes,8,rep,name=codebases"`
+	xxx_hidden_ProjectRules          *[]*InputContext_ProjectRules     `protobuf:"bytes,10,rep,name=project_rules,json=projectRules"`
+	xxx_hidden_Git                   *InputContext_Git                 `protobuf:"bytes,11,opt,name=git"`
+	xxx_hidden_RevertedFileEdits     *[]*InputContext_RevertedFileEdit `protobuf:"bytes,12,rep,name=reverted_file_edits,json=revertedFileEdits"`
+	xxx_hidden_ExecutedShellCommands *[]*ExecutedShellCommand          `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
+	xxx_hidden_SelectedText          *[]*InputContext_SelectedText     `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
+	xxx_hidden_Images                *[]*InputContext_Image            `protobuf:"bytes,7,rep,name=images"`
+	xxx_hidden_Files                 *[]*InputContext_File             `protobuf:"bytes,9,rep,name=files"`
 	unknownFields                    protoimpl.UnknownFields
 	sizeCache                        protoimpl.SizeCache
 }
@@ -118,6 +119,15 @@ func (x *InputContext) GetGit() *InputContext_Git {
 	return nil
 }
 
+func (x *InputContext) GetRevertedFileEdits() []*InputContext_RevertedFileEdit {
+	if x != nil {
+		if x.xxx_hidden_RevertedFileEdits != nil {
+			return *x.xxx_hidden_RevertedFileEdits
+		}
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) GetExecutedShellCommands() []*ExecutedShellCommand {
 	if x != nil {
@@ -181,6 +191,10 @@ func (x *InputContext) SetProjectRules(v []*InputContext_ProjectRules) {
 
 func (x *InputContext) SetGit(v *InputContext_Git) {
 	x.xxx_hidden_Git = v
+}
+
+func (x *InputContext) SetRevertedFileEdits(v []*InputContext_RevertedFileEdit) {
+	x.xxx_hidden_RevertedFileEdits = &v
 }
 
 // Deprecated: Marked as deprecated in input_context.proto.
@@ -258,13 +272,14 @@ func (x *InputContext) ClearGit() {
 type InputContext_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Directory       *InputContext_Directory
-	OperatingSystem *InputContext_OperatingSystem
-	Shell           *InputContext_Shell
-	CurrentTime     *timestamppb.Timestamp
-	Codebases       []*InputContext_Codebase
-	ProjectRules    []*InputContext_ProjectRules
-	Git             *InputContext_Git
+	Directory         *InputContext_Directory
+	OperatingSystem   *InputContext_OperatingSystem
+	Shell             *InputContext_Shell
+	CurrentTime       *timestamppb.Timestamp
+	Codebases         []*InputContext_Codebase
+	ProjectRules      []*InputContext_ProjectRules
+	Git               *InputContext_Git
+	RevertedFileEdits []*InputContext_RevertedFileEdit
 	// TODO: these fields should be _attachments_, not part of the input context.
 	//
 	// Deprecated: Marked as deprecated in input_context.proto.
@@ -285,6 +300,7 @@ func (b0 InputContext_builder) Build() *InputContext {
 	x.xxx_hidden_Codebases = &b.Codebases
 	x.xxx_hidden_ProjectRules = &b.ProjectRules
 	x.xxx_hidden_Git = b.Git
+	x.xxx_hidden_RevertedFileEdits = &b.RevertedFileEdits
 	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
 	x.xxx_hidden_SelectedText = &b.SelectedText
 	x.xxx_hidden_Images = &b.Images
@@ -1229,11 +1245,107 @@ func (b0 InputContext_Git_builder) Build() *InputContext_Git {
 	return m0
 }
 
+// Information about a file edit that was reverted by the user.
+type InputContext_RevertedFileEdit struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ActionId     *string                `protobuf:"bytes,1,opt,name=action_id,json=actionId"`
+	xxx_hidden_UnifiedDiffs []string               `protobuf:"bytes,2,rep,name=unified_diffs,json=unifiedDiffs"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *InputContext_RevertedFileEdit) Reset() {
+	*x = InputContext_RevertedFileEdit{}
+	mi := &file_input_context_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InputContext_RevertedFileEdit) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InputContext_RevertedFileEdit) ProtoMessage() {}
+
+func (x *InputContext_RevertedFileEdit) ProtoReflect() protoreflect.Message {
+	mi := &file_input_context_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *InputContext_RevertedFileEdit) GetActionId() string {
+	if x != nil {
+		if x.xxx_hidden_ActionId != nil {
+			return *x.xxx_hidden_ActionId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_RevertedFileEdit) GetUnifiedDiffs() []string {
+	if x != nil {
+		return x.xxx_hidden_UnifiedDiffs
+	}
+	return nil
+}
+
+func (x *InputContext_RevertedFileEdit) SetActionId(v string) {
+	x.xxx_hidden_ActionId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *InputContext_RevertedFileEdit) SetUnifiedDiffs(v []string) {
+	x.xxx_hidden_UnifiedDiffs = v
+}
+
+func (x *InputContext_RevertedFileEdit) HasActionId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *InputContext_RevertedFileEdit) ClearActionId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_ActionId = nil
+}
+
+type InputContext_RevertedFileEdit_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The action ID of the original file edit that was reverted.
+	ActionId *string
+	// Full unified diffs (with header) showing what was reverted (one per file).
+	// Each file path is included in its diff header (--- file / +++ file).
+	UnifiedDiffs []string
+}
+
+func (b0 InputContext_RevertedFileEdit_builder) Build() *InputContext_RevertedFileEdit {
+	m0 := &InputContext_RevertedFileEdit{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.ActionId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_ActionId = b.ActionId
+	}
+	x.xxx_hidden_UnifiedDiffs = b.UnifiedDiffs
+	return m0
+}
+
 var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x92\f\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xcc\r\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1242,7 +1354,8 @@ const file_input_context_proto_rawDesc = "" +
 	"\tcodebases\x18\b \x03(\v2*.warp.multi_agent.v1.InputContext.CodebaseR\tcodebases\x12S\n" +
 	"\rproject_rules\x18\n" +
 	" \x03(\v2..warp.multi_agent.v1.InputContext.ProjectRulesR\fprojectRules\x127\n" +
-	"\x03git\x18\v \x01(\v2%.warp.multi_agent.v1.InputContext.GitR\x03git\x12e\n" +
+	"\x03git\x18\v \x01(\v2%.warp.multi_agent.v1.InputContext.GitR\x03git\x12b\n" +
+	"\x13reverted_file_edits\x18\f \x03(\v22.warp.multi_agent.v1.InputContext.RevertedFileEditR\x11revertedFileEdits\x12e\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2).warp.multi_agent.v1.ExecutedShellCommandB\x02\x18\x01R\x15executedShellCommands\x12S\n" +
 	"\rselected_text\x18\x06 \x03(\v2..warp.multi_agent.v1.InputContext.SelectedTextR\fselectedText\x12?\n" +
 	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12<\n" +
@@ -1272,43 +1385,48 @@ const file_input_context_proto_rawDesc = "" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
 	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\x1f\n" +
 	"\x03Git\x12\x18\n" +
-	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04headB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x1aT\n" +
+	"\x10RevertedFileEdit\x12\x1b\n" +
+	"\taction_id\x18\x01 \x01(\tR\bactionId\x12#\n" +
+	"\runified_diffs\x18\x02 \x03(\tR\funifiedDiffsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_input_context_proto_goTypes = []any{
-	(*InputContext)(nil),                 // 0: warp.multi_agent.v1.InputContext
-	(*InputContext_SelectedText)(nil),    // 1: warp.multi_agent.v1.InputContext.SelectedText
-	(*InputContext_Directory)(nil),       // 2: warp.multi_agent.v1.InputContext.Directory
-	(*InputContext_Shell)(nil),           // 3: warp.multi_agent.v1.InputContext.Shell
-	(*InputContext_OperatingSystem)(nil), // 4: warp.multi_agent.v1.InputContext.OperatingSystem
-	(*InputContext_Image)(nil),           // 5: warp.multi_agent.v1.InputContext.Image
-	(*InputContext_Codebase)(nil),        // 6: warp.multi_agent.v1.InputContext.Codebase
-	(*InputContext_File)(nil),            // 7: warp.multi_agent.v1.InputContext.File
-	(*InputContext_ProjectRules)(nil),    // 8: warp.multi_agent.v1.InputContext.ProjectRules
-	(*InputContext_Git)(nil),             // 9: warp.multi_agent.v1.InputContext.Git
-	(*timestamppb.Timestamp)(nil),        // 10: google.protobuf.Timestamp
-	(*ExecutedShellCommand)(nil),         // 11: warp.multi_agent.v1.ExecutedShellCommand
-	(*FileContent)(nil),                  // 12: warp.multi_agent.v1.FileContent
+	(*InputContext)(nil),                  // 0: warp.multi_agent.v1.InputContext
+	(*InputContext_SelectedText)(nil),     // 1: warp.multi_agent.v1.InputContext.SelectedText
+	(*InputContext_Directory)(nil),        // 2: warp.multi_agent.v1.InputContext.Directory
+	(*InputContext_Shell)(nil),            // 3: warp.multi_agent.v1.InputContext.Shell
+	(*InputContext_OperatingSystem)(nil),  // 4: warp.multi_agent.v1.InputContext.OperatingSystem
+	(*InputContext_Image)(nil),            // 5: warp.multi_agent.v1.InputContext.Image
+	(*InputContext_Codebase)(nil),         // 6: warp.multi_agent.v1.InputContext.Codebase
+	(*InputContext_File)(nil),             // 7: warp.multi_agent.v1.InputContext.File
+	(*InputContext_ProjectRules)(nil),     // 8: warp.multi_agent.v1.InputContext.ProjectRules
+	(*InputContext_Git)(nil),              // 9: warp.multi_agent.v1.InputContext.Git
+	(*InputContext_RevertedFileEdit)(nil), // 10: warp.multi_agent.v1.InputContext.RevertedFileEdit
+	(*timestamppb.Timestamp)(nil),         // 11: google.protobuf.Timestamp
+	(*ExecutedShellCommand)(nil),          // 12: warp.multi_agent.v1.ExecutedShellCommand
+	(*FileContent)(nil),                   // 13: warp.multi_agent.v1.FileContent
 }
 var file_input_context_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
 	4,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
 	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	10, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	11, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
 	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
 	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
 	9,  // 6: warp.multi_agent.v1.InputContext.git:type_name -> warp.multi_agent.v1.InputContext.Git
-	11, // 7: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	1,  // 8: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	5,  // 9: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	7,  // 10: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	12, // 11: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	12, // 12: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	10, // 7: warp.multi_agent.v1.InputContext.reverted_file_edits:type_name -> warp.multi_agent.v1.InputContext.RevertedFileEdit
+	12, // 8: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	1,  // 9: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	5,  // 10: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	7,  // 11: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	13, // 12: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	13, // 13: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_input_context_proto_init() }
@@ -1325,7 +1443,7 @@ func file_input_context_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_input_context_proto_rawDesc), len(file_input_context_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
