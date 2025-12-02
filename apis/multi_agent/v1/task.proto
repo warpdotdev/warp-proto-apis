@@ -265,6 +265,7 @@ message Message {
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
+      ChainOfThought chain_of_thought = 24;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -384,6 +385,10 @@ message Message {
       repeated string queries = 1;
       // The relative path to the file or directory to search in.
       string path = 2;
+    }
+
+    message ChainOfThought {
+      string thought = 1;
     }
 
     // A tool call to find files matching glob patterns.
@@ -549,7 +554,10 @@ message Message {
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
+      ChainOfThoughtResult chain_of_thought = 28;
     }
+
+    message ChainOfThoughtResult {}
 
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
