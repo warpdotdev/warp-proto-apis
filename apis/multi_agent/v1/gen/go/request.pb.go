@@ -1224,7 +1224,7 @@ type Request_Settings struct {
 	xxx_hidden_AutonomyLevel                      AutonomyLevel                 `protobuf:"varint,19,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
 	xxx_hidden_IsolationLevel                     IsolationLevel                `protobuf:"varint,20,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
 	xxx_hidden_WebSearchEnabled                   bool                          `protobuf:"varint,21,opt,name=web_search_enabled,json=webSearchEnabled"`
-	xxx_hidden_SupportedCliTools                  []ToolType                    `protobuf:"varint,22,rep,packed,name=supported_cli_tools,json=supportedCliTools,enum=warp.multi_agent.v1.ToolType"`
+	xxx_hidden_SupportedCliAgentTools             []ToolType                    `protobuf:"varint,22,rep,packed,name=supported_cli_agent_tools,json=supportedCliAgentTools,enum=warp.multi_agent.v1.ToolType"`
 	XXX_raceDetectHookData                        protoimpl.RaceDetectHookData
 	XXX_presence                                  [1]uint32
 	unknownFields                                 protoimpl.UnknownFields
@@ -1407,9 +1407,9 @@ func (x *Request_Settings) GetWebSearchEnabled() bool {
 	return false
 }
 
-func (x *Request_Settings) GetSupportedCliTools() []ToolType {
+func (x *Request_Settings) GetSupportedCliAgentTools() []ToolType {
 	if x != nil {
-		return x.xxx_hidden_SupportedCliTools
+		return x.xxx_hidden_SupportedCliAgentTools
 	}
 	return nil
 }
@@ -1516,8 +1516,8 @@ func (x *Request_Settings) SetWebSearchEnabled(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 22)
 }
 
-func (x *Request_Settings) SetSupportedCliTools(v []ToolType) {
-	x.xxx_hidden_SupportedCliTools = v
+func (x *Request_Settings) SetSupportedCliAgentTools(v []ToolType) {
+	x.xxx_hidden_SupportedCliAgentTools = v
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -1815,8 +1815,8 @@ type Request_Settings_builder struct {
 	// If `true`, the agent may use web search when helpful for completing tasks.
 	// Controlled by the user's execution profile settings.
 	WebSearchEnabled *bool
-	// The set of CLI tools that are supported by the client.
-	SupportedCliTools []ToolType
+	// The set of CLI subagent tools that are supported by the client.
+	SupportedCliAgentTools []ToolType
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -1898,7 +1898,7 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 22)
 		x.xxx_hidden_WebSearchEnabled = *b.WebSearchEnabled
 	}
-	x.xxx_hidden_SupportedCliTools = b.SupportedCliTools
+	x.xxx_hidden_SupportedCliAgentTools = b.SupportedCliAgentTools
 	return m0
 }
 
@@ -6027,7 +6027,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xefH\n" +
+	"task.proto\"\xfaH\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6157,7 +6157,7 @@ const file_request_proto_rawDesc = "" +
 	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xbb\r\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xc6\r\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -6180,8 +6180,8 @@ const file_request_proto_rawDesc = "" +
 	"\bapi_keys\x18\x12 \x01(\v2-.warp.multi_agent.v1.Request.Settings.ApiKeysR\aapiKeys\x12I\n" +
 	"\x0eautonomy_level\x18\x13 \x01(\x0e2\".warp.multi_agent.v1.AutonomyLevelR\rautonomyLevel\x12L\n" +
 	"\x0fisolation_level\x18\x14 \x01(\x0e2#.warp.multi_agent.v1.IsolationLevelR\x0eisolationLevel\x12,\n" +
-	"\x12web_search_enabled\x18\x15 \x01(\bR\x10webSearchEnabled\x12M\n" +
-	"\x13supported_cli_tools\x18\x16 \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x11supportedCliTools\x1aU\n" +
+	"\x12web_search_enabled\x18\x15 \x01(\bR\x10webSearchEnabled\x12X\n" +
+	"\x19supported_cli_agent_tools\x18\x16 \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x16supportedCliAgentTools\x1aU\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
@@ -6323,7 +6323,7 @@ var file_request_proto_depIdxs = []int32{
 	34, // 24: warp.multi_agent.v1.Request.Settings.api_keys:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys
 	0,  // 25: warp.multi_agent.v1.Request.Settings.autonomy_level:type_name -> warp.multi_agent.v1.AutonomyLevel
 	1,  // 26: warp.multi_agent.v1.Request.Settings.isolation_level:type_name -> warp.multi_agent.v1.IsolationLevel
-	41, // 27: warp.multi_agent.v1.Request.Settings.supported_cli_tools:type_name -> warp.multi_agent.v1.ToolType
+	41, // 27: warp.multi_agent.v1.Request.Settings.supported_cli_agent_tools:type_name -> warp.multi_agent.v1.ToolType
 	35, // 28: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
 	36, // 29: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	37, // 30: warp.multi_agent.v1.Request.MCPContext.servers:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPServer
