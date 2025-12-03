@@ -18034,12 +18034,13 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xf7\x02\n" +
+	"\x06result\"\x99\x03\n" +
 	"\x10FileGlobV2Result\x12I\n" +
 	"\asuccess\x18\x01 \x01(\v2-.warp.multi_agent.v1.FileGlobV2Result.SuccessH\x00R\asuccess\x12C\n" +
-	"\x05error\x18\x02 \x01(\v2+.warp.multi_agent.v1.FileGlobV2Result.ErrorH\x00R\x05error\x1a\x9f\x01\n" +
+	"\x05error\x18\x02 \x01(\v2+.warp.multi_agent.v1.FileGlobV2Result.ErrorH\x00R\x05error\x1a\xc1\x01\n" +
 	"\aSuccess\x12`\n" +
-	"\rmatched_files\x18\x01 \x03(\v2;.warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatchR\fmatchedFiles\x1a2\n" +
+	"\rmatched_files\x18\x01 \x03(\v2;.warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatchR\fmatchedFiles\x12 \n" +
+	"\bwarnings\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\bwarnings\x1a2\n" +
 	"\rFileGlobMatch\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
