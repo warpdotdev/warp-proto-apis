@@ -493,6 +493,7 @@ message Message {
       oneof metadata {
         CLISubagent cli = 3;
         google.protobuf.Empty research = 4;
+        google.protobuf.Empty advice = 5;
       }
 
       message CLISubagent {

@@ -13008,6 +13008,15 @@ func (x *Message_ToolCall_Subagent) GetResearch() *emptypb.Empty {
 	return nil
 }
 
+func (x *Message_ToolCall_Subagent) GetAdvice() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Metadata.(*message_ToolCall_Subagent_Advice); ok {
+			return x.Advice
+		}
+	}
+	return nil
+}
+
 func (x *Message_ToolCall_Subagent) SetTaskId(v string) {
 	x.xxx_hidden_TaskId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
@@ -13032,6 +13041,14 @@ func (x *Message_ToolCall_Subagent) SetResearch(v *emptypb.Empty) {
 		return
 	}
 	x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Research{v}
+}
+
+func (x *Message_ToolCall_Subagent) SetAdvice(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Metadata = nil
+		return
+	}
+	x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Advice{v}
 }
 
 func (x *Message_ToolCall_Subagent) HasTaskId() bool {
@@ -13071,6 +13088,14 @@ func (x *Message_ToolCall_Subagent) HasResearch() bool {
 	return ok
 }
 
+func (x *Message_ToolCall_Subagent) HasAdvice() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Metadata.(*message_ToolCall_Subagent_Advice)
+	return ok
+}
+
 func (x *Message_ToolCall_Subagent) ClearTaskId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_TaskId = nil
@@ -13097,9 +13122,16 @@ func (x *Message_ToolCall_Subagent) ClearResearch() {
 	}
 }
 
+func (x *Message_ToolCall_Subagent) ClearAdvice() {
+	if _, ok := x.xxx_hidden_Metadata.(*message_ToolCall_Subagent_Advice); ok {
+		x.xxx_hidden_Metadata = nil
+	}
+}
+
 const Message_ToolCall_Subagent_Metadata_not_set_case case_Message_ToolCall_Subagent_Metadata = 0
 const Message_ToolCall_Subagent_Cli_case case_Message_ToolCall_Subagent_Metadata = 3
 const Message_ToolCall_Subagent_Research_case case_Message_ToolCall_Subagent_Metadata = 4
+const Message_ToolCall_Subagent_Advice_case case_Message_ToolCall_Subagent_Metadata = 5
 
 func (x *Message_ToolCall_Subagent) WhichMetadata() case_Message_ToolCall_Subagent_Metadata {
 	if x == nil {
@@ -13110,6 +13142,8 @@ func (x *Message_ToolCall_Subagent) WhichMetadata() case_Message_ToolCall_Subage
 		return Message_ToolCall_Subagent_Cli_case
 	case *message_ToolCall_Subagent_Research:
 		return Message_ToolCall_Subagent_Research_case
+	case *message_ToolCall_Subagent_Advice:
+		return Message_ToolCall_Subagent_Advice_case
 	default:
 		return Message_ToolCall_Subagent_Metadata_not_set_case
 	}
@@ -13125,6 +13159,7 @@ type Message_ToolCall_Subagent_builder struct {
 	// Fields of oneof xxx_hidden_Metadata:
 	Cli      *Message_ToolCall_Subagent_CLISubagent
 	Research *emptypb.Empty
+	Advice   *emptypb.Empty
 	// -- end of xxx_hidden_Metadata
 }
 
@@ -13145,6 +13180,9 @@ func (b0 Message_ToolCall_Subagent_builder) Build() *Message_ToolCall_Subagent {
 	}
 	if b.Research != nil {
 		x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Research{b.Research}
+	}
+	if b.Advice != nil {
+		x.xxx_hidden_Metadata = &message_ToolCall_Subagent_Advice{b.Advice}
 	}
 	return m0
 }
@@ -13171,9 +13209,15 @@ type message_ToolCall_Subagent_Research struct {
 	Research *emptypb.Empty `protobuf:"bytes,4,opt,name=research,oneof"`
 }
 
+type message_ToolCall_Subagent_Advice struct {
+	Advice *emptypb.Empty `protobuf:"bytes,5,opt,name=advice,oneof"`
+}
+
 func (*message_ToolCall_Subagent_Cli) isMessage_ToolCall_Subagent_Metadata() {}
 
 func (*message_ToolCall_Subagent_Research) isMessage_ToolCall_Subagent_Metadata() {}
+
+func (*message_ToolCall_Subagent_Advice) isMessage_ToolCall_Subagent_Metadata() {}
 
 // A tool call to read documents.
 type Message_ToolCall_ReadDocuments struct {
@@ -20585,12 +20629,13 @@ const file_task_proto_rawDesc = "" +
 	"\x05query\x18\x03 \x01(\tR\x05queryB\x0e\n" +
 	"\fdisplay_mode\x1a\x10\n" +
 	"\x0eOpenCodeReview\x1a\r\n" +
-	"\vInitProject\x1a\xfd\x01\n" +
+	"\vInitProject\x1a\xaf\x02\n" +
 	"\bSubagent\x12\x17\n" +
 	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12\x18\n" +
 	"\apayload\x18\x02 \x01(\tR\apayload\x12N\n" +
 	"\x03cli\x18\x03 \x01(\v2:.warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagentH\x00R\x03cli\x124\n" +
-	"\bresearch\x18\x04 \x01(\v2\x16.google.protobuf.EmptyH\x00R\bresearch\x1a,\n" +
+	"\bresearch\x18\x04 \x01(\v2\x16.google.protobuf.EmptyH\x00R\bresearch\x120\n" +
+	"\x06advice\x18\x05 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06advice\x1a,\n" +
 	"\vCLISubagent\x12\x1d\n" +
 	"\n" +
 	"command_id\x18\x01 \x01(\tR\tcommandIdB\n" +
@@ -21567,6 +21612,7 @@ func file_task_proto_init() {
 	file_task_proto_msgTypes[72].OneofWrappers = []any{
 		(*message_ToolCall_Subagent_Cli)(nil),
 		(*message_ToolCall_Subagent_Research)(nil),
+		(*message_ToolCall_Subagent_Advice)(nil),
 	}
 	file_task_proto_msgTypes[76].OneofWrappers = []any{
 		(*message_ToolCall_ReadShellCommandOutput_Duration)(nil),
