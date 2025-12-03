@@ -773,6 +773,10 @@ message FileGlobV2Result {
       // The path to the file that matched a file name pattern.
       string file_path = 1 [ (sensitive) = true ];
     }
+    // Optional warnings from the file glob operation (e.g. permission errors).
+    // These warnings are typically from stderr when the find succeeded but
+    // encountered non-fatal issues.
+    string warnings = 2 [ (sensitive) = true ];
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }

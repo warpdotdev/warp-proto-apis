@@ -15918,6 +15918,9 @@ func (b0 FileGlobResult_Error_builder) Build() *FileGlobResult_Error {
 type FileGlobV2Result_Success struct {
 	state                   protoimpl.MessageState                     `protogen:"opaque.v1"`
 	xxx_hidden_MatchedFiles *[]*FileGlobV2Result_Success_FileGlobMatch `protobuf:"bytes,1,rep,name=matched_files,json=matchedFiles"`
+	xxx_hidden_Warnings     *string                                    `protobuf:"bytes,2,opt,name=warnings"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -15956,8 +15959,35 @@ func (x *FileGlobV2Result_Success) GetMatchedFiles() []*FileGlobV2Result_Success
 	return nil
 }
 
+func (x *FileGlobV2Result_Success) GetWarnings() string {
+	if x != nil {
+		if x.xxx_hidden_Warnings != nil {
+			return *x.xxx_hidden_Warnings
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *FileGlobV2Result_Success) SetMatchedFiles(v []*FileGlobV2Result_Success_FileGlobMatch) {
 	x.xxx_hidden_MatchedFiles = &v
+}
+
+func (x *FileGlobV2Result_Success) SetWarnings(v string) {
+	x.xxx_hidden_Warnings = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *FileGlobV2Result_Success) HasWarnings() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *FileGlobV2Result_Success) ClearWarnings() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Warnings = nil
 }
 
 type FileGlobV2Result_Success_builder struct {
@@ -15965,6 +15995,10 @@ type FileGlobV2Result_Success_builder struct {
 
 	// List of file paths matching the file name patterns.
 	MatchedFiles []*FileGlobV2Result_Success_FileGlobMatch
+	// Optional warnings from the file glob operation (e.g. permission errors).
+	// These warnings are typically from stderr when the find succeeded but
+	// encountered non-fatal issues.
+	Warnings *string
 }
 
 func (b0 FileGlobV2Result_Success_builder) Build() *FileGlobV2Result_Success {
@@ -15972,6 +16006,10 @@ func (b0 FileGlobV2Result_Success_builder) Build() *FileGlobV2Result_Success {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_MatchedFiles = &b.MatchedFiles
+	if b.Warnings != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Warnings = b.Warnings
+	}
 	return m0
 }
 
@@ -18034,12 +18072,13 @@ const file_task_proto_rawDesc = "" +
 	"\rmatched_files\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\fmatchedFiles\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xf7\x02\n" +
+	"\x06result\"\x99\x03\n" +
 	"\x10FileGlobV2Result\x12I\n" +
 	"\asuccess\x18\x01 \x01(\v2-.warp.multi_agent.v1.FileGlobV2Result.SuccessH\x00R\asuccess\x12C\n" +
-	"\x05error\x18\x02 \x01(\v2+.warp.multi_agent.v1.FileGlobV2Result.ErrorH\x00R\x05error\x1a\x9f\x01\n" +
+	"\x05error\x18\x02 \x01(\v2+.warp.multi_agent.v1.FileGlobV2Result.ErrorH\x00R\x05error\x1a\xc1\x01\n" +
 	"\aSuccess\x12`\n" +
-	"\rmatched_files\x18\x01 \x03(\v2;.warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatchR\fmatchedFiles\x1a2\n" +
+	"\rmatched_files\x18\x01 \x03(\v2;.warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatchR\fmatchedFiles\x12 \n" +
+	"\bwarnings\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\bwarnings\x1a2\n" +
 	"\rFileGlobMatch\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
