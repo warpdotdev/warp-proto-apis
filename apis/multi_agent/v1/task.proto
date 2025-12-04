@@ -367,8 +367,11 @@ message Message {
         // Optional file rename.
         string move_to = 2;
 
-        repeated Hunk v4a_hunks = 3;
+        repeated Hunk hunks = 3;
 
+        // A V4A hunk represents a single change block in a file update.
+        // See here for more details on the semantic meaning of the fields:
+        // https://cookbook.openai.com/examples/gpt4-1_prompting_guide#apply-patch
         message Hunk {
           // Context to quickly identify the location of the change (i.e. the `@@` statements).
           repeated string change_context = 1;

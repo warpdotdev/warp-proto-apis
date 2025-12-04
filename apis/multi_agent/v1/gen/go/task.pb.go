@@ -13334,7 +13334,7 @@ type Message_ToolCall_ApplyFileDiffs_V4AFileUpdate struct {
 	state                  protoimpl.MessageState                                 `protogen:"opaque.v1"`
 	xxx_hidden_FilePath    *string                                                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
 	xxx_hidden_MoveTo      *string                                                `protobuf:"bytes,2,opt,name=move_to,json=moveTo"`
-	xxx_hidden_V4AHunks    *[]*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk `protobuf:"bytes,3,rep,name=v4a_hunks,json=v4aHunks"`
+	xxx_hidden_Hunks       *[]*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk `protobuf:"bytes,3,rep,name=hunks"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -13386,10 +13386,10 @@ func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) GetMoveTo() string {
 	return ""
 }
 
-func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) GetV4AHunks() []*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk {
+func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) GetHunks() []*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk {
 	if x != nil {
-		if x.xxx_hidden_V4AHunks != nil {
-			return *x.xxx_hidden_V4AHunks
+		if x.xxx_hidden_Hunks != nil {
+			return *x.xxx_hidden_Hunks
 		}
 	}
 	return nil
@@ -13405,8 +13405,8 @@ func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) SetMoveTo(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) SetV4AHunks(v []*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk) {
-	x.xxx_hidden_V4AHunks = &v
+func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) SetHunks(v []*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk) {
+	x.xxx_hidden_Hunks = &v
 }
 
 func (x *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate) HasFilePath() bool {
@@ -13438,8 +13438,8 @@ type Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_builder struct {
 
 	FilePath *string
 	// Optional file rename.
-	MoveTo   *string
-	V4AHunks []*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk
+	MoveTo *string
+	Hunks  []*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk
 }
 
 func (b0 Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_builder) Build() *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate {
@@ -13454,7 +13454,7 @@ func (b0 Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_builder) Build() *Message
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_MoveTo = b.MoveTo
 	}
-	x.xxx_hidden_V4AHunks = &b.V4AHunks
+	x.xxx_hidden_Hunks = &b.Hunks
 	return m0
 }
 
@@ -13649,6 +13649,9 @@ func (b0 Message_ToolCall_ApplyFileDiffs_DeleteFile_builder) Build() *Message_To
 	return m0
 }
 
+// A V4A hunk represents a single change block in a file update.
+// See here for more details on the semantic meaning of the fields:
+// https://cookbook.openai.com/examples/gpt4-1_prompting_guide#apply-patch
 type Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ChangeContext []string               `protobuf:"bytes,1,rep,name=change_context,json=changeContext"`
@@ -18152,7 +18155,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xe5e\n" +
+	"\x0ecomment_target\"\xdee\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -18226,7 +18229,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xaf/\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa8/\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -18289,7 +18292,7 @@ const file_task_proto_rawDesc = "" +
 	"\x0eSearchCodebase\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12!\n" +
 	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x12#\n" +
-	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\xb3\a\n" +
+	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\xac\a\n" +
 	"\x0eApplyFileDiffs\x12\x18\n" +
 	"\asummary\x18\x01 \x01(\tR\asummary\x12S\n" +
 	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x12Y\n" +
@@ -18300,11 +18303,11 @@ const file_task_proto_rawDesc = "" +
 	"\bFileDiff\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x16\n" +
 	"\x06search\x18\x02 \x01(\tR\x06search\x12\x18\n" +
-	"\areplace\x18\x03 \x01(\tR\areplace\x1a\xc3\x02\n" +
+	"\areplace\x18\x03 \x01(\tR\areplace\x1a\xbc\x02\n" +
 	"\rV4AFileUpdate\x12\x1b\n" +
 	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x17\n" +
-	"\amove_to\x18\x02 \x01(\tR\x06moveTo\x12d\n" +
-	"\tv4a_hunks\x18\x03 \x03(\v2G.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.HunkR\bv4aHunks\x1a\x95\x01\n" +
+	"\amove_to\x18\x02 \x01(\tR\x06moveTo\x12]\n" +
+	"\x05hunks\x18\x03 \x03(\v2G.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.HunkR\x05hunks\x1a\x95\x01\n" +
 	"\x04Hunk\x12%\n" +
 	"\x0echange_context\x18\x01 \x03(\tR\rchangeContext\x12\x1f\n" +
 	"\vpre_context\x18\x02 \x01(\tR\n" +
@@ -18977,7 +18980,7 @@ var file_task_proto_depIdxs = []int32{
 	136, // 156: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
 	136, // 157: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
 	146, // 158: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	81,  // 159: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.v4a_hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
+	81,  // 159: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
 	146, // 160: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	32,  // 161: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	92,  // 162: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
