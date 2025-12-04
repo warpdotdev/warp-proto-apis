@@ -367,18 +367,20 @@ message Message {
         // Optional file rename.
         string move_to = 2;
 
-        repeated V4ADiff v4a_diffs = 3;
+        repeated Hunk v4a_hunks = 3;
 
-        message V4ADiff {
+        message Hunk {
           // Context to quickly identify the location of the change (i.e. the `@@` statements).
           repeated string change_context = 1;
-          // The context before the change.
+          // The context lines right before the change.
           string pre_context = 2;
           // The old content that is being replaced.
+          // Empty if lines are only being added.
           string old = 3;
           // The new content that replaces the old content.
+          // Empty if lines are only being deleted.
           string new = 4;
-          // The context after the change.
+          // The context lines right after the change.
           string post_context = 5;
         }
       }
