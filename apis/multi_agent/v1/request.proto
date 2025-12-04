@@ -311,6 +311,9 @@ message Request {
     // The set of CLI subagent tools that are supported by the client.
     repeated ToolType supported_cli_agent_tools = 22;
 
+      // If `true`, the client supports V4A-style diffs.
+    bool supports_v4a_file_diffs = 23;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;

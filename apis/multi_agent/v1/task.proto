@@ -350,6 +350,8 @@ message Message {
       string summary = 1;
       repeated FileDiff diffs = 2;
       repeated NewFile new_files = 3;
+      repeated DeleteFile deleted_files = 4;
+      repeated V4AFileUpdate v4a_updates = 5;
 
       message FileDiff {
         string file_path = 1;
@@ -359,11 +361,42 @@ message Message {
         string replace = 3;
       }
 
+      message V4AFileUpdate {
+        string file_path = 1;
+        
+        // Optional file rename.
+        string move_to = 2;
+
+        repeated Hunk hunks = 3;
+
+        // A V4A hunk represents a single change block in a file update.
+        // See here for more details on the semantic meaning of the fields:
+        // https://cookbook.openai.com/examples/gpt4-1_prompting_guide#apply-patch
+        message Hunk {
+          // Context to quickly identify the location of the change (i.e. the `@@` statements).
+          repeated string change_context = 1;
+          // The context lines right before the change.
+          string pre_context = 2;
+          // The old content that is being replaced.
+          // Empty if lines are only being added.
+          string old = 3;
+          // The new content that replaces the old content.
+          // Empty if lines are only being deleted.
+          string new = 4;
+          // The context lines right after the change.
+          string post_context = 5;
+        }
+      }
+
       message NewFile {
         // Path of the file to create.
         string file_path = 1;
         // The new file contents.
         string content = 2;
+      }
+
+      message DeleteFile {
+        string file_path = 1;
       }
     }
 
