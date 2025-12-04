@@ -1970,7 +1970,7 @@ type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
 	ModelId *string
 	// The total tokens that we have used with the given model in this conversation.
 	TotalTokens *uint32
-	// Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction").
+	// Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction", etc.).
 	TokenUsageByCategory map[string]uint32
 }
 
