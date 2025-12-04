@@ -92,28 +92,11 @@ message ResponseEvent {
       // Tool usage data across every tool the agent could use (excluding some passive and server tools).
       ToolUsageMetadata tool_usage_metadata = 5;
 
-      // Token usage using the warp API key (aggregated across all categories).
-      // Deprecated: Use warp_token_usage_by_category instead.
-      map<string, ModelTokenUsage> warp_token_usage = 6 [deprecated = true];
+      // Token usage using the warp API key.
+      map<string, ModelTokenUsage> warp_token_usage = 6;
 
-      // Token usage using a user's API key (aggregated across all categories).
-      // Deprecated: Use byok_token_usage_by_category instead.
-      map<string, ModelTokenUsage> byok_token_usage = 7 [deprecated = true];
-
-      // Token usage using the warp API key, broken down by usage category.
-      repeated CategoryTokenUsage warp_token_usage_by_category = 8;
-
-      // Token usage using a user's API key, broken down by usage category.
-      repeated CategoryTokenUsage byok_token_usage_by_category = 9;
-    }
-
-    // Token usage for a specific usage category.
-    message CategoryTokenUsage {
-      // The category of usage (e.g. "primary_agent", "cli", "compaction").
-      string category = 1;
-
-      // Token usage by model for this category.
-      map<string, ModelTokenUsage> usage_by_model = 2;
+      // Token usage using a user's API key.
+      map<string, ModelTokenUsage> byok_token_usage = 7;
     }
 
     // Token usage by model.
@@ -127,6 +110,9 @@ message ResponseEvent {
 
       // The total tokens that we have used with the given model in this conversation.
       uint32 total_tokens = 2;
+
+      // Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction", etc.).
+      map<string, uint32> token_usage_by_category = 3;
     }
 
     // Tool usage by tool.
