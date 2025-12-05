@@ -73,10 +73,10 @@ message ReviewComment {
     // We need a diff hunk rather than just a starting and ending line number
     // because the latter cannot uniquely identify a deleted line.
     DiffHunk commented_line = 3;
-    
+
     // The file path that this comment is associated with.
     CommentedFile commented_file = 4;
-    
+
     // Indicates this comment is associated with the entire diff set.
     CommentedDiffset commented_diffset = 5;
   }
@@ -146,6 +146,8 @@ message Message {
     map<string, Attachment> referenced_attachments = 3;
 
     UserQueryMode mode = 4;
+
+    AgentType intended_agent = 5;
   }
 
   // System queries represent prompts from the Warp client that were
@@ -363,7 +365,7 @@ message Message {
 
       message V4AFileUpdate {
         string file_path = 1;
-        
+
         // Optional file rename.
         string move_to = 2;
 
@@ -1020,8 +1022,10 @@ message UserQueryMode {
     // We can change this to a non-empty `Plan` type later, this is backwards compatible
     google.protobuf.Empty plan = 1;
   }
+}
 
-  message CLI {
-    RunningShellCommand command = 1;
-  }
+enum AgentType {
+  AGENT_TYPE_UNKNOWN = 0;
+  AGENT_TYPE_PRIMARY = 1;
+  AGENT_TYPE_CLI = 2;
 }

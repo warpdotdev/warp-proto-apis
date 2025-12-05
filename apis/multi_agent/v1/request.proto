@@ -70,6 +70,7 @@ message Request {
       // An attachment referenced by key in the query text.
       map<string, Attachment> referenced_attachments = 2;
       UserQueryMode mode = 3;
+      AgentType intended_agent = 4;
     }
 
     // Initial query to spawn the CLI (long-running command) subagent on a running command.
