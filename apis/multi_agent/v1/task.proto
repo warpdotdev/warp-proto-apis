@@ -267,6 +267,7 @@ message Message {
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
+      UseComputer use_computer = 24;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -546,6 +547,27 @@ message Message {
         google.protobuf.Empty on_completion = 3;
       }
     }
+
+    message UseComputer {
+      // A series of actions to execute on the machine.
+      repeated Action actions = 1;
+      bool capture_screenshot_after_actions = 2;
+
+      message Coordinates {
+        int32 x = 1;
+        int32 y = 2;
+      }
+
+      message Action {
+        oneof type {
+          MouseMove mouse_move = 1;
+        }
+      }
+
+      message MouseMove {
+        Coordinates to = 1;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -584,6 +606,7 @@ message Message {
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
+      UseComputerResult use_computer = 28;
     }
 
     // Result of a server-side tool call.
@@ -981,6 +1004,28 @@ message ReadShellCommandOutputResult {
   }
 }
 
+message UseComputerResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    Image screenshot = 1;
+
+    message Image {
+      // Raw image bytes.
+      bytes data = 1 [ (sensitive) = true ];
+      // MIME type of the image content (e.g., "image/png").
+      string mime_type = 2;
+    }
+  }
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
+
 message ShellCommandError {
   oneof type {
     // There was no command execution found with the given command_id in the tool call.
@@ -1015,6 +1060,7 @@ enum ToolType {
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
   READ_SHELL_COMMAND_OUTPUT = 20;
+  USE_COMPUTER = 21;
 }
 
 message UserQueryMode {
