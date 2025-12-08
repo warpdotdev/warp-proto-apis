@@ -134,6 +134,7 @@ message Request {
         EditDocumentsResult edit_documents = 20;
         CreateDocumentsResult create_documents = 21;
         ReadShellCommandOutputResult read_shell_command_output = 22;
+        UseComputerResult use_computer = 23;
       }
 
       // Generic tool call result for representing a user-requested refinement
