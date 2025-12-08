@@ -14992,21 +14992,21 @@ func (x *Message_ToolCall_UseComputer_Action) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ToolCall_UseComputer_Action) GetMouseMove() *Message_ToolCall_UseComputer_MouseMove {
+func (x *Message_ToolCall_UseComputer_Action) GetMouseMove() *Message_ToolCall_UseComputer_Action_MouseMove {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*message_ToolCall_UseComputer_Action_MouseMove); ok {
+		if x, ok := x.xxx_hidden_Type.(*message_ToolCall_UseComputer_Action_MouseMove_); ok {
 			return x.MouseMove
 		}
 	}
 	return nil
 }
 
-func (x *Message_ToolCall_UseComputer_Action) SetMouseMove(v *Message_ToolCall_UseComputer_MouseMove) {
+func (x *Message_ToolCall_UseComputer_Action) SetMouseMove(v *Message_ToolCall_UseComputer_Action_MouseMove) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &message_ToolCall_UseComputer_Action_MouseMove{v}
+	x.xxx_hidden_Type = &message_ToolCall_UseComputer_Action_MouseMove_{v}
 }
 
 func (x *Message_ToolCall_UseComputer_Action) HasType() bool {
@@ -15020,7 +15020,7 @@ func (x *Message_ToolCall_UseComputer_Action) HasMouseMove() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*message_ToolCall_UseComputer_Action_MouseMove)
+	_, ok := x.xxx_hidden_Type.(*message_ToolCall_UseComputer_Action_MouseMove_)
 	return ok
 }
 
@@ -15029,7 +15029,7 @@ func (x *Message_ToolCall_UseComputer_Action) ClearType() {
 }
 
 func (x *Message_ToolCall_UseComputer_Action) ClearMouseMove() {
-	if _, ok := x.xxx_hidden_Type.(*message_ToolCall_UseComputer_Action_MouseMove); ok {
+	if _, ok := x.xxx_hidden_Type.(*message_ToolCall_UseComputer_Action_MouseMove_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -15042,7 +15042,7 @@ func (x *Message_ToolCall_UseComputer_Action) WhichType() case_Message_ToolCall_
 		return Message_ToolCall_UseComputer_Action_Type_not_set_case
 	}
 	switch x.xxx_hidden_Type.(type) {
-	case *message_ToolCall_UseComputer_Action_MouseMove:
+	case *message_ToolCall_UseComputer_Action_MouseMove_:
 		return Message_ToolCall_UseComputer_Action_MouseMove_case
 	default:
 		return Message_ToolCall_UseComputer_Action_Type_not_set_case
@@ -15053,7 +15053,7 @@ type Message_ToolCall_UseComputer_Action_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Type:
-	MouseMove *Message_ToolCall_UseComputer_MouseMove
+	MouseMove *Message_ToolCall_UseComputer_Action_MouseMove
 	// -- end of xxx_hidden_Type
 }
 
@@ -15062,7 +15062,7 @@ func (b0 Message_ToolCall_UseComputer_Action_builder) Build() *Message_ToolCall_
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.MouseMove != nil {
-		x.xxx_hidden_Type = &message_ToolCall_UseComputer_Action_MouseMove{b.MouseMove}
+		x.xxx_hidden_Type = &message_ToolCall_UseComputer_Action_MouseMove_{b.MouseMove}
 	}
 	return m0
 }
@@ -15081,33 +15081,33 @@ type isMessage_ToolCall_UseComputer_Action_Type interface {
 	isMessage_ToolCall_UseComputer_Action_Type()
 }
 
-type message_ToolCall_UseComputer_Action_MouseMove struct {
-	MouseMove *Message_ToolCall_UseComputer_MouseMove `protobuf:"bytes,1,opt,name=mouse_move,json=mouseMove,oneof"`
+type message_ToolCall_UseComputer_Action_MouseMove_ struct {
+	MouseMove *Message_ToolCall_UseComputer_Action_MouseMove `protobuf:"bytes,1,opt,name=mouse_move,json=mouseMove,oneof"`
 }
 
-func (*message_ToolCall_UseComputer_Action_MouseMove) isMessage_ToolCall_UseComputer_Action_Type() {}
+func (*message_ToolCall_UseComputer_Action_MouseMove_) isMessage_ToolCall_UseComputer_Action_Type() {}
 
-type Message_ToolCall_UseComputer_MouseMove struct {
+type Message_ToolCall_UseComputer_Action_MouseMove struct {
 	state         protoimpl.MessageState                    `protogen:"opaque.v1"`
 	xxx_hidden_To *Message_ToolCall_UseComputer_Coordinates `protobuf:"bytes,1,opt,name=to"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Message_ToolCall_UseComputer_MouseMove) Reset() {
-	*x = Message_ToolCall_UseComputer_MouseMove{}
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) Reset() {
+	*x = Message_ToolCall_UseComputer_Action_MouseMove{}
 	mi := &file_task_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_ToolCall_UseComputer_MouseMove) String() string {
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_ToolCall_UseComputer_MouseMove) ProtoMessage() {}
+func (*Message_ToolCall_UseComputer_Action_MouseMove) ProtoMessage() {}
 
-func (x *Message_ToolCall_UseComputer_MouseMove) ProtoReflect() protoreflect.Message {
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -15119,36 +15119,36 @@ func (x *Message_ToolCall_UseComputer_MouseMove) ProtoReflect() protoreflect.Mes
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ToolCall_UseComputer_MouseMove) GetTo() *Message_ToolCall_UseComputer_Coordinates {
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) GetTo() *Message_ToolCall_UseComputer_Coordinates {
 	if x != nil {
 		return x.xxx_hidden_To
 	}
 	return nil
 }
 
-func (x *Message_ToolCall_UseComputer_MouseMove) SetTo(v *Message_ToolCall_UseComputer_Coordinates) {
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) SetTo(v *Message_ToolCall_UseComputer_Coordinates) {
 	x.xxx_hidden_To = v
 }
 
-func (x *Message_ToolCall_UseComputer_MouseMove) HasTo() bool {
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) HasTo() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_To != nil
 }
 
-func (x *Message_ToolCall_UseComputer_MouseMove) ClearTo() {
+func (x *Message_ToolCall_UseComputer_Action_MouseMove) ClearTo() {
 	x.xxx_hidden_To = nil
 }
 
-type Message_ToolCall_UseComputer_MouseMove_builder struct {
+type Message_ToolCall_UseComputer_Action_MouseMove_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	To *Message_ToolCall_UseComputer_Coordinates
 }
 
-func (b0 Message_ToolCall_UseComputer_MouseMove_builder) Build() *Message_ToolCall_UseComputer_MouseMove {
-	m0 := &Message_ToolCall_UseComputer_MouseMove{}
+func (b0 Message_ToolCall_UseComputer_Action_MouseMove_builder) Build() *Message_ToolCall_UseComputer_Action_MouseMove {
+	m0 := &Message_ToolCall_UseComputer_Action_MouseMove{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_To = b.To
@@ -19076,7 +19076,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xeej\n" +
+	"\x0ecomment_target\"\xf6j\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -19151,7 +19151,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa43\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xac3\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -19313,19 +19313,19 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\xa1\x03\n" +
+	"\x05delay\x1a\xa9\x03\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12G\n" +
 	" capture_screenshot_after_actions\x18\x02 \x01(\bR\x1dcaptureScreenshotAfterActions\x1a)\n" +
 	"\vCoordinates\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x05R\x01x\x12\f\n" +
-	"\x01y\x18\x02 \x01(\x05R\x01y\x1an\n" +
-	"\x06Action\x12\\\n" +
+	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\xd1\x01\n" +
+	"\x06Action\x12c\n" +
 	"\n" +
-	"mouse_move\x18\x01 \x01(\v2;.warp.multi_agent.v1.Message.ToolCall.UseComputer.MouseMoveH\x00R\tmouseMoveB\x06\n" +
-	"\x04type\x1aZ\n" +
+	"mouse_move\x18\x01 \x01(\v2B.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMoveH\x00R\tmouseMove\x1aZ\n" +
 	"\tMouseMove\x12M\n" +
 	"\x02to\x18\x01 \x01(\v2=.warp.multi_agent.v1.Message.ToolCall.UseComputer.CoordinatesR\x02toB\x06\n" +
+	"\x04typeB\x06\n" +
 	"\x04tool\x1a\x8f\x13\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
@@ -19712,7 +19712,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_ToolCall_CreateDocuments_NewDocument)(nil),         // 89: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
 	(*Message_ToolCall_UseComputer_Coordinates)(nil),             // 90: warp.multi_agent.v1.Message.ToolCall.UseComputer.Coordinates
 	(*Message_ToolCall_UseComputer_Action)(nil),                  // 91: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
-	(*Message_ToolCall_UseComputer_MouseMove)(nil),               // 92: warp.multi_agent.v1.Message.ToolCall.UseComputer.MouseMove
+	(*Message_ToolCall_UseComputer_Action_MouseMove)(nil),        // 92: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
 	(*Message_ToolCallResult_ServerResult)(nil),                  // 93: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
 	(*Message_ToolCallResult_RefineResult)(nil),                  // 94: warp.multi_agent.v1.Message.ToolCallResult.RefineResult
 	(*Message_ToolCallResult_SubagentResult)(nil),                // 95: warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
@@ -19947,8 +19947,8 @@ var file_task_proto_depIdxs = []int32{
 	154, // 164: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	84,  // 165: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
 	154, // 166: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	92,  // 167: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.MouseMove
-	90,  // 168: warp.multi_agent.v1.Message.ToolCall.UseComputer.MouseMove.to:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Coordinates
+	92,  // 167: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
+	90,  // 168: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove.to:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Coordinates
 	34,  // 169: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	98,  // 170: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
 	99,  // 171: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
@@ -20191,7 +20191,7 @@ func file_task_proto_init() {
 		(*message_ToolCall_WriteToLongRunningShellCommand_Mode_Block)(nil),
 	}
 	file_task_proto_msgTypes[89].OneofWrappers = []any{
-		(*message_ToolCall_UseComputer_Action_MouseMove)(nil),
+		(*message_ToolCall_UseComputer_Action_MouseMove_)(nil),
 	}
 	file_task_proto_msgTypes[95].OneofWrappers = []any{
 		(*message_WebSearch_Status_Searching_)(nil),
