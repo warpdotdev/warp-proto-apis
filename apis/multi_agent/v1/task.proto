@@ -562,10 +562,10 @@ message Message {
         oneof type {
           MouseMove mouse_move = 1;
         }
-      }
 
-      message MouseMove {
-        Coordinates to = 1;
+        message MouseMove {
+          Coordinates to = 1;
+        }
       }
     }
   }
