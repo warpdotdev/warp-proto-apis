@@ -561,10 +561,43 @@ message Message {
       message Action {
         oneof type {
           MouseMove mouse_move = 1;
+          MouseDown mouse_down = 2;
+          MouseUp mouse_up = 3;
+          MouseWheel mouse_wheel = 4;
+        }
+
+        enum MouseButton {
+          LEFT = 0;
+          RIGHT = 1;
+          WHEEL = 2;
+          BACK = 3;
+          FORWARD = 4;
         }
 
         message MouseMove {
           Coordinates to = 1;
+        }
+
+        message MouseDown {
+          MouseButton button = 1;
+          Coordinates at = 2;
+        }
+
+        message MouseUp {
+          MouseButton button = 1;
+        }
+
+        message MouseWheel {
+          enum Direction {
+            UP = 0;
+            DOWN = 1;
+            LEFT = 2;
+            RIGHT = 3;
+          }
+
+          Coordinates at = 1;
+          Direction direction = 2;
+          int32 distance = 3;
         }
       }
     }
