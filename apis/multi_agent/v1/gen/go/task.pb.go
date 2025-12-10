@@ -19692,11 +19692,11 @@ func (b0 CreateDocumentsResult_Error_builder) Build() *CreateDocumentsResult_Err
 }
 
 type UseComputerResult_Success struct {
-	state                    protoimpl.MessageState           `protogen:"opaque.v1"`
-	xxx_hidden_Screenshot    *UseComputerResult_Success_Image `protobuf:"bytes,1,opt,name=screenshot"`
-	xxx_hidden_MouseLocation *Coordinates                     `protobuf:"bytes,2,opt,name=mouse_location,json=mouseLocation"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                     protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_Screenshot     *UseComputerResult_Success_Image `protobuf:"bytes,1,opt,name=screenshot"`
+	xxx_hidden_CursorPosition *Coordinates                     `protobuf:"bytes,2,opt,name=cursor_position,json=cursorPosition"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *UseComputerResult_Success) Reset() {
@@ -19731,9 +19731,9 @@ func (x *UseComputerResult_Success) GetScreenshot() *UseComputerResult_Success_I
 	return nil
 }
 
-func (x *UseComputerResult_Success) GetMouseLocation() *Coordinates {
+func (x *UseComputerResult_Success) GetCursorPosition() *Coordinates {
 	if x != nil {
-		return x.xxx_hidden_MouseLocation
+		return x.xxx_hidden_CursorPosition
 	}
 	return nil
 }
@@ -19742,8 +19742,8 @@ func (x *UseComputerResult_Success) SetScreenshot(v *UseComputerResult_Success_I
 	x.xxx_hidden_Screenshot = v
 }
 
-func (x *UseComputerResult_Success) SetMouseLocation(v *Coordinates) {
-	x.xxx_hidden_MouseLocation = v
+func (x *UseComputerResult_Success) SetCursorPosition(v *Coordinates) {
+	x.xxx_hidden_CursorPosition = v
 }
 
 func (x *UseComputerResult_Success) HasScreenshot() bool {
@@ -19753,26 +19753,26 @@ func (x *UseComputerResult_Success) HasScreenshot() bool {
 	return x.xxx_hidden_Screenshot != nil
 }
 
-func (x *UseComputerResult_Success) HasMouseLocation() bool {
+func (x *UseComputerResult_Success) HasCursorPosition() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_MouseLocation != nil
+	return x.xxx_hidden_CursorPosition != nil
 }
 
 func (x *UseComputerResult_Success) ClearScreenshot() {
 	x.xxx_hidden_Screenshot = nil
 }
 
-func (x *UseComputerResult_Success) ClearMouseLocation() {
-	x.xxx_hidden_MouseLocation = nil
+func (x *UseComputerResult_Success) ClearCursorPosition() {
+	x.xxx_hidden_CursorPosition = nil
 }
 
 type UseComputerResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Screenshot    *UseComputerResult_Success_Image
-	MouseLocation *Coordinates
+	Screenshot     *UseComputerResult_Success_Image
+	CursorPosition *Coordinates
 }
 
 func (b0 UseComputerResult_Success_builder) Build() *UseComputerResult_Success {
@@ -19780,7 +19780,7 @@ func (b0 UseComputerResult_Success_builder) Build() *UseComputerResult_Success {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Screenshot = b.Screenshot
-	x.xxx_hidden_MouseLocation = b.MouseLocation
+	x.xxx_hidden_CursorPosition = b.CursorPosition
 	return m0
 }
 
@@ -20538,15 +20538,15 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\")\n" +
 	"\vCoordinates\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x05R\x01x\x12\f\n" +
-	"\x01y\x18\x02 \x01(\x05R\x01y\"\xc3\x03\n" +
+	"\x01y\x18\x02 \x01(\x05R\x01y\"\xc5\x03\n" +
 	"\x11UseComputerResult\x12J\n" +
 	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.UseComputerResult.SuccessH\x00R\asuccess\x12D\n" +
-	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.UseComputerResult.ErrorH\x00R\x05error\x1a\xe8\x01\n" +
+	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.UseComputerResult.ErrorH\x00R\x05error\x1a\xea\x01\n" +
 	"\aSuccess\x12T\n" +
 	"\n" +
 	"screenshot\x18\x01 \x01(\v24.warp.multi_agent.v1.UseComputerResult.Success.ImageR\n" +
-	"screenshot\x12G\n" +
-	"\x0emouse_location\x18\x02 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\rmouseLocation\x1a>\n" +
+	"screenshot\x12I\n" +
+	"\x0fcursor_position\x18\x02 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\x0ecursorPosition\x1a>\n" +
 	"\x05Image\x12\x18\n" +
 	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a'\n" +
@@ -20962,7 +20962,7 @@ var file_task_proto_depIdxs = []int32{
 	164, // 200: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	164, // 201: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	145, // 202: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
-	30,  // 203: warp.multi_agent.v1.UseComputerResult.Success.mouse_location:type_name -> warp.multi_agent.v1.Coordinates
+	30,  // 203: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
 	204, // [204:204] is the sub-list for method output_type
 	204, // [204:204] is the sub-list for method input_type
 	204, // [204:204] is the sub-list for extension type_name

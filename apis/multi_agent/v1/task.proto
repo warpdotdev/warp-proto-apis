@@ -1065,7 +1065,7 @@ message UseComputerResult {
 
   message Success {
     Image screenshot = 1;
-    Coordinates mouse_location = 2;
+    Coordinates cursor_position = 2;
 
     message Image {
       // Raw image bytes.
