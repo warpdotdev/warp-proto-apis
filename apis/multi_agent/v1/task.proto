@@ -612,7 +612,7 @@ message Message {
         }
 
         message Wait {
-          int32 duration = 1;
+          google.protobuf.Duration duration = 1;
         }
 
         message TypeText {

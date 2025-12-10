@@ -15917,12 +15917,10 @@ func (*message_ToolCall_UseComputer_Action_MouseWheel_Clicks) isMessage_ToolCall
 }
 
 type Message_ToolCall_UseComputer_Action_Wait struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Duration    int32                  `protobuf:"varint,1,opt,name=duration"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Duration *durationpb.Duration   `protobuf:"bytes,1,opt,name=duration"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_UseComputer_Action_Wait) Reset() {
@@ -15950,44 +15948,39 @@ func (x *Message_ToolCall_UseComputer_Action_Wait) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ToolCall_UseComputer_Action_Wait) GetDuration() int32 {
+func (x *Message_ToolCall_UseComputer_Action_Wait) GetDuration() *durationpb.Duration {
 	if x != nil {
 		return x.xxx_hidden_Duration
 	}
-	return 0
+	return nil
 }
 
-func (x *Message_ToolCall_UseComputer_Action_Wait) SetDuration(v int32) {
+func (x *Message_ToolCall_UseComputer_Action_Wait) SetDuration(v *durationpb.Duration) {
 	x.xxx_hidden_Duration = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
 func (x *Message_ToolCall_UseComputer_Action_Wait) HasDuration() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_Duration != nil
 }
 
 func (x *Message_ToolCall_UseComputer_Action_Wait) ClearDuration() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Duration = 0
+	x.xxx_hidden_Duration = nil
 }
 
 type Message_ToolCall_UseComputer_Action_Wait_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Duration *int32
+	Duration *durationpb.Duration
 }
 
 func (b0 Message_ToolCall_UseComputer_Action_Wait_builder) Build() *Message_ToolCall_UseComputer_Action_Wait {
 	m0 := &Message_ToolCall_UseComputer_Action_Wait{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Duration != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Duration = *b.Duration
-	}
+	x.xxx_hidden_Duration = b.Duration
 	return m0
 }
 
@@ -19990,7 +19983,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xf9t\n" +
+	"\x0ecomment_target\"\x94u\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -20065,7 +20058,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xaf=\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xca=\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -20227,14 +20220,14 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\xac\r\n" +
+	"\x05delay\x1a\xc7\r\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12G\n" +
 	" capture_screenshot_after_actions\x18\x02 \x01(\bR\x1dcaptureScreenshotAfterActions\x12+\n" +
 	"\x0eaction_summary\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\ractionSummary\x1a)\n" +
 	"\vCoordinates\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x05R\x01x\x12\f\n" +
-	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\xa7\v\n" +
+	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\xc2\v\n" +
 	"\x06Action\x12c\n" +
 	"\n" +
 	"mouse_move\x18\x01 \x01(\v2B.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMoveH\x00R\tmouseMove\x12c\n" +
@@ -20264,9 +20257,9 @@ const file_task_proto_rawDesc = "" +
 	"\x04LEFT\x10\x02\x12\t\n" +
 	"\x05RIGHT\x10\x03B\n" +
 	"\n" +
-	"\bdistance\x1a\"\n" +
-	"\x04Wait\x12\x1a\n" +
-	"\bduration\x18\x01 \x01(\x05R\bduration\x1a$\n" +
+	"\bdistance\x1a=\n" +
+	"\x04Wait\x125\n" +
+	"\bduration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\bduration\x1a$\n" +
 	"\bTypeText\x12\x18\n" +
 	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\"D\n" +
 	"\vMouseButton\x12\b\n" +
@@ -20916,34 +20909,35 @@ var file_task_proto_depIdxs = []int32{
 	2,   // 176: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
 	92,  // 177: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Coordinates
 	3,   // 178: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
-	36,  // 179: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	105, // 180: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
-	106, // 181: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
-	151, // 182: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
-	107, // 183: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
-	162, // 184: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	163, // 185: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	162, // 186: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	162, // 187: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	115, // 188: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	162, // 189: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	119, // 190: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	120, // 191: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	125, // 192: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	17,  // 193: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	134, // 194: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	135, // 195: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	136, // 196: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	17,  // 197: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	164, // 198: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	164, // 199: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	164, // 200: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	145, // 201: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
-	202, // [202:202] is the sub-list for method output_type
-	202, // [202:202] is the sub-list for method input_type
-	202, // [202:202] is the sub-list for extension type_name
-	202, // [202:202] is the sub-list for extension extendee
-	0,   // [0:202] is the sub-list for field type_name
+	156, // 179: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
+	36,  // 180: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	105, // 181: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
+	106, // 182: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
+	151, // 183: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
+	107, // 184: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
+	162, // 185: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	163, // 186: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	162, // 187: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	162, // 188: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	115, // 189: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	162, // 190: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	119, // 191: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	120, // 192: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	125, // 193: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	17,  // 194: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	134, // 195: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	135, // 196: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	136, // 197: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	17,  // 198: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	164, // 199: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	164, // 200: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	164, // 201: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	145, // 202: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
+	203, // [203:203] is the sub-list for method output_type
+	203, // [203:203] is the sub-list for method input_type
+	203, // [203:203] is the sub-list for extension type_name
+	203, // [203:203] is the sub-list for extension extendee
+	0,   // [0:203] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
