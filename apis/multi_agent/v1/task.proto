@@ -789,12 +789,17 @@ message ApplyFileDiffsResult {
     repeated FileContent updated_files = 1 [deprecated = true];
 
     repeated UpdatedFileContent updated_files_v2 = 2;
+    repeated DeletedFile deleted_files = 3;
 
     message UpdatedFileContent {
       // Content of the updated file.
       FileContent file = 1;
       // Whether the applied update contains user edit.
       bool was_edited_by_user = 2;
+    }
+
+    message DeletedFile {
+      string file_path = 1 [ (sensitive) = true ];
     }
   }
 
