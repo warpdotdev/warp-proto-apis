@@ -552,6 +552,8 @@ message Message {
       // A series of actions to execute on the machine.
       repeated Action actions = 1;
       bool capture_screenshot_after_actions = 2;
+      // User-facing message of what the actions are doing.
+      string action_summary = 3;
 
       message Coordinates {
         int32 x = 1;
@@ -564,6 +566,8 @@ message Message {
           MouseDown mouse_down = 2;
           MouseUp mouse_up = 3;
           MouseWheel mouse_wheel = 4;
+          Wait wait = 5;
+          TypeText type_text = 6;
         }
 
         enum MouseButton {
@@ -605,6 +609,14 @@ message Message {
             // The number of times the scroll button is clicked.
             int32 clicks = 4;
           }
+        }
+
+        message Wait {
+          int32 duration = 1;
+        }
+
+        message TypeText {
+          string text = 1;
         }
       }
     }
