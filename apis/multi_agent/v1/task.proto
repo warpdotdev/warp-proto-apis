@@ -552,6 +552,8 @@ message Message {
       // A series of actions to execute on the machine.
       repeated Action actions = 1;
       bool capture_screenshot_after_actions = 2;
+      // User-facing message of what the actions are doing.
+      string action_summary = 3 [ (sensitive) = true ];
 
       message Coordinates {
         int32 x = 1;
@@ -561,10 +563,60 @@ message Message {
       message Action {
         oneof type {
           MouseMove mouse_move = 1;
+          MouseDown mouse_down = 2;
+          MouseUp mouse_up = 3;
+          MouseWheel mouse_wheel = 4;
+          Wait wait = 5;
+          TypeText type_text = 6;
+        }
+
+        enum MouseButton {
+          LEFT = 0;
+          RIGHT = 1;
+          MIDDLE = 2;
+          BACK = 3;
+          FORWARD = 4;
         }
 
         message MouseMove {
           Coordinates to = 1;
+        }
+
+        message MouseDown {
+          MouseButton button = 1;
+          Coordinates at = 2;
+        }
+
+        message MouseUp {
+          MouseButton button = 1;
+        }
+
+        message MouseWheel {
+          enum Direction {
+            UP = 0;
+            DOWN = 1;
+            LEFT = 2;
+            RIGHT = 3;
+          }
+
+          Coordinates at = 1;
+          Direction direction = 2;
+
+          // The model providers can provide a scroll distance either in pixels or clicks.
+          oneof distance {
+            // The number of pixels to scroll.
+            int32 pixels = 3;
+            // The number of times the scroll button is clicked.
+            int32 clicks = 4;
+          }
+        }
+
+        message Wait {
+          google.protobuf.Duration duration = 1;
+        }
+
+        message TypeText {
+          string text = 1 [ (sensitive) = true ];
         }
       }
     }
