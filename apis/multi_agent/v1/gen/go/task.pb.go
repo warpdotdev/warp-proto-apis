@@ -15565,10 +15565,10 @@ func (b0 Message_ToolCall_UseComputer_Action_MouseUp_builder) Build() *Message_T
 }
 
 type Message_ToolCall_UseComputer_Action_MouseWheel struct {
-	state                  protoimpl.MessageState                                   `protogen:"opaque.v1"`
-	xxx_hidden_At          *Message_ToolCall_UseComputer_Coordinates                `protobuf:"bytes,1,opt,name=at"`
-	xxx_hidden_Direction   Message_ToolCall_UseComputer_Action_MouseWheel_Direction `protobuf:"varint,2,opt,name=direction,enum=warp.multi_agent.v1.Message_ToolCall_UseComputer_Action_MouseWheel_Direction"`
-	xxx_hidden_Distance    int32                                                    `protobuf:"varint,3,opt,name=distance"`
+	state                  protoimpl.MessageState                                    `protogen:"opaque.v1"`
+	xxx_hidden_At          *Message_ToolCall_UseComputer_Coordinates                 `protobuf:"bytes,1,opt,name=at"`
+	xxx_hidden_Direction   Message_ToolCall_UseComputer_Action_MouseWheel_Direction  `protobuf:"varint,2,opt,name=direction,enum=warp.multi_agent.v1.Message_ToolCall_UseComputer_Action_MouseWheel_Direction"`
+	xxx_hidden_Distance    isMessage_ToolCall_UseComputer_Action_MouseWheel_Distance `protobuf_oneof:"distance"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -15616,9 +15616,20 @@ func (x *Message_ToolCall_UseComputer_Action_MouseWheel) GetDirection() Message_
 	return Message_ToolCall_UseComputer_Action_MouseWheel_UP
 }
 
-func (x *Message_ToolCall_UseComputer_Action_MouseWheel) GetDistance() int32 {
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) GetPixels() int32 {
 	if x != nil {
-		return x.xxx_hidden_Distance
+		if x, ok := x.xxx_hidden_Distance.(*message_ToolCall_UseComputer_Action_MouseWheel_Pixels); ok {
+			return x.Pixels
+		}
+	}
+	return 0
+}
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) GetClicks() int32 {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Distance.(*message_ToolCall_UseComputer_Action_MouseWheel_Clicks); ok {
+			return x.Clicks
+		}
 	}
 	return 0
 }
@@ -15632,9 +15643,12 @@ func (x *Message_ToolCall_UseComputer_Action_MouseWheel) SetDirection(v Message_
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Message_ToolCall_UseComputer_Action_MouseWheel) SetDistance(v int32) {
-	x.xxx_hidden_Distance = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) SetPixels(v int32) {
+	x.xxx_hidden_Distance = &message_ToolCall_UseComputer_Action_MouseWheel_Pixels{v}
+}
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) SetClicks(v int32) {
+	x.xxx_hidden_Distance = &message_ToolCall_UseComputer_Action_MouseWheel_Clicks{v}
 }
 
 func (x *Message_ToolCall_UseComputer_Action_MouseWheel) HasAt() bool {
@@ -15655,7 +15669,23 @@ func (x *Message_ToolCall_UseComputer_Action_MouseWheel) HasDistance() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+	return x.xxx_hidden_Distance != nil
+}
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) HasPixels() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Distance.(*message_ToolCall_UseComputer_Action_MouseWheel_Pixels)
+	return ok
+}
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) HasClicks() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Distance.(*message_ToolCall_UseComputer_Action_MouseWheel_Clicks)
+	return ok
 }
 
 func (x *Message_ToolCall_UseComputer_Action_MouseWheel) ClearAt() {
@@ -15668,8 +15698,37 @@ func (x *Message_ToolCall_UseComputer_Action_MouseWheel) ClearDirection() {
 }
 
 func (x *Message_ToolCall_UseComputer_Action_MouseWheel) ClearDistance() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_Distance = 0
+	x.xxx_hidden_Distance = nil
+}
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) ClearPixels() {
+	if _, ok := x.xxx_hidden_Distance.(*message_ToolCall_UseComputer_Action_MouseWheel_Pixels); ok {
+		x.xxx_hidden_Distance = nil
+	}
+}
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) ClearClicks() {
+	if _, ok := x.xxx_hidden_Distance.(*message_ToolCall_UseComputer_Action_MouseWheel_Clicks); ok {
+		x.xxx_hidden_Distance = nil
+	}
+}
+
+const Message_ToolCall_UseComputer_Action_MouseWheel_Distance_not_set_case case_Message_ToolCall_UseComputer_Action_MouseWheel_Distance = 0
+const Message_ToolCall_UseComputer_Action_MouseWheel_Pixels_case case_Message_ToolCall_UseComputer_Action_MouseWheel_Distance = 3
+const Message_ToolCall_UseComputer_Action_MouseWheel_Clicks_case case_Message_ToolCall_UseComputer_Action_MouseWheel_Distance = 4
+
+func (x *Message_ToolCall_UseComputer_Action_MouseWheel) WhichDistance() case_Message_ToolCall_UseComputer_Action_MouseWheel_Distance {
+	if x == nil {
+		return Message_ToolCall_UseComputer_Action_MouseWheel_Distance_not_set_case
+	}
+	switch x.xxx_hidden_Distance.(type) {
+	case *message_ToolCall_UseComputer_Action_MouseWheel_Pixels:
+		return Message_ToolCall_UseComputer_Action_MouseWheel_Pixels_case
+	case *message_ToolCall_UseComputer_Action_MouseWheel_Clicks:
+		return Message_ToolCall_UseComputer_Action_MouseWheel_Clicks_case
+	default:
+		return Message_ToolCall_UseComputer_Action_MouseWheel_Distance_not_set_case
+	}
 }
 
 type Message_ToolCall_UseComputer_Action_MouseWheel_builder struct {
@@ -15677,7 +15736,14 @@ type Message_ToolCall_UseComputer_Action_MouseWheel_builder struct {
 
 	At        *Message_ToolCall_UseComputer_Coordinates
 	Direction *Message_ToolCall_UseComputer_Action_MouseWheel_Direction
-	Distance  *int32
+	// The model providers can provide a scroll distance either in pixels or clicks.
+
+	// Fields of oneof xxx_hidden_Distance:
+	// The number of pixels to scroll.
+	Pixels *int32
+	// The number of times the scroll button is clicked.
+	Clicks *int32
+	// -- end of xxx_hidden_Distance
 }
 
 func (b0 Message_ToolCall_UseComputer_Action_MouseWheel_builder) Build() *Message_ToolCall_UseComputer_Action_MouseWheel {
@@ -15689,11 +15755,43 @@ func (b0 Message_ToolCall_UseComputer_Action_MouseWheel_builder) Build() *Messag
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Direction = *b.Direction
 	}
-	if b.Distance != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_Distance = *b.Distance
+	if b.Pixels != nil {
+		x.xxx_hidden_Distance = &message_ToolCall_UseComputer_Action_MouseWheel_Pixels{*b.Pixels}
+	}
+	if b.Clicks != nil {
+		x.xxx_hidden_Distance = &message_ToolCall_UseComputer_Action_MouseWheel_Clicks{*b.Clicks}
 	}
 	return m0
+}
+
+type case_Message_ToolCall_UseComputer_Action_MouseWheel_Distance protoreflect.FieldNumber
+
+func (x case_Message_ToolCall_UseComputer_Action_MouseWheel_Distance) String() string {
+	md := file_task_proto_msgTypes[93].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isMessage_ToolCall_UseComputer_Action_MouseWheel_Distance interface {
+	isMessage_ToolCall_UseComputer_Action_MouseWheel_Distance()
+}
+
+type message_ToolCall_UseComputer_Action_MouseWheel_Pixels struct {
+	// The number of pixels to scroll.
+	Pixels int32 `protobuf:"varint,3,opt,name=pixels,oneof"`
+}
+
+type message_ToolCall_UseComputer_Action_MouseWheel_Clicks struct {
+	// The number of times the scroll button is clicked.
+	Clicks int32 `protobuf:"varint,4,opt,name=clicks,oneof"`
+}
+
+func (*message_ToolCall_UseComputer_Action_MouseWheel_Pixels) isMessage_ToolCall_UseComputer_Action_MouseWheel_Distance() {
+}
+
+func (*message_ToolCall_UseComputer_Action_MouseWheel_Clicks) isMessage_ToolCall_UseComputer_Action_MouseWheel_Distance() {
 }
 
 // Result of a server-side tool call.
@@ -19617,7 +19715,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xa7r\n" +
+	"\x0ecomment_target\"\xcbr\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -19692,7 +19790,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xdd:\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\x81;\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -19854,14 +19952,14 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\xda\n" +
+	"\x05delay\x1a\xfe\n" +
 	"\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12G\n" +
 	" capture_screenshot_after_actions\x18\x02 \x01(\bR\x1dcaptureScreenshotAfterActions\x1a)\n" +
 	"\vCoordinates\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x05R\x01x\x12\f\n" +
-	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\x82\t\n" +
+	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\xa6\t\n" +
 	"\x06Action\x12c\n" +
 	"\n" +
 	"mouse_move\x18\x01 \x01(\v2B.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMoveH\x00R\tmouseMove\x12c\n" +
@@ -19876,17 +19974,20 @@ const file_task_proto_rawDesc = "" +
 	"\x06button\x18\x01 \x01(\x0e2D.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButtonR\x06button\x12M\n" +
 	"\x02at\x18\x02 \x01(\v2=.warp.multi_agent.v1.Message.ToolCall.UseComputer.CoordinatesR\x02at\x1ag\n" +
 	"\aMouseUp\x12\\\n" +
-	"\x06button\x18\x01 \x01(\x0e2D.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButtonR\x06button\x1a\x98\x02\n" +
+	"\x06button\x18\x01 \x01(\x0e2D.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButtonR\x06button\x1a\xbc\x02\n" +
 	"\n" +
 	"MouseWheel\x12M\n" +
 	"\x02at\x18\x01 \x01(\v2=.warp.multi_agent.v1.Message.ToolCall.UseComputer.CoordinatesR\x02at\x12k\n" +
-	"\tdirection\x18\x02 \x01(\x0e2M.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.DirectionR\tdirection\x12\x1a\n" +
-	"\bdistance\x18\x03 \x01(\x05R\bdistance\"2\n" +
+	"\tdirection\x18\x02 \x01(\x0e2M.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.DirectionR\tdirection\x12\x18\n" +
+	"\x06pixels\x18\x03 \x01(\x05H\x00R\x06pixels\x12\x18\n" +
+	"\x06clicks\x18\x04 \x01(\x05H\x00R\x06clicks\"2\n" +
 	"\tDirection\x12\x06\n" +
 	"\x02UP\x10\x00\x12\b\n" +
 	"\x04DOWN\x10\x01\x12\b\n" +
 	"\x04LEFT\x10\x02\x12\t\n" +
-	"\x05RIGHT\x10\x03\"D\n" +
+	"\x05RIGHT\x10\x03B\n" +
+	"\n" +
+	"\bdistance\"D\n" +
 	"\vMouseButton\x12\b\n" +
 	"\x04LEFT\x10\x00\x12\t\n" +
 	"\x05RIGHT\x10\x01\x12\t\n" +
@@ -20776,6 +20877,10 @@ func file_task_proto_init() {
 		(*message_ToolCall_UseComputer_Action_MouseDown_)(nil),
 		(*message_ToolCall_UseComputer_Action_MouseUp_)(nil),
 		(*message_ToolCall_UseComputer_Action_MouseWheel_)(nil),
+	}
+	file_task_proto_msgTypes[93].OneofWrappers = []any{
+		(*message_ToolCall_UseComputer_Action_MouseWheel_Pixels)(nil),
+		(*message_ToolCall_UseComputer_Action_MouseWheel_Clicks)(nil),
 	}
 	file_task_proto_msgTypes[98].OneofWrappers = []any{
 		(*message_WebSearch_Status_Searching_)(nil),
