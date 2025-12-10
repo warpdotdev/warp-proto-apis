@@ -573,7 +573,7 @@ message Message {
         enum MouseButton {
           LEFT = 0;
           RIGHT = 1;
-          WHEEL = 2;
+          MIDDLE = 2;
           BACK = 3;
           FORWARD = 4;
         }
