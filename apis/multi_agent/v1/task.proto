@@ -555,11 +555,6 @@ message Message {
       // User-facing message of what the actions are doing.
       string action_summary = 3 [ (sensitive) = true ];
 
-      message Coordinates {
-        int32 x = 1;
-        int32 y = 2;
-      }
-
       message Action {
         oneof type {
           MouseMove mouse_move = 1;
@@ -1056,6 +1051,12 @@ message ReadShellCommandOutputResult {
   }
 }
 
+// Screen coordinates used for computer use actions.
+message Coordinates {
+  int32 x = 1;
+  int32 y = 2;
+}
+
 message UseComputerResult {
   oneof result {
     Success success = 1;
@@ -1064,6 +1065,7 @@ message UseComputerResult {
 
   message Success {
     Image screenshot = 1;
+    Coordinates mouse_location = 2;
 
     message Image {
       // Raw image bytes.
