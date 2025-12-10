@@ -597,7 +597,14 @@ message Message {
 
           Coordinates at = 1;
           Direction direction = 2;
-          int32 distance = 3;
+
+          // The model providers can provide a scroll distance either in pixels or clicks.
+          oneof distance {
+            // The number of pixels to scroll.
+            int32 pixels = 3;
+            // The number of times the scroll button is clicked.
+            int32 clicks = 4;
+          }
         }
       }
     }
