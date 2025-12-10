@@ -747,6 +747,9 @@ message RunShellCommandResult {
 
     // The command completed.
     ShellCommandFinished command_finished = 5;
+
+    // The command was denied permission to run.
+    PermissionDenied permission_denied = 6;
   }
 
   // Deprecated; use [ShellCommandFinished::output] instead;
@@ -969,6 +972,13 @@ message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
   string command_id = 3;
+}
+
+// The reason why a shell command was denied permission to run.
+message PermissionDenied {
+  oneof reason {
+    google.protobuf.Empty denylisted_command = 1;
+  }
 }
 
 message CallMCPToolResult {
