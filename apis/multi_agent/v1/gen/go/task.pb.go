@@ -181,7 +181,7 @@ type Message_ToolCall_UseComputer_Action_MouseButton int32
 const (
 	Message_ToolCall_UseComputer_Action_LEFT    Message_ToolCall_UseComputer_Action_MouseButton = 0
 	Message_ToolCall_UseComputer_Action_RIGHT   Message_ToolCall_UseComputer_Action_MouseButton = 1
-	Message_ToolCall_UseComputer_Action_WHEEL   Message_ToolCall_UseComputer_Action_MouseButton = 2
+	Message_ToolCall_UseComputer_Action_MIDDLE  Message_ToolCall_UseComputer_Action_MouseButton = 2
 	Message_ToolCall_UseComputer_Action_BACK    Message_ToolCall_UseComputer_Action_MouseButton = 3
 	Message_ToolCall_UseComputer_Action_FORWARD Message_ToolCall_UseComputer_Action_MouseButton = 4
 )
@@ -191,14 +191,14 @@ var (
 	Message_ToolCall_UseComputer_Action_MouseButton_name = map[int32]string{
 		0: "LEFT",
 		1: "RIGHT",
-		2: "WHEEL",
+		2: "MIDDLE",
 		3: "BACK",
 		4: "FORWARD",
 	}
 	Message_ToolCall_UseComputer_Action_MouseButton_value = map[string]int32{
 		"LEFT":    0,
 		"RIGHT":   1,
-		"WHEEL":   2,
+		"MIDDLE":  2,
 		"BACK":    3,
 		"FORWARD": 4,
 	}
@@ -19983,7 +19983,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\x94u\n" +
+	"\x0ecomment_target\"\x95u\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -20058,7 +20058,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xca=\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xcb=\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -20220,14 +20220,14 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\xc7\r\n" +
+	"\x05delay\x1a\xc8\r\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12G\n" +
 	" capture_screenshot_after_actions\x18\x02 \x01(\bR\x1dcaptureScreenshotAfterActions\x12+\n" +
 	"\x0eaction_summary\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\ractionSummary\x1a)\n" +
 	"\vCoordinates\x12\f\n" +
 	"\x01x\x18\x01 \x01(\x05R\x01x\x12\f\n" +
-	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\xc2\v\n" +
+	"\x01y\x18\x02 \x01(\x05R\x01y\x1a\xc3\v\n" +
 	"\x06Action\x12c\n" +
 	"\n" +
 	"mouse_move\x18\x01 \x01(\v2B.warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMoveH\x00R\tmouseMove\x12c\n" +
@@ -20261,11 +20261,12 @@ const file_task_proto_rawDesc = "" +
 	"\x04Wait\x125\n" +
 	"\bduration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\bduration\x1a$\n" +
 	"\bTypeText\x12\x18\n" +
-	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\"D\n" +
+	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\"E\n" +
 	"\vMouseButton\x12\b\n" +
 	"\x04LEFT\x10\x00\x12\t\n" +
-	"\x05RIGHT\x10\x01\x12\t\n" +
-	"\x05WHEEL\x10\x02\x12\b\n" +
+	"\x05RIGHT\x10\x01\x12\n" +
+	"\n" +
+	"\x06MIDDLE\x10\x02\x12\b\n" +
 	"\x04BACK\x10\x03\x12\v\n" +
 	"\aFORWARD\x10\x04B\x06\n" +
 	"\x04typeB\x06\n" +
