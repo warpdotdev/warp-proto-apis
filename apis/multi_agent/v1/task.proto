@@ -73,10 +73,10 @@ message ReviewComment {
     // We need a diff hunk rather than just a starting and ending line number
     // because the latter cannot uniquely identify a deleted line.
     DiffHunk commented_line = 3;
-    
+
     // The file path that this comment is associated with.
     CommentedFile commented_file = 4;
-    
+
     // Indicates this comment is associated with the entire diff set.
     CommentedDiffset commented_diffset = 5;
   }
@@ -146,6 +146,8 @@ message Message {
     map<string, Attachment> referenced_attachments = 3;
 
     UserQueryMode mode = 4;
+
+    AgentType intended_agent = 5;
   }
 
   // System queries represent prompts from the Warp client that were
@@ -265,6 +267,7 @@ message Message {
       EditDocuments edit_documents = 21;
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
+      UseComputer use_computer = 24;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -363,7 +366,7 @@ message Message {
 
       message V4AFileUpdate {
         string file_path = 1;
-        
+
         // Optional file rename.
         string move_to = 2;
 
@@ -544,6 +547,85 @@ message Message {
         google.protobuf.Empty on_completion = 3;
       }
     }
+
+    message UseComputer {
+      // A series of actions to execute on the machine.
+      repeated Action actions = 1;
+      // If set, a screenshot will be captured after the actions are executed.
+      //
+      // The parameters specify what constraints, if any, the client must apply
+      // to the screenshot.
+      ScreenshotParams post_actions_screenshot_params = 2;
+      // User-facing message of what the actions are doing.
+      string action_summary = 3 [ (sensitive) = true ];
+
+      message Action {
+        oneof type {
+          MouseMove mouse_move = 1;
+          MouseDown mouse_down = 2;
+          MouseUp mouse_up = 3;
+          MouseWheel mouse_wheel = 4;
+          Wait wait = 5;
+          TypeText type_text = 6;
+        }
+
+        enum MouseButton {
+          LEFT = 0;
+          RIGHT = 1;
+          MIDDLE = 2;
+          BACK = 3;
+          FORWARD = 4;
+        }
+
+        message MouseMove {
+          Coordinates to = 1;
+        }
+
+        message MouseDown {
+          MouseButton button = 1;
+          Coordinates at = 2;
+        }
+
+        message MouseUp {
+          MouseButton button = 1;
+        }
+
+        message MouseWheel {
+          enum Direction {
+            UP = 0;
+            DOWN = 1;
+            LEFT = 2;
+            RIGHT = 3;
+          }
+
+          Coordinates at = 1;
+          Direction direction = 2;
+
+          // The model providers can provide a scroll distance either in pixels or clicks.
+          oneof distance {
+            // The number of pixels to scroll.
+            int32 pixels = 3;
+            // The number of times the scroll button is clicked.
+            int32 clicks = 4;
+          }
+        }
+
+        message Wait {
+          google.protobuf.Duration duration = 1;
+        }
+
+        message TypeText {
+          string text = 1 [ (sensitive) = true ];
+        }
+      }
+
+      message ScreenshotParams {
+        // The maximum length of the long edge of the screenshot in pixels.
+        int32 max_long_edge_px = 1;
+        // The maximum total number of pixels in the screenshot.
+        int32 max_total_px = 2;
+      }
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -582,6 +664,7 @@ message Message {
       EditDocumentsResult edit_documents = 25;
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
+      UseComputerResult use_computer = 28;
     }
 
     // Result of a server-side tool call.
@@ -717,12 +800,17 @@ message ApplyFileDiffsResult {
     repeated FileContent updated_files = 1 [deprecated = true];
 
     repeated UpdatedFileContent updated_files_v2 = 2;
+    repeated DeletedFile deleted_files = 3;
 
     message UpdatedFileContent {
       // Content of the updated file.
       FileContent file = 1;
       // Whether the applied update contains user edit.
       bool was_edited_by_user = 2;
+    }
+
+    message DeletedFile {
+      string file_path = 1 [ (sensitive) = true ];
     }
   }
 
@@ -979,6 +1067,35 @@ message ReadShellCommandOutputResult {
   }
 }
 
+// Screen coordinates used for computer use actions.
+message Coordinates {
+  int32 x = 1;
+  int32 y = 2;
+}
+
+message UseComputerResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    Image screenshot = 1;
+    Coordinates cursor_position = 2;
+
+    message Image {
+      // Raw image bytes.
+      bytes data = 1 [ (sensitive) = true ];
+      // MIME type of the image content (e.g., "image/png").
+      string mime_type = 2;
+    }
+  }
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
+
 message ShellCommandError {
   oneof type {
     // There was no command execution found with the given command_id in the tool call.
@@ -1013,6 +1130,7 @@ enum ToolType {
   EDIT_DOCUMENTS = 18;
   CREATE_DOCUMENTS = 19;
   READ_SHELL_COMMAND_OUTPUT = 20;
+  USE_COMPUTER = 21;
 }
 
 message UserQueryMode {
@@ -1020,8 +1138,10 @@ message UserQueryMode {
     // We can change this to a non-empty `Plan` type later, this is backwards compatible
     google.protobuf.Empty plan = 1;
   }
+}
 
-  message CLI {
-    RunningShellCommand command = 1;
-  }
+enum AgentType {
+  AGENT_TYPE_UNKNOWN = 0;
+  AGENT_TYPE_PRIMARY = 1;
+  AGENT_TYPE_CLI = 2;
 }
