@@ -551,7 +551,11 @@ message Message {
     message UseComputer {
       // A series of actions to execute on the machine.
       repeated Action actions = 1;
-      bool capture_screenshot_after_actions = 2;
+      // If set, a screenshot will be captured after the actions are executed.
+      //
+      // The parameters specify what constraints, if any, the client must apply
+      // to the screenshot.
+      ScreenshotParams post_actions_screenshot_params = 2;
       // User-facing message of what the actions are doing.
       string action_summary = 3 [ (sensitive) = true ];
 
@@ -613,6 +617,13 @@ message Message {
         message TypeText {
           string text = 1 [ (sensitive) = true ];
         }
+      }
+
+      message ScreenshotParams {
+        // The maximum length of the long edge of the screenshot in pixels.
+        int32 max_long_edge_px = 1;
+        // The maximum total number of pixels in the screenshot.
+        int32 max_total_px = 2;
       }
     }
   }
