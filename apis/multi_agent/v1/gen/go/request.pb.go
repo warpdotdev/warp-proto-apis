@@ -5431,8 +5431,7 @@ type Request_Settings_ApiKeys struct {
 	xxx_hidden_Google                *string                                  `protobuf:"bytes,3,opt,name=google"`
 	xxx_hidden_OpenRouter            *string                                  `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
 	xxx_hidden_AllowUseOfWarpCredits bool                                     `protobuf:"varint,5,opt,name=allow_use_of_warp_credits,json=allowUseOfWarpCredits"`
-	xxx_hidden_AwsBearerTokenBedrock *string                                  `protobuf:"bytes,6,opt,name=aws_bearer_token_bedrock,json=awsBearerTokenBedrock"`
-	xxx_hidden_AwsCredentials        *Request_Settings_ApiKeys_AWSCredentials `protobuf:"bytes,7,opt,name=aws_credentials,json=awsCredentials"`
+	xxx_hidden_AwsCredentials        *Request_Settings_ApiKeys_AWSCredentials `protobuf:"bytes,6,opt,name=aws_credentials,json=awsCredentials"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -5511,16 +5510,6 @@ func (x *Request_Settings_ApiKeys) GetAllowUseOfWarpCredits() bool {
 	return false
 }
 
-func (x *Request_Settings_ApiKeys) GetAwsBearerTokenBedrock() string {
-	if x != nil {
-		if x.xxx_hidden_AwsBearerTokenBedrock != nil {
-			return *x.xxx_hidden_AwsBearerTokenBedrock
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *Request_Settings_ApiKeys) GetAwsCredentials() *Request_Settings_ApiKeys_AWSCredentials {
 	if x != nil {
 		return x.xxx_hidden_AwsCredentials
@@ -5530,32 +5519,27 @@ func (x *Request_Settings_ApiKeys) GetAwsCredentials() *Request_Settings_ApiKeys
 
 func (x *Request_Settings_ApiKeys) SetAnthropic(v string) {
 	x.xxx_hidden_Anthropic = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenai(v string) {
 	x.xxx_hidden_Openai = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *Request_Settings_ApiKeys) SetGoogle(v string) {
 	x.xxx_hidden_Google = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenRouter(v string) {
 	x.xxx_hidden_OpenRouter = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *Request_Settings_ApiKeys) SetAllowUseOfWarpCredits(v bool) {
 	x.xxx_hidden_AllowUseOfWarpCredits = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
-}
-
-func (x *Request_Settings_ApiKeys) SetAwsBearerTokenBedrock(v string) {
-	x.xxx_hidden_AwsBearerTokenBedrock = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
 func (x *Request_Settings_ApiKeys) SetAwsCredentials(v *Request_Settings_ApiKeys_AWSCredentials) {
@@ -5597,13 +5581,6 @@ func (x *Request_Settings_ApiKeys) HasAllowUseOfWarpCredits() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Request_Settings_ApiKeys) HasAwsBearerTokenBedrock() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
-}
-
 func (x *Request_Settings_ApiKeys) HasAwsCredentials() bool {
 	if x == nil {
 		return false
@@ -5636,11 +5613,6 @@ func (x *Request_Settings_ApiKeys) ClearAllowUseOfWarpCredits() {
 	x.xxx_hidden_AllowUseOfWarpCredits = false
 }
 
-func (x *Request_Settings_ApiKeys) ClearAwsBearerTokenBedrock() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
-	x.xxx_hidden_AwsBearerTokenBedrock = nil
-}
-
 func (x *Request_Settings_ApiKeys) ClearAwsCredentials() {
 	x.xxx_hidden_AwsCredentials = nil
 }
@@ -5655,8 +5627,6 @@ type Request_Settings_ApiKeys_builder struct {
 	// If `true`, the client allows the use of Warp credits for LLM calls when
 	// keys are provided.
 	AllowUseOfWarpCredits *bool
-	// TODO: move to AWSCredentials message, or just delete ... i dont know if its reasonable to support bearer tokens directly
-	AwsBearerTokenBedrock *string
 	// Optional AWS credentials (e.g. for Bedrock).
 	AwsCredentials *Request_Settings_ApiKeys_AWSCredentials
 }
@@ -5666,28 +5636,24 @@ func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Anthropic != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_Anthropic = b.Anthropic
 	}
 	if b.Openai != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_Openai = b.Openai
 	}
 	if b.Google != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_Google = b.Google
 	}
 	if b.OpenRouter != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_OpenRouter = b.OpenRouter
 	}
 	if b.AllowUseOfWarpCredits != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_AllowUseOfWarpCredits = *b.AllowUseOfWarpCredits
-	}
-	if b.AwsBearerTokenBedrock != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
-		x.xxx_hidden_AwsBearerTokenBedrock = b.AwsBearerTokenBedrock
 	}
 	x.xxx_hidden_AwsCredentials = b.AwsCredentials
 	return m0
@@ -6371,7 +6337,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x91M\n" +
+	"task.proto\"\xccL\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6503,7 +6469,7 @@ const file_request_proto_rawDesc = "" +
 	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xc9\x10\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x84\x10\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -6532,23 +6498,22 @@ const file_request_proto_rawDesc = "" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
 	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
-	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\x96\x04\n" +
+	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\xd1\x03\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +
 	"\x06google\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06google\x12%\n" +
 	"\vopen_router\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"openRouter\x128\n" +
-	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x12=\n" +
-	"\x18aws_bearer_token_bedrock\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\x15awsBearerTokenBedrock\x12e\n" +
-	"\x0faws_credentials\x18\a \x01(\v2<.warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentialsR\x0eawsCredentials\x1a\xa3\x01\n" +
+	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x12e\n" +
+	"\x0faws_credentials\x18\x06 \x01(\v2<.warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentialsR\x0eawsCredentials\x1a\x9d\x01\n" +
 	"\x0eAWSCredentials\x12#\n" +
 	"\n" +
 	"access_key\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\taccessKey\x12#\n" +
 	"\n" +
 	"secret_key\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\tsecretKey\x12)\n" +
-	"\rsession_token\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\fsessionToken\x12\x1c\n" +
-	"\x06region\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x06region\x1a\x86\x06\n" +
+	"\rsession_token\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\fsessionToken\x12\x16\n" +
+	"\x06region\x18\x04 \x01(\tR\x06region\x1a\x86\x06\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
