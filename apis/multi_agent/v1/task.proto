@@ -276,6 +276,7 @@ message Message {
       UseComputer use_computer = 24;
       InsertReviewComments insert_review_comments = 25;
       ReadSkill read_skill = 26;
+      RequestComputerUse request_computer_use = 27;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -502,6 +503,7 @@ message Message {
         CLISubagent cli = 3;
         google.protobuf.Empty research = 4;
         google.protobuf.Empty advice = 5;
+        google.protobuf.Empty computer_use = 6;
       }
 
       message CLISubagent {
@@ -667,6 +669,13 @@ message Message {
         int32 max_total_px = 2;
       }
     }
+
+    message RequestComputerUse {
+      // A short description of the task.
+      string description = 1 [ (sensitive) = true ];
+      // A detailed description of full task the computer use subagent should complete.
+      string prompt = 2 [ (sensitive) = true ];
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -708,6 +717,7 @@ message Message {
       UseComputerResult use_computer = 28;
       InsertReviewCommentsResult insert_review_comments = 29;
       ReadSkillResult read_skill = 30;
+      RequestComputerUseResult request_computer_use_result = 31;
     }
 
     // Result of a server-side tool call.
@@ -1203,6 +1213,29 @@ message ReadSkillResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+message ScreenDimensions {
+  int32 width_px = 1;
+  int32 height_px = 2;
+}
+
+message RequestComputerUseResult {
+  oneof result {
+    Success success = 1;
+    Rejected rejected = 2;
+    Error error = 3;
+  }
+
+  message Success {
+    ScreenDimensions screen_dimensions = 1;
+  }
+
+  message Rejected {}
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
+
 message ShellCommandError {
   oneof type {
     // There was no command execution found with the given command_id in the tool call.
@@ -1240,6 +1273,7 @@ enum ToolType {
   USE_COMPUTER = 21;
   INSERT_REVIEW_COMMENTS = 22;
   READ_SKILL = 23;
+  REQUEST_COMPUTER_USE = 24;
 }
 
 message UserQueryMode {

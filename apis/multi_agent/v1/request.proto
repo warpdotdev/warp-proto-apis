@@ -140,6 +140,7 @@ message Request {
         ReadShellCommandOutputResult read_shell_command_output = 22;
         UseComputerResult use_computer = 23;
         InsertReviewCommentsResult insert_review_comments = 24;
+        RequestComputerUseResult request_computer_use = 25;
       }
 
       // Generic tool call result for representing a user-requested refinement
