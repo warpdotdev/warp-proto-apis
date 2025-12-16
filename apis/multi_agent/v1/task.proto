@@ -250,11 +250,7 @@ message Message {
       Server server = 4;
       ReadFiles read_files = 5;
       ApplyFileDiffs apply_file_diffs = 6;
-      SuggestPlan suggest_plan = 7;
-      SuggestCreatePlan suggest_create_plan = 8;
       Grep grep = 9;
-      // DEPRECATED: Being replaced by FileGlobV2.
-      FileGlob file_glob = 10 [deprecated=true];
       ReadMCPResource read_mcp_resource = 11;
       CallMCPTool call_mcp_tool = 12;
       WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
@@ -269,6 +265,15 @@ message Message {
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
       UseComputer use_computer = 24;
+
+      // ===== Deprecated tool calls below. =====
+
+      // Replaced by CreateDocuments.
+      SuggestPlan suggest_plan = 7 [deprecated=true];
+      // Replaced by FileGlobV2.
+      FileGlob file_glob = 10 [deprecated=true];
+      // No longer used by client.
+      SuggestCreatePlan suggest_create_plan = 8 [deprecated=true];
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -645,13 +650,7 @@ message Message {
       ServerResult server = 4;
       ReadFilesResult read_files = 5;
       ApplyFileDiffsResult apply_file_diffs = 6;
-      SuggestPlanResult suggest_plan = 7;
-      SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
-      // DEPRECATED: Being replaced by FileGlobV2Result.
-      FileGlobResult file_glob = 10 [deprecated=true];
-      // DEPRECATED: No longer used by client.
-      RefineResult refine = 13 [deprecated=true];
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
@@ -667,6 +666,17 @@ message Message {
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
       UseComputerResult use_computer = 28;
+
+      // ===== Deprecated tool calls below. =====
+
+      // Replaced by FileGlobV2Result.
+      FileGlobResult file_glob = 10 [deprecated=true];
+      // No longer used by client.
+      RefineResult refine = 13 [deprecated=true];
+      // No longer used by client.
+      SuggestPlanResult suggest_plan = 7 [deprecated=true];
+      // No longer used by client.
+      SuggestCreatePlanResult suggest_create_plan = 8 [deprecated=true];
     }
 
     // Result of a server-side tool call.

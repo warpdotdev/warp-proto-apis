@@ -8115,38 +8115,10 @@ func (x *Message_ToolCall) GetApplyFileDiffs() *Message_ToolCall_ApplyFileDiffs 
 	return nil
 }
 
-func (x *Message_ToolCall) GetSuggestPlan() *Message_ToolCall_SuggestPlan {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestPlan_); ok {
-			return x.SuggestPlan
-		}
-	}
-	return nil
-}
-
-func (x *Message_ToolCall) GetSuggestCreatePlan() *Message_ToolCall_SuggestCreatePlan {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestCreatePlan_); ok {
-			return x.SuggestCreatePlan
-		}
-	}
-	return nil
-}
-
 func (x *Message_ToolCall) GetGrep() *Message_ToolCall_Grep {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_Grep_); ok {
 			return x.Grep
-		}
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCall) GetFileGlob() *Message_ToolCall_FileGlob {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_); ok {
-			return x.FileGlob
 		}
 	}
 	return nil
@@ -8278,6 +8250,36 @@ func (x *Message_ToolCall) GetUseComputer() *Message_ToolCall_UseComputer {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) GetSuggestPlan() *Message_ToolCall_SuggestPlan {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestPlan_); ok {
+			return x.SuggestPlan
+		}
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) GetFileGlob() *Message_ToolCall_FileGlob {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_); ok {
+			return x.FileGlob
+		}
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) GetSuggestCreatePlan() *Message_ToolCall_SuggestCreatePlan {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestCreatePlan_); ok {
+			return x.SuggestCreatePlan
+		}
+	}
+	return nil
+}
+
 func (x *Message_ToolCall) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -8323,37 +8325,12 @@ func (x *Message_ToolCall) SetApplyFileDiffs(v *Message_ToolCall_ApplyFileDiffs)
 	x.xxx_hidden_Tool = &message_ToolCall_ApplyFileDiffs_{v}
 }
 
-func (x *Message_ToolCall) SetSuggestPlan(v *Message_ToolCall_SuggestPlan) {
-	if v == nil {
-		x.xxx_hidden_Tool = nil
-		return
-	}
-	x.xxx_hidden_Tool = &message_ToolCall_SuggestPlan_{v}
-}
-
-func (x *Message_ToolCall) SetSuggestCreatePlan(v *Message_ToolCall_SuggestCreatePlan) {
-	if v == nil {
-		x.xxx_hidden_Tool = nil
-		return
-	}
-	x.xxx_hidden_Tool = &message_ToolCall_SuggestCreatePlan_{v}
-}
-
 func (x *Message_ToolCall) SetGrep(v *Message_ToolCall_Grep) {
 	if v == nil {
 		x.xxx_hidden_Tool = nil
 		return
 	}
 	x.xxx_hidden_Tool = &message_ToolCall_Grep_{v}
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCall) SetFileGlob(v *Message_ToolCall_FileGlob) {
-	if v == nil {
-		x.xxx_hidden_Tool = nil
-		return
-	}
-	x.xxx_hidden_Tool = &message_ToolCall_FileGlob_{v}
 }
 
 func (x *Message_ToolCall) SetReadMcpResource(v *Message_ToolCall_ReadMCPResource) {
@@ -8468,6 +8445,33 @@ func (x *Message_ToolCall) SetUseComputer(v *Message_ToolCall_UseComputer) {
 	x.xxx_hidden_Tool = &message_ToolCall_UseComputer_{v}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) SetSuggestPlan(v *Message_ToolCall_SuggestPlan) {
+	if v == nil {
+		x.xxx_hidden_Tool = nil
+		return
+	}
+	x.xxx_hidden_Tool = &message_ToolCall_SuggestPlan_{v}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) SetFileGlob(v *Message_ToolCall_FileGlob) {
+	if v == nil {
+		x.xxx_hidden_Tool = nil
+		return
+	}
+	x.xxx_hidden_Tool = &message_ToolCall_FileGlob_{v}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) SetSuggestCreatePlan(v *Message_ToolCall_SuggestCreatePlan) {
+	if v == nil {
+		x.xxx_hidden_Tool = nil
+		return
+	}
+	x.xxx_hidden_Tool = &message_ToolCall_SuggestCreatePlan_{v}
+}
+
 func (x *Message_ToolCall) HasToolCallId() bool {
 	if x == nil {
 		return false
@@ -8522,36 +8526,11 @@ func (x *Message_ToolCall) HasApplyFileDiffs() bool {
 	return ok
 }
 
-func (x *Message_ToolCall) HasSuggestPlan() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestPlan_)
-	return ok
-}
-
-func (x *Message_ToolCall) HasSuggestCreatePlan() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestCreatePlan_)
-	return ok
-}
-
 func (x *Message_ToolCall) HasGrep() bool {
 	if x == nil {
 		return false
 	}
 	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_Grep_)
-	return ok
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCall) HasFileGlob() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_)
 	return ok
 }
 
@@ -8667,6 +8646,33 @@ func (x *Message_ToolCall) HasUseComputer() bool {
 	return ok
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) HasSuggestPlan() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestPlan_)
+	return ok
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) HasFileGlob() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_)
+	return ok
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) HasSuggestCreatePlan() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestCreatePlan_)
+	return ok
+}
+
 func (x *Message_ToolCall) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -8706,27 +8712,8 @@ func (x *Message_ToolCall) ClearApplyFileDiffs() {
 	}
 }
 
-func (x *Message_ToolCall) ClearSuggestPlan() {
-	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestPlan_); ok {
-		x.xxx_hidden_Tool = nil
-	}
-}
-
-func (x *Message_ToolCall) ClearSuggestCreatePlan() {
-	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestCreatePlan_); ok {
-		x.xxx_hidden_Tool = nil
-	}
-}
-
 func (x *Message_ToolCall) ClearGrep() {
 	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_Grep_); ok {
-		x.xxx_hidden_Tool = nil
-	}
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCall) ClearFileGlob() {
-	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_); ok {
 		x.xxx_hidden_Tool = nil
 	}
 }
@@ -8815,16 +8802,34 @@ func (x *Message_ToolCall) ClearUseComputer() {
 	}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) ClearSuggestPlan() {
+	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestPlan_); ok {
+		x.xxx_hidden_Tool = nil
+	}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) ClearFileGlob() {
+	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_FileGlob_); ok {
+		x.xxx_hidden_Tool = nil
+	}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCall) ClearSuggestCreatePlan() {
+	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_SuggestCreatePlan_); ok {
+		x.xxx_hidden_Tool = nil
+	}
+}
+
 const Message_ToolCall_Tool_not_set_case case_Message_ToolCall_Tool = 0
 const Message_ToolCall_RunShellCommand_case case_Message_ToolCall_Tool = 2
 const Message_ToolCall_SearchCodebase_case case_Message_ToolCall_Tool = 3
 const Message_ToolCall_Server_case case_Message_ToolCall_Tool = 4
 const Message_ToolCall_ReadFiles_case case_Message_ToolCall_Tool = 5
 const Message_ToolCall_ApplyFileDiffs_case case_Message_ToolCall_Tool = 6
-const Message_ToolCall_SuggestPlan_case case_Message_ToolCall_Tool = 7
-const Message_ToolCall_SuggestCreatePlan_case case_Message_ToolCall_Tool = 8
 const Message_ToolCall_Grep_case case_Message_ToolCall_Tool = 9
-const Message_ToolCall_FileGlob_case case_Message_ToolCall_Tool = 10
 const Message_ToolCall_ReadMcpResource_case case_Message_ToolCall_Tool = 11
 const Message_ToolCall_CallMcpTool_case case_Message_ToolCall_Tool = 12
 const Message_ToolCall_WriteToLongRunningShellCommand_case case_Message_ToolCall_Tool = 13
@@ -8839,6 +8844,9 @@ const Message_ToolCall_EditDocuments_case case_Message_ToolCall_Tool = 21
 const Message_ToolCall_CreateDocuments_case case_Message_ToolCall_Tool = 22
 const Message_ToolCall_ReadShellCommandOutput_case case_Message_ToolCall_Tool = 23
 const Message_ToolCall_UseComputer_case case_Message_ToolCall_Tool = 24
+const Message_ToolCall_SuggestPlan_case case_Message_ToolCall_Tool = 7
+const Message_ToolCall_FileGlob_case case_Message_ToolCall_Tool = 10
+const Message_ToolCall_SuggestCreatePlan_case case_Message_ToolCall_Tool = 8
 
 func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 	if x == nil {
@@ -8855,14 +8863,8 @@ func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 		return Message_ToolCall_ReadFiles_case
 	case *message_ToolCall_ApplyFileDiffs_:
 		return Message_ToolCall_ApplyFileDiffs_case
-	case *message_ToolCall_SuggestPlan_:
-		return Message_ToolCall_SuggestPlan_case
-	case *message_ToolCall_SuggestCreatePlan_:
-		return Message_ToolCall_SuggestCreatePlan_case
 	case *message_ToolCall_Grep_:
 		return Message_ToolCall_Grep_case
-	case *message_ToolCall_FileGlob_:
-		return Message_ToolCall_FileGlob_case
 	case *message_ToolCall_ReadMcpResource:
 		return Message_ToolCall_ReadMcpResource_case
 	case *message_ToolCall_CallMcpTool:
@@ -8891,6 +8893,12 @@ func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 		return Message_ToolCall_ReadShellCommandOutput_case
 	case *message_ToolCall_UseComputer_:
 		return Message_ToolCall_UseComputer_case
+	case *message_ToolCall_SuggestPlan_:
+		return Message_ToolCall_SuggestPlan_case
+	case *message_ToolCall_FileGlob_:
+		return Message_ToolCall_FileGlob_case
+	case *message_ToolCall_SuggestCreatePlan_:
+		return Message_ToolCall_SuggestCreatePlan_case
 	default:
 		return Message_ToolCall_Tool_not_set_case
 	}
@@ -8903,18 +8911,12 @@ type Message_ToolCall_builder struct {
 	// The specific tool being called
 
 	// Fields of oneof xxx_hidden_Tool:
-	RunShellCommand   *Message_ToolCall_RunShellCommand
-	SearchCodebase    *Message_ToolCall_SearchCodebase
-	Server            *Message_ToolCall_Server
-	ReadFiles         *Message_ToolCall_ReadFiles
-	ApplyFileDiffs    *Message_ToolCall_ApplyFileDiffs
-	SuggestPlan       *Message_ToolCall_SuggestPlan
-	SuggestCreatePlan *Message_ToolCall_SuggestCreatePlan
-	Grep              *Message_ToolCall_Grep
-	// DEPRECATED: Being replaced by FileGlobV2.
-	//
-	// Deprecated: Marked as deprecated in task.proto.
-	FileGlob                       *Message_ToolCall_FileGlob
+	RunShellCommand                *Message_ToolCall_RunShellCommand
+	SearchCodebase                 *Message_ToolCall_SearchCodebase
+	Server                         *Message_ToolCall_Server
+	ReadFiles                      *Message_ToolCall_ReadFiles
+	ApplyFileDiffs                 *Message_ToolCall_ApplyFileDiffs
+	Grep                           *Message_ToolCall_Grep
 	ReadMcpResource                *Message_ToolCall_ReadMCPResource
 	CallMcpTool                    *Message_ToolCall_CallMCPTool
 	WriteToLongRunningShellCommand *Message_ToolCall_WriteToLongRunningShellCommand
@@ -8929,6 +8931,18 @@ type Message_ToolCall_builder struct {
 	CreateDocuments                *Message_ToolCall_CreateDocuments
 	ReadShellCommandOutput         *Message_ToolCall_ReadShellCommandOutput
 	UseComputer                    *Message_ToolCall_UseComputer
+	// Replaced by CreateDocuments.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestPlan *Message_ToolCall_SuggestPlan
+	// Replaced by FileGlobV2.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	FileGlob *Message_ToolCall_FileGlob
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestCreatePlan *Message_ToolCall_SuggestCreatePlan
 	// -- end of xxx_hidden_Tool
 }
 
@@ -8955,17 +8969,8 @@ func (b0 Message_ToolCall_builder) Build() *Message_ToolCall {
 	if b.ApplyFileDiffs != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_ApplyFileDiffs_{b.ApplyFileDiffs}
 	}
-	if b.SuggestPlan != nil {
-		x.xxx_hidden_Tool = &message_ToolCall_SuggestPlan_{b.SuggestPlan}
-	}
-	if b.SuggestCreatePlan != nil {
-		x.xxx_hidden_Tool = &message_ToolCall_SuggestCreatePlan_{b.SuggestCreatePlan}
-	}
 	if b.Grep != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_Grep_{b.Grep}
-	}
-	if b.FileGlob != nil {
-		x.xxx_hidden_Tool = &message_ToolCall_FileGlob_{b.FileGlob}
 	}
 	if b.ReadMcpResource != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_ReadMcpResource{b.ReadMcpResource}
@@ -9009,6 +9014,15 @@ func (b0 Message_ToolCall_builder) Build() *Message_ToolCall {
 	if b.UseComputer != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_UseComputer_{b.UseComputer}
 	}
+	if b.SuggestPlan != nil {
+		x.xxx_hidden_Tool = &message_ToolCall_SuggestPlan_{b.SuggestPlan}
+	}
+	if b.FileGlob != nil {
+		x.xxx_hidden_Tool = &message_ToolCall_FileGlob_{b.FileGlob}
+	}
+	if b.SuggestCreatePlan != nil {
+		x.xxx_hidden_Tool = &message_ToolCall_SuggestCreatePlan_{b.SuggestCreatePlan}
+	}
 	return m0
 }
 
@@ -9046,23 +9060,8 @@ type message_ToolCall_ApplyFileDiffs_ struct {
 	ApplyFileDiffs *Message_ToolCall_ApplyFileDiffs `protobuf:"bytes,6,opt,name=apply_file_diffs,json=applyFileDiffs,oneof"`
 }
 
-type message_ToolCall_SuggestPlan_ struct {
-	SuggestPlan *Message_ToolCall_SuggestPlan `protobuf:"bytes,7,opt,name=suggest_plan,json=suggestPlan,oneof"`
-}
-
-type message_ToolCall_SuggestCreatePlan_ struct {
-	SuggestCreatePlan *Message_ToolCall_SuggestCreatePlan `protobuf:"bytes,8,opt,name=suggest_create_plan,json=suggestCreatePlan,oneof"`
-}
-
 type message_ToolCall_Grep_ struct {
 	Grep *Message_ToolCall_Grep `protobuf:"bytes,9,opt,name=grep,oneof"`
-}
-
-type message_ToolCall_FileGlob_ struct {
-	// DEPRECATED: Being replaced by FileGlobV2.
-	//
-	// Deprecated: Marked as deprecated in task.proto.
-	FileGlob *Message_ToolCall_FileGlob `protobuf:"bytes,10,opt,name=file_glob,json=fileGlob,oneof"`
 }
 
 type message_ToolCall_ReadMcpResource struct {
@@ -9121,6 +9120,27 @@ type message_ToolCall_UseComputer_ struct {
 	UseComputer *Message_ToolCall_UseComputer `protobuf:"bytes,24,opt,name=use_computer,json=useComputer,oneof"`
 }
 
+type message_ToolCall_SuggestPlan_ struct {
+	// Replaced by CreateDocuments.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestPlan *Message_ToolCall_SuggestPlan `protobuf:"bytes,7,opt,name=suggest_plan,json=suggestPlan,oneof"`
+}
+
+type message_ToolCall_FileGlob_ struct {
+	// Replaced by FileGlobV2.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	FileGlob *Message_ToolCall_FileGlob `protobuf:"bytes,10,opt,name=file_glob,json=fileGlob,oneof"`
+}
+
+type message_ToolCall_SuggestCreatePlan_ struct {
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestCreatePlan *Message_ToolCall_SuggestCreatePlan `protobuf:"bytes,8,opt,name=suggest_create_plan,json=suggestCreatePlan,oneof"`
+}
+
 func (*message_ToolCall_RunShellCommand_) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_SearchCodebase_) isMessage_ToolCall_Tool() {}
@@ -9131,13 +9151,7 @@ func (*message_ToolCall_ReadFiles_) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_ApplyFileDiffs_) isMessage_ToolCall_Tool() {}
 
-func (*message_ToolCall_SuggestPlan_) isMessage_ToolCall_Tool() {}
-
-func (*message_ToolCall_SuggestCreatePlan_) isMessage_ToolCall_Tool() {}
-
 func (*message_ToolCall_Grep_) isMessage_ToolCall_Tool() {}
-
-func (*message_ToolCall_FileGlob_) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_ReadMcpResource) isMessage_ToolCall_Tool() {}
 
@@ -9166,6 +9180,12 @@ func (*message_ToolCall_CreateDocuments_) isMessage_ToolCall_Tool() {}
 func (*message_ToolCall_ReadShellCommandOutput_) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_UseComputer_) isMessage_ToolCall_Tool() {}
+
+func (*message_ToolCall_SuggestPlan_) isMessage_ToolCall_Tool() {}
+
+func (*message_ToolCall_FileGlob_) isMessage_ToolCall_Tool() {}
+
+func (*message_ToolCall_SuggestCreatePlan_) isMessage_ToolCall_Tool() {}
 
 // Entry in the message log representing the result of a tool call.
 type Message_ToolCallResult struct {
@@ -9266,48 +9286,10 @@ func (x *Message_ToolCallResult) GetApplyFileDiffs() *ApplyFileDiffsResult {
 	return nil
 }
 
-func (x *Message_ToolCallResult) GetSuggestPlan() *SuggestPlanResult {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestPlan); ok {
-			return x.SuggestPlan
-		}
-	}
-	return nil
-}
-
-func (x *Message_ToolCallResult) GetSuggestCreatePlan() *SuggestCreatePlanResult {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestCreatePlan); ok {
-			return x.SuggestCreatePlan
-		}
-	}
-	return nil
-}
-
 func (x *Message_ToolCallResult) GetGrep() *GrepResult {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Grep); ok {
 			return x.Grep
-		}
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) GetFileGlob() *FileGlobResult {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob); ok {
-			return x.FileGlob
-		}
-	}
-	return nil
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) GetRefine() *Message_ToolCallResult_RefineResult {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine); ok {
-			return x.Refine
 		}
 	}
 	return nil
@@ -9448,6 +9430,46 @@ func (x *Message_ToolCallResult) GetUseComputer() *UseComputerResult {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) GetFileGlob() *FileGlobResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob); ok {
+			return x.FileGlob
+		}
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) GetRefine() *Message_ToolCallResult_RefineResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine); ok {
+			return x.Refine
+		}
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) GetSuggestPlan() *SuggestPlanResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestPlan); ok {
+			return x.SuggestPlan
+		}
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) GetSuggestCreatePlan() *SuggestCreatePlanResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestCreatePlan); ok {
+			return x.SuggestCreatePlan
+		}
+	}
+	return nil
+}
+
 func (x *Message_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
@@ -9497,46 +9519,12 @@ func (x *Message_ToolCallResult) SetApplyFileDiffs(v *ApplyFileDiffsResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_ApplyFileDiffs{v}
 }
 
-func (x *Message_ToolCallResult) SetSuggestPlan(v *SuggestPlanResult) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &message_ToolCallResult_SuggestPlan{v}
-}
-
-func (x *Message_ToolCallResult) SetSuggestCreatePlan(v *SuggestCreatePlanResult) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &message_ToolCallResult_SuggestCreatePlan{v}
-}
-
 func (x *Message_ToolCallResult) SetGrep(v *GrepResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
 	x.xxx_hidden_Result = &message_ToolCallResult_Grep{v}
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) SetFileGlob(v *FileGlobResult) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &message_ToolCallResult_FileGlob{v}
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) SetRefine(v *Message_ToolCallResult_RefineResult) {
-	if v == nil {
-		x.xxx_hidden_Result = nil
-		return
-	}
-	x.xxx_hidden_Result = &message_ToolCallResult_Refine{v}
 }
 
 func (x *Message_ToolCallResult) SetCancel(v *emptypb.Empty) {
@@ -9659,6 +9647,42 @@ func (x *Message_ToolCallResult) SetUseComputer(v *UseComputerResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_UseComputer{v}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) SetFileGlob(v *FileGlobResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &message_ToolCallResult_FileGlob{v}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) SetRefine(v *Message_ToolCallResult_RefineResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &message_ToolCallResult_Refine{v}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) SetSuggestPlan(v *SuggestPlanResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &message_ToolCallResult_SuggestPlan{v}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) SetSuggestCreatePlan(v *SuggestCreatePlanResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &message_ToolCallResult_SuggestCreatePlan{v}
+}
+
 func (x *Message_ToolCallResult) HasToolCallId() bool {
 	if x == nil {
 		return false
@@ -9720,45 +9744,11 @@ func (x *Message_ToolCallResult) HasApplyFileDiffs() bool {
 	return ok
 }
 
-func (x *Message_ToolCallResult) HasSuggestPlan() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestPlan)
-	return ok
-}
-
-func (x *Message_ToolCallResult) HasSuggestCreatePlan() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestCreatePlan)
-	return ok
-}
-
 func (x *Message_ToolCallResult) HasGrep() bool {
 	if x == nil {
 		return false
 	}
 	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Grep)
-	return ok
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) HasFileGlob() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob)
-	return ok
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) HasRefine() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine)
 	return ok
 }
 
@@ -9882,6 +9872,42 @@ func (x *Message_ToolCallResult) HasUseComputer() bool {
 	return ok
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) HasFileGlob() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob)
+	return ok
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) HasRefine() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine)
+	return ok
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) HasSuggestPlan() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestPlan)
+	return ok
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) HasSuggestCreatePlan() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestCreatePlan)
+	return ok
+}
+
 func (x *Message_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -9925,34 +9951,8 @@ func (x *Message_ToolCallResult) ClearApplyFileDiffs() {
 	}
 }
 
-func (x *Message_ToolCallResult) ClearSuggestPlan() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestPlan); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-func (x *Message_ToolCallResult) ClearSuggestCreatePlan() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestCreatePlan); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
 func (x *Message_ToolCallResult) ClearGrep() {
 	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Grep); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) ClearFileGlob() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob); ok {
-		x.xxx_hidden_Result = nil
-	}
-}
-
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_ToolCallResult) ClearRefine() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
@@ -10047,17 +10047,41 @@ func (x *Message_ToolCallResult) ClearUseComputer() {
 	}
 }
 
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) ClearFileGlob() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_FileGlob); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) ClearRefine() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_Refine); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) ClearSuggestPlan() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestPlan); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
+// Deprecated: Marked as deprecated in task.proto.
+func (x *Message_ToolCallResult) ClearSuggestCreatePlan() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SuggestCreatePlan); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Message_ToolCallResult_Result_not_set_case case_Message_ToolCallResult_Result = 0
 const Message_ToolCallResult_RunShellCommand_case case_Message_ToolCallResult_Result = 2
 const Message_ToolCallResult_SearchCodebase_case case_Message_ToolCallResult_Result = 3
 const Message_ToolCallResult_Server_case case_Message_ToolCallResult_Result = 4
 const Message_ToolCallResult_ReadFiles_case case_Message_ToolCallResult_Result = 5
 const Message_ToolCallResult_ApplyFileDiffs_case case_Message_ToolCallResult_Result = 6
-const Message_ToolCallResult_SuggestPlan_case case_Message_ToolCallResult_Result = 7
-const Message_ToolCallResult_SuggestCreatePlan_case case_Message_ToolCallResult_Result = 8
 const Message_ToolCallResult_Grep_case case_Message_ToolCallResult_Result = 9
-const Message_ToolCallResult_FileGlob_case case_Message_ToolCallResult_Result = 10
-const Message_ToolCallResult_Refine_case case_Message_ToolCallResult_Result = 13
 const Message_ToolCallResult_Cancel_case case_Message_ToolCallResult_Result = 14
 const Message_ToolCallResult_ReadMcpResource_case case_Message_ToolCallResult_Result = 15
 const Message_ToolCallResult_CallMcpTool_case case_Message_ToolCallResult_Result = 16
@@ -10073,6 +10097,10 @@ const Message_ToolCallResult_EditDocuments_case case_Message_ToolCallResult_Resu
 const Message_ToolCallResult_CreateDocuments_case case_Message_ToolCallResult_Result = 26
 const Message_ToolCallResult_ReadShellCommandOutput_case case_Message_ToolCallResult_Result = 27
 const Message_ToolCallResult_UseComputer_case case_Message_ToolCallResult_Result = 28
+const Message_ToolCallResult_FileGlob_case case_Message_ToolCallResult_Result = 10
+const Message_ToolCallResult_Refine_case case_Message_ToolCallResult_Result = 13
+const Message_ToolCallResult_SuggestPlan_case case_Message_ToolCallResult_Result = 7
+const Message_ToolCallResult_SuggestCreatePlan_case case_Message_ToolCallResult_Result = 8
 
 func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Result {
 	if x == nil {
@@ -10089,16 +10117,8 @@ func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Resul
 		return Message_ToolCallResult_ReadFiles_case
 	case *message_ToolCallResult_ApplyFileDiffs:
 		return Message_ToolCallResult_ApplyFileDiffs_case
-	case *message_ToolCallResult_SuggestPlan:
-		return Message_ToolCallResult_SuggestPlan_case
-	case *message_ToolCallResult_SuggestCreatePlan:
-		return Message_ToolCallResult_SuggestCreatePlan_case
 	case *message_ToolCallResult_Grep:
 		return Message_ToolCallResult_Grep_case
-	case *message_ToolCallResult_FileGlob:
-		return Message_ToolCallResult_FileGlob_case
-	case *message_ToolCallResult_Refine:
-		return Message_ToolCallResult_Refine_case
 	case *message_ToolCallResult_Cancel:
 		return Message_ToolCallResult_Cancel_case
 	case *message_ToolCallResult_ReadMcpResource:
@@ -10129,6 +10149,14 @@ func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Resul
 		return Message_ToolCallResult_ReadShellCommandOutput_case
 	case *message_ToolCallResult_UseComputer:
 		return Message_ToolCallResult_UseComputer_case
+	case *message_ToolCallResult_FileGlob:
+		return Message_ToolCallResult_FileGlob_case
+	case *message_ToolCallResult_Refine:
+		return Message_ToolCallResult_Refine_case
+	case *message_ToolCallResult_SuggestPlan:
+		return Message_ToolCallResult_SuggestPlan_case
+	case *message_ToolCallResult_SuggestCreatePlan:
+		return Message_ToolCallResult_SuggestCreatePlan_case
 	default:
 		return Message_ToolCallResult_Result_not_set_case
 	}
@@ -10143,22 +10171,12 @@ type Message_ToolCallResult_builder struct {
 	// Not included for `ServerResult`s.
 	Context *InputContext
 	// Fields of oneof xxx_hidden_Result:
-	RunShellCommand   *RunShellCommandResult
-	SearchCodebase    *SearchCodebaseResult
-	Server            *Message_ToolCallResult_ServerResult
-	ReadFiles         *ReadFilesResult
-	ApplyFileDiffs    *ApplyFileDiffsResult
-	SuggestPlan       *SuggestPlanResult
-	SuggestCreatePlan *SuggestCreatePlanResult
-	Grep              *GrepResult
-	// DEPRECATED: Being replaced by FileGlobV2Result.
-	//
-	// Deprecated: Marked as deprecated in task.proto.
-	FileGlob *FileGlobResult
-	// DEPRECATED: No longer used by client.
-	//
-	// Deprecated: Marked as deprecated in task.proto.
-	Refine                         *Message_ToolCallResult_RefineResult
+	RunShellCommand                *RunShellCommandResult
+	SearchCodebase                 *SearchCodebaseResult
+	Server                         *Message_ToolCallResult_ServerResult
+	ReadFiles                      *ReadFilesResult
+	ApplyFileDiffs                 *ApplyFileDiffsResult
+	Grep                           *GrepResult
 	Cancel                         *emptypb.Empty
 	ReadMcpResource                *ReadMCPResourceResult
 	CallMcpTool                    *CallMCPToolResult
@@ -10174,6 +10192,22 @@ type Message_ToolCallResult_builder struct {
 	CreateDocuments                *CreateDocumentsResult
 	ReadShellCommandOutput         *ReadShellCommandOutputResult
 	UseComputer                    *UseComputerResult
+	// Replaced by FileGlobV2Result.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	FileGlob *FileGlobResult
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	Refine *Message_ToolCallResult_RefineResult
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestPlan *SuggestPlanResult
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestCreatePlan *SuggestCreatePlanResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -10201,20 +10235,8 @@ func (b0 Message_ToolCallResult_builder) Build() *Message_ToolCallResult {
 	if b.ApplyFileDiffs != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_ApplyFileDiffs{b.ApplyFileDiffs}
 	}
-	if b.SuggestPlan != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_SuggestPlan{b.SuggestPlan}
-	}
-	if b.SuggestCreatePlan != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_SuggestCreatePlan{b.SuggestCreatePlan}
-	}
 	if b.Grep != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_Grep{b.Grep}
-	}
-	if b.FileGlob != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_FileGlob{b.FileGlob}
-	}
-	if b.Refine != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_Refine{b.Refine}
 	}
 	if b.Cancel != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_Cancel{b.Cancel}
@@ -10261,6 +10283,18 @@ func (b0 Message_ToolCallResult_builder) Build() *Message_ToolCallResult {
 	if b.UseComputer != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_UseComputer{b.UseComputer}
 	}
+	if b.FileGlob != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_FileGlob{b.FileGlob}
+	}
+	if b.Refine != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_Refine{b.Refine}
+	}
+	if b.SuggestPlan != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_SuggestPlan{b.SuggestPlan}
+	}
+	if b.SuggestCreatePlan != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_SuggestCreatePlan{b.SuggestCreatePlan}
+	}
 	return m0
 }
 
@@ -10298,30 +10332,8 @@ type message_ToolCallResult_ApplyFileDiffs struct {
 	ApplyFileDiffs *ApplyFileDiffsResult `protobuf:"bytes,6,opt,name=apply_file_diffs,json=applyFileDiffs,oneof"`
 }
 
-type message_ToolCallResult_SuggestPlan struct {
-	SuggestPlan *SuggestPlanResult `protobuf:"bytes,7,opt,name=suggest_plan,json=suggestPlan,oneof"`
-}
-
-type message_ToolCallResult_SuggestCreatePlan struct {
-	SuggestCreatePlan *SuggestCreatePlanResult `protobuf:"bytes,8,opt,name=suggest_create_plan,json=suggestCreatePlan,oneof"`
-}
-
 type message_ToolCallResult_Grep struct {
 	Grep *GrepResult `protobuf:"bytes,9,opt,name=grep,oneof"`
-}
-
-type message_ToolCallResult_FileGlob struct {
-	// DEPRECATED: Being replaced by FileGlobV2Result.
-	//
-	// Deprecated: Marked as deprecated in task.proto.
-	FileGlob *FileGlobResult `protobuf:"bytes,10,opt,name=file_glob,json=fileGlob,oneof"`
-}
-
-type message_ToolCallResult_Refine struct {
-	// DEPRECATED: No longer used by client.
-	//
-	// Deprecated: Marked as deprecated in task.proto.
-	Refine *Message_ToolCallResult_RefineResult `protobuf:"bytes,13,opt,name=refine,oneof"`
 }
 
 type message_ToolCallResult_Cancel struct {
@@ -10384,6 +10396,34 @@ type message_ToolCallResult_UseComputer struct {
 	UseComputer *UseComputerResult `protobuf:"bytes,28,opt,name=use_computer,json=useComputer,oneof"`
 }
 
+type message_ToolCallResult_FileGlob struct {
+	// Replaced by FileGlobV2Result.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	FileGlob *FileGlobResult `protobuf:"bytes,10,opt,name=file_glob,json=fileGlob,oneof"`
+}
+
+type message_ToolCallResult_Refine struct {
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	Refine *Message_ToolCallResult_RefineResult `protobuf:"bytes,13,opt,name=refine,oneof"`
+}
+
+type message_ToolCallResult_SuggestPlan struct {
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestPlan *SuggestPlanResult `protobuf:"bytes,7,opt,name=suggest_plan,json=suggestPlan,oneof"`
+}
+
+type message_ToolCallResult_SuggestCreatePlan struct {
+	// No longer used by client.
+	//
+	// Deprecated: Marked as deprecated in task.proto.
+	SuggestCreatePlan *SuggestCreatePlanResult `protobuf:"bytes,8,opt,name=suggest_create_plan,json=suggestCreatePlan,oneof"`
+}
+
 func (*message_ToolCallResult_RunShellCommand) isMessage_ToolCallResult_Result() {}
 
 func (*message_ToolCallResult_SearchCodebase) isMessage_ToolCallResult_Result() {}
@@ -10394,15 +10434,7 @@ func (*message_ToolCallResult_ReadFiles) isMessage_ToolCallResult_Result() {}
 
 func (*message_ToolCallResult_ApplyFileDiffs) isMessage_ToolCallResult_Result() {}
 
-func (*message_ToolCallResult_SuggestPlan) isMessage_ToolCallResult_Result() {}
-
-func (*message_ToolCallResult_SuggestCreatePlan) isMessage_ToolCallResult_Result() {}
-
 func (*message_ToolCallResult_Grep) isMessage_ToolCallResult_Result() {}
-
-func (*message_ToolCallResult_FileGlob) isMessage_ToolCallResult_Result() {}
-
-func (*message_ToolCallResult_Refine) isMessage_ToolCallResult_Result() {}
 
 func (*message_ToolCallResult_Cancel) isMessage_ToolCallResult_Result() {}
 
@@ -10433,6 +10465,14 @@ func (*message_ToolCallResult_CreateDocuments) isMessage_ToolCallResult_Result()
 func (*message_ToolCallResult_ReadShellCommandOutput) isMessage_ToolCallResult_Result() {}
 
 func (*message_ToolCallResult_UseComputer) isMessage_ToolCallResult_Result() {}
+
+func (*message_ToolCallResult_FileGlob) isMessage_ToolCallResult_Result() {}
+
+func (*message_ToolCallResult_Refine) isMessage_ToolCallResult_Result() {}
+
+func (*message_ToolCallResult_SuggestPlan) isMessage_ToolCallResult_Result() {}
+
+func (*message_ToolCallResult_SuggestCreatePlan) isMessage_ToolCallResult_Result() {}
 
 // An event that is preserved in message history
 // for server-side processing.
@@ -21011,7 +21051,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xcfz\n" +
+	"\x0ecomment_target\"\xdfz\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -21087,7 +21127,7 @@ const file_task_proto_rawDesc = "" +
 	"\fsummary_type\x1aM\n" +
 	"\n" +
 	"CodeReview\x12?\n" +
-	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\x9b>\n" +
+	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a\xa3>\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -21096,12 +21136,8 @@ const file_task_proto_rawDesc = "" +
 	"\x06server\x18\x04 \x01(\v2,.warp.multi_agent.v1.Message.ToolCall.ServerH\x00R\x06server\x12P\n" +
 	"\n" +
 	"read_files\x18\x05 \x01(\v2/.warp.multi_agent.v1.Message.ToolCall.ReadFilesH\x00R\treadFiles\x12`\n" +
-	"\x10apply_file_diffs\x18\x06 \x01(\v24.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffsH\x00R\x0eapplyFileDiffs\x12V\n" +
-	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanH\x00R\vsuggestPlan\x12i\n" +
-	"\x13suggest_create_plan\x18\b \x01(\v27.warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlanH\x00R\x11suggestCreatePlan\x12@\n" +
-	"\x04grep\x18\t \x01(\v2*.warp.multi_agent.v1.Message.ToolCall.GrepH\x00R\x04grep\x12Q\n" +
-	"\tfile_glob\x18\n" +
-	" \x01(\v2..warp.multi_agent.v1.Message.ToolCall.FileGlobB\x02\x18\x01H\x00R\bfileGlob\x12c\n" +
+	"\x10apply_file_diffs\x18\x06 \x01(\v24.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffsH\x00R\x0eapplyFileDiffs\x12@\n" +
+	"\x04grep\x18\t \x01(\v2*.warp.multi_agent.v1.Message.ToolCall.GrepH\x00R\x04grep\x12c\n" +
 	"\x11read_mcp_resource\x18\v \x01(\v25.warp.multi_agent.v1.Message.ToolCall.ReadMCPResourceH\x00R\x0freadMcpResource\x12W\n" +
 	"\rcall_mcp_tool\x18\f \x01(\v21.warp.multi_agent.v1.Message.ToolCall.CallMCPToolH\x00R\vcallMcpTool\x12\x93\x01\n" +
 	"#write_to_long_running_shell_command\x18\r \x01(\v2D.warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommandH\x00R\x1ewriteToLongRunningShellCommand\x12x\n" +
@@ -21116,7 +21152,11 @@ const file_task_proto_rawDesc = "" +
 	"\x0eedit_documents\x18\x15 \x01(\v23.warp.multi_agent.v1.Message.ToolCall.EditDocumentsH\x00R\reditDocuments\x12b\n" +
 	"\x10create_documents\x18\x16 \x01(\v25.warp.multi_agent.v1.Message.ToolCall.CreateDocumentsH\x00R\x0fcreateDocuments\x12y\n" +
 	"\x19read_shell_command_output\x18\x17 \x01(\v2<.warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutputH\x00R\x16readShellCommandOutput\x12V\n" +
-	"\fuse_computer\x18\x18 \x01(\v21.warp.multi_agent.v1.Message.ToolCall.UseComputerH\x00R\vuseComputer\x1a\"\n" +
+	"\fuse_computer\x18\x18 \x01(\v21.warp.multi_agent.v1.Message.ToolCall.UseComputerH\x00R\vuseComputer\x12Z\n" +
+	"\fsuggest_plan\x18\a \x01(\v21.warp.multi_agent.v1.Message.ToolCall.SuggestPlanB\x02\x18\x01H\x00R\vsuggestPlan\x12Q\n" +
+	"\tfile_glob\x18\n" +
+	" \x01(\v2..warp.multi_agent.v1.Message.ToolCall.FileGlobB\x02\x18\x01H\x00R\bfileGlob\x12m\n" +
+	"\x13suggest_create_plan\x18\b \x01(\v27.warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlanB\x02\x18\x01H\x00R\x11suggestCreatePlan\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
 	"\apayload\x18\x01 \x01(\tR\apayload\x1a\x93\x02\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
@@ -21302,7 +21342,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10max_long_edge_px\x18\x01 \x01(\x05R\rmaxLongEdgePx\x12 \n" +
 	"\fmax_total_px\x18\x02 \x01(\x05R\n" +
 	"maxTotalPxB\x06\n" +
-	"\x04tool\x1a\x8f\x13\n" +
+	"\x04tool\x1a\x97\x13\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -21312,13 +21352,8 @@ const file_task_proto_rawDesc = "" +
 	"\x06server\x18\x04 \x01(\v28.warp.multi_agent.v1.Message.ToolCallResult.ServerResultH\x00R\x06server\x12E\n" +
 	"\n" +
 	"read_files\x18\x05 \x01(\v2$.warp.multi_agent.v1.ReadFilesResultH\x00R\treadFiles\x12U\n" +
-	"\x10apply_file_diffs\x18\x06 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x12K\n" +
-	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultH\x00R\vsuggestPlan\x12^\n" +
-	"\x13suggest_create_plan\x18\b \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultH\x00R\x11suggestCreatePlan\x125\n" +
-	"\x04grep\x18\t \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x12F\n" +
-	"\tfile_glob\x18\n" +
-	" \x01(\v2#.warp.multi_agent.v1.FileGlobResultB\x02\x18\x01H\x00R\bfileGlob\x12V\n" +
-	"\x06refine\x18\r \x01(\v28.warp.multi_agent.v1.Message.ToolCallResult.RefineResultB\x02\x18\x01H\x00R\x06refine\x120\n" +
+	"\x10apply_file_diffs\x18\x06 \x01(\v2).warp.multi_agent.v1.ApplyFileDiffsResultH\x00R\x0eapplyFileDiffs\x125\n" +
+	"\x04grep\x18\t \x01(\v2\x1f.warp.multi_agent.v1.GrepResultH\x00R\x04grep\x120\n" +
 	"\x06cancel\x18\x0e \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06cancel\x12X\n" +
 	"\x11read_mcp_resource\x18\x0f \x01(\v2*.warp.multi_agent.v1.ReadMCPResourceResultH\x00R\x0freadMcpResource\x12L\n" +
 	"\rcall_mcp_tool\x18\x10 \x01(\v2&.warp.multi_agent.v1.CallMCPToolResultH\x00R\vcallMcpTool\x12\x88\x01\n" +
@@ -21334,7 +21369,12 @@ const file_task_proto_rawDesc = "" +
 	"\x0eedit_documents\x18\x19 \x01(\v2(.warp.multi_agent.v1.EditDocumentsResultH\x00R\reditDocuments\x12W\n" +
 	"\x10create_documents\x18\x1a \x01(\v2*.warp.multi_agent.v1.CreateDocumentsResultH\x00R\x0fcreateDocuments\x12n\n" +
 	"\x19read_shell_command_output\x18\x1b \x01(\v21.warp.multi_agent.v1.ReadShellCommandOutputResultH\x00R\x16readShellCommandOutput\x12K\n" +
-	"\fuse_computer\x18\x1c \x01(\v2&.warp.multi_agent.v1.UseComputerResultH\x00R\vuseComputer\x1a;\n" +
+	"\fuse_computer\x18\x1c \x01(\v2&.warp.multi_agent.v1.UseComputerResultH\x00R\vuseComputer\x12F\n" +
+	"\tfile_glob\x18\n" +
+	" \x01(\v2#.warp.multi_agent.v1.FileGlobResultB\x02\x18\x01H\x00R\bfileGlob\x12V\n" +
+	"\x06refine\x18\r \x01(\v28.warp.multi_agent.v1.Message.ToolCallResult.RefineResultB\x02\x18\x01H\x00R\x06refine\x12O\n" +
+	"\fsuggest_plan\x18\a \x01(\v2&.warp.multi_agent.v1.SuggestPlanResultB\x02\x18\x01H\x00R\vsuggestPlan\x12b\n" +
+	"\x13suggest_create_plan\x18\b \x01(\v2,.warp.multi_agent.v1.SuggestCreatePlanResultB\x02\x18\x01H\x00R\x11suggestCreatePlan\x1a;\n" +
 	"\fServerResult\x12+\n" +
 	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1aY\n" +
 	"\fRefineResult\x12E\n" +
@@ -21893,50 +21933,50 @@ var file_task_proto_depIdxs = []int32{
 	60,  // 93: warp.multi_agent.v1.Message.ToolCall.server:type_name -> warp.multi_agent.v1.Message.ToolCall.Server
 	64,  // 94: warp.multi_agent.v1.Message.ToolCall.read_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles
 	66,  // 95: warp.multi_agent.v1.Message.ToolCall.apply_file_diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	67,  // 96: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	68,  // 97: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	69,  // 98: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
-	70,  // 99: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
-	72,  // 100: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
-	73,  // 101: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
-	62,  // 102: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
-	63,  // 103: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
-	71,  // 104: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
-	74,  // 105: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
-	75,  // 106: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
-	76,  // 107: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
-	77,  // 108: warp.multi_agent.v1.Message.ToolCall.subagent:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent
-	78,  // 109: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
-	79,  // 110: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
-	80,  // 111: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
-	81,  // 112: warp.multi_agent.v1.Message.ToolCall.read_shell_command_output:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput
-	82,  // 113: warp.multi_agent.v1.Message.ToolCall.use_computer:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer
+	69,  // 96: warp.multi_agent.v1.Message.ToolCall.grep:type_name -> warp.multi_agent.v1.Message.ToolCall.Grep
+	72,  // 97: warp.multi_agent.v1.Message.ToolCall.read_mcp_resource:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	73,  // 98: warp.multi_agent.v1.Message.ToolCall.call_mcp_tool:type_name -> warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	62,  // 99: warp.multi_agent.v1.Message.ToolCall.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
+	63,  // 100: warp.multi_agent.v1.Message.ToolCall.suggest_new_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
+	71,  // 101: warp.multi_agent.v1.Message.ToolCall.file_glob_v2:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlobV2
+	74,  // 102: warp.multi_agent.v1.Message.ToolCall.suggest_prompt:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
+	75,  // 103: warp.multi_agent.v1.Message.ToolCall.open_code_review:type_name -> warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
+	76,  // 104: warp.multi_agent.v1.Message.ToolCall.init_project:type_name -> warp.multi_agent.v1.Message.ToolCall.InitProject
+	77,  // 105: warp.multi_agent.v1.Message.ToolCall.subagent:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent
+	78,  // 106: warp.multi_agent.v1.Message.ToolCall.read_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments
+	79,  // 107: warp.multi_agent.v1.Message.ToolCall.edit_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments
+	80,  // 108: warp.multi_agent.v1.Message.ToolCall.create_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments
+	81,  // 109: warp.multi_agent.v1.Message.ToolCall.read_shell_command_output:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput
+	82,  // 110: warp.multi_agent.v1.Message.ToolCall.use_computer:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer
+	67,  // 111: warp.multi_agent.v1.Message.ToolCall.suggest_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	70,  // 112: warp.multi_agent.v1.Message.ToolCall.file_glob:type_name -> warp.multi_agent.v1.Message.ToolCall.FileGlob
+	68,  // 113: warp.multi_agent.v1.Message.ToolCall.suggest_create_plan:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
 	162, // 114: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	8,   // 115: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	10,  // 116: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	103, // 117: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
 	9,   // 118: warp.multi_agent.v1.Message.ToolCallResult.read_files:type_name -> warp.multi_agent.v1.ReadFilesResult
 	11,  // 119: warp.multi_agent.v1.Message.ToolCallResult.apply_file_diffs:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult
-	13,  // 120: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
-	12,  // 121: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
-	14,  // 122: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
-	15,  // 123: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	104, // 124: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
-	159, // 125: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
-	18,  // 126: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
-	23,  // 127: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
-	19,  // 128: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	20,  // 129: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
-	16,  // 130: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
-	24,  // 131: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
-	25,  // 132: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
-	26,  // 133: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
-	105, // 134: warp.multi_agent.v1.Message.ToolCallResult.subagent:type_name -> warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
-	27,  // 135: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
-	28,  // 136: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
-	29,  // 137: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
-	30,  // 138: warp.multi_agent.v1.Message.ToolCallResult.read_shell_command_output:type_name -> warp.multi_agent.v1.ReadShellCommandOutputResult
-	32,  // 139: warp.multi_agent.v1.Message.ToolCallResult.use_computer:type_name -> warp.multi_agent.v1.UseComputerResult
+	14,  // 120: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
+	159, // 121: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	18,  // 122: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
+	23,  // 123: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
+	19,  // 124: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	20,  // 125: warp.multi_agent.v1.Message.ToolCallResult.suggest_new_conversation:type_name -> warp.multi_agent.v1.SuggestNewConversationResult
+	16,  // 126: warp.multi_agent.v1.Message.ToolCallResult.file_glob_v2:type_name -> warp.multi_agent.v1.FileGlobV2Result
+	24,  // 127: warp.multi_agent.v1.Message.ToolCallResult.suggest_prompt:type_name -> warp.multi_agent.v1.SuggestPromptResult
+	25,  // 128: warp.multi_agent.v1.Message.ToolCallResult.open_code_review:type_name -> warp.multi_agent.v1.OpenCodeReviewResult
+	26,  // 129: warp.multi_agent.v1.Message.ToolCallResult.init_project:type_name -> warp.multi_agent.v1.InitProjectResult
+	105, // 130: warp.multi_agent.v1.Message.ToolCallResult.subagent:type_name -> warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
+	27,  // 131: warp.multi_agent.v1.Message.ToolCallResult.read_documents:type_name -> warp.multi_agent.v1.ReadDocumentsResult
+	28,  // 132: warp.multi_agent.v1.Message.ToolCallResult.edit_documents:type_name -> warp.multi_agent.v1.EditDocumentsResult
+	29,  // 133: warp.multi_agent.v1.Message.ToolCallResult.create_documents:type_name -> warp.multi_agent.v1.CreateDocumentsResult
+	30,  // 134: warp.multi_agent.v1.Message.ToolCallResult.read_shell_command_output:type_name -> warp.multi_agent.v1.ReadShellCommandOutputResult
+	32,  // 135: warp.multi_agent.v1.Message.ToolCallResult.use_computer:type_name -> warp.multi_agent.v1.UseComputerResult
+	15,  // 136: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
+	104, // 137: warp.multi_agent.v1.Message.ToolCallResult.refine:type_name -> warp.multi_agent.v1.Message.ToolCallResult.RefineResult
+	13,  // 138: warp.multi_agent.v1.Message.ToolCallResult.suggest_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult
+	12,  // 139: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
 	165, // 140: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
 	166, // 141: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
 	167, // 142: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
@@ -22162,10 +22202,7 @@ func file_task_proto_init() {
 		(*message_ToolCall_Server_)(nil),
 		(*message_ToolCall_ReadFiles_)(nil),
 		(*message_ToolCall_ApplyFileDiffs_)(nil),
-		(*message_ToolCall_SuggestPlan_)(nil),
-		(*message_ToolCall_SuggestCreatePlan_)(nil),
 		(*message_ToolCall_Grep_)(nil),
-		(*message_ToolCall_FileGlob_)(nil),
 		(*message_ToolCall_ReadMcpResource)(nil),
 		(*message_ToolCall_CallMcpTool)(nil),
 		(*message_ToolCall_WriteToLongRunningShellCommand_)(nil),
@@ -22180,6 +22217,9 @@ func file_task_proto_init() {
 		(*message_ToolCall_CreateDocuments_)(nil),
 		(*message_ToolCall_ReadShellCommandOutput_)(nil),
 		(*message_ToolCall_UseComputer_)(nil),
+		(*message_ToolCall_SuggestPlan_)(nil),
+		(*message_ToolCall_FileGlob_)(nil),
+		(*message_ToolCall_SuggestCreatePlan_)(nil),
 	}
 	file_task_proto_msgTypes[47].OneofWrappers = []any{
 		(*message_ToolCallResult_RunShellCommand)(nil),
@@ -22187,11 +22227,7 @@ func file_task_proto_init() {
 		(*message_ToolCallResult_Server)(nil),
 		(*message_ToolCallResult_ReadFiles)(nil),
 		(*message_ToolCallResult_ApplyFileDiffs)(nil),
-		(*message_ToolCallResult_SuggestPlan)(nil),
-		(*message_ToolCallResult_SuggestCreatePlan)(nil),
 		(*message_ToolCallResult_Grep)(nil),
-		(*message_ToolCallResult_FileGlob)(nil),
-		(*message_ToolCallResult_Refine)(nil),
 		(*message_ToolCallResult_Cancel)(nil),
 		(*message_ToolCallResult_ReadMcpResource)(nil),
 		(*message_ToolCallResult_CallMcpTool)(nil),
@@ -22207,6 +22243,10 @@ func file_task_proto_init() {
 		(*message_ToolCallResult_CreateDocuments)(nil),
 		(*message_ToolCallResult_ReadShellCommandOutput)(nil),
 		(*message_ToolCallResult_UseComputer)(nil),
+		(*message_ToolCallResult_FileGlob)(nil),
+		(*message_ToolCallResult_Refine)(nil),
+		(*message_ToolCallResult_SuggestPlan)(nil),
+		(*message_ToolCallResult_SuggestCreatePlan)(nil),
 	}
 	file_task_proto_msgTypes[49].OneofWrappers = []any{
 		(*message_UpdateTodos_CreateTodoList)(nil),
