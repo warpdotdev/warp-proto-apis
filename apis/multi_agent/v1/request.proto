@@ -236,6 +236,13 @@ message Request {
     //
     // This is set if the client is working autonomously on an ambient agent task.
     string ambient_agent_task_id = 3;
+
+    // Optional forked-from conversation ID.
+    //
+    // Only populated when starting a new conversation (conversation_id is empty)
+    // that was created by forking an existing conversation.
+    // Value is the source conversation's server conversation ID.
+    string forked_from_conversation_id = 4;
   }
 
   message Settings {
