@@ -134,6 +134,7 @@ message Message {
     CodeReview code_review = 17;
     UpdateReviewComments update_review_comments = 18;
     WebSearch web_search = 19;
+    WebFetch web_fetch = 20;
   }
 
   // User query message type
@@ -729,6 +730,32 @@ message Message {
         message SearchedPage {
           string url = 1 [ (sensitive) = true ];
           string title = 2 [ (sensitive) = true ];
+        }
+      }
+    }
+  }
+
+  message WebFetch {
+    Status status = 1;
+
+    message Status {
+      oneof type {
+        Fetching fetching = 1;
+        Success success = 2;
+        google.protobuf.Empty error = 3;
+      }
+
+      message Fetching {
+        repeated string urls = 1 [ (sensitive) = true ];
+      }
+
+      message Success {
+        repeated FetchedPage pages = 1;
+
+        message FetchedPage {
+          string url = 1 [ (sensitive) = true ];
+          string title = 2 [ (sensitive) = true ];
+          bool success = 3;
         }
       }
     }
