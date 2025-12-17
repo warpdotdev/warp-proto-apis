@@ -1,0 +1,22 @@
+// Contains types that aren't used in the MAA API.
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+import "task.proto";
+
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// Wrapper for a list of tasks that can be serialized/deserialized.
+// This is used as the response type for serving the final task list 
+// after applying client actions in an MAA debug API.
+message TaskList {
+  repeated Task tasks = 1;
+  // The linearized message IDs from the tasks above.
+  // The client cannot derive this from tasks because
+  // starting child tasks is a ServerEvent opaque to the client,
+  // and those events are necessary to know the ordering of messages. 
+  repeated string ordered_message_ids = 2;
+}
