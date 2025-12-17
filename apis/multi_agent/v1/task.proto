@@ -492,12 +492,16 @@ message Message {
       // Optional metadata about the subagent required to render the appropriate UI.
       oneof metadata {
         CLISubagent cli = 3;
-        google.protobuf.Empty research = 4;
+        ResearchSubagent research = 4;
         google.protobuf.Empty advice = 5;
       }
 
       message CLISubagent {
         string command_id = 1;
+      }
+
+      message ResearchSubagent {
+        string task = 1;
       }
     }
 
