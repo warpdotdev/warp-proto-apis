@@ -327,8 +327,8 @@ message Request {
       // The LLM of preference for general tasks.
       string base = 1;
 
-      // The LLM of preference for reasoning tasks.
-      string planning = 2;
+      // DEPRECATED: The LLM of preference for reasoning tasks.
+      string planning = 2 [deprecated = true];
 
       // The LLM of preference for coding tasks.
       string coding = 3;

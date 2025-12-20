@@ -5361,6 +5361,7 @@ func (x *Request_Settings_ModelConfig) GetBase() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) GetPlanning() string {
 	if x != nil {
 		if x.xxx_hidden_Planning != nil {
@@ -5386,6 +5387,7 @@ func (x *Request_Settings_ModelConfig) SetBase(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) SetPlanning(v string) {
 	x.xxx_hidden_Planning = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
@@ -5403,6 +5405,7 @@ func (x *Request_Settings_ModelConfig) HasBase() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) HasPlanning() bool {
 	if x == nil {
 		return false
@@ -5422,6 +5425,7 @@ func (x *Request_Settings_ModelConfig) ClearBase() {
 	x.xxx_hidden_Base = nil
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) ClearPlanning() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Planning = nil
@@ -5437,7 +5441,9 @@ type Request_Settings_ModelConfig_builder struct {
 
 	// The LLM of preference for general tasks.
 	Base *string
-	// The LLM of preference for reasoning tasks.
+	// DEPRECATED: The LLM of preference for reasoning tasks.
+	//
+	// Deprecated: Marked as deprecated in request.proto.
 	Planning *string
 	// The LLM of preference for coding tasks.
 	Coding *string
@@ -6172,7 +6178,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x84K\n" +
+	"task.proto\"\x88K\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6305,7 +6311,7 @@ const file_request_proto_rawDesc = "" +
 	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xfd\r\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x81\x0e\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -6330,10 +6336,10 @@ const file_request_proto_rawDesc = "" +
 	"\x0fisolation_level\x18\x14 \x01(\x0e2#.warp.multi_agent.v1.IsolationLevelR\x0eisolationLevel\x12,\n" +
 	"\x12web_search_enabled\x18\x15 \x01(\bR\x10webSearchEnabled\x12X\n" +
 	"\x19supported_cli_agent_tools\x18\x16 \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x16supportedCliAgentTools\x125\n" +
-	"\x17supports_v4a_file_diffs\x18\x17 \x01(\bR\x14supportsV4aFileDiffs\x1aU\n" +
+	"\x17supports_v4a_file_diffs\x18\x17 \x01(\bR\x14supportsV4aFileDiffs\x1aY\n" +
 	"\vModelConfig\x12\x12\n" +
-	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
-	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
+	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
+	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
 	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\xca\x01\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
