@@ -60,6 +60,7 @@ message Request {
       CodeReview code_review = 12;
       SummarizeConversation summarize_conversation = 13;
       CreateEnvironment create_environment = 14;
+      FetchReviewComments fetch_review_comments = 15;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -211,6 +212,10 @@ message Request {
         repeated ReviewComment review_comments = 1;
         DiffSet diff_set = 2;
       }
+    }
+
+    message FetchReviewComments {
+      string repo_path = 1;
     }
 
     // An input to summarize the active conversation.

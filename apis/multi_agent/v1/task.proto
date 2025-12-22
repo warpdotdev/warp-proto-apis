@@ -162,6 +162,7 @@ message Message {
       CreateNewProject create_new_project = 5;
       CloneRepository clone_repository = 6;
       SummarizeConversation summarize_conversation = 7;
+      FetchReviewComments fetch_review_comments = 8;
     }
 
     InputContext context = 2;
@@ -238,6 +239,10 @@ message Message {
   }
 
   message CodeReview { ReviewComments comments = 1; }
+
+  message FetchReviewComments {
+    string repo_path = 1 [ (sensitive) = true ];
+  }
 
   // Tool call message type
   message ToolCall {
