@@ -274,6 +274,7 @@ message Message {
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
       UseComputer use_computer = 24;
+      InsertCodeComments insert_code_comments = 25;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -553,6 +554,30 @@ message Message {
         // Return the output when the command completes.
         google.protobuf.Empty on_completion = 3;
       }
+    }
+
+    message InsertCodeComments {
+      string repo_path = 1 [ (sensitive) = true];
+      repeated Comment comments = 2;
+      
+      message Comment {
+        string comment_id = 1;
+        string author = 2 [ (sensitive) = true ];
+        string last_modified_timestamp = 3;
+        string comment_body = 4 [ (sensitive) = true ];
+        string filepath = 5 [ (sensitive) = true ];
+        string diff_hunk = 6 [ (sensitive) = true ];
+        string parent_comment_id = 8;
+        oneof CommentType {
+          Line line = 9;
+          google.protobuf.Empty global = 10;
+        }
+      }
+
+      message Line {
+        int32 line_number = 1;
+      }
+
     }
 
     message UseComputer {
@@ -1107,6 +1132,18 @@ message ReadShellCommandOutputResult {
     LongRunningShellCommandSnapshot long_running_command_snapshot = 2;
     ShellCommandFinished command_finished = 3;
     ShellCommandError error = 4;
+  }
+}
+
+message InsertCodeCommentsResult {
+  string repo_path = 1 [ (sensitive) = true ];
+  oneof result {
+    google.protobuf.Empty success = 2;
+    Error error = 3;
+  }
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
   }
 }
 
