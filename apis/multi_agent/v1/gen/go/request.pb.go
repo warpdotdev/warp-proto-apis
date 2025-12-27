@@ -5316,15 +5316,15 @@ func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Reques
 }
 
 type Request_Settings_ModelConfig struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Base            *string                `protobuf:"bytes,1,opt,name=base"`
-	xxx_hidden_Planning        *string                `protobuf:"bytes,2,opt,name=planning"`
-	xxx_hidden_Coding          *string                `protobuf:"bytes,3,opt,name=coding"`
-	xxx_hidden_FullTerminalUse *string                `protobuf:"bytes,4,opt,name=full_terminal_use,json=fullTerminalUse"`
-	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
-	XXX_presence               [1]uint32
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Base        *string                `protobuf:"bytes,1,opt,name=base"`
+	xxx_hidden_Planning    *string                `protobuf:"bytes,2,opt,name=planning"`
+	xxx_hidden_Coding      *string                `protobuf:"bytes,3,opt,name=coding"`
+	xxx_hidden_CliAgent    *string                `protobuf:"bytes,4,opt,name=cli_agent,json=cliAgent"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Request_Settings_ModelConfig) Reset() {
@@ -5383,10 +5383,10 @@ func (x *Request_Settings_ModelConfig) GetCoding() string {
 	return ""
 }
 
-func (x *Request_Settings_ModelConfig) GetFullTerminalUse() string {
+func (x *Request_Settings_ModelConfig) GetCliAgent() string {
 	if x != nil {
-		if x.xxx_hidden_FullTerminalUse != nil {
-			return *x.xxx_hidden_FullTerminalUse
+		if x.xxx_hidden_CliAgent != nil {
+			return *x.xxx_hidden_CliAgent
 		}
 		return ""
 	}
@@ -5409,8 +5409,8 @@ func (x *Request_Settings_ModelConfig) SetCoding(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *Request_Settings_ModelConfig) SetFullTerminalUse(v string) {
-	x.xxx_hidden_FullTerminalUse = &v
+func (x *Request_Settings_ModelConfig) SetCliAgent(v string) {
+	x.xxx_hidden_CliAgent = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
@@ -5436,7 +5436,7 @@ func (x *Request_Settings_ModelConfig) HasCoding() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Request_Settings_ModelConfig) HasFullTerminalUse() bool {
+func (x *Request_Settings_ModelConfig) HasCliAgent() bool {
 	if x == nil {
 		return false
 	}
@@ -5459,9 +5459,9 @@ func (x *Request_Settings_ModelConfig) ClearCoding() {
 	x.xxx_hidden_Coding = nil
 }
 
-func (x *Request_Settings_ModelConfig) ClearFullTerminalUse() {
+func (x *Request_Settings_ModelConfig) ClearCliAgent() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_FullTerminalUse = nil
+	x.xxx_hidden_CliAgent = nil
 }
 
 type Request_Settings_ModelConfig_builder struct {
@@ -5475,8 +5475,8 @@ type Request_Settings_ModelConfig_builder struct {
 	Planning *string
 	// The LLM of preference for coding tasks.
 	Coding *string
-	// The LLM of preference for full terminal use (CLI subagent).
-	FullTerminalUse *string
+	// The LLM of preference for CLI agent.
+	CliAgent *string
 }
 
 func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelConfig {
@@ -5495,9 +5495,9 @@ func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelCo
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_Coding = b.Coding
 	}
-	if b.FullTerminalUse != nil {
+	if b.CliAgent != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
-		x.xxx_hidden_FullTerminalUse = b.FullTerminalUse
+		x.xxx_hidden_CliAgent = b.CliAgent
 	}
 	return m0
 }
@@ -6415,7 +6415,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xbcM\n" +
+	"task.proto\"\xacM\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6548,7 +6548,7 @@ const file_request_proto_rawDesc = "" +
 	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xb5\x10\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa5\x10\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -6573,12 +6573,12 @@ const file_request_proto_rawDesc = "" +
 	"\x0fisolation_level\x18\x14 \x01(\x0e2#.warp.multi_agent.v1.IsolationLevelR\x0eisolationLevel\x12,\n" +
 	"\x12web_search_enabled\x18\x15 \x01(\bR\x10webSearchEnabled\x12X\n" +
 	"\x19supported_cli_agent_tools\x18\x16 \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x16supportedCliAgentTools\x125\n" +
-	"\x17supports_v4a_file_diffs\x18\x17 \x01(\bR\x14supportsV4aFileDiffs\x1a\x85\x01\n" +
+	"\x17supports_v4a_file_diffs\x18\x17 \x01(\bR\x14supportsV4aFileDiffs\x1av\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
-	"\x06coding\x18\x03 \x01(\tR\x06coding\x12*\n" +
-	"\x11full_terminal_use\x18\x04 \x01(\tR\x0ffullTerminalUse\x1a\xd1\x03\n" +
+	"\x06coding\x18\x03 \x01(\tR\x06coding\x12\x1b\n" +
+	"\tcli_agent\x18\x04 \x01(\tR\bcliAgent\x1a\xd1\x03\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +

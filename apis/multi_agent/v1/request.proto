@@ -333,8 +333,8 @@ message Request {
       // The LLM of preference for coding tasks.
       string coding = 3;
 
-      // The LLM of preference for full terminal use (CLI subagent).
-      string full_terminal_use = 4;
+      // The LLM of preference for CLI agent.
+      string cli_agent = 4;
     }
 
     message ApiKeys {
