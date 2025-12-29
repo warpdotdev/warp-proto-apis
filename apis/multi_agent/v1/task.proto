@@ -134,6 +134,7 @@ message Message {
     CodeReview code_review = 17;
     UpdateReviewComments update_review_comments = 18;
     WebSearch web_search = 19;
+    WebFetch web_fetch = 20;
   }
 
   // User query message type
@@ -493,6 +494,7 @@ message Message {
       oneof metadata {
         CLISubagent cli = 3;
         google.protobuf.Empty research = 4;
+        google.protobuf.Empty advice = 5;
       }
 
       message CLISubagent {
@@ -732,6 +734,32 @@ message Message {
       }
     }
   }
+
+  message WebFetch {
+    Status status = 1;
+
+    message Status {
+      oneof type {
+        Fetching fetching = 1;
+        Success success = 2;
+        google.protobuf.Empty error = 3;
+      }
+
+      message Fetching {
+        repeated string urls = 1 [ (sensitive) = true ];
+      }
+
+      message Success {
+        repeated FetchedPage pages = 1;
+
+        message FetchedPage {
+          string url = 1 [ (sensitive) = true ];
+          string title = 2 [ (sensitive) = true ];
+          bool success = 3;
+        }
+      }
+    }
+  }
 }
 
 // Result of a `RunShellCommand` tool call.
@@ -747,6 +775,9 @@ message RunShellCommandResult {
 
     // The command completed.
     ShellCommandFinished command_finished = 5;
+
+    // The command was denied permission to run.
+    PermissionDenied permission_denied = 6;
   }
 
   // Deprecated; use [ShellCommandFinished::output] instead;
@@ -969,6 +1000,13 @@ message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
   string command_id = 3;
+}
+
+// The reason why a shell command was denied permission to run.
+message PermissionDenied {
+  oneof reason {
+    google.protobuf.Empty denylisted_command = 1;
+  }
 }
 
 message CallMCPToolResult {

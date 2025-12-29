@@ -1067,14 +1067,15 @@ func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 func (*request_Input_ToolCallResult_) isRequest_Input_Type() {}
 
 type Request_Metadata struct {
-	state                         protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_ConversationId     *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
-	xxx_hidden_Logging            map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_AmbientAgentTaskId *string                    `protobuf:"bytes,3,opt,name=ambient_agent_task_id,json=ambientAgentTaskId"`
-	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
-	XXX_presence                  [1]uint32
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state                               protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_ConversationId           *string                    `protobuf:"bytes,1,opt,name=conversation_id,json=conversationId"`
+	xxx_hidden_Logging                  map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_AmbientAgentTaskId       *string                    `protobuf:"bytes,3,opt,name=ambient_agent_task_id,json=ambientAgentTaskId"`
+	xxx_hidden_ForkedFromConversationId *string                    `protobuf:"bytes,4,opt,name=forked_from_conversation_id,json=forkedFromConversationId"`
+	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
+	XXX_presence                        [1]uint32
+	unknownFields                       protoimpl.UnknownFields
+	sizeCache                           protoimpl.SizeCache
 }
 
 func (x *Request_Metadata) Reset() {
@@ -1129,9 +1130,19 @@ func (x *Request_Metadata) GetAmbientAgentTaskId() string {
 	return ""
 }
 
+func (x *Request_Metadata) GetForkedFromConversationId() string {
+	if x != nil {
+		if x.xxx_hidden_ForkedFromConversationId != nil {
+			return *x.xxx_hidden_ForkedFromConversationId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Metadata) SetConversationId(v string) {
 	x.xxx_hidden_ConversationId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
@@ -1140,7 +1151,12 @@ func (x *Request_Metadata) SetLogging(v map[string]*structpb.Value) {
 
 func (x *Request_Metadata) SetAmbientAgentTaskId(v string) {
 	x.xxx_hidden_AmbientAgentTaskId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Request_Metadata) SetForkedFromConversationId(v string) {
+	x.xxx_hidden_ForkedFromConversationId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Request_Metadata) HasConversationId() bool {
@@ -1157,6 +1173,13 @@ func (x *Request_Metadata) HasAmbientAgentTaskId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *Request_Metadata) HasForkedFromConversationId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Request_Metadata) ClearConversationId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ConversationId = nil
@@ -1165,6 +1188,11 @@ func (x *Request_Metadata) ClearConversationId() {
 func (x *Request_Metadata) ClearAmbientAgentTaskId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_AmbientAgentTaskId = nil
+}
+
+func (x *Request_Metadata) ClearForkedFromConversationId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_ForkedFromConversationId = nil
 }
 
 type Request_Metadata_builder struct {
@@ -1183,6 +1211,12 @@ type Request_Metadata_builder struct {
 	//
 	// This is set if the client is working autonomously on an ambient agent task.
 	AmbientAgentTaskId *string
+	// Optional forked-from conversation ID.
+	//
+	// Only populated when starting a new conversation (conversation_id is empty)
+	// that was created by forking an existing conversation.
+	// Value is the source conversation's server conversation ID.
+	ForkedFromConversationId *string
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -1190,13 +1224,17 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ConversationId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_ConversationId = b.ConversationId
 	}
 	x.xxx_hidden_Logging = b.Logging
 	if b.AmbientAgentTaskId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_AmbientAgentTaskId = b.AmbientAgentTaskId
+	}
+	if b.ForkedFromConversationId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_ForkedFromConversationId = b.ForkedFromConversationId
 	}
 	return m0
 }
@@ -5323,6 +5361,7 @@ func (x *Request_Settings_ModelConfig) GetBase() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) GetPlanning() string {
 	if x != nil {
 		if x.xxx_hidden_Planning != nil {
@@ -5348,6 +5387,7 @@ func (x *Request_Settings_ModelConfig) SetBase(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) SetPlanning(v string) {
 	x.xxx_hidden_Planning = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
@@ -5365,6 +5405,7 @@ func (x *Request_Settings_ModelConfig) HasBase() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) HasPlanning() bool {
 	if x == nil {
 		return false
@@ -5384,6 +5425,7 @@ func (x *Request_Settings_ModelConfig) ClearBase() {
 	x.xxx_hidden_Base = nil
 }
 
+// Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) ClearPlanning() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Planning = nil
@@ -5399,7 +5441,9 @@ type Request_Settings_ModelConfig_builder struct {
 
 	// The LLM of preference for general tasks.
 	Base *string
-	// The LLM of preference for reasoning tasks.
+	// DEPRECATED: The LLM of preference for reasoning tasks.
+	//
+	// Deprecated: Marked as deprecated in request.proto.
 	Planning *string
 	// The LLM of preference for coding tasks.
 	Coding *string
@@ -6337,7 +6381,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xccL\n" +
+	"task.proto\"\x8fM\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6462,14 +6506,15 @@ const file_request_proto_rawDesc = "" +
 	"\toperation\x1a5\n" +
 	"\x15SummarizeConversation\x12\x1c\n" +
 	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06promptB\x06\n" +
-	"\x04type\x1a\x88\x02\n" +
+	"\x04type\x1a\xc7\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x121\n" +
-	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x1aR\n" +
+	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x12=\n" +
+	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x84\x10\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x88\x10\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -6494,10 +6539,10 @@ const file_request_proto_rawDesc = "" +
 	"\x0fisolation_level\x18\x14 \x01(\x0e2#.warp.multi_agent.v1.IsolationLevelR\x0eisolationLevel\x12,\n" +
 	"\x12web_search_enabled\x18\x15 \x01(\bR\x10webSearchEnabled\x12X\n" +
 	"\x19supported_cli_agent_tools\x18\x16 \x03(\x0e2\x1d.warp.multi_agent.v1.ToolTypeR\x16supportedCliAgentTools\x125\n" +
-	"\x17supports_v4a_file_diffs\x18\x17 \x01(\bR\x14supportsV4aFileDiffs\x1aU\n" +
+	"\x17supports_v4a_file_diffs\x18\x17 \x01(\bR\x14supportsV4aFileDiffs\x1aY\n" +
 	"\vModelConfig\x12\x12\n" +
-	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1a\n" +
-	"\bplanning\x18\x02 \x01(\tR\bplanning\x12\x16\n" +
+	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
+	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
 	"\x06coding\x18\x03 \x01(\tR\x06coding\x1a\xd1\x03\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
