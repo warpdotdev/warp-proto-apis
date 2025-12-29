@@ -697,6 +697,7 @@ message Message {
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
       UseComputerResult use_computer = 28;
+      InsertCodeCommentsResult insert_code_comments = 29;
     }
 
     // Result of a server-side tool call.
@@ -1211,6 +1212,7 @@ enum ToolType {
   CREATE_DOCUMENTS = 19;
   READ_SHELL_COMMAND_OUTPUT = 20;
   USE_COMPUTER = 21;
+  INSERT_CODE_COMMENTS = 22;
 }
 
 message UserQueryMode {
