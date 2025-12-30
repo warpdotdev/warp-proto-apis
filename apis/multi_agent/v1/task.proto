@@ -671,10 +671,10 @@ message Message {
     }
 
     message RequestComputerUse {
-      // A short description of the task.
-      string description = 1 [ (sensitive) = true ];
+      // A short summary of the task.
+      string task_summary = 1 [ (sensitive) = true ];
       // A detailed description of full task the computer use subagent should complete.
-      string prompt = 2 [ (sensitive) = true ];
+      string task = 2 [ (sensitive) = true ];
     }
   }
 

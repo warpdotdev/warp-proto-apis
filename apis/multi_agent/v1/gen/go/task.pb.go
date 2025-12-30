@@ -15197,8 +15197,8 @@ func (b0 Message_ToolCall_UseComputer_builder) Build() *Message_ToolCall_UseComp
 
 type Message_ToolCall_RequestComputerUse struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Description *string                `protobuf:"bytes,1,opt,name=description"`
-	xxx_hidden_Prompt      *string                `protobuf:"bytes,2,opt,name=prompt"`
+	xxx_hidden_TaskSummary *string                `protobuf:"bytes,1,opt,name=task_summary,json=taskSummary"`
+	xxx_hidden_Task        *string                `protobuf:"bytes,2,opt,name=task"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -15230,80 +15230,80 @@ func (x *Message_ToolCall_RequestComputerUse) ProtoReflect() protoreflect.Messag
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ToolCall_RequestComputerUse) GetDescription() string {
+func (x *Message_ToolCall_RequestComputerUse) GetTaskSummary() string {
 	if x != nil {
-		if x.xxx_hidden_Description != nil {
-			return *x.xxx_hidden_Description
+		if x.xxx_hidden_TaskSummary != nil {
+			return *x.xxx_hidden_TaskSummary
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Message_ToolCall_RequestComputerUse) GetPrompt() string {
+func (x *Message_ToolCall_RequestComputerUse) GetTask() string {
 	if x != nil {
-		if x.xxx_hidden_Prompt != nil {
-			return *x.xxx_hidden_Prompt
+		if x.xxx_hidden_Task != nil {
+			return *x.xxx_hidden_Task
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Message_ToolCall_RequestComputerUse) SetDescription(v string) {
-	x.xxx_hidden_Description = &v
+func (x *Message_ToolCall_RequestComputerUse) SetTaskSummary(v string) {
+	x.xxx_hidden_TaskSummary = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Message_ToolCall_RequestComputerUse) SetPrompt(v string) {
-	x.xxx_hidden_Prompt = &v
+func (x *Message_ToolCall_RequestComputerUse) SetTask(v string) {
+	x.xxx_hidden_Task = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *Message_ToolCall_RequestComputerUse) HasDescription() bool {
+func (x *Message_ToolCall_RequestComputerUse) HasTaskSummary() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ToolCall_RequestComputerUse) HasPrompt() bool {
+func (x *Message_ToolCall_RequestComputerUse) HasTask() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Message_ToolCall_RequestComputerUse) ClearDescription() {
+func (x *Message_ToolCall_RequestComputerUse) ClearTaskSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Description = nil
+	x.xxx_hidden_TaskSummary = nil
 }
 
-func (x *Message_ToolCall_RequestComputerUse) ClearPrompt() {
+func (x *Message_ToolCall_RequestComputerUse) ClearTask() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Prompt = nil
+	x.xxx_hidden_Task = nil
 }
 
 type Message_ToolCall_RequestComputerUse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// A short description of the task.
-	Description *string
+	// A short summary of the task.
+	TaskSummary *string
 	// A detailed description of full task the computer use subagent should complete.
-	Prompt *string
+	Task *string
 }
 
 func (b0 Message_ToolCall_RequestComputerUse_builder) Build() *Message_ToolCall_RequestComputerUse {
 	m0 := &Message_ToolCall_RequestComputerUse{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Description != nil {
+	if b.TaskSummary != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_Description = b.Description
+		x.xxx_hidden_TaskSummary = b.TaskSummary
 	}
-	if b.Prompt != nil {
+	if b.Task != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Prompt = b.Prompt
+		x.xxx_hidden_Task = b.Task
 	}
 	return m0
 }
@@ -23366,7 +23366,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\x93\x88\x01\n" +
+	"\x0ecomment_target\"\x90\x88\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -23445,7 +23445,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x9dH\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x9aH\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -23686,10 +23686,10 @@ const file_task_proto_rawDesc = "" +
 	"\x10ScreenshotParams\x12'\n" +
 	"\x10max_long_edge_px\x18\x01 \x01(\x05R\rmaxLongEdgePx\x12 \n" +
 	"\fmax_total_px\x18\x02 \x01(\x05R\n" +
-	"maxTotalPx\x1aZ\n" +
-	"\x12RequestComputerUse\x12&\n" +
-	"\vdescription\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x12\x1c\n" +
-	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06promptB\x06\n" +
+	"maxTotalPx\x1aW\n" +
+	"\x12RequestComputerUse\x12'\n" +
+	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummary\x12\x18\n" +
+	"\x04task\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04taskB\x06\n" +
 	"\x04tool\x1a\xaf\x15\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
