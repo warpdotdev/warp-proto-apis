@@ -15935,13 +15935,13 @@ func (b0 Message_ToolCall_CreateDocuments_NewDocument_builder) Build() *Message_
 }
 
 type Message_ToolCall_InsertCodeComments_Comment struct {
-	state                            protoimpl.MessageState                    `protogen:"opaque.v1"`
-	xxx_hidden_CommentId             *string                                   `protobuf:"bytes,1,opt,name=comment_id,json=commentId"`
-	xxx_hidden_Author                *string                                   `protobuf:"bytes,2,opt,name=author"`
-	xxx_hidden_LastModifiedTimestamp *string                                   `protobuf:"bytes,3,opt,name=last_modified_timestamp,json=lastModifiedTimestamp"`
-	xxx_hidden_CommentBody           *string                                   `protobuf:"bytes,4,opt,name=comment_body,json=commentBody"`
-	xxx_hidden_ParentCommentId       *string                                   `protobuf:"bytes,5,opt,name=parent_comment_id,json=parentCommentId"`
-	xxx_hidden_Line                  *Message_ToolCall_InsertCodeComments_Line `protobuf:"bytes,6,opt,name=line"`
+	state                            protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_CommentId             *string                                       `protobuf:"bytes,1,opt,name=comment_id,json=commentId"`
+	xxx_hidden_Author                *string                                       `protobuf:"bytes,2,opt,name=author"`
+	xxx_hidden_LastModifiedTimestamp *string                                       `protobuf:"bytes,3,opt,name=last_modified_timestamp,json=lastModifiedTimestamp"`
+	xxx_hidden_CommentBody           *string                                       `protobuf:"bytes,4,opt,name=comment_body,json=commentBody"`
+	xxx_hidden_ParentCommentId       *string                                       `protobuf:"bytes,5,opt,name=parent_comment_id,json=parentCommentId"`
+	xxx_hidden_Location              *Message_ToolCall_InsertCodeComments_Location `protobuf:"bytes,6,opt,name=location"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -16023,9 +16023,9 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) GetParentCommentId() strin
 	return ""
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) GetLine() *Message_ToolCall_InsertCodeComments_Line {
+func (x *Message_ToolCall_InsertCodeComments_Comment) GetLocation() *Message_ToolCall_InsertCodeComments_Location {
 	if x != nil {
-		return x.xxx_hidden_Line
+		return x.xxx_hidden_Location
 	}
 	return nil
 }
@@ -16055,8 +16055,8 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) SetParentCommentId(v strin
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) SetLine(v *Message_ToolCall_InsertCodeComments_Line) {
-	x.xxx_hidden_Line = v
+func (x *Message_ToolCall_InsertCodeComments_Comment) SetLocation(v *Message_ToolCall_InsertCodeComments_Location) {
+	x.xxx_hidden_Location = v
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) HasCommentId() bool {
@@ -16094,11 +16094,11 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) HasParentCommentId() bool 
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) HasLine() bool {
+func (x *Message_ToolCall_InsertCodeComments_Comment) HasLocation() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_Line != nil
+	return x.xxx_hidden_Location != nil
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) ClearCommentId() {
@@ -16126,8 +16126,8 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) ClearParentCommentId() {
 	x.xxx_hidden_ParentCommentId = nil
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) ClearLine() {
-	x.xxx_hidden_Line = nil
+func (x *Message_ToolCall_InsertCodeComments_Comment) ClearLocation() {
+	x.xxx_hidden_Location = nil
 }
 
 type Message_ToolCall_InsertCodeComments_Comment_builder struct {
@@ -16138,7 +16138,7 @@ type Message_ToolCall_InsertCodeComments_Comment_builder struct {
 	LastModifiedTimestamp *string
 	CommentBody           *string
 	ParentCommentId       *string
-	Line                  *Message_ToolCall_InsertCodeComments_Line
+	Location              *Message_ToolCall_InsertCodeComments_Location
 }
 
 func (b0 Message_ToolCall_InsertCodeComments_Comment_builder) Build() *Message_ToolCall_InsertCodeComments_Comment {
@@ -16165,11 +16165,11 @@ func (b0 Message_ToolCall_InsertCodeComments_Comment_builder) Build() *Message_T
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_ParentCommentId = b.ParentCommentId
 	}
-	x.xxx_hidden_Line = b.Line
+	x.xxx_hidden_Location = b.Location
 	return m0
 }
 
-type Message_ToolCall_InsertCodeComments_Line struct {
+type Message_ToolCall_InsertCodeComments_Location struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Filepath    *string                `protobuf:"bytes,1,opt,name=filepath"`
 	xxx_hidden_LineNumber  int32                  `protobuf:"varint,2,opt,name=line_number,json=lineNumber"`
@@ -16180,20 +16180,20 @@ type Message_ToolCall_InsertCodeComments_Line struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) Reset() {
-	*x = Message_ToolCall_InsertCodeComments_Line{}
+func (x *Message_ToolCall_InsertCodeComments_Location) Reset() {
+	*x = Message_ToolCall_InsertCodeComments_Location{}
 	mi := &file_task_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) String() string {
+func (x *Message_ToolCall_InsertCodeComments_Location) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_ToolCall_InsertCodeComments_Line) ProtoMessage() {}
+func (*Message_ToolCall_InsertCodeComments_Location) ProtoMessage() {}
 
-func (x *Message_ToolCall_InsertCodeComments_Line) ProtoReflect() protoreflect.Message {
+func (x *Message_ToolCall_InsertCodeComments_Location) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -16205,7 +16205,7 @@ func (x *Message_ToolCall_InsertCodeComments_Line) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) GetFilepath() string {
+func (x *Message_ToolCall_InsertCodeComments_Location) GetFilepath() string {
 	if x != nil {
 		if x.xxx_hidden_Filepath != nil {
 			return *x.xxx_hidden_Filepath
@@ -16215,14 +16215,14 @@ func (x *Message_ToolCall_InsertCodeComments_Line) GetFilepath() string {
 	return ""
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) GetLineNumber() int32 {
+func (x *Message_ToolCall_InsertCodeComments_Location) GetLineNumber() int32 {
 	if x != nil {
 		return x.xxx_hidden_LineNumber
 	}
 	return 0
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) GetDiffHunk() string {
+func (x *Message_ToolCall_InsertCodeComments_Location) GetDiffHunk() string {
 	if x != nil {
 		if x.xxx_hidden_DiffHunk != nil {
 			return *x.xxx_hidden_DiffHunk
@@ -16232,58 +16232,58 @@ func (x *Message_ToolCall_InsertCodeComments_Line) GetDiffHunk() string {
 	return ""
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) SetFilepath(v string) {
+func (x *Message_ToolCall_InsertCodeComments_Location) SetFilepath(v string) {
 	x.xxx_hidden_Filepath = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) SetLineNumber(v int32) {
+func (x *Message_ToolCall_InsertCodeComments_Location) SetLineNumber(v int32) {
 	x.xxx_hidden_LineNumber = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) SetDiffHunk(v string) {
+func (x *Message_ToolCall_InsertCodeComments_Location) SetDiffHunk(v string) {
 	x.xxx_hidden_DiffHunk = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) HasFilepath() bool {
+func (x *Message_ToolCall_InsertCodeComments_Location) HasFilepath() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) HasLineNumber() bool {
+func (x *Message_ToolCall_InsertCodeComments_Location) HasLineNumber() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) HasDiffHunk() bool {
+func (x *Message_ToolCall_InsertCodeComments_Location) HasDiffHunk() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) ClearFilepath() {
+func (x *Message_ToolCall_InsertCodeComments_Location) ClearFilepath() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Filepath = nil
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) ClearLineNumber() {
+func (x *Message_ToolCall_InsertCodeComments_Location) ClearLineNumber() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_LineNumber = 0
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) ClearDiffHunk() {
+func (x *Message_ToolCall_InsertCodeComments_Location) ClearDiffHunk() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_DiffHunk = nil
 }
 
-type Message_ToolCall_InsertCodeComments_Line_builder struct {
+type Message_ToolCall_InsertCodeComments_Location_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Filepath   *string
@@ -16291,8 +16291,8 @@ type Message_ToolCall_InsertCodeComments_Line_builder struct {
 	DiffHunk   *string
 }
 
-func (b0 Message_ToolCall_InsertCodeComments_Line_builder) Build() *Message_ToolCall_InsertCodeComments_Line {
-	m0 := &Message_ToolCall_InsertCodeComments_Line{}
+func (b0 Message_ToolCall_InsertCodeComments_Location_builder) Build() *Message_ToolCall_InsertCodeComments_Location {
+	m0 := &Message_ToolCall_InsertCodeComments_Location{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Filepath != nil {
@@ -21978,7 +21978,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xf1\x81\x01\n" +
+	"\x0ecomment_target\"\x81\x82\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -22057,7 +22057,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xb8C\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xc8C\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -22221,19 +22221,19 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\xac\x04\n" +
+	"\x05delay\x1a\xbc\x04\n" +
 	"\x12InsertCodeComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x12\\\n" +
-	"\bcomments\x18\x02 \x03(\v2@.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.CommentR\bcomments\x1a\xa6\x02\n" +
+	"\bcomments\x18\x02 \x03(\v2@.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.CommentR\bcomments\x1a\xb2\x02\n" +
 	"\aComment\x12\x1d\n" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\tR\tcommentId\x12\x1c\n" +
 	"\x06author\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06author\x126\n" +
 	"\x17last_modified_timestamp\x18\x03 \x01(\tR\x15lastModifiedTimestamp\x12'\n" +
 	"\fcomment_body\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\vcommentBody\x12*\n" +
-	"\x11parent_comment_id\x18\x05 \x01(\tR\x0fparentCommentId\x12Q\n" +
-	"\x04line\x18\x06 \x01(\v2=.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.LineR\x04line\x1al\n" +
-	"\x04Line\x12 \n" +
+	"\x11parent_comment_id\x18\x05 \x01(\tR\x0fparentCommentId\x12]\n" +
+	"\blocation\x18\x06 \x01(\v2A.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.LocationR\blocation\x1ap\n" +
+	"\bLocation\x12 \n" +
 	"\bfilepath\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilepath\x12\x1f\n" +
 	"\vline_number\x18\x02 \x01(\x05R\n" +
 	"lineNumber\x12!\n" +
@@ -22717,7 +22717,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_ToolCall_EditDocuments_DocumentDiff)(nil),          // 96: warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
 	(*Message_ToolCall_CreateDocuments_NewDocument)(nil),         // 97: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
 	(*Message_ToolCall_InsertCodeComments_Comment)(nil),          // 98: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Comment
-	(*Message_ToolCall_InsertCodeComments_Line)(nil),             // 99: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Line
+	(*Message_ToolCall_InsertCodeComments_Location)(nil),         // 99: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Location
 	(*Message_ToolCall_UseComputer_Action)(nil),                  // 100: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
 	(*Message_ToolCall_UseComputer_ScreenshotParams)(nil),        // 101: warp.multi_agent.v1.Message.ToolCall.UseComputer.ScreenshotParams
 	(*Message_ToolCall_UseComputer_Action_MouseMove)(nil),        // 102: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
@@ -22978,7 +22978,7 @@ var file_task_proto_depIdxs = []int32{
 	175, // 176: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	92,  // 177: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
 	175, // 178: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	99,  // 179: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Comment.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Line
+	99,  // 179: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Comment.location:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Location
 	102, // 180: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
 	103, // 181: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
 	104, // 182: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp

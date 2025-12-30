@@ -566,10 +566,10 @@ message Message {
         string last_modified_timestamp = 3;
         string comment_body = 4 [ (sensitive) = true ];
         string parent_comment_id = 5;
-        Line line = 6;
+        Location location = 6;
       }
 
-      message Line {
+      message Location {
         string filepath = 1 [ (sensitive) = true ];
         int32 line_number = 2;
         string diff_hunk = 3 [ (sensitive) = true ];
