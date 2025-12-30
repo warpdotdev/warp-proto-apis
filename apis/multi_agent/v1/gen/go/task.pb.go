@@ -15935,15 +15935,13 @@ func (b0 Message_ToolCall_CreateDocuments_NewDocument_builder) Build() *Message_
 }
 
 type Message_ToolCall_InsertCodeComments_Comment struct {
-	state                            protoimpl.MessageState                                    `protogen:"opaque.v1"`
-	xxx_hidden_CommentId             *string                                                   `protobuf:"bytes,1,opt,name=comment_id,json=commentId"`
-	xxx_hidden_Author                *string                                                   `protobuf:"bytes,2,opt,name=author"`
-	xxx_hidden_LastModifiedTimestamp *string                                                   `protobuf:"bytes,3,opt,name=last_modified_timestamp,json=lastModifiedTimestamp"`
-	xxx_hidden_CommentBody           *string                                                   `protobuf:"bytes,4,opt,name=comment_body,json=commentBody"`
-	xxx_hidden_Filepath              *string                                                   `protobuf:"bytes,5,opt,name=filepath"`
-	xxx_hidden_DiffHunk              *string                                                   `protobuf:"bytes,6,opt,name=diff_hunk,json=diffHunk"`
-	xxx_hidden_ParentCommentId       *string                                                   `protobuf:"bytes,8,opt,name=parent_comment_id,json=parentCommentId"`
-	xxx_hidden_CommentType           isMessage_ToolCall_InsertCodeComments_Comment_CommentType `protobuf_oneof:"CommentType"`
+	state                            protoimpl.MessageState                    `protogen:"opaque.v1"`
+	xxx_hidden_CommentId             *string                                   `protobuf:"bytes,1,opt,name=comment_id,json=commentId"`
+	xxx_hidden_Author                *string                                   `protobuf:"bytes,2,opt,name=author"`
+	xxx_hidden_LastModifiedTimestamp *string                                   `protobuf:"bytes,3,opt,name=last_modified_timestamp,json=lastModifiedTimestamp"`
+	xxx_hidden_CommentBody           *string                                   `protobuf:"bytes,4,opt,name=comment_body,json=commentBody"`
+	xxx_hidden_ParentCommentId       *string                                   `protobuf:"bytes,5,opt,name=parent_comment_id,json=parentCommentId"`
+	xxx_hidden_Line                  *Message_ToolCall_InsertCodeComments_Line `protobuf:"bytes,6,opt,name=line"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -16015,26 +16013,6 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) GetCommentBody() string {
 	return ""
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) GetFilepath() string {
-	if x != nil {
-		if x.xxx_hidden_Filepath != nil {
-			return *x.xxx_hidden_Filepath
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) GetDiffHunk() string {
-	if x != nil {
-		if x.xxx_hidden_DiffHunk != nil {
-			return *x.xxx_hidden_DiffHunk
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *Message_ToolCall_InsertCodeComments_Comment) GetParentCommentId() string {
 	if x != nil {
 		if x.xxx_hidden_ParentCommentId != nil {
@@ -16047,71 +16025,38 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) GetParentCommentId() strin
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) GetLine() *Message_ToolCall_InsertCodeComments_Line {
 	if x != nil {
-		if x, ok := x.xxx_hidden_CommentType.(*message_ToolCall_InsertCodeComments_Comment_Line); ok {
-			return x.Line
-		}
-	}
-	return nil
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) GetGlobal() *emptypb.Empty {
-	if x != nil {
-		if x, ok := x.xxx_hidden_CommentType.(*message_ToolCall_InsertCodeComments_Comment_Global); ok {
-			return x.Global
-		}
+		return x.xxx_hidden_Line
 	}
 	return nil
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) SetCommentId(v string) {
 	x.xxx_hidden_CommentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) SetAuthor(v string) {
 	x.xxx_hidden_Author = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) SetLastModifiedTimestamp(v string) {
 	x.xxx_hidden_LastModifiedTimestamp = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) SetCommentBody(v string) {
 	x.xxx_hidden_CommentBody = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) SetFilepath(v string) {
-	x.xxx_hidden_Filepath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) SetDiffHunk(v string) {
-	x.xxx_hidden_DiffHunk = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) SetParentCommentId(v string) {
 	x.xxx_hidden_ParentCommentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) SetLine(v *Message_ToolCall_InsertCodeComments_Line) {
-	if v == nil {
-		x.xxx_hidden_CommentType = nil
-		return
-	}
-	x.xxx_hidden_CommentType = &message_ToolCall_InsertCodeComments_Comment_Line{v}
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) SetGlobal(v *emptypb.Empty) {
-	if v == nil {
-		x.xxx_hidden_CommentType = nil
-		return
-	}
-	x.xxx_hidden_CommentType = &message_ToolCall_InsertCodeComments_Comment_Global{v}
+	x.xxx_hidden_Line = v
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) HasCommentId() bool {
@@ -16142,48 +16087,18 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) HasCommentBody() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) HasFilepath() bool {
+func (x *Message_ToolCall_InsertCodeComments_Comment) HasParentCommentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) HasDiffHunk() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) HasParentCommentId() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) HasCommentType() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_CommentType != nil
-}
-
 func (x *Message_ToolCall_InsertCodeComments_Comment) HasLine() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_CommentType.(*message_ToolCall_InsertCodeComments_Comment_Line)
-	return ok
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) HasGlobal() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_CommentType.(*message_ToolCall_InsertCodeComments_Comment_Global)
-	return ok
+	return x.xxx_hidden_Line != nil
 }
 
 func (x *Message_ToolCall_InsertCodeComments_Comment) ClearCommentId() {
@@ -16206,53 +16121,13 @@ func (x *Message_ToolCall_InsertCodeComments_Comment) ClearCommentBody() {
 	x.xxx_hidden_CommentBody = nil
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) ClearFilepath() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_Filepath = nil
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) ClearDiffHunk() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
-	x.xxx_hidden_DiffHunk = nil
-}
-
 func (x *Message_ToolCall_InsertCodeComments_Comment) ClearParentCommentId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_ParentCommentId = nil
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Comment) ClearCommentType() {
-	x.xxx_hidden_CommentType = nil
-}
-
 func (x *Message_ToolCall_InsertCodeComments_Comment) ClearLine() {
-	if _, ok := x.xxx_hidden_CommentType.(*message_ToolCall_InsertCodeComments_Comment_Line); ok {
-		x.xxx_hidden_CommentType = nil
-	}
-}
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) ClearGlobal() {
-	if _, ok := x.xxx_hidden_CommentType.(*message_ToolCall_InsertCodeComments_Comment_Global); ok {
-		x.xxx_hidden_CommentType = nil
-	}
-}
-
-const Message_ToolCall_InsertCodeComments_Comment_CommentType_not_set_case case_Message_ToolCall_InsertCodeComments_Comment_CommentType = 0
-const Message_ToolCall_InsertCodeComments_Comment_Line_case case_Message_ToolCall_InsertCodeComments_Comment_CommentType = 9
-const Message_ToolCall_InsertCodeComments_Comment_Global_case case_Message_ToolCall_InsertCodeComments_Comment_CommentType = 10
-
-func (x *Message_ToolCall_InsertCodeComments_Comment) WhichCommentType() case_Message_ToolCall_InsertCodeComments_Comment_CommentType {
-	if x == nil {
-		return Message_ToolCall_InsertCodeComments_Comment_CommentType_not_set_case
-	}
-	switch x.xxx_hidden_CommentType.(type) {
-	case *message_ToolCall_InsertCodeComments_Comment_Line:
-		return Message_ToolCall_InsertCodeComments_Comment_Line_case
-	case *message_ToolCall_InsertCodeComments_Comment_Global:
-		return Message_ToolCall_InsertCodeComments_Comment_Global_case
-	default:
-		return Message_ToolCall_InsertCodeComments_Comment_CommentType_not_set_case
-	}
+	x.xxx_hidden_Line = nil
 }
 
 type Message_ToolCall_InsertCodeComments_Comment_builder struct {
@@ -16262,13 +16137,8 @@ type Message_ToolCall_InsertCodeComments_Comment_builder struct {
 	Author                *string
 	LastModifiedTimestamp *string
 	CommentBody           *string
-	Filepath              *string
-	DiffHunk              *string
 	ParentCommentId       *string
-	// Fields of oneof xxx_hidden_CommentType:
-	Line   *Message_ToolCall_InsertCodeComments_Line
-	Global *emptypb.Empty
-	// -- end of xxx_hidden_CommentType
+	Line                  *Message_ToolCall_InsertCodeComments_Line
 }
 
 func (b0 Message_ToolCall_InsertCodeComments_Comment_builder) Build() *Message_ToolCall_InsertCodeComments_Comment {
@@ -16276,73 +16146,34 @@ func (b0 Message_ToolCall_InsertCodeComments_Comment_builder) Build() *Message_T
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.CommentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_CommentId = b.CommentId
 	}
 	if b.Author != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_Author = b.Author
 	}
 	if b.LastModifiedTimestamp != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_LastModifiedTimestamp = b.LastModifiedTimestamp
 	}
 	if b.CommentBody != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_CommentBody = b.CommentBody
 	}
-	if b.Filepath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
-		x.xxx_hidden_Filepath = b.Filepath
-	}
-	if b.DiffHunk != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
-		x.xxx_hidden_DiffHunk = b.DiffHunk
-	}
 	if b.ParentCommentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_ParentCommentId = b.ParentCommentId
 	}
-	if b.Line != nil {
-		x.xxx_hidden_CommentType = &message_ToolCall_InsertCodeComments_Comment_Line{b.Line}
-	}
-	if b.Global != nil {
-		x.xxx_hidden_CommentType = &message_ToolCall_InsertCodeComments_Comment_Global{b.Global}
-	}
+	x.xxx_hidden_Line = b.Line
 	return m0
-}
-
-type case_Message_ToolCall_InsertCodeComments_Comment_CommentType protoreflect.FieldNumber
-
-func (x case_Message_ToolCall_InsertCodeComments_Comment_CommentType) String() string {
-	md := file_task_proto_msgTypes[94].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isMessage_ToolCall_InsertCodeComments_Comment_CommentType interface {
-	isMessage_ToolCall_InsertCodeComments_Comment_CommentType()
-}
-
-type message_ToolCall_InsertCodeComments_Comment_Line struct {
-	Line *Message_ToolCall_InsertCodeComments_Line `protobuf:"bytes,9,opt,name=line,oneof"`
-}
-
-type message_ToolCall_InsertCodeComments_Comment_Global struct {
-	Global *emptypb.Empty `protobuf:"bytes,10,opt,name=global,oneof"`
-}
-
-func (*message_ToolCall_InsertCodeComments_Comment_Line) isMessage_ToolCall_InsertCodeComments_Comment_CommentType() {
-}
-
-func (*message_ToolCall_InsertCodeComments_Comment_Global) isMessage_ToolCall_InsertCodeComments_Comment_CommentType() {
 }
 
 type Message_ToolCall_InsertCodeComments_Line struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_LineNumber  int32                  `protobuf:"varint,1,opt,name=line_number,json=lineNumber"`
+	xxx_hidden_Filepath    *string                `protobuf:"bytes,1,opt,name=filepath"`
+	xxx_hidden_LineNumber  int32                  `protobuf:"varint,2,opt,name=line_number,json=lineNumber"`
+	xxx_hidden_DiffHunk    *string                `protobuf:"bytes,3,opt,name=diff_hunk,json=diffHunk"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -16374,6 +16205,16 @@ func (x *Message_ToolCall_InsertCodeComments_Line) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
+func (x *Message_ToolCall_InsertCodeComments_Line) GetFilepath() string {
+	if x != nil {
+		if x.xxx_hidden_Filepath != nil {
+			return *x.xxx_hidden_Filepath
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_InsertCodeComments_Line) GetLineNumber() int32 {
 	if x != nil {
 		return x.xxx_hidden_LineNumber
@@ -16381,36 +16222,90 @@ func (x *Message_ToolCall_InsertCodeComments_Line) GetLineNumber() int32 {
 	return 0
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) SetLineNumber(v int32) {
-	x.xxx_hidden_LineNumber = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+func (x *Message_ToolCall_InsertCodeComments_Line) GetDiffHunk() string {
+	if x != nil {
+		if x.xxx_hidden_DiffHunk != nil {
+			return *x.xxx_hidden_DiffHunk
+		}
+		return ""
+	}
+	return ""
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) HasLineNumber() bool {
+func (x *Message_ToolCall_InsertCodeComments_Line) SetFilepath(v string) {
+	x.xxx_hidden_Filepath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) SetLineNumber(v int32) {
+	x.xxx_hidden_LineNumber = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) SetDiffHunk(v string) {
+	x.xxx_hidden_DiffHunk = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) HasFilepath() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ToolCall_InsertCodeComments_Line) ClearLineNumber() {
+func (x *Message_ToolCall_InsertCodeComments_Line) HasLineNumber() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) HasDiffHunk() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) ClearFilepath() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Filepath = nil
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) ClearLineNumber() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_LineNumber = 0
+}
+
+func (x *Message_ToolCall_InsertCodeComments_Line) ClearDiffHunk() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_DiffHunk = nil
 }
 
 type Message_ToolCall_InsertCodeComments_Line_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	Filepath   *string
 	LineNumber *int32
+	DiffHunk   *string
 }
 
 func (b0 Message_ToolCall_InsertCodeComments_Line_builder) Build() *Message_ToolCall_InsertCodeComments_Line {
 	m0 := &Message_ToolCall_InsertCodeComments_Line{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.Filepath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Filepath = b.Filepath
+	}
 	if b.LineNumber != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_LineNumber = *b.LineNumber
+	}
+	if b.DiffHunk != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_DiffHunk = b.DiffHunk
 	}
 	return m0
 }
@@ -22083,7 +21978,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xb4\x82\x01\n" +
+	"\x0ecomment_target\"\xf1\x81\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -22162,7 +22057,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xfbC\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xb8C\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -22326,26 +22221,23 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\xef\x04\n" +
+	"\x05delay\x1a\xac\x04\n" +
 	"\x12InsertCodeComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x12\\\n" +
-	"\bcomments\x18\x02 \x03(\v2@.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.CommentR\bcomments\x1a\xae\x03\n" +
+	"\bcomments\x18\x02 \x03(\v2@.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.CommentR\bcomments\x1a\xa6\x02\n" +
 	"\aComment\x12\x1d\n" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\tR\tcommentId\x12\x1c\n" +
 	"\x06author\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06author\x126\n" +
 	"\x17last_modified_timestamp\x18\x03 \x01(\tR\x15lastModifiedTimestamp\x12'\n" +
-	"\fcomment_body\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\vcommentBody\x12 \n" +
-	"\bfilepath\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\bfilepath\x12!\n" +
-	"\tdiff_hunk\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\bdiffHunk\x12*\n" +
-	"\x11parent_comment_id\x18\b \x01(\tR\x0fparentCommentId\x12S\n" +
-	"\x04line\x18\t \x01(\v2=.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.LineH\x00R\x04line\x120\n" +
-	"\x06global\x18\n" +
-	" \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06globalB\r\n" +
-	"\vCommentType\x1a'\n" +
-	"\x04Line\x12\x1f\n" +
-	"\vline_number\x18\x01 \x01(\x05R\n" +
-	"lineNumber\x1a\xe6\r\n" +
+	"\fcomment_body\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\vcommentBody\x12*\n" +
+	"\x11parent_comment_id\x18\x05 \x01(\tR\x0fparentCommentId\x12Q\n" +
+	"\x04line\x18\x06 \x01(\v2=.warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.LineR\x04line\x1al\n" +
+	"\x04Line\x12 \n" +
+	"\bfilepath\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilepath\x12\x1f\n" +
+	"\vline_number\x18\x02 \x01(\x05R\n" +
+	"lineNumber\x12!\n" +
+	"\tdiff_hunk\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\bdiffHunk\x1a\xe6\r\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12\x87\x01\n" +
 	"\x1epost_actions_screenshot_params\x18\x02 \x01(\v2B.warp.multi_agent.v1.Message.ToolCall.UseComputer.ScreenshotParamsR\x1bpostActionsScreenshotParams\x12+\n" +
@@ -23087,54 +22979,53 @@ var file_task_proto_depIdxs = []int32{
 	92,  // 177: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
 	175, // 178: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	99,  // 179: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Comment.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Line
-	165, // 180: warp.multi_agent.v1.Message.ToolCall.InsertCodeComments.Comment.global:type_name -> google.protobuf.Empty
-	102, // 181: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
-	103, // 182: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
-	104, // 183: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp
-	105, // 184: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_wheel:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel
-	106, // 185: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.wait:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait
-	107, // 186: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.type_text:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.TypeText
-	32,  // 187: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove.to:type_name -> warp.multi_agent.v1.Coordinates
-	2,   // 188: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
-	32,  // 189: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.at:type_name -> warp.multi_agent.v1.Coordinates
-	2,   // 190: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
-	32,  // 191: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
-	3,   // 192: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
-	170, // 193: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
-	39,  // 194: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	113, // 195: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
-	114, // 196: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
-	165, // 197: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
-	115, // 198: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
-	117, // 199: warp.multi_agent.v1.Message.WebFetch.Status.fetching:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Fetching
-	118, // 200: warp.multi_agent.v1.Message.WebFetch.Status.success:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success
-	165, // 201: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
-	119, // 202: warp.multi_agent.v1.Message.WebFetch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
-	176, // 203: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	177, // 204: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	176, // 205: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	176, // 206: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	127, // 207: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	128, // 208: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
-	176, // 209: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	132, // 210: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	133, // 211: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	138, // 212: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	17,  // 213: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	147, // 214: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	148, // 215: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	149, // 216: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	17,  // 217: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	178, // 218: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	178, // 219: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	178, // 220: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	159, // 221: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
-	32,  // 222: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
-	223, // [223:223] is the sub-list for method output_type
-	223, // [223:223] is the sub-list for method input_type
-	223, // [223:223] is the sub-list for extension type_name
-	223, // [223:223] is the sub-list for extension extendee
-	0,   // [0:223] is the sub-list for field type_name
+	102, // 180: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
+	103, // 181: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
+	104, // 182: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp
+	105, // 183: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_wheel:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel
+	106, // 184: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.wait:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait
+	107, // 185: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.type_text:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.TypeText
+	32,  // 186: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove.to:type_name -> warp.multi_agent.v1.Coordinates
+	2,   // 187: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
+	32,  // 188: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.at:type_name -> warp.multi_agent.v1.Coordinates
+	2,   // 189: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
+	32,  // 190: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
+	3,   // 191: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
+	170, // 192: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
+	39,  // 193: warp.multi_agent.v1.Message.ToolCallResult.RefineResult.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	113, // 194: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
+	114, // 195: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
+	165, // 196: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
+	115, // 197: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
+	117, // 198: warp.multi_agent.v1.Message.WebFetch.Status.fetching:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Fetching
+	118, // 199: warp.multi_agent.v1.Message.WebFetch.Status.success:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success
+	165, // 200: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
+	119, // 201: warp.multi_agent.v1.Message.WebFetch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
+	176, // 202: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	177, // 203: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	176, // 204: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	176, // 205: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	127, // 206: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	128, // 207: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
+	176, // 208: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	132, // 209: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	133, // 210: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	138, // 211: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	17,  // 212: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	147, // 213: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	148, // 214: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	149, // 215: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	17,  // 216: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	178, // 217: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	178, // 218: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	178, // 219: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	159, // 220: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
+	32,  // 221: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
+	222, // [222:222] is the sub-list for method output_type
+	222, // [222:222] is the sub-list for method input_type
+	222, // [222:222] is the sub-list for extension type_name
+	222, // [222:222] is the sub-list for extension extendee
+	0,   // [0:222] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
@@ -23360,10 +23251,6 @@ func file_task_proto_init() {
 		(*message_ToolCall_WriteToLongRunningShellCommand_Mode_Raw)(nil),
 		(*message_ToolCall_WriteToLongRunningShellCommand_Mode_Line)(nil),
 		(*message_ToolCall_WriteToLongRunningShellCommand_Mode_Block)(nil),
-	}
-	file_task_proto_msgTypes[94].OneofWrappers = []any{
-		(*message_ToolCall_InsertCodeComments_Comment_Line)(nil),
-		(*message_ToolCall_InsertCodeComments_Comment_Global)(nil),
 	}
 	file_task_proto_msgTypes[96].OneofWrappers = []any{
 		(*message_ToolCall_UseComputer_Action_MouseMove_)(nil),

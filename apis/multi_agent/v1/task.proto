@@ -565,17 +565,14 @@ message Message {
         string author = 2 [ (sensitive) = true ];
         string last_modified_timestamp = 3;
         string comment_body = 4 [ (sensitive) = true ];
-        string filepath = 5 [ (sensitive) = true ];
-        string diff_hunk = 6 [ (sensitive) = true ];
-        string parent_comment_id = 8;
-        oneof CommentType {
-          Line line = 9;
-          google.protobuf.Empty global = 10;
-        }
+        string parent_comment_id = 5;
+        Line line = 6;
       }
 
       message Line {
-        int32 line_number = 1;
+        string filepath = 1 [ (sensitive) = true ];
+        int32 line_number = 2;
+        string diff_hunk = 3 [ (sensitive) = true ];
       }
 
     }
