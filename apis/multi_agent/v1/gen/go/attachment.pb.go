@@ -425,6 +425,7 @@ type ExecutedShellCommand struct {
 	xxx_hidden_Command     *string                `protobuf:"bytes,1,opt,name=command"`
 	xxx_hidden_Output      *string                `protobuf:"bytes,2,opt,name=output"`
 	xxx_hidden_ExitCode    int32                  `protobuf:"varint,3,opt,name=exit_code,json=exitCode"`
+	xxx_hidden_CommandId   *string                `protobuf:"bytes,4,opt,name=command_id,json=commandId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -483,19 +484,34 @@ func (x *ExecutedShellCommand) GetExitCode() int32 {
 	return 0
 }
 
+func (x *ExecutedShellCommand) GetCommandId() string {
+	if x != nil {
+		if x.xxx_hidden_CommandId != nil {
+			return *x.xxx_hidden_CommandId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ExecutedShellCommand) SetCommand(v string) {
 	x.xxx_hidden_Command = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *ExecutedShellCommand) SetOutput(v string) {
 	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
 func (x *ExecutedShellCommand) SetExitCode(v int32) {
 	x.xxx_hidden_ExitCode = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *ExecutedShellCommand) SetCommandId(v string) {
+	x.xxx_hidden_CommandId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *ExecutedShellCommand) HasCommand() bool {
@@ -519,6 +535,13 @@ func (x *ExecutedShellCommand) HasExitCode() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+func (x *ExecutedShellCommand) HasCommandId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *ExecutedShellCommand) ClearCommand() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Command = nil
@@ -534,12 +557,18 @@ func (x *ExecutedShellCommand) ClearExitCode() {
 	x.xxx_hidden_ExitCode = 0
 }
 
+func (x *ExecutedShellCommand) ClearCommandId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_CommandId = nil
+}
+
 type ExecutedShellCommand_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Command  *string
-	Output   *string
-	ExitCode *int32
+	Command   *string
+	Output    *string
+	ExitCode  *int32
+	CommandId *string
 }
 
 func (b0 ExecutedShellCommand_builder) Build() *ExecutedShellCommand {
@@ -547,16 +576,20 @@ func (b0 ExecutedShellCommand_builder) Build() *ExecutedShellCommand {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Command != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Command = b.Command
 	}
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_Output = b.Output
 	}
 	if b.ExitCode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_ExitCode = *b.ExitCode
+	}
+	if b.CommandId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_CommandId = b.CommandId
 	}
 	return m0
 }
@@ -2605,11 +2638,13 @@ const file_attachment_proto_rawDesc = "" +
 	"\tdiff_hunk\x18\x05 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkB\x02\x18\x01H\x00R\bdiffHunk\x129\n" +
 	"\bdiff_set\x18\x06 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetH\x00R\adiffSet\x12Q\n" +
 	"\x10document_content\x18\a \x01(\v2$.warp.multi_agent.v1.DocumentContentH\x00R\x0fdocumentContentB\a\n" +
-	"\x05value\"q\n" +
+	"\x05value\"\x90\x01\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
 	"\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x1b\n" +
-	"\texit_code\x18\x03 \x01(\x05R\bexitCode\"\x87\x01\n" +
+	"\texit_code\x18\x03 \x01(\x05R\bexitCode\x12\x1d\n" +
+	"\n" +
+	"command_id\x18\x04 \x01(\tR\tcommandId\"\x87\x01\n" +
 	"\x13RunningShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
 	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"v\n" +

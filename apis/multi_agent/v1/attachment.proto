@@ -31,6 +31,7 @@ message ExecutedShellCommand {
   string command = 1 [ (sensitive) = true ];
   string output = 2 [ (sensitive) = true ];
   int32 exit_code = 3;
+  string command_id = 4;
 }
 
 message RunningShellCommand {
