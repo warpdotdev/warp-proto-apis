@@ -1220,16 +1220,24 @@ message ScreenDimensions {
 
 message RequestComputerUseResult {
   oneof result {
-    Success success = 1;
-    Rejected rejected = 2;
+    // User approved the request.
+    RequestApproved request_approved = 1;
+    // User denied the request.
+    RequestRejected request_rejected = 2;
     Error error = 3;
+    // Computer use subagent completed execution.
+    ComputerUseFinished computer_use_finished = 4;
   }
 
-  message Success {
+  message RequestApproved {
     ScreenDimensions screen_dimensions = 1;
   }
 
-  message Rejected {}
+  message ComputerUseFinished {
+    string summary = 1 [ (sensitive) = true ];
+  }
+
+  message RequestRejected {}
 
   message Error {
     string message = 1 [ (sensitive) = true ];
