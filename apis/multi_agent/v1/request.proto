@@ -162,6 +162,7 @@ message Request {
         FetchConversationResult fetch_conversation = 27;
         StartAgentResult start_agent = 28 [ (internal) = true ];
         SendMessageToAgentResult send_message_to_agent = 29 [ (internal) = true ];
+        TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 30;
       }
     }
 

@@ -318,6 +318,7 @@ message Message {
       FetchConversation fetch_conversation = 28;
       StartAgent start_agent = 29 [ (internal) = true ];
       SendMessageToAgent send_message_to_agent = 30 [ (internal) = true ];
+      TransferShellCommandControlToUser transfer_shell_command_control_to_user = 31;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -386,6 +387,11 @@ message Message {
             google.protobuf.Empty block = 3;
         }
       }
+    }
+
+    // A tool call to explicitly transfer control of a running shell command to the user.
+    message TransferShellCommandControlToUser {
+        string reason = 1;
     }
 
     message SuggestNewConversation {
@@ -842,6 +848,7 @@ message Message {
       FetchConversationResult fetch_conversation = 32;
       StartAgentResult start_agent = 33 [ (internal) = true ];
       SendMessageToAgentResult send_message_to_agent = 34 [ (internal) = true ];
+      TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 35;
     }
 
     // Result of a server-side tool call.
@@ -1197,6 +1204,14 @@ message WriteToLongRunningShellCommandResult {
   }
 }
 
+message TransferShellCommandControlToUserResult {
+    oneof result {
+      LongRunningShellCommandSnapshot long_running_command_snapshot = 1;
+      ShellCommandFinished command_finished = 2;
+      ShellCommandError error = 3;
+    }
+}
+
 message SuggestNewConversationResult {
   oneof result {
     Accepted accepted = 1;
@@ -1470,6 +1485,7 @@ enum ToolType {
   FETCH_CONVERSATION = 25;
   START_AGENT = 26;
   SEND_MESSAGE_TO_AGENT = 27;
+  TRANSFER_SHELL_COMMAND_CONTROL_TO_USER = 28;
 }
 
 message UserQueryMode {
