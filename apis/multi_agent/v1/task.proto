@@ -1139,9 +1139,11 @@ message ReadShellCommandOutputResult {
 message InsertReviewCommentsResult {
   string repo_path = 1 [ (sensitive) = true ];
   oneof result {
-    google.protobuf.Empty success = 2;
+    Success success = 2;
     Error error = 3;
   }
+
+  message Success {}
 
   message Error {
     string message = 1 [ (sensitive) = true ];
