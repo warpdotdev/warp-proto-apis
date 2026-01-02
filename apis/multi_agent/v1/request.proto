@@ -216,7 +216,7 @@ message Request {
     }
 
     message FetchReviewComments {
-      string repo_path = 1;
+      string repo_path = 1 [ (sensitive) = true ];
     }
 
     // An input to summarize the active conversation.
