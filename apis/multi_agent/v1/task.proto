@@ -559,22 +559,25 @@ message Message {
     message InsertReviewComments {
       string repo_path = 1 [ (sensitive) = true];
       repeated Comment comments = 2;
-      
+
       message Comment {
         string comment_id = 1;
         string author = 2 [ (sensitive) = true ];
         string last_modified_timestamp = 3;
         string comment_body = 4 [ (sensitive) = true ];
         string parent_comment_id = 5;
-        Location location = 6;
+        CommentLocation location = 6;
       }
 
-      message Location {
-        string filepath = 1 [ (sensitive) = true ];
-        int32 line_number = 2;
-        string diff_hunk = 3 [ (sensitive) = true ];
+      message CommentLocation {
+        string file_path = 1 [ (sensitive) = true ];
+        CommentLineRange line = 2;
       }
 
+      message CommentLineRange {
+        string diff_hunk = 1 [ (sensitive) = true ];
+        FileContentLineRange range = 2;
+      }
     }
 
     message UseComputer {
