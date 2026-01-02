@@ -162,6 +162,7 @@ message Message {
       CreateNewProject create_new_project = 5;
       CloneRepository clone_repository = 6;
       SummarizeConversation summarize_conversation = 7;
+      FetchReviewComments fetch_review_comments = 8;
     }
 
     InputContext context = 2;
@@ -239,6 +240,10 @@ message Message {
 
   message CodeReview { ReviewComments comments = 1; }
 
+  message FetchReviewComments {
+    string repo_path = 1 [ (sensitive) = true ];
+  }
+
   // Tool call message type
   message ToolCall {
     string tool_call_id = 1;
@@ -269,7 +274,8 @@ message Message {
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
       UseComputer use_computer = 24;
-      ReadSkill read_skill = 25;
+      InsertReviewComments insert_review_comments = 25;
+      ReadSkill read_skill = 26;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -551,6 +557,30 @@ message Message {
       }
     }
 
+    message InsertReviewComments {
+      string repo_path = 1 [ (sensitive) = true];
+      repeated Comment comments = 2;
+
+      message Comment {
+        string comment_id = 1;
+        string author = 2 [ (sensitive) = true ];
+        string last_modified_timestamp = 3;
+        string comment_body = 4 [ (sensitive) = true ];
+        string parent_comment_id = 5;
+        CommentLocation location = 6;
+      }
+
+      message CommentLocation {
+        string file_path = 1 [ (sensitive) = true ];
+        CommentLineRange line = 2;
+      }
+
+      message CommentLineRange {
+        string diff_hunk = 1 [ (sensitive) = true ];
+        FileContentLineRange range = 2;
+      }
+    }
+    
     // A tool call to run a Skill.
     message ReadSkill {
       // The name of the Skill to read SKILL.md from.
@@ -674,7 +704,8 @@ message Message {
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
       UseComputerResult use_computer = 28;
-      ReadSkillResult read_skill = 29;
+      InsertReviewCommentsResult insert_review_comments = 29;
+      ReadSkillResult read_skill = 30;
     }
 
     // Result of a server-side tool call.
@@ -1113,6 +1144,20 @@ message ReadShellCommandOutputResult {
   }
 }
 
+message InsertReviewCommentsResult {
+  string repo_path = 1 [ (sensitive) = true ];
+  oneof result {
+    Success success = 2;
+    Error error = 3;
+  }
+
+  message Success {}
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
+
 // Screen coordinates used for computer use actions.
 message Coordinates {
   int32 x = 1;
@@ -1191,7 +1236,8 @@ enum ToolType {
   CREATE_DOCUMENTS = 19;
   READ_SHELL_COMMAND_OUTPUT = 20;
   USE_COMPUTER = 21;
-  READ_SKILL = 22;
+  INSERT_REVIEW_COMMENTS = 22;
+  READ_SKILL = 23;
 }
 
 message UserQueryMode {
