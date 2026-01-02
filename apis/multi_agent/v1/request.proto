@@ -323,9 +323,6 @@ message Request {
     // If `true`, the client supports V4A-style diffs.
     bool supports_v4a_file_diffs = 23;
 
-    // If `true`, the client supports Skills
-    bool supports_skills = 24;
-
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
