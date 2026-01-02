@@ -269,6 +269,7 @@ message Message {
       CreateDocuments create_documents = 22;
       ReadShellCommandOutput read_shell_command_output = 23;
       UseComputer use_computer = 24;
+      RetrieveSkill retrieve_skill = 25;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -550,6 +551,12 @@ message Message {
       }
     }
 
+    // A tool call to run a Skill.
+    message RetrieveSkill {
+      // The name of the Skill to retrieve SKILL.md from.
+      string skill_name = 1;
+    }
+
     message UseComputer {
       // A series of actions to execute on the machine.
       repeated Action actions = 1;
@@ -667,6 +674,7 @@ message Message {
       CreateDocumentsResult create_documents = 26;
       ReadShellCommandOutputResult read_shell_command_output = 27;
       UseComputerResult use_computer = 28;
+      RetrieveSkillResult retrieve_skill = 29;
     }
 
     // Result of a server-side tool call.
@@ -1132,6 +1140,20 @@ message UseComputerResult {
   message Error {
     string message = 1 [ (sensitive) = true ];
   }
+}
+
+message RetrieveSkillResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The content of the retrieved SKILL.md file.
+    string content = 1;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 message ShellCommandError {
