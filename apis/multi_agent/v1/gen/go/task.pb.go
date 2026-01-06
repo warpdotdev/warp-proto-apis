@@ -14504,7 +14504,8 @@ func (b0 Message_ToolCall_InsertReviewComments_builder) Build() *Message_ToolCal
 // A tool call to run a Skill.
 type Message_ToolCall_ReadSkill struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_SkillName   *string                `protobuf:"bytes,1,opt,name=skill_name,json=skillName"`
+	xxx_hidden_SkillPath   *string                `protobuf:"bytes,1,opt,name=skill_path,json=skillPath"`
+	xxx_hidden_SkillName   *string                `protobuf:"bytes,2,opt,name=skill_name,json=skillName"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -14536,6 +14537,16 @@ func (x *Message_ToolCall_ReadSkill) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *Message_ToolCall_ReadSkill) GetSkillPath() string {
+	if x != nil {
+		if x.xxx_hidden_SkillPath != nil {
+			return *x.xxx_hidden_SkillPath
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_ReadSkill) GetSkillName() string {
 	if x != nil {
 		if x.xxx_hidden_SkillName != nil {
@@ -14546,27 +14557,46 @@ func (x *Message_ToolCall_ReadSkill) GetSkillName() string {
 	return ""
 }
 
-func (x *Message_ToolCall_ReadSkill) SetSkillName(v string) {
-	x.xxx_hidden_SkillName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+func (x *Message_ToolCall_ReadSkill) SetSkillPath(v string) {
+	x.xxx_hidden_SkillPath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Message_ToolCall_ReadSkill) HasSkillName() bool {
+func (x *Message_ToolCall_ReadSkill) SetSkillName(v string) {
+	x.xxx_hidden_SkillName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Message_ToolCall_ReadSkill) HasSkillPath() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ToolCall_ReadSkill) ClearSkillName() {
+func (x *Message_ToolCall_ReadSkill) HasSkillName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message_ToolCall_ReadSkill) ClearSkillPath() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_SkillPath = nil
+}
+
+func (x *Message_ToolCall_ReadSkill) ClearSkillName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_SkillName = nil
 }
 
 type Message_ToolCall_ReadSkill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The name of the Skill to read SKILL.md from.
+	// The path to the SKILL.md to be read.
+	SkillPath *string
+	// The name of the Skill defined in SKILL.md.
 	SkillName *string
 }
 
@@ -14574,8 +14604,12 @@ func (b0 Message_ToolCall_ReadSkill_builder) Build() *Message_ToolCall_ReadSkill
 	m0 := &Message_ToolCall_ReadSkill{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.SkillPath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_SkillPath = b.SkillPath
+	}
 	if b.SkillName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
 		x.xxx_hidden_SkillName = b.SkillName
 	}
 	return m0
@@ -22585,7 +22619,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xfd\x84\x01\n" +
+	"\x0ecomment_target\"\x9c\x85\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -22664,7 +22698,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xf7E\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x96F\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -22847,10 +22881,12 @@ const file_task_proto_rawDesc = "" +
 	"\x04line\x18\x02 \x01(\v2K.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRangeR\x04line\x1av\n" +
 	"\x10CommentLineRange\x12!\n" +
 	"\tdiff_hunk\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bdiffHunk\x12?\n" +
-	"\x05range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x05range\x1a*\n" +
+	"\x05range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x05range\x1aI\n" +
 	"\tReadSkill\x12\x1d\n" +
 	"\n" +
-	"skill_name\x18\x01 \x01(\tR\tskillName\x1a\xe6\r\n" +
+	"skill_path\x18\x01 \x01(\tR\tskillPath\x12\x1d\n" +
+	"\n" +
+	"skill_name\x18\x02 \x01(\tR\tskillName\x1a\xe6\r\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12\x87\x01\n" +
 	"\x1epost_actions_screenshot_params\x18\x02 \x01(\v2B.warp.multi_agent.v1.Message.ToolCall.UseComputer.ScreenshotParamsR\x1bpostActionsScreenshotParams\x12+\n" +

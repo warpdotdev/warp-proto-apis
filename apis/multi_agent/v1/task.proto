@@ -583,8 +583,10 @@ message Message {
     
     // A tool call to run a Skill.
     message ReadSkill {
-      // The name of the Skill to read SKILL.md from.
-      string skill_name = 1;
+      // The path to the SKILL.md to be read.
+      string skill_path = 1;
+      // The name of the Skill defined in SKILL.md.
+      string skill_name = 2;
     }
 
     message UseComputer {
