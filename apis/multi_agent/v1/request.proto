@@ -61,6 +61,7 @@ message Request {
       SummarizeConversation summarize_conversation = 13;
       CreateEnvironment create_environment = 14;
       FetchReviewComments fetch_review_comments = 15;
+      ResolveTaskPrompt resolve_task_prompt = 16;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -224,6 +225,11 @@ message Request {
       // Optional user-specified instructions to focus or augment the summary.
       string prompt = 1 [ (sensitive) = true ];
     }
+
+    // An input signaling that the user query should be resolved from the associated
+    // ambient agent task. The task ID is provided in the request metadata.
+    // This is used when the CLI agent is run with --task-id but no --prompt.
+    message ResolveTaskPrompt { }
   }
 
   message Metadata {
