@@ -6436,19 +6436,19 @@ func (x *RequestComputerUseResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *RequestComputerUseResult) GetRequestApproved() *RequestComputerUseResult_RequestApproved {
+func (x *RequestComputerUseResult) GetApproved() *RequestComputerUseResult_Approved {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*requestComputerUseResult_RequestApproved_); ok {
-			return x.RequestApproved
+		if x, ok := x.xxx_hidden_Result.(*requestComputerUseResult_Approved_); ok {
+			return x.Approved
 		}
 	}
 	return nil
 }
 
-func (x *RequestComputerUseResult) GetRequestRejected() *RequestComputerUseResult_RequestRejected {
+func (x *RequestComputerUseResult) GetRejected() *RequestComputerUseResult_Rejected {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*requestComputerUseResult_RequestRejected_); ok {
-			return x.RequestRejected
+		if x, ok := x.xxx_hidden_Result.(*requestComputerUseResult_Rejected_); ok {
+			return x.Rejected
 		}
 	}
 	return nil
@@ -6463,20 +6463,20 @@ func (x *RequestComputerUseResult) GetError() *RequestComputerUseResult_Error {
 	return nil
 }
 
-func (x *RequestComputerUseResult) SetRequestApproved(v *RequestComputerUseResult_RequestApproved) {
+func (x *RequestComputerUseResult) SetApproved(v *RequestComputerUseResult_Approved) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &requestComputerUseResult_RequestApproved_{v}
+	x.xxx_hidden_Result = &requestComputerUseResult_Approved_{v}
 }
 
-func (x *RequestComputerUseResult) SetRequestRejected(v *RequestComputerUseResult_RequestRejected) {
+func (x *RequestComputerUseResult) SetRejected(v *RequestComputerUseResult_Rejected) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &requestComputerUseResult_RequestRejected_{v}
+	x.xxx_hidden_Result = &requestComputerUseResult_Rejected_{v}
 }
 
 func (x *RequestComputerUseResult) SetError(v *RequestComputerUseResult_Error) {
@@ -6494,19 +6494,19 @@ func (x *RequestComputerUseResult) HasResult() bool {
 	return x.xxx_hidden_Result != nil
 }
 
-func (x *RequestComputerUseResult) HasRequestApproved() bool {
+func (x *RequestComputerUseResult) HasApproved() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*requestComputerUseResult_RequestApproved_)
+	_, ok := x.xxx_hidden_Result.(*requestComputerUseResult_Approved_)
 	return ok
 }
 
-func (x *RequestComputerUseResult) HasRequestRejected() bool {
+func (x *RequestComputerUseResult) HasRejected() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*requestComputerUseResult_RequestRejected_)
+	_, ok := x.xxx_hidden_Result.(*requestComputerUseResult_Rejected_)
 	return ok
 }
 
@@ -6522,14 +6522,14 @@ func (x *RequestComputerUseResult) ClearResult() {
 	x.xxx_hidden_Result = nil
 }
 
-func (x *RequestComputerUseResult) ClearRequestApproved() {
-	if _, ok := x.xxx_hidden_Result.(*requestComputerUseResult_RequestApproved_); ok {
+func (x *RequestComputerUseResult) ClearApproved() {
+	if _, ok := x.xxx_hidden_Result.(*requestComputerUseResult_Approved_); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *RequestComputerUseResult) ClearRequestRejected() {
-	if _, ok := x.xxx_hidden_Result.(*requestComputerUseResult_RequestRejected_); ok {
+func (x *RequestComputerUseResult) ClearRejected() {
+	if _, ok := x.xxx_hidden_Result.(*requestComputerUseResult_Rejected_); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
@@ -6541,8 +6541,8 @@ func (x *RequestComputerUseResult) ClearError() {
 }
 
 const RequestComputerUseResult_Result_not_set_case case_RequestComputerUseResult_Result = 0
-const RequestComputerUseResult_RequestApproved_case case_RequestComputerUseResult_Result = 1
-const RequestComputerUseResult_RequestRejected_case case_RequestComputerUseResult_Result = 2
+const RequestComputerUseResult_Approved_case case_RequestComputerUseResult_Result = 1
+const RequestComputerUseResult_Rejected_case case_RequestComputerUseResult_Result = 2
 const RequestComputerUseResult_Error_case case_RequestComputerUseResult_Result = 3
 
 func (x *RequestComputerUseResult) WhichResult() case_RequestComputerUseResult_Result {
@@ -6550,10 +6550,10 @@ func (x *RequestComputerUseResult) WhichResult() case_RequestComputerUseResult_R
 		return RequestComputerUseResult_Result_not_set_case
 	}
 	switch x.xxx_hidden_Result.(type) {
-	case *requestComputerUseResult_RequestApproved_:
-		return RequestComputerUseResult_RequestApproved_case
-	case *requestComputerUseResult_RequestRejected_:
-		return RequestComputerUseResult_RequestRejected_case
+	case *requestComputerUseResult_Approved_:
+		return RequestComputerUseResult_Approved_case
+	case *requestComputerUseResult_Rejected_:
+		return RequestComputerUseResult_Rejected_case
 	case *requestComputerUseResult_Error_:
 		return RequestComputerUseResult_Error_case
 	default:
@@ -6565,11 +6565,9 @@ type RequestComputerUseResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Result:
-	// User approved the request.
-	RequestApproved *RequestComputerUseResult_RequestApproved
-	// User denied the request.
-	RequestRejected *RequestComputerUseResult_RequestRejected
-	Error           *RequestComputerUseResult_Error
+	Approved *RequestComputerUseResult_Approved
+	Rejected *RequestComputerUseResult_Rejected
+	Error    *RequestComputerUseResult_Error
 	// -- end of xxx_hidden_Result
 }
 
@@ -6577,11 +6575,11 @@ func (b0 RequestComputerUseResult_builder) Build() *RequestComputerUseResult {
 	m0 := &RequestComputerUseResult{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.RequestApproved != nil {
-		x.xxx_hidden_Result = &requestComputerUseResult_RequestApproved_{b.RequestApproved}
+	if b.Approved != nil {
+		x.xxx_hidden_Result = &requestComputerUseResult_Approved_{b.Approved}
 	}
-	if b.RequestRejected != nil {
-		x.xxx_hidden_Result = &requestComputerUseResult_RequestRejected_{b.RequestRejected}
+	if b.Rejected != nil {
+		x.xxx_hidden_Result = &requestComputerUseResult_Rejected_{b.Rejected}
 	}
 	if b.Error != nil {
 		x.xxx_hidden_Result = &requestComputerUseResult_Error_{b.Error}
@@ -6603,23 +6601,21 @@ type isRequestComputerUseResult_Result interface {
 	isRequestComputerUseResult_Result()
 }
 
-type requestComputerUseResult_RequestApproved_ struct {
-	// User approved the request.
-	RequestApproved *RequestComputerUseResult_RequestApproved `protobuf:"bytes,1,opt,name=request_approved,json=requestApproved,oneof"`
+type requestComputerUseResult_Approved_ struct {
+	Approved *RequestComputerUseResult_Approved `protobuf:"bytes,1,opt,name=approved,oneof"`
 }
 
-type requestComputerUseResult_RequestRejected_ struct {
-	// User denied the request.
-	RequestRejected *RequestComputerUseResult_RequestRejected `protobuf:"bytes,2,opt,name=request_rejected,json=requestRejected,oneof"`
+type requestComputerUseResult_Rejected_ struct {
+	Rejected *RequestComputerUseResult_Rejected `protobuf:"bytes,2,opt,name=rejected,oneof"`
 }
 
 type requestComputerUseResult_Error_ struct {
 	Error *RequestComputerUseResult_Error `protobuf:"bytes,3,opt,name=error,oneof"`
 }
 
-func (*requestComputerUseResult_RequestApproved_) isRequestComputerUseResult_Result() {}
+func (*requestComputerUseResult_Approved_) isRequestComputerUseResult_Result() {}
 
-func (*requestComputerUseResult_RequestRejected_) isRequestComputerUseResult_Result() {}
+func (*requestComputerUseResult_Rejected_) isRequestComputerUseResult_Result() {}
 
 func (*requestComputerUseResult_Error_) isRequestComputerUseResult_Result() {}
 
@@ -15202,7 +15198,6 @@ func (b0 Message_ToolCall_UseComputer_builder) Build() *Message_ToolCall_UseComp
 type Message_ToolCall_RequestComputerUse struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_TaskSummary *string                `protobuf:"bytes,1,opt,name=task_summary,json=taskSummary"`
-	xxx_hidden_Task        *string                `protobuf:"bytes,2,opt,name=task"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -15244,24 +15239,9 @@ func (x *Message_ToolCall_RequestComputerUse) GetTaskSummary() string {
 	return ""
 }
 
-func (x *Message_ToolCall_RequestComputerUse) GetTask() string {
-	if x != nil {
-		if x.xxx_hidden_Task != nil {
-			return *x.xxx_hidden_Task
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *Message_ToolCall_RequestComputerUse) SetTaskSummary(v string) {
 	x.xxx_hidden_TaskSummary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *Message_ToolCall_RequestComputerUse) SetTask(v string) {
-	x.xxx_hidden_Task = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
 func (x *Message_ToolCall_RequestComputerUse) HasTaskSummary() bool {
@@ -15271,30 +15251,15 @@ func (x *Message_ToolCall_RequestComputerUse) HasTaskSummary() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ToolCall_RequestComputerUse) HasTask() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
 func (x *Message_ToolCall_RequestComputerUse) ClearTaskSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_TaskSummary = nil
 }
 
-func (x *Message_ToolCall_RequestComputerUse) ClearTask() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Task = nil
-}
-
 type Message_ToolCall_RequestComputerUse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// A short summary of the task.
 	TaskSummary *string
-	// A detailed description of full task the computer use subagent should complete.
-	Task *string
 }
 
 func (b0 Message_ToolCall_RequestComputerUse_builder) Build() *Message_ToolCall_RequestComputerUse {
@@ -15302,12 +15267,8 @@ func (b0 Message_ToolCall_RequestComputerUse_builder) Build() *Message_ToolCall_
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.TaskSummary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
 		x.xxx_hidden_TaskSummary = b.TaskSummary
-	}
-	if b.Task != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Task = b.Task
 	}
 	return m0
 }
@@ -23147,27 +23108,27 @@ func (b0 ReadSkillResult_Error_builder) Build() *ReadSkillResult_Error {
 	return m0
 }
 
-type RequestComputerUseResult_RequestApproved struct {
+type RequestComputerUseResult_Approved struct {
 	state                       protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ScreenDimensions *ScreenDimensions      `protobuf:"bytes,1,opt,name=screen_dimensions,json=screenDimensions"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
 
-func (x *RequestComputerUseResult_RequestApproved) Reset() {
-	*x = RequestComputerUseResult_RequestApproved{}
+func (x *RequestComputerUseResult_Approved) Reset() {
+	*x = RequestComputerUseResult_Approved{}
 	mi := &file_task_proto_msgTypes[165]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestComputerUseResult_RequestApproved) String() string {
+func (x *RequestComputerUseResult_Approved) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestComputerUseResult_RequestApproved) ProtoMessage() {}
+func (*RequestComputerUseResult_Approved) ProtoMessage() {}
 
-func (x *RequestComputerUseResult_RequestApproved) ProtoReflect() protoreflect.Message {
+func (x *RequestComputerUseResult_Approved) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[165]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -23179,62 +23140,62 @@ func (x *RequestComputerUseResult_RequestApproved) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-func (x *RequestComputerUseResult_RequestApproved) GetScreenDimensions() *ScreenDimensions {
+func (x *RequestComputerUseResult_Approved) GetScreenDimensions() *ScreenDimensions {
 	if x != nil {
 		return x.xxx_hidden_ScreenDimensions
 	}
 	return nil
 }
 
-func (x *RequestComputerUseResult_RequestApproved) SetScreenDimensions(v *ScreenDimensions) {
+func (x *RequestComputerUseResult_Approved) SetScreenDimensions(v *ScreenDimensions) {
 	x.xxx_hidden_ScreenDimensions = v
 }
 
-func (x *RequestComputerUseResult_RequestApproved) HasScreenDimensions() bool {
+func (x *RequestComputerUseResult_Approved) HasScreenDimensions() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_ScreenDimensions != nil
 }
 
-func (x *RequestComputerUseResult_RequestApproved) ClearScreenDimensions() {
+func (x *RequestComputerUseResult_Approved) ClearScreenDimensions() {
 	x.xxx_hidden_ScreenDimensions = nil
 }
 
-type RequestComputerUseResult_RequestApproved_builder struct {
+type RequestComputerUseResult_Approved_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ScreenDimensions *ScreenDimensions
 }
 
-func (b0 RequestComputerUseResult_RequestApproved_builder) Build() *RequestComputerUseResult_RequestApproved {
-	m0 := &RequestComputerUseResult_RequestApproved{}
+func (b0 RequestComputerUseResult_Approved_builder) Build() *RequestComputerUseResult_Approved {
+	m0 := &RequestComputerUseResult_Approved{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ScreenDimensions = b.ScreenDimensions
 	return m0
 }
 
-type RequestComputerUseResult_RequestRejected struct {
+type RequestComputerUseResult_Rejected struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RequestComputerUseResult_RequestRejected) Reset() {
-	*x = RequestComputerUseResult_RequestRejected{}
+func (x *RequestComputerUseResult_Rejected) Reset() {
+	*x = RequestComputerUseResult_Rejected{}
 	mi := &file_task_proto_msgTypes[166]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RequestComputerUseResult_RequestRejected) String() string {
+func (x *RequestComputerUseResult_Rejected) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RequestComputerUseResult_RequestRejected) ProtoMessage() {}
+func (*RequestComputerUseResult_Rejected) ProtoMessage() {}
 
-func (x *RequestComputerUseResult_RequestRejected) ProtoReflect() protoreflect.Message {
+func (x *RequestComputerUseResult_Rejected) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[166]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -23246,13 +23207,13 @@ func (x *RequestComputerUseResult_RequestRejected) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-type RequestComputerUseResult_RequestRejected_builder struct {
+type RequestComputerUseResult_Rejected_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 RequestComputerUseResult_RequestRejected_builder) Build() *RequestComputerUseResult_RequestRejected {
-	m0 := &RequestComputerUseResult_RequestRejected{}
+func (b0 RequestComputerUseResult_Rejected_builder) Build() *RequestComputerUseResult_Rejected {
+	m0 := &RequestComputerUseResult_Rejected{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -23370,7 +23331,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\x90\x88\x01\n" +
+	"\x0ecomment_target\"\xf6\x87\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -23449,7 +23410,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x9aH\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x80H\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -23690,10 +23651,9 @@ const file_task_proto_rawDesc = "" +
 	"\x10ScreenshotParams\x12'\n" +
 	"\x10max_long_edge_px\x18\x01 \x01(\x05R\rmaxLongEdgePx\x12 \n" +
 	"\fmax_total_px\x18\x02 \x01(\x05R\n" +
-	"maxTotalPx\x1aW\n" +
+	"maxTotalPx\x1a=\n" +
 	"\x12RequestComputerUse\x12'\n" +
-	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummary\x12\x18\n" +
-	"\x04task\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04taskB\x06\n" +
+	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummaryB\x06\n" +
 	"\x04tool\x1a\xaf\x15\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
@@ -23997,14 +23957,15 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\"J\n" +
 	"\x10ScreenDimensions\x12\x19\n" +
 	"\bwidth_px\x18\x01 \x01(\x05R\awidthPx\x12\x1b\n" +
-	"\theight_px\x18\x02 \x01(\x05R\bheightPx\"\xec\x03\n" +
-	"\x18RequestComputerUseResult\x12j\n" +
-	"\x10request_approved\x18\x01 \x01(\v2=.warp.multi_agent.v1.RequestComputerUseResult.RequestApprovedH\x00R\x0frequestApproved\x12j\n" +
-	"\x10request_rejected\x18\x02 \x01(\v2=.warp.multi_agent.v1.RequestComputerUseResult.RequestRejectedH\x00R\x0frequestRejected\x12K\n" +
-	"\x05error\x18\x03 \x01(\v23.warp.multi_agent.v1.RequestComputerUseResult.ErrorH\x00R\x05error\x1ae\n" +
-	"\x0fRequestApproved\x12R\n" +
-	"\x11screen_dimensions\x18\x01 \x01(\v2%.warp.multi_agent.v1.ScreenDimensionsR\x10screenDimensions\x1a\x11\n" +
-	"\x0fRequestRejected\x1a'\n" +
+	"\theight_px\x18\x02 \x01(\x05R\bheightPx\"\xb2\x03\n" +
+	"\x18RequestComputerUseResult\x12T\n" +
+	"\bapproved\x18\x01 \x01(\v26.warp.multi_agent.v1.RequestComputerUseResult.ApprovedH\x00R\bapproved\x12T\n" +
+	"\brejected\x18\x02 \x01(\v26.warp.multi_agent.v1.RequestComputerUseResult.RejectedH\x00R\brejected\x12K\n" +
+	"\x05error\x18\x03 \x01(\v23.warp.multi_agent.v1.RequestComputerUseResult.ErrorH\x00R\x05error\x1a^\n" +
+	"\bApproved\x12R\n" +
+	"\x11screen_dimensions\x18\x01 \x01(\v2%.warp.multi_agent.v1.ScreenDimensionsR\x10screenDimensions\x1a\n" +
+	"\n" +
+	"\bRejected\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"a\n" +
@@ -24220,8 +24181,8 @@ var file_task_proto_goTypes = []any{
 	(*UseComputerResult_Success_Image)(nil),                        // 166: warp.multi_agent.v1.UseComputerResult.Success.Image
 	(*ReadSkillResult_Success)(nil),                                // 167: warp.multi_agent.v1.ReadSkillResult.Success
 	(*ReadSkillResult_Error)(nil),                                  // 168: warp.multi_agent.v1.ReadSkillResult.Error
-	(*RequestComputerUseResult_RequestApproved)(nil),               // 169: warp.multi_agent.v1.RequestComputerUseResult.RequestApproved
-	(*RequestComputerUseResult_RequestRejected)(nil),               // 170: warp.multi_agent.v1.RequestComputerUseResult.RequestRejected
+	(*RequestComputerUseResult_Approved)(nil),                      // 169: warp.multi_agent.v1.RequestComputerUseResult.Approved
+	(*RequestComputerUseResult_Rejected)(nil),                      // 170: warp.multi_agent.v1.RequestComputerUseResult.Rejected
 	(*RequestComputerUseResult_Error)(nil),                         // 171: warp.multi_agent.v1.RequestComputerUseResult.Error
 	(*DiffSet)(nil),                                                // 172: warp.multi_agent.v1.DiffSet
 	(*DiffHunk)(nil),                                               // 173: warp.multi_agent.v1.DiffHunk
@@ -24314,8 +24275,8 @@ var file_task_proto_depIdxs = []int32{
 	165, // 67: warp.multi_agent.v1.UseComputerResult.error:type_name -> warp.multi_agent.v1.UseComputerResult.Error
 	167, // 68: warp.multi_agent.v1.ReadSkillResult.success:type_name -> warp.multi_agent.v1.ReadSkillResult.Success
 	168, // 69: warp.multi_agent.v1.ReadSkillResult.error:type_name -> warp.multi_agent.v1.ReadSkillResult.Error
-	169, // 70: warp.multi_agent.v1.RequestComputerUseResult.request_approved:type_name -> warp.multi_agent.v1.RequestComputerUseResult.RequestApproved
-	170, // 71: warp.multi_agent.v1.RequestComputerUseResult.request_rejected:type_name -> warp.multi_agent.v1.RequestComputerUseResult.RequestRejected
+	169, // 70: warp.multi_agent.v1.RequestComputerUseResult.approved:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Approved
+	170, // 71: warp.multi_agent.v1.RequestComputerUseResult.rejected:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Rejected
 	171, // 72: warp.multi_agent.v1.RequestComputerUseResult.error:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Error
 	177, // 73: warp.multi_agent.v1.ShellCommandError.command_not_found:type_name -> google.protobuf.Empty
 	177, // 74: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
@@ -24479,7 +24440,7 @@ var file_task_proto_depIdxs = []int32{
 	166, // 232: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
 	32,  // 233: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
 	188, // 234: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
-	35,  // 235: warp.multi_agent.v1.RequestComputerUseResult.RequestApproved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
+	35,  // 235: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
 	236, // [236:236] is the sub-list for method output_type
 	236, // [236:236] is the sub-list for method input_type
 	236, // [236:236] is the sub-list for extension type_name
@@ -24611,8 +24572,8 @@ func file_task_proto_init() {
 		(*readSkillResult_Error_)(nil),
 	}
 	file_task_proto_msgTypes[32].OneofWrappers = []any{
-		(*requestComputerUseResult_RequestApproved_)(nil),
-		(*requestComputerUseResult_RequestRejected_)(nil),
+		(*requestComputerUseResult_Approved_)(nil),
+		(*requestComputerUseResult_Rejected_)(nil),
 		(*requestComputerUseResult_Error_)(nil),
 	}
 	file_task_proto_msgTypes[33].OneofWrappers = []any{
