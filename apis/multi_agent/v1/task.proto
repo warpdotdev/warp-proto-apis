@@ -1197,7 +1197,7 @@ message ReadSkillResult {
 
   message Success {
     // The content of the SKILL.md file that was read.
-    string content = 1;
+    FileContent content = 1;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }

@@ -22429,12 +22429,10 @@ func (b0 UseComputerResult_Success_Image_builder) Build() *UseComputerResult_Suc
 }
 
 type ReadSkillResult_Success struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Content     *string                `protobuf:"bytes,1,opt,name=content"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Content *FileContent           `protobuf:"bytes,1,opt,name=content"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *ReadSkillResult_Success) Reset() {
@@ -22462,30 +22460,25 @@ func (x *ReadSkillResult_Success) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *ReadSkillResult_Success) GetContent() string {
+func (x *ReadSkillResult_Success) GetContent() *FileContent {
 	if x != nil {
-		if x.xxx_hidden_Content != nil {
-			return *x.xxx_hidden_Content
-		}
-		return ""
+		return x.xxx_hidden_Content
 	}
-	return ""
+	return nil
 }
 
-func (x *ReadSkillResult_Success) SetContent(v string) {
-	x.xxx_hidden_Content = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+func (x *ReadSkillResult_Success) SetContent(v *FileContent) {
+	x.xxx_hidden_Content = v
 }
 
 func (x *ReadSkillResult_Success) HasContent() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_Content != nil
 }
 
 func (x *ReadSkillResult_Success) ClearContent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Content = nil
 }
 
@@ -22493,17 +22486,14 @@ type ReadSkillResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The content of the SKILL.md file that was read.
-	Content *string
+	Content *FileContent
 }
 
 func (b0 ReadSkillResult_Success_builder) Build() *ReadSkillResult_Success {
 	m0 := &ReadSkillResult_Success{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Content != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Content = b.Content
-	}
+	x.xxx_hidden_Content = b.Content
 	return m0
 }
 
@@ -23229,12 +23219,12 @@ const file_task_proto_rawDesc = "" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
-	"\x06result\"\xf7\x01\n" +
+	"\x06result\"\x99\x02\n" +
 	"\x0fReadSkillResult\x12H\n" +
 	"\asuccess\x18\x01 \x01(\v2,.warp.multi_agent.v1.ReadSkillResult.SuccessH\x00R\asuccess\x12B\n" +
-	"\x05error\x18\x02 \x01(\v2*.warp.multi_agent.v1.ReadSkillResult.ErrorH\x00R\x05error\x1a#\n" +
-	"\aSuccess\x12\x18\n" +
-	"\acontent\x18\x01 \x01(\tR\acontent\x1a'\n" +
+	"\x05error\x18\x02 \x01(\v2*.warp.multi_agent.v1.ReadSkillResult.ErrorH\x00R\x05error\x1aE\n" +
+	"\aSuccess\x12:\n" +
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"a\n" +
@@ -23695,11 +23685,12 @@ var file_task_proto_depIdxs = []int32{
 	184, // 225: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	163, // 226: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.UseComputerResult.Success.Image
 	32,  // 227: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
-	228, // [228:228] is the sub-list for method output_type
-	228, // [228:228] is the sub-list for method input_type
-	228, // [228:228] is the sub-list for extension type_name
-	228, // [228:228] is the sub-list for extension extendee
-	0,   // [0:228] is the sub-list for field type_name
+	182, // 228: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
+	229, // [229:229] is the sub-list for method output_type
+	229, // [229:229] is the sub-list for method input_type
+	229, // [229:229] is the sub-list for extension type_name
+	229, // [229:229] is the sub-list for extension extendee
+	0,   // [0:229] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
