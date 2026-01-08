@@ -520,10 +520,10 @@ func (x *Request_Input) GetFetchReviewComments() *Request_Input_FetchReviewComme
 	return nil
 }
 
-func (x *Request_Input) GetResolveTaskPrompt() *Request_Input_ResolveTaskPrompt {
+func (x *Request_Input) GetStartFromTaskPrompt() *Request_Input_StartFromTaskPrompt {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_ResolveTaskPrompt_); ok {
-			return x.ResolveTaskPrompt
+		if x, ok := x.xxx_hidden_Type.(*request_Input_StartFromTaskPrompt_); ok {
+			return x.StartFromTaskPrompt
 		}
 	}
 	return nil
@@ -649,12 +649,12 @@ func (x *Request_Input) SetFetchReviewComments(v *Request_Input_FetchReviewComme
 	x.xxx_hidden_Type = &request_Input_FetchReviewComments_{v}
 }
 
-func (x *Request_Input) SetResolveTaskPrompt(v *Request_Input_ResolveTaskPrompt) {
+func (x *Request_Input) SetStartFromTaskPrompt(v *Request_Input_StartFromTaskPrompt) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_ResolveTaskPrompt_{v}
+	x.xxx_hidden_Type = &request_Input_StartFromTaskPrompt_{v}
 }
 
 // Deprecated: Marked as deprecated in request.proto.
@@ -785,11 +785,11 @@ func (x *Request_Input) HasFetchReviewComments() bool {
 	return ok
 }
 
-func (x *Request_Input) HasResolveTaskPrompt() bool {
+func (x *Request_Input) HasStartFromTaskPrompt() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_ResolveTaskPrompt_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_StartFromTaskPrompt_)
 	return ok
 }
 
@@ -891,8 +891,8 @@ func (x *Request_Input) ClearFetchReviewComments() {
 	}
 }
 
-func (x *Request_Input) ClearResolveTaskPrompt() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_ResolveTaskPrompt_); ok {
+func (x *Request_Input) ClearStartFromTaskPrompt() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_StartFromTaskPrompt_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -924,7 +924,7 @@ const Request_Input_CodeReview_case case_Request_Input_Type = 12
 const Request_Input_SummarizeConversation_case case_Request_Input_Type = 13
 const Request_Input_CreateEnvironment_case case_Request_Input_Type = 14
 const Request_Input_FetchReviewComments_case case_Request_Input_Type = 15
-const Request_Input_ResolveTaskPrompt_case case_Request_Input_Type = 16
+const Request_Input_StartFromTaskPrompt_case case_Request_Input_Type = 16
 const Request_Input_UserQuery_case case_Request_Input_Type = 2
 const Request_Input_ToolCallResult_case case_Request_Input_Type = 3
 
@@ -957,8 +957,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_CreateEnvironment_case
 	case *request_Input_FetchReviewComments_:
 		return Request_Input_FetchReviewComments_case
-	case *request_Input_ResolveTaskPrompt_:
-		return Request_Input_ResolveTaskPrompt_case
+	case *request_Input_StartFromTaskPrompt_:
+		return Request_Input_StartFromTaskPrompt_case
 	case *request_Input_UserQuery_:
 		return Request_Input_UserQuery_case
 	case *request_Input_ToolCallResult_:
@@ -987,7 +987,7 @@ type Request_Input_builder struct {
 	SummarizeConversation   *Request_Input_SummarizeConversation
 	CreateEnvironment       *Request_Input_CreateEnvironment
 	FetchReviewComments     *Request_Input_FetchReviewComments
-	ResolveTaskPrompt       *Request_Input_ResolveTaskPrompt
+	StartFromTaskPrompt     *Request_Input_StartFromTaskPrompt
 	// Deprecated: Marked as deprecated in request.proto.
 	UserQuery *Request_Input_UserQuery
 	// Deprecated: Marked as deprecated in request.proto.
@@ -1036,8 +1036,8 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	if b.FetchReviewComments != nil {
 		x.xxx_hidden_Type = &request_Input_FetchReviewComments_{b.FetchReviewComments}
 	}
-	if b.ResolveTaskPrompt != nil {
-		x.xxx_hidden_Type = &request_Input_ResolveTaskPrompt_{b.ResolveTaskPrompt}
+	if b.StartFromTaskPrompt != nil {
+		x.xxx_hidden_Type = &request_Input_StartFromTaskPrompt_{b.StartFromTaskPrompt}
 	}
 	if b.UserQuery != nil {
 		x.xxx_hidden_Type = &request_Input_UserQuery_{b.UserQuery}
@@ -1110,8 +1110,8 @@ type request_Input_FetchReviewComments_ struct {
 	FetchReviewComments *Request_Input_FetchReviewComments `protobuf:"bytes,15,opt,name=fetch_review_comments,json=fetchReviewComments,oneof"`
 }
 
-type request_Input_ResolveTaskPrompt_ struct {
-	ResolveTaskPrompt *Request_Input_ResolveTaskPrompt `protobuf:"bytes,16,opt,name=resolve_task_prompt,json=resolveTaskPrompt,oneof"`
+type request_Input_StartFromTaskPrompt_ struct {
+	StartFromTaskPrompt *Request_Input_StartFromTaskPrompt `protobuf:"bytes,16,opt,name=start_from_task_prompt,json=startFromTaskPrompt,oneof"`
 }
 
 type request_Input_UserQuery_ struct {
@@ -1148,7 +1148,7 @@ func (*request_Input_CreateEnvironment_) isRequest_Input_Type() {}
 
 func (*request_Input_FetchReviewComments_) isRequest_Input_Type() {}
 
-func (*request_Input_ResolveTaskPrompt_) isRequest_Input_Type() {}
+func (*request_Input_StartFromTaskPrompt_) isRequest_Input_Type() {}
 
 func (*request_Input_UserQuery_) isRequest_Input_Type() {}
 
@@ -4973,28 +4973,30 @@ func (b0 Request_Input_SummarizeConversation_builder) Build() *Request_Input_Sum
 }
 
 // An input signaling that the user query should be resolved from the associated
-// ambient agent task. The task ID is provided in the request metadata.
-// This is used when the CLI agent is run with --task-id but no --prompt.
-type Request_Input_ResolveTaskPrompt struct {
-	state         protoimpl.MessageState `protogen:"opaque.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+// ambient agent task. This is used when the CLI agent is run with --task-id but no --prompt.
+type Request_Input_StartFromTaskPrompt struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TaskId      *string                `protobuf:"bytes,1,opt,name=task_id,json=taskId"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Input_ResolveTaskPrompt) Reset() {
-	*x = Request_Input_ResolveTaskPrompt{}
+func (x *Request_Input_StartFromTaskPrompt) Reset() {
+	*x = Request_Input_StartFromTaskPrompt{}
 	mi := &file_request_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_ResolveTaskPrompt) String() string {
+func (x *Request_Input_StartFromTaskPrompt) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_ResolveTaskPrompt) ProtoMessage() {}
+func (*Request_Input_StartFromTaskPrompt) ProtoMessage() {}
 
-func (x *Request_Input_ResolveTaskPrompt) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_StartFromTaskPrompt) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -5006,15 +5008,48 @@ func (x *Request_Input_ResolveTaskPrompt) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type Request_Input_ResolveTaskPrompt_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
+func (x *Request_Input_StartFromTaskPrompt) GetTaskId() string {
+	if x != nil {
+		if x.xxx_hidden_TaskId != nil {
+			return *x.xxx_hidden_TaskId
+		}
+		return ""
+	}
+	return ""
 }
 
-func (b0 Request_Input_ResolveTaskPrompt_builder) Build() *Request_Input_ResolveTaskPrompt {
-	m0 := &Request_Input_ResolveTaskPrompt{}
+func (x *Request_Input_StartFromTaskPrompt) SetTaskId(v string) {
+	x.xxx_hidden_TaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *Request_Input_StartFromTaskPrompt) HasTaskId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Input_StartFromTaskPrompt) ClearTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_TaskId = nil
+}
+
+type Request_Input_StartFromTaskPrompt_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The ambient agent task ID to resolve the prompt from.
+	TaskId *string
+}
+
+func (b0 Request_Input_StartFromTaskPrompt_builder) Build() *Request_Input_StartFromTaskPrompt {
+	m0 := &Request_Input_StartFromTaskPrompt{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.TaskId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_TaskId = b.TaskId
+	}
 	return m0
 }
 
@@ -6677,7 +6712,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x9fQ\n" +
+	"task.proto\"\xc1Q\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6687,7 +6722,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xb23\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd43\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -6704,8 +6739,8 @@ const file_request_proto_rawDesc = "" +
 	"codeReview\x12q\n" +
 	"\x16summarize_conversation\x18\r \x01(\v28.warp.multi_agent.v1.Request.Input.SummarizeConversationH\x00R\x15summarizeConversation\x12e\n" +
 	"\x12create_environment\x18\x0e \x01(\v24.warp.multi_agent.v1.Request.Input.CreateEnvironmentH\x00R\x11createEnvironment\x12l\n" +
-	"\x15fetch_review_comments\x18\x0f \x01(\v26.warp.multi_agent.v1.Request.Input.FetchReviewCommentsH\x00R\x13fetchReviewComments\x12f\n" +
-	"\x13resolve_task_prompt\x18\x10 \x01(\v24.warp.multi_agent.v1.Request.Input.ResolveTaskPromptH\x00R\x11resolveTaskPrompt\x12Q\n" +
+	"\x15fetch_review_comments\x18\x0f \x01(\v26.warp.multi_agent.v1.Request.Input.FetchReviewCommentsH\x00R\x13fetchReviewComments\x12m\n" +
+	"\x16start_from_task_prompt\x18\x10 \x01(\v26.warp.multi_agent.v1.Request.Input.StartFromTaskPromptH\x00R\x13startFromTaskPrompt\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
 	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\x91\x03\n" +
@@ -6805,8 +6840,9 @@ const file_request_proto_rawDesc = "" +
 	"\x13FetchReviewComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a5\n" +
 	"\x15SummarizeConversation\x12\x1c\n" +
-	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1a\x13\n" +
-	"\x11ResolveTaskPromptB\x06\n" +
+	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1a.\n" +
+	"\x13StartFromTaskPrompt\x12\x17\n" +
+	"\atask_id\x18\x01 \x01(\tR\x06taskIdB\x06\n" +
 	"\x04type\x1a\xc7\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -6893,31 +6929,31 @@ const file_request_proto_rawDesc = "" +
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 38)
 var file_request_proto_goTypes = []any{
-	(AutonomyLevel)(0),                                                     // 0: warp.multi_agent.v1.AutonomyLevel
-	(IsolationLevel)(0),                                                    // 1: warp.multi_agent.v1.IsolationLevel
-	(*Request)(nil),                                                        // 2: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                            // 3: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                  // 4: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                               // 5: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                               // 6: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                             // 7: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                        // 8: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_CLIAgentUserQuery)(nil),                                // 9: warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	(*Request_Input_UserInputs)(nil),                                       // 10: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                   // 11: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                          // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 13: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversation)(nil),                               // 14: warp.multi_agent.v1.Request.Input.ResumeConversation
-	(*Request_Input_InitProjectRules)(nil),                                 // 15: warp.multi_agent.v1.Request.Input.InitProjectRules
-	(*Request_Input_CreateNewProject)(nil),                                 // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
-	(*Request_Input_CloneRepository)(nil),                                  // 17: warp.multi_agent.v1.Request.Input.CloneRepository
-	(*Request_Input_CreateEnvironment)(nil),                                // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
-	(*Request_Input_TriggerSuggestPrompt)(nil),                             // 19: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
-	(*Request_Input_CodeReview)(nil),                                       // 20: warp.multi_agent.v1.Request.Input.CodeReview
-	(*Request_Input_FetchReviewComments)(nil),                              // 21: warp.multi_agent.v1.Request.Input.FetchReviewComments
-	(*Request_Input_SummarizeConversation)(nil),                            // 22: warp.multi_agent.v1.Request.Input.SummarizeConversation
-	(*Request_Input_ResolveTaskPrompt)(nil),                                // 23: warp.multi_agent.v1.Request.Input.ResolveTaskPrompt
-	nil,                                                                    // 24: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
+	(AutonomyLevel)(0),                            // 0: warp.multi_agent.v1.AutonomyLevel
+	(IsolationLevel)(0),                           // 1: warp.multi_agent.v1.IsolationLevel
+	(*Request)(nil),                               // 2: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                   // 3: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                         // 4: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                      // 5: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                      // 6: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                    // 7: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),               // 8: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_CLIAgentUserQuery)(nil),       // 9: warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	(*Request_Input_UserInputs)(nil),              // 10: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),          // 11: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil), // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),       // 13: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_ResumeConversation)(nil),      // 14: warp.multi_agent.v1.Request.Input.ResumeConversation
+	(*Request_Input_InitProjectRules)(nil),        // 15: warp.multi_agent.v1.Request.Input.InitProjectRules
+	(*Request_Input_CreateNewProject)(nil),        // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
+	(*Request_Input_CloneRepository)(nil),         // 17: warp.multi_agent.v1.Request.Input.CloneRepository
+	(*Request_Input_CreateEnvironment)(nil),       // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
+	(*Request_Input_TriggerSuggestPrompt)(nil),    // 19: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
+	(*Request_Input_CodeReview)(nil),              // 20: warp.multi_agent.v1.Request.Input.CodeReview
+	(*Request_Input_FetchReviewComments)(nil),     // 21: warp.multi_agent.v1.Request.Input.FetchReviewComments
+	(*Request_Input_SummarizeConversation)(nil),   // 22: warp.multi_agent.v1.Request.Input.SummarizeConversation
+	(*Request_Input_StartFromTaskPrompt)(nil),     // 23: warp.multi_agent.v1.Request.Input.StartFromTaskPrompt
+	nil, // 24: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	(*Request_Input_UserInputs_UserInput)(nil),                             // 25: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 26: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	(*Request_Input_QueryWithCannedResponse_Code)(nil),                     // 27: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
@@ -6992,7 +7028,7 @@ var file_request_proto_depIdxs = []int32{
 	22, // 17: warp.multi_agent.v1.Request.Input.summarize_conversation:type_name -> warp.multi_agent.v1.Request.Input.SummarizeConversation
 	18, // 18: warp.multi_agent.v1.Request.Input.create_environment:type_name -> warp.multi_agent.v1.Request.Input.CreateEnvironment
 	21, // 19: warp.multi_agent.v1.Request.Input.fetch_review_comments:type_name -> warp.multi_agent.v1.Request.Input.FetchReviewComments
-	23, // 20: warp.multi_agent.v1.Request.Input.resolve_task_prompt:type_name -> warp.multi_agent.v1.Request.Input.ResolveTaskPrompt
+	23, // 20: warp.multi_agent.v1.Request.Input.start_from_task_prompt:type_name -> warp.multi_agent.v1.Request.Input.StartFromTaskPrompt
 	8,  // 21: warp.multi_agent.v1.Request.Input.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	11, // 22: warp.multi_agent.v1.Request.Input.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	33, // 23: warp.multi_agent.v1.Request.Metadata.logging:type_name -> warp.multi_agent.v1.Request.Metadata.LoggingEntry
@@ -7086,7 +7122,7 @@ func file_request_proto_init() {
 		(*request_Input_SummarizeConversation_)(nil),
 		(*request_Input_CreateEnvironment_)(nil),
 		(*request_Input_FetchReviewComments_)(nil),
-		(*request_Input_ResolveTaskPrompt_)(nil),
+		(*request_Input_StartFromTaskPrompt_)(nil),
 		(*request_Input_UserQuery_)(nil),
 		(*request_Input_ToolCallResult_)(nil),
 	}
