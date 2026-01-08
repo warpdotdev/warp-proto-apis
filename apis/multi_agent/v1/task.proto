@@ -670,7 +670,10 @@ message Message {
       }
     }
 
+    // A tool call to check with the client that the agent is allowed to initiate
+    // computer use.
     message RequestComputerUse {
+      // A brief description of what the agent wants to do with computer use.
       string task_summary = 1 [ (sensitive) = true ];
     }
   }
@@ -1210,19 +1213,25 @@ message ReadSkillResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+// The dimensions of a user's screen, used for computer use.
 message ScreenDimensions {
   int32 width_px = 1;
   int32 height_px = 2;
 }
 
+// Result of a `RequestComputerUse` tool call.
 message RequestComputerUseResult {
   oneof result {
+    // The user approved this computer use.
     Approved approved = 1;
+    // The user rejected this comptuer use.
     Rejected rejected = 2;
+    // There was an error requesting computer use.
     Error error = 3;
   }
 
   message Approved {
+    // The dimensions of the screen that we are using computer use on.
     ScreenDimensions screen_dimensions = 1;
   }
 

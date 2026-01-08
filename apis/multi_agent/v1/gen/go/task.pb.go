@@ -6299,6 +6299,7 @@ func (*readSkillResult_Success_) isReadSkillResult_Result() {}
 
 func (*readSkillResult_Error_) isReadSkillResult_Result() {}
 
+// The dimensions of a user's screen, used for computer use.
 type ScreenDimensions struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_WidthPx     int32                  `protobuf:"varint,1,opt,name=width_px,json=widthPx"`
@@ -6404,6 +6405,7 @@ func (b0 ScreenDimensions_builder) Build() *ScreenDimensions {
 	return m0
 }
 
+// Result of a `RequestComputerUse` tool call.
 type RequestComputerUseResult struct {
 	state             protoimpl.MessageState            `protogen:"opaque.v1"`
 	xxx_hidden_Result isRequestComputerUseResult_Result `protobuf_oneof:"result"`
@@ -6565,9 +6567,12 @@ type RequestComputerUseResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Result:
+	// The user approved this computer use.
 	Approved *RequestComputerUseResult_Approved
+	// The user rejected this comptuer use.
 	Rejected *RequestComputerUseResult_Rejected
-	Error    *RequestComputerUseResult_Error
+	// There was an error requesting computer use.
+	Error *RequestComputerUseResult_Error
 	// -- end of xxx_hidden_Result
 }
 
@@ -6602,14 +6607,17 @@ type isRequestComputerUseResult_Result interface {
 }
 
 type requestComputerUseResult_Approved_ struct {
+	// The user approved this computer use.
 	Approved *RequestComputerUseResult_Approved `protobuf:"bytes,1,opt,name=approved,oneof"`
 }
 
 type requestComputerUseResult_Rejected_ struct {
+	// The user rejected this comptuer use.
 	Rejected *RequestComputerUseResult_Rejected `protobuf:"bytes,2,opt,name=rejected,oneof"`
 }
 
 type requestComputerUseResult_Error_ struct {
+	// There was an error requesting computer use.
 	Error *RequestComputerUseResult_Error `protobuf:"bytes,3,opt,name=error,oneof"`
 }
 
@@ -15195,6 +15203,8 @@ func (b0 Message_ToolCall_UseComputer_builder) Build() *Message_ToolCall_UseComp
 	return m0
 }
 
+// A tool call to check with the client that the agent is allowed to initiate
+// computer use.
 type Message_ToolCall_RequestComputerUse struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_TaskSummary *string                `protobuf:"bytes,1,opt,name=task_summary,json=taskSummary"`
@@ -15259,6 +15269,7 @@ func (x *Message_ToolCall_RequestComputerUse) ClearTaskSummary() {
 type Message_ToolCall_RequestComputerUse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// A brief description of what the agent wants to do with computer use.
 	TaskSummary *string
 }
 
@@ -23165,6 +23176,7 @@ func (x *RequestComputerUseResult_Approved) ClearScreenDimensions() {
 type RequestComputerUseResult_Approved_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// The dimensions of the screen that we are using computer use on.
 	ScreenDimensions *ScreenDimensions
 }
 
