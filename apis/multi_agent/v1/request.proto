@@ -36,6 +36,9 @@ message Request {
   // Information about the client's MCP capabilities.
   MCPContext mcp_context = 6;
 
+  // Information about the client's available skills.
+  SkillsContext skills_context = 7;
+
   message TaskContext {
     reserved active_task_id;
     reserved 2;
@@ -137,6 +140,8 @@ message Request {
         ReadShellCommandOutputResult read_shell_command_output = 22;
         UseComputerResult use_computer = 23;
         InsertReviewCommentsResult insert_review_comments = 24;
+        RequestComputerUseResult request_computer_use = 25;
+        ReadSkillResult read_skill = 26;
       }
 
       // Generic tool call result for representing a user-requested refinement
@@ -408,6 +413,16 @@ message Request {
       repeated MCPTool tools = 4;
     }
   }
+}
+
+message SkillsContext {
+  repeated Skill available_skills = 1;
+}
+
+message Skill {
+  string path = 1;
+  string name = 2;
+  string description = 3;
 }
 
 enum AutonomyLevel {

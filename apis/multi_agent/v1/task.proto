@@ -275,6 +275,8 @@ message Message {
       ReadShellCommandOutput read_shell_command_output = 23;
       UseComputer use_computer = 24;
       InsertReviewComments insert_review_comments = 25;
+      ReadSkill read_skill = 26;
+      RequestComputerUse request_computer_use = 27;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -501,6 +503,7 @@ message Message {
         CLISubagent cli = 3;
         google.protobuf.Empty research = 4;
         google.protobuf.Empty advice = 5;
+        google.protobuf.Empty computer_use = 6;
       }
 
       message CLISubagent {
@@ -578,6 +581,14 @@ message Message {
         string diff_hunk = 1 [ (sensitive) = true ];
         FileContentLineRange range = 2;
       }
+    }
+    
+    // A tool call to run a Skill.
+    message ReadSkill {
+      // The path to the SKILL.md to be read.
+      string skill_path = 1;
+      // The name of the Skill defined in SKILL.md.
+      string skill_name = 2;
     }
 
     message UseComputer {
@@ -658,6 +669,13 @@ message Message {
         int32 max_total_px = 2;
       }
     }
+
+    // A tool call to check with the client that the agent is allowed to initiate
+    // computer use.
+    message RequestComputerUse {
+      // A brief description of what the agent wants to do with computer use.
+      string task_summary = 1 [ (sensitive) = true ];
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -698,6 +716,8 @@ message Message {
       ReadShellCommandOutputResult read_shell_command_output = 27;
       UseComputerResult use_computer = 28;
       InsertReviewCommentsResult insert_review_comments = 29;
+      ReadSkillResult read_skill = 30;
+      RequestComputerUseResult request_computer_use_result = 31;
     }
 
     // Result of a server-side tool call.
@@ -1179,6 +1199,49 @@ message UseComputerResult {
   }
 }
 
+message ReadSkillResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The content of the SKILL.md file that was read.
+    FileContent content = 1;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+// The dimensions of a user's screen, used for computer use.
+message ScreenDimensions {
+  int32 width_px = 1;
+  int32 height_px = 2;
+}
+
+// Result of a `RequestComputerUse` tool call.
+message RequestComputerUseResult {
+  oneof result {
+    // The user approved this computer use.
+    Approved approved = 1;
+    // The user rejected this comptuer use.
+    Rejected rejected = 2;
+    // There was an error requesting computer use.
+    Error error = 3;
+  }
+
+  message Approved {
+    // The dimensions of the screen that we are using computer use on.
+    ScreenDimensions screen_dimensions = 1;
+  }
+
+  message Rejected {}
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
+
 message ShellCommandError {
   oneof type {
     // There was no command execution found with the given command_id in the tool call.
@@ -1215,6 +1278,8 @@ enum ToolType {
   READ_SHELL_COMMAND_OUTPUT = 20;
   USE_COMPUTER = 21;
   INSERT_REVIEW_COMMENTS = 22;
+  READ_SKILL = 23;
+  REQUEST_COMPUTER_USE = 24;
 }
 
 message UserQueryMode {
