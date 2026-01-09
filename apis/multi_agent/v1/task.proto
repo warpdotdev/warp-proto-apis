@@ -612,6 +612,8 @@ message Message {
           MouseWheel mouse_wheel = 4;
           Wait wait = 5;
           TypeText type_text = 6;
+          KeyDown key_down = 7;
+          KeyUp key_up = 8;
         }
 
         enum MouseButton {
@@ -661,6 +663,26 @@ message Message {
 
         message TypeText {
           string text = 1 [ (sensitive) = true ];
+        }
+
+        // Representation of a single key on the keyboard.
+        message Key {
+          oneof data {
+            // Representation of a non-character key (e.g. "Tab", "Enter"). On MacOS and
+            // Windows, this is a keycode that represents the physical key. On Linux,
+            // this is an X11 keysym.
+            int32 keycode = 1;
+            // A character key (e.g. "a", "+").
+            string char = 2;
+          }
+        }
+
+        message KeyDown {
+          Key key = 1;
+        }
+
+        message KeyUp {
+          Key key = 2;
         }
       }
     }
@@ -1232,8 +1254,18 @@ message RequestComputerUseResult {
   message Approved {
     // The dimensions of the screen that we are using computer use on.
     ScreenDimensions screen_dimensions = 1;
+
     // The screenshot that captures the initial state of the computer.
     RawImage initial_screenshot = 2;
+
+    // That platform that computer use is running on.
+    Platform platform = 3;
+
+    enum Platform {
+      MACOS = 0;
+      WINDOWS = 1;
+      LINUX_X11 = 2;
+    }
   }
 
   message Rejected {}
