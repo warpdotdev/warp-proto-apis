@@ -27,12 +27,13 @@ const (
 type LLMProvider int32
 
 const (
-	LLMProvider_LLM_PROVIDER_UNKNOWN    LLMProvider = 0
-	LLMProvider_LLM_PROVIDER_ANTHROPIC  LLMProvider = 1
-	LLMProvider_LLM_PROVIDER_OPENAI     LLMProvider = 2
-	LLMProvider_LLM_PROVIDER_GOOGLE     LLMProvider = 3
-	LLMProvider_LLM_PROVIDER_XAI        LLMProvider = 4
-	LLMProvider_LLM_PROVIDER_OPENROUTER LLMProvider = 5
+	LLMProvider_LLM_PROVIDER_UNKNOWN     LLMProvider = 0
+	LLMProvider_LLM_PROVIDER_ANTHROPIC   LLMProvider = 1
+	LLMProvider_LLM_PROVIDER_OPENAI      LLMProvider = 2
+	LLMProvider_LLM_PROVIDER_GOOGLE      LLMProvider = 3
+	LLMProvider_LLM_PROVIDER_XAI         LLMProvider = 4
+	LLMProvider_LLM_PROVIDER_OPENROUTER  LLMProvider = 5
+	LLMProvider_LLM_PROVIDER_AWS_BEDROCK LLMProvider = 6
 )
 
 // Enum value maps for LLMProvider.
@@ -44,14 +45,16 @@ var (
 		3: "LLM_PROVIDER_GOOGLE",
 		4: "LLM_PROVIDER_XAI",
 		5: "LLM_PROVIDER_OPENROUTER",
+		6: "LLM_PROVIDER_AWS_BEDROCK",
 	}
 	LLMProvider_value = map[string]int32{
-		"LLM_PROVIDER_UNKNOWN":    0,
-		"LLM_PROVIDER_ANTHROPIC":  1,
-		"LLM_PROVIDER_OPENAI":     2,
-		"LLM_PROVIDER_GOOGLE":     3,
-		"LLM_PROVIDER_XAI":        4,
-		"LLM_PROVIDER_OPENROUTER": 5,
+		"LLM_PROVIDER_UNKNOWN":     0,
+		"LLM_PROVIDER_ANTHROPIC":   1,
+		"LLM_PROVIDER_OPENAI":      2,
+		"LLM_PROVIDER_GOOGLE":      3,
+		"LLM_PROVIDER_XAI":         4,
+		"LLM_PROVIDER_OPENROUTER":  5,
+		"LLM_PROVIDER_AWS_BEDROCK": 6,
 	}
 )
 
@@ -4574,14 +4577,15 @@ const file_response_proto_rawDesc = "" +
 	"\x13RollbackTransaction\x1aI\n" +
 	"\x14StartNewConversation\x121\n" +
 	"\x15start_from_message_id\x18\x01 \x01(\tR\x12startFromMessageIdB\b\n" +
-	"\x06actionJ\x04\b\x02\x10\x03R\x12update_task_status*\xa8\x01\n" +
+	"\x06actionJ\x04\b\x02\x10\x03R\x12update_task_status*\xc6\x01\n" +
 	"\vLLMProvider\x12\x18\n" +
 	"\x14LLM_PROVIDER_UNKNOWN\x10\x00\x12\x1a\n" +
 	"\x16LLM_PROVIDER_ANTHROPIC\x10\x01\x12\x17\n" +
 	"\x13LLM_PROVIDER_OPENAI\x10\x02\x12\x17\n" +
 	"\x13LLM_PROVIDER_GOOGLE\x10\x03\x12\x14\n" +
 	"\x10LLM_PROVIDER_XAI\x10\x04\x12\x1b\n" +
-	"\x17LLM_PROVIDER_OPENROUTER\x10\x05B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x17LLM_PROVIDER_OPENROUTER\x10\x05\x12\x1c\n" +
+	"\x18LLM_PROVIDER_AWS_BEDROCK\x10\x06B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_response_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
