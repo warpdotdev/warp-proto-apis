@@ -141,6 +141,7 @@ message Request {
         UseComputerResult use_computer = 23;
         InsertReviewCommentsResult insert_review_comments = 24;
         RequestComputerUseResult request_computer_use = 25;
+        ReadSkillResult read_skill = 26;
       }
 
       // Generic tool call result for representing a user-requested refinement
