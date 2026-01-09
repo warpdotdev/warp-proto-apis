@@ -718,6 +718,7 @@ message Message {
       InsertReviewCommentsResult insert_review_comments = 29;
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
+      ReadSkillResult read_skill_result = 32;
     }
 
     // Result of a server-side tool call.
