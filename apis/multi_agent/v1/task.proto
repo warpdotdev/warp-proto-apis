@@ -683,6 +683,8 @@ message Message {
 
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
+    reserved 13;  // Removed: RefineResult - no longer used by client
+    
     string tool_call_id = 1;
 
     // Context that the client supplied as part of the tool call result input.
@@ -701,8 +703,6 @@ message Message {
       GrepResult grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2Result.
       FileGlobResult file_glob = 10 [deprecated=true];
-      // DEPRECATED: No longer used by client.
-      RefineResult refine = 13 [deprecated=true];
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
@@ -726,13 +726,6 @@ message Message {
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
     message ServerResult { string serialized_result = 1; }
-
-    // Generic tool call result for representing a user-requested refinement of
-    // the tool call parameters. DEPRECATED: No longer used by client.
-    message RefineResult {
-      option deprecated = true;
-      UserQuery user_query = 1;
-    }
 
     message SubagentResult {
         string payload = 1;
