@@ -661,13 +661,6 @@ message Message {
           string text = 1 [ (sensitive) = true ];
         }
       }
-
-      message ScreenshotParams {
-        // The maximum length of the long edge of the screenshot in pixels.
-        int32 max_long_edge_px = 1;
-        // The maximum total number of pixels in the screenshot.
-        int32 max_total_px = 2;
-      }
     }
 
     // A tool call to check with the client that the agent is allowed to initiate
@@ -675,6 +668,16 @@ message Message {
     message RequestComputerUse {
       // A brief description of what the agent wants to do with computer use.
       string task_summary = 1 [ (sensitive) = true ];
+      // The parameters that specify the constrains the client must apply to the
+      // screenshot.
+      ScreenshotParams screenshot_params = 2;
+    }
+
+    message ScreenshotParams {
+      // The maximum length of the long edge of the screenshot in pixels.
+      int32 max_long_edge_px = 1;
+      // The maximum total number of pixels in the screenshot.
+      int32 max_total_px = 2;
     }
   }
 
@@ -1183,15 +1186,8 @@ message UseComputerResult {
   }
 
   message Success {
-    Image screenshot = 1;
+    RawImage screenshot = 1;
     Coordinates cursor_position = 2;
-
-    message Image {
-      // Raw image bytes.
-      bytes data = 1 [ (sensitive) = true ];
-      // MIME type of the image content (e.g., "image/png").
-      string mime_type = 2;
-    }
   }
 
   message Error {
@@ -1233,6 +1229,8 @@ message RequestComputerUseResult {
   message Approved {
     // The dimensions of the screen that we are using computer use on.
     ScreenDimensions screen_dimensions = 1;
+    // The screenshot that captures the initial state of the computer.
+    RawImage intial_screenshot = 2;
   }
 
   message Rejected {}
@@ -1293,4 +1291,11 @@ enum AgentType {
   AGENT_TYPE_UNKNOWN = 0;
   AGENT_TYPE_PRIMARY = 1;
   AGENT_TYPE_CLI = 2;
+}
+
+message RawImage {
+  // Raw image bytes.
+  bytes data = 1 [ (sensitive) = true ];
+  // MIME type of the image content (e.g., "image/png").
+  string mime_type = 2;
 }
