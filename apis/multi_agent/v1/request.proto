@@ -125,7 +125,8 @@ message Request {
         SuggestCreatePlanResult suggest_create_plan = 7;
         GrepResult grep = 8;
         FileGlobResult file_glob = 9;
-        RefineResult refine = 10;
+        // DEPRECATED: No longer used by client. Tag 10 previously used for RefineResult.
+        reserved 10;
         ReadMCPResourceResult read_mcp_resource = 11;
         CallMCPToolResult call_mcp_tool = 12;
         WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 13;
@@ -143,10 +144,6 @@ message Request {
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
       }
-
-      // Generic tool call result for representing a user-requested refinement
-      // of the tool call parameters.
-      message RefineResult { UserQuery user_query = 1; }
     }
 
     // Canned responses correspond to hardcoded predefined responses from
