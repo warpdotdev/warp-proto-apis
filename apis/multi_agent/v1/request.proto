@@ -115,6 +115,7 @@ message Request {
     // Tool call result
     message ToolCallResult {
       reserved 10;  // Removed: RefineResult - no longer used by client
+      reserved refine;  // Field name also reserved for field masks
       
       string tool_call_id = 1;
 
