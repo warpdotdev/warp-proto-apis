@@ -27,13 +27,14 @@ jobs:
     
     - name: Check for changes
       run: |
-        # Check if there are any changes in the git working directory
-        if ! git diff --quiet; then
+        # Check if there are any meaningful changes (ignoring protoc version differences)
+        # The -I flag ignores lines matching the pattern (protoc version comments)
+        if ! git diff -I '^[[:space:]]*//.*(protoc|protoc-gen-go)[[:space:]]*v[0-9]' --quiet; then
           echo "❌ Generated code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
           echo "💡 If you're unable to reproduce this diff locally, check to make sure you have the latest protobuf installed: brew install protobuf"
           echo ""
-          echo "📋 Diff details:"
-          git diff
+          echo "📋 Diff details (excluding protoc version changes):"
+          git diff -I '^[[:space:]]*//.*(protoc|protoc-gen-go)[[:space:]]*v[0-9]'
           exit 1
         else
           echo "✅ Code generation produced no changes - generated code is up to date!"
