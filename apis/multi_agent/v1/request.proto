@@ -332,6 +332,10 @@ message Request {
     // If `true`, the client supports V4A-style diffs.
     bool supports_v4a_file_diffs = 23;
 
+    // If `true`, the client supports the new summarization approach where messages
+    // are moved to a subtask and replaced with a subagent tool call + result.
+    bool supports_summarization_via_message_replacement = 24;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
