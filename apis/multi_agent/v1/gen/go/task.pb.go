@@ -23020,11 +23020,11 @@ func (b0 ReadSkillResult_Error_builder) Build() *ReadSkillResult_Error {
 }
 
 type RequestComputerUseResult_Approved struct {
-	state                       protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_ScreenDimensions *ScreenDimensions      `protobuf:"bytes,1,opt,name=screen_dimensions,json=screenDimensions"`
-	xxx_hidden_IntialScreenshot *RawImage              `protobuf:"bytes,2,opt,name=intial_screenshot,json=intialScreenshot"`
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_ScreenDimensions  *ScreenDimensions      `protobuf:"bytes,1,opt,name=screen_dimensions,json=screenDimensions"`
+	xxx_hidden_InitialScreenshot *RawImage              `protobuf:"bytes,2,opt,name=initial_screenshot,json=initialScreenshot"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *RequestComputerUseResult_Approved) Reset() {
@@ -23059,9 +23059,9 @@ func (x *RequestComputerUseResult_Approved) GetScreenDimensions() *ScreenDimensi
 	return nil
 }
 
-func (x *RequestComputerUseResult_Approved) GetIntialScreenshot() *RawImage {
+func (x *RequestComputerUseResult_Approved) GetInitialScreenshot() *RawImage {
 	if x != nil {
-		return x.xxx_hidden_IntialScreenshot
+		return x.xxx_hidden_InitialScreenshot
 	}
 	return nil
 }
@@ -23070,8 +23070,8 @@ func (x *RequestComputerUseResult_Approved) SetScreenDimensions(v *ScreenDimensi
 	x.xxx_hidden_ScreenDimensions = v
 }
 
-func (x *RequestComputerUseResult_Approved) SetIntialScreenshot(v *RawImage) {
-	x.xxx_hidden_IntialScreenshot = v
+func (x *RequestComputerUseResult_Approved) SetInitialScreenshot(v *RawImage) {
+	x.xxx_hidden_InitialScreenshot = v
 }
 
 func (x *RequestComputerUseResult_Approved) HasScreenDimensions() bool {
@@ -23081,19 +23081,19 @@ func (x *RequestComputerUseResult_Approved) HasScreenDimensions() bool {
 	return x.xxx_hidden_ScreenDimensions != nil
 }
 
-func (x *RequestComputerUseResult_Approved) HasIntialScreenshot() bool {
+func (x *RequestComputerUseResult_Approved) HasInitialScreenshot() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_IntialScreenshot != nil
+	return x.xxx_hidden_InitialScreenshot != nil
 }
 
 func (x *RequestComputerUseResult_Approved) ClearScreenDimensions() {
 	x.xxx_hidden_ScreenDimensions = nil
 }
 
-func (x *RequestComputerUseResult_Approved) ClearIntialScreenshot() {
-	x.xxx_hidden_IntialScreenshot = nil
+func (x *RequestComputerUseResult_Approved) ClearInitialScreenshot() {
+	x.xxx_hidden_InitialScreenshot = nil
 }
 
 type RequestComputerUseResult_Approved_builder struct {
@@ -23102,7 +23102,7 @@ type RequestComputerUseResult_Approved_builder struct {
 	// The dimensions of the screen that we are using computer use on.
 	ScreenDimensions *ScreenDimensions
 	// The screenshot that captures the initial state of the computer.
-	IntialScreenshot *RawImage
+	InitialScreenshot *RawImage
 }
 
 func (b0 RequestComputerUseResult_Approved_builder) Build() *RequestComputerUseResult_Approved {
@@ -23110,7 +23110,7 @@ func (b0 RequestComputerUseResult_Approved_builder) Build() *RequestComputerUseR
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ScreenDimensions = b.ScreenDimensions
-	x.xxx_hidden_IntialScreenshot = b.IntialScreenshot
+	x.xxx_hidden_InitialScreenshot = b.InitialScreenshot
 	return m0
 }
 
@@ -23889,14 +23889,14 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\"J\n" +
 	"\x10ScreenDimensions\x12\x19\n" +
 	"\bwidth_px\x18\x01 \x01(\x05R\awidthPx\x12\x1b\n" +
-	"\theight_px\x18\x02 \x01(\x05R\bheightPx\"\xff\x03\n" +
+	"\theight_px\x18\x02 \x01(\x05R\bheightPx\"\x81\x04\n" +
 	"\x18RequestComputerUseResult\x12T\n" +
 	"\bapproved\x18\x01 \x01(\v26.warp.multi_agent.v1.RequestComputerUseResult.ApprovedH\x00R\bapproved\x12T\n" +
 	"\brejected\x18\x02 \x01(\v26.warp.multi_agent.v1.RequestComputerUseResult.RejectedH\x00R\brejected\x12K\n" +
-	"\x05error\x18\x03 \x01(\v23.warp.multi_agent.v1.RequestComputerUseResult.ErrorH\x00R\x05error\x1a\xaa\x01\n" +
+	"\x05error\x18\x03 \x01(\v23.warp.multi_agent.v1.RequestComputerUseResult.ErrorH\x00R\x05error\x1a\xac\x01\n" +
 	"\bApproved\x12R\n" +
-	"\x11screen_dimensions\x18\x01 \x01(\v2%.warp.multi_agent.v1.ScreenDimensionsR\x10screenDimensions\x12J\n" +
-	"\x11intial_screenshot\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.RawImageR\x10intialScreenshot\x1a\n" +
+	"\x11screen_dimensions\x18\x01 \x01(\v2%.warp.multi_agent.v1.ScreenDimensionsR\x10screenDimensions\x12L\n" +
+	"\x12initial_screenshot\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.RawImageR\x11initialScreenshot\x1a\n" +
 	"\n" +
 	"\bRejected\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
@@ -24375,7 +24375,7 @@ var file_task_proto_depIdxs = []int32{
 	32,  // 232: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
 	187, // 233: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
 	35,  // 234: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
-	39,  // 235: warp.multi_agent.v1.RequestComputerUseResult.Approved.intial_screenshot:type_name -> warp.multi_agent.v1.RawImage
+	39,  // 235: warp.multi_agent.v1.RequestComputerUseResult.Approved.initial_screenshot:type_name -> warp.multi_agent.v1.RawImage
 	236, // [236:236] is the sub-list for method output_type
 	236, // [236:236] is the sub-list for method input_type
 	236, // [236:236] is the sub-list for extension type_name

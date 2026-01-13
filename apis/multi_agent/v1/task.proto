@@ -1224,7 +1224,7 @@ message RequestComputerUseResult {
     // The dimensions of the screen that we are using computer use on.
     ScreenDimensions screen_dimensions = 1;
     // The screenshot that captures the initial state of the computer.
-    RawImage intial_screenshot = 2;
+    RawImage initial_screenshot = 2;
   }
 
   message Rejected {}
