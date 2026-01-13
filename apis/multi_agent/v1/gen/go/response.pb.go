@@ -449,10 +449,10 @@ func (x *ClientAction) GetUpdateTaskServerData() *ClientAction_UpdateTaskServerD
 	return nil
 }
 
-func (x *ClientAction) GetReplaceMessagesInTask() *ClientAction_ReplaceMessagesInTask {
+func (x *ClientAction) GetMoveMessagesToNewTask() *ClientAction_MoveMessagesToNewTask {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Action.(*clientAction_ReplaceMessagesInTask_); ok {
-			return x.ReplaceMessagesInTask
+		if x, ok := x.xxx_hidden_Action.(*clientAction_MoveMessagesToNewTask_); ok {
+			return x.MoveMessagesToNewTask
 		}
 	}
 	return nil
@@ -554,12 +554,12 @@ func (x *ClientAction) SetUpdateTaskServerData(v *ClientAction_UpdateTaskServerD
 	x.xxx_hidden_Action = &clientAction_UpdateTaskServerData_{v}
 }
 
-func (x *ClientAction) SetReplaceMessagesInTask(v *ClientAction_ReplaceMessagesInTask) {
+func (x *ClientAction) SetMoveMessagesToNewTask(v *ClientAction_MoveMessagesToNewTask) {
 	if v == nil {
 		x.xxx_hidden_Action = nil
 		return
 	}
-	x.xxx_hidden_Action = &clientAction_ReplaceMessagesInTask_{v}
+	x.xxx_hidden_Action = &clientAction_MoveMessagesToNewTask_{v}
 }
 
 func (x *ClientAction) HasAction() bool {
@@ -665,11 +665,11 @@ func (x *ClientAction) HasUpdateTaskServerData() bool {
 	return ok
 }
 
-func (x *ClientAction) HasReplaceMessagesInTask() bool {
+func (x *ClientAction) HasMoveMessagesToNewTask() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Action.(*clientAction_ReplaceMessagesInTask_)
+	_, ok := x.xxx_hidden_Action.(*clientAction_MoveMessagesToNewTask_)
 	return ok
 }
 
@@ -749,8 +749,8 @@ func (x *ClientAction) ClearUpdateTaskServerData() {
 	}
 }
 
-func (x *ClientAction) ClearReplaceMessagesInTask() {
-	if _, ok := x.xxx_hidden_Action.(*clientAction_ReplaceMessagesInTask_); ok {
+func (x *ClientAction) ClearMoveMessagesToNewTask() {
+	if _, ok := x.xxx_hidden_Action.(*clientAction_MoveMessagesToNewTask_); ok {
 		x.xxx_hidden_Action = nil
 	}
 }
@@ -768,7 +768,7 @@ const ClientAction_CommitTransaction_case case_ClientAction_Action = 10
 const ClientAction_RollbackTransaction_case case_ClientAction_Action = 11
 const ClientAction_StartNewConversation_case case_ClientAction_Action = 12
 const ClientAction_UpdateTaskServerData_case case_ClientAction_Action = 13
-const ClientAction_ReplaceMessagesInTask_case case_ClientAction_Action = 14
+const ClientAction_MoveMessagesToNewTask_case case_ClientAction_Action = 14
 
 func (x *ClientAction) WhichAction() case_ClientAction_Action {
 	if x == nil {
@@ -799,8 +799,8 @@ func (x *ClientAction) WhichAction() case_ClientAction_Action {
 		return ClientAction_StartNewConversation_case
 	case *clientAction_UpdateTaskServerData_:
 		return ClientAction_UpdateTaskServerData_case
-	case *clientAction_ReplaceMessagesInTask_:
-		return ClientAction_ReplaceMessagesInTask_case
+	case *clientAction_MoveMessagesToNewTask_:
+		return ClientAction_MoveMessagesToNewTask_case
 	default:
 		return ClientAction_Action_not_set_case
 	}
@@ -822,7 +822,7 @@ type ClientAction_builder struct {
 	RollbackTransaction    *ClientAction_RollbackTransaction
 	StartNewConversation   *ClientAction_StartNewConversation
 	UpdateTaskServerData   *ClientAction_UpdateTaskServerData
-	ReplaceMessagesInTask  *ClientAction_ReplaceMessagesInTask
+	MoveMessagesToNewTask  *ClientAction_MoveMessagesToNewTask
 	// -- end of xxx_hidden_Action
 }
 
@@ -866,8 +866,8 @@ func (b0 ClientAction_builder) Build() *ClientAction {
 	if b.UpdateTaskServerData != nil {
 		x.xxx_hidden_Action = &clientAction_UpdateTaskServerData_{b.UpdateTaskServerData}
 	}
-	if b.ReplaceMessagesInTask != nil {
-		x.xxx_hidden_Action = &clientAction_ReplaceMessagesInTask_{b.ReplaceMessagesInTask}
+	if b.MoveMessagesToNewTask != nil {
+		x.xxx_hidden_Action = &clientAction_MoveMessagesToNewTask_{b.MoveMessagesToNewTask}
 	}
 	return m0
 }
@@ -934,8 +934,8 @@ type clientAction_UpdateTaskServerData_ struct {
 	UpdateTaskServerData *ClientAction_UpdateTaskServerData `protobuf:"bytes,13,opt,name=update_task_server_data,json=updateTaskServerData,oneof"`
 }
 
-type clientAction_ReplaceMessagesInTask_ struct {
-	ReplaceMessagesInTask *ClientAction_ReplaceMessagesInTask `protobuf:"bytes,14,opt,name=replace_messages_in_task,json=replaceMessagesInTask,oneof"`
+type clientAction_MoveMessagesToNewTask_ struct {
+	MoveMessagesToNewTask *ClientAction_MoveMessagesToNewTask `protobuf:"bytes,14,opt,name=move_messages_to_new_task,json=moveMessagesToNewTask,oneof"`
 }
 
 func (*clientAction_CreateTask_) isClientAction_Action() {}
@@ -962,7 +962,7 @@ func (*clientAction_StartNewConversation_) isClientAction_Action() {}
 
 func (*clientAction_UpdateTaskServerData_) isClientAction_Action() {}
 
-func (*clientAction_ReplaceMessagesInTask_) isClientAction_Action() {}
+func (*clientAction_MoveMessagesToNewTask_) isClientAction_Action() {}
 
 type ResponseEvent_StreamInit struct {
 	state                     protoimpl.MessageState `protogen:"opaque.v1"`
@@ -4468,34 +4468,36 @@ func (b0 ClientAction_StartNewConversation_builder) Build() *ClientAction_StartN
 	return m0
 }
 
-// Replaces a contiguous range of messages in a task with new messages.
-type ClientAction_ReplaceMessagesInTask struct {
+// Moves a contiguous range of messages into a new task, replacing them
+// in the source task with new messages.
+type ClientAction_MoveMessagesToNewTask struct {
 	state                           protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TaskId               *string                `protobuf:"bytes,1,opt,name=task_id,json=taskId"`
-	xxx_hidden_FirstMessageId       *string                `protobuf:"bytes,2,opt,name=first_message_id,json=firstMessageId"`
-	xxx_hidden_LastMessageId        *string                `protobuf:"bytes,3,opt,name=last_message_id,json=lastMessageId"`
-	xxx_hidden_ExpectedMessageCount uint32                 `protobuf:"varint,4,opt,name=expected_message_count,json=expectedMessageCount"`
-	xxx_hidden_ReplacementMessages  *[]*Message            `protobuf:"bytes,5,rep,name=replacement_messages,json=replacementMessages"`
+	xxx_hidden_SourceTaskId         *string                `protobuf:"bytes,1,opt,name=source_task_id,json=sourceTaskId"`
+	xxx_hidden_NewTask              *Task                  `protobuf:"bytes,2,opt,name=new_task,json=newTask"`
+	xxx_hidden_FirstMessageId       *string                `protobuf:"bytes,3,opt,name=first_message_id,json=firstMessageId"`
+	xxx_hidden_LastMessageId        *string                `protobuf:"bytes,4,opt,name=last_message_id,json=lastMessageId"`
+	xxx_hidden_ExpectedMessageCount uint32                 `protobuf:"varint,5,opt,name=expected_message_count,json=expectedMessageCount"`
+	xxx_hidden_ReplacementMessages  *[]*Message            `protobuf:"bytes,6,rep,name=replacement_messages,json=replacementMessages"`
 	XXX_raceDetectHookData          protoimpl.RaceDetectHookData
 	XXX_presence                    [1]uint32
 	unknownFields                   protoimpl.UnknownFields
 	sizeCache                       protoimpl.SizeCache
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) Reset() {
-	*x = ClientAction_ReplaceMessagesInTask{}
+func (x *ClientAction_MoveMessagesToNewTask) Reset() {
+	*x = ClientAction_MoveMessagesToNewTask{}
 	mi := &file_response_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) String() string {
+func (x *ClientAction_MoveMessagesToNewTask) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ClientAction_ReplaceMessagesInTask) ProtoMessage() {}
+func (*ClientAction_MoveMessagesToNewTask) ProtoMessage() {}
 
-func (x *ClientAction_ReplaceMessagesInTask) ProtoReflect() protoreflect.Message {
+func (x *ClientAction_MoveMessagesToNewTask) ProtoReflect() protoreflect.Message {
 	mi := &file_response_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4507,17 +4509,24 @@ func (x *ClientAction_ReplaceMessagesInTask) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) GetTaskId() string {
+func (x *ClientAction_MoveMessagesToNewTask) GetSourceTaskId() string {
 	if x != nil {
-		if x.xxx_hidden_TaskId != nil {
-			return *x.xxx_hidden_TaskId
+		if x.xxx_hidden_SourceTaskId != nil {
+			return *x.xxx_hidden_SourceTaskId
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) GetFirstMessageId() string {
+func (x *ClientAction_MoveMessagesToNewTask) GetNewTask() *Task {
+	if x != nil {
+		return x.xxx_hidden_NewTask
+	}
+	return nil
+}
+
+func (x *ClientAction_MoveMessagesToNewTask) GetFirstMessageId() string {
 	if x != nil {
 		if x.xxx_hidden_FirstMessageId != nil {
 			return *x.xxx_hidden_FirstMessageId
@@ -4527,7 +4536,7 @@ func (x *ClientAction_ReplaceMessagesInTask) GetFirstMessageId() string {
 	return ""
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) GetLastMessageId() string {
+func (x *ClientAction_MoveMessagesToNewTask) GetLastMessageId() string {
 	if x != nil {
 		if x.xxx_hidden_LastMessageId != nil {
 			return *x.xxx_hidden_LastMessageId
@@ -4537,14 +4546,14 @@ func (x *ClientAction_ReplaceMessagesInTask) GetLastMessageId() string {
 	return ""
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) GetExpectedMessageCount() uint32 {
+func (x *ClientAction_MoveMessagesToNewTask) GetExpectedMessageCount() uint32 {
 	if x != nil {
 		return x.xxx_hidden_ExpectedMessageCount
 	}
 	return 0
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) GetReplacementMessages() []*Message {
+func (x *ClientAction_MoveMessagesToNewTask) GetReplacementMessages() []*Message {
 	if x != nil {
 		if x.xxx_hidden_ReplacementMessages != nil {
 			return *x.xxx_hidden_ReplacementMessages
@@ -4553,112 +4562,131 @@ func (x *ClientAction_ReplaceMessagesInTask) GetReplacementMessages() []*Message
 	return nil
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) SetTaskId(v string) {
-	x.xxx_hidden_TaskId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+func (x *ClientAction_MoveMessagesToNewTask) SetSourceTaskId(v string) {
+	x.xxx_hidden_SourceTaskId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) SetFirstMessageId(v string) {
+func (x *ClientAction_MoveMessagesToNewTask) SetNewTask(v *Task) {
+	x.xxx_hidden_NewTask = v
+}
+
+func (x *ClientAction_MoveMessagesToNewTask) SetFirstMessageId(v string) {
 	x.xxx_hidden_FirstMessageId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) SetLastMessageId(v string) {
+func (x *ClientAction_MoveMessagesToNewTask) SetLastMessageId(v string) {
 	x.xxx_hidden_LastMessageId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) SetExpectedMessageCount(v uint32) {
+func (x *ClientAction_MoveMessagesToNewTask) SetExpectedMessageCount(v uint32) {
 	x.xxx_hidden_ExpectedMessageCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) SetReplacementMessages(v []*Message) {
+func (x *ClientAction_MoveMessagesToNewTask) SetReplacementMessages(v []*Message) {
 	x.xxx_hidden_ReplacementMessages = &v
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) HasTaskId() bool {
+func (x *ClientAction_MoveMessagesToNewTask) HasSourceTaskId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) HasFirstMessageId() bool {
+func (x *ClientAction_MoveMessagesToNewTask) HasNewTask() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+	return x.xxx_hidden_NewTask != nil
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) HasLastMessageId() bool {
+func (x *ClientAction_MoveMessagesToNewTask) HasFirstMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) HasExpectedMessageCount() bool {
+func (x *ClientAction_MoveMessagesToNewTask) HasLastMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) ClearTaskId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_TaskId = nil
+func (x *ClientAction_MoveMessagesToNewTask) HasExpectedMessageCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) ClearFirstMessageId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+func (x *ClientAction_MoveMessagesToNewTask) ClearSourceTaskId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_SourceTaskId = nil
+}
+
+func (x *ClientAction_MoveMessagesToNewTask) ClearNewTask() {
+	x.xxx_hidden_NewTask = nil
+}
+
+func (x *ClientAction_MoveMessagesToNewTask) ClearFirstMessageId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_FirstMessageId = nil
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) ClearLastMessageId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+func (x *ClientAction_MoveMessagesToNewTask) ClearLastMessageId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_LastMessageId = nil
 }
 
-func (x *ClientAction_ReplaceMessagesInTask) ClearExpectedMessageCount() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+func (x *ClientAction_MoveMessagesToNewTask) ClearExpectedMessageCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_ExpectedMessageCount = 0
 }
 
-type ClientAction_ReplaceMessagesInTask_builder struct {
+type ClientAction_MoveMessagesToNewTask_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// ID of the task containing the messages to replace.
-	TaskId *string
+	SourceTaskId *string
+	// A new task to move the messages into.
+	NewTask *Task
 	// ID of the first message in the range to replace (inclusive).
 	FirstMessageId *string
 	// ID of the last message in the range to replace (inclusive).
 	LastMessageId *string
-	// The expected number of messages in the range being replaced. Acts as a
+	// The expected number of messages in the range being moved. Acts as a
 	// checksum to verify client and server agree on the range contents.
 	ExpectedMessageCount *uint32
-	// The new messages to insert in place of the replaced range.
+	// The new messages to insert in place of the source range.  If empty,
+	// the messages are simply moved.
 	ReplacementMessages []*Message
 }
 
-func (b0 ClientAction_ReplaceMessagesInTask_builder) Build() *ClientAction_ReplaceMessagesInTask {
-	m0 := &ClientAction_ReplaceMessagesInTask{}
+func (b0 ClientAction_MoveMessagesToNewTask_builder) Build() *ClientAction_MoveMessagesToNewTask {
+	m0 := &ClientAction_MoveMessagesToNewTask{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.TaskId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
-		x.xxx_hidden_TaskId = b.TaskId
+	if b.SourceTaskId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		x.xxx_hidden_SourceTaskId = b.SourceTaskId
 	}
+	x.xxx_hidden_NewTask = b.NewTask
 	if b.FirstMessageId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_FirstMessageId = b.FirstMessageId
 	}
 	if b.LastMessageId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_LastMessageId = b.LastMessageId
 	}
 	if b.ExpectedMessageCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_ExpectedMessageCount = *b.ExpectedMessageCount
 	}
 	x.xxx_hidden_ReplacementMessages = &b.ReplacementMessages
@@ -4773,7 +4801,7 @@ const file_response_proto_rawDesc = "" +
 	"\rInternalError\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessageB\b\n" +
 	"\x06reasonB\x06\n" +
-	"\x04type\"\xd9\x13\n" +
+	"\x04type\"\x9d\x14\n" +
 	"\fClientAction\x12O\n" +
 	"\vcreate_task\x18\x01 \x01(\v2,.warp.multi_agent.v1.ClientAction.CreateTaskH\x00R\n" +
 	"createTask\x12f\n" +
@@ -4788,8 +4816,8 @@ const file_response_proto_rawDesc = "" +
 	" \x01(\v23.warp.multi_agent.v1.ClientAction.CommitTransactionH\x00R\x11commitTransaction\x12j\n" +
 	"\x14rollback_transaction\x18\v \x01(\v25.warp.multi_agent.v1.ClientAction.RollbackTransactionH\x00R\x13rollbackTransaction\x12n\n" +
 	"\x16start_new_conversation\x18\f \x01(\v26.warp.multi_agent.v1.ClientAction.StartNewConversationH\x00R\x14startNewConversation\x12o\n" +
-	"\x17update_task_server_data\x18\r \x01(\v26.warp.multi_agent.v1.ClientAction.UpdateTaskServerDataH\x00R\x14updateTaskServerData\x12r\n" +
-	"\x18replace_messages_in_task\x18\x0e \x01(\v27.warp.multi_agent.v1.ClientAction.ReplaceMessagesInTaskH\x00R\x15replaceMessagesInTask\x1a;\n" +
+	"\x17update_task_server_data\x18\r \x01(\v26.warp.multi_agent.v1.ClientAction.UpdateTaskServerDataH\x00R\x14updateTaskServerData\x12s\n" +
+	"\x19move_messages_to_new_task\x18\x0e \x01(\v27.warp.multi_agent.v1.ClientAction.MoveMessagesToNewTaskH\x00R\x15moveMessagesToNewTask\x1a;\n" +
 	"\n" +
 	"CreateTask\x12-\n" +
 	"\x04task\x18\x01 \x01(\v2\x19.warp.multi_agent.v1.TaskR\x04task\x1aP\n" +
@@ -4818,13 +4846,14 @@ const file_response_proto_rawDesc = "" +
 	"\x11CommitTransaction\x1a\x15\n" +
 	"\x13RollbackTransaction\x1aI\n" +
 	"\x14StartNewConversation\x121\n" +
-	"\x15start_from_message_id\x18\x01 \x01(\tR\x12startFromMessageId\x1a\x89\x02\n" +
-	"\x15ReplaceMessagesInTask\x12\x17\n" +
-	"\atask_id\x18\x01 \x01(\tR\x06taskId\x12(\n" +
-	"\x10first_message_id\x18\x02 \x01(\tR\x0efirstMessageId\x12&\n" +
-	"\x0flast_message_id\x18\x03 \x01(\tR\rlastMessageId\x124\n" +
-	"\x16expected_message_count\x18\x04 \x01(\rR\x14expectedMessageCount\x12O\n" +
-	"\x14replacement_messages\x18\x05 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\x13replacementMessagesB\b\n" +
+	"\x15start_from_message_id\x18\x01 \x01(\tR\x12startFromMessageId\x1a\xcc\x02\n" +
+	"\x15MoveMessagesToNewTask\x12$\n" +
+	"\x0esource_task_id\x18\x01 \x01(\tR\fsourceTaskId\x124\n" +
+	"\bnew_task\x18\x02 \x01(\v2\x19.warp.multi_agent.v1.TaskR\anewTask\x12(\n" +
+	"\x10first_message_id\x18\x03 \x01(\tR\x0efirstMessageId\x12&\n" +
+	"\x0flast_message_id\x18\x04 \x01(\tR\rlastMessageId\x124\n" +
+	"\x16expected_message_count\x18\x05 \x01(\rR\x14expectedMessageCount\x12O\n" +
+	"\x14replacement_messages\x18\x06 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\x13replacementMessagesB\b\n" +
 	"\x06actionJ\x04\b\x02\x10\x03R\x12update_task_status*\xc6\x01\n" +
 	"\vLLMProvider\x12\x18\n" +
 	"\x14LLM_PROVIDER_UNKNOWN\x10\x00\x12\x1a\n" +
@@ -4874,7 +4903,7 @@ var file_response_proto_goTypes = []any{
 	(*ClientAction_CommitTransaction)(nil),      // 33: warp.multi_agent.v1.ClientAction.CommitTransaction
 	(*ClientAction_RollbackTransaction)(nil),    // 34: warp.multi_agent.v1.ClientAction.RollbackTransaction
 	(*ClientAction_StartNewConversation)(nil),   // 35: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*ClientAction_ReplaceMessagesInTask)(nil),  // 36: warp.multi_agent.v1.ClientAction.ReplaceMessagesInTask
+	(*ClientAction_MoveMessagesToNewTask)(nil),  // 36: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
 	(*Suggestions)(nil),                         // 37: warp.multi_agent.v1.Suggestions
 	(*Task)(nil),                                // 38: warp.multi_agent.v1.Task
 	(*Message)(nil),                             // 39: warp.multi_agent.v1.Message
@@ -4896,7 +4925,7 @@ var file_response_proto_depIdxs = []int32{
 	34, // 12: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
 	35, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
 	26, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	36, // 15: warp.multi_agent.v1.ClientAction.replace_messages_in_task:type_name -> warp.multi_agent.v1.ClientAction.ReplaceMessagesInTask
+	36, // 15: warp.multi_agent.v1.ClientAction.move_messages_to_new_task:type_name -> warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
 	2,  // 16: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
 	14, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
 	15, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
@@ -4935,12 +4964,13 @@ var file_response_proto_depIdxs = []int32{
 	40, // 51: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
 	39, // 52: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
 	40, // 53: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	39, // 54: warp.multi_agent.v1.ClientAction.ReplaceMessagesInTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
-	55, // [55:55] is the sub-list for method output_type
-	55, // [55:55] is the sub-list for method input_type
-	55, // [55:55] is the sub-list for extension type_name
-	55, // [55:55] is the sub-list for extension extendee
-	0,  // [0:55] is the sub-list for field type_name
+	38, // 54: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
+	39, // 55: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
+	56, // [56:56] is the sub-list for method output_type
+	56, // [56:56] is the sub-list for method input_type
+	56, // [56:56] is the sub-list for extension type_name
+	56, // [56:56] is the sub-list for extension extendee
+	0,  // [0:56] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -4969,7 +4999,7 @@ func file_response_proto_init() {
 		(*clientAction_RollbackTransaction_)(nil),
 		(*clientAction_StartNewConversation_)(nil),
 		(*clientAction_UpdateTaskServerData_)(nil),
-		(*clientAction_ReplaceMessagesInTask_)(nil),
+		(*clientAction_MoveMessagesToNewTask_)(nil),
 	}
 	file_response_proto_msgTypes[4].OneofWrappers = []any{
 		(*responseEvent_StreamFinished_Other_)(nil),
