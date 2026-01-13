@@ -135,6 +135,7 @@ message Message {
     UpdateReviewComments update_review_comments = 18;
     WebSearch web_search = 19;
     WebFetch web_fetch = 20;
+    DebugOutput debug_output = 21;
   }
 
   // User query message type
@@ -808,6 +809,13 @@ message Message {
         }
       }
     }
+  }
+
+  // Debug output message type for staging/local development only.
+  // These messages are emitted by the server for debugging purposes
+  // and should only be displayed on WarpDev client builds.
+  message DebugOutput {
+    string text = 1;
   }
 }
 
