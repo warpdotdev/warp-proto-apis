@@ -589,8 +589,6 @@ message Message {
     message ReadSkill {
       // The path to the SKILL.md to be read.
       string skill_path = 1;
-      // The name of the Skill defined in SKILL.md.
-      string skill_name = 2;
     }
 
     message UseComputer {
