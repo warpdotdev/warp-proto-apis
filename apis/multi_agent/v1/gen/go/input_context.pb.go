@@ -32,6 +32,7 @@ type InputContext struct {
 	xxx_hidden_Codebases             *[]*InputContext_Codebase     `protobuf:"bytes,8,rep,name=codebases"`
 	xxx_hidden_ProjectRules          *[]*InputContext_ProjectRules `protobuf:"bytes,10,rep,name=project_rules,json=projectRules"`
 	xxx_hidden_Git                   *InputContext_Git             `protobuf:"bytes,11,opt,name=git"`
+	xxx_hidden_UpdatedSkillsContext  *InputContext_SkillsContext   `protobuf:"bytes,12,opt,name=updated_skills_context,json=updatedSkillsContext"`
 	xxx_hidden_ExecutedShellCommands *[]*ExecutedShellCommand      `protobuf:"bytes,5,rep,name=executed_shell_commands,json=executedShellCommands"`
 	xxx_hidden_SelectedText          *[]*InputContext_SelectedText `protobuf:"bytes,6,rep,name=selected_text,json=selectedText"`
 	xxx_hidden_Images                *[]*InputContext_Image        `protobuf:"bytes,7,rep,name=images"`
@@ -118,6 +119,13 @@ func (x *InputContext) GetGit() *InputContext_Git {
 	return nil
 }
 
+func (x *InputContext) GetUpdatedSkillsContext() *InputContext_SkillsContext {
+	if x != nil {
+		return x.xxx_hidden_UpdatedSkillsContext
+	}
+	return nil
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) GetExecutedShellCommands() []*ExecutedShellCommand {
 	if x != nil {
@@ -183,6 +191,10 @@ func (x *InputContext) SetGit(v *InputContext_Git) {
 	x.xxx_hidden_Git = v
 }
 
+func (x *InputContext) SetUpdatedSkillsContext(v *InputContext_SkillsContext) {
+	x.xxx_hidden_UpdatedSkillsContext = v
+}
+
 // Deprecated: Marked as deprecated in input_context.proto.
 func (x *InputContext) SetExecutedShellCommands(v []*ExecutedShellCommand) {
 	x.xxx_hidden_ExecutedShellCommands = &v
@@ -235,6 +247,13 @@ func (x *InputContext) HasGit() bool {
 	return x.xxx_hidden_Git != nil
 }
 
+func (x *InputContext) HasUpdatedSkillsContext() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_UpdatedSkillsContext != nil
+}
+
 func (x *InputContext) ClearDirectory() {
 	x.xxx_hidden_Directory = nil
 }
@@ -255,6 +274,10 @@ func (x *InputContext) ClearGit() {
 	x.xxx_hidden_Git = nil
 }
 
+func (x *InputContext) ClearUpdatedSkillsContext() {
+	x.xxx_hidden_UpdatedSkillsContext = nil
+}
+
 type InputContext_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -265,6 +288,8 @@ type InputContext_builder struct {
 	Codebases       []*InputContext_Codebase
 	ProjectRules    []*InputContext_ProjectRules
 	Git             *InputContext_Git
+	// Sent on each request when scoped skills change
+	UpdatedSkillsContext *InputContext_SkillsContext
 	// TODO: these fields should be _attachments_, not part of the input context.
 	//
 	// Deprecated: Marked as deprecated in input_context.proto.
@@ -285,6 +310,7 @@ func (b0 InputContext_builder) Build() *InputContext {
 	x.xxx_hidden_Codebases = &b.Codebases
 	x.xxx_hidden_ProjectRules = &b.ProjectRules
 	x.xxx_hidden_Git = b.Git
+	x.xxx_hidden_UpdatedSkillsContext = b.UpdatedSkillsContext
 	x.xxx_hidden_ExecutedShellCommands = &b.ExecutedShellCommands
 	x.xxx_hidden_SelectedText = &b.SelectedText
 	x.xxx_hidden_Images = &b.Images
@@ -1229,11 +1255,214 @@ func (b0 InputContext_Git_builder) Build() *InputContext_Git {
 	return m0
 }
 
+type InputContext_SkillsContext struct {
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_AvailableSkills *[]*InputContext_Skill `protobuf:"bytes,1,rep,name=available_skills,json=availableSkills"`
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
+}
+
+func (x *InputContext_SkillsContext) Reset() {
+	*x = InputContext_SkillsContext{}
+	mi := &file_input_context_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InputContext_SkillsContext) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InputContext_SkillsContext) ProtoMessage() {}
+
+func (x *InputContext_SkillsContext) ProtoReflect() protoreflect.Message {
+	mi := &file_input_context_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *InputContext_SkillsContext) GetAvailableSkills() []*InputContext_Skill {
+	if x != nil {
+		if x.xxx_hidden_AvailableSkills != nil {
+			return *x.xxx_hidden_AvailableSkills
+		}
+	}
+	return nil
+}
+
+func (x *InputContext_SkillsContext) SetAvailableSkills(v []*InputContext_Skill) {
+	x.xxx_hidden_AvailableSkills = &v
+}
+
+type InputContext_SkillsContext_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	AvailableSkills []*InputContext_Skill
+}
+
+func (b0 InputContext_SkillsContext_builder) Build() *InputContext_SkillsContext {
+	m0 := &InputContext_SkillsContext{}
+	b, x := &b0, m0
+	_, _ = b, x
+	x.xxx_hidden_AvailableSkills = &b.AvailableSkills
+	return m0
+}
+
+type InputContext_Skill struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path        *string                `protobuf:"bytes,1,opt,name=path"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,2,opt,name=name"`
+	xxx_hidden_Description *string                `protobuf:"bytes,3,opt,name=description"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *InputContext_Skill) Reset() {
+	*x = InputContext_Skill{}
+	mi := &file_input_context_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InputContext_Skill) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InputContext_Skill) ProtoMessage() {}
+
+func (x *InputContext_Skill) ProtoReflect() protoreflect.Message {
+	mi := &file_input_context_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *InputContext_Skill) GetPath() string {
+	if x != nil {
+		if x.xxx_hidden_Path != nil {
+			return *x.xxx_hidden_Path
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Skill) GetName() string {
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Skill) GetDescription() string {
+	if x != nil {
+		if x.xxx_hidden_Description != nil {
+			return *x.xxx_hidden_Description
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Skill) SetPath(v string) {
+	x.xxx_hidden_Path = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *InputContext_Skill) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *InputContext_Skill) SetDescription(v string) {
+	x.xxx_hidden_Description = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *InputContext_Skill) HasPath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *InputContext_Skill) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *InputContext_Skill) HasDescription() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *InputContext_Skill) ClearPath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Path = nil
+}
+
+func (x *InputContext_Skill) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *InputContext_Skill) ClearDescription() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Description = nil
+}
+
+type InputContext_Skill_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Path        *string
+	Name        *string
+	Description *string
+}
+
+func (b0 InputContext_Skill_builder) Build() *InputContext_Skill {
+	m0 := &InputContext_Skill{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Path != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Path = b.Path
+	}
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Description != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Description = b.Description
+	}
+	return m0
+}
+
 var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\x92\f\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xb1\x0e\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1243,6 +1472,7 @@ const file_input_context_proto_rawDesc = "" +
 	"\rproject_rules\x18\n" +
 	" \x03(\v2..warp.multi_agent.v1.InputContext.ProjectRulesR\fprojectRules\x127\n" +
 	"\x03git\x18\v \x01(\v2%.warp.multi_agent.v1.InputContext.GitR\x03git\x12e\n" +
+	"\x16updated_skills_context\x18\f \x01(\v2/.warp.multi_agent.v1.InputContext.SkillsContextR\x14updatedSkillsContext\x12e\n" +
 	"\x17executed_shell_commands\x18\x05 \x03(\v2).warp.multi_agent.v1.ExecutedShellCommandB\x02\x18\x01R\x15executedShellCommands\x12S\n" +
 	"\rselected_text\x18\x06 \x03(\v2..warp.multi_agent.v1.InputContext.SelectedTextR\fselectedText\x12?\n" +
 	"\x06images\x18\a \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06images\x12<\n" +
@@ -1272,9 +1502,15 @@ const file_input_context_proto_rawDesc = "" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
 	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\x1f\n" +
 	"\x03Git\x12\x18\n" +
-	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04headB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x1ac\n" +
+	"\rSkillsContext\x12R\n" +
+	"\x10available_skills\x18\x01 \x03(\v2'.warp.multi_agent.v1.InputContext.SkillR\x0favailableSkills\x1aQ\n" +
+	"\x05Skill\x12\x12\n" +
+	"\x04path\x18\x01 \x01(\tR\x04path\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescriptionB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_input_context_proto_goTypes = []any{
 	(*InputContext)(nil),                 // 0: warp.multi_agent.v1.InputContext
 	(*InputContext_SelectedText)(nil),    // 1: warp.multi_agent.v1.InputContext.SelectedText
@@ -1286,29 +1522,33 @@ var file_input_context_proto_goTypes = []any{
 	(*InputContext_File)(nil),            // 7: warp.multi_agent.v1.InputContext.File
 	(*InputContext_ProjectRules)(nil),    // 8: warp.multi_agent.v1.InputContext.ProjectRules
 	(*InputContext_Git)(nil),             // 9: warp.multi_agent.v1.InputContext.Git
-	(*timestamppb.Timestamp)(nil),        // 10: google.protobuf.Timestamp
-	(*ExecutedShellCommand)(nil),         // 11: warp.multi_agent.v1.ExecutedShellCommand
-	(*FileContent)(nil),                  // 12: warp.multi_agent.v1.FileContent
+	(*InputContext_SkillsContext)(nil),   // 10: warp.multi_agent.v1.InputContext.SkillsContext
+	(*InputContext_Skill)(nil),           // 11: warp.multi_agent.v1.InputContext.Skill
+	(*timestamppb.Timestamp)(nil),        // 12: google.protobuf.Timestamp
+	(*ExecutedShellCommand)(nil),         // 13: warp.multi_agent.v1.ExecutedShellCommand
+	(*FileContent)(nil),                  // 14: warp.multi_agent.v1.FileContent
 }
 var file_input_context_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
 	4,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
 	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	10, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	12, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
 	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
 	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
 	9,  // 6: warp.multi_agent.v1.InputContext.git:type_name -> warp.multi_agent.v1.InputContext.Git
-	11, // 7: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	1,  // 8: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	5,  // 9: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	7,  // 10: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	12, // 11: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	12, // 12: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
-	13, // [13:13] is the sub-list for method output_type
-	13, // [13:13] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	10, // 7: warp.multi_agent.v1.InputContext.updated_skills_context:type_name -> warp.multi_agent.v1.InputContext.SkillsContext
+	13, // 8: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	1,  // 9: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	5,  // 10: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	7,  // 11: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	14, // 12: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	14, // 13: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
+	11, // 14: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.InputContext.Skill
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_input_context_proto_init() }
@@ -1325,7 +1565,7 @@ func file_input_context_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_input_context_proto_rawDesc), len(file_input_context_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

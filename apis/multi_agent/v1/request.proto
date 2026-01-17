@@ -36,9 +36,6 @@ message Request {
   // Information about the client's MCP capabilities.
   MCPContext mcp_context = 6;
 
-  // Information about the client's available skills.
-  SkillsContext skills_context = 7;
-
   message TaskContext {
     reserved active_task_id;
     reserved 2;
@@ -417,15 +414,6 @@ message Request {
   }
 }
 
-message SkillsContext {
-  repeated Skill available_skills = 1;
-}
-
-message Skill {
-  string path = 1;
-  string name = 2;
-  string description = 3;
-}
 
 enum AutonomyLevel {
   // This is the default and lowest level of autonomy. This assumes a user is
