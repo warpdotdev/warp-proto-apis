@@ -580,9 +580,17 @@ message Message {
         CommentLineRange line = 2;
       }
 
+      // The side of the diff the comment is attached to.
+      enum CommentSide {
+        COMMENT_SIDE_UNSPECIFIED = 0;
+        COMMENT_SIDE_RIGHT = 1;  // New file (additions)
+        COMMENT_SIDE_LEFT = 2;   // Old file (deletions)
+      }
+
       message CommentLineRange {
         string diff_hunk = 1 [ (sensitive) = true ];
         FileContentLineRange range = 2;
+        CommentSide side = 3;
       }
     }
     
