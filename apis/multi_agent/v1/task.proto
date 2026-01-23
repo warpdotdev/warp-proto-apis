@@ -2,23 +2,22 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "attachment.proto";
+import "citations.proto";
+import "document_content.proto";
+import "file_content.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/go_features.proto";
-import "google/protobuf/descriptor.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/duration.proto";
-
-import "citations.proto";
 import "input_context.proto";
-import "attachment.proto";
-import "file_content.proto";
-import "document_content.proto";
 import "options.proto";
 import "todo.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
+option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 
 // A task represents a unit of work with messages
 message Task {
@@ -65,7 +64,7 @@ message ReviewComment {
   // Unique identifier for the review comment.
   string id = 1;
 
-  string comment = 2 [ (sensitive) = true ];
+  string comment = 2 [(sensitive) = true];
 
   // The context this comment is associated with. At least one of these must be provided.
   oneof comment_target {
@@ -83,7 +82,7 @@ message ReviewComment {
 
   // File-level comment with current and base reference information.
   message CommentedFile {
-    string file_path = 1 [ (sensitive) = true ];
+    string file_path = 1 [(sensitive) = true];
     CurrentRef current = 2;
     BaseRef base = 3;
   }
@@ -141,7 +140,7 @@ message Message {
 
   // User query message type
   message UserQuery {
-    string query = 1 [ (sensitive) = true ];
+    string query = 1 [(sensitive) = true];
 
     // Context that the client supplied as part of the user query input.
     InputContext context = 2;
@@ -171,7 +170,7 @@ message Message {
   }
 
   message AutoCodeDiff {
-    string query = 1 [ (sensitive) = true ];
+    string query = 1 [(sensitive) = true];
   }
 
   message ResumeConversation {}
@@ -186,17 +185,17 @@ message Message {
   }
 
   message CreateNewProject {
-    string query = 1 [ (sensitive) = true ];
+    string query = 1 [(sensitive) = true];
   }
 
   message CloneRepository {
-    string url = 1 [ (sensitive) = true ];
+    string url = 1 [(sensitive) = true];
   }
 
   // A user-requested summarization.
   message SummarizeConversation {
     // Optional user-specified instructions to focus or augment the summary.
-    string prompt = 1 [ (sensitive) = true ];
+    string prompt = 1 [(sensitive) = true];
   }
 
   // Agent output message type
@@ -240,10 +239,12 @@ message Message {
     message ToolCallResultSummary {}
   }
 
-  message CodeReview { ReviewComments comments = 1; }
+  message CodeReview {
+    ReviewComments comments = 1;
+  }
 
   message FetchReviewComments {
-    string repo_path = 1 [ (sensitive) = true ];
+    string repo_path = 1 [(sensitive) = true];
   }
 
   // Tool call message type
@@ -261,7 +262,7 @@ message Message {
       SuggestCreatePlan suggest_create_plan = 8;
       Grep grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2.
-      FileGlob file_glob = 10 [deprecated=true];
+      FileGlob file_glob = 10 [deprecated = true];
       ReadMCPResource read_mcp_resource = 11;
       CallMCPTool call_mcp_tool = 12;
       WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
@@ -283,7 +284,9 @@ message Message {
 
     // A tool call that is totally resolved server-side and hence opaque to
     // clients. It's included in the message history for bookkeeping purposes.
-    message Server { string payload = 1; }
+    message Server {
+      string payload = 1;
+    }
 
     // A tool call to run a shell command.
     message RunShellCommand {
@@ -318,19 +321,19 @@ message Message {
 
       message Mode {
         oneof mode {
-            // Write raw bytes directly.
-            google.protobuf.Empty raw = 1;
+          // Write raw bytes directly.
+          google.protobuf.Empty raw = 1;
 
-            // Write a line of text input.
-            //
-            // This write mode is designed to be used with REPLs/shell-like TUIs. Ensures the cursor is at the
-            // beginnning of the input buffer and sends an enter keystroke after `line`.
-            google.protobuf.Empty line = 2;
+          // Write a line of text input.
+          //
+          // This write mode is designed to be used with REPLs/shell-like TUIs. Ensures the cursor is at the
+          // beginnning of the input buffer and sends an enter keystroke after `line`.
+          google.protobuf.Empty line = 2;
 
-            // Writes a block of multi-line text input.
-            //
-            // Under the hood, this uses bracketed paste to insert the text as-is.
-            google.protobuf.Empty block = 3;
+          // Writes a block of multi-line text input.
+          //
+          // Under the hood, this uses bracketed paste to insert the text as-is.
+          google.protobuf.Empty block = 3;
         }
       }
     }
@@ -563,37 +566,36 @@ message Message {
     }
 
     message InsertReviewComments {
-      string repo_path = 1 [ (sensitive) = true];
+      string repo_path = 1 [(sensitive) = true];
       repeated Comment comments = 2;
 
       message Comment {
         string comment_id = 1;
-        string author = 2 [ (sensitive) = true ];
+        string author = 2 [(sensitive) = true];
         string last_modified_timestamp = 3;
-        string comment_body = 4 [ (sensitive) = true ];
+        string comment_body = 4 [(sensitive) = true];
         string parent_comment_id = 5;
         CommentLocation location = 6;
       }
 
       message CommentLocation {
-        string file_path = 1 [ (sensitive) = true ];
+        string file_path = 1 [(sensitive) = true];
         CommentLineRange line = 2;
       }
 
       // The side of the diff the comment is attached to.
       enum CommentSide {
-        COMMENT_SIDE_UNSPECIFIED = 0;
-        COMMENT_SIDE_RIGHT = 1;  // New file (additions)
-        COMMENT_SIDE_LEFT = 2;   // Old file (deletions)
+        RIGHT = 0; // New file (additions)
+        LEFT = 1; // Old file (deletions)
       }
 
       message CommentLineRange {
-        string diff_hunk = 1 [ (sensitive) = true ];
+        string diff_hunk = 1 [(sensitive) = true];
         FileContentLineRange range = 2;
         CommentSide side = 3;
       }
     }
-    
+
     // A tool call to run a Skill.
     message ReadSkill {
       oneof skill_reference {
@@ -616,7 +618,7 @@ message Message {
       // to the screenshot.
       ScreenshotParams post_actions_screenshot_params = 2;
       // User-facing message of what the actions are doing.
-      string action_summary = 3 [ (sensitive) = true ];
+      string action_summary = 3 [(sensitive) = true];
 
       message Action {
         oneof type {
@@ -676,7 +678,7 @@ message Message {
         }
 
         message TypeText {
-          string text = 1 [ (sensitive) = true ];
+          string text = 1 [(sensitive) = true];
         }
 
         // Representation of a single key on the keyboard.
@@ -705,7 +707,7 @@ message Message {
     // computer use.
     message RequestComputerUse {
       // A brief description of what the agent wants to do with computer use.
-      string task_summary = 1 [ (sensitive) = true ];
+      string task_summary = 1 [(sensitive) = true];
       // The parameters that specify the constrains the client must apply to the
       // screenshot.
       ScreenshotParams screenshot_params = 2;
@@ -731,9 +733,9 @@ message Message {
 
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
-    reserved 13;  // Removed: RefineResult - no longer used by client
-    reserved refine;  // Field name also reserved for field masks
-    
+    reserved 13; // Removed: RefineResult - no longer used by client
+    reserved refine; // Field name also reserved for field masks
+
     string tool_call_id = 1;
 
     // Context that the client supplied as part of the tool call result input.
@@ -751,7 +753,7 @@ message Message {
       SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2Result.
-      FileGlobResult file_glob = 10 [deprecated=true];
+      FileGlobResult file_glob = 10 [deprecated = true];
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
@@ -774,10 +776,12 @@ message Message {
 
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
-    message ServerResult { string serialized_result = 1; }
+    message ServerResult {
+      string serialized_result = 1;
+    }
 
     message SubagentResult {
-        string payload = 1;
+      string payload = 1;
     }
   }
 
@@ -785,7 +789,9 @@ message Message {
   // for server-side processing.
   //
   // The client should treat the `payload` as an opaque blob.
-  message ServerEvent { string payload = 1; }
+  message ServerEvent {
+    string payload = 1;
+  }
 
   // Message for TODO list operations.
   message UpdateTodos {
@@ -802,7 +808,9 @@ message Message {
       AddressReviewComments address_review_comments = 1;
     }
 
-    message AddressReviewComments { repeated string comment_ids = 1; }
+    message AddressReviewComments {
+      repeated string comment_ids = 1;
+    }
   }
 
   message WebSearch {
@@ -816,16 +824,16 @@ message Message {
       }
 
       message Searching {
-        string query = 1 [ (sensitive) = true ];
+        string query = 1 [(sensitive) = true];
       }
 
       message Success {
-        string query = 1 [ (sensitive) = true ];
+        string query = 1 [(sensitive) = true];
         repeated SearchedPage pages = 2;
 
         message SearchedPage {
-          string url = 1 [ (sensitive) = true ];
-          string title = 2 [ (sensitive) = true ];
+          string url = 1 [(sensitive) = true];
+          string title = 2 [(sensitive) = true];
         }
       }
     }
@@ -842,15 +850,15 @@ message Message {
       }
 
       message Fetching {
-        repeated string urls = 1 [ (sensitive) = true ];
+        repeated string urls = 1 [(sensitive) = true];
       }
 
       message Success {
         repeated FetchedPage pages = 1;
 
         message FetchedPage {
-          string url = 1 [ (sensitive) = true ];
-          string title = 2 [ (sensitive) = true ];
+          string url = 1 [(sensitive) = true];
+          string title = 2 [(sensitive) = true];
           bool success = 3;
         }
       }
@@ -889,7 +897,7 @@ message RunShellCommandResult {
   // The command that was actually run. This might be different
   // from the command in the corresponding tool-call payload if the user
   // edited it before running.
-  string command = 3 [ (sensitive) = true ];
+  string command = 3 [(sensitive) = true];
 
   oneof result {
     // The command is now considered long-running and this is it's latest snapshot.
@@ -903,10 +911,13 @@ message RunShellCommandResult {
   }
 
   // Deprecated; use [ShellCommandFinished::output] instead;
-  string output = 1 [ deprecated = true, (sensitive) = true ];
+  string output = 1 [
+    deprecated = true,
+    (sensitive) = true
+  ];
 
   // Deprecated; use [ShellCommandFinished::exit_code] instead;
-  int32 exit_code = 2 [ deprecated = true ];
+  int32 exit_code = 2 [deprecated = true];
 }
 
 // Result of a `ReadFiles` tool call.
@@ -925,7 +936,9 @@ message ReadFilesResult {
     repeated AnyFileContent files = 1;
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of a `SearchCodebase` tool call.
@@ -935,9 +948,13 @@ message SearchCodebaseResult {
     Error error = 2;
   }
 
-  message Success { repeated FileContent files = 1; }
+  message Success {
+    repeated FileContent files = 1;
+  }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of a `ApplyFileDiffs` tool call.
@@ -963,15 +980,19 @@ message ApplyFileDiffsResult {
     }
 
     message DeletedFile {
-      string file_path = 1 [ (sensitive) = true ];
+      string file_path = 1 [(sensitive) = true];
     }
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of a `SuggestCreatePlan` tool call.
-message SuggestCreatePlanResult { bool accepted = 1; }
+message SuggestCreatePlanResult {
+  bool accepted = 1;
+}
 
 // Result of a `SuggestPlan` tool call.
 message SuggestPlanResult {
@@ -985,7 +1006,7 @@ message SuggestPlanResult {
   // A plan that was provided by the user.
   message UserEditedPlan {
     // The plan text provided by the user.
-    string plan_text = 1 [ (sensitive) = true ];
+    string plan_text = 1 [(sensitive) = true];
   }
 }
 
@@ -1002,7 +1023,7 @@ message GrepResult {
 
     message GrepFileMatch {
       // The path to the file that matched the grep query.
-      string file_path = 1 [ (sensitive) = true ];
+      string file_path = 1 [(sensitive) = true];
       // List of line matches within this file.
       repeated GrepLineMatch matched_lines = 2;
 
@@ -1015,7 +1036,9 @@ message GrepResult {
     }
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of a `FileGlob` tool call.
@@ -1027,10 +1050,12 @@ message FileGlobResult {
 
   message Success {
     // String containing list of file paths matching the glob patterns.
-    string matched_files = 1 [ (sensitive) = true ];
+    string matched_files = 1 [(sensitive) = true];
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of a `FileGlobV2` tool call.
@@ -1045,20 +1070,22 @@ message FileGlobV2Result {
     repeated FileGlobMatch matched_files = 1;
     message FileGlobMatch {
       // The path to the file that matched a file name pattern.
-      string file_path = 1 [ (sensitive) = true ];
+      string file_path = 1 [(sensitive) = true];
     }
     // Optional warnings from the file glob operation (e.g. permission errors).
     // These warnings are typically from stderr when the find succeeded but
     // encountered non-fatal issues.
-    string warnings = 2 [ (sensitive) = true ];
+    string warnings = 2 [(sensitive) = true];
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 message MCPResourceContent {
   // Every MCP resource is uniquely identified by a URI.
-  string uri = 1 [ (sensitive) = true ];
+  string uri = 1 [(sensitive) = true];
 
   // The type of content that this MCP resource contains.
   oneof content_type {
@@ -1067,7 +1094,7 @@ message MCPResourceContent {
   }
 
   message Text {
-    string content = 1 [ (sensitive) = true ];
+    string content = 1 [(sensitive) = true];
     string mime_type = 2;
   }
 
@@ -1076,7 +1103,7 @@ message MCPResourceContent {
     //
     // This should be b64-encoded already because of the MCP contract:
     // https://github.com/modelcontextprotocol/modelcontextprotocol/blob/4161f02acc841010004b7357b7907e6a270ad093/schema/2025-03-26/schema.json#L54
-    bytes data = 1 [ (sensitive) = true ];
+    bytes data = 1 [(sensitive) = true];
     string mime_type = 2;
   }
 }
@@ -1093,7 +1120,9 @@ message ReadMCPResourceResult {
     repeated MCPResourceContent contents = 1;
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 message WriteToLongRunningShellCommandResult {
@@ -1119,7 +1148,7 @@ message SuggestNewConversationResult {
 
 // The output when a shell command is finished.
 message ShellCommandFinished {
-  string output = 1 [ (sensitive) = true ];
+  string output = 1 [(sensitive) = true];
   int32 exit_code = 2;
   string command_id = 3;
 }
@@ -1148,19 +1177,23 @@ message CallMCPToolResult {
         MCPResourceContent resource = 3;
       }
 
-      message Text { string text = 1 [ (sensitive) = true ]; }
+      message Text {
+        string text = 1 [(sensitive) = true];
+      }
       message Image {
         // The image payload.
         //
         // This should be b64-encoded already because of the MCP contract:
         // https://github.com/modelcontextprotocol/modelcontextprotocol/blob/42273f11b9b3d5d5a93d3af8fd9a942b220adc01/schema/2025-03-26/schema.json#L566
-        bytes data = 1 [ (sensitive) = true ];
+        bytes data = 1 [(sensitive) = true];
         string mime_type = 2;
       }
     }
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 message SuggestPromptResult {
@@ -1187,7 +1220,9 @@ message ReadDocumentsResult {
     repeated DocumentContent documents = 1;
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of an `EditDocuments` tool call.
@@ -1201,7 +1236,9 @@ message EditDocumentsResult {
     repeated DocumentContent updated_documents = 1;
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // Result of a `CreateDocuments` tool call.
@@ -1215,11 +1252,13 @@ message CreateDocumentsResult {
     repeated DocumentContent created_documents = 1;
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 message ReadShellCommandOutputResult {
-  string command = 1 [ (sensitive) = true ];
+  string command = 1 [(sensitive) = true];
   oneof result {
     LongRunningShellCommandSnapshot long_running_command_snapshot = 2;
     ShellCommandFinished command_finished = 3;
@@ -1228,7 +1267,7 @@ message ReadShellCommandOutputResult {
 }
 
 message InsertReviewCommentsResult {
-  string repo_path = 1 [ (sensitive) = true ];
+  string repo_path = 1 [(sensitive) = true];
   oneof result {
     Success success = 2;
     Error error = 3;
@@ -1237,7 +1276,7 @@ message InsertReviewCommentsResult {
   message Success {}
 
   message Error {
-    string message = 1 [ (sensitive) = true ];
+    string message = 1 [(sensitive) = true];
   }
 }
 
@@ -1259,7 +1298,7 @@ message UseComputerResult {
   }
 
   message Error {
-    string message = 1 [ (sensitive) = true ];
+    string message = 1 [(sensitive) = true];
   }
 }
 
@@ -1274,7 +1313,9 @@ message ReadSkillResult {
     FileContent content = 1;
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    string message = 1 [(sensitive) = true];
+  }
 }
 
 // The dimensions of a user's screen, used for computer use.
@@ -1315,7 +1356,7 @@ message RequestComputerUseResult {
   message Rejected {}
 
   message Error {
-    string message = 1 [ (sensitive) = true ];
+    string message = 1 [(sensitive) = true];
   }
 }
 
@@ -1374,7 +1415,7 @@ enum AgentType {
 
 message RawImage {
   // Raw image bytes.
-  bytes data = 1 [ (sensitive) = true ];
+  bytes data = 1 [(sensitive) = true];
   // MIME type of the image content (e.g., "image/png").
   string mime_type = 2;
   // The width of the image, in pixels.
