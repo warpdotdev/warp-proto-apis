@@ -1263,6 +1263,7 @@ message RequestComputerUseResult {
       MACOS = 0;
       WINDOWS = 1;
       LINUX_X11 = 2;
+      LINUX_WAYLAND = 3;
     }
   }
 
