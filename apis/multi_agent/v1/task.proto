@@ -1332,4 +1332,8 @@ message RawImage {
   bytes data = 1 [ (sensitive) = true ];
   // MIME type of the image content (e.g., "image/png").
   string mime_type = 2;
+  // The width of the image, in pixels.
+  int32 width = 3;
+  // The height of the image, in pixels.
+  int32 height = 4;
 }

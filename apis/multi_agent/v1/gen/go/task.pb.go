@@ -6980,6 +6980,8 @@ type RawImage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Data        []byte                 `protobuf:"bytes,1,opt,name=data"`
 	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
+	xxx_hidden_Width       int32                  `protobuf:"varint,3,opt,name=width"`
+	xxx_hidden_Height      int32                  `protobuf:"varint,4,opt,name=height"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -7028,17 +7030,41 @@ func (x *RawImage) GetMimeType() string {
 	return ""
 }
 
+func (x *RawImage) GetWidth() int32 {
+	if x != nil {
+		return x.xxx_hidden_Width
+	}
+	return 0
+}
+
+func (x *RawImage) GetHeight() int32 {
+	if x != nil {
+		return x.xxx_hidden_Height
+	}
+	return 0
+}
+
 func (x *RawImage) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
 	x.xxx_hidden_Data = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *RawImage) SetMimeType(v string) {
 	x.xxx_hidden_MimeType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *RawImage) SetWidth(v int32) {
+	x.xxx_hidden_Width = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *RawImage) SetHeight(v int32) {
+	x.xxx_hidden_Height = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *RawImage) HasData() bool {
@@ -7055,6 +7081,20 @@ func (x *RawImage) HasMimeType() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *RawImage) HasWidth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *RawImage) HasHeight() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *RawImage) ClearData() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Data = nil
@@ -7065,6 +7105,16 @@ func (x *RawImage) ClearMimeType() {
 	x.xxx_hidden_MimeType = nil
 }
 
+func (x *RawImage) ClearWidth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Width = 0
+}
+
+func (x *RawImage) ClearHeight() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Height = 0
+}
+
 type RawImage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -7072,6 +7122,10 @@ type RawImage_builder struct {
 	Data []byte
 	// MIME type of the image content (e.g., "image/png").
 	MimeType *string
+	// The width of the image, in pixels.
+	Width *int32
+	// The height of the image, in pixels.
+	Height *int32
 }
 
 func (b0 RawImage_builder) Build() *RawImage {
@@ -7079,12 +7133,20 @@ func (b0 RawImage_builder) Build() *RawImage {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Data != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Data = b.Data
 	}
 	if b.MimeType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_MimeType = b.MimeType
+	}
+	if b.Width != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Width = *b.Width
+	}
+	if b.Height != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Height = *b.Height
 	}
 	return m0
 }
@@ -24539,10 +24601,12 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\"E\n" +
 	"\rUserQueryMode\x12,\n" +
 	"\x04plan\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04planB\x06\n" +
-	"\x04type\"A\n" +
+	"\x04type\"o\n" +
 	"\bRawImage\x12\x18\n" +
 	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType*\xa2\x04\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x14\n" +
+	"\x05width\x18\x03 \x01(\x05R\x05width\x12\x16\n" +
+	"\x06height\x18\x04 \x01(\x05R\x06height*\xa2\x04\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
