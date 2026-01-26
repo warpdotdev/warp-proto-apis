@@ -587,8 +587,15 @@ message Message {
     
     // A tool call to run a Skill.
     message ReadSkill {
-      // The path to the SKILL.md to be read.
-      string skill_path = 1;
+      oneof skill_reference {
+        // The path to the SKILL.md to be read.
+        string skill_path = 1;
+        // The unique identifier for a skill bundled with the client.
+        string bundled_skill_id = 2;
+      }
+
+      // The name of the skill.
+      string name = 3;
     }
 
     message UseComputer {
