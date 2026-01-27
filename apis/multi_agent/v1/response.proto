@@ -129,6 +129,7 @@ message ResponseEvent {
       ToolCallStats       suggest_plan_stats = 10;
       ToolCallStats       suggest_create_plan_stats = 11;
       ToolCallStats       read_shell_command_output_stats = 12;
+      ToolCallStats       use_computer_stats = 13;
     }
 
     message ToolCallStats {
