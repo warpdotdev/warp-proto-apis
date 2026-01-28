@@ -354,6 +354,9 @@ message Request {
 
       // The LLM of preference for CLI agent.
       string cli_agent = 4;
+
+      // The LLM of preference for the Computer Use agent.
+      string computer_use_agent = 5;
     }
 
     message ApiKeys {
