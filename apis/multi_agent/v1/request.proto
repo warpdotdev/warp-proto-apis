@@ -36,9 +36,6 @@ message Request {
   // Information about the client's MCP capabilities.
   MCPContext mcp_context = 6;
 
-  // Information about the client's available skills.
-  SkillsContext skills_context = 7;
-
   message TaskContext {
     reserved active_task_id;
     reserved 2;
@@ -64,7 +61,8 @@ message Request {
       SummarizeConversation summarize_conversation = 13;
       CreateEnvironment create_environment = 14;
       FetchReviewComments fetch_review_comments = 15;
-      InvokeSkill invoke_skill = 16;
+      StartFromAmbientRunPrompt start_from_ambient_run_prompt = 16;
+      InvokeSkill invoke_skill = 17;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -235,6 +233,14 @@ message Request {
       string path = 1;     // Path to skill file
       string name = 2;     // Display name (e.g., "my-skill")
       string content = 3;  // Full SKILL.md content
+    }
+    
+    // A special input type used to start an ambient agent run where the initial prompt
+    // is retrieved at runtime as the latest prompt known for the run.
+    // This is only valid when supplied at the start of a conversation.
+    message StartFromAmbientRunPrompt {
+      // The ambient agent run ID to resolve the prompt from.
+      string ambient_run_id = 1;
     }
   }
 
@@ -426,15 +432,6 @@ message Request {
   }
 }
 
-message SkillsContext {
-  repeated Skill available_skills = 1;
-}
-
-message Skill {
-  string path = 1;
-  string name = 2;
-  string description = 3;
-}
 
 enum AutonomyLevel {
   // This is the default and lowest level of autonomy. This assumes a user is

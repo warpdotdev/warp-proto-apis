@@ -285,9 +285,10 @@ func (x Message_ToolCall_UseComputer_Action_MouseWheel_Direction) Number() proto
 type RequestComputerUseResult_Approved_Platform int32
 
 const (
-	RequestComputerUseResult_Approved_MACOS     RequestComputerUseResult_Approved_Platform = 0
-	RequestComputerUseResult_Approved_WINDOWS   RequestComputerUseResult_Approved_Platform = 1
-	RequestComputerUseResult_Approved_LINUX_X11 RequestComputerUseResult_Approved_Platform = 2
+	RequestComputerUseResult_Approved_MACOS         RequestComputerUseResult_Approved_Platform = 0
+	RequestComputerUseResult_Approved_WINDOWS       RequestComputerUseResult_Approved_Platform = 1
+	RequestComputerUseResult_Approved_LINUX_X11     RequestComputerUseResult_Approved_Platform = 2
+	RequestComputerUseResult_Approved_LINUX_WAYLAND RequestComputerUseResult_Approved_Platform = 3
 )
 
 // Enum value maps for RequestComputerUseResult_Approved_Platform.
@@ -296,11 +297,13 @@ var (
 		0: "MACOS",
 		1: "WINDOWS",
 		2: "LINUX_X11",
+		3: "LINUX_WAYLAND",
 	}
 	RequestComputerUseResult_Approved_Platform_value = map[string]int32{
-		"MACOS":     0,
-		"WINDOWS":   1,
-		"LINUX_X11": 2,
+		"MACOS":         0,
+		"WINDOWS":       1,
+		"LINUX_X11":     2,
+		"LINUX_WAYLAND": 3,
 	}
 )
 
@@ -6977,6 +6980,8 @@ type RawImage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Data        []byte                 `protobuf:"bytes,1,opt,name=data"`
 	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
+	xxx_hidden_Width       int32                  `protobuf:"varint,3,opt,name=width"`
+	xxx_hidden_Height      int32                  `protobuf:"varint,4,opt,name=height"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -7025,17 +7030,41 @@ func (x *RawImage) GetMimeType() string {
 	return ""
 }
 
+func (x *RawImage) GetWidth() int32 {
+	if x != nil {
+		return x.xxx_hidden_Width
+	}
+	return 0
+}
+
+func (x *RawImage) GetHeight() int32 {
+	if x != nil {
+		return x.xxx_hidden_Height
+	}
+	return 0
+}
+
 func (x *RawImage) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
 	x.xxx_hidden_Data = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *RawImage) SetMimeType(v string) {
 	x.xxx_hidden_MimeType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *RawImage) SetWidth(v int32) {
+	x.xxx_hidden_Width = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *RawImage) SetHeight(v int32) {
+	x.xxx_hidden_Height = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *RawImage) HasData() bool {
@@ -7052,6 +7081,20 @@ func (x *RawImage) HasMimeType() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *RawImage) HasWidth() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *RawImage) HasHeight() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *RawImage) ClearData() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Data = nil
@@ -7062,6 +7105,16 @@ func (x *RawImage) ClearMimeType() {
 	x.xxx_hidden_MimeType = nil
 }
 
+func (x *RawImage) ClearWidth() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Width = 0
+}
+
+func (x *RawImage) ClearHeight() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Height = 0
+}
+
 type RawImage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -7069,6 +7122,10 @@ type RawImage_builder struct {
 	Data []byte
 	// MIME type of the image content (e.g., "image/png").
 	MimeType *string
+	// The width of the image, in pixels.
+	Width *int32
+	// The height of the image, in pixels.
+	Height *int32
 }
 
 func (b0 RawImage_builder) Build() *RawImage {
@@ -7076,12 +7133,20 @@ func (b0 RawImage_builder) Build() *RawImage {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Data != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Data = b.Data
 	}
 	if b.MimeType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_MimeType = b.MimeType
+	}
+	if b.Width != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Width = *b.Width
+	}
+	if b.Height != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Height = *b.Height
 	}
 	return m0
 }
@@ -15238,12 +15303,13 @@ func (b0 Message_ToolCall_InsertReviewComments_builder) Build() *Message_ToolCal
 
 // A tool call to run a Skill.
 type Message_ToolCall_ReadSkill struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_SkillPath   *string                `protobuf:"bytes,1,opt,name=skill_path,json=skillPath"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                     protoimpl.MessageState                      `protogen:"opaque.v1"`
+	xxx_hidden_SkillReference isMessage_ToolCall_ReadSkill_SkillReference `protobuf_oneof:"skill_reference"`
+	xxx_hidden_Name           *string                                     `protobuf:"bytes,3,opt,name=name"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_ReadSkill) Reset() {
@@ -15273,8 +15339,26 @@ func (x *Message_ToolCall_ReadSkill) ProtoReflect() protoreflect.Message {
 
 func (x *Message_ToolCall_ReadSkill) GetSkillPath() string {
 	if x != nil {
-		if x.xxx_hidden_SkillPath != nil {
-			return *x.xxx_hidden_SkillPath
+		if x, ok := x.xxx_hidden_SkillReference.(*message_ToolCall_ReadSkill_SkillPath); ok {
+			return x.SkillPath
+		}
+	}
+	return ""
+}
+
+func (x *Message_ToolCall_ReadSkill) GetBundledSkillId() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_SkillReference.(*message_ToolCall_ReadSkill_BundledSkillId); ok {
+			return x.BundledSkillId
+		}
+	}
+	return ""
+}
+
+func (x *Message_ToolCall_ReadSkill) GetName() string {
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
 		}
 		return ""
 	}
@@ -15282,27 +15366,98 @@ func (x *Message_ToolCall_ReadSkill) GetSkillPath() string {
 }
 
 func (x *Message_ToolCall_ReadSkill) SetSkillPath(v string) {
-	x.xxx_hidden_SkillPath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	x.xxx_hidden_SkillReference = &message_ToolCall_ReadSkill_SkillPath{v}
+}
+
+func (x *Message_ToolCall_ReadSkill) SetBundledSkillId(v string) {
+	x.xxx_hidden_SkillReference = &message_ToolCall_ReadSkill_BundledSkillId{v}
+}
+
+func (x *Message_ToolCall_ReadSkill) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Message_ToolCall_ReadSkill) HasSkillReference() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SkillReference != nil
 }
 
 func (x *Message_ToolCall_ReadSkill) HasSkillPath() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	_, ok := x.xxx_hidden_SkillReference.(*message_ToolCall_ReadSkill_SkillPath)
+	return ok
+}
+
+func (x *Message_ToolCall_ReadSkill) HasBundledSkillId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_SkillReference.(*message_ToolCall_ReadSkill_BundledSkillId)
+	return ok
+}
+
+func (x *Message_ToolCall_ReadSkill) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Message_ToolCall_ReadSkill) ClearSkillReference() {
+	x.xxx_hidden_SkillReference = nil
 }
 
 func (x *Message_ToolCall_ReadSkill) ClearSkillPath() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_SkillPath = nil
+	if _, ok := x.xxx_hidden_SkillReference.(*message_ToolCall_ReadSkill_SkillPath); ok {
+		x.xxx_hidden_SkillReference = nil
+	}
+}
+
+func (x *Message_ToolCall_ReadSkill) ClearBundledSkillId() {
+	if _, ok := x.xxx_hidden_SkillReference.(*message_ToolCall_ReadSkill_BundledSkillId); ok {
+		x.xxx_hidden_SkillReference = nil
+	}
+}
+
+func (x *Message_ToolCall_ReadSkill) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Name = nil
+}
+
+const Message_ToolCall_ReadSkill_SkillReference_not_set_case case_Message_ToolCall_ReadSkill_SkillReference = 0
+const Message_ToolCall_ReadSkill_SkillPath_case case_Message_ToolCall_ReadSkill_SkillReference = 1
+const Message_ToolCall_ReadSkill_BundledSkillId_case case_Message_ToolCall_ReadSkill_SkillReference = 2
+
+func (x *Message_ToolCall_ReadSkill) WhichSkillReference() case_Message_ToolCall_ReadSkill_SkillReference {
+	if x == nil {
+		return Message_ToolCall_ReadSkill_SkillReference_not_set_case
+	}
+	switch x.xxx_hidden_SkillReference.(type) {
+	case *message_ToolCall_ReadSkill_SkillPath:
+		return Message_ToolCall_ReadSkill_SkillPath_case
+	case *message_ToolCall_ReadSkill_BundledSkillId:
+		return Message_ToolCall_ReadSkill_BundledSkillId_case
+	default:
+		return Message_ToolCall_ReadSkill_SkillReference_not_set_case
+	}
 }
 
 type Message_ToolCall_ReadSkill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Fields of oneof xxx_hidden_SkillReference:
 	// The path to the SKILL.md to be read.
 	SkillPath *string
+	// The unique identifier for a skill bundled with the client.
+	BundledSkillId *string
+	// -- end of xxx_hidden_SkillReference
+	// The name of the skill.
+	Name *string
 }
 
 func (b0 Message_ToolCall_ReadSkill_builder) Build() *Message_ToolCall_ReadSkill {
@@ -15310,11 +15465,45 @@ func (b0 Message_ToolCall_ReadSkill_builder) Build() *Message_ToolCall_ReadSkill
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.SkillPath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_SkillPath = b.SkillPath
+		x.xxx_hidden_SkillReference = &message_ToolCall_ReadSkill_SkillPath{*b.SkillPath}
+	}
+	if b.BundledSkillId != nil {
+		x.xxx_hidden_SkillReference = &message_ToolCall_ReadSkill_BundledSkillId{*b.BundledSkillId}
+	}
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Name = b.Name
 	}
 	return m0
 }
+
+type case_Message_ToolCall_ReadSkill_SkillReference protoreflect.FieldNumber
+
+func (x case_Message_ToolCall_ReadSkill_SkillReference) String() string {
+	md := file_task_proto_msgTypes[86].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isMessage_ToolCall_ReadSkill_SkillReference interface {
+	isMessage_ToolCall_ReadSkill_SkillReference()
+}
+
+type message_ToolCall_ReadSkill_SkillPath struct {
+	// The path to the SKILL.md to be read.
+	SkillPath string `protobuf:"bytes,1,opt,name=skill_path,json=skillPath,oneof"`
+}
+
+type message_ToolCall_ReadSkill_BundledSkillId struct {
+	// The unique identifier for a skill bundled with the client.
+	BundledSkillId string `protobuf:"bytes,2,opt,name=bundled_skill_id,json=bundledSkillId,oneof"`
+}
+
+func (*message_ToolCall_ReadSkill_SkillPath) isMessage_ToolCall_ReadSkill_SkillReference() {}
+
+func (*message_ToolCall_ReadSkill_BundledSkillId) isMessage_ToolCall_ReadSkill_SkillReference() {}
 
 type Message_ToolCall_UseComputer struct {
 	state                                  protoimpl.MessageState                  `protogen:"opaque.v1"`
@@ -23881,7 +24070,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xea\x8b\x01\n" +
+	"\x0ecomment_target\"\xbf\x8c\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -23961,7 +24150,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xa7L\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xfcL\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -24147,10 +24336,13 @@ const file_task_proto_rawDesc = "" +
 	"\x04line\x18\x02 \x01(\v2K.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRangeR\x04line\x1av\n" +
 	"\x10CommentLineRange\x12!\n" +
 	"\tdiff_hunk\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bdiffHunk\x12?\n" +
-	"\x05range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x05range\x1a*\n" +
-	"\tReadSkill\x12\x1d\n" +
+	"\x05range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x05range\x1a\x7f\n" +
+	"\tReadSkill\x12\x1f\n" +
 	"\n" +
-	"skill_path\x18\x01 \x01(\tR\tskillPath\x1a\xa7\x10\n" +
+	"skill_path\x18\x01 \x01(\tH\x00R\tskillPath\x12*\n" +
+	"\x10bundled_skill_id\x18\x02 \x01(\tH\x00R\x0ebundledSkillId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04nameB\x11\n" +
+	"\x0fskill_reference\x1a\xa7\x10\n" +
 	"\vUseComputer\x12R\n" +
 	"\aactions\x18\x01 \x03(\v28.warp.multi_agent.v1.Message.ToolCall.UseComputer.ActionR\aactions\x12{\n" +
 	"\x1epost_actions_screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x1bpostActionsScreenshotParams\x12+\n" +
@@ -24512,19 +24704,20 @@ const file_task_proto_rawDesc = "" +
 	"\x06result\"J\n" +
 	"\x10ScreenDimensions\x12\x19\n" +
 	"\bwidth_px\x18\x01 \x01(\x05R\awidthPx\x12\x1b\n" +
-	"\theight_px\x18\x02 \x01(\x05R\bheightPx\"\x91\x05\n" +
+	"\theight_px\x18\x02 \x01(\x05R\bheightPx\"\xa4\x05\n" +
 	"\x18RequestComputerUseResult\x12T\n" +
 	"\bapproved\x18\x01 \x01(\v26.warp.multi_agent.v1.RequestComputerUseResult.ApprovedH\x00R\bapproved\x12T\n" +
 	"\brejected\x18\x02 \x01(\v26.warp.multi_agent.v1.RequestComputerUseResult.RejectedH\x00R\brejected\x12K\n" +
-	"\x05error\x18\x03 \x01(\v23.warp.multi_agent.v1.RequestComputerUseResult.ErrorH\x00R\x05error\x1a\xbc\x02\n" +
+	"\x05error\x18\x03 \x01(\v23.warp.multi_agent.v1.RequestComputerUseResult.ErrorH\x00R\x05error\x1a\xcf\x02\n" +
 	"\bApproved\x12R\n" +
 	"\x11screen_dimensions\x18\x01 \x01(\v2%.warp.multi_agent.v1.ScreenDimensionsR\x10screenDimensions\x12L\n" +
 	"\x12initial_screenshot\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.RawImageR\x11initialScreenshot\x12[\n" +
-	"\bplatform\x18\x03 \x01(\x0e2?.warp.multi_agent.v1.RequestComputerUseResult.Approved.PlatformR\bplatform\"1\n" +
+	"\bplatform\x18\x03 \x01(\x0e2?.warp.multi_agent.v1.RequestComputerUseResult.Approved.PlatformR\bplatform\"D\n" +
 	"\bPlatform\x12\t\n" +
 	"\x05MACOS\x10\x00\x12\v\n" +
 	"\aWINDOWS\x10\x01\x12\r\n" +
-	"\tLINUX_X11\x10\x02\x1a\n" +
+	"\tLINUX_X11\x10\x02\x12\x11\n" +
+	"\rLINUX_WAYLAND\x10\x03\x1a\n" +
 	"\n" +
 	"\bRejected\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
@@ -24535,10 +24728,12 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\"E\n" +
 	"\rUserQueryMode\x12,\n" +
 	"\x04plan\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04planB\x06\n" +
-	"\x04type\"A\n" +
+	"\x04type\"o\n" +
 	"\bRawImage\x12\x18\n" +
 	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
-	"\tmime_type\x18\x02 \x01(\tR\bmimeType*\xa2\x04\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x14\n" +
+	"\x05width\x18\x03 \x01(\x05R\x05width\x12\x16\n" +
+	"\x06height\x18\x04 \x01(\x05R\x06height*\xa2\x04\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -25256,6 +25451,10 @@ func file_task_proto_init() {
 	file_task_proto_msgTypes[84].OneofWrappers = []any{
 		(*message_ToolCall_ReadShellCommandOutput_Duration)(nil),
 		(*message_ToolCall_ReadShellCommandOutput_OnCompletion)(nil),
+	}
+	file_task_proto_msgTypes[86].OneofWrappers = []any{
+		(*message_ToolCall_ReadSkill_SkillPath)(nil),
+		(*message_ToolCall_ReadSkill_BundledSkillId)(nil),
 	}
 	file_task_proto_msgTypes[90].OneofWrappers = []any{
 		(*message_ToolCall_WriteToLongRunningShellCommand_Mode_Raw)(nil),

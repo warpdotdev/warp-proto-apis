@@ -2052,6 +2052,7 @@ type ResponseEvent_StreamFinished_ToolUsageMetadata struct {
 	xxx_hidden_SuggestPlanStats                    *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,10,opt,name=suggest_plan_stats,json=suggestPlanStats"`
 	xxx_hidden_SuggestCreatePlanStats              *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,11,opt,name=suggest_create_plan_stats,json=suggestCreatePlanStats"`
 	xxx_hidden_ReadShellCommandOutputStats         *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,12,opt,name=read_shell_command_output_stats,json=readShellCommandOutputStats"`
+	xxx_hidden_UseComputerStats                    *ResponseEvent_StreamFinished_ToolCallStats      `protobuf:"bytes,13,opt,name=use_computer_stats,json=useComputerStats"`
 	unknownFields                                  protoimpl.UnknownFields
 	sizeCache                                      protoimpl.SizeCache
 }
@@ -2165,6 +2166,13 @@ func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetReadShellCommandOutp
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) GetUseComputerStats() *ResponseEvent_StreamFinished_ToolCallStats {
+	if x != nil {
+		return x.xxx_hidden_UseComputerStats
+	}
+	return nil
+}
+
 func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetRunCommandStats(v *ResponseEvent_StreamFinished_RunCommandStats) {
 	x.xxx_hidden_RunCommandStats = v
 }
@@ -2211,6 +2219,10 @@ func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetSuggestCreatePlanSta
 
 func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetReadShellCommandOutputStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
 	x.xxx_hidden_ReadShellCommandOutputStats = v
+}
+
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) SetUseComputerStats(v *ResponseEvent_StreamFinished_ToolCallStats) {
+	x.xxx_hidden_UseComputerStats = v
 }
 
 func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasRunCommandStats() bool {
@@ -2297,6 +2309,13 @@ func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasReadShellCommandOutp
 	return x.xxx_hidden_ReadShellCommandOutputStats != nil
 }
 
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) HasUseComputerStats() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_UseComputerStats != nil
+}
+
 func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearRunCommandStats() {
 	x.xxx_hidden_RunCommandStats = nil
 }
@@ -2345,6 +2364,10 @@ func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearReadShellCommandOu
 	x.xxx_hidden_ReadShellCommandOutputStats = nil
 }
 
+func (x *ResponseEvent_StreamFinished_ToolUsageMetadata) ClearUseComputerStats() {
+	x.xxx_hidden_UseComputerStats = nil
+}
+
 type ResponseEvent_StreamFinished_ToolUsageMetadata_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2360,6 +2383,7 @@ type ResponseEvent_StreamFinished_ToolUsageMetadata_builder struct {
 	SuggestPlanStats                    *ResponseEvent_StreamFinished_ToolCallStats
 	SuggestCreatePlanStats              *ResponseEvent_StreamFinished_ToolCallStats
 	ReadShellCommandOutputStats         *ResponseEvent_StreamFinished_ToolCallStats
+	UseComputerStats                    *ResponseEvent_StreamFinished_ToolCallStats
 }
 
 func (b0 ResponseEvent_StreamFinished_ToolUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ToolUsageMetadata {
@@ -2378,6 +2402,7 @@ func (b0 ResponseEvent_StreamFinished_ToolUsageMetadata_builder) Build() *Respon
 	x.xxx_hidden_SuggestPlanStats = b.SuggestPlanStats
 	x.xxx_hidden_SuggestCreatePlanStats = b.SuggestCreatePlanStats
 	x.xxx_hidden_ReadShellCommandOutputStats = b.ReadShellCommandOutputStats
+	x.xxx_hidden_UseComputerStats = b.UseComputerStats
 	return m0
 }
 
@@ -4698,7 +4723,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x8d(\n" +
+	"task.proto\"\xfc(\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4709,7 +4734,7 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xde$\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xcd%\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4749,7 +4774,7 @@ const file_response_proto_rawDesc = "" +
 	"\x17token_usage_by_category\x18\x03 \x03(\v2[.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntryR\x14tokenUsageByCategory\x1aG\n" +
 	"\x19TokenUsageByCategoryEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01\x1a\x99\v\n" +
+	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01\x1a\x88\f\n" +
 	"\x11ToolUsageMetadata\x12m\n" +
 	"\x11run_command_stats\x18\x01 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStatsR\x0frunCommandStats\x12i\n" +
 	"\x10read_files_stats\x18\x02 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x0ereadFilesStats\x12s\n" +
@@ -4764,7 +4789,8 @@ const file_response_proto_rawDesc = "" +
 	"\x12suggest_plan_stats\x18\n" +
 	" \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x10suggestPlanStats\x12z\n" +
 	"\x19suggest_create_plan_stats\x18\v \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x16suggestCreatePlanStats\x12\x85\x01\n" +
-	"\x1fread_shell_command_output_stats\x18\f \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x1breadShellCommandOutputStats\x1a%\n" +
+	"\x1fread_shell_command_output_stats\x18\f \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x1breadShellCommandOutputStats\x12m\n" +
+	"\x12use_computer_stats\x18\r \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x10useComputerStats\x1a%\n" +
 	"\rToolCallStats\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x05R\x05count\x1a\x95\x01\n" +
 	"\x12ApplyFileDiffStats\x12\x14\n" +
@@ -4955,22 +4981,23 @@ var file_response_proto_depIdxs = []int32{
 	9,  // 42: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	9,  // 43: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
 	9,  // 44: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_shell_command_output_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	0,  // 45: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
-	7,  // 46: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	7,  // 47: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	38, // 48: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	39, // 49: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	39, // 50: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	40, // 51: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	39, // 52: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	40, // 53: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	38, // 54: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
-	39, // 55: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
-	56, // [56:56] is the sub-list for method output_type
-	56, // [56:56] is the sub-list for method input_type
-	56, // [56:56] is the sub-list for extension type_name
-	56, // [56:56] is the sub-list for extension extendee
-	0,  // [0:56] is the sub-list for field type_name
+	9,  // 45: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.use_computer_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	0,  // 46: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
+	7,  // 47: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	7,  // 48: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	38, // 49: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	39, // 50: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	39, // 51: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	40, // 52: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	39, // 53: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	40, // 54: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	38, // 55: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
+	39, // 56: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
+	57, // [57:57] is the sub-list for method output_type
+	57, // [57:57] is the sub-list for method input_type
+	57, // [57:57] is the sub-list for extension type_name
+	57, // [57:57] is the sub-list for extension extendee
+	0,  // [0:57] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }

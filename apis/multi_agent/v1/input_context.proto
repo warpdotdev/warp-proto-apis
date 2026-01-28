@@ -21,6 +21,8 @@ message InputContext {
   repeated Codebase codebases = 8;
   repeated ProjectRules project_rules = 10;
   Git git = 11;
+  // Sent on each request when scoped skills change
+  SkillsContext updated_skills_context = 12;
 
   // TODO: these fields should be _attachments_, not part of the input context.
   repeated ExecutedShellCommand executed_shell_commands = 5 [deprecated = true];
@@ -91,5 +93,20 @@ message InputContext {
   message Git {
     // The user's current head (i.e. branch name or commit hash).
     string head = 1 [ (sensitive) = true ];
+  }
+
+  message SkillsContext {
+    repeated Skill available_skills = 1;
+  }
+
+  message Skill {
+    oneof skill_reference {
+      // Path to the SKILL.md file defining this skill.
+      string path = 1;
+      // Unique identifier for a skill bundled with the client.
+      string bundled_skill_id = 4;
+    }
+    string name = 2;
+    string description = 3;
   }
 }
