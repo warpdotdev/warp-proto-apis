@@ -12,6 +12,7 @@ import "attachment.proto";
 import "options.proto";
 import "suggestions.proto";
 import "task.proto";
+import "file_content.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -230,9 +231,9 @@ message Request {
     // An input to invoke a skill. The skill content is passed as instructions
     // to the agent, while the user sees a visual indicator like "/{skill-name}".
     message InvokeSkill {
-      string path = 1;     // Path to skill file
-      string name = 2;     // Display name (e.g., "my-skill")
-      string content = 3;  // Full SKILL.md content
+      string path = 1;           // Path to skill file
+      string name = 2;           // Display name (e.g., "my-skill")
+      FileContent content = 3;   // Skill file with path and content
     }
     
     // A special input type used to start an ambient agent run where the initial prompt
