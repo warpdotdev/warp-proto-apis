@@ -64,6 +64,7 @@ message Request {
       SummarizeConversation summarize_conversation = 13;
       CreateEnvironment create_environment = 14;
       FetchReviewComments fetch_review_comments = 15;
+      InvokeSkill invoke_skill = 16;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -226,6 +227,14 @@ message Request {
     message SummarizeConversation {
       // Optional user-specified instructions to focus or augment the summary.
       string prompt = 1 [ (sensitive) = true ];
+    }
+
+    // An input to invoke a skill. The skill content is passed as instructions
+    // to the agent, while the user sees a visual indicator like "/{skill-name}".
+    message InvokeSkill {
+      string path = 1;     // Path to skill file
+      string name = 2;     // Display name (e.g., "my-skill")
+      string content = 3;  // Full SKILL.md content
     }
   }
 
