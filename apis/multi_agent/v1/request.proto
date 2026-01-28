@@ -57,7 +57,6 @@ message Request {
       TriggerSuggestPrompt trigger_suggest_prompt = 9;
       CreateNewProject create_new_project = 10;
       CloneRepository clone_repository = 11;
-      CodeReview code_review = 12;
       SummarizeConversation summarize_conversation = 13;
       CreateEnvironment create_environment = 14;
       FetchReviewComments fetch_review_comments = 15;
@@ -65,6 +64,7 @@ message Request {
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
+      CodeReview code_review = 12 [deprecated = true];
     }
 
     message UserQuery {
@@ -106,6 +106,7 @@ message Request {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
+          CodeReview code_review = 4;
         }
       }
     }
