@@ -278,6 +278,7 @@ message Message {
       InsertReviewComments insert_review_comments = 25;
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
+      AskQuestion ask_question = 28;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -702,6 +703,38 @@ message Message {
       ScreenshotParams screenshot_params = 2;
     }
 
+    // A tool call to ask the user a question.
+    message AskQuestion {
+      // The question being asked.
+      string question = 1 [ (sensitive) = true ];
+
+      // The type of question.
+      oneof question_type {
+        MultipleChoice multiple_choice = 2;
+        Freeform freeform = 3;
+      }
+
+      // A multiple choice question with a set of options and an optional "other" free-text option.
+      message MultipleChoice {
+        // The set of choices available to the user.
+        repeated Option options = 1;
+        // Whether to include an "other" option that allows the user to provide a free-text answer.
+        bool include_other_option = 2;
+        // Whether the user can select multiple options.
+        bool multi_select = 3;
+
+        message Option {
+          // A short label for the option.
+          string label = 1;
+          // A longer description of the option.
+          string description = 2;
+        }
+      }
+
+      // A freeform question that accepts an open-ended text response.
+      message Freeform {}
+    }
+
     message ScreenshotParams {
       // The maximum length of the long edge of the screenshot in pixels.
       int32 max_long_edge_px = 1;
@@ -751,6 +784,7 @@ message Message {
       InsertReviewCommentsResult insert_review_comments = 29;
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
+      AskQuestionResult ask_question = 32;
     }
 
     // Result of a server-side tool call.
@@ -1319,6 +1353,7 @@ enum ToolType {
   INSERT_REVIEW_COMMENTS = 22;
   READ_SKILL = 23;
   REQUEST_COMPUTER_USE = 24;
+  ASK_QUESTION = 25;
 }
 
 message UserQueryMode {
@@ -1332,6 +1367,12 @@ enum AgentType {
   AGENT_TYPE_UNKNOWN = 0;
   AGENT_TYPE_PRIMARY = 1;
   AGENT_TYPE_CLI = 2;
+}
+
+// Result of an `AskQuestion` tool call.
+message AskQuestionResult {
+  // The user's answer to the question.
+  string answer = 1 [ (sensitive) = true ];
 }
 
 message RawImage {
