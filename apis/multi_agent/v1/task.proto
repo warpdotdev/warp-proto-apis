@@ -563,8 +563,9 @@ message Message {
     }
 
     message InsertReviewComments {
-      string repo_path = 1 [ (sensitive) = true];
+      string repo_path = 1 [ (sensitive) = true ];
       repeated Comment comments = 2;
+      string base_branch = 3 [ (sensitive) = true ];
 
       message Comment {
         string comment_id = 1;
