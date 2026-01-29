@@ -16,6 +16,7 @@ import "file_content.proto";
 import "document_content.proto";
 import "options.proto";
 import "todo.proto";
+import "skill.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -136,6 +137,7 @@ message Message {
     WebSearch web_search = 19;
     WebFetch web_fetch = 20;
     DebugOutput debug_output = 21;
+    Skill invoke_skill = 22;
   }
 
   // User query message type

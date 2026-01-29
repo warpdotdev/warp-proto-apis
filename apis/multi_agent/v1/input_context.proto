@@ -8,6 +8,7 @@ import "google/protobuf/go_features.proto";
 import "file_content.proto";
 import "attachment.proto";
 import "options.proto";
+import "skill.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -96,17 +97,6 @@ message InputContext {
   }
 
   message SkillsContext {
-    repeated Skill available_skills = 1;
-  }
-
-  message Skill {
-    oneof skill_reference {
-      // Path to the SKILL.md file defining this skill.
-      string path = 1;
-      // Unique identifier for a skill bundled with the client.
-      string bundled_skill_id = 4;
-    }
-    string name = 2;
-    string description = 3;
+    repeated SkillDescriptor available_skills = 1;
   }
 }

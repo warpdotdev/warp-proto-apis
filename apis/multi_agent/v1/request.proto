@@ -12,7 +12,7 @@ import "attachment.proto";
 import "options.proto";
 import "suggestions.proto";
 import "task.proto";
-import "file_content.proto";
+import "skill.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -63,7 +63,7 @@ message Request {
       CreateEnvironment create_environment = 14;
       FetchReviewComments fetch_review_comments = 15;
       StartFromAmbientRunPrompt start_from_ambient_run_prompt = 16;
-      InvokeSkill invoke_skill = 17;
+      Skill invoke_skill = 17;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -226,18 +226,6 @@ message Request {
     message SummarizeConversation {
       // Optional user-specified instructions to focus or augment the summary.
       string prompt = 1 [ (sensitive) = true ];
-    }
-
-    // An input to invoke a skill. The skill content is passed as instructions
-    // to the agent, while the user sees a visual indicator like "/{skill-name}".
-    message InvokeSkill {
-      oneof skill_reference {
-        string path = 1;           // Path to skill file
-        string bundled_skill_id = 2; // Bundled skill ID
-      }
-      
-      string name = 3;           // Display name (e.g., "my-skill")
-      FileContent content = 4;   // Skill file with path and content
     }
     
     // A special input type used to start an ambient agent run where the initial prompt

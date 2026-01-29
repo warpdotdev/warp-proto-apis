@@ -1257,7 +1257,7 @@ func (b0 InputContext_Git_builder) Build() *InputContext_Git {
 
 type InputContext_SkillsContext struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_AvailableSkills *[]*InputContext_Skill `protobuf:"bytes,1,rep,name=available_skills,json=availableSkills"`
+	xxx_hidden_AvailableSkills *[]*SkillDescriptor    `protobuf:"bytes,1,rep,name=available_skills,json=availableSkills"`
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
@@ -1287,7 +1287,7 @@ func (x *InputContext_SkillsContext) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InputContext_SkillsContext) GetAvailableSkills() []*InputContext_Skill {
+func (x *InputContext_SkillsContext) GetAvailableSkills() []*SkillDescriptor {
 	if x != nil {
 		if x.xxx_hidden_AvailableSkills != nil {
 			return *x.xxx_hidden_AvailableSkills
@@ -1296,14 +1296,14 @@ func (x *InputContext_SkillsContext) GetAvailableSkills() []*InputContext_Skill 
 	return nil
 }
 
-func (x *InputContext_SkillsContext) SetAvailableSkills(v []*InputContext_Skill) {
+func (x *InputContext_SkillsContext) SetAvailableSkills(v []*SkillDescriptor) {
 	x.xxx_hidden_AvailableSkills = &v
 }
 
 type InputContext_SkillsContext_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	AvailableSkills []*InputContext_Skill
+	AvailableSkills []*SkillDescriptor
 }
 
 func (b0 InputContext_SkillsContext_builder) Build() *InputContext_SkillsContext {
@@ -1314,246 +1314,11 @@ func (b0 InputContext_SkillsContext_builder) Build() *InputContext_SkillsContext
 	return m0
 }
 
-type InputContext_Skill struct {
-	state                     protoimpl.MessageState              `protogen:"opaque.v1"`
-	xxx_hidden_SkillReference isInputContext_Skill_SkillReference `protobuf_oneof:"skill_reference"`
-	xxx_hidden_Name           *string                             `protobuf:"bytes,2,opt,name=name"`
-	xxx_hidden_Description    *string                             `protobuf:"bytes,3,opt,name=description"`
-	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
-	XXX_presence              [1]uint32
-	unknownFields             protoimpl.UnknownFields
-	sizeCache                 protoimpl.SizeCache
-}
-
-func (x *InputContext_Skill) Reset() {
-	*x = InputContext_Skill{}
-	mi := &file_input_context_proto_msgTypes[11]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *InputContext_Skill) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*InputContext_Skill) ProtoMessage() {}
-
-func (x *InputContext_Skill) ProtoReflect() protoreflect.Message {
-	mi := &file_input_context_proto_msgTypes[11]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *InputContext_Skill) GetPath() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_SkillReference.(*inputContext_Skill_Path); ok {
-			return x.Path
-		}
-	}
-	return ""
-}
-
-func (x *InputContext_Skill) GetBundledSkillId() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_SkillReference.(*inputContext_Skill_BundledSkillId); ok {
-			return x.BundledSkillId
-		}
-	}
-	return ""
-}
-
-func (x *InputContext_Skill) GetName() string {
-	if x != nil {
-		if x.xxx_hidden_Name != nil {
-			return *x.xxx_hidden_Name
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *InputContext_Skill) GetDescription() string {
-	if x != nil {
-		if x.xxx_hidden_Description != nil {
-			return *x.xxx_hidden_Description
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *InputContext_Skill) SetPath(v string) {
-	x.xxx_hidden_SkillReference = &inputContext_Skill_Path{v}
-}
-
-func (x *InputContext_Skill) SetBundledSkillId(v string) {
-	x.xxx_hidden_SkillReference = &inputContext_Skill_BundledSkillId{v}
-}
-
-func (x *InputContext_Skill) SetName(v string) {
-	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
-}
-
-func (x *InputContext_Skill) SetDescription(v string) {
-	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
-}
-
-func (x *InputContext_Skill) HasSkillReference() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_SkillReference != nil
-}
-
-func (x *InputContext_Skill) HasPath() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_SkillReference.(*inputContext_Skill_Path)
-	return ok
-}
-
-func (x *InputContext_Skill) HasBundledSkillId() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_SkillReference.(*inputContext_Skill_BundledSkillId)
-	return ok
-}
-
-func (x *InputContext_Skill) HasName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *InputContext_Skill) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *InputContext_Skill) ClearSkillReference() {
-	x.xxx_hidden_SkillReference = nil
-}
-
-func (x *InputContext_Skill) ClearPath() {
-	if _, ok := x.xxx_hidden_SkillReference.(*inputContext_Skill_Path); ok {
-		x.xxx_hidden_SkillReference = nil
-	}
-}
-
-func (x *InputContext_Skill) ClearBundledSkillId() {
-	if _, ok := x.xxx_hidden_SkillReference.(*inputContext_Skill_BundledSkillId); ok {
-		x.xxx_hidden_SkillReference = nil
-	}
-}
-
-func (x *InputContext_Skill) ClearName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Name = nil
-}
-
-func (x *InputContext_Skill) ClearDescription() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_Description = nil
-}
-
-const InputContext_Skill_SkillReference_not_set_case case_InputContext_Skill_SkillReference = 0
-const InputContext_Skill_Path_case case_InputContext_Skill_SkillReference = 1
-const InputContext_Skill_BundledSkillId_case case_InputContext_Skill_SkillReference = 4
-
-func (x *InputContext_Skill) WhichSkillReference() case_InputContext_Skill_SkillReference {
-	if x == nil {
-		return InputContext_Skill_SkillReference_not_set_case
-	}
-	switch x.xxx_hidden_SkillReference.(type) {
-	case *inputContext_Skill_Path:
-		return InputContext_Skill_Path_case
-	case *inputContext_Skill_BundledSkillId:
-		return InputContext_Skill_BundledSkillId_case
-	default:
-		return InputContext_Skill_SkillReference_not_set_case
-	}
-}
-
-type InputContext_Skill_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_SkillReference:
-	// Path to the SKILL.md file defining this skill.
-	Path *string
-	// Unique identifier for a skill bundled with the client.
-	BundledSkillId *string
-	// -- end of xxx_hidden_SkillReference
-	Name        *string
-	Description *string
-}
-
-func (b0 InputContext_Skill_builder) Build() *InputContext_Skill {
-	m0 := &InputContext_Skill{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Path != nil {
-		x.xxx_hidden_SkillReference = &inputContext_Skill_Path{*b.Path}
-	}
-	if b.BundledSkillId != nil {
-		x.xxx_hidden_SkillReference = &inputContext_Skill_BundledSkillId{*b.BundledSkillId}
-	}
-	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Name = b.Name
-	}
-	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_Description = b.Description
-	}
-	return m0
-}
-
-type case_InputContext_Skill_SkillReference protoreflect.FieldNumber
-
-func (x case_InputContext_Skill_SkillReference) String() string {
-	md := file_input_context_proto_msgTypes[11].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isInputContext_Skill_SkillReference interface {
-	isInputContext_Skill_SkillReference()
-}
-
-type inputContext_Skill_Path struct {
-	// Path to the SKILL.md file defining this skill.
-	Path string `protobuf:"bytes,1,opt,name=path,oneof"`
-}
-
-type inputContext_Skill_BundledSkillId struct {
-	// Unique identifier for a skill bundled with the client.
-	BundledSkillId string `protobuf:"bytes,4,opt,name=bundled_skill_id,json=bundledSkillId,oneof"`
-}
-
-func (*inputContext_Skill_Path) isInputContext_Skill_SkillReference() {}
-
-func (*inputContext_Skill_BundledSkillId) isInputContext_Skill_SkillReference() {}
-
 var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\"\xf3\x0e\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\"\xdb\r\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1593,17 +1358,11 @@ const file_input_context_proto_rawDesc = "" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
 	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\x1f\n" +
 	"\x03Git\x12\x18\n" +
-	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x1ac\n" +
-	"\rSkillsContext\x12R\n" +
-	"\x10available_skills\x18\x01 \x03(\v2'.warp.multi_agent.v1.InputContext.SkillR\x0favailableSkills\x1a\x92\x01\n" +
-	"\x05Skill\x12\x14\n" +
-	"\x04path\x18\x01 \x01(\tH\x00R\x04path\x12*\n" +
-	"\x10bundled_skill_id\x18\x04 \x01(\tH\x00R\x0ebundledSkillId\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescriptionB\x11\n" +
-	"\x0fskill_referenceB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x1a`\n" +
+	"\rSkillsContext\x12O\n" +
+	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkillsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_input_context_proto_goTypes = []any{
 	(*InputContext)(nil),                 // 0: warp.multi_agent.v1.InputContext
 	(*InputContext_SelectedText)(nil),    // 1: warp.multi_agent.v1.InputContext.SelectedText
@@ -1616,27 +1375,27 @@ var file_input_context_proto_goTypes = []any{
 	(*InputContext_ProjectRules)(nil),    // 8: warp.multi_agent.v1.InputContext.ProjectRules
 	(*InputContext_Git)(nil),             // 9: warp.multi_agent.v1.InputContext.Git
 	(*InputContext_SkillsContext)(nil),   // 10: warp.multi_agent.v1.InputContext.SkillsContext
-	(*InputContext_Skill)(nil),           // 11: warp.multi_agent.v1.InputContext.Skill
-	(*timestamppb.Timestamp)(nil),        // 12: google.protobuf.Timestamp
-	(*ExecutedShellCommand)(nil),         // 13: warp.multi_agent.v1.ExecutedShellCommand
-	(*FileContent)(nil),                  // 14: warp.multi_agent.v1.FileContent
+	(*timestamppb.Timestamp)(nil),        // 11: google.protobuf.Timestamp
+	(*ExecutedShellCommand)(nil),         // 12: warp.multi_agent.v1.ExecutedShellCommand
+	(*FileContent)(nil),                  // 13: warp.multi_agent.v1.FileContent
+	(*SkillDescriptor)(nil),              // 14: warp.multi_agent.v1.SkillDescriptor
 }
 var file_input_context_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
 	4,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
 	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	12, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	11, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
 	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
 	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
 	9,  // 6: warp.multi_agent.v1.InputContext.git:type_name -> warp.multi_agent.v1.InputContext.Git
 	10, // 7: warp.multi_agent.v1.InputContext.updated_skills_context:type_name -> warp.multi_agent.v1.InputContext.SkillsContext
-	13, // 8: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	12, // 8: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	1,  // 9: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
 	5,  // 10: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
 	7,  // 11: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	14, // 12: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	14, // 13: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
-	11, // 14: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.InputContext.Skill
+	13, // 12: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	13, // 13: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
+	14, // 14: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.SkillDescriptor
 	15, // [15:15] is the sub-list for method output_type
 	15, // [15:15] is the sub-list for method input_type
 	15, // [15:15] is the sub-list for extension type_name
@@ -1652,17 +1411,14 @@ func file_input_context_proto_init() {
 	file_file_content_proto_init()
 	file_attachment_proto_init()
 	file_options_proto_init()
-	file_input_context_proto_msgTypes[11].OneofWrappers = []any{
-		(*inputContext_Skill_Path)(nil),
-		(*inputContext_Skill_BundledSkillId)(nil),
-	}
+	file_skill_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_input_context_proto_rawDesc), len(file_input_context_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
