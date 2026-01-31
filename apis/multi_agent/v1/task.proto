@@ -138,7 +138,7 @@ message Message {
     WebFetch web_fetch = 20;
     DebugOutput debug_output = 21;
     ArtifactEvent artifact_event = 22;
-    Skill invoke_skill = 23;
+    InvokeSkill invoke_skill = 23;
   }
 
   // User query message type
@@ -865,6 +865,10 @@ message Message {
         PullRequestArtifact pull_request = 1;
       }
     }
+  }
+
+  message InvokeSkill {
+    Skill skill = 1;
   }
 }
 
