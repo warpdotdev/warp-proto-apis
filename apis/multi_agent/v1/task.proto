@@ -137,7 +137,8 @@ message Message {
     WebSearch web_search = 19;
     WebFetch web_fetch = 20;
     DebugOutput debug_output = 21;
-    Skill invoke_skill = 22;
+    ArtifactEvent artifact_event = 22;
+    Skill invoke_skill = 23;
   }
 
   // User query message type
@@ -845,6 +846,25 @@ message Message {
   // and should only be displayed on WarpDev client builds.
   message DebugOutput {
     string text = 1;
+  }
+
+  // Message for artifact-related events.
+  message ArtifactEvent {
+    oneof event {
+      ArtifactCreated created = 1;
+    }
+
+    message PullRequestArtifact {
+      string url = 1 [ (sensitive) = true ];
+      string branch = 2 [ (sensitive) = true ];
+    }
+
+    // Notifies the client that an artifact was created (e.g. a PR).
+    message ArtifactCreated {
+      oneof artifact {
+        PullRequestArtifact pull_request = 1;
+      }
+    }
   }
 }
 
