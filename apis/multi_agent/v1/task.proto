@@ -708,16 +708,9 @@ message Message {
       int32 max_long_edge_px = 1;
       // The maximum total number of pixels in the screenshot.
       int32 max_total_px = 2;
-
-      // The source area to capture. If unset, client applies its default.
-      oneof source {
-        // Captures the full display.
-        Display display = 3;
-        // Captures a rectangular sub-region of the display.
-        Region region = 4;
-      }
-
-      message Display {}
+      // Capture a rectangular sub-region of the display. If unset, will capture
+      // the full source.
+      Region region = 3;
 
       // A rectangular region defined by its top-left and bottom-right corners,
       // in physical screen pixel coordinates.
