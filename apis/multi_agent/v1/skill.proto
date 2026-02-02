@@ -23,7 +23,10 @@ message SkillDescriptor {
 }
 
 // A full representation of a skill, including file content.
+// This should contain all the information necessary to recreate a ParsedSkill in the client.
 message Skill {
   SkillDescriptor descriptor = 1;
   FileContent content = 2;
+  string origin = 3;
+  string scope = 4;
 }

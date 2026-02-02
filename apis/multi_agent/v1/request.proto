@@ -63,7 +63,7 @@ message Request {
       CreateEnvironment create_environment = 14;
       FetchReviewComments fetch_review_comments = 15;
       StartFromAmbientRunPrompt start_from_ambient_run_prompt = 16;
-      Skill invoke_skill = 17;
+      InvokeSkill invoke_skill = 17;
 
       UserQuery user_query = 2 [deprecated = true];
       ToolCallResult tool_call_result = 3 [deprecated = true];
@@ -234,6 +234,10 @@ message Request {
     message StartFromAmbientRunPrompt {
       // The ambient agent run ID to resolve the prompt from.
       string ambient_run_id = 1;
+    }
+
+    message InvokeSkill {
+      Skill skill = 1;
     }
   }
 

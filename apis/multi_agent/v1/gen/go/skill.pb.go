@@ -258,10 +258,15 @@ func (*skillDescriptor_Path) isSkillDescriptor_SkillReference() {}
 func (*skillDescriptor_BundledSkillId) isSkillDescriptor_SkillReference() {}
 
 // A full representation of a skill, including file content.
+// This should contain all the information necessary to recreate a ParsedSkill in the client.
 type Skill struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Descriptor_ *SkillDescriptor       `protobuf:"bytes,1,opt,name=descriptor"`
 	xxx_hidden_Content     *FileContent           `protobuf:"bytes,2,opt,name=content"`
+	xxx_hidden_Origin      *string                `protobuf:"bytes,3,opt,name=origin"`
+	xxx_hidden_Scope       *string                `protobuf:"bytes,4,opt,name=scope"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -305,12 +310,42 @@ func (x *Skill) GetContent() *FileContent {
 	return nil
 }
 
+func (x *Skill) GetOrigin() string {
+	if x != nil {
+		if x.xxx_hidden_Origin != nil {
+			return *x.xxx_hidden_Origin
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Skill) GetScope() string {
+	if x != nil {
+		if x.xxx_hidden_Scope != nil {
+			return *x.xxx_hidden_Scope
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Skill) SetDescriptor(v *SkillDescriptor) {
 	x.xxx_hidden_Descriptor_ = v
 }
 
 func (x *Skill) SetContent(v *FileContent) {
 	x.xxx_hidden_Content = v
+}
+
+func (x *Skill) SetOrigin(v string) {
+	x.xxx_hidden_Origin = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *Skill) SetScope(v string) {
+	x.xxx_hidden_Scope = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Skill) HasDescriptor() bool {
@@ -327,6 +362,20 @@ func (x *Skill) HasContent() bool {
 	return x.xxx_hidden_Content != nil
 }
 
+func (x *Skill) HasOrigin() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Skill) HasScope() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Skill) ClearDescriptor() {
 	x.xxx_hidden_Descriptor_ = nil
 }
@@ -335,11 +384,23 @@ func (x *Skill) ClearContent() {
 	x.xxx_hidden_Content = nil
 }
 
+func (x *Skill) ClearOrigin() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Origin = nil
+}
+
+func (x *Skill) ClearScope() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Scope = nil
+}
+
 type Skill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Descriptor *SkillDescriptor
 	Content    *FileContent
+	Origin     *string
+	Scope      *string
 }
 
 func (b0 Skill_builder) Build() *Skill {
@@ -348,6 +409,14 @@ func (b0 Skill_builder) Build() *Skill {
 	_, _ = b, x
 	x.xxx_hidden_Descriptor_ = b.Descriptor
 	x.xxx_hidden_Content = b.Content
+	if b.Origin != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Origin = b.Origin
+	}
+	if b.Scope != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Scope = b.Scope
+	}
 	return m0
 }
 
@@ -361,12 +430,14 @@ const file_skill_proto_rawDesc = "" +
 	"\x10bundled_skill_id\x18\x04 \x01(\tH\x00R\x0ebundledSkillId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x03 \x01(\tR\vdescriptionB\x11\n" +
-	"\x0fskill_reference\"\x89\x01\n" +
+	"\x0fskill_reference\"\xb7\x01\n" +
 	"\x05Skill\x12D\n" +
 	"\n" +
 	"descriptor\x18\x01 \x01(\v2$.warp.multi_agent.v1.SkillDescriptorR\n" +
 	"descriptor\x12:\n" +
-	"\acontent\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontent\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x12\x16\n" +
+	"\x06origin\x18\x03 \x01(\tR\x06origin\x12\x14\n" +
+	"\x05scope\x18\x04 \x01(\tR\x05scopeB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_skill_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_skill_proto_goTypes = []any{
