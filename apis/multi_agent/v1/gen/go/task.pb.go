@@ -189,19 +189,19 @@ func (x AgentType) Number() protoreflect.EnumNumber {
 type Message_ToolCall_InsertReviewComments_CommentSide int32
 
 const (
-	Message_ToolCall_InsertReviewComments_RIGHT Message_ToolCall_InsertReviewComments_CommentSide = 0 // New file (additions)
-	Message_ToolCall_InsertReviewComments_LEFT  Message_ToolCall_InsertReviewComments_CommentSide = 1 // Old file (deletions)
+	Message_ToolCall_InsertReviewComments_NEW Message_ToolCall_InsertReviewComments_CommentSide = 0 // Right side, current file state, additions
+	Message_ToolCall_InsertReviewComments_OLD Message_ToolCall_InsertReviewComments_CommentSide = 1 // Left side, past file state, deletions
 )
 
 // Enum value maps for Message_ToolCall_InsertReviewComments_CommentSide.
 var (
 	Message_ToolCall_InsertReviewComments_CommentSide_name = map[int32]string{
-		0: "RIGHT",
-		1: "LEFT",
+		0: "NEW",
+		1: "OLD",
 	}
 	Message_ToolCall_InsertReviewComments_CommentSide_value = map[string]int32{
-		"RIGHT": 0,
-		"LEFT":  1,
+		"NEW": 0,
+		"OLD": 1,
 	}
 )
 
@@ -18086,7 +18086,7 @@ func (x *Message_ToolCall_InsertReviewComments_CommentLineRange) GetSide() Messa
 			return x.xxx_hidden_Side
 		}
 	}
-	return Message_ToolCall_InsertReviewComments_RIGHT
+	return Message_ToolCall_InsertReviewComments_NEW
 }
 
 func (x *Message_ToolCall_InsertReviewComments_CommentLineRange) SetDiffHunk(v string) {
@@ -18135,7 +18135,7 @@ func (x *Message_ToolCall_InsertReviewComments_CommentLineRange) ClearRange() {
 
 func (x *Message_ToolCall_InsertReviewComments_CommentLineRange) ClearSide() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_Side = Message_ToolCall_InsertReviewComments_RIGHT
+	x.xxx_hidden_Side = Message_ToolCall_InsertReviewComments_NEW
 }
 
 type Message_ToolCall_InsertReviewComments_CommentLineRange_builder struct {
@@ -24711,7 +24711,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xe6\x92\x01\n" +
+	"\x0ecomment_target\"\xe3\x92\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -24792,7 +24792,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x89P\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x86P\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -24961,7 +24961,7 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\x8f\a\n" +
+	"\x05delay\x1a\x8c\a\n" +
 	"\x14InsertReviewComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x12^\n" +
 	"\bcomments\x18\x02 \x03(\v2B.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentR\bcomments\x12%\n" +
@@ -24981,10 +24981,10 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentLineRange\x12!\n" +
 	"\tdiff_hunk\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bdiffHunk\x12?\n" +
 	"\x05range\x18\x02 \x01(\v2).warp.multi_agent.v1.FileContentLineRangeR\x05range\x12Z\n" +
-	"\x04side\x18\x03 \x01(\x0e2F.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSideR\x04side\"\"\n" +
-	"\vCommentSide\x12\t\n" +
-	"\x05RIGHT\x10\x00\x12\b\n" +
-	"\x04LEFT\x10\x01\x1a\x7f\n" +
+	"\x04side\x18\x03 \x01(\x0e2F.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSideR\x04side\"\x1f\n" +
+	"\vCommentSide\x12\a\n" +
+	"\x03NEW\x10\x00\x12\a\n" +
+	"\x03OLD\x10\x01\x1a\x7f\n" +
 	"\tReadSkill\x12\x1f\n" +
 	"\n" +
 	"skill_path\x18\x01 \x01(\tH\x00R\tskillPath\x12*\n" +

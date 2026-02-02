@@ -583,8 +583,8 @@ message Message {
 
       // The side of the diff the comment is attached to.
       enum CommentSide {
-        RIGHT = 0; // New file (additions)
-        LEFT = 1; // Old file (deletions)
+        NEW = 0; // Right side, current file state, additions
+        OLD = 1; // Left side, past file state, deletions
       }
 
       message CommentLineRange {
