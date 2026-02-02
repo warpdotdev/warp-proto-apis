@@ -356,6 +356,9 @@ message Request {
     // are moved to a subtask and replaced with a subagent tool call + result.
     bool supports_summarization_via_message_replacement = 24;
 
+    // If `true`, the client supports reading bundled skills that are distributed alongside it.
+    bool supports_bundled_skills = 25;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
