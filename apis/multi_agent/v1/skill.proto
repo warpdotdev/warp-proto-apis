@@ -20,7 +20,7 @@ message SkillDescriptor {
 
   string name = 2;
   string description = 3;
-  string origin = 5;
+  string provider = 5;
   string scope = 6;
 }
 
