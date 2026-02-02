@@ -20,6 +20,8 @@ message SkillDescriptor {
 
   string name = 2;
   string description = 3;
+  string origin = 5;
+  string scope = 6;
 }
 
 // A full representation of a skill, including file content.
@@ -27,6 +29,4 @@ message SkillDescriptor {
 message Skill {
   SkillDescriptor descriptor = 1;
   FileContent content = 2;
-  string origin = 3;
-  string scope = 4;
 }
