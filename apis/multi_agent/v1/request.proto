@@ -234,6 +234,21 @@ message Request {
     message StartFromAmbientRunPrompt {
       // The ambient agent run ID to resolve the prompt from.
       string ambient_run_id = 1;
+
+      // Optional skill to apply to the resolved prompt.
+      // When provided, the skill's base_prompt is prepended to the effective prompt.
+      ResolvedSkillSpec skill_override = 2;
+
+      // A resolved skill specification containing the skill name and its base prompt.
+      // Used when the client has resolved a skill locally and wants the server to
+      // apply it during prompt resolution.
+      message ResolvedSkillSpec {
+        // The name of the skill.
+        string name = 1 [ (sensitive) = true ];
+
+        // The skill's base prompt / instructions.
+        string base_prompt = 2 [ (sensitive) = true ];
+      }
     }
 
     message InvokeSkill {
