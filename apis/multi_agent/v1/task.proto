@@ -563,8 +563,9 @@ message Message {
     }
 
     message InsertReviewComments {
-      string repo_path = 1 [ (sensitive) = true];
+      string repo_path = 1 [ (sensitive) = true ];
       repeated Comment comments = 2;
+      string base_branch = 3 [ (sensitive) = true ];
 
       message Comment {
         string comment_id = 1;
@@ -580,9 +581,16 @@ message Message {
         CommentLineRange line = 2;
       }
 
+      // The side of the diff the comment is attached to.
+      enum CommentSide {
+        NEW = 0; // Right side, current file state, additions
+        OLD = 1; // Left side, past file state, deletions
+      }
+
       message CommentLineRange {
         string diff_hunk = 1 [ (sensitive) = true ];
         FileContentLineRange range = 2;
+        CommentSide side = 3;
       }
     }
     
