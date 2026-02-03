@@ -5051,13 +5051,13 @@ func (b0 Request_Input_SummarizeConversation_builder) Build() *Request_Input_Sum
 // is retrieved at runtime as the latest prompt known for the run.
 // This is only valid when supplied at the start of a conversation.
 type Request_Input_StartFromAmbientRunPrompt struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_AmbientRunId    *string                `protobuf:"bytes,1,opt,name=ambient_run_id,json=ambientRunId"`
-	xxx_hidden_SkillBasePrompt *string                `protobuf:"bytes,2,opt,name=skill_base_prompt,json=skillBasePrompt"`
-	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
-	XXX_presence               [1]uint32
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_AmbientRunId      *string                `protobuf:"bytes,1,opt,name=ambient_run_id,json=ambientRunId"`
+	xxx_hidden_RuntimeBasePrompt *string                `protobuf:"bytes,2,opt,name=runtime_base_prompt,json=runtimeBasePrompt"`
+	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
+	XXX_presence                 [1]uint32
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *Request_Input_StartFromAmbientRunPrompt) Reset() {
@@ -5095,10 +5095,10 @@ func (x *Request_Input_StartFromAmbientRunPrompt) GetAmbientRunId() string {
 	return ""
 }
 
-func (x *Request_Input_StartFromAmbientRunPrompt) GetSkillBasePrompt() string {
+func (x *Request_Input_StartFromAmbientRunPrompt) GetRuntimeBasePrompt() string {
 	if x != nil {
-		if x.xxx_hidden_SkillBasePrompt != nil {
-			return *x.xxx_hidden_SkillBasePrompt
+		if x.xxx_hidden_RuntimeBasePrompt != nil {
+			return *x.xxx_hidden_RuntimeBasePrompt
 		}
 		return ""
 	}
@@ -5110,8 +5110,8 @@ func (x *Request_Input_StartFromAmbientRunPrompt) SetAmbientRunId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Input_StartFromAmbientRunPrompt) SetSkillBasePrompt(v string) {
-	x.xxx_hidden_SkillBasePrompt = &v
+func (x *Request_Input_StartFromAmbientRunPrompt) SetRuntimeBasePrompt(v string) {
+	x.xxx_hidden_RuntimeBasePrompt = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
@@ -5122,7 +5122,7 @@ func (x *Request_Input_StartFromAmbientRunPrompt) HasAmbientRunId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_StartFromAmbientRunPrompt) HasSkillBasePrompt() bool {
+func (x *Request_Input_StartFromAmbientRunPrompt) HasRuntimeBasePrompt() bool {
 	if x == nil {
 		return false
 	}
@@ -5134,9 +5134,9 @@ func (x *Request_Input_StartFromAmbientRunPrompt) ClearAmbientRunId() {
 	x.xxx_hidden_AmbientRunId = nil
 }
 
-func (x *Request_Input_StartFromAmbientRunPrompt) ClearSkillBasePrompt() {
+func (x *Request_Input_StartFromAmbientRunPrompt) ClearRuntimeBasePrompt() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_SkillBasePrompt = nil
+	x.xxx_hidden_RuntimeBasePrompt = nil
 }
 
 type Request_Input_StartFromAmbientRunPrompt_builder struct {
@@ -5144,9 +5144,9 @@ type Request_Input_StartFromAmbientRunPrompt_builder struct {
 
 	// The ambient agent run ID to resolve the prompt from.
 	AmbientRunId *string
-	// Optional skill base prompt / instructions.
+	// Optional runtime base prompt / instructions.
 	// When provided, this is prepended to the effective prompt.
-	SkillBasePrompt *string
+	RuntimeBasePrompt *string
 }
 
 func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input_StartFromAmbientRunPrompt {
@@ -5157,9 +5157,9 @@ func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_AmbientRunId = b.AmbientRunId
 	}
-	if b.SkillBasePrompt != nil {
+	if b.RuntimeBasePrompt != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_SkillBasePrompt = b.SkillBasePrompt
+		x.xxx_hidden_RuntimeBasePrompt = b.RuntimeBasePrompt
 	}
 	return m0
 }
@@ -6925,7 +6925,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x97T\n" +
+	"task.proto\x1a\vskill.proto\"\x9bT\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6935,7 +6935,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc35\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc75\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7054,10 +7054,10 @@ const file_request_proto_rawDesc = "" +
 	"\x13FetchReviewComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a5\n" +
 	"\x15SummarizeConversation\x12\x1c\n" +
-	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1as\n" +
+	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1aw\n" +
 	"\x19StartFromAmbientRunPrompt\x12$\n" +
-	"\x0eambient_run_id\x18\x01 \x01(\tR\fambientRunId\x120\n" +
-	"\x11skill_base_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x0fskillBasePrompt\x1a?\n" +
+	"\x0eambient_run_id\x18\x01 \x01(\tR\fambientRunId\x124\n" +
+	"\x13runtime_base_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x11runtimeBasePrompt\x1a?\n" +
 	"\vInvokeSkill\x120\n" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skillB\x06\n" +
 	"\x04type\x1a\xc7\x02\n" +
