@@ -3,7 +3,7 @@ edition = "2023";
 package warp.multi_agent.v1;
 
 import "google/protobuf/go_features.proto";
-
+import "google/protobuf/empty.proto";
 import "file_content.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
@@ -20,8 +20,31 @@ message SkillDescriptor {
 
   string name = 2;
   string description = 3;
-  string provider = 5;
-  string scope = 6;
+  Provider provider = 5;
+  Scope scope = 6;
+
+  message Provider {
+    oneof type {
+      google.protobuf.Empty warp = 1;
+      google.protobuf.Empty agents = 2;
+      google.protobuf.Empty claude = 3;
+      google.protobuf.Empty codex = 4;
+      google.protobuf.Empty cursor = 5;
+      google.protobuf.Empty gemini = 6;
+      google.protobuf.Empty copilot = 7;
+      google.protobuf.Empty droid = 8;
+      google.protobuf.Empty github = 9;
+      google.protobuf.Empty open_code = 10;
+    }
+  }
+
+  message Scope {
+    oneof type {
+      google.protobuf.Empty home = 1;
+      google.protobuf.Empty project = 2;
+      google.protobuf.Empty bundled = 3;
+    }
+  }
 }
 
 // A full representation of a skill, including file content.

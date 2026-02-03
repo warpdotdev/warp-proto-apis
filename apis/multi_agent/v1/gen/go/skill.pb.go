@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	reflect "reflect"
 	unsafe "unsafe"
 )
@@ -27,8 +28,8 @@ type SkillDescriptor struct {
 	xxx_hidden_SkillReference isSkillDescriptor_SkillReference `protobuf_oneof:"skill_reference"`
 	xxx_hidden_Name           *string                          `protobuf:"bytes,2,opt,name=name"`
 	xxx_hidden_Description    *string                          `protobuf:"bytes,3,opt,name=description"`
-	xxx_hidden_Provider       *string                          `protobuf:"bytes,5,opt,name=provider"`
-	xxx_hidden_Scope          *string                          `protobuf:"bytes,6,opt,name=scope"`
+	xxx_hidden_Provider       *SkillDescriptor_Provider        `protobuf:"bytes,5,opt,name=provider"`
+	xxx_hidden_Scope          *SkillDescriptor_Scope           `protobuf:"bytes,6,opt,name=scope"`
 	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
 	XXX_presence              [1]uint32
 	unknownFields             protoimpl.UnknownFields
@@ -98,24 +99,18 @@ func (x *SkillDescriptor) GetDescription() string {
 	return ""
 }
 
-func (x *SkillDescriptor) GetProvider() string {
+func (x *SkillDescriptor) GetProvider() *SkillDescriptor_Provider {
 	if x != nil {
-		if x.xxx_hidden_Provider != nil {
-			return *x.xxx_hidden_Provider
-		}
-		return ""
+		return x.xxx_hidden_Provider
 	}
-	return ""
+	return nil
 }
 
-func (x *SkillDescriptor) GetScope() string {
+func (x *SkillDescriptor) GetScope() *SkillDescriptor_Scope {
 	if x != nil {
-		if x.xxx_hidden_Scope != nil {
-			return *x.xxx_hidden_Scope
-		}
-		return ""
+		return x.xxx_hidden_Scope
 	}
-	return ""
+	return nil
 }
 
 func (x *SkillDescriptor) SetPath(v string) {
@@ -136,14 +131,12 @@ func (x *SkillDescriptor) SetDescription(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
-func (x *SkillDescriptor) SetProvider(v string) {
-	x.xxx_hidden_Provider = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+func (x *SkillDescriptor) SetProvider(v *SkillDescriptor_Provider) {
+	x.xxx_hidden_Provider = v
 }
 
-func (x *SkillDescriptor) SetScope(v string) {
-	x.xxx_hidden_Scope = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+func (x *SkillDescriptor) SetScope(v *SkillDescriptor_Scope) {
+	x.xxx_hidden_Scope = v
 }
 
 func (x *SkillDescriptor) HasSkillReference() bool {
@@ -187,14 +180,14 @@ func (x *SkillDescriptor) HasProvider() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+	return x.xxx_hidden_Provider != nil
 }
 
 func (x *SkillDescriptor) HasScope() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+	return x.xxx_hidden_Scope != nil
 }
 
 func (x *SkillDescriptor) ClearSkillReference() {
@@ -224,12 +217,10 @@ func (x *SkillDescriptor) ClearDescription() {
 }
 
 func (x *SkillDescriptor) ClearProvider() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_Provider = nil
 }
 
 func (x *SkillDescriptor) ClearScope() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_Scope = nil
 }
 
@@ -262,8 +253,8 @@ type SkillDescriptor_builder struct {
 	// -- end of xxx_hidden_SkillReference
 	Name        *string
 	Description *string
-	Provider    *string
-	Scope       *string
+	Provider    *SkillDescriptor_Provider
+	Scope       *SkillDescriptor_Scope
 }
 
 func (b0 SkillDescriptor_builder) Build() *SkillDescriptor {
@@ -284,14 +275,8 @@ func (b0 SkillDescriptor_builder) Build() *SkillDescriptor {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_Description = b.Description
 	}
-	if b.Provider != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
-		x.xxx_hidden_Provider = b.Provider
-	}
-	if b.Scope != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
-		x.xxx_hidden_Scope = b.Scope
-	}
+	x.xxx_hidden_Provider = b.Provider
+	x.xxx_hidden_Scope = b.Scope
 	return m0
 }
 
@@ -418,18 +403,774 @@ func (b0 Skill_builder) Build() *Skill {
 	return m0
 }
 
+type SkillDescriptor_Provider struct {
+	state           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Type isSkillDescriptor_Provider_Type `protobuf_oneof:"type"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SkillDescriptor_Provider) Reset() {
+	*x = SkillDescriptor_Provider{}
+	mi := &file_skill_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkillDescriptor_Provider) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkillDescriptor_Provider) ProtoMessage() {}
+
+func (x *SkillDescriptor_Provider) ProtoReflect() protoreflect.Message {
+	mi := &file_skill_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *SkillDescriptor_Provider) GetWarp() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Warp); ok {
+			return x.Warp
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetAgents() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Agents); ok {
+			return x.Agents
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetClaude() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Claude); ok {
+			return x.Claude
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetCodex() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Codex); ok {
+			return x.Codex
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetCursor() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Cursor); ok {
+			return x.Cursor
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetGemini() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Gemini); ok {
+			return x.Gemini
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetCopilot() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Copilot); ok {
+			return x.Copilot
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetDroid() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Droid); ok {
+			return x.Droid
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetGithub() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Github); ok {
+			return x.Github
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) GetOpenCode() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_OpenCode); ok {
+			return x.OpenCode
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Provider) SetWarp(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Warp{v}
+}
+
+func (x *SkillDescriptor_Provider) SetAgents(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Agents{v}
+}
+
+func (x *SkillDescriptor_Provider) SetClaude(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Claude{v}
+}
+
+func (x *SkillDescriptor_Provider) SetCodex(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Codex{v}
+}
+
+func (x *SkillDescriptor_Provider) SetCursor(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Cursor{v}
+}
+
+func (x *SkillDescriptor_Provider) SetGemini(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Gemini{v}
+}
+
+func (x *SkillDescriptor_Provider) SetCopilot(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Copilot{v}
+}
+
+func (x *SkillDescriptor_Provider) SetDroid(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Droid{v}
+}
+
+func (x *SkillDescriptor_Provider) SetGithub(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_Github{v}
+}
+
+func (x *SkillDescriptor_Provider) SetOpenCode(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Provider_OpenCode{v}
+}
+
+func (x *SkillDescriptor_Provider) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *SkillDescriptor_Provider) HasWarp() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Warp)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasAgents() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Agents)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasClaude() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Claude)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasCodex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Codex)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasCursor() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Cursor)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasGemini() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Gemini)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasCopilot() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Copilot)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasDroid() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Droid)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasGithub() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Github)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) HasOpenCode() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_OpenCode)
+	return ok
+}
+
+func (x *SkillDescriptor_Provider) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *SkillDescriptor_Provider) ClearWarp() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Warp); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearAgents() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Agents); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearClaude() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Claude); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearCodex() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Codex); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearCursor() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Cursor); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearGemini() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Gemini); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearCopilot() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Copilot); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearDroid() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Droid); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearGithub() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_Github); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Provider) ClearOpenCode() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Provider_OpenCode); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const SkillDescriptor_Provider_Type_not_set_case case_SkillDescriptor_Provider_Type = 0
+const SkillDescriptor_Provider_Warp_case case_SkillDescriptor_Provider_Type = 1
+const SkillDescriptor_Provider_Agents_case case_SkillDescriptor_Provider_Type = 2
+const SkillDescriptor_Provider_Claude_case case_SkillDescriptor_Provider_Type = 3
+const SkillDescriptor_Provider_Codex_case case_SkillDescriptor_Provider_Type = 4
+const SkillDescriptor_Provider_Cursor_case case_SkillDescriptor_Provider_Type = 5
+const SkillDescriptor_Provider_Gemini_case case_SkillDescriptor_Provider_Type = 6
+const SkillDescriptor_Provider_Copilot_case case_SkillDescriptor_Provider_Type = 7
+const SkillDescriptor_Provider_Droid_case case_SkillDescriptor_Provider_Type = 8
+const SkillDescriptor_Provider_Github_case case_SkillDescriptor_Provider_Type = 9
+const SkillDescriptor_Provider_OpenCode_case case_SkillDescriptor_Provider_Type = 10
+
+func (x *SkillDescriptor_Provider) WhichType() case_SkillDescriptor_Provider_Type {
+	if x == nil {
+		return SkillDescriptor_Provider_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *skillDescriptor_Provider_Warp:
+		return SkillDescriptor_Provider_Warp_case
+	case *skillDescriptor_Provider_Agents:
+		return SkillDescriptor_Provider_Agents_case
+	case *skillDescriptor_Provider_Claude:
+		return SkillDescriptor_Provider_Claude_case
+	case *skillDescriptor_Provider_Codex:
+		return SkillDescriptor_Provider_Codex_case
+	case *skillDescriptor_Provider_Cursor:
+		return SkillDescriptor_Provider_Cursor_case
+	case *skillDescriptor_Provider_Gemini:
+		return SkillDescriptor_Provider_Gemini_case
+	case *skillDescriptor_Provider_Copilot:
+		return SkillDescriptor_Provider_Copilot_case
+	case *skillDescriptor_Provider_Droid:
+		return SkillDescriptor_Provider_Droid_case
+	case *skillDescriptor_Provider_Github:
+		return SkillDescriptor_Provider_Github_case
+	case *skillDescriptor_Provider_OpenCode:
+		return SkillDescriptor_Provider_OpenCode_case
+	default:
+		return SkillDescriptor_Provider_Type_not_set_case
+	}
+}
+
+type SkillDescriptor_Provider_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Type:
+	Warp     *emptypb.Empty
+	Agents   *emptypb.Empty
+	Claude   *emptypb.Empty
+	Codex    *emptypb.Empty
+	Cursor   *emptypb.Empty
+	Gemini   *emptypb.Empty
+	Copilot  *emptypb.Empty
+	Droid    *emptypb.Empty
+	Github   *emptypb.Empty
+	OpenCode *emptypb.Empty
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 SkillDescriptor_Provider_builder) Build() *SkillDescriptor_Provider {
+	m0 := &SkillDescriptor_Provider{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Warp != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Warp{b.Warp}
+	}
+	if b.Agents != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Agents{b.Agents}
+	}
+	if b.Claude != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Claude{b.Claude}
+	}
+	if b.Codex != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Codex{b.Codex}
+	}
+	if b.Cursor != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Cursor{b.Cursor}
+	}
+	if b.Gemini != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Gemini{b.Gemini}
+	}
+	if b.Copilot != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Copilot{b.Copilot}
+	}
+	if b.Droid != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Droid{b.Droid}
+	}
+	if b.Github != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_Github{b.Github}
+	}
+	if b.OpenCode != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Provider_OpenCode{b.OpenCode}
+	}
+	return m0
+}
+
+type case_SkillDescriptor_Provider_Type protoreflect.FieldNumber
+
+func (x case_SkillDescriptor_Provider_Type) String() string {
+	md := file_skill_proto_msgTypes[2].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isSkillDescriptor_Provider_Type interface {
+	isSkillDescriptor_Provider_Type()
+}
+
+type skillDescriptor_Provider_Warp struct {
+	Warp *emptypb.Empty `protobuf:"bytes,1,opt,name=warp,oneof"`
+}
+
+type skillDescriptor_Provider_Agents struct {
+	Agents *emptypb.Empty `protobuf:"bytes,2,opt,name=agents,oneof"`
+}
+
+type skillDescriptor_Provider_Claude struct {
+	Claude *emptypb.Empty `protobuf:"bytes,3,opt,name=claude,oneof"`
+}
+
+type skillDescriptor_Provider_Codex struct {
+	Codex *emptypb.Empty `protobuf:"bytes,4,opt,name=codex,oneof"`
+}
+
+type skillDescriptor_Provider_Cursor struct {
+	Cursor *emptypb.Empty `protobuf:"bytes,5,opt,name=cursor,oneof"`
+}
+
+type skillDescriptor_Provider_Gemini struct {
+	Gemini *emptypb.Empty `protobuf:"bytes,6,opt,name=gemini,oneof"`
+}
+
+type skillDescriptor_Provider_Copilot struct {
+	Copilot *emptypb.Empty `protobuf:"bytes,7,opt,name=copilot,oneof"`
+}
+
+type skillDescriptor_Provider_Droid struct {
+	Droid *emptypb.Empty `protobuf:"bytes,8,opt,name=droid,oneof"`
+}
+
+type skillDescriptor_Provider_Github struct {
+	Github *emptypb.Empty `protobuf:"bytes,9,opt,name=github,oneof"`
+}
+
+type skillDescriptor_Provider_OpenCode struct {
+	OpenCode *emptypb.Empty `protobuf:"bytes,10,opt,name=open_code,json=openCode,oneof"`
+}
+
+func (*skillDescriptor_Provider_Warp) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Agents) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Claude) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Codex) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Cursor) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Gemini) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Copilot) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Droid) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_Github) isSkillDescriptor_Provider_Type() {}
+
+func (*skillDescriptor_Provider_OpenCode) isSkillDescriptor_Provider_Type() {}
+
+type SkillDescriptor_Scope struct {
+	state           protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_Type isSkillDescriptor_Scope_Type `protobuf_oneof:"type"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *SkillDescriptor_Scope) Reset() {
+	*x = SkillDescriptor_Scope{}
+	mi := &file_skill_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkillDescriptor_Scope) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkillDescriptor_Scope) ProtoMessage() {}
+
+func (x *SkillDescriptor_Scope) ProtoReflect() protoreflect.Message {
+	mi := &file_skill_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *SkillDescriptor_Scope) GetHome() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Home); ok {
+			return x.Home
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Scope) GetProject() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Project); ok {
+			return x.Project
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Scope) GetBundled() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Bundled); ok {
+			return x.Bundled
+		}
+	}
+	return nil
+}
+
+func (x *SkillDescriptor_Scope) SetHome(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Scope_Home{v}
+}
+
+func (x *SkillDescriptor_Scope) SetProject(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Scope_Project{v}
+}
+
+func (x *SkillDescriptor_Scope) SetBundled(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Type = nil
+		return
+	}
+	x.xxx_hidden_Type = &skillDescriptor_Scope_Bundled{v}
+}
+
+func (x *SkillDescriptor_Scope) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Type != nil
+}
+
+func (x *SkillDescriptor_Scope) HasHome() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Home)
+	return ok
+}
+
+func (x *SkillDescriptor_Scope) HasProject() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Project)
+	return ok
+}
+
+func (x *SkillDescriptor_Scope) HasBundled() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Bundled)
+	return ok
+}
+
+func (x *SkillDescriptor_Scope) ClearType() {
+	x.xxx_hidden_Type = nil
+}
+
+func (x *SkillDescriptor_Scope) ClearHome() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Home); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Scope) ClearProject() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Project); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+func (x *SkillDescriptor_Scope) ClearBundled() {
+	if _, ok := x.xxx_hidden_Type.(*skillDescriptor_Scope_Bundled); ok {
+		x.xxx_hidden_Type = nil
+	}
+}
+
+const SkillDescriptor_Scope_Type_not_set_case case_SkillDescriptor_Scope_Type = 0
+const SkillDescriptor_Scope_Home_case case_SkillDescriptor_Scope_Type = 1
+const SkillDescriptor_Scope_Project_case case_SkillDescriptor_Scope_Type = 2
+const SkillDescriptor_Scope_Bundled_case case_SkillDescriptor_Scope_Type = 3
+
+func (x *SkillDescriptor_Scope) WhichType() case_SkillDescriptor_Scope_Type {
+	if x == nil {
+		return SkillDescriptor_Scope_Type_not_set_case
+	}
+	switch x.xxx_hidden_Type.(type) {
+	case *skillDescriptor_Scope_Home:
+		return SkillDescriptor_Scope_Home_case
+	case *skillDescriptor_Scope_Project:
+		return SkillDescriptor_Scope_Project_case
+	case *skillDescriptor_Scope_Bundled:
+		return SkillDescriptor_Scope_Bundled_case
+	default:
+		return SkillDescriptor_Scope_Type_not_set_case
+	}
+}
+
+type SkillDescriptor_Scope_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Type:
+	Home    *emptypb.Empty
+	Project *emptypb.Empty
+	Bundled *emptypb.Empty
+	// -- end of xxx_hidden_Type
+}
+
+func (b0 SkillDescriptor_Scope_builder) Build() *SkillDescriptor_Scope {
+	m0 := &SkillDescriptor_Scope{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Home != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Scope_Home{b.Home}
+	}
+	if b.Project != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Scope_Project{b.Project}
+	}
+	if b.Bundled != nil {
+		x.xxx_hidden_Type = &skillDescriptor_Scope_Bundled{b.Bundled}
+	}
+	return m0
+}
+
+type case_SkillDescriptor_Scope_Type protoreflect.FieldNumber
+
+func (x case_SkillDescriptor_Scope_Type) String() string {
+	md := file_skill_proto_msgTypes[3].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isSkillDescriptor_Scope_Type interface {
+	isSkillDescriptor_Scope_Type()
+}
+
+type skillDescriptor_Scope_Home struct {
+	Home *emptypb.Empty `protobuf:"bytes,1,opt,name=home,oneof"`
+}
+
+type skillDescriptor_Scope_Project struct {
+	Project *emptypb.Empty `protobuf:"bytes,2,opt,name=project,oneof"`
+}
+
+type skillDescriptor_Scope_Bundled struct {
+	Bundled *emptypb.Empty `protobuf:"bytes,3,opt,name=bundled,oneof"`
+}
+
+func (*skillDescriptor_Scope_Home) isSkillDescriptor_Scope_Type() {}
+
+func (*skillDescriptor_Scope_Project) isSkillDescriptor_Scope_Type() {}
+
+func (*skillDescriptor_Scope_Bundled) isSkillDescriptor_Scope_Type() {}
+
 var File_skill_proto protoreflect.FileDescriptor
 
 const file_skill_proto_rawDesc = "" +
 	"\n" +
-	"\vskill.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\"\xce\x01\n" +
+	"\vskill.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x12file_content.proto\"\xd9\a\n" +
 	"\x0fSkillDescriptor\x12\x14\n" +
 	"\x04path\x18\x01 \x01(\tH\x00R\x04path\x12*\n" +
 	"\x10bundled_skill_id\x18\x04 \x01(\tH\x00R\x0ebundledSkillId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
-	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1a\n" +
-	"\bprovider\x18\x05 \x01(\tR\bprovider\x12\x14\n" +
-	"\x05scope\x18\x06 \x01(\tR\x05scopeB\x11\n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12I\n" +
+	"\bprovider\x18\x05 \x01(\v2-.warp.multi_agent.v1.SkillDescriptor.ProviderR\bprovider\x12@\n" +
+	"\x05scope\x18\x06 \x01(\v2*.warp.multi_agent.v1.SkillDescriptor.ScopeR\x05scope\x1a\x85\x04\n" +
+	"\bProvider\x12,\n" +
+	"\x04warp\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04warp\x120\n" +
+	"\x06agents\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06agents\x120\n" +
+	"\x06claude\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06claude\x12.\n" +
+	"\x05codex\x18\x04 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05codex\x120\n" +
+	"\x06cursor\x18\x05 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06cursor\x120\n" +
+	"\x06gemini\x18\x06 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06gemini\x122\n" +
+	"\acopilot\x18\a \x01(\v2\x16.google.protobuf.EmptyH\x00R\acopilot\x12.\n" +
+	"\x05droid\x18\b \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05droid\x120\n" +
+	"\x06github\x18\t \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06github\x125\n" +
+	"\topen_code\x18\n" +
+	" \x01(\v2\x16.google.protobuf.EmptyH\x00R\bopenCodeB\x06\n" +
+	"\x04type\x1a\xa5\x01\n" +
+	"\x05Scope\x12,\n" +
+	"\x04home\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04home\x122\n" +
+	"\aproject\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\aproject\x122\n" +
+	"\abundled\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\abundledB\x06\n" +
+	"\x04typeB\x11\n" +
 	"\x0fskill_reference\"\x89\x01\n" +
 	"\x05Skill\x12D\n" +
 	"\n" +
@@ -437,20 +1178,38 @@ const file_skill_proto_rawDesc = "" +
 	"descriptor\x12:\n" +
 	"\acontent\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_skill_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_skill_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_skill_proto_goTypes = []any{
-	(*SkillDescriptor)(nil), // 0: warp.multi_agent.v1.SkillDescriptor
-	(*Skill)(nil),           // 1: warp.multi_agent.v1.Skill
-	(*FileContent)(nil),     // 2: warp.multi_agent.v1.FileContent
+	(*SkillDescriptor)(nil),          // 0: warp.multi_agent.v1.SkillDescriptor
+	(*Skill)(nil),                    // 1: warp.multi_agent.v1.Skill
+	(*SkillDescriptor_Provider)(nil), // 2: warp.multi_agent.v1.SkillDescriptor.Provider
+	(*SkillDescriptor_Scope)(nil),    // 3: warp.multi_agent.v1.SkillDescriptor.Scope
+	(*FileContent)(nil),              // 4: warp.multi_agent.v1.FileContent
+	(*emptypb.Empty)(nil),            // 5: google.protobuf.Empty
 }
 var file_skill_proto_depIdxs = []int32{
-	0, // 0: warp.multi_agent.v1.Skill.descriptor:type_name -> warp.multi_agent.v1.SkillDescriptor
-	2, // 1: warp.multi_agent.v1.Skill.content:type_name -> warp.multi_agent.v1.FileContent
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	2,  // 0: warp.multi_agent.v1.SkillDescriptor.provider:type_name -> warp.multi_agent.v1.SkillDescriptor.Provider
+	3,  // 1: warp.multi_agent.v1.SkillDescriptor.scope:type_name -> warp.multi_agent.v1.SkillDescriptor.Scope
+	0,  // 2: warp.multi_agent.v1.Skill.descriptor:type_name -> warp.multi_agent.v1.SkillDescriptor
+	4,  // 3: warp.multi_agent.v1.Skill.content:type_name -> warp.multi_agent.v1.FileContent
+	5,  // 4: warp.multi_agent.v1.SkillDescriptor.Provider.warp:type_name -> google.protobuf.Empty
+	5,  // 5: warp.multi_agent.v1.SkillDescriptor.Provider.agents:type_name -> google.protobuf.Empty
+	5,  // 6: warp.multi_agent.v1.SkillDescriptor.Provider.claude:type_name -> google.protobuf.Empty
+	5,  // 7: warp.multi_agent.v1.SkillDescriptor.Provider.codex:type_name -> google.protobuf.Empty
+	5,  // 8: warp.multi_agent.v1.SkillDescriptor.Provider.cursor:type_name -> google.protobuf.Empty
+	5,  // 9: warp.multi_agent.v1.SkillDescriptor.Provider.gemini:type_name -> google.protobuf.Empty
+	5,  // 10: warp.multi_agent.v1.SkillDescriptor.Provider.copilot:type_name -> google.protobuf.Empty
+	5,  // 11: warp.multi_agent.v1.SkillDescriptor.Provider.droid:type_name -> google.protobuf.Empty
+	5,  // 12: warp.multi_agent.v1.SkillDescriptor.Provider.github:type_name -> google.protobuf.Empty
+	5,  // 13: warp.multi_agent.v1.SkillDescriptor.Provider.open_code:type_name -> google.protobuf.Empty
+	5,  // 14: warp.multi_agent.v1.SkillDescriptor.Scope.home:type_name -> google.protobuf.Empty
+	5,  // 15: warp.multi_agent.v1.SkillDescriptor.Scope.project:type_name -> google.protobuf.Empty
+	5,  // 16: warp.multi_agent.v1.SkillDescriptor.Scope.bundled:type_name -> google.protobuf.Empty
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_skill_proto_init() }
@@ -463,13 +1222,30 @@ func file_skill_proto_init() {
 		(*skillDescriptor_Path)(nil),
 		(*skillDescriptor_BundledSkillId)(nil),
 	}
+	file_skill_proto_msgTypes[2].OneofWrappers = []any{
+		(*skillDescriptor_Provider_Warp)(nil),
+		(*skillDescriptor_Provider_Agents)(nil),
+		(*skillDescriptor_Provider_Claude)(nil),
+		(*skillDescriptor_Provider_Codex)(nil),
+		(*skillDescriptor_Provider_Cursor)(nil),
+		(*skillDescriptor_Provider_Gemini)(nil),
+		(*skillDescriptor_Provider_Copilot)(nil),
+		(*skillDescriptor_Provider_Droid)(nil),
+		(*skillDescriptor_Provider_Github)(nil),
+		(*skillDescriptor_Provider_OpenCode)(nil),
+	}
+	file_skill_proto_msgTypes[3].OneofWrappers = []any{
+		(*skillDescriptor_Scope_Home)(nil),
+		(*skillDescriptor_Scope_Project)(nil),
+		(*skillDescriptor_Scope_Bundled)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_skill_proto_rawDesc), len(file_skill_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
