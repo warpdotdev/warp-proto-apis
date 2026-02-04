@@ -516,6 +516,7 @@ message Message {
         google.protobuf.Empty advice = 5;
         google.protobuf.Empty computer_use = 6;
         google.protobuf.Empty summarization = 7;
+        google.protobuf.Empty conversation_search = 8;
       }
 
       message CLISubagent {

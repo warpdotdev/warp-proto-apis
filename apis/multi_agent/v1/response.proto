@@ -221,6 +221,7 @@ message ClientAction {
     StartNewConversation start_new_conversation = 12;
     UpdateTaskServerData update_task_server_data = 13;
     MoveMessagesToNewTask move_messages_to_new_task = 14;
+    RequestSubtask request_subtask = 15;
   }
 
   // Create task action
@@ -307,6 +308,14 @@ message ClientAction {
     // The new messages to insert in place of the source range.  If empty,
     // the messages are simply moved.
     repeated Message replacement_messages = 6;
+  }
+
+  // Requests the client to send the messages for a subtask.
+  message RequestSubtask {
+    // The task ID whose messages are needed.
+    string task_id = 1;
+    // The pending tool call ID that the client should use when returning the subtask.
+    string pending_tool_call_id = 2;
   }
 }
 
