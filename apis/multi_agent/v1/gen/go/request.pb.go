@@ -5054,6 +5054,7 @@ type Request_Input_StartFromAmbientRunPrompt struct {
 	state                        protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_AmbientRunId      *string                `protobuf:"bytes,1,opt,name=ambient_run_id,json=ambientRunId"`
 	xxx_hidden_RuntimeBasePrompt *string                `protobuf:"bytes,2,opt,name=runtime_base_prompt,json=runtimeBasePrompt"`
+	xxx_hidden_RuntimeSkill      *Skill                 `protobuf:"bytes,3,opt,name=runtime_skill,json=runtimeSkill"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
 	unknownFields                protoimpl.UnknownFields
@@ -5105,14 +5106,25 @@ func (x *Request_Input_StartFromAmbientRunPrompt) GetRuntimeBasePrompt() string 
 	return ""
 }
 
+func (x *Request_Input_StartFromAmbientRunPrompt) GetRuntimeSkill() *Skill {
+	if x != nil {
+		return x.xxx_hidden_RuntimeSkill
+	}
+	return nil
+}
+
 func (x *Request_Input_StartFromAmbientRunPrompt) SetAmbientRunId(v string) {
 	x.xxx_hidden_AmbientRunId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Request_Input_StartFromAmbientRunPrompt) SetRuntimeBasePrompt(v string) {
 	x.xxx_hidden_RuntimeBasePrompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *Request_Input_StartFromAmbientRunPrompt) SetRuntimeSkill(v *Skill) {
+	x.xxx_hidden_RuntimeSkill = v
 }
 
 func (x *Request_Input_StartFromAmbientRunPrompt) HasAmbientRunId() bool {
@@ -5129,6 +5141,13 @@ func (x *Request_Input_StartFromAmbientRunPrompt) HasRuntimeBasePrompt() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *Request_Input_StartFromAmbientRunPrompt) HasRuntimeSkill() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_RuntimeSkill != nil
+}
+
 func (x *Request_Input_StartFromAmbientRunPrompt) ClearAmbientRunId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_AmbientRunId = nil
@@ -5139,14 +5158,21 @@ func (x *Request_Input_StartFromAmbientRunPrompt) ClearRuntimeBasePrompt() {
 	x.xxx_hidden_RuntimeBasePrompt = nil
 }
 
+func (x *Request_Input_StartFromAmbientRunPrompt) ClearRuntimeSkill() {
+	x.xxx_hidden_RuntimeSkill = nil
+}
+
 type Request_Input_StartFromAmbientRunPrompt_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The ambient agent run ID to resolve the prompt from.
 	AmbientRunId *string
-	// Optional runtime base prompt / instructions.
-	// When provided, this is prepended to the effective prompt.
+	// Optional runtime base prompt / instructions (e.g., from file-based agent config).
+	// When provided, this is prepended to the user-visible prompt.
 	RuntimeBasePrompt *string
+	// Optional skill to use as base context.
+	// When provided, creates an InvokeSkill message (content hidden from user in UI).
+	RuntimeSkill *Skill
 }
 
 func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input_StartFromAmbientRunPrompt {
@@ -5154,13 +5180,14 @@ func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.AmbientRunId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_AmbientRunId = b.AmbientRunId
 	}
 	if b.RuntimeBasePrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_RuntimeBasePrompt = b.RuntimeBasePrompt
 	}
+	x.xxx_hidden_RuntimeSkill = b.RuntimeSkill
 	return m0
 }
 
@@ -6925,7 +6952,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x9bT\n" +
+	"task.proto\x1a\vskill.proto\"\xddT\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6935,7 +6962,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc75\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x896\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7054,10 +7081,11 @@ const file_request_proto_rawDesc = "" +
 	"\x13FetchReviewComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a5\n" +
 	"\x15SummarizeConversation\x12\x1c\n" +
-	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1aw\n" +
+	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1a\xb8\x01\n" +
 	"\x19StartFromAmbientRunPrompt\x12$\n" +
 	"\x0eambient_run_id\x18\x01 \x01(\tR\fambientRunId\x124\n" +
-	"\x13runtime_base_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x11runtimeBasePrompt\x1a?\n" +
+	"\x13runtime_base_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x11runtimeBasePrompt\x12?\n" +
+	"\rruntime_skill\x18\x03 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\fruntimeSkill\x1a?\n" +
 	"\vInvokeSkill\x120\n" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skillB\x06\n" +
 	"\x04type\x1a\xc7\x02\n" +
@@ -7303,23 +7331,24 @@ var file_request_proto_depIdxs = []int32{
 	73, // 71: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
 	73, // 72: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
 	33, // 73: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
-	74, // 74: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
-	72, // 75: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	8,  // 76: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	11, // 77: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	9,  // 78: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	75, // 79: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	76, // 80: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	77, // 81: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	37, // 82: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	78, // 83: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	38, // 84: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	39, // 85: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	86, // [86:86] is the sub-list for method output_type
-	86, // [86:86] is the sub-list for method input_type
-	86, // [86:86] is the sub-list for extension type_name
-	86, // [86:86] is the sub-list for extension extendee
-	0,  // [0:86] is the sub-list for field type_name
+	74, // 74: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
+	74, // 75: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
+	72, // 76: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	8,  // 77: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	11, // 78: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	9,  // 79: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	75, // 80: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	76, // 81: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	77, // 82: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	37, // 83: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
+	78, // 84: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	38, // 85: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	39, // 86: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	87, // [87:87] is the sub-list for method output_type
+	87, // [87:87] is the sub-list for method input_type
+	87, // [87:87] is the sub-list for extension type_name
+	87, // [87:87] is the sub-list for extension extendee
+	0,  // [0:87] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }

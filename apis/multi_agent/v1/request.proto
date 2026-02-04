@@ -235,9 +235,13 @@ message Request {
       // The ambient agent run ID to resolve the prompt from.
       string ambient_run_id = 1;
 
-      // Optional runtime base prompt / instructions.
-      // When provided, this is prepended to the effective prompt.
+      // Optional runtime base prompt / instructions (e.g., from file-based agent config).
+      // When provided, this is prepended to the user-visible prompt.
       string runtime_base_prompt = 2 [ (sensitive) = true ];
+
+      // Optional skill to use as base context.
+      // When provided, creates an InvokeSkill message (content hidden from user in UI).
+      Skill runtime_skill = 3;
     }
 
     message InvokeSkill {
