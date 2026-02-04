@@ -13054,7 +13054,6 @@ func (x *Message_ToolCall_RunShellCommand) GetCommand() string {
 	return ""
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) GetIsReadOnly() bool {
 	if x != nil {
 		return x.xxx_hidden_IsReadOnly
@@ -13078,7 +13077,6 @@ func (x *Message_ToolCall_RunShellCommand) GetCitations() []*Citation {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) GetIsRisky() bool {
 	if x != nil {
 		return x.xxx_hidden_IsRisky
@@ -13109,7 +13107,6 @@ func (x *Message_ToolCall_RunShellCommand) SetCommand(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) SetIsReadOnly(v bool) {
 	x.xxx_hidden_IsReadOnly = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
@@ -13124,7 +13121,6 @@ func (x *Message_ToolCall_RunShellCommand) SetCitations(v []*Citation) {
 	x.xxx_hidden_Citations = &v
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) SetIsRisky(v bool) {
 	x.xxx_hidden_IsRisky = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
@@ -13146,7 +13142,6 @@ func (x *Message_ToolCall_RunShellCommand) HasCommand() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) HasIsReadOnly() bool {
 	if x == nil {
 		return false
@@ -13161,7 +13156,6 @@ func (x *Message_ToolCall_RunShellCommand) HasUsesPager() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) HasIsRisky() bool {
 	if x == nil {
 		return false
@@ -13196,7 +13190,6 @@ func (x *Message_ToolCall_RunShellCommand) ClearCommand() {
 	x.xxx_hidden_Command = nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) ClearIsReadOnly() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_IsReadOnly = false
@@ -13207,7 +13200,6 @@ func (x *Message_ToolCall_RunShellCommand) ClearUsesPager() {
 	x.xxx_hidden_UsesPager = false
 }
 
-// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_RunShellCommand) ClearIsRisky() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_IsRisky = false
@@ -13248,16 +13240,12 @@ type Message_ToolCall_RunShellCommand_builder struct {
 
 	Command *string
 	// DEPRECATED: Being replaced by risk_category
-	//
-	// Deprecated: Marked as deprecated in task.proto.
 	IsReadOnly *bool
 	UsesPager  *bool
 	Citations  []*Citation
 	// Whether the agent thinks this command is risky and therefore should be
 	// passed by the user first.
 	// DEPRECATED: Being replaced by risk_category
-	//
-	// Deprecated: Marked as deprecated in task.proto.
 	IsRisky *bool
 	// Whether or not the harness should wait until the command is complete to report a result.
 	//
@@ -24925,7 +24913,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"Ô\x01\n" +
+	"\x0ecomment_target\"\xbb\x94\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -25007,7 +24995,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xd6P\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xceP\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -25042,15 +25030,15 @@ const file_task_proto_rawDesc = "" +
 	"read_skill\x18\x1a \x01(\v2/.warp.multi_agent.v1.Message.ToolCall.ReadSkillH\x00R\treadSkill\x12l\n" +
 	"\x14request_computer_use\x18\x1b \x01(\v28.warp.multi_agent.v1.Message.ToolCall.RequestComputerUseH\x00R\x12requestComputerUse\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
-	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xe3\x02\n" +
+	"\apayload\x18\x01 \x01(\tR\apayload\x1a\xdb\x02\n" +
 	"\x0fRunShellCommand\x12\x18\n" +
-	"\acommand\x18\x01 \x01(\tR\acommand\x12$\n" +
-	"\fis_read_only\x18\x02 \x01(\bB\x02\x18\x01R\n" +
+	"\acommand\x18\x01 \x01(\tR\acommand\x12 \n" +
+	"\fis_read_only\x18\x02 \x01(\bR\n" +
 	"isReadOnly\x12\x1d\n" +
 	"\n" +
 	"uses_pager\x18\x03 \x01(\bR\tusesPager\x12;\n" +
-	"\tcitations\x18\x04 \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12\x1d\n" +
-	"\bis_risky\x18\x05 \x01(\bB\x02\x18\x01R\aisRisky\x120\n" +
+	"\tcitations\x18\x04 \x03(\v2\x1d.warp.multi_agent.v1.CitationR\tcitations\x12\x19\n" +
+	"\bis_risky\x18\x05 \x01(\bR\aisRisky\x120\n" +
 	"\x13wait_until_complete\x18\x06 \x01(\bH\x00R\x11waitUntilComplete\x12F\n" +
 	"\rrisk_category\x18\a \x01(\x0e2!.warp.multi_agent.v1.RiskCategoryR\friskCategoryB\x1b\n" +
 	"\x19wait_until_complete_value\x1a\xcf\x02\n" +

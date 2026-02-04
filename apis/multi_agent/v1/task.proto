@@ -292,13 +292,13 @@ message Message {
       string command = 1;
       
       // DEPRECATED: Being replaced by risk_category
-      bool is_read_only = 2 [deprecated=true];
+      bool is_read_only = 2;
       bool uses_pager = 3;
       repeated Citation citations = 4;
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
       // DEPRECATED: Being replaced by risk_category
-      bool is_risky = 5 [deprecated=true];
+      bool is_risky = 5;
 
       // Whether or not the harness should wait until the command is complete to report a result.
       //
