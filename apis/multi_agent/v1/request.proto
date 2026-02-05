@@ -144,8 +144,13 @@ message Request {
         InsertReviewCommentsResult insert_review_comments = 24;
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
+        ProvideSubtaskResult provide_subtask = 27;
       }
     }
+
+    // Result for providing a subtask in response to RequestSubtask client action.
+    // The subtask content is delivered via TaskContext.tasks in the request.
+    message ProvideSubtaskResult {}
 
     // Canned responses correspond to hardcoded predefined responses from
     // Agent Mode e.g. the zero-state chip for "Install" has a predefined
