@@ -281,6 +281,12 @@ message Message {
       InsertReviewComments insert_review_comments = 25;
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
+      AskQuestion ask_question = 28;
+    }
+
+    message AskQuestion {
+      string question = 1 [ (sensitive) = true ];
+      repeated string choices = 2 [ (sensitive) = true ];
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -779,6 +785,7 @@ message Message {
       InsertReviewCommentsResult insert_review_comments = 29;
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
+      AskQuestionResult ask_question = 32;
     }
 
     // Result of a server-side tool call.
@@ -1290,6 +1297,19 @@ message ReadSkillResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+message AskQuestionResult {
+  oneof result {
+    Selected selected = 1;
+    Cancelled cancelled = 2;
+  }
+
+  message Selected {
+    string selected_choice = 1;
+  }
+
+  message Cancelled {}
+}
+
 // The dimensions of a user's screen, used for computer use.
 message ScreenDimensions {
   int32 width_px = 1;
@@ -1370,6 +1390,7 @@ enum ToolType {
   INSERT_REVIEW_COMMENTS = 22;
   READ_SKILL = 23;
   REQUEST_COMPUTER_USE = 24;
+  ASK_QUESTION = 25;
 }
 
 message UserQueryMode {
