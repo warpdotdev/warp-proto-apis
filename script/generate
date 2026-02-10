@@ -76,12 +76,22 @@ if [ -d "$API_PATH/gen/python" ]; then
     echo "Error: grpc_python_plugin not found. Run ./script/bootstrap to install."
     exit 1
   fi
+  # Strip Go-specific directives
+  PY_TMPDIR=$(mktemp -d)
+  for proto in "${PROTO_FILES[@]}"; do
+    sed \
+      -e '/import "google\/protobuf\/go_features.proto";/d' \
+      -e '/option features\./d' \
+      "$(realpath "$API_PATH/$proto")" > "$PY_TMPDIR/$proto"
+  done
+
   protoc \
-    --proto_path="$(realpath "$API_PATH")" \
+    --proto_path="$PY_TMPDIR" \
     --python_out="$API_PATH/gen/python" \
     --grpc_python_out="$API_PATH/gen/python" \
     --plugin=protoc-gen-grpc_python="$GRPC_PYTHON_PLUGIN" \
     "${PROTO_FILES[@]}"
+  rm -rf "$PY_TMPDIR"
   touch "$API_PATH/gen/python/__init__.py"
   echo "✅️ Done generating Python bindings"
 else
