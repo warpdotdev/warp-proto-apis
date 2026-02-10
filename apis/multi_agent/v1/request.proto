@@ -108,7 +108,6 @@ message Request {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
-          InvokeSkill invoke_skill = 4;
         }
       }
     }
