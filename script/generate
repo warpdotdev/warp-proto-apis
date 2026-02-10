@@ -59,9 +59,31 @@ for proto in "${PROTO_FILES[@]}"; do
 done
 
 echo -e "\n➡️  Generating Go bindings..."
-protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
-pushd "$API_PATH/gen/go" >/dev/null 2>&1
-go mod tidy
-popd >/dev/null 2>&1
+if [ -d "$API_PATH/gen/go" ]; then
+  protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
+  pushd "$API_PATH/gen/go" >/dev/null 2>&1
+  go mod tidy
+  popd >/dev/null 2>&1
+  echo "✅️ Done generating Go bindings"
+else
+  echo "⏭️  Skipping Go (no gen/go directory)"
+fi
 
-echo "✅️ Done generating Go bindings"
+echo -e "\n➡️  Generating Python bindings..."
+if [ -d "$API_PATH/gen/python" ]; then
+  GRPC_PYTHON_PLUGIN=$(which grpc_python_plugin)
+  if [ -z "$GRPC_PYTHON_PLUGIN" ]; then
+    echo "Error: grpc_python_plugin not found. Run ./script/bootstrap to install."
+    exit 1
+  fi
+  protoc \
+    --proto_path="$(realpath "$API_PATH")" \
+    --python_out="$API_PATH/gen/python" \
+    --grpc_python_out="$API_PATH/gen/python" \
+    --plugin=protoc-gen-grpc_python="$GRPC_PYTHON_PLUGIN" \
+    "${PROTO_FILES[@]}"
+  touch "$API_PATH/gen/python/__init__.py"
+  echo "✅️ Done generating Python bindings"
+else
+  echo "⏭️  Skipping Python (no gen/python directory)"
+fi
