@@ -457,10 +457,10 @@ func (x *Request_Input) GetInitProjectRules() *Request_Input_InitProjectRules {
 	return nil
 }
 
-func (x *Request_Input) GetTriggerSuggestPrompt() *Request_Input_TriggerSuggestPrompt {
+func (x *Request_Input) GetTriggerPromptSuggestion() *Request_Input_TriggerPromptSuggestion {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_TriggerSuggestPrompt_); ok {
-			return x.TriggerSuggestPrompt
+		if x, ok := x.xxx_hidden_Type.(*request_Input_TriggerPromptSuggestion_); ok {
+			return x.TriggerPromptSuggestion
 		}
 	}
 	return nil
@@ -602,12 +602,12 @@ func (x *Request_Input) SetInitProjectRules(v *Request_Input_InitProjectRules) {
 	x.xxx_hidden_Type = &request_Input_InitProjectRules_{v}
 }
 
-func (x *Request_Input) SetTriggerSuggestPrompt(v *Request_Input_TriggerSuggestPrompt) {
+func (x *Request_Input) SetTriggerPromptSuggestion(v *Request_Input_TriggerPromptSuggestion) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_TriggerSuggestPrompt_{v}
+	x.xxx_hidden_Type = &request_Input_TriggerPromptSuggestion_{v}
 }
 
 func (x *Request_Input) SetCreateNewProject(v *Request_Input_CreateNewProject) {
@@ -746,11 +746,11 @@ func (x *Request_Input) HasInitProjectRules() bool {
 	return ok
 }
 
-func (x *Request_Input) HasTriggerSuggestPrompt() bool {
+func (x *Request_Input) HasTriggerPromptSuggestion() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_TriggerSuggestPrompt_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_TriggerPromptSuggestion_)
 	return ok
 }
 
@@ -874,8 +874,8 @@ func (x *Request_Input) ClearInitProjectRules() {
 	}
 }
 
-func (x *Request_Input) ClearTriggerSuggestPrompt() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_TriggerSuggestPrompt_); ok {
+func (x *Request_Input) ClearTriggerPromptSuggestion() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_TriggerPromptSuggestion_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -948,7 +948,7 @@ const Request_Input_QueryWithCannedResponse_case case_Request_Input_Type = 4
 const Request_Input_AutoCodeDiffQuery_case case_Request_Input_Type = 5
 const Request_Input_ResumeConversation_case case_Request_Input_Type = 7
 const Request_Input_InitProjectRules_case case_Request_Input_Type = 8
-const Request_Input_TriggerSuggestPrompt_case case_Request_Input_Type = 9
+const Request_Input_TriggerPromptSuggestion_case case_Request_Input_Type = 9
 const Request_Input_CreateNewProject_case case_Request_Input_Type = 10
 const Request_Input_CloneRepository_case case_Request_Input_Type = 11
 const Request_Input_CodeReview_case case_Request_Input_Type = 12
@@ -975,8 +975,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_ResumeConversation_case
 	case *request_Input_InitProjectRules_:
 		return Request_Input_InitProjectRules_case
-	case *request_Input_TriggerSuggestPrompt_:
-		return Request_Input_TriggerSuggestPrompt_case
+	case *request_Input_TriggerPromptSuggestion_:
+		return Request_Input_TriggerPromptSuggestion_case
 	case *request_Input_CreateNewProject_:
 		return Request_Input_CreateNewProject_case
 	case *request_Input_CloneRepository_:
@@ -1014,7 +1014,7 @@ type Request_Input_builder struct {
 	AutoCodeDiffQuery         *Request_Input_AutoCodeDiffQuery
 	ResumeConversation        *Request_Input_ResumeConversation
 	InitProjectRules          *Request_Input_InitProjectRules
-	TriggerSuggestPrompt      *Request_Input_TriggerSuggestPrompt
+	TriggerPromptSuggestion   *Request_Input_TriggerPromptSuggestion
 	CreateNewProject          *Request_Input_CreateNewProject
 	CloneRepository           *Request_Input_CloneRepository
 	CodeReview                *Request_Input_CodeReview
@@ -1050,8 +1050,8 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	if b.InitProjectRules != nil {
 		x.xxx_hidden_Type = &request_Input_InitProjectRules_{b.InitProjectRules}
 	}
-	if b.TriggerSuggestPrompt != nil {
-		x.xxx_hidden_Type = &request_Input_TriggerSuggestPrompt_{b.TriggerSuggestPrompt}
+	if b.TriggerPromptSuggestion != nil {
+		x.xxx_hidden_Type = &request_Input_TriggerPromptSuggestion_{b.TriggerPromptSuggestion}
 	}
 	if b.CreateNewProject != nil {
 		x.xxx_hidden_Type = &request_Input_CreateNewProject_{b.CreateNewProject}
@@ -1120,8 +1120,8 @@ type request_Input_InitProjectRules_ struct {
 	InitProjectRules *Request_Input_InitProjectRules `protobuf:"bytes,8,opt,name=init_project_rules,json=initProjectRules,oneof"`
 }
 
-type request_Input_TriggerSuggestPrompt_ struct {
-	TriggerSuggestPrompt *Request_Input_TriggerSuggestPrompt `protobuf:"bytes,9,opt,name=trigger_suggest_prompt,json=triggerSuggestPrompt,oneof"`
+type request_Input_TriggerPromptSuggestion_ struct {
+	TriggerPromptSuggestion *Request_Input_TriggerPromptSuggestion `protobuf:"bytes,9,opt,name=trigger_prompt_suggestion,json=triggerPromptSuggestion,oneof"`
 }
 
 type request_Input_CreateNewProject_ struct {
@@ -1176,7 +1176,7 @@ func (*request_Input_ResumeConversation_) isRequest_Input_Type() {}
 
 func (*request_Input_InitProjectRules_) isRequest_Input_Type() {}
 
-func (*request_Input_TriggerSuggestPrompt_) isRequest_Input_Type() {}
+func (*request_Input_TriggerPromptSuggestion_) isRequest_Input_Type() {}
 
 func (*request_Input_CreateNewProject_) isRequest_Input_Type() {}
 
@@ -4617,28 +4617,28 @@ func (b0 Request_Input_CreateEnvironment_builder) Build() *Request_Input_CreateE
 }
 
 // An input to trigger a suggested prompt.
-type Request_Input_TriggerSuggestPrompt struct {
-	state                  protoimpl.MessageState                       `protogen:"opaque.v1"`
-	xxx_hidden_Attachments *[]*Attachment                               `protobuf:"bytes,1,rep,name=attachments"`
-	xxx_hidden_Trigger     isRequest_Input_TriggerSuggestPrompt_Trigger `protobuf_oneof:"trigger"`
+type Request_Input_TriggerPromptSuggestion struct {
+	state                  protoimpl.MessageState                          `protogen:"opaque.v1"`
+	xxx_hidden_Attachments *[]*Attachment                                  `protobuf:"bytes,1,rep,name=attachments"`
+	xxx_hidden_Trigger     isRequest_Input_TriggerPromptSuggestion_Trigger `protobuf_oneof:"trigger"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) Reset() {
-	*x = Request_Input_TriggerSuggestPrompt{}
+func (x *Request_Input_TriggerPromptSuggestion) Reset() {
+	*x = Request_Input_TriggerPromptSuggestion{}
 	mi := &file_request_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) String() string {
+func (x *Request_Input_TriggerPromptSuggestion) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_TriggerSuggestPrompt) ProtoMessage() {}
+func (*Request_Input_TriggerPromptSuggestion) ProtoMessage() {}
 
-func (x *Request_Input_TriggerSuggestPrompt) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_TriggerPromptSuggestion) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4650,7 +4650,7 @@ func (x *Request_Input_TriggerSuggestPrompt) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) GetAttachments() []*Attachment {
+func (x *Request_Input_TriggerPromptSuggestion) GetAttachments() []*Attachment {
 	if x != nil {
 		if x.xxx_hidden_Attachments != nil {
 			return *x.xxx_hidden_Attachments
@@ -4659,102 +4659,102 @@ func (x *Request_Input_TriggerSuggestPrompt) GetAttachments() []*Attachment {
 	return nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) GetFilesChanged() *emptypb.Empty {
+func (x *Request_Input_TriggerPromptSuggestion) GetFilesChanged() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_FilesChanged); ok {
 			return x.FilesChanged
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) GetCommandRun() *emptypb.Empty {
+func (x *Request_Input_TriggerPromptSuggestion) GetCommandRun() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_CommandRun); ok {
 			return x.CommandRun
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) SetAttachments(v []*Attachment) {
+func (x *Request_Input_TriggerPromptSuggestion) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) SetFilesChanged(v *emptypb.Empty) {
+func (x *Request_Input_TriggerPromptSuggestion) SetFilesChanged(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_FilesChanged{v}
+	x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_FilesChanged{v}
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) SetCommandRun(v *emptypb.Empty) {
+func (x *Request_Input_TriggerPromptSuggestion) SetCommandRun(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_CommandRun{v}
+	x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_CommandRun{v}
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) HasTrigger() bool {
+func (x *Request_Input_TriggerPromptSuggestion) HasTrigger() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Trigger != nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) HasFilesChanged() bool {
+func (x *Request_Input_TriggerPromptSuggestion) HasFilesChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_FilesChanged)
 	return ok
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) HasCommandRun() bool {
+func (x *Request_Input_TriggerPromptSuggestion) HasCommandRun() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_CommandRun)
 	return ok
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) ClearTrigger() {
+func (x *Request_Input_TriggerPromptSuggestion) ClearTrigger() {
 	x.xxx_hidden_Trigger = nil
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) ClearFilesChanged() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_FilesChanged); ok {
+func (x *Request_Input_TriggerPromptSuggestion) ClearFilesChanged() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_FilesChanged); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Request_Input_TriggerSuggestPrompt) ClearCommandRun() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerSuggestPrompt_CommandRun); ok {
+func (x *Request_Input_TriggerPromptSuggestion) ClearCommandRun() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_CommandRun); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-const Request_Input_TriggerSuggestPrompt_Trigger_not_set_case case_Request_Input_TriggerSuggestPrompt_Trigger = 0
-const Request_Input_TriggerSuggestPrompt_FilesChanged_case case_Request_Input_TriggerSuggestPrompt_Trigger = 2
-const Request_Input_TriggerSuggestPrompt_CommandRun_case case_Request_Input_TriggerSuggestPrompt_Trigger = 3
+const Request_Input_TriggerPromptSuggestion_Trigger_not_set_case case_Request_Input_TriggerPromptSuggestion_Trigger = 0
+const Request_Input_TriggerPromptSuggestion_FilesChanged_case case_Request_Input_TriggerPromptSuggestion_Trigger = 2
+const Request_Input_TriggerPromptSuggestion_CommandRun_case case_Request_Input_TriggerPromptSuggestion_Trigger = 3
 
-func (x *Request_Input_TriggerSuggestPrompt) WhichTrigger() case_Request_Input_TriggerSuggestPrompt_Trigger {
+func (x *Request_Input_TriggerPromptSuggestion) WhichTrigger() case_Request_Input_TriggerPromptSuggestion_Trigger {
 	if x == nil {
-		return Request_Input_TriggerSuggestPrompt_Trigger_not_set_case
+		return Request_Input_TriggerPromptSuggestion_Trigger_not_set_case
 	}
 	switch x.xxx_hidden_Trigger.(type) {
-	case *request_Input_TriggerSuggestPrompt_FilesChanged:
-		return Request_Input_TriggerSuggestPrompt_FilesChanged_case
-	case *request_Input_TriggerSuggestPrompt_CommandRun:
-		return Request_Input_TriggerSuggestPrompt_CommandRun_case
+	case *request_Input_TriggerPromptSuggestion_FilesChanged:
+		return Request_Input_TriggerPromptSuggestion_FilesChanged_case
+	case *request_Input_TriggerPromptSuggestion_CommandRun:
+		return Request_Input_TriggerPromptSuggestion_CommandRun_case
 	default:
-		return Request_Input_TriggerSuggestPrompt_Trigger_not_set_case
+		return Request_Input_TriggerPromptSuggestion_Trigger_not_set_case
 	}
 }
 
-type Request_Input_TriggerSuggestPrompt_builder struct {
+type Request_Input_TriggerPromptSuggestion_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Attachments []*Attachment
@@ -4764,23 +4764,23 @@ type Request_Input_TriggerSuggestPrompt_builder struct {
 	// -- end of xxx_hidden_Trigger
 }
 
-func (b0 Request_Input_TriggerSuggestPrompt_builder) Build() *Request_Input_TriggerSuggestPrompt {
-	m0 := &Request_Input_TriggerSuggestPrompt{}
+func (b0 Request_Input_TriggerPromptSuggestion_builder) Build() *Request_Input_TriggerPromptSuggestion {
+	m0 := &Request_Input_TriggerPromptSuggestion{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Attachments = &b.Attachments
 	if b.FilesChanged != nil {
-		x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_FilesChanged{b.FilesChanged}
+		x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_FilesChanged{b.FilesChanged}
 	}
 	if b.CommandRun != nil {
-		x.xxx_hidden_Trigger = &request_Input_TriggerSuggestPrompt_CommandRun{b.CommandRun}
+		x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_CommandRun{b.CommandRun}
 	}
 	return m0
 }
 
-type case_Request_Input_TriggerSuggestPrompt_Trigger protoreflect.FieldNumber
+type case_Request_Input_TriggerPromptSuggestion_Trigger protoreflect.FieldNumber
 
-func (x case_Request_Input_TriggerSuggestPrompt_Trigger) String() string {
+func (x case_Request_Input_TriggerPromptSuggestion_Trigger) String() string {
 	md := file_request_proto_msgTypes[17].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -4788,22 +4788,22 @@ func (x case_Request_Input_TriggerSuggestPrompt_Trigger) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_TriggerSuggestPrompt_Trigger interface {
-	isRequest_Input_TriggerSuggestPrompt_Trigger()
+type isRequest_Input_TriggerPromptSuggestion_Trigger interface {
+	isRequest_Input_TriggerPromptSuggestion_Trigger()
 }
 
-type request_Input_TriggerSuggestPrompt_FilesChanged struct {
+type request_Input_TriggerPromptSuggestion_FilesChanged struct {
 	FilesChanged *emptypb.Empty `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
-type request_Input_TriggerSuggestPrompt_CommandRun struct {
+type request_Input_TriggerPromptSuggestion_CommandRun struct {
 	CommandRun *emptypb.Empty `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
-func (*request_Input_TriggerSuggestPrompt_FilesChanged) isRequest_Input_TriggerSuggestPrompt_Trigger() {
+func (*request_Input_TriggerPromptSuggestion_FilesChanged) isRequest_Input_TriggerPromptSuggestion_Trigger() {
 }
 
-func (*request_Input_TriggerSuggestPrompt_CommandRun) isRequest_Input_TriggerSuggestPrompt_Trigger() {
+func (*request_Input_TriggerPromptSuggestion_CommandRun) isRequest_Input_TriggerPromptSuggestion_Trigger() {
 }
 
 type Request_Input_CodeReview struct {
@@ -7024,7 +7024,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x8aV\n" +
+	"task.proto\x1a\vskill.proto\"\x96V\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7034,7 +7034,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xb67\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc27\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7042,8 +7042,8 @@ const file_request_proto_rawDesc = "" +
 	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x12g\n" +
 	"\x14auto_code_diff_query\x18\x05 \x01(\v24.warp.multi_agent.v1.Request.Input.AutoCodeDiffQueryH\x00R\x11autoCodeDiffQuery\x12h\n" +
 	"\x13resume_conversation\x18\a \x01(\v25.warp.multi_agent.v1.Request.Input.ResumeConversationH\x00R\x12resumeConversation\x12c\n" +
-	"\x12init_project_rules\x18\b \x01(\v23.warp.multi_agent.v1.Request.Input.InitProjectRulesH\x00R\x10initProjectRules\x12o\n" +
-	"\x16trigger_suggest_prompt\x18\t \x01(\v27.warp.multi_agent.v1.Request.Input.TriggerSuggestPromptH\x00R\x14triggerSuggestPrompt\x12c\n" +
+	"\x12init_project_rules\x18\b \x01(\v23.warp.multi_agent.v1.Request.Input.InitProjectRulesH\x00R\x10initProjectRules\x12x\n" +
+	"\x19trigger_prompt_suggestion\x18\t \x01(\v2:.warp.multi_agent.v1.Request.Input.TriggerPromptSuggestionH\x00R\x17triggerPromptSuggestion\x12c\n" +
 	"\x12create_new_project\x18\n" +
 	" \x01(\v23.warp.multi_agent.v1.Request.Input.CreateNewProjectH\x00R\x10createNewProject\x12_\n" +
 	"\x10clone_repository\x18\v \x01(\v22.warp.multi_agent.v1.Request.Input.CloneRepositoryH\x00R\x0fcloneRepository\x12P\n" +
@@ -7137,8 +7137,8 @@ const file_request_proto_rawDesc = "" +
 	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a8\n" +
 	"\x11CreateEnvironment\x12#\n" +
 	"\n" +
-	"repo_paths\x18\x01 \x03(\tB\x04\x80\xb5\x18\x01R\trepoPaths\x1a\xde\x01\n" +
-	"\x14TriggerSuggestPrompt\x12A\n" +
+	"repo_paths\x18\x01 \x03(\tB\x04\x80\xb5\x18\x01R\trepoPaths\x1a\xe1\x01\n" +
+	"\x17TriggerPromptSuggestion\x12A\n" +
 	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12=\n" +
 	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
 	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
@@ -7270,7 +7270,7 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_CreateNewProject)(nil),                                 // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
 	(*Request_Input_CloneRepository)(nil),                                  // 17: warp.multi_agent.v1.Request.Input.CloneRepository
 	(*Request_Input_CreateEnvironment)(nil),                                // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
-	(*Request_Input_TriggerSuggestPrompt)(nil),                             // 19: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
+	(*Request_Input_TriggerPromptSuggestion)(nil),                          // 19: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion
 	(*Request_Input_CodeReview)(nil),                                       // 20: warp.multi_agent.v1.Request.Input.CodeReview
 	(*Request_Input_FetchReviewComments)(nil),                              // 21: warp.multi_agent.v1.Request.Input.FetchReviewComments
 	(*Request_Input_SummarizeConversation)(nil),                            // 22: warp.multi_agent.v1.Request.Input.SummarizeConversation
@@ -7346,7 +7346,7 @@ var file_request_proto_depIdxs = []int32{
 	13, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	14, // 11: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
 	15, // 12: warp.multi_agent.v1.Request.Input.init_project_rules:type_name -> warp.multi_agent.v1.Request.Input.InitProjectRules
-	19, // 13: warp.multi_agent.v1.Request.Input.trigger_suggest_prompt:type_name -> warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt
+	19, // 13: warp.multi_agent.v1.Request.Input.trigger_prompt_suggestion:type_name -> warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion
 	16, // 14: warp.multi_agent.v1.Request.Input.create_new_project:type_name -> warp.multi_agent.v1.Request.Input.CreateNewProject
 	17, // 15: warp.multi_agent.v1.Request.Input.clone_repository:type_name -> warp.multi_agent.v1.Request.Input.CloneRepository
 	20, // 16: warp.multi_agent.v1.Request.Input.code_review:type_name -> warp.multi_agent.v1.Request.Input.CodeReview
@@ -7404,9 +7404,9 @@ var file_request_proto_depIdxs = []int32{
 	30, // 68: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	31, // 69: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	32, // 70: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	73, // 71: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	74, // 72: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	74, // 73: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	73, // 71: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.attachments:type_name -> warp.multi_agent.v1.Attachment
+	74, // 72: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.files_changed:type_name -> google.protobuf.Empty
+	74, // 73: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.command_run:type_name -> google.protobuf.Empty
 	33, // 74: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
 	75, // 75: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
 	75, // 76: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
@@ -7446,7 +7446,7 @@ func file_request_proto_init() {
 		(*request_Input_AutoCodeDiffQuery_)(nil),
 		(*request_Input_ResumeConversation_)(nil),
 		(*request_Input_InitProjectRules_)(nil),
-		(*request_Input_TriggerSuggestPrompt_)(nil),
+		(*request_Input_TriggerPromptSuggestion_)(nil),
 		(*request_Input_CreateNewProject_)(nil),
 		(*request_Input_CloneRepository_)(nil),
 		(*request_Input_CodeReview_)(nil),
@@ -7494,8 +7494,8 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
 	file_request_proto_msgTypes[17].OneofWrappers = []any{
-		(*request_Input_TriggerSuggestPrompt_FilesChanged)(nil),
-		(*request_Input_TriggerSuggestPrompt_CommandRun)(nil),
+		(*request_Input_TriggerPromptSuggestion_FilesChanged)(nil),
+		(*request_Input_TriggerPromptSuggestion_CommandRun)(nil),
 	}
 	file_request_proto_msgTypes[18].OneofWrappers = []any{
 		(*request_Input_CodeReview_InitialReviewComments_)(nil),

@@ -55,7 +55,7 @@ message Request {
       AutoCodeDiffQuery auto_code_diff_query = 5;
       ResumeConversation resume_conversation = 7;
       InitProjectRules init_project_rules = 8;
-      TriggerSuggestPrompt trigger_suggest_prompt = 9;
+      TriggerPromptSuggestion trigger_prompt_suggestion = 9;
       CreateNewProject create_new_project = 10;
       CloneRepository clone_repository = 11;
       CodeReview code_review = 12;
@@ -199,7 +199,7 @@ message Request {
     }
 
     // An input to trigger a suggested prompt.
-    message TriggerSuggestPrompt {
+    message TriggerPromptSuggestion {
       repeated Attachment attachments = 1;
 
       oneof trigger {

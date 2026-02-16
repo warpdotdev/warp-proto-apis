@@ -162,7 +162,7 @@ message Message {
     oneof type {
       AutoCodeDiff auto_code_diff = 1;
       ResumeConversation resume_conversation = 3;
-      TriggerSuggestPrompt trigger_suggest_prompt = 4;
+      TriggerPromptSuggestion trigger_prompt_suggestion = 4;
       CreateNewProject create_new_project = 5;
       CloneRepository clone_repository = 6;
       SummarizeConversation summarize_conversation = 7;
@@ -178,7 +178,7 @@ message Message {
 
   message ResumeConversation {}
 
-  message TriggerSuggestPrompt {
+  message TriggerPromptSuggestion {
     repeated Attachment attachments = 1;
 
     oneof trigger {
