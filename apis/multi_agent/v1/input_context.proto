@@ -9,6 +9,7 @@ import "file_content.proto";
 import "attachment.proto";
 import "options.proto";
 import "skill.proto";
+import "lsp.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -24,6 +25,8 @@ message InputContext {
   Git git = 11;
   // Sent on each request when scoped skills change
   SkillsContext updated_skills_context = 12;
+  // Sent on each request when LSP servers change
+  LspServersContext updated_lsp_servers_context = 13;
 
   // TODO: these fields should be _attachments_, not part of the input context.
   repeated ExecutedShellCommand executed_shell_commands = 5 [deprecated = true];
@@ -98,5 +101,9 @@ message InputContext {
 
   message SkillsContext {
     repeated SkillDescriptor available_skills = 1;
+  }
+
+  message LspServersContext {
+    repeated LspDescriptor available_lsp_servers = 1;
   }
 }

@@ -290,11 +290,14 @@ message Message {
     // A tool call to run a shell command.
     message RunShellCommand {
       string command = 1;
+      
+      // DEPRECATED: Being replaced by risk_category
       bool is_read_only = 2;
       bool uses_pager = 3;
       repeated Citation citations = 4;
       // Whether the agent thinks this command is risky and therefore should be
       // passed by the user first.
+      // DEPRECATED: Being replaced by risk_category
       bool is_risky = 5;
 
       // Whether or not the harness should wait until the command is complete to report a result.
@@ -304,6 +307,10 @@ message Message {
       oneof wait_until_complete_value {
         bool wait_until_complete = 6;
       }
+
+      // Finer-grained classification of command risk. When present, clients should prefer
+      // this over is_read_only and is_risky.
+      RiskCategory risk_category = 7;
     }
 
     // A tool call to write bytes to the PTY when a command is running in the foreground.
@@ -1376,6 +1383,16 @@ enum AgentType {
   AGENT_TYPE_UNKNOWN = 0;
   AGENT_TYPE_PRIMARY = 1;
   AGENT_TYPE_CLI = 2;
+}
+
+// Classifies the risk level of a shell command.
+enum RiskCategory {
+  RISK_CATEGORY_UNSPECIFIED = 0;
+  RISK_CATEGORY_READ_ONLY = 1;
+  RISK_CATEGORY_TRIVIAL_LOCAL_CHANGE = 2;
+  RISK_CATEGORY_NONTRIVIAL_LOCAL_CHANGE = 3;
+  RISK_CATEGORY_EXTERNAL_CHANGE = 4;
+  RISK_CATEGORY_RISKY = 5;
 }
 
 message RawImage {

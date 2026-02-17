@@ -9,6 +9,12 @@ static DESCRIPTOR_POOL: LazyLock<DescriptorPool> = LazyLock::new(|| {
     DescriptorPool::decode(FILE_DESCRIPTOR_SET).expect("Failed to load file descriptor set")
 });
 
+pub static MESSAGE_DESCRIPTOR: LazyLock<prost_reflect::MessageDescriptor> = LazyLock::new(|| {
+    get_descriptor_pool()
+        .get_message_by_name("warp.multi_agent.v1.Message")
+        .expect("Proto definition exists.")
+});
+
 // Re-export all generated types.
 include!(concat!(env!("OUT_DIR"), "/warp.multi_agent.v1.rs"));
 

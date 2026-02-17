@@ -116,7 +116,7 @@ message Request {
     message ToolCallResult {
       reserved 10;  // Removed: RefineResult - no longer used by client
       reserved refine;  // Field name also reserved for field masks
-      
+
       string tool_call_id = 1;
 
       oneof result {
@@ -227,7 +227,7 @@ message Request {
       // Optional user-specified instructions to focus or augment the summary.
       string prompt = 1 [ (sensitive) = true ];
     }
-    
+
     // A special input type used to start an ambient agent run where the initial prompt
     // is retrieved at runtime as the latest prompt known for the run.
     // This is only valid when supplied at the start of a conversation.
@@ -235,9 +235,13 @@ message Request {
       // The ambient agent run ID to resolve the prompt from.
       string ambient_run_id = 1;
 
-      // Optional runtime base prompt / instructions.
-      // When provided, this is prepended to the effective prompt.
+      // Optional runtime base prompt / instructions (e.g., from file-based agent config).
+      // When provided, this is prepended to the user-visible prompt.
       string runtime_base_prompt = 2 [ (sensitive) = true ];
+
+      // Optional skill to use as base context.
+      // When provided, creates an InvokeSkill message (content hidden from user in UI).
+      Skill runtime_skill = 3;
     }
 
     message InvokeSkill {
@@ -385,7 +389,7 @@ message Request {
       // If `true`, the client allows the use of Warp credits for LLM calls when
       // keys are provided.
       bool allow_use_of_warp_credits = 5;
-      
+
       // Optional AWS credentials (e.g. for Bedrock).
       AWSCredentials aws_credentials = 6;
 
@@ -395,7 +399,7 @@ message Request {
         string session_token = 3 [ (sensitive) = true ];
         string region = 4;
       }
-      
+
       // TODO(isaiah): Add Azure/GCP credentials here...
     }
   }
