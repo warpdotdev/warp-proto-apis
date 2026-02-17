@@ -281,6 +281,14 @@ message Message {
       InsertReviewComments insert_review_comments = 25;
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
+      FetchConversation fetch_conversation = 28;
+    }
+
+    // A tool call to fetch a conversation's tasks from the client.
+    // Used by subagents that need to access a different conversation's data.
+    message FetchConversation {
+      // The ID of the conversation to fetch.
+      string conversation_id = 1;
     }
 
     // A tool call that is totally resolved server-side and hence opaque to
@@ -516,6 +524,7 @@ message Message {
         google.protobuf.Empty advice = 5;
         google.protobuf.Empty computer_use = 6;
         google.protobuf.Empty summarization = 7;
+        google.protobuf.Empty conversation_search = 8;
       }
 
       message CLISubagent {
@@ -779,6 +788,7 @@ message Message {
       InsertReviewCommentsResult insert_review_comments = 29;
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
+      FetchConversationResult fetch_conversation = 32;
     }
 
     // Result of a server-side tool call.
@@ -1332,6 +1342,12 @@ message RequestComputerUseResult {
   }
 }
 
+// Result of a `FetchConversation` tool call.
+message FetchConversationResult {
+  // The tasks from the fetched conversation.
+  repeated Task tasks = 1;
+}
+
 message ShellCommandError {
   oneof type {
     // There was no command execution found with the given command_id in the tool call.
@@ -1370,6 +1386,7 @@ enum ToolType {
   INSERT_REVIEW_COMMENTS = 22;
   READ_SKILL = 23;
   REQUEST_COMPUTER_USE = 24;
+  FETCH_CONVERSATION = 25;
 }
 
 message UserQueryMode {
