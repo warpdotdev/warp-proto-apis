@@ -5192,13 +5192,11 @@ func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input
 }
 
 type Request_Input_InvokeSkill struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Skill       *Skill                 `protobuf:"bytes,1,opt,name=skill"`
-	xxx_hidden_Arguments   *string                `protobuf:"bytes,2,opt,name=arguments"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Skill     *Skill                   `protobuf:"bytes,1,opt,name=skill"`
+	xxx_hidden_UserQuery *Request_Input_UserQuery `protobuf:"bytes,2,opt,name=user_query,json=userQuery"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Request_Input_InvokeSkill) Reset() {
@@ -5233,23 +5231,19 @@ func (x *Request_Input_InvokeSkill) GetSkill() *Skill {
 	return nil
 }
 
-func (x *Request_Input_InvokeSkill) GetArguments() string {
+func (x *Request_Input_InvokeSkill) GetUserQuery() *Request_Input_UserQuery {
 	if x != nil {
-		if x.xxx_hidden_Arguments != nil {
-			return *x.xxx_hidden_Arguments
-		}
-		return ""
+		return x.xxx_hidden_UserQuery
 	}
-	return ""
+	return nil
 }
 
 func (x *Request_Input_InvokeSkill) SetSkill(v *Skill) {
 	x.xxx_hidden_Skill = v
 }
 
-func (x *Request_Input_InvokeSkill) SetArguments(v string) {
-	x.xxx_hidden_Arguments = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+func (x *Request_Input_InvokeSkill) SetUserQuery(v *Request_Input_UserQuery) {
+	x.xxx_hidden_UserQuery = v
 }
 
 func (x *Request_Input_InvokeSkill) HasSkill() bool {
@@ -5259,27 +5253,26 @@ func (x *Request_Input_InvokeSkill) HasSkill() bool {
 	return x.xxx_hidden_Skill != nil
 }
 
-func (x *Request_Input_InvokeSkill) HasArguments() bool {
+func (x *Request_Input_InvokeSkill) HasUserQuery() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+	return x.xxx_hidden_UserQuery != nil
 }
 
 func (x *Request_Input_InvokeSkill) ClearSkill() {
 	x.xxx_hidden_Skill = nil
 }
 
-func (x *Request_Input_InvokeSkill) ClearArguments() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Arguments = nil
+func (x *Request_Input_InvokeSkill) ClearUserQuery() {
+	x.xxx_hidden_UserQuery = nil
 }
 
 type Request_Input_InvokeSkill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Skill     *Skill
-	Arguments *string
+	UserQuery *Request_Input_UserQuery
 }
 
 func (b0 Request_Input_InvokeSkill_builder) Build() *Request_Input_InvokeSkill {
@@ -5287,10 +5280,7 @@ func (b0 Request_Input_InvokeSkill_builder) Build() *Request_Input_InvokeSkill {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Skill = b.Skill
-	if b.Arguments != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Arguments = b.Arguments
-	}
+	x.xxx_hidden_UserQuery = b.UserQuery
 	return m0
 }
 
@@ -6987,7 +6977,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x81U\n" +
+	"task.proto\x1a\vskill.proto\"\xabU\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6997,7 +6987,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xad6\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd76\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7120,10 +7110,11 @@ const file_request_proto_rawDesc = "" +
 	"\x19StartFromAmbientRunPrompt\x12$\n" +
 	"\x0eambient_run_id\x18\x01 \x01(\tR\fambientRunId\x124\n" +
 	"\x13runtime_base_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x11runtimeBasePrompt\x12?\n" +
-	"\rruntime_skill\x18\x03 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\fruntimeSkill\x1ac\n" +
+	"\rruntime_skill\x18\x03 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\fruntimeSkill\x1a\x8c\x01\n" +
 	"\vInvokeSkill\x120\n" +
-	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12\"\n" +
-	"\targuments\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\targumentsB\x06\n" +
+	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12K\n" +
+	"\n" +
+	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\x06\n" +
 	"\x04type\x1a\xc7\x02\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
@@ -7369,22 +7360,23 @@ var file_request_proto_depIdxs = []int32{
 	33, // 73: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
 	74, // 74: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
 	74, // 75: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
-	72, // 76: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	8,  // 77: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	11, // 78: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	9,  // 79: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	75, // 80: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	76, // 81: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	77, // 82: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	37, // 83: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	78, // 84: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	38, // 85: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	39, // 86: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	87, // [87:87] is the sub-list for method output_type
-	87, // [87:87] is the sub-list for method input_type
-	87, // [87:87] is the sub-list for extension type_name
-	87, // [87:87] is the sub-list for extension extendee
-	0,  // [0:87] is the sub-list for field type_name
+	8,  // 76: warp.multi_agent.v1.Request.Input.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	72, // 77: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	8,  // 78: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	11, // 79: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	9,  // 80: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	75, // 81: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	76, // 82: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	77, // 83: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	37, // 84: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
+	78, // 85: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	38, // 86: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	39, // 87: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	88, // [88:88] is the sub-list for method output_type
+	88, // [88:88] is the sub-list for method input_type
+	88, // [88:88] is the sub-list for extension type_name
+	88, // [88:88] is the sub-list for extension extendee
+	0,  // [0:88] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }

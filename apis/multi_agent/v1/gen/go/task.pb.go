@@ -12703,13 +12703,11 @@ type message_ArtifactEvent_Created struct {
 func (*message_ArtifactEvent_Created) isMessage_ArtifactEvent_Event() {}
 
 type Message_InvokeSkill struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Skill       *Skill                 `protobuf:"bytes,1,opt,name=skill"`
-	xxx_hidden_Arguments   *string                `protobuf:"bytes,2,opt,name=arguments"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Skill     *Skill                 `protobuf:"bytes,1,opt,name=skill"`
+	xxx_hidden_UserQuery *Message_UserQuery     `protobuf:"bytes,2,opt,name=user_query,json=userQuery"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Message_InvokeSkill) Reset() {
@@ -12744,23 +12742,19 @@ func (x *Message_InvokeSkill) GetSkill() *Skill {
 	return nil
 }
 
-func (x *Message_InvokeSkill) GetArguments() string {
+func (x *Message_InvokeSkill) GetUserQuery() *Message_UserQuery {
 	if x != nil {
-		if x.xxx_hidden_Arguments != nil {
-			return *x.xxx_hidden_Arguments
-		}
-		return ""
+		return x.xxx_hidden_UserQuery
 	}
-	return ""
+	return nil
 }
 
 func (x *Message_InvokeSkill) SetSkill(v *Skill) {
 	x.xxx_hidden_Skill = v
 }
 
-func (x *Message_InvokeSkill) SetArguments(v string) {
-	x.xxx_hidden_Arguments = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+func (x *Message_InvokeSkill) SetUserQuery(v *Message_UserQuery) {
+	x.xxx_hidden_UserQuery = v
 }
 
 func (x *Message_InvokeSkill) HasSkill() bool {
@@ -12770,27 +12764,26 @@ func (x *Message_InvokeSkill) HasSkill() bool {
 	return x.xxx_hidden_Skill != nil
 }
 
-func (x *Message_InvokeSkill) HasArguments() bool {
+func (x *Message_InvokeSkill) HasUserQuery() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+	return x.xxx_hidden_UserQuery != nil
 }
 
 func (x *Message_InvokeSkill) ClearSkill() {
 	x.xxx_hidden_Skill = nil
 }
 
-func (x *Message_InvokeSkill) ClearArguments() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Arguments = nil
+func (x *Message_InvokeSkill) ClearUserQuery() {
+	x.xxx_hidden_UserQuery = nil
 }
 
 type Message_InvokeSkill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Skill     *Skill
-	Arguments *string
+	UserQuery *Message_UserQuery
 }
 
 func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
@@ -12798,10 +12791,7 @@ func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Skill = b.Skill
-	if b.Arguments != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Arguments = b.Arguments
-	}
+	x.xxx_hidden_UserQuery = b.UserQuery
 	return m0
 }
 
@@ -24948,7 +24938,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"ߔ\x01\n" +
+	"\x0ecomment_target\"\x83\x95\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -25392,10 +25382,11 @@ const file_task_proto_rawDesc = "" +
 	"\fpull_request\x18\x01 \x01(\v2>.warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifactH\x00R\vpullRequestB\n" +
 	"\n" +
 	"\bartifactB\a\n" +
-	"\x05event\x1ac\n" +
+	"\x05event\x1a\x86\x01\n" +
 	"\vInvokeSkill\x120\n" +
-	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12\"\n" +
-	"\targuments\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\targumentsB\t\n" +
+	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12E\n" +
+	"\n" +
+	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQueryB\t\n" +
 	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xab\x03\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
 	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12y\n" +
@@ -26051,100 +26042,101 @@ var file_task_proto_depIdxs = []int32{
 	132, // 161: warp.multi_agent.v1.Message.WebFetch.status:type_name -> warp.multi_agent.v1.Message.WebFetch.Status
 	137, // 162: warp.multi_agent.v1.Message.ArtifactEvent.created:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated
 	197, // 163: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
-	192, // 164: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	186, // 165: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
-	2,   // 166: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.risk_category:type_name -> warp.multi_agent.v1.RiskCategory
-	99,  // 167: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
-	100, // 168: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	101, // 169: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	103, // 170: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	104, // 171: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.deleted_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
-	102, // 172: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.v4a_updates:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
-	7,   // 173: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	198, // 174: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
-	106, // 175: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
-	107, // 176: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
-	188, // 177: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
-	188, // 178: warp.multi_agent.v1.Message.ToolCall.Subagent.advice:type_name -> google.protobuf.Empty
-	188, // 179: warp.multi_agent.v1.Message.ToolCall.Subagent.computer_use:type_name -> google.protobuf.Empty
-	188, // 180: warp.multi_agent.v1.Message.ToolCall.Subagent.summarization:type_name -> google.protobuf.Empty
-	108, // 181: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
-	109, // 182: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
-	110, // 183: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	193, // 184: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
-	188, // 185: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
-	111, // 186: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.comments:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
-	114, // 187: warp.multi_agent.v1.Message.ToolCall.UseComputer.actions:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
-	98,  // 188: warp.multi_agent.v1.Message.ToolCall.UseComputer.post_actions_screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
-	98,  // 189: warp.multi_agent.v1.Message.ToolCall.RequestComputerUse.screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
-	124, // 190: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.region:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region
-	188, // 191: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
-	188, // 192: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
-	188, // 193: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
-	199, // 194: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	105, // 195: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
-	199, // 196: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
-	112, // 197: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment.location:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
-	113, // 198: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
-	199, // 199: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	3,   // 200: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.side:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSide
-	115, // 201: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
-	116, // 202: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
-	117, // 203: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp
-	118, // 204: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_wheel:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel
-	119, // 205: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.wait:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait
-	120, // 206: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.type_text:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.TypeText
-	122, // 207: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.key_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown
-	123, // 208: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.key_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp
-	35,  // 209: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove.to:type_name -> warp.multi_agent.v1.Coordinates
-	4,   // 210: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
-	35,  // 211: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.at:type_name -> warp.multi_agent.v1.Coordinates
-	4,   // 212: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
-	35,  // 213: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
-	5,   // 214: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
-	193, // 215: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
-	121, // 216: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
-	121, // 217: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
-	35,  // 218: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.top_left:type_name -> warp.multi_agent.v1.Coordinates
-	35,  // 219: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.bottom_right:type_name -> warp.multi_agent.v1.Coordinates
-	129, // 220: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
-	130, // 221: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
-	188, // 222: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
-	131, // 223: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
-	133, // 224: warp.multi_agent.v1.Message.WebFetch.Status.fetching:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Fetching
-	134, // 225: warp.multi_agent.v1.Message.WebFetch.Status.success:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success
-	188, // 226: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
-	135, // 227: warp.multi_agent.v1.Message.WebFetch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
-	136, // 228: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.pull_request:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
-	200, // 229: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	201, // 230: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	200, // 231: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	200, // 232: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
-	145, // 233: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	146, // 234: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
-	200, // 235: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
-	150, // 236: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	151, // 237: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	156, // 238: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	20,  // 239: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
-	165, // 240: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	166, // 241: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	167, // 242: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	20,  // 243: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	202, // 244: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	202, // 245: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	202, // 246: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	42,  // 247: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.RawImage
-	35,  // 248: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
-	200, // 249: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
-	38,  // 250: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
-	42,  // 251: warp.multi_agent.v1.RequestComputerUseResult.Approved.initial_screenshot:type_name -> warp.multi_agent.v1.RawImage
-	6,   // 252: warp.multi_agent.v1.RequestComputerUseResult.Approved.platform:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
-	253, // [253:253] is the sub-list for method output_type
-	253, // [253:253] is the sub-list for method input_type
-	253, // [253:253] is the sub-list for extension type_name
-	253, // [253:253] is the sub-list for extension extendee
-	0,   // [0:253] is the sub-list for field type_name
+	46,  // 164: warp.multi_agent.v1.Message.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
+	192, // 165: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	186, // 166: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	2,   // 167: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.risk_category:type_name -> warp.multi_agent.v1.RiskCategory
+	99,  // 168: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
+	100, // 169: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	101, // 170: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	103, // 171: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.new_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	104, // 172: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.deleted_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
+	102, // 173: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.v4a_updates:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
+	7,   // 174: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
+	198, // 175: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	106, // 176: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
+	107, // 177: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
+	188, // 178: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
+	188, // 179: warp.multi_agent.v1.Message.ToolCall.Subagent.advice:type_name -> google.protobuf.Empty
+	188, // 180: warp.multi_agent.v1.Message.ToolCall.Subagent.computer_use:type_name -> google.protobuf.Empty
+	188, // 181: warp.multi_agent.v1.Message.ToolCall.Subagent.summarization:type_name -> google.protobuf.Empty
+	108, // 182: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
+	109, // 183: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
+	110, // 184: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
+	193, // 185: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
+	188, // 186: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
+	111, // 187: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.comments:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
+	114, // 188: warp.multi_agent.v1.Message.ToolCall.UseComputer.actions:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
+	98,  // 189: warp.multi_agent.v1.Message.ToolCall.UseComputer.post_actions_screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
+	98,  // 190: warp.multi_agent.v1.Message.ToolCall.RequestComputerUse.screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
+	124, // 191: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.region:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region
+	188, // 192: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
+	188, // 193: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
+	188, // 194: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
+	199, // 195: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	105, // 196: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
+	199, // 197: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	112, // 198: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment.location:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
+	113, // 199: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
+	199, // 200: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	3,   // 201: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.side:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSide
+	115, // 202: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
+	116, // 203: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
+	117, // 204: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp
+	118, // 205: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_wheel:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel
+	119, // 206: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.wait:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait
+	120, // 207: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.type_text:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.TypeText
+	122, // 208: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.key_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown
+	123, // 209: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.key_up:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp
+	35,  // 210: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove.to:type_name -> warp.multi_agent.v1.Coordinates
+	4,   // 211: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
+	35,  // 212: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown.at:type_name -> warp.multi_agent.v1.Coordinates
+	4,   // 213: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
+	35,  // 214: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
+	5,   // 215: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
+	193, // 216: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
+	121, // 217: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
+	121, // 218: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
+	35,  // 219: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.top_left:type_name -> warp.multi_agent.v1.Coordinates
+	35,  // 220: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.bottom_right:type_name -> warp.multi_agent.v1.Coordinates
+	129, // 221: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
+	130, // 222: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
+	188, // 223: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
+	131, // 224: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
+	133, // 225: warp.multi_agent.v1.Message.WebFetch.Status.fetching:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Fetching
+	134, // 226: warp.multi_agent.v1.Message.WebFetch.Status.success:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success
+	188, // 227: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
+	135, // 228: warp.multi_agent.v1.Message.WebFetch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
+	136, // 229: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.pull_request:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
+	200, // 230: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	201, // 231: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	200, // 232: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	200, // 233: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	145, // 234: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	146, // 235: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
+	200, // 236: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	150, // 237: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	151, // 238: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	156, // 239: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	20,  // 240: warp.multi_agent.v1.ReadMCPResourceResult.Success.contents:type_name -> warp.multi_agent.v1.MCPResourceContent
+	165, // 241: warp.multi_agent.v1.CallMCPToolResult.Success.results:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	166, // 242: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	167, // 243: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	20,  // 244: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
+	202, // 245: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	202, // 246: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	202, // 247: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	42,  // 248: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.RawImage
+	35,  // 249: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
+	200, // 250: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
+	38,  // 251: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
+	42,  // 252: warp.multi_agent.v1.RequestComputerUseResult.Approved.initial_screenshot:type_name -> warp.multi_agent.v1.RawImage
+	6,   // 253: warp.multi_agent.v1.RequestComputerUseResult.Approved.platform:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
+	254, // [254:254] is the sub-list for method output_type
+	254, // [254:254] is the sub-list for method input_type
+	254, // [254:254] is the sub-list for extension type_name
+	254, // [254:254] is the sub-list for extension extendee
+	0,   // [0:254] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }
