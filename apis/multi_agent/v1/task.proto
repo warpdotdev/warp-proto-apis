@@ -911,6 +911,9 @@ message Message {
 
   message InvokeSkill {
     Skill skill = 1;
+    // This field is used to either pass in arguments for the skill invocation (if the skill
+    // contents have any arguments) or pass a query to be added at the same time as the skill invocation
+    // (in the case of 0-arg skills).
     UserQuery user_query = 2;
   }
 }

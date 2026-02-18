@@ -12934,7 +12934,10 @@ func (x *Message_InvokeSkill) ClearUserQuery() {
 type Message_InvokeSkill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Skill     *Skill
+	Skill *Skill
+	// This field is used to either pass in arguments for the skill invocation (if the skill
+	// contents have any arguments) or pass a query to be added at the same time as the skill invocation
+	// (in the case of 0-arg skills).
 	UserQuery *Message_UserQuery
 }
 
