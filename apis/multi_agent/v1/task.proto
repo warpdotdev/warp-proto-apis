@@ -894,10 +894,17 @@ message Message {
       string branch = 2 [ (sensitive) = true ];
     }
 
+    message ScreenshotArtifact {
+      string artifact_uid = 1 [ (sensitive) = true ];
+      string mime_type = 2 [ (sensitive) = true ];
+      string description = 3 [ (sensitive) = true ];
+    }
+
     // Notifies the client that an artifact was created (e.g. a PR).
     message ArtifactCreated {
       oneof artifact {
         PullRequestArtifact pull_request = 1;
+        ScreenshotArtifact screenshot = 2;
       }
     }
   }
