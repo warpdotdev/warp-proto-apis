@@ -12703,10 +12703,13 @@ type message_ArtifactEvent_Created struct {
 func (*message_ArtifactEvent_Created) isMessage_ArtifactEvent_Event() {}
 
 type Message_InvokeSkill struct {
-	state            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Skill *Skill                 `protobuf:"bytes,1,opt,name=skill"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Skill       *Skill                 `protobuf:"bytes,1,opt,name=skill"`
+	xxx_hidden_Arguments   *string                `protobuf:"bytes,2,opt,name=arguments"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Message_InvokeSkill) Reset() {
@@ -12741,8 +12744,23 @@ func (x *Message_InvokeSkill) GetSkill() *Skill {
 	return nil
 }
 
+func (x *Message_InvokeSkill) GetArguments() string {
+	if x != nil {
+		if x.xxx_hidden_Arguments != nil {
+			return *x.xxx_hidden_Arguments
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_InvokeSkill) SetSkill(v *Skill) {
 	x.xxx_hidden_Skill = v
+}
+
+func (x *Message_InvokeSkill) SetArguments(v string) {
+	x.xxx_hidden_Arguments = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *Message_InvokeSkill) HasSkill() bool {
@@ -12752,14 +12770,27 @@ func (x *Message_InvokeSkill) HasSkill() bool {
 	return x.xxx_hidden_Skill != nil
 }
 
+func (x *Message_InvokeSkill) HasArguments() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *Message_InvokeSkill) ClearSkill() {
 	x.xxx_hidden_Skill = nil
+}
+
+func (x *Message_InvokeSkill) ClearArguments() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Arguments = nil
 }
 
 type Message_InvokeSkill_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Skill *Skill
+	Skill     *Skill
+	Arguments *string
 }
 
 func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
@@ -12767,6 +12798,10 @@ func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Skill = b.Skill
+	if b.Arguments != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Arguments = b.Arguments
+	}
 	return m0
 }
 
@@ -24913,7 +24948,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xbb\x94\x01\n" +
+	"\x0ecomment_target\"ߔ\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -25357,9 +25392,10 @@ const file_task_proto_rawDesc = "" +
 	"\fpull_request\x18\x01 \x01(\v2>.warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifactH\x00R\vpullRequestB\n" +
 	"\n" +
 	"\bartifactB\a\n" +
-	"\x05event\x1a?\n" +
+	"\x05event\x1ac\n" +
 	"\vInvokeSkill\x120\n" +
-	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skillB\t\n" +
+	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12\"\n" +
+	"\targuments\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\targumentsB\t\n" +
 	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xab\x03\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
 	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12y\n" +

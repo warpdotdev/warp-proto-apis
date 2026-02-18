@@ -246,6 +246,7 @@ message Request {
 
     message InvokeSkill {
       Skill skill = 1;
+      string arguments = 2 [ (sensitive) = true ];
     }
   }
 
