@@ -55,6 +55,14 @@ message Task {
   // An opaque payload that the client should simply roundtrip.
   string server_data = 8;
 }
+// Terminal completion outcome for an agent task.
+enum TaskCompletionState {
+  TASK_COMPLETION_STATE_UNSPECIFIED = 0;
+  TASK_COMPLETION_STATE_SUCCEEDED = 1;
+  TASK_COMPLETION_STATE_FAILED = 2;
+  TASK_COMPLETION_STATE_ERROR = 3;
+  TASK_COMPLETION_STATE_BLOCKED = 4;
+}
 
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
