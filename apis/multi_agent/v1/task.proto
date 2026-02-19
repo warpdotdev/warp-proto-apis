@@ -1355,8 +1355,19 @@ message RequestComputerUseResult {
 
 // Result of a `FetchConversation` tool call.
 message FetchConversationResult {
-  // The tasks from the fetched conversation.
-  repeated Task tasks = 1;
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The tasks from the fetched conversation.
+    repeated Task tasks = 1;
+  }
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
 }
 
 message ShellCommandError {

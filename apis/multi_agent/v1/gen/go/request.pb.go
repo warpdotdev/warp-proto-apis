@@ -2881,6 +2881,15 @@ func (x *Request_Input_ToolCallResult) GetReadSkill() *ReadSkillResult {
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetFetchConversation() *FetchConversationResult {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_FetchConversation); ok {
+			return x.FetchConversation
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -3076,6 +3085,14 @@ func (x *Request_Input_ToolCallResult) SetReadSkill(v *ReadSkillResult) {
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadSkill{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetFetchConversation(v *FetchConversationResult) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_FetchConversation{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -3284,6 +3301,14 @@ func (x *Request_Input_ToolCallResult) HasReadSkill() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasFetchConversation() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_FetchConversation)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -3437,6 +3462,12 @@ func (x *Request_Input_ToolCallResult) ClearReadSkill() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearFetchConversation() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_FetchConversation); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -3462,6 +3493,7 @@ const Request_Input_ToolCallResult_UseComputer_case case_Request_Input_ToolCallR
 const Request_Input_ToolCallResult_InsertReviewComments_case case_Request_Input_ToolCallResult_Result = 24
 const Request_Input_ToolCallResult_RequestComputerUse_case case_Request_Input_ToolCallResult_Result = 25
 const Request_Input_ToolCallResult_ReadSkill_case case_Request_Input_ToolCallResult_Result = 26
+const Request_Input_ToolCallResult_FetchConversation_case case_Request_Input_ToolCallResult_Result = 27
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -3516,6 +3548,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_RequestComputerUse_case
 	case *request_Input_ToolCallResult_ReadSkill:
 		return Request_Input_ToolCallResult_ReadSkill_case
+	case *request_Input_ToolCallResult_FetchConversation:
+		return Request_Input_ToolCallResult_FetchConversation_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -3550,6 +3584,7 @@ type Request_Input_ToolCallResult_builder struct {
 	InsertReviewComments           *InsertReviewCommentsResult
 	RequestComputerUse             *RequestComputerUseResult
 	ReadSkill                      *ReadSkillResult
+	FetchConversation              *FetchConversationResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -3632,6 +3667,9 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.ReadSkill != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_ReadSkill{b.ReadSkill}
+	}
+	if b.FetchConversation != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_FetchConversation{b.FetchConversation}
 	}
 	return m0
 }
@@ -3746,6 +3784,10 @@ type request_Input_ToolCallResult_ReadSkill struct {
 	ReadSkill *ReadSkillResult `protobuf:"bytes,26,opt,name=read_skill,json=readSkill,oneof"`
 }
 
+type request_Input_ToolCallResult_FetchConversation struct {
+	FetchConversation *FetchConversationResult `protobuf:"bytes,27,opt,name=fetch_conversation,json=fetchConversation,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -3794,6 +3836,8 @@ func (*request_Input_ToolCallResult_InsertReviewComments) isRequest_Input_ToolCa
 func (*request_Input_ToolCallResult_RequestComputerUse) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadSkill) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_FetchConversation) isRequest_Input_ToolCallResult_Result() {}
 
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -6980,7 +7024,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\xabU\n" +
+	"task.proto\x1a\vskill.proto\"\x8aV\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -6990,7 +7034,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd76\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xb67\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7034,7 +7078,7 @@ const file_request_proto_rawDesc = "" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12g\n" +
 	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQueryB\a\n" +
-	"\x05input\x1a\xf3\x10\n" +
+	"\x05input\x1a\xd2\x11\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -7064,7 +7108,8 @@ const file_request_proto_rawDesc = "" +
 	"\x16insert_review_comments\x18\x18 \x01(\v2/.warp.multi_agent.v1.InsertReviewCommentsResultH\x00R\x14insertReviewComments\x12a\n" +
 	"\x14request_computer_use\x18\x19 \x01(\v2-.warp.multi_agent.v1.RequestComputerUseResultH\x00R\x12requestComputerUse\x12E\n" +
 	"\n" +
-	"read_skill\x18\x1a \x01(\v2$.warp.multi_agent.v1.ReadSkillResultH\x00R\treadSkillB\b\n" +
+	"read_skill\x18\x1a \x01(\v2$.warp.multi_agent.v1.ReadSkillResultH\x00R\treadSkill\x12]\n" +
+	"\x12fetch_conversation\x18\x1b \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversationB\b\n" +
 	"\x06resultJ\x04\b\n" +
 	"\x10\vR\x06refine\x1a\xcc\x06\n" +
 	"\x17QueryWithCannedResponse\x12\x14\n" +
@@ -7278,13 +7323,14 @@ var file_request_proto_goTypes = []any{
 	(*InsertReviewCommentsResult)(nil),              // 69: warp.multi_agent.v1.InsertReviewCommentsResult
 	(*RequestComputerUseResult)(nil),                // 70: warp.multi_agent.v1.RequestComputerUseResult
 	(*ReadSkillResult)(nil),                         // 71: warp.multi_agent.v1.ReadSkillResult
-	(*Attachment)(nil),                              // 72: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                           // 73: google.protobuf.Empty
-	(*Skill)(nil),                                   // 74: warp.multi_agent.v1.Skill
-	(*ReviewComment)(nil),                           // 75: warp.multi_agent.v1.ReviewComment
-	(*DiffSet)(nil),                                 // 76: warp.multi_agent.v1.DiffSet
-	(*structpb.Value)(nil),                          // 77: google.protobuf.Value
-	(*structpb.Struct)(nil),                         // 78: google.protobuf.Struct
+	(*FetchConversationResult)(nil),                 // 72: warp.multi_agent.v1.FetchConversationResult
+	(*Attachment)(nil),                              // 73: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                           // 74: google.protobuf.Empty
+	(*Skill)(nil),                                   // 75: warp.multi_agent.v1.Skill
+	(*ReviewComment)(nil),                           // 76: warp.multi_agent.v1.ReviewComment
+	(*DiffSet)(nil),                                 // 77: warp.multi_agent.v1.DiffSet
+	(*structpb.Value)(nil),                          // 78: google.protobuf.Value
+	(*structpb.Struct)(nil),                         // 79: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	3,  // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -7351,35 +7397,36 @@ var file_request_proto_depIdxs = []int32{
 	69, // 61: warp.multi_agent.v1.Request.Input.ToolCallResult.insert_review_comments:type_name -> warp.multi_agent.v1.InsertReviewCommentsResult
 	70, // 62: warp.multi_agent.v1.Request.Input.ToolCallResult.request_computer_use:type_name -> warp.multi_agent.v1.RequestComputerUseResult
 	71, // 63: warp.multi_agent.v1.Request.Input.ToolCallResult.read_skill:type_name -> warp.multi_agent.v1.ReadSkillResult
-	27, // 64: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	28, // 65: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	29, // 66: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	30, // 67: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	31, // 68: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	32, // 69: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	72, // 70: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
-	73, // 71: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
-	73, // 72: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
-	33, // 73: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
-	74, // 74: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
-	74, // 75: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
-	8,  // 76: warp.multi_agent.v1.Request.Input.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	72, // 77: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	8,  // 78: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	11, // 79: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	9,  // 80: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	75, // 81: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	76, // 82: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	77, // 83: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	37, // 84: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	78, // 85: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	38, // 86: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	39, // 87: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	88, // [88:88] is the sub-list for method output_type
-	88, // [88:88] is the sub-list for method input_type
-	88, // [88:88] is the sub-list for extension type_name
-	88, // [88:88] is the sub-list for extension extendee
-	0,  // [0:88] is the sub-list for field type_name
+	72, // 64: warp.multi_agent.v1.Request.Input.ToolCallResult.fetch_conversation:type_name -> warp.multi_agent.v1.FetchConversationResult
+	27, // 65: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	28, // 66: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	29, // 67: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	30, // 68: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	31, // 69: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	32, // 70: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	73, // 71: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.attachments:type_name -> warp.multi_agent.v1.Attachment
+	74, // 72: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.files_changed:type_name -> google.protobuf.Empty
+	74, // 73: warp.multi_agent.v1.Request.Input.TriggerSuggestPrompt.command_run:type_name -> google.protobuf.Empty
+	33, // 74: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
+	75, // 75: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
+	75, // 76: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
+	8,  // 77: warp.multi_agent.v1.Request.Input.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	73, // 78: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	8,  // 79: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	11, // 80: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	9,  // 81: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	76, // 82: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	77, // 83: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	78, // 84: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	37, // 85: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
+	79, // 86: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	38, // 87: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	39, // 88: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	89, // [89:89] is the sub-list for method output_type
+	89, // [89:89] is the sub-list for method input_type
+	89, // [89:89] is the sub-list for extension type_name
+	89, // [89:89] is the sub-list for extension extendee
+	0,  // [0:89] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -7436,6 +7483,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_InsertReviewComments)(nil),
 		(*request_Input_ToolCallResult_RequestComputerUse)(nil),
 		(*request_Input_ToolCallResult_ReadSkill)(nil),
+		(*request_Input_ToolCallResult_FetchConversation)(nil),
 	}
 	file_request_proto_msgTypes[10].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),

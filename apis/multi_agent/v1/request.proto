@@ -144,6 +144,7 @@ message Request {
         InsertReviewCommentsResult insert_review_comments = 24;
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
+        FetchConversationResult fetch_conversation = 27;
       }
     }
 
