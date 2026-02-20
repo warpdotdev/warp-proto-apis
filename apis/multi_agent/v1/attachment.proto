@@ -24,6 +24,7 @@ message Attachment {
     DiffHunk diff_hunk = 5 [deprecated = true];
     DiffSet diff_set = 6;
     DocumentContent document_content = 7;
+    FilePathReference file_path_reference = 8;
   }
 }
 
@@ -136,4 +137,9 @@ message DiffSet {
   repeated DiffHunk hunks = 1;
   CurrentRef curr_ref = 2;
   BaseRef base_ref = 3;
+}
+
+// Reference to a file on the filesystem (e.g., downloaded attachments on VM)
+message FilePathReference {
+  string file_path = 1 [ (sensitive) = true ];
 }
