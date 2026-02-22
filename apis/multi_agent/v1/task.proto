@@ -179,12 +179,21 @@ message Message {
   message ResumeConversation {}
 
   message TriggerPromptSuggestion {
-    repeated Attachment attachments = 1;
+    repeated Attachment attachments = 1 [deprecated = true];
 
     oneof trigger {
-      google.protobuf.Empty files_changed = 2;
-      google.protobuf.Empty command_run = 3;
+      google.protobuf.Empty files_changed = 2 [deprecated = true];
+      google.protobuf.Empty command_run = 3 [deprecated = true];
+      ShellCommandCompletion shell_command_completion = 4;
+      AgentFollowup agent_followup = 5;
     }
+
+    message ShellCommandCompletion {
+      ExecutedShellCommand executed_shell_command = 1;
+      repeated AnyFileContent relevant_files = 2;
+    }
+
+    message AgentFollowup {}
   }
 
   message CreateNewProject {
@@ -498,12 +507,18 @@ message Message {
     message SuggestPrompt {
       oneof display_mode {
         InlineQueryBanner inline_query_banner = 1;
+        PromptChip prompt_chip = 2;
       }
 
       message InlineQueryBanner {
         string title = 1;
         string description = 2;
         string query = 3;
+        string accept_text = 4;
+      }
+      
+      message PromptChip {
+        string prompt = 1;
       }
     }
 

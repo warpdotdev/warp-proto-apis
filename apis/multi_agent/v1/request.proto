@@ -9,6 +9,7 @@ import "google/protobuf/struct.proto";
 
 import "input_context.proto";
 import "attachment.proto";
+import "file_content.proto";
 import "options.proto";
 import "suggestions.proto";
 import "task.proto";
@@ -200,12 +201,25 @@ message Request {
 
     // An input to trigger a suggested prompt.
     message TriggerPromptSuggestion {
-      repeated Attachment attachments = 1;
+      repeated Attachment attachments = 1 [deprecated = true];
 
       oneof trigger {
-        google.protobuf.Empty files_changed = 2;
-        google.protobuf.Empty command_run = 3;
+        google.protobuf.Empty files_changed = 2 [deprecated = true];
+        google.protobuf.Empty command_run = 3 [deprecated = true];
+        ShellCommandCompletion shell_command_completion = 4;
+        AgentFollowup agent_followup = 5;
       }
+
+      message ShellCommandCompletion {
+        ExecutedShellCommand executed_shell_command = 1;
+        repeated AnyFileContent relevant_files = 2;
+      }
+
+      message AgentFollowup {}
+    }
+
+    message OnShellCommandCompletion {
+      string command = 1 [ (sensitive) = true ];
     }
 
     message CodeReview {

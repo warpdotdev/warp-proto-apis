@@ -24,7 +24,6 @@ message Attachment {
     DiffHunk diff_hunk = 5 [deprecated = true];
     DiffSet diff_set = 6;
     DocumentContent document_content = 7;
-    FileContent file_content = 8;
   }
 }
 
