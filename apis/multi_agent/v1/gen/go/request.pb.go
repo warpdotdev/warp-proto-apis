@@ -457,10 +457,10 @@ func (x *Request_Input) GetInitProjectRules() *Request_Input_InitProjectRules {
 	return nil
 }
 
-func (x *Request_Input) GetTriggerPromptSuggestion() *Request_Input_TriggerPromptSuggestion {
+func (x *Request_Input) GetGeneratePassiveSuggestions() *Request_Input_GeneratePassiveSuggestions {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*request_Input_TriggerPromptSuggestion_); ok {
-			return x.TriggerPromptSuggestion
+		if x, ok := x.xxx_hidden_Type.(*request_Input_GeneratePassiveSuggestions_); ok {
+			return x.GeneratePassiveSuggestions
 		}
 	}
 	return nil
@@ -602,12 +602,12 @@ func (x *Request_Input) SetInitProjectRules(v *Request_Input_InitProjectRules) {
 	x.xxx_hidden_Type = &request_Input_InitProjectRules_{v}
 }
 
-func (x *Request_Input) SetTriggerPromptSuggestion(v *Request_Input_TriggerPromptSuggestion) {
+func (x *Request_Input) SetGeneratePassiveSuggestions(v *Request_Input_GeneratePassiveSuggestions) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &request_Input_TriggerPromptSuggestion_{v}
+	x.xxx_hidden_Type = &request_Input_GeneratePassiveSuggestions_{v}
 }
 
 func (x *Request_Input) SetCreateNewProject(v *Request_Input_CreateNewProject) {
@@ -746,11 +746,11 @@ func (x *Request_Input) HasInitProjectRules() bool {
 	return ok
 }
 
-func (x *Request_Input) HasTriggerPromptSuggestion() bool {
+func (x *Request_Input) HasGeneratePassiveSuggestions() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*request_Input_TriggerPromptSuggestion_)
+	_, ok := x.xxx_hidden_Type.(*request_Input_GeneratePassiveSuggestions_)
 	return ok
 }
 
@@ -874,8 +874,8 @@ func (x *Request_Input) ClearInitProjectRules() {
 	}
 }
 
-func (x *Request_Input) ClearTriggerPromptSuggestion() {
-	if _, ok := x.xxx_hidden_Type.(*request_Input_TriggerPromptSuggestion_); ok {
+func (x *Request_Input) ClearGeneratePassiveSuggestions() {
+	if _, ok := x.xxx_hidden_Type.(*request_Input_GeneratePassiveSuggestions_); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -948,7 +948,7 @@ const Request_Input_QueryWithCannedResponse_case case_Request_Input_Type = 4
 const Request_Input_AutoCodeDiffQuery_case case_Request_Input_Type = 5
 const Request_Input_ResumeConversation_case case_Request_Input_Type = 7
 const Request_Input_InitProjectRules_case case_Request_Input_Type = 8
-const Request_Input_TriggerPromptSuggestion_case case_Request_Input_Type = 9
+const Request_Input_GeneratePassiveSuggestions_case case_Request_Input_Type = 9
 const Request_Input_CreateNewProject_case case_Request_Input_Type = 10
 const Request_Input_CloneRepository_case case_Request_Input_Type = 11
 const Request_Input_CodeReview_case case_Request_Input_Type = 12
@@ -975,8 +975,8 @@ func (x *Request_Input) WhichType() case_Request_Input_Type {
 		return Request_Input_ResumeConversation_case
 	case *request_Input_InitProjectRules_:
 		return Request_Input_InitProjectRules_case
-	case *request_Input_TriggerPromptSuggestion_:
-		return Request_Input_TriggerPromptSuggestion_case
+	case *request_Input_GeneratePassiveSuggestions_:
+		return Request_Input_GeneratePassiveSuggestions_case
 	case *request_Input_CreateNewProject_:
 		return Request_Input_CreateNewProject_case
 	case *request_Input_CloneRepository_:
@@ -1009,20 +1009,20 @@ type Request_Input_builder struct {
 	// The type of input from the user.
 
 	// Fields of oneof xxx_hidden_Type:
-	UserInputs                *Request_Input_UserInputs
-	QueryWithCannedResponse   *Request_Input_QueryWithCannedResponse
-	AutoCodeDiffQuery         *Request_Input_AutoCodeDiffQuery
-	ResumeConversation        *Request_Input_ResumeConversation
-	InitProjectRules          *Request_Input_InitProjectRules
-	TriggerPromptSuggestion   *Request_Input_TriggerPromptSuggestion
-	CreateNewProject          *Request_Input_CreateNewProject
-	CloneRepository           *Request_Input_CloneRepository
-	CodeReview                *Request_Input_CodeReview
-	SummarizeConversation     *Request_Input_SummarizeConversation
-	CreateEnvironment         *Request_Input_CreateEnvironment
-	FetchReviewComments       *Request_Input_FetchReviewComments
-	StartFromAmbientRunPrompt *Request_Input_StartFromAmbientRunPrompt
-	InvokeSkill               *Request_Input_InvokeSkill
+	UserInputs                 *Request_Input_UserInputs
+	QueryWithCannedResponse    *Request_Input_QueryWithCannedResponse
+	AutoCodeDiffQuery          *Request_Input_AutoCodeDiffQuery
+	ResumeConversation         *Request_Input_ResumeConversation
+	InitProjectRules           *Request_Input_InitProjectRules
+	GeneratePassiveSuggestions *Request_Input_GeneratePassiveSuggestions
+	CreateNewProject           *Request_Input_CreateNewProject
+	CloneRepository            *Request_Input_CloneRepository
+	CodeReview                 *Request_Input_CodeReview
+	SummarizeConversation      *Request_Input_SummarizeConversation
+	CreateEnvironment          *Request_Input_CreateEnvironment
+	FetchReviewComments        *Request_Input_FetchReviewComments
+	StartFromAmbientRunPrompt  *Request_Input_StartFromAmbientRunPrompt
+	InvokeSkill                *Request_Input_InvokeSkill
 	// Deprecated: Marked as deprecated in request.proto.
 	UserQuery *Request_Input_UserQuery
 	// Deprecated: Marked as deprecated in request.proto.
@@ -1050,8 +1050,8 @@ func (b0 Request_Input_builder) Build() *Request_Input {
 	if b.InitProjectRules != nil {
 		x.xxx_hidden_Type = &request_Input_InitProjectRules_{b.InitProjectRules}
 	}
-	if b.TriggerPromptSuggestion != nil {
-		x.xxx_hidden_Type = &request_Input_TriggerPromptSuggestion_{b.TriggerPromptSuggestion}
+	if b.GeneratePassiveSuggestions != nil {
+		x.xxx_hidden_Type = &request_Input_GeneratePassiveSuggestions_{b.GeneratePassiveSuggestions}
 	}
 	if b.CreateNewProject != nil {
 		x.xxx_hidden_Type = &request_Input_CreateNewProject_{b.CreateNewProject}
@@ -1120,8 +1120,8 @@ type request_Input_InitProjectRules_ struct {
 	InitProjectRules *Request_Input_InitProjectRules `protobuf:"bytes,8,opt,name=init_project_rules,json=initProjectRules,oneof"`
 }
 
-type request_Input_TriggerPromptSuggestion_ struct {
-	TriggerPromptSuggestion *Request_Input_TriggerPromptSuggestion `protobuf:"bytes,9,opt,name=trigger_prompt_suggestion,json=triggerPromptSuggestion,oneof"`
+type request_Input_GeneratePassiveSuggestions_ struct {
+	GeneratePassiveSuggestions *Request_Input_GeneratePassiveSuggestions `protobuf:"bytes,9,opt,name=generate_passive_suggestions,json=generatePassiveSuggestions,oneof"`
 }
 
 type request_Input_CreateNewProject_ struct {
@@ -1176,7 +1176,7 @@ func (*request_Input_ResumeConversation_) isRequest_Input_Type() {}
 
 func (*request_Input_InitProjectRules_) isRequest_Input_Type() {}
 
-func (*request_Input_TriggerPromptSuggestion_) isRequest_Input_Type() {}
+func (*request_Input_GeneratePassiveSuggestions_) isRequest_Input_Type() {}
 
 func (*request_Input_CreateNewProject_) isRequest_Input_Type() {}
 
@@ -4616,29 +4616,30 @@ func (b0 Request_Input_CreateEnvironment_builder) Build() *Request_Input_CreateE
 	return m0
 }
 
-// An input to trigger a suggested prompt.
-type Request_Input_TriggerPromptSuggestion struct {
-	state                  protoimpl.MessageState                          `protogen:"opaque.v1"`
-	xxx_hidden_Attachments *[]*Attachment                                  `protobuf:"bytes,1,rep,name=attachments"`
-	xxx_hidden_Trigger     isRequest_Input_TriggerPromptSuggestion_Trigger `protobuf_oneof:"trigger"`
+// An input type to generate passive suggestions (e.g. prompt suggestions).
+// If any suggestions are generated, they will be produced as tool calls.
+type Request_Input_GeneratePassiveSuggestions struct {
+	state                  protoimpl.MessageState                             `protogen:"opaque.v1"`
+	xxx_hidden_Attachments *[]*Attachment                                     `protobuf:"bytes,1,rep,name=attachments"`
+	xxx_hidden_Trigger     isRequest_Input_GeneratePassiveSuggestions_Trigger `protobuf_oneof:"trigger"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) Reset() {
-	*x = Request_Input_TriggerPromptSuggestion{}
+func (x *Request_Input_GeneratePassiveSuggestions) Reset() {
+	*x = Request_Input_GeneratePassiveSuggestions{}
 	mi := &file_request_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) String() string {
+func (x *Request_Input_GeneratePassiveSuggestions) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_TriggerPromptSuggestion) ProtoMessage() {}
+func (*Request_Input_GeneratePassiveSuggestions) ProtoMessage() {}
 
-func (x *Request_Input_TriggerPromptSuggestion) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_GeneratePassiveSuggestions) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -4650,8 +4651,7 @@ func (x *Request_Input_TriggerPromptSuggestion) ProtoReflect() protoreflect.Mess
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) GetAttachments() []*Attachment {
+func (x *Request_Input_GeneratePassiveSuggestions) GetAttachments() []*Attachment {
 	if x != nil {
 		if x.xxx_hidden_Attachments != nil {
 			return *x.xxx_hidden_Attachments
@@ -4660,216 +4660,209 @@ func (x *Request_Input_TriggerPromptSuggestion) GetAttachments() []*Attachment {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) GetFilesChanged() *emptypb.Empty {
+func (x *Request_Input_GeneratePassiveSuggestions) GetFilesChanged() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_FilesChanged); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_FilesChanged); ok {
 			return x.FilesChanged
 		}
 	}
 	return nil
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) GetCommandRun() *emptypb.Empty {
+func (x *Request_Input_GeneratePassiveSuggestions) GetCommandRun() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_CommandRun); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_CommandRun); ok {
 			return x.CommandRun
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) GetShellCommandCompletion() *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion {
+func (x *Request_Input_GeneratePassiveSuggestions) GetShellCommandCompleted() *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_ShellCommandCompletion_); ok {
-			return x.ShellCommandCompletion
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_); ok {
+			return x.ShellCommandCompleted
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) GetAgentFollowup() *Request_Input_TriggerPromptSuggestion_AgentFollowup {
+func (x *Request_Input_GeneratePassiveSuggestions) GetAgentResponseCompleted() *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_AgentFollowup_); ok {
-			return x.AgentFollowup
+		if x, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_); ok {
+			return x.AgentResponseCompleted
 		}
 	}
 	return nil
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) SetAttachments(v []*Attachment) {
+func (x *Request_Input_GeneratePassiveSuggestions) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) SetFilesChanged(v *emptypb.Empty) {
+func (x *Request_Input_GeneratePassiveSuggestions) SetFilesChanged(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_FilesChanged{v}
+	x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_FilesChanged{v}
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) SetCommandRun(v *emptypb.Empty) {
+func (x *Request_Input_GeneratePassiveSuggestions) SetCommandRun(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_CommandRun{v}
+	x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_CommandRun{v}
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) SetShellCommandCompletion(v *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) {
+func (x *Request_Input_GeneratePassiveSuggestions) SetShellCommandCompleted(v *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_ShellCommandCompletion_{v}
+	x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_{v}
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) SetAgentFollowup(v *Request_Input_TriggerPromptSuggestion_AgentFollowup) {
+func (x *Request_Input_GeneratePassiveSuggestions) SetAgentResponseCompleted(v *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_AgentFollowup_{v}
+	x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_{v}
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) HasTrigger() bool {
+func (x *Request_Input_GeneratePassiveSuggestions) HasTrigger() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Trigger != nil
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) HasFilesChanged() bool {
+func (x *Request_Input_GeneratePassiveSuggestions) HasFilesChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_FilesChanged)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_FilesChanged)
 	return ok
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) HasCommandRun() bool {
+func (x *Request_Input_GeneratePassiveSuggestions) HasCommandRun() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_CommandRun)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_CommandRun)
 	return ok
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) HasShellCommandCompletion() bool {
+func (x *Request_Input_GeneratePassiveSuggestions) HasShellCommandCompleted() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_ShellCommandCompletion_)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_)
 	return ok
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) HasAgentFollowup() bool {
+func (x *Request_Input_GeneratePassiveSuggestions) HasAgentResponseCompleted() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_AgentFollowup_)
+	_, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_)
 	return ok
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) ClearTrigger() {
+func (x *Request_Input_GeneratePassiveSuggestions) ClearTrigger() {
 	x.xxx_hidden_Trigger = nil
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) ClearFilesChanged() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_FilesChanged); ok {
+func (x *Request_Input_GeneratePassiveSuggestions) ClearFilesChanged() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_FilesChanged); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-// Deprecated: Marked as deprecated in request.proto.
-func (x *Request_Input_TriggerPromptSuggestion) ClearCommandRun() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_CommandRun); ok {
+func (x *Request_Input_GeneratePassiveSuggestions) ClearCommandRun() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_CommandRun); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) ClearShellCommandCompletion() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_ShellCommandCompletion_); ok {
+func (x *Request_Input_GeneratePassiveSuggestions) ClearShellCommandCompleted() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Request_Input_TriggerPromptSuggestion) ClearAgentFollowup() {
-	if _, ok := x.xxx_hidden_Trigger.(*request_Input_TriggerPromptSuggestion_AgentFollowup_); ok {
+func (x *Request_Input_GeneratePassiveSuggestions) ClearAgentResponseCompleted() {
+	if _, ok := x.xxx_hidden_Trigger.(*request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-const Request_Input_TriggerPromptSuggestion_Trigger_not_set_case case_Request_Input_TriggerPromptSuggestion_Trigger = 0
-const Request_Input_TriggerPromptSuggestion_FilesChanged_case case_Request_Input_TriggerPromptSuggestion_Trigger = 2
-const Request_Input_TriggerPromptSuggestion_CommandRun_case case_Request_Input_TriggerPromptSuggestion_Trigger = 3
-const Request_Input_TriggerPromptSuggestion_ShellCommandCompletion_case case_Request_Input_TriggerPromptSuggestion_Trigger = 4
-const Request_Input_TriggerPromptSuggestion_AgentFollowup_case case_Request_Input_TriggerPromptSuggestion_Trigger = 5
+const Request_Input_GeneratePassiveSuggestions_Trigger_not_set_case case_Request_Input_GeneratePassiveSuggestions_Trigger = 0
+const Request_Input_GeneratePassiveSuggestions_FilesChanged_case case_Request_Input_GeneratePassiveSuggestions_Trigger = 2
+const Request_Input_GeneratePassiveSuggestions_CommandRun_case case_Request_Input_GeneratePassiveSuggestions_Trigger = 3
+const Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_case case_Request_Input_GeneratePassiveSuggestions_Trigger = 4
+const Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_case case_Request_Input_GeneratePassiveSuggestions_Trigger = 5
 
-func (x *Request_Input_TriggerPromptSuggestion) WhichTrigger() case_Request_Input_TriggerPromptSuggestion_Trigger {
+func (x *Request_Input_GeneratePassiveSuggestions) WhichTrigger() case_Request_Input_GeneratePassiveSuggestions_Trigger {
 	if x == nil {
-		return Request_Input_TriggerPromptSuggestion_Trigger_not_set_case
+		return Request_Input_GeneratePassiveSuggestions_Trigger_not_set_case
 	}
 	switch x.xxx_hidden_Trigger.(type) {
-	case *request_Input_TriggerPromptSuggestion_FilesChanged:
-		return Request_Input_TriggerPromptSuggestion_FilesChanged_case
-	case *request_Input_TriggerPromptSuggestion_CommandRun:
-		return Request_Input_TriggerPromptSuggestion_CommandRun_case
-	case *request_Input_TriggerPromptSuggestion_ShellCommandCompletion_:
-		return Request_Input_TriggerPromptSuggestion_ShellCommandCompletion_case
-	case *request_Input_TriggerPromptSuggestion_AgentFollowup_:
-		return Request_Input_TriggerPromptSuggestion_AgentFollowup_case
+	case *request_Input_GeneratePassiveSuggestions_FilesChanged:
+		return Request_Input_GeneratePassiveSuggestions_FilesChanged_case
+	case *request_Input_GeneratePassiveSuggestions_CommandRun:
+		return Request_Input_GeneratePassiveSuggestions_CommandRun_case
+	case *request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_:
+		return Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_case
+	case *request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_:
+		return Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_case
 	default:
-		return Request_Input_TriggerPromptSuggestion_Trigger_not_set_case
+		return Request_Input_GeneratePassiveSuggestions_Trigger_not_set_case
 	}
 }
 
-type Request_Input_TriggerPromptSuggestion_builder struct {
+type Request_Input_GeneratePassiveSuggestions_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Deprecated: Marked as deprecated in request.proto.
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	Attachments []*Attachment
 	// Fields of oneof xxx_hidden_Trigger:
-	// Deprecated: Marked as deprecated in request.proto.
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	FilesChanged *emptypb.Empty
-	// Deprecated: Marked as deprecated in request.proto.
-	CommandRun             *emptypb.Empty
-	ShellCommandCompletion *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion
-	AgentFollowup          *Request_Input_TriggerPromptSuggestion_AgentFollowup
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+	CommandRun *emptypb.Empty
+	// Triggered when a manually run shell command completes.
+	ShellCommandCompleted *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted
+	// Triggered when an agent completes a response.
+	AgentResponseCompleted *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted
 	// -- end of xxx_hidden_Trigger
 }
 
-func (b0 Request_Input_TriggerPromptSuggestion_builder) Build() *Request_Input_TriggerPromptSuggestion {
-	m0 := &Request_Input_TriggerPromptSuggestion{}
+func (b0 Request_Input_GeneratePassiveSuggestions_builder) Build() *Request_Input_GeneratePassiveSuggestions {
+	m0 := &Request_Input_GeneratePassiveSuggestions{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Attachments = &b.Attachments
 	if b.FilesChanged != nil {
-		x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_FilesChanged{b.FilesChanged}
+		x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_FilesChanged{b.FilesChanged}
 	}
 	if b.CommandRun != nil {
-		x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_CommandRun{b.CommandRun}
+		x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_CommandRun{b.CommandRun}
 	}
-	if b.ShellCommandCompletion != nil {
-		x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_ShellCommandCompletion_{b.ShellCommandCompletion}
+	if b.ShellCommandCompleted != nil {
+		x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_{b.ShellCommandCompleted}
 	}
-	if b.AgentFollowup != nil {
-		x.xxx_hidden_Trigger = &request_Input_TriggerPromptSuggestion_AgentFollowup_{b.AgentFollowup}
+	if b.AgentResponseCompleted != nil {
+		x.xxx_hidden_Trigger = &request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_{b.AgentResponseCompleted}
 	}
 	return m0
 }
 
-type case_Request_Input_TriggerPromptSuggestion_Trigger protoreflect.FieldNumber
+type case_Request_Input_GeneratePassiveSuggestions_Trigger protoreflect.FieldNumber
 
-func (x case_Request_Input_TriggerPromptSuggestion_Trigger) String() string {
+func (x case_Request_Input_GeneratePassiveSuggestions_Trigger) String() string {
 	md := file_request_proto_msgTypes[17].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -4877,38 +4870,40 @@ func (x case_Request_Input_TriggerPromptSuggestion_Trigger) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Input_TriggerPromptSuggestion_Trigger interface {
-	isRequest_Input_TriggerPromptSuggestion_Trigger()
+type isRequest_Input_GeneratePassiveSuggestions_Trigger interface {
+	isRequest_Input_GeneratePassiveSuggestions_Trigger()
 }
 
-type request_Input_TriggerPromptSuggestion_FilesChanged struct {
-	// Deprecated: Marked as deprecated in request.proto.
+type request_Input_GeneratePassiveSuggestions_FilesChanged struct {
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	FilesChanged *emptypb.Empty `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
-type request_Input_TriggerPromptSuggestion_CommandRun struct {
-	// Deprecated: Marked as deprecated in request.proto.
+type request_Input_GeneratePassiveSuggestions_CommandRun struct {
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	CommandRun *emptypb.Empty `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
-type request_Input_TriggerPromptSuggestion_ShellCommandCompletion_ struct {
-	ShellCommandCompletion *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion `protobuf:"bytes,4,opt,name=shell_command_completion,json=shellCommandCompletion,oneof"`
+type request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_ struct {
+	// Triggered when a manually run shell command completes.
+	ShellCommandCompleted *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted `protobuf:"bytes,4,opt,name=shell_command_completed,json=shellCommandCompleted,oneof"`
 }
 
-type request_Input_TriggerPromptSuggestion_AgentFollowup_ struct {
-	AgentFollowup *Request_Input_TriggerPromptSuggestion_AgentFollowup `protobuf:"bytes,5,opt,name=agent_followup,json=agentFollowup,oneof"`
+type request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_ struct {
+	// Triggered when an agent completes a response.
+	AgentResponseCompleted *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted `protobuf:"bytes,5,opt,name=agent_response_completed,json=agentResponseCompleted,oneof"`
 }
 
-func (*request_Input_TriggerPromptSuggestion_FilesChanged) isRequest_Input_TriggerPromptSuggestion_Trigger() {
+func (*request_Input_GeneratePassiveSuggestions_FilesChanged) isRequest_Input_GeneratePassiveSuggestions_Trigger() {
 }
 
-func (*request_Input_TriggerPromptSuggestion_CommandRun) isRequest_Input_TriggerPromptSuggestion_Trigger() {
+func (*request_Input_GeneratePassiveSuggestions_CommandRun) isRequest_Input_GeneratePassiveSuggestions_Trigger() {
 }
 
-func (*request_Input_TriggerPromptSuggestion_ShellCommandCompletion_) isRequest_Input_TriggerPromptSuggestion_Trigger() {
+func (*request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_) isRequest_Input_GeneratePassiveSuggestions_Trigger() {
 }
 
-func (*request_Input_TriggerPromptSuggestion_AgentFollowup_) isRequest_Input_TriggerPromptSuggestion_Trigger() {
+func (*request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_) isRequest_Input_GeneratePassiveSuggestions_Trigger() {
 }
 
 type Request_Input_OnShellCommandCompletion struct {
@@ -5989,7 +5984,7 @@ func (b0 Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_builder)
 	return m0
 }
 
-type Request_Input_TriggerPromptSuggestion_ShellCommandCompletion struct {
+type Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted struct {
 	state                           protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ExecutedShellCommand *ExecutedShellCommand  `protobuf:"bytes,1,opt,name=executed_shell_command,json=executedShellCommand"`
 	xxx_hidden_RelevantFiles        *[]*AnyFileContent     `protobuf:"bytes,2,rep,name=relevant_files,json=relevantFiles"`
@@ -5997,20 +5992,20 @@ type Request_Input_TriggerPromptSuggestion_ShellCommandCompletion struct {
 	sizeCache                       protoimpl.SizeCache
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) Reset() {
-	*x = Request_Input_TriggerPromptSuggestion_ShellCommandCompletion{}
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) Reset() {
+	*x = Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted{}
 	mi := &file_request_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) String() string {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) ProtoMessage() {}
+func (*Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) ProtoMessage() {}
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -6022,14 +6017,14 @@ func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) ProtoRefl
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) GetExecutedShellCommand() *ExecutedShellCommand {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) GetExecutedShellCommand() *ExecutedShellCommand {
 	if x != nil {
 		return x.xxx_hidden_ExecutedShellCommand
 	}
 	return nil
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) GetRelevantFiles() []*AnyFileContent {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) GetRelevantFiles() []*AnyFileContent {
 	if x != nil {
 		if x.xxx_hidden_RelevantFiles != nil {
 			return *x.xxx_hidden_RelevantFiles
@@ -6038,34 +6033,34 @@ func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) GetReleva
 	return nil
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) SetExecutedShellCommand(v *ExecutedShellCommand) {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) SetExecutedShellCommand(v *ExecutedShellCommand) {
 	x.xxx_hidden_ExecutedShellCommand = v
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) SetRelevantFiles(v []*AnyFileContent) {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) SetRelevantFiles(v []*AnyFileContent) {
 	x.xxx_hidden_RelevantFiles = &v
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) HasExecutedShellCommand() bool {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) HasExecutedShellCommand() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_ExecutedShellCommand != nil
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion) ClearExecutedShellCommand() {
+func (x *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted) ClearExecutedShellCommand() {
 	x.xxx_hidden_ExecutedShellCommand = nil
 }
 
-type Request_Input_TriggerPromptSuggestion_ShellCommandCompletion_builder struct {
+type Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ExecutedShellCommand *ExecutedShellCommand
 	RelevantFiles        []*AnyFileContent
 }
 
-func (b0 Request_Input_TriggerPromptSuggestion_ShellCommandCompletion_builder) Build() *Request_Input_TriggerPromptSuggestion_ShellCommandCompletion {
-	m0 := &Request_Input_TriggerPromptSuggestion_ShellCommandCompletion{}
+func (b0 Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_builder) Build() *Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted {
+	m0 := &Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ExecutedShellCommand = b.ExecutedShellCommand
@@ -6073,26 +6068,26 @@ func (b0 Request_Input_TriggerPromptSuggestion_ShellCommandCompletion_builder) B
 	return m0
 }
 
-type Request_Input_TriggerPromptSuggestion_AgentFollowup struct {
+type Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_AgentFollowup) Reset() {
-	*x = Request_Input_TriggerPromptSuggestion_AgentFollowup{}
+func (x *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted) Reset() {
+	*x = Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted{}
 	mi := &file_request_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_TriggerPromptSuggestion_AgentFollowup) String() string {
+func (x *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_TriggerPromptSuggestion_AgentFollowup) ProtoMessage() {}
+func (*Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted) ProtoMessage() {}
 
-func (x *Request_Input_TriggerPromptSuggestion_AgentFollowup) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -6104,13 +6099,13 @@ func (x *Request_Input_TriggerPromptSuggestion_AgentFollowup) ProtoReflect() pro
 	return mi.MessageOf(x)
 }
 
-type Request_Input_TriggerPromptSuggestion_AgentFollowup_builder struct {
+type Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_TriggerPromptSuggestion_AgentFollowup_builder) Build() *Request_Input_TriggerPromptSuggestion_AgentFollowup {
-	m0 := &Request_Input_TriggerPromptSuggestion_AgentFollowup{}
+func (b0 Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_builder) Build() *Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted {
+	m0 := &Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -7334,7 +7329,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\xbaZ\n" +
+	"task.proto\x1a\vskill.proto\"\xe3Z\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7344,7 +7339,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xe6;\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x8f<\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7352,8 +7347,8 @@ const file_request_proto_rawDesc = "" +
 	"\x1aquery_with_canned_response\x18\x04 \x01(\v2:.warp.multi_agent.v1.Request.Input.QueryWithCannedResponseH\x00R\x17queryWithCannedResponse\x12g\n" +
 	"\x14auto_code_diff_query\x18\x05 \x01(\v24.warp.multi_agent.v1.Request.Input.AutoCodeDiffQueryH\x00R\x11autoCodeDiffQuery\x12h\n" +
 	"\x13resume_conversation\x18\a \x01(\v25.warp.multi_agent.v1.Request.Input.ResumeConversationH\x00R\x12resumeConversation\x12c\n" +
-	"\x12init_project_rules\x18\b \x01(\v23.warp.multi_agent.v1.Request.Input.InitProjectRulesH\x00R\x10initProjectRules\x12x\n" +
-	"\x19trigger_prompt_suggestion\x18\t \x01(\v2:.warp.multi_agent.v1.Request.Input.TriggerPromptSuggestionH\x00R\x17triggerPromptSuggestion\x12c\n" +
+	"\x12init_project_rules\x18\b \x01(\v23.warp.multi_agent.v1.Request.Input.InitProjectRulesH\x00R\x10initProjectRules\x12\x81\x01\n" +
+	"\x1cgenerate_passive_suggestions\x18\t \x01(\v2=.warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestionsH\x00R\x1ageneratePassiveSuggestions\x12c\n" +
 	"\x12create_new_project\x18\n" +
 	" \x01(\v23.warp.multi_agent.v1.Request.Input.CreateNewProjectH\x00R\x10createNewProject\x12_\n" +
 	"\x10clone_repository\x18\v \x01(\v22.warp.multi_agent.v1.Request.Input.CloneRepositoryH\x00R\x0fcloneRepository\x12P\n" +
@@ -7447,18 +7442,18 @@ const file_request_proto_rawDesc = "" +
 	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x1a8\n" +
 	"\x11CreateEnvironment\x12#\n" +
 	"\n" +
-	"repo_paths\x18\x01 \x03(\tB\x04\x80\xb5\x18\x01R\trepoPaths\x1a\xc9\x05\n" +
-	"\x17TriggerPromptSuggestion\x12E\n" +
-	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentB\x02\x18\x01R\vattachments\x12A\n" +
-	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyB\x02\x18\x01H\x00R\ffilesChanged\x12=\n" +
-	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyB\x02\x18\x01H\x00R\n" +
+	"repo_paths\x18\x01 \x03(\tB\x04\x80\xb5\x18\x01R\trepoPaths\x1a\xe8\x05\n" +
+	"\x1aGeneratePassiveSuggestions\x12A\n" +
+	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12=\n" +
+	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
+	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
 	"commandRun\x12\x8d\x01\n" +
-	"\x18shell_command_completion\x18\x04 \x01(\v2Q.warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.ShellCommandCompletionH\x00R\x16shellCommandCompletion\x12q\n" +
-	"\x0eagent_followup\x18\x05 \x01(\v2H.warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.AgentFollowupH\x00R\ragentFollowup\x1a\xc5\x01\n" +
-	"\x16ShellCommandCompletion\x12_\n" +
+	"\x17shell_command_completed\x18\x04 \x01(\v2S.warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompletedH\x00R\x15shellCommandCompleted\x12\x90\x01\n" +
+	"\x18agent_response_completed\x18\x05 \x01(\v2T.warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompletedH\x00R\x16agentResponseCompleted\x1a\xc4\x01\n" +
+	"\x15ShellCommandCompleted\x12_\n" +
 	"\x16executed_shell_command\x18\x01 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandR\x14executedShellCommand\x12J\n" +
-	"\x0erelevant_files\x18\x02 \x03(\v2#.warp.multi_agent.v1.AnyFileContentR\rrelevantFiles\x1a\x0f\n" +
-	"\rAgentFollowupB\t\n" +
+	"\x0erelevant_files\x18\x02 \x03(\v2#.warp.multi_agent.v1.AnyFileContentR\rrelevantFiles\x1a\x18\n" +
+	"\x16AgentResponseCompletedB\t\n" +
 	"\atrigger\x1a:\n" +
 	"\x18OnShellCommandCompletion\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x1a\xb8\x02\n" +
@@ -7569,43 +7564,43 @@ const file_request_proto_rawDesc = "" +
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_request_proto_goTypes = []any{
-	(AutonomyLevel)(0),                                                     // 0: warp.multi_agent.v1.AutonomyLevel
-	(IsolationLevel)(0),                                                    // 1: warp.multi_agent.v1.IsolationLevel
-	(*Request)(nil),                                                        // 2: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                            // 3: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                  // 4: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                               // 5: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                               // 6: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                             // 7: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                        // 8: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_CLIAgentUserQuery)(nil),                                // 9: warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	(*Request_Input_UserInputs)(nil),                                       // 10: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                   // 11: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                          // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                                // 13: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversation)(nil),                               // 14: warp.multi_agent.v1.Request.Input.ResumeConversation
-	(*Request_Input_InitProjectRules)(nil),                                 // 15: warp.multi_agent.v1.Request.Input.InitProjectRules
-	(*Request_Input_CreateNewProject)(nil),                                 // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
-	(*Request_Input_CloneRepository)(nil),                                  // 17: warp.multi_agent.v1.Request.Input.CloneRepository
-	(*Request_Input_CreateEnvironment)(nil),                                // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
-	(*Request_Input_TriggerPromptSuggestion)(nil),                          // 19: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion
-	(*Request_Input_OnShellCommandCompletion)(nil),                         // 20: warp.multi_agent.v1.Request.Input.OnShellCommandCompletion
-	(*Request_Input_CodeReview)(nil),                                       // 21: warp.multi_agent.v1.Request.Input.CodeReview
-	(*Request_Input_FetchReviewComments)(nil),                              // 22: warp.multi_agent.v1.Request.Input.FetchReviewComments
-	(*Request_Input_SummarizeConversation)(nil),                            // 23: warp.multi_agent.v1.Request.Input.SummarizeConversation
-	(*Request_Input_StartFromAmbientRunPrompt)(nil),                        // 24: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt
-	(*Request_Input_InvokeSkill)(nil),                                      // 25: warp.multi_agent.v1.Request.Input.InvokeSkill
-	nil,                                                                    // 26: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
-	(*Request_Input_UserInputs_UserInput)(nil),                             // 27: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	(*Request_Input_QueryWithCannedResponse_Install)(nil),                  // 28: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	(*Request_Input_QueryWithCannedResponse_Code)(nil),                     // 29: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                   // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),            // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil),  // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	(*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff)(nil), // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	(*Request_Input_TriggerPromptSuggestion_ShellCommandCompletion)(nil),   // 34: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.ShellCommandCompletion
-	(*Request_Input_TriggerPromptSuggestion_AgentFollowup)(nil),            // 35: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.AgentFollowup
-	(*Request_Input_CodeReview_InitialReviewComments)(nil),                 // 36: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
+	(AutonomyLevel)(0),                                                      // 0: warp.multi_agent.v1.AutonomyLevel
+	(IsolationLevel)(0),                                                     // 1: warp.multi_agent.v1.IsolationLevel
+	(*Request)(nil),                                                         // 2: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                                             // 3: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                                                   // 4: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                                                // 5: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                                                // 6: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                                              // 7: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),                                         // 8: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_CLIAgentUserQuery)(nil),                                 // 9: warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	(*Request_Input_UserInputs)(nil),                                        // 10: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),                                    // 11: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil),                           // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),                                 // 13: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_ResumeConversation)(nil),                                // 14: warp.multi_agent.v1.Request.Input.ResumeConversation
+	(*Request_Input_InitProjectRules)(nil),                                  // 15: warp.multi_agent.v1.Request.Input.InitProjectRules
+	(*Request_Input_CreateNewProject)(nil),                                  // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
+	(*Request_Input_CloneRepository)(nil),                                   // 17: warp.multi_agent.v1.Request.Input.CloneRepository
+	(*Request_Input_CreateEnvironment)(nil),                                 // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
+	(*Request_Input_GeneratePassiveSuggestions)(nil),                        // 19: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions
+	(*Request_Input_OnShellCommandCompletion)(nil),                          // 20: warp.multi_agent.v1.Request.Input.OnShellCommandCompletion
+	(*Request_Input_CodeReview)(nil),                                        // 21: warp.multi_agent.v1.Request.Input.CodeReview
+	(*Request_Input_FetchReviewComments)(nil),                               // 22: warp.multi_agent.v1.Request.Input.FetchReviewComments
+	(*Request_Input_SummarizeConversation)(nil),                             // 23: warp.multi_agent.v1.Request.Input.SummarizeConversation
+	(*Request_Input_StartFromAmbientRunPrompt)(nil),                         // 24: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt
+	(*Request_Input_InvokeSkill)(nil),                                       // 25: warp.multi_agent.v1.Request.Input.InvokeSkill
+	nil,                                                                     // 26: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
+	(*Request_Input_UserInputs_UserInput)(nil),                              // 27: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
+	(*Request_Input_QueryWithCannedResponse_Install)(nil),                   // 28: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	(*Request_Input_QueryWithCannedResponse_Code)(nil),                      // 29: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                    // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),             // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil),   // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	(*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff)(nil),  // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	(*Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted)(nil),  // 34: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted
+	(*Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted)(nil), // 35: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompleted
+	(*Request_Input_CodeReview_InitialReviewComments)(nil),                  // 36: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
 	nil,                                  // 37: warp.multi_agent.v1.Request.Metadata.LoggingEntry
 	(*Request_Settings_ModelConfig)(nil), // 38: warp.multi_agent.v1.Request.Settings.ModelConfig
 	(*Request_Settings_ApiKeys)(nil),     // 39: warp.multi_agent.v1.Request.Settings.ApiKeys
@@ -7669,7 +7664,7 @@ var file_request_proto_depIdxs = []int32{
 	13, // 10: warp.multi_agent.v1.Request.Input.auto_code_diff_query:type_name -> warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
 	14, // 11: warp.multi_agent.v1.Request.Input.resume_conversation:type_name -> warp.multi_agent.v1.Request.Input.ResumeConversation
 	15, // 12: warp.multi_agent.v1.Request.Input.init_project_rules:type_name -> warp.multi_agent.v1.Request.Input.InitProjectRules
-	19, // 13: warp.multi_agent.v1.Request.Input.trigger_prompt_suggestion:type_name -> warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion
+	19, // 13: warp.multi_agent.v1.Request.Input.generate_passive_suggestions:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions
 	16, // 14: warp.multi_agent.v1.Request.Input.create_new_project:type_name -> warp.multi_agent.v1.Request.Input.CreateNewProject
 	17, // 15: warp.multi_agent.v1.Request.Input.clone_repository:type_name -> warp.multi_agent.v1.Request.Input.CloneRepository
 	21, // 16: warp.multi_agent.v1.Request.Input.code_review:type_name -> warp.multi_agent.v1.Request.Input.CodeReview
@@ -7727,11 +7722,11 @@ var file_request_proto_depIdxs = []int32{
 	31, // 68: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
 	32, // 69: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
 	33, // 70: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	76, // 71: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.attachments:type_name -> warp.multi_agent.v1.Attachment
-	77, // 72: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.files_changed:type_name -> google.protobuf.Empty
-	77, // 73: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.command_run:type_name -> google.protobuf.Empty
-	34, // 74: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.shell_command_completion:type_name -> warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.ShellCommandCompletion
-	35, // 75: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.agent_followup:type_name -> warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.AgentFollowup
+	76, // 71: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
+	77, // 72: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
+	77, // 73: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
+	34, // 74: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted
+	35, // 75: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompleted
 	36, // 76: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
 	78, // 77: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
 	78, // 78: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
@@ -7740,8 +7735,8 @@ var file_request_proto_depIdxs = []int32{
 	8,  // 81: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	11, // 82: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	9,  // 83: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	79, // 84: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.ShellCommandCompletion.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	80, // 85: warp.multi_agent.v1.Request.Input.TriggerPromptSuggestion.ShellCommandCompletion.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
+	79, // 84: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	80, // 85: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	81, // 86: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	82, // 87: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
 	83, // 88: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
@@ -7774,7 +7769,7 @@ func file_request_proto_init() {
 		(*request_Input_AutoCodeDiffQuery_)(nil),
 		(*request_Input_ResumeConversation_)(nil),
 		(*request_Input_InitProjectRules_)(nil),
-		(*request_Input_TriggerPromptSuggestion_)(nil),
+		(*request_Input_GeneratePassiveSuggestions_)(nil),
 		(*request_Input_CreateNewProject_)(nil),
 		(*request_Input_CloneRepository_)(nil),
 		(*request_Input_CodeReview_)(nil),
@@ -7822,10 +7817,10 @@ func file_request_proto_init() {
 		(*request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff_)(nil),
 	}
 	file_request_proto_msgTypes[17].OneofWrappers = []any{
-		(*request_Input_TriggerPromptSuggestion_FilesChanged)(nil),
-		(*request_Input_TriggerPromptSuggestion_CommandRun)(nil),
-		(*request_Input_TriggerPromptSuggestion_ShellCommandCompletion_)(nil),
-		(*request_Input_TriggerPromptSuggestion_AgentFollowup_)(nil),
+		(*request_Input_GeneratePassiveSuggestions_FilesChanged)(nil),
+		(*request_Input_GeneratePassiveSuggestions_CommandRun)(nil),
+		(*request_Input_GeneratePassiveSuggestions_ShellCommandCompleted_)(nil),
+		(*request_Input_GeneratePassiveSuggestions_AgentResponseCompleted_)(nil),
 	}
 	file_request_proto_msgTypes[19].OneofWrappers = []any{
 		(*request_Input_CodeReview_InitialReviewComments_)(nil),

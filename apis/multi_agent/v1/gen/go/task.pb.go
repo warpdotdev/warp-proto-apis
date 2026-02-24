@@ -8044,10 +8044,10 @@ func (x *Message_SystemQuery) GetResumeConversation() *Message_ResumeConversatio
 	return nil
 }
 
-func (x *Message_SystemQuery) GetTriggerPromptSuggestion() *Message_TriggerPromptSuggestion {
+func (x *Message_SystemQuery) GetGeneratePassiveSuggestions() *Message_GeneratePassiveSuggestions {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Type.(*message_SystemQuery_TriggerPromptSuggestion); ok {
-			return x.TriggerPromptSuggestion
+		if x, ok := x.xxx_hidden_Type.(*message_SystemQuery_GeneratePassiveSuggestions); ok {
+			return x.GeneratePassiveSuggestions
 		}
 	}
 	return nil
@@ -8112,12 +8112,12 @@ func (x *Message_SystemQuery) SetResumeConversation(v *Message_ResumeConversatio
 	x.xxx_hidden_Type = &message_SystemQuery_ResumeConversation{v}
 }
 
-func (x *Message_SystemQuery) SetTriggerPromptSuggestion(v *Message_TriggerPromptSuggestion) {
+func (x *Message_SystemQuery) SetGeneratePassiveSuggestions(v *Message_GeneratePassiveSuggestions) {
 	if v == nil {
 		x.xxx_hidden_Type = nil
 		return
 	}
-	x.xxx_hidden_Type = &message_SystemQuery_TriggerPromptSuggestion{v}
+	x.xxx_hidden_Type = &message_SystemQuery_GeneratePassiveSuggestions{v}
 }
 
 func (x *Message_SystemQuery) SetCreateNewProject(v *Message_CreateNewProject) {
@@ -8179,11 +8179,11 @@ func (x *Message_SystemQuery) HasResumeConversation() bool {
 	return ok
 }
 
-func (x *Message_SystemQuery) HasTriggerPromptSuggestion() bool {
+func (x *Message_SystemQuery) HasGeneratePassiveSuggestions() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Type.(*message_SystemQuery_TriggerPromptSuggestion)
+	_, ok := x.xxx_hidden_Type.(*message_SystemQuery_GeneratePassiveSuggestions)
 	return ok
 }
 
@@ -8242,8 +8242,8 @@ func (x *Message_SystemQuery) ClearResumeConversation() {
 	}
 }
 
-func (x *Message_SystemQuery) ClearTriggerPromptSuggestion() {
-	if _, ok := x.xxx_hidden_Type.(*message_SystemQuery_TriggerPromptSuggestion); ok {
+func (x *Message_SystemQuery) ClearGeneratePassiveSuggestions() {
+	if _, ok := x.xxx_hidden_Type.(*message_SystemQuery_GeneratePassiveSuggestions); ok {
 		x.xxx_hidden_Type = nil
 	}
 }
@@ -8279,7 +8279,7 @@ func (x *Message_SystemQuery) ClearContext() {
 const Message_SystemQuery_Type_not_set_case case_Message_SystemQuery_Type = 0
 const Message_SystemQuery_AutoCodeDiff_case case_Message_SystemQuery_Type = 1
 const Message_SystemQuery_ResumeConversation_case case_Message_SystemQuery_Type = 3
-const Message_SystemQuery_TriggerPromptSuggestion_case case_Message_SystemQuery_Type = 4
+const Message_SystemQuery_GeneratePassiveSuggestions_case case_Message_SystemQuery_Type = 4
 const Message_SystemQuery_CreateNewProject_case case_Message_SystemQuery_Type = 5
 const Message_SystemQuery_CloneRepository_case case_Message_SystemQuery_Type = 6
 const Message_SystemQuery_SummarizeConversation_case case_Message_SystemQuery_Type = 7
@@ -8294,8 +8294,8 @@ func (x *Message_SystemQuery) WhichType() case_Message_SystemQuery_Type {
 		return Message_SystemQuery_AutoCodeDiff_case
 	case *message_SystemQuery_ResumeConversation:
 		return Message_SystemQuery_ResumeConversation_case
-	case *message_SystemQuery_TriggerPromptSuggestion:
-		return Message_SystemQuery_TriggerPromptSuggestion_case
+	case *message_SystemQuery_GeneratePassiveSuggestions:
+		return Message_SystemQuery_GeneratePassiveSuggestions_case
 	case *message_SystemQuery_CreateNewProject:
 		return Message_SystemQuery_CreateNewProject_case
 	case *message_SystemQuery_CloneRepository:
@@ -8313,13 +8313,13 @@ type Message_SystemQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Type:
-	AutoCodeDiff            *Message_AutoCodeDiff
-	ResumeConversation      *Message_ResumeConversation
-	TriggerPromptSuggestion *Message_TriggerPromptSuggestion
-	CreateNewProject        *Message_CreateNewProject
-	CloneRepository         *Message_CloneRepository
-	SummarizeConversation   *Message_SummarizeConversation
-	FetchReviewComments     *Message_FetchReviewComments
+	AutoCodeDiff               *Message_AutoCodeDiff
+	ResumeConversation         *Message_ResumeConversation
+	GeneratePassiveSuggestions *Message_GeneratePassiveSuggestions
+	CreateNewProject           *Message_CreateNewProject
+	CloneRepository            *Message_CloneRepository
+	SummarizeConversation      *Message_SummarizeConversation
+	FetchReviewComments        *Message_FetchReviewComments
 	// -- end of xxx_hidden_Type
 	Context *InputContext
 }
@@ -8334,8 +8334,8 @@ func (b0 Message_SystemQuery_builder) Build() *Message_SystemQuery {
 	if b.ResumeConversation != nil {
 		x.xxx_hidden_Type = &message_SystemQuery_ResumeConversation{b.ResumeConversation}
 	}
-	if b.TriggerPromptSuggestion != nil {
-		x.xxx_hidden_Type = &message_SystemQuery_TriggerPromptSuggestion{b.TriggerPromptSuggestion}
+	if b.GeneratePassiveSuggestions != nil {
+		x.xxx_hidden_Type = &message_SystemQuery_GeneratePassiveSuggestions{b.GeneratePassiveSuggestions}
 	}
 	if b.CreateNewProject != nil {
 		x.xxx_hidden_Type = &message_SystemQuery_CreateNewProject{b.CreateNewProject}
@@ -8375,8 +8375,8 @@ type message_SystemQuery_ResumeConversation struct {
 	ResumeConversation *Message_ResumeConversation `protobuf:"bytes,3,opt,name=resume_conversation,json=resumeConversation,oneof"`
 }
 
-type message_SystemQuery_TriggerPromptSuggestion struct {
-	TriggerPromptSuggestion *Message_TriggerPromptSuggestion `protobuf:"bytes,4,opt,name=trigger_prompt_suggestion,json=triggerPromptSuggestion,oneof"`
+type message_SystemQuery_GeneratePassiveSuggestions struct {
+	GeneratePassiveSuggestions *Message_GeneratePassiveSuggestions `protobuf:"bytes,4,opt,name=generate_passive_suggestions,json=generatePassiveSuggestions,oneof"`
 }
 
 type message_SystemQuery_CreateNewProject struct {
@@ -8399,7 +8399,7 @@ func (*message_SystemQuery_AutoCodeDiff) isMessage_SystemQuery_Type() {}
 
 func (*message_SystemQuery_ResumeConversation) isMessage_SystemQuery_Type() {}
 
-func (*message_SystemQuery_TriggerPromptSuggestion) isMessage_SystemQuery_Type() {}
+func (*message_SystemQuery_GeneratePassiveSuggestions) isMessage_SystemQuery_Type() {}
 
 func (*message_SystemQuery_CreateNewProject) isMessage_SystemQuery_Type() {}
 
@@ -8530,28 +8530,30 @@ func (b0 Message_ResumeConversation_builder) Build() *Message_ResumeConversation
 	return m0
 }
 
-type Message_TriggerPromptSuggestion struct {
-	state                  protoimpl.MessageState                    `protogen:"opaque.v1"`
-	xxx_hidden_Attachments *[]*Attachment                            `protobuf:"bytes,1,rep,name=attachments"`
-	xxx_hidden_Trigger     isMessage_TriggerPromptSuggestion_Trigger `protobuf_oneof:"trigger"`
+// An input type to generate passive suggestions (e.g. prompt suggestions).
+// If any suggestions are generated, they will be produced as tool calls.
+type Message_GeneratePassiveSuggestions struct {
+	state                  protoimpl.MessageState                       `protogen:"opaque.v1"`
+	xxx_hidden_Attachments *[]*Attachment                               `protobuf:"bytes,1,rep,name=attachments"`
+	xxx_hidden_Trigger     isMessage_GeneratePassiveSuggestions_Trigger `protobuf_oneof:"trigger"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Message_TriggerPromptSuggestion) Reset() {
-	*x = Message_TriggerPromptSuggestion{}
+func (x *Message_GeneratePassiveSuggestions) Reset() {
+	*x = Message_GeneratePassiveSuggestions{}
 	mi := &file_task_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_TriggerPromptSuggestion) String() string {
+func (x *Message_GeneratePassiveSuggestions) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_TriggerPromptSuggestion) ProtoMessage() {}
+func (*Message_GeneratePassiveSuggestions) ProtoMessage() {}
 
-func (x *Message_TriggerPromptSuggestion) ProtoReflect() protoreflect.Message {
+func (x *Message_GeneratePassiveSuggestions) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8563,8 +8565,7 @@ func (x *Message_TriggerPromptSuggestion) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) GetAttachments() []*Attachment {
+func (x *Message_GeneratePassiveSuggestions) GetAttachments() []*Attachment {
 	if x != nil {
 		if x.xxx_hidden_Attachments != nil {
 			return *x.xxx_hidden_Attachments
@@ -8573,216 +8574,209 @@ func (x *Message_TriggerPromptSuggestion) GetAttachments() []*Attachment {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) GetFilesChanged() *emptypb.Empty {
+func (x *Message_GeneratePassiveSuggestions) GetFilesChanged() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_FilesChanged); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_FilesChanged); ok {
 			return x.FilesChanged
 		}
 	}
 	return nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) GetCommandRun() *emptypb.Empty {
+func (x *Message_GeneratePassiveSuggestions) GetCommandRun() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_CommandRun); ok {
+		if x, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_CommandRun); ok {
 			return x.CommandRun
 		}
 	}
 	return nil
 }
 
-func (x *Message_TriggerPromptSuggestion) GetShellCommandCompletion() *Message_TriggerPromptSuggestion_ShellCommandCompletion {
+func (x *Message_GeneratePassiveSuggestions) GetShellCommandCompleted() *Message_GeneratePassiveSuggestions_ShellCommandCompleted {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_ShellCommandCompletion_); ok {
-			return x.ShellCommandCompletion
+		if x, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_ShellCommandCompleted_); ok {
+			return x.ShellCommandCompleted
 		}
 	}
 	return nil
 }
 
-func (x *Message_TriggerPromptSuggestion) GetAgentFollowup() *Message_TriggerPromptSuggestion_AgentFollowup {
+func (x *Message_GeneratePassiveSuggestions) GetAgentResponseCompleted() *Message_GeneratePassiveSuggestions_AgentResponseCompleted {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_AgentFollowup_); ok {
-			return x.AgentFollowup
+		if x, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_AgentResponseCompleted_); ok {
+			return x.AgentResponseCompleted
 		}
 	}
 	return nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) SetAttachments(v []*Attachment) {
+func (x *Message_GeneratePassiveSuggestions) SetAttachments(v []*Attachment) {
 	x.xxx_hidden_Attachments = &v
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) SetFilesChanged(v *emptypb.Empty) {
+func (x *Message_GeneratePassiveSuggestions) SetFilesChanged(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_FilesChanged{v}
+	x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_FilesChanged{v}
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) SetCommandRun(v *emptypb.Empty) {
+func (x *Message_GeneratePassiveSuggestions) SetCommandRun(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_CommandRun{v}
+	x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_CommandRun{v}
 }
 
-func (x *Message_TriggerPromptSuggestion) SetShellCommandCompletion(v *Message_TriggerPromptSuggestion_ShellCommandCompletion) {
+func (x *Message_GeneratePassiveSuggestions) SetShellCommandCompleted(v *Message_GeneratePassiveSuggestions_ShellCommandCompleted) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_ShellCommandCompletion_{v}
+	x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_ShellCommandCompleted_{v}
 }
 
-func (x *Message_TriggerPromptSuggestion) SetAgentFollowup(v *Message_TriggerPromptSuggestion_AgentFollowup) {
+func (x *Message_GeneratePassiveSuggestions) SetAgentResponseCompleted(v *Message_GeneratePassiveSuggestions_AgentResponseCompleted) {
 	if v == nil {
 		x.xxx_hidden_Trigger = nil
 		return
 	}
-	x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_AgentFollowup_{v}
+	x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_AgentResponseCompleted_{v}
 }
 
-func (x *Message_TriggerPromptSuggestion) HasTrigger() bool {
+func (x *Message_GeneratePassiveSuggestions) HasTrigger() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Trigger != nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) HasFilesChanged() bool {
+func (x *Message_GeneratePassiveSuggestions) HasFilesChanged() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_FilesChanged)
+	_, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_FilesChanged)
 	return ok
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) HasCommandRun() bool {
+func (x *Message_GeneratePassiveSuggestions) HasCommandRun() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_CommandRun)
+	_, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_CommandRun)
 	return ok
 }
 
-func (x *Message_TriggerPromptSuggestion) HasShellCommandCompletion() bool {
+func (x *Message_GeneratePassiveSuggestions) HasShellCommandCompleted() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_ShellCommandCompletion_)
+	_, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_ShellCommandCompleted_)
 	return ok
 }
 
-func (x *Message_TriggerPromptSuggestion) HasAgentFollowup() bool {
+func (x *Message_GeneratePassiveSuggestions) HasAgentResponseCompleted() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_AgentFollowup_)
+	_, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_AgentResponseCompleted_)
 	return ok
 }
 
-func (x *Message_TriggerPromptSuggestion) ClearTrigger() {
+func (x *Message_GeneratePassiveSuggestions) ClearTrigger() {
 	x.xxx_hidden_Trigger = nil
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) ClearFilesChanged() {
-	if _, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_FilesChanged); ok {
+func (x *Message_GeneratePassiveSuggestions) ClearFilesChanged() {
+	if _, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_FilesChanged); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-// Deprecated: Marked as deprecated in task.proto.
-func (x *Message_TriggerPromptSuggestion) ClearCommandRun() {
-	if _, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_CommandRun); ok {
+func (x *Message_GeneratePassiveSuggestions) ClearCommandRun() {
+	if _, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_CommandRun); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Message_TriggerPromptSuggestion) ClearShellCommandCompletion() {
-	if _, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_ShellCommandCompletion_); ok {
+func (x *Message_GeneratePassiveSuggestions) ClearShellCommandCompleted() {
+	if _, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_ShellCommandCompleted_); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-func (x *Message_TriggerPromptSuggestion) ClearAgentFollowup() {
-	if _, ok := x.xxx_hidden_Trigger.(*message_TriggerPromptSuggestion_AgentFollowup_); ok {
+func (x *Message_GeneratePassiveSuggestions) ClearAgentResponseCompleted() {
+	if _, ok := x.xxx_hidden_Trigger.(*message_GeneratePassiveSuggestions_AgentResponseCompleted_); ok {
 		x.xxx_hidden_Trigger = nil
 	}
 }
 
-const Message_TriggerPromptSuggestion_Trigger_not_set_case case_Message_TriggerPromptSuggestion_Trigger = 0
-const Message_TriggerPromptSuggestion_FilesChanged_case case_Message_TriggerPromptSuggestion_Trigger = 2
-const Message_TriggerPromptSuggestion_CommandRun_case case_Message_TriggerPromptSuggestion_Trigger = 3
-const Message_TriggerPromptSuggestion_ShellCommandCompletion_case case_Message_TriggerPromptSuggestion_Trigger = 4
-const Message_TriggerPromptSuggestion_AgentFollowup_case case_Message_TriggerPromptSuggestion_Trigger = 5
+const Message_GeneratePassiveSuggestions_Trigger_not_set_case case_Message_GeneratePassiveSuggestions_Trigger = 0
+const Message_GeneratePassiveSuggestions_FilesChanged_case case_Message_GeneratePassiveSuggestions_Trigger = 2
+const Message_GeneratePassiveSuggestions_CommandRun_case case_Message_GeneratePassiveSuggestions_Trigger = 3
+const Message_GeneratePassiveSuggestions_ShellCommandCompleted_case case_Message_GeneratePassiveSuggestions_Trigger = 4
+const Message_GeneratePassiveSuggestions_AgentResponseCompleted_case case_Message_GeneratePassiveSuggestions_Trigger = 5
 
-func (x *Message_TriggerPromptSuggestion) WhichTrigger() case_Message_TriggerPromptSuggestion_Trigger {
+func (x *Message_GeneratePassiveSuggestions) WhichTrigger() case_Message_GeneratePassiveSuggestions_Trigger {
 	if x == nil {
-		return Message_TriggerPromptSuggestion_Trigger_not_set_case
+		return Message_GeneratePassiveSuggestions_Trigger_not_set_case
 	}
 	switch x.xxx_hidden_Trigger.(type) {
-	case *message_TriggerPromptSuggestion_FilesChanged:
-		return Message_TriggerPromptSuggestion_FilesChanged_case
-	case *message_TriggerPromptSuggestion_CommandRun:
-		return Message_TriggerPromptSuggestion_CommandRun_case
-	case *message_TriggerPromptSuggestion_ShellCommandCompletion_:
-		return Message_TriggerPromptSuggestion_ShellCommandCompletion_case
-	case *message_TriggerPromptSuggestion_AgentFollowup_:
-		return Message_TriggerPromptSuggestion_AgentFollowup_case
+	case *message_GeneratePassiveSuggestions_FilesChanged:
+		return Message_GeneratePassiveSuggestions_FilesChanged_case
+	case *message_GeneratePassiveSuggestions_CommandRun:
+		return Message_GeneratePassiveSuggestions_CommandRun_case
+	case *message_GeneratePassiveSuggestions_ShellCommandCompleted_:
+		return Message_GeneratePassiveSuggestions_ShellCommandCompleted_case
+	case *message_GeneratePassiveSuggestions_AgentResponseCompleted_:
+		return Message_GeneratePassiveSuggestions_AgentResponseCompleted_case
 	default:
-		return Message_TriggerPromptSuggestion_Trigger_not_set_case
+		return Message_GeneratePassiveSuggestions_Trigger_not_set_case
 	}
 }
 
-type Message_TriggerPromptSuggestion_builder struct {
+type Message_GeneratePassiveSuggestions_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Deprecated: Marked as deprecated in task.proto.
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	Attachments []*Attachment
 	// Fields of oneof xxx_hidden_Trigger:
-	// Deprecated: Marked as deprecated in task.proto.
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	FilesChanged *emptypb.Empty
-	// Deprecated: Marked as deprecated in task.proto.
-	CommandRun             *emptypb.Empty
-	ShellCommandCompletion *Message_TriggerPromptSuggestion_ShellCommandCompletion
-	AgentFollowup          *Message_TriggerPromptSuggestion_AgentFollowup
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+	CommandRun *emptypb.Empty
+	// Triggered when a manually run shell command completes.
+	ShellCommandCompleted *Message_GeneratePassiveSuggestions_ShellCommandCompleted
+	// Triggered when an agent completes a response.
+	AgentResponseCompleted *Message_GeneratePassiveSuggestions_AgentResponseCompleted
 	// -- end of xxx_hidden_Trigger
 }
 
-func (b0 Message_TriggerPromptSuggestion_builder) Build() *Message_TriggerPromptSuggestion {
-	m0 := &Message_TriggerPromptSuggestion{}
+func (b0 Message_GeneratePassiveSuggestions_builder) Build() *Message_GeneratePassiveSuggestions {
+	m0 := &Message_GeneratePassiveSuggestions{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Attachments = &b.Attachments
 	if b.FilesChanged != nil {
-		x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_FilesChanged{b.FilesChanged}
+		x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_FilesChanged{b.FilesChanged}
 	}
 	if b.CommandRun != nil {
-		x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_CommandRun{b.CommandRun}
+		x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_CommandRun{b.CommandRun}
 	}
-	if b.ShellCommandCompletion != nil {
-		x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_ShellCommandCompletion_{b.ShellCommandCompletion}
+	if b.ShellCommandCompleted != nil {
+		x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_ShellCommandCompleted_{b.ShellCommandCompleted}
 	}
-	if b.AgentFollowup != nil {
-		x.xxx_hidden_Trigger = &message_TriggerPromptSuggestion_AgentFollowup_{b.AgentFollowup}
+	if b.AgentResponseCompleted != nil {
+		x.xxx_hidden_Trigger = &message_GeneratePassiveSuggestions_AgentResponseCompleted_{b.AgentResponseCompleted}
 	}
 	return m0
 }
 
-type case_Message_TriggerPromptSuggestion_Trigger protoreflect.FieldNumber
+type case_Message_GeneratePassiveSuggestions_Trigger protoreflect.FieldNumber
 
-func (x case_Message_TriggerPromptSuggestion_Trigger) String() string {
+func (x case_Message_GeneratePassiveSuggestions_Trigger) String() string {
 	md := file_task_proto_msgTypes[44].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -8790,36 +8784,41 @@ func (x case_Message_TriggerPromptSuggestion_Trigger) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isMessage_TriggerPromptSuggestion_Trigger interface {
-	isMessage_TriggerPromptSuggestion_Trigger()
+type isMessage_GeneratePassiveSuggestions_Trigger interface {
+	isMessage_GeneratePassiveSuggestions_Trigger()
 }
 
-type message_TriggerPromptSuggestion_FilesChanged struct {
-	// Deprecated: Marked as deprecated in task.proto.
+type message_GeneratePassiveSuggestions_FilesChanged struct {
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	FilesChanged *emptypb.Empty `protobuf:"bytes,2,opt,name=files_changed,json=filesChanged,oneof"`
 }
 
-type message_TriggerPromptSuggestion_CommandRun struct {
-	// Deprecated: Marked as deprecated in task.proto.
+type message_GeneratePassiveSuggestions_CommandRun struct {
+	// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
 	CommandRun *emptypb.Empty `protobuf:"bytes,3,opt,name=command_run,json=commandRun,oneof"`
 }
 
-type message_TriggerPromptSuggestion_ShellCommandCompletion_ struct {
-	ShellCommandCompletion *Message_TriggerPromptSuggestion_ShellCommandCompletion `protobuf:"bytes,4,opt,name=shell_command_completion,json=shellCommandCompletion,oneof"`
+type message_GeneratePassiveSuggestions_ShellCommandCompleted_ struct {
+	// Triggered when a manually run shell command completes.
+	ShellCommandCompleted *Message_GeneratePassiveSuggestions_ShellCommandCompleted `protobuf:"bytes,4,opt,name=shell_command_completed,json=shellCommandCompleted,oneof"`
 }
 
-type message_TriggerPromptSuggestion_AgentFollowup_ struct {
-	AgentFollowup *Message_TriggerPromptSuggestion_AgentFollowup `protobuf:"bytes,5,opt,name=agent_followup,json=agentFollowup,oneof"`
+type message_GeneratePassiveSuggestions_AgentResponseCompleted_ struct {
+	// Triggered when an agent completes a response.
+	AgentResponseCompleted *Message_GeneratePassiveSuggestions_AgentResponseCompleted `protobuf:"bytes,5,opt,name=agent_response_completed,json=agentResponseCompleted,oneof"`
 }
 
-func (*message_TriggerPromptSuggestion_FilesChanged) isMessage_TriggerPromptSuggestion_Trigger() {}
-
-func (*message_TriggerPromptSuggestion_CommandRun) isMessage_TriggerPromptSuggestion_Trigger() {}
-
-func (*message_TriggerPromptSuggestion_ShellCommandCompletion_) isMessage_TriggerPromptSuggestion_Trigger() {
+func (*message_GeneratePassiveSuggestions_FilesChanged) isMessage_GeneratePassiveSuggestions_Trigger() {
 }
 
-func (*message_TriggerPromptSuggestion_AgentFollowup_) isMessage_TriggerPromptSuggestion_Trigger() {}
+func (*message_GeneratePassiveSuggestions_CommandRun) isMessage_GeneratePassiveSuggestions_Trigger() {
+}
+
+func (*message_GeneratePassiveSuggestions_ShellCommandCompleted_) isMessage_GeneratePassiveSuggestions_Trigger() {
+}
+
+func (*message_GeneratePassiveSuggestions_AgentResponseCompleted_) isMessage_GeneratePassiveSuggestions_Trigger() {
+}
 
 type Message_CreateNewProject struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -13165,7 +13164,7 @@ func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
 	return m0
 }
 
-type Message_TriggerPromptSuggestion_ShellCommandCompletion struct {
+type Message_GeneratePassiveSuggestions_ShellCommandCompleted struct {
 	state                           protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ExecutedShellCommand *ExecutedShellCommand  `protobuf:"bytes,1,opt,name=executed_shell_command,json=executedShellCommand"`
 	xxx_hidden_RelevantFiles        *[]*AnyFileContent     `protobuf:"bytes,2,rep,name=relevant_files,json=relevantFiles"`
@@ -13173,20 +13172,20 @@ type Message_TriggerPromptSuggestion_ShellCommandCompletion struct {
 	sizeCache                       protoimpl.SizeCache
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) Reset() {
-	*x = Message_TriggerPromptSuggestion_ShellCommandCompletion{}
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) Reset() {
+	*x = Message_GeneratePassiveSuggestions_ShellCommandCompleted{}
 	mi := &file_task_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) String() string {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_TriggerPromptSuggestion_ShellCommandCompletion) ProtoMessage() {}
+func (*Message_GeneratePassiveSuggestions_ShellCommandCompleted) ProtoMessage() {}
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) ProtoReflect() protoreflect.Message {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -13198,14 +13197,14 @@ func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) ProtoReflect() 
 	return mi.MessageOf(x)
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) GetExecutedShellCommand() *ExecutedShellCommand {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) GetExecutedShellCommand() *ExecutedShellCommand {
 	if x != nil {
 		return x.xxx_hidden_ExecutedShellCommand
 	}
 	return nil
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) GetRelevantFiles() []*AnyFileContent {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) GetRelevantFiles() []*AnyFileContent {
 	if x != nil {
 		if x.xxx_hidden_RelevantFiles != nil {
 			return *x.xxx_hidden_RelevantFiles
@@ -13214,34 +13213,34 @@ func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) GetRelevantFile
 	return nil
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) SetExecutedShellCommand(v *ExecutedShellCommand) {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) SetExecutedShellCommand(v *ExecutedShellCommand) {
 	x.xxx_hidden_ExecutedShellCommand = v
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) SetRelevantFiles(v []*AnyFileContent) {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) SetRelevantFiles(v []*AnyFileContent) {
 	x.xxx_hidden_RelevantFiles = &v
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) HasExecutedShellCommand() bool {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) HasExecutedShellCommand() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_ExecutedShellCommand != nil
 }
 
-func (x *Message_TriggerPromptSuggestion_ShellCommandCompletion) ClearExecutedShellCommand() {
+func (x *Message_GeneratePassiveSuggestions_ShellCommandCompleted) ClearExecutedShellCommand() {
 	x.xxx_hidden_ExecutedShellCommand = nil
 }
 
-type Message_TriggerPromptSuggestion_ShellCommandCompletion_builder struct {
+type Message_GeneratePassiveSuggestions_ShellCommandCompleted_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ExecutedShellCommand *ExecutedShellCommand
 	RelevantFiles        []*AnyFileContent
 }
 
-func (b0 Message_TriggerPromptSuggestion_ShellCommandCompletion_builder) Build() *Message_TriggerPromptSuggestion_ShellCommandCompletion {
-	m0 := &Message_TriggerPromptSuggestion_ShellCommandCompletion{}
+func (b0 Message_GeneratePassiveSuggestions_ShellCommandCompleted_builder) Build() *Message_GeneratePassiveSuggestions_ShellCommandCompleted {
+	m0 := &Message_GeneratePassiveSuggestions_ShellCommandCompleted{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_ExecutedShellCommand = b.ExecutedShellCommand
@@ -13249,26 +13248,26 @@ func (b0 Message_TriggerPromptSuggestion_ShellCommandCompletion_builder) Build()
 	return m0
 }
 
-type Message_TriggerPromptSuggestion_AgentFollowup struct {
+type Message_GeneratePassiveSuggestions_AgentResponseCompleted struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Message_TriggerPromptSuggestion_AgentFollowup) Reset() {
-	*x = Message_TriggerPromptSuggestion_AgentFollowup{}
+func (x *Message_GeneratePassiveSuggestions_AgentResponseCompleted) Reset() {
+	*x = Message_GeneratePassiveSuggestions_AgentResponseCompleted{}
 	mi := &file_task_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_TriggerPromptSuggestion_AgentFollowup) String() string {
+func (x *Message_GeneratePassiveSuggestions_AgentResponseCompleted) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_TriggerPromptSuggestion_AgentFollowup) ProtoMessage() {}
+func (*Message_GeneratePassiveSuggestions_AgentResponseCompleted) ProtoMessage() {}
 
-func (x *Message_TriggerPromptSuggestion_AgentFollowup) ProtoReflect() protoreflect.Message {
+func (x *Message_GeneratePassiveSuggestions_AgentResponseCompleted) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -13280,13 +13279,13 @@ func (x *Message_TriggerPromptSuggestion_AgentFollowup) ProtoReflect() protorefl
 	return mi.MessageOf(x)
 }
 
-type Message_TriggerPromptSuggestion_AgentFollowup_builder struct {
+type Message_GeneratePassiveSuggestions_AgentResponseCompleted_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Message_TriggerPromptSuggestion_AgentFollowup_builder) Build() *Message_TriggerPromptSuggestion_AgentFollowup {
-	m0 := &Message_TriggerPromptSuggestion_AgentFollowup{}
+func (b0 Message_GeneratePassiveSuggestions_AgentResponseCompleted_builder) Build() *Message_GeneratePassiveSuggestions_AgentResponseCompleted {
+	m0 := &Message_GeneratePassiveSuggestions_AgentResponseCompleted{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -15241,7 +15240,7 @@ func (b0 Message_ToolCall_CallMCPTool_builder) Build() *Message_ToolCall_CallMCP
 	return m0
 }
 
-// A tool call to suggest a prompt.
+// A tool call to suggest a prompt for the user to run.
 type Message_ToolCall_SuggestPrompt struct {
 	state                  protoimpl.MessageState                       `protogen:"opaque.v1"`
 	xxx_hidden_DisplayMode isMessage_ToolCall_SuggestPrompt_DisplayMode `protobuf_oneof:"display_mode"`
@@ -18007,12 +18006,13 @@ func (b0 Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk_builder) Build() *Me
 	return m0
 }
 
+// Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+// This was previously used for passive unit test suggestions.
 type Message_ToolCall_SuggestPrompt_InlineQueryBanner struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Title       *string                `protobuf:"bytes,1,opt,name=title"`
 	xxx_hidden_Description *string                `protobuf:"bytes,2,opt,name=description"`
 	xxx_hidden_Query       *string                `protobuf:"bytes,3,opt,name=query"`
-	xxx_hidden_AcceptText  *string                `protobuf:"bytes,4,opt,name=accept_text,json=acceptText"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -18074,34 +18074,19 @@ func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) GetQuery() string {
 	return ""
 }
 
-func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) GetAcceptText() string {
-	if x != nil {
-		if x.xxx_hidden_AcceptText != nil {
-			return *x.xxx_hidden_AcceptText
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
-}
-
-func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) SetAcceptText(v string) {
-	x.xxx_hidden_AcceptText = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) HasTitle() bool {
@@ -18125,13 +18110,6 @@ func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) HasQuery() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) HasAcceptText() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
-}
-
 func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) ClearTitle() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Title = nil
@@ -18147,18 +18125,12 @@ func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) ClearQuery() {
 	x.xxx_hidden_Query = nil
 }
 
-func (x *Message_ToolCall_SuggestPrompt_InlineQueryBanner) ClearAcceptText() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_AcceptText = nil
-}
-
 type Message_ToolCall_SuggestPrompt_InlineQueryBanner_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Title       *string
 	Description *string
 	Query       *string
-	AcceptText  *string
 }
 
 func (b0 Message_ToolCall_SuggestPrompt_InlineQueryBanner_builder) Build() *Message_ToolCall_SuggestPrompt_InlineQueryBanner {
@@ -18166,20 +18138,16 @@ func (b0 Message_ToolCall_SuggestPrompt_InlineQueryBanner_builder) Build() *Mess
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Description = b.Description
 	}
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_Query = b.Query
-	}
-	if b.AcceptText != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
-		x.xxx_hidden_AcceptText = b.AcceptText
 	}
 	return m0
 }
@@ -26042,7 +26010,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"Ԟ\x01\n" +
+	"\x0ecomment_target\"ڞ\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -26079,11 +26047,11 @@ const file_task_proto_rawDesc = "" +
 	"\x0eintended_agent\x18\x05 \x01(\x0e2\x1e.warp.multi_agent.v1.AgentTypeR\rintendedAgent\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
-	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\x8c\x06\n" +
+	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\x95\x06\n" +
 	"\vSystemQuery\x12Q\n" +
 	"\x0eauto_code_diff\x18\x01 \x01(\v2).warp.multi_agent.v1.Message.AutoCodeDiffH\x00R\fautoCodeDiff\x12b\n" +
-	"\x13resume_conversation\x18\x03 \x01(\v2/.warp.multi_agent.v1.Message.ResumeConversationH\x00R\x12resumeConversation\x12r\n" +
-	"\x19trigger_prompt_suggestion\x18\x04 \x01(\v24.warp.multi_agent.v1.Message.TriggerPromptSuggestionH\x00R\x17triggerPromptSuggestion\x12]\n" +
+	"\x13resume_conversation\x18\x03 \x01(\v2/.warp.multi_agent.v1.Message.ResumeConversationH\x00R\x12resumeConversation\x12{\n" +
+	"\x1cgenerate_passive_suggestions\x18\x04 \x01(\v27.warp.multi_agent.v1.Message.GeneratePassiveSuggestionsH\x00R\x1ageneratePassiveSuggestions\x12]\n" +
 	"\x12create_new_project\x18\x05 \x01(\v2-.warp.multi_agent.v1.Message.CreateNewProjectH\x00R\x10createNewProject\x12Y\n" +
 	"\x10clone_repository\x18\x06 \x01(\v2,.warp.multi_agent.v1.Message.CloneRepositoryH\x00R\x0fcloneRepository\x12k\n" +
 	"\x16summarize_conversation\x18\a \x01(\v22.warp.multi_agent.v1.Message.SummarizeConversationH\x00R\x15summarizeConversation\x12f\n" +
@@ -26092,18 +26060,18 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\x1a*\n" +
 	"\fAutoCodeDiff\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a\x14\n" +
-	"\x12ResumeConversation\x1a\xbd\x05\n" +
-	"\x17TriggerPromptSuggestion\x12E\n" +
-	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentB\x02\x18\x01R\vattachments\x12A\n" +
-	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyB\x02\x18\x01H\x00R\ffilesChanged\x12=\n" +
-	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyB\x02\x18\x01H\x00R\n" +
+	"\x12ResumeConversation\x1a\xdc\x05\n" +
+	"\x1aGeneratePassiveSuggestions\x12A\n" +
+	"\vattachments\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x12=\n" +
+	"\rfiles_changed\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\ffilesChanged\x129\n" +
+	"\vcommand_run\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\n" +
 	"commandRun\x12\x87\x01\n" +
-	"\x18shell_command_completion\x18\x04 \x01(\v2K.warp.multi_agent.v1.Message.TriggerPromptSuggestion.ShellCommandCompletionH\x00R\x16shellCommandCompletion\x12k\n" +
-	"\x0eagent_followup\x18\x05 \x01(\v2B.warp.multi_agent.v1.Message.TriggerPromptSuggestion.AgentFollowupH\x00R\ragentFollowup\x1a\xc5\x01\n" +
-	"\x16ShellCommandCompletion\x12_\n" +
+	"\x17shell_command_completed\x18\x04 \x01(\v2M.warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompletedH\x00R\x15shellCommandCompleted\x12\x8a\x01\n" +
+	"\x18agent_response_completed\x18\x05 \x01(\v2N.warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompletedH\x00R\x16agentResponseCompleted\x1a\xc4\x01\n" +
+	"\x15ShellCommandCompleted\x12_\n" +
 	"\x16executed_shell_command\x18\x01 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandR\x14executedShellCommand\x12J\n" +
-	"\x0erelevant_files\x18\x02 \x03(\v2#.warp.multi_agent.v1.AnyFileContentR\rrelevantFiles\x1a\x0f\n" +
-	"\rAgentFollowupB\t\n" +
+	"\x0erelevant_files\x18\x02 \x03(\v2#.warp.multi_agent.v1.AnyFileContentR\rrelevantFiles\x1a\x18\n" +
+	"\x16AgentResponseCompletedB\t\n" +
 	"\atrigger\x1a.\n" +
 	"\x10CreateNewProject\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x1a)\n" +
@@ -26130,7 +26098,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xecS\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xcaS\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -26256,17 +26224,15 @@ const file_task_proto_rawDesc = "" +
 	"\vCallMCPTool\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12+\n" +
 	"\x04args\x18\x02 \x01(\v2\x17.google.protobuf.StructR\x04args\x12\x1b\n" +
-	"\tserver_id\x18\x03 \x01(\tR\bserverId\x1a\xa6\x03\n" +
+	"\tserver_id\x18\x03 \x01(\tR\bserverId\x1a\x84\x03\n" +
 	"\rSuggestPrompt\x12w\n" +
 	"\x13inline_query_banner\x18\x01 \x01(\v2E.warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBannerH\x00R\x11inlineQueryBanner\x12a\n" +
 	"\vprompt_chip\x18\x02 \x01(\v2>.warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.PromptChipH\x00R\n" +
-	"promptChip\x1a\x82\x01\n" +
+	"promptChip\x1aa\n" +
 	"\x11InlineQueryBanner\x12\x14\n" +
 	"\x05title\x18\x01 \x01(\tR\x05title\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x14\n" +
-	"\x05query\x18\x03 \x01(\tR\x05query\x12\x1f\n" +
-	"\vaccept_text\x18\x04 \x01(\tR\n" +
-	"acceptText\x1a$\n" +
+	"\x05query\x18\x03 \x01(\tR\x05query\x1a$\n" +
 	"\n" +
 	"PromptChip\x12\x16\n" +
 	"\x06prompt\x18\x01 \x01(\tR\x06promptB\x0e\n" +
@@ -26818,211 +26784,211 @@ var file_task_proto_goTypes = []any{
 	(Message_ToolCall_UseComputer_Action_MouseButton)(0),          // 4: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
 	(Message_ToolCall_UseComputer_Action_MouseWheel_Direction)(0), // 5: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
 	(RequestComputerUseResult_Approved_Platform)(0),               // 6: warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
-	(*Task)(nil),                                                   // 7: warp.multi_agent.v1.Task
-	(*ReviewComments)(nil),                                         // 8: warp.multi_agent.v1.ReviewComments
-	(*ReviewComment)(nil),                                          // 9: warp.multi_agent.v1.ReviewComment
-	(*Message)(nil),                                                // 10: warp.multi_agent.v1.Message
-	(*RunShellCommandResult)(nil),                                  // 11: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                        // 12: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                                   // 13: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                                   // 14: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestCreatePlanResult)(nil),                                // 15: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*SuggestPlanResult)(nil),                                      // 16: warp.multi_agent.v1.SuggestPlanResult
-	(*GrepResult)(nil),                                             // 17: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                                         // 18: warp.multi_agent.v1.FileGlobResult
-	(*FileGlobV2Result)(nil),                                       // 19: warp.multi_agent.v1.FileGlobV2Result
-	(*MCPResourceContent)(nil),                                     // 20: warp.multi_agent.v1.MCPResourceContent
-	(*ReadMCPResourceResult)(nil),                                  // 21: warp.multi_agent.v1.ReadMCPResourceResult
-	(*WriteToLongRunningShellCommandResult)(nil),                   // 22: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),                           // 23: warp.multi_agent.v1.SuggestNewConversationResult
-	(*ShellCommandFinished)(nil),                                   // 24: warp.multi_agent.v1.ShellCommandFinished
-	(*PermissionDenied)(nil),                                       // 25: warp.multi_agent.v1.PermissionDenied
-	(*CallMCPToolResult)(nil),                                      // 26: warp.multi_agent.v1.CallMCPToolResult
-	(*SuggestPromptResult)(nil),                                    // 27: warp.multi_agent.v1.SuggestPromptResult
-	(*OpenCodeReviewResult)(nil),                                   // 28: warp.multi_agent.v1.OpenCodeReviewResult
-	(*InitProjectResult)(nil),                                      // 29: warp.multi_agent.v1.InitProjectResult
-	(*ReadDocumentsResult)(nil),                                    // 30: warp.multi_agent.v1.ReadDocumentsResult
-	(*EditDocumentsResult)(nil),                                    // 31: warp.multi_agent.v1.EditDocumentsResult
-	(*CreateDocumentsResult)(nil),                                  // 32: warp.multi_agent.v1.CreateDocumentsResult
-	(*ReadShellCommandOutputResult)(nil),                           // 33: warp.multi_agent.v1.ReadShellCommandOutputResult
-	(*InsertReviewCommentsResult)(nil),                             // 34: warp.multi_agent.v1.InsertReviewCommentsResult
-	(*Coordinates)(nil),                                            // 35: warp.multi_agent.v1.Coordinates
-	(*UseComputerResult)(nil),                                      // 36: warp.multi_agent.v1.UseComputerResult
-	(*ReadSkillResult)(nil),                                        // 37: warp.multi_agent.v1.ReadSkillResult
-	(*ScreenDimensions)(nil),                                       // 38: warp.multi_agent.v1.ScreenDimensions
-	(*RequestComputerUseResult)(nil),                               // 39: warp.multi_agent.v1.RequestComputerUseResult
-	(*FetchConversationResult)(nil),                                // 40: warp.multi_agent.v1.FetchConversationResult
-	(*ShellCommandError)(nil),                                      // 41: warp.multi_agent.v1.ShellCommandError
-	(*UserQueryMode)(nil),                                          // 42: warp.multi_agent.v1.UserQueryMode
-	(*RawImage)(nil),                                               // 43: warp.multi_agent.v1.RawImage
-	(*Task_Dependencies)(nil),                                      // 44: warp.multi_agent.v1.Task.Dependencies
-	(*ReviewComment_CommentedFile)(nil),                            // 45: warp.multi_agent.v1.ReviewComment.CommentedFile
-	(*ReviewComment_CommentedDiffset)(nil),                         // 46: warp.multi_agent.v1.ReviewComment.CommentedDiffset
-	(*Message_UserQuery)(nil),                                      // 47: warp.multi_agent.v1.Message.UserQuery
-	(*Message_SystemQuery)(nil),                                    // 48: warp.multi_agent.v1.Message.SystemQuery
-	(*Message_AutoCodeDiff)(nil),                                   // 49: warp.multi_agent.v1.Message.AutoCodeDiff
-	(*Message_ResumeConversation)(nil),                             // 50: warp.multi_agent.v1.Message.ResumeConversation
-	(*Message_TriggerPromptSuggestion)(nil),                        // 51: warp.multi_agent.v1.Message.TriggerPromptSuggestion
-	(*Message_CreateNewProject)(nil),                               // 52: warp.multi_agent.v1.Message.CreateNewProject
-	(*Message_CloneRepository)(nil),                                // 53: warp.multi_agent.v1.Message.CloneRepository
-	(*Message_SummarizeConversation)(nil),                          // 54: warp.multi_agent.v1.Message.SummarizeConversation
-	(*Message_AgentOutput)(nil),                                    // 55: warp.multi_agent.v1.Message.AgentOutput
-	(*Message_AgentReasoning)(nil),                                 // 56: warp.multi_agent.v1.Message.AgentReasoning
-	(*Message_Summarization)(nil),                                  // 57: warp.multi_agent.v1.Message.Summarization
-	(*Message_CodeReview)(nil),                                     // 58: warp.multi_agent.v1.Message.CodeReview
-	(*Message_FetchReviewComments)(nil),                            // 59: warp.multi_agent.v1.Message.FetchReviewComments
-	(*Message_ToolCall)(nil),                                       // 60: warp.multi_agent.v1.Message.ToolCall
-	(*Message_ToolCallResult)(nil),                                 // 61: warp.multi_agent.v1.Message.ToolCallResult
-	(*Message_ServerEvent)(nil),                                    // 62: warp.multi_agent.v1.Message.ServerEvent
-	(*Message_UpdateTodos)(nil),                                    // 63: warp.multi_agent.v1.Message.UpdateTodos
-	(*Message_UpdateReviewComments)(nil),                           // 64: warp.multi_agent.v1.Message.UpdateReviewComments
-	(*Message_WebSearch)(nil),                                      // 65: warp.multi_agent.v1.Message.WebSearch
-	(*Message_WebFetch)(nil),                                       // 66: warp.multi_agent.v1.Message.WebFetch
-	(*Message_DebugOutput)(nil),                                    // 67: warp.multi_agent.v1.Message.DebugOutput
-	(*Message_ArtifactEvent)(nil),                                  // 68: warp.multi_agent.v1.Message.ArtifactEvent
-	(*Message_InvokeSkill)(nil),                                    // 69: warp.multi_agent.v1.Message.InvokeSkill
-	nil,                                                            // 70: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
-	(*Message_TriggerPromptSuggestion_ShellCommandCompletion)(nil), // 71: warp.multi_agent.v1.Message.TriggerPromptSuggestion.ShellCommandCompletion
-	(*Message_TriggerPromptSuggestion_AgentFollowup)(nil),          // 72: warp.multi_agent.v1.Message.TriggerPromptSuggestion.AgentFollowup
-	(*Message_Summarization_ConversationSummary)(nil),              // 73: warp.multi_agent.v1.Message.Summarization.ConversationSummary
-	(*Message_Summarization_ToolCallResultSummary)(nil),            // 74: warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
-	(*Message_ToolCall_FetchConversation)(nil),                     // 75: warp.multi_agent.v1.Message.ToolCall.FetchConversation
-	(*Message_ToolCall_Server)(nil),                                // 76: warp.multi_agent.v1.Message.ToolCall.Server
-	(*Message_ToolCall_RunShellCommand)(nil),                       // 77: warp.multi_agent.v1.Message.ToolCall.RunShellCommand
-	(*Message_ToolCall_WriteToLongRunningShellCommand)(nil),        // 78: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
-	(*Message_ToolCall_SuggestNewConversation)(nil),                // 79: warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
-	(*Message_ToolCall_ReadFiles)(nil),                             // 80: warp.multi_agent.v1.Message.ToolCall.ReadFiles
-	(*Message_ToolCall_SearchCodebase)(nil),                        // 81: warp.multi_agent.v1.Message.ToolCall.SearchCodebase
-	(*Message_ToolCall_ApplyFileDiffs)(nil),                        // 82: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
-	(*Message_ToolCall_SuggestPlan)(nil),                           // 83: warp.multi_agent.v1.Message.ToolCall.SuggestPlan
-	(*Message_ToolCall_SuggestCreatePlan)(nil),                     // 84: warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
-	(*Message_ToolCall_Grep)(nil),                                  // 85: warp.multi_agent.v1.Message.ToolCall.Grep
-	(*Message_ToolCall_FileGlob)(nil),                              // 86: warp.multi_agent.v1.Message.ToolCall.FileGlob
-	(*Message_ToolCall_FileGlobV2)(nil),                            // 87: warp.multi_agent.v1.Message.ToolCall.FileGlobV2
-	(*Message_ToolCall_ReadMCPResource)(nil),                       // 88: warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
-	(*Message_ToolCall_CallMCPTool)(nil),                           // 89: warp.multi_agent.v1.Message.ToolCall.CallMCPTool
-	(*Message_ToolCall_SuggestPrompt)(nil),                         // 90: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
-	(*Message_ToolCall_OpenCodeReview)(nil),                        // 91: warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
-	(*Message_ToolCall_InitProject)(nil),                           // 92: warp.multi_agent.v1.Message.ToolCall.InitProject
-	(*Message_ToolCall_Subagent)(nil),                              // 93: warp.multi_agent.v1.Message.ToolCall.Subagent
-	(*Message_ToolCall_ReadDocuments)(nil),                         // 94: warp.multi_agent.v1.Message.ToolCall.ReadDocuments
-	(*Message_ToolCall_EditDocuments)(nil),                         // 95: warp.multi_agent.v1.Message.ToolCall.EditDocuments
-	(*Message_ToolCall_CreateDocuments)(nil),                       // 96: warp.multi_agent.v1.Message.ToolCall.CreateDocuments
-	(*Message_ToolCall_ReadShellCommandOutput)(nil),                // 97: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput
-	(*Message_ToolCall_InsertReviewComments)(nil),                  // 98: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments
-	(*Message_ToolCall_ReadSkill)(nil),                             // 99: warp.multi_agent.v1.Message.ToolCall.ReadSkill
-	(*Message_ToolCall_UseComputer)(nil),                           // 100: warp.multi_agent.v1.Message.ToolCall.UseComputer
-	(*Message_ToolCall_RequestComputerUse)(nil),                    // 101: warp.multi_agent.v1.Message.ToolCall.RequestComputerUse
-	(*Message_ToolCall_ScreenshotParams)(nil),                      // 102: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
-	(*Message_ToolCall_WriteToLongRunningShellCommand_Mode)(nil),   // 103: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
-	(*Message_ToolCall_ReadFiles_File)(nil),                        // 104: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
-	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil),               // 105: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
-	(*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate)(nil),          // 106: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
-	(*Message_ToolCall_ApplyFileDiffs_NewFile)(nil),                // 107: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
-	(*Message_ToolCall_ApplyFileDiffs_DeleteFile)(nil),             // 108: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
-	(*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk)(nil),     // 109: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
-	(*Message_ToolCall_SuggestPrompt_InlineQueryBanner)(nil),       // 110: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
-	(*Message_ToolCall_SuggestPrompt_PromptChip)(nil),              // 111: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.PromptChip
-	(*Message_ToolCall_Subagent_CLISubagent)(nil),                  // 112: warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
-	(*Message_ToolCall_ReadDocuments_Document)(nil),                // 113: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
-	(*Message_ToolCall_EditDocuments_DocumentDiff)(nil),            // 114: warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
-	(*Message_ToolCall_CreateDocuments_NewDocument)(nil),           // 115: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	(*Message_ToolCall_InsertReviewComments_Comment)(nil),          // 116: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
-	(*Message_ToolCall_InsertReviewComments_CommentLocation)(nil),  // 117: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
-	(*Message_ToolCall_InsertReviewComments_CommentLineRange)(nil), // 118: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
-	(*Message_ToolCall_UseComputer_Action)(nil),                    // 119: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
-	(*Message_ToolCall_UseComputer_Action_MouseMove)(nil),          // 120: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
-	(*Message_ToolCall_UseComputer_Action_MouseDown)(nil),          // 121: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
-	(*Message_ToolCall_UseComputer_Action_MouseUp)(nil),            // 122: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp
-	(*Message_ToolCall_UseComputer_Action_MouseWheel)(nil),         // 123: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel
-	(*Message_ToolCall_UseComputer_Action_Wait)(nil),               // 124: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait
-	(*Message_ToolCall_UseComputer_Action_TypeText)(nil),           // 125: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.TypeText
-	(*Message_ToolCall_UseComputer_Action_Key)(nil),                // 126: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
-	(*Message_ToolCall_UseComputer_Action_KeyDown)(nil),            // 127: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown
-	(*Message_ToolCall_UseComputer_Action_KeyUp)(nil),              // 128: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp
-	(*Message_ToolCall_ScreenshotParams_Region)(nil),               // 129: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region
-	(*Message_ToolCallResult_ServerResult)(nil),                    // 130: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
-	(*Message_ToolCallResult_SubagentResult)(nil),                  // 131: warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
-	(*Message_UpdateReviewComments_AddressReviewComments)(nil),     // 132: warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
-	(*Message_WebSearch_Status)(nil),                               // 133: warp.multi_agent.v1.Message.WebSearch.Status
-	(*Message_WebSearch_Status_Searching)(nil),                     // 134: warp.multi_agent.v1.Message.WebSearch.Status.Searching
-	(*Message_WebSearch_Status_Success)(nil),                       // 135: warp.multi_agent.v1.Message.WebSearch.Status.Success
-	(*Message_WebSearch_Status_Success_SearchedPage)(nil),          // 136: warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
-	(*Message_WebFetch_Status)(nil),                                // 137: warp.multi_agent.v1.Message.WebFetch.Status
-	(*Message_WebFetch_Status_Fetching)(nil),                       // 138: warp.multi_agent.v1.Message.WebFetch.Status.Fetching
-	(*Message_WebFetch_Status_Success)(nil),                        // 139: warp.multi_agent.v1.Message.WebFetch.Status.Success
-	(*Message_WebFetch_Status_Success_FetchedPage)(nil),            // 140: warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
-	(*Message_ArtifactEvent_PullRequestArtifact)(nil),              // 141: warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
-	(*Message_ArtifactEvent_ScreenshotArtifact)(nil),               // 142: warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
-	(*Message_ArtifactEvent_ArtifactCreated)(nil),                  // 143: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated
-	(*ReadFilesResult_TextFilesSuccess)(nil),                       // 144: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
-	(*ReadFilesResult_AnyFilesSuccess)(nil),                        // 145: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
-	(*ReadFilesResult_Error)(nil),                                  // 146: warp.multi_agent.v1.ReadFilesResult.Error
-	(*SearchCodebaseResult_Success)(nil),                           // 147: warp.multi_agent.v1.SearchCodebaseResult.Success
-	(*SearchCodebaseResult_Error)(nil),                             // 148: warp.multi_agent.v1.SearchCodebaseResult.Error
-	(*ApplyFileDiffsResult_Success)(nil),                           // 149: warp.multi_agent.v1.ApplyFileDiffsResult.Success
-	(*ApplyFileDiffsResult_Error)(nil),                             // 150: warp.multi_agent.v1.ApplyFileDiffsResult.Error
-	(*ApplyFileDiffsResult_Success_UpdatedFileContent)(nil),        // 151: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
-	(*ApplyFileDiffsResult_Success_DeletedFile)(nil),               // 152: warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
-	(*SuggestPlanResult_UserEditedPlan)(nil),                       // 153: warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
-	(*GrepResult_Success)(nil),                                     // 154: warp.multi_agent.v1.GrepResult.Success
-	(*GrepResult_Error)(nil),                                       // 155: warp.multi_agent.v1.GrepResult.Error
-	(*GrepResult_Success_GrepFileMatch)(nil),                       // 156: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
-	(*GrepResult_Success_GrepFileMatch_GrepLineMatch)(nil),         // 157: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
-	(*FileGlobResult_Success)(nil),                                 // 158: warp.multi_agent.v1.FileGlobResult.Success
-	(*FileGlobResult_Error)(nil),                                   // 159: warp.multi_agent.v1.FileGlobResult.Error
-	(*FileGlobV2Result_Success)(nil),                               // 160: warp.multi_agent.v1.FileGlobV2Result.Success
-	(*FileGlobV2Result_Error)(nil),                                 // 161: warp.multi_agent.v1.FileGlobV2Result.Error
-	(*FileGlobV2Result_Success_FileGlobMatch)(nil),                 // 162: warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
-	(*MCPResourceContent_Text)(nil),                                // 163: warp.multi_agent.v1.MCPResourceContent.Text
-	(*MCPResourceContent_Binary)(nil),                              // 164: warp.multi_agent.v1.MCPResourceContent.Binary
-	(*ReadMCPResourceResult_Success)(nil),                          // 165: warp.multi_agent.v1.ReadMCPResourceResult.Success
-	(*ReadMCPResourceResult_Error)(nil),                            // 166: warp.multi_agent.v1.ReadMCPResourceResult.Error
-	(*SuggestNewConversationResult_Accepted)(nil),                  // 167: warp.multi_agent.v1.SuggestNewConversationResult.Accepted
-	(*SuggestNewConversationResult_Rejected)(nil),                  // 168: warp.multi_agent.v1.SuggestNewConversationResult.Rejected
-	(*CallMCPToolResult_Success)(nil),                              // 169: warp.multi_agent.v1.CallMCPToolResult.Success
-	(*CallMCPToolResult_Error)(nil),                                // 170: warp.multi_agent.v1.CallMCPToolResult.Error
-	(*CallMCPToolResult_Success_Result)(nil),                       // 171: warp.multi_agent.v1.CallMCPToolResult.Success.Result
-	(*CallMCPToolResult_Success_Result_Text)(nil),                  // 172: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
-	(*CallMCPToolResult_Success_Result_Image)(nil),                 // 173: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
-	(*ReadDocumentsResult_Success)(nil),                            // 174: warp.multi_agent.v1.ReadDocumentsResult.Success
-	(*ReadDocumentsResult_Error)(nil),                              // 175: warp.multi_agent.v1.ReadDocumentsResult.Error
-	(*EditDocumentsResult_Success)(nil),                            // 176: warp.multi_agent.v1.EditDocumentsResult.Success
-	(*EditDocumentsResult_Error)(nil),                              // 177: warp.multi_agent.v1.EditDocumentsResult.Error
-	(*CreateDocumentsResult_Success)(nil),                          // 178: warp.multi_agent.v1.CreateDocumentsResult.Success
-	(*CreateDocumentsResult_Error)(nil),                            // 179: warp.multi_agent.v1.CreateDocumentsResult.Error
-	(*InsertReviewCommentsResult_Success)(nil),                     // 180: warp.multi_agent.v1.InsertReviewCommentsResult.Success
-	(*InsertReviewCommentsResult_Error)(nil),                       // 181: warp.multi_agent.v1.InsertReviewCommentsResult.Error
-	(*UseComputerResult_Success)(nil),                              // 182: warp.multi_agent.v1.UseComputerResult.Success
-	(*UseComputerResult_Error)(nil),                                // 183: warp.multi_agent.v1.UseComputerResult.Error
-	(*ReadSkillResult_Success)(nil),                                // 184: warp.multi_agent.v1.ReadSkillResult.Success
-	(*ReadSkillResult_Error)(nil),                                  // 185: warp.multi_agent.v1.ReadSkillResult.Error
-	(*RequestComputerUseResult_Approved)(nil),                      // 186: warp.multi_agent.v1.RequestComputerUseResult.Approved
-	(*RequestComputerUseResult_Rejected)(nil),                      // 187: warp.multi_agent.v1.RequestComputerUseResult.Rejected
-	(*RequestComputerUseResult_Error)(nil),                         // 188: warp.multi_agent.v1.RequestComputerUseResult.Error
-	(*FetchConversationResult_Success)(nil),                        // 189: warp.multi_agent.v1.FetchConversationResult.Success
-	(*FetchConversationResult_Error)(nil),                          // 190: warp.multi_agent.v1.FetchConversationResult.Error
-	(*DiffSet)(nil),                                                // 191: warp.multi_agent.v1.DiffSet
-	(*DiffHunk)(nil),                                               // 192: warp.multi_agent.v1.DiffHunk
-	(*timestamppb.Timestamp)(nil),                                  // 193: google.protobuf.Timestamp
-	(*Citation)(nil),                                               // 194: warp.multi_agent.v1.Citation
-	(*LongRunningShellCommandSnapshot)(nil),                        // 195: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*emptypb.Empty)(nil),                                          // 196: google.protobuf.Empty
-	(*CurrentRef)(nil),                                             // 197: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                                                // 198: warp.multi_agent.v1.BaseRef
-	(*InputContext)(nil),                                           // 199: warp.multi_agent.v1.InputContext
-	(*Attachment)(nil),                                             // 200: warp.multi_agent.v1.Attachment
-	(*durationpb.Duration)(nil),                                    // 201: google.protobuf.Duration
-	(*CreateTodoList)(nil),                                         // 202: warp.multi_agent.v1.CreateTodoList
-	(*UpdatePendingTodos)(nil),                                     // 203: warp.multi_agent.v1.UpdatePendingTodos
-	(*MarkTodosCompleted)(nil),                                     // 204: warp.multi_agent.v1.MarkTodosCompleted
-	(*Skill)(nil),                                                  // 205: warp.multi_agent.v1.Skill
-	(*ExecutedShellCommand)(nil),                                   // 206: warp.multi_agent.v1.ExecutedShellCommand
-	(*AnyFileContent)(nil),                                         // 207: warp.multi_agent.v1.AnyFileContent
-	(*structpb.Struct)(nil),                                        // 208: google.protobuf.Struct
-	(*FileContentLineRange)(nil),                                   // 209: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                            // 210: warp.multi_agent.v1.FileContent
-	(*DocumentContent)(nil),                                        // 211: warp.multi_agent.v1.DocumentContent
+	(*Task)(nil),                                                      // 7: warp.multi_agent.v1.Task
+	(*ReviewComments)(nil),                                            // 8: warp.multi_agent.v1.ReviewComments
+	(*ReviewComment)(nil),                                             // 9: warp.multi_agent.v1.ReviewComment
+	(*Message)(nil),                                                   // 10: warp.multi_agent.v1.Message
+	(*RunShellCommandResult)(nil),                                     // 11: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                           // 12: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                                      // 13: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                                      // 14: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestCreatePlanResult)(nil),                                   // 15: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*SuggestPlanResult)(nil),                                         // 16: warp.multi_agent.v1.SuggestPlanResult
+	(*GrepResult)(nil),                                                // 17: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                                            // 18: warp.multi_agent.v1.FileGlobResult
+	(*FileGlobV2Result)(nil),                                          // 19: warp.multi_agent.v1.FileGlobV2Result
+	(*MCPResourceContent)(nil),                                        // 20: warp.multi_agent.v1.MCPResourceContent
+	(*ReadMCPResourceResult)(nil),                                     // 21: warp.multi_agent.v1.ReadMCPResourceResult
+	(*WriteToLongRunningShellCommandResult)(nil),                      // 22: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),                              // 23: warp.multi_agent.v1.SuggestNewConversationResult
+	(*ShellCommandFinished)(nil),                                      // 24: warp.multi_agent.v1.ShellCommandFinished
+	(*PermissionDenied)(nil),                                          // 25: warp.multi_agent.v1.PermissionDenied
+	(*CallMCPToolResult)(nil),                                         // 26: warp.multi_agent.v1.CallMCPToolResult
+	(*SuggestPromptResult)(nil),                                       // 27: warp.multi_agent.v1.SuggestPromptResult
+	(*OpenCodeReviewResult)(nil),                                      // 28: warp.multi_agent.v1.OpenCodeReviewResult
+	(*InitProjectResult)(nil),                                         // 29: warp.multi_agent.v1.InitProjectResult
+	(*ReadDocumentsResult)(nil),                                       // 30: warp.multi_agent.v1.ReadDocumentsResult
+	(*EditDocumentsResult)(nil),                                       // 31: warp.multi_agent.v1.EditDocumentsResult
+	(*CreateDocumentsResult)(nil),                                     // 32: warp.multi_agent.v1.CreateDocumentsResult
+	(*ReadShellCommandOutputResult)(nil),                              // 33: warp.multi_agent.v1.ReadShellCommandOutputResult
+	(*InsertReviewCommentsResult)(nil),                                // 34: warp.multi_agent.v1.InsertReviewCommentsResult
+	(*Coordinates)(nil),                                               // 35: warp.multi_agent.v1.Coordinates
+	(*UseComputerResult)(nil),                                         // 36: warp.multi_agent.v1.UseComputerResult
+	(*ReadSkillResult)(nil),                                           // 37: warp.multi_agent.v1.ReadSkillResult
+	(*ScreenDimensions)(nil),                                          // 38: warp.multi_agent.v1.ScreenDimensions
+	(*RequestComputerUseResult)(nil),                                  // 39: warp.multi_agent.v1.RequestComputerUseResult
+	(*FetchConversationResult)(nil),                                   // 40: warp.multi_agent.v1.FetchConversationResult
+	(*ShellCommandError)(nil),                                         // 41: warp.multi_agent.v1.ShellCommandError
+	(*UserQueryMode)(nil),                                             // 42: warp.multi_agent.v1.UserQueryMode
+	(*RawImage)(nil),                                                  // 43: warp.multi_agent.v1.RawImage
+	(*Task_Dependencies)(nil),                                         // 44: warp.multi_agent.v1.Task.Dependencies
+	(*ReviewComment_CommentedFile)(nil),                               // 45: warp.multi_agent.v1.ReviewComment.CommentedFile
+	(*ReviewComment_CommentedDiffset)(nil),                            // 46: warp.multi_agent.v1.ReviewComment.CommentedDiffset
+	(*Message_UserQuery)(nil),                                         // 47: warp.multi_agent.v1.Message.UserQuery
+	(*Message_SystemQuery)(nil),                                       // 48: warp.multi_agent.v1.Message.SystemQuery
+	(*Message_AutoCodeDiff)(nil),                                      // 49: warp.multi_agent.v1.Message.AutoCodeDiff
+	(*Message_ResumeConversation)(nil),                                // 50: warp.multi_agent.v1.Message.ResumeConversation
+	(*Message_GeneratePassiveSuggestions)(nil),                        // 51: warp.multi_agent.v1.Message.GeneratePassiveSuggestions
+	(*Message_CreateNewProject)(nil),                                  // 52: warp.multi_agent.v1.Message.CreateNewProject
+	(*Message_CloneRepository)(nil),                                   // 53: warp.multi_agent.v1.Message.CloneRepository
+	(*Message_SummarizeConversation)(nil),                             // 54: warp.multi_agent.v1.Message.SummarizeConversation
+	(*Message_AgentOutput)(nil),                                       // 55: warp.multi_agent.v1.Message.AgentOutput
+	(*Message_AgentReasoning)(nil),                                    // 56: warp.multi_agent.v1.Message.AgentReasoning
+	(*Message_Summarization)(nil),                                     // 57: warp.multi_agent.v1.Message.Summarization
+	(*Message_CodeReview)(nil),                                        // 58: warp.multi_agent.v1.Message.CodeReview
+	(*Message_FetchReviewComments)(nil),                               // 59: warp.multi_agent.v1.Message.FetchReviewComments
+	(*Message_ToolCall)(nil),                                          // 60: warp.multi_agent.v1.Message.ToolCall
+	(*Message_ToolCallResult)(nil),                                    // 61: warp.multi_agent.v1.Message.ToolCallResult
+	(*Message_ServerEvent)(nil),                                       // 62: warp.multi_agent.v1.Message.ServerEvent
+	(*Message_UpdateTodos)(nil),                                       // 63: warp.multi_agent.v1.Message.UpdateTodos
+	(*Message_UpdateReviewComments)(nil),                              // 64: warp.multi_agent.v1.Message.UpdateReviewComments
+	(*Message_WebSearch)(nil),                                         // 65: warp.multi_agent.v1.Message.WebSearch
+	(*Message_WebFetch)(nil),                                          // 66: warp.multi_agent.v1.Message.WebFetch
+	(*Message_DebugOutput)(nil),                                       // 67: warp.multi_agent.v1.Message.DebugOutput
+	(*Message_ArtifactEvent)(nil),                                     // 68: warp.multi_agent.v1.Message.ArtifactEvent
+	(*Message_InvokeSkill)(nil),                                       // 69: warp.multi_agent.v1.Message.InvokeSkill
+	nil,                                                               // 70: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
+	(*Message_GeneratePassiveSuggestions_ShellCommandCompleted)(nil),  // 71: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
+	(*Message_GeneratePassiveSuggestions_AgentResponseCompleted)(nil), // 72: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompleted
+	(*Message_Summarization_ConversationSummary)(nil),                 // 73: warp.multi_agent.v1.Message.Summarization.ConversationSummary
+	(*Message_Summarization_ToolCallResultSummary)(nil),               // 74: warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
+	(*Message_ToolCall_FetchConversation)(nil),                        // 75: warp.multi_agent.v1.Message.ToolCall.FetchConversation
+	(*Message_ToolCall_Server)(nil),                                   // 76: warp.multi_agent.v1.Message.ToolCall.Server
+	(*Message_ToolCall_RunShellCommand)(nil),                          // 77: warp.multi_agent.v1.Message.ToolCall.RunShellCommand
+	(*Message_ToolCall_WriteToLongRunningShellCommand)(nil),           // 78: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand
+	(*Message_ToolCall_SuggestNewConversation)(nil),                   // 79: warp.multi_agent.v1.Message.ToolCall.SuggestNewConversation
+	(*Message_ToolCall_ReadFiles)(nil),                                // 80: warp.multi_agent.v1.Message.ToolCall.ReadFiles
+	(*Message_ToolCall_SearchCodebase)(nil),                           // 81: warp.multi_agent.v1.Message.ToolCall.SearchCodebase
+	(*Message_ToolCall_ApplyFileDiffs)(nil),                           // 82: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs
+	(*Message_ToolCall_SuggestPlan)(nil),                              // 83: warp.multi_agent.v1.Message.ToolCall.SuggestPlan
+	(*Message_ToolCall_SuggestCreatePlan)(nil),                        // 84: warp.multi_agent.v1.Message.ToolCall.SuggestCreatePlan
+	(*Message_ToolCall_Grep)(nil),                                     // 85: warp.multi_agent.v1.Message.ToolCall.Grep
+	(*Message_ToolCall_FileGlob)(nil),                                 // 86: warp.multi_agent.v1.Message.ToolCall.FileGlob
+	(*Message_ToolCall_FileGlobV2)(nil),                               // 87: warp.multi_agent.v1.Message.ToolCall.FileGlobV2
+	(*Message_ToolCall_ReadMCPResource)(nil),                          // 88: warp.multi_agent.v1.Message.ToolCall.ReadMCPResource
+	(*Message_ToolCall_CallMCPTool)(nil),                              // 89: warp.multi_agent.v1.Message.ToolCall.CallMCPTool
+	(*Message_ToolCall_SuggestPrompt)(nil),                            // 90: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt
+	(*Message_ToolCall_OpenCodeReview)(nil),                           // 91: warp.multi_agent.v1.Message.ToolCall.OpenCodeReview
+	(*Message_ToolCall_InitProject)(nil),                              // 92: warp.multi_agent.v1.Message.ToolCall.InitProject
+	(*Message_ToolCall_Subagent)(nil),                                 // 93: warp.multi_agent.v1.Message.ToolCall.Subagent
+	(*Message_ToolCall_ReadDocuments)(nil),                            // 94: warp.multi_agent.v1.Message.ToolCall.ReadDocuments
+	(*Message_ToolCall_EditDocuments)(nil),                            // 95: warp.multi_agent.v1.Message.ToolCall.EditDocuments
+	(*Message_ToolCall_CreateDocuments)(nil),                          // 96: warp.multi_agent.v1.Message.ToolCall.CreateDocuments
+	(*Message_ToolCall_ReadShellCommandOutput)(nil),                   // 97: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput
+	(*Message_ToolCall_InsertReviewComments)(nil),                     // 98: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments
+	(*Message_ToolCall_ReadSkill)(nil),                                // 99: warp.multi_agent.v1.Message.ToolCall.ReadSkill
+	(*Message_ToolCall_UseComputer)(nil),                              // 100: warp.multi_agent.v1.Message.ToolCall.UseComputer
+	(*Message_ToolCall_RequestComputerUse)(nil),                       // 101: warp.multi_agent.v1.Message.ToolCall.RequestComputerUse
+	(*Message_ToolCall_ScreenshotParams)(nil),                         // 102: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
+	(*Message_ToolCall_WriteToLongRunningShellCommand_Mode)(nil),      // 103: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
+	(*Message_ToolCall_ReadFiles_File)(nil),                           // 104: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
+	(*Message_ToolCall_ApplyFileDiffs_FileDiff)(nil),                  // 105: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiff
+	(*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate)(nil),             // 106: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
+	(*Message_ToolCall_ApplyFileDiffs_NewFile)(nil),                   // 107: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.NewFile
+	(*Message_ToolCall_ApplyFileDiffs_DeleteFile)(nil),                // 108: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
+	(*Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk)(nil),        // 109: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
+	(*Message_ToolCall_SuggestPrompt_InlineQueryBanner)(nil),          // 110: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
+	(*Message_ToolCall_SuggestPrompt_PromptChip)(nil),                 // 111: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.PromptChip
+	(*Message_ToolCall_Subagent_CLISubagent)(nil),                     // 112: warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
+	(*Message_ToolCall_ReadDocuments_Document)(nil),                   // 113: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
+	(*Message_ToolCall_EditDocuments_DocumentDiff)(nil),               // 114: warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
+	(*Message_ToolCall_CreateDocuments_NewDocument)(nil),              // 115: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
+	(*Message_ToolCall_InsertReviewComments_Comment)(nil),             // 116: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
+	(*Message_ToolCall_InsertReviewComments_CommentLocation)(nil),     // 117: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
+	(*Message_ToolCall_InsertReviewComments_CommentLineRange)(nil),    // 118: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
+	(*Message_ToolCall_UseComputer_Action)(nil),                       // 119: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
+	(*Message_ToolCall_UseComputer_Action_MouseMove)(nil),             // 120: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
+	(*Message_ToolCall_UseComputer_Action_MouseDown)(nil),             // 121: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
+	(*Message_ToolCall_UseComputer_Action_MouseUp)(nil),               // 122: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp
+	(*Message_ToolCall_UseComputer_Action_MouseWheel)(nil),            // 123: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel
+	(*Message_ToolCall_UseComputer_Action_Wait)(nil),                  // 124: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait
+	(*Message_ToolCall_UseComputer_Action_TypeText)(nil),              // 125: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.TypeText
+	(*Message_ToolCall_UseComputer_Action_Key)(nil),                   // 126: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
+	(*Message_ToolCall_UseComputer_Action_KeyDown)(nil),               // 127: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown
+	(*Message_ToolCall_UseComputer_Action_KeyUp)(nil),                 // 128: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp
+	(*Message_ToolCall_ScreenshotParams_Region)(nil),                  // 129: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region
+	(*Message_ToolCallResult_ServerResult)(nil),                       // 130: warp.multi_agent.v1.Message.ToolCallResult.ServerResult
+	(*Message_ToolCallResult_SubagentResult)(nil),                     // 131: warp.multi_agent.v1.Message.ToolCallResult.SubagentResult
+	(*Message_UpdateReviewComments_AddressReviewComments)(nil),        // 132: warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
+	(*Message_WebSearch_Status)(nil),                                  // 133: warp.multi_agent.v1.Message.WebSearch.Status
+	(*Message_WebSearch_Status_Searching)(nil),                        // 134: warp.multi_agent.v1.Message.WebSearch.Status.Searching
+	(*Message_WebSearch_Status_Success)(nil),                          // 135: warp.multi_agent.v1.Message.WebSearch.Status.Success
+	(*Message_WebSearch_Status_Success_SearchedPage)(nil),             // 136: warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
+	(*Message_WebFetch_Status)(nil),                                   // 137: warp.multi_agent.v1.Message.WebFetch.Status
+	(*Message_WebFetch_Status_Fetching)(nil),                          // 138: warp.multi_agent.v1.Message.WebFetch.Status.Fetching
+	(*Message_WebFetch_Status_Success)(nil),                           // 139: warp.multi_agent.v1.Message.WebFetch.Status.Success
+	(*Message_WebFetch_Status_Success_FetchedPage)(nil),               // 140: warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
+	(*Message_ArtifactEvent_PullRequestArtifact)(nil),                 // 141: warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
+	(*Message_ArtifactEvent_ScreenshotArtifact)(nil),                  // 142: warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
+	(*Message_ArtifactEvent_ArtifactCreated)(nil),                     // 143: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated
+	(*ReadFilesResult_TextFilesSuccess)(nil),                          // 144: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
+	(*ReadFilesResult_AnyFilesSuccess)(nil),                           // 145: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess
+	(*ReadFilesResult_Error)(nil),                                     // 146: warp.multi_agent.v1.ReadFilesResult.Error
+	(*SearchCodebaseResult_Success)(nil),                              // 147: warp.multi_agent.v1.SearchCodebaseResult.Success
+	(*SearchCodebaseResult_Error)(nil),                                // 148: warp.multi_agent.v1.SearchCodebaseResult.Error
+	(*ApplyFileDiffsResult_Success)(nil),                              // 149: warp.multi_agent.v1.ApplyFileDiffsResult.Success
+	(*ApplyFileDiffsResult_Error)(nil),                                // 150: warp.multi_agent.v1.ApplyFileDiffsResult.Error
+	(*ApplyFileDiffsResult_Success_UpdatedFileContent)(nil),           // 151: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
+	(*ApplyFileDiffsResult_Success_DeletedFile)(nil),                  // 152: warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
+	(*SuggestPlanResult_UserEditedPlan)(nil),                          // 153: warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
+	(*GrepResult_Success)(nil),                                        // 154: warp.multi_agent.v1.GrepResult.Success
+	(*GrepResult_Error)(nil),                                          // 155: warp.multi_agent.v1.GrepResult.Error
+	(*GrepResult_Success_GrepFileMatch)(nil),                          // 156: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
+	(*GrepResult_Success_GrepFileMatch_GrepLineMatch)(nil),            // 157: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
+	(*FileGlobResult_Success)(nil),                                    // 158: warp.multi_agent.v1.FileGlobResult.Success
+	(*FileGlobResult_Error)(nil),                                      // 159: warp.multi_agent.v1.FileGlobResult.Error
+	(*FileGlobV2Result_Success)(nil),                                  // 160: warp.multi_agent.v1.FileGlobV2Result.Success
+	(*FileGlobV2Result_Error)(nil),                                    // 161: warp.multi_agent.v1.FileGlobV2Result.Error
+	(*FileGlobV2Result_Success_FileGlobMatch)(nil),                    // 162: warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
+	(*MCPResourceContent_Text)(nil),                                   // 163: warp.multi_agent.v1.MCPResourceContent.Text
+	(*MCPResourceContent_Binary)(nil),                                 // 164: warp.multi_agent.v1.MCPResourceContent.Binary
+	(*ReadMCPResourceResult_Success)(nil),                             // 165: warp.multi_agent.v1.ReadMCPResourceResult.Success
+	(*ReadMCPResourceResult_Error)(nil),                               // 166: warp.multi_agent.v1.ReadMCPResourceResult.Error
+	(*SuggestNewConversationResult_Accepted)(nil),                     // 167: warp.multi_agent.v1.SuggestNewConversationResult.Accepted
+	(*SuggestNewConversationResult_Rejected)(nil),                     // 168: warp.multi_agent.v1.SuggestNewConversationResult.Rejected
+	(*CallMCPToolResult_Success)(nil),                                 // 169: warp.multi_agent.v1.CallMCPToolResult.Success
+	(*CallMCPToolResult_Error)(nil),                                   // 170: warp.multi_agent.v1.CallMCPToolResult.Error
+	(*CallMCPToolResult_Success_Result)(nil),                          // 171: warp.multi_agent.v1.CallMCPToolResult.Success.Result
+	(*CallMCPToolResult_Success_Result_Text)(nil),                     // 172: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
+	(*CallMCPToolResult_Success_Result_Image)(nil),                    // 173: warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
+	(*ReadDocumentsResult_Success)(nil),                               // 174: warp.multi_agent.v1.ReadDocumentsResult.Success
+	(*ReadDocumentsResult_Error)(nil),                                 // 175: warp.multi_agent.v1.ReadDocumentsResult.Error
+	(*EditDocumentsResult_Success)(nil),                               // 176: warp.multi_agent.v1.EditDocumentsResult.Success
+	(*EditDocumentsResult_Error)(nil),                                 // 177: warp.multi_agent.v1.EditDocumentsResult.Error
+	(*CreateDocumentsResult_Success)(nil),                             // 178: warp.multi_agent.v1.CreateDocumentsResult.Success
+	(*CreateDocumentsResult_Error)(nil),                               // 179: warp.multi_agent.v1.CreateDocumentsResult.Error
+	(*InsertReviewCommentsResult_Success)(nil),                        // 180: warp.multi_agent.v1.InsertReviewCommentsResult.Success
+	(*InsertReviewCommentsResult_Error)(nil),                          // 181: warp.multi_agent.v1.InsertReviewCommentsResult.Error
+	(*UseComputerResult_Success)(nil),                                 // 182: warp.multi_agent.v1.UseComputerResult.Success
+	(*UseComputerResult_Error)(nil),                                   // 183: warp.multi_agent.v1.UseComputerResult.Error
+	(*ReadSkillResult_Success)(nil),                                   // 184: warp.multi_agent.v1.ReadSkillResult.Success
+	(*ReadSkillResult_Error)(nil),                                     // 185: warp.multi_agent.v1.ReadSkillResult.Error
+	(*RequestComputerUseResult_Approved)(nil),                         // 186: warp.multi_agent.v1.RequestComputerUseResult.Approved
+	(*RequestComputerUseResult_Rejected)(nil),                         // 187: warp.multi_agent.v1.RequestComputerUseResult.Rejected
+	(*RequestComputerUseResult_Error)(nil),                            // 188: warp.multi_agent.v1.RequestComputerUseResult.Error
+	(*FetchConversationResult_Success)(nil),                           // 189: warp.multi_agent.v1.FetchConversationResult.Success
+	(*FetchConversationResult_Error)(nil),                             // 190: warp.multi_agent.v1.FetchConversationResult.Error
+	(*DiffSet)(nil),                                                   // 191: warp.multi_agent.v1.DiffSet
+	(*DiffHunk)(nil),                                                  // 192: warp.multi_agent.v1.DiffHunk
+	(*timestamppb.Timestamp)(nil),                                     // 193: google.protobuf.Timestamp
+	(*Citation)(nil),                                                  // 194: warp.multi_agent.v1.Citation
+	(*LongRunningShellCommandSnapshot)(nil),                           // 195: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*emptypb.Empty)(nil),                                             // 196: google.protobuf.Empty
+	(*CurrentRef)(nil),                                                // 197: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                                   // 198: warp.multi_agent.v1.BaseRef
+	(*InputContext)(nil),                                              // 199: warp.multi_agent.v1.InputContext
+	(*Attachment)(nil),                                                // 200: warp.multi_agent.v1.Attachment
+	(*durationpb.Duration)(nil),                                       // 201: google.protobuf.Duration
+	(*CreateTodoList)(nil),                                            // 202: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil),                                        // 203: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil),                                        // 204: warp.multi_agent.v1.MarkTodosCompleted
+	(*Skill)(nil),                                                     // 205: warp.multi_agent.v1.Skill
+	(*ExecutedShellCommand)(nil),                                      // 206: warp.multi_agent.v1.ExecutedShellCommand
+	(*AnyFileContent)(nil),                                            // 207: warp.multi_agent.v1.AnyFileContent
+	(*structpb.Struct)(nil),                                           // 208: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                                      // 209: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                               // 210: warp.multi_agent.v1.FileContent
+	(*DocumentContent)(nil),                                           // 211: warp.multi_agent.v1.DocumentContent
 }
 var file_task_proto_depIdxs = []int32{
 	44,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -27115,17 +27081,17 @@ var file_task_proto_depIdxs = []int32{
 	1,   // 87: warp.multi_agent.v1.Message.UserQuery.intended_agent:type_name -> warp.multi_agent.v1.AgentType
 	49,  // 88: warp.multi_agent.v1.Message.SystemQuery.auto_code_diff:type_name -> warp.multi_agent.v1.Message.AutoCodeDiff
 	50,  // 89: warp.multi_agent.v1.Message.SystemQuery.resume_conversation:type_name -> warp.multi_agent.v1.Message.ResumeConversation
-	51,  // 90: warp.multi_agent.v1.Message.SystemQuery.trigger_prompt_suggestion:type_name -> warp.multi_agent.v1.Message.TriggerPromptSuggestion
+	51,  // 90: warp.multi_agent.v1.Message.SystemQuery.generate_passive_suggestions:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions
 	52,  // 91: warp.multi_agent.v1.Message.SystemQuery.create_new_project:type_name -> warp.multi_agent.v1.Message.CreateNewProject
 	53,  // 92: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
 	54,  // 93: warp.multi_agent.v1.Message.SystemQuery.summarize_conversation:type_name -> warp.multi_agent.v1.Message.SummarizeConversation
 	59,  // 94: warp.multi_agent.v1.Message.SystemQuery.fetch_review_comments:type_name -> warp.multi_agent.v1.Message.FetchReviewComments
 	199, // 95: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	200, // 96: warp.multi_agent.v1.Message.TriggerPromptSuggestion.attachments:type_name -> warp.multi_agent.v1.Attachment
-	196, // 97: warp.multi_agent.v1.Message.TriggerPromptSuggestion.files_changed:type_name -> google.protobuf.Empty
-	196, // 98: warp.multi_agent.v1.Message.TriggerPromptSuggestion.command_run:type_name -> google.protobuf.Empty
-	71,  // 99: warp.multi_agent.v1.Message.TriggerPromptSuggestion.shell_command_completion:type_name -> warp.multi_agent.v1.Message.TriggerPromptSuggestion.ShellCommandCompletion
-	72,  // 100: warp.multi_agent.v1.Message.TriggerPromptSuggestion.agent_followup:type_name -> warp.multi_agent.v1.Message.TriggerPromptSuggestion.AgentFollowup
+	200, // 96: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
+	196, // 97: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
+	196, // 98: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
+	71,  // 99: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
+	72,  // 100: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompleted
 	201, // 101: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
 	201, // 102: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
 	73,  // 103: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
@@ -27197,8 +27163,8 @@ var file_task_proto_depIdxs = []int32{
 	205, // 169: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
 	47,  // 170: warp.multi_agent.v1.Message.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	200, // 171: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	206, // 172: warp.multi_agent.v1.Message.TriggerPromptSuggestion.ShellCommandCompletion.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	207, // 173: warp.multi_agent.v1.Message.TriggerPromptSuggestion.ShellCommandCompletion.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
+	206, // 172: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	207, // 173: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	194, // 174: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
 	2,   // 175: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.risk_category:type_name -> warp.multi_agent.v1.RiskCategory
 	103, // 176: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
@@ -27443,17 +27409,17 @@ func file_task_proto_init() {
 	file_task_proto_msgTypes[41].OneofWrappers = []any{
 		(*message_SystemQuery_AutoCodeDiff)(nil),
 		(*message_SystemQuery_ResumeConversation)(nil),
-		(*message_SystemQuery_TriggerPromptSuggestion)(nil),
+		(*message_SystemQuery_GeneratePassiveSuggestions)(nil),
 		(*message_SystemQuery_CreateNewProject)(nil),
 		(*message_SystemQuery_CloneRepository)(nil),
 		(*message_SystemQuery_SummarizeConversation)(nil),
 		(*message_SystemQuery_FetchReviewComments)(nil),
 	}
 	file_task_proto_msgTypes[44].OneofWrappers = []any{
-		(*message_TriggerPromptSuggestion_FilesChanged)(nil),
-		(*message_TriggerPromptSuggestion_CommandRun)(nil),
-		(*message_TriggerPromptSuggestion_ShellCommandCompletion_)(nil),
-		(*message_TriggerPromptSuggestion_AgentFollowup_)(nil),
+		(*message_GeneratePassiveSuggestions_FilesChanged)(nil),
+		(*message_GeneratePassiveSuggestions_CommandRun)(nil),
+		(*message_GeneratePassiveSuggestions_ShellCommandCompleted_)(nil),
+		(*message_GeneratePassiveSuggestions_AgentResponseCompleted_)(nil),
 	}
 	file_task_proto_msgTypes[50].OneofWrappers = []any{
 		(*message_Summarization_ConversationSummary_)(nil),

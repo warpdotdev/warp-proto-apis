@@ -162,7 +162,7 @@ message Message {
     oneof type {
       AutoCodeDiff auto_code_diff = 1;
       ResumeConversation resume_conversation = 3;
-      TriggerPromptSuggestion trigger_prompt_suggestion = 4;
+      GeneratePassiveSuggestions generate_passive_suggestions = 4;
       CreateNewProject create_new_project = 5;
       CloneRepository clone_repository = 6;
       SummarizeConversation summarize_conversation = 7;
@@ -178,22 +178,29 @@ message Message {
 
   message ResumeConversation {}
 
-  message TriggerPromptSuggestion {
-    repeated Attachment attachments = 1 [deprecated = true];
+  // An input type to generate passive suggestions (e.g. prompt suggestions).
+  // If any suggestions are generated, they will be produced as tool calls.
+  message GeneratePassiveSuggestions {
+    // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+    repeated Attachment attachments = 1;
 
     oneof trigger {
-      google.protobuf.Empty files_changed = 2 [deprecated = true];
-      google.protobuf.Empty command_run = 3 [deprecated = true];
-      ShellCommandCompletion shell_command_completion = 4;
-      AgentFollowup agent_followup = 5;
+      // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+      google.protobuf.Empty files_changed = 2;
+      // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+      google.protobuf.Empty command_run = 3;
+      // Triggered when a manually run shell command completes.
+      ShellCommandCompleted shell_command_completed = 4;
+      // Triggered when an agent completes a response.
+      AgentResponseCompleted agent_response_completed = 5;
     }
 
-    message ShellCommandCompletion {
+    message ShellCommandCompleted {
       ExecutedShellCommand executed_shell_command = 1;
       repeated AnyFileContent relevant_files = 2;
     }
 
-    message AgentFollowup {}
+    message AgentResponseCompleted {}
   }
 
   message CreateNewProject {
@@ -503,18 +510,19 @@ message Message {
       string server_id = 3;
     }
 
-    // A tool call to suggest a prompt.
+    // A tool call to suggest a prompt for the user to run.
     message SuggestPrompt {
       oneof display_mode {
         InlineQueryBanner inline_query_banner = 1;
         PromptChip prompt_chip = 2;
       }
 
+      // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+      // This was previously used for passive unit test suggestions.
       message InlineQueryBanner {
         string title = 1;
         string description = 2;
         string query = 3;
-        string accept_text = 4;
       }
       
       message PromptChip {

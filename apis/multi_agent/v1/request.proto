@@ -56,7 +56,7 @@ message Request {
       AutoCodeDiffQuery auto_code_diff_query = 5;
       ResumeConversation resume_conversation = 7;
       InitProjectRules init_project_rules = 8;
-      TriggerPromptSuggestion trigger_prompt_suggestion = 9;
+      GeneratePassiveSuggestions generate_passive_suggestions = 9;
       CreateNewProject create_new_project = 10;
       CloneRepository clone_repository = 11;
       CodeReview code_review = 12;
@@ -199,23 +199,29 @@ message Request {
       repeated string repo_paths = 1 [ (sensitive) = true ];
     }
 
-    // An input to trigger a suggested prompt.
-    message TriggerPromptSuggestion {
-      repeated Attachment attachments = 1 [deprecated = true];
+    // An input type to generate passive suggestions (e.g. prompt suggestions).
+    // If any suggestions are generated, they will be produced as tool calls.
+    message GeneratePassiveSuggestions {
+      // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+      repeated Attachment attachments = 1;
 
       oneof trigger {
-        google.protobuf.Empty files_changed = 2 [deprecated = true];
-        google.protobuf.Empty command_run = 3 [deprecated = true];
-        ShellCommandCompletion shell_command_completion = 4;
-        AgentFollowup agent_followup = 5;
+        // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+        google.protobuf.Empty files_changed = 2;
+        // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+        google.protobuf.Empty command_run = 3;
+        // Triggered when a manually run shell command completes.
+        ShellCommandCompleted shell_command_completed = 4;
+        // Triggered when an agent completes a response.
+        AgentResponseCompleted agent_response_completed = 5;
       }
 
-      message ShellCommandCompletion {
+      message ShellCommandCompleted {
         ExecutedShellCommand executed_shell_command = 1;
         repeated AnyFileContent relevant_files = 2;
       }
 
-      message AgentFollowup {}
+      message AgentResponseCompleted {}
     }
 
     message OnShellCommandCompletion {
