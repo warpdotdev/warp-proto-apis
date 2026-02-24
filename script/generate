@@ -60,7 +60,13 @@ done
 
 echo -e "\n➡️  Generating Go bindings..."
 if [ -d "$API_PATH/gen/go" ]; then
-  protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
+  GO_GRPC_OPTS=()
+  # Check if any proto file defines a gRPC service
+  if grep -q '^service ' "$API_PATH/"*.proto 2>/dev/null; then
+    GO_GRPC_OPTS=(--go-grpc_out="$API_PATH/gen/go" --go-grpc_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION")
+    echo "  (service detected — generating gRPC stubs)"
+  fi
+  protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" "${GO_GRPC_OPTS[@]}" --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
   pushd "$API_PATH/gen/go" >/dev/null 2>&1
   go mod tidy
   popd >/dev/null 2>&1
