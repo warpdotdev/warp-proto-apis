@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/task.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -25639,7 +25639,7 @@ const file_multi_agent_v1_task_proto_rawDesc = "" +
 	"\"RISK_CATEGORY_TRIVIAL_LOCAL_CHANGE\x10\x02\x12)\n" +
 	"%RISK_CATEGORY_NONTRIVIAL_LOCAL_CHANGE\x10\x03\x12!\n" +
 	"\x1dRISK_CATEGORY_EXTERNAL_CHANGE\x10\x04\x12\x17\n" +
-	"\x13RISK_CATEGORY_RISKY\x10\x05B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x13RISK_CATEGORY_RISKY\x10\x05B5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_task_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
 var file_multi_agent_v1_task_proto_msgTypes = make([]protoimpl.MessageInfo, 176)

@@ -6,7 +6,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/request.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -7170,7 +7170,7 @@ const file_multi_agent_v1_request_proto_rawDesc = "" +
 	"\fUNSUPERVISED\x10\x01*'\n" +
 	"\x0eIsolationLevel\x12\b\n" +
 	"\x04NONE\x10\x00\x12\v\n" +
-	"\aSANDBOX\x10\x01B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\aSANDBOX\x10\x01B5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_request_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_multi_agent_v1_request_proto_msgTypes = make([]protoimpl.MessageInfo, 39)

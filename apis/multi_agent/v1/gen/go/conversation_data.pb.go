@@ -6,7 +6,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/conversation_data.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -116,7 +116,7 @@ const file_multi_agent_v1_conversation_data_proto_rawDesc = "" +
 	"&multi_agent/v1/conversation_data.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x19multi_agent/v1/task.proto\"w\n" +
 	"\x10ConversationData\x12/\n" +
 	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasks\x122\n" +
-	"\x13ordered_message_ids\x18\x02 \x03(\tB\x02\x18\x01R\x11orderedMessageIdsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x13ordered_message_ids\x18\x02 \x03(\tB\x02\x18\x01R\x11orderedMessageIdsB5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_conversation_data_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_multi_agent_v1_conversation_data_proto_goTypes = []any{

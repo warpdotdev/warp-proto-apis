@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/options.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -65,7 +65,7 @@ const file_multi_agent_v1_options_proto_rawDesc = "" +
 	"\n" +
 	"\x1cmulti_agent/v1/options.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/descriptor.proto:=\n" +
 	"\tsensitive\x12\x1d.google.protobuf.FieldOptions\x18І\x03 \x01(\bR\tsensitive:;\n" +
-	"\binternal\x12\x1d.google.protobuf.FieldOptions\x18ц\x03 \x01(\bR\binternalB0Z.github.com/warp/warp-proto-apis/multi_agent/v1b\beditionsp\xe8\a"
+	"\binternal\x12\x1d.google.protobuf.FieldOptions\x18ц\x03 \x01(\bR\binternalB-Z+github.com/warp/warp-proto-apis/multi_agentb\beditionsp\xe8\a"
 
 var file_multi_agent_v1_options_proto_goTypes = []any{
 	(*descriptorpb.FieldOptions)(nil), // 0: google.protobuf.FieldOptions

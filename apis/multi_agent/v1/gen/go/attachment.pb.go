@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/attachment.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -2799,7 +2799,7 @@ const file_multi_agent_v1_attachment_proto_rawDesc = "" +
 	"\fdiff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdiffContent\x12\x1f\n" +
 	"\vlines_added\x18\x04 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
-	"\rlines_removed\x18\x05 \x01(\rR\flinesRemovedB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\rlines_removed\x18\x05 \x01(\rR\flinesRemovedB5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_multi_agent_v1_attachment_proto_goTypes = []any{

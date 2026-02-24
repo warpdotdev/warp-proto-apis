@@ -3,6 +3,7 @@ module github.com/warpdotdev/warp-proto-apis/fraud_scorer/v1
 go 1.24.0
 
 require (
+	github.com/warp/warp-proto-apis/multi_agent v0.0.0
 	google.golang.org/grpc v1.78.0
 	google.golang.org/protobuf v1.36.10
 )
@@ -13,3 +14,5 @@ require (
 	golang.org/x/text v0.31.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251029180050-ab9386a59fda // indirect
 )
+
+replace github.com/warp/warp-proto-apis/multi_agent => ../../../../multi_agent/v1/gen/go

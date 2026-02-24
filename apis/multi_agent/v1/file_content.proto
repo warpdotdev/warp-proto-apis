@@ -6,7 +6,7 @@ import "google/protobuf/go_features.proto";
 
 import "multi_agent/v1/options.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option go_package = "github.com/warp/warp-proto-apis/multi_agent";
 option features.(pb.go).api_level = API_OPAQUE;
 
 // A range of lines [start, end] that situate content in a file, 1-indexed.

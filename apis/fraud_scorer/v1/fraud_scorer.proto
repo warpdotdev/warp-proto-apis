@@ -3,6 +3,7 @@ edition = "2023";
 package warp.fraud_scorer.v1;
 
 import "google/protobuf/go_features.proto";
+import "multi_agent/v1/request.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/fraud_scorer/v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -17,11 +18,7 @@ message ScoreRequest {
 }
 
 message RequestContext {
-  string user_id = 1;
-  string firebase_uid = 2;
-  string user_query = 3;
-  string os = 4;
-  bool has_context = 5;
+  warp.multi_agent.v1.Request request = 1;
 }
 
 message ScoreResponse {

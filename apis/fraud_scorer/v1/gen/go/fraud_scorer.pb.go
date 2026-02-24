@@ -7,6 +7,7 @@
 package v1
 
 import (
+	multi_agent "github.com/warp/warp-proto-apis/multi_agent"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
@@ -134,16 +135,10 @@ func (b0 ScoreRequest_builder) Build() *ScoreRequest {
 }
 
 type RequestContext struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_UserId      *string                `protobuf:"bytes,1,opt,name=user_id,json=userId"`
-	xxx_hidden_FirebaseUid *string                `protobuf:"bytes,2,opt,name=firebase_uid,json=firebaseUid"`
-	xxx_hidden_UserQuery   *string                `protobuf:"bytes,3,opt,name=user_query,json=userQuery"`
-	xxx_hidden_Os          *string                `protobuf:"bytes,4,opt,name=os"`
-	xxx_hidden_HasContext  bool                   `protobuf:"varint,5,opt,name=has_context,json=hasContext"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Request *multi_agent.Request   `protobuf:"bytes,1,opt,name=request"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *RequestContext) Reset() {
@@ -171,172 +166,39 @@ func (x *RequestContext) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *RequestContext) GetUserId() string {
+func (x *RequestContext) GetRequest() *multi_agent.Request {
 	if x != nil {
-		if x.xxx_hidden_UserId != nil {
-			return *x.xxx_hidden_UserId
-		}
-		return ""
+		return x.xxx_hidden_Request
 	}
-	return ""
+	return nil
 }
 
-func (x *RequestContext) GetFirebaseUid() string {
-	if x != nil {
-		if x.xxx_hidden_FirebaseUid != nil {
-			return *x.xxx_hidden_FirebaseUid
-		}
-		return ""
-	}
-	return ""
+func (x *RequestContext) SetRequest(v *multi_agent.Request) {
+	x.xxx_hidden_Request = v
 }
 
-func (x *RequestContext) GetUserQuery() string {
-	if x != nil {
-		if x.xxx_hidden_UserQuery != nil {
-			return *x.xxx_hidden_UserQuery
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *RequestContext) GetOs() string {
-	if x != nil {
-		if x.xxx_hidden_Os != nil {
-			return *x.xxx_hidden_Os
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *RequestContext) GetHasContext() bool {
-	if x != nil {
-		return x.xxx_hidden_HasContext
-	}
-	return false
-}
-
-func (x *RequestContext) SetUserId(v string) {
-	x.xxx_hidden_UserId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
-}
-
-func (x *RequestContext) SetFirebaseUid(v string) {
-	x.xxx_hidden_FirebaseUid = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
-}
-
-func (x *RequestContext) SetUserQuery(v string) {
-	x.xxx_hidden_UserQuery = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
-}
-
-func (x *RequestContext) SetOs(v string) {
-	x.xxx_hidden_Os = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
-}
-
-func (x *RequestContext) SetHasContext(v bool) {
-	x.xxx_hidden_HasContext = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
-}
-
-func (x *RequestContext) HasUserId() bool {
+func (x *RequestContext) HasRequest() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_Request != nil
 }
 
-func (x *RequestContext) HasFirebaseUid() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
-func (x *RequestContext) HasUserQuery() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *RequestContext) HasOs() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
-}
-
-func (x *RequestContext) HasHasContext() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
-}
-
-func (x *RequestContext) ClearUserId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_UserId = nil
-}
-
-func (x *RequestContext) ClearFirebaseUid() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_FirebaseUid = nil
-}
-
-func (x *RequestContext) ClearUserQuery() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_UserQuery = nil
-}
-
-func (x *RequestContext) ClearOs() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_Os = nil
-}
-
-func (x *RequestContext) ClearHasContext() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_HasContext = false
+func (x *RequestContext) ClearRequest() {
+	x.xxx_hidden_Request = nil
 }
 
 type RequestContext_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	UserId      *string
-	FirebaseUid *string
-	UserQuery   *string
-	Os          *string
-	HasContext  *bool
+	Request *multi_agent.Request
 }
 
 func (b0 RequestContext_builder) Build() *RequestContext {
 	m0 := &RequestContext{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.UserId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
-		x.xxx_hidden_UserId = b.UserId
-	}
-	if b.FirebaseUid != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
-		x.xxx_hidden_FirebaseUid = b.FirebaseUid
-	}
-	if b.UserQuery != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
-		x.xxx_hidden_UserQuery = b.UserQuery
-	}
-	if b.Os != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
-		x.xxx_hidden_Os = b.Os
-	}
-	if b.HasContext != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
-		x.xxx_hidden_HasContext = *b.HasContext
-	}
+	x.xxx_hidden_Request = b.Request
 	return m0
 }
 
@@ -572,17 +434,11 @@ var File_fraud_scorer_v1_fraud_scorer_proto protoreflect.FileDescriptor
 
 const file_fraud_scorer_v1_fraud_scorer_proto_rawDesc = "" +
 	"\n" +
-	"\"fraud_scorer/v1/fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\"]\n" +
+	"\"fraud_scorer/v1/fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\x1a\x1cmulti_agent/v1/request.proto\"]\n" +
 	"\fScoreRequest\x12M\n" +
-	"\x0frequest_context\x18\x01 \x01(\v2$.warp.fraud_scorer.v1.RequestContextR\x0erequestContext\"\x9c\x01\n" +
-	"\x0eRequestContext\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\x12!\n" +
-	"\ffirebase_uid\x18\x02 \x01(\tR\vfirebaseUid\x12\x1d\n" +
-	"\n" +
-	"user_query\x18\x03 \x01(\tR\tuserQuery\x12\x0e\n" +
-	"\x02os\x18\x04 \x01(\tR\x02os\x12\x1f\n" +
-	"\vhas_context\x18\x05 \x01(\bR\n" +
-	"hasContext\"U\n" +
+	"\x0frequest_context\x18\x01 \x01(\v2$.warp.fraud_scorer.v1.RequestContextR\x0erequestContext\"H\n" +
+	"\x0eRequestContext\x126\n" +
+	"\arequest\x18\x01 \x01(\v2\x1c.warp.multi_agent.v1.RequestR\arequest\"U\n" +
 	"\rScoreResponse\x12\x1f\n" +
 	"\vfraud_score\x18\x01 \x01(\x02R\n" +
 	"fraudScore\x12#\n" +
@@ -607,19 +463,21 @@ var file_fraud_scorer_v1_fraud_scorer_proto_goTypes = []any{
 	(*ScoreResponse)(nil),                  // 3: warp.fraud_scorer.v1.ScoreResponse
 	(*HealthCheckRequest)(nil),             // 4: warp.fraud_scorer.v1.HealthCheckRequest
 	(*HealthCheckResponse)(nil),            // 5: warp.fraud_scorer.v1.HealthCheckResponse
+	(*multi_agent.Request)(nil),            // 6: warp.multi_agent.v1.Request
 }
 var file_fraud_scorer_v1_fraud_scorer_proto_depIdxs = []int32{
 	2, // 0: warp.fraud_scorer.v1.ScoreRequest.request_context:type_name -> warp.fraud_scorer.v1.RequestContext
-	0, // 1: warp.fraud_scorer.v1.HealthCheckResponse.status:type_name -> warp.fraud_scorer.v1.HealthCheckResponse.ServingStatus
-	1, // 2: warp.fraud_scorer.v1.FraudScorer.ScoreUser:input_type -> warp.fraud_scorer.v1.ScoreRequest
-	4, // 3: warp.fraud_scorer.v1.FraudScorer.HealthCheck:input_type -> warp.fraud_scorer.v1.HealthCheckRequest
-	3, // 4: warp.fraud_scorer.v1.FraudScorer.ScoreUser:output_type -> warp.fraud_scorer.v1.ScoreResponse
-	5, // 5: warp.fraud_scorer.v1.FraudScorer.HealthCheck:output_type -> warp.fraud_scorer.v1.HealthCheckResponse
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	6, // 1: warp.fraud_scorer.v1.RequestContext.request:type_name -> warp.multi_agent.v1.Request
+	0, // 2: warp.fraud_scorer.v1.HealthCheckResponse.status:type_name -> warp.fraud_scorer.v1.HealthCheckResponse.ServingStatus
+	1, // 3: warp.fraud_scorer.v1.FraudScorer.ScoreUser:input_type -> warp.fraud_scorer.v1.ScoreRequest
+	4, // 4: warp.fraud_scorer.v1.FraudScorer.HealthCheck:input_type -> warp.fraud_scorer.v1.HealthCheckRequest
+	3, // 5: warp.fraud_scorer.v1.FraudScorer.ScoreUser:output_type -> warp.fraud_scorer.v1.ScoreResponse
+	5, // 6: warp.fraud_scorer.v1.FraudScorer.HealthCheck:output_type -> warp.fraud_scorer.v1.HealthCheckResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_fraud_scorer_v1_fraud_scorer_proto_init() }

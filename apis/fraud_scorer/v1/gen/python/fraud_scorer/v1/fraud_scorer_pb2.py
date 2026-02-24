@@ -23,9 +23,10 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import go_features_pb2 as google_dot_protobuf_dot_go__features__pb2
+from multi_agent.v1 import request_pb2 as multi__agent_dot_v1_dot_request__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"fraud_scorer/v1/fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\"M\n\x0cScoreRequest\x12=\n\x0frequest_context\x18\x01 \x01(\x0b\x32$.warp.fraud_scorer.v1.RequestContext\"l\n\x0eRequestContext\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x14\n\x0c\x66irebase_uid\x18\x02 \x01(\t\x12\x12\n\nuser_query\x18\x03 \x01(\t\x12\n\n\x02os\x18\x04 \x01(\t\x12\x13\n\x0bhas_context\x18\x05 \x01(\x08\";\n\rScoreResponse\x12\x13\n\x0b\x66raud_score\x18\x01 \x01(\x02\x12\x15\n\rmodel_version\x18\x02 \x01(\t\"\x14\n\x12HealthCheckRequest\"\x9a\x01\n\x13HealthCheckResponse\x12G\n\x06status\x18\x01 \x01(\x0e\x32\x37.warp.fraud_scorer.v1.HealthCheckResponse.ServingStatus\":\n\rServingStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07SERVING\x10\x01\x12\x0f\n\x0bNOT_SERVING\x10\x02\x32\xc7\x01\n\x0b\x46raudScorer\x12T\n\tScoreUser\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponse\x12\x62\n\x0bHealthCheck\x12(.warp.fraud_scorer.v1.HealthCheckRequest\x1a).warp.fraud_scorer.v1.HealthCheckResponseB9Z/github.com/warp/warp-proto-apis/fraud_scorer/v1\x92\x03\x05\xd2>\x02\x10\x03\x62\x08\x65\x64itionsp\xe8\x07')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"fraud_scorer/v1/fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\x1a\x1cmulti_agent/v1/request.proto\"M\n\x0cScoreRequest\x12=\n\x0frequest_context\x18\x01 \x01(\x0b\x32$.warp.fraud_scorer.v1.RequestContext\"?\n\x0eRequestContext\x12-\n\x07request\x18\x01 \x01(\x0b\x32\x1c.warp.multi_agent.v1.Request\";\n\rScoreResponse\x12\x13\n\x0b\x66raud_score\x18\x01 \x01(\x02\x12\x15\n\rmodel_version\x18\x02 \x01(\t\"\x14\n\x12HealthCheckRequest\"\x9a\x01\n\x13HealthCheckResponse\x12G\n\x06status\x18\x01 \x01(\x0e\x32\x37.warp.fraud_scorer.v1.HealthCheckResponse.ServingStatus\":\n\rServingStatus\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07SERVING\x10\x01\x12\x0f\n\x0bNOT_SERVING\x10\x02\x32\xc7\x01\n\x0b\x46raudScorer\x12T\n\tScoreUser\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponse\x12\x62\n\x0bHealthCheck\x12(.warp.fraud_scorer.v1.HealthCheckRequest\x1a).warp.fraud_scorer.v1.HealthCheckResponseB9Z/github.com/warp/warp-proto-apis/fraud_scorer/v1\x92\x03\x05\xd2>\x02\x10\x03\x62\x08\x65\x64itionsp\xe8\x07')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,18 +34,18 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'fraud_scorer.v1.fraud_score
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'Z/github.com/warp/warp-proto-apis/fraud_scorer/v1\222\003\005\322>\002\020\003'
-  _globals['_SCOREREQUEST']._serialized_start=95
-  _globals['_SCOREREQUEST']._serialized_end=172
-  _globals['_REQUESTCONTEXT']._serialized_start=174
-  _globals['_REQUESTCONTEXT']._serialized_end=282
-  _globals['_SCORERESPONSE']._serialized_start=284
-  _globals['_SCORERESPONSE']._serialized_end=343
-  _globals['_HEALTHCHECKREQUEST']._serialized_start=345
-  _globals['_HEALTHCHECKREQUEST']._serialized_end=365
-  _globals['_HEALTHCHECKRESPONSE']._serialized_start=368
-  _globals['_HEALTHCHECKRESPONSE']._serialized_end=522
-  _globals['_HEALTHCHECKRESPONSE_SERVINGSTATUS']._serialized_start=464
-  _globals['_HEALTHCHECKRESPONSE_SERVINGSTATUS']._serialized_end=522
-  _globals['_FRAUDSCORER']._serialized_start=525
-  _globals['_FRAUDSCORER']._serialized_end=724
+  _globals['_SCOREREQUEST']._serialized_start=125
+  _globals['_SCOREREQUEST']._serialized_end=202
+  _globals['_REQUESTCONTEXT']._serialized_start=204
+  _globals['_REQUESTCONTEXT']._serialized_end=267
+  _globals['_SCORERESPONSE']._serialized_start=269
+  _globals['_SCORERESPONSE']._serialized_end=328
+  _globals['_HEALTHCHECKREQUEST']._serialized_start=330
+  _globals['_HEALTHCHECKREQUEST']._serialized_end=350
+  _globals['_HEALTHCHECKRESPONSE']._serialized_start=353
+  _globals['_HEALTHCHECKRESPONSE']._serialized_end=507
+  _globals['_HEALTHCHECKRESPONSE_SERVINGSTATUS']._serialized_start=449
+  _globals['_HEALTHCHECKRESPONSE_SERVINGSTATUS']._serialized_end=507
+  _globals['_FRAUDSCORER']._serialized_start=510
+  _globals['_FRAUDSCORER']._serialized_end=709
 # @@protoc_insertion_point(module_scope)

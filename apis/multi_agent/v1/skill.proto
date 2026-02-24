@@ -6,7 +6,7 @@ import "google/protobuf/go_features.proto";
 import "google/protobuf/empty.proto";
 import "multi_agent/v1/file_content.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option go_package = "github.com/warp/warp-proto-apis/multi_agent";
 option features.(pb.go).api_level = API_OPAQUE;
 
 // A complete descriptor of a skill without file content.

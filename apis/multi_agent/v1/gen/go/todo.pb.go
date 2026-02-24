@@ -6,7 +6,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/todo.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -362,7 +362,7 @@ const file_multi_agent_v1_todo_proto_rawDesc = "" +
 	"\x12UpdatePendingTodos\x12Q\n" +
 	"\x15updated_pending_todos\x18\x01 \x03(\v2\x1d.warp.multi_agent.v1.TodoItemR\x13updatedPendingTodos\"/\n" +
 	"\x12MarkTodosCompleted\x12\x19\n" +
-	"\btodo_ids\x18\x01 \x03(\tR\atodoIdsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\btodo_ids\x18\x01 \x03(\tR\atodoIdsB5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_todo_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_multi_agent_v1_todo_proto_goTypes = []any{

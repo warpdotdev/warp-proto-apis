@@ -6,7 +6,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/response.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -4887,7 +4887,7 @@ const file_multi_agent_v1_response_proto_rawDesc = "" +
 	"\x13LLM_PROVIDER_GOOGLE\x10\x03\x12\x14\n" +
 	"\x10LLM_PROVIDER_XAI\x10\x04\x12\x1b\n" +
 	"\x17LLM_PROVIDER_OPENROUTER\x10\x05\x12\x1c\n" +
-	"\x18LLM_PROVIDER_AWS_BEDROCK\x10\x06B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x18LLM_PROVIDER_AWS_BEDROCK\x10\x06B5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_response_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_multi_agent_v1_response_proto_msgTypes = make([]protoimpl.MessageInfo, 36)

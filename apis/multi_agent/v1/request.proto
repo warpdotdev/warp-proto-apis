@@ -14,7 +14,7 @@ import "multi_agent/v1/suggestions.proto";
 import "multi_agent/v1/task.proto";
 import "multi_agent/v1/skill.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option go_package = "github.com/warp/warp-proto-apis/multi_agent";
 option features.(pb.go).api_level = API_OPAQUE;
 
 // The main request type. Every multi-agent API call begins with a `Request`.

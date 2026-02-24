@@ -18,7 +18,7 @@ import "multi_agent/v1/options.proto";
 import "multi_agent/v1/todo.proto";
 import "multi_agent/v1/skill.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option go_package = "github.com/warp/warp-proto-apis/multi_agent";
 option features.(pb.go).api_level = API_OPAQUE;
 
 // A task represents a unit of work with messages

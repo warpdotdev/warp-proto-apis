@@ -1,4 +1,4 @@
-module github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go
+module github.com/warp/warp-proto-apis/multi_agent
 
 go 1.23.5
 

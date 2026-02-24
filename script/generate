@@ -60,17 +60,23 @@ done
 
 echo -e "\n➡️  Generating Go bindings..."
 if [ -d "$API_PATH/gen/go" ]; then
+  # Extract go_package from first proto file
+  GO_MODULE=$(grep 'option go_package' "$API_PATH/"*.proto 2>/dev/null | head -1 | sed 's/.*option go_package = "\([^"]*\)".*/\1/' | sed 's/[;[:space:]]*$//')
+  if [ -z "$GO_MODULE" ]; then
+    GO_MODULE="github.com/warp/warp-proto-apis/$API/$VERSION"
+  fi
+  
   GO_GRPC_OPTS=()
   # Check if any proto file defines a gRPC service
   if grep -q '^service ' "$API_PATH/"*.proto 2>/dev/null; then
-    GO_GRPC_OPTS=(--go-grpc_out="$API_PATH/gen/go" --go-grpc_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION")
+    GO_GRPC_OPTS=(--go-grpc_out="$API_PATH/gen/go" --go-grpc_opt="module=$GO_MODULE")
     echo "  (service detected — generating gRPC stubs)"
   fi
   PROTO_FILES_WITH_PATH=()
   for proto in "${PROTO_FILES[@]}"; do
     PROTO_FILES_WITH_PATH+=("$API/$VERSION/$proto")
   done
-  protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" "${GO_GRPC_OPTS[@]}" --proto_path="$(realpath "apis")" "${PROTO_FILES_WITH_PATH[@]}"
+  protoc --go_out="$API_PATH/gen/go" --go_opt="module=$GO_MODULE" "${GO_GRPC_OPTS[@]}" --proto_path="$(realpath "apis")" "${PROTO_FILES_WITH_PATH[@]}"
   pushd "$API_PATH/gen/go" >/dev/null 2>&1
   go mod tidy
   popd >/dev/null 2>&1

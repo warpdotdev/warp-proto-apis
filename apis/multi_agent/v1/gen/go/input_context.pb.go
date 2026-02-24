@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/input_context.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -1360,7 +1360,7 @@ const file_multi_agent_v1_input_context_proto_rawDesc = "" +
 	"\x03Git\x12\x18\n" +
 	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x1a`\n" +
 	"\rSkillsContext\x12O\n" +
-	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkillsB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkillsB5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_multi_agent_v1_input_context_proto_goTypes = []any{

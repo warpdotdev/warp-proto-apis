@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/citations.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -207,7 +207,7 @@ const file_multi_agent_v1_citations_proto_rawDesc = "" +
 	"\x04RULE\x10\x03\x12\x16\n" +
 	"\x12WARP_DOCUMENTATION\x10\x04\x12\f\n" +
 	"\bWEB_PAGE\x10\x05\x12\v\n" +
-	"\aUNKNOWN\x10\x06B8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\aUNKNOWN\x10\x06B5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_citations_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_multi_agent_v1_citations_proto_msgTypes = make([]protoimpl.MessageInfo, 1)

@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/skill.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -1176,7 +1176,7 @@ const file_multi_agent_v1_skill_proto_rawDesc = "" +
 	"\n" +
 	"descriptor\x18\x01 \x01(\v2$.warp.multi_agent.v1.SkillDescriptorR\n" +
 	"descriptor\x12:\n" +
-	"\acontent\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontent\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentB5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_skill_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_multi_agent_v1_skill_proto_goTypes = []any{

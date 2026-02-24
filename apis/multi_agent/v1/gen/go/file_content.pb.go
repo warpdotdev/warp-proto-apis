@@ -4,7 +4,7 @@
 // 	protoc        v6.33.4
 // source: multi_agent/v1/file_content.proto
 
-package v1
+package multi_agent
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -567,7 +567,7 @@ const file_multi_agent_v1_file_content_proto_rawDesc = "" +
 	"\x0eAnyFileContent\x12O\n" +
 	"\x0ebinary_content\x18\x01 \x01(\v2&.warp.multi_agent.v1.BinaryFileContentH\x00R\rbinaryContent\x12E\n" +
 	"\ftext_content\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentH\x00R\vtextContentB\t\n" +
-	"\acontentB8Z.github.com/warp/warp-proto-apis/multi_agent/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\acontentB5Z+github.com/warp/warp-proto-apis/multi_agent\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_multi_agent_v1_file_content_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_multi_agent_v1_file_content_proto_goTypes = []any{
