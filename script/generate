@@ -92,13 +92,15 @@ if [ -d "$API_PATH/gen/python" ]; then
     echo "Error: grpc_python_plugin not found. Run ./script/bootstrap to install."
     exit 1
   fi
-  # Strip Go-specific directives
+  # Strip Go-specific directives from ALL protos in apis/ to support cross-API imports
   PY_TMPDIR=$(mktemp -d)
-  for proto in "${PROTO_FILES[@]}"; do
+  find "$(realpath "apis")" -name "*.proto" -type f | while read -r proto_file; do
+    rel_path=${proto_file#$(realpath "apis")/}
+    mkdir -p "$PY_TMPDIR/$(dirname "$rel_path")"
     sed \
       -e '/import "google\/protobuf\/go_features.proto";/d' \
       -e '/option features\./d' \
-      "$(realpath "$API_PATH/$proto")" > "$PY_TMPDIR/$proto"
+      "$proto_file" > "$PY_TMPDIR/$rel_path"
   done
 
   PROTO_FILES_WITH_PATH=()
@@ -107,7 +109,6 @@ if [ -d "$API_PATH/gen/python" ]; then
   done
 
   protoc \
-    --proto_path="$(realpath "apis")" \
     --proto_path="$PY_TMPDIR" \
     --python_out="$API_PATH/gen/python" \
     --grpc_python_out="$API_PATH/gen/python" \
