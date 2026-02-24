@@ -66,7 +66,11 @@ if [ -d "$API_PATH/gen/go" ]; then
     GO_GRPC_OPTS=(--go-grpc_out="$API_PATH/gen/go" --go-grpc_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION")
     echo "  (service detected — generating gRPC stubs)"
   fi
-  protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" "${GO_GRPC_OPTS[@]}" --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
+  PROTO_FILES_WITH_PATH=()
+  for proto in "${PROTO_FILES[@]}"; do
+    PROTO_FILES_WITH_PATH+=("$API/$VERSION/$proto")
+  done
+  protoc --go_out="$API_PATH/gen/go" --go_opt="module=github.com/warp/warp-proto-apis/$API/$VERSION" "${GO_GRPC_OPTS[@]}" --proto_path="$(realpath "apis")" "${PROTO_FILES_WITH_PATH[@]}"
   pushd "$API_PATH/gen/go" >/dev/null 2>&1
   go mod tidy
   popd >/dev/null 2>&1
@@ -91,12 +95,18 @@ if [ -d "$API_PATH/gen/python" ]; then
       "$(realpath "$API_PATH/$proto")" > "$PY_TMPDIR/$proto"
   done
 
+  PROTO_FILES_WITH_PATH=()
+  for proto in "${PROTO_FILES[@]}"; do
+    PROTO_FILES_WITH_PATH+=("$API/$VERSION/$proto")
+  done
+
   protoc \
+    --proto_path="$(realpath "apis")" \
     --proto_path="$PY_TMPDIR" \
     --python_out="$API_PATH/gen/python" \
     --grpc_python_out="$API_PATH/gen/python" \
     --plugin=protoc-gen-grpc_python="$GRPC_PYTHON_PLUGIN" \
-    "${PROTO_FILES[@]}"
+    "${PROTO_FILES_WITH_PATH[@]}"
   rm -rf "$PY_TMPDIR"
   touch "$API_PATH/gen/python/__init__.py"
   echo "✅️ Done generating Python bindings"

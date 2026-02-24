@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v6.33.4
-// source: fraud_scorer.proto
+// source: fraud_scorer/v1/fraud_scorer.proto
 
 package v1
 
@@ -54,11 +54,11 @@ func (x HealthCheckResponse_ServingStatus) String() string {
 }
 
 func (HealthCheckResponse_ServingStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_fraud_scorer_proto_enumTypes[0].Descriptor()
+	return file_fraud_scorer_v1_fraud_scorer_proto_enumTypes[0].Descriptor()
 }
 
 func (HealthCheckResponse_ServingStatus) Type() protoreflect.EnumType {
-	return &file_fraud_scorer_proto_enumTypes[0]
+	return &file_fraud_scorer_v1_fraud_scorer_proto_enumTypes[0]
 }
 
 func (x HealthCheckResponse_ServingStatus) Number() protoreflect.EnumNumber {
@@ -74,7 +74,7 @@ type ScoreRequest struct {
 
 func (x *ScoreRequest) Reset() {
 	*x = ScoreRequest{}
-	mi := &file_fraud_scorer_proto_msgTypes[0]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +86,7 @@ func (x *ScoreRequest) String() string {
 func (*ScoreRequest) ProtoMessage() {}
 
 func (x *ScoreRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_fraud_scorer_proto_msgTypes[0]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -148,7 +148,7 @@ type RequestContext struct {
 
 func (x *RequestContext) Reset() {
 	*x = RequestContext{}
-	mi := &file_fraud_scorer_proto_msgTypes[1]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -160,7 +160,7 @@ func (x *RequestContext) String() string {
 func (*RequestContext) ProtoMessage() {}
 
 func (x *RequestContext) ProtoReflect() protoreflect.Message {
-	mi := &file_fraud_scorer_proto_msgTypes[1]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -352,7 +352,7 @@ type ScoreResponse struct {
 
 func (x *ScoreResponse) Reset() {
 	*x = ScoreResponse{}
-	mi := &file_fraud_scorer_proto_msgTypes[2]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -364,7 +364,7 @@ func (x *ScoreResponse) String() string {
 func (*ScoreResponse) ProtoMessage() {}
 
 func (x *ScoreResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_fraud_scorer_proto_msgTypes[2]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -456,7 +456,7 @@ type HealthCheckRequest struct {
 
 func (x *HealthCheckRequest) Reset() {
 	*x = HealthCheckRequest{}
-	mi := &file_fraud_scorer_proto_msgTypes[3]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -468,7 +468,7 @@ func (x *HealthCheckRequest) String() string {
 func (*HealthCheckRequest) ProtoMessage() {}
 
 func (x *HealthCheckRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_fraud_scorer_proto_msgTypes[3]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -502,7 +502,7 @@ type HealthCheckResponse struct {
 
 func (x *HealthCheckResponse) Reset() {
 	*x = HealthCheckResponse{}
-	mi := &file_fraud_scorer_proto_msgTypes[4]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -514,7 +514,7 @@ func (x *HealthCheckResponse) String() string {
 func (*HealthCheckResponse) ProtoMessage() {}
 
 func (x *HealthCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_fraud_scorer_proto_msgTypes[4]
+	mi := &file_fraud_scorer_v1_fraud_scorer_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -568,11 +568,11 @@ func (b0 HealthCheckResponse_builder) Build() *HealthCheckResponse {
 	return m0
 }
 
-var File_fraud_scorer_proto protoreflect.FileDescriptor
+var File_fraud_scorer_v1_fraud_scorer_proto protoreflect.FileDescriptor
 
-const file_fraud_scorer_proto_rawDesc = "" +
+const file_fraud_scorer_v1_fraud_scorer_proto_rawDesc = "" +
 	"\n" +
-	"\x12fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\"]\n" +
+	"\"fraud_scorer/v1/fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\"]\n" +
 	"\fScoreRequest\x12M\n" +
 	"\x0frequest_context\x18\x01 \x01(\v2$.warp.fraud_scorer.v1.RequestContextR\x0erequestContext\"\x9c\x01\n" +
 	"\x0eRequestContext\x12\x17\n" +
@@ -598,9 +598,9 @@ const file_fraud_scorer_proto_rawDesc = "" +
 	"\tScoreUser\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponse\x12b\n" +
 	"\vHealthCheck\x12(.warp.fraud_scorer.v1.HealthCheckRequest\x1a).warp.fraud_scorer.v1.HealthCheckResponseB9Z/github.com/warp/warp-proto-apis/fraud_scorer/v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_fraud_scorer_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_fraud_scorer_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_fraud_scorer_proto_goTypes = []any{
+var file_fraud_scorer_v1_fraud_scorer_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_fraud_scorer_v1_fraud_scorer_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_fraud_scorer_v1_fraud_scorer_proto_goTypes = []any{
 	(HealthCheckResponse_ServingStatus)(0), // 0: warp.fraud_scorer.v1.HealthCheckResponse.ServingStatus
 	(*ScoreRequest)(nil),                   // 1: warp.fraud_scorer.v1.ScoreRequest
 	(*RequestContext)(nil),                 // 2: warp.fraud_scorer.v1.RequestContext
@@ -608,7 +608,7 @@ var file_fraud_scorer_proto_goTypes = []any{
 	(*HealthCheckRequest)(nil),             // 4: warp.fraud_scorer.v1.HealthCheckRequest
 	(*HealthCheckResponse)(nil),            // 5: warp.fraud_scorer.v1.HealthCheckResponse
 }
-var file_fraud_scorer_proto_depIdxs = []int32{
+var file_fraud_scorer_v1_fraud_scorer_proto_depIdxs = []int32{
 	2, // 0: warp.fraud_scorer.v1.ScoreRequest.request_context:type_name -> warp.fraud_scorer.v1.RequestContext
 	0, // 1: warp.fraud_scorer.v1.HealthCheckResponse.status:type_name -> warp.fraud_scorer.v1.HealthCheckResponse.ServingStatus
 	1, // 2: warp.fraud_scorer.v1.FraudScorer.ScoreUser:input_type -> warp.fraud_scorer.v1.ScoreRequest
@@ -622,27 +622,27 @@ var file_fraud_scorer_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_fraud_scorer_proto_init() }
-func file_fraud_scorer_proto_init() {
-	if File_fraud_scorer_proto != nil {
+func init() { file_fraud_scorer_v1_fraud_scorer_proto_init() }
+func file_fraud_scorer_v1_fraud_scorer_proto_init() {
+	if File_fraud_scorer_v1_fraud_scorer_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fraud_scorer_proto_rawDesc), len(file_fraud_scorer_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_fraud_scorer_v1_fraud_scorer_proto_rawDesc), len(file_fraud_scorer_v1_fraud_scorer_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_fraud_scorer_proto_goTypes,
-		DependencyIndexes: file_fraud_scorer_proto_depIdxs,
-		EnumInfos:         file_fraud_scorer_proto_enumTypes,
-		MessageInfos:      file_fraud_scorer_proto_msgTypes,
+		GoTypes:           file_fraud_scorer_v1_fraud_scorer_proto_goTypes,
+		DependencyIndexes: file_fraud_scorer_v1_fraud_scorer_proto_depIdxs,
+		EnumInfos:         file_fraud_scorer_v1_fraud_scorer_proto_enumTypes,
+		MessageInfos:      file_fraud_scorer_v1_fraud_scorer_proto_msgTypes,
 	}.Build()
-	File_fraud_scorer_proto = out.File
-	file_fraud_scorer_proto_goTypes = nil
-	file_fraud_scorer_proto_depIdxs = nil
+	File_fraud_scorer_v1_fraud_scorer_proto = out.File
+	file_fraud_scorer_v1_fraud_scorer_proto_goTypes = nil
+	file_fraud_scorer_v1_fraud_scorer_proto_depIdxs = nil
 }

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v6.33.4
-// source: fraud_scorer.proto
+// source: fraud_scorer/v1/fraud_scorer.proto
 
 package v1
 
@@ -155,5 +155,5 @@ var FraudScorer_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "fraud_scorer.proto",
+	Metadata: "fraud_scorer/v1/fraud_scorer.proto",
 }

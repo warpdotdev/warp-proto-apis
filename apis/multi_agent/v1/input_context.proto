@@ -5,10 +5,10 @@ package warp.multi_agent.v1;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/go_features.proto";
 
-import "file_content.proto";
-import "attachment.proto";
-import "options.proto";
-import "skill.proto";
+import "multi_agent/v1/file_content.proto";
+import "multi_agent/v1/attachment.proto";
+import "multi_agent/v1/options.proto";
+import "multi_agent/v1/skill.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;

@@ -9,14 +9,14 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 
-import "citations.proto";
-import "input_context.proto";
-import "attachment.proto";
-import "file_content.proto";
-import "document_content.proto";
-import "options.proto";
-import "todo.proto";
-import "skill.proto";
+import "multi_agent/v1/citations.proto";
+import "multi_agent/v1/input_context.proto";
+import "multi_agent/v1/attachment.proto";
+import "multi_agent/v1/file_content.proto";
+import "multi_agent/v1/document_content.proto";
+import "multi_agent/v1/options.proto";
+import "multi_agent/v1/todo.proto";
+import "multi_agent/v1/skill.proto";
 
 option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
 option features.(pb.go).api_level = API_OPAQUE;

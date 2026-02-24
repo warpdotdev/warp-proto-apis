@@ -1,4 +1,4 @@
-module github.com/warpdotdev/warp-proto-apis/apis/fraud_scorer/v1/gen/go
+module github.com/warpdotdev/warp-proto-apis/fraud_scorer/v1
 
 go 1.24.0
 
