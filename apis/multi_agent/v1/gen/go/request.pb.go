@@ -7442,7 +7442,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x8f\\\n" +
+	"task.proto\x1a\vskill.proto\"\x95\\\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7591,14 +7591,14 @@ const file_request_proto_rawDesc = "" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12K\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\x06\n" +
-	"\x04type\x1a\xa9\x03\n" +
+	"\x04type\x1a\xaf\x03\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x121\n" +
 	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x12=\n" +
 	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x12-\n" +
-	"\x13started_by_agent_id\x18\x05 \x01(\tR\x10startedByAgentId\x121\n" +
-	"\x15started_by_agent_name\x18\x06 \x01(\tR\x12startedByAgentName\x1aR\n" +
+	"\x13started_by_agent_id\x18\x05 \x01(\tR\x10startedByAgentId\x127\n" +
+	"\x15started_by_agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\x12startedByAgentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xf0\x11\n" +

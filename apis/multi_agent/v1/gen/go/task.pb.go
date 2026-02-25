@@ -27309,10 +27309,10 @@ const file_task_proto_rawDesc = "" +
 	"\rUserQueryMode\x12,\n" +
 	"\x04plan\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04plan\x12:\n" +
 	"\vorchestrate\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\vorchestrateB\x06\n" +
-	"\x04type\">\n" +
+	"\x04type\"D\n" +
 	"\n" +
-	"StartAgent\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x1c\n" +
+	"StartAgent\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\"\xf1\x01\n" +
 	"\x10StartAgentResult\x12I\n" +
 	"\asuccess\x18\x01 \x01(\v2-.warp.multi_agent.v1.StartAgentResult.SuccessH\x00R\asuccess\x12C\n" +

@@ -304,7 +304,7 @@ message Request {
 
     // The display name the parent agent assigned to this child agent
     // via StartAgent.name.
-    string started_by_agent_name = 6;
+    string started_by_agent_name = 6 [ (sensitive) = true ];
   }
 
   message Settings {

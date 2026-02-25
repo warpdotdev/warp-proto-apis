@@ -1464,7 +1464,7 @@ enum RiskCategory {
 // A client tool call to start a new agent in a separate conversation.
 message StartAgent {
   // The display name for the new agent.
-  string name = 1;
+  string name = 1 [ (sensitive) = true ];
   // The initial prompt to send to the new agent.
   string prompt = 2 [ (sensitive) = true ];
 }
