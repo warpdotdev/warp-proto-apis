@@ -5392,6 +5392,7 @@ type Request_Input_StartFromAmbientRunPrompt struct {
 	xxx_hidden_AmbientRunId      *string                `protobuf:"bytes,1,opt,name=ambient_run_id,json=ambientRunId"`
 	xxx_hidden_RuntimeBasePrompt *string                `protobuf:"bytes,2,opt,name=runtime_base_prompt,json=runtimeBasePrompt"`
 	xxx_hidden_RuntimeSkill      *Skill                 `protobuf:"bytes,3,opt,name=runtime_skill,json=runtimeSkill"`
+	xxx_hidden_AttachmentsDir    *string                `protobuf:"bytes,4,opt,name=attachments_dir,json=attachmentsDir"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
 	unknownFields                protoimpl.UnknownFields
@@ -5450,18 +5451,33 @@ func (x *Request_Input_StartFromAmbientRunPrompt) GetRuntimeSkill() *Skill {
 	return nil
 }
 
+func (x *Request_Input_StartFromAmbientRunPrompt) GetAttachmentsDir() string {
+	if x != nil {
+		if x.xxx_hidden_AttachmentsDir != nil {
+			return *x.xxx_hidden_AttachmentsDir
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Input_StartFromAmbientRunPrompt) SetAmbientRunId(v string) {
 	x.xxx_hidden_AmbientRunId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *Request_Input_StartFromAmbientRunPrompt) SetRuntimeBasePrompt(v string) {
 	x.xxx_hidden_RuntimeBasePrompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
 func (x *Request_Input_StartFromAmbientRunPrompt) SetRuntimeSkill(v *Skill) {
 	x.xxx_hidden_RuntimeSkill = v
+}
+
+func (x *Request_Input_StartFromAmbientRunPrompt) SetAttachmentsDir(v string) {
+	x.xxx_hidden_AttachmentsDir = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *Request_Input_StartFromAmbientRunPrompt) HasAmbientRunId() bool {
@@ -5485,6 +5501,13 @@ func (x *Request_Input_StartFromAmbientRunPrompt) HasRuntimeSkill() bool {
 	return x.xxx_hidden_RuntimeSkill != nil
 }
 
+func (x *Request_Input_StartFromAmbientRunPrompt) HasAttachmentsDir() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *Request_Input_StartFromAmbientRunPrompt) ClearAmbientRunId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_AmbientRunId = nil
@@ -5499,6 +5522,11 @@ func (x *Request_Input_StartFromAmbientRunPrompt) ClearRuntimeSkill() {
 	x.xxx_hidden_RuntimeSkill = nil
 }
 
+func (x *Request_Input_StartFromAmbientRunPrompt) ClearAttachmentsDir() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_AttachmentsDir = nil
+}
+
 type Request_Input_StartFromAmbientRunPrompt_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -5510,6 +5538,10 @@ type Request_Input_StartFromAmbientRunPrompt_builder struct {
 	// Optional skill to use as base context.
 	// When provided, creates an InvokeSkill message (content hidden from user in UI).
 	RuntimeSkill *Skill
+	// Optional directory path where the client downloaded task attachments.
+	// When provided, the server uses this to construct file paths for the LLM
+	// instead of hardcoding a directory.
+	AttachmentsDir *string
 }
 
 func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input_StartFromAmbientRunPrompt {
@@ -5517,14 +5549,18 @@ func (b0 Request_Input_StartFromAmbientRunPrompt_builder) Build() *Request_Input
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.AmbientRunId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_AmbientRunId = b.AmbientRunId
 	}
 	if b.RuntimeBasePrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_RuntimeBasePrompt = b.RuntimeBasePrompt
 	}
 	x.xxx_hidden_RuntimeSkill = b.RuntimeSkill
+	if b.AttachmentsDir != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_AttachmentsDir = b.AttachmentsDir
+	}
 	return m0
 }
 
@@ -7444,7 +7480,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\xfa[\n" +
+	"task.proto\x1a\vskill.proto\"\xa3\\\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7454,7 +7490,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd9<\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x82=\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7584,11 +7620,12 @@ const file_request_proto_rawDesc = "" +
 	"\x13FetchReviewComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a5\n" +
 	"\x15SummarizeConversation\x12\x1c\n" +
-	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1a\xb8\x01\n" +
+	"\x06prompt\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x1a\xe1\x01\n" +
 	"\x19StartFromAmbientRunPrompt\x12$\n" +
 	"\x0eambient_run_id\x18\x01 \x01(\tR\fambientRunId\x124\n" +
 	"\x13runtime_base_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x11runtimeBasePrompt\x12?\n" +
-	"\rruntime_skill\x18\x03 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\fruntimeSkill\x1a\x8c\x01\n" +
+	"\rruntime_skill\x18\x03 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\fruntimeSkill\x12'\n" +
+	"\x0fattachments_dir\x18\x04 \x01(\tR\x0eattachmentsDir\x1a\x8c\x01\n" +
 	"\vInvokeSkill\x120\n" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12K\n" +
 	"\n" +

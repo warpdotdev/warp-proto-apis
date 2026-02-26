@@ -264,6 +264,11 @@ message Request {
       // Optional skill to use as base context.
       // When provided, creates an InvokeSkill message (content hidden from user in UI).
       Skill runtime_skill = 3;
+
+      // Optional directory path where the client downloaded task attachments.
+      // When provided, the server uses this to construct file paths for the LLM
+      // instead of hardcoding a directory.
+      string attachments_dir = 4;
     }
 
     message InvokeSkill {
