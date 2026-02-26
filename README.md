@@ -35,6 +35,13 @@ Requires the `protoc-gen-go` plugin: `go install google.golang.org/protobuf/cmd/
 
 This is installed by the bootstrap script.
 
+### TypeScript
+Requires Node.js (v18+) and the `@bufbuild/protoc-gen-es` plugin: `npm install -g @bufbuild/protoc-gen-es`.
+
+This is installed by the bootstrap script.
+
+Generated TypeScript files are checked into the repository at `apis/<api>/<version>/gen/typescript/`. The generated code depends on `@bufbuild/protobuf` at runtime.
+
 ### Rust
 There are no specific dependencies required for Rust, outside of the `protoc` compiler and a Rust toolchain.  The Rust code generation happens at compile time (as part of a Rust build script), so no additional setup is required and nothing needs to be regenerated and checked in when proto files are modified.
 

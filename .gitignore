@@ -1,2 +1,3 @@
 /target/
 **/gen/rust/target/
+**/gen/typescript/node_modules/

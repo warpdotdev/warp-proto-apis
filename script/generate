@@ -65,3 +65,13 @@ go mod tidy
 popd >/dev/null 2>&1
 
 echo "✅️ Done generating Go bindings"
+
+echo -e "\n➡️  Generating TypeScript bindings..."
+TS_OUT_DIR="$API_PATH/gen/typescript"
+mkdir -p "$TS_OUT_DIR"
+protoc \
+  --es_out="$TS_OUT_DIR" \
+  --es_opt="target=ts" \
+  --proto_path="$(realpath "$API_PATH")" \
+  "${PROTO_FILES[@]}"
+echo "✅️ Done generating TypeScript bindings"
