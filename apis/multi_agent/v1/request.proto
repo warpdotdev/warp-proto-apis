@@ -299,12 +299,14 @@ message Request {
     // Value is the source conversation's server conversation ID.
     string forked_from_conversation_id = 4;
 
-    // The agent ID of the parent agent that started this conversation.
-    string started_by_agent_id = 5;
+    // The conversation ID of the parent agent that spawned this child agent.
+    // In V0 the agent ID is the conversation ID; this may change in future
+    // versions.
+    string parent_agent_id = 5;
 
-    // The display name the parent agent assigned to this child agent
-    // via StartAgent.name.
-    string started_by_agent_name = 6 [ (sensitive) = true ];
+    // The display name for this agent (e.g. "Agent 1"), assigned by the
+    // orchestrator via StartAgent.name.
+    string agent_name = 6 [ (sensitive) = true ];
   }
 
   message Settings {

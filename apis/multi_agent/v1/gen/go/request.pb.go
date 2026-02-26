@@ -1204,8 +1204,8 @@ type Request_Metadata struct {
 	xxx_hidden_Logging                  map[string]*structpb.Value `protobuf:"bytes,2,rep,name=logging" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	xxx_hidden_AmbientAgentTaskId       *string                    `protobuf:"bytes,3,opt,name=ambient_agent_task_id,json=ambientAgentTaskId"`
 	xxx_hidden_ForkedFromConversationId *string                    `protobuf:"bytes,4,opt,name=forked_from_conversation_id,json=forkedFromConversationId"`
-	xxx_hidden_StartedByAgentId         *string                    `protobuf:"bytes,5,opt,name=started_by_agent_id,json=startedByAgentId"`
-	xxx_hidden_StartedByAgentName       *string                    `protobuf:"bytes,6,opt,name=started_by_agent_name,json=startedByAgentName"`
+	xxx_hidden_ParentAgentId            *string                    `protobuf:"bytes,5,opt,name=parent_agent_id,json=parentAgentId"`
+	xxx_hidden_AgentName                *string                    `protobuf:"bytes,6,opt,name=agent_name,json=agentName"`
 	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
 	XXX_presence                        [1]uint32
 	unknownFields                       protoimpl.UnknownFields
@@ -1274,20 +1274,20 @@ func (x *Request_Metadata) GetForkedFromConversationId() string {
 	return ""
 }
 
-func (x *Request_Metadata) GetStartedByAgentId() string {
+func (x *Request_Metadata) GetParentAgentId() string {
 	if x != nil {
-		if x.xxx_hidden_StartedByAgentId != nil {
-			return *x.xxx_hidden_StartedByAgentId
+		if x.xxx_hidden_ParentAgentId != nil {
+			return *x.xxx_hidden_ParentAgentId
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Request_Metadata) GetStartedByAgentName() string {
+func (x *Request_Metadata) GetAgentName() string {
 	if x != nil {
-		if x.xxx_hidden_StartedByAgentName != nil {
-			return *x.xxx_hidden_StartedByAgentName
+		if x.xxx_hidden_AgentName != nil {
+			return *x.xxx_hidden_AgentName
 		}
 		return ""
 	}
@@ -1313,13 +1313,13 @@ func (x *Request_Metadata) SetForkedFromConversationId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
-func (x *Request_Metadata) SetStartedByAgentId(v string) {
-	x.xxx_hidden_StartedByAgentId = &v
+func (x *Request_Metadata) SetParentAgentId(v string) {
+	x.xxx_hidden_ParentAgentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
-func (x *Request_Metadata) SetStartedByAgentName(v string) {
-	x.xxx_hidden_StartedByAgentName = &v
+func (x *Request_Metadata) SetAgentName(v string) {
+	x.xxx_hidden_AgentName = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
 
@@ -1344,14 +1344,14 @@ func (x *Request_Metadata) HasForkedFromConversationId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Request_Metadata) HasStartedByAgentId() bool {
+func (x *Request_Metadata) HasParentAgentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Request_Metadata) HasStartedByAgentName() bool {
+func (x *Request_Metadata) HasAgentName() bool {
 	if x == nil {
 		return false
 	}
@@ -1373,14 +1373,14 @@ func (x *Request_Metadata) ClearForkedFromConversationId() {
 	x.xxx_hidden_ForkedFromConversationId = nil
 }
 
-func (x *Request_Metadata) ClearStartedByAgentId() {
+func (x *Request_Metadata) ClearParentAgentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_StartedByAgentId = nil
+	x.xxx_hidden_ParentAgentId = nil
 }
 
-func (x *Request_Metadata) ClearStartedByAgentName() {
+func (x *Request_Metadata) ClearAgentName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
-	x.xxx_hidden_StartedByAgentName = nil
+	x.xxx_hidden_AgentName = nil
 }
 
 type Request_Metadata_builder struct {
@@ -1405,11 +1405,13 @@ type Request_Metadata_builder struct {
 	// that was created by forking an existing conversation.
 	// Value is the source conversation's server conversation ID.
 	ForkedFromConversationId *string
-	// The agent ID of the parent agent that started this conversation.
-	StartedByAgentId *string
-	// The display name the parent agent assigned to this child agent
-	// via StartAgent.name.
-	StartedByAgentName *string
+	// The conversation ID of the parent agent that spawned this child agent.
+	// In V0 the agent ID is the conversation ID; this may change in future
+	// versions.
+	ParentAgentId *string
+	// The display name for this agent (e.g. "Agent 1"), assigned by the
+	// orchestrator via StartAgent.name.
+	AgentName *string
 }
 
 func (b0 Request_Metadata_builder) Build() *Request_Metadata {
@@ -1429,13 +1431,13 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_ForkedFromConversationId = b.ForkedFromConversationId
 	}
-	if b.StartedByAgentId != nil {
+	if b.ParentAgentId != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
-		x.xxx_hidden_StartedByAgentId = b.StartedByAgentId
+		x.xxx_hidden_ParentAgentId = b.ParentAgentId
 	}
-	if b.StartedByAgentName != nil {
+	if b.AgentName != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
-		x.xxx_hidden_StartedByAgentName = b.StartedByAgentName
+		x.xxx_hidden_AgentName = b.AgentName
 	}
 	return m0
 }
@@ -7442,7 +7444,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x95\\\n" +
+	"task.proto\x1a\vskill.proto\"\xfa[\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7591,14 +7593,15 @@ const file_request_proto_rawDesc = "" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12K\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\x06\n" +
-	"\x04type\x1a\xaf\x03\n" +
+	"\x04type\x1a\x94\x03\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x121\n" +
 	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x12=\n" +
-	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x12-\n" +
-	"\x13started_by_agent_id\x18\x05 \x01(\tR\x10startedByAgentId\x127\n" +
-	"\x15started_by_agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\x12startedByAgentName\x1aR\n" +
+	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x12&\n" +
+	"\x0fparent_agent_id\x18\x05 \x01(\tR\rparentAgentId\x12#\n" +
+	"\n" +
+	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xf0\x11\n" +
