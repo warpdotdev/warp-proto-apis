@@ -146,6 +146,7 @@ message Request {
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
         FetchConversationResult fetch_conversation = 27;
+        StartAgentResult start_agent = 28;
       }
     }
 
@@ -297,6 +298,13 @@ message Request {
     // that was created by forking an existing conversation.
     // Value is the source conversation's server conversation ID.
     string forked_from_conversation_id = 4;
+
+    // The agent ID of the parent agent that started this conversation.
+    string started_by_agent_id = 5;
+
+    // The display name the parent agent assigned to this child agent
+    // via StartAgent.name.
+    string started_by_agent_name = 6 [ (sensitive) = true ];
   }
 
   message Settings {

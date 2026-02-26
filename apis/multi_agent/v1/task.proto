@@ -298,6 +298,7 @@ message Message {
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
       FetchConversation fetch_conversation = 28;
+      StartAgent start_agent = 29;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -812,6 +813,7 @@ message Message {
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
       FetchConversationResult fetch_conversation = 32;
+      StartAgentResult start_agent = 33;
     }
 
     // Result of a server-side tool call.
@@ -1432,12 +1434,14 @@ enum ToolType {
   READ_SKILL = 23;
   REQUEST_COMPUTER_USE = 24;
   FETCH_CONVERSATION = 25;
+  START_AGENT = 26;
 }
 
 message UserQueryMode {
   oneof type {
     // We can change this to a non-empty `Plan` type later, this is backwards compatible
     google.protobuf.Empty plan = 1;
+    google.protobuf.Empty orchestrate = 2;
   }
 }
 
@@ -1455,6 +1459,30 @@ enum RiskCategory {
   RISK_CATEGORY_NONTRIVIAL_LOCAL_CHANGE = 3;
   RISK_CATEGORY_EXTERNAL_CHANGE = 4;
   RISK_CATEGORY_RISKY = 5;
+}
+
+// A client tool call to start a new agent in a separate conversation.
+message StartAgent {
+  // The display name for the new agent.
+  string name = 1 [ (sensitive) = true ];
+  // The initial prompt to send to the new agent.
+  string prompt = 2 [ (sensitive) = true ];
+}
+
+// The result of a StartAgent tool call.
+message StartAgentResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The server-assigned agent ID (conversation_id for V0).
+    string agent_id = 1;
+  }
+  message Error {
+    string error = 1;
+  }
 }
 
 message RawImage {
