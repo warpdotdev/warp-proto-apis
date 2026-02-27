@@ -549,6 +549,7 @@ message Message {
         google.protobuf.Empty computer_use = 6;
         google.protobuf.Empty summarization = 7;
         google.protobuf.Empty conversation_search = 8;
+        google.protobuf.Empty warp_documentation_search = 9;
       }
 
       message CLISubagent {
