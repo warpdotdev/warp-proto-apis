@@ -109,6 +109,20 @@ message Request {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
+          MessagesReceived messages_received = 4;
+        }
+      }
+
+      // Batch of messages received from other agents.
+      message MessagesReceived {
+        repeated Message received = 1;
+
+        message Message {
+          string message_id = 1;
+          string sender_agent_id = 2;
+          repeated string address_agent_ids = 3;
+          string subject = 4;
+          string message_body = 5 [ (sensitive) = true ];
         }
       }
     }
@@ -147,6 +161,7 @@ message Request {
         ReadSkillResult read_skill = 26;
         FetchConversationResult fetch_conversation = 27;
         StartAgentResult start_agent = 28;
+        SendMessageResult send_message = 29;
       }
     }
 
