@@ -35,12 +35,49 @@ jobs:
         # Check if there are any meaningful changes (ignoring protoc version differences)
         # The -I flag ignores lines matching the pattern (protoc version comments)
         if ! git diff -I '^[[:space:]]*//.*(protoc|protoc-gen-go|protoc-gen-es)[[:space:]]*v[0-9]' --quiet; then
-          echo "❌ Generated code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
+          echo "❌ Generated Go code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
           echo "💡 If you're unable to reproduce this diff locally, check to make sure you have the latest protobuf installed: brew install protobuf"
           echo ""
           echo "📋 Diff details (excluding protoc version changes):"
           git diff -I '^[[:space:]]*//.*(protoc|protoc-gen-go|protoc-gen-es)[[:space:]]*v[0-9]'
           exit 1
         else
-          echo "✅ Code generation produced no changes - generated code is up to date!"
+          echo "✅ Code generation produced no changes - generated Go code is up to date!"
         fi
+
+  check-typescript-package:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install protoc
+      run: |
+        brew update
+        brew install protobuf
+
+    - name: Install npm dependencies
+      run: npm install
+
+    - name: Generate TypeScript package bindings
+      run: npm run generate:ts
+
+    - name: Pack package
+      run: |
+        TARBALL="$(npm pack --silent | tail -n 1)"
+        echo "TARBALL_PATH=$PWD/$TARBALL" >> "$GITHUB_ENV"
+
+    - name: Validate package install and import
+      run: |
+        TMP_DIR="$(mktemp -d)"
+        pushd "$TMP_DIR" >/dev/null
+        npm init -y >/dev/null
+        npm install "$TARBALL_PATH"
+        node --input-type=module -e "await import('@warp/multi-agent-api-v1/request_pb');"
+        popd >/dev/null

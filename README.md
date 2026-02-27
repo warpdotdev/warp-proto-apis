@@ -14,21 +14,44 @@ warp-proto-apis/
                 └── <bindings_for_lang>/
 ```
 
+## Installing TypeScript bindings from GitHub
+
+Install the package from a pinned commit:
+
+```bash
+npm install @warp/multi-agent-api-v1@github:warpdotdev/warp-proto-apis#<commit-sha>
+```
+
+or:
+
+```bash
+pnpm add @warp/multi-agent-api-v1@github:warpdotdev/warp-proto-apis#<commit-sha>
+```
+
+Requirements for Git installs:
+- Node.js 18+
+- `git`
+- `protoc` in `PATH` (https://protobuf.dev/installation/)
+
+Example import:
+
+```ts
+import { RequestSchema } from "@warp/multi-agent-api-v1/request_pb";
+```
+
 ## Initial setup
 
 Run `./script/bootstrap` to install proto compiler dependencies.
 
 ## Updating generated bindings
 
-When updating the proto definitions, you will need to run the `./script/generate` script. This will automatically update bindings for all supported languages.
+When updating the proto definitions, run:
 
-For example, to update the `multi_agent` API:
 ```bash
 ./script/generate -a multi_agent -v v1
 ```
 
-## Required dependencies
-Must have `protoc` installed. See here on how to install for your platform: https://protobuf.dev/installation/.
+This updates checked-in Go bindings.
 
 ### Go
 Requires the `protoc-gen-go` plugin: `go install google.golang.org/protobuf/cmd/protoc-gen-go@latest`.
@@ -36,11 +59,15 @@ Requires the `protoc-gen-go` plugin: `go install google.golang.org/protobuf/cmd/
 This is installed by the bootstrap script.
 
 ### TypeScript
-Requires Node.js (v18+) and the `@bufbuild/protoc-gen-es` plugin: `npm install -g @bufbuild/protoc-gen-es`.
+TypeScript bindings are generated during package install via the root `prepare` script and are not checked into git.
+To generate them locally:
 
-This is installed by the bootstrap script.
+```bash
+npm install
+npm run generate:ts
+```
 
-Generated TypeScript files are checked into the repository at `apis/<api>/<version>/gen/typescript/`. The generated code depends on `@bufbuild/protobuf` at runtime.
+This writes generated files to `generated/`. The generated code depends on `@bufbuild/protobuf` at runtime.
 
 ### Rust
 There are no specific dependencies required for Rust, outside of the `protoc` compiler and a Rust toolchain.  The Rust code generation happens at compile time (as part of a Rust build script), so no additional setup is required and nothing needs to be regenerated and checked in when proto files are modified.

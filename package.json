@@ -1,0 +1,39 @@
+{
+  "name": "@warp/multi-agent-api-v1",
+  "version": "0.0.1",
+  "description": "Generated TypeScript bindings for Warp multi-agent API v1",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "clean": "rm -rf generated",
+    "generate:ts": "./script/generate-typescript-package",
+    "prepare": "npm run generate:ts"
+  },
+  "exports": {
+    "./*_pb": {
+      "types": "./generated/*_pb.d.ts",
+      "import": "./generated/*_pb.js",
+      "default": "./generated/*_pb.js"
+    },
+    "./*_pb.js": {
+      "types": "./generated/*_pb.d.ts",
+      "import": "./generated/*_pb.js",
+      "default": "./generated/*_pb.js"
+    }
+  },
+  "files": [
+    "generated/*.ts",
+    "generated/*.js",
+    "generated/*.d.ts",
+    "README.md"
+  ],
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.11.0"
+  },
+  "devDependencies": {
+    "@bufbuild/protoc-gen-es": "^2.11.0"
+  },
+  "license": "UNLICENSED"
+}

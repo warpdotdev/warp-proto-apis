@@ -1,3 +1,6 @@
 /target/
+/node_modules/
 **/gen/rust/target/
 **/gen/typescript/node_modules/
+/generated/
+**/gen/typescript/

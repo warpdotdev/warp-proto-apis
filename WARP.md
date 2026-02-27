@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Overview
 
-This repository centralizes protobuf-based APIs for Warp services and clients. It maintains proto definitions alongside generated code for supported languages (Go and Rust).
+This repository centralizes protobuf-based APIs for Warp services and clients. It maintains proto definitions alongside generated code for supported languages.
 
 ## Common Commands
 
@@ -17,7 +17,7 @@ Installs required dependencies:
 - `protoc-gen-go` Go plugin
 
 ### Generating Language Bindings
-After modifying any `.proto` files, regenerate bindings:
+After modifying any `.proto` files, regenerate checked-in Go bindings:
 ```bash
 ./script/generate -a <api> -v <version>
 ```
@@ -27,7 +27,17 @@ Example:
 ./script/generate -a multi_agent -v v1
 ```
 
-This regenerates both Go and Rust bindings. The Go bindings are checked into git, while Rust bindings are generated at compile time via build scripts.
+This regenerates Go bindings. Rust bindings are generated at compile time via build scripts.
+
+### Generating TypeScript Package Bindings
+The TypeScript package is generated during npm lifecycle scripts and is not checked into git.
+
+```bash
+npm install
+npm run generate:ts
+```
+
+Generated TypeScript files are written to `generated/`.
 
 ### Building Rust Crates
 ```bash
@@ -57,6 +67,8 @@ apis/
         └── gen/
             ├── go/     # Generated Go bindings (checked in)
             └── rust/   # Rust crate with build.rs (bindings generated at compile time)
+
+generated/              # Generated TypeScript package output (not checked in)
 ```
 
 ### Current APIs
@@ -84,6 +96,12 @@ apis/
   - Remove Go-specific imports
 - Workspace dependencies are defined in root `Cargo.toml`
 
+### TypeScript
+- Uses `@bufbuild/protoc-gen-es`
+- Code generation runs in npm `prepare` via `script/generate-typescript-package`
+- Generated bindings are **not** checked into git
+- Package name: `@warp/multi-agent-api-v1`
+
 ## Proto File Conventions
 
 ### Sensitive Fields
@@ -107,7 +125,8 @@ The repository uses proto `edition = "2023"`, which is automatically converted t
 
 The repository has a GitHub Actions workflow that validates generated code is up-to-date:
 - Runs on pushes and PRs to `main`
-- Executes `./script/bootstrap` and `./script/generate`
+- Executes `./script/bootstrap` and `./script/generate` for Go checks
+- Runs TypeScript package smoke checks (`npm pack` and import validation)
 - Fails if generated Go code differs from what's checked in
 
 **Important**: Always run `./script/generate` after modifying proto files and commit the generated Go code changes.
@@ -139,8 +158,9 @@ The repository has a GitHub Actions workflow that validates generated code is up
 ### Modifying Existing Proto Files
 1. Edit the proto file
 2. Run `./script/generate -a <api> -v <version>` to update Go bindings
-3. For Rust, run `cargo build` to verify the build script handles the changes correctly
-4. Commit both proto and generated Go changes
+3. Run `npm install && npm run generate:ts` to verify TypeScript generation still works
+4. For Rust, run `cargo build` to verify the build script handles the changes correctly
+5. Commit proto and generated Go changes (TypeScript output is not committed)
 
 ### Working with Multi-Agent API
 The `multi_agent/v1` API is the core communication protocol between Warp clients and the multi-agent backend. Key message types:
