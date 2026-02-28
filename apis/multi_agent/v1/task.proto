@@ -299,6 +299,7 @@ message Message {
       RequestComputerUse request_computer_use = 27;
       FetchConversation fetch_conversation = 28;
       StartAgent start_agent = 29;
+      AnswerQuestion answer_question = 30;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -814,6 +815,7 @@ message Message {
       RequestComputerUseResult request_computer_use_result = 31;
       FetchConversationResult fetch_conversation = 32;
       StartAgentResult start_agent = 33;
+      AnswerQuestionResult answer_question = 34;
     }
 
     // Result of a server-side tool call.
@@ -1435,6 +1437,7 @@ enum ToolType {
   REQUEST_COMPUTER_USE = 24;
   FETCH_CONVERSATION = 25;
   START_AGENT = 26;
+  ANSWER_QUESTION = 27;
 }
 
 message UserQueryMode {
@@ -1483,6 +1486,27 @@ message StartAgentResult {
   message Error {
     string error = 1;
   }
+}
+
+// A client tool call to present a multi-select menu of choices to the user.
+message AnswerQuestion {
+  string question = 1 [ (sensitive) = true ];
+  repeated Choice choices = 2;
+  message Choice {
+    string id = 1;
+    string label = 2 [ (sensitive) = true ];
+  }
+}
+
+message AnswerQuestionResult {
+  oneof result {
+    Answered answered = 1;
+    Rejected rejected = 2;
+  }
+  message Answered {
+    repeated string selected_choice_ids = 1;
+  }
+  message Rejected {}
 }
 
 message RawImage {
