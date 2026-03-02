@@ -61,7 +61,7 @@ const (
 	ToolType_REQUEST_COMPUTER_USE                ToolType = 24
 	ToolType_FETCH_CONVERSATION                  ToolType = 25
 	ToolType_START_AGENT                         ToolType = 26
-	ToolType_SEND_MESSAGE                        ToolType = 27
+	ToolType_SEND_MESSAGE_TO_AGENT               ToolType = 27
 )
 
 // Enum value maps for ToolType.
@@ -94,7 +94,7 @@ var (
 		24: "REQUEST_COMPUTER_USE",
 		25: "FETCH_CONVERSATION",
 		26: "START_AGENT",
-		27: "SEND_MESSAGE",
+		27: "SEND_MESSAGE_TO_AGENT",
 	}
 	ToolType_value = map[string]int32{
 		"RUN_SHELL_COMMAND":                   0,
@@ -124,7 +124,7 @@ var (
 		"REQUEST_COMPUTER_USE":                24,
 		"FETCH_CONVERSATION":                  25,
 		"START_AGENT":                         26,
-		"SEND_MESSAGE":                        27,
+		"SEND_MESSAGE_TO_AGENT":               27,
 	}
 )
 
@@ -7716,7 +7716,7 @@ func (*startAgentResult_Success_) isStartAgentResult_Result() {}
 func (*startAgentResult_Error_) isStartAgentResult_Result() {}
 
 // A client tool call to send a message to one or more agents.
-type SendMessage struct {
+type SendMessageToAgent struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Addresses   []string               `protobuf:"bytes,1,rep,name=addresses"`
 	xxx_hidden_Subject     *string                `protobuf:"bytes,2,opt,name=subject"`
@@ -7727,20 +7727,20 @@ type SendMessage struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *SendMessage) Reset() {
-	*x = SendMessage{}
+func (x *SendMessageToAgent) Reset() {
+	*x = SendMessageToAgent{}
 	mi := &file_task_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SendMessage) String() string {
+func (x *SendMessageToAgent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SendMessage) ProtoMessage() {}
+func (*SendMessageToAgent) ProtoMessage() {}
 
-func (x *SendMessage) ProtoReflect() protoreflect.Message {
+func (x *SendMessageToAgent) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7752,14 +7752,14 @@ func (x *SendMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SendMessage) GetAddresses() []string {
+func (x *SendMessageToAgent) GetAddresses() []string {
 	if x != nil {
 		return x.xxx_hidden_Addresses
 	}
 	return nil
 }
 
-func (x *SendMessage) GetSubject() string {
+func (x *SendMessageToAgent) GetSubject() string {
 	if x != nil {
 		if x.xxx_hidden_Subject != nil {
 			return *x.xxx_hidden_Subject
@@ -7769,7 +7769,7 @@ func (x *SendMessage) GetSubject() string {
 	return ""
 }
 
-func (x *SendMessage) GetMessage() string {
+func (x *SendMessageToAgent) GetMessage() string {
 	if x != nil {
 		if x.xxx_hidden_Message != nil {
 			return *x.xxx_hidden_Message
@@ -7779,45 +7779,45 @@ func (x *SendMessage) GetMessage() string {
 	return ""
 }
 
-func (x *SendMessage) SetAddresses(v []string) {
+func (x *SendMessageToAgent) SetAddresses(v []string) {
 	x.xxx_hidden_Addresses = v
 }
 
-func (x *SendMessage) SetSubject(v string) {
+func (x *SendMessageToAgent) SetSubject(v string) {
 	x.xxx_hidden_Subject = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *SendMessage) SetMessage(v string) {
+func (x *SendMessageToAgent) SetMessage(v string) {
 	x.xxx_hidden_Message = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *SendMessage) HasSubject() bool {
+func (x *SendMessageToAgent) HasSubject() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *SendMessage) HasMessage() bool {
+func (x *SendMessageToAgent) HasMessage() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *SendMessage) ClearSubject() {
+func (x *SendMessageToAgent) ClearSubject() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Subject = nil
 }
 
-func (x *SendMessage) ClearMessage() {
+func (x *SendMessageToAgent) ClearMessage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_Message = nil
 }
 
-type SendMessage_builder struct {
+type SendMessageToAgent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The agent IDs of the recipients.
@@ -7828,8 +7828,8 @@ type SendMessage_builder struct {
 	Message *string
 }
 
-func (b0 SendMessage_builder) Build() *SendMessage {
-	m0 := &SendMessage{}
+func (b0 SendMessageToAgent_builder) Build() *SendMessageToAgent {
+	m0 := &SendMessageToAgent{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Addresses = b.Addresses
@@ -7844,28 +7844,28 @@ func (b0 SendMessage_builder) Build() *SendMessage {
 	return m0
 }
 
-// The result of a SendMessage tool call.
-type SendMessageResult struct {
-	state             protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_Result isSendMessageResult_Result `protobuf_oneof:"result"`
+// The result of a SendMessageToAgent tool call.
+type SendMessageToAgentResult struct {
+	state             protoimpl.MessageState            `protogen:"opaque.v1"`
+	xxx_hidden_Result isSendMessageToAgentResult_Result `protobuf_oneof:"result"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
 
-func (x *SendMessageResult) Reset() {
-	*x = SendMessageResult{}
+func (x *SendMessageToAgentResult) Reset() {
+	*x = SendMessageToAgentResult{}
 	mi := &file_task_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SendMessageResult) String() string {
+func (x *SendMessageToAgentResult) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SendMessageResult) ProtoMessage() {}
+func (*SendMessageToAgentResult) ProtoMessage() {}
 
-func (x *SendMessageResult) ProtoReflect() protoreflect.Message {
+func (x *SendMessageToAgentResult) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7877,122 +7877,122 @@ func (x *SendMessageResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SendMessageResult) GetSuccess() *SendMessageResult_Success {
+func (x *SendMessageToAgentResult) GetSuccess() *SendMessageToAgentResult_Success {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*sendMessageResult_Success_); ok {
+		if x, ok := x.xxx_hidden_Result.(*sendMessageToAgentResult_Success_); ok {
 			return x.Success
 		}
 	}
 	return nil
 }
 
-func (x *SendMessageResult) GetError() *SendMessageResult_Error {
+func (x *SendMessageToAgentResult) GetError() *SendMessageToAgentResult_Error {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*sendMessageResult_Error_); ok {
+		if x, ok := x.xxx_hidden_Result.(*sendMessageToAgentResult_Error_); ok {
 			return x.Error
 		}
 	}
 	return nil
 }
 
-func (x *SendMessageResult) SetSuccess(v *SendMessageResult_Success) {
+func (x *SendMessageToAgentResult) SetSuccess(v *SendMessageToAgentResult_Success) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &sendMessageResult_Success_{v}
+	x.xxx_hidden_Result = &sendMessageToAgentResult_Success_{v}
 }
 
-func (x *SendMessageResult) SetError(v *SendMessageResult_Error) {
+func (x *SendMessageToAgentResult) SetError(v *SendMessageToAgentResult_Error) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &sendMessageResult_Error_{v}
+	x.xxx_hidden_Result = &sendMessageToAgentResult_Error_{v}
 }
 
-func (x *SendMessageResult) HasResult() bool {
+func (x *SendMessageToAgentResult) HasResult() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Result != nil
 }
 
-func (x *SendMessageResult) HasSuccess() bool {
+func (x *SendMessageToAgentResult) HasSuccess() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*sendMessageResult_Success_)
+	_, ok := x.xxx_hidden_Result.(*sendMessageToAgentResult_Success_)
 	return ok
 }
 
-func (x *SendMessageResult) HasError() bool {
+func (x *SendMessageToAgentResult) HasError() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*sendMessageResult_Error_)
+	_, ok := x.xxx_hidden_Result.(*sendMessageToAgentResult_Error_)
 	return ok
 }
 
-func (x *SendMessageResult) ClearResult() {
+func (x *SendMessageToAgentResult) ClearResult() {
 	x.xxx_hidden_Result = nil
 }
 
-func (x *SendMessageResult) ClearSuccess() {
-	if _, ok := x.xxx_hidden_Result.(*sendMessageResult_Success_); ok {
+func (x *SendMessageToAgentResult) ClearSuccess() {
+	if _, ok := x.xxx_hidden_Result.(*sendMessageToAgentResult_Success_); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *SendMessageResult) ClearError() {
-	if _, ok := x.xxx_hidden_Result.(*sendMessageResult_Error_); ok {
+func (x *SendMessageToAgentResult) ClearError() {
+	if _, ok := x.xxx_hidden_Result.(*sendMessageToAgentResult_Error_); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-const SendMessageResult_Result_not_set_case case_SendMessageResult_Result = 0
-const SendMessageResult_Success_case case_SendMessageResult_Result = 1
-const SendMessageResult_Error_case case_SendMessageResult_Result = 2
+const SendMessageToAgentResult_Result_not_set_case case_SendMessageToAgentResult_Result = 0
+const SendMessageToAgentResult_Success_case case_SendMessageToAgentResult_Result = 1
+const SendMessageToAgentResult_Error_case case_SendMessageToAgentResult_Result = 2
 
-func (x *SendMessageResult) WhichResult() case_SendMessageResult_Result {
+func (x *SendMessageToAgentResult) WhichResult() case_SendMessageToAgentResult_Result {
 	if x == nil {
-		return SendMessageResult_Result_not_set_case
+		return SendMessageToAgentResult_Result_not_set_case
 	}
 	switch x.xxx_hidden_Result.(type) {
-	case *sendMessageResult_Success_:
-		return SendMessageResult_Success_case
-	case *sendMessageResult_Error_:
-		return SendMessageResult_Error_case
+	case *sendMessageToAgentResult_Success_:
+		return SendMessageToAgentResult_Success_case
+	case *sendMessageToAgentResult_Error_:
+		return SendMessageToAgentResult_Error_case
 	default:
-		return SendMessageResult_Result_not_set_case
+		return SendMessageToAgentResult_Result_not_set_case
 	}
 }
 
-type SendMessageResult_builder struct {
+type SendMessageToAgentResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Result:
-	Success *SendMessageResult_Success
-	Error   *SendMessageResult_Error
+	Success *SendMessageToAgentResult_Success
+	Error   *SendMessageToAgentResult_Error
 	// -- end of xxx_hidden_Result
 }
 
-func (b0 SendMessageResult_builder) Build() *SendMessageResult {
-	m0 := &SendMessageResult{}
+func (b0 SendMessageToAgentResult_builder) Build() *SendMessageToAgentResult {
+	m0 := &SendMessageToAgentResult{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Success != nil {
-		x.xxx_hidden_Result = &sendMessageResult_Success_{b.Success}
+		x.xxx_hidden_Result = &sendMessageToAgentResult_Success_{b.Success}
 	}
 	if b.Error != nil {
-		x.xxx_hidden_Result = &sendMessageResult_Error_{b.Error}
+		x.xxx_hidden_Result = &sendMessageToAgentResult_Error_{b.Error}
 	}
 	return m0
 }
 
-type case_SendMessageResult_Result protoreflect.FieldNumber
+type case_SendMessageToAgentResult_Result protoreflect.FieldNumber
 
-func (x case_SendMessageResult_Result) String() string {
+func (x case_SendMessageToAgentResult_Result) String() string {
 	md := file_task_proto_msgTypes[39].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -8000,21 +8000,21 @@ func (x case_SendMessageResult_Result) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isSendMessageResult_Result interface {
-	isSendMessageResult_Result()
+type isSendMessageToAgentResult_Result interface {
+	isSendMessageToAgentResult_Result()
 }
 
-type sendMessageResult_Success_ struct {
-	Success *SendMessageResult_Success `protobuf:"bytes,1,opt,name=success,oneof"`
+type sendMessageToAgentResult_Success_ struct {
+	Success *SendMessageToAgentResult_Success `protobuf:"bytes,1,opt,name=success,oneof"`
 }
 
-type sendMessageResult_Error_ struct {
-	Error *SendMessageResult_Error `protobuf:"bytes,2,opt,name=error,oneof"`
+type sendMessageToAgentResult_Error_ struct {
+	Error *SendMessageToAgentResult_Error `protobuf:"bytes,2,opt,name=error,oneof"`
 }
 
-func (*sendMessageResult_Success_) isSendMessageResult_Result() {}
+func (*sendMessageToAgentResult_Success_) isSendMessageToAgentResult_Result() {}
 
-func (*sendMessageResult_Error_) isSendMessageResult_Result() {}
+func (*sendMessageToAgentResult_Error_) isSendMessageToAgentResult_Result() {}
 
 type RawImage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -10631,10 +10631,10 @@ func (x *Message_ToolCall) GetStartAgent() *StartAgent {
 	return nil
 }
 
-func (x *Message_ToolCall) GetSendMessage() *SendMessage {
+func (x *Message_ToolCall) GetSendMessageToAgent() *SendMessageToAgent {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_SendMessage); ok {
-			return x.SendMessage
+		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_SendMessageToAgent); ok {
+			return x.SendMessageToAgent
 		}
 	}
 	return nil
@@ -10870,12 +10870,12 @@ func (x *Message_ToolCall) SetStartAgent(v *StartAgent) {
 	x.xxx_hidden_Tool = &message_ToolCall_StartAgent{v}
 }
 
-func (x *Message_ToolCall) SetSendMessage(v *SendMessage) {
+func (x *Message_ToolCall) SetSendMessageToAgent(v *SendMessageToAgent) {
 	if v == nil {
 		x.xxx_hidden_Tool = nil
 		return
 	}
-	x.xxx_hidden_Tool = &message_ToolCall_SendMessage{v}
+	x.xxx_hidden_Tool = &message_ToolCall_SendMessageToAgent{v}
 }
 
 func (x *Message_ToolCall) HasToolCallId() bool {
@@ -11117,11 +11117,11 @@ func (x *Message_ToolCall) HasStartAgent() bool {
 	return ok
 }
 
-func (x *Message_ToolCall) HasSendMessage() bool {
+func (x *Message_ToolCall) HasSendMessageToAgent() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_SendMessage)
+	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_SendMessageToAgent)
 	return ok
 }
 
@@ -11303,8 +11303,8 @@ func (x *Message_ToolCall) ClearStartAgent() {
 	}
 }
 
-func (x *Message_ToolCall) ClearSendMessage() {
-	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_SendMessage); ok {
+func (x *Message_ToolCall) ClearSendMessageToAgent() {
+	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_SendMessageToAgent); ok {
 		x.xxx_hidden_Tool = nil
 	}
 }
@@ -11338,7 +11338,7 @@ const Message_ToolCall_ReadSkill_case case_Message_ToolCall_Tool = 26
 const Message_ToolCall_RequestComputerUse_case case_Message_ToolCall_Tool = 27
 const Message_ToolCall_FetchConversation_case case_Message_ToolCall_Tool = 28
 const Message_ToolCall_StartAgent_case case_Message_ToolCall_Tool = 29
-const Message_ToolCall_SendMessage_case case_Message_ToolCall_Tool = 30
+const Message_ToolCall_SendMessageToAgent_case case_Message_ToolCall_Tool = 30
 
 func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 	if x == nil {
@@ -11401,8 +11401,8 @@ func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 		return Message_ToolCall_FetchConversation_case
 	case *message_ToolCall_StartAgent:
 		return Message_ToolCall_StartAgent_case
-	case *message_ToolCall_SendMessage:
-		return Message_ToolCall_SendMessage_case
+	case *message_ToolCall_SendMessageToAgent:
+		return Message_ToolCall_SendMessageToAgent_case
 	default:
 		return Message_ToolCall_Tool_not_set_case
 	}
@@ -11446,7 +11446,7 @@ type Message_ToolCall_builder struct {
 	RequestComputerUse             *Message_ToolCall_RequestComputerUse
 	FetchConversation              *Message_ToolCall_FetchConversation
 	StartAgent                     *StartAgent
-	SendMessage                    *SendMessage
+	SendMessageToAgent             *SendMessageToAgent
 	// -- end of xxx_hidden_Tool
 }
 
@@ -11542,8 +11542,8 @@ func (b0 Message_ToolCall_builder) Build() *Message_ToolCall {
 	if b.StartAgent != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_StartAgent{b.StartAgent}
 	}
-	if b.SendMessage != nil {
-		x.xxx_hidden_Tool = &message_ToolCall_SendMessage{b.SendMessage}
+	if b.SendMessageToAgent != nil {
+		x.xxx_hidden_Tool = &message_ToolCall_SendMessageToAgent{b.SendMessageToAgent}
 	}
 	return m0
 }
@@ -11677,8 +11677,8 @@ type message_ToolCall_StartAgent struct {
 	StartAgent *StartAgent `protobuf:"bytes,29,opt,name=start_agent,json=startAgent,oneof"`
 }
 
-type message_ToolCall_SendMessage struct {
-	SendMessage *SendMessage `protobuf:"bytes,30,opt,name=send_message,json=sendMessage,oneof"`
+type message_ToolCall_SendMessageToAgent struct {
+	SendMessageToAgent *SendMessageToAgent `protobuf:"bytes,30,opt,name=send_message_to_agent,json=sendMessageToAgent,oneof"`
 }
 
 func (*message_ToolCall_RunShellCommand_) isMessage_ToolCall_Tool() {}
@@ -11737,7 +11737,7 @@ func (*message_ToolCall_FetchConversation_) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_StartAgent) isMessage_ToolCall_Tool() {}
 
-func (*message_ToolCall_SendMessage) isMessage_ToolCall_Tool() {}
+func (*message_ToolCall_SendMessageToAgent) isMessage_ToolCall_Tool() {}
 
 // Entry in the message log representing the result of a tool call.
 type Message_ToolCallResult struct {
@@ -12055,10 +12055,10 @@ func (x *Message_ToolCallResult) GetStartAgent() *StartAgentResult {
 	return nil
 }
 
-func (x *Message_ToolCallResult) GetSendMessage() *SendMessageResult {
+func (x *Message_ToolCallResult) GetSendMessageToAgent() *SendMessageToAgentResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SendMessage); ok {
-			return x.SendMessage
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SendMessageToAgent); ok {
+			return x.SendMessageToAgent
 		}
 	}
 	return nil
@@ -12306,12 +12306,12 @@ func (x *Message_ToolCallResult) SetStartAgent(v *StartAgentResult) {
 	x.xxx_hidden_Result = &message_ToolCallResult_StartAgent{v}
 }
 
-func (x *Message_ToolCallResult) SetSendMessage(v *SendMessageResult) {
+func (x *Message_ToolCallResult) SetSendMessageToAgent(v *SendMessageToAgentResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &message_ToolCallResult_SendMessage{v}
+	x.xxx_hidden_Result = &message_ToolCallResult_SendMessageToAgent{v}
 }
 
 func (x *Message_ToolCallResult) HasToolCallId() bool {
@@ -12568,11 +12568,11 @@ func (x *Message_ToolCallResult) HasStartAgent() bool {
 	return ok
 }
 
-func (x *Message_ToolCallResult) HasSendMessage() bool {
+func (x *Message_ToolCallResult) HasSendMessageToAgent() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SendMessage)
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SendMessageToAgent)
 	return ok
 }
 
@@ -12764,8 +12764,8 @@ func (x *Message_ToolCallResult) ClearStartAgent() {
 	}
 }
 
-func (x *Message_ToolCallResult) ClearSendMessage() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SendMessage); ok {
+func (x *Message_ToolCallResult) ClearSendMessageToAgent() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_SendMessageToAgent); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
@@ -12800,7 +12800,7 @@ const Message_ToolCallResult_ReadSkill_case case_Message_ToolCallResult_Result =
 const Message_ToolCallResult_RequestComputerUseResult_case case_Message_ToolCallResult_Result = 31
 const Message_ToolCallResult_FetchConversation_case case_Message_ToolCallResult_Result = 32
 const Message_ToolCallResult_StartAgent_case case_Message_ToolCallResult_Result = 33
-const Message_ToolCallResult_SendMessage_case case_Message_ToolCallResult_Result = 34
+const Message_ToolCallResult_SendMessageToAgent_case case_Message_ToolCallResult_Result = 34
 
 func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Result {
 	if x == nil {
@@ -12865,8 +12865,8 @@ func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Resul
 		return Message_ToolCallResult_FetchConversation_case
 	case *message_ToolCallResult_StartAgent:
 		return Message_ToolCallResult_StartAgent_case
-	case *message_ToolCallResult_SendMessage:
-		return Message_ToolCallResult_SendMessage_case
+	case *message_ToolCallResult_SendMessageToAgent:
+		return Message_ToolCallResult_SendMessageToAgent_case
 	default:
 		return Message_ToolCallResult_Result_not_set_case
 	}
@@ -12913,7 +12913,7 @@ type Message_ToolCallResult_builder struct {
 	RequestComputerUseResult       *RequestComputerUseResult
 	FetchConversation              *FetchConversationResult
 	StartAgent                     *StartAgentResult
-	SendMessage                    *SendMessageResult
+	SendMessageToAgent             *SendMessageToAgentResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -13013,8 +13013,8 @@ func (b0 Message_ToolCallResult_builder) Build() *Message_ToolCallResult {
 	if b.StartAgent != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_StartAgent{b.StartAgent}
 	}
-	if b.SendMessage != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_SendMessage{b.SendMessage}
+	if b.SendMessageToAgent != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_SendMessageToAgent{b.SendMessageToAgent}
 	}
 	return m0
 }
@@ -13152,8 +13152,8 @@ type message_ToolCallResult_StartAgent struct {
 	StartAgent *StartAgentResult `protobuf:"bytes,33,opt,name=start_agent,json=startAgent,oneof"`
 }
 
-type message_ToolCallResult_SendMessage struct {
-	SendMessage *SendMessageResult `protobuf:"bytes,34,opt,name=send_message,json=sendMessage,oneof"`
+type message_ToolCallResult_SendMessageToAgent struct {
+	SendMessageToAgent *SendMessageToAgentResult `protobuf:"bytes,34,opt,name=send_message_to_agent,json=sendMessageToAgent,oneof"`
 }
 
 func (*message_ToolCallResult_RunShellCommand) isMessage_ToolCallResult_Result() {}
@@ -13214,7 +13214,7 @@ func (*message_ToolCallResult_FetchConversation) isMessage_ToolCallResult_Result
 
 func (*message_ToolCallResult_StartAgent) isMessage_ToolCallResult_Result() {}
 
-func (*message_ToolCallResult_SendMessage) isMessage_ToolCallResult_Result() {}
+func (*message_ToolCallResult_SendMessageToAgent) isMessage_ToolCallResult_Result() {}
 
 // An event that is preserved in message history
 // for server-side processing.
@@ -27326,7 +27326,7 @@ func (b0 StartAgentResult_Error_builder) Build() *StartAgentResult_Error {
 	return m0
 }
 
-type SendMessageResult_Success struct {
+type SendMessageToAgentResult_Success struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MessageId   *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -27335,20 +27335,20 @@ type SendMessageResult_Success struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *SendMessageResult_Success) Reset() {
-	*x = SendMessageResult_Success{}
+func (x *SendMessageToAgentResult_Success) Reset() {
+	*x = SendMessageToAgentResult_Success{}
 	mi := &file_task_proto_msgTypes[192]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SendMessageResult_Success) String() string {
+func (x *SendMessageToAgentResult_Success) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SendMessageResult_Success) ProtoMessage() {}
+func (*SendMessageToAgentResult_Success) ProtoMessage() {}
 
-func (x *SendMessageResult_Success) ProtoReflect() protoreflect.Message {
+func (x *SendMessageToAgentResult_Success) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[192]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -27360,7 +27360,7 @@ func (x *SendMessageResult_Success) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SendMessageResult_Success) GetMessageId() string {
+func (x *SendMessageToAgentResult_Success) GetMessageId() string {
 	if x != nil {
 		if x.xxx_hidden_MessageId != nil {
 			return *x.xxx_hidden_MessageId
@@ -27370,32 +27370,32 @@ func (x *SendMessageResult_Success) GetMessageId() string {
 	return ""
 }
 
-func (x *SendMessageResult_Success) SetMessageId(v string) {
+func (x *SendMessageToAgentResult_Success) SetMessageId(v string) {
 	x.xxx_hidden_MessageId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *SendMessageResult_Success) HasMessageId() bool {
+func (x *SendMessageToAgentResult_Success) HasMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *SendMessageResult_Success) ClearMessageId() {
+func (x *SendMessageToAgentResult_Success) ClearMessageId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_MessageId = nil
 }
 
-type SendMessageResult_Success_builder struct {
+type SendMessageToAgentResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The client-generated message ID.
 	MessageId *string
 }
 
-func (b0 SendMessageResult_Success_builder) Build() *SendMessageResult_Success {
-	m0 := &SendMessageResult_Success{}
+func (b0 SendMessageToAgentResult_Success_builder) Build() *SendMessageToAgentResult_Success {
+	m0 := &SendMessageToAgentResult_Success{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.MessageId != nil {
@@ -27405,7 +27405,7 @@ func (b0 SendMessageResult_Success_builder) Build() *SendMessageResult_Success {
 	return m0
 }
 
-type SendMessageResult_Error struct {
+type SendMessageToAgentResult_Error struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Message     *string                `protobuf:"bytes,1,opt,name=message"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -27414,20 +27414,20 @@ type SendMessageResult_Error struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *SendMessageResult_Error) Reset() {
-	*x = SendMessageResult_Error{}
+func (x *SendMessageToAgentResult_Error) Reset() {
+	*x = SendMessageToAgentResult_Error{}
 	mi := &file_task_proto_msgTypes[193]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *SendMessageResult_Error) String() string {
+func (x *SendMessageToAgentResult_Error) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SendMessageResult_Error) ProtoMessage() {}
+func (*SendMessageToAgentResult_Error) ProtoMessage() {}
 
-func (x *SendMessageResult_Error) ProtoReflect() protoreflect.Message {
+func (x *SendMessageToAgentResult_Error) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[193]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -27439,7 +27439,7 @@ func (x *SendMessageResult_Error) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SendMessageResult_Error) GetMessage() string {
+func (x *SendMessageToAgentResult_Error) GetMessage() string {
 	if x != nil {
 		if x.xxx_hidden_Message != nil {
 			return *x.xxx_hidden_Message
@@ -27449,31 +27449,31 @@ func (x *SendMessageResult_Error) GetMessage() string {
 	return ""
 }
 
-func (x *SendMessageResult_Error) SetMessage(v string) {
+func (x *SendMessageToAgentResult_Error) SetMessage(v string) {
 	x.xxx_hidden_Message = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *SendMessageResult_Error) HasMessage() bool {
+func (x *SendMessageToAgentResult_Error) HasMessage() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *SendMessageResult_Error) ClearMessage() {
+func (x *SendMessageToAgentResult_Error) ClearMessage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Message = nil
 }
 
-type SendMessageResult_Error_builder struct {
+type SendMessageToAgentResult_Error_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Message *string
 }
 
-func (b0 SendMessageResult_Error_builder) Build() *SendMessageResult_Error {
-	m0 := &SendMessageResult_Error{}
+func (b0 SendMessageToAgentResult_Error_builder) Build() *SendMessageToAgentResult_Error {
+	m0 := &SendMessageToAgentResult_Error{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Message != nil {
@@ -27517,7 +27517,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xf8\xa4\x01\n" +
+	"\x0ecomment_target\"ĥ\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -27545,8 +27545,8 @@ const file_task_proto_rawDesc = "" +
 	"\tweb_fetch\x18\x14 \x01(\v2%.warp.multi_agent.v1.Message.WebFetchH\x00R\bwebFetch\x12M\n" +
 	"\fdebug_output\x18\x15 \x01(\v2(.warp.multi_agent.v1.Message.DebugOutputH\x00R\vdebugOutput\x12S\n" +
 	"\x0eartifact_event\x18\x16 \x01(\v2*.warp.multi_agent.v1.Message.ArtifactEventH\x00R\rartifactEvent\x12M\n" +
-	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12\\\n" +
-	"\x11messages_received\x18\x18 \x01(\v2-.warp.multi_agent.v1.Message.MessagesReceivedH\x00R\x10messagesReceived\x1a\xaf\x02\n" +
+	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12b\n" +
+	"\x11messages_received\x18\x18 \x01(\v2-.warp.multi_agent.v1.Message.MessagesReceivedB\x04\x88\xb5\x18\x01H\x00R\x10messagesReceived\x1a\xaf\x02\n" +
 	"\x10MessagesReceived\x12Y\n" +
 	"\bmessages\x18\x01 \x03(\v2=.warp.multi_agent.v1.Message.MessagesReceived.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
 	"\x0fReceivedMessage\x12\x1d\n" +
@@ -27615,7 +27615,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xc1U\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xe4U\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -27649,10 +27649,10 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_skill\x18\x1a \x01(\v2/.warp.multi_agent.v1.Message.ToolCall.ReadSkillH\x00R\treadSkill\x12l\n" +
 	"\x14request_computer_use\x18\x1b \x01(\v28.warp.multi_agent.v1.Message.ToolCall.RequestComputerUseH\x00R\x12requestComputerUse\x12h\n" +
-	"\x12fetch_conversation\x18\x1c \x01(\v27.warp.multi_agent.v1.Message.ToolCall.FetchConversationH\x00R\x11fetchConversation\x12B\n" +
-	"\vstart_agent\x18\x1d \x01(\v2\x1f.warp.multi_agent.v1.StartAgentH\x00R\n" +
-	"startAgent\x12E\n" +
-	"\fsend_message\x18\x1e \x01(\v2 .warp.multi_agent.v1.SendMessageH\x00R\vsendMessage\x1a<\n" +
+	"\x12fetch_conversation\x18\x1c \x01(\v27.warp.multi_agent.v1.Message.ToolCall.FetchConversationH\x00R\x11fetchConversation\x12H\n" +
+	"\vstart_agent\x18\x1d \x01(\v2\x1f.warp.multi_agent.v1.StartAgentB\x04\x88\xb5\x18\x01H\x00R\n" +
+	"startAgent\x12b\n" +
+	"\x15send_message_to_agent\x18\x1e \x01(\v2'.warp.multi_agent.v1.SendMessageToAgentB\x04\x88\xb5\x18\x01H\x00R\x12sendMessageToAgent\x1a<\n" +
 	"\x11FetchConversation\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
@@ -27896,7 +27896,7 @@ const file_task_proto_rawDesc = "" +
 	"\x06Region\x12;\n" +
 	"\btop_left\x18\x01 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\atopLeft\x12C\n" +
 	"\fbottom_right\x18\x02 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\vbottomRightB\x06\n" +
-	"\x04tool\x1a\x80\x16\n" +
+	"\x04tool\x1a\xa3\x16\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -27932,10 +27932,10 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_skill\x18\x1e \x01(\v2$.warp.multi_agent.v1.ReadSkillResultH\x00R\treadSkill\x12n\n" +
 	"\x1brequest_computer_use_result\x18\x1f \x01(\v2-.warp.multi_agent.v1.RequestComputerUseResultH\x00R\x18requestComputerUseResult\x12]\n" +
-	"\x12fetch_conversation\x18  \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversation\x12H\n" +
-	"\vstart_agent\x18! \x01(\v2%.warp.multi_agent.v1.StartAgentResultH\x00R\n" +
-	"startAgent\x12K\n" +
-	"\fsend_message\x18\" \x01(\v2&.warp.multi_agent.v1.SendMessageResultH\x00R\vsendMessage\x1a;\n" +
+	"\x12fetch_conversation\x18  \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversation\x12N\n" +
+	"\vstart_agent\x18! \x01(\v2%.warp.multi_agent.v1.StartAgentResultB\x04\x88\xb5\x18\x01H\x00R\n" +
+	"startAgent\x12h\n" +
+	"\x15send_message_to_agent\x18\" \x01(\v2-.warp.multi_agent.v1.SendMessageToAgentResultB\x04\x88\xb5\x18\x01H\x00R\x12sendMessageToAgent\x1a;\n" +
 	"\fServerResult\x12+\n" +
 	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1a*\n" +
 	"\x0eSubagentResult\x12\x18\n" +
@@ -28264,14 +28264,14 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"k\n" +
-	"\vSendMessage\x12\x1c\n" +
+	"\x06result\"r\n" +
+	"\x12SendMessageToAgent\x12\x1c\n" +
 	"\taddresses\x18\x01 \x03(\tR\taddresses\x12\x1e\n" +
 	"\asubject\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\asubject\x12\x1e\n" +
-	"\amessage\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\amessage\"\x82\x02\n" +
-	"\x11SendMessageResult\x12J\n" +
-	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.SendMessageResult.SuccessH\x00R\asuccess\x12D\n" +
-	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.SendMessageResult.ErrorH\x00R\x05error\x1a(\n" +
+	"\amessage\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\amessage\"\x97\x02\n" +
+	"\x18SendMessageToAgentResult\x12Q\n" +
+	"\asuccess\x18\x01 \x01(\v25.warp.multi_agent.v1.SendMessageToAgentResult.SuccessH\x00R\asuccess\x12K\n" +
+	"\x05error\x18\x02 \x01(\v23.warp.multi_agent.v1.SendMessageToAgentResult.ErrorH\x00R\x05error\x1a(\n" +
 	"\aSuccess\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x1a'\n" +
@@ -28282,7 +28282,7 @@ const file_task_proto_rawDesc = "" +
 	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x14\n" +
 	"\x05width\x18\x03 \x01(\x05R\x05width\x12\x16\n" +
-	"\x06height\x18\x04 \x01(\x05R\x06height*\xdd\x04\n" +
+	"\x06height\x18\x04 \x01(\x05R\x06height*\xe6\x04\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -28313,8 +28313,8 @@ const file_task_proto_rawDesc = "" +
 	"READ_SKILL\x10\x17\x12\x18\n" +
 	"\x14REQUEST_COMPUTER_USE\x10\x18\x12\x16\n" +
 	"\x12FETCH_CONVERSATION\x10\x19\x12\x0f\n" +
-	"\vSTART_AGENT\x10\x1a\x12\x10\n" +
-	"\fSEND_MESSAGE\x10\x1b*O\n" +
+	"\vSTART_AGENT\x10\x1a\x12\x19\n" +
+	"\x15SEND_MESSAGE_TO_AGENT\x10\x1b*O\n" +
 	"\tAgentType\x12\x16\n" +
 	"\x12AGENT_TYPE_UNKNOWN\x10\x00\x12\x16\n" +
 	"\x12AGENT_TYPE_PRIMARY\x10\x01\x12\x12\n" +
@@ -28375,8 +28375,8 @@ var file_task_proto_goTypes = []any{
 	(*UserQueryMode)(nil),                            // 42: warp.multi_agent.v1.UserQueryMode
 	(*StartAgent)(nil),                               // 43: warp.multi_agent.v1.StartAgent
 	(*StartAgentResult)(nil),                         // 44: warp.multi_agent.v1.StartAgentResult
-	(*SendMessage)(nil),                              // 45: warp.multi_agent.v1.SendMessage
-	(*SendMessageResult)(nil),                        // 46: warp.multi_agent.v1.SendMessageResult
+	(*SendMessageToAgent)(nil),                       // 45: warp.multi_agent.v1.SendMessageToAgent
+	(*SendMessageToAgentResult)(nil),                 // 46: warp.multi_agent.v1.SendMessageToAgentResult
 	(*RawImage)(nil),                                 // 47: warp.multi_agent.v1.RawImage
 	(*Task_Dependencies)(nil),                        // 48: warp.multi_agent.v1.Task.Dependencies
 	(*ReviewComment_CommentedFile)(nil),              // 49: warp.multi_agent.v1.ReviewComment.CommentedFile
@@ -28529,8 +28529,8 @@ var file_task_proto_goTypes = []any{
 	(*FetchConversationResult_Error)(nil),                             // 196: warp.multi_agent.v1.FetchConversationResult.Error
 	(*StartAgentResult_Success)(nil),                                  // 197: warp.multi_agent.v1.StartAgentResult.Success
 	(*StartAgentResult_Error)(nil),                                    // 198: warp.multi_agent.v1.StartAgentResult.Error
-	(*SendMessageResult_Success)(nil),                                 // 199: warp.multi_agent.v1.SendMessageResult.Success
-	(*SendMessageResult_Error)(nil),                                   // 200: warp.multi_agent.v1.SendMessageResult.Error
+	(*SendMessageToAgentResult_Success)(nil),                          // 199: warp.multi_agent.v1.SendMessageToAgentResult.Success
+	(*SendMessageToAgentResult_Error)(nil),                            // 200: warp.multi_agent.v1.SendMessageToAgentResult.Error
 	(*DiffSet)(nil),                                                   // 201: warp.multi_agent.v1.DiffSet
 	(*DiffHunk)(nil),                                                  // 202: warp.multi_agent.v1.DiffHunk
 	(*timestamppb.Timestamp)(nil),                                     // 203: google.protobuf.Timestamp
@@ -28638,8 +28638,8 @@ var file_task_proto_depIdxs = []int32{
 	206, // 81: warp.multi_agent.v1.UserQueryMode.orchestrate:type_name -> google.protobuf.Empty
 	197, // 82: warp.multi_agent.v1.StartAgentResult.success:type_name -> warp.multi_agent.v1.StartAgentResult.Success
 	198, // 83: warp.multi_agent.v1.StartAgentResult.error:type_name -> warp.multi_agent.v1.StartAgentResult.Error
-	199, // 84: warp.multi_agent.v1.SendMessageResult.success:type_name -> warp.multi_agent.v1.SendMessageResult.Success
-	200, // 85: warp.multi_agent.v1.SendMessageResult.error:type_name -> warp.multi_agent.v1.SendMessageResult.Error
+	199, // 84: warp.multi_agent.v1.SendMessageToAgentResult.success:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Success
+	200, // 85: warp.multi_agent.v1.SendMessageToAgentResult.error:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Error
 	207, // 86: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
 	208, // 87: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
 	207, // 88: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
@@ -28695,7 +28695,7 @@ var file_task_proto_depIdxs = []int32{
 	107, // 138: warp.multi_agent.v1.Message.ToolCall.request_computer_use:type_name -> warp.multi_agent.v1.Message.ToolCall.RequestComputerUse
 	81,  // 139: warp.multi_agent.v1.Message.ToolCall.fetch_conversation:type_name -> warp.multi_agent.v1.Message.ToolCall.FetchConversation
 	43,  // 140: warp.multi_agent.v1.Message.ToolCall.start_agent:type_name -> warp.multi_agent.v1.StartAgent
-	45,  // 141: warp.multi_agent.v1.Message.ToolCall.send_message:type_name -> warp.multi_agent.v1.SendMessage
+	45,  // 141: warp.multi_agent.v1.Message.ToolCall.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgent
 	209, // 142: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	11,  // 143: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	13,  // 144: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
@@ -28726,7 +28726,7 @@ var file_task_proto_depIdxs = []int32{
 	39,  // 169: warp.multi_agent.v1.Message.ToolCallResult.request_computer_use_result:type_name -> warp.multi_agent.v1.RequestComputerUseResult
 	40,  // 170: warp.multi_agent.v1.Message.ToolCallResult.fetch_conversation:type_name -> warp.multi_agent.v1.FetchConversationResult
 	44,  // 171: warp.multi_agent.v1.Message.ToolCallResult.start_agent:type_name -> warp.multi_agent.v1.StartAgentResult
-	46,  // 172: warp.multi_agent.v1.Message.ToolCallResult.send_message:type_name -> warp.multi_agent.v1.SendMessageResult
+	46,  // 172: warp.multi_agent.v1.Message.ToolCallResult.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgentResult
 	212, // 173: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
 	213, // 174: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
 	214, // 175: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
@@ -28988,8 +28988,8 @@ func file_task_proto_init() {
 		(*startAgentResult_Error_)(nil),
 	}
 	file_task_proto_msgTypes[39].OneofWrappers = []any{
-		(*sendMessageResult_Success_)(nil),
-		(*sendMessageResult_Error_)(nil),
+		(*sendMessageToAgentResult_Success_)(nil),
+		(*sendMessageToAgentResult_Error_)(nil),
 	}
 	file_task_proto_msgTypes[46].OneofWrappers = []any{
 		(*message_SystemQuery_AutoCodeDiff)(nil),
@@ -29039,7 +29039,7 @@ func file_task_proto_init() {
 		(*message_ToolCall_RequestComputerUse_)(nil),
 		(*message_ToolCall_FetchConversation_)(nil),
 		(*message_ToolCall_StartAgent)(nil),
-		(*message_ToolCall_SendMessage)(nil),
+		(*message_ToolCall_SendMessageToAgent)(nil),
 	}
 	file_task_proto_msgTypes[59].OneofWrappers = []any{
 		(*message_ToolCallResult_RunShellCommand)(nil),
@@ -29071,7 +29071,7 @@ func file_task_proto_init() {
 		(*message_ToolCallResult_RequestComputerUseResult)(nil),
 		(*message_ToolCallResult_FetchConversation)(nil),
 		(*message_ToolCallResult_StartAgent)(nil),
-		(*message_ToolCallResult_SendMessage)(nil),
+		(*message_ToolCallResult_SendMessageToAgent)(nil),
 	}
 	file_task_proto_msgTypes[61].OneofWrappers = []any{
 		(*message_UpdateTodos_CreateTodoList)(nil),

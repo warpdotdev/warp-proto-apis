@@ -109,7 +109,7 @@ message Request {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
-          MessagesReceived messages_received = 4;
+          MessagesReceived messages_received = 4 [ (internal) = true ];
         }
       }
 
@@ -160,8 +160,8 @@ message Request {
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
         FetchConversationResult fetch_conversation = 27;
-        StartAgentResult start_agent = 28;
-        SendMessageResult send_message = 29;
+        StartAgentResult start_agent = 28 [ (internal) = true ];
+        SendMessageToAgentResult send_message_to_agent = 29 [ (internal) = true ];
       }
     }
 
@@ -322,11 +322,11 @@ message Request {
     // The conversation ID of the parent agent that spawned this child agent.
     // In V0 the agent ID is the conversation ID; this may change in future
     // versions.
-    string parent_agent_id = 5;
+    string parent_agent_id = 5 [ (internal) = true ];
 
     // The display name for this agent (e.g. "Agent 1"), assigned by the
     // orchestrator via StartAgent.name.
-    string agent_name = 6 [ (sensitive) = true ];
+    string agent_name = 6 [ (sensitive) = true, (internal) = true ];
   }
 
   message Settings {

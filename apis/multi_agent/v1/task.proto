@@ -139,7 +139,7 @@ message Message {
     DebugOutput debug_output = 21;
     ArtifactEvent artifact_event = 22;
     InvokeSkill invoke_skill = 23;
-    MessagesReceived messages_received = 24;
+    MessagesReceived messages_received = 24 [ (internal) = true ];
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -315,8 +315,8 @@ message Message {
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
       FetchConversation fetch_conversation = 28;
-      StartAgent start_agent = 29;
-      SendMessage send_message = 30;
+      StartAgent start_agent = 29 [ (internal) = true ];
+      SendMessageToAgent send_message_to_agent = 30 [ (internal) = true ];
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -839,8 +839,8 @@ message Message {
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
       FetchConversationResult fetch_conversation = 32;
-      StartAgentResult start_agent = 33;
-      SendMessageResult send_message = 34;
+      StartAgentResult start_agent = 33 [ (internal) = true ];
+      SendMessageToAgentResult send_message_to_agent = 34 [ (internal) = true ];
     }
 
     // Result of a server-side tool call.
@@ -1462,7 +1462,7 @@ enum ToolType {
   REQUEST_COMPUTER_USE = 24;
   FETCH_CONVERSATION = 25;
   START_AGENT = 26;
-  SEND_MESSAGE = 27;
+  SEND_MESSAGE_TO_AGENT = 27;
 }
 
 message UserQueryMode {
@@ -1514,7 +1514,7 @@ message StartAgentResult {
 }
 
 // A client tool call to send a message to one or more agents.
-message SendMessage {
+message SendMessageToAgent {
   // The agent IDs of the recipients.
   repeated string addresses = 1;
   // The subject line of the message.
@@ -1523,8 +1523,8 @@ message SendMessage {
   string message = 3 [ (sensitive) = true ];
 }
 
-// The result of a SendMessage tool call.
-message SendMessageResult {
+// The result of a SendMessageToAgent tool call.
+message SendMessageToAgentResult {
   oneof result {
     Success success = 1;
     Error error = 2;
