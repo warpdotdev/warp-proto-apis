@@ -152,8 +152,8 @@ message Message {
     message ReceivedMessage {
       string message_id = 1;
       string sender_agent_id = 2;
-      repeated string address_agent_ids = 3;
-      string subject = 4;
+      repeated string addresses = 3;
+      string subject = 4 [ (sensitive) = true ];
       string message_body = 5 [ (sensitive) = true ];
     }
   }
@@ -1516,7 +1516,7 @@ message StartAgentResult {
 // A client tool call to send a message to one or more agents.
 message SendMessage {
   // The agent IDs of the recipients.
-  repeated string address = 1;
+  repeated string addresses = 1;
   // The subject line of the message.
   string subject = 2 [ (sensitive) = true ];
   // The body of the message.
@@ -1535,7 +1535,7 @@ message SendMessageResult {
     string message_id = 1;
   }
   message Error {
-    string error = 1;
+    string message = 1 [ (sensitive) = true ];
   }
 }
 

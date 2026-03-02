@@ -5968,8 +5968,8 @@ func (*request_Input_UserInputs_UserInput_MessagesReceived) isRequest_Input_User
 
 // Batch of messages received from other agents.
 type Request_Input_UserInputs_MessagesReceived struct {
-	state               protoimpl.MessageState                                `protogen:"opaque.v1"`
-	xxx_hidden_Received *[]*Request_Input_UserInputs_MessagesReceived_Message `protobuf:"bytes,1,rep,name=received"`
+	state               protoimpl.MessageState                                        `protogen:"opaque.v1"`
+	xxx_hidden_Messages *[]*Request_Input_UserInputs_MessagesReceived_ReceivedMessage `protobuf:"bytes,1,rep,name=messages"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -5999,60 +5999,60 @@ func (x *Request_Input_UserInputs_MessagesReceived) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived) GetReceived() []*Request_Input_UserInputs_MessagesReceived_Message {
+func (x *Request_Input_UserInputs_MessagesReceived) GetMessages() []*Request_Input_UserInputs_MessagesReceived_ReceivedMessage {
 	if x != nil {
-		if x.xxx_hidden_Received != nil {
-			return *x.xxx_hidden_Received
+		if x.xxx_hidden_Messages != nil {
+			return *x.xxx_hidden_Messages
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived) SetReceived(v []*Request_Input_UserInputs_MessagesReceived_Message) {
-	x.xxx_hidden_Received = &v
+func (x *Request_Input_UserInputs_MessagesReceived) SetMessages(v []*Request_Input_UserInputs_MessagesReceived_ReceivedMessage) {
+	x.xxx_hidden_Messages = &v
 }
 
 type Request_Input_UserInputs_MessagesReceived_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Received []*Request_Input_UserInputs_MessagesReceived_Message
+	Messages []*Request_Input_UserInputs_MessagesReceived_ReceivedMessage
 }
 
 func (b0 Request_Input_UserInputs_MessagesReceived_builder) Build() *Request_Input_UserInputs_MessagesReceived {
 	m0 := &Request_Input_UserInputs_MessagesReceived{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Received = &b.Received
+	x.xxx_hidden_Messages = &b.Messages
 	return m0
 }
 
-type Request_Input_UserInputs_MessagesReceived_Message struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MessageId       *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
-	xxx_hidden_SenderAgentId   *string                `protobuf:"bytes,2,opt,name=sender_agent_id,json=senderAgentId"`
-	xxx_hidden_AddressAgentIds []string               `protobuf:"bytes,3,rep,name=address_agent_ids,json=addressAgentIds"`
-	xxx_hidden_Subject         *string                `protobuf:"bytes,4,opt,name=subject"`
-	xxx_hidden_MessageBody     *string                `protobuf:"bytes,5,opt,name=message_body,json=messageBody"`
-	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
-	XXX_presence               [1]uint32
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+type Request_Input_UserInputs_MessagesReceived_ReceivedMessage struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MessageId     *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
+	xxx_hidden_SenderAgentId *string                `protobuf:"bytes,2,opt,name=sender_agent_id,json=senderAgentId"`
+	xxx_hidden_Addresses     []string               `protobuf:"bytes,3,rep,name=addresses"`
+	xxx_hidden_Subject       *string                `protobuf:"bytes,4,opt,name=subject"`
+	xxx_hidden_MessageBody   *string                `protobuf:"bytes,5,opt,name=message_body,json=messageBody"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) Reset() {
-	*x = Request_Input_UserInputs_MessagesReceived_Message{}
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) Reset() {
+	*x = Request_Input_UserInputs_MessagesReceived_ReceivedMessage{}
 	mi := &file_request_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) String() string {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_UserInputs_MessagesReceived_Message) ProtoMessage() {}
+func (*Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ProtoMessage() {}
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -6064,7 +6064,7 @@ func (x *Request_Input_UserInputs_MessagesReceived_Message) ProtoReflect() proto
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) GetMessageId() string {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetMessageId() string {
 	if x != nil {
 		if x.xxx_hidden_MessageId != nil {
 			return *x.xxx_hidden_MessageId
@@ -6074,7 +6074,7 @@ func (x *Request_Input_UserInputs_MessagesReceived_Message) GetMessageId() strin
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) GetSenderAgentId() string {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetSenderAgentId() string {
 	if x != nil {
 		if x.xxx_hidden_SenderAgentId != nil {
 			return *x.xxx_hidden_SenderAgentId
@@ -6084,14 +6084,14 @@ func (x *Request_Input_UserInputs_MessagesReceived_Message) GetSenderAgentId() s
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) GetAddressAgentIds() []string {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetAddresses() []string {
 	if x != nil {
-		return x.xxx_hidden_AddressAgentIds
+		return x.xxx_hidden_Addresses
 	}
 	return nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) GetSubject() string {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetSubject() string {
 	if x != nil {
 		if x.xxx_hidden_Subject != nil {
 			return *x.xxx_hidden_Subject
@@ -6101,7 +6101,7 @@ func (x *Request_Input_UserInputs_MessagesReceived_Message) GetSubject() string 
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) GetMessageBody() string {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetMessageBody() string {
 	if x != nil {
 		if x.xxx_hidden_MessageBody != nil {
 			return *x.xxx_hidden_MessageBody
@@ -6111,90 +6111,90 @@ func (x *Request_Input_UserInputs_MessagesReceived_Message) GetMessageBody() str
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) SetMessageId(v string) {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetMessageId(v string) {
 	x.xxx_hidden_MessageId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) SetSenderAgentId(v string) {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetSenderAgentId(v string) {
 	x.xxx_hidden_SenderAgentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) SetAddressAgentIds(v []string) {
-	x.xxx_hidden_AddressAgentIds = v
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetAddresses(v []string) {
+	x.xxx_hidden_Addresses = v
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) SetSubject(v string) {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetSubject(v string) {
 	x.xxx_hidden_Subject = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) SetMessageBody(v string) {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetMessageBody(v string) {
 	x.xxx_hidden_MessageBody = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) HasMessageId() bool {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) HasSenderAgentId() bool {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasSenderAgentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) HasSubject() bool {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasSubject() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) HasMessageBody() bool {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasMessageBody() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) ClearMessageId() {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearMessageId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_MessageId = nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) ClearSenderAgentId() {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearSenderAgentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_SenderAgentId = nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) ClearSubject() {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearSubject() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_Subject = nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_Message) ClearMessageBody() {
+func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearMessageBody() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_MessageBody = nil
 }
 
-type Request_Input_UserInputs_MessagesReceived_Message_builder struct {
+type Request_Input_UserInputs_MessagesReceived_ReceivedMessage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	MessageId       *string
-	SenderAgentId   *string
-	AddressAgentIds []string
-	Subject         *string
-	MessageBody     *string
+	MessageId     *string
+	SenderAgentId *string
+	Addresses     []string
+	Subject       *string
+	MessageBody   *string
 }
 
-func (b0 Request_Input_UserInputs_MessagesReceived_Message_builder) Build() *Request_Input_UserInputs_MessagesReceived_Message {
-	m0 := &Request_Input_UserInputs_MessagesReceived_Message{}
+func (b0 Request_Input_UserInputs_MessagesReceived_ReceivedMessage_builder) Build() *Request_Input_UserInputs_MessagesReceived_ReceivedMessage {
+	m0 := &Request_Input_UserInputs_MessagesReceived_ReceivedMessage{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.MessageId != nil {
@@ -6205,7 +6205,7 @@ func (b0 Request_Input_UserInputs_MessagesReceived_Message_builder) Build() *Req
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_SenderAgentId = b.SenderAgentId
 	}
-	x.xxx_hidden_AddressAgentIds = b.AddressAgentIds
+	x.xxx_hidden_Addresses = b.Addresses
 	if b.Subject != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_Subject = b.Subject
@@ -7820,7 +7820,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x9a`\n" +
+	"task.proto\x1a\vskill.proto\"\xa2`\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7830,7 +7830,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xf9@\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x81A\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7865,7 +7865,7 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQuery\x12Q\n" +
 	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x12A\n" +
-	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xb5\x06\n" +
+	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xbd\x06\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
 	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\x9a\x03\n" +
@@ -7875,15 +7875,15 @@ const file_request_proto_rawDesc = "" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12g\n" +
 	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQuery\x12m\n" +
 	"\x11messages_received\x18\x04 \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedH\x00R\x10messagesReceivedB\a\n" +
-	"\x05input\x1a\xb8\x02\n" +
-	"\x10MessagesReceived\x12b\n" +
-	"\breceived\x18\x01 \x03(\v2F.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.MessageR\breceived\x1a\xbf\x01\n" +
-	"\aMessage\x12\x1d\n" +
+	"\x05input\x1a\xc0\x02\n" +
+	"\x10MessagesReceived\x12j\n" +
+	"\bmessages\x18\x01 \x03(\v2N.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
+	"\x0fReceivedMessage\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12&\n" +
-	"\x0fsender_agent_id\x18\x02 \x01(\tR\rsenderAgentId\x12*\n" +
-	"\x11address_agent_ids\x18\x03 \x03(\tR\x0faddressAgentIds\x12\x18\n" +
-	"\asubject\x18\x04 \x01(\tR\asubject\x12'\n" +
+	"\x0fsender_agent_id\x18\x02 \x01(\tR\rsenderAgentId\x12\x1c\n" +
+	"\taddresses\x18\x03 \x03(\tR\taddresses\x12\x1e\n" +
+	"\asubject\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\asubject\x12'\n" +
 	"\fmessage_body\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vmessageBody\x1a\xe9\x12\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
@@ -8101,7 +8101,7 @@ var file_request_proto_goTypes = []any{
 	nil,                                                                     // 26: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	(*Request_Input_UserInputs_UserInput)(nil),                              // 27: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_UserInputs_MessagesReceived)(nil),                       // 28: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived
-	(*Request_Input_UserInputs_MessagesReceived_Message)(nil),               // 29: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.Message
+	(*Request_Input_UserInputs_MessagesReceived_ReceivedMessage)(nil),       // 29: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.ReceivedMessage
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                   // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	(*Request_Input_QueryWithCannedResponse_Code)(nil),                      // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
 	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                    // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
@@ -8250,7 +8250,7 @@ var file_request_proto_depIdxs = []int32{
 	11, // 84: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	9,  // 85: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
 	28, // 86: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.messages_received:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived
-	29, // 87: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.received:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.Message
+	29, // 87: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.ReceivedMessage
 	83, // 88: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	84, // 89: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	85, // 90: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment

@@ -115,13 +115,13 @@ message Request {
 
       // Batch of messages received from other agents.
       message MessagesReceived {
-        repeated Message received = 1;
+        repeated ReceivedMessage messages = 1;
 
-        message Message {
+        message ReceivedMessage {
           string message_id = 1;
           string sender_agent_id = 2;
-          repeated string address_agent_ids = 3;
-          string subject = 4;
+          repeated string addresses = 3;
+          string subject = 4 [ (sensitive) = true ];
           string message_body = 5 [ (sensitive) = true ];
         }
       }

@@ -7718,7 +7718,7 @@ func (*startAgentResult_Error_) isStartAgentResult_Result() {}
 // A client tool call to send a message to one or more agents.
 type SendMessage struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Address     []string               `protobuf:"bytes,1,rep,name=address"`
+	xxx_hidden_Addresses   []string               `protobuf:"bytes,1,rep,name=addresses"`
 	xxx_hidden_Subject     *string                `protobuf:"bytes,2,opt,name=subject"`
 	xxx_hidden_Message     *string                `protobuf:"bytes,3,opt,name=message"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -7752,9 +7752,9 @@ func (x *SendMessage) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SendMessage) GetAddress() []string {
+func (x *SendMessage) GetAddresses() []string {
 	if x != nil {
-		return x.xxx_hidden_Address
+		return x.xxx_hidden_Addresses
 	}
 	return nil
 }
@@ -7779,8 +7779,8 @@ func (x *SendMessage) GetMessage() string {
 	return ""
 }
 
-func (x *SendMessage) SetAddress(v []string) {
-	x.xxx_hidden_Address = v
+func (x *SendMessage) SetAddresses(v []string) {
+	x.xxx_hidden_Addresses = v
 }
 
 func (x *SendMessage) SetSubject(v string) {
@@ -7821,7 +7821,7 @@ type SendMessage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The agent IDs of the recipients.
-	Address []string
+	Addresses []string
 	// The subject line of the message.
 	Subject *string
 	// The body of the message.
@@ -7832,7 +7832,7 @@ func (b0 SendMessage_builder) Build() *SendMessage {
 	m0 := &SendMessage{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Address = b.Address
+	x.xxx_hidden_Addresses = b.Addresses
 	if b.Subject != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Subject = b.Subject
@@ -14085,16 +14085,16 @@ func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
 }
 
 type Message_MessagesReceived_ReceivedMessage struct {
-	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MessageId       *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
-	xxx_hidden_SenderAgentId   *string                `protobuf:"bytes,2,opt,name=sender_agent_id,json=senderAgentId"`
-	xxx_hidden_AddressAgentIds []string               `protobuf:"bytes,3,rep,name=address_agent_ids,json=addressAgentIds"`
-	xxx_hidden_Subject         *string                `protobuf:"bytes,4,opt,name=subject"`
-	xxx_hidden_MessageBody     *string                `protobuf:"bytes,5,opt,name=message_body,json=messageBody"`
-	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
-	XXX_presence               [1]uint32
-	unknownFields              protoimpl.UnknownFields
-	sizeCache                  protoimpl.SizeCache
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MessageId     *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
+	xxx_hidden_SenderAgentId *string                `protobuf:"bytes,2,opt,name=sender_agent_id,json=senderAgentId"`
+	xxx_hidden_Addresses     []string               `protobuf:"bytes,3,rep,name=addresses"`
+	xxx_hidden_Subject       *string                `protobuf:"bytes,4,opt,name=subject"`
+	xxx_hidden_MessageBody   *string                `protobuf:"bytes,5,opt,name=message_body,json=messageBody"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
 }
 
 func (x *Message_MessagesReceived_ReceivedMessage) Reset() {
@@ -14142,9 +14142,9 @@ func (x *Message_MessagesReceived_ReceivedMessage) GetSenderAgentId() string {
 	return ""
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) GetAddressAgentIds() []string {
+func (x *Message_MessagesReceived_ReceivedMessage) GetAddresses() []string {
 	if x != nil {
-		return x.xxx_hidden_AddressAgentIds
+		return x.xxx_hidden_Addresses
 	}
 	return nil
 }
@@ -14179,8 +14179,8 @@ func (x *Message_MessagesReceived_ReceivedMessage) SetSenderAgentId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) SetAddressAgentIds(v []string) {
-	x.xxx_hidden_AddressAgentIds = v
+func (x *Message_MessagesReceived_ReceivedMessage) SetAddresses(v []string) {
+	x.xxx_hidden_Addresses = v
 }
 
 func (x *Message_MessagesReceived_ReceivedMessage) SetSubject(v string) {
@@ -14244,11 +14244,11 @@ func (x *Message_MessagesReceived_ReceivedMessage) ClearMessageBody() {
 type Message_MessagesReceived_ReceivedMessage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	MessageId       *string
-	SenderAgentId   *string
-	AddressAgentIds []string
-	Subject         *string
-	MessageBody     *string
+	MessageId     *string
+	SenderAgentId *string
+	Addresses     []string
+	Subject       *string
+	MessageBody   *string
 }
 
 func (b0 Message_MessagesReceived_ReceivedMessage_builder) Build() *Message_MessagesReceived_ReceivedMessage {
@@ -14263,7 +14263,7 @@ func (b0 Message_MessagesReceived_ReceivedMessage_builder) Build() *Message_Mess
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_SenderAgentId = b.SenderAgentId
 	}
-	x.xxx_hidden_AddressAgentIds = b.AddressAgentIds
+	x.xxx_hidden_Addresses = b.Addresses
 	if b.Subject != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_Subject = b.Subject
@@ -27407,7 +27407,7 @@ func (b0 SendMessageResult_Success_builder) Build() *SendMessageResult_Success {
 
 type SendMessageResult_Error struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Error       *string                `protobuf:"bytes,1,opt,name=error"`
+	xxx_hidden_Message     *string                `protobuf:"bytes,1,opt,name=message"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -27439,46 +27439,46 @@ func (x *SendMessageResult_Error) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *SendMessageResult_Error) GetError() string {
+func (x *SendMessageResult_Error) GetMessage() string {
 	if x != nil {
-		if x.xxx_hidden_Error != nil {
-			return *x.xxx_hidden_Error
+		if x.xxx_hidden_Message != nil {
+			return *x.xxx_hidden_Message
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *SendMessageResult_Error) SetError(v string) {
-	x.xxx_hidden_Error = &v
+func (x *SendMessageResult_Error) SetMessage(v string) {
+	x.xxx_hidden_Message = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *SendMessageResult_Error) HasError() bool {
+func (x *SendMessageResult_Error) HasMessage() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *SendMessageResult_Error) ClearError() {
+func (x *SendMessageResult_Error) ClearMessage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Error = nil
+	x.xxx_hidden_Message = nil
 }
 
 type SendMessageResult_Error_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Error *string
+	Message *string
 }
 
 func (b0 SendMessageResult_Error_builder) Build() *SendMessageResult_Error {
 	m0 := &SendMessageResult_Error{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Error != nil {
+	if b.Message != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Error = b.Error
+		x.xxx_hidden_Message = b.Message
 	}
 	return m0
 }
@@ -27517,7 +27517,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\x80\xa5\x01\n" +
+	"\x0ecomment_target\"\xf8\xa4\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -27546,15 +27546,15 @@ const file_task_proto_rawDesc = "" +
 	"\fdebug_output\x18\x15 \x01(\v2(.warp.multi_agent.v1.Message.DebugOutputH\x00R\vdebugOutput\x12S\n" +
 	"\x0eartifact_event\x18\x16 \x01(\v2*.warp.multi_agent.v1.Message.ArtifactEventH\x00R\rartifactEvent\x12M\n" +
 	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12\\\n" +
-	"\x11messages_received\x18\x18 \x01(\v2-.warp.multi_agent.v1.Message.MessagesReceivedH\x00R\x10messagesReceived\x1a\xb7\x02\n" +
+	"\x11messages_received\x18\x18 \x01(\v2-.warp.multi_agent.v1.Message.MessagesReceivedH\x00R\x10messagesReceived\x1a\xaf\x02\n" +
 	"\x10MessagesReceived\x12Y\n" +
-	"\bmessages\x18\x01 \x03(\v2=.warp.multi_agent.v1.Message.MessagesReceived.ReceivedMessageR\bmessages\x1a\xc7\x01\n" +
+	"\bmessages\x18\x01 \x03(\v2=.warp.multi_agent.v1.Message.MessagesReceived.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
 	"\x0fReceivedMessage\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12&\n" +
-	"\x0fsender_agent_id\x18\x02 \x01(\tR\rsenderAgentId\x12*\n" +
-	"\x11address_agent_ids\x18\x03 \x03(\tR\x0faddressAgentIds\x12\x18\n" +
-	"\asubject\x18\x04 \x01(\tR\asubject\x12'\n" +
+	"\x0fsender_agent_id\x18\x02 \x01(\tR\rsenderAgentId\x12\x1c\n" +
+	"\taddresses\x18\x03 \x03(\tR\taddresses\x12\x1e\n" +
+	"\asubject\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\asubject\x12'\n" +
 	"\fmessage_body\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vmessageBody\x1a\xc8\x03\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
@@ -28264,19 +28264,19 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"g\n" +
-	"\vSendMessage\x12\x18\n" +
-	"\aaddress\x18\x01 \x03(\tR\aaddress\x12\x1e\n" +
+	"\x06result\"k\n" +
+	"\vSendMessage\x12\x1c\n" +
+	"\taddresses\x18\x01 \x03(\tR\taddresses\x12\x1e\n" +
 	"\asubject\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\asubject\x12\x1e\n" +
-	"\amessage\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\amessage\"\xf8\x01\n" +
+	"\amessage\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\amessage\"\x82\x02\n" +
 	"\x11SendMessageResult\x12J\n" +
 	"\asuccess\x18\x01 \x01(\v2..warp.multi_agent.v1.SendMessageResult.SuccessH\x00R\asuccess\x12D\n" +
 	"\x05error\x18\x02 \x01(\v2,.warp.multi_agent.v1.SendMessageResult.ErrorH\x00R\x05error\x1a(\n" +
 	"\aSuccess\x12\x1d\n" +
 	"\n" +
-	"message_id\x18\x01 \x01(\tR\tmessageId\x1a\x1d\n" +
-	"\x05Error\x12\x14\n" +
-	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
+	"message_id\x18\x01 \x01(\tR\tmessageId\x1a'\n" +
+	"\x05Error\x12\x1e\n" +
+	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"o\n" +
 	"\bRawImage\x12\x18\n" +
 	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
