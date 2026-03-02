@@ -528,6 +528,13 @@ message Message {
       
       message PromptChip {
         string prompt = 1;
+
+        // Optional. If supplied, this will be used as the label for the chip,
+        // while the `prompt` will be used as the actual prompt sent to the agent.
+        //
+        // This can be useful if the prompt is long and a shorter label is more
+        // appropriate for display.
+        string label = 2;
       }
     }
 
