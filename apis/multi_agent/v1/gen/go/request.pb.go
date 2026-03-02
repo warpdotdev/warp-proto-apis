@@ -5763,10 +5763,10 @@ func (x *Request_Input_UserInputs_UserInput) GetCliAgentUserQuery() *Request_Inp
 	return nil
 }
 
-func (x *Request_Input_UserInputs_UserInput) GetMessagesReceived() *Request_Input_UserInputs_MessagesReceived {
+func (x *Request_Input_UserInputs_UserInput) GetMessagesReceivedFromAgents() *Request_Input_UserInputs_MessagesReceivedFromAgents {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_MessagesReceived); ok {
-			return x.MessagesReceived
+		if x, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents); ok {
+			return x.MessagesReceivedFromAgents
 		}
 	}
 	return nil
@@ -5796,12 +5796,12 @@ func (x *Request_Input_UserInputs_UserInput) SetCliAgentUserQuery(v *Request_Inp
 	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_CliAgentUserQuery{v}
 }
 
-func (x *Request_Input_UserInputs_UserInput) SetMessagesReceived(v *Request_Input_UserInputs_MessagesReceived) {
+func (x *Request_Input_UserInputs_UserInput) SetMessagesReceivedFromAgents(v *Request_Input_UserInputs_MessagesReceivedFromAgents) {
 	if v == nil {
 		x.xxx_hidden_Input = nil
 		return
 	}
-	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_MessagesReceived{v}
+	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_MessagesReceivedFromAgents{v}
 }
 
 func (x *Request_Input_UserInputs_UserInput) HasInput() bool {
@@ -5835,11 +5835,11 @@ func (x *Request_Input_UserInputs_UserInput) HasCliAgentUserQuery() bool {
 	return ok
 }
 
-func (x *Request_Input_UserInputs_UserInput) HasMessagesReceived() bool {
+func (x *Request_Input_UserInputs_UserInput) HasMessagesReceivedFromAgents() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_MessagesReceived)
+	_, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents)
 	return ok
 }
 
@@ -5865,8 +5865,8 @@ func (x *Request_Input_UserInputs_UserInput) ClearCliAgentUserQuery() {
 	}
 }
 
-func (x *Request_Input_UserInputs_UserInput) ClearMessagesReceived() {
-	if _, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_MessagesReceived); ok {
+func (x *Request_Input_UserInputs_UserInput) ClearMessagesReceivedFromAgents() {
+	if _, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents); ok {
 		x.xxx_hidden_Input = nil
 	}
 }
@@ -5875,7 +5875,7 @@ const Request_Input_UserInputs_UserInput_Input_not_set_case case_Request_Input_U
 const Request_Input_UserInputs_UserInput_UserQuery_case case_Request_Input_UserInputs_UserInput_Input = 1
 const Request_Input_UserInputs_UserInput_ToolCallResult_case case_Request_Input_UserInputs_UserInput_Input = 2
 const Request_Input_UserInputs_UserInput_CliAgentUserQuery_case case_Request_Input_UserInputs_UserInput_Input = 3
-const Request_Input_UserInputs_UserInput_MessagesReceived_case case_Request_Input_UserInputs_UserInput_Input = 4
+const Request_Input_UserInputs_UserInput_MessagesReceivedFromAgents_case case_Request_Input_UserInputs_UserInput_Input = 4
 
 func (x *Request_Input_UserInputs_UserInput) WhichInput() case_Request_Input_UserInputs_UserInput_Input {
 	if x == nil {
@@ -5888,8 +5888,8 @@ func (x *Request_Input_UserInputs_UserInput) WhichInput() case_Request_Input_Use
 		return Request_Input_UserInputs_UserInput_ToolCallResult_case
 	case *request_Input_UserInputs_UserInput_CliAgentUserQuery:
 		return Request_Input_UserInputs_UserInput_CliAgentUserQuery_case
-	case *request_Input_UserInputs_UserInput_MessagesReceived:
-		return Request_Input_UserInputs_UserInput_MessagesReceived_case
+	case *request_Input_UserInputs_UserInput_MessagesReceivedFromAgents:
+		return Request_Input_UserInputs_UserInput_MessagesReceivedFromAgents_case
 	default:
 		return Request_Input_UserInputs_UserInput_Input_not_set_case
 	}
@@ -5899,10 +5899,10 @@ type Request_Input_UserInputs_UserInput_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Input:
-	UserQuery         *Request_Input_UserQuery
-	ToolCallResult    *Request_Input_ToolCallResult
-	CliAgentUserQuery *Request_Input_CLIAgentUserQuery
-	MessagesReceived  *Request_Input_UserInputs_MessagesReceived
+	UserQuery                  *Request_Input_UserQuery
+	ToolCallResult             *Request_Input_ToolCallResult
+	CliAgentUserQuery          *Request_Input_CLIAgentUserQuery
+	MessagesReceivedFromAgents *Request_Input_UserInputs_MessagesReceivedFromAgents
 	// -- end of xxx_hidden_Input
 }
 
@@ -5919,8 +5919,8 @@ func (b0 Request_Input_UserInputs_UserInput_builder) Build() *Request_Input_User
 	if b.CliAgentUserQuery != nil {
 		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_CliAgentUserQuery{b.CliAgentUserQuery}
 	}
-	if b.MessagesReceived != nil {
-		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_MessagesReceived{b.MessagesReceived}
+	if b.MessagesReceivedFromAgents != nil {
+		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_MessagesReceivedFromAgents{b.MessagesReceivedFromAgents}
 	}
 	return m0
 }
@@ -5951,8 +5951,8 @@ type request_Input_UserInputs_UserInput_CliAgentUserQuery struct {
 	CliAgentUserQuery *Request_Input_CLIAgentUserQuery `protobuf:"bytes,3,opt,name=cli_agent_user_query,json=cliAgentUserQuery,oneof"`
 }
 
-type request_Input_UserInputs_UserInput_MessagesReceived struct {
-	MessagesReceived *Request_Input_UserInputs_MessagesReceived `protobuf:"bytes,4,opt,name=messages_received,json=messagesReceived,oneof"`
+type request_Input_UserInputs_UserInput_MessagesReceivedFromAgents struct {
+	MessagesReceivedFromAgents *Request_Input_UserInputs_MessagesReceivedFromAgents `protobuf:"bytes,4,opt,name=messages_received_from_agents,json=messagesReceivedFromAgents,oneof"`
 }
 
 func (*request_Input_UserInputs_UserInput_UserQuery) isRequest_Input_UserInputs_UserInput_Input() {}
@@ -5963,31 +5963,31 @@ func (*request_Input_UserInputs_UserInput_ToolCallResult) isRequest_Input_UserIn
 func (*request_Input_UserInputs_UserInput_CliAgentUserQuery) isRequest_Input_UserInputs_UserInput_Input() {
 }
 
-func (*request_Input_UserInputs_UserInput_MessagesReceived) isRequest_Input_UserInputs_UserInput_Input() {
+func (*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents) isRequest_Input_UserInputs_UserInput_Input() {
 }
 
 // Batch of messages received from other agents.
-type Request_Input_UserInputs_MessagesReceived struct {
-	state               protoimpl.MessageState                                        `protogen:"opaque.v1"`
-	xxx_hidden_Messages *[]*Request_Input_UserInputs_MessagesReceived_ReceivedMessage `protobuf:"bytes,1,rep,name=messages"`
+type Request_Input_UserInputs_MessagesReceivedFromAgents struct {
+	state               protoimpl.MessageState                                                  `protogen:"opaque.v1"`
+	xxx_hidden_Messages *[]*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage `protobuf:"bytes,1,rep,name=messages"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived) Reset() {
-	*x = Request_Input_UserInputs_MessagesReceived{}
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents) Reset() {
+	*x = Request_Input_UserInputs_MessagesReceivedFromAgents{}
 	mi := &file_request_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived) String() string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_UserInputs_MessagesReceived) ProtoMessage() {}
+func (*Request_Input_UserInputs_MessagesReceivedFromAgents) ProtoMessage() {}
 
-func (x *Request_Input_UserInputs_MessagesReceived) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -5999,7 +5999,7 @@ func (x *Request_Input_UserInputs_MessagesReceived) ProtoReflect() protoreflect.
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived) GetMessages() []*Request_Input_UserInputs_MessagesReceived_ReceivedMessage {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents) GetMessages() []*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage {
 	if x != nil {
 		if x.xxx_hidden_Messages != nil {
 			return *x.xxx_hidden_Messages
@@ -6008,25 +6008,25 @@ func (x *Request_Input_UserInputs_MessagesReceived) GetMessages() []*Request_Inp
 	return nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived) SetMessages(v []*Request_Input_UserInputs_MessagesReceived_ReceivedMessage) {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents) SetMessages(v []*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) {
 	x.xxx_hidden_Messages = &v
 }
 
-type Request_Input_UserInputs_MessagesReceived_builder struct {
+type Request_Input_UserInputs_MessagesReceivedFromAgents_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Messages []*Request_Input_UserInputs_MessagesReceived_ReceivedMessage
+	Messages []*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage
 }
 
-func (b0 Request_Input_UserInputs_MessagesReceived_builder) Build() *Request_Input_UserInputs_MessagesReceived {
-	m0 := &Request_Input_UserInputs_MessagesReceived{}
+func (b0 Request_Input_UserInputs_MessagesReceivedFromAgents_builder) Build() *Request_Input_UserInputs_MessagesReceivedFromAgents {
+	m0 := &Request_Input_UserInputs_MessagesReceivedFromAgents{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Messages = &b.Messages
 	return m0
 }
 
-type Request_Input_UserInputs_MessagesReceived_ReceivedMessage struct {
+type Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MessageId     *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
 	xxx_hidden_SenderAgentId *string                `protobuf:"bytes,2,opt,name=sender_agent_id,json=senderAgentId"`
@@ -6039,20 +6039,20 @@ type Request_Input_UserInputs_MessagesReceived_ReceivedMessage struct {
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) Reset() {
-	*x = Request_Input_UserInputs_MessagesReceived_ReceivedMessage{}
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) Reset() {
+	*x = Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage{}
 	mi := &file_request_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) String() string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ProtoMessage() {}
+func (*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) ProtoMessage() {}
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -6064,7 +6064,7 @@ func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ProtoReflect
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetMessageId() string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) GetMessageId() string {
 	if x != nil {
 		if x.xxx_hidden_MessageId != nil {
 			return *x.xxx_hidden_MessageId
@@ -6074,7 +6074,7 @@ func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetMessageId
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetSenderAgentId() string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) GetSenderAgentId() string {
 	if x != nil {
 		if x.xxx_hidden_SenderAgentId != nil {
 			return *x.xxx_hidden_SenderAgentId
@@ -6084,14 +6084,14 @@ func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetSenderAge
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetAddresses() []string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) GetAddresses() []string {
 	if x != nil {
 		return x.xxx_hidden_Addresses
 	}
 	return nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetSubject() string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) GetSubject() string {
 	if x != nil {
 		if x.xxx_hidden_Subject != nil {
 			return *x.xxx_hidden_Subject
@@ -6101,7 +6101,7 @@ func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetSubject()
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetMessageBody() string {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) GetMessageBody() string {
 	if x != nil {
 		if x.xxx_hidden_MessageBody != nil {
 			return *x.xxx_hidden_MessageBody
@@ -6111,79 +6111,79 @@ func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) GetMessageBo
 	return ""
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetMessageId(v string) {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) SetMessageId(v string) {
 	x.xxx_hidden_MessageId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetSenderAgentId(v string) {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) SetSenderAgentId(v string) {
 	x.xxx_hidden_SenderAgentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetAddresses(v []string) {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) SetAddresses(v []string) {
 	x.xxx_hidden_Addresses = v
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetSubject(v string) {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) SetSubject(v string) {
 	x.xxx_hidden_Subject = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) SetMessageBody(v string) {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) SetMessageBody(v string) {
 	x.xxx_hidden_MessageBody = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasMessageId() bool {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) HasMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasSenderAgentId() bool {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) HasSenderAgentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasSubject() bool {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) HasSubject() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) HasMessageBody() bool {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) HasMessageBody() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearMessageId() {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) ClearMessageId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_MessageId = nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearSenderAgentId() {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) ClearSenderAgentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_SenderAgentId = nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearSubject() {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) ClearSubject() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_Subject = nil
 }
 
-func (x *Request_Input_UserInputs_MessagesReceived_ReceivedMessage) ClearMessageBody() {
+func (x *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage) ClearMessageBody() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_MessageBody = nil
 }
 
-type Request_Input_UserInputs_MessagesReceived_ReceivedMessage_builder struct {
+type Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	MessageId     *string
@@ -6193,8 +6193,8 @@ type Request_Input_UserInputs_MessagesReceived_ReceivedMessage_builder struct {
 	MessageBody   *string
 }
 
-func (b0 Request_Input_UserInputs_MessagesReceived_ReceivedMessage_builder) Build() *Request_Input_UserInputs_MessagesReceived_ReceivedMessage {
-	m0 := &Request_Input_UserInputs_MessagesReceived_ReceivedMessage{}
+func (b0 Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage_builder) Build() *Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage {
+	m0 := &Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.MessageId != nil {
@@ -7820,7 +7820,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\xd5`\n" +
+	"task.proto\x1a\vskill.proto\"\x8aa\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -7830,7 +7830,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xaaA\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xdfA\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -7865,19 +7865,19 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQuery\x12Q\n" +
 	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x12A\n" +
-	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xc3\x06\n" +
+	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xf8\x06\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
-	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xa0\x03\n" +
+	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xc1\x03\n" +
 	"\tUserInput\x12M\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12g\n" +
-	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQuery\x12s\n" +
-	"\x11messages_received\x18\x04 \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedB\x04\x88\xb5\x18\x01H\x00R\x10messagesReceivedB\a\n" +
-	"\x05input\x1a\xc0\x02\n" +
-	"\x10MessagesReceived\x12j\n" +
-	"\bmessages\x18\x01 \x03(\v2N.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
+	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQuery\x12\x93\x01\n" +
+	"\x1dmessages_received_from_agents\x18\x04 \x01(\v2H.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgentsB\a\n" +
+	"\x05input\x1a\xd4\x02\n" +
+	"\x1aMessagesReceivedFromAgents\x12t\n" +
+	"\bmessages\x18\x01 \x03(\v2X.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
 	"\x0fReceivedMessage\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12&\n" +
@@ -8072,45 +8072,45 @@ const file_request_proto_rawDesc = "" +
 var file_request_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_request_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_request_proto_goTypes = []any{
-	(AutonomyLevel)(0),                                                      // 0: warp.multi_agent.v1.AutonomyLevel
-	(IsolationLevel)(0),                                                     // 1: warp.multi_agent.v1.IsolationLevel
-	(*Request)(nil),                                                         // 2: warp.multi_agent.v1.Request
-	(*Request_TaskContext)(nil),                                             // 3: warp.multi_agent.v1.Request.TaskContext
-	(*Request_Input)(nil),                                                   // 4: warp.multi_agent.v1.Request.Input
-	(*Request_Metadata)(nil),                                                // 5: warp.multi_agent.v1.Request.Metadata
-	(*Request_Settings)(nil),                                                // 6: warp.multi_agent.v1.Request.Settings
-	(*Request_MCPContext)(nil),                                              // 7: warp.multi_agent.v1.Request.MCPContext
-	(*Request_Input_UserQuery)(nil),                                         // 8: warp.multi_agent.v1.Request.Input.UserQuery
-	(*Request_Input_CLIAgentUserQuery)(nil),                                 // 9: warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	(*Request_Input_UserInputs)(nil),                                        // 10: warp.multi_agent.v1.Request.Input.UserInputs
-	(*Request_Input_ToolCallResult)(nil),                                    // 11: warp.multi_agent.v1.Request.Input.ToolCallResult
-	(*Request_Input_QueryWithCannedResponse)(nil),                           // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
-	(*Request_Input_AutoCodeDiffQuery)(nil),                                 // 13: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
-	(*Request_Input_ResumeConversation)(nil),                                // 14: warp.multi_agent.v1.Request.Input.ResumeConversation
-	(*Request_Input_InitProjectRules)(nil),                                  // 15: warp.multi_agent.v1.Request.Input.InitProjectRules
-	(*Request_Input_CreateNewProject)(nil),                                  // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
-	(*Request_Input_CloneRepository)(nil),                                   // 17: warp.multi_agent.v1.Request.Input.CloneRepository
-	(*Request_Input_CreateEnvironment)(nil),                                 // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
-	(*Request_Input_GeneratePassiveSuggestions)(nil),                        // 19: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions
-	(*Request_Input_OnShellCommandCompletion)(nil),                          // 20: warp.multi_agent.v1.Request.Input.OnShellCommandCompletion
-	(*Request_Input_CodeReview)(nil),                                        // 21: warp.multi_agent.v1.Request.Input.CodeReview
-	(*Request_Input_FetchReviewComments)(nil),                               // 22: warp.multi_agent.v1.Request.Input.FetchReviewComments
-	(*Request_Input_SummarizeConversation)(nil),                             // 23: warp.multi_agent.v1.Request.Input.SummarizeConversation
-	(*Request_Input_StartFromAmbientRunPrompt)(nil),                         // 24: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt
-	(*Request_Input_InvokeSkill)(nil),                                       // 25: warp.multi_agent.v1.Request.Input.InvokeSkill
-	nil,                                                                     // 26: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
-	(*Request_Input_UserInputs_UserInput)(nil),                              // 27: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
-	(*Request_Input_UserInputs_MessagesReceived)(nil),                       // 28: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived
-	(*Request_Input_UserInputs_MessagesReceived_ReceivedMessage)(nil),       // 29: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.ReceivedMessage
-	(*Request_Input_QueryWithCannedResponse_Install)(nil),                   // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	(*Request_Input_QueryWithCannedResponse_Code)(nil),                      // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                    // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),             // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil),   // 34: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	(*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff)(nil),  // 35: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	(*Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted)(nil),  // 36: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted
-	(*Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted)(nil), // 37: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompleted
-	(*Request_Input_CodeReview_InitialReviewComments)(nil),                  // 38: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
+	(AutonomyLevel)(0),                                                          // 0: warp.multi_agent.v1.AutonomyLevel
+	(IsolationLevel)(0),                                                         // 1: warp.multi_agent.v1.IsolationLevel
+	(*Request)(nil),                                                             // 2: warp.multi_agent.v1.Request
+	(*Request_TaskContext)(nil),                                                 // 3: warp.multi_agent.v1.Request.TaskContext
+	(*Request_Input)(nil),                                                       // 4: warp.multi_agent.v1.Request.Input
+	(*Request_Metadata)(nil),                                                    // 5: warp.multi_agent.v1.Request.Metadata
+	(*Request_Settings)(nil),                                                    // 6: warp.multi_agent.v1.Request.Settings
+	(*Request_MCPContext)(nil),                                                  // 7: warp.multi_agent.v1.Request.MCPContext
+	(*Request_Input_UserQuery)(nil),                                             // 8: warp.multi_agent.v1.Request.Input.UserQuery
+	(*Request_Input_CLIAgentUserQuery)(nil),                                     // 9: warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	(*Request_Input_UserInputs)(nil),                                            // 10: warp.multi_agent.v1.Request.Input.UserInputs
+	(*Request_Input_ToolCallResult)(nil),                                        // 11: warp.multi_agent.v1.Request.Input.ToolCallResult
+	(*Request_Input_QueryWithCannedResponse)(nil),                               // 12: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse
+	(*Request_Input_AutoCodeDiffQuery)(nil),                                     // 13: warp.multi_agent.v1.Request.Input.AutoCodeDiffQuery
+	(*Request_Input_ResumeConversation)(nil),                                    // 14: warp.multi_agent.v1.Request.Input.ResumeConversation
+	(*Request_Input_InitProjectRules)(nil),                                      // 15: warp.multi_agent.v1.Request.Input.InitProjectRules
+	(*Request_Input_CreateNewProject)(nil),                                      // 16: warp.multi_agent.v1.Request.Input.CreateNewProject
+	(*Request_Input_CloneRepository)(nil),                                       // 17: warp.multi_agent.v1.Request.Input.CloneRepository
+	(*Request_Input_CreateEnvironment)(nil),                                     // 18: warp.multi_agent.v1.Request.Input.CreateEnvironment
+	(*Request_Input_GeneratePassiveSuggestions)(nil),                            // 19: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions
+	(*Request_Input_OnShellCommandCompletion)(nil),                              // 20: warp.multi_agent.v1.Request.Input.OnShellCommandCompletion
+	(*Request_Input_CodeReview)(nil),                                            // 21: warp.multi_agent.v1.Request.Input.CodeReview
+	(*Request_Input_FetchReviewComments)(nil),                                   // 22: warp.multi_agent.v1.Request.Input.FetchReviewComments
+	(*Request_Input_SummarizeConversation)(nil),                                 // 23: warp.multi_agent.v1.Request.Input.SummarizeConversation
+	(*Request_Input_StartFromAmbientRunPrompt)(nil),                             // 24: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt
+	(*Request_Input_InvokeSkill)(nil),                                           // 25: warp.multi_agent.v1.Request.Input.InvokeSkill
+	nil,                                                                         // 26: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
+	(*Request_Input_UserInputs_UserInput)(nil),                                  // 27: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
+	(*Request_Input_UserInputs_MessagesReceivedFromAgents)(nil),                 // 28: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents
+	(*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage)(nil), // 29: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
+	(*Request_Input_QueryWithCannedResponse_Install)(nil),                       // 30: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	(*Request_Input_QueryWithCannedResponse_Code)(nil),                          // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	(*Request_Input_QueryWithCannedResponse_Deploy)(nil),                        // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	(*Request_Input_QueryWithCannedResponse_SomethingElse)(nil),                 // 33: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	(*Request_Input_QueryWithCannedResponse_CustomOnboardingRequest)(nil),       // 34: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	(*Request_Input_QueryWithCannedResponse_AgenticOnboardingKickoff)(nil),      // 35: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	(*Request_Input_GeneratePassiveSuggestions_ShellCommandCompleted)(nil),      // 36: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted
+	(*Request_Input_GeneratePassiveSuggestions_AgentResponseCompleted)(nil),     // 37: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompleted
+	(*Request_Input_CodeReview_InitialReviewComments)(nil),                      // 38: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
 	nil,                                  // 39: warp.multi_agent.v1.Request.Metadata.LoggingEntry
 	(*Request_Settings_ModelConfig)(nil), // 40: warp.multi_agent.v1.Request.Settings.ModelConfig
 	(*Request_Settings_ApiKeys)(nil),     // 41: warp.multi_agent.v1.Request.Settings.ApiKeys
@@ -8249,8 +8249,8 @@ var file_request_proto_depIdxs = []int32{
 	8,  // 83: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
 	11, // 84: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	9,  // 85: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	28, // 86: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.messages_received:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived
-	29, // 87: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceived.ReceivedMessage
+	28, // 86: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.messages_received_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents
+	29, // 87: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
 	83, // 88: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	84, // 89: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	85, // 90: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
@@ -8347,7 +8347,7 @@ func file_request_proto_init() {
 		(*request_Input_UserInputs_UserInput_UserQuery)(nil),
 		(*request_Input_UserInputs_UserInput_ToolCallResult)(nil),
 		(*request_Input_UserInputs_UserInput_CliAgentUserQuery)(nil),
-		(*request_Input_UserInputs_UserInput_MessagesReceived)(nil),
+		(*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

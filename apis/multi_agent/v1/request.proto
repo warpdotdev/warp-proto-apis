@@ -109,12 +109,12 @@ message Request {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
-          MessagesReceived messages_received = 4 [ (internal) = true ];
+          MessagesReceivedFromAgents messages_received_from_agents = 4 [ (internal) = true ];
         }
       }
 
       // Batch of messages received from other agents.
-      message MessagesReceived {
+      message MessagesReceivedFromAgents {
         repeated ReceivedMessage messages = 1;
 
         message ReceivedMessage {

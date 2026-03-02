@@ -139,14 +139,14 @@ message Message {
     DebugOutput debug_output = 21;
     ArtifactEvent artifact_event = 22;
     InvokeSkill invoke_skill = 23;
-    MessagesReceived messages_received = 24 [ (internal) = true ];
+    MessagesReceivedFromAgents messages_received_from_agents = 24 [ (internal) = true ];
   }
 
   // A batch of messages received from other agents, persisted in conversation
   // history. The full message contents are stored here so that server-side
   // tools (ListMessages, ReadMessages) can scan them. When formatted for the
   // LLM, only a summary (count + headers) is shown.
-  message MessagesReceived {
+  message MessagesReceivedFromAgents {
     repeated ReceivedMessage messages = 1;
 
     message ReceivedMessage {

@@ -1297,10 +1297,10 @@ func (x *Message) GetInvokeSkill() *Message_InvokeSkill {
 	return nil
 }
 
-func (x *Message) GetMessagesReceived() *Message_MessagesReceived {
+func (x *Message) GetMessagesReceivedFromAgents() *Message_MessagesReceivedFromAgents {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Message.(*message_MessagesReceived_); ok {
-			return x.MessagesReceived
+		if x, ok := x.xxx_hidden_Message.(*message_MessagesReceivedFromAgents_); ok {
+			return x.MessagesReceivedFromAgents
 		}
 	}
 	return nil
@@ -1462,12 +1462,12 @@ func (x *Message) SetInvokeSkill(v *Message_InvokeSkill) {
 	x.xxx_hidden_Message = &message_InvokeSkill_{v}
 }
 
-func (x *Message) SetMessagesReceived(v *Message_MessagesReceived) {
+func (x *Message) SetMessagesReceivedFromAgents(v *Message_MessagesReceivedFromAgents) {
 	if v == nil {
 		x.xxx_hidden_Message = nil
 		return
 	}
-	x.xxx_hidden_Message = &message_MessagesReceived_{v}
+	x.xxx_hidden_Message = &message_MessagesReceivedFromAgents_{v}
 }
 
 func (x *Message) HasId() bool {
@@ -1640,11 +1640,11 @@ func (x *Message) HasInvokeSkill() bool {
 	return ok
 }
 
-func (x *Message) HasMessagesReceived() bool {
+func (x *Message) HasMessagesReceivedFromAgents() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Message.(*message_MessagesReceived_)
+	_, ok := x.xxx_hidden_Message.(*message_MessagesReceivedFromAgents_)
 	return ok
 }
 
@@ -1772,8 +1772,8 @@ func (x *Message) ClearInvokeSkill() {
 	}
 }
 
-func (x *Message) ClearMessagesReceived() {
-	if _, ok := x.xxx_hidden_Message.(*message_MessagesReceived_); ok {
+func (x *Message) ClearMessagesReceivedFromAgents() {
+	if _, ok := x.xxx_hidden_Message.(*message_MessagesReceivedFromAgents_); ok {
 		x.xxx_hidden_Message = nil
 	}
 }
@@ -1795,7 +1795,7 @@ const Message_WebFetch_case case_Message_Message = 20
 const Message_DebugOutput_case case_Message_Message = 21
 const Message_ArtifactEvent_case case_Message_Message = 22
 const Message_InvokeSkill_case case_Message_Message = 23
-const Message_MessagesReceived_case case_Message_Message = 24
+const Message_MessagesReceivedFromAgents_case case_Message_Message = 24
 
 func (x *Message) WhichMessage() case_Message_Message {
 	if x == nil {
@@ -1834,8 +1834,8 @@ func (x *Message) WhichMessage() case_Message_Message {
 		return Message_ArtifactEvent_case
 	case *message_InvokeSkill_:
 		return Message_InvokeSkill_case
-	case *message_MessagesReceived_:
-		return Message_MessagesReceived_case
+	case *message_MessagesReceivedFromAgents_:
+		return Message_MessagesReceivedFromAgents_case
 	default:
 		return Message_Message_not_set_case
 	}
@@ -1861,23 +1861,23 @@ type Message_builder struct {
 	// The type of message with its specific content
 
 	// Fields of oneof xxx_hidden_Message:
-	UserQuery            *Message_UserQuery
-	AgentOutput          *Message_AgentOutput
-	ToolCall             *Message_ToolCall
-	ToolCallResult       *Message_ToolCallResult
-	ServerEvent          *Message_ServerEvent
-	SystemQuery          *Message_SystemQuery
-	UpdateTodos          *Message_UpdateTodos
-	AgentReasoning       *Message_AgentReasoning
-	Summarization        *Message_Summarization
-	CodeReview           *Message_CodeReview
-	UpdateReviewComments *Message_UpdateReviewComments
-	WebSearch            *Message_WebSearch
-	WebFetch             *Message_WebFetch
-	DebugOutput          *Message_DebugOutput
-	ArtifactEvent        *Message_ArtifactEvent
-	InvokeSkill          *Message_InvokeSkill
-	MessagesReceived     *Message_MessagesReceived
+	UserQuery                  *Message_UserQuery
+	AgentOutput                *Message_AgentOutput
+	ToolCall                   *Message_ToolCall
+	ToolCallResult             *Message_ToolCallResult
+	ServerEvent                *Message_ServerEvent
+	SystemQuery                *Message_SystemQuery
+	UpdateTodos                *Message_UpdateTodos
+	AgentReasoning             *Message_AgentReasoning
+	Summarization              *Message_Summarization
+	CodeReview                 *Message_CodeReview
+	UpdateReviewComments       *Message_UpdateReviewComments
+	WebSearch                  *Message_WebSearch
+	WebFetch                   *Message_WebFetch
+	DebugOutput                *Message_DebugOutput
+	ArtifactEvent              *Message_ArtifactEvent
+	InvokeSkill                *Message_InvokeSkill
+	MessagesReceivedFromAgents *Message_MessagesReceivedFromAgents
 	// -- end of xxx_hidden_Message
 }
 
@@ -1951,8 +1951,8 @@ func (b0 Message_builder) Build() *Message {
 	if b.InvokeSkill != nil {
 		x.xxx_hidden_Message = &message_InvokeSkill_{b.InvokeSkill}
 	}
-	if b.MessagesReceived != nil {
-		x.xxx_hidden_Message = &message_MessagesReceived_{b.MessagesReceived}
+	if b.MessagesReceivedFromAgents != nil {
+		x.xxx_hidden_Message = &message_MessagesReceivedFromAgents_{b.MessagesReceivedFromAgents}
 	}
 	return m0
 }
@@ -2035,8 +2035,8 @@ type message_InvokeSkill_ struct {
 	InvokeSkill *Message_InvokeSkill `protobuf:"bytes,23,opt,name=invoke_skill,json=invokeSkill,oneof"`
 }
 
-type message_MessagesReceived_ struct {
-	MessagesReceived *Message_MessagesReceived `protobuf:"bytes,24,opt,name=messages_received,json=messagesReceived,oneof"`
+type message_MessagesReceivedFromAgents_ struct {
+	MessagesReceivedFromAgents *Message_MessagesReceivedFromAgents `protobuf:"bytes,24,opt,name=messages_received_from_agents,json=messagesReceivedFromAgents,oneof"`
 }
 
 func (*message_UserQuery_) isMessage_Message() {}
@@ -2071,7 +2071,7 @@ func (*message_ArtifactEvent_) isMessage_Message() {}
 
 func (*message_InvokeSkill_) isMessage_Message() {}
 
-func (*message_MessagesReceived_) isMessage_Message() {}
+func (*message_MessagesReceivedFromAgents_) isMessage_Message() {}
 
 // Result of a `RunShellCommand` tool call.
 type RunShellCommandResult struct {
@@ -8499,27 +8499,27 @@ func (b0 ReviewComment_CommentedDiffset_builder) Build() *ReviewComment_Commente
 // history. The full message contents are stored here so that server-side
 // tools (ListMessages, ReadMessages) can scan them. When formatted for the
 // LLM, only a summary (count + headers) is shown.
-type Message_MessagesReceived struct {
-	state               protoimpl.MessageState                       `protogen:"opaque.v1"`
-	xxx_hidden_Messages *[]*Message_MessagesReceived_ReceivedMessage `protobuf:"bytes,1,rep,name=messages"`
+type Message_MessagesReceivedFromAgents struct {
+	state               protoimpl.MessageState                                 `protogen:"opaque.v1"`
+	xxx_hidden_Messages *[]*Message_MessagesReceivedFromAgents_ReceivedMessage `protobuf:"bytes,1,rep,name=messages"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
-func (x *Message_MessagesReceived) Reset() {
-	*x = Message_MessagesReceived{}
+func (x *Message_MessagesReceivedFromAgents) Reset() {
+	*x = Message_MessagesReceivedFromAgents{}
 	mi := &file_task_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_MessagesReceived) String() string {
+func (x *Message_MessagesReceivedFromAgents) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_MessagesReceived) ProtoMessage() {}
+func (*Message_MessagesReceivedFromAgents) ProtoMessage() {}
 
-func (x *Message_MessagesReceived) ProtoReflect() protoreflect.Message {
+func (x *Message_MessagesReceivedFromAgents) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8531,7 +8531,7 @@ func (x *Message_MessagesReceived) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Message_MessagesReceived) GetMessages() []*Message_MessagesReceived_ReceivedMessage {
+func (x *Message_MessagesReceivedFromAgents) GetMessages() []*Message_MessagesReceivedFromAgents_ReceivedMessage {
 	if x != nil {
 		if x.xxx_hidden_Messages != nil {
 			return *x.xxx_hidden_Messages
@@ -8540,18 +8540,18 @@ func (x *Message_MessagesReceived) GetMessages() []*Message_MessagesReceived_Rec
 	return nil
 }
 
-func (x *Message_MessagesReceived) SetMessages(v []*Message_MessagesReceived_ReceivedMessage) {
+func (x *Message_MessagesReceivedFromAgents) SetMessages(v []*Message_MessagesReceivedFromAgents_ReceivedMessage) {
 	x.xxx_hidden_Messages = &v
 }
 
-type Message_MessagesReceived_builder struct {
+type Message_MessagesReceivedFromAgents_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Messages []*Message_MessagesReceived_ReceivedMessage
+	Messages []*Message_MessagesReceivedFromAgents_ReceivedMessage
 }
 
-func (b0 Message_MessagesReceived_builder) Build() *Message_MessagesReceived {
-	m0 := &Message_MessagesReceived{}
+func (b0 Message_MessagesReceivedFromAgents_builder) Build() *Message_MessagesReceivedFromAgents {
+	m0 := &Message_MessagesReceivedFromAgents{}
 	b, x := &b0, m0
 	_, _ = b, x
 	x.xxx_hidden_Messages = &b.Messages
@@ -14084,7 +14084,7 @@ func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
 	return m0
 }
 
-type Message_MessagesReceived_ReceivedMessage struct {
+type Message_MessagesReceivedFromAgents_ReceivedMessage struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_MessageId     *string                `protobuf:"bytes,1,opt,name=message_id,json=messageId"`
 	xxx_hidden_SenderAgentId *string                `protobuf:"bytes,2,opt,name=sender_agent_id,json=senderAgentId"`
@@ -14097,20 +14097,20 @@ type Message_MessagesReceived_ReceivedMessage struct {
 	sizeCache                protoimpl.SizeCache
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) Reset() {
-	*x = Message_MessagesReceived_ReceivedMessage{}
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) Reset() {
+	*x = Message_MessagesReceivedFromAgents_ReceivedMessage{}
 	mi := &file_task_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) String() string {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_MessagesReceived_ReceivedMessage) ProtoMessage() {}
+func (*Message_MessagesReceivedFromAgents_ReceivedMessage) ProtoMessage() {}
 
-func (x *Message_MessagesReceived_ReceivedMessage) ProtoReflect() protoreflect.Message {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -14122,7 +14122,7 @@ func (x *Message_MessagesReceived_ReceivedMessage) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) GetMessageId() string {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) GetMessageId() string {
 	if x != nil {
 		if x.xxx_hidden_MessageId != nil {
 			return *x.xxx_hidden_MessageId
@@ -14132,7 +14132,7 @@ func (x *Message_MessagesReceived_ReceivedMessage) GetMessageId() string {
 	return ""
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) GetSenderAgentId() string {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) GetSenderAgentId() string {
 	if x != nil {
 		if x.xxx_hidden_SenderAgentId != nil {
 			return *x.xxx_hidden_SenderAgentId
@@ -14142,14 +14142,14 @@ func (x *Message_MessagesReceived_ReceivedMessage) GetSenderAgentId() string {
 	return ""
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) GetAddresses() []string {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) GetAddresses() []string {
 	if x != nil {
 		return x.xxx_hidden_Addresses
 	}
 	return nil
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) GetSubject() string {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) GetSubject() string {
 	if x != nil {
 		if x.xxx_hidden_Subject != nil {
 			return *x.xxx_hidden_Subject
@@ -14159,7 +14159,7 @@ func (x *Message_MessagesReceived_ReceivedMessage) GetSubject() string {
 	return ""
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) GetMessageBody() string {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) GetMessageBody() string {
 	if x != nil {
 		if x.xxx_hidden_MessageBody != nil {
 			return *x.xxx_hidden_MessageBody
@@ -14169,79 +14169,79 @@ func (x *Message_MessagesReceived_ReceivedMessage) GetMessageBody() string {
 	return ""
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) SetMessageId(v string) {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) SetMessageId(v string) {
 	x.xxx_hidden_MessageId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) SetSenderAgentId(v string) {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) SetSenderAgentId(v string) {
 	x.xxx_hidden_SenderAgentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) SetAddresses(v []string) {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) SetAddresses(v []string) {
 	x.xxx_hidden_Addresses = v
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) SetSubject(v string) {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) SetSubject(v string) {
 	x.xxx_hidden_Subject = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) SetMessageBody(v string) {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) SetMessageBody(v string) {
 	x.xxx_hidden_MessageBody = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) HasMessageId() bool {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) HasMessageId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) HasSenderAgentId() bool {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) HasSenderAgentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) HasSubject() bool {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) HasSubject() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) HasMessageBody() bool {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) HasMessageBody() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) ClearMessageId() {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) ClearMessageId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_MessageId = nil
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) ClearSenderAgentId() {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) ClearSenderAgentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_SenderAgentId = nil
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) ClearSubject() {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) ClearSubject() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_Subject = nil
 }
 
-func (x *Message_MessagesReceived_ReceivedMessage) ClearMessageBody() {
+func (x *Message_MessagesReceivedFromAgents_ReceivedMessage) ClearMessageBody() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_MessageBody = nil
 }
 
-type Message_MessagesReceived_ReceivedMessage_builder struct {
+type Message_MessagesReceivedFromAgents_ReceivedMessage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	MessageId     *string
@@ -14251,8 +14251,8 @@ type Message_MessagesReceived_ReceivedMessage_builder struct {
 	MessageBody   *string
 }
 
-func (b0 Message_MessagesReceived_ReceivedMessage_builder) Build() *Message_MessagesReceived_ReceivedMessage {
-	m0 := &Message_MessagesReceived_ReceivedMessage{}
+func (b0 Message_MessagesReceivedFromAgents_ReceivedMessage_builder) Build() *Message_MessagesReceivedFromAgents_ReceivedMessage {
+	m0 := &Message_MessagesReceivedFromAgents_ReceivedMessage{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.MessageId != nil {
@@ -27517,7 +27517,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"ĥ\x01\n" +
+	"\x0ecomment_target\"\xf9\xa5\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -27545,10 +27545,10 @@ const file_task_proto_rawDesc = "" +
 	"\tweb_fetch\x18\x14 \x01(\v2%.warp.multi_agent.v1.Message.WebFetchH\x00R\bwebFetch\x12M\n" +
 	"\fdebug_output\x18\x15 \x01(\v2(.warp.multi_agent.v1.Message.DebugOutputH\x00R\vdebugOutput\x12S\n" +
 	"\x0eartifact_event\x18\x16 \x01(\v2*.warp.multi_agent.v1.Message.ArtifactEventH\x00R\rartifactEvent\x12M\n" +
-	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12b\n" +
-	"\x11messages_received\x18\x18 \x01(\v2-.warp.multi_agent.v1.Message.MessagesReceivedB\x04\x88\xb5\x18\x01H\x00R\x10messagesReceived\x1a\xaf\x02\n" +
-	"\x10MessagesReceived\x12Y\n" +
-	"\bmessages\x18\x01 \x03(\v2=.warp.multi_agent.v1.Message.MessagesReceived.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
+	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12\x82\x01\n" +
+	"\x1dmessages_received_from_agents\x18\x18 \x01(\v27.warp.multi_agent.v1.Message.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x1a\xc3\x02\n" +
+	"\x1aMessagesReceivedFromAgents\x12c\n" +
+	"\bmessages\x18\x01 \x03(\v2G.warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
 	"\x0fReceivedMessage\x12\x1d\n" +
 	"\n" +
 	"message_id\x18\x01 \x01(\tR\tmessageId\x12&\n" +
@@ -28337,75 +28337,75 @@ var file_task_proto_goTypes = []any{
 	(Message_ToolCall_UseComputer_Action_MouseButton)(0),          // 4: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
 	(Message_ToolCall_UseComputer_Action_MouseWheel_Direction)(0), // 5: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
 	(RequestComputerUseResult_Approved_Platform)(0),               // 6: warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
-	(*Task)(nil),                                     // 7: warp.multi_agent.v1.Task
-	(*ReviewComments)(nil),                           // 8: warp.multi_agent.v1.ReviewComments
-	(*ReviewComment)(nil),                            // 9: warp.multi_agent.v1.ReviewComment
-	(*Message)(nil),                                  // 10: warp.multi_agent.v1.Message
-	(*RunShellCommandResult)(nil),                    // 11: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                          // 12: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                     // 13: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                     // 14: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestCreatePlanResult)(nil),                  // 15: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*SuggestPlanResult)(nil),                        // 16: warp.multi_agent.v1.SuggestPlanResult
-	(*GrepResult)(nil),                               // 17: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                           // 18: warp.multi_agent.v1.FileGlobResult
-	(*FileGlobV2Result)(nil),                         // 19: warp.multi_agent.v1.FileGlobV2Result
-	(*MCPResourceContent)(nil),                       // 20: warp.multi_agent.v1.MCPResourceContent
-	(*ReadMCPResourceResult)(nil),                    // 21: warp.multi_agent.v1.ReadMCPResourceResult
-	(*WriteToLongRunningShellCommandResult)(nil),     // 22: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),             // 23: warp.multi_agent.v1.SuggestNewConversationResult
-	(*ShellCommandFinished)(nil),                     // 24: warp.multi_agent.v1.ShellCommandFinished
-	(*PermissionDenied)(nil),                         // 25: warp.multi_agent.v1.PermissionDenied
-	(*CallMCPToolResult)(nil),                        // 26: warp.multi_agent.v1.CallMCPToolResult
-	(*SuggestPromptResult)(nil),                      // 27: warp.multi_agent.v1.SuggestPromptResult
-	(*OpenCodeReviewResult)(nil),                     // 28: warp.multi_agent.v1.OpenCodeReviewResult
-	(*InitProjectResult)(nil),                        // 29: warp.multi_agent.v1.InitProjectResult
-	(*ReadDocumentsResult)(nil),                      // 30: warp.multi_agent.v1.ReadDocumentsResult
-	(*EditDocumentsResult)(nil),                      // 31: warp.multi_agent.v1.EditDocumentsResult
-	(*CreateDocumentsResult)(nil),                    // 32: warp.multi_agent.v1.CreateDocumentsResult
-	(*ReadShellCommandOutputResult)(nil),             // 33: warp.multi_agent.v1.ReadShellCommandOutputResult
-	(*InsertReviewCommentsResult)(nil),               // 34: warp.multi_agent.v1.InsertReviewCommentsResult
-	(*Coordinates)(nil),                              // 35: warp.multi_agent.v1.Coordinates
-	(*UseComputerResult)(nil),                        // 36: warp.multi_agent.v1.UseComputerResult
-	(*ReadSkillResult)(nil),                          // 37: warp.multi_agent.v1.ReadSkillResult
-	(*ScreenDimensions)(nil),                         // 38: warp.multi_agent.v1.ScreenDimensions
-	(*RequestComputerUseResult)(nil),                 // 39: warp.multi_agent.v1.RequestComputerUseResult
-	(*FetchConversationResult)(nil),                  // 40: warp.multi_agent.v1.FetchConversationResult
-	(*ShellCommandError)(nil),                        // 41: warp.multi_agent.v1.ShellCommandError
-	(*UserQueryMode)(nil),                            // 42: warp.multi_agent.v1.UserQueryMode
-	(*StartAgent)(nil),                               // 43: warp.multi_agent.v1.StartAgent
-	(*StartAgentResult)(nil),                         // 44: warp.multi_agent.v1.StartAgentResult
-	(*SendMessageToAgent)(nil),                       // 45: warp.multi_agent.v1.SendMessageToAgent
-	(*SendMessageToAgentResult)(nil),                 // 46: warp.multi_agent.v1.SendMessageToAgentResult
-	(*RawImage)(nil),                                 // 47: warp.multi_agent.v1.RawImage
-	(*Task_Dependencies)(nil),                        // 48: warp.multi_agent.v1.Task.Dependencies
-	(*ReviewComment_CommentedFile)(nil),              // 49: warp.multi_agent.v1.ReviewComment.CommentedFile
-	(*ReviewComment_CommentedDiffset)(nil),           // 50: warp.multi_agent.v1.ReviewComment.CommentedDiffset
-	(*Message_MessagesReceived)(nil),                 // 51: warp.multi_agent.v1.Message.MessagesReceived
-	(*Message_UserQuery)(nil),                        // 52: warp.multi_agent.v1.Message.UserQuery
-	(*Message_SystemQuery)(nil),                      // 53: warp.multi_agent.v1.Message.SystemQuery
-	(*Message_AutoCodeDiff)(nil),                     // 54: warp.multi_agent.v1.Message.AutoCodeDiff
-	(*Message_ResumeConversation)(nil),               // 55: warp.multi_agent.v1.Message.ResumeConversation
-	(*Message_GeneratePassiveSuggestions)(nil),       // 56: warp.multi_agent.v1.Message.GeneratePassiveSuggestions
-	(*Message_CreateNewProject)(nil),                 // 57: warp.multi_agent.v1.Message.CreateNewProject
-	(*Message_CloneRepository)(nil),                  // 58: warp.multi_agent.v1.Message.CloneRepository
-	(*Message_SummarizeConversation)(nil),            // 59: warp.multi_agent.v1.Message.SummarizeConversation
-	(*Message_AgentOutput)(nil),                      // 60: warp.multi_agent.v1.Message.AgentOutput
-	(*Message_AgentReasoning)(nil),                   // 61: warp.multi_agent.v1.Message.AgentReasoning
-	(*Message_Summarization)(nil),                    // 62: warp.multi_agent.v1.Message.Summarization
-	(*Message_CodeReview)(nil),                       // 63: warp.multi_agent.v1.Message.CodeReview
-	(*Message_FetchReviewComments)(nil),              // 64: warp.multi_agent.v1.Message.FetchReviewComments
-	(*Message_ToolCall)(nil),                         // 65: warp.multi_agent.v1.Message.ToolCall
-	(*Message_ToolCallResult)(nil),                   // 66: warp.multi_agent.v1.Message.ToolCallResult
-	(*Message_ServerEvent)(nil),                      // 67: warp.multi_agent.v1.Message.ServerEvent
-	(*Message_UpdateTodos)(nil),                      // 68: warp.multi_agent.v1.Message.UpdateTodos
-	(*Message_UpdateReviewComments)(nil),             // 69: warp.multi_agent.v1.Message.UpdateReviewComments
-	(*Message_WebSearch)(nil),                        // 70: warp.multi_agent.v1.Message.WebSearch
-	(*Message_WebFetch)(nil),                         // 71: warp.multi_agent.v1.Message.WebFetch
-	(*Message_DebugOutput)(nil),                      // 72: warp.multi_agent.v1.Message.DebugOutput
-	(*Message_ArtifactEvent)(nil),                    // 73: warp.multi_agent.v1.Message.ArtifactEvent
-	(*Message_InvokeSkill)(nil),                      // 74: warp.multi_agent.v1.Message.InvokeSkill
-	(*Message_MessagesReceived_ReceivedMessage)(nil), // 75: warp.multi_agent.v1.Message.MessagesReceived.ReceivedMessage
+	(*Task)(nil),                                               // 7: warp.multi_agent.v1.Task
+	(*ReviewComments)(nil),                                     // 8: warp.multi_agent.v1.ReviewComments
+	(*ReviewComment)(nil),                                      // 9: warp.multi_agent.v1.ReviewComment
+	(*Message)(nil),                                            // 10: warp.multi_agent.v1.Message
+	(*RunShellCommandResult)(nil),                              // 11: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                    // 12: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                               // 13: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                               // 14: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestCreatePlanResult)(nil),                            // 15: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*SuggestPlanResult)(nil),                                  // 16: warp.multi_agent.v1.SuggestPlanResult
+	(*GrepResult)(nil),                                         // 17: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                                     // 18: warp.multi_agent.v1.FileGlobResult
+	(*FileGlobV2Result)(nil),                                   // 19: warp.multi_agent.v1.FileGlobV2Result
+	(*MCPResourceContent)(nil),                                 // 20: warp.multi_agent.v1.MCPResourceContent
+	(*ReadMCPResourceResult)(nil),                              // 21: warp.multi_agent.v1.ReadMCPResourceResult
+	(*WriteToLongRunningShellCommandResult)(nil),               // 22: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),                       // 23: warp.multi_agent.v1.SuggestNewConversationResult
+	(*ShellCommandFinished)(nil),                               // 24: warp.multi_agent.v1.ShellCommandFinished
+	(*PermissionDenied)(nil),                                   // 25: warp.multi_agent.v1.PermissionDenied
+	(*CallMCPToolResult)(nil),                                  // 26: warp.multi_agent.v1.CallMCPToolResult
+	(*SuggestPromptResult)(nil),                                // 27: warp.multi_agent.v1.SuggestPromptResult
+	(*OpenCodeReviewResult)(nil),                               // 28: warp.multi_agent.v1.OpenCodeReviewResult
+	(*InitProjectResult)(nil),                                  // 29: warp.multi_agent.v1.InitProjectResult
+	(*ReadDocumentsResult)(nil),                                // 30: warp.multi_agent.v1.ReadDocumentsResult
+	(*EditDocumentsResult)(nil),                                // 31: warp.multi_agent.v1.EditDocumentsResult
+	(*CreateDocumentsResult)(nil),                              // 32: warp.multi_agent.v1.CreateDocumentsResult
+	(*ReadShellCommandOutputResult)(nil),                       // 33: warp.multi_agent.v1.ReadShellCommandOutputResult
+	(*InsertReviewCommentsResult)(nil),                         // 34: warp.multi_agent.v1.InsertReviewCommentsResult
+	(*Coordinates)(nil),                                        // 35: warp.multi_agent.v1.Coordinates
+	(*UseComputerResult)(nil),                                  // 36: warp.multi_agent.v1.UseComputerResult
+	(*ReadSkillResult)(nil),                                    // 37: warp.multi_agent.v1.ReadSkillResult
+	(*ScreenDimensions)(nil),                                   // 38: warp.multi_agent.v1.ScreenDimensions
+	(*RequestComputerUseResult)(nil),                           // 39: warp.multi_agent.v1.RequestComputerUseResult
+	(*FetchConversationResult)(nil),                            // 40: warp.multi_agent.v1.FetchConversationResult
+	(*ShellCommandError)(nil),                                  // 41: warp.multi_agent.v1.ShellCommandError
+	(*UserQueryMode)(nil),                                      // 42: warp.multi_agent.v1.UserQueryMode
+	(*StartAgent)(nil),                                         // 43: warp.multi_agent.v1.StartAgent
+	(*StartAgentResult)(nil),                                   // 44: warp.multi_agent.v1.StartAgentResult
+	(*SendMessageToAgent)(nil),                                 // 45: warp.multi_agent.v1.SendMessageToAgent
+	(*SendMessageToAgentResult)(nil),                           // 46: warp.multi_agent.v1.SendMessageToAgentResult
+	(*RawImage)(nil),                                           // 47: warp.multi_agent.v1.RawImage
+	(*Task_Dependencies)(nil),                                  // 48: warp.multi_agent.v1.Task.Dependencies
+	(*ReviewComment_CommentedFile)(nil),                        // 49: warp.multi_agent.v1.ReviewComment.CommentedFile
+	(*ReviewComment_CommentedDiffset)(nil),                     // 50: warp.multi_agent.v1.ReviewComment.CommentedDiffset
+	(*Message_MessagesReceivedFromAgents)(nil),                 // 51: warp.multi_agent.v1.Message.MessagesReceivedFromAgents
+	(*Message_UserQuery)(nil),                                  // 52: warp.multi_agent.v1.Message.UserQuery
+	(*Message_SystemQuery)(nil),                                // 53: warp.multi_agent.v1.Message.SystemQuery
+	(*Message_AutoCodeDiff)(nil),                               // 54: warp.multi_agent.v1.Message.AutoCodeDiff
+	(*Message_ResumeConversation)(nil),                         // 55: warp.multi_agent.v1.Message.ResumeConversation
+	(*Message_GeneratePassiveSuggestions)(nil),                 // 56: warp.multi_agent.v1.Message.GeneratePassiveSuggestions
+	(*Message_CreateNewProject)(nil),                           // 57: warp.multi_agent.v1.Message.CreateNewProject
+	(*Message_CloneRepository)(nil),                            // 58: warp.multi_agent.v1.Message.CloneRepository
+	(*Message_SummarizeConversation)(nil),                      // 59: warp.multi_agent.v1.Message.SummarizeConversation
+	(*Message_AgentOutput)(nil),                                // 60: warp.multi_agent.v1.Message.AgentOutput
+	(*Message_AgentReasoning)(nil),                             // 61: warp.multi_agent.v1.Message.AgentReasoning
+	(*Message_Summarization)(nil),                              // 62: warp.multi_agent.v1.Message.Summarization
+	(*Message_CodeReview)(nil),                                 // 63: warp.multi_agent.v1.Message.CodeReview
+	(*Message_FetchReviewComments)(nil),                        // 64: warp.multi_agent.v1.Message.FetchReviewComments
+	(*Message_ToolCall)(nil),                                   // 65: warp.multi_agent.v1.Message.ToolCall
+	(*Message_ToolCallResult)(nil),                             // 66: warp.multi_agent.v1.Message.ToolCallResult
+	(*Message_ServerEvent)(nil),                                // 67: warp.multi_agent.v1.Message.ServerEvent
+	(*Message_UpdateTodos)(nil),                                // 68: warp.multi_agent.v1.Message.UpdateTodos
+	(*Message_UpdateReviewComments)(nil),                       // 69: warp.multi_agent.v1.Message.UpdateReviewComments
+	(*Message_WebSearch)(nil),                                  // 70: warp.multi_agent.v1.Message.WebSearch
+	(*Message_WebFetch)(nil),                                   // 71: warp.multi_agent.v1.Message.WebFetch
+	(*Message_DebugOutput)(nil),                                // 72: warp.multi_agent.v1.Message.DebugOutput
+	(*Message_ArtifactEvent)(nil),                              // 73: warp.multi_agent.v1.Message.ArtifactEvent
+	(*Message_InvokeSkill)(nil),                                // 74: warp.multi_agent.v1.Message.InvokeSkill
+	(*Message_MessagesReceivedFromAgents_ReceivedMessage)(nil), // 75: warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessage
 	nil, // 76: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	(*Message_GeneratePassiveSuggestions_ShellCommandCompleted)(nil),  // 77: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
 	(*Message_GeneratePassiveSuggestions_AgentResponseCompleted)(nil), // 78: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompleted
@@ -28580,7 +28580,7 @@ var file_task_proto_depIdxs = []int32{
 	72,  // 23: warp.multi_agent.v1.Message.debug_output:type_name -> warp.multi_agent.v1.Message.DebugOutput
 	73,  // 24: warp.multi_agent.v1.Message.artifact_event:type_name -> warp.multi_agent.v1.Message.ArtifactEvent
 	74,  // 25: warp.multi_agent.v1.Message.invoke_skill:type_name -> warp.multi_agent.v1.Message.InvokeSkill
-	51,  // 26: warp.multi_agent.v1.Message.messages_received:type_name -> warp.multi_agent.v1.Message.MessagesReceived
+	51,  // 26: warp.multi_agent.v1.Message.messages_received_from_agents:type_name -> warp.multi_agent.v1.Message.MessagesReceivedFromAgents
 	205, // 27: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	24,  // 28: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	25,  // 29: warp.multi_agent.v1.RunShellCommandResult.permission_denied:type_name -> warp.multi_agent.v1.PermissionDenied
@@ -28644,7 +28644,7 @@ var file_task_proto_depIdxs = []int32{
 	208, // 87: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
 	207, // 88: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
 	208, // 89: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
-	75,  // 90: warp.multi_agent.v1.Message.MessagesReceived.messages:type_name -> warp.multi_agent.v1.Message.MessagesReceived.ReceivedMessage
+	75,  // 90: warp.multi_agent.v1.Message.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessage
 	209, // 91: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
 	76,  // 92: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	42,  // 93: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
@@ -28874,7 +28874,7 @@ func file_task_proto_init() {
 		(*message_DebugOutput_)(nil),
 		(*message_ArtifactEvent_)(nil),
 		(*message_InvokeSkill_)(nil),
-		(*message_MessagesReceived_)(nil),
+		(*message_MessagesReceivedFromAgents_)(nil),
 	}
 	file_task_proto_msgTypes[4].OneofWrappers = []any{
 		(*runShellCommandResult_LongRunningCommandSnapshot)(nil),
