@@ -140,6 +140,7 @@ message Message {
     ArtifactEvent artifact_event = 22;
     InvokeSkill invoke_skill = 23;
     MessagesReceivedFromAgents messages_received_from_agents = 24 [ (internal) = true ];
+    ModelFallback model_fallback = 25;
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -967,6 +968,12 @@ message Message {
     // contents have any arguments) or pass a query to be added at the same time as the skill invocation
     // (in the case of 0-arg skills).
     UserQuery user_query = 2;
+  }
+
+  // Notifies the client that this turn switched to a fallback model.
+  message ModelFallback {
+    string model_id = 1;
+    string model_display_name = 2;
   }
 }
 
