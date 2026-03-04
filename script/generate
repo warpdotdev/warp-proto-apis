@@ -79,9 +79,7 @@ for proto in "${PROTO_FILES[@]}"; do
       -e '/option go_package/d' \
       "$API_PATH/$proto" > "$PYTHON_TEMP_DIR/$proto"
 done
-
 PYTHON_OUT="$API_PATH/gen/python"
-mkdir -p "$PYTHON_OUT"
 
 protoc --python_out="$PYTHON_OUT" --pyi_out="$PYTHON_OUT" \
   --proto_path="$PYTHON_TEMP_DIR" \
