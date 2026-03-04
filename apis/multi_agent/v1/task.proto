@@ -109,11 +109,12 @@ message ReviewComment {
 
   string comment = 2 [ (sensitive) = true ];
 
-  // The context this comment is associated with. At least one of these must be provided.
+  // The context this comment is associated with. At least one of these must be
+  // provided.
   oneof comment_target {
-    // The exact file location and line content that this comment is associated with.
-    // We need a diff hunk rather than just a starting and ending line number
-    // because the latter cannot uniquely identify a deleted line.
+    // The exact file location and line content that this comment is associated
+    // with. We need a diff hunk rather than just a starting and ending line
+    // number because the latter cannot uniquely identify a deleted line.
     DiffHunk commented_line = 3;
 
     // The file path that this comment is associated with.
@@ -153,7 +154,8 @@ message Message {
 
   // The timestamp that this message was produced.
   // For input messages, this is the timestamp the server received the request.
-  // For output messages, this is the timestamp the server finished the response for the request.
+  // For output messages, this is the timestamp the server finished the response
+  // for the request.
   google.protobuf.Timestamp timestamp = 14;
 
   // An opaque payload that the client should simply roundtrip.
@@ -237,9 +239,7 @@ message Message {
     InputContext context = 2;
   }
 
-  message AutoCodeDiff {
-    string query = 1 [ (sensitive) = true ];
-  }
+  message AutoCodeDiff { string query = 1 [ (sensitive) = true ]; }
 
   message ResumeConversation {}
 
@@ -268,13 +268,9 @@ message Message {
     message AgentResponseCompleted {}
   }
 
-  message CreateNewProject {
-    string query = 1 [ (sensitive) = true ];
-  }
+  message CreateNewProject { string query = 1 [ (sensitive) = true ]; }
 
-  message CloneRepository {
-    string url = 1 [ (sensitive) = true ];
-  }
+  message CloneRepository { string url = 1 [ (sensitive) = true ]; }
 
   // A user-requested summarization.
   message SummarizeConversation {
@@ -325,9 +321,7 @@ message Message {
 
   message CodeReview { ReviewComments comments = 1; }
 
-  message FetchReviewComments {
-    string repo_path = 1 [ (sensitive) = true ];
-  }
+  message FetchReviewComments { string repo_path = 1 [ (sensitive) = true ]; }
 
   // Tool call message type
   message ToolCall {
@@ -344,7 +338,7 @@ message Message {
       SuggestCreatePlan suggest_create_plan = 8;
       Grep grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2.
-      FileGlob file_glob = 10 [deprecated=true];
+      FileGlob file_glob = 10 [ deprecated = true ];
       ReadMCPResource read_mcp_resource = 11;
       CallMCPTool call_mcp_tool = 12;
       WriteToLongRunningShellCommand write_to_long_running_shell_command = 13;
@@ -365,7 +359,8 @@ message Message {
       FetchConversation fetch_conversation = 28;
       StartAgent start_agent = 29 [ (internal) = true ];
       SendMessageToAgent send_message_to_agent = 30 [ (internal) = true ];
-      TransferShellCommandControlToUser transfer_shell_command_control_to_user = 31;
+      TransferShellCommandControlToUser transfer_shell_command_control_to_user =
+          31;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -382,7 +377,7 @@ message Message {
     // A tool call to run a shell command.
     message RunShellCommand {
       string command = 1;
-      
+
       // DEPRECATED: Being replaced by risk_category
       bool is_read_only = 2;
       bool uses_pager = 3;
@@ -392,20 +387,21 @@ message Message {
       // DEPRECATED: Being replaced by risk_category
       bool is_risky = 5;
 
-      // Whether or not the harness should wait until the command is complete to report a result.
+      // Whether or not the harness should wait until the command is complete to
+      // report a result.
       //
-      // This is wrapped in a oneof to preserve field presence, which isn't preserved for scalar
-      // fields in prost-generated rust bindings. If unset, the client should wait until completion.
-      oneof wait_until_complete_value {
-        bool wait_until_complete = 6;
-      }
+      // This is wrapped in a oneof to preserve field presence, which isn't
+      // preserved for scalar fields in prost-generated rust bindings. If unset,
+      // the client should wait until completion.
+      oneof wait_until_complete_value { bool wait_until_complete = 6; }
 
-      // Finer-grained classification of command risk. When present, clients should prefer
-      // this over is_read_only and is_risky.
+      // Finer-grained classification of command risk. When present, clients
+      // should prefer this over is_read_only and is_risky.
       RiskCategory risk_category = 7;
     }
 
-    // A tool call to write bytes to the PTY when a command is running in the foreground.
+    // A tool call to write bytes to the PTY when a command is running in the
+    // foreground.
     message WriteToLongRunningShellCommand {
       // The exact set of bytes that the client should write to PTY.
       bytes input = 1;
@@ -419,27 +415,27 @@ message Message {
 
       message Mode {
         oneof mode {
-            // Write raw bytes directly.
-            google.protobuf.Empty raw = 1;
+          // Write raw bytes directly.
+          google.protobuf.Empty raw = 1;
 
-            // Write a line of text input.
-            //
-            // This write mode is designed to be used with REPLs/shell-like TUIs. Ensures the cursor is at the
-            // beginnning of the input buffer and sends an enter keystroke after `line`.
-            google.protobuf.Empty line = 2;
+          // Write a line of text input.
+          //
+          // This write mode is designed to be used with REPLs/shell-like TUIs.
+          // Ensures the cursor is at the beginnning of the input buffer and
+          // sends an enter keystroke after `line`.
+          google.protobuf.Empty line = 2;
 
-            // Writes a block of multi-line text input.
-            //
-            // Under the hood, this uses bracketed paste to insert the text as-is.
-            google.protobuf.Empty block = 3;
+          // Writes a block of multi-line text input.
+          //
+          // Under the hood, this uses bracketed paste to insert the text as-is.
+          google.protobuf.Empty block = 3;
         }
       }
     }
 
-    // A tool call to explicitly transfer control of a running shell command to the user.
-    message TransferShellCommandControlToUser {
-        string reason = 1;
-    }
+    // A tool call to explicitly transfer control of a running shell command to
+    // the user.
+    message TransferShellCommandControlToUser { string reason = 1; }
 
     message SuggestNewConversation {
       // The id of the message where we'd branch a new conversation.
@@ -493,7 +489,8 @@ message Message {
         // See here for more details on the semantic meaning of the fields:
         // https://cookbook.openai.com/examples/gpt4-1_prompting_guide#apply-patch
         message Hunk {
-          // Context to quickly identify the location of the change (i.e. the `@@` statements).
+          // Context to quickly identify the location of the change (i.e. the
+          // `@@` statements).
           repeated string change_context = 1;
           // The context lines right before the change.
           string pre_context = 2;
@@ -515,9 +512,7 @@ message Message {
         string content = 2;
       }
 
-      message DeleteFile {
-        string file_path = 1;
-      }
+      message DeleteFile { string file_path = 1; }
     }
 
     // A tool call to suggest a plan.
@@ -555,7 +550,8 @@ message Message {
       string search_dir = 2;
       // The maximum number of matches to return. Zero indicates no limit.
       int32 max_matches = 3;
-      // The maximum depth to search in. Zero indicates no limit. A max depth of 1 will match children of the path directory only.
+      // The maximum depth to search in. Zero indicates no limit. A max depth of
+      // 1 will match children of the path directory only.
       int32 max_depth = 4;
       // The minimum depth to search in. Zero indicates no limit.
       int32 min_depth = 5;
@@ -566,7 +562,8 @@ message Message {
       string uri = 1;
 
       // Optional identifier of the MCP server that provides this tool.
-      // If set, this should match the `id` of an MCPServer in the request's MCPContext.
+      // If set, this should match the `id` of an MCPServer in the request's
+      // MCPContext.
       string server_id = 2;
     }
 
@@ -579,7 +576,8 @@ message Message {
       google.protobuf.Struct args = 2;
 
       // Optional identifier of the MCP server that provides this tool.
-      // If set, this should match the `id` of an MCPServer in the request's MCPContext.
+      // If set, this should match the `id` of an MCPServer in the request's
+      // MCPContext.
       string server_id = 3;
     }
 
@@ -597,12 +595,13 @@ message Message {
         string description = 2;
         string query = 3;
       }
-      
+
       message PromptChip {
         string prompt = 1;
 
         // Optional. If supplied, this will be used as the label for the chip,
-        // while the `prompt` will be used as the actual prompt sent to the agent.
+        // while the `prompt` will be used as the actual prompt sent to the
+        // agent.
         //
         // This can be useful if the prompt is long and a shorter label is more
         // appropriate for display.
@@ -620,7 +619,8 @@ message Message {
       string task_id = 1;
       string payload = 2;
 
-      // Optional metadata about the subagent required to render the appropriate UI.
+      // Optional metadata about the subagent required to render the appropriate
+      // UI.
       oneof metadata {
         CLISubagent cli = 3;
         google.protobuf.Empty research = 4;
@@ -631,9 +631,7 @@ message Message {
         google.protobuf.Empty warp_documentation_search = 9;
       }
 
-      message CLISubagent {
-        string command_id = 1;
-      }
+      message CLISubagent { string command_id = 1; }
     }
 
     // A tool call to read documents.
@@ -717,7 +715,7 @@ message Message {
         CommentSide side = 3;
       }
     }
-    
+
     // A tool call to run a Skill.
     message ReadSkill {
       oneof skill_reference {
@@ -762,18 +760,14 @@ message Message {
           FORWARD = 4;
         }
 
-        message MouseMove {
-          Coordinates to = 1;
-        }
+        message MouseMove { Coordinates to = 1; }
 
         message MouseDown {
           MouseButton button = 1;
           Coordinates at = 2;
         }
 
-        message MouseUp {
-          MouseButton button = 1;
-        }
+        message MouseUp { MouseButton button = 1; }
 
         message MouseWheel {
           enum Direction {
@@ -786,7 +780,8 @@ message Message {
           Coordinates at = 1;
           Direction direction = 2;
 
-          // The model providers can provide a scroll distance either in pixels or clicks.
+          // The model providers can provide a scroll distance either in pixels
+          // or clicks.
           oneof distance {
             // The number of pixels to scroll.
             int32 pixels = 3;
@@ -795,38 +790,30 @@ message Message {
           }
         }
 
-        message Wait {
-          google.protobuf.Duration duration = 1;
-        }
+        message Wait { google.protobuf.Duration duration = 1; }
 
-        message TypeText {
-          string text = 1 [ (sensitive) = true ];
-        }
+        message TypeText { string text = 1 [ (sensitive) = true ]; }
 
         // Representation of a single key on the keyboard.
         message Key {
           oneof data {
-            // Representation of a non-character key (e.g. "Tab", "Enter"). On MacOS and
-            // Windows, this is a keycode that represents the physical key. On Linux,
-            // this is an X11 keysym.
+            // Representation of a non-character key (e.g. "Tab", "Enter"). On
+            // MacOS and Windows, this is a keycode that represents the physical
+            // key. On Linux, this is an X11 keysym.
             int32 keycode = 1;
             // A character key (e.g. "a", "+").
             string char = 2;
           }
         }
 
-        message KeyDown {
-          Key key = 1;
-        }
+        message KeyDown { Key key = 1; }
 
-        message KeyUp {
-          Key key = 2;
-        }
+        message KeyUp { Key key = 2; }
       }
     }
 
-    // A tool call to check with the client that the agent is allowed to initiate
-    // computer use.
+    // A tool call to check with the client that the agent is allowed to
+    // initiate computer use.
     message RequestComputerUse {
       // A brief description of what the agent wants to do with computer use.
       string task_summary = 1 [ (sensitive) = true ];
@@ -855,9 +842,9 @@ message Message {
 
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
-    reserved 13;  // Removed: RefineResult - no longer used by client
-    reserved refine;  // Field name also reserved for field masks
-    
+    reserved 13;     // Removed: RefineResult - no longer used by client
+    reserved refine; // Field name also reserved for field masks
+
     string tool_call_id = 1;
 
     // Context that the client supplied as part of the tool call result input.
@@ -875,11 +862,12 @@ message Message {
       SuggestCreatePlanResult suggest_create_plan = 8;
       GrepResult grep = 9;
       // DEPRECATED: Being replaced by FileGlobV2Result.
-      FileGlobResult file_glob = 10 [deprecated=true];
+      FileGlobResult file_glob = 10 [ deprecated = true ];
       google.protobuf.Empty cancel = 14;
       ReadMCPResourceResult read_mcp_resource = 15;
       CallMCPToolResult call_mcp_tool = 16;
-      WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 17;
+      WriteToLongRunningShellCommandResult write_to_long_running_shell_command =
+          17;
       SuggestNewConversationResult suggest_new_conversation = 18;
       FileGlobV2Result file_glob_v2 = 19;
       SuggestPromptResult suggest_prompt = 20;
@@ -897,16 +885,15 @@ message Message {
       FetchConversationResult fetch_conversation = 32;
       StartAgentResult start_agent = 33 [ (internal) = true ];
       SendMessageToAgentResult send_message_to_agent = 34 [ (internal) = true ];
-      TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 35;
+      TransferShellCommandControlToUserResult
+          transfer_shell_command_control_to_user = 35;
     }
 
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
     message ServerResult { string serialized_result = 1; }
 
-    message SubagentResult {
-        string payload = 1;
-    }
+    message SubagentResult { string payload = 1; }
   }
 
   // An event that is preserved in message history
@@ -926,9 +913,7 @@ message Message {
 
   // Message for review comment operations.
   message UpdateReviewComments {
-    oneof operation {
-      AddressReviewComments address_review_comments = 1;
-    }
+    oneof operation { AddressReviewComments address_review_comments = 1; }
 
     message AddressReviewComments { repeated string comment_ids = 1; }
   }
@@ -943,9 +928,7 @@ message Message {
         google.protobuf.Empty error = 3;
       }
 
-      message Searching {
-        string query = 1 [ (sensitive) = true ];
-      }
+      message Searching { string query = 1 [ (sensitive) = true ]; }
 
       message Success {
         string query = 1 [ (sensitive) = true ];
@@ -969,9 +952,7 @@ message Message {
         google.protobuf.Empty error = 3;
       }
 
-      message Fetching {
-        repeated string urls = 1 [ (sensitive) = true ];
-      }
+      message Fetching { repeated string urls = 1 [ (sensitive) = true ]; }
 
       message Success {
         repeated FetchedPage pages = 1;
@@ -988,14 +969,13 @@ message Message {
   // Debug output message type for staging/local development only.
   // These messages are emitted by the server for debugging purposes
   // and should only be displayed on WarpDev client builds.
-  message DebugOutput {
-    string text = 1;
-  }
+  message DebugOutput { string text = 1; }
 
   // Message for artifact-related events.
   message ArtifactEvent {
     oneof event {
       ArtifactCreated created = 1;
+      ForkArtifacts fork_artifacts = 2;
     }
 
     message PullRequestArtifact {
@@ -1009,20 +989,42 @@ message Message {
       string description = 3 [ (sensitive) = true ];
     }
 
+    message PlanArtifact {
+      string document_id = 1;
+      string notebook_uid = 2;
+      string title = 3 [ (sensitive) = true ];
+    }
+
+    // An artifact associated with a conversation, used by ForkArtifacts.
+    message ConversationArtifact {
+      oneof artifact {
+        PullRequestArtifact pull_request = 1;
+        ScreenshotArtifact screenshot = 2;
+        PlanArtifact plan = 3;
+      }
+    }
+
     // Notifies the client that an artifact was created (e.g. a PR).
     message ArtifactCreated {
+      // We do not use this event to notify the client about plan artifact
+      // creation, which happens when we sync a plan to Warp Drive, so we
+      // explicitly use a oneof here instead of reusing the
+      // `ConversationArtifact` type.
       oneof artifact {
         PullRequestArtifact pull_request = 1;
         ScreenshotArtifact screenshot = 2;
       }
     }
+
+    // Sets conversation artifacts on fork.
+    message ForkArtifacts { repeated ConversationArtifact artifacts = 1; }
   }
 
   message InvokeSkill {
     Skill skill = 1;
-    // This field is used to either pass in arguments for the skill invocation (if the skill
-    // contents have any arguments) or pass a query to be added at the same time as the skill invocation
-    // (in the case of 0-arg skills).
+    // This field is used to either pass in arguments for the skill invocation
+    // (if the skill contents have any arguments) or pass a query to be added at
+    // the same time as the skill invocation (in the case of 0-arg skills).
     UserQuery user_query = 2;
   }
 
@@ -1042,7 +1044,8 @@ message RunShellCommandResult {
   string command = 3 [ (sensitive) = true ];
 
   oneof result {
-    // The command is now considered long-running and this is it's latest snapshot.
+    // The command is now considered long-running and this is it's latest
+    // snapshot.
     LongRunningShellCommandSnapshot long_running_command_snapshot = 4;
 
     // The command completed.
@@ -1067,13 +1070,9 @@ message ReadFilesResult {
     Error error = 2;
   }
 
-  message TextFilesSuccess {
-    repeated FileContent files = 1;
-  }
+  message TextFilesSuccess { repeated FileContent files = 1; }
 
-  message AnyFilesSuccess {
-    repeated AnyFileContent files = 1;
-  }
+  message AnyFilesSuccess { repeated AnyFileContent files = 1; }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
@@ -1098,9 +1097,9 @@ message ApplyFileDiffsResult {
   }
 
   message Success {
-    // Deprecated: Use updated_files_v2 instead. This field is kept for backward compatibility
-    // with older clients and will be removed in a future version.
-    repeated FileContent updated_files = 1 [deprecated = true];
+    // Deprecated: Use updated_files_v2 instead. This field is kept for backward
+    // compatibility with older clients and will be removed in a future version.
+    repeated FileContent updated_files = 1 [ deprecated = true ];
 
     repeated UpdatedFileContent updated_files_v2 = 2;
     repeated DeletedFile deleted_files = 3;
@@ -1112,9 +1111,7 @@ message ApplyFileDiffsResult {
       bool was_edited_by_user = 2;
     }
 
-    message DeletedFile {
-      string file_path = 1 [ (sensitive) = true ];
-    }
+    message DeletedFile { string file_path = 1 [ (sensitive) = true ]; }
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -1239,7 +1236,8 @@ message ReadMCPResourceResult {
 
   message Success {
     // Reading a single MCP resource can result in multiple resources.
-    // See https://modelcontextprotocol.io/docs/concepts/resources#reading-resources.
+    // See
+    // https://modelcontextprotocol.io/docs/concepts/resources#reading-resources.
     repeated MCPResourceContent contents = 1;
   }
 
@@ -1255,11 +1253,11 @@ message WriteToLongRunningShellCommandResult {
 }
 
 message TransferShellCommandControlToUserResult {
-    oneof result {
-      LongRunningShellCommandSnapshot long_running_command_snapshot = 1;
-      ShellCommandFinished command_finished = 2;
-      ShellCommandError error = 3;
-    }
+  oneof result {
+    LongRunningShellCommandSnapshot long_running_command_snapshot = 1;
+    ShellCommandFinished command_finished = 2;
+    ShellCommandError error = 3;
+  }
 }
 
 message SuggestNewConversationResult {
@@ -1268,9 +1266,7 @@ message SuggestNewConversationResult {
     Rejected rejected = 2;
   }
 
-  message Accepted {
-    string message_id = 1;
-  }
+  message Accepted { string message_id = 1; }
 
   message Rejected {}
 }
@@ -1284,9 +1280,7 @@ message ShellCommandFinished {
 
 // The reason why a shell command was denied permission to run.
 message PermissionDenied {
-  oneof reason {
-    google.protobuf.Empty denylisted_command = 1;
-  }
+  oneof reason { google.protobuf.Empty denylisted_command = 1; }
 }
 
 message CallMCPToolResult {
@@ -1341,9 +1335,7 @@ message ReadDocumentsResult {
     Error error = 2;
   }
 
-  message Success {
-    repeated DocumentContent documents = 1;
-  }
+  message Success { repeated DocumentContent documents = 1; }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
@@ -1355,9 +1347,7 @@ message EditDocumentsResult {
     Error error = 2;
   }
 
-  message Success {
-    repeated DocumentContent updated_documents = 1;
-  }
+  message Success { repeated DocumentContent updated_documents = 1; }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
@@ -1369,9 +1359,7 @@ message CreateDocumentsResult {
     Error error = 2;
   }
 
-  message Success {
-    repeated DocumentContent created_documents = 1;
-  }
+  message Success { repeated DocumentContent created_documents = 1; }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
@@ -1394,9 +1382,7 @@ message InsertReviewCommentsResult {
 
   message Success {}
 
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 // Screen coordinates used for computer use actions.
@@ -1416,9 +1402,7 @@ message UseComputerResult {
     Coordinates cursor_position = 2;
   }
 
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 message ReadSkillResult {
@@ -1472,9 +1456,7 @@ message RequestComputerUseResult {
 
   message Rejected {}
 
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 // Result of a `FetchConversation` tool call.
@@ -1491,20 +1473,20 @@ message FetchConversationResult {
     string directory_path = 2;
   }
 
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 message ShellCommandError {
   oneof type {
-    // There was no command execution found with the given command_id in the tool call.
+    // There was no command execution found with the given command_id in the
+    // tool call.
     google.protobuf.Empty command_not_found = 1;
   }
 }
 
 // An enumeration of the different types of client-server tools.
-// This must map 1:1 with the list of structured tool call / tool call result types.
+// This must map 1:1 with the list of structured tool call / tool call result
+// types.
 //
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
@@ -1542,7 +1524,8 @@ enum ToolType {
 
 message UserQueryMode {
   oneof type {
-    // We can change this to a non-empty `Plan` type later, this is backwards compatible
+    // We can change this to a non-empty `Plan` type later, this is backwards
+    // compatible
     google.protobuf.Empty plan = 1;
     google.protobuf.Empty orchestrate = 2;
   }
@@ -1591,9 +1574,7 @@ message StartAgentResult {
     // The server-assigned agent ID (conversation_id for V0).
     string agent_id = 1;
   }
-  message Error {
-    string error = 1;
-  }
+  message Error { string error = 1; }
 }
 
 // A client tool call to send a message to one or more agents.
@@ -1617,9 +1598,7 @@ message SendMessageToAgentResult {
     // The client-generated message ID.
     string message_id = 1;
   }
-  message Error {
-    string message = 1 [ (sensitive) = true ];
-  }
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 message RawImage {
