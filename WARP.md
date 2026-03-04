@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Overview
 
-This repository centralizes protobuf-based APIs for Warp services and clients. It maintains proto definitions alongside generated code for supported languages (Go and Rust).
+This repository centralizes protobuf-based APIs for Warp services and clients. It maintains proto definitions alongside generated code for supported languages (Go, Python, and Rust).
 
 ## Common Commands
 
@@ -27,7 +27,7 @@ Example:
 ./script/generate -a multi_agent -v v1
 ```
 
-This regenerates both Go and Rust bindings. The Go bindings are checked into git, while Rust bindings are generated at compile time via build scripts.
+This regenerates Go and Python bindings, which are checked into git. Rust bindings are generated at compile time via build scripts.
 
 ### Building Rust Crates
 ```bash
@@ -56,6 +56,7 @@ apis/
         ├── *.proto     # Proto definitions (may be multiple files)
         └── gen/
             ├── go/     # Generated Go bindings (checked in)
+            ├── python/ # Generated Python bindings (checked in)
             └── rust/   # Rust crate with build.rs (bindings generated at compile time)
 ```
 
@@ -72,6 +73,18 @@ apis/
 - Generated Go bindings live in `apis/<api>/<version>/gen/go/`
 - Module path: `github.com/warpdotdev/warp-proto-apis/apis/<api>`
 - Go package import path: `github.com/warpdotdev/warp-proto-apis/apis/<api>/<version>/gen/go`
+
+### Python
+- Uses built-in `protoc --python_out` and `--pyi_out` (no plugin needed)
+- Generated `*_pb2.py` and `*_pb2.pyi` files are checked into version control
+- Must be regenerated manually via `./script/generate` after proto changes
+- Proto files are preprocessed to strip Go-specific directives (same as Rust)
+- Post-processed to convert absolute imports to relative imports for package compatibility
+- Installable as a dependency via git reference pointing to `apis/<api>/<version>/gen/python`:
+```
+# pyproject.toml [project.dependencies]
+warp-multi-agent-api @ git+ssh://git@github.com/warpdotdev/warp-proto-apis.git@<rev>#subdirectory=apis/multi_agent/v1/gen/python
+```
 
 ### Rust
 - Uses `prost` and `prost-reflect` crates
@@ -108,9 +121,9 @@ The repository uses proto `edition = "2023"`, which is automatically converted t
 The repository has a GitHub Actions workflow that validates generated code is up-to-date:
 - Runs on pushes and PRs to `main`
 - Executes `./script/bootstrap` and `./script/generate`
-- Fails if generated Go code differs from what's checked in
+- Fails if generated Go or Python code differs from what's checked in
 
-**Important**: Always run `./script/generate` after modifying proto files and commit the generated Go code changes.
+**Important**: Always run `./script/generate` after modifying proto files and commit the generated Go and Python code changes.
 
 ## Dependencies
 
@@ -133,14 +146,14 @@ The repository has a GitHub Actions workflow that validates generated code is up
 ### Adding a New Proto File
 1. Create the `.proto` file in the appropriate `apis/<api>/<version>/` directory
 2. Run `./script/generate -a <api> -v <version>`
-3. Commit both the new proto file and the generated Go code
+3. Commit both the new proto file and the generated Go and Python code
 4. Rust bindings will be automatically generated at compile time
 
 ### Modifying Existing Proto Files
 1. Edit the proto file
-2. Run `./script/generate -a <api> -v <version>` to update Go bindings
+2. Run `./script/generate -a <api> -v <version>` to update Go and Python bindings
 3. For Rust, run `cargo build` to verify the build script handles the changes correctly
-4. Commit both proto and generated Go changes
+4. Commit both proto and generated Go/Python changes
 
 ### Working with Multi-Agent API
 The `multi_agent/v1` API is the core communication protocol between Warp clients and the multi-agent backend. Key message types:
