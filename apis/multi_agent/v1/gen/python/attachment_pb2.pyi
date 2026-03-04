@@ -14,7 +14,7 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Attachment(_message.Message):
-    __slots__ = ("plain_text", "executed_shell_command", "running_shell_command", "drive_object", "diff_hunk", "diff_set", "document_content")
+    __slots__ = ("plain_text", "executed_shell_command", "running_shell_command", "drive_object", "diff_hunk", "diff_set", "document_content", "file_path_reference")
     PLAIN_TEXT_FIELD_NUMBER: _ClassVar[int]
     EXECUTED_SHELL_COMMAND_FIELD_NUMBER: _ClassVar[int]
     RUNNING_SHELL_COMMAND_FIELD_NUMBER: _ClassVar[int]
@@ -22,6 +22,7 @@ class Attachment(_message.Message):
     DIFF_HUNK_FIELD_NUMBER: _ClassVar[int]
     DIFF_SET_FIELD_NUMBER: _ClassVar[int]
     DOCUMENT_CONTENT_FIELD_NUMBER: _ClassVar[int]
+    FILE_PATH_REFERENCE_FIELD_NUMBER: _ClassVar[int]
     plain_text: str
     executed_shell_command: ExecutedShellCommand
     running_shell_command: RunningShellCommand
@@ -29,7 +30,8 @@ class Attachment(_message.Message):
     diff_hunk: DiffHunk
     diff_set: DiffSet
     document_content: _document_content_pb2.DocumentContent
-    def __init__(self, plain_text: _Optional[str] = ..., executed_shell_command: _Optional[_Union[ExecutedShellCommand, _Mapping]] = ..., running_shell_command: _Optional[_Union[RunningShellCommand, _Mapping]] = ..., drive_object: _Optional[_Union[DriveObject, _Mapping]] = ..., diff_hunk: _Optional[_Union[DiffHunk, _Mapping]] = ..., diff_set: _Optional[_Union[DiffSet, _Mapping]] = ..., document_content: _Optional[_Union[_document_content_pb2.DocumentContent, _Mapping]] = ...) -> None: ...
+    file_path_reference: FilePathReference
+    def __init__(self, plain_text: _Optional[str] = ..., executed_shell_command: _Optional[_Union[ExecutedShellCommand, _Mapping]] = ..., running_shell_command: _Optional[_Union[RunningShellCommand, _Mapping]] = ..., drive_object: _Optional[_Union[DriveObject, _Mapping]] = ..., diff_hunk: _Optional[_Union[DiffHunk, _Mapping]] = ..., diff_set: _Optional[_Union[DiffSet, _Mapping]] = ..., document_content: _Optional[_Union[_document_content_pb2.DocumentContent, _Mapping]] = ..., file_path_reference: _Optional[_Union[FilePathReference, _Mapping]] = ...) -> None: ...
 
 class ExecutedShellCommand(_message.Message):
     __slots__ = ("command", "output", "exit_code", "command_id", "started_ts", "finished_ts", "is_auto_attached")
@@ -169,3 +171,9 @@ class DiffSet(_message.Message):
     curr_ref: CurrentRef
     base_ref: BaseRef
     def __init__(self, hunks: _Optional[_Iterable[_Union[DiffSet.DiffHunk, _Mapping]]] = ..., curr_ref: _Optional[_Union[CurrentRef, _Mapping]] = ..., base_ref: _Optional[_Union[BaseRef, _Mapping]] = ...) -> None: ...
+
+class FilePathReference(_message.Message):
+    __slots__ = ("file_path",)
+    FILE_PATH_FIELD_NUMBER: _ClassVar[int]
+    file_path: str
+    def __init__(self, file_path: _Optional[str] = ...) -> None: ...

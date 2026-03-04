@@ -29,7 +29,7 @@ from . import options_pb2 as options__pb2
 from . import file_content_pb2 as file__content__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10\x61ttachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16\x64ocument_content.proto\x1a\roptions.proto\x1a\x12\x66ile_content.proto\"\xaf\x03\n\nAttachment\x12\x1a\n\nplain_text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12K\n\x16\x65xecuted_shell_command\x18\x02 \x01(\x0b\x32).warp.multi_agent.v1.ExecutedShellCommandH\x00\x12I\n\x15running_shell_command\x18\x03 \x01(\x0b\x32(.warp.multi_agent.v1.RunningShellCommandH\x00\x12\x38\n\x0c\x64rive_object\x18\x04 \x01(\x0b\x32 .warp.multi_agent.v1.DriveObjectH\x00\x12\x36\n\tdiff_hunk\x18\x05 \x01(\x0b\x32\x1d.warp.multi_agent.v1.DiffHunkB\x02\x18\x01H\x00\x12\x30\n\x08\x64iff_set\x18\x06 \x01(\x0b\x32\x1c.warp.multi_agent.v1.DiffSetH\x00\x12@\n\x10\x64ocument_content\x18\x07 \x01(\x0b\x32$.warp.multi_agent.v1.DocumentContentH\x00\x42\x07\n\x05value\"\xe5\x01\n\x14\x45xecutedShellCommand\x12\x15\n\x07\x63ommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x14\n\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01\x12\x11\n\texit_code\x18\x03 \x01(\x05\x12\x12\n\ncommand_id\x18\x04 \x01(\t\x12.\n\nstarted_ts\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0b\x66inished_ts\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x18\n\x10is_auto_attached\x18\x07 \x01(\x08\"t\n\x13RunningShellCommand\x12\x15\n\x07\x63ommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x46\n\x08snapshot\x18\x02 \x01(\x0b\x32\x34.warp.multi_agent.v1.LongRunningShellCommandSnapshot\"[\n\x1fLongRunningShellCommandSnapshot\x12\x14\n\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x0e\n\x06\x63ursor\x18\x02 \x01(\t\x12\x12\n\ncommand_id\x18\x03 \x01(\t\"\xe3\x01\n\x0b\x44riveObject\x12\x11\n\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x31\n\x08workflow\x18\x02 \x01(\x0b\x32\x1d.warp.multi_agent.v1.WorkflowH\x00\x12\x31\n\x08notebook\x18\x03 \x01(\x0b\x32\x1d.warp.multi_agent.v1.NotebookH\x00\x12I\n\x15generic_string_object\x18\x04 \x01(\x0b\x32(.warp.multi_agent.v1.GenericStringObjectH\x00\x42\x10\n\x0eobject_payload\"P\n\x08Workflow\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x19\n\x0b\x64\x65scription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07\x63ommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01\"6\n\x08Notebook\x12\x13\n\x05title\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07\x63ontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01\"A\n\x13GenericStringObject\x12\x15\n\x07payload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x13\n\x0bobject_type\x18\x02 \x01(\t\"\x86\x03\n\x08\x44iffHunk\x12\x17\n\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12=\n\nline_range\x18\x02 \x01(\x0b\x32).warp.multi_agent.v1.FileContentLineRange\x12\x1a\n\x0c\x64iff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01\x12\x13\n\x0blines_added\x18\x04 \x01(\r\x12\x15\n\rlines_removed\x18\x05 \x01(\r\x12#\n\x13\x63urrent_branch_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12%\n\x1b\x63urrent_headless_commit_sha\x18\x07 \x01(\tH\x00\x12 \n\x10\x62\x61se_branch_name\x18\x08 \x01(\tB\x04\x80\xb5\x18\x01H\x01\x12\"\n\x18\x62\x61se_headless_commit_sha\x18\t \x01(\tH\x01\x12\x35\n\x13uncommitted_changes\x18\n \x01(\x0b\x32\x16.google.protobuf.EmptyH\x01\x42\t\n\x07\x63urrentB\x06\n\x04\x62\x61se\"O\n\nCurrentRef\x12\x1b\n\x0b\x62ranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12\x1d\n\x13headless_commit_sha\x18\x02 \x01(\tH\x00\x42\x05\n\x03ref\"\x83\x01\n\x07\x42\x61seRef\x12\x1b\n\x0b\x62ranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12\x1d\n\x13headless_commit_sha\x18\x02 \x01(\tH\x00\x12\x35\n\x13uncommitted_changes\x18\x03 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x42\x05\n\x03ref\"\xcf\x02\n\x07\x44iffSet\x12\x34\n\x05hunks\x18\x01 \x03(\x0b\x32%.warp.multi_agent.v1.DiffSet.DiffHunk\x12\x31\n\x08\x63urr_ref\x18\x02 \x01(\x0b\x32\x1f.warp.multi_agent.v1.CurrentRef\x12.\n\x08\x62\x61se_ref\x18\x03 \x01(\x0b\x32\x1c.warp.multi_agent.v1.BaseRef\x1a\xaa\x01\n\x08\x44iffHunk\x12\x17\n\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12=\n\nline_range\x18\x02 \x01(\x0b\x32).warp.multi_agent.v1.FileContentLineRange\x12\x1a\n\x0c\x64iff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01\x12\x13\n\x0blines_added\x18\x04 \x01(\r\x12\x15\n\rlines_removed\x18\x05 \x01(\rb\x08\x65\x64itionsp\xe8\x07')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x10\x61ttachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16\x64ocument_content.proto\x1a\roptions.proto\x1a\x12\x66ile_content.proto\"\xf6\x03\n\nAttachment\x12\x1a\n\nplain_text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12K\n\x16\x65xecuted_shell_command\x18\x02 \x01(\x0b\x32).warp.multi_agent.v1.ExecutedShellCommandH\x00\x12I\n\x15running_shell_command\x18\x03 \x01(\x0b\x32(.warp.multi_agent.v1.RunningShellCommandH\x00\x12\x38\n\x0c\x64rive_object\x18\x04 \x01(\x0b\x32 .warp.multi_agent.v1.DriveObjectH\x00\x12\x36\n\tdiff_hunk\x18\x05 \x01(\x0b\x32\x1d.warp.multi_agent.v1.DiffHunkB\x02\x18\x01H\x00\x12\x30\n\x08\x64iff_set\x18\x06 \x01(\x0b\x32\x1c.warp.multi_agent.v1.DiffSetH\x00\x12@\n\x10\x64ocument_content\x18\x07 \x01(\x0b\x32$.warp.multi_agent.v1.DocumentContentH\x00\x12\x45\n\x13\x66ile_path_reference\x18\x08 \x01(\x0b\x32&.warp.multi_agent.v1.FilePathReferenceH\x00\x42\x07\n\x05value\"\xe5\x01\n\x14\x45xecutedShellCommand\x12\x15\n\x07\x63ommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x14\n\x06output\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01\x12\x11\n\texit_code\x18\x03 \x01(\x05\x12\x12\n\ncommand_id\x18\x04 \x01(\t\x12.\n\nstarted_ts\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0b\x66inished_ts\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x18\n\x10is_auto_attached\x18\x07 \x01(\x08\"t\n\x13RunningShellCommand\x12\x15\n\x07\x63ommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x46\n\x08snapshot\x18\x02 \x01(\x0b\x32\x34.warp.multi_agent.v1.LongRunningShellCommandSnapshot\"[\n\x1fLongRunningShellCommandSnapshot\x12\x14\n\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x0e\n\x06\x63ursor\x18\x02 \x01(\t\x12\x12\n\ncommand_id\x18\x03 \x01(\t\"\xe3\x01\n\x0b\x44riveObject\x12\x11\n\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x31\n\x08workflow\x18\x02 \x01(\x0b\x32\x1d.warp.multi_agent.v1.WorkflowH\x00\x12\x31\n\x08notebook\x18\x03 \x01(\x0b\x32\x1d.warp.multi_agent.v1.NotebookH\x00\x12I\n\x15generic_string_object\x18\x04 \x01(\x0b\x32(.warp.multi_agent.v1.GenericStringObjectH\x00\x42\x10\n\x0eobject_payload\"P\n\x08Workflow\x12\x12\n\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x19\n\x0b\x64\x65scription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07\x63ommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01\"6\n\x08Notebook\x12\x13\n\x05title\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07\x63ontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01\"A\n\x13GenericStringObject\x12\x15\n\x07payload\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x13\n\x0bobject_type\x18\x02 \x01(\t\"\x86\x03\n\x08\x44iffHunk\x12\x17\n\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12=\n\nline_range\x18\x02 \x01(\x0b\x32).warp.multi_agent.v1.FileContentLineRange\x12\x1a\n\x0c\x64iff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01\x12\x13\n\x0blines_added\x18\x04 \x01(\r\x12\x15\n\rlines_removed\x18\x05 \x01(\r\x12#\n\x13\x63urrent_branch_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12%\n\x1b\x63urrent_headless_commit_sha\x18\x07 \x01(\tH\x00\x12 \n\x10\x62\x61se_branch_name\x18\x08 \x01(\tB\x04\x80\xb5\x18\x01H\x01\x12\"\n\x18\x62\x61se_headless_commit_sha\x18\t \x01(\tH\x01\x12\x35\n\x13uncommitted_changes\x18\n \x01(\x0b\x32\x16.google.protobuf.EmptyH\x01\x42\t\n\x07\x63urrentB\x06\n\x04\x62\x61se\"O\n\nCurrentRef\x12\x1b\n\x0b\x62ranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12\x1d\n\x13headless_commit_sha\x18\x02 \x01(\tH\x00\x42\x05\n\x03ref\"\x83\x01\n\x07\x42\x61seRef\x12\x1b\n\x0b\x62ranch_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01H\x00\x12\x1d\n\x13headless_commit_sha\x18\x02 \x01(\tH\x00\x12\x35\n\x13uncommitted_changes\x18\x03 \x01(\x0b\x32\x16.google.protobuf.EmptyH\x00\x42\x05\n\x03ref\"\xcf\x02\n\x07\x44iffSet\x12\x34\n\x05hunks\x18\x01 \x03(\x0b\x32%.warp.multi_agent.v1.DiffSet.DiffHunk\x12\x31\n\x08\x63urr_ref\x18\x02 \x01(\x0b\x32\x1f.warp.multi_agent.v1.CurrentRef\x12.\n\x08\x62\x61se_ref\x18\x03 \x01(\x0b\x32\x1c.warp.multi_agent.v1.BaseRef\x1a\xaa\x01\n\x08\x44iffHunk\x12\x17\n\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12=\n\nline_range\x18\x02 \x01(\x0b\x32).warp.multi_agent.v1.FileContentLineRange\x12\x1a\n\x0c\x64iff_content\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01\x12\x13\n\x0blines_added\x18\x04 \x01(\r\x12\x15\n\rlines_removed\x18\x05 \x01(\r\",\n\x11\x46ilePathReference\x12\x17\n\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x62\x08\x65\x64itionsp\xe8\x07')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -78,30 +78,34 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DIFFSET_DIFFHUNK'].fields_by_name['file_path']._serialized_options = b'\200\265\030\001'
   _globals['_DIFFSET_DIFFHUNK'].fields_by_name['diff_content']._loaded_options = None
   _globals['_DIFFSET_DIFFHUNK'].fields_by_name['diff_content']._serialized_options = b'\200\265\030\001'
+  _globals['_FILEPATHREFERENCE'].fields_by_name['file_path']._loaded_options = None
+  _globals['_FILEPATHREFERENCE'].fields_by_name['file_path']._serialized_options = b'\200\265\030\001'
   _globals['_ATTACHMENT']._serialized_start=163
-  _globals['_ATTACHMENT']._serialized_end=594
-  _globals['_EXECUTEDSHELLCOMMAND']._serialized_start=597
-  _globals['_EXECUTEDSHELLCOMMAND']._serialized_end=826
-  _globals['_RUNNINGSHELLCOMMAND']._serialized_start=828
-  _globals['_RUNNINGSHELLCOMMAND']._serialized_end=944
-  _globals['_LONGRUNNINGSHELLCOMMANDSNAPSHOT']._serialized_start=946
-  _globals['_LONGRUNNINGSHELLCOMMANDSNAPSHOT']._serialized_end=1037
-  _globals['_DRIVEOBJECT']._serialized_start=1040
-  _globals['_DRIVEOBJECT']._serialized_end=1267
-  _globals['_WORKFLOW']._serialized_start=1269
-  _globals['_WORKFLOW']._serialized_end=1349
-  _globals['_NOTEBOOK']._serialized_start=1351
-  _globals['_NOTEBOOK']._serialized_end=1405
-  _globals['_GENERICSTRINGOBJECT']._serialized_start=1407
-  _globals['_GENERICSTRINGOBJECT']._serialized_end=1472
-  _globals['_DIFFHUNK']._serialized_start=1475
-  _globals['_DIFFHUNK']._serialized_end=1865
-  _globals['_CURRENTREF']._serialized_start=1867
-  _globals['_CURRENTREF']._serialized_end=1946
-  _globals['_BASEREF']._serialized_start=1949
-  _globals['_BASEREF']._serialized_end=2080
-  _globals['_DIFFSET']._serialized_start=2083
-  _globals['_DIFFSET']._serialized_end=2418
-  _globals['_DIFFSET_DIFFHUNK']._serialized_start=1475
-  _globals['_DIFFSET_DIFFHUNK']._serialized_end=1645
+  _globals['_ATTACHMENT']._serialized_end=665
+  _globals['_EXECUTEDSHELLCOMMAND']._serialized_start=668
+  _globals['_EXECUTEDSHELLCOMMAND']._serialized_end=897
+  _globals['_RUNNINGSHELLCOMMAND']._serialized_start=899
+  _globals['_RUNNINGSHELLCOMMAND']._serialized_end=1015
+  _globals['_LONGRUNNINGSHELLCOMMANDSNAPSHOT']._serialized_start=1017
+  _globals['_LONGRUNNINGSHELLCOMMANDSNAPSHOT']._serialized_end=1108
+  _globals['_DRIVEOBJECT']._serialized_start=1111
+  _globals['_DRIVEOBJECT']._serialized_end=1338
+  _globals['_WORKFLOW']._serialized_start=1340
+  _globals['_WORKFLOW']._serialized_end=1420
+  _globals['_NOTEBOOK']._serialized_start=1422
+  _globals['_NOTEBOOK']._serialized_end=1476
+  _globals['_GENERICSTRINGOBJECT']._serialized_start=1478
+  _globals['_GENERICSTRINGOBJECT']._serialized_end=1543
+  _globals['_DIFFHUNK']._serialized_start=1546
+  _globals['_DIFFHUNK']._serialized_end=1936
+  _globals['_CURRENTREF']._serialized_start=1938
+  _globals['_CURRENTREF']._serialized_end=2017
+  _globals['_BASEREF']._serialized_start=2020
+  _globals['_BASEREF']._serialized_end=2151
+  _globals['_DIFFSET']._serialized_start=2154
+  _globals['_DIFFSET']._serialized_end=2489
+  _globals['_DIFFSET_DIFFHUNK']._serialized_start=1546
+  _globals['_DIFFSET_DIFFHUNK']._serialized_end=1716
+  _globals['_FILEPATHREFERENCE']._serialized_start=2491
+  _globals['_FILEPATHREFERENCE']._serialized_end=2535
 # @@protoc_insertion_point(module_scope)

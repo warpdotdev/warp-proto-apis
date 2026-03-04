@@ -50,6 +50,9 @@ class ToolType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     READ_SKILL: _ClassVar[ToolType]
     REQUEST_COMPUTER_USE: _ClassVar[ToolType]
     FETCH_CONVERSATION: _ClassVar[ToolType]
+    START_AGENT: _ClassVar[ToolType]
+    SEND_MESSAGE_TO_AGENT: _ClassVar[ToolType]
+    TRANSFER_SHELL_COMMAND_CONTROL_TO_USER: _ClassVar[ToolType]
 
 class AgentType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -91,6 +94,9 @@ INSERT_REVIEW_COMMENTS: ToolType
 READ_SKILL: ToolType
 REQUEST_COMPUTER_USE: ToolType
 FETCH_CONVERSATION: ToolType
+START_AGENT: ToolType
+SEND_MESSAGE_TO_AGENT: ToolType
+TRANSFER_SHELL_COMMAND_CONTROL_TO_USER: ToolType
 AGENT_TYPE_UNKNOWN: AgentType
 AGENT_TYPE_PRIMARY: AgentType
 AGENT_TYPE_CLI: AgentType
@@ -163,7 +169,25 @@ class ReviewComment(_message.Message):
     def __init__(self, id: _Optional[str] = ..., comment: _Optional[str] = ..., commented_line: _Optional[_Union[_attachment_pb2.DiffHunk, _Mapping]] = ..., commented_file: _Optional[_Union[ReviewComment.CommentedFile, _Mapping]] = ..., commented_diffset: _Optional[_Union[ReviewComment.CommentedDiffset, _Mapping]] = ...) -> None: ...
 
 class Message(_message.Message):
-    __slots__ = ("id", "task_id", "request_id", "timestamp", "server_message_data", "citations", "user_query", "agent_output", "tool_call", "tool_call_result", "server_event", "system_query", "update_todos", "agent_reasoning", "summarization", "code_review", "update_review_comments", "web_search", "web_fetch", "debug_output", "artifact_event", "invoke_skill")
+    __slots__ = ("id", "task_id", "request_id", "timestamp", "server_message_data", "citations", "user_query", "agent_output", "tool_call", "tool_call_result", "server_event", "system_query", "update_todos", "agent_reasoning", "summarization", "code_review", "update_review_comments", "web_search", "web_fetch", "debug_output", "artifact_event", "invoke_skill", "messages_received_from_agents", "model_fallback")
+    class MessagesReceivedFromAgents(_message.Message):
+        __slots__ = ("messages",)
+        class ReceivedMessage(_message.Message):
+            __slots__ = ("message_id", "sender_agent_id", "addresses", "subject", "message_body")
+            MESSAGE_ID_FIELD_NUMBER: _ClassVar[int]
+            SENDER_AGENT_ID_FIELD_NUMBER: _ClassVar[int]
+            ADDRESSES_FIELD_NUMBER: _ClassVar[int]
+            SUBJECT_FIELD_NUMBER: _ClassVar[int]
+            MESSAGE_BODY_FIELD_NUMBER: _ClassVar[int]
+            message_id: str
+            sender_agent_id: str
+            addresses: _containers.RepeatedScalarFieldContainer[str]
+            subject: str
+            message_body: str
+            def __init__(self, message_id: _Optional[str] = ..., sender_agent_id: _Optional[str] = ..., addresses: _Optional[_Iterable[str]] = ..., subject: _Optional[str] = ..., message_body: _Optional[str] = ...) -> None: ...
+        MESSAGES_FIELD_NUMBER: _ClassVar[int]
+        messages: _containers.RepeatedCompositeFieldContainer[Message.MessagesReceivedFromAgents.ReceivedMessage]
+        def __init__(self, messages: _Optional[_Iterable[_Union[Message.MessagesReceivedFromAgents.ReceivedMessage, _Mapping]]] = ...) -> None: ...
     class UserQuery(_message.Message):
         __slots__ = ("query", "context", "referenced_attachments", "mode", "intended_agent")
         class ReferencedAttachmentsEntry(_message.Message):
@@ -291,7 +315,7 @@ class Message(_message.Message):
         repo_path: str
         def __init__(self, repo_path: _Optional[str] = ...) -> None: ...
     class ToolCall(_message.Message):
-        __slots__ = ("tool_call_id", "run_shell_command", "search_codebase", "server", "read_files", "apply_file_diffs", "suggest_plan", "suggest_create_plan", "grep", "file_glob", "read_mcp_resource", "call_mcp_tool", "write_to_long_running_shell_command", "suggest_new_conversation", "file_glob_v2", "suggest_prompt", "open_code_review", "init_project", "subagent", "read_documents", "edit_documents", "create_documents", "read_shell_command_output", "use_computer", "insert_review_comments", "read_skill", "request_computer_use", "fetch_conversation")
+        __slots__ = ("tool_call_id", "run_shell_command", "search_codebase", "server", "read_files", "apply_file_diffs", "suggest_plan", "suggest_create_plan", "grep", "file_glob", "read_mcp_resource", "call_mcp_tool", "write_to_long_running_shell_command", "suggest_new_conversation", "file_glob_v2", "suggest_prompt", "open_code_review", "init_project", "subagent", "read_documents", "edit_documents", "create_documents", "read_shell_command_output", "use_computer", "insert_review_comments", "read_skill", "request_computer_use", "fetch_conversation", "start_agent", "send_message_to_agent", "transfer_shell_command_control_to_user")
         class FetchConversation(_message.Message):
             __slots__ = ("conversation_id",)
             CONVERSATION_ID_FIELD_NUMBER: _ClassVar[int]
@@ -337,6 +361,11 @@ class Message(_message.Message):
             mode: Message.ToolCall.WriteToLongRunningShellCommand.Mode
             command_id: str
             def __init__(self, input: _Optional[bytes] = ..., mode: _Optional[_Union[Message.ToolCall.WriteToLongRunningShellCommand.Mode, _Mapping]] = ..., command_id: _Optional[str] = ...) -> None: ...
+        class TransferShellCommandControlToUser(_message.Message):
+            __slots__ = ("reason",)
+            REASON_FIELD_NUMBER: _ClassVar[int]
+            reason: str
+            def __init__(self, reason: _Optional[str] = ...) -> None: ...
         class SuggestNewConversation(_message.Message):
             __slots__ = ("message_id",)
             MESSAGE_ID_FIELD_NUMBER: _ClassVar[int]
@@ -484,10 +513,12 @@ class Message(_message.Message):
                 query: str
                 def __init__(self, title: _Optional[str] = ..., description: _Optional[str] = ..., query: _Optional[str] = ...) -> None: ...
             class PromptChip(_message.Message):
-                __slots__ = ("prompt",)
+                __slots__ = ("prompt", "label")
                 PROMPT_FIELD_NUMBER: _ClassVar[int]
+                LABEL_FIELD_NUMBER: _ClassVar[int]
                 prompt: str
-                def __init__(self, prompt: _Optional[str] = ...) -> None: ...
+                label: str
+                def __init__(self, prompt: _Optional[str] = ..., label: _Optional[str] = ...) -> None: ...
             INLINE_QUERY_BANNER_FIELD_NUMBER: _ClassVar[int]
             PROMPT_CHIP_FIELD_NUMBER: _ClassVar[int]
             inline_query_banner: Message.ToolCall.SuggestPrompt.InlineQueryBanner
@@ -500,7 +531,7 @@ class Message(_message.Message):
             __slots__ = ()
             def __init__(self) -> None: ...
         class Subagent(_message.Message):
-            __slots__ = ("task_id", "payload", "cli", "research", "advice", "computer_use", "summarization", "conversation_search")
+            __slots__ = ("task_id", "payload", "cli", "research", "advice", "computer_use", "summarization", "conversation_search", "warp_documentation_search")
             class CLISubagent(_message.Message):
                 __slots__ = ("command_id",)
                 COMMAND_ID_FIELD_NUMBER: _ClassVar[int]
@@ -514,6 +545,7 @@ class Message(_message.Message):
             COMPUTER_USE_FIELD_NUMBER: _ClassVar[int]
             SUMMARIZATION_FIELD_NUMBER: _ClassVar[int]
             CONVERSATION_SEARCH_FIELD_NUMBER: _ClassVar[int]
+            WARP_DOCUMENTATION_SEARCH_FIELD_NUMBER: _ClassVar[int]
             task_id: str
             payload: str
             cli: Message.ToolCall.Subagent.CLISubagent
@@ -522,7 +554,8 @@ class Message(_message.Message):
             computer_use: _empty_pb2.Empty
             summarization: _empty_pb2.Empty
             conversation_search: _empty_pb2.Empty
-            def __init__(self, task_id: _Optional[str] = ..., payload: _Optional[str] = ..., cli: _Optional[_Union[Message.ToolCall.Subagent.CLISubagent, _Mapping]] = ..., research: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., advice: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., computer_use: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., summarization: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., conversation_search: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ...) -> None: ...
+            warp_documentation_search: _empty_pb2.Empty
+            def __init__(self, task_id: _Optional[str] = ..., payload: _Optional[str] = ..., cli: _Optional[_Union[Message.ToolCall.Subagent.CLISubagent, _Mapping]] = ..., research: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., advice: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., computer_use: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., summarization: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., conversation_search: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., warp_documentation_search: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ...) -> None: ...
         class ReadDocuments(_message.Message):
             __slots__ = ("documents",)
             class Document(_message.Message):
@@ -781,6 +814,9 @@ class Message(_message.Message):
         READ_SKILL_FIELD_NUMBER: _ClassVar[int]
         REQUEST_COMPUTER_USE_FIELD_NUMBER: _ClassVar[int]
         FETCH_CONVERSATION_FIELD_NUMBER: _ClassVar[int]
+        START_AGENT_FIELD_NUMBER: _ClassVar[int]
+        SEND_MESSAGE_TO_AGENT_FIELD_NUMBER: _ClassVar[int]
+        TRANSFER_SHELL_COMMAND_CONTROL_TO_USER_FIELD_NUMBER: _ClassVar[int]
         tool_call_id: str
         run_shell_command: Message.ToolCall.RunShellCommand
         search_codebase: Message.ToolCall.SearchCodebase
@@ -809,9 +845,12 @@ class Message(_message.Message):
         read_skill: Message.ToolCall.ReadSkill
         request_computer_use: Message.ToolCall.RequestComputerUse
         fetch_conversation: Message.ToolCall.FetchConversation
-        def __init__(self, tool_call_id: _Optional[str] = ..., run_shell_command: _Optional[_Union[Message.ToolCall.RunShellCommand, _Mapping]] = ..., search_codebase: _Optional[_Union[Message.ToolCall.SearchCodebase, _Mapping]] = ..., server: _Optional[_Union[Message.ToolCall.Server, _Mapping]] = ..., read_files: _Optional[_Union[Message.ToolCall.ReadFiles, _Mapping]] = ..., apply_file_diffs: _Optional[_Union[Message.ToolCall.ApplyFileDiffs, _Mapping]] = ..., suggest_plan: _Optional[_Union[Message.ToolCall.SuggestPlan, _Mapping]] = ..., suggest_create_plan: _Optional[_Union[Message.ToolCall.SuggestCreatePlan, _Mapping]] = ..., grep: _Optional[_Union[Message.ToolCall.Grep, _Mapping]] = ..., file_glob: _Optional[_Union[Message.ToolCall.FileGlob, _Mapping]] = ..., read_mcp_resource: _Optional[_Union[Message.ToolCall.ReadMCPResource, _Mapping]] = ..., call_mcp_tool: _Optional[_Union[Message.ToolCall.CallMCPTool, _Mapping]] = ..., write_to_long_running_shell_command: _Optional[_Union[Message.ToolCall.WriteToLongRunningShellCommand, _Mapping]] = ..., suggest_new_conversation: _Optional[_Union[Message.ToolCall.SuggestNewConversation, _Mapping]] = ..., file_glob_v2: _Optional[_Union[Message.ToolCall.FileGlobV2, _Mapping]] = ..., suggest_prompt: _Optional[_Union[Message.ToolCall.SuggestPrompt, _Mapping]] = ..., open_code_review: _Optional[_Union[Message.ToolCall.OpenCodeReview, _Mapping]] = ..., init_project: _Optional[_Union[Message.ToolCall.InitProject, _Mapping]] = ..., subagent: _Optional[_Union[Message.ToolCall.Subagent, _Mapping]] = ..., read_documents: _Optional[_Union[Message.ToolCall.ReadDocuments, _Mapping]] = ..., edit_documents: _Optional[_Union[Message.ToolCall.EditDocuments, _Mapping]] = ..., create_documents: _Optional[_Union[Message.ToolCall.CreateDocuments, _Mapping]] = ..., read_shell_command_output: _Optional[_Union[Message.ToolCall.ReadShellCommandOutput, _Mapping]] = ..., use_computer: _Optional[_Union[Message.ToolCall.UseComputer, _Mapping]] = ..., insert_review_comments: _Optional[_Union[Message.ToolCall.InsertReviewComments, _Mapping]] = ..., read_skill: _Optional[_Union[Message.ToolCall.ReadSkill, _Mapping]] = ..., request_computer_use: _Optional[_Union[Message.ToolCall.RequestComputerUse, _Mapping]] = ..., fetch_conversation: _Optional[_Union[Message.ToolCall.FetchConversation, _Mapping]] = ...) -> None: ...
+        start_agent: StartAgent
+        send_message_to_agent: SendMessageToAgent
+        transfer_shell_command_control_to_user: Message.ToolCall.TransferShellCommandControlToUser
+        def __init__(self, tool_call_id: _Optional[str] = ..., run_shell_command: _Optional[_Union[Message.ToolCall.RunShellCommand, _Mapping]] = ..., search_codebase: _Optional[_Union[Message.ToolCall.SearchCodebase, _Mapping]] = ..., server: _Optional[_Union[Message.ToolCall.Server, _Mapping]] = ..., read_files: _Optional[_Union[Message.ToolCall.ReadFiles, _Mapping]] = ..., apply_file_diffs: _Optional[_Union[Message.ToolCall.ApplyFileDiffs, _Mapping]] = ..., suggest_plan: _Optional[_Union[Message.ToolCall.SuggestPlan, _Mapping]] = ..., suggest_create_plan: _Optional[_Union[Message.ToolCall.SuggestCreatePlan, _Mapping]] = ..., grep: _Optional[_Union[Message.ToolCall.Grep, _Mapping]] = ..., file_glob: _Optional[_Union[Message.ToolCall.FileGlob, _Mapping]] = ..., read_mcp_resource: _Optional[_Union[Message.ToolCall.ReadMCPResource, _Mapping]] = ..., call_mcp_tool: _Optional[_Union[Message.ToolCall.CallMCPTool, _Mapping]] = ..., write_to_long_running_shell_command: _Optional[_Union[Message.ToolCall.WriteToLongRunningShellCommand, _Mapping]] = ..., suggest_new_conversation: _Optional[_Union[Message.ToolCall.SuggestNewConversation, _Mapping]] = ..., file_glob_v2: _Optional[_Union[Message.ToolCall.FileGlobV2, _Mapping]] = ..., suggest_prompt: _Optional[_Union[Message.ToolCall.SuggestPrompt, _Mapping]] = ..., open_code_review: _Optional[_Union[Message.ToolCall.OpenCodeReview, _Mapping]] = ..., init_project: _Optional[_Union[Message.ToolCall.InitProject, _Mapping]] = ..., subagent: _Optional[_Union[Message.ToolCall.Subagent, _Mapping]] = ..., read_documents: _Optional[_Union[Message.ToolCall.ReadDocuments, _Mapping]] = ..., edit_documents: _Optional[_Union[Message.ToolCall.EditDocuments, _Mapping]] = ..., create_documents: _Optional[_Union[Message.ToolCall.CreateDocuments, _Mapping]] = ..., read_shell_command_output: _Optional[_Union[Message.ToolCall.ReadShellCommandOutput, _Mapping]] = ..., use_computer: _Optional[_Union[Message.ToolCall.UseComputer, _Mapping]] = ..., insert_review_comments: _Optional[_Union[Message.ToolCall.InsertReviewComments, _Mapping]] = ..., read_skill: _Optional[_Union[Message.ToolCall.ReadSkill, _Mapping]] = ..., request_computer_use: _Optional[_Union[Message.ToolCall.RequestComputerUse, _Mapping]] = ..., fetch_conversation: _Optional[_Union[Message.ToolCall.FetchConversation, _Mapping]] = ..., start_agent: _Optional[_Union[StartAgent, _Mapping]] = ..., send_message_to_agent: _Optional[_Union[SendMessageToAgent, _Mapping]] = ..., transfer_shell_command_control_to_user: _Optional[_Union[Message.ToolCall.TransferShellCommandControlToUser, _Mapping]] = ...) -> None: ...
     class ToolCallResult(_message.Message):
-        __slots__ = ("tool_call_id", "context", "run_shell_command", "search_codebase", "server", "read_files", "apply_file_diffs", "suggest_plan", "suggest_create_plan", "grep", "file_glob", "cancel", "read_mcp_resource", "call_mcp_tool", "write_to_long_running_shell_command", "suggest_new_conversation", "file_glob_v2", "suggest_prompt", "open_code_review", "init_project", "subagent", "read_documents", "edit_documents", "create_documents", "read_shell_command_output", "use_computer", "insert_review_comments", "read_skill", "request_computer_use_result", "fetch_conversation")
+        __slots__ = ("tool_call_id", "context", "run_shell_command", "search_codebase", "server", "read_files", "apply_file_diffs", "suggest_plan", "suggest_create_plan", "grep", "file_glob", "cancel", "read_mcp_resource", "call_mcp_tool", "write_to_long_running_shell_command", "suggest_new_conversation", "file_glob_v2", "suggest_prompt", "open_code_review", "init_project", "subagent", "read_documents", "edit_documents", "create_documents", "read_shell_command_output", "use_computer", "insert_review_comments", "read_skill", "request_computer_use_result", "fetch_conversation", "start_agent", "send_message_to_agent", "transfer_shell_command_control_to_user")
         class ServerResult(_message.Message):
             __slots__ = ("serialized_result",)
             SERIALIZED_RESULT_FIELD_NUMBER: _ClassVar[int]
@@ -852,6 +891,9 @@ class Message(_message.Message):
         READ_SKILL_FIELD_NUMBER: _ClassVar[int]
         REQUEST_COMPUTER_USE_RESULT_FIELD_NUMBER: _ClassVar[int]
         FETCH_CONVERSATION_FIELD_NUMBER: _ClassVar[int]
+        START_AGENT_FIELD_NUMBER: _ClassVar[int]
+        SEND_MESSAGE_TO_AGENT_FIELD_NUMBER: _ClassVar[int]
+        TRANSFER_SHELL_COMMAND_CONTROL_TO_USER_FIELD_NUMBER: _ClassVar[int]
         tool_call_id: str
         context: _input_context_pb2.InputContext
         run_shell_command: RunShellCommandResult
@@ -882,7 +924,10 @@ class Message(_message.Message):
         read_skill: ReadSkillResult
         request_computer_use_result: RequestComputerUseResult
         fetch_conversation: FetchConversationResult
-        def __init__(self, tool_call_id: _Optional[str] = ..., context: _Optional[_Union[_input_context_pb2.InputContext, _Mapping]] = ..., run_shell_command: _Optional[_Union[RunShellCommandResult, _Mapping]] = ..., search_codebase: _Optional[_Union[SearchCodebaseResult, _Mapping]] = ..., server: _Optional[_Union[Message.ToolCallResult.ServerResult, _Mapping]] = ..., read_files: _Optional[_Union[ReadFilesResult, _Mapping]] = ..., apply_file_diffs: _Optional[_Union[ApplyFileDiffsResult, _Mapping]] = ..., suggest_plan: _Optional[_Union[SuggestPlanResult, _Mapping]] = ..., suggest_create_plan: _Optional[_Union[SuggestCreatePlanResult, _Mapping]] = ..., grep: _Optional[_Union[GrepResult, _Mapping]] = ..., file_glob: _Optional[_Union[FileGlobResult, _Mapping]] = ..., cancel: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., read_mcp_resource: _Optional[_Union[ReadMCPResourceResult, _Mapping]] = ..., call_mcp_tool: _Optional[_Union[CallMCPToolResult, _Mapping]] = ..., write_to_long_running_shell_command: _Optional[_Union[WriteToLongRunningShellCommandResult, _Mapping]] = ..., suggest_new_conversation: _Optional[_Union[SuggestNewConversationResult, _Mapping]] = ..., file_glob_v2: _Optional[_Union[FileGlobV2Result, _Mapping]] = ..., suggest_prompt: _Optional[_Union[SuggestPromptResult, _Mapping]] = ..., open_code_review: _Optional[_Union[OpenCodeReviewResult, _Mapping]] = ..., init_project: _Optional[_Union[InitProjectResult, _Mapping]] = ..., subagent: _Optional[_Union[Message.ToolCallResult.SubagentResult, _Mapping]] = ..., read_documents: _Optional[_Union[ReadDocumentsResult, _Mapping]] = ..., edit_documents: _Optional[_Union[EditDocumentsResult, _Mapping]] = ..., create_documents: _Optional[_Union[CreateDocumentsResult, _Mapping]] = ..., read_shell_command_output: _Optional[_Union[ReadShellCommandOutputResult, _Mapping]] = ..., use_computer: _Optional[_Union[UseComputerResult, _Mapping]] = ..., insert_review_comments: _Optional[_Union[InsertReviewCommentsResult, _Mapping]] = ..., read_skill: _Optional[_Union[ReadSkillResult, _Mapping]] = ..., request_computer_use_result: _Optional[_Union[RequestComputerUseResult, _Mapping]] = ..., fetch_conversation: _Optional[_Union[FetchConversationResult, _Mapping]] = ...) -> None: ...
+        start_agent: StartAgentResult
+        send_message_to_agent: SendMessageToAgentResult
+        transfer_shell_command_control_to_user: TransferShellCommandControlToUserResult
+        def __init__(self, tool_call_id: _Optional[str] = ..., context: _Optional[_Union[_input_context_pb2.InputContext, _Mapping]] = ..., run_shell_command: _Optional[_Union[RunShellCommandResult, _Mapping]] = ..., search_codebase: _Optional[_Union[SearchCodebaseResult, _Mapping]] = ..., server: _Optional[_Union[Message.ToolCallResult.ServerResult, _Mapping]] = ..., read_files: _Optional[_Union[ReadFilesResult, _Mapping]] = ..., apply_file_diffs: _Optional[_Union[ApplyFileDiffsResult, _Mapping]] = ..., suggest_plan: _Optional[_Union[SuggestPlanResult, _Mapping]] = ..., suggest_create_plan: _Optional[_Union[SuggestCreatePlanResult, _Mapping]] = ..., grep: _Optional[_Union[GrepResult, _Mapping]] = ..., file_glob: _Optional[_Union[FileGlobResult, _Mapping]] = ..., cancel: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., read_mcp_resource: _Optional[_Union[ReadMCPResourceResult, _Mapping]] = ..., call_mcp_tool: _Optional[_Union[CallMCPToolResult, _Mapping]] = ..., write_to_long_running_shell_command: _Optional[_Union[WriteToLongRunningShellCommandResult, _Mapping]] = ..., suggest_new_conversation: _Optional[_Union[SuggestNewConversationResult, _Mapping]] = ..., file_glob_v2: _Optional[_Union[FileGlobV2Result, _Mapping]] = ..., suggest_prompt: _Optional[_Union[SuggestPromptResult, _Mapping]] = ..., open_code_review: _Optional[_Union[OpenCodeReviewResult, _Mapping]] = ..., init_project: _Optional[_Union[InitProjectResult, _Mapping]] = ..., subagent: _Optional[_Union[Message.ToolCallResult.SubagentResult, _Mapping]] = ..., read_documents: _Optional[_Union[ReadDocumentsResult, _Mapping]] = ..., edit_documents: _Optional[_Union[EditDocumentsResult, _Mapping]] = ..., create_documents: _Optional[_Union[CreateDocumentsResult, _Mapping]] = ..., read_shell_command_output: _Optional[_Union[ReadShellCommandOutputResult, _Mapping]] = ..., use_computer: _Optional[_Union[UseComputerResult, _Mapping]] = ..., insert_review_comments: _Optional[_Union[InsertReviewCommentsResult, _Mapping]] = ..., read_skill: _Optional[_Union[ReadSkillResult, _Mapping]] = ..., request_computer_use_result: _Optional[_Union[RequestComputerUseResult, _Mapping]] = ..., fetch_conversation: _Optional[_Union[FetchConversationResult, _Mapping]] = ..., start_agent: _Optional[_Union[StartAgentResult, _Mapping]] = ..., send_message_to_agent: _Optional[_Union[SendMessageToAgentResult, _Mapping]] = ..., transfer_shell_command_control_to_user: _Optional[_Union[TransferShellCommandControlToUserResult, _Mapping]] = ...) -> None: ...
     class ServerEvent(_message.Message):
         __slots__ = ("payload",)
         PAYLOAD_FIELD_NUMBER: _ClassVar[int]
@@ -1013,6 +1058,13 @@ class Message(_message.Message):
         skill: _skill_pb2.Skill
         user_query: Message.UserQuery
         def __init__(self, skill: _Optional[_Union[_skill_pb2.Skill, _Mapping]] = ..., user_query: _Optional[_Union[Message.UserQuery, _Mapping]] = ...) -> None: ...
+    class ModelFallback(_message.Message):
+        __slots__ = ("model_id", "model_display_name")
+        MODEL_ID_FIELD_NUMBER: _ClassVar[int]
+        MODEL_DISPLAY_NAME_FIELD_NUMBER: _ClassVar[int]
+        model_id: str
+        model_display_name: str
+        def __init__(self, model_id: _Optional[str] = ..., model_display_name: _Optional[str] = ...) -> None: ...
     ID_FIELD_NUMBER: _ClassVar[int]
     TASK_ID_FIELD_NUMBER: _ClassVar[int]
     REQUEST_ID_FIELD_NUMBER: _ClassVar[int]
@@ -1035,6 +1087,8 @@ class Message(_message.Message):
     DEBUG_OUTPUT_FIELD_NUMBER: _ClassVar[int]
     ARTIFACT_EVENT_FIELD_NUMBER: _ClassVar[int]
     INVOKE_SKILL_FIELD_NUMBER: _ClassVar[int]
+    MESSAGES_RECEIVED_FROM_AGENTS_FIELD_NUMBER: _ClassVar[int]
+    MODEL_FALLBACK_FIELD_NUMBER: _ClassVar[int]
     id: str
     task_id: str
     request_id: str
@@ -1057,7 +1111,9 @@ class Message(_message.Message):
     debug_output: Message.DebugOutput
     artifact_event: Message.ArtifactEvent
     invoke_skill: Message.InvokeSkill
-    def __init__(self, id: _Optional[str] = ..., task_id: _Optional[str] = ..., request_id: _Optional[str] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., server_message_data: _Optional[str] = ..., citations: _Optional[_Iterable[_Union[_citations_pb2.Citation, _Mapping]]] = ..., user_query: _Optional[_Union[Message.UserQuery, _Mapping]] = ..., agent_output: _Optional[_Union[Message.AgentOutput, _Mapping]] = ..., tool_call: _Optional[_Union[Message.ToolCall, _Mapping]] = ..., tool_call_result: _Optional[_Union[Message.ToolCallResult, _Mapping]] = ..., server_event: _Optional[_Union[Message.ServerEvent, _Mapping]] = ..., system_query: _Optional[_Union[Message.SystemQuery, _Mapping]] = ..., update_todos: _Optional[_Union[Message.UpdateTodos, _Mapping]] = ..., agent_reasoning: _Optional[_Union[Message.AgentReasoning, _Mapping]] = ..., summarization: _Optional[_Union[Message.Summarization, _Mapping]] = ..., code_review: _Optional[_Union[Message.CodeReview, _Mapping]] = ..., update_review_comments: _Optional[_Union[Message.UpdateReviewComments, _Mapping]] = ..., web_search: _Optional[_Union[Message.WebSearch, _Mapping]] = ..., web_fetch: _Optional[_Union[Message.WebFetch, _Mapping]] = ..., debug_output: _Optional[_Union[Message.DebugOutput, _Mapping]] = ..., artifact_event: _Optional[_Union[Message.ArtifactEvent, _Mapping]] = ..., invoke_skill: _Optional[_Union[Message.InvokeSkill, _Mapping]] = ...) -> None: ...
+    messages_received_from_agents: Message.MessagesReceivedFromAgents
+    model_fallback: Message.ModelFallback
+    def __init__(self, id: _Optional[str] = ..., task_id: _Optional[str] = ..., request_id: _Optional[str] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., server_message_data: _Optional[str] = ..., citations: _Optional[_Iterable[_Union[_citations_pb2.Citation, _Mapping]]] = ..., user_query: _Optional[_Union[Message.UserQuery, _Mapping]] = ..., agent_output: _Optional[_Union[Message.AgentOutput, _Mapping]] = ..., tool_call: _Optional[_Union[Message.ToolCall, _Mapping]] = ..., tool_call_result: _Optional[_Union[Message.ToolCallResult, _Mapping]] = ..., server_event: _Optional[_Union[Message.ServerEvent, _Mapping]] = ..., system_query: _Optional[_Union[Message.SystemQuery, _Mapping]] = ..., update_todos: _Optional[_Union[Message.UpdateTodos, _Mapping]] = ..., agent_reasoning: _Optional[_Union[Message.AgentReasoning, _Mapping]] = ..., summarization: _Optional[_Union[Message.Summarization, _Mapping]] = ..., code_review: _Optional[_Union[Message.CodeReview, _Mapping]] = ..., update_review_comments: _Optional[_Union[Message.UpdateReviewComments, _Mapping]] = ..., web_search: _Optional[_Union[Message.WebSearch, _Mapping]] = ..., web_fetch: _Optional[_Union[Message.WebFetch, _Mapping]] = ..., debug_output: _Optional[_Union[Message.DebugOutput, _Mapping]] = ..., artifact_event: _Optional[_Union[Message.ArtifactEvent, _Mapping]] = ..., invoke_skill: _Optional[_Union[Message.InvokeSkill, _Mapping]] = ..., messages_received_from_agents: _Optional[_Union[Message.MessagesReceivedFromAgents, _Mapping]] = ..., model_fallback: _Optional[_Union[Message.ModelFallback, _Mapping]] = ...) -> None: ...
 
 class RunShellCommandResult(_message.Message):
     __slots__ = ("command", "long_running_command_snapshot", "command_finished", "permission_denied", "output", "exit_code")
@@ -1287,6 +1343,16 @@ class ReadMCPResourceResult(_message.Message):
     def __init__(self, success: _Optional[_Union[ReadMCPResourceResult.Success, _Mapping]] = ..., error: _Optional[_Union[ReadMCPResourceResult.Error, _Mapping]] = ...) -> None: ...
 
 class WriteToLongRunningShellCommandResult(_message.Message):
+    __slots__ = ("long_running_command_snapshot", "command_finished", "error")
+    LONG_RUNNING_COMMAND_SNAPSHOT_FIELD_NUMBER: _ClassVar[int]
+    COMMAND_FINISHED_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    long_running_command_snapshot: _attachment_pb2.LongRunningShellCommandSnapshot
+    command_finished: ShellCommandFinished
+    error: ShellCommandError
+    def __init__(self, long_running_command_snapshot: _Optional[_Union[_attachment_pb2.LongRunningShellCommandSnapshot, _Mapping]] = ..., command_finished: _Optional[_Union[ShellCommandFinished, _Mapping]] = ..., error: _Optional[_Union[ShellCommandError, _Mapping]] = ...) -> None: ...
+
+class TransferShellCommandControlToUserResult(_message.Message):
     __slots__ = ("long_running_command_snapshot", "command_finished", "error")
     LONG_RUNNING_COMMAND_SNAPSHOT_FIELD_NUMBER: _ClassVar[int]
     COMMAND_FINISHED_FIELD_NUMBER: _ClassVar[int]
@@ -1583,10 +1649,66 @@ class ShellCommandError(_message.Message):
     def __init__(self, command_not_found: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ...) -> None: ...
 
 class UserQueryMode(_message.Message):
-    __slots__ = ("plan",)
+    __slots__ = ("plan", "orchestrate")
     PLAN_FIELD_NUMBER: _ClassVar[int]
+    ORCHESTRATE_FIELD_NUMBER: _ClassVar[int]
     plan: _empty_pb2.Empty
-    def __init__(self, plan: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ...) -> None: ...
+    orchestrate: _empty_pb2.Empty
+    def __init__(self, plan: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., orchestrate: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ...) -> None: ...
+
+class StartAgent(_message.Message):
+    __slots__ = ("name", "prompt")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    PROMPT_FIELD_NUMBER: _ClassVar[int]
+    name: str
+    prompt: str
+    def __init__(self, name: _Optional[str] = ..., prompt: _Optional[str] = ...) -> None: ...
+
+class StartAgentResult(_message.Message):
+    __slots__ = ("success", "error")
+    class Success(_message.Message):
+        __slots__ = ("agent_id",)
+        AGENT_ID_FIELD_NUMBER: _ClassVar[int]
+        agent_id: str
+        def __init__(self, agent_id: _Optional[str] = ...) -> None: ...
+    class Error(_message.Message):
+        __slots__ = ("error",)
+        ERROR_FIELD_NUMBER: _ClassVar[int]
+        error: str
+        def __init__(self, error: _Optional[str] = ...) -> None: ...
+    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    success: StartAgentResult.Success
+    error: StartAgentResult.Error
+    def __init__(self, success: _Optional[_Union[StartAgentResult.Success, _Mapping]] = ..., error: _Optional[_Union[StartAgentResult.Error, _Mapping]] = ...) -> None: ...
+
+class SendMessageToAgent(_message.Message):
+    __slots__ = ("addresses", "subject", "message")
+    ADDRESSES_FIELD_NUMBER: _ClassVar[int]
+    SUBJECT_FIELD_NUMBER: _ClassVar[int]
+    MESSAGE_FIELD_NUMBER: _ClassVar[int]
+    addresses: _containers.RepeatedScalarFieldContainer[str]
+    subject: str
+    message: str
+    def __init__(self, addresses: _Optional[_Iterable[str]] = ..., subject: _Optional[str] = ..., message: _Optional[str] = ...) -> None: ...
+
+class SendMessageToAgentResult(_message.Message):
+    __slots__ = ("success", "error")
+    class Success(_message.Message):
+        __slots__ = ("message_id",)
+        MESSAGE_ID_FIELD_NUMBER: _ClassVar[int]
+        message_id: str
+        def __init__(self, message_id: _Optional[str] = ...) -> None: ...
+    class Error(_message.Message):
+        __slots__ = ("message",)
+        MESSAGE_FIELD_NUMBER: _ClassVar[int]
+        message: str
+        def __init__(self, message: _Optional[str] = ...) -> None: ...
+    SUCCESS_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
+    success: SendMessageToAgentResult.Success
+    error: SendMessageToAgentResult.Error
+    def __init__(self, success: _Optional[_Union[SendMessageToAgentResult.Success, _Mapping]] = ..., error: _Optional[_Union[SendMessageToAgentResult.Error, _Mapping]] = ...) -> None: ...
 
 class RawImage(_message.Message):
     __slots__ = ("data", "mime_type", "width", "height")
