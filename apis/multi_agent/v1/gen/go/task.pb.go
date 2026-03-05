@@ -1309,10 +1309,10 @@ func (x *Message) GetMessagesReceivedFromAgents() *Message_MessagesReceivedFromA
 	return nil
 }
 
-func (x *Message) GetModelFallback() *Message_ModelFallback {
+func (x *Message) GetModelUsed() *Message_ModelUsed {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Message.(*message_ModelFallback_); ok {
-			return x.ModelFallback
+		if x, ok := x.xxx_hidden_Message.(*message_ModelUsed_); ok {
+			return x.ModelUsed
 		}
 	}
 	return nil
@@ -1482,12 +1482,12 @@ func (x *Message) SetMessagesReceivedFromAgents(v *Message_MessagesReceivedFromA
 	x.xxx_hidden_Message = &message_MessagesReceivedFromAgents_{v}
 }
 
-func (x *Message) SetModelFallback(v *Message_ModelFallback) {
+func (x *Message) SetModelUsed(v *Message_ModelUsed) {
 	if v == nil {
 		x.xxx_hidden_Message = nil
 		return
 	}
-	x.xxx_hidden_Message = &message_ModelFallback_{v}
+	x.xxx_hidden_Message = &message_ModelUsed_{v}
 }
 
 func (x *Message) HasId() bool {
@@ -1668,11 +1668,11 @@ func (x *Message) HasMessagesReceivedFromAgents() bool {
 	return ok
 }
 
-func (x *Message) HasModelFallback() bool {
+func (x *Message) HasModelUsed() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Message.(*message_ModelFallback_)
+	_, ok := x.xxx_hidden_Message.(*message_ModelUsed_)
 	return ok
 }
 
@@ -1806,8 +1806,8 @@ func (x *Message) ClearMessagesReceivedFromAgents() {
 	}
 }
 
-func (x *Message) ClearModelFallback() {
-	if _, ok := x.xxx_hidden_Message.(*message_ModelFallback_); ok {
+func (x *Message) ClearModelUsed() {
+	if _, ok := x.xxx_hidden_Message.(*message_ModelUsed_); ok {
 		x.xxx_hidden_Message = nil
 	}
 }
@@ -1830,7 +1830,7 @@ const Message_DebugOutput_case case_Message_Message = 21
 const Message_ArtifactEvent_case case_Message_Message = 22
 const Message_InvokeSkill_case case_Message_Message = 23
 const Message_MessagesReceivedFromAgents_case case_Message_Message = 24
-const Message_ModelFallback_case case_Message_Message = 25
+const Message_ModelUsed_case case_Message_Message = 25
 
 func (x *Message) WhichMessage() case_Message_Message {
 	if x == nil {
@@ -1871,8 +1871,8 @@ func (x *Message) WhichMessage() case_Message_Message {
 		return Message_InvokeSkill_case
 	case *message_MessagesReceivedFromAgents_:
 		return Message_MessagesReceivedFromAgents_case
-	case *message_ModelFallback_:
-		return Message_ModelFallback_case
+	case *message_ModelUsed_:
+		return Message_ModelUsed_case
 	default:
 		return Message_Message_not_set_case
 	}
@@ -1915,7 +1915,7 @@ type Message_builder struct {
 	ArtifactEvent              *Message_ArtifactEvent
 	InvokeSkill                *Message_InvokeSkill
 	MessagesReceivedFromAgents *Message_MessagesReceivedFromAgents
-	ModelFallback              *Message_ModelFallback
+	ModelUsed                  *Message_ModelUsed
 	// -- end of xxx_hidden_Message
 }
 
@@ -1992,8 +1992,8 @@ func (b0 Message_builder) Build() *Message {
 	if b.MessagesReceivedFromAgents != nil {
 		x.xxx_hidden_Message = &message_MessagesReceivedFromAgents_{b.MessagesReceivedFromAgents}
 	}
-	if b.ModelFallback != nil {
-		x.xxx_hidden_Message = &message_ModelFallback_{b.ModelFallback}
+	if b.ModelUsed != nil {
+		x.xxx_hidden_Message = &message_ModelUsed_{b.ModelUsed}
 	}
 	return m0
 }
@@ -2080,8 +2080,8 @@ type message_MessagesReceivedFromAgents_ struct {
 	MessagesReceivedFromAgents *Message_MessagesReceivedFromAgents `protobuf:"bytes,24,opt,name=messages_received_from_agents,json=messagesReceivedFromAgents,oneof"`
 }
 
-type message_ModelFallback_ struct {
-	ModelFallback *Message_ModelFallback `protobuf:"bytes,25,opt,name=model_fallback,json=modelFallback,oneof"`
+type message_ModelUsed_ struct {
+	ModelUsed *Message_ModelUsed `protobuf:"bytes,25,opt,name=model_used,json=modelUsed,oneof"`
 }
 
 func (*message_UserQuery_) isMessage_Message() {}
@@ -2118,7 +2118,7 @@ func (*message_InvokeSkill_) isMessage_Message() {}
 
 func (*message_MessagesReceivedFromAgents_) isMessage_Message() {}
 
-func (*message_ModelFallback_) isMessage_Message() {}
+func (*message_ModelUsed_) isMessage_Message() {}
 
 // Result of a `RunShellCommand` tool call.
 type RunShellCommandResult struct {
@@ -14437,31 +14437,32 @@ func (b0 Message_InvokeSkill_builder) Build() *Message_InvokeSkill {
 	return m0
 }
 
-// Notifies the client that this turn switched to a fallback model.
-type Message_ModelFallback struct {
+// Notifies the client which model was used for this turn.
+type Message_ModelUsed struct {
 	state                       protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ModelId          *string                `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
 	xxx_hidden_ModelDisplayName *string                `protobuf:"bytes,2,opt,name=model_display_name,json=modelDisplayName"`
+	xxx_hidden_IsFallback       bool                   `protobuf:"varint,3,opt,name=is_fallback,json=isFallback"`
 	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
 	XXX_presence                [1]uint32
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
 
-func (x *Message_ModelFallback) Reset() {
-	*x = Message_ModelFallback{}
+func (x *Message_ModelUsed) Reset() {
+	*x = Message_ModelUsed{}
 	mi := &file_task_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Message_ModelFallback) String() string {
+func (x *Message_ModelUsed) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Message_ModelFallback) ProtoMessage() {}
+func (*Message_ModelUsed) ProtoMessage() {}
 
-func (x *Message_ModelFallback) ProtoReflect() protoreflect.Message {
+func (x *Message_ModelUsed) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -14473,7 +14474,7 @@ func (x *Message_ModelFallback) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Message_ModelFallback) GetModelId() string {
+func (x *Message_ModelUsed) GetModelId() string {
 	if x != nil {
 		if x.xxx_hidden_ModelId != nil {
 			return *x.xxx_hidden_ModelId
@@ -14483,7 +14484,7 @@ func (x *Message_ModelFallback) GetModelId() string {
 	return ""
 }
 
-func (x *Message_ModelFallback) GetModelDisplayName() string {
+func (x *Message_ModelUsed) GetModelDisplayName() string {
 	if x != nil {
 		if x.xxx_hidden_ModelDisplayName != nil {
 			return *x.xxx_hidden_ModelDisplayName
@@ -14493,58 +14494,87 @@ func (x *Message_ModelFallback) GetModelDisplayName() string {
 	return ""
 }
 
-func (x *Message_ModelFallback) SetModelId(v string) {
+func (x *Message_ModelUsed) GetIsFallback() bool {
+	if x != nil {
+		return x.xxx_hidden_IsFallback
+	}
+	return false
+}
+
+func (x *Message_ModelUsed) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Message_ModelFallback) SetModelDisplayName(v string) {
+func (x *Message_ModelUsed) SetModelDisplayName(v string) {
 	x.xxx_hidden_ModelDisplayName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Message_ModelFallback) HasModelId() bool {
+func (x *Message_ModelUsed) SetIsFallback(v bool) {
+	x.xxx_hidden_IsFallback = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *Message_ModelUsed) HasModelId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_ModelFallback) HasModelDisplayName() bool {
+func (x *Message_ModelUsed) HasModelDisplayName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Message_ModelFallback) ClearModelId() {
+func (x *Message_ModelUsed) HasIsFallback() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *Message_ModelUsed) ClearModelId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ModelId = nil
 }
 
-func (x *Message_ModelFallback) ClearModelDisplayName() {
+func (x *Message_ModelUsed) ClearModelDisplayName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_ModelDisplayName = nil
 }
 
-type Message_ModelFallback_builder struct {
+func (x *Message_ModelUsed) ClearIsFallback() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_IsFallback = false
+}
+
+type Message_ModelUsed_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ModelId          *string
 	ModelDisplayName *string
+	IsFallback       *bool
 }
 
-func (b0 Message_ModelFallback_builder) Build() *Message_ModelFallback {
-	m0 := &Message_ModelFallback{}
+func (b0 Message_ModelUsed_builder) Build() *Message_ModelUsed {
+	m0 := &Message_ModelUsed{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	if b.ModelDisplayName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_ModelDisplayName = b.ModelDisplayName
+	}
+	if b.IsFallback != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_IsFallback = *b.IsFallback
 	}
 	return m0
 }
@@ -28114,7 +28144,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xb9\xaa\x01\n" +
+	"\x0ecomment_target\"ʪ\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -28143,8 +28173,9 @@ const file_task_proto_rawDesc = "" +
 	"\fdebug_output\x18\x15 \x01(\v2(.warp.multi_agent.v1.Message.DebugOutputH\x00R\vdebugOutput\x12S\n" +
 	"\x0eartifact_event\x18\x16 \x01(\v2*.warp.multi_agent.v1.Message.ArtifactEventH\x00R\rartifactEvent\x12M\n" +
 	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12\x82\x01\n" +
-	"\x1dmessages_received_from_agents\x18\x18 \x01(\v27.warp.multi_agent.v1.Message.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x12S\n" +
-	"\x0emodel_fallback\x18\x19 \x01(\v2*.warp.multi_agent.v1.Message.ModelFallbackH\x00R\rmodelFallback\x1a\xc3\x02\n" +
+	"\x1dmessages_received_from_agents\x18\x18 \x01(\v27.warp.multi_agent.v1.Message.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x12G\n" +
+	"\n" +
+	"model_used\x18\x19 \x01(\v2&.warp.multi_agent.v1.Message.ModelUsedH\x00R\tmodelUsed\x1a\xc3\x02\n" +
 	"\x1aMessagesReceivedFromAgents\x12c\n" +
 	"\bmessages\x18\x01 \x03(\v2G.warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
 	"\x0fReceivedMessage\x12\x1d\n" +
@@ -28609,10 +28640,12 @@ const file_task_proto_rawDesc = "" +
 	"\vInvokeSkill\x120\n" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12E\n" +
 	"\n" +
-	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQuery\x1aX\n" +
-	"\rModelFallback\x12\x19\n" +
+	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQuery\x1au\n" +
+	"\tModelUsed\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12,\n" +
-	"\x12model_display_name\x18\x02 \x01(\tR\x10modelDisplayNameB\t\n" +
+	"\x12model_display_name\x18\x02 \x01(\tR\x10modelDisplayName\x12\x1f\n" +
+	"\vis_fallback\x18\x03 \x01(\bR\n" +
+	"isFallbackB\t\n" +
 	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xab\x03\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
 	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12y\n" +
@@ -29018,7 +29051,7 @@ var file_task_proto_goTypes = []any{
 	(*Message_DebugOutput)(nil),                                // 73: warp.multi_agent.v1.Message.DebugOutput
 	(*Message_ArtifactEvent)(nil),                              // 74: warp.multi_agent.v1.Message.ArtifactEvent
 	(*Message_InvokeSkill)(nil),                                // 75: warp.multi_agent.v1.Message.InvokeSkill
-	(*Message_ModelFallback)(nil),                              // 76: warp.multi_agent.v1.Message.ModelFallback
+	(*Message_ModelUsed)(nil),                                  // 76: warp.multi_agent.v1.Message.ModelUsed
 	(*Message_MessagesReceivedFromAgents_ReceivedMessage)(nil), // 77: warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessage
 	nil, // 78: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	(*Message_GeneratePassiveSuggestions_ShellCommandCompleted)(nil),  // 79: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
@@ -29196,7 +29229,7 @@ var file_task_proto_depIdxs = []int32{
 	74,  // 24: warp.multi_agent.v1.Message.artifact_event:type_name -> warp.multi_agent.v1.Message.ArtifactEvent
 	75,  // 25: warp.multi_agent.v1.Message.invoke_skill:type_name -> warp.multi_agent.v1.Message.InvokeSkill
 	52,  // 26: warp.multi_agent.v1.Message.messages_received_from_agents:type_name -> warp.multi_agent.v1.Message.MessagesReceivedFromAgents
-	76,  // 27: warp.multi_agent.v1.Message.model_fallback:type_name -> warp.multi_agent.v1.Message.ModelFallback
+	76,  // 27: warp.multi_agent.v1.Message.model_used:type_name -> warp.multi_agent.v1.Message.ModelUsed
 	208, // 28: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	25,  // 29: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	26,  // 30: warp.multi_agent.v1.RunShellCommandResult.permission_denied:type_name -> warp.multi_agent.v1.PermissionDenied
@@ -29495,7 +29528,7 @@ func file_task_proto_init() {
 		(*message_ArtifactEvent_)(nil),
 		(*message_InvokeSkill_)(nil),
 		(*message_MessagesReceivedFromAgents_)(nil),
-		(*message_ModelFallback_)(nil),
+		(*message_ModelUsed_)(nil),
 	}
 	file_task_proto_msgTypes[4].OneofWrappers = []any{
 		(*runShellCommandResult_LongRunningCommandSnapshot)(nil),

@@ -140,7 +140,7 @@ message Message {
     ArtifactEvent artifact_event = 22;
     InvokeSkill invoke_skill = 23;
     MessagesReceivedFromAgents messages_received_from_agents = 24 [ (internal) = true ];
-    ModelFallback model_fallback = 25;
+    ModelUsed model_used = 25;
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -979,10 +979,11 @@ message Message {
     UserQuery user_query = 2;
   }
 
-  // Notifies the client that this turn switched to a fallback model.
-  message ModelFallback {
+  // Notifies the client which model was used for this turn.
+  message ModelUsed {
     string model_id = 1;
     string model_display_name = 2;
+    bool is_fallback = 3;
   }
 }
 
