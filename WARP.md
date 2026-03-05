@@ -50,6 +50,8 @@ cargo test
 ```
 apis/
 └── <api>/              # e.g., multi_agent
+    ├── go.mod          # Go module root (module includes all versions' proto files)
+    ├── go.sum
     └── <version>/      # e.g., v1
         ├── *.proto     # Proto definitions (may be multiple files)
         └── gen/
@@ -66,8 +68,10 @@ apis/
 - Uses `protoc-gen-go` plugin
 - Generated `.pb.go` files are checked into version control
 - Must be regenerated manually via `./script/generate` after proto changes
-- Each API version has its own Go module at `apis/<api>/<version>/gen/go`
-- Module path: `github.com/warpdotdev/warp-proto-apis/apis/<api>/<version>/gen/go`
+- Each API has a Go module at `apis/<api>/` (the module root, which includes all versioned proto files)
+- Generated Go bindings live in `apis/<api>/<version>/gen/go/`
+- Module path: `github.com/warpdotdev/warp-proto-apis/apis/<api>`
+- Go package import path: `github.com/warpdotdev/warp-proto-apis/apis/<api>/<version>/gen/go`
 
 ### Rust
 - Uses `prost` and `prost-reflect` crates

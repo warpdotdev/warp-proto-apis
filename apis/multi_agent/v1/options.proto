@@ -4,7 +4,7 @@ package warp.multi_agent.v1;
 
 import "google/protobuf/descriptor.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 
 extend google.protobuf.FieldOptions {
   // Indicates that the field might contain sensitive information (e.g. PII).

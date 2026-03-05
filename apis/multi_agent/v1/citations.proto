@@ -4,7 +4,7 @@ package warp.multi_agent.v1;
 
 import "google/protobuf/go_features.proto";
 
-option go_package = "github.com/warp/warp-proto-apis/multi_agent/v1";
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
 // DocumentType represents the various types of documents that can be cited.
