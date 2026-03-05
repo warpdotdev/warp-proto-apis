@@ -38,7 +38,7 @@ jobs:
         )
         
         # In Python, we also need to filter out entire ValidateProtobufRuntimeVersion blocks from diff
-        DIFF_OUTPUT=$(git diff "${IGNORE_OPTS[@]}" | sed '/_runtime_version.ValidateProtobufRuntimeVersion/,/^[+-][[:space:]]*)/d')
+        DIFF_OUTPUT=$(git diff "${IGNORE_OPTS[@]}" | sed '/_runtime_version.ValidateProtobufRuntimeVersion/,/[+-][[:space:]]*)/d')
         
         if [ -n "$DIFF_OUTPUT" ]; then
           echo "❌ Generated code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
