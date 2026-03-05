@@ -25,27 +25,30 @@ jobs:
     - name: Run code generation
       run: ./script/generate -a multi_agent -v v1
     
+    - name: Strip version-specific validation blocks
+      run: |
+        # Remove ValidateProtobufRuntimeVersion blocks from generated Python files
+        # These blocks differ based on protoc version and aren't meaningful code changes
+        find apis -name '*_pb2.py' -exec sed -i '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
+    
     - name: Check for changes
       run: |
         # Check if there are any meaningful changes (ignoring protoc version differences)
-        # The -I flag ignores lines matching the pattern (protoc version comments)
         # Ignore patterns for version-only differences across languages:
         #   Go: comment lines with protoc/protoc-gen-go version strings
         #   Python: '# Protobuf Python Version:' comments
+        #           ValidateProtobufRuntimeVersion blocks (stripped above)
         IGNORE_OPTS=(
           -I '^[[:space:]]*//.*(protoc|protoc-gen-go)[[:space:]]*v[0-9]'
           -I '^# Protobuf Python Version:'
         )
         
-        # In Python, we also need to filter out entire ValidateProtobufRuntimeVersion blocks from diff
-        DIFF_OUTPUT=$(git diff "${IGNORE_OPTS[@]}" | sed '/_runtime_version.ValidateProtobufRuntimeVersion/,/[+-][[:space:]]*)/d')
-        
-        if [ -n "$DIFF_OUTPUT" ]; then
+        if ! git diff "${IGNORE_OPTS[@]}" --quiet; then
           echo "❌ Generated code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
           echo "💡 If you're unable to reproduce this diff locally, check to make sure you have the latest protobuf installed: brew install protobuf"
           echo ""
           echo "📋 Diff details (excluding protoc version changes):"
-          echo "$DIFF_OUTPUT"
+          git diff "${IGNORE_OPTS[@]}"
           exit 1
         else
           echo "✅ Code generation produced no changes - generated code is up to date!"
