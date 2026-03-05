@@ -25,19 +25,27 @@ jobs:
     - name: Run code generation
       run: ./script/generate -a multi_agent -v v1
     
-    - name: Strip version-specific validation blocks
-      run: |
-        # Remove ValidateProtobufRuntimeVersion blocks from generated Python files
-        # These blocks differ based on protoc version and aren't meaningful code changes
-        find apis -name '*_pb2.py' -exec sed -i '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
-    
     - name: Check for changes
       run: |
-        # Check if there are any meaningful changes (ignoring protoc version differences)
+        # Strip ValidateProtobufRuntimeVersion blocks from both original and generated files
+        # to compare meaningful changes only (not version differences)
+        ORIG_DIR=$(mktemp -d)
+        GEN_DIR=$(mktemp -d)
+        trap "rm -rf $ORIG_DIR $GEN_DIR" EXIT
+        
+        # Copy original checked-in files
+        git show HEAD:apis/multi_agent/v1/gen/python > /dev/null 2>&1 && \
+          git show HEAD:apis/multi_agent/v1/gen/python/*.py > $ORIG_DIR/ 2>/dev/null || true
+        
+        # Copy newly generated files
+        cp apis/multi_agent/v1/gen/python/*.py $GEN_DIR/ 2>/dev/null || true
+        
+        # Strip ValidateProtobufRuntimeVersion blocks from both
+        find $ORIG_DIR $GEN_DIR -name '*_pb2.py' -exec sed -i '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
+        
         # Ignore patterns for version-only differences across languages:
         #   Go: comment lines with protoc/protoc-gen-go version strings
         #   Python: '# Protobuf Python Version:' comments
-        #           ValidateProtobufRuntimeVersion blocks (stripped above)
         IGNORE_OPTS=(
           -I '^[[:space:]]*//.*(protoc|protoc-gen-go)[[:space:]]*v[0-9]'
           -I '^# Protobuf Python Version:'
