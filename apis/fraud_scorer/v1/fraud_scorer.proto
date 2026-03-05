@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package warp.fraud_scorer.v1;
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/fraud_scorer";
+option java_multiple_files = true;
+option java_package = "dev.warp.fraud_scorer.v1";
+
+service FraudScorer {
+  rpc Score(ScoreRequest) returns (ScoreResponse);
+}
+
+message ScoreRequest {
+  // Serialized warp.multi_agent.v1.Request proto.
+  // Using bytes to avoid cross-API imports.
+  bytes request_data = 1;
+}
+
+message ScoreResponse {
+  // The fraud score. Absent if scoring could not be performed.
+  double score = 1;
+}
