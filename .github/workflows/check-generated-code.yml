@@ -36,6 +36,7 @@ jobs:
         IGNORE_OPTS=(
           -I '^[[:space:]]*//.*(protoc|protoc-gen-go)[[:space:]]*v[0-9]'
           -I '^# Protobuf Python Version:'
+          -I 'ValidateProtobufRuntimeVersion'
         )
         if ! git diff "${IGNORE_OPTS[@]}" --quiet; then
           echo "❌ Generated code is not up to date. Please run './script/generate -a multi_agent -v v1' and commit the changes."
