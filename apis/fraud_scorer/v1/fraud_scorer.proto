@@ -12,12 +12,10 @@ service FraudScorer {
 }
 
 message ScoreRequest {
-  // Serialized warp.multi_agent.v1.Request proto.
-  // Using bytes to avoid cross-API imports.
+  // Serialized warp.multi_agent.v1.Request proto. Using bytes to avoid cross-API imports.
   bytes request_data = 1;
 }
 
 message ScoreResponse {
-  // The fraud score. Absent if scoring could not be performed.
   double score = 1;
 }

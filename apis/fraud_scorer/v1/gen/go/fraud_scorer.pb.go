@@ -85,8 +85,7 @@ func (x *ScoreRequest) ClearRequestData() {
 type ScoreRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Serialized warp.multi_agent.v1.Request proto.
-	// Using bytes to avoid cross-API imports.
+	// Serialized warp.multi_agent.v1.Request proto. Using bytes to avoid cross-API imports.
 	RequestData []byte
 }
 
@@ -162,7 +161,6 @@ func (x *ScoreResponse) ClearScore() {
 type ScoreResponse_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The fraud score. Absent if scoring could not be performed.
 	Score *float64
 }
 
