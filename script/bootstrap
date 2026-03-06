@@ -8,3 +8,6 @@ fi
 
 # Install protoc go plugin.
 go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6
+
+# Install Python gRPC tools for Python gRPC generation.
+pip3 install grpcio-tools
