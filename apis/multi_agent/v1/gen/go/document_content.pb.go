@@ -13,6 +13,7 @@ import (
 	reflect "reflect"
 	unsafe "unsafe"
 )
+anothe rteest
 
 const (
 	// Verify that this generated code is sufficiently up-to-date.
