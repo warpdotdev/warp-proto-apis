@@ -1,2 +1,6 @@
 # Tell GitHub that .pb.go files are generated code.
 **/gen/go/*.pb.go linguist-generated=true
+
+# Tell GitHub that generated Python files are generated code.
+**/gen/python/*.py linguist-generated=true
+**/gen/python/*.pyi linguist-generated=true
