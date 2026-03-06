@@ -9,8 +9,8 @@ package v1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	_ "google.golang.org/protobuf/types/gofeaturespb"
 	reflect "reflect"
-	sync "sync"
 	unsafe "unsafe"
 )
 
@@ -22,12 +22,12 @@ const (
 )
 
 type ScoreRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Serialized warp.multi_agent.v1.Request proto.
-	// Using bytes to avoid cross-API imports.
-	RequestData   []byte `protobuf:"bytes,1,opt,name=request_data,json=requestData,proto3" json:"request_data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_RequestData []byte                 `protobuf:"bytes,1,opt,name=request_data,json=requestData"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ScoreRequest) Reset() {
@@ -55,24 +55,59 @@ func (x *ScoreRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ScoreRequest.ProtoReflect.Descriptor instead.
-func (*ScoreRequest) Descriptor() ([]byte, []int) {
-	return file_fraud_scorer_proto_rawDescGZIP(), []int{0}
-}
-
 func (x *ScoreRequest) GetRequestData() []byte {
 	if x != nil {
-		return x.RequestData
+		return x.xxx_hidden_RequestData
 	}
 	return nil
 }
 
+func (x *ScoreRequest) SetRequestData(v []byte) {
+	if v == nil {
+		v = []byte{}
+	}
+	x.xxx_hidden_RequestData = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *ScoreRequest) HasRequestData() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ScoreRequest) ClearRequestData() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_RequestData = nil
+}
+
+type ScoreRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Serialized warp.multi_agent.v1.Request proto.
+	// Using bytes to avoid cross-API imports.
+	RequestData []byte
+}
+
+func (b0 ScoreRequest_builder) Build() *ScoreRequest {
+	m0 := &ScoreRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.RequestData != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_RequestData = b.RequestData
+	}
+	return m0
+}
+
 type ScoreResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The fraud score. Absent if scoring could not be performed.
-	Score         float64 `protobuf:"fixed64,1,opt,name=score,proto3" json:"score,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Score       float64                `protobuf:"fixed64,1,opt,name=score"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ScoreResponse) Reset() {
@@ -100,42 +135,59 @@ func (x *ScoreResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ScoreResponse.ProtoReflect.Descriptor instead.
-func (*ScoreResponse) Descriptor() ([]byte, []int) {
-	return file_fraud_scorer_proto_rawDescGZIP(), []int{1}
-}
-
 func (x *ScoreResponse) GetScore() float64 {
 	if x != nil {
-		return x.Score
+		return x.xxx_hidden_Score
 	}
 	return 0
+}
+
+func (x *ScoreResponse) SetScore(v float64) {
+	x.xxx_hidden_Score = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *ScoreResponse) HasScore() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ScoreResponse) ClearScore() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Score = 0
+}
+
+type ScoreResponse_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The fraud score. Absent if scoring could not be performed.
+	Score *float64
+}
+
+func (b0 ScoreResponse_builder) Build() *ScoreResponse {
+	m0 := &ScoreResponse{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Score != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Score = *b.Score
+	}
+	return m0
 }
 
 var File_fraud_scorer_proto protoreflect.FileDescriptor
 
 const file_fraud_scorer_proto_rawDesc = "" +
 	"\n" +
-	"\x12fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\"1\n" +
+	"\x12fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\"1\n" +
 	"\fScoreRequest\x12!\n" +
 	"\frequest_data\x18\x01 \x01(\fR\vrequestData\"%\n" +
 	"\rScoreResponse\x12\x14\n" +
 	"\x05score\x18\x01 \x01(\x01R\x05score2_\n" +
 	"\vFraudScorer\x12P\n" +
-	"\x05Score\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponseBb\n" +
-	"\x18dev.warp.fraud_scorer.v1P\x01ZDgithub.com/warpdotdev/warp-proto-apis/apis/fraud_scorer/v1/gen/go;v1b\x06proto3"
-
-var (
-	file_fraud_scorer_proto_rawDescOnce sync.Once
-	file_fraud_scorer_proto_rawDescData []byte
-)
-
-func file_fraud_scorer_proto_rawDescGZIP() []byte {
-	file_fraud_scorer_proto_rawDescOnce.Do(func() {
-		file_fraud_scorer_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_fraud_scorer_proto_rawDesc), len(file_fraud_scorer_proto_rawDesc)))
-	})
-	return file_fraud_scorer_proto_rawDescData
-}
+	"\x05Score\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponseBNZDgithub.com/warpdotdev/warp-proto-apis/apis/fraud_scorer/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_fraud_scorer_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_fraud_scorer_proto_goTypes = []any{

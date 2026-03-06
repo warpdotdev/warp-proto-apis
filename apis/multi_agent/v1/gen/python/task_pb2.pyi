@@ -342,7 +342,7 @@ class Message(_message.Message):
             is_risky: bool
             wait_until_complete: bool
             risk_category: RiskCategory
-            def __init__(self, command: _Optional[str] = ..., is_read_only: _Optional[bool] = ..., uses_pager: _Optional[bool] = ..., citations: _Optional[_Iterable[_Union[_citations_pb2.Citation, _Mapping]]] = ..., is_risky: _Optional[bool] = ..., wait_until_complete: _Optional[bool] = ..., risk_category: _Optional[_Union[RiskCategory, str]] = ...) -> None: ...
+            def __init__(self, command: _Optional[str] = ..., is_read_only: bool = ..., uses_pager: bool = ..., citations: _Optional[_Iterable[_Union[_citations_pb2.Citation, _Mapping]]] = ..., is_risky: bool = ..., wait_until_complete: bool = ..., risk_category: _Optional[_Union[RiskCategory, str]] = ...) -> None: ...
         class WriteToLongRunningShellCommand(_message.Message):
             __slots__ = ("input", "mode", "command_id")
             class Mode(_message.Message):
@@ -1004,7 +1004,7 @@ class Message(_message.Message):
                     url: str
                     title: str
                     success: bool
-                    def __init__(self, url: _Optional[str] = ..., title: _Optional[str] = ..., success: _Optional[bool] = ...) -> None: ...
+                    def __init__(self, url: _Optional[str] = ..., title: _Optional[str] = ..., success: bool = ...) -> None: ...
                 PAGES_FIELD_NUMBER: _ClassVar[int]
                 pages: _containers.RepeatedCompositeFieldContainer[Message.WebFetch.Status.Success.FetchedPage]
                 def __init__(self, pages: _Optional[_Iterable[_Union[Message.WebFetch.Status.Success.FetchedPage, _Mapping]]] = ...) -> None: ...
@@ -1184,7 +1184,7 @@ class ApplyFileDiffsResult(_message.Message):
             WAS_EDITED_BY_USER_FIELD_NUMBER: _ClassVar[int]
             file: _file_content_pb2.FileContent
             was_edited_by_user: bool
-            def __init__(self, file: _Optional[_Union[_file_content_pb2.FileContent, _Mapping]] = ..., was_edited_by_user: _Optional[bool] = ...) -> None: ...
+            def __init__(self, file: _Optional[_Union[_file_content_pb2.FileContent, _Mapping]] = ..., was_edited_by_user: bool = ...) -> None: ...
         class DeletedFile(_message.Message):
             __slots__ = ("file_path",)
             FILE_PATH_FIELD_NUMBER: _ClassVar[int]
@@ -1212,7 +1212,7 @@ class SuggestCreatePlanResult(_message.Message):
     __slots__ = ("accepted",)
     ACCEPTED_FIELD_NUMBER: _ClassVar[int]
     accepted: bool
-    def __init__(self, accepted: _Optional[bool] = ...) -> None: ...
+    def __init__(self, accepted: bool = ...) -> None: ...
 
 class SuggestPlanResult(_message.Message):
     __slots__ = ("accepted", "user_edited_plan")

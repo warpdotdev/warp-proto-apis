@@ -49,7 +49,7 @@ class ExecutedShellCommand(_message.Message):
     started_ts: _timestamp_pb2.Timestamp
     finished_ts: _timestamp_pb2.Timestamp
     is_auto_attached: bool
-    def __init__(self, command: _Optional[str] = ..., output: _Optional[str] = ..., exit_code: _Optional[int] = ..., command_id: _Optional[str] = ..., started_ts: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., finished_ts: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., is_auto_attached: _Optional[bool] = ...) -> None: ...
+    def __init__(self, command: _Optional[str] = ..., output: _Optional[str] = ..., exit_code: _Optional[int] = ..., command_id: _Optional[str] = ..., started_ts: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., finished_ts: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., is_auto_attached: bool = ...) -> None: ...
 
 class RunningShellCommand(_message.Message):
     __slots__ = ("command", "snapshot")

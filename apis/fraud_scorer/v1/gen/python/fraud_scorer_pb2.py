@@ -24,14 +24,13 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12\x66raud_scorer.proto\x12\x14warp.fraud_scorer.v1\"$\n\x0cScoreRequest\x12\x14\n\x0crequest_data\x18\x01 \x01(\x0c\"\x1e\n\rScoreResponse\x12\r\n\x05score\x18\x01 \x01(\x01\x32_\n\x0b\x46raudScorer\x12P\n\x05Score\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponseB\x1c\n\x18\x64\x65v.warp.fraud_scorer.v1P\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12\x66raud_scorer.proto\x12\x14warp.fraud_scorer.v1\"$\n\x0cScoreRequest\x12\x14\n\x0crequest_data\x18\x01 \x01(\x0c\"\x1e\n\rScoreResponse\x12\r\n\x05score\x18\x01 \x01(\x01\x32_\n\x0b\x46raudScorer\x12P\n\x05Score\x12\".warp.fraud_scorer.v1.ScoreRequest\x1a#.warp.fraud_scorer.v1.ScoreResponseb\x08\x65\x64itionsp\xe8\x07')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'fraud_scorer_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
-  _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'\n\030dev.warp.fraud_scorer.v1P\001'
+  DESCRIPTOR._loaded_options = None
   _globals['_SCOREREQUEST']._serialized_start=44
   _globals['_SCOREREQUEST']._serialized_end=80
   _globals['_SCORERESPONSE']._serialized_start=82
