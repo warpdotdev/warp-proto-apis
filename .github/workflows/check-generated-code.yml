@@ -27,8 +27,9 @@ jobs:
         # Remove ValidateProtobufRuntimeVersion blocks from checked-in generated code
         # so we can compare against freshly generated code (which will have different version numbers)
         find apis -name '*_pb2.py' -exec sed -i '' '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
-        # Stage these changes so git diff compares against the stripped version
-        git add apis
+    
+    - name: Stage stripped checked-in code
+      run: git add apis
     
     - name: Run code generation
       run: ./script/generate -a multi_agent -v v1
