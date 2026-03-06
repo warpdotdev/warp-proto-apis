@@ -68,8 +68,7 @@ echo "✅️ Done generating Go bindings"
 
 echo -e "\n➡️  Generating Python bindings..."
 
-# Preprocess proto files to strip Go-specific directives.
-# This mirrors the approach in the Rust build.rs.
+# Preprocess proto files to strip Go-specific directives (mirrors the approach in the Rust build.rs).
 PYTHON_TEMP_DIR=$(mktemp -d)
 trap "rm -rf $PYTHON_TEMP_DIR" EXIT
 
