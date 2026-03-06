@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package warp.fraud_scorer.v1;
 
-option go_package = "github.com/warpdotdev/warp-proto-apis/apis/fraud_scorer";
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/fraud_scorer/v1/gen/go;v1";
 option java_multiple_files = true;
 option java_package = "dev.warp.fraud_scorer.v1";
 

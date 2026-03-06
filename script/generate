@@ -58,8 +58,16 @@ for proto in "${PROTO_FILES[@]}"; do
   echo " - $API_PATH/$proto"
 done
 
+# Detect if any proto files define gRPC services
+HAS_SERVICES=$(grep -l '^service ' "$API_PATH"/*.proto 2>/dev/null || true)
+GRPC_OPTS=""
+if [ -n "$HAS_SERVICES" ]; then
+  echo "Detected gRPC service definitions."
+  GRPC_OPTS="--go-grpc_out=apis/$API --go-grpc_opt=module=github.com/warpdotdev/warp-proto-apis/apis/$API"
+fi
+
 echo -e "\n➡️  Generating Go bindings..."
-protoc --go_out="apis/$API" --go_opt="module=github.com/warpdotdev/warp-proto-apis/apis/$API" --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
+protoc --go_out="apis/$API" --go_opt="module=github.com/warpdotdev/warp-proto-apis/apis/$API" $GRPC_OPTS --proto_path="$(realpath "$API_PATH")" "${PROTO_FILES[@]}"
 pushd "apis/$API" >/dev/null 2>&1
 go mod tidy
 popd >/dev/null 2>&1
