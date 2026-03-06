@@ -319,6 +319,7 @@ message Message {
       StartAgent start_agent = 29 [ (internal) = true ];
       SendMessageToAgent send_message_to_agent = 30 [ (internal) = true ];
       TransferShellCommandControlToUser transfer_shell_command_control_to_user = 31;
+      AskQuestion ask_question = 32;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -392,6 +393,18 @@ message Message {
     // A tool call to explicitly transfer control of a running shell command to the user.
     message TransferShellCommandControlToUser {
         string reason = 1;
+    }
+
+    // A tool call to present the user with a multiple-choice question.
+    message AskQuestion {
+      string question = 1 [ (sensitive) = true ];
+      repeated Option options = 2;
+      bool allow_multiple = 3;
+
+      message Option {
+        string id = 1;
+        string label = 2 [ (sensitive) = true ];
+      }
     }
 
     message SuggestNewConversation {
@@ -849,6 +862,7 @@ message Message {
       StartAgentResult start_agent = 33 [ (internal) = true ];
       SendMessageToAgentResult send_message_to_agent = 34 [ (internal) = true ];
       TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 35;
+      AskQuestionResult ask_question = 36;
     }
 
     // Result of a server-side tool call.
@@ -1212,6 +1226,26 @@ message TransferShellCommandControlToUserResult {
     }
 }
 
+message AskQuestionResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    repeated SelectedOption selected_options = 1;
+
+    message SelectedOption {
+      string id = 1;
+      string label = 2 [ (sensitive) = true ];
+    }
+  }
+
+  message Error {
+    string message = 1 [ (sensitive) = true ];
+  }
+}
+
 message SuggestNewConversationResult {
   oneof result {
     Accepted accepted = 1;
@@ -1486,6 +1520,7 @@ enum ToolType {
   START_AGENT = 26;
   SEND_MESSAGE_TO_AGENT = 27;
   TRANSFER_SHELL_COMMAND_CONTROL_TO_USER = 28;
+  ASK_QUESTION = 29;
 }
 
 message UserQueryMode {
