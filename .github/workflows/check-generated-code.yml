@@ -36,11 +36,11 @@ jobs:
         # Copy original checked-in files
         for f in apis/multi_agent/v1/gen/python/*_pb2.py; do
           [ -f "$f" ] || continue
-          git show HEAD:"$f" > "$ORIG_DIR/$(basename "$f")" 2>/dev/null || true
+          git show HEAD:"$f" > "$ORIG_DIR/$(basename "$f")" 2>/dev/null
         done
         
         # Copy newly generated files
-        cp apis/multi_agent/v1/gen/python/*_pb2.py $GEN_DIR/ 2>/dev/null || true
+        cp apis/multi_agent/v1/gen/python/*_pb2.py $GEN_DIR/
         
         # Strip ValidateProtobufRuntimeVersion blocks from both
         find $ORIG_DIR $GEN_DIR -name '*_pb2.py' -exec sed -i '' '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
