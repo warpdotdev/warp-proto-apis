@@ -22,29 +22,22 @@ jobs:
     - name: Bootstrap dependencies
       run: ./script/bootstrap
     
+    - name: Strip version-specific blocks from checked-in code
+      run: |
+        # Remove ValidateProtobufRuntimeVersion blocks from checked-in generated code
+        # so we can compare against freshly generated code (which will have different version numbers)
+        find apis -name '*_pb2.py' -exec sed -i '' '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
+    
     - name: Run code generation
       run: ./script/generate -a multi_agent -v v1
     
+    - name: Strip version-specific blocks from generated code
+      run: |
+        # Remove ValidateProtobufRuntimeVersion blocks from newly generated code
+        find apis -name '*_pb2.py' -exec sed -i '' '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
+    
     - name: Check for changes
       run: |
-        # Strip ValidateProtobufRuntimeVersion blocks from both original and generated files
-        # to compare meaningful changes only (not version differences)
-        ORIG_DIR=$(mktemp -d)
-        GEN_DIR=$(mktemp -d)
-        trap "rm -rf $ORIG_DIR $GEN_DIR" EXIT
-        
-        # Copy original checked-in files
-        for f in apis/multi_agent/v1/gen/python/*_pb2.py; do
-          [ -f "$f" ] || continue
-          git show HEAD:"$f" > "$ORIG_DIR/$(basename "$f")" 2>/dev/null
-        done
-        
-        # Copy newly generated files
-        cp apis/multi_agent/v1/gen/python/*_pb2.py $GEN_DIR/
-        
-        # Strip ValidateProtobufRuntimeVersion blocks from both
-        find $ORIG_DIR $GEN_DIR -name '*_pb2.py' -exec sed -i '' '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
-        
         # Ignore patterns for version-only differences across languages:
         #   Go: comment lines with protoc/protoc-gen-go version strings
         #   Python: '# Protobuf Python Version:' comments
