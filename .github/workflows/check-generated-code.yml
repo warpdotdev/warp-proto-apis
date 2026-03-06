@@ -34,14 +34,16 @@ jobs:
         trap "rm -rf $ORIG_DIR $GEN_DIR" EXIT
         
         # Copy original checked-in files
-        git show HEAD:apis/multi_agent/v1/gen/python > /dev/null 2>&1 && \
-          git show HEAD:apis/multi_agent/v1/gen/python/*.py > $ORIG_DIR/ 2>/dev/null || true
+        for f in apis/multi_agent/v1/gen/python/*_pb2.py; do
+          [ -f "$f" ] || continue
+          git show HEAD:"$f" > "$ORIG_DIR/$(basename "$f")" 2>/dev/null || true
+        done
         
         # Copy newly generated files
-        cp apis/multi_agent/v1/gen/python/*.py $GEN_DIR/ 2>/dev/null || true
+        cp apis/multi_agent/v1/gen/python/*_pb2.py $GEN_DIR/ 2>/dev/null || true
         
         # Strip ValidateProtobufRuntimeVersion blocks from both
-        find $ORIG_DIR $GEN_DIR -name '*_pb2.py' -exec sed -i '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
+        find $ORIG_DIR $GEN_DIR -name '*_pb2.py' -exec sed -i '' '/_runtime_version.ValidateProtobufRuntimeVersion/,/)/d' {} +
         
         # Ignore patterns for version-only differences across languages:
         #   Go: comment lines with protoc/protoc-gen-go version strings
