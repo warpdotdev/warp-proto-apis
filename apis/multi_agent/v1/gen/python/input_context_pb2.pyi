@@ -29,7 +29,7 @@ class InputContext(_message.Message):
         pwd: str
         home: str
         pwd_file_symbols_indexed: bool
-        def __init__(self, pwd: _Optional[str] = ..., home: _Optional[str] = ..., pwd_file_symbols_indexed: _Optional[bool] = ...) -> None: ...
+        def __init__(self, pwd: _Optional[str] = ..., home: _Optional[str] = ..., pwd_file_symbols_indexed: bool = ...) -> None: ...
     class Shell(_message.Message):
         __slots__ = ("name", "version")
         NAME_FIELD_NUMBER: _ClassVar[int]

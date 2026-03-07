@@ -1,0 +1,21 @@
+edition = "2023";
+
+package warp.fraud_scorer.v1;
+
+import "google/protobuf/go_features.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/fraud_scorer/v1/gen/go;v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+service FraudScorer {
+  rpc Score(ScoreRequest) returns (ScoreResponse);
+}
+
+message ScoreRequest {
+  // Serialized warp.multi_agent.v1.Request proto. Using bytes to avoid cross-API imports.
+  bytes multi_agent_request = 1;
+}
+
+message ScoreResponse {
+  double score = 1;
+}
