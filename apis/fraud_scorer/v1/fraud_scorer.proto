@@ -13,7 +13,7 @@ service FraudScorer {
 
 message ScoreRequest {
   // Serialized warp.multi_agent.v1.Request proto. Using bytes to avoid cross-API imports.
-  bytes request_data = 1;
+  bytes multi_agent_request = 1;
 }
 
 message ScoreResponse {

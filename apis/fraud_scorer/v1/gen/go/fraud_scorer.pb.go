@@ -22,12 +22,12 @@ const (
 )
 
 type ScoreRequest struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_RequestData []byte                 `protobuf:"bytes,1,opt,name=request_data,json=requestData"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MultiAgentRequest []byte                 `protobuf:"bytes,1,opt,name=multi_agent_request,json=multiAgentRequest"`
+	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
+	XXX_presence                 [1]uint32
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ScoreRequest) Reset() {
@@ -55,47 +55,47 @@ func (x *ScoreRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *ScoreRequest) GetRequestData() []byte {
+func (x *ScoreRequest) GetMultiAgentRequest() []byte {
 	if x != nil {
-		return x.xxx_hidden_RequestData
+		return x.xxx_hidden_MultiAgentRequest
 	}
 	return nil
 }
 
-func (x *ScoreRequest) SetRequestData(v []byte) {
+func (x *ScoreRequest) SetMultiAgentRequest(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
-	x.xxx_hidden_RequestData = v
+	x.xxx_hidden_MultiAgentRequest = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *ScoreRequest) HasRequestData() bool {
+func (x *ScoreRequest) HasMultiAgentRequest() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ScoreRequest) ClearRequestData() {
+func (x *ScoreRequest) ClearMultiAgentRequest() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_RequestData = nil
+	x.xxx_hidden_MultiAgentRequest = nil
 }
 
 type ScoreRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Serialized warp.multi_agent.v1.Request proto. Using bytes to avoid cross-API imports.
-	RequestData []byte
+	MultiAgentRequest []byte
 }
 
 func (b0 ScoreRequest_builder) Build() *ScoreRequest {
 	m0 := &ScoreRequest{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.RequestData != nil {
+	if b.MultiAgentRequest != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_RequestData = b.RequestData
+		x.xxx_hidden_MultiAgentRequest = b.MultiAgentRequest
 	}
 	return m0
 }
@@ -179,9 +179,9 @@ var File_fraud_scorer_proto protoreflect.FileDescriptor
 
 const file_fraud_scorer_proto_rawDesc = "" +
 	"\n" +
-	"\x12fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\"1\n" +
-	"\fScoreRequest\x12!\n" +
-	"\frequest_data\x18\x01 \x01(\fR\vrequestData\"%\n" +
+	"\x12fraud_scorer.proto\x12\x14warp.fraud_scorer.v1\x1a!google/protobuf/go_features.proto\">\n" +
+	"\fScoreRequest\x12.\n" +
+	"\x13multi_agent_request\x18\x01 \x01(\fR\x11multiAgentRequest\"%\n" +
 	"\rScoreResponse\x12\x14\n" +
 	"\x05score\x18\x01 \x01(\x01R\x05score2_\n" +
 	"\vFraudScorer\x12P\n" +
