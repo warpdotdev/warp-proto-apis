@@ -1437,8 +1437,10 @@ message FetchConversationResult {
   }
 
   message Success {
-    // The tasks from the fetched conversation.
-    repeated Task tasks = 1;
+    reserved 1;
+    reserved tasks;
+    // The path to the directory containing the materialized conversation YAML files.
+    string directory_path = 2;
   }
 
   message Error {
