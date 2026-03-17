@@ -415,6 +415,10 @@ message Request {
     // If `true`, the client supports reading bundled skills that are distributed alongside it.
     bool supports_bundled_skills = 25;
 
+    // If `true`, the research agent can be used to perform research tasks.
+    // Populated from the 'ResearchAgentEnabled' user preference.
+    bool research_agent_enabled = 26;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
