@@ -500,9 +500,7 @@ message Message {
         string command_id = 1;
       }
 
-      message ResearchSubagent {
-        string task = 1;
-      }
+      message ResearchSubagent {}
     }
 
     // A tool call to read documents.
