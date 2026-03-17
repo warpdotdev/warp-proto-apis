@@ -649,6 +649,8 @@ message Message {
         string comment_body = 4 [ (sensitive) = true ];
         string parent_comment_id = 5;
         CommentLocation location = 6;
+        // The URL to view this comment in GitHub's web UI.
+        string html_url = 7 [ (sensitive) = true ];
       }
 
       message CommentLocation {
