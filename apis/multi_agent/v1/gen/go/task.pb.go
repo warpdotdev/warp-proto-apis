@@ -20406,6 +20406,7 @@ type Message_ToolCall_InsertReviewComments_Comment struct {
 	xxx_hidden_CommentBody           *string                                                `protobuf:"bytes,4,opt,name=comment_body,json=commentBody"`
 	xxx_hidden_ParentCommentId       *string                                                `protobuf:"bytes,5,opt,name=parent_comment_id,json=parentCommentId"`
 	xxx_hidden_Location              *Message_ToolCall_InsertReviewComments_CommentLocation `protobuf:"bytes,6,opt,name=location"`
+	xxx_hidden_HtmlUrl               *string                                                `protobuf:"bytes,7,opt,name=html_url,json=htmlUrl"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -20494,33 +20495,48 @@ func (x *Message_ToolCall_InsertReviewComments_Comment) GetLocation() *Message_T
 	return nil
 }
 
+func (x *Message_ToolCall_InsertReviewComments_Comment) GetHtmlUrl() string {
+	if x != nil {
+		if x.xxx_hidden_HtmlUrl != nil {
+			return *x.xxx_hidden_HtmlUrl
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Message_ToolCall_InsertReviewComments_Comment) SetCommentId(v string) {
 	x.xxx_hidden_CommentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 func (x *Message_ToolCall_InsertReviewComments_Comment) SetAuthor(v string) {
 	x.xxx_hidden_Author = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
 func (x *Message_ToolCall_InsertReviewComments_Comment) SetLastModifiedTimestamp(v string) {
 	x.xxx_hidden_LastModifiedTimestamp = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
 func (x *Message_ToolCall_InsertReviewComments_Comment) SetCommentBody(v string) {
 	x.xxx_hidden_CommentBody = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *Message_ToolCall_InsertReviewComments_Comment) SetParentCommentId(v string) {
 	x.xxx_hidden_ParentCommentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
 }
 
 func (x *Message_ToolCall_InsertReviewComments_Comment) SetLocation(v *Message_ToolCall_InsertReviewComments_CommentLocation) {
 	x.xxx_hidden_Location = v
+}
+
+func (x *Message_ToolCall_InsertReviewComments_Comment) SetHtmlUrl(v string) {
+	x.xxx_hidden_HtmlUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 7)
 }
 
 func (x *Message_ToolCall_InsertReviewComments_Comment) HasCommentId() bool {
@@ -20565,6 +20581,13 @@ func (x *Message_ToolCall_InsertReviewComments_Comment) HasLocation() bool {
 	return x.xxx_hidden_Location != nil
 }
 
+func (x *Message_ToolCall_InsertReviewComments_Comment) HasHtmlUrl() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
 func (x *Message_ToolCall_InsertReviewComments_Comment) ClearCommentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_CommentId = nil
@@ -20594,6 +20617,11 @@ func (x *Message_ToolCall_InsertReviewComments_Comment) ClearLocation() {
 	x.xxx_hidden_Location = nil
 }
 
+func (x *Message_ToolCall_InsertReviewComments_Comment) ClearHtmlUrl() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_HtmlUrl = nil
+}
+
 type Message_ToolCall_InsertReviewComments_Comment_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -20603,6 +20631,8 @@ type Message_ToolCall_InsertReviewComments_Comment_builder struct {
 	CommentBody           *string
 	ParentCommentId       *string
 	Location              *Message_ToolCall_InsertReviewComments_CommentLocation
+	// The URL to view this comment in GitHub's web UI.
+	HtmlUrl *string
 }
 
 func (b0 Message_ToolCall_InsertReviewComments_Comment_builder) Build() *Message_ToolCall_InsertReviewComments_Comment {
@@ -20610,26 +20640,30 @@ func (b0 Message_ToolCall_InsertReviewComments_Comment_builder) Build() *Message
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.CommentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_CommentId = b.CommentId
 	}
 	if b.Author != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
 		x.xxx_hidden_Author = b.Author
 	}
 	if b.LastModifiedTimestamp != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_LastModifiedTimestamp = b.LastModifiedTimestamp
 	}
 	if b.CommentBody != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_CommentBody = b.CommentBody
 	}
 	if b.ParentCommentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
 		x.xxx_hidden_ParentCommentId = b.ParentCommentId
 	}
 	x.xxx_hidden_Location = b.Location
+	if b.HtmlUrl != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
+		x.xxx_hidden_HtmlUrl = b.HtmlUrl
+	}
 	return m0
 }
 
@@ -28061,7 +28095,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\x98\xaa\x01\n" +
+	"\x0ecomment_target\"\xb9\xaa\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -28160,7 +28194,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xc0W\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xe1W\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -28347,12 +28381,12 @@ const file_task_proto_rawDesc = "" +
 	"command_id\x18\x01 \x01(\tR\tcommandId\x127\n" +
 	"\bduration\x18\x02 \x01(\v2\x19.google.protobuf.DurationH\x00R\bduration\x12=\n" +
 	"\ron_completion\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\fonCompletionB\a\n" +
-	"\x05delay\x1a\x8c\a\n" +
+	"\x05delay\x1a\xad\a\n" +
 	"\x14InsertReviewComments\x12!\n" +
 	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x12^\n" +
 	"\bcomments\x18\x02 \x03(\v2B.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentR\bcomments\x12%\n" +
 	"\vbase_branch\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"baseBranch\x1a\xbb\x02\n" +
+	"baseBranch\x1a\xdc\x02\n" +
 	"\aComment\x12\x1d\n" +
 	"\n" +
 	"comment_id\x18\x01 \x01(\tR\tcommentId\x12\x1c\n" +
@@ -28360,7 +28394,8 @@ const file_task_proto_rawDesc = "" +
 	"\x17last_modified_timestamp\x18\x03 \x01(\tR\x15lastModifiedTimestamp\x12'\n" +
 	"\fcomment_body\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\vcommentBody\x12*\n" +
 	"\x11parent_comment_id\x18\x05 \x01(\tR\x0fparentCommentId\x12f\n" +
-	"\blocation\x18\x06 \x01(\v2J.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocationR\blocation\x1a\x95\x01\n" +
+	"\blocation\x18\x06 \x01(\v2J.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocationR\blocation\x12\x1f\n" +
+	"\bhtml_url\x18\a \x01(\tB\x04\x80\xb5\x18\x01R\ahtmlUrl\x1a\x95\x01\n" +
 	"\x0fCommentLocation\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12_\n" +
 	"\x04line\x18\x02 \x01(\v2K.warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRangeR\x04line\x1a\xd2\x01\n" +
