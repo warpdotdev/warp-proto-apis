@@ -415,6 +415,9 @@ message Request {
     // If `true`, the client supports reading bundled skills that are distributed alongside it.
     bool supports_bundled_skills = 25;
 
+    // If `true`, the client supports the research agent.
+    bool supports_research_agent = 26;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
