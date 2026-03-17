@@ -316,6 +316,9 @@ message Request {
       // If `true`, the client supports V4A-style diffs.
     bool supports_v4a_file_diffs = 23;
 
+    // If `true`, the research agent can be used to perform research tasks.
+    bool research_agent_enabled = 26;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
