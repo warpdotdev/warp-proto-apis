@@ -1518,6 +1518,25 @@ message StartAgent {
   string name = 1 [ (sensitive) = true ];
   // The initial prompt to send to the new agent.
   string prompt = 2 [ (sensitive) = true ];
+  // Optional plan references to pass to the new agent as structured context.
+  repeated PlanReference plan_references = 3;
+
+  // A scoped reference to a plan document for a child agent.
+  message PlanReference {
+    // The ID of the plan document.
+    string document_id = 1;
+    // Optional list of specific, non-overlapping line ranges.
+    // If empty, the reference applies to the full document.
+    repeated FileContentLineRange line_ranges = 2;
+    // The requested access mode for this plan reference.
+    AccessMode access_mode = 3;
+
+    enum AccessMode {
+      ACCESS_MODE_UNSPECIFIED = 0;
+      ACCESS_MODE_READ_ONLY = 1;
+      ACCESS_MODE_EDIT_ALLOWED = 2;
+    }
+  }
 }
 
 // The result of a StartAgent tool call.

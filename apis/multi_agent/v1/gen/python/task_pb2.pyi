@@ -1657,12 +1657,31 @@ class UserQueryMode(_message.Message):
     def __init__(self, plan: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ..., orchestrate: _Optional[_Union[_empty_pb2.Empty, _Mapping]] = ...) -> None: ...
 
 class StartAgent(_message.Message):
-    __slots__ = ("name", "prompt")
+    __slots__ = ("name", "prompt", "plan_references")
+    class PlanReference(_message.Message):
+        __slots__ = ("document_id", "line_ranges", "access_mode")
+        class AccessMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+            __slots__ = ()
+            ACCESS_MODE_UNSPECIFIED: _ClassVar[StartAgent.PlanReference.AccessMode]
+            ACCESS_MODE_READ_ONLY: _ClassVar[StartAgent.PlanReference.AccessMode]
+            ACCESS_MODE_EDIT_ALLOWED: _ClassVar[StartAgent.PlanReference.AccessMode]
+        ACCESS_MODE_UNSPECIFIED: StartAgent.PlanReference.AccessMode
+        ACCESS_MODE_READ_ONLY: StartAgent.PlanReference.AccessMode
+        ACCESS_MODE_EDIT_ALLOWED: StartAgent.PlanReference.AccessMode
+        DOCUMENT_ID_FIELD_NUMBER: _ClassVar[int]
+        LINE_RANGES_FIELD_NUMBER: _ClassVar[int]
+        ACCESS_MODE_FIELD_NUMBER: _ClassVar[int]
+        document_id: str
+        line_ranges: _containers.RepeatedCompositeFieldContainer[_file_content_pb2.FileContentLineRange]
+        access_mode: StartAgent.PlanReference.AccessMode
+        def __init__(self, document_id: _Optional[str] = ..., line_ranges: _Optional[_Iterable[_Union[_file_content_pb2.FileContentLineRange, _Mapping]]] = ..., access_mode: _Optional[_Union[StartAgent.PlanReference.AccessMode, str]] = ...) -> None: ...
     NAME_FIELD_NUMBER: _ClassVar[int]
     PROMPT_FIELD_NUMBER: _ClassVar[int]
+    PLAN_REFERENCES_FIELD_NUMBER: _ClassVar[int]
     name: str
     prompt: str
-    def __init__(self, name: _Optional[str] = ..., prompt: _Optional[str] = ...) -> None: ...
+    plan_references: _containers.RepeatedCompositeFieldContainer[StartAgent.PlanReference]
+    def __init__(self, name: _Optional[str] = ..., prompt: _Optional[str] = ..., plan_references: _Optional[_Iterable[_Union[StartAgent.PlanReference, _Mapping]]] = ...) -> None: ...
 
 class StartAgentResult(_message.Message):
     __slots__ = ("success", "error")
