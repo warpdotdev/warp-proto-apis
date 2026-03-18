@@ -1205,6 +1205,7 @@ func (b0 InputContext_ProjectRules_builder) Build() *InputContext_ProjectRules {
 type InputContext_Git struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Head        *string                `protobuf:"bytes,1,opt,name=head"`
+	xxx_hidden_Branch      *string                `protobuf:"bytes,2,opt,name=branch"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1246,9 +1247,24 @@ func (x *InputContext_Git) GetHead() string {
 	return ""
 }
 
+func (x *InputContext_Git) GetBranch() string {
+	if x != nil {
+		if x.xxx_hidden_Branch != nil {
+			return *x.xxx_hidden_Branch
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *InputContext_Git) SetHead(v string) {
 	x.xxx_hidden_Head = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *InputContext_Git) SetBranch(v string) {
+	x.xxx_hidden_Branch = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *InputContext_Git) HasHead() bool {
@@ -1258,9 +1274,21 @@ func (x *InputContext_Git) HasHead() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *InputContext_Git) HasBranch() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *InputContext_Git) ClearHead() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Head = nil
+}
+
+func (x *InputContext_Git) ClearBranch() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Branch = nil
 }
 
 type InputContext_Git_builder struct {
@@ -1268,6 +1296,9 @@ type InputContext_Git_builder struct {
 
 	// The user's current head (i.e. branch name or commit hash).
 	Head *string
+	// The current branch name, populated only from `git symbolic-ref --short HEAD`.
+	// Empty/absent when in detached HEAD state.
+	Branch *string
 }
 
 func (b0 InputContext_Git_builder) Build() *InputContext_Git {
@@ -1275,8 +1306,12 @@ func (b0 InputContext_Git_builder) Build() *InputContext_Git {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Head != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Head = b.Head
+	}
+	if b.Branch != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Branch = b.Branch
 	}
 	return m0
 }
@@ -1403,7 +1438,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xbc\x0f\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xda\x0f\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1442,9 +1477,10 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\x1f\n" +
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a=\n" +
 	"\x03Git\x12\x18\n" +
-	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x1a`\n" +
+	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x12\x1c\n" +
+	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x1a`\n" +
 	"\rSkillsContext\x12O\n" +
 	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkills\x1ak\n" +
 	"\x11LspServersContext\x12V\n" +
