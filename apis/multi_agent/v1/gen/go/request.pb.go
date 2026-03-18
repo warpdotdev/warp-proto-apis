@@ -5848,10 +5848,10 @@ func (x *Request_Input_UserInputs_UserInput) GetMessagesReceivedFromAgents() *Re
 	return nil
 }
 
-func (x *Request_Input_UserInputs_UserInput) GetLifecycleEventsFromAgents() *Request_Input_UserInputs_LifecycleEventsFromAgents {
+func (x *Request_Input_UserInputs_UserInput) GetEventsFromAgents() *Request_Input_UserInputs_EventsFromAgents {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_LifecycleEventsFromAgents); ok {
-			return x.LifecycleEventsFromAgents
+		if x, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_EventsFromAgents); ok {
+			return x.EventsFromAgents
 		}
 	}
 	return nil
@@ -5889,12 +5889,12 @@ func (x *Request_Input_UserInputs_UserInput) SetMessagesReceivedFromAgents(v *Re
 	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_MessagesReceivedFromAgents{v}
 }
 
-func (x *Request_Input_UserInputs_UserInput) SetLifecycleEventsFromAgents(v *Request_Input_UserInputs_LifecycleEventsFromAgents) {
+func (x *Request_Input_UserInputs_UserInput) SetEventsFromAgents(v *Request_Input_UserInputs_EventsFromAgents) {
 	if v == nil {
 		x.xxx_hidden_Input = nil
 		return
 	}
-	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_LifecycleEventsFromAgents{v}
+	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_EventsFromAgents{v}
 }
 
 func (x *Request_Input_UserInputs_UserInput) HasInput() bool {
@@ -5936,11 +5936,11 @@ func (x *Request_Input_UserInputs_UserInput) HasMessagesReceivedFromAgents() boo
 	return ok
 }
 
-func (x *Request_Input_UserInputs_UserInput) HasLifecycleEventsFromAgents() bool {
+func (x *Request_Input_UserInputs_UserInput) HasEventsFromAgents() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_LifecycleEventsFromAgents)
+	_, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_EventsFromAgents)
 	return ok
 }
 
@@ -5972,8 +5972,8 @@ func (x *Request_Input_UserInputs_UserInput) ClearMessagesReceivedFromAgents() {
 	}
 }
 
-func (x *Request_Input_UserInputs_UserInput) ClearLifecycleEventsFromAgents() {
-	if _, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_LifecycleEventsFromAgents); ok {
+func (x *Request_Input_UserInputs_UserInput) ClearEventsFromAgents() {
+	if _, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_EventsFromAgents); ok {
 		x.xxx_hidden_Input = nil
 	}
 }
@@ -5983,7 +5983,7 @@ const Request_Input_UserInputs_UserInput_UserQuery_case case_Request_Input_UserI
 const Request_Input_UserInputs_UserInput_ToolCallResult_case case_Request_Input_UserInputs_UserInput_Input = 2
 const Request_Input_UserInputs_UserInput_CliAgentUserQuery_case case_Request_Input_UserInputs_UserInput_Input = 3
 const Request_Input_UserInputs_UserInput_MessagesReceivedFromAgents_case case_Request_Input_UserInputs_UserInput_Input = 4
-const Request_Input_UserInputs_UserInput_LifecycleEventsFromAgents_case case_Request_Input_UserInputs_UserInput_Input = 5
+const Request_Input_UserInputs_UserInput_EventsFromAgents_case case_Request_Input_UserInputs_UserInput_Input = 5
 
 func (x *Request_Input_UserInputs_UserInput) WhichInput() case_Request_Input_UserInputs_UserInput_Input {
 	if x == nil {
@@ -5998,8 +5998,8 @@ func (x *Request_Input_UserInputs_UserInput) WhichInput() case_Request_Input_Use
 		return Request_Input_UserInputs_UserInput_CliAgentUserQuery_case
 	case *request_Input_UserInputs_UserInput_MessagesReceivedFromAgents:
 		return Request_Input_UserInputs_UserInput_MessagesReceivedFromAgents_case
-	case *request_Input_UserInputs_UserInput_LifecycleEventsFromAgents:
-		return Request_Input_UserInputs_UserInput_LifecycleEventsFromAgents_case
+	case *request_Input_UserInputs_UserInput_EventsFromAgents:
+		return Request_Input_UserInputs_UserInput_EventsFromAgents_case
 	default:
 		return Request_Input_UserInputs_UserInput_Input_not_set_case
 	}
@@ -6013,7 +6013,7 @@ type Request_Input_UserInputs_UserInput_builder struct {
 	ToolCallResult             *Request_Input_ToolCallResult
 	CliAgentUserQuery          *Request_Input_CLIAgentUserQuery
 	MessagesReceivedFromAgents *Request_Input_UserInputs_MessagesReceivedFromAgents
-	LifecycleEventsFromAgents  *Request_Input_UserInputs_LifecycleEventsFromAgents
+	EventsFromAgents           *Request_Input_UserInputs_EventsFromAgents
 	// -- end of xxx_hidden_Input
 }
 
@@ -6033,8 +6033,8 @@ func (b0 Request_Input_UserInputs_UserInput_builder) Build() *Request_Input_User
 	if b.MessagesReceivedFromAgents != nil {
 		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_MessagesReceivedFromAgents{b.MessagesReceivedFromAgents}
 	}
-	if b.LifecycleEventsFromAgents != nil {
-		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_LifecycleEventsFromAgents{b.LifecycleEventsFromAgents}
+	if b.EventsFromAgents != nil {
+		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_EventsFromAgents{b.EventsFromAgents}
 	}
 	return m0
 }
@@ -6069,8 +6069,8 @@ type request_Input_UserInputs_UserInput_MessagesReceivedFromAgents struct {
 	MessagesReceivedFromAgents *Request_Input_UserInputs_MessagesReceivedFromAgents `protobuf:"bytes,4,opt,name=messages_received_from_agents,json=messagesReceivedFromAgents,oneof"`
 }
 
-type request_Input_UserInputs_UserInput_LifecycleEventsFromAgents struct {
-	LifecycleEventsFromAgents *Request_Input_UserInputs_LifecycleEventsFromAgents `protobuf:"bytes,5,opt,name=lifecycle_events_from_agents,json=lifecycleEventsFromAgents,oneof"`
+type request_Input_UserInputs_UserInput_EventsFromAgents struct {
+	EventsFromAgents *Request_Input_UserInputs_EventsFromAgents `protobuf:"bytes,5,opt,name=events_from_agents,json=eventsFromAgents,oneof"`
 }
 
 func (*request_Input_UserInputs_UserInput_UserQuery) isRequest_Input_UserInputs_UserInput_Input() {}
@@ -6084,7 +6084,7 @@ func (*request_Input_UserInputs_UserInput_CliAgentUserQuery) isRequest_Input_Use
 func (*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents) isRequest_Input_UserInputs_UserInput_Input() {
 }
 
-func (*request_Input_UserInputs_UserInput_LifecycleEventsFromAgents) isRequest_Input_UserInputs_UserInput_Input() {
+func (*request_Input_UserInputs_UserInput_EventsFromAgents) isRequest_Input_UserInputs_UserInput_Input() {
 }
 
 // Batch of messages received from other agents.
@@ -6147,28 +6147,28 @@ func (b0 Request_Input_UserInputs_MessagesReceivedFromAgents_builder) Build() *R
 	return m0
 }
 
-// Batch of lifecycle events received from child agents.
-type Request_Input_UserInputs_LifecycleEventsFromAgents struct {
-	state             protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Events *[]*LifecycleEvent     `protobuf:"bytes,1,rep,name=events"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+// Batch of events received from agents.
+type Request_Input_UserInputs_EventsFromAgents struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_AgentEvents *[]*AgentEvent         `protobuf:"bytes,1,rep,name=agent_events,json=agentEvents"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Input_UserInputs_LifecycleEventsFromAgents) Reset() {
-	*x = Request_Input_UserInputs_LifecycleEventsFromAgents{}
+func (x *Request_Input_UserInputs_EventsFromAgents) Reset() {
+	*x = Request_Input_UserInputs_EventsFromAgents{}
 	mi := &file_request_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_UserInputs_LifecycleEventsFromAgents) String() string {
+func (x *Request_Input_UserInputs_EventsFromAgents) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_UserInputs_LifecycleEventsFromAgents) ProtoMessage() {}
+func (*Request_Input_UserInputs_EventsFromAgents) ProtoMessage() {}
 
-func (x *Request_Input_UserInputs_LifecycleEventsFromAgents) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_UserInputs_EventsFromAgents) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -6180,30 +6180,30 @@ func (x *Request_Input_UserInputs_LifecycleEventsFromAgents) ProtoReflect() prot
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Input_UserInputs_LifecycleEventsFromAgents) GetEvents() []*LifecycleEvent {
+func (x *Request_Input_UserInputs_EventsFromAgents) GetAgentEvents() []*AgentEvent {
 	if x != nil {
-		if x.xxx_hidden_Events != nil {
-			return *x.xxx_hidden_Events
+		if x.xxx_hidden_AgentEvents != nil {
+			return *x.xxx_hidden_AgentEvents
 		}
 	}
 	return nil
 }
 
-func (x *Request_Input_UserInputs_LifecycleEventsFromAgents) SetEvents(v []*LifecycleEvent) {
-	x.xxx_hidden_Events = &v
+func (x *Request_Input_UserInputs_EventsFromAgents) SetAgentEvents(v []*AgentEvent) {
+	x.xxx_hidden_AgentEvents = &v
 }
 
-type Request_Input_UserInputs_LifecycleEventsFromAgents_builder struct {
+type Request_Input_UserInputs_EventsFromAgents_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Events []*LifecycleEvent
+	AgentEvents []*AgentEvent
 }
 
-func (b0 Request_Input_UserInputs_LifecycleEventsFromAgents_builder) Build() *Request_Input_UserInputs_LifecycleEventsFromAgents {
-	m0 := &Request_Input_UserInputs_LifecycleEventsFromAgents{}
+func (b0 Request_Input_UserInputs_EventsFromAgents_builder) Build() *Request_Input_UserInputs_EventsFromAgents {
+	m0 := &Request_Input_UserInputs_EventsFromAgents{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Events = &b.Events
+	x.xxx_hidden_AgentEvents = &b.AgentEvents
 	return m0
 }
 
@@ -8001,7 +8001,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\xc3d\n" +
+	"task.proto\x1a\vskill.proto\"\xa4d\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -8011,7 +8011,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xe0D\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc1D\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -8046,17 +8046,17 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQuery\x12Q\n" +
 	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x12A\n" +
-	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xe5\b\n" +
+	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xc6\b\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
-	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xd4\x04\n" +
+	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xb7\x04\n" +
 	"\tUserInput\x12M\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12g\n" +
 	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQuery\x12\x93\x01\n" +
-	"\x1dmessages_received_from_agents\x18\x04 \x01(\v2H.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x12\x90\x01\n" +
-	"\x1clifecycle_events_from_agents\x18\x05 \x01(\v2G.warp.multi_agent.v1.Request.Input.UserInputs.LifecycleEventsFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x19lifecycleEventsFromAgentsB\a\n" +
+	"\x1dmessages_received_from_agents\x18\x04 \x01(\v2H.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x12t\n" +
+	"\x12events_from_agents\x18\x05 \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x10eventsFromAgentsB\a\n" +
 	"\x05input\x1a\xd4\x02\n" +
 	"\x1aMessagesReceivedFromAgents\x12t\n" +
 	"\bmessages\x18\x01 \x03(\v2X.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
@@ -8066,9 +8066,9 @@ const file_request_proto_rawDesc = "" +
 	"\x0fsender_agent_id\x18\x02 \x01(\tR\rsenderAgentId\x12\x1c\n" +
 	"\taddresses\x18\x03 \x03(\tR\taddresses\x12\x1e\n" +
 	"\asubject\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\asubject\x12'\n" +
-	"\fmessage_body\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vmessageBody\x1aX\n" +
-	"\x19LifecycleEventsFromAgents\x12;\n" +
-	"\x06events\x18\x01 \x03(\v2#.warp.multi_agent.v1.LifecycleEventR\x06events\x1a\xa0\x14\n" +
+	"\fmessage_body\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vmessageBody\x1aV\n" +
+	"\x10EventsFromAgents\x12B\n" +
+	"\fagent_events\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AgentEventR\vagentEvents\x1a\xa0\x14\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -8287,7 +8287,7 @@ var file_request_proto_goTypes = []any{
 	nil,                                                                         // 26: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry
 	(*Request_Input_UserInputs_UserInput)(nil),                                  // 27: warp.multi_agent.v1.Request.Input.UserInputs.UserInput
 	(*Request_Input_UserInputs_MessagesReceivedFromAgents)(nil),                 // 28: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents
-	(*Request_Input_UserInputs_LifecycleEventsFromAgents)(nil),                  // 29: warp.multi_agent.v1.Request.Input.UserInputs.LifecycleEventsFromAgents
+	(*Request_Input_UserInputs_EventsFromAgents)(nil),                           // 29: warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents
 	(*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage)(nil), // 30: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                       // 31: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	(*Request_Input_QueryWithCannedResponse_Code)(nil),                          // 32: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
@@ -8343,7 +8343,7 @@ var file_request_proto_goTypes = []any{
 	(*Attachment)(nil),                              // 82: warp.multi_agent.v1.Attachment
 	(*emptypb.Empty)(nil),                           // 83: google.protobuf.Empty
 	(*Skill)(nil),                                   // 84: warp.multi_agent.v1.Skill
-	(*LifecycleEvent)(nil),                          // 85: warp.multi_agent.v1.LifecycleEvent
+	(*AgentEvent)(nil),                              // 85: warp.multi_agent.v1.AgentEvent
 	(*ExecutedShellCommand)(nil),                    // 86: warp.multi_agent.v1.ExecutedShellCommand
 	(*AnyFileContent)(nil),                          // 87: warp.multi_agent.v1.AnyFileContent
 	(*ReviewComment)(nil),                           // 88: warp.multi_agent.v1.ReviewComment
@@ -8440,9 +8440,9 @@ var file_request_proto_depIdxs = []int32{
 	11,  // 85: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
 	9,   // 86: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
 	28,  // 87: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.messages_received_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents
-	29,  // 88: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.lifecycle_events_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.LifecycleEventsFromAgents
+	29,  // 88: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.events_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents
 	30,  // 89: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
-	85,  // 90: warp.multi_agent.v1.Request.Input.UserInputs.LifecycleEventsFromAgents.events:type_name -> warp.multi_agent.v1.LifecycleEvent
+	85,  // 90: warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
 	86,  // 91: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	87,  // 92: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	88,  // 93: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
@@ -8541,7 +8541,7 @@ func file_request_proto_init() {
 		(*request_Input_UserInputs_UserInput_ToolCallResult)(nil),
 		(*request_Input_UserInputs_UserInput_CliAgentUserQuery)(nil),
 		(*request_Input_UserInputs_UserInput_MessagesReceivedFromAgents)(nil),
-		(*request_Input_UserInputs_UserInput_LifecycleEventsFromAgents)(nil),
+		(*request_Input_UserInputs_UserInput_EventsFromAgents)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -65,38 +65,46 @@ enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_ERRORED = 4;
 }
 
-// A lifecycle event emitted by a child agent.
-message LifecycleEvent {
+// A generic event emitted by an agent and routed to other agents.
+message AgentEvent {
   // Unique identifier for idempotency and deduplication.
   string event_id = 1;
-  // The child agent ID (conversation ID in V0).
-  string child_agent_id = 2;
-  // The lifecycle event type.
-  LifecycleEventType event_type = 3;
-  // Monotonic sequence number per child agent.
-  uint64 sequence_num = 4;
   // Timestamp the event occurred.
-  google.protobuf.Timestamp occurred_at = 5;
-  // Version of this lifecycle event payload schema.
-  uint32 schema_version = 6;
+  google.protobuf.Timestamp occurred_at = 2;
 
-  oneof detail {
-    Started started = 7;
-    Idle idle = 8;
-    Restarted restarted = 9;
-    Errored errored = 10;
+  oneof event {
+    LifecycleEvent lifecycle_event = 3;
   }
 
-  message Started {}
+  // Lifecycle event payload emitted by a sender agent.
+  message LifecycleEvent {
+    // The sender agent ID (conversation ID in V0).
+    string sender_agent_id = 1;
+    // The lifecycle event type.
+    LifecycleEventType event_type = 2;
+    // Monotonic sequence number per sender agent.
+    uint64 sequence_num = 3;
+    // Version of this lifecycle event payload schema.
+    uint32 schema_version = 4;
 
-  message Idle {}
+    oneof detail {
+      Started started = 5;
+      Idle idle = 6;
+      Restarted restarted = 7;
+      Errored errored = 8;
+    }
 
-  message Restarted {}
+    message Started {}
 
-  message Errored {
-    string stage = 1;
-    string reason = 2;
-    string error_message = 3 [ (sensitive) = true ];
+    message Idle {}
+
+    message Restarted {}
+
+    message Errored {
+      string stage = 1;
+      string reason = 2;
+      string error_message = 3 [ (sensitive) = true ];
+    }
   }
 }
 
@@ -185,7 +193,7 @@ message Message {
     InvokeSkill invoke_skill = 23;
     MessagesReceivedFromAgents messages_received_from_agents = 24 [ (internal) = true ];
     ModelUsed model_used = 25;
-    LifecycleEventsFromAgents lifecycle_events_from_agents = 26 [ (internal) = true ];
+    EventsFromAgents events_from_agents = 26 [ (internal) = true ];
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -204,9 +212,9 @@ message Message {
     }
   }
 
-  // A batch of lifecycle events received from child agents.
-  message LifecycleEventsFromAgents {
-    repeated LifecycleEvent events = 1;
+  // A batch of events received from agents.
+  message EventsFromAgents {
+    repeated AgentEvent agent_events = 1;
   }
 
   // User query message type
