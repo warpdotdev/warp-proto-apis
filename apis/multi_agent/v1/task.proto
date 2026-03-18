@@ -56,6 +56,50 @@ message Task {
   string server_data = 8;
 }
 
+// Lifecycle event types emitted by child agents and routed to lead agents.
+enum LifecycleEventType {
+  LIFECYCLE_EVENT_TYPE_UNSPECIFIED = 0;
+  LIFECYCLE_EVENT_TYPE_STARTED = 1;
+  LIFECYCLE_EVENT_TYPE_IDLE = 2;
+  LIFECYCLE_EVENT_TYPE_RESTARTED = 3;
+  LIFECYCLE_EVENT_TYPE_ERRORED = 4;
+}
+
+// A lifecycle event emitted by a child agent.
+message LifecycleEvent {
+  // Unique identifier for idempotency and deduplication.
+  string event_id = 1;
+  // The child agent ID (conversation ID in V0).
+  string child_agent_id = 2;
+  // The lifecycle event type.
+  LifecycleEventType event_type = 3;
+  // Monotonic sequence number per child agent.
+  uint64 sequence_num = 4;
+  // Timestamp the event occurred.
+  google.protobuf.Timestamp occurred_at = 5;
+  // Version of this lifecycle event payload schema.
+  uint32 schema_version = 6;
+
+  oneof detail {
+    Started started = 7;
+    Idle idle = 8;
+    Restarted restarted = 9;
+    Errored errored = 10;
+  }
+
+  message Started {}
+
+  message Idle {}
+
+  message Restarted {}
+
+  message Errored {
+    string stage = 1;
+    string reason = 2;
+    string error_message = 3 [ (sensitive) = true ];
+  }
+}
+
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
   repeated ReviewComment completed_comments = 2;
@@ -141,6 +185,7 @@ message Message {
     InvokeSkill invoke_skill = 23;
     MessagesReceivedFromAgents messages_received_from_agents = 24 [ (internal) = true ];
     ModelUsed model_used = 25;
+    LifecycleEventsFromAgents lifecycle_events_from_agents = 26 [ (internal) = true ];
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -157,6 +202,11 @@ message Message {
       string subject = 4 [ (sensitive) = true ];
       string message_body = 5 [ (sensitive) = true ];
     }
+  }
+
+  // A batch of lifecycle events received from child agents.
+  message LifecycleEventsFromAgents {
+    repeated LifecycleEvent events = 1;
   }
 
   // User query message type
@@ -1523,6 +1573,14 @@ message StartAgent {
   string name = 1 [ (sensitive) = true ];
   // The initial prompt to send to the new agent.
   string prompt = 2 [ (sensitive) = true ];
+  // Optional lifecycle event subscription for the new child agent.
+  // If not set or empty, defaults to all lifecycle event types.
+  LifecycleSubscription lifecycle_subscription = 3;
+
+  message LifecycleSubscription {
+    // Lifecycle event types the lead agent is subscribing to.
+    repeated LifecycleEventType event_types = 1;
+  }
 }
 
 // The result of a StartAgent tool call.

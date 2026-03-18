@@ -110,6 +110,7 @@ message Request {
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
           MessagesReceivedFromAgents messages_received_from_agents = 4 [ (internal) = true ];
+          LifecycleEventsFromAgents lifecycle_events_from_agents = 5 [ (internal) = true ];
         }
       }
 
@@ -124,6 +125,11 @@ message Request {
           string subject = 4 [ (sensitive) = true ];
           string message_body = 5 [ (sensitive) = true ];
         }
+      }
+
+      // Batch of lifecycle events received from child agents.
+      message LifecycleEventsFromAgents {
+        repeated LifecycleEvent events = 1;
       }
     }
 
