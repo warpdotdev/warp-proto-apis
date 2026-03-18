@@ -82,23 +82,10 @@ message AgentEvent {
     string sender_agent_id = 1;
     // The lifecycle event type.
     LifecycleEventType event_type = 2;
-    // Monotonic sequence number per sender agent.
-    uint64 sequence_num = 3;
-    // Version of this lifecycle event payload schema.
-    uint32 schema_version = 4;
-
+    // Optional detail payload. Only errored detail is defined for now.
     oneof detail {
-      Started started = 5;
-      Idle idle = 6;
-      Restarted restarted = 7;
-      Errored errored = 8;
+      Errored errored = 3;
     }
-
-    message Started {}
-
-    message Idle {}
-
-    message Restarted {}
 
     message Errored {
       string stage = 1;
