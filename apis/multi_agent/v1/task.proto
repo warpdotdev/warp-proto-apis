@@ -361,6 +361,7 @@ message Message {
       SendMessageToAgent send_message_to_agent = 30 [ (internal) = true ];
       TransferShellCommandControlToUser transfer_shell_command_control_to_user =
           31;
+      AskUserQuestion ask_user_question = 32;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -887,6 +888,7 @@ message Message {
       SendMessageToAgentResult send_message_to_agent = 34 [ (internal) = true ];
       TransferShellCommandControlToUserResult
           transfer_shell_command_control_to_user = 35;
+      AskUserQuestionResult ask_user_question = 36;
     }
 
     // Result of a server-side tool call.
@@ -1520,6 +1522,7 @@ enum ToolType {
   START_AGENT = 26;
   SEND_MESSAGE_TO_AGENT = 27;
   TRANSFER_SHELL_COMMAND_CONTROL_TO_USER = 28;
+  ASK_USER_QUESTION = 29;
 }
 
 message UserQueryMode {
@@ -1599,6 +1602,65 @@ message SendMessageToAgentResult {
     string message_id = 1;
   }
   message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+// A client tool call to present one or more questions to the user.
+message AskUserQuestion {
+  repeated Question questions = 1;
+
+  // A selectable option presented to the user.
+  message Option {
+    string label = 1;
+  }
+
+  // A multiple-choice question configuration.
+  message MultipleChoice {
+    repeated Option options = 1;
+    // Zero-based index into `options` identifying the recommended choice.
+    int32 recommended_option_index = 2;
+    // If true, the user may select more than one option.
+    bool is_multiselect = 3;
+    // If true, the user may provide free-form input in addition to the options.
+    bool supports_other = 4;
+  }
+
+  // A single question to present to the user.
+  message Question {
+    string question_id = 1;
+    string question = 2;
+    oneof question_type {
+      MultipleChoice multiple_choice = 3;
+    }
+  }
+}
+
+// The result of an AskUserQuestion tool call.
+message AskUserQuestionResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    repeated AnswerItem answers = 1;
+  }
+
+  message Error { string message = 1; }
+
+  // The user's answer to a single question.
+  message AnswerItem {
+    string question_id = 1;
+    oneof answer {
+      MultipleChoiceAnswer multiple_choice = 2;
+      google.protobuf.Empty skipped = 3;
+    }
+
+    message MultipleChoiceAnswer {
+      repeated string selected_options = 1;
+      // Populated if the user provided free-form "Other" input.
+      string other_text = 2;
+    }
+  }
 }
 
 message RawImage {

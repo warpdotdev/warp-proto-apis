@@ -169,6 +169,7 @@ message Request {
         StartAgentResult start_agent = 28 [ (internal) = true ];
         SendMessageToAgentResult send_message_to_agent = 29 [ (internal) = true ];
         TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 30;
+        AskUserQuestionResult ask_user_question = 31;
       }
     }
 
