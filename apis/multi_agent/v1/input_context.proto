@@ -97,6 +97,10 @@ message InputContext {
   message Git {
     // The user's current head (i.e. branch name or commit hash).
     string head = 1 [ (sensitive) = true ];
+
+    // The current branch name, populated only from `git symbolic-ref --short HEAD`.
+    // Empty/absent when in detached HEAD state.
+    string branch = 2 [ (sensitive) = true ];
   }
 
   message SkillsContext {
