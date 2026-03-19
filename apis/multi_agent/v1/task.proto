@@ -80,11 +80,13 @@ message AgentEvent {
   message LifecycleEvent {
     // The sender agent ID (conversation ID in V0).
     string sender_agent_id = 1;
-    // The lifecycle event type.
-    LifecycleEventType event_type = 2;
-    // Optional detail payload. Only errored detail is defined for now.
+    // Lifecycle detail payload. Empty variants represent enum-like lifecycle
+    // states while still allowing future expansion of per-state metadata.
     oneof detail {
-      Errored errored = 3;
+      Errored errored = 2;
+      google.protobuf.Empty started = 3;
+      google.protobuf.Empty idle = 4;
+      google.protobuf.Empty restarted = 5;
     }
 
     message Errored {
