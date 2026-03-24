@@ -113,7 +113,7 @@ message Request {
           EventsFromAgents events_from_agents = 5 [ (internal) = true ];
 
           // Resolution of a passive suggestion that should be brought into context.
-          PassiveSuggestionResult passive_suggestion_result = 6;
+          PassiveSuggestionResultInput passive_suggestion_result = 6;
         }
       }
 
@@ -133,6 +133,10 @@ message Request {
       // Batch of events received from agents.
       message EventsFromAgents {
         repeated AgentEvent agent_events = 1;
+      }
+
+      message PassiveSuggestionResultInput {
+        PassiveSuggestionResultType result = 1;
       }
     }
 

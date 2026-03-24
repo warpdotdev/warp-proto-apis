@@ -187,6 +187,11 @@ message Message {
     PassiveSuggestionResult passive_suggestion_result = 27;
   }
 
+  message PassiveSuggestionResult {
+    PassiveSuggestionResultType result = 1;
+    InputContext context = 2; 
+  }
+
   // A batch of messages received from other agents, persisted in conversation
   // history. The full message contents are stored here so that server-side
   // tools (ListMessages, ReadMessages) can scan them. When formatted for the
@@ -1656,7 +1661,7 @@ message AskUserQuestionResult {
   }
 }
 
-message PassiveSuggestionResult {
+message PassiveSuggestionResultType {
   oneof trigger {
     ExecutedShellCommand executed_shell_command = 1;
     AgentResponseCompleted agent_response_completed = 2;
