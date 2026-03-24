@@ -72,9 +72,7 @@ message AgentEvent {
   // Timestamp the event occurred.
   google.protobuf.Timestamp occurred_at = 2;
 
-  oneof event {
-    LifecycleEvent lifecycle_event = 3;
-  }
+  oneof event { LifecycleEvent lifecycle_event = 3; }
 
   // Lifecycle event payload emitted by a sender agent.
   message LifecycleEvent {
@@ -182,9 +180,11 @@ message Message {
     DebugOutput debug_output = 21;
     ArtifactEvent artifact_event = 22;
     InvokeSkill invoke_skill = 23;
-    MessagesReceivedFromAgents messages_received_from_agents = 24 [ (internal) = true ];
+    MessagesReceivedFromAgents messages_received_from_agents = 24
+        [ (internal) = true ];
     ModelUsed model_used = 25;
     EventsFromAgents events_from_agents = 26 [ (internal) = true ];
+    PassiveSuggestionResult passive_suggestion_result = 27;
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -204,9 +204,7 @@ message Message {
   }
 
   // A batch of events received from agents.
-  message EventsFromAgents {
-    repeated AgentEvent agent_events = 1;
-  }
+  message EventsFromAgents { repeated AgentEvent agent_events = 1; }
 
   // User query message type
   message UserQuery {
@@ -1471,7 +1469,8 @@ message FetchConversationResult {
   message Success {
     reserved 1;
     reserved tasks;
-    // The path to the directory containing the materialized conversation YAML files.
+    // The path to the directory containing the materialized conversation YAML
+    // files.
     string directory_path = 2;
   }
 
@@ -1609,9 +1608,7 @@ message AskUserQuestion {
   repeated Question questions = 1;
 
   // A selectable option presented to the user.
-  message Option {
-    string label = 1;
-  }
+  message Option { string label = 1; }
 
   // A multiple-choice question configuration.
   message MultipleChoice {
@@ -1628,9 +1625,7 @@ message AskUserQuestion {
   message Question {
     string question_id = 1;
     string question = 2;
-    oneof question_type {
-      MultipleChoice multiple_choice = 3;
-    }
+    oneof question_type { MultipleChoice multiple_choice = 3; }
   }
 }
 
@@ -1641,9 +1636,7 @@ message AskUserQuestionResult {
     Error error = 2;
   }
 
-  message Success {
-    repeated AnswerItem answers = 1;
-  }
+  message Success { repeated AnswerItem answers = 1; }
 
   message Error { string message = 1; }
 
@@ -1660,6 +1653,32 @@ message AskUserQuestionResult {
       // Populated if the user provided free-form "Other" input.
       string other_text = 2;
     }
+  }
+}
+
+message PassiveSuggestionResult {
+  oneof trigger {
+    ExecutedShellCommand executed_shell_command = 1;
+    AgentResponseCompleted agent_response_completed = 2;
+  }
+
+  oneof suggestion {
+    Prompt prompt = 3;
+    CodeDiff code_diff = 4;
+  }
+
+  message AgentResponseCompleted {}
+
+  message Prompt { string prompt = 1; }
+
+  message CodeDiff {
+    // The file contents with the diff applied.
+    repeated FileContent updated_files = 1;
+    // A brief description of the change, if any.
+    string summary = 2;
+    // Passive code diffs can be rejected but brought into context for further
+    // iteration.
+    bool accepted = 3;
   }
 }
 

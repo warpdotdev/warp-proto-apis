@@ -111,6 +111,9 @@ message Request {
           CLIAgentUserQuery cli_agent_user_query = 3;
           MessagesReceivedFromAgents messages_received_from_agents = 4 [ (internal) = true ];
           EventsFromAgents events_from_agents = 5 [ (internal) = true ];
+
+          // Resolution of a passive suggestion that should be brought into context.
+          PassiveSuggestionResult passive_suggestion_result = 6;
         }
       }
 
@@ -195,7 +198,7 @@ message Request {
       message CustomOnboardingRequest {}
       message AgenticOnboardingKickoff {}
     }
-
+    
     // A query to perform an automatic code diff e.g. Warp detects compilation errors
     // in the last run block, and surfaces relevant a code diff to show to the user.
     message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
