@@ -1677,13 +1677,18 @@ message PassiveSuggestionResultType {
   message Prompt { string prompt = 1; }
 
   message CodeDiff {
-    // The file contents with the diff applied.
-    repeated FileContent updated_files = 1;
+    // The suggested diffs.
+    repeated Diff diffs = 1;
     // A brief description of the change, if any.
     string summary = 2;
-    // Passive code diffs can be rejected but brought into context for further
-    // iteration.
+    // Passive code diffs can be rejected but brought into context for further iteration.
     bool accepted = 3;
+
+    message Diff {
+      string file_path = 1;
+      string search = 2;
+      string replace = 3;
+    }
   }
 }
 

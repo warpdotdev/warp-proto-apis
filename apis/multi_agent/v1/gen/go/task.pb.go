@@ -31227,14 +31227,14 @@ func (b0 PassiveSuggestionResultType_Prompt_builder) Build() *PassiveSuggestionR
 }
 
 type PassiveSuggestionResultType_CodeDiff struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_UpdatedFiles *[]*FileContent        `protobuf:"bytes,1,rep,name=updated_files,json=updatedFiles"`
-	xxx_hidden_Summary      *string                `protobuf:"bytes,2,opt,name=summary"`
-	xxx_hidden_Accepted     bool                   `protobuf:"varint,3,opt,name=accepted"`
-	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
-	XXX_presence            [1]uint32
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                  protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_Diffs       *[]*PassiveSuggestionResultType_CodeDiff_Diff `protobuf:"bytes,1,rep,name=diffs"`
+	xxx_hidden_Summary     *string                                       `protobuf:"bytes,2,opt,name=summary"`
+	xxx_hidden_Accepted    bool                                          `protobuf:"varint,3,opt,name=accepted"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *PassiveSuggestionResultType_CodeDiff) Reset() {
@@ -31262,10 +31262,10 @@ func (x *PassiveSuggestionResultType_CodeDiff) ProtoReflect() protoreflect.Messa
 	return mi.MessageOf(x)
 }
 
-func (x *PassiveSuggestionResultType_CodeDiff) GetUpdatedFiles() []*FileContent {
+func (x *PassiveSuggestionResultType_CodeDiff) GetDiffs() []*PassiveSuggestionResultType_CodeDiff_Diff {
 	if x != nil {
-		if x.xxx_hidden_UpdatedFiles != nil {
-			return *x.xxx_hidden_UpdatedFiles
+		if x.xxx_hidden_Diffs != nil {
+			return *x.xxx_hidden_Diffs
 		}
 	}
 	return nil
@@ -31288,8 +31288,8 @@ func (x *PassiveSuggestionResultType_CodeDiff) GetAccepted() bool {
 	return false
 }
 
-func (x *PassiveSuggestionResultType_CodeDiff) SetUpdatedFiles(v []*FileContent) {
-	x.xxx_hidden_UpdatedFiles = &v
+func (x *PassiveSuggestionResultType_CodeDiff) SetDiffs(v []*PassiveSuggestionResultType_CodeDiff_Diff) {
+	x.xxx_hidden_Diffs = &v
 }
 
 func (x *PassiveSuggestionResultType_CodeDiff) SetSummary(v string) {
@@ -31329,12 +31329,11 @@ func (x *PassiveSuggestionResultType_CodeDiff) ClearAccepted() {
 type PassiveSuggestionResultType_CodeDiff_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The file contents with the diff applied.
-	UpdatedFiles []*FileContent
+	// The suggested diffs.
+	Diffs []*PassiveSuggestionResultType_CodeDiff_Diff
 	// A brief description of the change, if any.
 	Summary *string
-	// Passive code diffs can be rejected but brought into context for further
-	// iteration.
+	// Passive code diffs can be rejected but brought into context for further iteration.
 	Accepted *bool
 }
 
@@ -31342,7 +31341,7 @@ func (b0 PassiveSuggestionResultType_CodeDiff_builder) Build() *PassiveSuggestio
 	m0 := &PassiveSuggestionResultType_CodeDiff{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_UpdatedFiles = &b.UpdatedFiles
+	x.xxx_hidden_Diffs = &b.Diffs
 	if b.Summary != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Summary = b.Summary
@@ -31350,6 +31349,150 @@ func (b0 PassiveSuggestionResultType_CodeDiff_builder) Build() *PassiveSuggestio
 	if b.Accepted != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_Accepted = *b.Accepted
+	}
+	return m0
+}
+
+type PassiveSuggestionResultType_CodeDiff_Diff struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_Search      *string                `protobuf:"bytes,2,opt,name=search"`
+	xxx_hidden_Replace     *string                `protobuf:"bytes,3,opt,name=replace"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) Reset() {
+	*x = PassiveSuggestionResultType_CodeDiff_Diff{}
+	mi := &file_task_proto_msgTypes[219]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PassiveSuggestionResultType_CodeDiff_Diff) ProtoMessage() {}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) ProtoReflect() protoreflect.Message {
+	mi := &file_task_proto_msgTypes[219]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) GetFilePath() string {
+	if x != nil {
+		if x.xxx_hidden_FilePath != nil {
+			return *x.xxx_hidden_FilePath
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) GetSearch() string {
+	if x != nil {
+		if x.xxx_hidden_Search != nil {
+			return *x.xxx_hidden_Search
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) GetReplace() string {
+	if x != nil {
+		if x.xxx_hidden_Replace != nil {
+			return *x.xxx_hidden_Replace
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) SetFilePath(v string) {
+	x.xxx_hidden_FilePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) SetSearch(v string) {
+	x.xxx_hidden_Search = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) SetReplace(v string) {
+	x.xxx_hidden_Replace = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) HasFilePath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) HasSearch() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) HasReplace() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) ClearFilePath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_FilePath = nil
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) ClearSearch() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Search = nil
+}
+
+func (x *PassiveSuggestionResultType_CodeDiff_Diff) ClearReplace() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Replace = nil
+}
+
+type PassiveSuggestionResultType_CodeDiff_Diff_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	FilePath *string
+	Search   *string
+	Replace  *string
+}
+
+func (b0 PassiveSuggestionResultType_CodeDiff_Diff_builder) Build() *PassiveSuggestionResultType_CodeDiff_Diff {
+	m0 := &PassiveSuggestionResultType_CodeDiff_Diff{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.FilePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_FilePath = b.FilePath
+	}
+	if b.Search != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_Search = b.Search
+	}
+	if b.Replace != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_Replace = b.Replace
 	}
 	return m0
 }
@@ -32246,7 +32389,7 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"other_text\x18\x02 \x01(\tR\totherTextB\b\n" +
 	"\x06answerB\b\n" +
-	"\x06result\"\x92\x05\n" +
+	"\x06result\"\xf8\x05\n" +
 	"\x1bPassiveSuggestionResultType\x12a\n" +
 	"\x16executed_shell_command\x18\x01 \x01(\v2).warp.multi_agent.v1.ExecutedShellCommandH\x00R\x14executedShellCommand\x12\x83\x01\n" +
 	"\x18agent_response_completed\x18\x02 \x01(\v2G.warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompletedH\x00R\x16agentResponseCompleted\x12Q\n" +
@@ -32254,11 +32397,15 @@ const file_task_proto_rawDesc = "" +
 	"\tcode_diff\x18\x04 \x01(\v29.warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiffH\x01R\bcodeDiff\x1a\x18\n" +
 	"\x16AgentResponseCompleted\x1a \n" +
 	"\x06Prompt\x12\x16\n" +
-	"\x06prompt\x18\x01 \x01(\tR\x06prompt\x1a\x87\x01\n" +
-	"\bCodeDiff\x12E\n" +
-	"\rupdated_files\x18\x01 \x03(\v2 .warp.multi_agent.v1.FileContentR\fupdatedFiles\x12\x18\n" +
+	"\x06prompt\x18\x01 \x01(\tR\x06prompt\x1a\xed\x01\n" +
+	"\bCodeDiff\x12T\n" +
+	"\x05diffs\x18\x01 \x03(\v2>.warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.DiffR\x05diffs\x12\x18\n" +
 	"\asummary\x18\x02 \x01(\tR\asummary\x12\x1a\n" +
-	"\baccepted\x18\x03 \x01(\bR\bacceptedB\t\n" +
+	"\baccepted\x18\x03 \x01(\bR\baccepted\x1aU\n" +
+	"\x04Diff\x12\x1b\n" +
+	"\tfile_path\x18\x01 \x01(\tR\bfilePath\x12\x16\n" +
+	"\x06search\x18\x02 \x01(\tR\x06search\x12\x18\n" +
+	"\areplace\x18\x03 \x01(\tR\areplaceB\t\n" +
 	"\atriggerB\f\n" +
 	"\n" +
 	"suggestion\"o\n" +
@@ -32320,7 +32467,7 @@ const file_task_proto_rawDesc = "" +
 	"\x13RISK_CATEGORY_RISKY\x10\x05BMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 219)
+var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 220)
 var file_task_proto_goTypes = []any{
 	(LifecycleEventType)(0), // 0: warp.multi_agent.v1.LifecycleEventType
 	(ToolType)(0),           // 1: warp.multi_agent.v1.ToolType
@@ -32549,41 +32696,42 @@ var file_task_proto_goTypes = []any{
 	(*PassiveSuggestionResultType_AgentResponseCompleted)(nil),        // 224: warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
 	(*PassiveSuggestionResultType_Prompt)(nil),                        // 225: warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
 	(*PassiveSuggestionResultType_CodeDiff)(nil),                      // 226: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
-	(*timestamppb.Timestamp)(nil),                                     // 227: google.protobuf.Timestamp
-	(*DiffSet)(nil),                                                   // 228: warp.multi_agent.v1.DiffSet
-	(*DiffHunk)(nil),                                                  // 229: warp.multi_agent.v1.DiffHunk
-	(*Citation)(nil),                                                  // 230: warp.multi_agent.v1.Citation
-	(*LongRunningShellCommandSnapshot)(nil),                           // 231: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*emptypb.Empty)(nil),                                             // 232: google.protobuf.Empty
-	(*ExecutedShellCommand)(nil),                                      // 233: warp.multi_agent.v1.ExecutedShellCommand
-	(*CurrentRef)(nil),                                                // 234: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                                                   // 235: warp.multi_agent.v1.BaseRef
-	(*InputContext)(nil),                                              // 236: warp.multi_agent.v1.InputContext
-	(*Attachment)(nil),                                                // 237: warp.multi_agent.v1.Attachment
-	(*durationpb.Duration)(nil),                                       // 238: google.protobuf.Duration
-	(*CreateTodoList)(nil),                                            // 239: warp.multi_agent.v1.CreateTodoList
-	(*UpdatePendingTodos)(nil),                                        // 240: warp.multi_agent.v1.UpdatePendingTodos
-	(*MarkTodosCompleted)(nil),                                        // 241: warp.multi_agent.v1.MarkTodosCompleted
-	(*Skill)(nil),                                                     // 242: warp.multi_agent.v1.Skill
-	(*AnyFileContent)(nil),                                            // 243: warp.multi_agent.v1.AnyFileContent
-	(*structpb.Struct)(nil),                                           // 244: google.protobuf.Struct
-	(*FileContentLineRange)(nil),                                      // 245: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                               // 246: warp.multi_agent.v1.FileContent
-	(*DocumentContent)(nil),                                           // 247: warp.multi_agent.v1.DocumentContent
+	(*PassiveSuggestionResultType_CodeDiff_Diff)(nil),                 // 227: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
+	(*timestamppb.Timestamp)(nil),                                     // 228: google.protobuf.Timestamp
+	(*DiffSet)(nil),                                                   // 229: warp.multi_agent.v1.DiffSet
+	(*DiffHunk)(nil),                                                  // 230: warp.multi_agent.v1.DiffHunk
+	(*Citation)(nil),                                                  // 231: warp.multi_agent.v1.Citation
+	(*LongRunningShellCommandSnapshot)(nil),                           // 232: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*emptypb.Empty)(nil),                                             // 233: google.protobuf.Empty
+	(*ExecutedShellCommand)(nil),                                      // 234: warp.multi_agent.v1.ExecutedShellCommand
+	(*CurrentRef)(nil),                                                // 235: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                                   // 236: warp.multi_agent.v1.BaseRef
+	(*InputContext)(nil),                                              // 237: warp.multi_agent.v1.InputContext
+	(*Attachment)(nil),                                                // 238: warp.multi_agent.v1.Attachment
+	(*durationpb.Duration)(nil),                                       // 239: google.protobuf.Duration
+	(*CreateTodoList)(nil),                                            // 240: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil),                                        // 241: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil),                                        // 242: warp.multi_agent.v1.MarkTodosCompleted
+	(*Skill)(nil),                                                     // 243: warp.multi_agent.v1.Skill
+	(*AnyFileContent)(nil),                                            // 244: warp.multi_agent.v1.AnyFileContent
+	(*structpb.Struct)(nil),                                           // 245: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                                      // 246: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                               // 247: warp.multi_agent.v1.FileContent
+	(*DocumentContent)(nil),                                           // 248: warp.multi_agent.v1.DocumentContent
 }
 var file_task_proto_depIdxs = []int32{
 	54,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
 	12,  // 1: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
-	227, // 2: warp.multi_agent.v1.AgentEvent.occurred_at:type_name -> google.protobuf.Timestamp
+	228, // 2: warp.multi_agent.v1.AgentEvent.occurred_at:type_name -> google.protobuf.Timestamp
 	55,  // 3: warp.multi_agent.v1.AgentEvent.lifecycle_event:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent
 	11,  // 4: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	11,  // 5: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	228, // 6: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	229, // 7: warp.multi_agent.v1.ReviewComment.commented_line:type_name -> warp.multi_agent.v1.DiffHunk
+	229, // 6: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	230, // 7: warp.multi_agent.v1.ReviewComment.commented_line:type_name -> warp.multi_agent.v1.DiffHunk
 	57,  // 8: warp.multi_agent.v1.ReviewComment.commented_file:type_name -> warp.multi_agent.v1.ReviewComment.CommentedFile
 	58,  // 9: warp.multi_agent.v1.ReviewComment.commented_diffset:type_name -> warp.multi_agent.v1.ReviewComment.CommentedDiffset
-	227, // 10: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
-	230, // 11: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+	228, // 10: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
+	231, // 11: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
 	62,  // 12: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	70,  // 13: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
 	75,  // 14: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
@@ -32604,7 +32752,7 @@ var file_task_proto_depIdxs = []int32{
 	85,  // 29: warp.multi_agent.v1.Message.model_used:type_name -> warp.multi_agent.v1.Message.ModelUsed
 	61,  // 30: warp.multi_agent.v1.Message.events_from_agents:type_name -> warp.multi_agent.v1.Message.EventsFromAgents
 	59,  // 31: warp.multi_agent.v1.Message.passive_suggestion_result:type_name -> warp.multi_agent.v1.Message.PassiveSuggestionResult
-	231, // 32: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	232, // 32: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 33: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	28,  // 34: warp.multi_agent.v1.RunShellCommandResult.permission_denied:type_name -> warp.multi_agent.v1.PermissionDenied
 	165, // 35: warp.multi_agent.v1.ReadFilesResult.text_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
@@ -32614,7 +32762,7 @@ var file_task_proto_depIdxs = []int32{
 	169, // 39: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
 	170, // 40: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
 	171, // 41: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
-	232, // 42: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	233, // 42: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
 	174, // 43: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
 	175, // 44: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
 	176, // 45: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
@@ -32626,26 +32774,26 @@ var file_task_proto_depIdxs = []int32{
 	185, // 51: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
 	186, // 52: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
 	187, // 53: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
-	231, // 54: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	232, // 54: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 55: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	44,  // 56: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.error:type_name -> warp.multi_agent.v1.ShellCommandError
-	231, // 57: warp.multi_agent.v1.TransferShellCommandControlToUserResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	232, // 57: warp.multi_agent.v1.TransferShellCommandControlToUserResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 58: warp.multi_agent.v1.TransferShellCommandControlToUserResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	44,  // 59: warp.multi_agent.v1.TransferShellCommandControlToUserResult.error:type_name -> warp.multi_agent.v1.ShellCommandError
 	188, // 60: warp.multi_agent.v1.SuggestNewConversationResult.accepted:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Accepted
 	189, // 61: warp.multi_agent.v1.SuggestNewConversationResult.rejected:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Rejected
-	232, // 62: warp.multi_agent.v1.PermissionDenied.denylisted_command:type_name -> google.protobuf.Empty
+	233, // 62: warp.multi_agent.v1.PermissionDenied.denylisted_command:type_name -> google.protobuf.Empty
 	190, // 63: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
 	191, // 64: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
-	232, // 65: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
-	232, // 66: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
+	233, // 65: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
+	233, // 66: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
 	195, // 67: warp.multi_agent.v1.ReadDocumentsResult.success:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Success
 	196, // 68: warp.multi_agent.v1.ReadDocumentsResult.error:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Error
 	197, // 69: warp.multi_agent.v1.EditDocumentsResult.success:type_name -> warp.multi_agent.v1.EditDocumentsResult.Success
 	198, // 70: warp.multi_agent.v1.EditDocumentsResult.error:type_name -> warp.multi_agent.v1.EditDocumentsResult.Error
 	199, // 71: warp.multi_agent.v1.CreateDocumentsResult.success:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Success
 	200, // 72: warp.multi_agent.v1.CreateDocumentsResult.error:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Error
-	231, // 73: warp.multi_agent.v1.ReadShellCommandOutputResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	232, // 73: warp.multi_agent.v1.ReadShellCommandOutputResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 74: warp.multi_agent.v1.ReadShellCommandOutputResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	44,  // 75: warp.multi_agent.v1.ReadShellCommandOutputResult.error:type_name -> warp.multi_agent.v1.ShellCommandError
 	201, // 76: warp.multi_agent.v1.InsertReviewCommentsResult.success:type_name -> warp.multi_agent.v1.InsertReviewCommentsResult.Success
@@ -32659,9 +32807,9 @@ var file_task_proto_depIdxs = []int32{
 	209, // 84: warp.multi_agent.v1.RequestComputerUseResult.error:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Error
 	210, // 85: warp.multi_agent.v1.FetchConversationResult.success:type_name -> warp.multi_agent.v1.FetchConversationResult.Success
 	211, // 86: warp.multi_agent.v1.FetchConversationResult.error:type_name -> warp.multi_agent.v1.FetchConversationResult.Error
-	232, // 87: warp.multi_agent.v1.ShellCommandError.command_not_found:type_name -> google.protobuf.Empty
-	232, // 88: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
-	232, // 89: warp.multi_agent.v1.UserQueryMode.orchestrate:type_name -> google.protobuf.Empty
+	233, // 87: warp.multi_agent.v1.ShellCommandError.command_not_found:type_name -> google.protobuf.Empty
+	233, // 88: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
+	233, // 89: warp.multi_agent.v1.UserQueryMode.orchestrate:type_name -> google.protobuf.Empty
 	212, // 90: warp.multi_agent.v1.StartAgent.lifecycle_subscription:type_name -> warp.multi_agent.v1.StartAgent.LifecycleSubscription
 	213, // 91: warp.multi_agent.v1.StartAgentResult.success:type_name -> warp.multi_agent.v1.StartAgentResult.Success
 	214, // 92: warp.multi_agent.v1.StartAgentResult.error:type_name -> warp.multi_agent.v1.StartAgentResult.Error
@@ -32670,23 +32818,23 @@ var file_task_proto_depIdxs = []int32{
 	219, // 95: warp.multi_agent.v1.AskUserQuestion.questions:type_name -> warp.multi_agent.v1.AskUserQuestion.Question
 	220, // 96: warp.multi_agent.v1.AskUserQuestionResult.success:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Success
 	221, // 97: warp.multi_agent.v1.AskUserQuestionResult.error:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Error
-	233, // 98: warp.multi_agent.v1.PassiveSuggestionResultType.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	234, // 98: warp.multi_agent.v1.PassiveSuggestionResultType.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	224, // 99: warp.multi_agent.v1.PassiveSuggestionResultType.agent_response_completed:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
 	225, // 100: warp.multi_agent.v1.PassiveSuggestionResultType.prompt:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
 	226, // 101: warp.multi_agent.v1.PassiveSuggestionResultType.code_diff:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
 	56,  // 102: warp.multi_agent.v1.AgentEvent.LifecycleEvent.errored:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent.Errored
-	232, // 103: warp.multi_agent.v1.AgentEvent.LifecycleEvent.started:type_name -> google.protobuf.Empty
-	232, // 104: warp.multi_agent.v1.AgentEvent.LifecycleEvent.idle:type_name -> google.protobuf.Empty
-	232, // 105: warp.multi_agent.v1.AgentEvent.LifecycleEvent.restarted:type_name -> google.protobuf.Empty
-	234, // 106: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
-	235, // 107: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
-	234, // 108: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
-	235, // 109: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
+	233, // 103: warp.multi_agent.v1.AgentEvent.LifecycleEvent.started:type_name -> google.protobuf.Empty
+	233, // 104: warp.multi_agent.v1.AgentEvent.LifecycleEvent.idle:type_name -> google.protobuf.Empty
+	233, // 105: warp.multi_agent.v1.AgentEvent.LifecycleEvent.restarted:type_name -> google.protobuf.Empty
+	235, // 106: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
+	236, // 107: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
+	235, // 108: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
+	236, // 109: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
 	52,  // 110: warp.multi_agent.v1.Message.PassiveSuggestionResult.result:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType
-	236, // 111: warp.multi_agent.v1.Message.PassiveSuggestionResult.context:type_name -> warp.multi_agent.v1.InputContext
+	237, // 111: warp.multi_agent.v1.Message.PassiveSuggestionResult.context:type_name -> warp.multi_agent.v1.InputContext
 	86,  // 112: warp.multi_agent.v1.Message.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessage
 	9,   // 113: warp.multi_agent.v1.Message.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
-	236, // 114: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	237, // 114: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
 	87,  // 115: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	45,  // 116: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
 	2,   // 117: warp.multi_agent.v1.Message.UserQuery.intended_agent:type_name -> warp.multi_agent.v1.AgentType
@@ -32697,14 +32845,14 @@ var file_task_proto_depIdxs = []int32{
 	68,  // 122: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
 	69,  // 123: warp.multi_agent.v1.Message.SystemQuery.summarize_conversation:type_name -> warp.multi_agent.v1.Message.SummarizeConversation
 	74,  // 124: warp.multi_agent.v1.Message.SystemQuery.fetch_review_comments:type_name -> warp.multi_agent.v1.Message.FetchReviewComments
-	236, // 125: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	237, // 126: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
-	232, // 127: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
-	232, // 128: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
+	237, // 125: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	238, // 126: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
+	233, // 127: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
+	233, // 128: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
 	88,  // 129: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
 	89,  // 130: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompleted
-	238, // 131: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
-	238, // 132: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
+	239, // 131: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
+	239, // 132: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
 	90,  // 133: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
 	91,  // 134: warp.multi_agent.v1.Message.Summarization.tool_call_result_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
 	10,  // 135: warp.multi_agent.v1.Message.CodeReview.comments:type_name -> warp.multi_agent.v1.ReviewComments
@@ -32739,7 +32887,7 @@ var file_task_proto_depIdxs = []int32{
 	48,  // 164: warp.multi_agent.v1.Message.ToolCall.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgent
 	96,  // 165: warp.multi_agent.v1.Message.ToolCall.transfer_shell_command_control_to_user:type_name -> warp.multi_agent.v1.Message.ToolCall.TransferShellCommandControlToUser
 	50,  // 166: warp.multi_agent.v1.Message.ToolCall.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestion
-	236, // 167: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	237, // 167: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	13,  // 168: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	15,  // 169: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	148, // 170: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
@@ -32749,7 +32897,7 @@ var file_task_proto_depIdxs = []int32{
 	17,  // 174: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
 	19,  // 175: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
 	20,  // 176: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	232, // 177: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	233, // 177: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
 	23,  // 178: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
 	29,  // 179: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
 	24,  // 180: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
@@ -32772,20 +32920,20 @@ var file_task_proto_depIdxs = []int32{
 	49,  // 197: warp.multi_agent.v1.Message.ToolCallResult.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgentResult
 	25,  // 198: warp.multi_agent.v1.Message.ToolCallResult.transfer_shell_command_control_to_user:type_name -> warp.multi_agent.v1.TransferShellCommandControlToUserResult
 	51,  // 199: warp.multi_agent.v1.Message.ToolCallResult.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestionResult
-	239, // 200: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
-	240, // 201: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
-	241, // 202: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
+	240, // 200: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
+	241, // 201: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
+	242, // 202: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
 	150, // 203: warp.multi_agent.v1.Message.UpdateReviewComments.address_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
 	151, // 204: warp.multi_agent.v1.Message.WebSearch.status:type_name -> warp.multi_agent.v1.Message.WebSearch.Status
 	155, // 205: warp.multi_agent.v1.Message.WebFetch.status:type_name -> warp.multi_agent.v1.Message.WebFetch.Status
 	163, // 206: warp.multi_agent.v1.Message.ArtifactEvent.created:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated
 	164, // 207: warp.multi_agent.v1.Message.ArtifactEvent.fork_artifacts:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifacts
-	242, // 208: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
+	243, // 208: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
 	62,  // 209: warp.multi_agent.v1.Message.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	237, // 210: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	233, // 211: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	243, // 212: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
-	230, // 213: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	238, // 210: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	234, // 211: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	244, // 212: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
+	231, // 213: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
 	3,   // 214: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.risk_category:type_name -> warp.multi_agent.v1.RiskCategory
 	121, // 215: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
 	122, // 216: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
@@ -32794,35 +32942,35 @@ var file_task_proto_depIdxs = []int32{
 	126, // 219: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.deleted_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
 	124, // 220: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.v4a_updates:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
 	8,   // 221: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	244, // 222: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	245, // 222: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
 	128, // 223: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
 	129, // 224: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.prompt_chip:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.PromptChip
 	130, // 225: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
-	232, // 226: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
-	232, // 227: warp.multi_agent.v1.Message.ToolCall.Subagent.advice:type_name -> google.protobuf.Empty
-	232, // 228: warp.multi_agent.v1.Message.ToolCall.Subagent.computer_use:type_name -> google.protobuf.Empty
-	232, // 229: warp.multi_agent.v1.Message.ToolCall.Subagent.summarization:type_name -> google.protobuf.Empty
-	232, // 230: warp.multi_agent.v1.Message.ToolCall.Subagent.conversation_search:type_name -> google.protobuf.Empty
-	232, // 231: warp.multi_agent.v1.Message.ToolCall.Subagent.warp_documentation_search:type_name -> google.protobuf.Empty
+	233, // 226: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
+	233, // 227: warp.multi_agent.v1.Message.ToolCall.Subagent.advice:type_name -> google.protobuf.Empty
+	233, // 228: warp.multi_agent.v1.Message.ToolCall.Subagent.computer_use:type_name -> google.protobuf.Empty
+	233, // 229: warp.multi_agent.v1.Message.ToolCall.Subagent.summarization:type_name -> google.protobuf.Empty
+	233, // 230: warp.multi_agent.v1.Message.ToolCall.Subagent.conversation_search:type_name -> google.protobuf.Empty
+	233, // 231: warp.multi_agent.v1.Message.ToolCall.Subagent.warp_documentation_search:type_name -> google.protobuf.Empty
 	131, // 232: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
 	132, // 233: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
 	133, // 234: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	238, // 235: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
-	232, // 236: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
+	239, // 235: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
+	233, // 236: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
 	134, // 237: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.comments:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
 	137, // 238: warp.multi_agent.v1.Message.ToolCall.UseComputer.actions:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
 	120, // 239: warp.multi_agent.v1.Message.ToolCall.UseComputer.post_actions_screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
 	120, // 240: warp.multi_agent.v1.Message.ToolCall.RequestComputerUse.screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
 	147, // 241: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.region:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region
-	232, // 242: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
-	232, // 243: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
-	232, // 244: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
-	245, // 245: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	233, // 242: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
+	233, // 243: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
+	233, // 244: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
+	246, // 245: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	127, // 246: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
-	245, // 247: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	246, // 247: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	135, // 248: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment.location:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
 	136, // 249: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
-	245, // 250: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	246, // 250: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
 	4,   // 251: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.side:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSide
 	138, // 252: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
 	139, // 253: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
@@ -32838,18 +32986,18 @@ var file_task_proto_depIdxs = []int32{
 	5,   // 263: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
 	38,  // 264: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
 	6,   // 265: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
-	238, // 266: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
+	239, // 266: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
 	144, // 267: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
 	144, // 268: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
 	38,  // 269: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.top_left:type_name -> warp.multi_agent.v1.Coordinates
 	38,  // 270: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.bottom_right:type_name -> warp.multi_agent.v1.Coordinates
 	152, // 271: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
 	153, // 272: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
-	232, // 273: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
+	233, // 273: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
 	154, // 274: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
 	156, // 275: warp.multi_agent.v1.Message.WebFetch.Status.fetching:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Fetching
 	157, // 276: warp.multi_agent.v1.Message.WebFetch.Status.success:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success
-	232, // 277: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
+	233, // 277: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
 	158, // 278: warp.multi_agent.v1.Message.WebFetch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
 	159, // 279: warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact.pull_request:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
 	160, // 280: warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact.screenshot:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
@@ -32857,13 +33005,13 @@ var file_task_proto_depIdxs = []int32{
 	159, // 282: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.pull_request:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
 	160, // 283: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.screenshot:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
 	162, // 284: warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifacts.artifacts:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact
-	246, // 285: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	243, // 286: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	246, // 287: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	246, // 288: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	247, // 285: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	244, // 286: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	247, // 287: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	247, // 288: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
 	172, // 289: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
 	173, // 290: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
-	246, // 291: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	247, // 291: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
 	177, // 292: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
 	178, // 293: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
 	183, // 294: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
@@ -32872,12 +33020,12 @@ var file_task_proto_depIdxs = []int32{
 	193, // 297: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	194, // 298: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
 	22,  // 299: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	247, // 300: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	247, // 301: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	247, // 302: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	248, // 300: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	248, // 301: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	248, // 302: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	53,  // 303: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.RawImage
 	38,  // 304: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
-	246, // 305: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
+	247, // 305: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
 	41,  // 306: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
 	53,  // 307: warp.multi_agent.v1.RequestComputerUseResult.Approved.initial_screenshot:type_name -> warp.multi_agent.v1.RawImage
 	7,   // 308: warp.multi_agent.v1.RequestComputerUseResult.Approved.platform:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
@@ -32886,8 +33034,8 @@ var file_task_proto_depIdxs = []int32{
 	218, // 311: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
 	222, // 312: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
 	223, // 313: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
-	232, // 314: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.skipped:type_name -> google.protobuf.Empty
-	246, // 315: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	233, // 314: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.skipped:type_name -> google.protobuf.Empty
+	227, // 315: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.diffs:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
 	316, // [316:316] is the sub-list for method output_type
 	316, // [316:316] is the sub-list for method input_type
 	316, // [316:316] is the sub-list for extension type_name
@@ -33256,7 +33404,7 @@ func file_task_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_task_proto_rawDesc), len(file_task_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   219,
+			NumMessages:   220,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
