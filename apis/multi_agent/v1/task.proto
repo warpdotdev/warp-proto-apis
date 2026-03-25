@@ -63,6 +63,8 @@ enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_IDLE = 2;
   LIFECYCLE_EVENT_TYPE_RESTARTED = 3;
   LIFECYCLE_EVENT_TYPE_ERRORED = 4;
+  LIFECYCLE_EVENT_TYPE_CANCELLED = 5;
+  LIFECYCLE_EVENT_TYPE_BLOCKED = 6;
 }
 
 // A generic event emitted by an agent and routed to other agents.
@@ -85,6 +87,8 @@ message AgentEvent {
       google.protobuf.Empty started = 3;
       google.protobuf.Empty idle = 4;
       google.protobuf.Empty restarted = 5;
+      google.protobuf.Empty cancelled = 6;
+      Blocked blocked = 7;
     }
 
     message Errored {
@@ -92,6 +96,8 @@ message AgentEvent {
       string reason = 2;
       string error_message = 3 [ (sensitive) = true ];
     }
+
+    message Blocked { string blocked_action = 1 [ (sensitive) = true ]; }
   }
 }
 
