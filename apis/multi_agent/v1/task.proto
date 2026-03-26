@@ -186,10 +186,9 @@ message Message {
     DebugOutput debug_output = 21;
     ArtifactEvent artifact_event = 22;
     InvokeSkill invoke_skill = 23;
-    MessagesReceivedFromAgents messages_received_from_agents = 24
-        [ (internal) = true ];
+    MessagesReceivedFromAgents messages_received_from_agents = 24;
     ModelUsed model_used = 25;
-    EventsFromAgents events_from_agents = 26 [ (internal) = true ];
+    EventsFromAgents events_from_agents = 26;
     PassiveSuggestionResult passive_suggestion_result = 27;
   }
 
@@ -366,8 +365,8 @@ message Message {
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
       FetchConversation fetch_conversation = 28;
-      StartAgent start_agent = 29 [ (internal) = true ];
-      SendMessageToAgent send_message_to_agent = 30 [ (internal) = true ];
+      StartAgent start_agent = 29;
+      SendMessageToAgent send_message_to_agent = 30;
       TransferShellCommandControlToUser transfer_shell_command_control_to_user =
           31;
       AskUserQuestion ask_user_question = 32;
@@ -893,8 +892,8 @@ message Message {
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
       FetchConversationResult fetch_conversation = 32;
-      StartAgentResult start_agent = 33 [ (internal) = true ];
-      SendMessageToAgentResult send_message_to_agent = 34 [ (internal) = true ];
+      StartAgentResult start_agent = 33;
+      SendMessageToAgentResult send_message_to_agent = 34;
       TransferShellCommandControlToUserResult
           transfer_shell_command_control_to_user = 35;
       AskUserQuestionResult ask_user_question = 36;

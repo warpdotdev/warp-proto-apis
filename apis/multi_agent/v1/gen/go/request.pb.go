@@ -8160,7 +8160,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\xf3f\n" +
+	"task.proto\x1a\vskill.proto\"\xd1f\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -8170,7 +8170,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\x90G\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xf8F\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -8205,18 +8205,18 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQuery\x12Q\n" +
 	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x12A\n" +
-	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xbb\n" +
+	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xaf\n" +
 	"\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
-	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xc2\x05\n" +
+	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xb6\x05\n" +
 	"\tUserInput\x12M\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
 	"\x10tool_call_result\x18\x02 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultH\x00R\x0etoolCallResult\x12g\n" +
-	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQuery\x12\x93\x01\n" +
-	"\x1dmessages_received_from_agents\x18\x04 \x01(\v2H.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x12t\n" +
-	"\x12events_from_agents\x18\x05 \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x10eventsFromAgents\x12\x88\x01\n" +
+	"\x14cli_agent_user_query\x18\x03 \x01(\v24.warp.multi_agent.v1.Request.Input.CLIAgentUserQueryH\x00R\x11cliAgentUserQuery\x12\x8d\x01\n" +
+	"\x1dmessages_received_from_agents\x18\x04 \x01(\v2H.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgentsH\x00R\x1amessagesReceivedFromAgents\x12n\n" +
+	"\x12events_from_agents\x18\x05 \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgentsH\x00R\x10eventsFromAgents\x12\x88\x01\n" +
 	"\x19passive_suggestion_result\x18\x06 \x01(\v2J.warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInputH\x00R\x17passiveSuggestionResultB\a\n" +
 	"\x05input\x1a\xd4\x02\n" +
 	"\x1aMessagesReceivedFromAgents\x12t\n" +
@@ -8231,7 +8231,7 @@ const file_request_proto_rawDesc = "" +
 	"\x10EventsFromAgents\x12B\n" +
 	"\fagent_events\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AgentEventR\vagentEvents\x1ah\n" +
 	"\x1cPassiveSuggestionResultInput\x12H\n" +
-	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x1a\xfa\x14\n" +
+	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x1a\xee\x14\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -8262,10 +8262,10 @@ const file_request_proto_rawDesc = "" +
 	"\x14request_computer_use\x18\x19 \x01(\v2-.warp.multi_agent.v1.RequestComputerUseResultH\x00R\x12requestComputerUse\x12E\n" +
 	"\n" +
 	"read_skill\x18\x1a \x01(\v2$.warp.multi_agent.v1.ReadSkillResultH\x00R\treadSkill\x12]\n" +
-	"\x12fetch_conversation\x18\x1b \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversation\x12N\n" +
-	"\vstart_agent\x18\x1c \x01(\v2%.warp.multi_agent.v1.StartAgentResultB\x04\x88\xb5\x18\x01H\x00R\n" +
-	"startAgent\x12h\n" +
-	"\x15send_message_to_agent\x18\x1d \x01(\v2-.warp.multi_agent.v1.SendMessageToAgentResultB\x04\x88\xb5\x18\x01H\x00R\x12sendMessageToAgent\x12\x91\x01\n" +
+	"\x12fetch_conversation\x18\x1b \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversation\x12H\n" +
+	"\vstart_agent\x18\x1c \x01(\v2%.warp.multi_agent.v1.StartAgentResultH\x00R\n" +
+	"startAgent\x12b\n" +
+	"\x15send_message_to_agent\x18\x1d \x01(\v2-.warp.multi_agent.v1.SendMessageToAgentResultH\x00R\x12sendMessageToAgent\x12\x91\x01\n" +
 	"&transfer_shell_command_control_to_user\x18\x1e \x01(\v2<.warp.multi_agent.v1.TransferShellCommandControlToUserResultH\x00R!transferShellCommandControlToUser\x12X\n" +
 	"\x11ask_user_question\x18\x1f \x01(\v2*.warp.multi_agent.v1.AskUserQuestionResultH\x00R\x0faskUserQuestionB\b\n" +
 	"\x06resultJ\x04\b\n" +
@@ -8330,15 +8330,15 @@ const file_request_proto_rawDesc = "" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12K\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQueryB\x06\n" +
-	"\x04type\x1a\x9e\x03\n" +
+	"\x04type\x1a\x94\x03\n" +
 	"\bMetadata\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x12L\n" +
 	"\alogging\x18\x02 \x03(\v22.warp.multi_agent.v1.Request.Metadata.LoggingEntryR\alogging\x121\n" +
 	"\x15ambient_agent_task_id\x18\x03 \x01(\tR\x12ambientAgentTaskId\x12=\n" +
-	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x12,\n" +
-	"\x0fparent_agent_id\x18\x05 \x01(\tB\x04\x88\xb5\x18\x01R\rparentAgentId\x12'\n" +
+	"\x1bforked_from_conversation_id\x18\x04 \x01(\tR\x18forkedFromConversationId\x12&\n" +
+	"\x0fparent_agent_id\x18\x05 \x01(\tR\rparentAgentId\x12#\n" +
 	"\n" +
-	"agent_name\x18\x06 \x01(\tB\b\x80\xb5\x18\x01\x88\xb5\x18\x01R\tagentName\x1aR\n" +
+	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
 	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xa8\x12\n" +

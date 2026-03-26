@@ -109,8 +109,8 @@ message Request {
           UserQuery user_query = 1;
           ToolCallResult tool_call_result = 2;
           CLIAgentUserQuery cli_agent_user_query = 3;
-          MessagesReceivedFromAgents messages_received_from_agents = 4 [ (internal) = true ];
-          EventsFromAgents events_from_agents = 5 [ (internal) = true ];
+          MessagesReceivedFromAgents messages_received_from_agents = 4;
+          EventsFromAgents events_from_agents = 5;
 
           // Resolution of a passive suggestion that should be brought into context.
           PassiveSuggestionResultInput passive_suggestion_result = 6;
@@ -173,8 +173,8 @@ message Request {
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
         FetchConversationResult fetch_conversation = 27;
-        StartAgentResult start_agent = 28 [ (internal) = true ];
-        SendMessageToAgentResult send_message_to_agent = 29 [ (internal) = true ];
+        StartAgentResult start_agent = 28;
+        SendMessageToAgentResult send_message_to_agent = 29;
         TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 30;
         AskUserQuestionResult ask_user_question = 31;
       }
@@ -337,11 +337,11 @@ message Request {
     // The conversation ID of the parent agent that spawned this child agent.
     // In V0 the agent ID is the conversation ID; this may change in future
     // versions.
-    string parent_agent_id = 5 [ (internal) = true ];
+    string parent_agent_id = 5;
 
     // The display name for this agent (e.g. "Agent 1"), assigned by the
     // orchestrator via StartAgent.name.
-    string agent_name = 6 [ (sensitive) = true, (internal) = true ];
+    string agent_name = 6 [ (sensitive) = true ];
   }
 
   message Settings {

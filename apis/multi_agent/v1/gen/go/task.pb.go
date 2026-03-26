@@ -31725,7 +31725,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"ɴ\x01\n" +
+	"\x0ecomment_target\"\xa4\xb4\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -31753,11 +31753,11 @@ const file_task_proto_rawDesc = "" +
 	"\tweb_fetch\x18\x14 \x01(\v2%.warp.multi_agent.v1.Message.WebFetchH\x00R\bwebFetch\x12M\n" +
 	"\fdebug_output\x18\x15 \x01(\v2(.warp.multi_agent.v1.Message.DebugOutputH\x00R\vdebugOutput\x12S\n" +
 	"\x0eartifact_event\x18\x16 \x01(\v2*.warp.multi_agent.v1.Message.ArtifactEventH\x00R\rartifactEvent\x12M\n" +
-	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12\x82\x01\n" +
-	"\x1dmessages_received_from_agents\x18\x18 \x01(\v27.warp.multi_agent.v1.Message.MessagesReceivedFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x1amessagesReceivedFromAgents\x12G\n" +
+	"\finvoke_skill\x18\x17 \x01(\v2(.warp.multi_agent.v1.Message.InvokeSkillH\x00R\vinvokeSkill\x12|\n" +
+	"\x1dmessages_received_from_agents\x18\x18 \x01(\v27.warp.multi_agent.v1.Message.MessagesReceivedFromAgentsH\x00R\x1amessagesReceivedFromAgents\x12G\n" +
 	"\n" +
-	"model_used\x18\x19 \x01(\v2&.warp.multi_agent.v1.Message.ModelUsedH\x00R\tmodelUsed\x12c\n" +
-	"\x12events_from_agents\x18\x1a \x01(\v2-.warp.multi_agent.v1.Message.EventsFromAgentsB\x04\x88\xb5\x18\x01H\x00R\x10eventsFromAgents\x12r\n" +
+	"model_used\x18\x19 \x01(\v2&.warp.multi_agent.v1.Message.ModelUsedH\x00R\tmodelUsed\x12]\n" +
+	"\x12events_from_agents\x18\x1a \x01(\v2-.warp.multi_agent.v1.Message.EventsFromAgentsH\x00R\x10eventsFromAgents\x12r\n" +
 	"\x19passive_suggestion_result\x18\x1b \x01(\v24.warp.multi_agent.v1.Message.PassiveSuggestionResultH\x00R\x17passiveSuggestionResult\x1a\xa0\x01\n" +
 	"\x17PassiveSuggestionResult\x12H\n" +
 	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x12;\n" +
@@ -31832,7 +31832,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xb5X\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xa9X\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -31866,10 +31866,10 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_skill\x18\x1a \x01(\v2/.warp.multi_agent.v1.Message.ToolCall.ReadSkillH\x00R\treadSkill\x12l\n" +
 	"\x14request_computer_use\x18\x1b \x01(\v28.warp.multi_agent.v1.Message.ToolCall.RequestComputerUseH\x00R\x12requestComputerUse\x12h\n" +
-	"\x12fetch_conversation\x18\x1c \x01(\v27.warp.multi_agent.v1.Message.ToolCall.FetchConversationH\x00R\x11fetchConversation\x12H\n" +
-	"\vstart_agent\x18\x1d \x01(\v2\x1f.warp.multi_agent.v1.StartAgentB\x04\x88\xb5\x18\x01H\x00R\n" +
-	"startAgent\x12b\n" +
-	"\x15send_message_to_agent\x18\x1e \x01(\v2'.warp.multi_agent.v1.SendMessageToAgentB\x04\x88\xb5\x18\x01H\x00R\x12sendMessageToAgent\x12\x9c\x01\n" +
+	"\x12fetch_conversation\x18\x1c \x01(\v27.warp.multi_agent.v1.Message.ToolCall.FetchConversationH\x00R\x11fetchConversation\x12B\n" +
+	"\vstart_agent\x18\x1d \x01(\v2\x1f.warp.multi_agent.v1.StartAgentH\x00R\n" +
+	"startAgent\x12\\\n" +
+	"\x15send_message_to_agent\x18\x1e \x01(\v2'.warp.multi_agent.v1.SendMessageToAgentH\x00R\x12sendMessageToAgent\x12\x9c\x01\n" +
 	"&transfer_shell_command_control_to_user\x18\x1f \x01(\v2G.warp.multi_agent.v1.Message.ToolCall.TransferShellCommandControlToUserH\x00R!transferShellCommandControlToUser\x12R\n" +
 	"\x11ask_user_question\x18  \x01(\v2$.warp.multi_agent.v1.AskUserQuestionH\x00R\x0faskUserQuestion\x1a<\n" +
 	"\x11FetchConversation\x12'\n" +
@@ -32118,7 +32118,7 @@ const file_task_proto_rawDesc = "" +
 	"\x06Region\x12;\n" +
 	"\btop_left\x18\x01 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\atopLeft\x12C\n" +
 	"\fbottom_right\x18\x02 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\vbottomRightB\x06\n" +
-	"\x04tool\x1a\x91\x18\n" +
+	"\x04tool\x1a\x85\x18\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -32154,10 +32154,10 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"read_skill\x18\x1e \x01(\v2$.warp.multi_agent.v1.ReadSkillResultH\x00R\treadSkill\x12n\n" +
 	"\x1brequest_computer_use_result\x18\x1f \x01(\v2-.warp.multi_agent.v1.RequestComputerUseResultH\x00R\x18requestComputerUseResult\x12]\n" +
-	"\x12fetch_conversation\x18  \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversation\x12N\n" +
-	"\vstart_agent\x18! \x01(\v2%.warp.multi_agent.v1.StartAgentResultB\x04\x88\xb5\x18\x01H\x00R\n" +
-	"startAgent\x12h\n" +
-	"\x15send_message_to_agent\x18\" \x01(\v2-.warp.multi_agent.v1.SendMessageToAgentResultB\x04\x88\xb5\x18\x01H\x00R\x12sendMessageToAgent\x12\x91\x01\n" +
+	"\x12fetch_conversation\x18  \x01(\v2,.warp.multi_agent.v1.FetchConversationResultH\x00R\x11fetchConversation\x12H\n" +
+	"\vstart_agent\x18! \x01(\v2%.warp.multi_agent.v1.StartAgentResultH\x00R\n" +
+	"startAgent\x12b\n" +
+	"\x15send_message_to_agent\x18\" \x01(\v2-.warp.multi_agent.v1.SendMessageToAgentResultH\x00R\x12sendMessageToAgent\x12\x91\x01\n" +
 	"&transfer_shell_command_control_to_user\x18# \x01(\v2<.warp.multi_agent.v1.TransferShellCommandControlToUserResultH\x00R!transferShellCommandControlToUser\x12X\n" +
 	"\x11ask_user_question\x18$ \x01(\v2*.warp.multi_agent.v1.AskUserQuestionResultH\x00R\x0faskUserQuestion\x1a;\n" +
 	"\fServerResult\x12+\n" +
