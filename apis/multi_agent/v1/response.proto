@@ -45,6 +45,13 @@ message ResponseEvent {
     // This is mainly used for logging and analytics, so we can join client
     // telemetry events on this ID.
     string request_id = 2;
+
+    // A stable Oz run identifier for this conversation.
+    //
+    // For local conversations, this is the conversation-backed ai_tasks row ID.
+    // For requests already associated with an ambient/cloud run, this is that
+    // existing run ID.
+    string run_id = 3;
   }
 
   message ClientActions { repeated ClientAction actions = 1; }
