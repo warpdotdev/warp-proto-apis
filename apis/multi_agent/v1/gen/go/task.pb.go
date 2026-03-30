@@ -18889,8 +18889,7 @@ type Message_ToolCall_SuggestPrompt_builder struct {
 	InlineQueryBanner *Message_ToolCall_SuggestPrompt_InlineQueryBanner
 	PromptChip        *Message_ToolCall_SuggestPrompt_PromptChip
 	// -- end of xxx_hidden_DisplayMode
-	// Whether the trigger for this suggestion is not actually relevant to the suggestion.
-	// If true, the suggestion should not be displayed to the user.
+	// Whether the trigger for this suggestion is not actually relevant to the suggestion itself.
 	IsTriggerIrrelevant *bool
 }
 
