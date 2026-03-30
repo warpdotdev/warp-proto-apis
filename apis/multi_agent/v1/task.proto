@@ -597,6 +597,10 @@ message Message {
         PromptChip prompt_chip = 2;
       }
 
+      // Whether the trigger for this suggestion is not actually relevant to the suggestion.
+      // If true, the suggestion should not be displayed to the user.
+      bool is_trigger_irrelevant = 3;
+
       // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
       // This was previously used for passive unit test suggestions.
       message InlineQueryBanner {
