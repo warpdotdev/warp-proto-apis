@@ -48,9 +48,11 @@ message ResponseEvent {
 
     // A stable Oz run identifier for this conversation.
     //
-    // For local conversations, this is the conversation-backed ai_tasks row ID.
-    // For requests already associated with an ambient/cloud run, this is that
-    // existing run ID.
+    // This always identifies the ai_tasks row backing the run.
+    // If a local conversation enters agent mode for the first time, that row is
+    // created when the request starts.
+    // If the request is already associated with an ambient/cloud run, this reuses
+    // that existing run row ID.
     string run_id = 3;
   }
 
