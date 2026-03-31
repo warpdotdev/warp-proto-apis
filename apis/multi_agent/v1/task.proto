@@ -1002,6 +1002,14 @@ message Message {
       string description = 3 [ (sensitive) = true ];
     }
 
+    message FileArtifact {
+      string artifact_uid = 1 [ (sensitive) = true ];
+      string filepath = 2 [ (sensitive) = true ];
+      string mime_type = 3 [ (sensitive) = true ];
+      int64 size_bytes = 4;
+      string description = 5 [ (sensitive) = true ];
+    }
+
     message PlanArtifact {
       string document_id = 1;
       string notebook_uid = 2;
@@ -1014,6 +1022,7 @@ message Message {
         PullRequestArtifact pull_request = 1;
         ScreenshotArtifact screenshot = 2;
         PlanArtifact plan = 3;
+        FileArtifact file = 4;
       }
     }
 
