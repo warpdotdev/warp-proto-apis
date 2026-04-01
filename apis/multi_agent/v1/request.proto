@@ -527,6 +527,9 @@ enum AutonomyLevel {
   SUPERVISED = 0;
   // No user is available to answer questions.
   UNSUPERVISED = 1;
+  // A user is present, but action approvals are being auto-approved for the
+  // current exchange.
+  SUPERVISED_AUTO_APPROVE = 2;
 }
 
 enum IsolationLevel {
