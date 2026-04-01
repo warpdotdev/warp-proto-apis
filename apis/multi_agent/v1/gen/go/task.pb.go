@@ -32010,7 +32010,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xed\xb6\x01\n" +
+	"\x0ecomment_target\"ζ\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -32495,21 +32495,21 @@ const file_task_proto_rawDesc = "" +
 	"\asuccess\x18\x03 \x01(\bR\asuccessB\x06\n" +
 	"\x04type\x1a!\n" +
 	"\vDebugOutput\x12\x12\n" +
-	"\x04text\x18\x01 \x01(\tR\x04text\x1a\xc0\v\n" +
+	"\x04text\x18\x01 \x01(\tR\x04text\x1a\xa1\v\n" +
 	"\rArtifactEvent\x12V\n" +
 	"\acreated\x18\x01 \x01(\v2:.warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreatedH\x00R\acreated\x12a\n" +
 	"\x0efork_artifacts\x18\x02 \x01(\v28.warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifactsH\x00R\rforkArtifacts\x1aK\n" +
 	"\x13PullRequestArtifact\x12\x16\n" +
 	"\x03url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03url\x12\x1c\n" +
-	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x1a\x88\x01\n" +
-	"\x12ScreenshotArtifact\x12'\n" +
-	"\fartifact_uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vartifactUid\x12!\n" +
-	"\tmime_type\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\bmimeType\x12&\n" +
-	"\vdescription\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x1a\xc3\x01\n" +
-	"\fFileArtifact\x12'\n" +
-	"\fartifact_uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vartifactUid\x12 \n" +
-	"\bfilepath\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\bfilepath\x12!\n" +
-	"\tmime_type\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\bmimeType\x12\x1d\n" +
+	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x1a|\n" +
+	"\x12ScreenshotArtifact\x12!\n" +
+	"\fartifact_uid\x18\x01 \x01(\tR\vartifactUid\x12\x1b\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12&\n" +
+	"\vdescription\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x1a\xb1\x01\n" +
+	"\fFileArtifact\x12!\n" +
+	"\fartifact_uid\x18\x01 \x01(\tR\vartifactUid\x12\x1a\n" +
+	"\bfilepath\x18\x02 \x01(\tR\bfilepath\x12\x1b\n" +
+	"\tmime_type\x18\x03 \x01(\tR\bmimeType\x12\x1d\n" +
 	"\n" +
 	"size_bytes\x18\x04 \x01(\x03R\tsizeBytes\x12&\n" +
 	"\vdescription\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x1an\n" +

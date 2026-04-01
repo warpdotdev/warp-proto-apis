@@ -997,15 +997,15 @@ message Message {
     }
 
     message ScreenshotArtifact {
-      string artifact_uid = 1 [ (sensitive) = true ];
-      string mime_type = 2 [ (sensitive) = true ];
+      string artifact_uid = 1;
+      string mime_type = 2;
       string description = 3 [ (sensitive) = true ];
     }
 
     message FileArtifact {
-      string artifact_uid = 1 [ (sensitive) = true ];
-      string filepath = 2 [ (sensitive) = true ];
-      string mime_type = 3 [ (sensitive) = true ];
+      string artifact_uid = 1;
+      string filepath = 2;
+      string mime_type = 3;
       int64 size_bytes = 4;
       string description = 5 [ (sensitive) = true ];
     }
