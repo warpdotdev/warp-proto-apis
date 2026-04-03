@@ -639,11 +639,19 @@ message Message {
         google.protobuf.Empty advice = 5;
         google.protobuf.Empty computer_use = 6;
         google.protobuf.Empty summarization = 7;
-        google.protobuf.Empty conversation_search = 8;
+        ConversationSearchMetadata conversation_search = 8;
         google.protobuf.Empty warp_documentation_search = 9;
       }
 
       message CLISubagent { string command_id = 1; }
+
+      message ConversationSearchMetadata {
+        // The natural language query describing what to find in conversation history.
+        string query = 1;
+        // The ID of the conversation being searched. Empty when searching the
+        // current conversation.
+        string conversation_id = 2;
+      }
     }
 
     // A tool call to read documents.
