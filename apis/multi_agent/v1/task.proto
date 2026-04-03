@@ -1573,6 +1573,12 @@ enum RiskCategory {
 
 // A client tool call to start a new agent in a separate conversation.
 message StartAgent {
+  enum ExecutionMode {
+    // Starts the child agent in the user's local environment.
+    EXECUTION_MODE_LOCAL = 0;
+    // Starts the child agent as an isolated remote/cloud run.
+    EXECUTION_MODE_REMOTE = 1;
+  }
   // The display name for the new agent.
   string name = 1 [ (sensitive) = true ];
   // The initial prompt to send to the new agent.
@@ -1580,6 +1586,8 @@ message StartAgent {
   // Optional lifecycle event subscription for the new child agent.
   // If not set or empty, defaults to all lifecycle event types.
   LifecycleSubscription lifecycle_subscription = 3;
+  // Where the child agent should run. Defaults to LOCAL when omitted.
+  ExecutionMode execution_mode = 4;
 
   message LifecycleSubscription {
     // Lifecycle event types the lead agent is subscribing to.
@@ -1595,7 +1603,9 @@ message StartAgentResult {
   }
 
   message Success {
-    // The server-assigned agent ID (conversation_id for V0).
+    // The server-assigned child agent address.
+    // When orchestration_v2 is disabled, this is the child conversation ID.
+    // When orchestration_v2 is enabled, this is the child run ID.
     string agent_id = 1;
   }
   message Error { string error = 1; }

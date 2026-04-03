@@ -1405,9 +1405,10 @@ type Request_Metadata_builder struct {
 	// that was created by forking an existing conversation.
 	// Value is the source conversation's server conversation ID.
 	ForkedFromConversationId *string
-	// The conversation ID of the parent agent that spawned this child agent.
-	// In V0 the agent ID is the conversation ID; this may change in future
-	// versions.
+	// The versioned orchestration address of the parent agent that spawned this
+	// child agent.
+	// When orchestration_v2 is disabled, this is the parent conversation ID.
+	// When orchestration_v2 is enabled, this is the parent run ID.
 	ParentAgentId *string
 	// The display name for this agent (e.g. "Agent 1"), assigned by the
 	// orchestrator via StartAgent.name.
