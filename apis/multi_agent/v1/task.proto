@@ -1573,17 +1573,6 @@ enum RiskCategory {
 
 // A client tool call to start a new agent in a separate conversation.
 message StartAgent {
-  // Where the child agent should run.
-  // This is modeled as a message rather than an enum so each mode can later
-  // grow its own configuration fields (for example, environment selection).
-  message ExecutionMode {
-    oneof execution_mode {
-      // Starts the child agent in the user's local environment.
-      google.protobuf.Empty local = 1;
-      // Starts the child agent as an isolated remote/cloud run.
-      google.protobuf.Empty remote = 2;
-    }
-  }
   // The display name for the new agent.
   string name = 1 [ (sensitive) = true ];
   // The initial prompt to send to the new agent.
@@ -1597,6 +1586,18 @@ message StartAgent {
   message LifecycleSubscription {
     // Lifecycle event types the lead agent is subscribing to.
     repeated LifecycleEventType event_types = 1;
+  }
+
+  message ExecutionMode {
+    oneof mode {
+      google.protobuf.Empty local = 1;
+      Remote remote = 2;
+    }
+
+    message Remote {
+      // Optional cloud environment UID for remote child agents.
+      string environment_id = 1;
+    }
   }
 }
 

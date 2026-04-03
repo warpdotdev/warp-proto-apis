@@ -8187,7 +8187,7 @@ type StartAgent_builder struct {
 	// Optional lifecycle event subscription for the new child agent.
 	// If not set or empty, defaults to all lifecycle event types.
 	LifecycleSubscription *StartAgent_LifecycleSubscription
-	// Where the child agent should run. Defaults to local when omitted.
+	// Determines where the child agent should run.
 	ExecutionMode *StartAgent_ExecutionMode
 }
 
@@ -30349,184 +30349,6 @@ func (b0 FetchConversationResult_Error_builder) Build() *FetchConversationResult
 	return m0
 }
 
-// Where the child agent should run.
-// This is modeled as a message rather than an enum so each mode can later
-// grow its own configuration fields (for example, environment selection).
-type StartAgent_ExecutionMode struct {
-	state                    protoimpl.MessageState                   `protogen:"opaque.v1"`
-	xxx_hidden_ExecutionMode isStartAgent_ExecutionMode_ExecutionMode `protobuf_oneof:"execution_mode"`
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
-}
-
-func (x *StartAgent_ExecutionMode) Reset() {
-	*x = StartAgent_ExecutionMode{}
-	mi := &file_task_proto_msgTypes[206]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartAgent_ExecutionMode) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartAgent_ExecutionMode) ProtoMessage() {}
-
-func (x *StartAgent_ExecutionMode) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[206]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *StartAgent_ExecutionMode) GetLocal() *emptypb.Empty {
-	if x != nil {
-		if x, ok := x.xxx_hidden_ExecutionMode.(*startAgent_ExecutionMode_Local); ok {
-			return x.Local
-		}
-	}
-	return nil
-}
-
-func (x *StartAgent_ExecutionMode) GetRemote() *emptypb.Empty {
-	if x != nil {
-		if x, ok := x.xxx_hidden_ExecutionMode.(*startAgent_ExecutionMode_Remote); ok {
-			return x.Remote
-		}
-	}
-	return nil
-}
-
-func (x *StartAgent_ExecutionMode) SetLocal(v *emptypb.Empty) {
-	if v == nil {
-		x.xxx_hidden_ExecutionMode = nil
-		return
-	}
-	x.xxx_hidden_ExecutionMode = &startAgent_ExecutionMode_Local{v}
-}
-
-func (x *StartAgent_ExecutionMode) SetRemote(v *emptypb.Empty) {
-	if v == nil {
-		x.xxx_hidden_ExecutionMode = nil
-		return
-	}
-	x.xxx_hidden_ExecutionMode = &startAgent_ExecutionMode_Remote{v}
-}
-
-func (x *StartAgent_ExecutionMode) HasExecutionMode() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_ExecutionMode != nil
-}
-
-func (x *StartAgent_ExecutionMode) HasLocal() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_ExecutionMode.(*startAgent_ExecutionMode_Local)
-	return ok
-}
-
-func (x *StartAgent_ExecutionMode) HasRemote() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_ExecutionMode.(*startAgent_ExecutionMode_Remote)
-	return ok
-}
-
-func (x *StartAgent_ExecutionMode) ClearExecutionMode() {
-	x.xxx_hidden_ExecutionMode = nil
-}
-
-func (x *StartAgent_ExecutionMode) ClearLocal() {
-	if _, ok := x.xxx_hidden_ExecutionMode.(*startAgent_ExecutionMode_Local); ok {
-		x.xxx_hidden_ExecutionMode = nil
-	}
-}
-
-func (x *StartAgent_ExecutionMode) ClearRemote() {
-	if _, ok := x.xxx_hidden_ExecutionMode.(*startAgent_ExecutionMode_Remote); ok {
-		x.xxx_hidden_ExecutionMode = nil
-	}
-}
-
-const StartAgent_ExecutionMode_ExecutionMode_not_set_case case_StartAgent_ExecutionMode_ExecutionMode = 0
-const StartAgent_ExecutionMode_Local_case case_StartAgent_ExecutionMode_ExecutionMode = 1
-const StartAgent_ExecutionMode_Remote_case case_StartAgent_ExecutionMode_ExecutionMode = 2
-
-func (x *StartAgent_ExecutionMode) WhichExecutionMode() case_StartAgent_ExecutionMode_ExecutionMode {
-	if x == nil {
-		return StartAgent_ExecutionMode_ExecutionMode_not_set_case
-	}
-	switch x.xxx_hidden_ExecutionMode.(type) {
-	case *startAgent_ExecutionMode_Local:
-		return StartAgent_ExecutionMode_Local_case
-	case *startAgent_ExecutionMode_Remote:
-		return StartAgent_ExecutionMode_Remote_case
-	default:
-		return StartAgent_ExecutionMode_ExecutionMode_not_set_case
-	}
-}
-
-type StartAgent_ExecutionMode_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_ExecutionMode:
-	// Starts the child agent in the user's local environment.
-	Local *emptypb.Empty
-	// Starts the child agent as an isolated remote/cloud run.
-	Remote *emptypb.Empty
-	// -- end of xxx_hidden_ExecutionMode
-}
-
-func (b0 StartAgent_ExecutionMode_builder) Build() *StartAgent_ExecutionMode {
-	m0 := &StartAgent_ExecutionMode{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Local != nil {
-		x.xxx_hidden_ExecutionMode = &startAgent_ExecutionMode_Local{b.Local}
-	}
-	if b.Remote != nil {
-		x.xxx_hidden_ExecutionMode = &startAgent_ExecutionMode_Remote{b.Remote}
-	}
-	return m0
-}
-
-type case_StartAgent_ExecutionMode_ExecutionMode protoreflect.FieldNumber
-
-func (x case_StartAgent_ExecutionMode_ExecutionMode) String() string {
-	md := file_task_proto_msgTypes[206].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isStartAgent_ExecutionMode_ExecutionMode interface {
-	isStartAgent_ExecutionMode_ExecutionMode()
-}
-
-type startAgent_ExecutionMode_Local struct {
-	// Starts the child agent in the user's local environment.
-	Local *emptypb.Empty `protobuf:"bytes,1,opt,name=local,oneof"`
-}
-
-type startAgent_ExecutionMode_Remote struct {
-	// Starts the child agent as an isolated remote/cloud run.
-	Remote *emptypb.Empty `protobuf:"bytes,2,opt,name=remote,oneof"`
-}
-
-func (*startAgent_ExecutionMode_Local) isStartAgent_ExecutionMode_ExecutionMode() {}
-
-func (*startAgent_ExecutionMode_Remote) isStartAgent_ExecutionMode_ExecutionMode() {}
-
 type StartAgent_LifecycleSubscription struct {
 	state                 protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_EventTypes []LifecycleEventType   `protobuf:"varint,1,rep,packed,name=event_types,json=eventTypes,enum=warp.multi_agent.v1.LifecycleEventType"`
@@ -30536,7 +30358,7 @@ type StartAgent_LifecycleSubscription struct {
 
 func (x *StartAgent_LifecycleSubscription) Reset() {
 	*x = StartAgent_LifecycleSubscription{}
-	mi := &file_task_proto_msgTypes[207]
+	mi := &file_task_proto_msgTypes[206]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30548,7 +30370,7 @@ func (x *StartAgent_LifecycleSubscription) String() string {
 func (*StartAgent_LifecycleSubscription) ProtoMessage() {}
 
 func (x *StartAgent_LifecycleSubscription) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[207]
+	mi := &file_task_proto_msgTypes[206]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30585,6 +30407,256 @@ func (b0 StartAgent_LifecycleSubscription_builder) Build() *StartAgent_Lifecycle
 	return m0
 }
 
+type StartAgent_ExecutionMode struct {
+	state           protoimpl.MessageState          `protogen:"opaque.v1"`
+	xxx_hidden_Mode isStartAgent_ExecutionMode_Mode `protobuf_oneof:"mode"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *StartAgent_ExecutionMode) Reset() {
+	*x = StartAgent_ExecutionMode{}
+	mi := &file_task_proto_msgTypes[207]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartAgent_ExecutionMode) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartAgent_ExecutionMode) ProtoMessage() {}
+
+func (x *StartAgent_ExecutionMode) ProtoReflect() protoreflect.Message {
+	mi := &file_task_proto_msgTypes[207]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *StartAgent_ExecutionMode) GetLocal() *emptypb.Empty {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Mode.(*startAgent_ExecutionMode_Local); ok {
+			return x.Local
+		}
+	}
+	return nil
+}
+
+func (x *StartAgent_ExecutionMode) GetRemote() *StartAgent_ExecutionMode_Remote {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Mode.(*startAgent_ExecutionMode_Remote_); ok {
+			return x.Remote
+		}
+	}
+	return nil
+}
+
+func (x *StartAgent_ExecutionMode) SetLocal(v *emptypb.Empty) {
+	if v == nil {
+		x.xxx_hidden_Mode = nil
+		return
+	}
+	x.xxx_hidden_Mode = &startAgent_ExecutionMode_Local{v}
+}
+
+func (x *StartAgent_ExecutionMode) SetRemote(v *StartAgent_ExecutionMode_Remote) {
+	if v == nil {
+		x.xxx_hidden_Mode = nil
+		return
+	}
+	x.xxx_hidden_Mode = &startAgent_ExecutionMode_Remote_{v}
+}
+
+func (x *StartAgent_ExecutionMode) HasMode() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Mode != nil
+}
+
+func (x *StartAgent_ExecutionMode) HasLocal() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Mode.(*startAgent_ExecutionMode_Local)
+	return ok
+}
+
+func (x *StartAgent_ExecutionMode) HasRemote() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Mode.(*startAgent_ExecutionMode_Remote_)
+	return ok
+}
+
+func (x *StartAgent_ExecutionMode) ClearMode() {
+	x.xxx_hidden_Mode = nil
+}
+
+func (x *StartAgent_ExecutionMode) ClearLocal() {
+	if _, ok := x.xxx_hidden_Mode.(*startAgent_ExecutionMode_Local); ok {
+		x.xxx_hidden_Mode = nil
+	}
+}
+
+func (x *StartAgent_ExecutionMode) ClearRemote() {
+	if _, ok := x.xxx_hidden_Mode.(*startAgent_ExecutionMode_Remote_); ok {
+		x.xxx_hidden_Mode = nil
+	}
+}
+
+const StartAgent_ExecutionMode_Mode_not_set_case case_StartAgent_ExecutionMode_Mode = 0
+const StartAgent_ExecutionMode_Local_case case_StartAgent_ExecutionMode_Mode = 1
+const StartAgent_ExecutionMode_Remote_case case_StartAgent_ExecutionMode_Mode = 2
+
+func (x *StartAgent_ExecutionMode) WhichMode() case_StartAgent_ExecutionMode_Mode {
+	if x == nil {
+		return StartAgent_ExecutionMode_Mode_not_set_case
+	}
+	switch x.xxx_hidden_Mode.(type) {
+	case *startAgent_ExecutionMode_Local:
+		return StartAgent_ExecutionMode_Local_case
+	case *startAgent_ExecutionMode_Remote_:
+		return StartAgent_ExecutionMode_Remote_case
+	default:
+		return StartAgent_ExecutionMode_Mode_not_set_case
+	}
+}
+
+type StartAgent_ExecutionMode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_Mode:
+	Local  *emptypb.Empty
+	Remote *StartAgent_ExecutionMode_Remote
+	// -- end of xxx_hidden_Mode
+}
+
+func (b0 StartAgent_ExecutionMode_builder) Build() *StartAgent_ExecutionMode {
+	m0 := &StartAgent_ExecutionMode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Local != nil {
+		x.xxx_hidden_Mode = &startAgent_ExecutionMode_Local{b.Local}
+	}
+	if b.Remote != nil {
+		x.xxx_hidden_Mode = &startAgent_ExecutionMode_Remote_{b.Remote}
+	}
+	return m0
+}
+
+type case_StartAgent_ExecutionMode_Mode protoreflect.FieldNumber
+
+func (x case_StartAgent_ExecutionMode_Mode) String() string {
+	md := file_task_proto_msgTypes[207].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isStartAgent_ExecutionMode_Mode interface {
+	isStartAgent_ExecutionMode_Mode()
+}
+
+type startAgent_ExecutionMode_Local struct {
+	Local *emptypb.Empty `protobuf:"bytes,1,opt,name=local,oneof"`
+}
+
+type startAgent_ExecutionMode_Remote_ struct {
+	Remote *StartAgent_ExecutionMode_Remote `protobuf:"bytes,2,opt,name=remote,oneof"`
+}
+
+func (*startAgent_ExecutionMode_Local) isStartAgent_ExecutionMode_Mode() {}
+
+func (*startAgent_ExecutionMode_Remote_) isStartAgent_ExecutionMode_Mode() {}
+
+type StartAgent_ExecutionMode_Remote struct {
+	state                    protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_EnvironmentId *string                `protobuf:"bytes,1,opt,name=environment_id,json=environmentId"`
+	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
+	XXX_presence             [1]uint32
+	unknownFields            protoimpl.UnknownFields
+	sizeCache                protoimpl.SizeCache
+}
+
+func (x *StartAgent_ExecutionMode_Remote) Reset() {
+	*x = StartAgent_ExecutionMode_Remote{}
+	mi := &file_task_proto_msgTypes[208]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartAgent_ExecutionMode_Remote) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartAgent_ExecutionMode_Remote) ProtoMessage() {}
+
+func (x *StartAgent_ExecutionMode_Remote) ProtoReflect() protoreflect.Message {
+	mi := &file_task_proto_msgTypes[208]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *StartAgent_ExecutionMode_Remote) GetEnvironmentId() string {
+	if x != nil {
+		if x.xxx_hidden_EnvironmentId != nil {
+			return *x.xxx_hidden_EnvironmentId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *StartAgent_ExecutionMode_Remote) SetEnvironmentId(v string) {
+	x.xxx_hidden_EnvironmentId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *StartAgent_ExecutionMode_Remote) HasEnvironmentId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *StartAgent_ExecutionMode_Remote) ClearEnvironmentId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_EnvironmentId = nil
+}
+
+type StartAgent_ExecutionMode_Remote_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Optional cloud environment UID for remote child agents.
+	EnvironmentId *string
+}
+
+func (b0 StartAgent_ExecutionMode_Remote_builder) Build() *StartAgent_ExecutionMode_Remote {
+	m0 := &StartAgent_ExecutionMode_Remote{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.EnvironmentId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_EnvironmentId = b.EnvironmentId
+	}
+	return m0
+}
+
 type StartAgentResult_Success struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_AgentId     *string                `protobuf:"bytes,1,opt,name=agent_id,json=agentId"`
@@ -30596,7 +30668,7 @@ type StartAgentResult_Success struct {
 
 func (x *StartAgentResult_Success) Reset() {
 	*x = StartAgentResult_Success{}
-	mi := &file_task_proto_msgTypes[208]
+	mi := &file_task_proto_msgTypes[209]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30608,7 +30680,7 @@ func (x *StartAgentResult_Success) String() string {
 func (*StartAgentResult_Success) ProtoMessage() {}
 
 func (x *StartAgentResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[208]
+	mi := &file_task_proto_msgTypes[209]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30677,7 +30749,7 @@ type StartAgentResult_Error struct {
 
 func (x *StartAgentResult_Error) Reset() {
 	*x = StartAgentResult_Error{}
-	mi := &file_task_proto_msgTypes[209]
+	mi := &file_task_proto_msgTypes[210]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30689,7 +30761,7 @@ func (x *StartAgentResult_Error) String() string {
 func (*StartAgentResult_Error) ProtoMessage() {}
 
 func (x *StartAgentResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[209]
+	mi := &file_task_proto_msgTypes[210]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30755,7 +30827,7 @@ type SendMessageToAgentResult_Success struct {
 
 func (x *SendMessageToAgentResult_Success) Reset() {
 	*x = SendMessageToAgentResult_Success{}
-	mi := &file_task_proto_msgTypes[210]
+	mi := &file_task_proto_msgTypes[211]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30767,7 +30839,7 @@ func (x *SendMessageToAgentResult_Success) String() string {
 func (*SendMessageToAgentResult_Success) ProtoMessage() {}
 
 func (x *SendMessageToAgentResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[210]
+	mi := &file_task_proto_msgTypes[211]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30834,7 +30906,7 @@ type SendMessageToAgentResult_Error struct {
 
 func (x *SendMessageToAgentResult_Error) Reset() {
 	*x = SendMessageToAgentResult_Error{}
-	mi := &file_task_proto_msgTypes[211]
+	mi := &file_task_proto_msgTypes[212]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30846,7 +30918,7 @@ func (x *SendMessageToAgentResult_Error) String() string {
 func (*SendMessageToAgentResult_Error) ProtoMessage() {}
 
 func (x *SendMessageToAgentResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[211]
+	mi := &file_task_proto_msgTypes[212]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30913,7 +30985,7 @@ type AskUserQuestion_Option struct {
 
 func (x *AskUserQuestion_Option) Reset() {
 	*x = AskUserQuestion_Option{}
-	mi := &file_task_proto_msgTypes[212]
+	mi := &file_task_proto_msgTypes[213]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -30925,7 +30997,7 @@ func (x *AskUserQuestion_Option) String() string {
 func (*AskUserQuestion_Option) ProtoMessage() {}
 
 func (x *AskUserQuestion_Option) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[212]
+	mi := &file_task_proto_msgTypes[213]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -30995,7 +31067,7 @@ type AskUserQuestion_MultipleChoice struct {
 
 func (x *AskUserQuestion_MultipleChoice) Reset() {
 	*x = AskUserQuestion_MultipleChoice{}
-	mi := &file_task_proto_msgTypes[213]
+	mi := &file_task_proto_msgTypes[214]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31007,7 +31079,7 @@ func (x *AskUserQuestion_MultipleChoice) String() string {
 func (*AskUserQuestion_MultipleChoice) ProtoMessage() {}
 
 func (x *AskUserQuestion_MultipleChoice) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[213]
+	mi := &file_task_proto_msgTypes[214]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31149,7 +31221,7 @@ type AskUserQuestion_Question struct {
 
 func (x *AskUserQuestion_Question) Reset() {
 	*x = AskUserQuestion_Question{}
-	mi := &file_task_proto_msgTypes[214]
+	mi := &file_task_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31161,7 +31233,7 @@ func (x *AskUserQuestion_Question) String() string {
 func (*AskUserQuestion_Question) ProtoMessage() {}
 
 func (x *AskUserQuestion_Question) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[214]
+	mi := &file_task_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31314,7 +31386,7 @@ func (b0 AskUserQuestion_Question_builder) Build() *AskUserQuestion_Question {
 type case_AskUserQuestion_Question_QuestionType protoreflect.FieldNumber
 
 func (x case_AskUserQuestion_Question_QuestionType) String() string {
-	md := file_task_proto_msgTypes[214].Descriptor()
+	md := file_task_proto_msgTypes[215].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -31340,7 +31412,7 @@ type AskUserQuestionResult_Success struct {
 
 func (x *AskUserQuestionResult_Success) Reset() {
 	*x = AskUserQuestionResult_Success{}
-	mi := &file_task_proto_msgTypes[215]
+	mi := &file_task_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31352,7 +31424,7 @@ func (x *AskUserQuestionResult_Success) String() string {
 func (*AskUserQuestionResult_Success) ProtoMessage() {}
 
 func (x *AskUserQuestionResult_Success) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[215]
+	mi := &file_task_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31401,7 +31473,7 @@ type AskUserQuestionResult_Error struct {
 
 func (x *AskUserQuestionResult_Error) Reset() {
 	*x = AskUserQuestionResult_Error{}
-	mi := &file_task_proto_msgTypes[216]
+	mi := &file_task_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31413,7 +31485,7 @@ func (x *AskUserQuestionResult_Error) String() string {
 func (*AskUserQuestionResult_Error) ProtoMessage() {}
 
 func (x *AskUserQuestionResult_Error) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[216]
+	mi := &file_task_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31481,7 +31553,7 @@ type AskUserQuestionResult_AnswerItem struct {
 
 func (x *AskUserQuestionResult_AnswerItem) Reset() {
 	*x = AskUserQuestionResult_AnswerItem{}
-	mi := &file_task_proto_msgTypes[217]
+	mi := &file_task_proto_msgTypes[218]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31493,7 +31565,7 @@ func (x *AskUserQuestionResult_AnswerItem) String() string {
 func (*AskUserQuestionResult_AnswerItem) ProtoMessage() {}
 
 func (x *AskUserQuestionResult_AnswerItem) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[217]
+	mi := &file_task_proto_msgTypes[218]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31652,7 +31724,7 @@ func (b0 AskUserQuestionResult_AnswerItem_builder) Build() *AskUserQuestionResul
 type case_AskUserQuestionResult_AnswerItem_Answer protoreflect.FieldNumber
 
 func (x case_AskUserQuestionResult_AnswerItem_Answer) String() string {
-	md := file_task_proto_msgTypes[217].Descriptor()
+	md := file_task_proto_msgTypes[218].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -31687,7 +31759,7 @@ type AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer struct {
 
 func (x *AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer) Reset() {
 	*x = AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer{}
-	mi := &file_task_proto_msgTypes[218]
+	mi := &file_task_proto_msgTypes[219]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31699,7 +31771,7 @@ func (x *AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer) String() string 
 func (*AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer) ProtoMessage() {}
 
 func (x *AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[218]
+	mi := &file_task_proto_msgTypes[219]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31776,7 +31848,7 @@ type PassiveSuggestionResultType_AgentResponseCompleted struct {
 
 func (x *PassiveSuggestionResultType_AgentResponseCompleted) Reset() {
 	*x = PassiveSuggestionResultType_AgentResponseCompleted{}
-	mi := &file_task_proto_msgTypes[219]
+	mi := &file_task_proto_msgTypes[220]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31788,7 +31860,7 @@ func (x *PassiveSuggestionResultType_AgentResponseCompleted) String() string {
 func (*PassiveSuggestionResultType_AgentResponseCompleted) ProtoMessage() {}
 
 func (x *PassiveSuggestionResultType_AgentResponseCompleted) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[219]
+	mi := &file_task_proto_msgTypes[220]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31822,7 +31894,7 @@ type PassiveSuggestionResultType_Prompt struct {
 
 func (x *PassiveSuggestionResultType_Prompt) Reset() {
 	*x = PassiveSuggestionResultType_Prompt{}
-	mi := &file_task_proto_msgTypes[220]
+	mi := &file_task_proto_msgTypes[221]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31834,7 +31906,7 @@ func (x *PassiveSuggestionResultType_Prompt) String() string {
 func (*PassiveSuggestionResultType_Prompt) ProtoMessage() {}
 
 func (x *PassiveSuggestionResultType_Prompt) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[220]
+	mi := &file_task_proto_msgTypes[221]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31902,7 +31974,7 @@ type PassiveSuggestionResultType_CodeDiff struct {
 
 func (x *PassiveSuggestionResultType_CodeDiff) Reset() {
 	*x = PassiveSuggestionResultType_CodeDiff{}
-	mi := &file_task_proto_msgTypes[221]
+	mi := &file_task_proto_msgTypes[222]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31914,7 +31986,7 @@ func (x *PassiveSuggestionResultType_CodeDiff) String() string {
 func (*PassiveSuggestionResultType_CodeDiff) ProtoMessage() {}
 
 func (x *PassiveSuggestionResultType_CodeDiff) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[221]
+	mi := &file_task_proto_msgTypes[222]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -32029,7 +32101,7 @@ type PassiveSuggestionResultType_CodeDiff_Diff struct {
 
 func (x *PassiveSuggestionResultType_CodeDiff_Diff) Reset() {
 	*x = PassiveSuggestionResultType_CodeDiff_Diff{}
-	mi := &file_task_proto_msgTypes[222]
+	mi := &file_task_proto_msgTypes[223]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -32041,7 +32113,7 @@ func (x *PassiveSuggestionResultType_CodeDiff_Diff) String() string {
 func (*PassiveSuggestionResultType_CodeDiff_Diff) ProtoMessage() {}
 
 func (x *PassiveSuggestionResultType_CodeDiff_Diff) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[222]
+	mi := &file_task_proto_msgTypes[223]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -33002,20 +33074,22 @@ const file_task_proto_rawDesc = "" +
 	"\rUserQueryMode\x12,\n" +
 	"\x04plan\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04plan\x12:\n" +
 	"\vorchestrate\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\vorchestrateB\x06\n" +
-	"\x04type\"\xf1\x03\n" +
+	"\x04type\"\xb6\x04\n" +
 	"\n" +
 	"StartAgent\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12l\n" +
 	"\x16lifecycle_subscription\x18\x03 \x01(\v25.warp.multi_agent.v1.StartAgent.LifecycleSubscriptionR\x15lifecycleSubscription\x12T\n" +
-	"\x0eexecution_mode\x18\x04 \x01(\v2-.warp.multi_agent.v1.StartAgent.ExecutionModeR\rexecutionMode\x1a\x83\x01\n" +
-	"\rExecutionMode\x12.\n" +
-	"\x05local\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05local\x120\n" +
-	"\x06remote\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x06remoteB\x10\n" +
-	"\x0eexecution_mode\x1aa\n" +
+	"\x0eexecution_mode\x18\x04 \x01(\v2-.warp.multi_agent.v1.StartAgent.ExecutionModeR\rexecutionMode\x1aa\n" +
 	"\x15LifecycleSubscription\x12H\n" +
 	"\vevent_types\x18\x01 \x03(\x0e2'.warp.multi_agent.v1.LifecycleEventTypeR\n" +
-	"eventTypes\"\xf1\x01\n" +
+	"eventTypes\x1a\xc8\x01\n" +
+	"\rExecutionMode\x12.\n" +
+	"\x05local\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05local\x12N\n" +
+	"\x06remote\x18\x02 \x01(\v24.warp.multi_agent.v1.StartAgent.ExecutionMode.RemoteH\x00R\x06remote\x1a/\n" +
+	"\x06Remote\x12%\n" +
+	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentIdB\x06\n" +
+	"\x04mode\"\xf1\x01\n" +
 	"\x10StartAgentResult\x12I\n" +
 	"\asuccess\x18\x01 \x01(\v2-.warp.multi_agent.v1.StartAgentResult.SuccessH\x00R\asuccess\x12C\n" +
 	"\x05error\x18\x02 \x01(\v2+.warp.multi_agent.v1.StartAgentResult.ErrorH\x00R\x05error\x1a$\n" +
@@ -33150,7 +33224,7 @@ const file_task_proto_rawDesc = "" +
 	"\x13RISK_CATEGORY_RISKY\x10\x05BMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_task_proto_enumTypes = make([]protoimpl.EnumInfo, 8)
-var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 223)
+var file_task_proto_msgTypes = make([]protoimpl.MessageInfo, 224)
 var file_task_proto_goTypes = []any{
 	(LifecycleEventType)(0), // 0: warp.multi_agent.v1.LifecycleEventType
 	(ToolType)(0),           // 1: warp.multi_agent.v1.ToolType
@@ -33366,58 +33440,59 @@ var file_task_proto_goTypes = []any{
 	(*RequestComputerUseResult_Error)(nil),                            // 211: warp.multi_agent.v1.RequestComputerUseResult.Error
 	(*FetchConversationResult_Success)(nil),                           // 212: warp.multi_agent.v1.FetchConversationResult.Success
 	(*FetchConversationResult_Error)(nil),                             // 213: warp.multi_agent.v1.FetchConversationResult.Error
-	(*StartAgent_ExecutionMode)(nil),                                  // 214: warp.multi_agent.v1.StartAgent.ExecutionMode
-	(*StartAgent_LifecycleSubscription)(nil),                          // 215: warp.multi_agent.v1.StartAgent.LifecycleSubscription
-	(*StartAgentResult_Success)(nil),                                  // 216: warp.multi_agent.v1.StartAgentResult.Success
-	(*StartAgentResult_Error)(nil),                                    // 217: warp.multi_agent.v1.StartAgentResult.Error
-	(*SendMessageToAgentResult_Success)(nil),                          // 218: warp.multi_agent.v1.SendMessageToAgentResult.Success
-	(*SendMessageToAgentResult_Error)(nil),                            // 219: warp.multi_agent.v1.SendMessageToAgentResult.Error
-	(*AskUserQuestion_Option)(nil),                                    // 220: warp.multi_agent.v1.AskUserQuestion.Option
-	(*AskUserQuestion_MultipleChoice)(nil),                            // 221: warp.multi_agent.v1.AskUserQuestion.MultipleChoice
-	(*AskUserQuestion_Question)(nil),                                  // 222: warp.multi_agent.v1.AskUserQuestion.Question
-	(*AskUserQuestionResult_Success)(nil),                             // 223: warp.multi_agent.v1.AskUserQuestionResult.Success
-	(*AskUserQuestionResult_Error)(nil),                               // 224: warp.multi_agent.v1.AskUserQuestionResult.Error
-	(*AskUserQuestionResult_AnswerItem)(nil),                          // 225: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
-	(*AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer)(nil),     // 226: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
-	(*PassiveSuggestionResultType_AgentResponseCompleted)(nil),        // 227: warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
-	(*PassiveSuggestionResultType_Prompt)(nil),                        // 228: warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
-	(*PassiveSuggestionResultType_CodeDiff)(nil),                      // 229: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
-	(*PassiveSuggestionResultType_CodeDiff_Diff)(nil),                 // 230: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
-	(*timestamppb.Timestamp)(nil),                                     // 231: google.protobuf.Timestamp
-	(*DiffSet)(nil),                                                   // 232: warp.multi_agent.v1.DiffSet
-	(*DiffHunk)(nil),                                                  // 233: warp.multi_agent.v1.DiffHunk
-	(*Citation)(nil),                                                  // 234: warp.multi_agent.v1.Citation
-	(*LongRunningShellCommandSnapshot)(nil),                           // 235: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*emptypb.Empty)(nil),                                             // 236: google.protobuf.Empty
-	(*ExecutedShellCommand)(nil),                                      // 237: warp.multi_agent.v1.ExecutedShellCommand
-	(*CurrentRef)(nil),                                                // 238: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                                                   // 239: warp.multi_agent.v1.BaseRef
-	(*InputContext)(nil),                                              // 240: warp.multi_agent.v1.InputContext
-	(*Attachment)(nil),                                                // 241: warp.multi_agent.v1.Attachment
-	(*durationpb.Duration)(nil),                                       // 242: google.protobuf.Duration
-	(*CreateTodoList)(nil),                                            // 243: warp.multi_agent.v1.CreateTodoList
-	(*UpdatePendingTodos)(nil),                                        // 244: warp.multi_agent.v1.UpdatePendingTodos
-	(*MarkTodosCompleted)(nil),                                        // 245: warp.multi_agent.v1.MarkTodosCompleted
-	(*Skill)(nil),                                                     // 246: warp.multi_agent.v1.Skill
-	(*AnyFileContent)(nil),                                            // 247: warp.multi_agent.v1.AnyFileContent
-	(*structpb.Struct)(nil),                                           // 248: google.protobuf.Struct
-	(*FileContentLineRange)(nil),                                      // 249: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                               // 250: warp.multi_agent.v1.FileContent
-	(*DocumentContent)(nil),                                           // 251: warp.multi_agent.v1.DocumentContent
+	(*StartAgent_LifecycleSubscription)(nil),                          // 214: warp.multi_agent.v1.StartAgent.LifecycleSubscription
+	(*StartAgent_ExecutionMode)(nil),                                  // 215: warp.multi_agent.v1.StartAgent.ExecutionMode
+	(*StartAgent_ExecutionMode_Remote)(nil),                           // 216: warp.multi_agent.v1.StartAgent.ExecutionMode.Remote
+	(*StartAgentResult_Success)(nil),                                  // 217: warp.multi_agent.v1.StartAgentResult.Success
+	(*StartAgentResult_Error)(nil),                                    // 218: warp.multi_agent.v1.StartAgentResult.Error
+	(*SendMessageToAgentResult_Success)(nil),                          // 219: warp.multi_agent.v1.SendMessageToAgentResult.Success
+	(*SendMessageToAgentResult_Error)(nil),                            // 220: warp.multi_agent.v1.SendMessageToAgentResult.Error
+	(*AskUserQuestion_Option)(nil),                                    // 221: warp.multi_agent.v1.AskUserQuestion.Option
+	(*AskUserQuestion_MultipleChoice)(nil),                            // 222: warp.multi_agent.v1.AskUserQuestion.MultipleChoice
+	(*AskUserQuestion_Question)(nil),                                  // 223: warp.multi_agent.v1.AskUserQuestion.Question
+	(*AskUserQuestionResult_Success)(nil),                             // 224: warp.multi_agent.v1.AskUserQuestionResult.Success
+	(*AskUserQuestionResult_Error)(nil),                               // 225: warp.multi_agent.v1.AskUserQuestionResult.Error
+	(*AskUserQuestionResult_AnswerItem)(nil),                          // 226: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
+	(*AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer)(nil),     // 227: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
+	(*PassiveSuggestionResultType_AgentResponseCompleted)(nil),        // 228: warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
+	(*PassiveSuggestionResultType_Prompt)(nil),                        // 229: warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
+	(*PassiveSuggestionResultType_CodeDiff)(nil),                      // 230: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
+	(*PassiveSuggestionResultType_CodeDiff_Diff)(nil),                 // 231: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
+	(*timestamppb.Timestamp)(nil),                                     // 232: google.protobuf.Timestamp
+	(*DiffSet)(nil),                                                   // 233: warp.multi_agent.v1.DiffSet
+	(*DiffHunk)(nil),                                                  // 234: warp.multi_agent.v1.DiffHunk
+	(*Citation)(nil),                                                  // 235: warp.multi_agent.v1.Citation
+	(*LongRunningShellCommandSnapshot)(nil),                           // 236: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*emptypb.Empty)(nil),                                             // 237: google.protobuf.Empty
+	(*ExecutedShellCommand)(nil),                                      // 238: warp.multi_agent.v1.ExecutedShellCommand
+	(*CurrentRef)(nil),                                                // 239: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                                   // 240: warp.multi_agent.v1.BaseRef
+	(*InputContext)(nil),                                              // 241: warp.multi_agent.v1.InputContext
+	(*Attachment)(nil),                                                // 242: warp.multi_agent.v1.Attachment
+	(*durationpb.Duration)(nil),                                       // 243: google.protobuf.Duration
+	(*CreateTodoList)(nil),                                            // 244: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil),                                        // 245: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil),                                        // 246: warp.multi_agent.v1.MarkTodosCompleted
+	(*Skill)(nil),                                                     // 247: warp.multi_agent.v1.Skill
+	(*AnyFileContent)(nil),                                            // 248: warp.multi_agent.v1.AnyFileContent
+	(*structpb.Struct)(nil),                                           // 249: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                                      // 250: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                               // 251: warp.multi_agent.v1.FileContent
+	(*DocumentContent)(nil),                                           // 252: warp.multi_agent.v1.DocumentContent
 }
 var file_task_proto_depIdxs = []int32{
 	54,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
 	12,  // 1: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
-	231, // 2: warp.multi_agent.v1.AgentEvent.occurred_at:type_name -> google.protobuf.Timestamp
+	232, // 2: warp.multi_agent.v1.AgentEvent.occurred_at:type_name -> google.protobuf.Timestamp
 	55,  // 3: warp.multi_agent.v1.AgentEvent.lifecycle_event:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent
 	11,  // 4: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	11,  // 5: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	232, // 6: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	233, // 7: warp.multi_agent.v1.ReviewComment.commented_line:type_name -> warp.multi_agent.v1.DiffHunk
+	233, // 6: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	234, // 7: warp.multi_agent.v1.ReviewComment.commented_line:type_name -> warp.multi_agent.v1.DiffHunk
 	58,  // 8: warp.multi_agent.v1.ReviewComment.commented_file:type_name -> warp.multi_agent.v1.ReviewComment.CommentedFile
 	59,  // 9: warp.multi_agent.v1.ReviewComment.commented_diffset:type_name -> warp.multi_agent.v1.ReviewComment.CommentedDiffset
-	231, // 10: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
-	234, // 11: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
+	232, // 10: warp.multi_agent.v1.Message.timestamp:type_name -> google.protobuf.Timestamp
+	235, // 11: warp.multi_agent.v1.Message.citations:type_name -> warp.multi_agent.v1.Citation
 	63,  // 12: warp.multi_agent.v1.Message.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
 	71,  // 13: warp.multi_agent.v1.Message.agent_output:type_name -> warp.multi_agent.v1.Message.AgentOutput
 	76,  // 14: warp.multi_agent.v1.Message.tool_call:type_name -> warp.multi_agent.v1.Message.ToolCall
@@ -33438,7 +33513,7 @@ var file_task_proto_depIdxs = []int32{
 	86,  // 29: warp.multi_agent.v1.Message.model_used:type_name -> warp.multi_agent.v1.Message.ModelUsed
 	62,  // 30: warp.multi_agent.v1.Message.events_from_agents:type_name -> warp.multi_agent.v1.Message.EventsFromAgents
 	60,  // 31: warp.multi_agent.v1.Message.passive_suggestion_result:type_name -> warp.multi_agent.v1.Message.PassiveSuggestionResult
-	235, // 32: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	236, // 32: warp.multi_agent.v1.RunShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 33: warp.multi_agent.v1.RunShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	28,  // 34: warp.multi_agent.v1.RunShellCommandResult.permission_denied:type_name -> warp.multi_agent.v1.PermissionDenied
 	167, // 35: warp.multi_agent.v1.ReadFilesResult.text_files_success:type_name -> warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess
@@ -33448,7 +33523,7 @@ var file_task_proto_depIdxs = []int32{
 	171, // 39: warp.multi_agent.v1.SearchCodebaseResult.error:type_name -> warp.multi_agent.v1.SearchCodebaseResult.Error
 	172, // 40: warp.multi_agent.v1.ApplyFileDiffsResult.success:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success
 	173, // 41: warp.multi_agent.v1.ApplyFileDiffsResult.error:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Error
-	236, // 42: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
+	237, // 42: warp.multi_agent.v1.SuggestPlanResult.accepted:type_name -> google.protobuf.Empty
 	176, // 43: warp.multi_agent.v1.SuggestPlanResult.user_edited_plan:type_name -> warp.multi_agent.v1.SuggestPlanResult.UserEditedPlan
 	177, // 44: warp.multi_agent.v1.GrepResult.success:type_name -> warp.multi_agent.v1.GrepResult.Success
 	178, // 45: warp.multi_agent.v1.GrepResult.error:type_name -> warp.multi_agent.v1.GrepResult.Error
@@ -33460,26 +33535,26 @@ var file_task_proto_depIdxs = []int32{
 	187, // 51: warp.multi_agent.v1.MCPResourceContent.binary:type_name -> warp.multi_agent.v1.MCPResourceContent.Binary
 	188, // 52: warp.multi_agent.v1.ReadMCPResourceResult.success:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Success
 	189, // 53: warp.multi_agent.v1.ReadMCPResourceResult.error:type_name -> warp.multi_agent.v1.ReadMCPResourceResult.Error
-	235, // 54: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	236, // 54: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 55: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	44,  // 56: warp.multi_agent.v1.WriteToLongRunningShellCommandResult.error:type_name -> warp.multi_agent.v1.ShellCommandError
-	235, // 57: warp.multi_agent.v1.TransferShellCommandControlToUserResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	236, // 57: warp.multi_agent.v1.TransferShellCommandControlToUserResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 58: warp.multi_agent.v1.TransferShellCommandControlToUserResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	44,  // 59: warp.multi_agent.v1.TransferShellCommandControlToUserResult.error:type_name -> warp.multi_agent.v1.ShellCommandError
 	190, // 60: warp.multi_agent.v1.SuggestNewConversationResult.accepted:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Accepted
 	191, // 61: warp.multi_agent.v1.SuggestNewConversationResult.rejected:type_name -> warp.multi_agent.v1.SuggestNewConversationResult.Rejected
-	236, // 62: warp.multi_agent.v1.PermissionDenied.denylisted_command:type_name -> google.protobuf.Empty
+	237, // 62: warp.multi_agent.v1.PermissionDenied.denylisted_command:type_name -> google.protobuf.Empty
 	192, // 63: warp.multi_agent.v1.CallMCPToolResult.success:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success
 	193, // 64: warp.multi_agent.v1.CallMCPToolResult.error:type_name -> warp.multi_agent.v1.CallMCPToolResult.Error
-	236, // 65: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
-	236, // 66: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
+	237, // 65: warp.multi_agent.v1.SuggestPromptResult.accepted:type_name -> google.protobuf.Empty
+	237, // 66: warp.multi_agent.v1.SuggestPromptResult.rejected:type_name -> google.protobuf.Empty
 	197, // 67: warp.multi_agent.v1.ReadDocumentsResult.success:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Success
 	198, // 68: warp.multi_agent.v1.ReadDocumentsResult.error:type_name -> warp.multi_agent.v1.ReadDocumentsResult.Error
 	199, // 69: warp.multi_agent.v1.EditDocumentsResult.success:type_name -> warp.multi_agent.v1.EditDocumentsResult.Success
 	200, // 70: warp.multi_agent.v1.EditDocumentsResult.error:type_name -> warp.multi_agent.v1.EditDocumentsResult.Error
 	201, // 71: warp.multi_agent.v1.CreateDocumentsResult.success:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Success
 	202, // 72: warp.multi_agent.v1.CreateDocumentsResult.error:type_name -> warp.multi_agent.v1.CreateDocumentsResult.Error
-	235, // 73: warp.multi_agent.v1.ReadShellCommandOutputResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	236, // 73: warp.multi_agent.v1.ReadShellCommandOutputResult.long_running_command_snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	27,  // 74: warp.multi_agent.v1.ReadShellCommandOutputResult.command_finished:type_name -> warp.multi_agent.v1.ShellCommandFinished
 	44,  // 75: warp.multi_agent.v1.ReadShellCommandOutputResult.error:type_name -> warp.multi_agent.v1.ShellCommandError
 	203, // 76: warp.multi_agent.v1.InsertReviewCommentsResult.success:type_name -> warp.multi_agent.v1.InsertReviewCommentsResult.Success
@@ -33493,37 +33568,37 @@ var file_task_proto_depIdxs = []int32{
 	211, // 84: warp.multi_agent.v1.RequestComputerUseResult.error:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Error
 	212, // 85: warp.multi_agent.v1.FetchConversationResult.success:type_name -> warp.multi_agent.v1.FetchConversationResult.Success
 	213, // 86: warp.multi_agent.v1.FetchConversationResult.error:type_name -> warp.multi_agent.v1.FetchConversationResult.Error
-	236, // 87: warp.multi_agent.v1.ShellCommandError.command_not_found:type_name -> google.protobuf.Empty
-	236, // 88: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
-	236, // 89: warp.multi_agent.v1.UserQueryMode.orchestrate:type_name -> google.protobuf.Empty
-	215, // 90: warp.multi_agent.v1.StartAgent.lifecycle_subscription:type_name -> warp.multi_agent.v1.StartAgent.LifecycleSubscription
-	214, // 91: warp.multi_agent.v1.StartAgent.execution_mode:type_name -> warp.multi_agent.v1.StartAgent.ExecutionMode
-	216, // 92: warp.multi_agent.v1.StartAgentResult.success:type_name -> warp.multi_agent.v1.StartAgentResult.Success
-	217, // 93: warp.multi_agent.v1.StartAgentResult.error:type_name -> warp.multi_agent.v1.StartAgentResult.Error
-	218, // 94: warp.multi_agent.v1.SendMessageToAgentResult.success:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Success
-	219, // 95: warp.multi_agent.v1.SendMessageToAgentResult.error:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Error
-	222, // 96: warp.multi_agent.v1.AskUserQuestion.questions:type_name -> warp.multi_agent.v1.AskUserQuestion.Question
-	223, // 97: warp.multi_agent.v1.AskUserQuestionResult.success:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Success
-	224, // 98: warp.multi_agent.v1.AskUserQuestionResult.error:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Error
-	237, // 99: warp.multi_agent.v1.PassiveSuggestionResultType.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	227, // 100: warp.multi_agent.v1.PassiveSuggestionResultType.agent_response_completed:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
-	228, // 101: warp.multi_agent.v1.PassiveSuggestionResultType.prompt:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
-	229, // 102: warp.multi_agent.v1.PassiveSuggestionResultType.code_diff:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
+	237, // 87: warp.multi_agent.v1.ShellCommandError.command_not_found:type_name -> google.protobuf.Empty
+	237, // 88: warp.multi_agent.v1.UserQueryMode.plan:type_name -> google.protobuf.Empty
+	237, // 89: warp.multi_agent.v1.UserQueryMode.orchestrate:type_name -> google.protobuf.Empty
+	214, // 90: warp.multi_agent.v1.StartAgent.lifecycle_subscription:type_name -> warp.multi_agent.v1.StartAgent.LifecycleSubscription
+	215, // 91: warp.multi_agent.v1.StartAgent.execution_mode:type_name -> warp.multi_agent.v1.StartAgent.ExecutionMode
+	217, // 92: warp.multi_agent.v1.StartAgentResult.success:type_name -> warp.multi_agent.v1.StartAgentResult.Success
+	218, // 93: warp.multi_agent.v1.StartAgentResult.error:type_name -> warp.multi_agent.v1.StartAgentResult.Error
+	219, // 94: warp.multi_agent.v1.SendMessageToAgentResult.success:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Success
+	220, // 95: warp.multi_agent.v1.SendMessageToAgentResult.error:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Error
+	223, // 96: warp.multi_agent.v1.AskUserQuestion.questions:type_name -> warp.multi_agent.v1.AskUserQuestion.Question
+	224, // 97: warp.multi_agent.v1.AskUserQuestionResult.success:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Success
+	225, // 98: warp.multi_agent.v1.AskUserQuestionResult.error:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Error
+	238, // 99: warp.multi_agent.v1.PassiveSuggestionResultType.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	228, // 100: warp.multi_agent.v1.PassiveSuggestionResultType.agent_response_completed:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
+	229, // 101: warp.multi_agent.v1.PassiveSuggestionResultType.prompt:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
+	230, // 102: warp.multi_agent.v1.PassiveSuggestionResultType.code_diff:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
 	56,  // 103: warp.multi_agent.v1.AgentEvent.LifecycleEvent.errored:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent.Errored
-	236, // 104: warp.multi_agent.v1.AgentEvent.LifecycleEvent.started:type_name -> google.protobuf.Empty
-	236, // 105: warp.multi_agent.v1.AgentEvent.LifecycleEvent.idle:type_name -> google.protobuf.Empty
-	236, // 106: warp.multi_agent.v1.AgentEvent.LifecycleEvent.restarted:type_name -> google.protobuf.Empty
-	236, // 107: warp.multi_agent.v1.AgentEvent.LifecycleEvent.cancelled:type_name -> google.protobuf.Empty
+	237, // 104: warp.multi_agent.v1.AgentEvent.LifecycleEvent.started:type_name -> google.protobuf.Empty
+	237, // 105: warp.multi_agent.v1.AgentEvent.LifecycleEvent.idle:type_name -> google.protobuf.Empty
+	237, // 106: warp.multi_agent.v1.AgentEvent.LifecycleEvent.restarted:type_name -> google.protobuf.Empty
+	237, // 107: warp.multi_agent.v1.AgentEvent.LifecycleEvent.cancelled:type_name -> google.protobuf.Empty
 	57,  // 108: warp.multi_agent.v1.AgentEvent.LifecycleEvent.blocked:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent.Blocked
-	238, // 109: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
-	239, // 110: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
-	238, // 111: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
-	239, // 112: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
+	239, // 109: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
+	240, // 110: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
+	239, // 111: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
+	240, // 112: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
 	52,  // 113: warp.multi_agent.v1.Message.PassiveSuggestionResult.result:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType
-	240, // 114: warp.multi_agent.v1.Message.PassiveSuggestionResult.context:type_name -> warp.multi_agent.v1.InputContext
+	241, // 114: warp.multi_agent.v1.Message.PassiveSuggestionResult.context:type_name -> warp.multi_agent.v1.InputContext
 	87,  // 115: warp.multi_agent.v1.Message.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessage
 	9,   // 116: warp.multi_agent.v1.Message.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
-	240, // 117: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	241, // 117: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
 	88,  // 118: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	45,  // 119: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
 	2,   // 120: warp.multi_agent.v1.Message.UserQuery.intended_agent:type_name -> warp.multi_agent.v1.AgentType
@@ -33534,14 +33609,14 @@ var file_task_proto_depIdxs = []int32{
 	69,  // 125: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
 	70,  // 126: warp.multi_agent.v1.Message.SystemQuery.summarize_conversation:type_name -> warp.multi_agent.v1.Message.SummarizeConversation
 	75,  // 127: warp.multi_agent.v1.Message.SystemQuery.fetch_review_comments:type_name -> warp.multi_agent.v1.Message.FetchReviewComments
-	240, // 128: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	241, // 129: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
-	236, // 130: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
-	236, // 131: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
+	241, // 128: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	242, // 129: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
+	237, // 130: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
+	237, // 131: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
 	89,  // 132: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
 	90,  // 133: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompleted
-	242, // 134: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
-	242, // 135: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
+	243, // 134: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
+	243, // 135: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
 	91,  // 136: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
 	92,  // 137: warp.multi_agent.v1.Message.Summarization.tool_call_result_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
 	10,  // 138: warp.multi_agent.v1.Message.CodeReview.comments:type_name -> warp.multi_agent.v1.ReviewComments
@@ -33576,7 +33651,7 @@ var file_task_proto_depIdxs = []int32{
 	48,  // 167: warp.multi_agent.v1.Message.ToolCall.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgent
 	97,  // 168: warp.multi_agent.v1.Message.ToolCall.transfer_shell_command_control_to_user:type_name -> warp.multi_agent.v1.Message.ToolCall.TransferShellCommandControlToUser
 	50,  // 169: warp.multi_agent.v1.Message.ToolCall.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestion
-	240, // 170: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	241, // 170: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	13,  // 171: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	15,  // 172: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	149, // 173: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
@@ -33586,7 +33661,7 @@ var file_task_proto_depIdxs = []int32{
 	17,  // 177: warp.multi_agent.v1.Message.ToolCallResult.suggest_create_plan:type_name -> warp.multi_agent.v1.SuggestCreatePlanResult
 	19,  // 178: warp.multi_agent.v1.Message.ToolCallResult.grep:type_name -> warp.multi_agent.v1.GrepResult
 	20,  // 179: warp.multi_agent.v1.Message.ToolCallResult.file_glob:type_name -> warp.multi_agent.v1.FileGlobResult
-	236, // 180: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
+	237, // 180: warp.multi_agent.v1.Message.ToolCallResult.cancel:type_name -> google.protobuf.Empty
 	23,  // 181: warp.multi_agent.v1.Message.ToolCallResult.read_mcp_resource:type_name -> warp.multi_agent.v1.ReadMCPResourceResult
 	29,  // 182: warp.multi_agent.v1.Message.ToolCallResult.call_mcp_tool:type_name -> warp.multi_agent.v1.CallMCPToolResult
 	24,  // 183: warp.multi_agent.v1.Message.ToolCallResult.write_to_long_running_shell_command:type_name -> warp.multi_agent.v1.WriteToLongRunningShellCommandResult
@@ -33609,20 +33684,20 @@ var file_task_proto_depIdxs = []int32{
 	49,  // 200: warp.multi_agent.v1.Message.ToolCallResult.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgentResult
 	25,  // 201: warp.multi_agent.v1.Message.ToolCallResult.transfer_shell_command_control_to_user:type_name -> warp.multi_agent.v1.TransferShellCommandControlToUserResult
 	51,  // 202: warp.multi_agent.v1.Message.ToolCallResult.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestionResult
-	243, // 203: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
-	244, // 204: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
-	245, // 205: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
+	244, // 203: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
+	245, // 204: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
+	246, // 205: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
 	151, // 206: warp.multi_agent.v1.Message.UpdateReviewComments.address_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
 	152, // 207: warp.multi_agent.v1.Message.WebSearch.status:type_name -> warp.multi_agent.v1.Message.WebSearch.Status
 	156, // 208: warp.multi_agent.v1.Message.WebFetch.status:type_name -> warp.multi_agent.v1.Message.WebFetch.Status
 	165, // 209: warp.multi_agent.v1.Message.ArtifactEvent.created:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated
 	166, // 210: warp.multi_agent.v1.Message.ArtifactEvent.fork_artifacts:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifacts
-	246, // 211: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
+	247, // 211: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
 	63,  // 212: warp.multi_agent.v1.Message.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	241, // 213: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	237, // 214: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	247, // 215: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
-	234, // 216: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
+	242, // 213: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	238, // 214: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	248, // 215: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
+	235, // 216: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
 	3,   // 217: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.risk_category:type_name -> warp.multi_agent.v1.RiskCategory
 	122, // 218: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
 	123, // 219: warp.multi_agent.v1.Message.ToolCall.ReadFiles.files:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadFiles.File
@@ -33631,35 +33706,35 @@ var file_task_proto_depIdxs = []int32{
 	127, // 222: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.deleted_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
 	125, // 223: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.v4a_updates:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
 	8,   // 224: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	248, // 225: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	249, // 225: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
 	129, // 226: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
 	130, // 227: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.prompt_chip:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.PromptChip
 	131, // 228: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
-	236, // 229: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
-	236, // 230: warp.multi_agent.v1.Message.ToolCall.Subagent.advice:type_name -> google.protobuf.Empty
-	236, // 231: warp.multi_agent.v1.Message.ToolCall.Subagent.computer_use:type_name -> google.protobuf.Empty
-	236, // 232: warp.multi_agent.v1.Message.ToolCall.Subagent.summarization:type_name -> google.protobuf.Empty
-	236, // 233: warp.multi_agent.v1.Message.ToolCall.Subagent.conversation_search:type_name -> google.protobuf.Empty
-	236, // 234: warp.multi_agent.v1.Message.ToolCall.Subagent.warp_documentation_search:type_name -> google.protobuf.Empty
+	237, // 229: warp.multi_agent.v1.Message.ToolCall.Subagent.research:type_name -> google.protobuf.Empty
+	237, // 230: warp.multi_agent.v1.Message.ToolCall.Subagent.advice:type_name -> google.protobuf.Empty
+	237, // 231: warp.multi_agent.v1.Message.ToolCall.Subagent.computer_use:type_name -> google.protobuf.Empty
+	237, // 232: warp.multi_agent.v1.Message.ToolCall.Subagent.summarization:type_name -> google.protobuf.Empty
+	237, // 233: warp.multi_agent.v1.Message.ToolCall.Subagent.conversation_search:type_name -> google.protobuf.Empty
+	237, // 234: warp.multi_agent.v1.Message.ToolCall.Subagent.warp_documentation_search:type_name -> google.protobuf.Empty
 	132, // 235: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
 	133, // 236: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
 	134, // 237: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	242, // 238: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
-	236, // 239: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
+	243, // 238: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
+	237, // 239: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
 	135, // 240: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.comments:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
 	138, // 241: warp.multi_agent.v1.Message.ToolCall.UseComputer.actions:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
 	121, // 242: warp.multi_agent.v1.Message.ToolCall.UseComputer.post_actions_screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
 	121, // 243: warp.multi_agent.v1.Message.ToolCall.RequestComputerUse.screenshot_params:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams
 	148, // 244: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.region:type_name -> warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region
-	236, // 245: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
-	236, // 246: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
-	236, // 247: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
-	249, // 248: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	237, // 245: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
+	237, // 246: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
+	237, // 247: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
+	250, // 248: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	128, // 249: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
-	249, // 250: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	250, // 250: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	136, // 251: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment.location:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
 	137, // 252: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
-	249, // 253: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	250, // 253: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
 	4,   // 254: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.side:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSide
 	139, // 255: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
 	140, // 256: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
@@ -33675,18 +33750,18 @@ var file_task_proto_depIdxs = []int32{
 	5,   // 266: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
 	38,  // 267: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
 	6,   // 268: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
-	242, // 269: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
+	243, // 269: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
 	145, // 270: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
 	145, // 271: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
 	38,  // 272: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.top_left:type_name -> warp.multi_agent.v1.Coordinates
 	38,  // 273: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.bottom_right:type_name -> warp.multi_agent.v1.Coordinates
 	153, // 274: warp.multi_agent.v1.Message.WebSearch.Status.searching:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Searching
 	154, // 275: warp.multi_agent.v1.Message.WebSearch.Status.success:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success
-	236, // 276: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
+	237, // 276: warp.multi_agent.v1.Message.WebSearch.Status.error:type_name -> google.protobuf.Empty
 	155, // 277: warp.multi_agent.v1.Message.WebSearch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebSearch.Status.Success.SearchedPage
 	157, // 278: warp.multi_agent.v1.Message.WebFetch.Status.fetching:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Fetching
 	158, // 279: warp.multi_agent.v1.Message.WebFetch.Status.success:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success
-	236, // 280: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
+	237, // 280: warp.multi_agent.v1.Message.WebFetch.Status.error:type_name -> google.protobuf.Empty
 	159, // 281: warp.multi_agent.v1.Message.WebFetch.Status.Success.pages:type_name -> warp.multi_agent.v1.Message.WebFetch.Status.Success.FetchedPage
 	160, // 282: warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact.pull_request:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
 	161, // 283: warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact.screenshot:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
@@ -33695,13 +33770,13 @@ var file_task_proto_depIdxs = []int32{
 	160, // 286: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.pull_request:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.PullRequestArtifact
 	161, // 287: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.screenshot:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
 	164, // 288: warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifacts.artifacts:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact
-	250, // 289: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	247, // 290: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	250, // 291: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	250, // 292: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	251, // 289: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	248, // 290: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	251, // 291: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	251, // 292: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
 	174, // 293: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
 	175, // 294: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
-	250, // 295: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	251, // 295: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
 	179, // 296: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
 	180, // 297: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
 	185, // 298: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
@@ -33710,24 +33785,24 @@ var file_task_proto_depIdxs = []int32{
 	195, // 301: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	196, // 302: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
 	22,  // 303: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	251, // 304: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	251, // 305: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	251, // 306: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	252, // 304: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	252, // 305: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	252, // 306: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	53,  // 307: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.RawImage
 	38,  // 308: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
-	250, // 309: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
+	251, // 309: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
 	41,  // 310: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
 	53,  // 311: warp.multi_agent.v1.RequestComputerUseResult.Approved.initial_screenshot:type_name -> warp.multi_agent.v1.RawImage
 	7,   // 312: warp.multi_agent.v1.RequestComputerUseResult.Approved.platform:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
-	236, // 313: warp.multi_agent.v1.StartAgent.ExecutionMode.local:type_name -> google.protobuf.Empty
-	236, // 314: warp.multi_agent.v1.StartAgent.ExecutionMode.remote:type_name -> google.protobuf.Empty
-	0,   // 315: warp.multi_agent.v1.StartAgent.LifecycleSubscription.event_types:type_name -> warp.multi_agent.v1.LifecycleEventType
-	220, // 316: warp.multi_agent.v1.AskUserQuestion.MultipleChoice.options:type_name -> warp.multi_agent.v1.AskUserQuestion.Option
-	221, // 317: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
-	225, // 318: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
-	226, // 319: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
-	236, // 320: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.skipped:type_name -> google.protobuf.Empty
-	230, // 321: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.diffs:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
+	0,   // 313: warp.multi_agent.v1.StartAgent.LifecycleSubscription.event_types:type_name -> warp.multi_agent.v1.LifecycleEventType
+	237, // 314: warp.multi_agent.v1.StartAgent.ExecutionMode.local:type_name -> google.protobuf.Empty
+	216, // 315: warp.multi_agent.v1.StartAgent.ExecutionMode.remote:type_name -> warp.multi_agent.v1.StartAgent.ExecutionMode.Remote
+	221, // 316: warp.multi_agent.v1.AskUserQuestion.MultipleChoice.options:type_name -> warp.multi_agent.v1.AskUserQuestion.Option
+	222, // 317: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
+	226, // 318: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
+	227, // 319: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
+	237, // 320: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.skipped:type_name -> google.protobuf.Empty
+	231, // 321: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.diffs:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
 	322, // [322:322] is the sub-list for method output_type
 	322, // [322:322] is the sub-list for method input_type
 	322, // [322:322] is the sub-list for extension type_name
@@ -34086,14 +34161,14 @@ func file_task_proto_init() {
 		(*callMCPToolResult_Success_Result_Image_)(nil),
 		(*callMCPToolResult_Success_Result_Resource)(nil),
 	}
-	file_task_proto_msgTypes[206].OneofWrappers = []any{
+	file_task_proto_msgTypes[207].OneofWrappers = []any{
 		(*startAgent_ExecutionMode_Local)(nil),
-		(*startAgent_ExecutionMode_Remote)(nil),
+		(*startAgent_ExecutionMode_Remote_)(nil),
 	}
-	file_task_proto_msgTypes[214].OneofWrappers = []any{
+	file_task_proto_msgTypes[215].OneofWrappers = []any{
 		(*askUserQuestion_Question_MultipleChoice)(nil),
 	}
-	file_task_proto_msgTypes[217].OneofWrappers = []any{
+	file_task_proto_msgTypes[218].OneofWrappers = []any{
 		(*askUserQuestionResult_AnswerItem_MultipleChoice)(nil),
 		(*askUserQuestionResult_AnswerItem_Skipped)(nil),
 	}
@@ -34103,7 +34178,7 @@ func file_task_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_task_proto_rawDesc), len(file_task_proto_rawDesc)),
 			NumEnums:      8,
-			NumMessages:   223,
+			NumMessages:   224,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
