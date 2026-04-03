@@ -8187,7 +8187,7 @@ type StartAgent_builder struct {
 	// Optional lifecycle event subscription for the new child agent.
 	// If not set or empty, defaults to all lifecycle event types.
 	LifecycleSubscription *StartAgent_LifecycleSubscription
-	// Determines where the child agent should run.
+	// Where the child agent should run. Defaults to local when omitted.
 	ExecutionMode *StartAgent_ExecutionMode
 }
 
