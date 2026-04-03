@@ -62,6 +62,11 @@ message LongRunningShellCommandSnapshot {
   // "ID" of the command execution to be included in tool calls to write to or read from the
   // snapshotted command.
   string command_id = 3;
+
+  // Whether the terminal alternate screen buffer is active (e.g., pager, TUI application).
+  // When true, the output is from the alternate screen buffer (like 'less', 'vim', 'top').
+  // When false, the output is from the normal scrollback history.
+  bool is_alt_screen_active = 4;
 }
 
 message DriveObject {
