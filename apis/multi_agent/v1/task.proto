@@ -1596,6 +1596,55 @@ message StartAgent {
     repeated LifecycleEventType event_types = 1;
   }
 
+  // Remote run configuration for a child agent.
+  // JSON field names intentionally mirror the POST /v1/agent/runs config payload.
+  message RemoteConfig {
+    // Optional run-config metadata for grouping, filtering, and traceability.
+    // This is distinct from the top-level StartAgent.name, which is the child
+    // agent's display/orchestration label.
+    string name = 1 [ (sensitive) = true ];
+    // Optional model override for the remote child agent.
+    string model_id = 2;
+    // Optional base prompt override for the remote child agent.
+    string base_prompt = 3 [ (sensitive) = true ];
+    // Optional cloud environment UID for the remote child agent.
+    string environment_id = 4;
+    // Optional skill specification for the remote child agent.
+    string skill_spec = 5 [ (sensitive) = true ];
+    // Optional MCP server configurations keyed by server name.
+    map<string, MCPServerConfig> mcp_servers = 6;
+    // Optional computer use override for the remote child agent.
+    bool computer_use_enabled = 7;
+    // Optional idle timeout override for the remote child agent.
+    int32 idle_timeout_minutes = 8;
+    // Optional worker host override for the remote child agent.
+    string worker_host = 9;
+    // Optional harness selection for the remote child agent.
+    Harness harness = 10;
+
+    // Configuration for a single MCP server entry.
+    message MCPServerConfig {
+      // Reference to a Warp shared MCP server by UUID.
+      string warp_id = 1;
+      // Stdio transport command to run.
+      string command = 2;
+      // Stdio transport command arguments.
+      repeated string args = 3;
+      // SSE/HTTP transport server URL.
+      string url = 4;
+      // Environment variables for the server.
+      map<string, string> env = 5 [ (sensitive) = true ];
+      // HTTP headers for SSE/HTTP transport.
+      map<string, string> headers = 6 [ (sensitive) = true ];
+    }
+
+    // Harness selection for the remote child agent.
+    message Harness {
+      // Harness type identifier, e.g. "oz" or "claude".
+      string type = 1;
+    }
+  }
+
   message ExecutionMode {
     oneof mode {
       google.protobuf.Empty local = 1;
@@ -1603,8 +1652,13 @@ message StartAgent {
     }
 
     message Remote {
-      // Optional cloud environment UID for remote child agents.
+      // Deprecated: use config.environment_id instead.
+      // Kept so older stored conversations and older clients can continue to
+      // round-trip remote child agents.
       string environment_id = 1;
+      // Remote run configuration whose fields intentionally mirror the
+      // POST /v1/agent/runs config payload.
+      RemoteConfig config = 2;
     }
   }
 }
