@@ -30532,7 +30532,6 @@ type StartAgent_RemoteConfig struct {
 	state                         protoimpl.MessageState                              `protogen:"opaque.v1"`
 	xxx_hidden_Name               *string                                             `protobuf:"bytes,1,opt,name=name"`
 	xxx_hidden_ModelId            *string                                             `protobuf:"bytes,2,opt,name=model_id,json=modelId"`
-	xxx_hidden_BasePrompt         *string                                             `protobuf:"bytes,3,opt,name=base_prompt,json=basePrompt"`
 	xxx_hidden_EnvironmentId      *string                                             `protobuf:"bytes,4,opt,name=environment_id,json=environmentId"`
 	xxx_hidden_SkillSpec          *string                                             `protobuf:"bytes,5,opt,name=skill_spec,json=skillSpec"`
 	xxx_hidden_McpServers         map[string]*StartAgent_RemoteConfig_MCPServerConfig `protobuf:"bytes,6,rep,name=mcp_servers,json=mcpServers" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -30585,16 +30584,6 @@ func (x *StartAgent_RemoteConfig) GetModelId() string {
 	if x != nil {
 		if x.xxx_hidden_ModelId != nil {
 			return *x.xxx_hidden_ModelId
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *StartAgent_RemoteConfig) GetBasePrompt() string {
-	if x != nil {
-		if x.xxx_hidden_BasePrompt != nil {
-			return *x.xxx_hidden_BasePrompt
 		}
 		return ""
 	}
@@ -30661,27 +30650,22 @@ func (x *StartAgent_RemoteConfig) GetHarness() *StartAgent_RemoteConfig_Harness 
 
 func (x *StartAgent_RemoteConfig) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 10)
-}
-
-func (x *StartAgent_RemoteConfig) SetBasePrompt(v string) {
-	x.xxx_hidden_BasePrompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetEnvironmentId(v string) {
 	x.xxx_hidden_EnvironmentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetSkillSpec(v string) {
 	x.xxx_hidden_SkillSpec = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetMcpServers(v map[string]*StartAgent_RemoteConfig_MCPServerConfig) {
@@ -30690,17 +30674,17 @@ func (x *StartAgent_RemoteConfig) SetMcpServers(v map[string]*StartAgent_RemoteC
 
 func (x *StartAgent_RemoteConfig) SetComputerUseEnabled(v bool) {
 	x.xxx_hidden_ComputerUseEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetIdleTimeoutMinutes(v int32) {
 	x.xxx_hidden_IdleTimeoutMinutes = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetWorkerHost(v string) {
 	x.xxx_hidden_WorkerHost = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 10)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 9)
 }
 
 func (x *StartAgent_RemoteConfig) SetHarness(v *StartAgent_RemoteConfig_Harness) {
@@ -30721,46 +30705,39 @@ func (x *StartAgent_RemoteConfig) HasModelId() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *StartAgent_RemoteConfig) HasBasePrompt() bool {
+func (x *StartAgent_RemoteConfig) HasEnvironmentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *StartAgent_RemoteConfig) HasEnvironmentId() bool {
+func (x *StartAgent_RemoteConfig) HasSkillSpec() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *StartAgent_RemoteConfig) HasSkillSpec() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
-}
-
 func (x *StartAgent_RemoteConfig) HasComputerUseEnabled() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
 func (x *StartAgent_RemoteConfig) HasIdleTimeoutMinutes() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
 }
 
 func (x *StartAgent_RemoteConfig) HasWorkerHost() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
 }
 
 func (x *StartAgent_RemoteConfig) HasHarness() bool {
@@ -30780,33 +30757,28 @@ func (x *StartAgent_RemoteConfig) ClearModelId() {
 	x.xxx_hidden_ModelId = nil
 }
 
-func (x *StartAgent_RemoteConfig) ClearBasePrompt() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_BasePrompt = nil
-}
-
 func (x *StartAgent_RemoteConfig) ClearEnvironmentId() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_EnvironmentId = nil
 }
 
 func (x *StartAgent_RemoteConfig) ClearSkillSpec() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_SkillSpec = nil
 }
 
 func (x *StartAgent_RemoteConfig) ClearComputerUseEnabled() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
 	x.xxx_hidden_ComputerUseEnabled = false
 }
 
 func (x *StartAgent_RemoteConfig) ClearIdleTimeoutMinutes() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
 	x.xxx_hidden_IdleTimeoutMinutes = 0
 }
 
 func (x *StartAgent_RemoteConfig) ClearWorkerHost() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
 	x.xxx_hidden_WorkerHost = nil
 }
 
@@ -30827,10 +30799,6 @@ type StartAgent_RemoteConfig_builder struct {
 	// Uses the same model IDs accepted by POST /v1/agent/runs, e.g.
 	// "claude-sonnet-4".
 	ModelId *string
-	// Optional advanced base prompt override for the remote child agent.
-	// This prepends extra instructions before the task prompt; in most cases,
-	// prefer the top-level prompt or skill_spec instead.
-	BasePrompt *string
 	// Optional cloud environment UID for the remote child agent.
 	EnvironmentId *string
 	// Optional skill specification for the remote child agent.
@@ -30852,36 +30820,32 @@ func (b0 StartAgent_RemoteConfig_builder) Build() *StartAgent_RemoteConfig {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
 		x.xxx_hidden_Name = b.Name
 	}
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
-	if b.BasePrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 10)
-		x.xxx_hidden_BasePrompt = b.BasePrompt
-	}
 	if b.EnvironmentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
 		x.xxx_hidden_EnvironmentId = b.EnvironmentId
 	}
 	if b.SkillSpec != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
 		x.xxx_hidden_SkillSpec = b.SkillSpec
 	}
 	x.xxx_hidden_McpServers = b.McpServers
 	if b.ComputerUseEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 9)
 		x.xxx_hidden_ComputerUseEnabled = *b.ComputerUseEnabled
 	}
 	if b.IdleTimeoutMinutes != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 9)
 		x.xxx_hidden_IdleTimeoutMinutes = *b.IdleTimeoutMinutes
 	}
 	if b.WorkerHost != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 10)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 9)
 		x.xxx_hidden_WorkerHost = b.WorkerHost
 	}
 	x.xxx_hidden_Harness = b.Harness
@@ -34356,7 +34320,7 @@ const file_task_proto_rawDesc = "" +
 	"\rUserQueryMode\x12,\n" +
 	"\x04plan\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04plan\x12:\n" +
 	"\vorchestrate\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\vorchestrateB\x06\n" +
-	"\x04type\"\xa4\x13\n" +
+	"\x04type\"\x90\x13\n" +
 	"\n" +
 	"StartAgent\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
@@ -34365,12 +34329,10 @@ const file_task_proto_rawDesc = "" +
 	"\x0eexecution_mode\x18\x04 \x01(\v2-.warp.multi_agent.v1.StartAgent.ExecutionModeR\rexecutionMode\x1aa\n" +
 	"\x15LifecycleSubscription\x12H\n" +
 	"\vevent_types\x18\x01 \x03(\x0e2'.warp.multi_agent.v1.LifecycleEventTypeR\n" +
-	"eventTypes\x1a\xa5\x0e\n" +
+	"eventTypes\x1a\x91\x0e\n" +
 	"\fRemoteConfig\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x19\n" +
 	"\bmodel_id\x18\x02 \x01(\tR\amodelId\x12%\n" +
-	"\vbase_prompt\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"basePrompt\x12%\n" +
 	"\x0eenvironment_id\x18\x04 \x01(\tR\renvironmentId\x12#\n" +
 	"\n" +
 	"skill_spec\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\tskillSpec\x12]\n" +
@@ -34418,7 +34380,7 @@ const file_task_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\v\n" +
 	"\ttransport\x1a\x1d\n" +
 	"\aHarness\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\x1a\x8e\x02\n" +
+	"\x04type\x18\x01 \x01(\tR\x04typeJ\x04\b\x03\x10\x04R\vbase_prompt\x1a\x8e\x02\n" +
 	"\rExecutionMode\x12.\n" +
 	"\x05local\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05local\x12N\n" +
 	"\x06remote\x18\x02 \x01(\v24.warp.multi_agent.v1.StartAgent.ExecutionMode.RemoteH\x00R\x06remote\x1au\n" +

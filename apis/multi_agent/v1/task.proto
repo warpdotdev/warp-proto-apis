@@ -1604,6 +1604,8 @@ message StartAgent {
   // orchestration fields like the top-level `name`, `prompt`, and lifecycle
   // subscription.
   message RemoteConfig {
+    reserved 3;
+    reserved base_prompt;
     // Optional run-config metadata for grouping, filtering, and traceability.
     // This remains distinct from the top-level StartAgent.name, which is the
     // child agent's display/orchestration label.
@@ -1614,10 +1616,6 @@ message StartAgent {
     // Uses the same model IDs accepted by POST /v1/agent/runs, e.g.
     // "claude-sonnet-4".
     string model_id = 2;
-    // Optional advanced base prompt override for the remote child agent.
-    // This prepends extra instructions before the task prompt; in most cases,
-    // prefer the top-level prompt or skill_spec instead.
-    string base_prompt = 3 [ (sensitive) = true ];
     // Optional cloud environment UID for the remote child agent.
     string environment_id = 4;
     // Optional skill specification for the remote child agent.
