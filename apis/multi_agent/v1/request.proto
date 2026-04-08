@@ -433,6 +433,9 @@ message Request {
     // If `true`, the client supports the research agent.
     bool supports_research_agent = 26;
 
+    // If `true`, the client supports orchestration v2 durable messaging.
+    bool supports_orchestration_v2 = 27;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
