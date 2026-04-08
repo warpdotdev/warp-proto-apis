@@ -1596,96 +1596,6 @@ message StartAgent {
     repeated LifecycleEventType event_types = 1;
   }
 
-  // Remote-only run configuration for a child agent.
-  // This intentionally mirrors the POST /v1/agent/runs `config` object, not
-  // top-level request fields like `title`, `attachments`, or
-  // `conversation_id`.
-  // Keeping remote-only settings under `config` separates them from
-  // orchestration fields like the top-level `name`, `prompt`, and lifecycle
-  // subscription.
-  message RemoteConfig {
-    reserved 3;
-    reserved base_prompt;
-    // Optional run-config metadata for grouping, filtering, and traceability.
-    // This remains distinct from the top-level StartAgent.name, which is the
-    // child agent's display/orchestration label.
-    // Callers may default this to StartAgent.name when they want the run
-    // metadata to match the child agent label.
-    string name = 1 [ (sensitive) = true ];
-    // Optional model override for the remote child agent.
-    // Uses the same model IDs accepted by POST /v1/agent/runs, e.g.
-    // "claude-sonnet-4".
-    string model_id = 2;
-    // Optional cloud environment UID for the remote child agent.
-    string environment_id = 4;
-    // Optional skill specification for the remote child agent.
-    string skill_spec = 5 [ (sensitive) = true ];
-    // Optional MCP server configurations keyed by server name.
-    map<string, MCPServerConfig> mcp_servers = 6;
-    // Optional computer use override for the remote child agent.
-    bool computer_use_enabled = 7;
-    // Optional idle timeout override for the remote child agent.
-    int32 idle_timeout_minutes = 8;
-    // Optional worker host override for the remote child agent.
-    string worker_host = 9;
-    // Optional harness selection for the remote child agent.
-    Harness harness = 10;
-
-    // Configuration for a single MCP server entry.
-    // Exactly one transport should be configured.
-    message MCPServerConfig {
-      // Deprecated: use `shared.warp_id` instead.
-      string warp_id = 1 [ deprecated = true ];
-      // Deprecated: use `stdio.command` instead.
-      string command = 2 [ deprecated = true ];
-      // Deprecated: use `stdio.args` instead.
-      repeated string args = 3 [ deprecated = true ];
-      // Deprecated: use `http.url` instead.
-      string url = 4 [ deprecated = true ];
-      // Deprecated: use `stdio.env` instead.
-      map<string, string> env = 5 [ deprecated = true, (sensitive) = true ];
-      // Deprecated: use `http.headers` instead.
-      map<string, string> headers = 6 [ deprecated = true, (sensitive) = true ];
-
-      oneof transport {
-        // Reference to a Warp shared MCP server by UUID.
-        Shared shared = 7;
-        // Stdio transport configuration.
-        Stdio stdio = 8;
-        // SSE/HTTP transport configuration.
-        Http http = 9;
-      }
-
-      message Shared {
-        // Reference to a Warp shared MCP server by UUID.
-        string warp_id = 1;
-      }
-
-      message Stdio {
-        // Stdio transport command to run.
-        string command = 1;
-        // Stdio transport command arguments.
-        repeated string args = 2;
-        // Environment variables for the server.
-        map<string, string> env = 3 [ (sensitive) = true ];
-      }
-
-      message Http {
-        // SSE/HTTP transport server URL.
-        string url = 1;
-        // HTTP headers for SSE/HTTP transport.
-        map<string, string> headers = 2 [ (sensitive) = true ];
-      }
-    }
-
-    // Harness selection for the remote child agent.
-    message Harness {
-      // Harness type identifier, e.g. "oz" or "claude".
-      // This only takes effect when the child run implementation supports that
-      // harness.
-      string type = 1;
-    }
-  }
 
   message ExecutionMode {
     oneof mode {
@@ -1694,13 +1604,91 @@ message StartAgent {
     }
 
     message Remote {
-      // Deprecated: use config.environment_id instead.
-      // Kept so older stored conversations and older clients can continue to
-      // round-trip remote child agents.
+      // Remote-only run configuration for a child agent.
+      // These fields intentionally mirror the POST /v1/agent/runs `config`
+      // object, not top-level request fields like `title`, `attachments`, or
+      // `conversation_id`.
+      // Optional cloud environment UID for the remote child agent.
       string environment_id = 1;
-      // Remote run configuration whose fields intentionally mirror the
-      // POST /v1/agent/runs config payload.
-      RemoteConfig config = 2;
+      // Optional run-config metadata for grouping, filtering, and traceability.
+      // This remains distinct from the top-level StartAgent.name, which is the
+      // child agent's display/orchestration label.
+      // Callers may default this to StartAgent.name when they want the run
+      // metadata to match the child agent label.
+      string name = 3 [ (sensitive) = true ];
+      // Optional model override for the remote child agent.
+      // Uses the same model IDs accepted by POST /v1/agent/runs, e.g.
+      // "claude-sonnet-4".
+      string model_id = 4;
+      reserved 5;
+      reserved base_prompt;
+      // Optional skill specification for the remote child agent.
+      string skill_spec = 6 [ (sensitive) = true ];
+      // Optional MCP server configurations keyed by server name.
+      map<string, MCPServerConfig> mcp_servers = 7;
+      // Optional computer use override for the remote child agent.
+      bool computer_use_enabled = 8;
+      // Optional idle timeout override for the remote child agent.
+      int32 idle_timeout_minutes = 9;
+      // Optional worker host override for the remote child agent.
+      string worker_host = 10;
+      // Optional harness selection for the remote child agent.
+      Harness harness = 11;
+
+      // Configuration for a single MCP server entry.
+      // Exactly one transport should be configured.
+      message MCPServerConfig {
+        // Deprecated: use `shared.warp_id` instead.
+        string warp_id = 1 [ deprecated = true ];
+        // Deprecated: use `stdio.command` instead.
+        string command = 2 [ deprecated = true ];
+        // Deprecated: use `stdio.args` instead.
+        repeated string args = 3 [ deprecated = true ];
+        // Deprecated: use `http.url` instead.
+        string url = 4 [ deprecated = true ];
+        // Deprecated: use `stdio.env` instead.
+        map<string, string> env = 5 [ deprecated = true, (sensitive) = true ];
+        // Deprecated: use `http.headers` instead.
+        map<string, string> headers = 6 [ deprecated = true, (sensitive) = true ];
+
+        oneof transport {
+          // Reference to a Warp shared MCP server by UUID.
+          Shared shared = 7;
+          // Stdio transport configuration.
+          Stdio stdio = 8;
+          // SSE/HTTP transport configuration.
+          Http http = 9;
+        }
+
+        message Shared {
+          // Reference to a Warp shared MCP server by UUID.
+          string warp_id = 1;
+        }
+
+        message Stdio {
+          // Stdio transport command to run.
+          string command = 1;
+          // Stdio transport command arguments.
+          repeated string args = 2;
+          // Environment variables for the server.
+          map<string, string> env = 3 [ (sensitive) = true ];
+        }
+
+        message Http {
+          // SSE/HTTP transport server URL.
+          string url = 1;
+          // HTTP headers for SSE/HTTP transport.
+          map<string, string> headers = 2 [ (sensitive) = true ];
+        }
+      }
+
+      // Harness selection for the remote child agent.
+      message Harness {
+        // Harness type identifier, e.g. "oz" or "claude".
+        // This only takes effect when the child run implementation supports
+        // that harness.
+        string type = 1;
+      }
     }
   }
 }
