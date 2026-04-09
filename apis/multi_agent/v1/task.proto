@@ -1036,15 +1036,16 @@ message Message {
       }
     }
 
-    // Notifies the client that an artifact was created (e.g. a PR).
+    // Notifies the client that an artifact was created (e.g. a PR or file).
     message ArtifactCreated {
       // We do not use this event to notify the client about plan artifact
       // creation, which happens when we sync a plan to Warp Drive, so we
-      // explicitly use a oneof here instead of reusing the
+      // explicitly list the supported created artifact types instead of reusing the
       // `ConversationArtifact` type.
       oneof artifact {
         PullRequestArtifact pull_request = 1;
         ScreenshotArtifact screenshot = 2;
+        FileArtifact file = 3;
       }
     }
 
