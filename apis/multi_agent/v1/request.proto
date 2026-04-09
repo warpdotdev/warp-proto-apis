@@ -436,6 +436,17 @@ message Request {
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
 
+    // The authoritative list of tools that the server should discourage the
+    // LLM from calling for this request. The server applies no defaults and
+    // performs no per-tool reasoning: if a tool is in this list, the server
+    // will proactively remind the LLM to avoid it and will reject attempted
+    // calls to it (subject to retry budget). An empty or unset list means
+    // nothing is discouraged.
+    //
+    // The client is expected to populate this based on the user's settings
+    // and current autonomy mode.
+    repeated ToolType discouraged_tools = 28;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
@@ -527,6 +538,9 @@ enum AutonomyLevel {
   SUPERVISED = 0;
   // No user is available to answer questions.
   UNSUPERVISED = 1;
+  // A user is present, but action approvals are being auto-approved for the
+  // current exchange.
+  SUPERVISED_AUTO_APPROVE = 2;
 }
 
 enum IsolationLevel {
