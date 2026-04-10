@@ -3060,6 +3060,15 @@ func (x *Request_Input_ToolCallResult) GetAskUserQuestion() *AskUserQuestionResu
 	return nil
 }
 
+func (x *Request_Input_ToolCallResult) GetStartAgentV2() *StartAgentV2Result {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_StartAgentV2); ok {
+			return x.StartAgentV2
+		}
+	}
+	return nil
+}
+
 func (x *Request_Input_ToolCallResult) SetToolCallId(v string) {
 	x.xxx_hidden_ToolCallId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -3295,6 +3304,14 @@ func (x *Request_Input_ToolCallResult) SetAskUserQuestion(v *AskUserQuestionResu
 		return
 	}
 	x.xxx_hidden_Result = &request_Input_ToolCallResult_AskUserQuestion{v}
+}
+
+func (x *Request_Input_ToolCallResult) SetStartAgentV2(v *StartAgentV2Result) {
+	if v == nil {
+		x.xxx_hidden_Result = nil
+		return
+	}
+	x.xxx_hidden_Result = &request_Input_ToolCallResult_StartAgentV2{v}
 }
 
 func (x *Request_Input_ToolCallResult) HasToolCallId() bool {
@@ -3543,6 +3560,14 @@ func (x *Request_Input_ToolCallResult) HasAskUserQuestion() bool {
 	return ok
 }
 
+func (x *Request_Input_ToolCallResult) HasStartAgentV2() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_StartAgentV2)
+	return ok
+}
+
 func (x *Request_Input_ToolCallResult) ClearToolCallId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ToolCallId = nil
@@ -3726,6 +3751,12 @@ func (x *Request_Input_ToolCallResult) ClearAskUserQuestion() {
 	}
 }
 
+func (x *Request_Input_ToolCallResult) ClearStartAgentV2() {
+	if _, ok := x.xxx_hidden_Result.(*request_Input_ToolCallResult_StartAgentV2); ok {
+		x.xxx_hidden_Result = nil
+	}
+}
+
 const Request_Input_ToolCallResult_Result_not_set_case case_Request_Input_ToolCallResult_Result = 0
 const Request_Input_ToolCallResult_RunShellCommand_case case_Request_Input_ToolCallResult_Result = 2
 const Request_Input_ToolCallResult_ReadFiles_case case_Request_Input_ToolCallResult_Result = 3
@@ -3756,6 +3787,7 @@ const Request_Input_ToolCallResult_StartAgent_case case_Request_Input_ToolCallRe
 const Request_Input_ToolCallResult_SendMessageToAgent_case case_Request_Input_ToolCallResult_Result = 29
 const Request_Input_ToolCallResult_TransferShellCommandControlToUser_case case_Request_Input_ToolCallResult_Result = 30
 const Request_Input_ToolCallResult_AskUserQuestion_case case_Request_Input_ToolCallResult_Result = 31
+const Request_Input_ToolCallResult_StartAgentV2_case case_Request_Input_ToolCallResult_Result = 32
 
 func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCallResult_Result {
 	if x == nil {
@@ -3820,6 +3852,8 @@ func (x *Request_Input_ToolCallResult) WhichResult() case_Request_Input_ToolCall
 		return Request_Input_ToolCallResult_TransferShellCommandControlToUser_case
 	case *request_Input_ToolCallResult_AskUserQuestion:
 		return Request_Input_ToolCallResult_AskUserQuestion_case
+	case *request_Input_ToolCallResult_StartAgentV2:
+		return Request_Input_ToolCallResult_StartAgentV2_case
 	default:
 		return Request_Input_ToolCallResult_Result_not_set_case
 	}
@@ -3859,6 +3893,7 @@ type Request_Input_ToolCallResult_builder struct {
 	SendMessageToAgent                *SendMessageToAgentResult
 	TransferShellCommandControlToUser *TransferShellCommandControlToUserResult
 	AskUserQuestion                   *AskUserQuestionResult
+	StartAgentV2                      *StartAgentV2Result
 	// -- end of xxx_hidden_Result
 }
 
@@ -3956,6 +3991,9 @@ func (b0 Request_Input_ToolCallResult_builder) Build() *Request_Input_ToolCallRe
 	}
 	if b.AskUserQuestion != nil {
 		x.xxx_hidden_Result = &request_Input_ToolCallResult_AskUserQuestion{b.AskUserQuestion}
+	}
+	if b.StartAgentV2 != nil {
+		x.xxx_hidden_Result = &request_Input_ToolCallResult_StartAgentV2{b.StartAgentV2}
 	}
 	return m0
 }
@@ -4090,6 +4128,10 @@ type request_Input_ToolCallResult_AskUserQuestion struct {
 	AskUserQuestion *AskUserQuestionResult `protobuf:"bytes,31,opt,name=ask_user_question,json=askUserQuestion,oneof"`
 }
 
+type request_Input_ToolCallResult_StartAgentV2 struct {
+	StartAgentV2 *StartAgentV2Result `protobuf:"bytes,32,opt,name=start_agent_v2,json=startAgentV2,oneof"`
+}
+
 func (*request_Input_ToolCallResult_RunShellCommand) isRequest_Input_ToolCallResult_Result() {}
 
 func (*request_Input_ToolCallResult_ReadFiles) isRequest_Input_ToolCallResult_Result() {}
@@ -4149,6 +4191,8 @@ func (*request_Input_ToolCallResult_TransferShellCommandControlToUser) isRequest
 }
 
 func (*request_Input_ToolCallResult_AskUserQuestion) isRequest_Input_ToolCallResult_Result() {}
+
+func (*request_Input_ToolCallResult_StartAgentV2) isRequest_Input_ToolCallResult_Result() {}
 
 // Canned responses correspond to hardcoded predefined responses from
 // Agent Mode e.g. the zero-state chip for "Install" has a predefined
@@ -8192,7 +8236,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\"\x8dg\n" +
+	"task.proto\x1a\vskill.proto\"\xdeg\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -8202,7 +8246,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xf8F\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xc9G\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -8263,7 +8307,7 @@ const file_request_proto_rawDesc = "" +
 	"\x10EventsFromAgents\x12B\n" +
 	"\fagent_events\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AgentEventR\vagentEvents\x1ah\n" +
 	"\x1cPassiveSuggestionResultInput\x12H\n" +
-	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x1a\xee\x14\n" +
+	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x1a\xbf\x15\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -8299,7 +8343,8 @@ const file_request_proto_rawDesc = "" +
 	"startAgent\x12b\n" +
 	"\x15send_message_to_agent\x18\x1d \x01(\v2-.warp.multi_agent.v1.SendMessageToAgentResultH\x00R\x12sendMessageToAgent\x12\x91\x01\n" +
 	"&transfer_shell_command_control_to_user\x18\x1e \x01(\v2<.warp.multi_agent.v1.TransferShellCommandControlToUserResultH\x00R!transferShellCommandControlToUser\x12X\n" +
-	"\x11ask_user_question\x18\x1f \x01(\v2*.warp.multi_agent.v1.AskUserQuestionResultH\x00R\x0faskUserQuestionB\b\n" +
+	"\x11ask_user_question\x18\x1f \x01(\v2*.warp.multi_agent.v1.AskUserQuestionResultH\x00R\x0faskUserQuestion\x12O\n" +
+	"\x0estart_agent_v2\x18  \x01(\v2'.warp.multi_agent.v1.StartAgentV2ResultH\x00R\fstartAgentV2B\b\n" +
 	"\x06resultJ\x04\b\n" +
 	"\x10\vR\x06refine\x1a\xcc\x06\n" +
 	"\x17QueryWithCannedResponse\x12\x14\n" +
@@ -8539,17 +8584,18 @@ var file_request_proto_goTypes = []any{
 	(*SendMessageToAgentResult)(nil),                // 81: warp.multi_agent.v1.SendMessageToAgentResult
 	(*TransferShellCommandControlToUserResult)(nil), // 82: warp.multi_agent.v1.TransferShellCommandControlToUserResult
 	(*AskUserQuestionResult)(nil),                   // 83: warp.multi_agent.v1.AskUserQuestionResult
-	(*Attachment)(nil),                              // 84: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                           // 85: google.protobuf.Empty
-	(*Skill)(nil),                                   // 86: warp.multi_agent.v1.Skill
-	(*AgentEvent)(nil),                              // 87: warp.multi_agent.v1.AgentEvent
-	(*PassiveSuggestionResultType)(nil),             // 88: warp.multi_agent.v1.PassiveSuggestionResultType
-	(*ExecutedShellCommand)(nil),                    // 89: warp.multi_agent.v1.ExecutedShellCommand
-	(*AnyFileContent)(nil),                          // 90: warp.multi_agent.v1.AnyFileContent
-	(*ReviewComment)(nil),                           // 91: warp.multi_agent.v1.ReviewComment
-	(*DiffSet)(nil),                                 // 92: warp.multi_agent.v1.DiffSet
-	(*structpb.Value)(nil),                          // 93: google.protobuf.Value
-	(*structpb.Struct)(nil),                         // 94: google.protobuf.Struct
+	(*StartAgentV2Result)(nil),                      // 84: warp.multi_agent.v1.StartAgentV2Result
+	(*Attachment)(nil),                              // 85: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                           // 86: google.protobuf.Empty
+	(*Skill)(nil),                                   // 87: warp.multi_agent.v1.Skill
+	(*AgentEvent)(nil),                              // 88: warp.multi_agent.v1.AgentEvent
+	(*PassiveSuggestionResultType)(nil),             // 89: warp.multi_agent.v1.PassiveSuggestionResultType
+	(*ExecutedShellCommand)(nil),                    // 90: warp.multi_agent.v1.ExecutedShellCommand
+	(*AnyFileContent)(nil),                          // 91: warp.multi_agent.v1.AnyFileContent
+	(*ReviewComment)(nil),                           // 92: warp.multi_agent.v1.ReviewComment
+	(*DiffSet)(nil),                                 // 93: warp.multi_agent.v1.DiffSet
+	(*structpb.Value)(nil),                          // 94: google.protobuf.Value
+	(*structpb.Struct)(nil),                         // 95: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	3,   // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -8621,45 +8667,46 @@ var file_request_proto_depIdxs = []int32{
 	81,  // 66: warp.multi_agent.v1.Request.Input.ToolCallResult.send_message_to_agent:type_name -> warp.multi_agent.v1.SendMessageToAgentResult
 	82,  // 67: warp.multi_agent.v1.Request.Input.ToolCallResult.transfer_shell_command_control_to_user:type_name -> warp.multi_agent.v1.TransferShellCommandControlToUserResult
 	83,  // 68: warp.multi_agent.v1.Request.Input.ToolCallResult.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestionResult
-	32,  // 69: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
-	33,  // 70: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
-	34,  // 71: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
-	35,  // 72: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
-	36,  // 73: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
-	37,  // 74: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
-	84,  // 75: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
-	85,  // 76: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
-	85,  // 77: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
-	38,  // 78: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted
-	39,  // 79: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompleted
-	40,  // 80: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
-	86,  // 81: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
-	86,  // 82: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
-	8,   // 83: warp.multi_agent.v1.Request.Input.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	84,  // 84: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	8,   // 85: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
-	11,  // 86: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
-	9,   // 87: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
-	28,  // 88: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.messages_received_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents
-	29,  // 89: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.events_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents
-	30,  // 90: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.passive_suggestion_result:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput
-	31,  // 91: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
-	87,  // 92: warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
-	88,  // 93: warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput.result:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType
-	89,  // 94: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	90,  // 95: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
-	91,  // 96: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
-	92,  // 97: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	93,  // 98: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
-	44,  // 99: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	94,  // 100: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	45,  // 101: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	46,  // 102: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	103, // [103:103] is the sub-list for method output_type
-	103, // [103:103] is the sub-list for method input_type
-	103, // [103:103] is the sub-list for extension type_name
-	103, // [103:103] is the sub-list for extension extendee
-	0,   // [0:103] is the sub-list for field type_name
+	84,  // 69: warp.multi_agent.v1.Request.Input.ToolCallResult.start_agent_v2:type_name -> warp.multi_agent.v1.StartAgentV2Result
+	32,  // 70: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.install:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
+	33,  // 71: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.code:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
+	34,  // 72: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.deploy:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Deploy
+	35,  // 73: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.something_else:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.SomethingElse
+	36,  // 74: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.custom_onboarding_request:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.CustomOnboardingRequest
+	37,  // 75: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.agentic_onboarding_kickoff:type_name -> warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.AgenticOnboardingKickoff
+	85,  // 76: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
+	86,  // 77: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
+	86,  // 78: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
+	38,  // 79: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted
+	39,  // 80: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.AgentResponseCompleted
+	40,  // 81: warp.multi_agent.v1.Request.Input.CodeReview.initial_review_comments:type_name -> warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments
+	87,  // 82: warp.multi_agent.v1.Request.Input.StartFromAmbientRunPrompt.runtime_skill:type_name -> warp.multi_agent.v1.Skill
+	87,  // 83: warp.multi_agent.v1.Request.Input.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
+	8,   // 84: warp.multi_agent.v1.Request.Input.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	85,  // 85: warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	8,   // 86: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.user_query:type_name -> warp.multi_agent.v1.Request.Input.UserQuery
+	11,  // 87: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.tool_call_result:type_name -> warp.multi_agent.v1.Request.Input.ToolCallResult
+	9,   // 88: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.cli_agent_user_query:type_name -> warp.multi_agent.v1.Request.Input.CLIAgentUserQuery
+	28,  // 89: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.messages_received_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents
+	29,  // 90: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.events_from_agents:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents
+	30,  // 91: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.passive_suggestion_result:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput
+	31,  // 92: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
+	88,  // 93: warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
+	89,  // 94: warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput.result:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType
+	90,  // 95: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	91,  // 96: warp.multi_agent.v1.Request.Input.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
+	92,  // 97: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.review_comments:type_name -> warp.multi_agent.v1.ReviewComment
+	93,  // 98: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	94,  // 99: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
+	44,  // 100: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
+	95,  // 101: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	45,  // 102: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	46,  // 103: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	104, // [104:104] is the sub-list for method output_type
+	104, // [104:104] is the sub-list for method input_type
+	104, // [104:104] is the sub-list for extension type_name
+	104, // [104:104] is the sub-list for extension extendee
+	0,   // [0:104] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -8722,6 +8769,7 @@ func file_request_proto_init() {
 		(*request_Input_ToolCallResult_SendMessageToAgent)(nil),
 		(*request_Input_ToolCallResult_TransferShellCommandControlToUser)(nil),
 		(*request_Input_ToolCallResult_AskUserQuestion)(nil),
+		(*request_Input_ToolCallResult_StartAgentV2)(nil),
 	}
 	file_request_proto_msgTypes[10].OneofWrappers = []any{
 		(*request_Input_QueryWithCannedResponse_Install_)(nil),

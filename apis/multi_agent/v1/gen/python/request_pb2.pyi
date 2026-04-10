@@ -1,12 +1,13 @@
 from google.protobuf import empty_pb2 as _empty_pb2
+from google.protobuf import go_features_pb2 as _go_features_pb2
 from google.protobuf import struct_pb2 as _struct_pb2
-from . import input_context_pb2 as _input_context_pb2
-from . import attachment_pb2 as _attachment_pb2
-from . import file_content_pb2 as _file_content_pb2
-from . import options_pb2 as _options_pb2
-from . import suggestions_pb2 as _suggestions_pb2
-from . import task_pb2 as _task_pb2
-from . import skill_pb2 as _skill_pb2
+import input_context_pb2 as _input_context_pb2
+import attachment_pb2 as _attachment_pb2
+import file_content_pb2 as _file_content_pb2
+import options_pb2 as _options_pb2
+import suggestions_pb2 as _suggestions_pb2
+import task_pb2 as _task_pb2
+import skill_pb2 as _skill_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -69,16 +70,20 @@ class Request(_message.Message):
         class UserInputs(_message.Message):
             __slots__ = ("inputs",)
             class UserInput(_message.Message):
-                __slots__ = ("user_query", "tool_call_result", "cli_agent_user_query", "messages_received_from_agents")
+                __slots__ = ("user_query", "tool_call_result", "cli_agent_user_query", "messages_received_from_agents", "events_from_agents", "passive_suggestion_result")
                 USER_QUERY_FIELD_NUMBER: _ClassVar[int]
                 TOOL_CALL_RESULT_FIELD_NUMBER: _ClassVar[int]
                 CLI_AGENT_USER_QUERY_FIELD_NUMBER: _ClassVar[int]
                 MESSAGES_RECEIVED_FROM_AGENTS_FIELD_NUMBER: _ClassVar[int]
+                EVENTS_FROM_AGENTS_FIELD_NUMBER: _ClassVar[int]
+                PASSIVE_SUGGESTION_RESULT_FIELD_NUMBER: _ClassVar[int]
                 user_query: Request.Input.UserQuery
                 tool_call_result: Request.Input.ToolCallResult
                 cli_agent_user_query: Request.Input.CLIAgentUserQuery
                 messages_received_from_agents: Request.Input.UserInputs.MessagesReceivedFromAgents
-                def __init__(self, user_query: _Optional[_Union[Request.Input.UserQuery, _Mapping]] = ..., tool_call_result: _Optional[_Union[Request.Input.ToolCallResult, _Mapping]] = ..., cli_agent_user_query: _Optional[_Union[Request.Input.CLIAgentUserQuery, _Mapping]] = ..., messages_received_from_agents: _Optional[_Union[Request.Input.UserInputs.MessagesReceivedFromAgents, _Mapping]] = ...) -> None: ...
+                events_from_agents: Request.Input.UserInputs.EventsFromAgents
+                passive_suggestion_result: Request.Input.UserInputs.PassiveSuggestionResultInput
+                def __init__(self, user_query: _Optional[_Union[Request.Input.UserQuery, _Mapping]] = ..., tool_call_result: _Optional[_Union[Request.Input.ToolCallResult, _Mapping]] = ..., cli_agent_user_query: _Optional[_Union[Request.Input.CLIAgentUserQuery, _Mapping]] = ..., messages_received_from_agents: _Optional[_Union[Request.Input.UserInputs.MessagesReceivedFromAgents, _Mapping]] = ..., events_from_agents: _Optional[_Union[Request.Input.UserInputs.EventsFromAgents, _Mapping]] = ..., passive_suggestion_result: _Optional[_Union[Request.Input.UserInputs.PassiveSuggestionResultInput, _Mapping]] = ...) -> None: ...
             class MessagesReceivedFromAgents(_message.Message):
                 __slots__ = ("messages",)
                 class ReceivedMessage(_message.Message):
@@ -97,11 +102,21 @@ class Request(_message.Message):
                 MESSAGES_FIELD_NUMBER: _ClassVar[int]
                 messages: _containers.RepeatedCompositeFieldContainer[Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage]
                 def __init__(self, messages: _Optional[_Iterable[_Union[Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage, _Mapping]]] = ...) -> None: ...
+            class EventsFromAgents(_message.Message):
+                __slots__ = ("agent_events",)
+                AGENT_EVENTS_FIELD_NUMBER: _ClassVar[int]
+                agent_events: _containers.RepeatedCompositeFieldContainer[_task_pb2.AgentEvent]
+                def __init__(self, agent_events: _Optional[_Iterable[_Union[_task_pb2.AgentEvent, _Mapping]]] = ...) -> None: ...
+            class PassiveSuggestionResultInput(_message.Message):
+                __slots__ = ("result",)
+                RESULT_FIELD_NUMBER: _ClassVar[int]
+                result: _task_pb2.PassiveSuggestionResultType
+                def __init__(self, result: _Optional[_Union[_task_pb2.PassiveSuggestionResultType, _Mapping]] = ...) -> None: ...
             INPUTS_FIELD_NUMBER: _ClassVar[int]
             inputs: _containers.RepeatedCompositeFieldContainer[Request.Input.UserInputs.UserInput]
             def __init__(self, inputs: _Optional[_Iterable[_Union[Request.Input.UserInputs.UserInput, _Mapping]]] = ...) -> None: ...
         class ToolCallResult(_message.Message):
-            __slots__ = ("tool_call_id", "run_shell_command", "read_files", "search_codebase", "apply_file_diffs", "suggest_plan", "suggest_create_plan", "grep", "file_glob", "read_mcp_resource", "call_mcp_tool", "write_to_long_running_shell_command", "suggest_new_conversation", "file_glob_v2", "suggest_prompt", "open_code_review", "init_project", "read_documents", "edit_documents", "create_documents", "read_shell_command_output", "use_computer", "insert_review_comments", "request_computer_use", "read_skill", "fetch_conversation", "start_agent", "send_message_to_agent", "transfer_shell_command_control_to_user")
+            __slots__ = ("tool_call_id", "run_shell_command", "read_files", "search_codebase", "apply_file_diffs", "suggest_plan", "suggest_create_plan", "grep", "file_glob", "read_mcp_resource", "call_mcp_tool", "write_to_long_running_shell_command", "suggest_new_conversation", "file_glob_v2", "suggest_prompt", "open_code_review", "init_project", "read_documents", "edit_documents", "create_documents", "read_shell_command_output", "use_computer", "insert_review_comments", "request_computer_use", "read_skill", "fetch_conversation", "start_agent", "send_message_to_agent", "transfer_shell_command_control_to_user", "ask_user_question", "start_agent_v2")
             TOOL_CALL_ID_FIELD_NUMBER: _ClassVar[int]
             RUN_SHELL_COMMAND_FIELD_NUMBER: _ClassVar[int]
             READ_FILES_FIELD_NUMBER: _ClassVar[int]
@@ -131,6 +146,8 @@ class Request(_message.Message):
             START_AGENT_FIELD_NUMBER: _ClassVar[int]
             SEND_MESSAGE_TO_AGENT_FIELD_NUMBER: _ClassVar[int]
             TRANSFER_SHELL_COMMAND_CONTROL_TO_USER_FIELD_NUMBER: _ClassVar[int]
+            ASK_USER_QUESTION_FIELD_NUMBER: _ClassVar[int]
+            START_AGENT_V2_FIELD_NUMBER: _ClassVar[int]
             tool_call_id: str
             run_shell_command: _task_pb2.RunShellCommandResult
             read_files: _task_pb2.ReadFilesResult
@@ -160,7 +177,9 @@ class Request(_message.Message):
             start_agent: _task_pb2.StartAgentResult
             send_message_to_agent: _task_pb2.SendMessageToAgentResult
             transfer_shell_command_control_to_user: _task_pb2.TransferShellCommandControlToUserResult
-            def __init__(self, tool_call_id: _Optional[str] = ..., run_shell_command: _Optional[_Union[_task_pb2.RunShellCommandResult, _Mapping]] = ..., read_files: _Optional[_Union[_task_pb2.ReadFilesResult, _Mapping]] = ..., search_codebase: _Optional[_Union[_task_pb2.SearchCodebaseResult, _Mapping]] = ..., apply_file_diffs: _Optional[_Union[_task_pb2.ApplyFileDiffsResult, _Mapping]] = ..., suggest_plan: _Optional[_Union[_task_pb2.SuggestPlanResult, _Mapping]] = ..., suggest_create_plan: _Optional[_Union[_task_pb2.SuggestCreatePlanResult, _Mapping]] = ..., grep: _Optional[_Union[_task_pb2.GrepResult, _Mapping]] = ..., file_glob: _Optional[_Union[_task_pb2.FileGlobResult, _Mapping]] = ..., read_mcp_resource: _Optional[_Union[_task_pb2.ReadMCPResourceResult, _Mapping]] = ..., call_mcp_tool: _Optional[_Union[_task_pb2.CallMCPToolResult, _Mapping]] = ..., write_to_long_running_shell_command: _Optional[_Union[_task_pb2.WriteToLongRunningShellCommandResult, _Mapping]] = ..., suggest_new_conversation: _Optional[_Union[_task_pb2.SuggestNewConversationResult, _Mapping]] = ..., file_glob_v2: _Optional[_Union[_task_pb2.FileGlobV2Result, _Mapping]] = ..., suggest_prompt: _Optional[_Union[_task_pb2.SuggestPromptResult, _Mapping]] = ..., open_code_review: _Optional[_Union[_task_pb2.OpenCodeReviewResult, _Mapping]] = ..., init_project: _Optional[_Union[_task_pb2.InitProjectResult, _Mapping]] = ..., read_documents: _Optional[_Union[_task_pb2.ReadDocumentsResult, _Mapping]] = ..., edit_documents: _Optional[_Union[_task_pb2.EditDocumentsResult, _Mapping]] = ..., create_documents: _Optional[_Union[_task_pb2.CreateDocumentsResult, _Mapping]] = ..., read_shell_command_output: _Optional[_Union[_task_pb2.ReadShellCommandOutputResult, _Mapping]] = ..., use_computer: _Optional[_Union[_task_pb2.UseComputerResult, _Mapping]] = ..., insert_review_comments: _Optional[_Union[_task_pb2.InsertReviewCommentsResult, _Mapping]] = ..., request_computer_use: _Optional[_Union[_task_pb2.RequestComputerUseResult, _Mapping]] = ..., read_skill: _Optional[_Union[_task_pb2.ReadSkillResult, _Mapping]] = ..., fetch_conversation: _Optional[_Union[_task_pb2.FetchConversationResult, _Mapping]] = ..., start_agent: _Optional[_Union[_task_pb2.StartAgentResult, _Mapping]] = ..., send_message_to_agent: _Optional[_Union[_task_pb2.SendMessageToAgentResult, _Mapping]] = ..., transfer_shell_command_control_to_user: _Optional[_Union[_task_pb2.TransferShellCommandControlToUserResult, _Mapping]] = ...) -> None: ...
+            ask_user_question: _task_pb2.AskUserQuestionResult
+            start_agent_v2: _task_pb2.StartAgentV2Result
+            def __init__(self, tool_call_id: _Optional[str] = ..., run_shell_command: _Optional[_Union[_task_pb2.RunShellCommandResult, _Mapping]] = ..., read_files: _Optional[_Union[_task_pb2.ReadFilesResult, _Mapping]] = ..., search_codebase: _Optional[_Union[_task_pb2.SearchCodebaseResult, _Mapping]] = ..., apply_file_diffs: _Optional[_Union[_task_pb2.ApplyFileDiffsResult, _Mapping]] = ..., suggest_plan: _Optional[_Union[_task_pb2.SuggestPlanResult, _Mapping]] = ..., suggest_create_plan: _Optional[_Union[_task_pb2.SuggestCreatePlanResult, _Mapping]] = ..., grep: _Optional[_Union[_task_pb2.GrepResult, _Mapping]] = ..., file_glob: _Optional[_Union[_task_pb2.FileGlobResult, _Mapping]] = ..., read_mcp_resource: _Optional[_Union[_task_pb2.ReadMCPResourceResult, _Mapping]] = ..., call_mcp_tool: _Optional[_Union[_task_pb2.CallMCPToolResult, _Mapping]] = ..., write_to_long_running_shell_command: _Optional[_Union[_task_pb2.WriteToLongRunningShellCommandResult, _Mapping]] = ..., suggest_new_conversation: _Optional[_Union[_task_pb2.SuggestNewConversationResult, _Mapping]] = ..., file_glob_v2: _Optional[_Union[_task_pb2.FileGlobV2Result, _Mapping]] = ..., suggest_prompt: _Optional[_Union[_task_pb2.SuggestPromptResult, _Mapping]] = ..., open_code_review: _Optional[_Union[_task_pb2.OpenCodeReviewResult, _Mapping]] = ..., init_project: _Optional[_Union[_task_pb2.InitProjectResult, _Mapping]] = ..., read_documents: _Optional[_Union[_task_pb2.ReadDocumentsResult, _Mapping]] = ..., edit_documents: _Optional[_Union[_task_pb2.EditDocumentsResult, _Mapping]] = ..., create_documents: _Optional[_Union[_task_pb2.CreateDocumentsResult, _Mapping]] = ..., read_shell_command_output: _Optional[_Union[_task_pb2.ReadShellCommandOutputResult, _Mapping]] = ..., use_computer: _Optional[_Union[_task_pb2.UseComputerResult, _Mapping]] = ..., insert_review_comments: _Optional[_Union[_task_pb2.InsertReviewCommentsResult, _Mapping]] = ..., request_computer_use: _Optional[_Union[_task_pb2.RequestComputerUseResult, _Mapping]] = ..., read_skill: _Optional[_Union[_task_pb2.ReadSkillResult, _Mapping]] = ..., fetch_conversation: _Optional[_Union[_task_pb2.FetchConversationResult, _Mapping]] = ..., start_agent: _Optional[_Union[_task_pb2.StartAgentResult, _Mapping]] = ..., send_message_to_agent: _Optional[_Union[_task_pb2.SendMessageToAgentResult, _Mapping]] = ..., transfer_shell_command_control_to_user: _Optional[_Union[_task_pb2.TransferShellCommandControlToUserResult, _Mapping]] = ..., ask_user_question: _Optional[_Union[_task_pb2.AskUserQuestionResult, _Mapping]] = ..., start_agent_v2: _Optional[_Union[_task_pb2.StartAgentV2Result, _Mapping]] = ...) -> None: ...
         class QueryWithCannedResponse(_message.Message):
             __slots__ = ("query", "install", "code", "deploy", "something_else", "custom_onboarding_request", "agentic_onboarding_kickoff")
             class Install(_message.Message):
@@ -348,7 +367,7 @@ class Request(_message.Message):
         agent_name: str
         def __init__(self, conversation_id: _Optional[str] = ..., logging: _Optional[_Mapping[str, _struct_pb2.Value]] = ..., ambient_agent_task_id: _Optional[str] = ..., forked_from_conversation_id: _Optional[str] = ..., parent_agent_id: _Optional[str] = ..., agent_name: _Optional[str] = ...) -> None: ...
     class Settings(_message.Message):
-        __slots__ = ("model_config", "rules_enabled", "web_context_retrieval_enabled", "supports_parallel_tool_calls", "use_anthropic_text_editor_tools", "planning_enabled", "warp_drive_context_enabled", "supports_create_files", "supported_tools", "supports_long_running_commands", "should_preserve_file_content_in_history", "supports_todos_ui", "supports_linked_code_blocks", "supports_started_child_task_message", "supports_suggest_prompt", "supports_read_image_files", "supports_reasoning_message", "api_keys", "autonomy_level", "isolation_level", "web_search_enabled", "supported_cli_agent_tools", "supports_v4a_file_diffs", "supports_summarization_via_message_replacement", "supports_bundled_skills", "supports_research_agent")
+        __slots__ = ("model_config", "rules_enabled", "web_context_retrieval_enabled", "supports_parallel_tool_calls", "use_anthropic_text_editor_tools", "planning_enabled", "warp_drive_context_enabled", "supports_create_files", "supported_tools", "supports_long_running_commands", "should_preserve_file_content_in_history", "supports_todos_ui", "supports_linked_code_blocks", "supports_started_child_task_message", "supports_suggest_prompt", "supports_read_image_files", "supports_reasoning_message", "api_keys", "autonomy_level", "isolation_level", "web_search_enabled", "supported_cli_agent_tools", "supports_v4a_file_diffs", "supports_summarization_via_message_replacement", "supports_bundled_skills", "supports_research_agent", "supports_orchestration_v2")
         class ModelConfig(_message.Message):
             __slots__ = ("base", "planning", "coding", "cli_agent", "computer_use_agent")
             BASE_FIELD_NUMBER: _ClassVar[int]
@@ -414,6 +433,7 @@ class Request(_message.Message):
         SUPPORTS_SUMMARIZATION_VIA_MESSAGE_REPLACEMENT_FIELD_NUMBER: _ClassVar[int]
         SUPPORTS_BUNDLED_SKILLS_FIELD_NUMBER: _ClassVar[int]
         SUPPORTS_RESEARCH_AGENT_FIELD_NUMBER: _ClassVar[int]
+        SUPPORTS_ORCHESTRATION_V2_FIELD_NUMBER: _ClassVar[int]
         model_config: Request.Settings.ModelConfig
         rules_enabled: bool
         web_context_retrieval_enabled: bool
@@ -440,7 +460,8 @@ class Request(_message.Message):
         supports_summarization_via_message_replacement: bool
         supports_bundled_skills: bool
         supports_research_agent: bool
-        def __init__(self, model_config: _Optional[_Union[Request.Settings.ModelConfig, _Mapping]] = ..., rules_enabled: _Optional[bool] = ..., web_context_retrieval_enabled: _Optional[bool] = ..., supports_parallel_tool_calls: _Optional[bool] = ..., use_anthropic_text_editor_tools: _Optional[bool] = ..., planning_enabled: _Optional[bool] = ..., warp_drive_context_enabled: _Optional[bool] = ..., supports_create_files: _Optional[bool] = ..., supported_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_long_running_commands: _Optional[bool] = ..., should_preserve_file_content_in_history: _Optional[bool] = ..., supports_todos_ui: _Optional[bool] = ..., supports_linked_code_blocks: _Optional[bool] = ..., supports_started_child_task_message: _Optional[bool] = ..., supports_suggest_prompt: _Optional[bool] = ..., supports_read_image_files: _Optional[bool] = ..., supports_reasoning_message: _Optional[bool] = ..., api_keys: _Optional[_Union[Request.Settings.ApiKeys, _Mapping]] = ..., autonomy_level: _Optional[_Union[AutonomyLevel, str]] = ..., isolation_level: _Optional[_Union[IsolationLevel, str]] = ..., web_search_enabled: _Optional[bool] = ..., supported_cli_agent_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_v4a_file_diffs: _Optional[bool] = ..., supports_summarization_via_message_replacement: _Optional[bool] = ..., supports_bundled_skills: _Optional[bool] = ..., supports_research_agent: _Optional[bool] = ...) -> None: ...
+        supports_orchestration_v2: bool
+        def __init__(self, model_config: _Optional[_Union[Request.Settings.ModelConfig, _Mapping]] = ..., rules_enabled: _Optional[bool] = ..., web_context_retrieval_enabled: _Optional[bool] = ..., supports_parallel_tool_calls: _Optional[bool] = ..., use_anthropic_text_editor_tools: _Optional[bool] = ..., planning_enabled: _Optional[bool] = ..., warp_drive_context_enabled: _Optional[bool] = ..., supports_create_files: _Optional[bool] = ..., supported_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_long_running_commands: _Optional[bool] = ..., should_preserve_file_content_in_history: _Optional[bool] = ..., supports_todos_ui: _Optional[bool] = ..., supports_linked_code_blocks: _Optional[bool] = ..., supports_started_child_task_message: _Optional[bool] = ..., supports_suggest_prompt: _Optional[bool] = ..., supports_read_image_files: _Optional[bool] = ..., supports_reasoning_message: _Optional[bool] = ..., api_keys: _Optional[_Union[Request.Settings.ApiKeys, _Mapping]] = ..., autonomy_level: _Optional[_Union[AutonomyLevel, str]] = ..., isolation_level: _Optional[_Union[IsolationLevel, str]] = ..., web_search_enabled: _Optional[bool] = ..., supported_cli_agent_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_v4a_file_diffs: _Optional[bool] = ..., supports_summarization_via_message_replacement: _Optional[bool] = ..., supports_bundled_skills: _Optional[bool] = ..., supports_research_agent: _Optional[bool] = ..., supports_orchestration_v2: _Optional[bool] = ...) -> None: ...
     class MCPContext(_message.Message):
         __slots__ = ("resources", "tools", "servers")
         class MCPResource(_message.Message):

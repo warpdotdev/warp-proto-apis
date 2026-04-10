@@ -370,6 +370,7 @@ message Message {
       TransferShellCommandControlToUser transfer_shell_command_control_to_user =
           31;
       AskUserQuestion ask_user_question = 32;
+      StartAgentV2 start_agent_v2 = 33;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -908,6 +909,7 @@ message Message {
       TransferShellCommandControlToUserResult
           transfer_shell_command_control_to_user = 35;
       AskUserQuestionResult ask_user_question = 36;
+      StartAgentV2Result start_agent_v2 = 37;
     }
 
     // Result of a server-side tool call.
@@ -1552,6 +1554,7 @@ enum ToolType {
   SEND_MESSAGE_TO_AGENT = 27;
   TRANSFER_SHELL_COMMAND_CONTROL_TO_USER = 28;
   ASK_USER_QUESTION = 29;
+  START_AGENT_V2 = 30;
 }
 
 message UserQueryMode {
@@ -1617,9 +1620,70 @@ message StartAgentResult {
   }
 
   message Success {
-    // The server-assigned child agent address.
-    // When orchestration_v2 is disabled, this is the child conversation ID.
-    // When orchestration_v2 is enabled, this is the child run ID.
+    // The server-assigned child conversation ID.
+    string agent_id = 1;
+  }
+  message Error { string error = 1; }
+}
+
+// A client tool call to start a new agent in a separate run.
+message StartAgentV2 {
+  // The display name for the new agent.
+  string name = 1 [ (sensitive) = true ];
+  // The initial prompt to send to the new agent.
+  string prompt = 2 [ (sensitive) = true ];
+  // Optional lifecycle event subscription for the new child agent.
+  // If not set or empty, defaults to all lifecycle event types.
+  LifecycleSubscription lifecycle_subscription = 3;
+  // Where the child agent should run. Defaults to local when omitted.
+  ExecutionMode execution_mode = 4;
+
+  message LifecycleSubscription {
+    // Lifecycle event types the lead agent is subscribing to.
+    repeated LifecycleEventType event_types = 1;
+  }
+
+  message ExecutionMode {
+    oneof mode {
+      google.protobuf.Empty local = 1;
+      Remote remote = 2;
+    }
+
+    message Remote {
+      // Optional cloud environment UID for remote child agents.
+      string environment_id = 1;
+      // Optional skills to use as base context for a remote child run.
+      repeated Skill skills = 2;
+      // Optional model override for the remote child run.
+      string model_id = 3;
+      // Whether computer use should be enabled for the remote child run.
+      bool computer_use_enabled = 4;
+      // Optional worker host ID for routing the remote child run.
+      string worker_host = 5;
+      // Optional execution harness for the remote child run.
+      Harness harness = 6;
+      // Optional title for the remote child run.
+      string title = 7 [ (sensitive) = true ];
+      // Optional attachments to include when creating the remote child run.
+      repeated Attachment attachments = 8;
+
+      message Harness {
+        // The harness type identifier (e.g. "oz" or "claude").
+        string type = 1;
+      }
+    }
+  }
+}
+
+// The result of a StartAgentV2 tool call.
+message StartAgentV2Result {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The server-assigned child run ID.
     string agent_id = 1;
   }
   message Error { string error = 1; }
