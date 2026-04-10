@@ -1579,7 +1579,7 @@ enum RiskCategory {
   RISK_CATEGORY_RISKY = 5;
 }
 
-// A client tool call to start a new agent in a separate conversation.
+// A client tool call to start a new agent in a separate conversation or run.
 message StartAgent {
   // The display name for the new agent.
   string name = 1 [ (sensitive) = true ];
@@ -1605,6 +1605,27 @@ message StartAgent {
     message Remote {
       // Optional cloud environment UID for remote child agents.
       string environment_id = 1;
+      // Optional skills to use as base context when orchestration_v2 creates a
+      // remote child run.
+      repeated Skill skills = 2;
+      // Optional model override for the remote child run.
+      string model_id = 3;
+      // Whether computer use should be enabled for the remote child run.
+      bool computer_use_enabled = 4;
+      // Optional worker host ID for routing the remote child run.
+      string worker_host = 5;
+      // Optional execution harness for the remote child run.
+      Harness harness = 6;
+      // Optional title for the remote child run.
+      string title = 7 [ (sensitive) = true ];
+      // Optional attachments to include when creating the remote child run.
+      repeated Attachment attachments = 8;
+      // These fields correspond to the create-run API surface and should be
+      // copied onto the child run record when orchestration_v2 creates it.
+      message Harness {
+        // The harness type identifier (e.g. "oz" or "claude").
+        string type = 1;
+      }
     }
   }
 }
