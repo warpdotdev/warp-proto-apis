@@ -178,6 +178,7 @@ message Request {
         TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 30;
         AskUserQuestionResult ask_user_question = 31;
         StartAgentV2Result start_agent_v2 = 32;
+        UploadFileArtifactResult upload_file_artifact = 33;
       }
     }
 

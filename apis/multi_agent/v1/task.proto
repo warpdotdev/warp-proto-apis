@@ -389,6 +389,7 @@ message Message {
           31;
       AskUserQuestion ask_user_question = 32;
       StartAgentV2 start_agent_v2 = 33;
+      UploadFileArtifact upload_file_artifact = 34;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -928,6 +929,7 @@ message Message {
           transfer_shell_command_control_to_user = 35;
       AskUserQuestionResult ask_user_question = 36;
       StartAgentV2Result start_agent_v2 = 37;
+      UploadFileArtifactResult upload_file_artifact = 38;
     }
 
     // Result of a server-side tool call.
@@ -1574,6 +1576,7 @@ enum ToolType {
   TRANSFER_SHELL_COMMAND_CONTROL_TO_USER = 28;
   ASK_USER_QUESTION = 29;
   START_AGENT_V2 = 30;
+  UPLOAD_FILE_ARTIFACT = 31;
 }
 
 message UserQueryMode {
@@ -1790,6 +1793,30 @@ message AskUserQuestionResult {
       string other_text = 2;
     }
   }
+}
+
+// A client tool call to upload a local file as a conversation artifact.
+message UploadFileArtifact {
+  string path = 1 [ (sensitive) = true ];
+  string description = 2 [ (sensitive) = true ];
+}
+
+// The result of an UploadFileArtifact tool call.
+message UploadFileArtifactResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    string artifact_uid = 1;
+    string filepath = 2 [ (sensitive) = true ];
+    string mime_type = 3;
+    int64 size_bytes = 4;
+    string description = 5 [ (sensitive) = true ];
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
 message PassiveSuggestionResultType {
