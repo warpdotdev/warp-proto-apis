@@ -8188,7 +8188,8 @@ type StartAgent_builder struct {
 	// The initial prompt to send to the new agent.
 	Prompt *string
 	// Optional lifecycle event subscription for the new child agent.
-	// If not set or empty, defaults to all lifecycle event types.
+	// If omitted, defaults to all lifecycle event types.
+	// If present with an empty event_types list, subscribes to none.
 	LifecycleSubscription *StartAgent_LifecycleSubscription
 	// Where the child agent should run. Defaults to local when omitted.
 	ExecutionMode *StartAgent_ExecutionMode
@@ -8527,7 +8528,8 @@ type StartAgentV2_builder struct {
 	// The initial prompt to send to the new agent.
 	Prompt *string
 	// Optional lifecycle event subscription for the new child agent.
-	// If not set or empty, defaults to all lifecycle event types.
+	// If omitted, defaults to all lifecycle event types.
+	// If present with an empty event_types list, subscribes to none.
 	LifecycleSubscription *StartAgentV2_LifecycleSubscription
 	// Where the child agent should run. Defaults to local when omitted.
 	ExecutionMode *StartAgentV2_ExecutionMode
@@ -30940,6 +30942,7 @@ type StartAgent_LifecycleSubscription_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Lifecycle event types the lead agent is subscribing to.
+	// Empty means the lead agent is subscribing to none.
 	EventTypes []LifecycleEventType
 }
 
@@ -31405,6 +31408,7 @@ type StartAgentV2_LifecycleSubscription_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Lifecycle event types the lead agent is subscribing to.
+	// Empty means the lead agent is subscribing to none.
 	EventTypes []LifecycleEventType
 }
 
@@ -31590,13 +31594,12 @@ func (*startAgentV2_ExecutionMode_Remote_) isStartAgentV2_ExecutionMode_Mode() {
 type StartAgentV2_ExecutionMode_Remote struct {
 	state                         protoimpl.MessageState                     `protogen:"opaque.v1"`
 	xxx_hidden_EnvironmentId      *string                                    `protobuf:"bytes,1,opt,name=environment_id,json=environmentId"`
-	xxx_hidden_Skills             *[]*Skill                                  `protobuf:"bytes,2,rep,name=skills"`
+	xxx_hidden_Skills             *[]*SkillRef                               `protobuf:"bytes,2,rep,name=skills"`
 	xxx_hidden_ModelId            *string                                    `protobuf:"bytes,3,opt,name=model_id,json=modelId"`
 	xxx_hidden_ComputerUseEnabled bool                                       `protobuf:"varint,4,opt,name=computer_use_enabled,json=computerUseEnabled"`
 	xxx_hidden_WorkerHost         *string                                    `protobuf:"bytes,5,opt,name=worker_host,json=workerHost"`
 	xxx_hidden_Harness            *StartAgentV2_ExecutionMode_Remote_Harness `protobuf:"bytes,6,opt,name=harness"`
 	xxx_hidden_Title              *string                                    `protobuf:"bytes,7,opt,name=title"`
-	xxx_hidden_Attachments        *[]*Attachment                             `protobuf:"bytes,8,rep,name=attachments"`
 	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
 	XXX_presence                  [1]uint32
 	unknownFields                 protoimpl.UnknownFields
@@ -31638,7 +31641,7 @@ func (x *StartAgentV2_ExecutionMode_Remote) GetEnvironmentId() string {
 	return ""
 }
 
-func (x *StartAgentV2_ExecutionMode_Remote) GetSkills() []*Skill {
+func (x *StartAgentV2_ExecutionMode_Remote) GetSkills() []*SkillRef {
 	if x != nil {
 		if x.xxx_hidden_Skills != nil {
 			return *x.xxx_hidden_Skills
@@ -31691,37 +31694,28 @@ func (x *StartAgentV2_ExecutionMode_Remote) GetTitle() string {
 	return ""
 }
 
-func (x *StartAgentV2_ExecutionMode_Remote) GetAttachments() []*Attachment {
-	if x != nil {
-		if x.xxx_hidden_Attachments != nil {
-			return *x.xxx_hidden_Attachments
-		}
-	}
-	return nil
-}
-
 func (x *StartAgentV2_ExecutionMode_Remote) SetEnvironmentId(v string) {
 	x.xxx_hidden_EnvironmentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
-func (x *StartAgentV2_ExecutionMode_Remote) SetSkills(v []*Skill) {
+func (x *StartAgentV2_ExecutionMode_Remote) SetSkills(v []*SkillRef) {
 	x.xxx_hidden_Skills = &v
 }
 
 func (x *StartAgentV2_ExecutionMode_Remote) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
 func (x *StartAgentV2_ExecutionMode_Remote) SetComputerUseEnabled(v bool) {
 	x.xxx_hidden_ComputerUseEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *StartAgentV2_ExecutionMode_Remote) SetWorkerHost(v string) {
 	x.xxx_hidden_WorkerHost = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
 }
 
 func (x *StartAgentV2_ExecutionMode_Remote) SetHarness(v *StartAgentV2_ExecutionMode_Remote_Harness) {
@@ -31730,11 +31724,7 @@ func (x *StartAgentV2_ExecutionMode_Remote) SetHarness(v *StartAgentV2_Execution
 
 func (x *StartAgentV2_ExecutionMode_Remote) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote) SetAttachments(v []*Attachment) {
-	x.xxx_hidden_Attachments = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 7)
 }
 
 func (x *StartAgentV2_ExecutionMode_Remote) HasEnvironmentId() bool {
@@ -31813,8 +31803,8 @@ type StartAgentV2_ExecutionMode_Remote_builder struct {
 
 	// Optional cloud environment UID for remote child agents.
 	EnvironmentId *string
-	// Optional skills to use as base context for a remote child run.
-	Skills []*Skill
+	// Optional skill references to use as base context for a remote child run.
+	Skills []*SkillRef
 	// Optional model override for the remote child run.
 	ModelId *string
 	// Whether computer use should be enabled for the remote child run.
@@ -31825,8 +31815,6 @@ type StartAgentV2_ExecutionMode_Remote_builder struct {
 	Harness *StartAgentV2_ExecutionMode_Remote_Harness
 	// Optional title for the remote child run.
 	Title *string
-	// Optional attachments to include when creating the remote child run.
-	Attachments []*Attachment
 }
 
 func (b0 StartAgentV2_ExecutionMode_Remote_builder) Build() *StartAgentV2_ExecutionMode_Remote {
@@ -31834,28 +31822,27 @@ func (b0 StartAgentV2_ExecutionMode_Remote_builder) Build() *StartAgentV2_Execut
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.EnvironmentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_EnvironmentId = b.EnvironmentId
 	}
 	x.xxx_hidden_Skills = &b.Skills
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	if b.ComputerUseEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_ComputerUseEnabled = *b.ComputerUseEnabled
 	}
 	if b.WorkerHost != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
 		x.xxx_hidden_WorkerHost = b.WorkerHost
 	}
 	x.xxx_hidden_Harness = b.Harness
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
 		x.xxx_hidden_Title = b.Title
 	}
-	x.xxx_hidden_Attachments = &b.Attachments
 	return m0
 }
 
@@ -34381,7 +34368,7 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"\xb9\a\n" +
+	"\x06result\"\xf9\x06\n" +
 	"\fStartAgentV2\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12n\n" +
@@ -34389,20 +34376,19 @@ const file_task_proto_rawDesc = "" +
 	"\x0eexecution_mode\x18\x04 \x01(\v2/.warp.multi_agent.v1.StartAgentV2.ExecutionModeR\rexecutionMode\x1aa\n" +
 	"\x15LifecycleSubscription\x12H\n" +
 	"\vevent_types\x18\x01 \x03(\x0e2'.warp.multi_agent.v1.LifecycleEventTypeR\n" +
-	"eventTypes\x1a\xc5\x04\n" +
+	"eventTypes\x1a\x85\x04\n" +
 	"\rExecutionMode\x12.\n" +
 	"\x05local\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x05local\x12P\n" +
-	"\x06remote\x18\x02 \x01(\v26.warp.multi_agent.v1.StartAgentV2.ExecutionMode.RemoteH\x00R\x06remote\x1a\xa9\x03\n" +
+	"\x06remote\x18\x02 \x01(\v26.warp.multi_agent.v1.StartAgentV2.ExecutionMode.RemoteH\x00R\x06remote\x1a\xe9\x02\n" +
 	"\x06Remote\x12%\n" +
-	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentId\x122\n" +
-	"\x06skills\x18\x02 \x03(\v2\x1a.warp.multi_agent.v1.SkillR\x06skills\x12\x19\n" +
+	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentId\x125\n" +
+	"\x06skills\x18\x02 \x03(\v2\x1d.warp.multi_agent.v1.SkillRefR\x06skills\x12\x19\n" +
 	"\bmodel_id\x18\x03 \x01(\tR\amodelId\x120\n" +
 	"\x14computer_use_enabled\x18\x04 \x01(\bR\x12computerUseEnabled\x12\x1f\n" +
 	"\vworker_host\x18\x05 \x01(\tR\n" +
 	"workerHost\x12X\n" +
 	"\aharness\x18\x06 \x01(\v2>.warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.HarnessR\aharness\x12\x1a\n" +
-	"\x05title\x18\a \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x12A\n" +
-	"\vattachments\x18\b \x03(\v2\x1f.warp.multi_agent.v1.AttachmentR\vattachments\x1a\x1d\n" +
+	"\x05title\x18\a \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x1a\x1d\n" +
 	"\aHarness\x12\x12\n" +
 	"\x04type\x18\x01 \x01(\tR\x04typeB\x06\n" +
 	"\x04mode\"\xf7\x01\n" +
@@ -34805,6 +34791,7 @@ var file_task_proto_goTypes = []any{
 	(*FileContentLineRange)(nil),                                      // 259: warp.multi_agent.v1.FileContentLineRange
 	(*FileContent)(nil),                                               // 260: warp.multi_agent.v1.FileContent
 	(*DocumentContent)(nil),                                           // 261: warp.multi_agent.v1.DocumentContent
+	(*SkillRef)(nil),                                                  // 262: warp.multi_agent.v1.SkillRef
 }
 var file_task_proto_depIdxs = []int32{
 	56,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -35132,20 +35119,19 @@ var file_task_proto_depIdxs = []int32{
 	0,   // 322: warp.multi_agent.v1.StartAgentV2.LifecycleSubscription.event_types:type_name -> warp.multi_agent.v1.LifecycleEventType
 	246, // 323: warp.multi_agent.v1.StartAgentV2.ExecutionMode.local:type_name -> google.protobuf.Empty
 	224, // 324: warp.multi_agent.v1.StartAgentV2.ExecutionMode.remote:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote
-	256, // 325: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.skills:type_name -> warp.multi_agent.v1.Skill
+	262, // 325: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.skills:type_name -> warp.multi_agent.v1.SkillRef
 	225, // 326: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.Harness
-	251, // 327: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.attachments:type_name -> warp.multi_agent.v1.Attachment
-	230, // 328: warp.multi_agent.v1.AskUserQuestion.MultipleChoice.options:type_name -> warp.multi_agent.v1.AskUserQuestion.Option
-	231, // 329: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
-	235, // 330: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
-	236, // 331: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
-	246, // 332: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.skipped:type_name -> google.protobuf.Empty
-	240, // 333: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.diffs:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
-	334, // [334:334] is the sub-list for method output_type
-	334, // [334:334] is the sub-list for method input_type
-	334, // [334:334] is the sub-list for extension type_name
-	334, // [334:334] is the sub-list for extension extendee
-	0,   // [0:334] is the sub-list for field type_name
+	230, // 327: warp.multi_agent.v1.AskUserQuestion.MultipleChoice.options:type_name -> warp.multi_agent.v1.AskUserQuestion.Option
+	231, // 328: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
+	235, // 329: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
+	236, // 330: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.MultipleChoiceAnswer
+	246, // 331: warp.multi_agent.v1.AskUserQuestionResult.AnswerItem.skipped:type_name -> google.protobuf.Empty
+	240, // 332: warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.diffs:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff.Diff
+	333, // [333:333] is the sub-list for method output_type
+	333, // [333:333] is the sub-list for method input_type
+	333, // [333:333] is the sub-list for extension type_name
+	333, // [333:333] is the sub-list for extension extendee
+	0,   // [0:333] is the sub-list for field type_name
 }
 
 func init() { file_task_proto_init() }

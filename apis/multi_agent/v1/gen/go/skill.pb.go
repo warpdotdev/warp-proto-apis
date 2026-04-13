@@ -308,6 +308,175 @@ func (*skillDescriptor_Path) isSkillDescriptor_SkillReference() {}
 
 func (*skillDescriptor_BundledSkillId) isSkillDescriptor_SkillReference() {}
 
+// A lightweight reference to a skill.
+// Unlike Skill, this does not include resolved metadata or file content.
+type SkillRef struct {
+	state                     protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_SkillReference isSkillRef_SkillReference `protobuf_oneof:"skill_reference"`
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *SkillRef) Reset() {
+	*x = SkillRef{}
+	mi := &file_skill_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SkillRef) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SkillRef) ProtoMessage() {}
+
+func (x *SkillRef) ProtoReflect() protoreflect.Message {
+	mi := &file_skill_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *SkillRef) GetPath() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_SkillReference.(*skillRef_Path); ok {
+			return x.Path
+		}
+	}
+	return ""
+}
+
+func (x *SkillRef) GetBundledSkillId() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_SkillReference.(*skillRef_BundledSkillId); ok {
+			return x.BundledSkillId
+		}
+	}
+	return ""
+}
+
+func (x *SkillRef) SetPath(v string) {
+	x.xxx_hidden_SkillReference = &skillRef_Path{v}
+}
+
+func (x *SkillRef) SetBundledSkillId(v string) {
+	x.xxx_hidden_SkillReference = &skillRef_BundledSkillId{v}
+}
+
+func (x *SkillRef) HasSkillReference() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_SkillReference != nil
+}
+
+func (x *SkillRef) HasPath() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_SkillReference.(*skillRef_Path)
+	return ok
+}
+
+func (x *SkillRef) HasBundledSkillId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_SkillReference.(*skillRef_BundledSkillId)
+	return ok
+}
+
+func (x *SkillRef) ClearSkillReference() {
+	x.xxx_hidden_SkillReference = nil
+}
+
+func (x *SkillRef) ClearPath() {
+	if _, ok := x.xxx_hidden_SkillReference.(*skillRef_Path); ok {
+		x.xxx_hidden_SkillReference = nil
+	}
+}
+
+func (x *SkillRef) ClearBundledSkillId() {
+	if _, ok := x.xxx_hidden_SkillReference.(*skillRef_BundledSkillId); ok {
+		x.xxx_hidden_SkillReference = nil
+	}
+}
+
+const SkillRef_SkillReference_not_set_case case_SkillRef_SkillReference = 0
+const SkillRef_Path_case case_SkillRef_SkillReference = 1
+const SkillRef_BundledSkillId_case case_SkillRef_SkillReference = 2
+
+func (x *SkillRef) WhichSkillReference() case_SkillRef_SkillReference {
+	if x == nil {
+		return SkillRef_SkillReference_not_set_case
+	}
+	switch x.xxx_hidden_SkillReference.(type) {
+	case *skillRef_Path:
+		return SkillRef_Path_case
+	case *skillRef_BundledSkillId:
+		return SkillRef_BundledSkillId_case
+	default:
+		return SkillRef_SkillReference_not_set_case
+	}
+}
+
+type SkillRef_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Fields of oneof xxx_hidden_SkillReference:
+	// Path to the SKILL.md file defining this skill.
+	Path *string
+	// Unique identifier for a skill bundled with the client.
+	BundledSkillId *string
+	// -- end of xxx_hidden_SkillReference
+}
+
+func (b0 SkillRef_builder) Build() *SkillRef {
+	m0 := &SkillRef{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Path != nil {
+		x.xxx_hidden_SkillReference = &skillRef_Path{*b.Path}
+	}
+	if b.BundledSkillId != nil {
+		x.xxx_hidden_SkillReference = &skillRef_BundledSkillId{*b.BundledSkillId}
+	}
+	return m0
+}
+
+type case_SkillRef_SkillReference protoreflect.FieldNumber
+
+func (x case_SkillRef_SkillReference) String() string {
+	md := file_skill_proto_msgTypes[1].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isSkillRef_SkillReference interface {
+	isSkillRef_SkillReference()
+}
+
+type skillRef_Path struct {
+	// Path to the SKILL.md file defining this skill.
+	Path string `protobuf:"bytes,1,opt,name=path,oneof"`
+}
+
+type skillRef_BundledSkillId struct {
+	// Unique identifier for a skill bundled with the client.
+	BundledSkillId string `protobuf:"bytes,2,opt,name=bundled_skill_id,json=bundledSkillId,oneof"`
+}
+
+func (*skillRef_Path) isSkillRef_SkillReference() {}
+
+func (*skillRef_BundledSkillId) isSkillRef_SkillReference() {}
+
 // A full representation of a skill, including file content.
 // This should contain all the information necessary to recreate a ParsedSkill in the client.
 type Skill struct {
@@ -320,7 +489,7 @@ type Skill struct {
 
 func (x *Skill) Reset() {
 	*x = Skill{}
-	mi := &file_skill_proto_msgTypes[1]
+	mi := &file_skill_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -332,7 +501,7 @@ func (x *Skill) String() string {
 func (*Skill) ProtoMessage() {}
 
 func (x *Skill) ProtoReflect() protoreflect.Message {
-	mi := &file_skill_proto_msgTypes[1]
+	mi := &file_skill_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -412,7 +581,7 @@ type SkillDescriptor_Provider struct {
 
 func (x *SkillDescriptor_Provider) Reset() {
 	*x = SkillDescriptor_Provider{}
-	mi := &file_skill_proto_msgTypes[2]
+	mi := &file_skill_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -424,7 +593,7 @@ func (x *SkillDescriptor_Provider) String() string {
 func (*SkillDescriptor_Provider) ProtoMessage() {}
 
 func (x *SkillDescriptor_Provider) ProtoReflect() protoreflect.Message {
-	mi := &file_skill_proto_msgTypes[2]
+	mi := &file_skill_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -855,7 +1024,7 @@ func (b0 SkillDescriptor_Provider_builder) Build() *SkillDescriptor_Provider {
 type case_SkillDescriptor_Provider_Type protoreflect.FieldNumber
 
 func (x case_SkillDescriptor_Provider_Type) String() string {
-	md := file_skill_proto_msgTypes[2].Descriptor()
+	md := file_skill_proto_msgTypes[3].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -935,7 +1104,7 @@ type SkillDescriptor_Scope struct {
 
 func (x *SkillDescriptor_Scope) Reset() {
 	*x = SkillDescriptor_Scope{}
-	mi := &file_skill_proto_msgTypes[3]
+	mi := &file_skill_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -947,7 +1116,7 @@ func (x *SkillDescriptor_Scope) String() string {
 func (*SkillDescriptor_Scope) ProtoMessage() {}
 
 func (x *SkillDescriptor_Scope) ProtoReflect() protoreflect.Message {
-	mi := &file_skill_proto_msgTypes[3]
+	mi := &file_skill_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1112,7 +1281,7 @@ func (b0 SkillDescriptor_Scope_builder) Build() *SkillDescriptor_Scope {
 type case_SkillDescriptor_Scope_Type protoreflect.FieldNumber
 
 func (x case_SkillDescriptor_Scope_Type) String() string {
-	md := file_skill_proto_msgTypes[3].Descriptor()
+	md := file_skill_proto_msgTypes[4].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -1171,6 +1340,10 @@ const file_skill_proto_rawDesc = "" +
 	"\aproject\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\aproject\x122\n" +
 	"\abundled\x18\x03 \x01(\v2\x16.google.protobuf.EmptyH\x00R\abundledB\x06\n" +
 	"\x04typeB\x11\n" +
+	"\x0fskill_reference\"_\n" +
+	"\bSkillRef\x12\x14\n" +
+	"\x04path\x18\x01 \x01(\tH\x00R\x04path\x12*\n" +
+	"\x10bundled_skill_id\x18\x02 \x01(\tH\x00R\x0ebundledSkillIdB\x11\n" +
 	"\x0fskill_reference\"\x89\x01\n" +
 	"\x05Skill\x12D\n" +
 	"\n" +
@@ -1178,33 +1351,34 @@ const file_skill_proto_rawDesc = "" +
 	"descriptor\x12:\n" +
 	"\acontent\x18\x02 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontentBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_skill_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_skill_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_skill_proto_goTypes = []any{
 	(*SkillDescriptor)(nil),          // 0: warp.multi_agent.v1.SkillDescriptor
-	(*Skill)(nil),                    // 1: warp.multi_agent.v1.Skill
-	(*SkillDescriptor_Provider)(nil), // 2: warp.multi_agent.v1.SkillDescriptor.Provider
-	(*SkillDescriptor_Scope)(nil),    // 3: warp.multi_agent.v1.SkillDescriptor.Scope
-	(*FileContent)(nil),              // 4: warp.multi_agent.v1.FileContent
-	(*emptypb.Empty)(nil),            // 5: google.protobuf.Empty
+	(*SkillRef)(nil),                 // 1: warp.multi_agent.v1.SkillRef
+	(*Skill)(nil),                    // 2: warp.multi_agent.v1.Skill
+	(*SkillDescriptor_Provider)(nil), // 3: warp.multi_agent.v1.SkillDescriptor.Provider
+	(*SkillDescriptor_Scope)(nil),    // 4: warp.multi_agent.v1.SkillDescriptor.Scope
+	(*FileContent)(nil),              // 5: warp.multi_agent.v1.FileContent
+	(*emptypb.Empty)(nil),            // 6: google.protobuf.Empty
 }
 var file_skill_proto_depIdxs = []int32{
-	2,  // 0: warp.multi_agent.v1.SkillDescriptor.provider:type_name -> warp.multi_agent.v1.SkillDescriptor.Provider
-	3,  // 1: warp.multi_agent.v1.SkillDescriptor.scope:type_name -> warp.multi_agent.v1.SkillDescriptor.Scope
+	3,  // 0: warp.multi_agent.v1.SkillDescriptor.provider:type_name -> warp.multi_agent.v1.SkillDescriptor.Provider
+	4,  // 1: warp.multi_agent.v1.SkillDescriptor.scope:type_name -> warp.multi_agent.v1.SkillDescriptor.Scope
 	0,  // 2: warp.multi_agent.v1.Skill.descriptor:type_name -> warp.multi_agent.v1.SkillDescriptor
-	4,  // 3: warp.multi_agent.v1.Skill.content:type_name -> warp.multi_agent.v1.FileContent
-	5,  // 4: warp.multi_agent.v1.SkillDescriptor.Provider.warp:type_name -> google.protobuf.Empty
-	5,  // 5: warp.multi_agent.v1.SkillDescriptor.Provider.agents:type_name -> google.protobuf.Empty
-	5,  // 6: warp.multi_agent.v1.SkillDescriptor.Provider.claude:type_name -> google.protobuf.Empty
-	5,  // 7: warp.multi_agent.v1.SkillDescriptor.Provider.codex:type_name -> google.protobuf.Empty
-	5,  // 8: warp.multi_agent.v1.SkillDescriptor.Provider.cursor:type_name -> google.protobuf.Empty
-	5,  // 9: warp.multi_agent.v1.SkillDescriptor.Provider.gemini:type_name -> google.protobuf.Empty
-	5,  // 10: warp.multi_agent.v1.SkillDescriptor.Provider.copilot:type_name -> google.protobuf.Empty
-	5,  // 11: warp.multi_agent.v1.SkillDescriptor.Provider.droid:type_name -> google.protobuf.Empty
-	5,  // 12: warp.multi_agent.v1.SkillDescriptor.Provider.github:type_name -> google.protobuf.Empty
-	5,  // 13: warp.multi_agent.v1.SkillDescriptor.Provider.open_code:type_name -> google.protobuf.Empty
-	5,  // 14: warp.multi_agent.v1.SkillDescriptor.Scope.home:type_name -> google.protobuf.Empty
-	5,  // 15: warp.multi_agent.v1.SkillDescriptor.Scope.project:type_name -> google.protobuf.Empty
-	5,  // 16: warp.multi_agent.v1.SkillDescriptor.Scope.bundled:type_name -> google.protobuf.Empty
+	5,  // 3: warp.multi_agent.v1.Skill.content:type_name -> warp.multi_agent.v1.FileContent
+	6,  // 4: warp.multi_agent.v1.SkillDescriptor.Provider.warp:type_name -> google.protobuf.Empty
+	6,  // 5: warp.multi_agent.v1.SkillDescriptor.Provider.agents:type_name -> google.protobuf.Empty
+	6,  // 6: warp.multi_agent.v1.SkillDescriptor.Provider.claude:type_name -> google.protobuf.Empty
+	6,  // 7: warp.multi_agent.v1.SkillDescriptor.Provider.codex:type_name -> google.protobuf.Empty
+	6,  // 8: warp.multi_agent.v1.SkillDescriptor.Provider.cursor:type_name -> google.protobuf.Empty
+	6,  // 9: warp.multi_agent.v1.SkillDescriptor.Provider.gemini:type_name -> google.protobuf.Empty
+	6,  // 10: warp.multi_agent.v1.SkillDescriptor.Provider.copilot:type_name -> google.protobuf.Empty
+	6,  // 11: warp.multi_agent.v1.SkillDescriptor.Provider.droid:type_name -> google.protobuf.Empty
+	6,  // 12: warp.multi_agent.v1.SkillDescriptor.Provider.github:type_name -> google.protobuf.Empty
+	6,  // 13: warp.multi_agent.v1.SkillDescriptor.Provider.open_code:type_name -> google.protobuf.Empty
+	6,  // 14: warp.multi_agent.v1.SkillDescriptor.Scope.home:type_name -> google.protobuf.Empty
+	6,  // 15: warp.multi_agent.v1.SkillDescriptor.Scope.project:type_name -> google.protobuf.Empty
+	6,  // 16: warp.multi_agent.v1.SkillDescriptor.Scope.bundled:type_name -> google.protobuf.Empty
 	17, // [17:17] is the sub-list for method output_type
 	17, // [17:17] is the sub-list for method input_type
 	17, // [17:17] is the sub-list for extension type_name
@@ -1222,7 +1396,11 @@ func file_skill_proto_init() {
 		(*skillDescriptor_Path)(nil),
 		(*skillDescriptor_BundledSkillId)(nil),
 	}
-	file_skill_proto_msgTypes[2].OneofWrappers = []any{
+	file_skill_proto_msgTypes[1].OneofWrappers = []any{
+		(*skillRef_Path)(nil),
+		(*skillRef_BundledSkillId)(nil),
+	}
+	file_skill_proto_msgTypes[3].OneofWrappers = []any{
 		(*skillDescriptor_Provider_Warp)(nil),
 		(*skillDescriptor_Provider_Agents)(nil),
 		(*skillDescriptor_Provider_Claude)(nil),
@@ -1234,7 +1412,7 @@ func file_skill_proto_init() {
 		(*skillDescriptor_Provider_Github)(nil),
 		(*skillDescriptor_Provider_OpenCode)(nil),
 	}
-	file_skill_proto_msgTypes[3].OneofWrappers = []any{
+	file_skill_proto_msgTypes[4].OneofWrappers = []any{
 		(*skillDescriptor_Scope_Home)(nil),
 		(*skillDescriptor_Scope_Project)(nil),
 		(*skillDescriptor_Scope_Bundled)(nil),
@@ -1245,7 +1423,7 @@ func file_skill_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_skill_proto_rawDesc), len(file_skill_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

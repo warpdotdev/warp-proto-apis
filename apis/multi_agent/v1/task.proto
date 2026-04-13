@@ -1589,13 +1589,15 @@ message StartAgent {
   // The initial prompt to send to the new agent.
   string prompt = 2 [ (sensitive) = true ];
   // Optional lifecycle event subscription for the new child agent.
-  // If not set or empty, defaults to all lifecycle event types.
+  // If omitted, defaults to all lifecycle event types.
+  // If present with an empty event_types list, subscribes to none.
   LifecycleSubscription lifecycle_subscription = 3;
   // Where the child agent should run. Defaults to local when omitted.
   ExecutionMode execution_mode = 4;
 
   message LifecycleSubscription {
     // Lifecycle event types the lead agent is subscribing to.
+    // Empty means the lead agent is subscribing to none.
     repeated LifecycleEventType event_types = 1;
   }
 
@@ -1633,13 +1635,15 @@ message StartAgentV2 {
   // The initial prompt to send to the new agent.
   string prompt = 2 [ (sensitive) = true ];
   // Optional lifecycle event subscription for the new child agent.
-  // If not set or empty, defaults to all lifecycle event types.
+  // If omitted, defaults to all lifecycle event types.
+  // If present with an empty event_types list, subscribes to none.
   LifecycleSubscription lifecycle_subscription = 3;
   // Where the child agent should run. Defaults to local when omitted.
   ExecutionMode execution_mode = 4;
 
   message LifecycleSubscription {
     // Lifecycle event types the lead agent is subscribing to.
+    // Empty means the lead agent is subscribing to none.
     repeated LifecycleEventType event_types = 1;
   }
 
@@ -1652,8 +1656,8 @@ message StartAgentV2 {
     message Remote {
       // Optional cloud environment UID for remote child agents.
       string environment_id = 1;
-      // Optional skills to use as base context for a remote child run.
-      repeated Skill skills = 2;
+      // Optional skill references to use as base context for a remote child run.
+      repeated SkillRef skills = 2;
       // Optional model override for the remote child run.
       string model_id = 3;
       // Whether computer use should be enabled for the remote child run.
@@ -1664,8 +1668,6 @@ message StartAgentV2 {
       Harness harness = 6;
       // Optional title for the remote child run.
       string title = 7 [ (sensitive) = true ];
-      // Optional attachments to include when creating the remote child run.
-      repeated Attachment attachments = 8;
 
       message Harness {
         // The harness type identifier (e.g. "oz" or "claude").
