@@ -60,8 +60,11 @@ message Task {
 // These align with task states to provide a consistent lifecycle model.
 enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_UNSPECIFIED = 0;
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead.
   LIFECYCLE_EVENT_TYPE_STARTED = 1 [deprecated = true];
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_SUCCEEDED instead.
   LIFECYCLE_EVENT_TYPE_IDLE = 2 [deprecated = true];
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead. Restart is no longer distinguished from start.
   LIFECYCLE_EVENT_TYPE_RESTARTED = 3 [deprecated = true];
   LIFECYCLE_EVENT_TYPE_ERRORED = 4;
   LIFECYCLE_EVENT_TYPE_CANCELLED = 5;
@@ -88,8 +91,11 @@ message AgentEvent {
     // states while still allowing future expansion of per-state metadata.
     oneof detail {
       Errored errored = 2;
+      // Deprecated: use in_progress instead.
       google.protobuf.Empty started = 3 [deprecated = true];
+      // Deprecated: use succeeded instead.
       google.protobuf.Empty idle = 4 [deprecated = true];
+      // Deprecated: use in_progress instead. Restart is no longer distinguished from start.
       google.protobuf.Empty restarted = 5 [deprecated = true];
       google.protobuf.Empty cancelled = 6;
       Blocked blocked = 7;
@@ -107,8 +113,9 @@ message AgentEvent {
     message Blocked { string blocked_action = 1 [ (sensitive) = true ]; }
 
     message Failed {
-      string reason = 1;
-      string error_message = 2 [ (sensitive) = true ];
+      string stage = 1;
+      string reason = 2;
+      string error_message = 3 [ (sensitive) = true ];
     }
   }
 }

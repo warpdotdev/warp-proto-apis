@@ -32,10 +32,16 @@ type LifecycleEventType int32
 
 const (
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_UNSPECIFIED LifecycleEventType = 0
+	// Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_STARTED LifecycleEventType = 1
+	// Deprecated: use LIFECYCLE_EVENT_TYPE_SUCCEEDED instead.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_IDLE LifecycleEventType = 2
+	// Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead. Restart is no longer distinguished from start.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_RESTARTED   LifecycleEventType = 3
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_ERRORED     LifecycleEventType = 4
@@ -10239,10 +10245,16 @@ type AgentEvent_LifecycleEvent_builder struct {
 
 	// Fields of oneof xxx_hidden_Detail:
 	Errored *AgentEvent_LifecycleEvent_Errored
+	// Deprecated: use in_progress instead.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	Started *emptypb.Empty
+	// Deprecated: use succeeded instead.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	Idle *emptypb.Empty
+	// Deprecated: use in_progress instead. Restart is no longer distinguished from start.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	Restarted  *emptypb.Empty
 	Cancelled  *emptypb.Empty
@@ -10310,16 +10322,22 @@ type agentEvent_LifecycleEvent_Errored_ struct {
 }
 
 type agentEvent_LifecycleEvent_Started struct {
+	// Deprecated: use in_progress instead.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	Started *emptypb.Empty `protobuf:"bytes,3,opt,name=started,oneof"`
 }
 
 type agentEvent_LifecycleEvent_Idle struct {
+	// Deprecated: use succeeded instead.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	Idle *emptypb.Empty `protobuf:"bytes,4,opt,name=idle,oneof"`
 }
 
 type agentEvent_LifecycleEvent_Restarted struct {
+	// Deprecated: use in_progress instead. Restart is no longer distinguished from start.
+	//
 	// Deprecated: Marked as deprecated in task.proto.
 	Restarted *emptypb.Empty `protobuf:"bytes,5,opt,name=restarted,oneof"`
 }
@@ -10586,8 +10604,9 @@ func (b0 AgentEvent_LifecycleEvent_Blocked_builder) Build() *AgentEvent_Lifecycl
 
 type AgentEvent_LifecycleEvent_Failed struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Reason       *string                `protobuf:"bytes,1,opt,name=reason"`
-	xxx_hidden_ErrorMessage *string                `protobuf:"bytes,2,opt,name=error_message,json=errorMessage"`
+	xxx_hidden_Stage        *string                `protobuf:"bytes,1,opt,name=stage"`
+	xxx_hidden_Reason       *string                `protobuf:"bytes,2,opt,name=reason"`
+	xxx_hidden_ErrorMessage *string                `protobuf:"bytes,3,opt,name=error_message,json=errorMessage"`
 	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
 	XXX_presence            [1]uint32
 	unknownFields           protoimpl.UnknownFields
@@ -10619,6 +10638,16 @@ func (x *AgentEvent_LifecycleEvent_Failed) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
+func (x *AgentEvent_LifecycleEvent_Failed) GetStage() string {
+	if x != nil {
+		if x.xxx_hidden_Stage != nil {
+			return *x.xxx_hidden_Stage
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *AgentEvent_LifecycleEvent_Failed) GetReason() string {
 	if x != nil {
 		if x.xxx_hidden_Reason != nil {
@@ -10639,43 +10668,61 @@ func (x *AgentEvent_LifecycleEvent_Failed) GetErrorMessage() string {
 	return ""
 }
 
+func (x *AgentEvent_LifecycleEvent_Failed) SetStage(v string) {
+	x.xxx_hidden_Stage = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
 func (x *AgentEvent_LifecycleEvent_Failed) SetReason(v string) {
 	x.xxx_hidden_Reason = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *AgentEvent_LifecycleEvent_Failed) SetErrorMessage(v string) {
 	x.xxx_hidden_ErrorMessage = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *AgentEvent_LifecycleEvent_Failed) HasReason() bool {
+func (x *AgentEvent_LifecycleEvent_Failed) HasStage() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *AgentEvent_LifecycleEvent_Failed) HasErrorMessage() bool {
+func (x *AgentEvent_LifecycleEvent_Failed) HasReason() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *AgentEvent_LifecycleEvent_Failed) ClearReason() {
+func (x *AgentEvent_LifecycleEvent_Failed) HasErrorMessage() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *AgentEvent_LifecycleEvent_Failed) ClearStage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Stage = nil
+}
+
+func (x *AgentEvent_LifecycleEvent_Failed) ClearReason() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Reason = nil
 }
 
 func (x *AgentEvent_LifecycleEvent_Failed) ClearErrorMessage() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ErrorMessage = nil
 }
 
 type AgentEvent_LifecycleEvent_Failed_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	Stage        *string
 	Reason       *string
 	ErrorMessage *string
 }
@@ -10684,12 +10731,16 @@ func (b0 AgentEvent_LifecycleEvent_Failed_builder) Build() *AgentEvent_Lifecycle
 	m0 := &AgentEvent_LifecycleEvent_Failed{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.Stage != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_Stage = b.Stage
+	}
 	if b.Reason != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Reason = b.Reason
 	}
 	if b.ErrorMessage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_ErrorMessage = b.ErrorMessage
 	}
 	return m0
@@ -33833,13 +33884,13 @@ const file_task_proto_rawDesc = "" +
 	"\vserver_data\x18\b \x01(\tR\n" +
 	"serverData\x1aP\n" +
 	"\fDependencies\x12$\n" +
-	"\x0eparent_task_id\x18\x01 \x01(\tR\fparentTaskIdJ\x04\b\x02\x10\x03R\x14sibling_dependenciesJ\x04\b\x04\x10\x05R\x06status\"\xc0\b\n" +
+	"\x0eparent_task_id\x18\x01 \x01(\tR\fparentTaskIdJ\x04\b\x02\x10\x03R\x14sibling_dependenciesJ\x04\b\x04\x10\x05R\x06status\"\xd6\b\n" +
 	"\n" +
 	"AgentEvent\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12;\n" +
 	"\voccurred_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"occurredAt\x12Y\n" +
-	"\x0flifecycle_event\x18\x03 \x01(\v2..warp.multi_agent.v1.AgentEvent.LifecycleEventH\x00R\x0elifecycleEvent\x1a\xf5\x06\n" +
+	"\x0flifecycle_event\x18\x03 \x01(\v2..warp.multi_agent.v1.AgentEvent.LifecycleEventH\x00R\x0elifecycleEvent\x1a\x8b\a\n" +
 	"\x0eLifecycleEvent\x12&\n" +
 	"\x0fsender_agent_id\x18\x01 \x01(\tR\rsenderAgentId\x12R\n" +
 	"\aerrored\x18\x02 \x01(\v26.warp.multi_agent.v1.AgentEvent.LifecycleEvent.ErroredH\x00R\aerrored\x126\n" +
@@ -33858,10 +33909,11 @@ const file_task_proto_rawDesc = "" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12)\n" +
 	"\rerror_message\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\ferrorMessage\x1a6\n" +
 	"\aBlocked\x12+\n" +
-	"\x0eblocked_action\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\rblockedAction\x1aK\n" +
-	"\x06Failed\x12\x16\n" +
-	"\x06reason\x18\x01 \x01(\tR\x06reason\x12)\n" +
-	"\rerror_message\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\ferrorMessageB\b\n" +
+	"\x0eblocked_action\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\rblockedAction\x1aa\n" +
+	"\x06Failed\x12\x14\n" +
+	"\x05stage\x18\x01 \x01(\tR\x05stage\x12\x16\n" +
+	"\x06reason\x18\x02 \x01(\tR\x06reason\x12)\n" +
+	"\rerror_message\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\ferrorMessageB\b\n" +
 	"\x06detailB\a\n" +
 	"\x05event\"\xeb\x01\n" +
 	"\x0eReviewComments\x12M\n" +
