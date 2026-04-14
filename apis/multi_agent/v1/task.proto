@@ -113,9 +113,8 @@ message AgentEvent {
     message Blocked { string blocked_action = 1 [ (sensitive) = true ]; }
 
     message Failed {
-      string stage = 1;
-      string reason = 2;
-      string error_message = 3 [ (sensitive) = true ];
+      string reason = 1;
+      string error_message = 2 [ (sensitive) = true ];
     }
   }
 }
