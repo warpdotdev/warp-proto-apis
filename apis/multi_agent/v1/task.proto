@@ -1797,7 +1797,7 @@ message AskUserQuestionResult {
 
 // A client tool call to upload a local file as a conversation artifact.
 message UploadFileArtifact {
-  string path = 1 [ (sensitive) = true ];
+  FilePathReference file = 1;
   string description = 2 [ (sensitive) = true ];
 }
 
