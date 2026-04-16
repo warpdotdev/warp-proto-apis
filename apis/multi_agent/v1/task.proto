@@ -1650,8 +1650,13 @@ message StartAgentV2 {
 
   message ExecutionMode {
     oneof mode {
-      google.protobuf.Empty local = 1;
+      Local local = 1;
       Remote remote = 2;
+    }
+
+    message Local {
+      // Optional execution harness for the local child run.
+      .warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.Harness harness = 1;
     }
 
     message Remote {
