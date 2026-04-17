@@ -57,14 +57,21 @@ message Task {
 }
 
 // Lifecycle event types emitted by child agents and routed to lead agents.
+// These align with task states to provide a consistent lifecycle model.
 enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_UNSPECIFIED = 0;
-  LIFECYCLE_EVENT_TYPE_STARTED = 1;
-  LIFECYCLE_EVENT_TYPE_IDLE = 2;
-  LIFECYCLE_EVENT_TYPE_RESTARTED = 3;
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead.
+  LIFECYCLE_EVENT_TYPE_STARTED = 1 [deprecated = true];
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_SUCCEEDED instead.
+  LIFECYCLE_EVENT_TYPE_IDLE = 2 [deprecated = true];
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead. Restart is no longer distinguished from start.
+  LIFECYCLE_EVENT_TYPE_RESTARTED = 3 [deprecated = true];
   LIFECYCLE_EVENT_TYPE_ERRORED = 4;
   LIFECYCLE_EVENT_TYPE_CANCELLED = 5;
   LIFECYCLE_EVENT_TYPE_BLOCKED = 6;
+  LIFECYCLE_EVENT_TYPE_IN_PROGRESS = 7;
+  LIFECYCLE_EVENT_TYPE_SUCCEEDED = 8;
+  LIFECYCLE_EVENT_TYPE_FAILED = 9;
 }
 
 // A generic event emitted by an agent and routed to other agents.
@@ -84,11 +91,17 @@ message AgentEvent {
     // states while still allowing future expansion of per-state metadata.
     oneof detail {
       Errored errored = 2;
-      google.protobuf.Empty started = 3;
-      google.protobuf.Empty idle = 4;
-      google.protobuf.Empty restarted = 5;
+      // Deprecated: use in_progress instead.
+      google.protobuf.Empty started = 3 [deprecated = true];
+      // Deprecated: use succeeded instead.
+      google.protobuf.Empty idle = 4 [deprecated = true];
+      // Deprecated: use in_progress instead. Restart is no longer distinguished from start.
+      google.protobuf.Empty restarted = 5 [deprecated = true];
       google.protobuf.Empty cancelled = 6;
       Blocked blocked = 7;
+      google.protobuf.Empty in_progress = 8;
+      google.protobuf.Empty succeeded = 9;
+      Failed failed = 10;
     }
 
     message Errored {
@@ -98,6 +111,11 @@ message AgentEvent {
     }
 
     message Blocked { string blocked_action = 1 [ (sensitive) = true ]; }
+
+    message Failed {
+      string reason = 1;
+      string error_message = 2 [ (sensitive) = true ];
+    }
   }
 }
 
