@@ -31636,27 +31636,29 @@ func (*startAgentV2_ExecutionMode_Local_) isStartAgentV2_ExecutionMode_Mode() {}
 
 func (*startAgentV2_ExecutionMode_Remote_) isStartAgentV2_ExecutionMode_Mode() {}
 
-type StartAgentV2_ExecutionMode_Local struct {
-	state              protoimpl.MessageState                     `protogen:"opaque.v1"`
-	xxx_hidden_Harness *StartAgentV2_ExecutionMode_Remote_Harness `protobuf:"bytes,1,opt,name=harness"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+type StartAgentV2_ExecutionMode_Harness struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Type        *string                `protobuf:"bytes,1,opt,name=type"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
-func (x *StartAgentV2_ExecutionMode_Local) Reset() {
-	*x = StartAgentV2_ExecutionMode_Local{}
+func (x *StartAgentV2_ExecutionMode_Harness) Reset() {
+	*x = StartAgentV2_ExecutionMode_Harness{}
 	mi := &file_task_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *StartAgentV2_ExecutionMode_Local) String() string {
+func (x *StartAgentV2_ExecutionMode_Harness) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartAgentV2_ExecutionMode_Local) ProtoMessage() {}
+func (*StartAgentV2_ExecutionMode_Harness) ProtoMessage() {}
 
-func (x *StartAgentV2_ExecutionMode_Local) ProtoReflect() protoreflect.Message {
+func (x *StartAgentV2_ExecutionMode_Harness) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -31668,14 +31670,91 @@ func (x *StartAgentV2_ExecutionMode_Local) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *StartAgentV2_ExecutionMode_Local) GetHarness() *StartAgentV2_ExecutionMode_Remote_Harness {
+func (x *StartAgentV2_ExecutionMode_Harness) GetType() string {
+	if x != nil {
+		if x.xxx_hidden_Type != nil {
+			return *x.xxx_hidden_Type
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *StartAgentV2_ExecutionMode_Harness) SetType(v string) {
+	x.xxx_hidden_Type = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *StartAgentV2_ExecutionMode_Harness) HasType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *StartAgentV2_ExecutionMode_Harness) ClearType() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Type = nil
+}
+
+type StartAgentV2_ExecutionMode_Harness_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The harness type identifier (e.g. "oz" or "claude").
+	Type *string
+}
+
+func (b0 StartAgentV2_ExecutionMode_Harness_builder) Build() *StartAgentV2_ExecutionMode_Harness {
+	m0 := &StartAgentV2_ExecutionMode_Harness{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Type != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Type = b.Type
+	}
+	return m0
+}
+
+type StartAgentV2_ExecutionMode_Local struct {
+	state              protoimpl.MessageState              `protogen:"opaque.v1"`
+	xxx_hidden_Harness *StartAgentV2_ExecutionMode_Harness `protobuf:"bytes,1,opt,name=harness"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *StartAgentV2_ExecutionMode_Local) Reset() {
+	*x = StartAgentV2_ExecutionMode_Local{}
+	mi := &file_task_proto_msgTypes[217]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartAgentV2_ExecutionMode_Local) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartAgentV2_ExecutionMode_Local) ProtoMessage() {}
+
+func (x *StartAgentV2_ExecutionMode_Local) ProtoReflect() protoreflect.Message {
+	mi := &file_task_proto_msgTypes[217]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *StartAgentV2_ExecutionMode_Local) GetHarness() *StartAgentV2_ExecutionMode_Harness {
 	if x != nil {
 		return x.xxx_hidden_Harness
 	}
 	return nil
 }
 
-func (x *StartAgentV2_ExecutionMode_Local) SetHarness(v *StartAgentV2_ExecutionMode_Remote_Harness) {
+func (x *StartAgentV2_ExecutionMode_Local) SetHarness(v *StartAgentV2_ExecutionMode_Harness) {
 	x.xxx_hidden_Harness = v
 }
 
@@ -31694,7 +31773,7 @@ type StartAgentV2_ExecutionMode_Local_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Optional execution harness for the local child run.
-	Harness *StartAgentV2_ExecutionMode_Remote_Harness
+	Harness *StartAgentV2_ExecutionMode_Harness
 }
 
 func (b0 StartAgentV2_ExecutionMode_Local_builder) Build() *StartAgentV2_ExecutionMode_Local {
@@ -31706,14 +31785,14 @@ func (b0 StartAgentV2_ExecutionMode_Local_builder) Build() *StartAgentV2_Executi
 }
 
 type StartAgentV2_ExecutionMode_Remote struct {
-	state                         protoimpl.MessageState                     `protogen:"opaque.v1"`
-	xxx_hidden_EnvironmentId      *string                                    `protobuf:"bytes,1,opt,name=environment_id,json=environmentId"`
-	xxx_hidden_Skills             *[]*SkillRef                               `protobuf:"bytes,2,rep,name=skills"`
-	xxx_hidden_ModelId            *string                                    `protobuf:"bytes,3,opt,name=model_id,json=modelId"`
-	xxx_hidden_ComputerUseEnabled bool                                       `protobuf:"varint,4,opt,name=computer_use_enabled,json=computerUseEnabled"`
-	xxx_hidden_WorkerHost         *string                                    `protobuf:"bytes,5,opt,name=worker_host,json=workerHost"`
-	xxx_hidden_Harness            *StartAgentV2_ExecutionMode_Remote_Harness `protobuf:"bytes,6,opt,name=harness"`
-	xxx_hidden_Title              *string                                    `protobuf:"bytes,7,opt,name=title"`
+	state                         protoimpl.MessageState              `protogen:"opaque.v1"`
+	xxx_hidden_EnvironmentId      *string                             `protobuf:"bytes,1,opt,name=environment_id,json=environmentId"`
+	xxx_hidden_Skills             *[]*SkillRef                        `protobuf:"bytes,2,rep,name=skills"`
+	xxx_hidden_ModelId            *string                             `protobuf:"bytes,3,opt,name=model_id,json=modelId"`
+	xxx_hidden_ComputerUseEnabled bool                                `protobuf:"varint,4,opt,name=computer_use_enabled,json=computerUseEnabled"`
+	xxx_hidden_WorkerHost         *string                             `protobuf:"bytes,5,opt,name=worker_host,json=workerHost"`
+	xxx_hidden_Harness            *StartAgentV2_ExecutionMode_Harness `protobuf:"bytes,6,opt,name=harness"`
+	xxx_hidden_Title              *string                             `protobuf:"bytes,7,opt,name=title"`
 	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
 	XXX_presence                  [1]uint32
 	unknownFields                 protoimpl.UnknownFields
@@ -31722,7 +31801,7 @@ type StartAgentV2_ExecutionMode_Remote struct {
 
 func (x *StartAgentV2_ExecutionMode_Remote) Reset() {
 	*x = StartAgentV2_ExecutionMode_Remote{}
-	mi := &file_task_proto_msgTypes[217]
+	mi := &file_task_proto_msgTypes[218]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -31734,7 +31813,7 @@ func (x *StartAgentV2_ExecutionMode_Remote) String() string {
 func (*StartAgentV2_ExecutionMode_Remote) ProtoMessage() {}
 
 func (x *StartAgentV2_ExecutionMode_Remote) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[217]
+	mi := &file_task_proto_msgTypes[218]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -31791,7 +31870,7 @@ func (x *StartAgentV2_ExecutionMode_Remote) GetWorkerHost() string {
 	return ""
 }
 
-func (x *StartAgentV2_ExecutionMode_Remote) GetHarness() *StartAgentV2_ExecutionMode_Remote_Harness {
+func (x *StartAgentV2_ExecutionMode_Remote) GetHarness() *StartAgentV2_ExecutionMode_Harness {
 	if x != nil {
 		return x.xxx_hidden_Harness
 	}
@@ -31832,7 +31911,7 @@ func (x *StartAgentV2_ExecutionMode_Remote) SetWorkerHost(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
 }
 
-func (x *StartAgentV2_ExecutionMode_Remote) SetHarness(v *StartAgentV2_ExecutionMode_Remote_Harness) {
+func (x *StartAgentV2_ExecutionMode_Remote) SetHarness(v *StartAgentV2_ExecutionMode_Harness) {
 	x.xxx_hidden_Harness = v
 }
 
@@ -31926,7 +32005,7 @@ type StartAgentV2_ExecutionMode_Remote_builder struct {
 	// Optional worker host ID for routing the remote child run.
 	WorkerHost *string
 	// Optional execution harness for the remote child run.
-	Harness *StartAgentV2_ExecutionMode_Remote_Harness
+	Harness *StartAgentV2_ExecutionMode_Harness
 	// Optional title for the remote child run.
 	Title *string
 }
@@ -31956,85 +32035,6 @@ func (b0 StartAgentV2_ExecutionMode_Remote_builder) Build() *StartAgentV2_Execut
 	if b.Title != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
 		x.xxx_hidden_Title = b.Title
-	}
-	return m0
-}
-
-type StartAgentV2_ExecutionMode_Remote_Harness struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Type        *string                `protobuf:"bytes,1,opt,name=type"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) Reset() {
-	*x = StartAgentV2_ExecutionMode_Remote_Harness{}
-	mi := &file_task_proto_msgTypes[218]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StartAgentV2_ExecutionMode_Remote_Harness) ProtoMessage() {}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) ProtoReflect() protoreflect.Message {
-	mi := &file_task_proto_msgTypes[218]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) GetType() string {
-	if x != nil {
-		if x.xxx_hidden_Type != nil {
-			return *x.xxx_hidden_Type
-		}
-		return ""
-	}
-	return ""
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) SetType(v string) {
-	x.xxx_hidden_Type = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) HasType() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *StartAgentV2_ExecutionMode_Remote_Harness) ClearType() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Type = nil
-}
-
-type StartAgentV2_ExecutionMode_Remote_Harness_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// The harness type identifier (e.g. "oz" or "claude").
-	Type *string
-}
-
-func (b0 StartAgentV2_ExecutionMode_Remote_Harness_builder) Build() *StartAgentV2_ExecutionMode_Remote_Harness {
-	m0 := &StartAgentV2_ExecutionMode_Remote_Harness{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.Type != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Type = b.Type
 	}
 	return m0
 }
@@ -34483,7 +34483,7 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"\xfb\a\n" +
+	"\x06result\"\xed\a\n" +
 	"\fStartAgentV2\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12n\n" +
@@ -34491,23 +34491,23 @@ const file_task_proto_rawDesc = "" +
 	"\x0eexecution_mode\x18\x04 \x01(\v2/.warp.multi_agent.v1.StartAgentV2.ExecutionModeR\rexecutionMode\x1aa\n" +
 	"\x15LifecycleSubscription\x12H\n" +
 	"\vevent_types\x18\x01 \x03(\x0e2'.warp.multi_agent.v1.LifecycleEventTypeR\n" +
-	"eventTypes\x1a\x87\x05\n" +
+	"eventTypes\x1a\xf9\x04\n" +
 	"\rExecutionMode\x12M\n" +
 	"\x05local\x18\x01 \x01(\v25.warp.multi_agent.v1.StartAgentV2.ExecutionMode.LocalH\x00R\x05local\x12P\n" +
-	"\x06remote\x18\x02 \x01(\v26.warp.multi_agent.v1.StartAgentV2.ExecutionMode.RemoteH\x00R\x06remote\x1aa\n" +
-	"\x05Local\x12X\n" +
-	"\aharness\x18\x01 \x01(\v2>.warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.HarnessR\aharness\x1a\xe9\x02\n" +
+	"\x06remote\x18\x02 \x01(\v26.warp.multi_agent.v1.StartAgentV2.ExecutionMode.RemoteH\x00R\x06remote\x1a\x1d\n" +
+	"\aHarness\x12\x12\n" +
+	"\x04type\x18\x01 \x01(\tR\x04type\x1aZ\n" +
+	"\x05Local\x12Q\n" +
+	"\aharness\x18\x01 \x01(\v27.warp.multi_agent.v1.StartAgentV2.ExecutionMode.HarnessR\aharness\x1a\xc3\x02\n" +
 	"\x06Remote\x12%\n" +
 	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentId\x125\n" +
 	"\x06skills\x18\x02 \x03(\v2\x1d.warp.multi_agent.v1.SkillRefR\x06skills\x12\x19\n" +
 	"\bmodel_id\x18\x03 \x01(\tR\amodelId\x120\n" +
 	"\x14computer_use_enabled\x18\x04 \x01(\bR\x12computerUseEnabled\x12\x1f\n" +
 	"\vworker_host\x18\x05 \x01(\tR\n" +
-	"workerHost\x12X\n" +
-	"\aharness\x18\x06 \x01(\v2>.warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.HarnessR\aharness\x12\x1a\n" +
-	"\x05title\x18\a \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x1a\x1d\n" +
-	"\aHarness\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04typeB\x06\n" +
+	"workerHost\x12Q\n" +
+	"\aharness\x18\x06 \x01(\v27.warp.multi_agent.v1.StartAgentV2.ExecutionMode.HarnessR\aharness\x12\x1a\n" +
+	"\x05title\x18\a \x01(\tB\x04\x80\xb5\x18\x01R\x05titleB\x06\n" +
 	"\x04mode\"\xf7\x01\n" +
 	"\x12StartAgentV2Result\x12K\n" +
 	"\asuccess\x18\x01 \x01(\v2/.warp.multi_agent.v1.StartAgentV2Result.SuccessH\x00R\asuccess\x12E\n" +
@@ -34870,9 +34870,9 @@ var file_task_proto_goTypes = []any{
 	(*StartAgentResult_Error)(nil),                                    // 221: warp.multi_agent.v1.StartAgentResult.Error
 	(*StartAgentV2_LifecycleSubscription)(nil),                        // 222: warp.multi_agent.v1.StartAgentV2.LifecycleSubscription
 	(*StartAgentV2_ExecutionMode)(nil),                                // 223: warp.multi_agent.v1.StartAgentV2.ExecutionMode
-	(*StartAgentV2_ExecutionMode_Local)(nil),                          // 224: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local
-	(*StartAgentV2_ExecutionMode_Remote)(nil),                         // 225: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote
-	(*StartAgentV2_ExecutionMode_Remote_Harness)(nil),                 // 226: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.Harness
+	(*StartAgentV2_ExecutionMode_Harness)(nil),                        // 224: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
+	(*StartAgentV2_ExecutionMode_Local)(nil),                          // 225: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local
+	(*StartAgentV2_ExecutionMode_Remote)(nil),                         // 226: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote
 	(*StartAgentV2Result_Success)(nil),                                // 227: warp.multi_agent.v1.StartAgentV2Result.Success
 	(*StartAgentV2Result_Error)(nil),                                  // 228: warp.multi_agent.v1.StartAgentV2Result.Error
 	(*SendMessageToAgentResult_Success)(nil),                          // 229: warp.multi_agent.v1.SendMessageToAgentResult.Success
@@ -35236,11 +35236,11 @@ var file_task_proto_depIdxs = []int32{
 	247, // 321: warp.multi_agent.v1.StartAgent.ExecutionMode.local:type_name -> google.protobuf.Empty
 	219, // 322: warp.multi_agent.v1.StartAgent.ExecutionMode.remote:type_name -> warp.multi_agent.v1.StartAgent.ExecutionMode.Remote
 	0,   // 323: warp.multi_agent.v1.StartAgentV2.LifecycleSubscription.event_types:type_name -> warp.multi_agent.v1.LifecycleEventType
-	224, // 324: warp.multi_agent.v1.StartAgentV2.ExecutionMode.local:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local
-	225, // 325: warp.multi_agent.v1.StartAgentV2.ExecutionMode.remote:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote
-	226, // 326: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.Harness
+	225, // 324: warp.multi_agent.v1.StartAgentV2.ExecutionMode.local:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local
+	226, // 325: warp.multi_agent.v1.StartAgentV2.ExecutionMode.remote:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote
+	224, // 326: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
 	263, // 327: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.skills:type_name -> warp.multi_agent.v1.SkillRef
-	226, // 328: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.Harness
+	224, // 328: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
 	231, // 329: warp.multi_agent.v1.AskUserQuestion.MultipleChoice.options:type_name -> warp.multi_agent.v1.AskUserQuestion.Option
 	232, // 330: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
 	236, // 331: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem

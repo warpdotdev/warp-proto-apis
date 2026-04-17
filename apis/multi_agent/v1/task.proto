@@ -1654,9 +1654,14 @@ message StartAgentV2 {
       Remote remote = 2;
     }
 
+    message Harness {
+      // The harness type identifier (e.g. "oz" or "claude").
+      string type = 1;
+    }
+
     message Local {
       // Optional execution harness for the local child run.
-      .warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.Harness harness = 1;
+      Harness harness = 1;
     }
 
     message Remote {
@@ -1674,11 +1679,6 @@ message StartAgentV2 {
       Harness harness = 6;
       // Optional title for the remote child run.
       string title = 7 [ (sensitive) = true ];
-
-      message Harness {
-        // The harness type identifier (e.g. "oz" or "claude").
-        string type = 1;
-      }
     }
   }
 }
