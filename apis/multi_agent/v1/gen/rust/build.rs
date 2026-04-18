@@ -16,6 +16,7 @@ fn main() -> Result<()> {
         .unwrap()
         .map(|entry| entry.unwrap().path())
     {
+        // Comment
         if proto.extension().is_none_or(|ext| ext != "proto") {
             continue;
         }
