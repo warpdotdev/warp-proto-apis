@@ -9367,7 +9367,8 @@ func (x *UploadFileArtifact) ClearDescription() {
 type UploadFileArtifact_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	File        *FilePathReference
+	File *FilePathReference
+	// Client/agent-provided description; non-sensitive by design.
 	Description *string
 }
 
@@ -33882,10 +33883,8 @@ func (b0 AskUserQuestionResult_AnswerItem_MultipleChoiceAnswer_builder) Build() 
 type UploadFileArtifactResult_Success struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ArtifactUid *string                `protobuf:"bytes,1,opt,name=artifact_uid,json=artifactUid"`
-	xxx_hidden_Filepath    *string                `protobuf:"bytes,2,opt,name=filepath"`
-	xxx_hidden_MimeType    *string                `protobuf:"bytes,3,opt,name=mime_type,json=mimeType"`
-	xxx_hidden_SizeBytes   int64                  `protobuf:"varint,4,opt,name=size_bytes,json=sizeBytes"`
-	xxx_hidden_Description *string                `protobuf:"bytes,5,opt,name=description"`
+	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
+	xxx_hidden_SizeBytes   int64                  `protobuf:"varint,3,opt,name=size_bytes,json=sizeBytes"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -33927,16 +33926,6 @@ func (x *UploadFileArtifactResult_Success) GetArtifactUid() string {
 	return ""
 }
 
-func (x *UploadFileArtifactResult_Success) GetFilepath() string {
-	if x != nil {
-		if x.xxx_hidden_Filepath != nil {
-			return *x.xxx_hidden_Filepath
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *UploadFileArtifactResult_Success) GetMimeType() string {
 	if x != nil {
 		if x.xxx_hidden_MimeType != nil {
@@ -33954,39 +33943,19 @@ func (x *UploadFileArtifactResult_Success) GetSizeBytes() int64 {
 	return 0
 }
 
-func (x *UploadFileArtifactResult_Success) GetDescription() string {
-	if x != nil {
-		if x.xxx_hidden_Description != nil {
-			return *x.xxx_hidden_Description
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *UploadFileArtifactResult_Success) SetArtifactUid(v string) {
 	x.xxx_hidden_ArtifactUid = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
-}
-
-func (x *UploadFileArtifactResult_Success) SetFilepath(v string) {
-	x.xxx_hidden_Filepath = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *UploadFileArtifactResult_Success) SetMimeType(v string) {
 	x.xxx_hidden_MimeType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *UploadFileArtifactResult_Success) SetSizeBytes(v int64) {
 	x.xxx_hidden_SizeBytes = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
-}
-
-func (x *UploadFileArtifactResult_Success) SetDescription(v string) {
-	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *UploadFileArtifactResult_Success) HasArtifactUid() bool {
@@ -33996,32 +33965,18 @@ func (x *UploadFileArtifactResult_Success) HasArtifactUid() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *UploadFileArtifactResult_Success) HasFilepath() bool {
+func (x *UploadFileArtifactResult_Success) HasMimeType() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *UploadFileArtifactResult_Success) HasMimeType() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
 func (x *UploadFileArtifactResult_Success) HasSizeBytes() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
-}
-
-func (x *UploadFileArtifactResult_Success) HasDescription() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
 func (x *UploadFileArtifactResult_Success) ClearArtifactUid() {
@@ -34029,34 +33984,22 @@ func (x *UploadFileArtifactResult_Success) ClearArtifactUid() {
 	x.xxx_hidden_ArtifactUid = nil
 }
 
-func (x *UploadFileArtifactResult_Success) ClearFilepath() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Filepath = nil
-}
-
 func (x *UploadFileArtifactResult_Success) ClearMimeType() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_MimeType = nil
 }
 
 func (x *UploadFileArtifactResult_Success) ClearSizeBytes() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_SizeBytes = 0
-}
-
-func (x *UploadFileArtifactResult_Success) ClearDescription() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_Description = nil
 }
 
 type UploadFileArtifactResult_Success_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ArtifactUid *string
-	Filepath    *string
 	MimeType    *string
 	SizeBytes   *int64
-	Description *string
 }
 
 func (b0 UploadFileArtifactResult_Success_builder) Build() *UploadFileArtifactResult_Success {
@@ -34064,24 +34007,16 @@ func (b0 UploadFileArtifactResult_Success_builder) Build() *UploadFileArtifactRe
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ArtifactUid != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ArtifactUid = b.ArtifactUid
 	}
-	if b.Filepath != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
-		x.xxx_hidden_Filepath = b.Filepath
-	}
 	if b.MimeType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_MimeType = b.MimeType
 	}
 	if b.SizeBytes != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_SizeBytes = *b.SizeBytes
-	}
-	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
-		x.xxx_hidden_Description = b.Description
 	}
 	return m0
 }
@@ -35517,20 +35452,18 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"other_text\x18\x02 \x01(\tR\totherTextB\b\n" +
 	"\x06answerB\b\n" +
-	"\x06result\"x\n" +
+	"\x06result\"r\n" +
 	"\x12UploadFileArtifact\x12:\n" +
-	"\x04file\x18\x01 \x01(\v2&.warp.multi_agent.v1.FilePathReferenceR\x04file\x12&\n" +
-	"\vdescription\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\"\xa2\x03\n" +
+	"\x04file\x18\x01 \x01(\v2&.warp.multi_agent.v1.FilePathReferenceR\x04file\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\"\xd7\x02\n" +
 	"\x18UploadFileArtifactResult\x12Q\n" +
 	"\asuccess\x18\x01 \x01(\v25.warp.multi_agent.v1.UploadFileArtifactResult.SuccessH\x00R\asuccess\x12K\n" +
-	"\x05error\x18\x02 \x01(\v23.warp.multi_agent.v1.UploadFileArtifactResult.ErrorH\x00R\x05error\x1a\xb2\x01\n" +
+	"\x05error\x18\x02 \x01(\v23.warp.multi_agent.v1.UploadFileArtifactResult.ErrorH\x00R\x05error\x1ah\n" +
 	"\aSuccess\x12!\n" +
-	"\fartifact_uid\x18\x01 \x01(\tR\vartifactUid\x12 \n" +
-	"\bfilepath\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\bfilepath\x12\x1b\n" +
-	"\tmime_type\x18\x03 \x01(\tR\bmimeType\x12\x1d\n" +
+	"\fartifact_uid\x18\x01 \x01(\tR\vartifactUid\x12\x1b\n" +
+	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12\x1d\n" +
 	"\n" +
-	"size_bytes\x18\x04 \x01(\x03R\tsizeBytes\x12&\n" +
-	"\vdescription\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vdescription\x1a'\n" +
+	"size_bytes\x18\x03 \x01(\x03R\tsizeBytes\x1a'\n" +
 	"\x05Error\x12\x1e\n" +
 	"\amessage\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\amessageB\b\n" +
 	"\x06result\"\xf8\x05\n" +

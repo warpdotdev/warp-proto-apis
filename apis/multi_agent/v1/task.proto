@@ -1798,7 +1798,8 @@ message AskUserQuestionResult {
 // A client tool call to upload a local file as a conversation artifact.
 message UploadFileArtifact {
   FilePathReference file = 1;
-  string description = 2 [ (sensitive) = true ];
+  // Client/agent-provided description; non-sensitive by design.
+  string description = 2;
 }
 
 // The result of an UploadFileArtifact tool call.
@@ -1810,10 +1811,8 @@ message UploadFileArtifactResult {
 
   message Success {
     string artifact_uid = 1;
-    string filepath = 2 [ (sensitive) = true ];
-    string mime_type = 3;
-    int64 size_bytes = 4;
-    string description = 5 [ (sensitive) = true ];
+    string mime_type = 2;
+    int64 size_bytes = 3;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
