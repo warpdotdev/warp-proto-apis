@@ -7,6 +7,11 @@ default-members = [
     "apis/*/*/gen/rust",
 ]
 
+[workspace.package]
+authors = ["Warp Team <dev@warp.dev>"]
+license = "AGPL-3.0-only"
+publish = false
+
 [workspace.dependencies]
 prost = "0.14.3"
 prost-types = "0.14.3"
