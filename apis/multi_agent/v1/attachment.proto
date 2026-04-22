@@ -67,6 +67,18 @@ message LongRunningShellCommandSnapshot {
   // When true, the output is from the alternate screen buffer (like 'less', 'vim', 'top').
   // When false, the output is from the normal scrollback history.
   bool is_alt_screen_active = 4;
+
+  // Whether this snapshot was produced by preempting the agent's wait rather than by the command
+  // completing or a scheduled timer expiring.
+  //
+  // Set to `true` when:
+  //   - The agent requested `on_completion` but the client's 120s cap was hit before the command
+  //     finished (the command is still running).
+  //   - The user explicitly triggered an early snapshot (e.g. "Check now" affordance).
+  //
+  // When `true`, the server should inform the agent that the command is still running and that
+  // it should not treat this as a completion signal.
+  bool is_preempted = 5;
 }
 
 message DriveObject {

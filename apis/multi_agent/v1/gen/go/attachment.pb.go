@@ -833,6 +833,7 @@ type LongRunningShellCommandSnapshot struct {
 	xxx_hidden_Cursor            *string                `protobuf:"bytes,2,opt,name=cursor"`
 	xxx_hidden_CommandId         *string                `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
 	xxx_hidden_IsAltScreenActive bool                   `protobuf:"varint,4,opt,name=is_alt_screen_active,json=isAltScreenActive"`
+	xxx_hidden_IsPreempted       bool                   `protobuf:"varint,5,opt,name=is_preempted,json=isPreempted"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
 	unknownFields                protoimpl.UnknownFields
@@ -901,24 +902,36 @@ func (x *LongRunningShellCommandSnapshot) GetIsAltScreenActive() bool {
 	return false
 }
 
+func (x *LongRunningShellCommandSnapshot) GetIsPreempted() bool {
+	if x != nil {
+		return x.xxx_hidden_IsPreempted
+	}
+	return false
+}
+
 func (x *LongRunningShellCommandSnapshot) SetOutput(v string) {
 	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetCursor(v string) {
 	x.xxx_hidden_Cursor = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetCommandId(v string) {
 	x.xxx_hidden_CommandId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetIsAltScreenActive(v bool) {
 	x.xxx_hidden_IsAltScreenActive = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *LongRunningShellCommandSnapshot) SetIsPreempted(v bool) {
+	x.xxx_hidden_IsPreempted = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *LongRunningShellCommandSnapshot) HasOutput() bool {
@@ -949,6 +962,13 @@ func (x *LongRunningShellCommandSnapshot) HasIsAltScreenActive() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *LongRunningShellCommandSnapshot) HasIsPreempted() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *LongRunningShellCommandSnapshot) ClearOutput() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Output = nil
@@ -969,6 +989,11 @@ func (x *LongRunningShellCommandSnapshot) ClearIsAltScreenActive() {
 	x.xxx_hidden_IsAltScreenActive = false
 }
 
+func (x *LongRunningShellCommandSnapshot) ClearIsPreempted() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_IsPreempted = false
+}
+
 type LongRunningShellCommandSnapshot_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -985,6 +1010,17 @@ type LongRunningShellCommandSnapshot_builder struct {
 	// When true, the output is from the alternate screen buffer (like 'less', 'vim', 'top').
 	// When false, the output is from the normal scrollback history.
 	IsAltScreenActive *bool
+	// Whether this snapshot was produced by preempting the agent's wait rather than by the command
+	// completing or a scheduled timer expiring.
+	//
+	// Set to `true` when:
+	//   - The agent requested `on_completion` but the client's 120s cap was hit before the command
+	//     finished (the command is still running).
+	//   - The user explicitly triggered an early snapshot (e.g. "Check now" affordance).
+	//
+	// When `true`, the server should inform the agent that the command is still running and that
+	// it should not treat this as a completion signal.
+	IsPreempted *bool
 }
 
 func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellCommandSnapshot {
@@ -992,20 +1028,24 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Output = b.Output
 	}
 	if b.Cursor != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Cursor = b.Cursor
 	}
 	if b.CommandId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_CommandId = b.CommandId
 	}
 	if b.IsAltScreenActive != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_IsAltScreenActive = *b.IsAltScreenActive
+	}
+	if b.IsPreempted != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_IsPreempted = *b.IsPreempted
 	}
 	return m0
 }
@@ -2894,13 +2934,14 @@ const file_attachment_proto_rawDesc = "" +
 	"\x10is_auto_attached\x18\a \x01(\bR\x0eisAutoAttached\"\x87\x01\n" +
 	"\x13RunningShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
-	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"\xa7\x01\n" +
+	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"\xca\x01\n" +
 	"\x1fLongRunningShellCommandSnapshot\x12\x1c\n" +
 	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x16\n" +
 	"\x06cursor\x18\x02 \x01(\tR\x06cursor\x12\x1d\n" +
 	"\n" +
 	"command_id\x18\x03 \x01(\tR\tcommandId\x12/\n" +
-	"\x14is_alt_screen_active\x18\x04 \x01(\bR\x11isAltScreenActive\"\x91\x02\n" +
+	"\x14is_alt_screen_active\x18\x04 \x01(\bR\x11isAltScreenActive\x12!\n" +
+	"\fis_preempted\x18\x05 \x01(\bR\visPreempted\"\x91\x02\n" +
 	"\vDriveObject\x12\x16\n" +
 	"\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uid\x12;\n" +
 	"\bworkflow\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.WorkflowH\x00R\bworkflow\x12;\n" +
