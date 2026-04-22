@@ -37,3 +37,9 @@ This is installed by the bootstrap script.
 
 ### Rust
 There are no specific dependencies required for Rust, outside of the `protoc` compiler and a Rust toolchain.  The Rust code generation happens at compile time (as part of a Rust build script), so no additional setup is required and nothing needs to be regenerated and checked in when proto files are modified.
+
+## License
+
+This project is licensed under version 3 of the GNU Affero General Public License; see LICENSE.md.
+
+Warp requires contributors to sign a contributor license agreement (CLA) before their contributions can be merged. You can read and sign our CLA at https://cla.warp.dev.
