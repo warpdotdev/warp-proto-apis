@@ -180,6 +180,14 @@ message Message {
   // for the request.
   google.protobuf.Timestamp timestamp = 14;
 
+  // Wall-clock time at which the server began producing this message. Paired
+  // with `timestamp` (the end time, stamped when the message is finalized).
+  // Populated for server-produced messages whose production takes non-zero
+  // time (agent_output, agent_reasoning, tool_call). Unset for
+  // client-submitted inputs (user_query, system_query, tool_call_result)
+  // where start is approximately equal to end.
+  google.protobuf.Timestamp start_timestamp = 28;
+
   // An opaque payload that the client should simply roundtrip.
   string server_message_data = 7;
 
