@@ -492,25 +492,25 @@ message Message {
 
     // A tool call to apply diffs to files.
     message ApplyFileDiffs {
-      string summary = 1;
+      string summary = 1 [ (sensitive) = true ];
       repeated FileDiff diffs = 2;
       repeated NewFile new_files = 3;
       repeated DeleteFile deleted_files = 4;
       repeated V4AFileUpdate v4a_updates = 5;
 
       message FileDiff {
-        string file_path = 1;
+        string file_path = 1 [ (sensitive) = true ];
         // The content to be replaced.
-        string search = 2;
+        string search = 2 [ (sensitive) = true ];
         // The content that replaces `search`.
-        string replace = 3;
+        string replace = 3 [ (sensitive) = true ];
       }
 
       message V4AFileUpdate {
-        string file_path = 1;
+        string file_path = 1 [ (sensitive) = true ];
 
         // Optional file rename.
-        string move_to = 2;
+        string move_to = 2 [ (sensitive) = true ];
 
         repeated Hunk hunks = 3;
 
@@ -520,28 +520,28 @@ message Message {
         message Hunk {
           // Context to quickly identify the location of the change (i.e. the
           // `@@` statements).
-          repeated string change_context = 1;
+          repeated string change_context = 1 [ (sensitive) = true ];
           // The context lines right before the change.
-          string pre_context = 2;
+          string pre_context = 2 [ (sensitive) = true ];
           // The old content that is being replaced.
           // Empty if lines are only being added.
-          string old = 3;
+          string old = 3 [ (sensitive) = true ];
           // The new content that replaces the old content.
           // Empty if lines are only being deleted.
-          string new = 4;
+          string new = 4 [ (sensitive) = true ];
           // The context lines right after the change.
-          string post_context = 5;
+          string post_context = 5 [ (sensitive) = true ];
         }
       }
 
       message NewFile {
         // Path of the file to create.
-        string file_path = 1;
+        string file_path = 1 [ (sensitive) = true ];
         // The new file contents.
-        string content = 2;
+        string content = 2 [ (sensitive) = true ];
       }
 
-      message DeleteFile { string file_path = 1; }
+      message DeleteFile { string file_path = 1 [ (sensitive) = true ]; }
     }
 
     // A tool call to suggest a plan.
