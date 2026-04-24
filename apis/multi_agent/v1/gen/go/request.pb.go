@@ -7625,9 +7625,9 @@ type Request_Settings_ApiKeys_builder struct {
 	// If `true`, the client allows the use of Warp credits for LLM calls when
 	// keys are provided.
 	AllowUseOfWarpCredits *bool
-	// Optional AWS credentials (e.g. for Bedrock).
+	// For AWS Bedrock inference
 	AwsCredentials *Request_Settings_ApiKeys_AWSCredentials
-	// Optional Azure credentials (e.g. for Azure AI Foundry).
+	// For Azure Foundry inference
 	AzureCredentials *Request_Settings_ApiKeys_AzureCredentials
 }
 
@@ -7901,21 +7901,7 @@ func (x *Request_Settings_ApiKeys_AzureCredentials) ClearAccessToken() {
 type Request_Settings_ApiKeys_AzureCredentials_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Short-lived Microsoft Entra access token, minted client-side.
-	//
-	// The token must be scoped to the
-	// `https://cognitiveservices.azure.com/.default` audience so that it
-	// is accepted by Azure AI Foundry / Azure OpenAI inference endpoints.
-	//
-	// The server uses the token statically for one request and never
-	// stores or refreshes it. If the token has expired by the time the
-	// server tries to use it the request fails and the client is
-	// responsible for minting a fresh token before retrying.
-	//
-	// The client may produce this token via any supported Entra flow,
-	// e.g. a user-delegated flow, a service principal client-credentials
-	// flow, or a federated-credential (OIDC) exchange. The server does
-	// not need to know which path produced the token.
+	// Short-lived Microsoft Entra access token
 	AccessToken *string
 }
 
