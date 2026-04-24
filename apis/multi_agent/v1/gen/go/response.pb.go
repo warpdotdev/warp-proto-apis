@@ -27,13 +27,14 @@ const (
 type LLMProvider int32
 
 const (
-	LLMProvider_LLM_PROVIDER_UNKNOWN     LLMProvider = 0
-	LLMProvider_LLM_PROVIDER_ANTHROPIC   LLMProvider = 1
-	LLMProvider_LLM_PROVIDER_OPENAI      LLMProvider = 2
-	LLMProvider_LLM_PROVIDER_GOOGLE      LLMProvider = 3
-	LLMProvider_LLM_PROVIDER_XAI         LLMProvider = 4
-	LLMProvider_LLM_PROVIDER_OPENROUTER  LLMProvider = 5
-	LLMProvider_LLM_PROVIDER_AWS_BEDROCK LLMProvider = 6
+	LLMProvider_LLM_PROVIDER_UNKNOWN       LLMProvider = 0
+	LLMProvider_LLM_PROVIDER_ANTHROPIC     LLMProvider = 1
+	LLMProvider_LLM_PROVIDER_OPENAI        LLMProvider = 2
+	LLMProvider_LLM_PROVIDER_GOOGLE        LLMProvider = 3
+	LLMProvider_LLM_PROVIDER_XAI           LLMProvider = 4
+	LLMProvider_LLM_PROVIDER_OPENROUTER    LLMProvider = 5
+	LLMProvider_LLM_PROVIDER_AWS_BEDROCK   LLMProvider = 6
+	LLMProvider_LLM_PROVIDER_AZURE_FOUNDRY LLMProvider = 7
 )
 
 // Enum value maps for LLMProvider.
@@ -46,15 +47,17 @@ var (
 		4: "LLM_PROVIDER_XAI",
 		5: "LLM_PROVIDER_OPENROUTER",
 		6: "LLM_PROVIDER_AWS_BEDROCK",
+		7: "LLM_PROVIDER_AZURE_FOUNDRY",
 	}
 	LLMProvider_value = map[string]int32{
-		"LLM_PROVIDER_UNKNOWN":     0,
-		"LLM_PROVIDER_ANTHROPIC":   1,
-		"LLM_PROVIDER_OPENAI":      2,
-		"LLM_PROVIDER_GOOGLE":      3,
-		"LLM_PROVIDER_XAI":         4,
-		"LLM_PROVIDER_OPENROUTER":  5,
-		"LLM_PROVIDER_AWS_BEDROCK": 6,
+		"LLM_PROVIDER_UNKNOWN":       0,
+		"LLM_PROVIDER_ANTHROPIC":     1,
+		"LLM_PROVIDER_OPENAI":        2,
+		"LLM_PROVIDER_GOOGLE":        3,
+		"LLM_PROVIDER_XAI":           4,
+		"LLM_PROVIDER_OPENROUTER":    5,
+		"LLM_PROVIDER_AWS_BEDROCK":   6,
+		"LLM_PROVIDER_AZURE_FOUNDRY": 7,
 	}
 )
 
@@ -4921,7 +4924,7 @@ const file_response_proto_rawDesc = "" +
 	"\x0flast_message_id\x18\x04 \x01(\tR\rlastMessageId\x124\n" +
 	"\x16expected_message_count\x18\x05 \x01(\rR\x14expectedMessageCount\x12O\n" +
 	"\x14replacement_messages\x18\x06 \x03(\v2\x1c.warp.multi_agent.v1.MessageR\x13replacementMessagesB\b\n" +
-	"\x06actionJ\x04\b\x02\x10\x03R\x12update_task_status*\xc6\x01\n" +
+	"\x06actionJ\x04\b\x02\x10\x03R\x12update_task_status*\xe6\x01\n" +
 	"\vLLMProvider\x12\x18\n" +
 	"\x14LLM_PROVIDER_UNKNOWN\x10\x00\x12\x1a\n" +
 	"\x16LLM_PROVIDER_ANTHROPIC\x10\x01\x12\x17\n" +
@@ -4929,7 +4932,8 @@ const file_response_proto_rawDesc = "" +
 	"\x13LLM_PROVIDER_GOOGLE\x10\x03\x12\x14\n" +
 	"\x10LLM_PROVIDER_XAI\x10\x04\x12\x1b\n" +
 	"\x17LLM_PROVIDER_OPENROUTER\x10\x05\x12\x1c\n" +
-	"\x18LLM_PROVIDER_AWS_BEDROCK\x10\x06BMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\x18LLM_PROVIDER_AWS_BEDROCK\x10\x06\x12\x1e\n" +
+	"\x1aLLM_PROVIDER_AZURE_FOUNDRY\x10\aBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_response_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
