@@ -469,8 +469,11 @@ message Request {
       // keys are provided.
       bool allow_use_of_warp_credits = 5;
 
-      // Optional AWS credentials (e.g. for Bedrock).
+      // For AWS Bedrock inference
       AWSCredentials aws_credentials = 6;
+
+      // For Azure Foundry inference
+      AzureCredentials azure_credentials = 7;
 
       message AWSCredentials {
         string access_key = 1 [ (sensitive) = true ];
@@ -479,7 +482,12 @@ message Request {
         string region = 4;
       }
 
-      // TODO(isaiah): Add Azure/GCP credentials here...
+      message AzureCredentials {
+        // Short-lived Microsoft Entra access token
+        string access_token = 1 [ (sensitive) = true ];
+      }
+
+      // TODO(isaiah): Add GCP credentials here...
     }
   }
 
