@@ -7153,7 +7153,7 @@ type Request_Settings_ModelConfig struct {
 	xxx_hidden_Coding                      *string                `protobuf:"bytes,3,opt,name=coding"`
 	xxx_hidden_CliAgent                    *string                `protobuf:"bytes,4,opt,name=cli_agent,json=cliAgent"`
 	xxx_hidden_ComputerUseAgent            *string                `protobuf:"bytes,5,opt,name=computer_use_agent,json=computerUseAgent"`
-	xxx_hidden_BaseModelContextWindowLimit int32                  `protobuf:"varint,6,opt,name=base_model_context_window_limit,json=baseModelContextWindowLimit"`
+	xxx_hidden_BaseModelContextWindowLimit uint32                 `protobuf:"varint,6,opt,name=base_model_context_window_limit,json=baseModelContextWindowLimit"`
 	XXX_raceDetectHookData                 protoimpl.RaceDetectHookData
 	XXX_presence                           [1]uint32
 	unknownFields                          protoimpl.UnknownFields
@@ -7236,7 +7236,7 @@ func (x *Request_Settings_ModelConfig) GetComputerUseAgent() string {
 	return ""
 }
 
-func (x *Request_Settings_ModelConfig) GetBaseModelContextWindowLimit() int32 {
+func (x *Request_Settings_ModelConfig) GetBaseModelContextWindowLimit() uint32 {
 	if x != nil {
 		return x.xxx_hidden_BaseModelContextWindowLimit
 	}
@@ -7269,7 +7269,7 @@ func (x *Request_Settings_ModelConfig) SetComputerUseAgent(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
-func (x *Request_Settings_ModelConfig) SetBaseModelContextWindowLimit(v int32) {
+func (x *Request_Settings_ModelConfig) SetBaseModelContextWindowLimit(v uint32) {
 	x.xxx_hidden_BaseModelContextWindowLimit = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
@@ -7365,7 +7365,7 @@ type Request_Settings_ModelConfig_builder struct {
 	ComputerUseAgent *string
 	// User-selected max input-token context window for the base model.
 	// Zero or unset means "use the model's default max".
-	BaseModelContextWindowLimit *int32
+	BaseModelContextWindowLimit *uint32
 }
 
 func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelConfig {
@@ -8531,7 +8531,7 @@ const file_request_proto_rawDesc = "" +
 	"\x06coding\x18\x03 \x01(\tR\x06coding\x12\x1b\n" +
 	"\tcli_agent\x18\x04 \x01(\tR\bcliAgent\x12,\n" +
 	"\x12computer_use_agent\x18\x05 \x01(\tR\x10computerUseAgent\x12D\n" +
-	"\x1fbase_model_context_window_limit\x18\x06 \x01(\x05R\x1bbaseModelContextWindowLimit\x1a\xd1\x03\n" +
+	"\x1fbase_model_context_window_limit\x18\x06 \x01(\rR\x1bbaseModelContextWindowLimit\x1a\xd1\x03\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +

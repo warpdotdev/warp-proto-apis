@@ -456,7 +456,7 @@ message Request {
 
       // User-selected max input-token context window for the base model.
       // Zero or unset means "use the model's default max".
-      int32 base_model_context_window_limit = 6;
+      uint32 base_model_context_window_limit = 6;
     }
 
     message ApiKeys {
