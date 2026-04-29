@@ -179,6 +179,7 @@ message Request {
         AskUserQuestionResult ask_user_question = 31;
         StartAgentV2Result start_agent_v2 = 32;
         UploadFileArtifactResult upload_file_artifact = 33;
+        OrchestrateResult orchestrate_result = 34;
       }
     }
 
@@ -437,6 +438,11 @@ message Request {
 
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
+
+    // If `true`, the client supports the orchestrate tool and can render the
+    // OrchestrateConfigCard. When true (combined with server-side feature flag),
+    // the LLM receives `orchestrate` instead of `start_agent`/`start_agent_v2`.
+    bool supports_orchestrate = 28;
 
     message ModelConfig {
       // The LLM of preference for general tasks.

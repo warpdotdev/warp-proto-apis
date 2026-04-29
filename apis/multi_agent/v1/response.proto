@@ -7,6 +7,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
 
 import "options.proto";
+import "skill.proto";
 import "suggestions.proto";
 import "task.proto";
 
@@ -230,6 +231,7 @@ message ClientAction {
     StartNewConversation start_new_conversation = 12;
     UpdateTaskServerData update_task_server_data = 13;
     MoveMessagesToNewTask move_messages_to_new_task = 14;
+    OrchestrateAction orchestrate = 15;
   }
 
   // Create task action
@@ -317,6 +319,40 @@ message ClientAction {
     // the messages are simply moved.
     repeated Message replacement_messages = 6;
   }
+}
+
+// Client action emitted by the server when an orchestrate tool call has been
+// parsed and validated. Rendered by the Warp desktop client as the
+// OrchestrateConfigCard. Exactly one OrchestrateAction is emitted per
+// orchestrate tool call.
+message OrchestrateAction {
+  // Echoed from the originating Orchestrate tool call so the client can
+  // associate result/cancel messages with the right call.
+  string tool_call_id = 1;
+  // The summary the LLM provided; rendered as the card header.
+  string summary = 2;
+  // Resolved (server-side) run-wide model. Reflects either the LLM-supplied
+  // value or the orchestrator-inherited default.
+  string model_id = 3;
+  // Resolved run-wide harness. Reflects either the LLM-supplied value or the
+  // orchestrator-inherited default.
+  StartAgentV2.ExecutionMode.Harness harness = 4;
+  // Resolved execution mode. If remote.environment_id is empty the client
+  // must gate Launch until the user picks an environment.
+  oneof execution_mode {
+    Orchestrate.Local local = 5;
+    Orchestrate.Remote remote = 6;
+  }
+  // Shared skill references for every child agent.
+  repeated SkillRef skills = 7;
+  // Per-agent slice in input order. Each entry's prompt is the resolved full
+  // per-child prompt (base_prompt + "\n\n" + agent.prompt when both are
+  // non-empty, or just base_prompt when the per-agent prompt is empty).
+  message Agent {
+    string name = 1;
+    string prompt = 2;
+  }
+  repeated Agent agents = 8;
 }
 
 enum LLMProvider {

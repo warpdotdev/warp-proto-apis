@@ -390,6 +390,7 @@ message Message {
       AskUserQuestion ask_user_question = 32;
       StartAgentV2 start_agent_v2 = 33;
       UploadFileArtifact upload_file_artifact = 34;
+      Orchestrate orchestrate = 35;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -930,6 +931,7 @@ message Message {
       AskUserQuestionResult ask_user_question = 36;
       StartAgentV2Result start_agent_v2 = 37;
       UploadFileArtifactResult upload_file_artifact = 38;
+      OrchestrateResult orchestrate_result = 39;
     }
 
     // Result of a server-side tool call.
@@ -1577,6 +1579,7 @@ enum ToolType {
   ASK_USER_QUESTION = 29;
   START_AGENT_V2 = 30;
   UPLOAD_FILE_ARTIFACT = 31;
+  TOOL_TYPE_ORCHESTRATE = 32;
 }
 
 message UserQueryMode {
@@ -1792,6 +1795,98 @@ message AskUserQuestionResult {
       // Populated if the user provided free-form "Other" input.
       string other_text = 2;
     }
+  }
+}
+
+// A client tool call to orchestrate a batch of child agents in a single tool call.
+message Orchestrate {
+  // Empty marker for the local execution mode; kept as a distinct message so
+  // future local-only options can be added without breaking the oneof shape.
+  message Local {}
+
+  message Remote {
+    string environment_id = 1;
+  }
+
+  message AgentRunConfig {
+    string name = 1;
+    // Optional per-agent prompt. The effective prompt sent to the agent is the
+    // concatenation of base_prompt and this field (with "\n\n" between them when
+    // both are non-empty). May be empty when base_prompt is non-empty.
+    string prompt = 2;
+  }
+
+  string summary = 1;
+  string base_prompt = 2;
+  // Skills attached to every child agent. Mirrors the repeated SkillRef shape
+  // that StartAgentV2.ExecutionMode.Remote already uses.
+  repeated SkillRef skills = 3;
+  // Optional model override applied to every child agent. When omitted, the
+  // orchestrator's current model is used.
+  string model_id = 4;
+  // Optional run-wide harness override applied to every child agent. When
+  // omitted, the orchestrator's current harness is used. "opencode" is rejected
+  // server-side when remote execution mode is set.
+  StartAgentV2.ExecutionMode.Harness harness = 5;
+  // Exactly one of local or remote must be set.
+  oneof execution_mode {
+    Local local = 6;
+    Remote remote = 7;
+  }
+  // Array of per-child agent configurations, 1–32 entries.
+  repeated AgentRunConfig agent_run_configs = 8;
+}
+
+// The result of an Orchestrate tool call.
+message OrchestrateResult {
+  // A child agent that was successfully created.
+  message LaunchedAgent {
+    string agent_id = 1;
+  }
+
+  // A child agent that failed to be created.
+  message FailedAgent {
+    string error = 1;
+  }
+
+  // Per-agent outcome for a single entry in agent_run_configs[]. The name
+  // matches the original agent_run_configs[i].name; order matches input order.
+  message AgentOutcome {
+    string name = 1;
+    oneof result {
+      LaunchedAgent launched = 2;
+      FailedAgent failed = 3;
+    }
+  }
+
+  // The user clicked Launch. Carries the resolved (post-UI) run-wide
+  // configuration and a per-agent outcome for every entry in agent_run_configs[].
+  message Launched {
+    string model_id = 1;
+    StartAgentV2.ExecutionMode.Harness harness = 2;
+    // Mirrors the Orchestrate.execution_mode oneof so the resolved mode is
+    // reported back unambiguously, including Remote.environment_id.
+    oneof execution_mode {
+      Orchestrate.Local local = 3;
+      Orchestrate.Remote remote = 4;
+    }
+    repeated AgentOutcome agents = 5;
+  }
+
+  // The user clicked "Launch without orchestration". No children were launched.
+  message LaunchDenied {}
+
+  // No children were launched at all. Used only when the orchestrate call
+  // could not produce any per-agent CreateAgentTask attempts. Partial-batch
+  // failures are reported inside Launched.agents, not here.
+  message Failure {
+    string error = 1;
+  }
+
+  oneof outcome {
+    Launched launched = 1;
+    LaunchDenied launch_denied = 2;
+    Failure failure = 3;
   }
 }
 
