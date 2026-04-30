@@ -115,8 +115,8 @@ message Request {
           // Resolution of a passive suggestion that should be brought into context.
           PassiveSuggestionResultInput passive_suggestion_result = 6;
 
-          // [Stage 2] Inbound transport for plan-card orchestration config
-          // edits. Server's input interceptor converts this into a top-level
+          // Inbound transport for plan-card orchestration config edits.
+          // Server's input interceptor converts this into a top-level
           // Message.OrchestrationConfigSnapshot in conversation history.
           OrchestrationConfigUpdate orchestration_config_update = 7;
         }
@@ -444,9 +444,7 @@ message Request {
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
 
-    // If `true`, the client supports the `orchestrate` tool (batched agent
-    // launches with an inline confirmation card and Stage 2 plan-attached
-    // OrchestrationConfig).
+    // If `true`, the client supports the `orchestrate` tool.
     bool supports_orchestrate = 28;
 
     message ModelConfig {

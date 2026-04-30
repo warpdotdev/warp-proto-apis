@@ -208,14 +208,6 @@ message Message {
     ModelUsed model_used = 25;
     EventsFromAgents events_from_agents = 26;
     PassiveSuggestionResult passive_suggestion_result = 27;
-    // Canonical in-history record of an orchestration config update for a
-    // plan. Carried as a top-level Message variant (peer of ToolCall /
-    // ToolCallResult / ServerEvent) because ServerEvent payloads are
-    // server-only and opaque to the client; the plan card needs to hydrate
-    // from this on conversation restore. Written by the server either when
-    // synthesizing a snapshot from an LLM-driven plan create / update tool
-    // call (with `approved` defaulting to true) or when the input
-    // interceptor receives an OrchestrationConfigUpdate from the client.
     OrchestrationConfigSnapshot orchestration_config_snapshot = 28;
   }
 
@@ -1731,139 +1723,74 @@ message StartAgentV2Result {
 }
 
 // A client tool call to start a batch of child agents that share run-wide
-// configuration (model, harness, execution mode). Single tool call; emitted
-// in place of multiple sequential start_agent / start_agent_v2 calls when the
-// orchestrate tool is enabled. The full per-child prompt the agent runs is
-// computed at dispatch time as `base_prompt + "\n\n" + agent_run_configs[i].prompt`
-// (or just `base_prompt` when prompt is empty).
-//
-// During streaming the server emits this message with only the LLM-supplied
-// fields populated; once the tool call payload is complete the server
-// re-emits this message via SetOrchestrateToolCall with server-resolved
-// run-wide defaults (model_id, harness, execution_mode) and (Stage 2)
-// auto_launch folded into the same fields. Clients should read these values
-// off the tool call message only after IsComplete is true.
+// configuration (model, harness, execution mode).
 message Orchestrate {
-  // Local execution-mode marker. Empty marker; kept as a distinct message
-  // so future local-only options can be added without breaking the oneof.
   message Local {}
-
-  // Remote execution-mode parameters.
   message Remote {
-    // Cloud environment UID for the batch.
     string environment_id = 1;
-    // Worker host ID for routing the batch.
     string worker_host = 2;
-    // Run-wide for the batch: every child gets the same value. Set by the
-    // LLM based on its knowledge of what the children will be doing (e.g.
-    // visual inspection, browser automation), not a user preference.
-    // Intentionally NOT part of OrchestrationConfig and NOT part of the
-    // Stage 2 match check.
+    // LLM-set per call based on whether the children need computer use
+    // (browser automation, visual inspection, etc.). Not a user preference.
     bool computer_use_enabled = 3;
   }
-
-  // One per child agent, in the order they should be dispatched and rendered.
+  // One per child agent. Full per-child prompt is computed at dispatch as
+  // base_prompt + "\n\n" + prompt (or just base_prompt when prompt is empty).
   message AgentRunConfig {
-    // The display name for the child agent. Required.
     string name = 1 [ (sensitive) = true ];
-    // Per-agent prompt that is appended to base_prompt when both are set.
-    // May be empty when base_prompt is non-empty.
     string prompt = 2 [ (sensitive) = true ];
-    // Optional task title. Agent-set only (not user-editable in the Stage 1
-    // Edit editor or the Stage 2 plan card config block); flows through to
-    // the spawned task's title metadata as a more descriptive label than
-    // `name`.
+    // Agent-set descriptive label flowed through to the spawned task title.
     string title = 3 [ (sensitive) = true ];
   }
-
-  // Short summary text shown as the title row on the confirmation card.
-  // Phrased as a question so Reject/Accept read naturally.
   string summary = 1 [ (sensitive) = true ];
-  // Text prepended to every child agent's prompt.
   string base_prompt = 2 [ (sensitive) = true ];
-  // Optional skill references attached to every child agent.
   repeated SkillRef skills = 3;
-  // Optional model override applied to every child. Client-facing model ID
-  // (e.g. "auto", "claude-4-6-opus-high"). Empty during streaming; server
-  // resolves on completion.
   string model_id = 4;
-  // Optional harness override applied to every child. Empty during
-  // streaming; server resolves on completion.
   StartAgentV2.ExecutionMode.Harness harness = 5;
-  // Where the children should run. Empty during streaming; server resolves
-  // on completion.
   oneof execution_mode {
     Local local = 6;
     Remote remote = 7;
   }
-  // Per-child agent run configuration. 1-32 entries inclusive.
   repeated AgentRunConfig agent_run_configs = 8;
-  // [Stage 2] When true, the client skips the confirmation card and
-  // dispatches per-agent CreateAgentTask immediately. Set by the server
-  // when the orchestrate call's run-wide fields match the active approved
-  // OrchestrationConfig. Defaults to false; Stage 1 server never sets it
-  // and Stage 1 client never reads it.
+  // When true, the client skips the confirmation card and dispatches
+  // per-agent CreateAgentTask immediately. Set by the server when the
+  // orchestrate call's run-wide fields match the active approved
+  // OrchestrationConfig.
   bool auto_launch = 9;
 }
 
 // The result of an Orchestrate tool call.
 message OrchestrateResult {
-  // Per-agent successful launch outcome.
-  message LaunchedAgent {
-    // The server-assigned child run ID.
-    string agent_id = 1;
-  }
-  // Per-agent failure outcome.
+  message LaunchedAgent { string agent_id = 1; }
   message FailedAgent { string error = 1 [ (sensitive) = true ]; }
-
-  // Per-agent outcome reported in agent_run_configs[] input order regardless
-  // of which dispatch returned first.
+  // Per-agent outcome in agent_run_configs[] input order. `title` mirrors
+  // the LLM-supplied agent_run_configs[i].title (empty when unset).
   message AgentOutcome {
-    // Mirrors the `name` from the corresponding agent_run_configs entry.
     string name = 1 [ (sensitive) = true ];
-    // Mirrors agent_run_configs[i].title (or empty when the LLM didn't set
-    // it), so the formatter and downstream consumers don't have to look
-    // it up by index against the LLM-supplied fields.
     string title = 4 [ (sensitive) = true ];
     oneof result {
       LaunchedAgent launched = 2;
       FailedAgent failed = 3;
     }
   }
-
-  // The user clicked Accept (Stage 1) or auto-launch fired (Stage 2).
-  // Carries the resolved configuration (post any user edits) and per-agent
-  // outcomes. Partial-batch failures (some children created, some not) are
-  // reported here; not in the Failure variant.
+  // Orchestration launched. Carries the resolved configuration and
+  // per-agent outcomes.
   message Launched {
-    // The resolved client-facing model ID actually used for dispatch.
     string model_id = 1;
-    // The resolved harness actually used for dispatch.
     StartAgentV2.ExecutionMode.Harness harness = 2;
     oneof execution_mode {
       Orchestrate.Local local = 3;
       Orchestrate.Remote remote = 4;
     }
-    // One AgentOutcome per agent_run_configs[] entry, in input order.
     repeated AgentOutcome agents = 5;
   }
-
-  // The orchestration was declined for a non-error reason. [Stage 2] emitted
-  // by the server when the user has disapproved orchestration on the active
-  // plan; in that case `reason` is exactly
-  // "orchestration disapproved by user". Stage 1 never emits this variant
-  // (Stage 1 has no disapproval mechanism). Future denial paths (policy,
-  // quota, etc.) can populate `reason` with a different string without
-  // overloading the Failure variant.
+  // Declined for a non-error reason. Currently emitted when the user has
+  // disapproved orchestration on the active plan; future denial paths
+  // (policy, quota, etc.) populate `reason` with a different string.
   message LaunchDenied { string reason = 1; }
-
-  // No agents were launched because something actually went wrong. Used
-  // when server-side validation rejects the call before any per-agent
-  // attempt or when the client cannot begin the launch sequence (e.g.
-  // transient network failure). NOT used for user-driven outcomes like
-  // disapproval or cancellation -- those have their own variants.
+  // Actual error: server-side validation rejected the call, or the client
+  // could not begin the launch sequence. NOT used for user-driven outcomes
+  // (disapproval, cancellation) -- those have their own variants.
   message Failure { string error = 1 [ (sensitive) = true ]; }
-
   oneof outcome {
     Launched launched = 1;
     LaunchDenied launch_denied = 2;
@@ -1871,81 +1798,57 @@ message OrchestrateResult {
   }
 }
 
-// [Stage 2] Plan-level orchestration settings. Set by the agent via the plan
-// tool's orchestration_config parameter; edited by the user via the plan
-// card config block. Just data; approval state lives on
+// Plan-level orchestration settings. Status (approved/disapproved) lives on
 // OrchestrationConfigSnapshot below.
-//
-// model_id and harness are explicit `optional` (unlike the same-named fields
-// on Orchestrate above) because the Stage 2 match check needs to distinguish
-// "unset on the config" from "empty string" -- an unset config field lets
-// the orchestrate call's value pass through without triggering a card.
 message OrchestrationConfig {
-  // Local execution-mode marker. Empty marker; mirrors Orchestrate.Local.
   message Local {}
-
-  // Remote execution-mode parameters. Note that this does NOT carry
-  // computer_use_enabled -- that field is per-call on Orchestrate.Remote
-  // because it is set by the LLM based on what the children will be doing,
-  // not a user-toggled per-plan setting.
   message Remote {
     string environment_id = 1;
     string worker_host = 2;
   }
-
-  // Optional client-facing model ID. Unset means the call's model_id
-  // passes through unchanged. Edition 2023 gives singular scalar fields
-  // explicit presence by default, so the Go-side match check can
-  // distinguish unset from "".
   string model_id = 1;
-  // Optional harness. Unset means the call's harness passes through
-  // unchanged. Message-typed fields always have explicit presence.
   StartAgentV2.ExecutionMode.Harness harness = 2;
-  // Execution mode for the plan. When set, the call's execution_mode is
-  // checked against this value during the match check; when unset, the
-  // call's execution_mode passes through unchanged.
   oneof execution_mode {
     Local local = 3;
     Remote remote = 4;
   }
 }
 
-// [Stage 2] Inbound wire transport: the client sends this on its next
-// outbound request after the user makes dirty edits in the plan card config
-// block. One-shot transport; consumed by the server's input interceptor and
-// not persisted in this form. Defined as a separate message from
-// OrchestrationConfigSnapshot below so that the inbound transport and the
-// in-history representation can evolve independently.
-message OrchestrationConfigUpdate {
-  // The plan document this update is for.
-  string plan_id = 1;
-  // The plan-level orchestration settings the user just edited.
-  OrchestrationConfig config = 2;
-  // The user's approval state at the time of the edit.
-  bool approved = 3;
+// User's approval status for orchestration on a plan. Each variant is a
+// distinct message so future status values (e.g. revoked, pending, or
+// variants carrying a reason payload) can be added without breaking wire
+// format.
+message OrchestrationStatus {
+  message Approved {}
+  message Disapproved {}
+  oneof status {
+    Approved approved = 1;
+    Disapproved disapproved = 2;
+  }
 }
 
-// [Stage 2] Canonical in-history record of an orchestration config update,
-// carried as a top-level Message variant. Written by the server in two
-// cases:
-//   (1) synthesized when an LLM-driven create_plan / edit_plans includes
-//       orchestration_config (server defaults approved=true);
-//   (2) synthesized when the input interceptor receives an
-//       OrchestrationConfigUpdate from the client.
-// Visible to the client in conversation history so the plan card can
-// hydrate from the most recent event for each plan after a conversation is
-// restored. The server runtime's active-state lookup reads this form too.
-message OrchestrationConfigSnapshot {
-  // The plan document this snapshot is for.
+// Inbound transport: client sends on its next outbound request after the
+// user edits the plan card. One-shot; consumed by the server's input
+// interceptor and not persisted in this form. Separate from the in-history
+// snapshot below so the two can evolve independently.
+message OrchestrationConfigUpdate {
   string plan_id = 1;
-  // The plan-level orchestration settings active as of this snapshot.
   OrchestrationConfig config = 2;
-  // True iff the user has approved orchestration for this plan. The agent
-  // CANNOT set this field -- the plan tool's orchestration_config parameter
-  // is OrchestrationConfig only, with no approved flag. Defaults to true
-  // when the server synthesizes the bootstrap event on plan create. The
-  // user toggles it via the plan card's "Use orchestration" toggle.
-  bool approved = 3;
+  OrchestrationStatus status = 3;
+}
+
+// Canonical in-history record. Top-level Message variant rather than a
+// ServerEvent sub-type because the plan card hydrates from this on restore.
+// Synthesized by the server when (1) the plan tool's input includes
+// orchestration_config (status defaults to Approved), or (2) the input
+// interceptor receives an OrchestrationConfigUpdate. The server runtime's
+// active-state lookup reads only this form. The agent cannot set `status`
+// -- the plan tool's orchestration_config parameter is OrchestrationConfig
+// only.
+message OrchestrationConfigSnapshot {
+  string plan_id = 1;
+  OrchestrationConfig config = 2;
+  OrchestrationStatus status = 3;
 }
 
 // A client tool call to send a message to one or more agents.

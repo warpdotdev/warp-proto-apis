@@ -2220,9 +2220,7 @@ type Request_Settings_builder struct {
 	SupportsResearchAgent *bool
 	// If `true`, the client supports orchestration v2 durable messaging.
 	SupportsOrchestrationV2 *bool
-	// If `true`, the client supports the `orchestrate` tool (batched agent
-	// launches with an inline confirmation card and Stage 2 plan-attached
-	// OrchestrationConfig).
+	// If `true`, the client supports the `orchestrate` tool.
 	SupportsOrchestrate *bool
 }
 
@@ -6325,8 +6323,8 @@ type Request_Input_UserInputs_UserInput_builder struct {
 	EventsFromAgents           *Request_Input_UserInputs_EventsFromAgents
 	// Resolution of a passive suggestion that should be brought into context.
 	PassiveSuggestionResult *Request_Input_UserInputs_PassiveSuggestionResultInput
-	// [Stage 2] Inbound transport for plan-card orchestration config
-	// edits. Server's input interceptor converts this into a top-level
+	// Inbound transport for plan-card orchestration config edits.
+	// Server's input interceptor converts this into a top-level
 	// Message.OrchestrationConfigSnapshot in conversation history.
 	OrchestrationConfigUpdate *OrchestrationConfigUpdate
 	// -- end of xxx_hidden_Input
@@ -6400,8 +6398,8 @@ type request_Input_UserInputs_UserInput_PassiveSuggestionResult struct {
 }
 
 type request_Input_UserInputs_UserInput_OrchestrationConfigUpdate struct {
-	// [Stage 2] Inbound transport for plan-card orchestration config
-	// edits. Server's input interceptor converts this into a top-level
+	// Inbound transport for plan-card orchestration config edits.
+	// Server's input interceptor converts this into a top-level
 	// Message.OrchestrationConfigSnapshot in conversation history.
 	OrchestrationConfigUpdate *OrchestrationConfigUpdate `protobuf:"bytes,7,opt,name=orchestration_config_update,json=orchestrationConfigUpdate,oneof"`
 }
