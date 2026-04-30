@@ -14,6 +14,7 @@ import "options.proto";
 import "suggestions.proto";
 import "task.proto";
 import "skill.proto";
+import "orchestration.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
