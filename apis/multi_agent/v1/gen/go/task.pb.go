@@ -34036,7 +34036,6 @@ func (b0 RunAgentsResult_FailedAgent_builder) Build() *RunAgentsResult_FailedAge
 type RunAgentsResult_AgentOutcome struct {
 	state                  protoimpl.MessageState                `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                               `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Title       *string                               `protobuf:"bytes,4,opt,name=title"`
 	xxx_hidden_Result      isRunAgentsResult_AgentOutcome_Result `protobuf_oneof:"result"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
@@ -34079,16 +34078,6 @@ func (x *RunAgentsResult_AgentOutcome) GetName() string {
 	return ""
 }
 
-func (x *RunAgentsResult_AgentOutcome) GetTitle() string {
-	if x != nil {
-		if x.xxx_hidden_Title != nil {
-			return *x.xxx_hidden_Title
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *RunAgentsResult_AgentOutcome) GetLaunched() *RunAgentsResult_LaunchedAgent {
 	if x != nil {
 		if x, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Launched); ok {
@@ -34109,12 +34098,7 @@ func (x *RunAgentsResult_AgentOutcome) GetFailed() *RunAgentsResult_FailedAgent 
 
 func (x *RunAgentsResult_AgentOutcome) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *RunAgentsResult_AgentOutcome) SetTitle(v string) {
-	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
 func (x *RunAgentsResult_AgentOutcome) SetLaunched(v *RunAgentsResult_LaunchedAgent) {
@@ -34138,13 +34122,6 @@ func (x *RunAgentsResult_AgentOutcome) HasName() bool {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
-}
-
-func (x *RunAgentsResult_AgentOutcome) HasTitle() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
 func (x *RunAgentsResult_AgentOutcome) HasResult() bool {
@@ -34173,11 +34150,6 @@ func (x *RunAgentsResult_AgentOutcome) HasFailed() bool {
 func (x *RunAgentsResult_AgentOutcome) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
-}
-
-func (x *RunAgentsResult_AgentOutcome) ClearTitle() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Title = nil
 }
 
 func (x *RunAgentsResult_AgentOutcome) ClearResult() {
@@ -34217,8 +34189,7 @@ func (x *RunAgentsResult_AgentOutcome) WhichResult() case_RunAgentsResult_AgentO
 type RunAgentsResult_AgentOutcome_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Name  *string
-	Title *string
+	Name *string
 	// Fields of oneof xxx_hidden_Result:
 	Launched *RunAgentsResult_LaunchedAgent
 	Failed   *RunAgentsResult_FailedAgent
@@ -34230,12 +34201,8 @@ func (b0 RunAgentsResult_AgentOutcome_builder) Build() *RunAgentsResult_AgentOut
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Name = b.Name
-	}
-	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Title = b.Title
 	}
 	if b.Launched != nil {
 		x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Launched{b.Launched}
@@ -34521,9 +34488,7 @@ func (*runAgentsResult_Launched_Local) isRunAgentsResult_Launched_ResolvedExecut
 
 func (*runAgentsResult_Launched_Remote) isRunAgentsResult_Launched_ResolvedExecutionMode() {}
 
-// Declined for a non-error reason. Currently emitted when the user has
-// disapproved orchestration on the active plan; future denial paths
-// (policy, quota, etc.) populate `reason` with a different string.
+// Declined for a non-error reason.
 type RunAgentsResult_Denied struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Reason      *string                `protobuf:"bytes,1,opt,name=reason"`
@@ -36324,7 +36289,7 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x0fcitations.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\n" +
-	"todo.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x15agent_execution.proto\"\xd9\x02\n" +
+	"todo.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xd9\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
@@ -37236,7 +37201,7 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"\xc2\x05\n" +
+	"\x06result\"\xbc\x05\n" +
 	"\tRunAgents\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12%\n" +
 	"\vbase_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
@@ -37257,8 +37222,7 @@ const file_task_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12\x1a\n" +
 	"\x05title\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x05titleB\x10\n" +
-	"\x0eexecution_modeJ\x04\b\t\x10\n" +
-	"\"\xf0\a\n" +
+	"\x0eexecution_mode\"\xd4\a\n" +
 	"\x0fRunAgentsResult\x12K\n" +
 	"\blaunched\x18\x01 \x01(\v2-.warp.multi_agent.v1.RunAgentsResult.LaunchedH\x00R\blaunched\x12E\n" +
 	"\x06denied\x18\x02 \x01(\v2+.warp.multi_agent.v1.RunAgentsResult.DeniedH\x00R\x06denied\x12H\n" +
@@ -37266,10 +37230,9 @@ const file_task_proto_rawDesc = "" +
 	"\rLaunchedAgent\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a)\n" +
 	"\vFailedAgent\x12\x1a\n" +
-	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05error\x1a\xec\x01\n" +
+	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05error\x1a\xd0\x01\n" +
 	"\fAgentOutcome\x12\x18\n" +
-	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1a\n" +
-	"\x05title\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x12P\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12P\n" +
 	"\blaunched\x18\x02 \x01(\v22.warp.multi_agent.v1.RunAgentsResult.LaunchedAgentH\x00R\blaunched\x12J\n" +
 	"\x06failed\x18\x03 \x01(\v20.warp.multi_agent.v1.RunAgentsResult.FailedAgentH\x00R\x06failedB\b\n" +
 	"\x06result\x1a\xe4\x02\n" +
@@ -38100,7 +38063,6 @@ func file_task_proto_init() {
 	file_todo_proto_init()
 	file_skill_proto_init()
 	file_orchestration_proto_init()
-	file_agent_execution_proto_init()
 	file_task_proto_msgTypes[1].OneofWrappers = []any{
 		(*agentEvent_LifecycleEvent_)(nil),
 	}

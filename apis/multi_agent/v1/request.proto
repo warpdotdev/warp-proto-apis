@@ -354,9 +354,6 @@ message Request {
   }
 
   message Settings {
-    reserved 28; // formerly supports_orchestrate
-    reserved supports_orchestrate;
-
     ModelConfig model_config = 1;
     bool rules_enabled = 2;
     bool web_context_retrieval_enabled = 3;

@@ -18,7 +18,6 @@ import "options.proto";
 import "todo.proto";
 import "skill.proto";
 import "orchestration.proto";
-import "agent_execution.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -1727,8 +1726,6 @@ message StartAgentV2Result {
 // A client tool call to start a batch of child agents that share run-wide
 // configuration (model, harness, execution mode).
 message RunAgents {
-  reserved 9; // formerly auto_launch
-
   message Local {}
   message Remote {
     string environment_id = 1;
@@ -1769,7 +1766,6 @@ message RunAgentsResult {
   // by `name`.
   message AgentOutcome {
     string name = 1 [ (sensitive) = true ];
-    string title = 4 [ (sensitive) = true ];
     oneof result {
       LaunchedAgent launched = 2;
       FailedAgent failed = 3;
@@ -1786,9 +1782,7 @@ message RunAgentsResult {
     }
     repeated AgentOutcome agents = 5;
   }
-  // Declined for a non-error reason. Currently emitted when the user has
-  // disapproved orchestration on the active plan; future denial paths
-  // (policy, quota, etc.) populate `reason` with a different string.
+  // Declined for a non-error reason.
   message Denied { string reason = 1; }
   // Actual error: server-side validation rejected the call, or the client
   // could not begin the launch sequence. NOT used for user-driven outcomes
