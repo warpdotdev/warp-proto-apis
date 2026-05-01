@@ -8,10 +8,22 @@ import "google/protobuf/go_features.proto";
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
-// The harness that runs an agent.
+// The harness that runs an agent. Modeled as a oneof so future per-variant
+// configuration (e.g. an embedded model_id on a third-party harness) can
+// be added without breaking the wire format.
 message Harness {
-  // The harness type identifier (e.g. "oz" or "claude").
-  string type = 1;
+  oneof variant {
+    Oz oz = 1;
+    ClaudeCode claude_code = 2;
+    OpenCode open_code = 3;
+    Gemini gemini = 4;
+    Codex codex = 5;
+  }
+  message Oz {}
+  message ClaudeCode {}
+  message OpenCode {}
+  message Gemini {}
+  message Codex {}
 }
 
 // Plan-level orchestration settings.

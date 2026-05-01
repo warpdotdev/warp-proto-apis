@@ -23,14 +23,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// The harness that runs an agent.
+// The harness that runs an agent. Modeled as a oneof so future per-variant
+// configuration (e.g. an embedded model_id on a third-party harness) can
+// be added without breaking the wire format.
 type Harness struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Type        *string                `protobuf:"bytes,1,opt,name=type"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state              protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Variant isHarness_Variant      `protobuf_oneof:"variant"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
 func (x *Harness) Reset() {
@@ -58,50 +58,276 @@ func (x *Harness) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Harness) GetType() string {
+func (x *Harness) GetOz() *Harness_Oz {
 	if x != nil {
-		if x.xxx_hidden_Type != nil {
-			return *x.xxx_hidden_Type
+		if x, ok := x.xxx_hidden_Variant.(*harness_Oz_); ok {
+			return x.Oz
 		}
-		return ""
 	}
-	return ""
+	return nil
 }
 
-func (x *Harness) SetType(v string) {
-	x.xxx_hidden_Type = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+func (x *Harness) GetClaudeCode() *Harness_ClaudeCode {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Variant.(*harness_ClaudeCode_); ok {
+			return x.ClaudeCode
+		}
+	}
+	return nil
 }
 
-func (x *Harness) HasType() bool {
+func (x *Harness) GetOpenCode() *Harness_OpenCode {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Variant.(*harness_OpenCode_); ok {
+			return x.OpenCode
+		}
+	}
+	return nil
+}
+
+func (x *Harness) GetGemini() *Harness_Gemini {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Variant.(*harness_Gemini_); ok {
+			return x.Gemini
+		}
+	}
+	return nil
+}
+
+func (x *Harness) GetCodex() *Harness_Codex {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Variant.(*harness_Codex_); ok {
+			return x.Codex
+		}
+	}
+	return nil
+}
+
+func (x *Harness) SetOz(v *Harness_Oz) {
+	if v == nil {
+		x.xxx_hidden_Variant = nil
+		return
+	}
+	x.xxx_hidden_Variant = &harness_Oz_{v}
+}
+
+func (x *Harness) SetClaudeCode(v *Harness_ClaudeCode) {
+	if v == nil {
+		x.xxx_hidden_Variant = nil
+		return
+	}
+	x.xxx_hidden_Variant = &harness_ClaudeCode_{v}
+}
+
+func (x *Harness) SetOpenCode(v *Harness_OpenCode) {
+	if v == nil {
+		x.xxx_hidden_Variant = nil
+		return
+	}
+	x.xxx_hidden_Variant = &harness_OpenCode_{v}
+}
+
+func (x *Harness) SetGemini(v *Harness_Gemini) {
+	if v == nil {
+		x.xxx_hidden_Variant = nil
+		return
+	}
+	x.xxx_hidden_Variant = &harness_Gemini_{v}
+}
+
+func (x *Harness) SetCodex(v *Harness_Codex) {
+	if v == nil {
+		x.xxx_hidden_Variant = nil
+		return
+	}
+	x.xxx_hidden_Variant = &harness_Codex_{v}
+}
+
+func (x *Harness) HasVariant() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_Variant != nil
 }
 
-func (x *Harness) ClearType() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Type = nil
+func (x *Harness) HasOz() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Variant.(*harness_Oz_)
+	return ok
+}
+
+func (x *Harness) HasClaudeCode() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Variant.(*harness_ClaudeCode_)
+	return ok
+}
+
+func (x *Harness) HasOpenCode() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Variant.(*harness_OpenCode_)
+	return ok
+}
+
+func (x *Harness) HasGemini() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Variant.(*harness_Gemini_)
+	return ok
+}
+
+func (x *Harness) HasCodex() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Variant.(*harness_Codex_)
+	return ok
+}
+
+func (x *Harness) ClearVariant() {
+	x.xxx_hidden_Variant = nil
+}
+
+func (x *Harness) ClearOz() {
+	if _, ok := x.xxx_hidden_Variant.(*harness_Oz_); ok {
+		x.xxx_hidden_Variant = nil
+	}
+}
+
+func (x *Harness) ClearClaudeCode() {
+	if _, ok := x.xxx_hidden_Variant.(*harness_ClaudeCode_); ok {
+		x.xxx_hidden_Variant = nil
+	}
+}
+
+func (x *Harness) ClearOpenCode() {
+	if _, ok := x.xxx_hidden_Variant.(*harness_OpenCode_); ok {
+		x.xxx_hidden_Variant = nil
+	}
+}
+
+func (x *Harness) ClearGemini() {
+	if _, ok := x.xxx_hidden_Variant.(*harness_Gemini_); ok {
+		x.xxx_hidden_Variant = nil
+	}
+}
+
+func (x *Harness) ClearCodex() {
+	if _, ok := x.xxx_hidden_Variant.(*harness_Codex_); ok {
+		x.xxx_hidden_Variant = nil
+	}
+}
+
+const Harness_Variant_not_set_case case_Harness_Variant = 0
+const Harness_Oz_case case_Harness_Variant = 1
+const Harness_ClaudeCode_case case_Harness_Variant = 2
+const Harness_OpenCode_case case_Harness_Variant = 3
+const Harness_Gemini_case case_Harness_Variant = 4
+const Harness_Codex_case case_Harness_Variant = 5
+
+func (x *Harness) WhichVariant() case_Harness_Variant {
+	if x == nil {
+		return Harness_Variant_not_set_case
+	}
+	switch x.xxx_hidden_Variant.(type) {
+	case *harness_Oz_:
+		return Harness_Oz_case
+	case *harness_ClaudeCode_:
+		return Harness_ClaudeCode_case
+	case *harness_OpenCode_:
+		return Harness_OpenCode_case
+	case *harness_Gemini_:
+		return Harness_Gemini_case
+	case *harness_Codex_:
+		return Harness_Codex_case
+	default:
+		return Harness_Variant_not_set_case
+	}
 }
 
 type Harness_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The harness type identifier (e.g. "oz" or "claude").
-	Type *string
+	// Fields of oneof xxx_hidden_Variant:
+	Oz         *Harness_Oz
+	ClaudeCode *Harness_ClaudeCode
+	OpenCode   *Harness_OpenCode
+	Gemini     *Harness_Gemini
+	Codex      *Harness_Codex
+	// -- end of xxx_hidden_Variant
 }
 
 func (b0 Harness_builder) Build() *Harness {
 	m0 := &Harness{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.Type != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_Type = b.Type
+	if b.Oz != nil {
+		x.xxx_hidden_Variant = &harness_Oz_{b.Oz}
+	}
+	if b.ClaudeCode != nil {
+		x.xxx_hidden_Variant = &harness_ClaudeCode_{b.ClaudeCode}
+	}
+	if b.OpenCode != nil {
+		x.xxx_hidden_Variant = &harness_OpenCode_{b.OpenCode}
+	}
+	if b.Gemini != nil {
+		x.xxx_hidden_Variant = &harness_Gemini_{b.Gemini}
+	}
+	if b.Codex != nil {
+		x.xxx_hidden_Variant = &harness_Codex_{b.Codex}
 	}
 	return m0
 }
+
+type case_Harness_Variant protoreflect.FieldNumber
+
+func (x case_Harness_Variant) String() string {
+	md := file_orchestration_proto_msgTypes[0].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isHarness_Variant interface {
+	isHarness_Variant()
+}
+
+type harness_Oz_ struct {
+	Oz *Harness_Oz `protobuf:"bytes,1,opt,name=oz,oneof"`
+}
+
+type harness_ClaudeCode_ struct {
+	ClaudeCode *Harness_ClaudeCode `protobuf:"bytes,2,opt,name=claude_code,json=claudeCode,oneof"`
+}
+
+type harness_OpenCode_ struct {
+	OpenCode *Harness_OpenCode `protobuf:"bytes,3,opt,name=open_code,json=openCode,oneof"`
+}
+
+type harness_Gemini_ struct {
+	Gemini *Harness_Gemini `protobuf:"bytes,4,opt,name=gemini,oneof"`
+}
+
+type harness_Codex_ struct {
+	Codex *Harness_Codex `protobuf:"bytes,5,opt,name=codex,oneof"`
+}
+
+func (*harness_Oz_) isHarness_Variant() {}
+
+func (*harness_ClaudeCode_) isHarness_Variant() {}
+
+func (*harness_OpenCode_) isHarness_Variant() {}
+
+func (*harness_Gemini_) isHarness_Variant() {}
+
+func (*harness_Codex_) isHarness_Variant() {}
 
 // Plan-level orchestration settings.
 type OrchestrationConfig struct {
@@ -766,6 +992,221 @@ func (b0 OrchestrationConfigSnapshot_builder) Build() *OrchestrationConfigSnapsh
 	return m0
 }
 
+type Harness_Oz struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Harness_Oz) Reset() {
+	*x = Harness_Oz{}
+	mi := &file_orchestration_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Harness_Oz) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Harness_Oz) ProtoMessage() {}
+
+func (x *Harness_Oz) ProtoReflect() protoreflect.Message {
+	mi := &file_orchestration_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Harness_Oz_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Harness_Oz_builder) Build() *Harness_Oz {
+	m0 := &Harness_Oz{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type Harness_ClaudeCode struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Harness_ClaudeCode) Reset() {
+	*x = Harness_ClaudeCode{}
+	mi := &file_orchestration_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Harness_ClaudeCode) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Harness_ClaudeCode) ProtoMessage() {}
+
+func (x *Harness_ClaudeCode) ProtoReflect() protoreflect.Message {
+	mi := &file_orchestration_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Harness_ClaudeCode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Harness_ClaudeCode_builder) Build() *Harness_ClaudeCode {
+	m0 := &Harness_ClaudeCode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type Harness_OpenCode struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Harness_OpenCode) Reset() {
+	*x = Harness_OpenCode{}
+	mi := &file_orchestration_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Harness_OpenCode) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Harness_OpenCode) ProtoMessage() {}
+
+func (x *Harness_OpenCode) ProtoReflect() protoreflect.Message {
+	mi := &file_orchestration_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Harness_OpenCode_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Harness_OpenCode_builder) Build() *Harness_OpenCode {
+	m0 := &Harness_OpenCode{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type Harness_Gemini struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Harness_Gemini) Reset() {
+	*x = Harness_Gemini{}
+	mi := &file_orchestration_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Harness_Gemini) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Harness_Gemini) ProtoMessage() {}
+
+func (x *Harness_Gemini) ProtoReflect() protoreflect.Message {
+	mi := &file_orchestration_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Harness_Gemini_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Harness_Gemini_builder) Build() *Harness_Gemini {
+	m0 := &Harness_Gemini{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
+type Harness_Codex struct {
+	state         protoimpl.MessageState `protogen:"opaque.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Harness_Codex) Reset() {
+	*x = Harness_Codex{}
+	mi := &file_orchestration_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Harness_Codex) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Harness_Codex) ProtoMessage() {}
+
+func (x *Harness_Codex) ProtoReflect() protoreflect.Message {
+	mi := &file_orchestration_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type Harness_Codex_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+}
+
+func (b0 Harness_Codex_builder) Build() *Harness_Codex {
+	m0 := &Harness_Codex{}
+	b, x := &b0, m0
+	_, _ = b, x
+	return m0
+}
+
 type OrchestrationConfig_Local struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -774,7 +1215,7 @@ type OrchestrationConfig_Local struct {
 
 func (x *OrchestrationConfig_Local) Reset() {
 	*x = OrchestrationConfig_Local{}
-	mi := &file_orchestration_proto_msgTypes[5]
+	mi := &file_orchestration_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -786,7 +1227,7 @@ func (x *OrchestrationConfig_Local) String() string {
 func (*OrchestrationConfig_Local) ProtoMessage() {}
 
 func (x *OrchestrationConfig_Local) ProtoReflect() protoreflect.Message {
-	mi := &file_orchestration_proto_msgTypes[5]
+	mi := &file_orchestration_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +1262,7 @@ type OrchestrationConfig_Remote struct {
 
 func (x *OrchestrationConfig_Remote) Reset() {
 	*x = OrchestrationConfig_Remote{}
-	mi := &file_orchestration_proto_msgTypes[6]
+	mi := &file_orchestration_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -833,7 +1274,7 @@ func (x *OrchestrationConfig_Remote) String() string {
 func (*OrchestrationConfig_Remote) ProtoMessage() {}
 
 func (x *OrchestrationConfig_Remote) ProtoReflect() protoreflect.Message {
-	mi := &file_orchestration_proto_msgTypes[6]
+	mi := &file_orchestration_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -928,7 +1369,7 @@ type OrchestrationStatus_Approved struct {
 
 func (x *OrchestrationStatus_Approved) Reset() {
 	*x = OrchestrationStatus_Approved{}
-	mi := &file_orchestration_proto_msgTypes[7]
+	mi := &file_orchestration_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -940,7 +1381,7 @@ func (x *OrchestrationStatus_Approved) String() string {
 func (*OrchestrationStatus_Approved) ProtoMessage() {}
 
 func (x *OrchestrationStatus_Approved) ProtoReflect() protoreflect.Message {
-	mi := &file_orchestration_proto_msgTypes[7]
+	mi := &file_orchestration_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -971,7 +1412,7 @@ type OrchestrationStatus_Disapproved struct {
 
 func (x *OrchestrationStatus_Disapproved) Reset() {
 	*x = OrchestrationStatus_Disapproved{}
-	mi := &file_orchestration_proto_msgTypes[8]
+	mi := &file_orchestration_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -983,7 +1424,7 @@ func (x *OrchestrationStatus_Disapproved) String() string {
 func (*OrchestrationStatus_Disapproved) ProtoMessage() {}
 
 func (x *OrchestrationStatus_Disapproved) ProtoReflect() protoreflect.Message {
-	mi := &file_orchestration_proto_msgTypes[8]
+	mi := &file_orchestration_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1010,9 +1451,22 @@ var File_orchestration_proto protoreflect.FileDescriptor
 
 const file_orchestration_proto_rawDesc = "" +
 	"\n" +
-	"\x13orchestration.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\x1d\n" +
-	"\aHarness\x12\x12\n" +
-	"\x04type\x18\x01 \x01(\tR\x04type\"\xe8\x02\n" +
+	"\x13orchestration.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\x87\x03\n" +
+	"\aHarness\x121\n" +
+	"\x02oz\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.Harness.OzH\x00R\x02oz\x12J\n" +
+	"\vclaude_code\x18\x02 \x01(\v2'.warp.multi_agent.v1.Harness.ClaudeCodeH\x00R\n" +
+	"claudeCode\x12D\n" +
+	"\topen_code\x18\x03 \x01(\v2%.warp.multi_agent.v1.Harness.OpenCodeH\x00R\bopenCode\x12=\n" +
+	"\x06gemini\x18\x04 \x01(\v2#.warp.multi_agent.v1.Harness.GeminiH\x00R\x06gemini\x12:\n" +
+	"\x05codex\x18\x05 \x01(\v2\".warp.multi_agent.v1.Harness.CodexH\x00R\x05codex\x1a\x04\n" +
+	"\x02Oz\x1a\f\n" +
+	"\n" +
+	"ClaudeCode\x1a\n" +
+	"\n" +
+	"\bOpenCode\x1a\b\n" +
+	"\x06Gemini\x1a\a\n" +
+	"\x05CodexB\t\n" +
+	"\avariant\"\xe8\x02\n" +
 	"\x13OrchestrationConfig\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x126\n" +
 	"\aharness\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\aharness\x12F\n" +
@@ -1040,39 +1494,56 @@ const file_orchestration_proto_rawDesc = "" +
 	"\x06config\x18\x02 \x01(\v2(.warp.multi_agent.v1.OrchestrationConfigR\x06config\x12@\n" +
 	"\x06status\x18\x03 \x01(\v2(.warp.multi_agent.v1.OrchestrationStatusR\x06statusBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_orchestration_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_orchestration_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_orchestration_proto_goTypes = []any{
 	(*Harness)(nil),                         // 0: warp.multi_agent.v1.Harness
 	(*OrchestrationConfig)(nil),             // 1: warp.multi_agent.v1.OrchestrationConfig
 	(*OrchestrationStatus)(nil),             // 2: warp.multi_agent.v1.OrchestrationStatus
 	(*OrchestrationConfigUpdate)(nil),       // 3: warp.multi_agent.v1.OrchestrationConfigUpdate
 	(*OrchestrationConfigSnapshot)(nil),     // 4: warp.multi_agent.v1.OrchestrationConfigSnapshot
-	(*OrchestrationConfig_Local)(nil),       // 5: warp.multi_agent.v1.OrchestrationConfig.Local
-	(*OrchestrationConfig_Remote)(nil),      // 6: warp.multi_agent.v1.OrchestrationConfig.Remote
-	(*OrchestrationStatus_Approved)(nil),    // 7: warp.multi_agent.v1.OrchestrationStatus.Approved
-	(*OrchestrationStatus_Disapproved)(nil), // 8: warp.multi_agent.v1.OrchestrationStatus.Disapproved
+	(*Harness_Oz)(nil),                      // 5: warp.multi_agent.v1.Harness.Oz
+	(*Harness_ClaudeCode)(nil),              // 6: warp.multi_agent.v1.Harness.ClaudeCode
+	(*Harness_OpenCode)(nil),                // 7: warp.multi_agent.v1.Harness.OpenCode
+	(*Harness_Gemini)(nil),                  // 8: warp.multi_agent.v1.Harness.Gemini
+	(*Harness_Codex)(nil),                   // 9: warp.multi_agent.v1.Harness.Codex
+	(*OrchestrationConfig_Local)(nil),       // 10: warp.multi_agent.v1.OrchestrationConfig.Local
+	(*OrchestrationConfig_Remote)(nil),      // 11: warp.multi_agent.v1.OrchestrationConfig.Remote
+	(*OrchestrationStatus_Approved)(nil),    // 12: warp.multi_agent.v1.OrchestrationStatus.Approved
+	(*OrchestrationStatus_Disapproved)(nil), // 13: warp.multi_agent.v1.OrchestrationStatus.Disapproved
 }
 var file_orchestration_proto_depIdxs = []int32{
-	0, // 0: warp.multi_agent.v1.OrchestrationConfig.harness:type_name -> warp.multi_agent.v1.Harness
-	5, // 1: warp.multi_agent.v1.OrchestrationConfig.local:type_name -> warp.multi_agent.v1.OrchestrationConfig.Local
-	6, // 2: warp.multi_agent.v1.OrchestrationConfig.remote:type_name -> warp.multi_agent.v1.OrchestrationConfig.Remote
-	7, // 3: warp.multi_agent.v1.OrchestrationStatus.approved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Approved
-	8, // 4: warp.multi_agent.v1.OrchestrationStatus.disapproved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Disapproved
-	1, // 5: warp.multi_agent.v1.OrchestrationConfigUpdate.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
-	2, // 6: warp.multi_agent.v1.OrchestrationConfigUpdate.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
-	1, // 7: warp.multi_agent.v1.OrchestrationConfigSnapshot.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
-	2, // 8: warp.multi_agent.v1.OrchestrationConfigSnapshot.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	5,  // 0: warp.multi_agent.v1.Harness.oz:type_name -> warp.multi_agent.v1.Harness.Oz
+	6,  // 1: warp.multi_agent.v1.Harness.claude_code:type_name -> warp.multi_agent.v1.Harness.ClaudeCode
+	7,  // 2: warp.multi_agent.v1.Harness.open_code:type_name -> warp.multi_agent.v1.Harness.OpenCode
+	8,  // 3: warp.multi_agent.v1.Harness.gemini:type_name -> warp.multi_agent.v1.Harness.Gemini
+	9,  // 4: warp.multi_agent.v1.Harness.codex:type_name -> warp.multi_agent.v1.Harness.Codex
+	0,  // 5: warp.multi_agent.v1.OrchestrationConfig.harness:type_name -> warp.multi_agent.v1.Harness
+	10, // 6: warp.multi_agent.v1.OrchestrationConfig.local:type_name -> warp.multi_agent.v1.OrchestrationConfig.Local
+	11, // 7: warp.multi_agent.v1.OrchestrationConfig.remote:type_name -> warp.multi_agent.v1.OrchestrationConfig.Remote
+	12, // 8: warp.multi_agent.v1.OrchestrationStatus.approved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Approved
+	13, // 9: warp.multi_agent.v1.OrchestrationStatus.disapproved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Disapproved
+	1,  // 10: warp.multi_agent.v1.OrchestrationConfigUpdate.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
+	2,  // 11: warp.multi_agent.v1.OrchestrationConfigUpdate.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
+	1,  // 12: warp.multi_agent.v1.OrchestrationConfigSnapshot.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
+	2,  // 13: warp.multi_agent.v1.OrchestrationConfigSnapshot.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
+	14, // [14:14] is the sub-list for method output_type
+	14, // [14:14] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_orchestration_proto_init() }
 func file_orchestration_proto_init() {
 	if File_orchestration_proto != nil {
 		return
+	}
+	file_orchestration_proto_msgTypes[0].OneofWrappers = []any{
+		(*harness_Oz_)(nil),
+		(*harness_ClaudeCode_)(nil),
+		(*harness_OpenCode_)(nil),
+		(*harness_Gemini_)(nil),
+		(*harness_Codex_)(nil),
 	}
 	file_orchestration_proto_msgTypes[1].OneofWrappers = []any{
 		(*orchestrationConfig_Local_)(nil),
@@ -1088,7 +1559,7 @@ func file_orchestration_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_orchestration_proto_rawDesc), len(file_orchestration_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
