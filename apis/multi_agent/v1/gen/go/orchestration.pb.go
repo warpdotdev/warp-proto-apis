@@ -28,7 +28,7 @@ const (
 type OrchestrationConfig struct {
 	state                    protoimpl.MessageState              `protogen:"opaque.v1"`
 	xxx_hidden_ModelId       *string                             `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
-	xxx_hidden_Harness       *string                             `protobuf:"bytes,2,opt,name=harness"`
+	xxx_hidden_Harness       *Harness                            `protobuf:"bytes,2,opt,name=harness"`
 	xxx_hidden_ExecutionMode isOrchestrationConfig_ExecutionMode `protobuf_oneof:"execution_mode"`
 	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
 	XXX_presence             [1]uint32
@@ -71,14 +71,11 @@ func (x *OrchestrationConfig) GetModelId() string {
 	return ""
 }
 
-func (x *OrchestrationConfig) GetHarness() string {
+func (x *OrchestrationConfig) GetHarness() *Harness {
 	if x != nil {
-		if x.xxx_hidden_Harness != nil {
-			return *x.xxx_hidden_Harness
-		}
-		return ""
+		return x.xxx_hidden_Harness
 	}
-	return ""
+	return nil
 }
 
 func (x *OrchestrationConfig) GetLocal() *OrchestrationConfig_Local {
@@ -104,9 +101,8 @@ func (x *OrchestrationConfig) SetModelId(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *OrchestrationConfig) SetHarness(v string) {
-	x.xxx_hidden_Harness = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+func (x *OrchestrationConfig) SetHarness(v *Harness) {
+	x.xxx_hidden_Harness = v
 }
 
 func (x *OrchestrationConfig) SetLocal(v *OrchestrationConfig_Local) {
@@ -136,7 +132,7 @@ func (x *OrchestrationConfig) HasHarness() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+	return x.xxx_hidden_Harness != nil
 }
 
 func (x *OrchestrationConfig) HasExecutionMode() bool {
@@ -168,7 +164,6 @@ func (x *OrchestrationConfig) ClearModelId() {
 }
 
 func (x *OrchestrationConfig) ClearHarness() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Harness = nil
 }
 
@@ -210,13 +205,7 @@ type OrchestrationConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	ModelId *string
-	// Harness type identifier (e.g. "oz" or "claude"). Plain string rather
-	// than the StartAgentV2.ExecutionMode.Harness wrapper used on the
-	// Orchestrate tool call -- the wrapper lives in task.proto and using it
-	// here would create a cyclic import (orchestration.proto would import
-	// task.proto, and task.proto already imports orchestration.proto for
-	// OrchestrationConfigSnapshot).
-	Harness *string
+	Harness *Harness
 	// Fields of oneof xxx_hidden_ExecutionMode:
 	Local  *OrchestrationConfig_Local
 	Remote *OrchestrationConfig_Remote
@@ -231,10 +220,7 @@ func (b0 OrchestrationConfig_builder) Build() *OrchestrationConfig {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
-	if b.Harness != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_Harness = b.Harness
-	}
+	x.xxx_hidden_Harness = b.Harness
 	if b.Local != nil {
 		x.xxx_hidden_ExecutionMode = &orchestrationConfig_Local_{b.Local}
 	}
@@ -957,10 +943,10 @@ var File_orchestration_proto protoreflect.FileDescriptor
 
 const file_orchestration_proto_rawDesc = "" +
 	"\n" +
-	"\x13orchestration.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\xca\x02\n" +
+	"\x13orchestration.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\x15agent_execution.proto\"\xe8\x02\n" +
 	"\x13OrchestrationConfig\x12\x19\n" +
-	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12\x18\n" +
-	"\aharness\x18\x02 \x01(\tR\aharness\x12F\n" +
+	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x126\n" +
+	"\aharness\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\aharness\x12F\n" +
 	"\x05local\x18\x03 \x01(\v2..warp.multi_agent.v1.OrchestrationConfig.LocalH\x00R\x05local\x12I\n" +
 	"\x06remote\x18\x04 \x01(\v2/.warp.multi_agent.v1.OrchestrationConfig.RemoteH\x00R\x06remote\x1a\a\n" +
 	"\x05Local\x1aP\n" +
@@ -995,21 +981,23 @@ var file_orchestration_proto_goTypes = []any{
 	(*OrchestrationConfig_Remote)(nil),      // 5: warp.multi_agent.v1.OrchestrationConfig.Remote
 	(*OrchestrationStatus_Approved)(nil),    // 6: warp.multi_agent.v1.OrchestrationStatus.Approved
 	(*OrchestrationStatus_Disapproved)(nil), // 7: warp.multi_agent.v1.OrchestrationStatus.Disapproved
+	(*Harness)(nil),                         // 8: warp.multi_agent.v1.Harness
 }
 var file_orchestration_proto_depIdxs = []int32{
-	4, // 0: warp.multi_agent.v1.OrchestrationConfig.local:type_name -> warp.multi_agent.v1.OrchestrationConfig.Local
-	5, // 1: warp.multi_agent.v1.OrchestrationConfig.remote:type_name -> warp.multi_agent.v1.OrchestrationConfig.Remote
-	6, // 2: warp.multi_agent.v1.OrchestrationStatus.approved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Approved
-	7, // 3: warp.multi_agent.v1.OrchestrationStatus.disapproved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Disapproved
-	0, // 4: warp.multi_agent.v1.OrchestrationConfigUpdate.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
-	1, // 5: warp.multi_agent.v1.OrchestrationConfigUpdate.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
-	0, // 6: warp.multi_agent.v1.OrchestrationConfigSnapshot.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
-	1, // 7: warp.multi_agent.v1.OrchestrationConfigSnapshot.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	8, // 0: warp.multi_agent.v1.OrchestrationConfig.harness:type_name -> warp.multi_agent.v1.Harness
+	4, // 1: warp.multi_agent.v1.OrchestrationConfig.local:type_name -> warp.multi_agent.v1.OrchestrationConfig.Local
+	5, // 2: warp.multi_agent.v1.OrchestrationConfig.remote:type_name -> warp.multi_agent.v1.OrchestrationConfig.Remote
+	6, // 3: warp.multi_agent.v1.OrchestrationStatus.approved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Approved
+	7, // 4: warp.multi_agent.v1.OrchestrationStatus.disapproved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Disapproved
+	0, // 5: warp.multi_agent.v1.OrchestrationConfigUpdate.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
+	1, // 6: warp.multi_agent.v1.OrchestrationConfigUpdate.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
+	0, // 7: warp.multi_agent.v1.OrchestrationConfigSnapshot.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
+	1, // 8: warp.multi_agent.v1.OrchestrationConfigSnapshot.status:type_name -> warp.multi_agent.v1.OrchestrationStatus
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_orchestration_proto_init() }
@@ -1017,6 +1005,7 @@ func file_orchestration_proto_init() {
 	if File_orchestration_proto != nil {
 		return
 	}
+	file_agent_execution_proto_init()
 	file_orchestration_proto_msgTypes[0].OneofWrappers = []any{
 		(*orchestrationConfig_Local_)(nil),
 		(*orchestrationConfig_Remote_)(nil),

@@ -143,7 +143,7 @@ const (
 	ToolType_ASK_USER_QUESTION                      ToolType = 29
 	ToolType_START_AGENT_V2                         ToolType = 30
 	ToolType_UPLOAD_FILE_ARTIFACT                   ToolType = 31
-	ToolType_ORCHESTRATE                            ToolType = 32
+	ToolType_RUN_AGENTS                             ToolType = 32
 )
 
 // Enum value maps for ToolType.
@@ -181,7 +181,7 @@ var (
 		29: "ASK_USER_QUESTION",
 		30: "START_AGENT_V2",
 		31: "UPLOAD_FILE_ARTIFACT",
-		32: "ORCHESTRATE",
+		32: "RUN_AGENTS",
 	}
 	ToolType_value = map[string]int32{
 		"RUN_SHELL_COMMAND":                      0,
@@ -216,7 +216,7 @@ var (
 		"ASK_USER_QUESTION":                      29,
 		"START_AGENT_V2":                         30,
 		"UPLOAD_FILE_ARTIFACT":                   31,
-		"ORCHESTRATE":                            32,
+		"RUN_AGENTS":                             32,
 	}
 )
 
@@ -8795,36 +8795,35 @@ func (*startAgentV2Result_Error_) isStartAgentV2Result_Result() {}
 
 // A client tool call to start a batch of child agents that share run-wide
 // configuration (model, harness, execution mode).
-type Orchestrate struct {
-	state                      protoimpl.MessageState              `protogen:"opaque.v1"`
-	xxx_hidden_Summary         *string                             `protobuf:"bytes,1,opt,name=summary"`
-	xxx_hidden_BasePrompt      *string                             `protobuf:"bytes,2,opt,name=base_prompt,json=basePrompt"`
-	xxx_hidden_Skills          *[]*SkillRef                        `protobuf:"bytes,3,rep,name=skills"`
-	xxx_hidden_ModelId         *string                             `protobuf:"bytes,4,opt,name=model_id,json=modelId"`
-	xxx_hidden_Harness         *StartAgentV2_ExecutionMode_Harness `protobuf:"bytes,5,opt,name=harness"`
-	xxx_hidden_ExecutionMode   isOrchestrate_ExecutionMode         `protobuf_oneof:"execution_mode"`
-	xxx_hidden_AgentRunConfigs *[]*Orchestrate_AgentRunConfig      `protobuf:"bytes,8,rep,name=agent_run_configs,json=agentRunConfigs"`
-	xxx_hidden_AutoLaunch      bool                                `protobuf:"varint,9,opt,name=auto_launch,json=autoLaunch"`
+type RunAgents struct {
+	state                      protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_Summary         *string                      `protobuf:"bytes,1,opt,name=summary"`
+	xxx_hidden_BasePrompt      *string                      `protobuf:"bytes,2,opt,name=base_prompt,json=basePrompt"`
+	xxx_hidden_Skills          *[]*SkillRef                 `protobuf:"bytes,3,rep,name=skills"`
+	xxx_hidden_ModelId         *string                      `protobuf:"bytes,4,opt,name=model_id,json=modelId"`
+	xxx_hidden_Harness         *Harness                     `protobuf:"bytes,5,opt,name=harness"`
+	xxx_hidden_ExecutionMode   isRunAgents_ExecutionMode    `protobuf_oneof:"execution_mode"`
+	xxx_hidden_AgentRunConfigs *[]*RunAgents_AgentRunConfig `protobuf:"bytes,8,rep,name=agent_run_configs,json=agentRunConfigs"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
 	sizeCache                  protoimpl.SizeCache
 }
 
-func (x *Orchestrate) Reset() {
-	*x = Orchestrate{}
+func (x *RunAgents) Reset() {
+	*x = RunAgents{}
 	mi := &file_task_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Orchestrate) String() string {
+func (x *RunAgents) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Orchestrate) ProtoMessage() {}
+func (*RunAgents) ProtoMessage() {}
 
-func (x *Orchestrate) ProtoReflect() protoreflect.Message {
+func (x *RunAgents) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8836,7 +8835,7 @@ func (x *Orchestrate) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Orchestrate) GetSummary() string {
+func (x *RunAgents) GetSummary() string {
 	if x != nil {
 		if x.xxx_hidden_Summary != nil {
 			return *x.xxx_hidden_Summary
@@ -8846,7 +8845,7 @@ func (x *Orchestrate) GetSummary() string {
 	return ""
 }
 
-func (x *Orchestrate) GetBasePrompt() string {
+func (x *RunAgents) GetBasePrompt() string {
 	if x != nil {
 		if x.xxx_hidden_BasePrompt != nil {
 			return *x.xxx_hidden_BasePrompt
@@ -8856,7 +8855,7 @@ func (x *Orchestrate) GetBasePrompt() string {
 	return ""
 }
 
-func (x *Orchestrate) GetSkills() []*SkillRef {
+func (x *RunAgents) GetSkills() []*SkillRef {
 	if x != nil {
 		if x.xxx_hidden_Skills != nil {
 			return *x.xxx_hidden_Skills
@@ -8865,7 +8864,7 @@ func (x *Orchestrate) GetSkills() []*SkillRef {
 	return nil
 }
 
-func (x *Orchestrate) GetModelId() string {
+func (x *RunAgents) GetModelId() string {
 	if x != nil {
 		if x.xxx_hidden_ModelId != nil {
 			return *x.xxx_hidden_ModelId
@@ -8875,32 +8874,32 @@ func (x *Orchestrate) GetModelId() string {
 	return ""
 }
 
-func (x *Orchestrate) GetHarness() *StartAgentV2_ExecutionMode_Harness {
+func (x *RunAgents) GetHarness() *Harness {
 	if x != nil {
 		return x.xxx_hidden_Harness
 	}
 	return nil
 }
 
-func (x *Orchestrate) GetLocal() *Orchestrate_Local {
+func (x *RunAgents) GetLocal() *RunAgents_Local {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ExecutionMode.(*orchestrate_Local_); ok {
+		if x, ok := x.xxx_hidden_ExecutionMode.(*runAgents_Local_); ok {
 			return x.Local
 		}
 	}
 	return nil
 }
 
-func (x *Orchestrate) GetRemote() *Orchestrate_Remote {
+func (x *RunAgents) GetRemote() *RunAgents_Remote {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ExecutionMode.(*orchestrate_Remote_); ok {
+		if x, ok := x.xxx_hidden_ExecutionMode.(*runAgents_Remote_); ok {
 			return x.Remote
 		}
 	}
 	return nil
 }
 
-func (x *Orchestrate) GetAgentRunConfigs() []*Orchestrate_AgentRunConfig {
+func (x *RunAgents) GetAgentRunConfigs() []*RunAgents_AgentRunConfig {
 	if x != nil {
 		if x.xxx_hidden_AgentRunConfigs != nil {
 			return *x.xxx_hidden_AgentRunConfigs
@@ -8909,232 +8908,199 @@ func (x *Orchestrate) GetAgentRunConfigs() []*Orchestrate_AgentRunConfig {
 	return nil
 }
 
-func (x *Orchestrate) GetAutoLaunch() bool {
-	if x != nil {
-		return x.xxx_hidden_AutoLaunch
-	}
-	return false
-}
-
-func (x *Orchestrate) SetSummary(v string) {
+func (x *RunAgents) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
-func (x *Orchestrate) SetBasePrompt(v string) {
+func (x *RunAgents) SetBasePrompt(v string) {
 	x.xxx_hidden_BasePrompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
-func (x *Orchestrate) SetSkills(v []*SkillRef) {
+func (x *RunAgents) SetSkills(v []*SkillRef) {
 	x.xxx_hidden_Skills = &v
 }
 
-func (x *Orchestrate) SetModelId(v string) {
+func (x *RunAgents) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
-func (x *Orchestrate) SetHarness(v *StartAgentV2_ExecutionMode_Harness) {
+func (x *RunAgents) SetHarness(v *Harness) {
 	x.xxx_hidden_Harness = v
 }
 
-func (x *Orchestrate) SetLocal(v *Orchestrate_Local) {
+func (x *RunAgents) SetLocal(v *RunAgents_Local) {
 	if v == nil {
 		x.xxx_hidden_ExecutionMode = nil
 		return
 	}
-	x.xxx_hidden_ExecutionMode = &orchestrate_Local_{v}
+	x.xxx_hidden_ExecutionMode = &runAgents_Local_{v}
 }
 
-func (x *Orchestrate) SetRemote(v *Orchestrate_Remote) {
+func (x *RunAgents) SetRemote(v *RunAgents_Remote) {
 	if v == nil {
 		x.xxx_hidden_ExecutionMode = nil
 		return
 	}
-	x.xxx_hidden_ExecutionMode = &orchestrate_Remote_{v}
+	x.xxx_hidden_ExecutionMode = &runAgents_Remote_{v}
 }
 
-func (x *Orchestrate) SetAgentRunConfigs(v []*Orchestrate_AgentRunConfig) {
+func (x *RunAgents) SetAgentRunConfigs(v []*RunAgents_AgentRunConfig) {
 	x.xxx_hidden_AgentRunConfigs = &v
 }
 
-func (x *Orchestrate) SetAutoLaunch(v bool) {
-	x.xxx_hidden_AutoLaunch = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
-}
-
-func (x *Orchestrate) HasSummary() bool {
+func (x *RunAgents) HasSummary() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Orchestrate) HasBasePrompt() bool {
+func (x *RunAgents) HasBasePrompt() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Orchestrate) HasModelId() bool {
+func (x *RunAgents) HasModelId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Orchestrate) HasHarness() bool {
+func (x *RunAgents) HasHarness() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Harness != nil
 }
 
-func (x *Orchestrate) HasExecutionMode() bool {
+func (x *RunAgents) HasExecutionMode() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_ExecutionMode != nil
 }
 
-func (x *Orchestrate) HasLocal() bool {
+func (x *RunAgents) HasLocal() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ExecutionMode.(*orchestrate_Local_)
+	_, ok := x.xxx_hidden_ExecutionMode.(*runAgents_Local_)
 	return ok
 }
 
-func (x *Orchestrate) HasRemote() bool {
+func (x *RunAgents) HasRemote() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ExecutionMode.(*orchestrate_Remote_)
+	_, ok := x.xxx_hidden_ExecutionMode.(*runAgents_Remote_)
 	return ok
 }
 
-func (x *Orchestrate) HasAutoLaunch() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
-}
-
-func (x *Orchestrate) ClearSummary() {
+func (x *RunAgents) ClearSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Summary = nil
 }
 
-func (x *Orchestrate) ClearBasePrompt() {
+func (x *RunAgents) ClearBasePrompt() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_BasePrompt = nil
 }
 
-func (x *Orchestrate) ClearModelId() {
+func (x *RunAgents) ClearModelId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_ModelId = nil
 }
 
-func (x *Orchestrate) ClearHarness() {
+func (x *RunAgents) ClearHarness() {
 	x.xxx_hidden_Harness = nil
 }
 
-func (x *Orchestrate) ClearExecutionMode() {
+func (x *RunAgents) ClearExecutionMode() {
 	x.xxx_hidden_ExecutionMode = nil
 }
 
-func (x *Orchestrate) ClearLocal() {
-	if _, ok := x.xxx_hidden_ExecutionMode.(*orchestrate_Local_); ok {
+func (x *RunAgents) ClearLocal() {
+	if _, ok := x.xxx_hidden_ExecutionMode.(*runAgents_Local_); ok {
 		x.xxx_hidden_ExecutionMode = nil
 	}
 }
 
-func (x *Orchestrate) ClearRemote() {
-	if _, ok := x.xxx_hidden_ExecutionMode.(*orchestrate_Remote_); ok {
+func (x *RunAgents) ClearRemote() {
+	if _, ok := x.xxx_hidden_ExecutionMode.(*runAgents_Remote_); ok {
 		x.xxx_hidden_ExecutionMode = nil
 	}
 }
 
-func (x *Orchestrate) ClearAutoLaunch() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
-	x.xxx_hidden_AutoLaunch = false
-}
+const RunAgents_ExecutionMode_not_set_case case_RunAgents_ExecutionMode = 0
+const RunAgents_Local_case case_RunAgents_ExecutionMode = 6
+const RunAgents_Remote_case case_RunAgents_ExecutionMode = 7
 
-const Orchestrate_ExecutionMode_not_set_case case_Orchestrate_ExecutionMode = 0
-const Orchestrate_Local_case case_Orchestrate_ExecutionMode = 6
-const Orchestrate_Remote_case case_Orchestrate_ExecutionMode = 7
-
-func (x *Orchestrate) WhichExecutionMode() case_Orchestrate_ExecutionMode {
+func (x *RunAgents) WhichExecutionMode() case_RunAgents_ExecutionMode {
 	if x == nil {
-		return Orchestrate_ExecutionMode_not_set_case
+		return RunAgents_ExecutionMode_not_set_case
 	}
 	switch x.xxx_hidden_ExecutionMode.(type) {
-	case *orchestrate_Local_:
-		return Orchestrate_Local_case
-	case *orchestrate_Remote_:
-		return Orchestrate_Remote_case
+	case *runAgents_Local_:
+		return RunAgents_Local_case
+	case *runAgents_Remote_:
+		return RunAgents_Remote_case
 	default:
-		return Orchestrate_ExecutionMode_not_set_case
+		return RunAgents_ExecutionMode_not_set_case
 	}
 }
 
-type Orchestrate_builder struct {
+type RunAgents_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Summary    *string
 	BasePrompt *string
 	Skills     []*SkillRef
 	ModelId    *string
-	Harness    *StartAgentV2_ExecutionMode_Harness
+	Harness    *Harness
 	// Fields of oneof xxx_hidden_ExecutionMode:
-	Local  *Orchestrate_Local
-	Remote *Orchestrate_Remote
+	Local  *RunAgents_Local
+	Remote *RunAgents_Remote
 	// -- end of xxx_hidden_ExecutionMode
-	AgentRunConfigs []*Orchestrate_AgentRunConfig
-	// When true, the client skips the confirmation card and dispatches
-	// per-agent CreateAgentTask immediately. Set by the server when the
-	// orchestrate call's run-wide fields match the active approved
-	// OrchestrationConfig.
-	AutoLaunch *bool
+	AgentRunConfigs []*RunAgents_AgentRunConfig
 }
 
-func (b0 Orchestrate_builder) Build() *Orchestrate {
-	m0 := &Orchestrate{}
+func (b0 RunAgents_builder) Build() *RunAgents {
+	m0 := &RunAgents{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	if b.BasePrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
 		x.xxx_hidden_BasePrompt = b.BasePrompt
 	}
 	x.xxx_hidden_Skills = &b.Skills
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	x.xxx_hidden_Harness = b.Harness
 	if b.Local != nil {
-		x.xxx_hidden_ExecutionMode = &orchestrate_Local_{b.Local}
+		x.xxx_hidden_ExecutionMode = &runAgents_Local_{b.Local}
 	}
 	if b.Remote != nil {
-		x.xxx_hidden_ExecutionMode = &orchestrate_Remote_{b.Remote}
+		x.xxx_hidden_ExecutionMode = &runAgents_Remote_{b.Remote}
 	}
 	x.xxx_hidden_AgentRunConfigs = &b.AgentRunConfigs
-	if b.AutoLaunch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
-		x.xxx_hidden_AutoLaunch = *b.AutoLaunch
-	}
 	return m0
 }
 
-type case_Orchestrate_ExecutionMode protoreflect.FieldNumber
+type case_RunAgents_ExecutionMode protoreflect.FieldNumber
 
-func (x case_Orchestrate_ExecutionMode) String() string {
+func (x case_RunAgents_ExecutionMode) String() string {
 	md := file_task_proto_msgTypes[42].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -9142,44 +9108,44 @@ func (x case_Orchestrate_ExecutionMode) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isOrchestrate_ExecutionMode interface {
-	isOrchestrate_ExecutionMode()
+type isRunAgents_ExecutionMode interface {
+	isRunAgents_ExecutionMode()
 }
 
-type orchestrate_Local_ struct {
-	Local *Orchestrate_Local `protobuf:"bytes,6,opt,name=local,oneof"`
+type runAgents_Local_ struct {
+	Local *RunAgents_Local `protobuf:"bytes,6,opt,name=local,oneof"`
 }
 
-type orchestrate_Remote_ struct {
-	Remote *Orchestrate_Remote `protobuf:"bytes,7,opt,name=remote,oneof"`
+type runAgents_Remote_ struct {
+	Remote *RunAgents_Remote `protobuf:"bytes,7,opt,name=remote,oneof"`
 }
 
-func (*orchestrate_Local_) isOrchestrate_ExecutionMode() {}
+func (*runAgents_Local_) isRunAgents_ExecutionMode() {}
 
-func (*orchestrate_Remote_) isOrchestrate_ExecutionMode() {}
+func (*runAgents_Remote_) isRunAgents_ExecutionMode() {}
 
-// The result of an Orchestrate tool call.
-type OrchestrateResult struct {
-	state              protoimpl.MessageState      `protogen:"opaque.v1"`
-	xxx_hidden_Outcome isOrchestrateResult_Outcome `protobuf_oneof:"outcome"`
+// The result of a RunAgents tool call.
+type RunAgentsResult struct {
+	state              protoimpl.MessageState    `protogen:"opaque.v1"`
+	xxx_hidden_Outcome isRunAgentsResult_Outcome `protobuf_oneof:"outcome"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult) Reset() {
-	*x = OrchestrateResult{}
+func (x *RunAgentsResult) Reset() {
+	*x = RunAgentsResult{}
 	mi := &file_task_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult) String() string {
+func (x *RunAgentsResult) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult) ProtoMessage() {}
+func (*RunAgentsResult) ProtoMessage() {}
 
-func (x *OrchestrateResult) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9191,160 +9157,160 @@ func (x *OrchestrateResult) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult) GetLaunched() *OrchestrateResult_Launched {
+func (x *RunAgentsResult) GetLaunched() *RunAgentsResult_Launched {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Outcome.(*orchestrateResult_Launched_); ok {
+		if x, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Launched_); ok {
 			return x.Launched
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult) GetLaunchDenied() *OrchestrateResult_LaunchDenied {
+func (x *RunAgentsResult) GetDenied() *RunAgentsResult_Denied {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Outcome.(*orchestrateResult_LaunchDenied_); ok {
-			return x.LaunchDenied
+		if x, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Denied_); ok {
+			return x.Denied
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult) GetFailure() *OrchestrateResult_Failure {
+func (x *RunAgentsResult) GetFailure() *RunAgentsResult_Failure {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Outcome.(*orchestrateResult_Failure_); ok {
+		if x, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Failure_); ok {
 			return x.Failure
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult) SetLaunched(v *OrchestrateResult_Launched) {
+func (x *RunAgentsResult) SetLaunched(v *RunAgentsResult_Launched) {
 	if v == nil {
 		x.xxx_hidden_Outcome = nil
 		return
 	}
-	x.xxx_hidden_Outcome = &orchestrateResult_Launched_{v}
+	x.xxx_hidden_Outcome = &runAgentsResult_Launched_{v}
 }
 
-func (x *OrchestrateResult) SetLaunchDenied(v *OrchestrateResult_LaunchDenied) {
+func (x *RunAgentsResult) SetDenied(v *RunAgentsResult_Denied) {
 	if v == nil {
 		x.xxx_hidden_Outcome = nil
 		return
 	}
-	x.xxx_hidden_Outcome = &orchestrateResult_LaunchDenied_{v}
+	x.xxx_hidden_Outcome = &runAgentsResult_Denied_{v}
 }
 
-func (x *OrchestrateResult) SetFailure(v *OrchestrateResult_Failure) {
+func (x *RunAgentsResult) SetFailure(v *RunAgentsResult_Failure) {
 	if v == nil {
 		x.xxx_hidden_Outcome = nil
 		return
 	}
-	x.xxx_hidden_Outcome = &orchestrateResult_Failure_{v}
+	x.xxx_hidden_Outcome = &runAgentsResult_Failure_{v}
 }
 
-func (x *OrchestrateResult) HasOutcome() bool {
+func (x *RunAgentsResult) HasOutcome() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Outcome != nil
 }
 
-func (x *OrchestrateResult) HasLaunched() bool {
+func (x *RunAgentsResult) HasLaunched() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Outcome.(*orchestrateResult_Launched_)
+	_, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Launched_)
 	return ok
 }
 
-func (x *OrchestrateResult) HasLaunchDenied() bool {
+func (x *RunAgentsResult) HasDenied() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Outcome.(*orchestrateResult_LaunchDenied_)
+	_, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Denied_)
 	return ok
 }
 
-func (x *OrchestrateResult) HasFailure() bool {
+func (x *RunAgentsResult) HasFailure() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Outcome.(*orchestrateResult_Failure_)
+	_, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Failure_)
 	return ok
 }
 
-func (x *OrchestrateResult) ClearOutcome() {
+func (x *RunAgentsResult) ClearOutcome() {
 	x.xxx_hidden_Outcome = nil
 }
 
-func (x *OrchestrateResult) ClearLaunched() {
-	if _, ok := x.xxx_hidden_Outcome.(*orchestrateResult_Launched_); ok {
+func (x *RunAgentsResult) ClearLaunched() {
+	if _, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Launched_); ok {
 		x.xxx_hidden_Outcome = nil
 	}
 }
 
-func (x *OrchestrateResult) ClearLaunchDenied() {
-	if _, ok := x.xxx_hidden_Outcome.(*orchestrateResult_LaunchDenied_); ok {
+func (x *RunAgentsResult) ClearDenied() {
+	if _, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Denied_); ok {
 		x.xxx_hidden_Outcome = nil
 	}
 }
 
-func (x *OrchestrateResult) ClearFailure() {
-	if _, ok := x.xxx_hidden_Outcome.(*orchestrateResult_Failure_); ok {
+func (x *RunAgentsResult) ClearFailure() {
+	if _, ok := x.xxx_hidden_Outcome.(*runAgentsResult_Failure_); ok {
 		x.xxx_hidden_Outcome = nil
 	}
 }
 
-const OrchestrateResult_Outcome_not_set_case case_OrchestrateResult_Outcome = 0
-const OrchestrateResult_Launched_case case_OrchestrateResult_Outcome = 1
-const OrchestrateResult_LaunchDenied_case case_OrchestrateResult_Outcome = 2
-const OrchestrateResult_Failure_case case_OrchestrateResult_Outcome = 3
+const RunAgentsResult_Outcome_not_set_case case_RunAgentsResult_Outcome = 0
+const RunAgentsResult_Launched_case case_RunAgentsResult_Outcome = 1
+const RunAgentsResult_Denied_case case_RunAgentsResult_Outcome = 2
+const RunAgentsResult_Failure_case case_RunAgentsResult_Outcome = 3
 
-func (x *OrchestrateResult) WhichOutcome() case_OrchestrateResult_Outcome {
+func (x *RunAgentsResult) WhichOutcome() case_RunAgentsResult_Outcome {
 	if x == nil {
-		return OrchestrateResult_Outcome_not_set_case
+		return RunAgentsResult_Outcome_not_set_case
 	}
 	switch x.xxx_hidden_Outcome.(type) {
-	case *orchestrateResult_Launched_:
-		return OrchestrateResult_Launched_case
-	case *orchestrateResult_LaunchDenied_:
-		return OrchestrateResult_LaunchDenied_case
-	case *orchestrateResult_Failure_:
-		return OrchestrateResult_Failure_case
+	case *runAgentsResult_Launched_:
+		return RunAgentsResult_Launched_case
+	case *runAgentsResult_Denied_:
+		return RunAgentsResult_Denied_case
+	case *runAgentsResult_Failure_:
+		return RunAgentsResult_Failure_case
 	default:
-		return OrchestrateResult_Outcome_not_set_case
+		return RunAgentsResult_Outcome_not_set_case
 	}
 }
 
-type OrchestrateResult_builder struct {
+type RunAgentsResult_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Fields of oneof xxx_hidden_Outcome:
-	Launched     *OrchestrateResult_Launched
-	LaunchDenied *OrchestrateResult_LaunchDenied
-	Failure      *OrchestrateResult_Failure
+	Launched *RunAgentsResult_Launched
+	Denied   *RunAgentsResult_Denied
+	Failure  *RunAgentsResult_Failure
 	// -- end of xxx_hidden_Outcome
 }
 
-func (b0 OrchestrateResult_builder) Build() *OrchestrateResult {
-	m0 := &OrchestrateResult{}
+func (b0 RunAgentsResult_builder) Build() *RunAgentsResult {
+	m0 := &RunAgentsResult{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Launched != nil {
-		x.xxx_hidden_Outcome = &orchestrateResult_Launched_{b.Launched}
+		x.xxx_hidden_Outcome = &runAgentsResult_Launched_{b.Launched}
 	}
-	if b.LaunchDenied != nil {
-		x.xxx_hidden_Outcome = &orchestrateResult_LaunchDenied_{b.LaunchDenied}
+	if b.Denied != nil {
+		x.xxx_hidden_Outcome = &runAgentsResult_Denied_{b.Denied}
 	}
 	if b.Failure != nil {
-		x.xxx_hidden_Outcome = &orchestrateResult_Failure_{b.Failure}
+		x.xxx_hidden_Outcome = &runAgentsResult_Failure_{b.Failure}
 	}
 	return m0
 }
 
-type case_OrchestrateResult_Outcome protoreflect.FieldNumber
+type case_RunAgentsResult_Outcome protoreflect.FieldNumber
 
-func (x case_OrchestrateResult_Outcome) String() string {
+func (x case_RunAgentsResult_Outcome) String() string {
 	md := file_task_proto_msgTypes[43].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -9352,27 +9318,27 @@ func (x case_OrchestrateResult_Outcome) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isOrchestrateResult_Outcome interface {
-	isOrchestrateResult_Outcome()
+type isRunAgentsResult_Outcome interface {
+	isRunAgentsResult_Outcome()
 }
 
-type orchestrateResult_Launched_ struct {
-	Launched *OrchestrateResult_Launched `protobuf:"bytes,1,opt,name=launched,oneof"`
+type runAgentsResult_Launched_ struct {
+	Launched *RunAgentsResult_Launched `protobuf:"bytes,1,opt,name=launched,oneof"`
 }
 
-type orchestrateResult_LaunchDenied_ struct {
-	LaunchDenied *OrchestrateResult_LaunchDenied `protobuf:"bytes,2,opt,name=launch_denied,json=launchDenied,oneof"`
+type runAgentsResult_Denied_ struct {
+	Denied *RunAgentsResult_Denied `protobuf:"bytes,2,opt,name=denied,oneof"`
 }
 
-type orchestrateResult_Failure_ struct {
-	Failure *OrchestrateResult_Failure `protobuf:"bytes,3,opt,name=failure,oneof"`
+type runAgentsResult_Failure_ struct {
+	Failure *RunAgentsResult_Failure `protobuf:"bytes,3,opt,name=failure,oneof"`
 }
 
-func (*orchestrateResult_Launched_) isOrchestrateResult_Outcome() {}
+func (*runAgentsResult_Launched_) isRunAgentsResult_Outcome() {}
 
-func (*orchestrateResult_LaunchDenied_) isOrchestrateResult_Outcome() {}
+func (*runAgentsResult_Denied_) isRunAgentsResult_Outcome() {}
 
-func (*orchestrateResult_Failure_) isOrchestrateResult_Outcome() {}
+func (*runAgentsResult_Failure_) isRunAgentsResult_Outcome() {}
 
 // A client tool call to send a message to one or more agents.
 type SendMessageToAgent struct {
@@ -14178,10 +14144,10 @@ func (x *Message_ToolCall) GetUploadFileArtifact() *UploadFileArtifact {
 	return nil
 }
 
-func (x *Message_ToolCall) GetOrchestrate() *Orchestrate {
+func (x *Message_ToolCall) GetRunAgents() *RunAgents {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_Orchestrate); ok {
-			return x.Orchestrate
+		if x, ok := x.xxx_hidden_Tool.(*message_ToolCall_RunAgents); ok {
+			return x.RunAgents
 		}
 	}
 	return nil
@@ -14457,12 +14423,12 @@ func (x *Message_ToolCall) SetUploadFileArtifact(v *UploadFileArtifact) {
 	x.xxx_hidden_Tool = &message_ToolCall_UploadFileArtifact{v}
 }
 
-func (x *Message_ToolCall) SetOrchestrate(v *Orchestrate) {
+func (x *Message_ToolCall) SetRunAgents(v *RunAgents) {
 	if v == nil {
 		x.xxx_hidden_Tool = nil
 		return
 	}
-	x.xxx_hidden_Tool = &message_ToolCall_Orchestrate{v}
+	x.xxx_hidden_Tool = &message_ToolCall_RunAgents{v}
 }
 
 func (x *Message_ToolCall) HasToolCallId() bool {
@@ -14744,11 +14710,11 @@ func (x *Message_ToolCall) HasUploadFileArtifact() bool {
 	return ok
 }
 
-func (x *Message_ToolCall) HasOrchestrate() bool {
+func (x *Message_ToolCall) HasRunAgents() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_Orchestrate)
+	_, ok := x.xxx_hidden_Tool.(*message_ToolCall_RunAgents)
 	return ok
 }
 
@@ -14960,8 +14926,8 @@ func (x *Message_ToolCall) ClearUploadFileArtifact() {
 	}
 }
 
-func (x *Message_ToolCall) ClearOrchestrate() {
-	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_Orchestrate); ok {
+func (x *Message_ToolCall) ClearRunAgents() {
+	if _, ok := x.xxx_hidden_Tool.(*message_ToolCall_RunAgents); ok {
 		x.xxx_hidden_Tool = nil
 	}
 }
@@ -15000,7 +14966,7 @@ const Message_ToolCall_TransferShellCommandControlToUser_case case_Message_ToolC
 const Message_ToolCall_AskUserQuestion_case case_Message_ToolCall_Tool = 32
 const Message_ToolCall_StartAgentV2_case case_Message_ToolCall_Tool = 33
 const Message_ToolCall_UploadFileArtifact_case case_Message_ToolCall_Tool = 34
-const Message_ToolCall_Orchestrate_case case_Message_ToolCall_Tool = 35
+const Message_ToolCall_RunAgents_case case_Message_ToolCall_Tool = 35
 
 func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 	if x == nil {
@@ -15073,8 +15039,8 @@ func (x *Message_ToolCall) WhichTool() case_Message_ToolCall_Tool {
 		return Message_ToolCall_StartAgentV2_case
 	case *message_ToolCall_UploadFileArtifact:
 		return Message_ToolCall_UploadFileArtifact_case
-	case *message_ToolCall_Orchestrate:
-		return Message_ToolCall_Orchestrate_case
+	case *message_ToolCall_RunAgents:
+		return Message_ToolCall_RunAgents_case
 	default:
 		return Message_ToolCall_Tool_not_set_case
 	}
@@ -15123,7 +15089,7 @@ type Message_ToolCall_builder struct {
 	AskUserQuestion                   *AskUserQuestion
 	StartAgentV2                      *StartAgentV2
 	UploadFileArtifact                *UploadFileArtifact
-	Orchestrate                       *Orchestrate
+	RunAgents                         *RunAgents
 	// -- end of xxx_hidden_Tool
 }
 
@@ -15234,8 +15200,8 @@ func (b0 Message_ToolCall_builder) Build() *Message_ToolCall {
 	if b.UploadFileArtifact != nil {
 		x.xxx_hidden_Tool = &message_ToolCall_UploadFileArtifact{b.UploadFileArtifact}
 	}
-	if b.Orchestrate != nil {
-		x.xxx_hidden_Tool = &message_ToolCall_Orchestrate{b.Orchestrate}
+	if b.RunAgents != nil {
+		x.xxx_hidden_Tool = &message_ToolCall_RunAgents{b.RunAgents}
 	}
 	return m0
 }
@@ -15389,8 +15355,8 @@ type message_ToolCall_UploadFileArtifact struct {
 	UploadFileArtifact *UploadFileArtifact `protobuf:"bytes,34,opt,name=upload_file_artifact,json=uploadFileArtifact,oneof"`
 }
 
-type message_ToolCall_Orchestrate struct {
-	Orchestrate *Orchestrate `protobuf:"bytes,35,opt,name=orchestrate,oneof"`
+type message_ToolCall_RunAgents struct {
+	RunAgents *RunAgents `protobuf:"bytes,35,opt,name=run_agents,json=runAgents,oneof"`
 }
 
 func (*message_ToolCall_RunShellCommand_) isMessage_ToolCall_Tool() {}
@@ -15459,7 +15425,7 @@ func (*message_ToolCall_StartAgentV2) isMessage_ToolCall_Tool() {}
 
 func (*message_ToolCall_UploadFileArtifact) isMessage_ToolCall_Tool() {}
 
-func (*message_ToolCall_Orchestrate) isMessage_ToolCall_Tool() {}
+func (*message_ToolCall_RunAgents) isMessage_ToolCall_Tool() {}
 
 // Entry in the message log representing the result of a tool call.
 type Message_ToolCallResult struct {
@@ -15822,10 +15788,10 @@ func (x *Message_ToolCallResult) GetUploadFileArtifact() *UploadFileArtifactResu
 	return nil
 }
 
-func (x *Message_ToolCallResult) GetOrchestrateResult() *OrchestrateResult {
+func (x *Message_ToolCallResult) GetRunAgentsResult() *RunAgentsResult {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_OrchestrateResult); ok {
-			return x.OrchestrateResult
+		if x, ok := x.xxx_hidden_Result.(*message_ToolCallResult_RunAgentsResult); ok {
+			return x.RunAgentsResult
 		}
 	}
 	return nil
@@ -16113,12 +16079,12 @@ func (x *Message_ToolCallResult) SetUploadFileArtifact(v *UploadFileArtifactResu
 	x.xxx_hidden_Result = &message_ToolCallResult_UploadFileArtifact{v}
 }
 
-func (x *Message_ToolCallResult) SetOrchestrateResult(v *OrchestrateResult) {
+func (x *Message_ToolCallResult) SetRunAgentsResult(v *RunAgentsResult) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &message_ToolCallResult_OrchestrateResult{v}
+	x.xxx_hidden_Result = &message_ToolCallResult_RunAgentsResult{v}
 }
 
 func (x *Message_ToolCallResult) HasToolCallId() bool {
@@ -16415,11 +16381,11 @@ func (x *Message_ToolCallResult) HasUploadFileArtifact() bool {
 	return ok
 }
 
-func (x *Message_ToolCallResult) HasOrchestrateResult() bool {
+func (x *Message_ToolCallResult) HasRunAgentsResult() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_OrchestrateResult)
+	_, ok := x.xxx_hidden_Result.(*message_ToolCallResult_RunAgentsResult)
 	return ok
 }
 
@@ -16641,8 +16607,8 @@ func (x *Message_ToolCallResult) ClearUploadFileArtifact() {
 	}
 }
 
-func (x *Message_ToolCallResult) ClearOrchestrateResult() {
-	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_OrchestrateResult); ok {
+func (x *Message_ToolCallResult) ClearRunAgentsResult() {
+	if _, ok := x.xxx_hidden_Result.(*message_ToolCallResult_RunAgentsResult); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
@@ -16682,7 +16648,7 @@ const Message_ToolCallResult_TransferShellCommandControlToUser_case case_Message
 const Message_ToolCallResult_AskUserQuestion_case case_Message_ToolCallResult_Result = 36
 const Message_ToolCallResult_StartAgentV2_case case_Message_ToolCallResult_Result = 37
 const Message_ToolCallResult_UploadFileArtifact_case case_Message_ToolCallResult_Result = 38
-const Message_ToolCallResult_OrchestrateResult_case case_Message_ToolCallResult_Result = 39
+const Message_ToolCallResult_RunAgentsResult_case case_Message_ToolCallResult_Result = 39
 
 func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Result {
 	if x == nil {
@@ -16757,8 +16723,8 @@ func (x *Message_ToolCallResult) WhichResult() case_Message_ToolCallResult_Resul
 		return Message_ToolCallResult_StartAgentV2_case
 	case *message_ToolCallResult_UploadFileArtifact:
 		return Message_ToolCallResult_UploadFileArtifact_case
-	case *message_ToolCallResult_OrchestrateResult:
-		return Message_ToolCallResult_OrchestrateResult_case
+	case *message_ToolCallResult_RunAgentsResult:
+		return Message_ToolCallResult_RunAgentsResult_case
 	default:
 		return Message_ToolCallResult_Result_not_set_case
 	}
@@ -16810,7 +16776,7 @@ type Message_ToolCallResult_builder struct {
 	AskUserQuestion                   *AskUserQuestionResult
 	StartAgentV2                      *StartAgentV2Result
 	UploadFileArtifact                *UploadFileArtifactResult
-	OrchestrateResult                 *OrchestrateResult
+	RunAgentsResult                   *RunAgentsResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -16925,8 +16891,8 @@ func (b0 Message_ToolCallResult_builder) Build() *Message_ToolCallResult {
 	if b.UploadFileArtifact != nil {
 		x.xxx_hidden_Result = &message_ToolCallResult_UploadFileArtifact{b.UploadFileArtifact}
 	}
-	if b.OrchestrateResult != nil {
-		x.xxx_hidden_Result = &message_ToolCallResult_OrchestrateResult{b.OrchestrateResult}
+	if b.RunAgentsResult != nil {
+		x.xxx_hidden_Result = &message_ToolCallResult_RunAgentsResult{b.RunAgentsResult}
 	}
 	return m0
 }
@@ -17084,8 +17050,8 @@ type message_ToolCallResult_UploadFileArtifact struct {
 	UploadFileArtifact *UploadFileArtifactResult `protobuf:"bytes,38,opt,name=upload_file_artifact,json=uploadFileArtifact,oneof"`
 }
 
-type message_ToolCallResult_OrchestrateResult struct {
-	OrchestrateResult *OrchestrateResult `protobuf:"bytes,39,opt,name=orchestrate_result,json=orchestrateResult,oneof"`
+type message_ToolCallResult_RunAgentsResult struct {
+	RunAgentsResult *RunAgentsResult `protobuf:"bytes,39,opt,name=run_agents_result,json=runAgentsResult,oneof"`
 }
 
 func (*message_ToolCallResult_RunShellCommand) isMessage_ToolCallResult_Result() {}
@@ -17156,7 +17122,7 @@ func (*message_ToolCallResult_StartAgentV2) isMessage_ToolCallResult_Result() {}
 
 func (*message_ToolCallResult_UploadFileArtifact) isMessage_ToolCallResult_Result() {}
 
-func (*message_ToolCallResult_OrchestrateResult) isMessage_ToolCallResult_Result() {}
+func (*message_ToolCallResult_RunAgentsResult) isMessage_ToolCallResult_Result() {}
 
 // An event that is preserved in message history
 // for server-side processing.
@@ -33572,26 +33538,26 @@ func (b0 StartAgentV2Result_Error_builder) Build() *StartAgentV2Result_Error {
 	return m0
 }
 
-type Orchestrate_Local struct {
+type RunAgents_Local struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Orchestrate_Local) Reset() {
-	*x = Orchestrate_Local{}
+func (x *RunAgents_Local) Reset() {
+	*x = RunAgents_Local{}
 	mi := &file_task_proto_msgTypes[226]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Orchestrate_Local) String() string {
+func (x *RunAgents_Local) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Orchestrate_Local) ProtoMessage() {}
+func (*RunAgents_Local) ProtoMessage() {}
 
-func (x *Orchestrate_Local) ProtoReflect() protoreflect.Message {
+func (x *RunAgents_Local) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[226]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -33603,19 +33569,19 @@ func (x *Orchestrate_Local) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-type Orchestrate_Local_builder struct {
+type RunAgents_Local_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Orchestrate_Local_builder) Build() *Orchestrate_Local {
-	m0 := &Orchestrate_Local{}
+func (b0 RunAgents_Local_builder) Build() *RunAgents_Local {
+	m0 := &RunAgents_Local{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
 }
 
-type Orchestrate_Remote struct {
+type RunAgents_Remote struct {
 	state                         protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_EnvironmentId      *string                `protobuf:"bytes,1,opt,name=environment_id,json=environmentId"`
 	xxx_hidden_WorkerHost         *string                `protobuf:"bytes,2,opt,name=worker_host,json=workerHost"`
@@ -33626,20 +33592,20 @@ type Orchestrate_Remote struct {
 	sizeCache                     protoimpl.SizeCache
 }
 
-func (x *Orchestrate_Remote) Reset() {
-	*x = Orchestrate_Remote{}
+func (x *RunAgents_Remote) Reset() {
+	*x = RunAgents_Remote{}
 	mi := &file_task_proto_msgTypes[227]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Orchestrate_Remote) String() string {
+func (x *RunAgents_Remote) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Orchestrate_Remote) ProtoMessage() {}
+func (*RunAgents_Remote) ProtoMessage() {}
 
-func (x *Orchestrate_Remote) ProtoReflect() protoreflect.Message {
+func (x *RunAgents_Remote) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[227]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -33651,7 +33617,7 @@ func (x *Orchestrate_Remote) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Orchestrate_Remote) GetEnvironmentId() string {
+func (x *RunAgents_Remote) GetEnvironmentId() string {
 	if x != nil {
 		if x.xxx_hidden_EnvironmentId != nil {
 			return *x.xxx_hidden_EnvironmentId
@@ -33661,7 +33627,7 @@ func (x *Orchestrate_Remote) GetEnvironmentId() string {
 	return ""
 }
 
-func (x *Orchestrate_Remote) GetWorkerHost() string {
+func (x *RunAgents_Remote) GetWorkerHost() string {
 	if x != nil {
 		if x.xxx_hidden_WorkerHost != nil {
 			return *x.xxx_hidden_WorkerHost
@@ -33671,65 +33637,65 @@ func (x *Orchestrate_Remote) GetWorkerHost() string {
 	return ""
 }
 
-func (x *Orchestrate_Remote) GetComputerUseEnabled() bool {
+func (x *RunAgents_Remote) GetComputerUseEnabled() bool {
 	if x != nil {
 		return x.xxx_hidden_ComputerUseEnabled
 	}
 	return false
 }
 
-func (x *Orchestrate_Remote) SetEnvironmentId(v string) {
+func (x *RunAgents_Remote) SetEnvironmentId(v string) {
 	x.xxx_hidden_EnvironmentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Orchestrate_Remote) SetWorkerHost(v string) {
+func (x *RunAgents_Remote) SetWorkerHost(v string) {
 	x.xxx_hidden_WorkerHost = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Orchestrate_Remote) SetComputerUseEnabled(v bool) {
+func (x *RunAgents_Remote) SetComputerUseEnabled(v bool) {
 	x.xxx_hidden_ComputerUseEnabled = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *Orchestrate_Remote) HasEnvironmentId() bool {
+func (x *RunAgents_Remote) HasEnvironmentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Orchestrate_Remote) HasWorkerHost() bool {
+func (x *RunAgents_Remote) HasWorkerHost() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Orchestrate_Remote) HasComputerUseEnabled() bool {
+func (x *RunAgents_Remote) HasComputerUseEnabled() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Orchestrate_Remote) ClearEnvironmentId() {
+func (x *RunAgents_Remote) ClearEnvironmentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_EnvironmentId = nil
 }
 
-func (x *Orchestrate_Remote) ClearWorkerHost() {
+func (x *RunAgents_Remote) ClearWorkerHost() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_WorkerHost = nil
 }
 
-func (x *Orchestrate_Remote) ClearComputerUseEnabled() {
+func (x *RunAgents_Remote) ClearComputerUseEnabled() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_ComputerUseEnabled = false
 }
 
-type Orchestrate_Remote_builder struct {
+type RunAgents_Remote_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	EnvironmentId *string
@@ -33739,8 +33705,8 @@ type Orchestrate_Remote_builder struct {
 	ComputerUseEnabled *bool
 }
 
-func (b0 Orchestrate_Remote_builder) Build() *Orchestrate_Remote {
-	m0 := &Orchestrate_Remote{}
+func (b0 RunAgents_Remote_builder) Build() *RunAgents_Remote {
+	m0 := &RunAgents_Remote{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.EnvironmentId != nil {
@@ -33758,9 +33724,8 @@ func (b0 Orchestrate_Remote_builder) Build() *Orchestrate_Remote {
 	return m0
 }
 
-// One per child agent. Full per-child prompt is computed at dispatch as
-// base_prompt + "\n\n" + prompt (or just base_prompt when prompt is empty).
-type Orchestrate_AgentRunConfig struct {
+// Configuration for a single child agent in the batch.
+type RunAgents_AgentRunConfig struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
 	xxx_hidden_Prompt      *string                `protobuf:"bytes,2,opt,name=prompt"`
@@ -33771,20 +33736,20 @@ type Orchestrate_AgentRunConfig struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Orchestrate_AgentRunConfig) Reset() {
-	*x = Orchestrate_AgentRunConfig{}
+func (x *RunAgents_AgentRunConfig) Reset() {
+	*x = RunAgents_AgentRunConfig{}
 	mi := &file_task_proto_msgTypes[228]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Orchestrate_AgentRunConfig) String() string {
+func (x *RunAgents_AgentRunConfig) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Orchestrate_AgentRunConfig) ProtoMessage() {}
+func (*RunAgents_AgentRunConfig) ProtoMessage() {}
 
-func (x *Orchestrate_AgentRunConfig) ProtoReflect() protoreflect.Message {
+func (x *RunAgents_AgentRunConfig) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[228]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -33796,7 +33761,7 @@ func (x *Orchestrate_AgentRunConfig) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Orchestrate_AgentRunConfig) GetName() string {
+func (x *RunAgents_AgentRunConfig) GetName() string {
 	if x != nil {
 		if x.xxx_hidden_Name != nil {
 			return *x.xxx_hidden_Name
@@ -33806,7 +33771,7 @@ func (x *Orchestrate_AgentRunConfig) GetName() string {
 	return ""
 }
 
-func (x *Orchestrate_AgentRunConfig) GetPrompt() string {
+func (x *RunAgents_AgentRunConfig) GetPrompt() string {
 	if x != nil {
 		if x.xxx_hidden_Prompt != nil {
 			return *x.xxx_hidden_Prompt
@@ -33816,7 +33781,7 @@ func (x *Orchestrate_AgentRunConfig) GetPrompt() string {
 	return ""
 }
 
-func (x *Orchestrate_AgentRunConfig) GetTitle() string {
+func (x *RunAgents_AgentRunConfig) GetTitle() string {
 	if x != nil {
 		if x.xxx_hidden_Title != nil {
 			return *x.xxx_hidden_Title
@@ -33826,68 +33791,73 @@ func (x *Orchestrate_AgentRunConfig) GetTitle() string {
 	return ""
 }
 
-func (x *Orchestrate_AgentRunConfig) SetName(v string) {
+func (x *RunAgents_AgentRunConfig) SetName(v string) {
 	x.xxx_hidden_Name = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Orchestrate_AgentRunConfig) SetPrompt(v string) {
+func (x *RunAgents_AgentRunConfig) SetPrompt(v string) {
 	x.xxx_hidden_Prompt = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Orchestrate_AgentRunConfig) SetTitle(v string) {
+func (x *RunAgents_AgentRunConfig) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
-func (x *Orchestrate_AgentRunConfig) HasName() bool {
+func (x *RunAgents_AgentRunConfig) HasName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Orchestrate_AgentRunConfig) HasPrompt() bool {
+func (x *RunAgents_AgentRunConfig) HasPrompt() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Orchestrate_AgentRunConfig) HasTitle() bool {
+func (x *RunAgents_AgentRunConfig) HasTitle() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Orchestrate_AgentRunConfig) ClearName() {
+func (x *RunAgents_AgentRunConfig) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
 }
 
-func (x *Orchestrate_AgentRunConfig) ClearPrompt() {
+func (x *RunAgents_AgentRunConfig) ClearPrompt() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Prompt = nil
 }
 
-func (x *Orchestrate_AgentRunConfig) ClearTitle() {
+func (x *RunAgents_AgentRunConfig) ClearTitle() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_Title = nil
 }
 
-type Orchestrate_AgentRunConfig_builder struct {
+type RunAgents_AgentRunConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Display name for the child agent. Required: must be non-empty and
+	// unique across the entries in a single RunAgents call. The server
+	// rejects violations with
+	// RunAgentsResult.Failure { error: "agent names must be non-empty and
+	// unique" }.
 	Name   *string
 	Prompt *string
-	// Agent-set descriptive label flowed through to the spawned task title.
+	// Title for the spawned agent's task.
 	Title *string
 }
 
-func (b0 Orchestrate_AgentRunConfig_builder) Build() *Orchestrate_AgentRunConfig {
-	m0 := &Orchestrate_AgentRunConfig{}
+func (b0 RunAgents_AgentRunConfig_builder) Build() *RunAgents_AgentRunConfig {
+	m0 := &RunAgents_AgentRunConfig{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
@@ -33905,7 +33875,7 @@ func (b0 Orchestrate_AgentRunConfig_builder) Build() *Orchestrate_AgentRunConfig
 	return m0
 }
 
-type OrchestrateResult_LaunchedAgent struct {
+type RunAgentsResult_LaunchedAgent struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_AgentId     *string                `protobuf:"bytes,1,opt,name=agent_id,json=agentId"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -33914,20 +33884,20 @@ type OrchestrateResult_LaunchedAgent struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult_LaunchedAgent) Reset() {
-	*x = OrchestrateResult_LaunchedAgent{}
+func (x *RunAgentsResult_LaunchedAgent) Reset() {
+	*x = RunAgentsResult_LaunchedAgent{}
 	mi := &file_task_proto_msgTypes[229]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult_LaunchedAgent) String() string {
+func (x *RunAgentsResult_LaunchedAgent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult_LaunchedAgent) ProtoMessage() {}
+func (*RunAgentsResult_LaunchedAgent) ProtoMessage() {}
 
-func (x *OrchestrateResult_LaunchedAgent) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult_LaunchedAgent) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[229]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -33939,7 +33909,7 @@ func (x *OrchestrateResult_LaunchedAgent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult_LaunchedAgent) GetAgentId() string {
+func (x *RunAgentsResult_LaunchedAgent) GetAgentId() string {
 	if x != nil {
 		if x.xxx_hidden_AgentId != nil {
 			return *x.xxx_hidden_AgentId
@@ -33949,31 +33919,31 @@ func (x *OrchestrateResult_LaunchedAgent) GetAgentId() string {
 	return ""
 }
 
-func (x *OrchestrateResult_LaunchedAgent) SetAgentId(v string) {
+func (x *RunAgentsResult_LaunchedAgent) SetAgentId(v string) {
 	x.xxx_hidden_AgentId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *OrchestrateResult_LaunchedAgent) HasAgentId() bool {
+func (x *RunAgentsResult_LaunchedAgent) HasAgentId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrateResult_LaunchedAgent) ClearAgentId() {
+func (x *RunAgentsResult_LaunchedAgent) ClearAgentId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_AgentId = nil
 }
 
-type OrchestrateResult_LaunchedAgent_builder struct {
+type RunAgentsResult_LaunchedAgent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	AgentId *string
 }
 
-func (b0 OrchestrateResult_LaunchedAgent_builder) Build() *OrchestrateResult_LaunchedAgent {
-	m0 := &OrchestrateResult_LaunchedAgent{}
+func (b0 RunAgentsResult_LaunchedAgent_builder) Build() *RunAgentsResult_LaunchedAgent {
+	m0 := &RunAgentsResult_LaunchedAgent{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.AgentId != nil {
@@ -33983,7 +33953,7 @@ func (b0 OrchestrateResult_LaunchedAgent_builder) Build() *OrchestrateResult_Lau
 	return m0
 }
 
-type OrchestrateResult_FailedAgent struct {
+type RunAgentsResult_FailedAgent struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Error       *string                `protobuf:"bytes,1,opt,name=error"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -33992,20 +33962,20 @@ type OrchestrateResult_FailedAgent struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult_FailedAgent) Reset() {
-	*x = OrchestrateResult_FailedAgent{}
+func (x *RunAgentsResult_FailedAgent) Reset() {
+	*x = RunAgentsResult_FailedAgent{}
 	mi := &file_task_proto_msgTypes[230]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult_FailedAgent) String() string {
+func (x *RunAgentsResult_FailedAgent) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult_FailedAgent) ProtoMessage() {}
+func (*RunAgentsResult_FailedAgent) ProtoMessage() {}
 
-func (x *OrchestrateResult_FailedAgent) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult_FailedAgent) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[230]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -34017,7 +33987,7 @@ func (x *OrchestrateResult_FailedAgent) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult_FailedAgent) GetError() string {
+func (x *RunAgentsResult_FailedAgent) GetError() string {
 	if x != nil {
 		if x.xxx_hidden_Error != nil {
 			return *x.xxx_hidden_Error
@@ -34027,31 +33997,31 @@ func (x *OrchestrateResult_FailedAgent) GetError() string {
 	return ""
 }
 
-func (x *OrchestrateResult_FailedAgent) SetError(v string) {
+func (x *RunAgentsResult_FailedAgent) SetError(v string) {
 	x.xxx_hidden_Error = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *OrchestrateResult_FailedAgent) HasError() bool {
+func (x *RunAgentsResult_FailedAgent) HasError() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrateResult_FailedAgent) ClearError() {
+func (x *RunAgentsResult_FailedAgent) ClearError() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Error = nil
 }
 
-type OrchestrateResult_FailedAgent_builder struct {
+type RunAgentsResult_FailedAgent_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Error *string
 }
 
-func (b0 OrchestrateResult_FailedAgent_builder) Build() *OrchestrateResult_FailedAgent {
-	m0 := &OrchestrateResult_FailedAgent{}
+func (b0 RunAgentsResult_FailedAgent_builder) Build() *RunAgentsResult_FailedAgent {
+	m0 := &RunAgentsResult_FailedAgent{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Error != nil {
@@ -34061,33 +34031,33 @@ func (b0 OrchestrateResult_FailedAgent_builder) Build() *OrchestrateResult_Faile
 	return m0
 }
 
-// Per-agent outcome in agent_run_configs[] input order. `title` mirrors
-// the LLM-supplied agent_run_configs[i].title (empty when unset).
-type OrchestrateResult_AgentOutcome struct {
-	state                  protoimpl.MessageState                  `protogen:"opaque.v1"`
-	xxx_hidden_Name        *string                                 `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Title       *string                                 `protobuf:"bytes,4,opt,name=title"`
-	xxx_hidden_Result      isOrchestrateResult_AgentOutcome_Result `protobuf_oneof:"result"`
+// Per-agent outcome. Clients correlate entries to AgentRunConfig inputs
+// by `name`.
+type RunAgentsResult_AgentOutcome struct {
+	state                  protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                               `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Title       *string                               `protobuf:"bytes,4,opt,name=title"`
+	xxx_hidden_Result      isRunAgentsResult_AgentOutcome_Result `protobuf_oneof:"result"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult_AgentOutcome) Reset() {
-	*x = OrchestrateResult_AgentOutcome{}
+func (x *RunAgentsResult_AgentOutcome) Reset() {
+	*x = RunAgentsResult_AgentOutcome{}
 	mi := &file_task_proto_msgTypes[231]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult_AgentOutcome) String() string {
+func (x *RunAgentsResult_AgentOutcome) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult_AgentOutcome) ProtoMessage() {}
+func (*RunAgentsResult_AgentOutcome) ProtoMessage() {}
 
-func (x *OrchestrateResult_AgentOutcome) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult_AgentOutcome) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[231]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -34099,7 +34069,7 @@ func (x *OrchestrateResult_AgentOutcome) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult_AgentOutcome) GetName() string {
+func (x *RunAgentsResult_AgentOutcome) GetName() string {
 	if x != nil {
 		if x.xxx_hidden_Name != nil {
 			return *x.xxx_hidden_Name
@@ -34109,7 +34079,7 @@ func (x *OrchestrateResult_AgentOutcome) GetName() string {
 	return ""
 }
 
-func (x *OrchestrateResult_AgentOutcome) GetTitle() string {
+func (x *RunAgentsResult_AgentOutcome) GetTitle() string {
 	if x != nil {
 		if x.xxx_hidden_Title != nil {
 			return *x.xxx_hidden_Title
@@ -34119,144 +34089,144 @@ func (x *OrchestrateResult_AgentOutcome) GetTitle() string {
 	return ""
 }
 
-func (x *OrchestrateResult_AgentOutcome) GetLaunched() *OrchestrateResult_LaunchedAgent {
+func (x *RunAgentsResult_AgentOutcome) GetLaunched() *RunAgentsResult_LaunchedAgent {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*orchestrateResult_AgentOutcome_Launched); ok {
+		if x, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Launched); ok {
 			return x.Launched
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult_AgentOutcome) GetFailed() *OrchestrateResult_FailedAgent {
+func (x *RunAgentsResult_AgentOutcome) GetFailed() *RunAgentsResult_FailedAgent {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Result.(*orchestrateResult_AgentOutcome_Failed); ok {
+		if x, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Failed); ok {
 			return x.Failed
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult_AgentOutcome) SetName(v string) {
+func (x *RunAgentsResult_AgentOutcome) SetName(v string) {
 	x.xxx_hidden_Name = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *OrchestrateResult_AgentOutcome) SetTitle(v string) {
+func (x *RunAgentsResult_AgentOutcome) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *OrchestrateResult_AgentOutcome) SetLaunched(v *OrchestrateResult_LaunchedAgent) {
+func (x *RunAgentsResult_AgentOutcome) SetLaunched(v *RunAgentsResult_LaunchedAgent) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &orchestrateResult_AgentOutcome_Launched{v}
+	x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Launched{v}
 }
 
-func (x *OrchestrateResult_AgentOutcome) SetFailed(v *OrchestrateResult_FailedAgent) {
+func (x *RunAgentsResult_AgentOutcome) SetFailed(v *RunAgentsResult_FailedAgent) {
 	if v == nil {
 		x.xxx_hidden_Result = nil
 		return
 	}
-	x.xxx_hidden_Result = &orchestrateResult_AgentOutcome_Failed{v}
+	x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Failed{v}
 }
 
-func (x *OrchestrateResult_AgentOutcome) HasName() bool {
+func (x *RunAgentsResult_AgentOutcome) HasName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrateResult_AgentOutcome) HasTitle() bool {
+func (x *RunAgentsResult_AgentOutcome) HasTitle() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *OrchestrateResult_AgentOutcome) HasResult() bool {
+func (x *RunAgentsResult_AgentOutcome) HasResult() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Result != nil
 }
 
-func (x *OrchestrateResult_AgentOutcome) HasLaunched() bool {
+func (x *RunAgentsResult_AgentOutcome) HasLaunched() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*orchestrateResult_AgentOutcome_Launched)
+	_, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Launched)
 	return ok
 }
 
-func (x *OrchestrateResult_AgentOutcome) HasFailed() bool {
+func (x *RunAgentsResult_AgentOutcome) HasFailed() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Result.(*orchestrateResult_AgentOutcome_Failed)
+	_, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Failed)
 	return ok
 }
 
-func (x *OrchestrateResult_AgentOutcome) ClearName() {
+func (x *RunAgentsResult_AgentOutcome) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
 }
 
-func (x *OrchestrateResult_AgentOutcome) ClearTitle() {
+func (x *RunAgentsResult_AgentOutcome) ClearTitle() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Title = nil
 }
 
-func (x *OrchestrateResult_AgentOutcome) ClearResult() {
+func (x *RunAgentsResult_AgentOutcome) ClearResult() {
 	x.xxx_hidden_Result = nil
 }
 
-func (x *OrchestrateResult_AgentOutcome) ClearLaunched() {
-	if _, ok := x.xxx_hidden_Result.(*orchestrateResult_AgentOutcome_Launched); ok {
+func (x *RunAgentsResult_AgentOutcome) ClearLaunched() {
+	if _, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Launched); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-func (x *OrchestrateResult_AgentOutcome) ClearFailed() {
-	if _, ok := x.xxx_hidden_Result.(*orchestrateResult_AgentOutcome_Failed); ok {
+func (x *RunAgentsResult_AgentOutcome) ClearFailed() {
+	if _, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Failed); ok {
 		x.xxx_hidden_Result = nil
 	}
 }
 
-const OrchestrateResult_AgentOutcome_Result_not_set_case case_OrchestrateResult_AgentOutcome_Result = 0
-const OrchestrateResult_AgentOutcome_Launched_case case_OrchestrateResult_AgentOutcome_Result = 2
-const OrchestrateResult_AgentOutcome_Failed_case case_OrchestrateResult_AgentOutcome_Result = 3
+const RunAgentsResult_AgentOutcome_Result_not_set_case case_RunAgentsResult_AgentOutcome_Result = 0
+const RunAgentsResult_AgentOutcome_Launched_case case_RunAgentsResult_AgentOutcome_Result = 2
+const RunAgentsResult_AgentOutcome_Failed_case case_RunAgentsResult_AgentOutcome_Result = 3
 
-func (x *OrchestrateResult_AgentOutcome) WhichResult() case_OrchestrateResult_AgentOutcome_Result {
+func (x *RunAgentsResult_AgentOutcome) WhichResult() case_RunAgentsResult_AgentOutcome_Result {
 	if x == nil {
-		return OrchestrateResult_AgentOutcome_Result_not_set_case
+		return RunAgentsResult_AgentOutcome_Result_not_set_case
 	}
 	switch x.xxx_hidden_Result.(type) {
-	case *orchestrateResult_AgentOutcome_Launched:
-		return OrchestrateResult_AgentOutcome_Launched_case
-	case *orchestrateResult_AgentOutcome_Failed:
-		return OrchestrateResult_AgentOutcome_Failed_case
+	case *runAgentsResult_AgentOutcome_Launched:
+		return RunAgentsResult_AgentOutcome_Launched_case
+	case *runAgentsResult_AgentOutcome_Failed:
+		return RunAgentsResult_AgentOutcome_Failed_case
 	default:
-		return OrchestrateResult_AgentOutcome_Result_not_set_case
+		return RunAgentsResult_AgentOutcome_Result_not_set_case
 	}
 }
 
-type OrchestrateResult_AgentOutcome_builder struct {
+type RunAgentsResult_AgentOutcome_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Name  *string
 	Title *string
 	// Fields of oneof xxx_hidden_Result:
-	Launched *OrchestrateResult_LaunchedAgent
-	Failed   *OrchestrateResult_FailedAgent
+	Launched *RunAgentsResult_LaunchedAgent
+	Failed   *RunAgentsResult_FailedAgent
 	// -- end of xxx_hidden_Result
 }
 
-func (b0 OrchestrateResult_AgentOutcome_builder) Build() *OrchestrateResult_AgentOutcome {
-	m0 := &OrchestrateResult_AgentOutcome{}
+func (b0 RunAgentsResult_AgentOutcome_builder) Build() *RunAgentsResult_AgentOutcome {
+	m0 := &RunAgentsResult_AgentOutcome{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
@@ -34268,17 +34238,17 @@ func (b0 OrchestrateResult_AgentOutcome_builder) Build() *OrchestrateResult_Agen
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.Launched != nil {
-		x.xxx_hidden_Result = &orchestrateResult_AgentOutcome_Launched{b.Launched}
+		x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Launched{b.Launched}
 	}
 	if b.Failed != nil {
-		x.xxx_hidden_Result = &orchestrateResult_AgentOutcome_Failed{b.Failed}
+		x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Failed{b.Failed}
 	}
 	return m0
 }
 
-type case_OrchestrateResult_AgentOutcome_Result protoreflect.FieldNumber
+type case_RunAgentsResult_AgentOutcome_Result protoreflect.FieldNumber
 
-func (x case_OrchestrateResult_AgentOutcome_Result) String() string {
+func (x case_RunAgentsResult_AgentOutcome_Result) String() string {
 	md := file_task_proto_msgTypes[231].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -34286,50 +34256,50 @@ func (x case_OrchestrateResult_AgentOutcome_Result) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isOrchestrateResult_AgentOutcome_Result interface {
-	isOrchestrateResult_AgentOutcome_Result()
+type isRunAgentsResult_AgentOutcome_Result interface {
+	isRunAgentsResult_AgentOutcome_Result()
 }
 
-type orchestrateResult_AgentOutcome_Launched struct {
-	Launched *OrchestrateResult_LaunchedAgent `protobuf:"bytes,2,opt,name=launched,oneof"`
+type runAgentsResult_AgentOutcome_Launched struct {
+	Launched *RunAgentsResult_LaunchedAgent `protobuf:"bytes,2,opt,name=launched,oneof"`
 }
 
-type orchestrateResult_AgentOutcome_Failed struct {
-	Failed *OrchestrateResult_FailedAgent `protobuf:"bytes,3,opt,name=failed,oneof"`
+type runAgentsResult_AgentOutcome_Failed struct {
+	Failed *RunAgentsResult_FailedAgent `protobuf:"bytes,3,opt,name=failed,oneof"`
 }
 
-func (*orchestrateResult_AgentOutcome_Launched) isOrchestrateResult_AgentOutcome_Result() {}
+func (*runAgentsResult_AgentOutcome_Launched) isRunAgentsResult_AgentOutcome_Result() {}
 
-func (*orchestrateResult_AgentOutcome_Failed) isOrchestrateResult_AgentOutcome_Result() {}
+func (*runAgentsResult_AgentOutcome_Failed) isRunAgentsResult_AgentOutcome_Result() {}
 
 // Orchestration launched. Carries the resolved configuration and
 // per-agent outcomes.
-type OrchestrateResult_Launched struct {
-	state                    protoimpl.MessageState                     `protogen:"opaque.v1"`
-	xxx_hidden_ModelId       *string                                    `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
-	xxx_hidden_Harness       *StartAgentV2_ExecutionMode_Harness        `protobuf:"bytes,2,opt,name=harness"`
-	xxx_hidden_ExecutionMode isOrchestrateResult_Launched_ExecutionMode `protobuf_oneof:"execution_mode"`
-	xxx_hidden_Agents        *[]*OrchestrateResult_AgentOutcome         `protobuf:"bytes,5,rep,name=agents"`
-	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
-	XXX_presence             [1]uint32
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+type RunAgentsResult_Launched struct {
+	state                            protoimpl.MessageState                           `protogen:"opaque.v1"`
+	xxx_hidden_ResolvedModelId       *string                                          `protobuf:"bytes,1,opt,name=resolved_model_id,json=resolvedModelId"`
+	xxx_hidden_ResolvedHarness       *Harness                                         `protobuf:"bytes,2,opt,name=resolved_harness,json=resolvedHarness"`
+	xxx_hidden_ResolvedExecutionMode isRunAgentsResult_Launched_ResolvedExecutionMode `protobuf_oneof:"resolved_execution_mode"`
+	xxx_hidden_Agents                *[]*RunAgentsResult_AgentOutcome                 `protobuf:"bytes,5,rep,name=agents"`
+	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
+	XXX_presence                     [1]uint32
+	unknownFields                    protoimpl.UnknownFields
+	sizeCache                        protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult_Launched) Reset() {
-	*x = OrchestrateResult_Launched{}
+func (x *RunAgentsResult_Launched) Reset() {
+	*x = RunAgentsResult_Launched{}
 	mi := &file_task_proto_msgTypes[232]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult_Launched) String() string {
+func (x *RunAgentsResult_Launched) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult_Launched) ProtoMessage() {}
+func (*RunAgentsResult_Launched) ProtoMessage() {}
 
-func (x *OrchestrateResult_Launched) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult_Launched) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[232]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -34341,42 +34311,42 @@ func (x *OrchestrateResult_Launched) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult_Launched) GetModelId() string {
+func (x *RunAgentsResult_Launched) GetResolvedModelId() string {
 	if x != nil {
-		if x.xxx_hidden_ModelId != nil {
-			return *x.xxx_hidden_ModelId
+		if x.xxx_hidden_ResolvedModelId != nil {
+			return *x.xxx_hidden_ResolvedModelId
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *OrchestrateResult_Launched) GetHarness() *StartAgentV2_ExecutionMode_Harness {
+func (x *RunAgentsResult_Launched) GetResolvedHarness() *Harness {
 	if x != nil {
-		return x.xxx_hidden_Harness
+		return x.xxx_hidden_ResolvedHarness
 	}
 	return nil
 }
 
-func (x *OrchestrateResult_Launched) GetLocal() *Orchestrate_Local {
+func (x *RunAgentsResult_Launched) GetLocal() *RunAgents_Local {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ExecutionMode.(*orchestrateResult_Launched_Local); ok {
+		if x, ok := x.xxx_hidden_ResolvedExecutionMode.(*runAgentsResult_Launched_Local); ok {
 			return x.Local
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult_Launched) GetRemote() *Orchestrate_Remote {
+func (x *RunAgentsResult_Launched) GetRemote() *RunAgents_Remote {
 	if x != nil {
-		if x, ok := x.xxx_hidden_ExecutionMode.(*orchestrateResult_Launched_Remote); ok {
+		if x, ok := x.xxx_hidden_ResolvedExecutionMode.(*runAgentsResult_Launched_Remote); ok {
 			return x.Remote
 		}
 	}
 	return nil
 }
 
-func (x *OrchestrateResult_Launched) GetAgents() []*OrchestrateResult_AgentOutcome {
+func (x *RunAgentsResult_Launched) GetAgents() []*RunAgentsResult_AgentOutcome {
 	if x != nil {
 		if x.xxx_hidden_Agents != nil {
 			return *x.xxx_hidden_Agents
@@ -34385,149 +34355,149 @@ func (x *OrchestrateResult_Launched) GetAgents() []*OrchestrateResult_AgentOutco
 	return nil
 }
 
-func (x *OrchestrateResult_Launched) SetModelId(v string) {
-	x.xxx_hidden_ModelId = &v
+func (x *RunAgentsResult_Launched) SetResolvedModelId(v string) {
+	x.xxx_hidden_ResolvedModelId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
-func (x *OrchestrateResult_Launched) SetHarness(v *StartAgentV2_ExecutionMode_Harness) {
-	x.xxx_hidden_Harness = v
+func (x *RunAgentsResult_Launched) SetResolvedHarness(v *Harness) {
+	x.xxx_hidden_ResolvedHarness = v
 }
 
-func (x *OrchestrateResult_Launched) SetLocal(v *Orchestrate_Local) {
+func (x *RunAgentsResult_Launched) SetLocal(v *RunAgents_Local) {
 	if v == nil {
-		x.xxx_hidden_ExecutionMode = nil
+		x.xxx_hidden_ResolvedExecutionMode = nil
 		return
 	}
-	x.xxx_hidden_ExecutionMode = &orchestrateResult_Launched_Local{v}
+	x.xxx_hidden_ResolvedExecutionMode = &runAgentsResult_Launched_Local{v}
 }
 
-func (x *OrchestrateResult_Launched) SetRemote(v *Orchestrate_Remote) {
+func (x *RunAgentsResult_Launched) SetRemote(v *RunAgents_Remote) {
 	if v == nil {
-		x.xxx_hidden_ExecutionMode = nil
+		x.xxx_hidden_ResolvedExecutionMode = nil
 		return
 	}
-	x.xxx_hidden_ExecutionMode = &orchestrateResult_Launched_Remote{v}
+	x.xxx_hidden_ResolvedExecutionMode = &runAgentsResult_Launched_Remote{v}
 }
 
-func (x *OrchestrateResult_Launched) SetAgents(v []*OrchestrateResult_AgentOutcome) {
+func (x *RunAgentsResult_Launched) SetAgents(v []*RunAgentsResult_AgentOutcome) {
 	x.xxx_hidden_Agents = &v
 }
 
-func (x *OrchestrateResult_Launched) HasModelId() bool {
+func (x *RunAgentsResult_Launched) HasResolvedModelId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrateResult_Launched) HasHarness() bool {
+func (x *RunAgentsResult_Launched) HasResolvedHarness() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_Harness != nil
+	return x.xxx_hidden_ResolvedHarness != nil
 }
 
-func (x *OrchestrateResult_Launched) HasExecutionMode() bool {
+func (x *RunAgentsResult_Launched) HasResolvedExecutionMode() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_ExecutionMode != nil
+	return x.xxx_hidden_ResolvedExecutionMode != nil
 }
 
-func (x *OrchestrateResult_Launched) HasLocal() bool {
+func (x *RunAgentsResult_Launched) HasLocal() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ExecutionMode.(*orchestrateResult_Launched_Local)
+	_, ok := x.xxx_hidden_ResolvedExecutionMode.(*runAgentsResult_Launched_Local)
 	return ok
 }
 
-func (x *OrchestrateResult_Launched) HasRemote() bool {
+func (x *RunAgentsResult_Launched) HasRemote() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_ExecutionMode.(*orchestrateResult_Launched_Remote)
+	_, ok := x.xxx_hidden_ResolvedExecutionMode.(*runAgentsResult_Launched_Remote)
 	return ok
 }
 
-func (x *OrchestrateResult_Launched) ClearModelId() {
+func (x *RunAgentsResult_Launched) ClearResolvedModelId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_ModelId = nil
+	x.xxx_hidden_ResolvedModelId = nil
 }
 
-func (x *OrchestrateResult_Launched) ClearHarness() {
-	x.xxx_hidden_Harness = nil
+func (x *RunAgentsResult_Launched) ClearResolvedHarness() {
+	x.xxx_hidden_ResolvedHarness = nil
 }
 
-func (x *OrchestrateResult_Launched) ClearExecutionMode() {
-	x.xxx_hidden_ExecutionMode = nil
+func (x *RunAgentsResult_Launched) ClearResolvedExecutionMode() {
+	x.xxx_hidden_ResolvedExecutionMode = nil
 }
 
-func (x *OrchestrateResult_Launched) ClearLocal() {
-	if _, ok := x.xxx_hidden_ExecutionMode.(*orchestrateResult_Launched_Local); ok {
-		x.xxx_hidden_ExecutionMode = nil
+func (x *RunAgentsResult_Launched) ClearLocal() {
+	if _, ok := x.xxx_hidden_ResolvedExecutionMode.(*runAgentsResult_Launched_Local); ok {
+		x.xxx_hidden_ResolvedExecutionMode = nil
 	}
 }
 
-func (x *OrchestrateResult_Launched) ClearRemote() {
-	if _, ok := x.xxx_hidden_ExecutionMode.(*orchestrateResult_Launched_Remote); ok {
-		x.xxx_hidden_ExecutionMode = nil
+func (x *RunAgentsResult_Launched) ClearRemote() {
+	if _, ok := x.xxx_hidden_ResolvedExecutionMode.(*runAgentsResult_Launched_Remote); ok {
+		x.xxx_hidden_ResolvedExecutionMode = nil
 	}
 }
 
-const OrchestrateResult_Launched_ExecutionMode_not_set_case case_OrchestrateResult_Launched_ExecutionMode = 0
-const OrchestrateResult_Launched_Local_case case_OrchestrateResult_Launched_ExecutionMode = 3
-const OrchestrateResult_Launched_Remote_case case_OrchestrateResult_Launched_ExecutionMode = 4
+const RunAgentsResult_Launched_ResolvedExecutionMode_not_set_case case_RunAgentsResult_Launched_ResolvedExecutionMode = 0
+const RunAgentsResult_Launched_Local_case case_RunAgentsResult_Launched_ResolvedExecutionMode = 3
+const RunAgentsResult_Launched_Remote_case case_RunAgentsResult_Launched_ResolvedExecutionMode = 4
 
-func (x *OrchestrateResult_Launched) WhichExecutionMode() case_OrchestrateResult_Launched_ExecutionMode {
+func (x *RunAgentsResult_Launched) WhichResolvedExecutionMode() case_RunAgentsResult_Launched_ResolvedExecutionMode {
 	if x == nil {
-		return OrchestrateResult_Launched_ExecutionMode_not_set_case
+		return RunAgentsResult_Launched_ResolvedExecutionMode_not_set_case
 	}
-	switch x.xxx_hidden_ExecutionMode.(type) {
-	case *orchestrateResult_Launched_Local:
-		return OrchestrateResult_Launched_Local_case
-	case *orchestrateResult_Launched_Remote:
-		return OrchestrateResult_Launched_Remote_case
+	switch x.xxx_hidden_ResolvedExecutionMode.(type) {
+	case *runAgentsResult_Launched_Local:
+		return RunAgentsResult_Launched_Local_case
+	case *runAgentsResult_Launched_Remote:
+		return RunAgentsResult_Launched_Remote_case
 	default:
-		return OrchestrateResult_Launched_ExecutionMode_not_set_case
+		return RunAgentsResult_Launched_ResolvedExecutionMode_not_set_case
 	}
 }
 
-type OrchestrateResult_Launched_builder struct {
+type RunAgentsResult_Launched_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	ModelId *string
-	Harness *StartAgentV2_ExecutionMode_Harness
-	// Fields of oneof xxx_hidden_ExecutionMode:
-	Local  *Orchestrate_Local
-	Remote *Orchestrate_Remote
-	// -- end of xxx_hidden_ExecutionMode
-	Agents []*OrchestrateResult_AgentOutcome
+	ResolvedModelId *string
+	ResolvedHarness *Harness
+	// Fields of oneof xxx_hidden_ResolvedExecutionMode:
+	Local  *RunAgents_Local
+	Remote *RunAgents_Remote
+	// -- end of xxx_hidden_ResolvedExecutionMode
+	Agents []*RunAgentsResult_AgentOutcome
 }
 
-func (b0 OrchestrateResult_Launched_builder) Build() *OrchestrateResult_Launched {
-	m0 := &OrchestrateResult_Launched{}
+func (b0 RunAgentsResult_Launched_builder) Build() *RunAgentsResult_Launched {
+	m0 := &RunAgentsResult_Launched{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.ModelId != nil {
+	if b.ResolvedModelId != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
-		x.xxx_hidden_ModelId = b.ModelId
+		x.xxx_hidden_ResolvedModelId = b.ResolvedModelId
 	}
-	x.xxx_hidden_Harness = b.Harness
+	x.xxx_hidden_ResolvedHarness = b.ResolvedHarness
 	if b.Local != nil {
-		x.xxx_hidden_ExecutionMode = &orchestrateResult_Launched_Local{b.Local}
+		x.xxx_hidden_ResolvedExecutionMode = &runAgentsResult_Launched_Local{b.Local}
 	}
 	if b.Remote != nil {
-		x.xxx_hidden_ExecutionMode = &orchestrateResult_Launched_Remote{b.Remote}
+		x.xxx_hidden_ResolvedExecutionMode = &runAgentsResult_Launched_Remote{b.Remote}
 	}
 	x.xxx_hidden_Agents = &b.Agents
 	return m0
 }
 
-type case_OrchestrateResult_Launched_ExecutionMode protoreflect.FieldNumber
+type case_RunAgentsResult_Launched_ResolvedExecutionMode protoreflect.FieldNumber
 
-func (x case_OrchestrateResult_Launched_ExecutionMode) String() string {
+func (x case_RunAgentsResult_Launched_ResolvedExecutionMode) String() string {
 	md := file_task_proto_msgTypes[232].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -34535,26 +34505,26 @@ func (x case_OrchestrateResult_Launched_ExecutionMode) String() string {
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isOrchestrateResult_Launched_ExecutionMode interface {
-	isOrchestrateResult_Launched_ExecutionMode()
+type isRunAgentsResult_Launched_ResolvedExecutionMode interface {
+	isRunAgentsResult_Launched_ResolvedExecutionMode()
 }
 
-type orchestrateResult_Launched_Local struct {
-	Local *Orchestrate_Local `protobuf:"bytes,3,opt,name=local,oneof"`
+type runAgentsResult_Launched_Local struct {
+	Local *RunAgents_Local `protobuf:"bytes,3,opt,name=local,oneof"`
 }
 
-type orchestrateResult_Launched_Remote struct {
-	Remote *Orchestrate_Remote `protobuf:"bytes,4,opt,name=remote,oneof"`
+type runAgentsResult_Launched_Remote struct {
+	Remote *RunAgents_Remote `protobuf:"bytes,4,opt,name=remote,oneof"`
 }
 
-func (*orchestrateResult_Launched_Local) isOrchestrateResult_Launched_ExecutionMode() {}
+func (*runAgentsResult_Launched_Local) isRunAgentsResult_Launched_ResolvedExecutionMode() {}
 
-func (*orchestrateResult_Launched_Remote) isOrchestrateResult_Launched_ExecutionMode() {}
+func (*runAgentsResult_Launched_Remote) isRunAgentsResult_Launched_ResolvedExecutionMode() {}
 
 // Declined for a non-error reason. Currently emitted when the user has
 // disapproved orchestration on the active plan; future denial paths
 // (policy, quota, etc.) populate `reason` with a different string.
-type OrchestrateResult_LaunchDenied struct {
+type RunAgentsResult_Denied struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Reason      *string                `protobuf:"bytes,1,opt,name=reason"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -34563,20 +34533,20 @@ type OrchestrateResult_LaunchDenied struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult_LaunchDenied) Reset() {
-	*x = OrchestrateResult_LaunchDenied{}
+func (x *RunAgentsResult_Denied) Reset() {
+	*x = RunAgentsResult_Denied{}
 	mi := &file_task_proto_msgTypes[233]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult_LaunchDenied) String() string {
+func (x *RunAgentsResult_Denied) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult_LaunchDenied) ProtoMessage() {}
+func (*RunAgentsResult_Denied) ProtoMessage() {}
 
-func (x *OrchestrateResult_LaunchDenied) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult_Denied) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[233]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -34588,7 +34558,7 @@ func (x *OrchestrateResult_LaunchDenied) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult_LaunchDenied) GetReason() string {
+func (x *RunAgentsResult_Denied) GetReason() string {
 	if x != nil {
 		if x.xxx_hidden_Reason != nil {
 			return *x.xxx_hidden_Reason
@@ -34598,31 +34568,31 @@ func (x *OrchestrateResult_LaunchDenied) GetReason() string {
 	return ""
 }
 
-func (x *OrchestrateResult_LaunchDenied) SetReason(v string) {
+func (x *RunAgentsResult_Denied) SetReason(v string) {
 	x.xxx_hidden_Reason = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *OrchestrateResult_LaunchDenied) HasReason() bool {
+func (x *RunAgentsResult_Denied) HasReason() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrateResult_LaunchDenied) ClearReason() {
+func (x *RunAgentsResult_Denied) ClearReason() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Reason = nil
 }
 
-type OrchestrateResult_LaunchDenied_builder struct {
+type RunAgentsResult_Denied_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Reason *string
 }
 
-func (b0 OrchestrateResult_LaunchDenied_builder) Build() *OrchestrateResult_LaunchDenied {
-	m0 := &OrchestrateResult_LaunchDenied{}
+func (b0 RunAgentsResult_Denied_builder) Build() *RunAgentsResult_Denied {
+	m0 := &RunAgentsResult_Denied{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Reason != nil {
@@ -34635,7 +34605,7 @@ func (b0 OrchestrateResult_LaunchDenied_builder) Build() *OrchestrateResult_Laun
 // Actual error: server-side validation rejected the call, or the client
 // could not begin the launch sequence. NOT used for user-driven outcomes
 // (disapproval, cancellation) -- those have their own variants.
-type OrchestrateResult_Failure struct {
+type RunAgentsResult_Failure struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Error       *string                `protobuf:"bytes,1,opt,name=error"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
@@ -34644,20 +34614,20 @@ type OrchestrateResult_Failure struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *OrchestrateResult_Failure) Reset() {
-	*x = OrchestrateResult_Failure{}
+func (x *RunAgentsResult_Failure) Reset() {
+	*x = RunAgentsResult_Failure{}
 	mi := &file_task_proto_msgTypes[234]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrateResult_Failure) String() string {
+func (x *RunAgentsResult_Failure) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrateResult_Failure) ProtoMessage() {}
+func (*RunAgentsResult_Failure) ProtoMessage() {}
 
-func (x *OrchestrateResult_Failure) ProtoReflect() protoreflect.Message {
+func (x *RunAgentsResult_Failure) ProtoReflect() protoreflect.Message {
 	mi := &file_task_proto_msgTypes[234]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -34669,7 +34639,7 @@ func (x *OrchestrateResult_Failure) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrateResult_Failure) GetError() string {
+func (x *RunAgentsResult_Failure) GetError() string {
 	if x != nil {
 		if x.xxx_hidden_Error != nil {
 			return *x.xxx_hidden_Error
@@ -34679,31 +34649,31 @@ func (x *OrchestrateResult_Failure) GetError() string {
 	return ""
 }
 
-func (x *OrchestrateResult_Failure) SetError(v string) {
+func (x *RunAgentsResult_Failure) SetError(v string) {
 	x.xxx_hidden_Error = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *OrchestrateResult_Failure) HasError() bool {
+func (x *RunAgentsResult_Failure) HasError() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrateResult_Failure) ClearError() {
+func (x *RunAgentsResult_Failure) ClearError() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Error = nil
 }
 
-type OrchestrateResult_Failure_builder struct {
+type RunAgentsResult_Failure_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Error *string
 }
 
-func (b0 OrchestrateResult_Failure_builder) Build() *OrchestrateResult_Failure {
-	m0 := &OrchestrateResult_Failure{}
+func (b0 RunAgentsResult_Failure_builder) Build() *RunAgentsResult_Failure {
+	m0 := &RunAgentsResult_Failure{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Error != nil {
@@ -36354,7 +36324,7 @@ const file_task_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"task.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x0fcitations.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\n" +
-	"todo.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xd9\x02\n" +
+	"todo.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x15agent_execution.proto\"\xd9\x02\n" +
 	"\x04Task\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12J\n" +
@@ -36412,7 +36382,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xf4\xbd\x01\n" +
+	"\x0ecomment_target\"\xea\xbd\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -36520,7 +36490,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xaf\\\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xaa\\\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -36561,8 +36531,9 @@ const file_task_proto_rawDesc = "" +
 	"&transfer_shell_command_control_to_user\x18\x1f \x01(\v2G.warp.multi_agent.v1.Message.ToolCall.TransferShellCommandControlToUserH\x00R!transferShellCommandControlToUser\x12R\n" +
 	"\x11ask_user_question\x18  \x01(\v2$.warp.multi_agent.v1.AskUserQuestionH\x00R\x0faskUserQuestion\x12I\n" +
 	"\x0estart_agent_v2\x18! \x01(\v2!.warp.multi_agent.v1.StartAgentV2H\x00R\fstartAgentV2\x12[\n" +
-	"\x14upload_file_artifact\x18\" \x01(\v2'.warp.multi_agent.v1.UploadFileArtifactH\x00R\x12uploadFileArtifact\x12D\n" +
-	"\vorchestrate\x18# \x01(\v2 .warp.multi_agent.v1.OrchestrateH\x00R\vorchestrate\x1a<\n" +
+	"\x14upload_file_artifact\x18\" \x01(\v2'.warp.multi_agent.v1.UploadFileArtifactH\x00R\x12uploadFileArtifact\x12?\n" +
+	"\n" +
+	"run_agents\x18# \x01(\v2\x1e.warp.multi_agent.v1.RunAgentsH\x00R\trunAgents\x1a<\n" +
 	"\x11FetchConversation\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x1a\"\n" +
 	"\x06Server\x12\x18\n" +
@@ -36813,7 +36784,7 @@ const file_task_proto_rawDesc = "" +
 	"\x06Region\x12;\n" +
 	"\btop_left\x18\x01 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\atopLeft\x12C\n" +
 	"\fbottom_right\x18\x02 \x01(\v2 .warp.multi_agent.v1.CoordinatesR\vbottomRightB\x06\n" +
-	"\x04tool\x1a\x92\x1a\n" +
+	"\x04tool\x1a\x8d\x1a\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12;\n" +
@@ -36856,8 +36827,8 @@ const file_task_proto_rawDesc = "" +
 	"&transfer_shell_command_control_to_user\x18# \x01(\v2<.warp.multi_agent.v1.TransferShellCommandControlToUserResultH\x00R!transferShellCommandControlToUser\x12X\n" +
 	"\x11ask_user_question\x18$ \x01(\v2*.warp.multi_agent.v1.AskUserQuestionResultH\x00R\x0faskUserQuestion\x12O\n" +
 	"\x0estart_agent_v2\x18% \x01(\v2'.warp.multi_agent.v1.StartAgentV2ResultH\x00R\fstartAgentV2\x12a\n" +
-	"\x14upload_file_artifact\x18& \x01(\v2-.warp.multi_agent.v1.UploadFileArtifactResultH\x00R\x12uploadFileArtifact\x12W\n" +
-	"\x12orchestrate_result\x18' \x01(\v2&.warp.multi_agent.v1.OrchestrateResultH\x00R\x11orchestrateResult\x1a;\n" +
+	"\x14upload_file_artifact\x18& \x01(\v2-.warp.multi_agent.v1.UploadFileArtifactResultH\x00R\x12uploadFileArtifact\x12R\n" +
+	"\x11run_agents_result\x18' \x01(\v2$.warp.multi_agent.v1.RunAgentsResultH\x00R\x0frunAgentsResult\x1a;\n" +
 	"\fServerResult\x12+\n" +
 	"\x11serialized_result\x18\x01 \x01(\tR\x10serializedResult\x1a*\n" +
 	"\x0eSubagentResult\x12\x18\n" +
@@ -37265,19 +37236,17 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"\x80\x06\n" +
-	"\vOrchestrate\x12\x1e\n" +
+	"\x06result\"\xc2\x05\n" +
+	"\tRunAgents\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12%\n" +
 	"\vbase_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"basePrompt\x125\n" +
 	"\x06skills\x18\x03 \x03(\v2\x1d.warp.multi_agent.v1.SkillRefR\x06skills\x12\x19\n" +
-	"\bmodel_id\x18\x04 \x01(\tR\amodelId\x12Q\n" +
-	"\aharness\x18\x05 \x01(\v27.warp.multi_agent.v1.StartAgentV2.ExecutionMode.HarnessR\aharness\x12>\n" +
-	"\x05local\x18\x06 \x01(\v2&.warp.multi_agent.v1.Orchestrate.LocalH\x00R\x05local\x12A\n" +
-	"\x06remote\x18\a \x01(\v2'.warp.multi_agent.v1.Orchestrate.RemoteH\x00R\x06remote\x12[\n" +
-	"\x11agent_run_configs\x18\b \x03(\v2/.warp.multi_agent.v1.Orchestrate.AgentRunConfigR\x0fagentRunConfigs\x12\x1f\n" +
-	"\vauto_launch\x18\t \x01(\bR\n" +
-	"autoLaunch\x1a\a\n" +
+	"\bmodel_id\x18\x04 \x01(\tR\amodelId\x126\n" +
+	"\aharness\x18\x05 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\aharness\x12<\n" +
+	"\x05local\x18\x06 \x01(\v2$.warp.multi_agent.v1.RunAgents.LocalH\x00R\x05local\x12?\n" +
+	"\x06remote\x18\a \x01(\v2%.warp.multi_agent.v1.RunAgents.RemoteH\x00R\x06remote\x12Y\n" +
+	"\x11agent_run_configs\x18\b \x03(\v2-.warp.multi_agent.v1.RunAgents.AgentRunConfigR\x0fagentRunConfigs\x1a\a\n" +
 	"\x05Local\x1a\x82\x01\n" +
 	"\x06Remote\x12%\n" +
 	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentId\x12\x1f\n" +
@@ -37288,29 +37257,30 @@ const file_task_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12\x1a\n" +
 	"\x05title\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x05titleB\x10\n" +
-	"\x0eexecution_mode\"\x8b\b\n" +
-	"\x11OrchestrateResult\x12M\n" +
-	"\blaunched\x18\x01 \x01(\v2/.warp.multi_agent.v1.OrchestrateResult.LaunchedH\x00R\blaunched\x12Z\n" +
-	"\rlaunch_denied\x18\x02 \x01(\v23.warp.multi_agent.v1.OrchestrateResult.LaunchDeniedH\x00R\flaunchDenied\x12J\n" +
-	"\afailure\x18\x03 \x01(\v2..warp.multi_agent.v1.OrchestrateResult.FailureH\x00R\afailure\x1a*\n" +
+	"\x0eexecution_modeJ\x04\b\t\x10\n" +
+	"\"\xf0\a\n" +
+	"\x0fRunAgentsResult\x12K\n" +
+	"\blaunched\x18\x01 \x01(\v2-.warp.multi_agent.v1.RunAgentsResult.LaunchedH\x00R\blaunched\x12E\n" +
+	"\x06denied\x18\x02 \x01(\v2+.warp.multi_agent.v1.RunAgentsResult.DeniedH\x00R\x06denied\x12H\n" +
+	"\afailure\x18\x03 \x01(\v2,.warp.multi_agent.v1.RunAgentsResult.FailureH\x00R\afailure\x1a*\n" +
 	"\rLaunchedAgent\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a)\n" +
 	"\vFailedAgent\x12\x1a\n" +
-	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05error\x1a\xf0\x01\n" +
+	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05error\x1a\xec\x01\n" +
 	"\fAgentOutcome\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1a\n" +
-	"\x05title\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x12R\n" +
-	"\blaunched\x18\x02 \x01(\v24.warp.multi_agent.v1.OrchestrateResult.LaunchedAgentH\x00R\blaunched\x12L\n" +
-	"\x06failed\x18\x03 \x01(\v22.warp.multi_agent.v1.OrchestrateResult.FailedAgentH\x00R\x06failedB\b\n" +
-	"\x06result\x1a\xda\x02\n" +
-	"\bLaunched\x12\x19\n" +
-	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12Q\n" +
-	"\aharness\x18\x02 \x01(\v27.warp.multi_agent.v1.StartAgentV2.ExecutionMode.HarnessR\aharness\x12>\n" +
-	"\x05local\x18\x03 \x01(\v2&.warp.multi_agent.v1.Orchestrate.LocalH\x00R\x05local\x12A\n" +
-	"\x06remote\x18\x04 \x01(\v2'.warp.multi_agent.v1.Orchestrate.RemoteH\x00R\x06remote\x12K\n" +
-	"\x06agents\x18\x05 \x03(\v23.warp.multi_agent.v1.OrchestrateResult.AgentOutcomeR\x06agentsB\x10\n" +
-	"\x0eexecution_mode\x1a&\n" +
-	"\fLaunchDenied\x12\x16\n" +
+	"\x05title\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x12P\n" +
+	"\blaunched\x18\x02 \x01(\v22.warp.multi_agent.v1.RunAgentsResult.LaunchedAgentH\x00R\blaunched\x12J\n" +
+	"\x06failed\x18\x03 \x01(\v20.warp.multi_agent.v1.RunAgentsResult.FailedAgentH\x00R\x06failedB\b\n" +
+	"\x06result\x1a\xe4\x02\n" +
+	"\bLaunched\x12*\n" +
+	"\x11resolved_model_id\x18\x01 \x01(\tR\x0fresolvedModelId\x12G\n" +
+	"\x10resolved_harness\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\x0fresolvedHarness\x12<\n" +
+	"\x05local\x18\x03 \x01(\v2$.warp.multi_agent.v1.RunAgents.LocalH\x00R\x05local\x12?\n" +
+	"\x06remote\x18\x04 \x01(\v2%.warp.multi_agent.v1.RunAgents.RemoteH\x00R\x06remote\x12I\n" +
+	"\x06agents\x18\x05 \x03(\v21.warp.multi_agent.v1.RunAgentsResult.AgentOutcomeR\x06agentsB\x19\n" +
+	"\x17resolved_execution_mode\x1a \n" +
+	"\x06Denied\x12\x16\n" +
 	"\x06reason\x18\x01 \x01(\tR\x06reason\x1a%\n" +
 	"\aFailure\x12\x1a\n" +
 	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05errorB\t\n" +
@@ -37410,7 +37380,7 @@ const file_task_proto_rawDesc = "" +
 	"\x1cLIFECYCLE_EVENT_TYPE_BLOCKED\x10\x06\x12$\n" +
 	" LIFECYCLE_EVENT_TYPE_IN_PROGRESS\x10\a\x12\"\n" +
 	"\x1eLIFECYCLE_EVENT_TYPE_SUCCEEDED\x10\b\x12\x1f\n" +
-	"\x1bLIFECYCLE_EVENT_TYPE_FAILED\x10\t*\xe8\x05\n" +
+	"\x1bLIFECYCLE_EVENT_TYPE_FAILED\x10\t*\xe7\x05\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
@@ -37446,8 +37416,9 @@ const file_task_proto_rawDesc = "" +
 	"&TRANSFER_SHELL_COMMAND_CONTROL_TO_USER\x10\x1c\x12\x15\n" +
 	"\x11ASK_USER_QUESTION\x10\x1d\x12\x12\n" +
 	"\x0eSTART_AGENT_V2\x10\x1e\x12\x18\n" +
-	"\x14UPLOAD_FILE_ARTIFACT\x10\x1f\x12\x0f\n" +
-	"\vORCHESTRATE\x10 *O\n" +
+	"\x14UPLOAD_FILE_ARTIFACT\x10\x1f\x12\x0e\n" +
+	"\n" +
+	"RUN_AGENTS\x10 *O\n" +
 	"\tAgentType\x12\x16\n" +
 	"\x12AGENT_TYPE_UNKNOWN\x10\x00\x12\x16\n" +
 	"\x12AGENT_TYPE_PRIMARY\x10\x01\x12\x12\n" +
@@ -37513,8 +37484,8 @@ var file_task_proto_goTypes = []any{
 	(*StartAgentResult)(nil),                                   // 47: warp.multi_agent.v1.StartAgentResult
 	(*StartAgentV2)(nil),                                       // 48: warp.multi_agent.v1.StartAgentV2
 	(*StartAgentV2Result)(nil),                                 // 49: warp.multi_agent.v1.StartAgentV2Result
-	(*Orchestrate)(nil),                                        // 50: warp.multi_agent.v1.Orchestrate
-	(*OrchestrateResult)(nil),                                  // 51: warp.multi_agent.v1.OrchestrateResult
+	(*RunAgents)(nil),                                          // 50: warp.multi_agent.v1.RunAgents
+	(*RunAgentsResult)(nil),                                    // 51: warp.multi_agent.v1.RunAgentsResult
 	(*SendMessageToAgent)(nil),                                 // 52: warp.multi_agent.v1.SendMessageToAgent
 	(*SendMessageToAgentResult)(nil),                           // 53: warp.multi_agent.v1.SendMessageToAgentResult
 	(*AskUserQuestion)(nil),                                    // 54: warp.multi_agent.v1.AskUserQuestion
@@ -37697,15 +37668,15 @@ var file_task_proto_goTypes = []any{
 	(*StartAgentV2_ExecutionMode_Remote)(nil),                         // 231: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote
 	(*StartAgentV2Result_Success)(nil),                                // 232: warp.multi_agent.v1.StartAgentV2Result.Success
 	(*StartAgentV2Result_Error)(nil),                                  // 233: warp.multi_agent.v1.StartAgentV2Result.Error
-	(*Orchestrate_Local)(nil),                                         // 234: warp.multi_agent.v1.Orchestrate.Local
-	(*Orchestrate_Remote)(nil),                                        // 235: warp.multi_agent.v1.Orchestrate.Remote
-	(*Orchestrate_AgentRunConfig)(nil),                                // 236: warp.multi_agent.v1.Orchestrate.AgentRunConfig
-	(*OrchestrateResult_LaunchedAgent)(nil),                           // 237: warp.multi_agent.v1.OrchestrateResult.LaunchedAgent
-	(*OrchestrateResult_FailedAgent)(nil),                             // 238: warp.multi_agent.v1.OrchestrateResult.FailedAgent
-	(*OrchestrateResult_AgentOutcome)(nil),                            // 239: warp.multi_agent.v1.OrchestrateResult.AgentOutcome
-	(*OrchestrateResult_Launched)(nil),                                // 240: warp.multi_agent.v1.OrchestrateResult.Launched
-	(*OrchestrateResult_LaunchDenied)(nil),                            // 241: warp.multi_agent.v1.OrchestrateResult.LaunchDenied
-	(*OrchestrateResult_Failure)(nil),                                 // 242: warp.multi_agent.v1.OrchestrateResult.Failure
+	(*RunAgents_Local)(nil),                                           // 234: warp.multi_agent.v1.RunAgents.Local
+	(*RunAgents_Remote)(nil),                                          // 235: warp.multi_agent.v1.RunAgents.Remote
+	(*RunAgents_AgentRunConfig)(nil),                                  // 236: warp.multi_agent.v1.RunAgents.AgentRunConfig
+	(*RunAgentsResult_LaunchedAgent)(nil),                             // 237: warp.multi_agent.v1.RunAgentsResult.LaunchedAgent
+	(*RunAgentsResult_FailedAgent)(nil),                               // 238: warp.multi_agent.v1.RunAgentsResult.FailedAgent
+	(*RunAgentsResult_AgentOutcome)(nil),                              // 239: warp.multi_agent.v1.RunAgentsResult.AgentOutcome
+	(*RunAgentsResult_Launched)(nil),                                  // 240: warp.multi_agent.v1.RunAgentsResult.Launched
+	(*RunAgentsResult_Denied)(nil),                                    // 241: warp.multi_agent.v1.RunAgentsResult.Denied
+	(*RunAgentsResult_Failure)(nil),                                   // 242: warp.multi_agent.v1.RunAgentsResult.Failure
 	(*SendMessageToAgentResult_Success)(nil),                          // 243: warp.multi_agent.v1.SendMessageToAgentResult.Success
 	(*SendMessageToAgentResult_Error)(nil),                            // 244: warp.multi_agent.v1.SendMessageToAgentResult.Error
 	(*AskUserQuestion_Option)(nil),                                    // 245: warp.multi_agent.v1.AskUserQuestion.Option
@@ -37729,22 +37700,23 @@ var file_task_proto_goTypes = []any{
 	(*LongRunningShellCommandSnapshot)(nil),                           // 263: warp.multi_agent.v1.LongRunningShellCommandSnapshot
 	(*emptypb.Empty)(nil),                                             // 264: google.protobuf.Empty
 	(*SkillRef)(nil),                                                  // 265: warp.multi_agent.v1.SkillRef
-	(*FilePathReference)(nil),                                         // 266: warp.multi_agent.v1.FilePathReference
-	(*ExecutedShellCommand)(nil),                                      // 267: warp.multi_agent.v1.ExecutedShellCommand
-	(*CurrentRef)(nil),                                                // 268: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                                                   // 269: warp.multi_agent.v1.BaseRef
-	(*InputContext)(nil),                                              // 270: warp.multi_agent.v1.InputContext
-	(*Attachment)(nil),                                                // 271: warp.multi_agent.v1.Attachment
-	(*durationpb.Duration)(nil),                                       // 272: google.protobuf.Duration
-	(*CreateTodoList)(nil),                                            // 273: warp.multi_agent.v1.CreateTodoList
-	(*UpdatePendingTodos)(nil),                                        // 274: warp.multi_agent.v1.UpdatePendingTodos
-	(*MarkTodosCompleted)(nil),                                        // 275: warp.multi_agent.v1.MarkTodosCompleted
-	(*Skill)(nil),                                                     // 276: warp.multi_agent.v1.Skill
-	(*AnyFileContent)(nil),                                            // 277: warp.multi_agent.v1.AnyFileContent
-	(*structpb.Struct)(nil),                                           // 278: google.protobuf.Struct
-	(*FileContentLineRange)(nil),                                      // 279: warp.multi_agent.v1.FileContentLineRange
-	(*FileContent)(nil),                                               // 280: warp.multi_agent.v1.FileContent
-	(*DocumentContent)(nil),                                           // 281: warp.multi_agent.v1.DocumentContent
+	(*Harness)(nil),                                                   // 266: warp.multi_agent.v1.Harness
+	(*FilePathReference)(nil),                                         // 267: warp.multi_agent.v1.FilePathReference
+	(*ExecutedShellCommand)(nil),                                      // 268: warp.multi_agent.v1.ExecutedShellCommand
+	(*CurrentRef)(nil),                                                // 269: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                                   // 270: warp.multi_agent.v1.BaseRef
+	(*InputContext)(nil),                                              // 271: warp.multi_agent.v1.InputContext
+	(*Attachment)(nil),                                                // 272: warp.multi_agent.v1.Attachment
+	(*durationpb.Duration)(nil),                                       // 273: google.protobuf.Duration
+	(*CreateTodoList)(nil),                                            // 274: warp.multi_agent.v1.CreateTodoList
+	(*UpdatePendingTodos)(nil),                                        // 275: warp.multi_agent.v1.UpdatePendingTodos
+	(*MarkTodosCompleted)(nil),                                        // 276: warp.multi_agent.v1.MarkTodosCompleted
+	(*Skill)(nil),                                                     // 277: warp.multi_agent.v1.Skill
+	(*AnyFileContent)(nil),                                            // 278: warp.multi_agent.v1.AnyFileContent
+	(*structpb.Struct)(nil),                                           // 279: google.protobuf.Struct
+	(*FileContentLineRange)(nil),                                      // 280: warp.multi_agent.v1.FileContentLineRange
+	(*FileContent)(nil),                                               // 281: warp.multi_agent.v1.FileContent
+	(*DocumentContent)(nil),                                           // 282: warp.multi_agent.v1.DocumentContent
 }
 var file_task_proto_depIdxs = []int32{
 	60,  // 0: warp.multi_agent.v1.Task.dependencies:type_name -> warp.multi_agent.v1.Task.Dependencies
@@ -37846,23 +37818,23 @@ var file_task_proto_depIdxs = []int32{
 	228, // 96: warp.multi_agent.v1.StartAgentV2.execution_mode:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode
 	232, // 97: warp.multi_agent.v1.StartAgentV2Result.success:type_name -> warp.multi_agent.v1.StartAgentV2Result.Success
 	233, // 98: warp.multi_agent.v1.StartAgentV2Result.error:type_name -> warp.multi_agent.v1.StartAgentV2Result.Error
-	265, // 99: warp.multi_agent.v1.Orchestrate.skills:type_name -> warp.multi_agent.v1.SkillRef
-	229, // 100: warp.multi_agent.v1.Orchestrate.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
-	234, // 101: warp.multi_agent.v1.Orchestrate.local:type_name -> warp.multi_agent.v1.Orchestrate.Local
-	235, // 102: warp.multi_agent.v1.Orchestrate.remote:type_name -> warp.multi_agent.v1.Orchestrate.Remote
-	236, // 103: warp.multi_agent.v1.Orchestrate.agent_run_configs:type_name -> warp.multi_agent.v1.Orchestrate.AgentRunConfig
-	240, // 104: warp.multi_agent.v1.OrchestrateResult.launched:type_name -> warp.multi_agent.v1.OrchestrateResult.Launched
-	241, // 105: warp.multi_agent.v1.OrchestrateResult.launch_denied:type_name -> warp.multi_agent.v1.OrchestrateResult.LaunchDenied
-	242, // 106: warp.multi_agent.v1.OrchestrateResult.failure:type_name -> warp.multi_agent.v1.OrchestrateResult.Failure
+	265, // 99: warp.multi_agent.v1.RunAgents.skills:type_name -> warp.multi_agent.v1.SkillRef
+	266, // 100: warp.multi_agent.v1.RunAgents.harness:type_name -> warp.multi_agent.v1.Harness
+	234, // 101: warp.multi_agent.v1.RunAgents.local:type_name -> warp.multi_agent.v1.RunAgents.Local
+	235, // 102: warp.multi_agent.v1.RunAgents.remote:type_name -> warp.multi_agent.v1.RunAgents.Remote
+	236, // 103: warp.multi_agent.v1.RunAgents.agent_run_configs:type_name -> warp.multi_agent.v1.RunAgents.AgentRunConfig
+	240, // 104: warp.multi_agent.v1.RunAgentsResult.launched:type_name -> warp.multi_agent.v1.RunAgentsResult.Launched
+	241, // 105: warp.multi_agent.v1.RunAgentsResult.denied:type_name -> warp.multi_agent.v1.RunAgentsResult.Denied
+	242, // 106: warp.multi_agent.v1.RunAgentsResult.failure:type_name -> warp.multi_agent.v1.RunAgentsResult.Failure
 	243, // 107: warp.multi_agent.v1.SendMessageToAgentResult.success:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Success
 	244, // 108: warp.multi_agent.v1.SendMessageToAgentResult.error:type_name -> warp.multi_agent.v1.SendMessageToAgentResult.Error
 	247, // 109: warp.multi_agent.v1.AskUserQuestion.questions:type_name -> warp.multi_agent.v1.AskUserQuestion.Question
 	248, // 110: warp.multi_agent.v1.AskUserQuestionResult.success:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Success
 	249, // 111: warp.multi_agent.v1.AskUserQuestionResult.error:type_name -> warp.multi_agent.v1.AskUserQuestionResult.Error
-	266, // 112: warp.multi_agent.v1.UploadFileArtifact.file:type_name -> warp.multi_agent.v1.FilePathReference
+	267, // 112: warp.multi_agent.v1.UploadFileArtifact.file:type_name -> warp.multi_agent.v1.FilePathReference
 	252, // 113: warp.multi_agent.v1.UploadFileArtifactResult.success:type_name -> warp.multi_agent.v1.UploadFileArtifactResult.Success
 	253, // 114: warp.multi_agent.v1.UploadFileArtifactResult.error:type_name -> warp.multi_agent.v1.UploadFileArtifactResult.Error
-	267, // 115: warp.multi_agent.v1.PassiveSuggestionResultType.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	268, // 115: warp.multi_agent.v1.PassiveSuggestionResultType.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	254, // 116: warp.multi_agent.v1.PassiveSuggestionResultType.agent_response_completed:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.AgentResponseCompleted
 	255, // 117: warp.multi_agent.v1.PassiveSuggestionResultType.prompt:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.Prompt
 	256, // 118: warp.multi_agent.v1.PassiveSuggestionResultType.code_diff:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType.CodeDiff
@@ -37875,15 +37847,15 @@ var file_task_proto_depIdxs = []int32{
 	264, // 125: warp.multi_agent.v1.AgentEvent.LifecycleEvent.in_progress:type_name -> google.protobuf.Empty
 	264, // 126: warp.multi_agent.v1.AgentEvent.LifecycleEvent.succeeded:type_name -> google.protobuf.Empty
 	64,  // 127: warp.multi_agent.v1.AgentEvent.LifecycleEvent.failed:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent.Failed
-	268, // 128: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
-	269, // 129: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
-	268, // 130: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
-	269, // 131: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
+	269, // 128: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
+	270, // 129: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
+	269, // 130: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
+	270, // 131: warp.multi_agent.v1.ReviewComment.CommentedDiffset.base:type_name -> warp.multi_agent.v1.BaseRef
 	58,  // 132: warp.multi_agent.v1.Message.PassiveSuggestionResult.result:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType
-	270, // 133: warp.multi_agent.v1.Message.PassiveSuggestionResult.context:type_name -> warp.multi_agent.v1.InputContext
+	271, // 133: warp.multi_agent.v1.Message.PassiveSuggestionResult.context:type_name -> warp.multi_agent.v1.InputContext
 	94,  // 134: warp.multi_agent.v1.Message.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Message.MessagesReceivedFromAgents.ReceivedMessage
 	9,   // 135: warp.multi_agent.v1.Message.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
-	270, // 136: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	271, // 136: warp.multi_agent.v1.Message.UserQuery.context:type_name -> warp.multi_agent.v1.InputContext
 	95,  // 137: warp.multi_agent.v1.Message.UserQuery.referenced_attachments:type_name -> warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry
 	45,  // 138: warp.multi_agent.v1.Message.UserQuery.mode:type_name -> warp.multi_agent.v1.UserQueryMode
 	2,   // 139: warp.multi_agent.v1.Message.UserQuery.intended_agent:type_name -> warp.multi_agent.v1.AgentType
@@ -37894,14 +37866,14 @@ var file_task_proto_depIdxs = []int32{
 	76,  // 144: warp.multi_agent.v1.Message.SystemQuery.clone_repository:type_name -> warp.multi_agent.v1.Message.CloneRepository
 	77,  // 145: warp.multi_agent.v1.Message.SystemQuery.summarize_conversation:type_name -> warp.multi_agent.v1.Message.SummarizeConversation
 	82,  // 146: warp.multi_agent.v1.Message.SystemQuery.fetch_review_comments:type_name -> warp.multi_agent.v1.Message.FetchReviewComments
-	270, // 147: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
-	271, // 148: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
+	271, // 147: warp.multi_agent.v1.Message.SystemQuery.context:type_name -> warp.multi_agent.v1.InputContext
+	272, // 148: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.attachments:type_name -> warp.multi_agent.v1.Attachment
 	264, // 149: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.files_changed:type_name -> google.protobuf.Empty
 	264, // 150: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.command_run:type_name -> google.protobuf.Empty
 	96,  // 151: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.shell_command_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted
 	97,  // 152: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.agent_response_completed:type_name -> warp.multi_agent.v1.Message.GeneratePassiveSuggestions.AgentResponseCompleted
-	272, // 153: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
-	272, // 154: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
+	273, // 153: warp.multi_agent.v1.Message.AgentReasoning.finished_duration:type_name -> google.protobuf.Duration
+	273, // 154: warp.multi_agent.v1.Message.Summarization.finished_duration:type_name -> google.protobuf.Duration
 	98,  // 155: warp.multi_agent.v1.Message.Summarization.conversation_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ConversationSummary
 	99,  // 156: warp.multi_agent.v1.Message.Summarization.tool_call_result_summary:type_name -> warp.multi_agent.v1.Message.Summarization.ToolCallResultSummary
 	10,  // 157: warp.multi_agent.v1.Message.CodeReview.comments:type_name -> warp.multi_agent.v1.ReviewComments
@@ -37938,8 +37910,8 @@ var file_task_proto_depIdxs = []int32{
 	54,  // 188: warp.multi_agent.v1.Message.ToolCall.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestion
 	48,  // 189: warp.multi_agent.v1.Message.ToolCall.start_agent_v2:type_name -> warp.multi_agent.v1.StartAgentV2
 	56,  // 190: warp.multi_agent.v1.Message.ToolCall.upload_file_artifact:type_name -> warp.multi_agent.v1.UploadFileArtifact
-	50,  // 191: warp.multi_agent.v1.Message.ToolCall.orchestrate:type_name -> warp.multi_agent.v1.Orchestrate
-	270, // 192: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
+	50,  // 191: warp.multi_agent.v1.Message.ToolCall.run_agents:type_name -> warp.multi_agent.v1.RunAgents
+	271, // 192: warp.multi_agent.v1.Message.ToolCallResult.context:type_name -> warp.multi_agent.v1.InputContext
 	13,  // 193: warp.multi_agent.v1.Message.ToolCallResult.run_shell_command:type_name -> warp.multi_agent.v1.RunShellCommandResult
 	15,  // 194: warp.multi_agent.v1.Message.ToolCallResult.search_codebase:type_name -> warp.multi_agent.v1.SearchCodebaseResult
 	157, // 195: warp.multi_agent.v1.Message.ToolCallResult.server:type_name -> warp.multi_agent.v1.Message.ToolCallResult.ServerResult
@@ -37974,20 +37946,20 @@ var file_task_proto_depIdxs = []int32{
 	55,  // 224: warp.multi_agent.v1.Message.ToolCallResult.ask_user_question:type_name -> warp.multi_agent.v1.AskUserQuestionResult
 	49,  // 225: warp.multi_agent.v1.Message.ToolCallResult.start_agent_v2:type_name -> warp.multi_agent.v1.StartAgentV2Result
 	57,  // 226: warp.multi_agent.v1.Message.ToolCallResult.upload_file_artifact:type_name -> warp.multi_agent.v1.UploadFileArtifactResult
-	51,  // 227: warp.multi_agent.v1.Message.ToolCallResult.orchestrate_result:type_name -> warp.multi_agent.v1.OrchestrateResult
-	273, // 228: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
-	274, // 229: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
-	275, // 230: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
+	51,  // 227: warp.multi_agent.v1.Message.ToolCallResult.run_agents_result:type_name -> warp.multi_agent.v1.RunAgentsResult
+	274, // 228: warp.multi_agent.v1.Message.UpdateTodos.create_todo_list:type_name -> warp.multi_agent.v1.CreateTodoList
+	275, // 229: warp.multi_agent.v1.Message.UpdateTodos.update_pending_todos:type_name -> warp.multi_agent.v1.UpdatePendingTodos
+	276, // 230: warp.multi_agent.v1.Message.UpdateTodos.mark_todos_completed:type_name -> warp.multi_agent.v1.MarkTodosCompleted
 	159, // 231: warp.multi_agent.v1.Message.UpdateReviewComments.address_review_comments:type_name -> warp.multi_agent.v1.Message.UpdateReviewComments.AddressReviewComments
 	160, // 232: warp.multi_agent.v1.Message.WebSearch.status:type_name -> warp.multi_agent.v1.Message.WebSearch.Status
 	164, // 233: warp.multi_agent.v1.Message.WebFetch.status:type_name -> warp.multi_agent.v1.Message.WebFetch.Status
 	173, // 234: warp.multi_agent.v1.Message.ArtifactEvent.created:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated
 	174, // 235: warp.multi_agent.v1.Message.ArtifactEvent.fork_artifacts:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifacts
-	276, // 236: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
+	277, // 236: warp.multi_agent.v1.Message.InvokeSkill.skill:type_name -> warp.multi_agent.v1.Skill
 	70,  // 237: warp.multi_agent.v1.Message.InvokeSkill.user_query:type_name -> warp.multi_agent.v1.Message.UserQuery
-	271, // 238: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
-	267, // 239: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	277, // 240: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
+	272, // 238: warp.multi_agent.v1.Message.UserQuery.ReferencedAttachmentsEntry.value:type_name -> warp.multi_agent.v1.Attachment
+	268, // 239: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	278, // 240: warp.multi_agent.v1.Message.GeneratePassiveSuggestions.ShellCommandCompleted.relevant_files:type_name -> warp.multi_agent.v1.AnyFileContent
 	261, // 241: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.citations:type_name -> warp.multi_agent.v1.Citation
 	3,   // 242: warp.multi_agent.v1.Message.ToolCall.RunShellCommand.risk_category:type_name -> warp.multi_agent.v1.RiskCategory
 	129, // 243: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.mode:type_name -> warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode
@@ -37997,7 +37969,7 @@ var file_task_proto_depIdxs = []int32{
 	134, // 247: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.deleted_files:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.DeleteFile
 	132, // 248: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.v4a_updates:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate
 	8,   // 249: warp.multi_agent.v1.Message.ToolCall.SuggestPlan.proposed_tasks:type_name -> warp.multi_agent.v1.Task
-	278, // 250: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
+	279, // 250: warp.multi_agent.v1.Message.ToolCall.CallMCPTool.args:type_name -> google.protobuf.Struct
 	136, // 251: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.inline_query_banner:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.InlineQueryBanner
 	137, // 252: warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.prompt_chip:type_name -> warp.multi_agent.v1.Message.ToolCall.SuggestPrompt.PromptChip
 	138, // 253: warp.multi_agent.v1.Message.ToolCall.Subagent.cli:type_name -> warp.multi_agent.v1.Message.ToolCall.Subagent.CLISubagent
@@ -38010,7 +37982,7 @@ var file_task_proto_depIdxs = []int32{
 	140, // 260: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.documents:type_name -> warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document
 	141, // 261: warp.multi_agent.v1.Message.ToolCall.EditDocuments.diffs:type_name -> warp.multi_agent.v1.Message.ToolCall.EditDocuments.DocumentDiff
 	142, // 262: warp.multi_agent.v1.Message.ToolCall.CreateDocuments.new_documents:type_name -> warp.multi_agent.v1.Message.ToolCall.CreateDocuments.NewDocument
-	272, // 263: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
+	273, // 263: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.duration:type_name -> google.protobuf.Duration
 	264, // 264: warp.multi_agent.v1.Message.ToolCall.ReadShellCommandOutput.on_completion:type_name -> google.protobuf.Empty
 	143, // 265: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.comments:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment
 	146, // 266: warp.multi_agent.v1.Message.ToolCall.UseComputer.actions:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action
@@ -38020,12 +37992,12 @@ var file_task_proto_depIdxs = []int32{
 	264, // 270: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.raw:type_name -> google.protobuf.Empty
 	264, // 271: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.line:type_name -> google.protobuf.Empty
 	264, // 272: warp.multi_agent.v1.Message.ToolCall.WriteToLongRunningShellCommand.Mode.block:type_name -> google.protobuf.Empty
-	279, // 273: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	280, // 273: warp.multi_agent.v1.Message.ToolCall.ReadFiles.File.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	135, // 274: warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.hunks:type_name -> warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.V4AFileUpdate.Hunk
-	279, // 275: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
+	280, // 275: warp.multi_agent.v1.Message.ToolCall.ReadDocuments.Document.line_ranges:type_name -> warp.multi_agent.v1.FileContentLineRange
 	144, // 276: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.Comment.location:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation
 	145, // 277: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLocation.line:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange
-	279, // 278: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	280, // 278: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.range:type_name -> warp.multi_agent.v1.FileContentLineRange
 	4,   // 279: warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentLineRange.side:type_name -> warp.multi_agent.v1.Message.ToolCall.InsertReviewComments.CommentSide
 	147, // 280: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_move:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseMove
 	148, // 281: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.mouse_down:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseDown
@@ -38041,7 +38013,7 @@ var file_task_proto_depIdxs = []int32{
 	5,   // 291: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseUp.button:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseButton
 	38,  // 292: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.at:type_name -> warp.multi_agent.v1.Coordinates
 	6,   // 293: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.direction:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.MouseWheel.Direction
-	272, // 294: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
+	273, // 294: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Wait.duration:type_name -> google.protobuf.Duration
 	153, // 295: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyDown.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
 	153, // 296: warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.KeyUp.key:type_name -> warp.multi_agent.v1.Message.ToolCall.UseComputer.Action.Key
 	38,  // 297: warp.multi_agent.v1.Message.ToolCall.ScreenshotParams.Region.top_left:type_name -> warp.multi_agent.v1.Coordinates
@@ -38062,13 +38034,13 @@ var file_task_proto_depIdxs = []int32{
 	169, // 312: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.screenshot:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ScreenshotArtifact
 	170, // 313: warp.multi_agent.v1.Message.ArtifactEvent.ArtifactCreated.file:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.FileArtifact
 	172, // 314: warp.multi_agent.v1.Message.ArtifactEvent.ForkArtifacts.artifacts:type_name -> warp.multi_agent.v1.Message.ArtifactEvent.ConversationArtifact
-	280, // 315: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
-	277, // 316: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
-	280, // 317: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
-	280, // 318: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
+	281, // 315: warp.multi_agent.v1.ReadFilesResult.TextFilesSuccess.files:type_name -> warp.multi_agent.v1.FileContent
+	278, // 316: warp.multi_agent.v1.ReadFilesResult.AnyFilesSuccess.files:type_name -> warp.multi_agent.v1.AnyFileContent
+	281, // 317: warp.multi_agent.v1.SearchCodebaseResult.Success.files:type_name -> warp.multi_agent.v1.FileContent
+	281, // 318: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files:type_name -> warp.multi_agent.v1.FileContent
 	182, // 319: warp.multi_agent.v1.ApplyFileDiffsResult.Success.updated_files_v2:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent
 	183, // 320: warp.multi_agent.v1.ApplyFileDiffsResult.Success.deleted_files:type_name -> warp.multi_agent.v1.ApplyFileDiffsResult.Success.DeletedFile
-	280, // 321: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
+	281, // 321: warp.multi_agent.v1.ApplyFileDiffsResult.Success.UpdatedFileContent.file:type_name -> warp.multi_agent.v1.FileContent
 	187, // 322: warp.multi_agent.v1.GrepResult.Success.matched_files:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch
 	188, // 323: warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.matched_lines:type_name -> warp.multi_agent.v1.GrepResult.Success.GrepFileMatch.GrepLineMatch
 	193, // 324: warp.multi_agent.v1.FileGlobV2Result.Success.matched_files:type_name -> warp.multi_agent.v1.FileGlobV2Result.Success.FileGlobMatch
@@ -38077,12 +38049,12 @@ var file_task_proto_depIdxs = []int32{
 	203, // 327: warp.multi_agent.v1.CallMCPToolResult.Success.Result.text:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Text
 	204, // 328: warp.multi_agent.v1.CallMCPToolResult.Success.Result.image:type_name -> warp.multi_agent.v1.CallMCPToolResult.Success.Result.Image
 	22,  // 329: warp.multi_agent.v1.CallMCPToolResult.Success.Result.resource:type_name -> warp.multi_agent.v1.MCPResourceContent
-	281, // 330: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
-	281, // 331: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
-	281, // 332: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	282, // 330: warp.multi_agent.v1.ReadDocumentsResult.Success.documents:type_name -> warp.multi_agent.v1.DocumentContent
+	282, // 331: warp.multi_agent.v1.EditDocumentsResult.Success.updated_documents:type_name -> warp.multi_agent.v1.DocumentContent
+	282, // 332: warp.multi_agent.v1.CreateDocumentsResult.Success.created_documents:type_name -> warp.multi_agent.v1.DocumentContent
 	59,  // 333: warp.multi_agent.v1.UseComputerResult.Success.screenshot:type_name -> warp.multi_agent.v1.RawImage
 	38,  // 334: warp.multi_agent.v1.UseComputerResult.Success.cursor_position:type_name -> warp.multi_agent.v1.Coordinates
-	280, // 335: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
+	281, // 335: warp.multi_agent.v1.ReadSkillResult.Success.content:type_name -> warp.multi_agent.v1.FileContent
 	41,  // 336: warp.multi_agent.v1.RequestComputerUseResult.Approved.screen_dimensions:type_name -> warp.multi_agent.v1.ScreenDimensions
 	59,  // 337: warp.multi_agent.v1.RequestComputerUseResult.Approved.initial_screenshot:type_name -> warp.multi_agent.v1.RawImage
 	7,   // 338: warp.multi_agent.v1.RequestComputerUseResult.Approved.platform:type_name -> warp.multi_agent.v1.RequestComputerUseResult.Approved.Platform
@@ -38095,12 +38067,12 @@ var file_task_proto_depIdxs = []int32{
 	229, // 345: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Local.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
 	265, // 346: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.skills:type_name -> warp.multi_agent.v1.SkillRef
 	229, // 347: warp.multi_agent.v1.StartAgentV2.ExecutionMode.Remote.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
-	237, // 348: warp.multi_agent.v1.OrchestrateResult.AgentOutcome.launched:type_name -> warp.multi_agent.v1.OrchestrateResult.LaunchedAgent
-	238, // 349: warp.multi_agent.v1.OrchestrateResult.AgentOutcome.failed:type_name -> warp.multi_agent.v1.OrchestrateResult.FailedAgent
-	229, // 350: warp.multi_agent.v1.OrchestrateResult.Launched.harness:type_name -> warp.multi_agent.v1.StartAgentV2.ExecutionMode.Harness
-	234, // 351: warp.multi_agent.v1.OrchestrateResult.Launched.local:type_name -> warp.multi_agent.v1.Orchestrate.Local
-	235, // 352: warp.multi_agent.v1.OrchestrateResult.Launched.remote:type_name -> warp.multi_agent.v1.Orchestrate.Remote
-	239, // 353: warp.multi_agent.v1.OrchestrateResult.Launched.agents:type_name -> warp.multi_agent.v1.OrchestrateResult.AgentOutcome
+	237, // 348: warp.multi_agent.v1.RunAgentsResult.AgentOutcome.launched:type_name -> warp.multi_agent.v1.RunAgentsResult.LaunchedAgent
+	238, // 349: warp.multi_agent.v1.RunAgentsResult.AgentOutcome.failed:type_name -> warp.multi_agent.v1.RunAgentsResult.FailedAgent
+	266, // 350: warp.multi_agent.v1.RunAgentsResult.Launched.resolved_harness:type_name -> warp.multi_agent.v1.Harness
+	234, // 351: warp.multi_agent.v1.RunAgentsResult.Launched.local:type_name -> warp.multi_agent.v1.RunAgents.Local
+	235, // 352: warp.multi_agent.v1.RunAgentsResult.Launched.remote:type_name -> warp.multi_agent.v1.RunAgents.Remote
+	239, // 353: warp.multi_agent.v1.RunAgentsResult.Launched.agents:type_name -> warp.multi_agent.v1.RunAgentsResult.AgentOutcome
 	245, // 354: warp.multi_agent.v1.AskUserQuestion.MultipleChoice.options:type_name -> warp.multi_agent.v1.AskUserQuestion.Option
 	246, // 355: warp.multi_agent.v1.AskUserQuestion.Question.multiple_choice:type_name -> warp.multi_agent.v1.AskUserQuestion.MultipleChoice
 	250, // 356: warp.multi_agent.v1.AskUserQuestionResult.Success.answers:type_name -> warp.multi_agent.v1.AskUserQuestionResult.AnswerItem
@@ -38128,6 +38100,7 @@ func file_task_proto_init() {
 	file_todo_proto_init()
 	file_skill_proto_init()
 	file_orchestration_proto_init()
+	file_agent_execution_proto_init()
 	file_task_proto_msgTypes[1].OneofWrappers = []any{
 		(*agentEvent_LifecycleEvent_)(nil),
 	}
@@ -38280,13 +38253,13 @@ func file_task_proto_init() {
 		(*startAgentV2Result_Error_)(nil),
 	}
 	file_task_proto_msgTypes[42].OneofWrappers = []any{
-		(*orchestrate_Local_)(nil),
-		(*orchestrate_Remote_)(nil),
+		(*runAgents_Local_)(nil),
+		(*runAgents_Remote_)(nil),
 	}
 	file_task_proto_msgTypes[43].OneofWrappers = []any{
-		(*orchestrateResult_Launched_)(nil),
-		(*orchestrateResult_LaunchDenied_)(nil),
-		(*orchestrateResult_Failure_)(nil),
+		(*runAgentsResult_Launched_)(nil),
+		(*runAgentsResult_Denied_)(nil),
+		(*runAgentsResult_Failure_)(nil),
 	}
 	file_task_proto_msgTypes[45].OneofWrappers = []any{
 		(*sendMessageToAgentResult_Success_)(nil),
@@ -38370,7 +38343,7 @@ func file_task_proto_init() {
 		(*message_ToolCall_AskUserQuestion)(nil),
 		(*message_ToolCall_StartAgentV2)(nil),
 		(*message_ToolCall_UploadFileArtifact)(nil),
-		(*message_ToolCall_Orchestrate)(nil),
+		(*message_ToolCall_RunAgents)(nil),
 	}
 	file_task_proto_msgTypes[76].OneofWrappers = []any{
 		(*message_ToolCallResult_RunShellCommand)(nil),
@@ -38407,7 +38380,7 @@ func file_task_proto_init() {
 		(*message_ToolCallResult_AskUserQuestion)(nil),
 		(*message_ToolCallResult_StartAgentV2)(nil),
 		(*message_ToolCallResult_UploadFileArtifact)(nil),
-		(*message_ToolCallResult_OrchestrateResult)(nil),
+		(*message_ToolCallResult_RunAgentsResult)(nil),
 	}
 	file_task_proto_msgTypes[78].OneofWrappers = []any{
 		(*message_UpdateTodos_CreateTodoList)(nil),
@@ -38503,12 +38476,12 @@ func file_task_proto_init() {
 		(*startAgentV2_ExecutionMode_Remote_)(nil),
 	}
 	file_task_proto_msgTypes[231].OneofWrappers = []any{
-		(*orchestrateResult_AgentOutcome_Launched)(nil),
-		(*orchestrateResult_AgentOutcome_Failed)(nil),
+		(*runAgentsResult_AgentOutcome_Launched)(nil),
+		(*runAgentsResult_AgentOutcome_Failed)(nil),
 	}
 	file_task_proto_msgTypes[232].OneofWrappers = []any{
-		(*orchestrateResult_Launched_Local)(nil),
-		(*orchestrateResult_Launched_Remote)(nil),
+		(*runAgentsResult_Launched_Local)(nil),
+		(*runAgentsResult_Launched_Remote)(nil),
 	}
 	file_task_proto_msgTypes[239].OneofWrappers = []any{
 		(*askUserQuestion_Question_MultipleChoice)(nil),

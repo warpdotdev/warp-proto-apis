@@ -1,0 +1,20 @@
+// Shared agent-execution types for the multi-agent API.
+//
+// This file is a forked leaf: it deliberately mirrors the shape of the
+// equivalent types nested under `StartAgentV2.ExecutionMode` (in task.proto)
+// rather than depending on them. StartAgentV2 is on its way out; once it
+// is removed, the nested copies go with it.
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// The harness that runs an agent.
+message Harness {
+  // The harness type identifier (e.g. "oz" or "claude").
+  string type = 1;
+}

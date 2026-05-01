@@ -18,6 +18,7 @@ import "options.proto";
 import "todo.proto";
 import "skill.proto";
 import "orchestration.proto";
+import "agent_execution.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -392,7 +393,7 @@ message Message {
       AskUserQuestion ask_user_question = 32;
       StartAgentV2 start_agent_v2 = 33;
       UploadFileArtifact upload_file_artifact = 34;
-      Orchestrate orchestrate = 35;
+      RunAgents run_agents = 35;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -933,7 +934,7 @@ message Message {
       AskUserQuestionResult ask_user_question = 36;
       StartAgentV2Result start_agent_v2 = 37;
       UploadFileArtifactResult upload_file_artifact = 38;
-      OrchestrateResult orchestrate_result = 39;
+      RunAgentsResult run_agents_result = 39;
     }
 
     // Result of a server-side tool call.
@@ -1581,7 +1582,7 @@ enum ToolType {
   ASK_USER_QUESTION = 29;
   START_AGENT_V2 = 30;
   UPLOAD_FILE_ARTIFACT = 31;
-  ORCHESTRATE = 32;
+  RUN_AGENTS = 32;
 }
 
 message UserQueryMode {
@@ -1725,7 +1726,9 @@ message StartAgentV2Result {
 
 // A client tool call to start a batch of child agents that share run-wide
 // configuration (model, harness, execution mode).
-message Orchestrate {
+message RunAgents {
+  reserved 9; // formerly auto_launch
+
   message Local {}
   message Remote {
     string environment_id = 1;
@@ -1734,37 +1737,36 @@ message Orchestrate {
     // (browser automation, visual inspection, etc.). Not a user preference.
     bool computer_use_enabled = 3;
   }
-  // One per child agent. Full per-child prompt is computed at dispatch as
-  // base_prompt + "\n\n" + prompt (or just base_prompt when prompt is empty).
+  // Configuration for a single child agent in the batch.
   message AgentRunConfig {
+    // Display name for the child agent. Required: must be non-empty and
+    // unique across the entries in a single RunAgents call. The server
+    // rejects violations with
+    // RunAgentsResult.Failure { error: "agent names must be non-empty and
+    // unique" }.
     string name = 1 [ (sensitive) = true ];
     string prompt = 2 [ (sensitive) = true ];
-    // Agent-set descriptive label flowed through to the spawned task title.
+    // Title for the spawned agent's task.
     string title = 3 [ (sensitive) = true ];
   }
   string summary = 1 [ (sensitive) = true ];
   string base_prompt = 2 [ (sensitive) = true ];
   repeated SkillRef skills = 3;
   string model_id = 4;
-  StartAgentV2.ExecutionMode.Harness harness = 5;
+  Harness harness = 5;
   oneof execution_mode {
     Local local = 6;
     Remote remote = 7;
   }
   repeated AgentRunConfig agent_run_configs = 8;
-  // When true, the client skips the confirmation card and dispatches
-  // per-agent CreateAgentTask immediately. Set by the server when the
-  // orchestrate call's run-wide fields match the active approved
-  // OrchestrationConfig.
-  bool auto_launch = 9;
 }
 
-// The result of an Orchestrate tool call.
-message OrchestrateResult {
+// The result of a RunAgents tool call.
+message RunAgentsResult {
   message LaunchedAgent { string agent_id = 1; }
   message FailedAgent { string error = 1 [ (sensitive) = true ]; }
-  // Per-agent outcome in agent_run_configs[] input order. `title` mirrors
-  // the LLM-supplied agent_run_configs[i].title (empty when unset).
+  // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs
+  // by `name`.
   message AgentOutcome {
     string name = 1 [ (sensitive) = true ];
     string title = 4 [ (sensitive) = true ];
@@ -1776,25 +1778,25 @@ message OrchestrateResult {
   // Orchestration launched. Carries the resolved configuration and
   // per-agent outcomes.
   message Launched {
-    string model_id = 1;
-    StartAgentV2.ExecutionMode.Harness harness = 2;
-    oneof execution_mode {
-      Orchestrate.Local local = 3;
-      Orchestrate.Remote remote = 4;
+    string resolved_model_id = 1;
+    Harness resolved_harness = 2;
+    oneof resolved_execution_mode {
+      RunAgents.Local local = 3;
+      RunAgents.Remote remote = 4;
     }
     repeated AgentOutcome agents = 5;
   }
   // Declined for a non-error reason. Currently emitted when the user has
   // disapproved orchestration on the active plan; future denial paths
   // (policy, quota, etc.) populate `reason` with a different string.
-  message LaunchDenied { string reason = 1; }
+  message Denied { string reason = 1; }
   // Actual error: server-side validation rejected the call, or the client
   // could not begin the launch sequence. NOT used for user-driven outcomes
   // (disapproval, cancellation) -- those have their own variants.
   message Failure { string error = 1 [ (sensitive) = true ]; }
   oneof outcome {
     Launched launched = 1;
-    LaunchDenied launch_denied = 2;
+    Denied denied = 2;
     Failure failure = 3;
   }
 }

@@ -116,9 +116,8 @@ message Request {
           // Resolution of a passive suggestion that should be brought into context.
           PassiveSuggestionResultInput passive_suggestion_result = 6;
 
-          // Inbound transport for plan-card orchestration config edits.
-          // Server's input interceptor converts this into a top-level
-          // Message.OrchestrationConfigSnapshot in conversation history.
+          // Plan-card edits to plan orchestration config. Sent on the next
+          // outbound request after the user edits the plan card.
           OrchestrationConfigUpdate orchestration_config_update = 7;
         }
       }
@@ -185,7 +184,7 @@ message Request {
         AskUserQuestionResult ask_user_question = 31;
         StartAgentV2Result start_agent_v2 = 32;
         UploadFileArtifactResult upload_file_artifact = 33;
-        OrchestrateResult orchestrate_result = 34;
+        RunAgentsResult run_agents_result = 34;
       }
     }
 
@@ -355,6 +354,9 @@ message Request {
   }
 
   message Settings {
+    reserved 28; // formerly supports_orchestrate
+    reserved supports_orchestrate;
+
     ModelConfig model_config = 1;
     bool rules_enabled = 2;
     bool web_context_retrieval_enabled = 3;
@@ -444,9 +446,6 @@ message Request {
 
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
-
-    // If `true`, the client supports the `orchestrate` tool.
-    bool supports_orchestrate = 28;
 
     message ModelConfig {
       // The LLM of preference for general tasks.

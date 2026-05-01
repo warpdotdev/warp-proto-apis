@@ -4,6 +4,7 @@ edition = "2023";
 package warp.multi_agent.v1;
 
 import "google/protobuf/go_features.proto";
+import "agent_execution.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -17,13 +18,7 @@ message OrchestrationConfig {
     string worker_host = 2;
   }
   string model_id = 1;
-  // Harness type identifier (e.g. "oz" or "claude"). Plain string rather
-  // than the StartAgentV2.ExecutionMode.Harness wrapper used on the
-  // Orchestrate tool call -- the wrapper lives in task.proto and using it
-  // here would create a cyclic import (orchestration.proto would import
-  // task.proto, and task.proto already imports orchestration.proto for
-  // OrchestrationConfigSnapshot).
-  string harness = 2;
+  Harness harness = 2;
   oneof execution_mode {
     Local local = 3;
     Remote remote = 4;
