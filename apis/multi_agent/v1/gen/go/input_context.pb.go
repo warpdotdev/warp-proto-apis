@@ -22,6 +22,53 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type InputContext_Git_PullRequest_State int32
+
+const (
+	InputContext_Git_PullRequest_STATE_UNSPECIFIED InputContext_Git_PullRequest_State = 0
+	InputContext_Git_PullRequest_STATE_OPEN        InputContext_Git_PullRequest_State = 1
+	InputContext_Git_PullRequest_STATE_CLOSED      InputContext_Git_PullRequest_State = 2
+	InputContext_Git_PullRequest_STATE_MERGED      InputContext_Git_PullRequest_State = 3
+)
+
+// Enum value maps for InputContext_Git_PullRequest_State.
+var (
+	InputContext_Git_PullRequest_State_name = map[int32]string{
+		0: "STATE_UNSPECIFIED",
+		1: "STATE_OPEN",
+		2: "STATE_CLOSED",
+		3: "STATE_MERGED",
+	}
+	InputContext_Git_PullRequest_State_value = map[string]int32{
+		"STATE_UNSPECIFIED": 0,
+		"STATE_OPEN":        1,
+		"STATE_CLOSED":      2,
+		"STATE_MERGED":      3,
+	}
+)
+
+func (x InputContext_Git_PullRequest_State) Enum() *InputContext_Git_PullRequest_State {
+	p := new(InputContext_Git_PullRequest_State)
+	*p = x
+	return p
+}
+
+func (x InputContext_Git_PullRequest_State) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (InputContext_Git_PullRequest_State) Descriptor() protoreflect.EnumDescriptor {
+	return file_input_context_proto_enumTypes[0].Descriptor()
+}
+
+func (InputContext_Git_PullRequest_State) Type() protoreflect.EnumType {
+	return &file_input_context_proto_enumTypes[0]
+}
+
+func (x InputContext_Git_PullRequest_State) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // Context that may be relevant to the input in a request.
 type InputContext struct {
 	state                               protoimpl.MessageState          `protogen:"opaque.v1"`
@@ -1600,11 +1647,11 @@ func (b0 InputContext_Git_Repository_builder) Build() *InputContext_Git_Reposito
 }
 
 type InputContext_Git_PullRequest struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Number      *string                `protobuf:"bytes,1,opt,name=number"`
-	xxx_hidden_State       *string                `protobuf:"bytes,2,opt,name=state"`
-	xxx_hidden_Draft       bool                   `protobuf:"varint,3,opt,name=draft"`
-	xxx_hidden_BaseBranch  *string                `protobuf:"bytes,4,opt,name=base_branch,json=baseBranch"`
+	state                  protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Number      int32                              `protobuf:"varint,1,opt,name=number"`
+	xxx_hidden_State       InputContext_Git_PullRequest_State `protobuf:"varint,2,opt,name=state,enum=warp.multi_agent.v1.InputContext_Git_PullRequest_State"`
+	xxx_hidden_Draft       bool                               `protobuf:"varint,3,opt,name=draft"`
+	xxx_hidden_BaseBranch  *string                            `protobuf:"bytes,4,opt,name=base_branch,json=baseBranch"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1636,24 +1683,20 @@ func (x *InputContext_Git_PullRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *InputContext_Git_PullRequest) GetNumber() string {
+func (x *InputContext_Git_PullRequest) GetNumber() int32 {
 	if x != nil {
-		if x.xxx_hidden_Number != nil {
-			return *x.xxx_hidden_Number
-		}
-		return ""
+		return x.xxx_hidden_Number
 	}
-	return ""
+	return 0
 }
 
-func (x *InputContext_Git_PullRequest) GetState() string {
+func (x *InputContext_Git_PullRequest) GetState() InputContext_Git_PullRequest_State {
 	if x != nil {
-		if x.xxx_hidden_State != nil {
-			return *x.xxx_hidden_State
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_State
 		}
-		return ""
 	}
-	return ""
+	return InputContext_Git_PullRequest_STATE_UNSPECIFIED
 }
 
 func (x *InputContext_Git_PullRequest) GetDraft() bool {
@@ -1673,13 +1716,13 @@ func (x *InputContext_Git_PullRequest) GetBaseBranch() string {
 	return ""
 }
 
-func (x *InputContext_Git_PullRequest) SetNumber(v string) {
-	x.xxx_hidden_Number = &v
+func (x *InputContext_Git_PullRequest) SetNumber(v int32) {
+	x.xxx_hidden_Number = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
-func (x *InputContext_Git_PullRequest) SetState(v string) {
-	x.xxx_hidden_State = &v
+func (x *InputContext_Git_PullRequest) SetState(v InputContext_Git_PullRequest_State) {
+	x.xxx_hidden_State = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
@@ -1723,12 +1766,12 @@ func (x *InputContext_Git_PullRequest) HasBaseBranch() bool {
 
 func (x *InputContext_Git_PullRequest) ClearNumber() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_Number = nil
+	x.xxx_hidden_Number = 0
 }
 
 func (x *InputContext_Git_PullRequest) ClearState() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_State = nil
+	x.xxx_hidden_State = InputContext_Git_PullRequest_STATE_UNSPECIFIED
 }
 
 func (x *InputContext_Git_PullRequest) ClearDraft() {
@@ -1745,9 +1788,9 @@ type InputContext_Git_PullRequest_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The pull request number.
-	Number *string
+	Number *int32
 	// The pull request state, e.g. "open", "closed", or "merged".
-	State *string
+	State *InputContext_Git_PullRequest_State
 	// Whether the pull request is a draft.
 	Draft *bool
 	// The target branch for the pull request.
@@ -1760,11 +1803,11 @@ func (b0 InputContext_Git_PullRequest_builder) Build() *InputContext_Git_PullReq
 	_, _ = b, x
 	if b.Number != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
-		x.xxx_hidden_Number = b.Number
+		x.xxx_hidden_Number = *b.Number
 	}
 	if b.State != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
-		x.xxx_hidden_State = b.State
+		x.xxx_hidden_State = *b.State
 	}
 	if b.Draft != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
@@ -1781,7 +1824,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xc7\x12\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xcf\x13\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1820,7 +1863,7 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\xa9\x03\n" +
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\xb1\x04\n" +
 	"\x03Git\x12\x18\n" +
 	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x12\x1c\n" +
 	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x12P\n" +
@@ -1831,65 +1874,74 @@ const file_input_context_proto_rawDesc = "" +
 	"\n" +
 	"Repository\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1a\n" +
-	"\x05owner\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x1a~\n" +
-	"\vPullRequest\x12\x1c\n" +
-	"\x06number\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06number\x12\x14\n" +
-	"\x05state\x18\x02 \x01(\tR\x05state\x12\x14\n" +
+	"\x05owner\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x1a\x85\x02\n" +
+	"\vPullRequest\x12\x16\n" +
+	"\x06number\x18\x01 \x01(\x05R\x06number\x12M\n" +
+	"\x05state\x18\x02 \x01(\x0e27.warp.multi_agent.v1.InputContext.Git.PullRequest.StateR\x05state\x12\x14\n" +
 	"\x05draft\x18\x03 \x01(\bR\x05draft\x12%\n" +
 	"\vbase_branch\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"baseBranch\x1a`\n" +
+	"baseBranch\"R\n" +
+	"\x05State\x12\x15\n" +
+	"\x11STATE_UNSPECIFIED\x10\x00\x12\x0e\n" +
+	"\n" +
+	"STATE_OPEN\x10\x01\x12\x10\n" +
+	"\fSTATE_CLOSED\x10\x02\x12\x10\n" +
+	"\fSTATE_MERGED\x10\x03\x1a`\n" +
 	"\rSkillsContext\x12O\n" +
 	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkills\x1ak\n" +
 	"\x11LspServersContext\x12V\n" +
 	"\x15available_lsp_servers\x18\x01 \x03(\v2\".warp.multi_agent.v1.LspDescriptorR\x13availableLspServersBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
+var file_input_context_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_input_context_proto_goTypes = []any{
-	(*InputContext)(nil),                   // 0: warp.multi_agent.v1.InputContext
-	(*InputContext_SelectedText)(nil),      // 1: warp.multi_agent.v1.InputContext.SelectedText
-	(*InputContext_Directory)(nil),         // 2: warp.multi_agent.v1.InputContext.Directory
-	(*InputContext_Shell)(nil),             // 3: warp.multi_agent.v1.InputContext.Shell
-	(*InputContext_OperatingSystem)(nil),   // 4: warp.multi_agent.v1.InputContext.OperatingSystem
-	(*InputContext_Image)(nil),             // 5: warp.multi_agent.v1.InputContext.Image
-	(*InputContext_Codebase)(nil),          // 6: warp.multi_agent.v1.InputContext.Codebase
-	(*InputContext_File)(nil),              // 7: warp.multi_agent.v1.InputContext.File
-	(*InputContext_ProjectRules)(nil),      // 8: warp.multi_agent.v1.InputContext.ProjectRules
-	(*InputContext_Git)(nil),               // 9: warp.multi_agent.v1.InputContext.Git
-	(*InputContext_SkillsContext)(nil),     // 10: warp.multi_agent.v1.InputContext.SkillsContext
-	(*InputContext_LspServersContext)(nil), // 11: warp.multi_agent.v1.InputContext.LspServersContext
-	(*InputContext_Git_Repository)(nil),    // 12: warp.multi_agent.v1.InputContext.Git.Repository
-	(*InputContext_Git_PullRequest)(nil),   // 13: warp.multi_agent.v1.InputContext.Git.PullRequest
-	(*timestamppb.Timestamp)(nil),          // 14: google.protobuf.Timestamp
-	(*ExecutedShellCommand)(nil),           // 15: warp.multi_agent.v1.ExecutedShellCommand
-	(*FileContent)(nil),                    // 16: warp.multi_agent.v1.FileContent
-	(*SkillDescriptor)(nil),                // 17: warp.multi_agent.v1.SkillDescriptor
-	(*LspDescriptor)(nil),                  // 18: warp.multi_agent.v1.LspDescriptor
+	(InputContext_Git_PullRequest_State)(0), // 0: warp.multi_agent.v1.InputContext.Git.PullRequest.State
+	(*InputContext)(nil),                    // 1: warp.multi_agent.v1.InputContext
+	(*InputContext_SelectedText)(nil),       // 2: warp.multi_agent.v1.InputContext.SelectedText
+	(*InputContext_Directory)(nil),          // 3: warp.multi_agent.v1.InputContext.Directory
+	(*InputContext_Shell)(nil),              // 4: warp.multi_agent.v1.InputContext.Shell
+	(*InputContext_OperatingSystem)(nil),    // 5: warp.multi_agent.v1.InputContext.OperatingSystem
+	(*InputContext_Image)(nil),              // 6: warp.multi_agent.v1.InputContext.Image
+	(*InputContext_Codebase)(nil),           // 7: warp.multi_agent.v1.InputContext.Codebase
+	(*InputContext_File)(nil),               // 8: warp.multi_agent.v1.InputContext.File
+	(*InputContext_ProjectRules)(nil),       // 9: warp.multi_agent.v1.InputContext.ProjectRules
+	(*InputContext_Git)(nil),                // 10: warp.multi_agent.v1.InputContext.Git
+	(*InputContext_SkillsContext)(nil),      // 11: warp.multi_agent.v1.InputContext.SkillsContext
+	(*InputContext_LspServersContext)(nil),  // 12: warp.multi_agent.v1.InputContext.LspServersContext
+	(*InputContext_Git_Repository)(nil),     // 13: warp.multi_agent.v1.InputContext.Git.Repository
+	(*InputContext_Git_PullRequest)(nil),    // 14: warp.multi_agent.v1.InputContext.Git.PullRequest
+	(*timestamppb.Timestamp)(nil),           // 15: google.protobuf.Timestamp
+	(*ExecutedShellCommand)(nil),            // 16: warp.multi_agent.v1.ExecutedShellCommand
+	(*FileContent)(nil),                     // 17: warp.multi_agent.v1.FileContent
+	(*SkillDescriptor)(nil),                 // 18: warp.multi_agent.v1.SkillDescriptor
+	(*LspDescriptor)(nil),                   // 19: warp.multi_agent.v1.LspDescriptor
 }
 var file_input_context_proto_depIdxs = []int32{
-	2,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
-	4,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
-	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	14, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
-	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
-	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
-	9,  // 6: warp.multi_agent.v1.InputContext.git:type_name -> warp.multi_agent.v1.InputContext.Git
-	10, // 7: warp.multi_agent.v1.InputContext.updated_skills_context:type_name -> warp.multi_agent.v1.InputContext.SkillsContext
-	11, // 8: warp.multi_agent.v1.InputContext.updated_lsp_servers_context:type_name -> warp.multi_agent.v1.InputContext.LspServersContext
-	15, // 9: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	1,  // 10: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
-	5,  // 11: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
-	7,  // 12: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	16, // 13: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	16, // 14: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
-	12, // 15: warp.multi_agent.v1.InputContext.Git.repository:type_name -> warp.multi_agent.v1.InputContext.Git.Repository
-	13, // 16: warp.multi_agent.v1.InputContext.Git.pull_request:type_name -> warp.multi_agent.v1.InputContext.Git.PullRequest
-	17, // 17: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.SkillDescriptor
-	18, // 18: warp.multi_agent.v1.InputContext.LspServersContext.available_lsp_servers:type_name -> warp.multi_agent.v1.LspDescriptor
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	3,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
+	5,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
+	4,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
+	15, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	7,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
+	9,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
+	10, // 6: warp.multi_agent.v1.InputContext.git:type_name -> warp.multi_agent.v1.InputContext.Git
+	11, // 7: warp.multi_agent.v1.InputContext.updated_skills_context:type_name -> warp.multi_agent.v1.InputContext.SkillsContext
+	12, // 8: warp.multi_agent.v1.InputContext.updated_lsp_servers_context:type_name -> warp.multi_agent.v1.InputContext.LspServersContext
+	16, // 9: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	2,  // 10: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
+	6,  // 11: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
+	8,  // 12: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
+	17, // 13: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	17, // 14: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
+	13, // 15: warp.multi_agent.v1.InputContext.Git.repository:type_name -> warp.multi_agent.v1.InputContext.Git.Repository
+	14, // 16: warp.multi_agent.v1.InputContext.Git.pull_request:type_name -> warp.multi_agent.v1.InputContext.Git.PullRequest
+	18, // 17: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.SkillDescriptor
+	19, // 18: warp.multi_agent.v1.InputContext.LspServersContext.available_lsp_servers:type_name -> warp.multi_agent.v1.LspDescriptor
+	0,  // 19: warp.multi_agent.v1.InputContext.Git.PullRequest.state:type_name -> warp.multi_agent.v1.InputContext.Git.PullRequest.State
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_input_context_proto_init() }
@@ -1907,13 +1959,14 @@ func file_input_context_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_input_context_proto_rawDesc), len(file_input_context_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_input_context_proto_goTypes,
 		DependencyIndexes: file_input_context_proto_depIdxs,
+		EnumInfos:         file_input_context_proto_enumTypes,
 		MessageInfos:      file_input_context_proto_msgTypes,
 	}.Build()
 	File_input_context_proto = out.File

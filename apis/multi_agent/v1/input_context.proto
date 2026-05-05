@@ -117,11 +117,18 @@ message InputContext {
     }
 
     message PullRequest {
+      enum State {
+        STATE_UNSPECIFIED = 0;
+        STATE_OPEN = 1;
+        STATE_CLOSED = 2;
+        STATE_MERGED = 3;
+      }
+
       // The pull request number.
-      string number = 1 [ (sensitive) = true ];
+      int32 number = 1;
 
       // The pull request state, e.g. "open", "closed", or "merged".
-      string state = 2;
+      State state = 2;
 
       // Whether the pull request is a draft.
       bool draft = 3;
