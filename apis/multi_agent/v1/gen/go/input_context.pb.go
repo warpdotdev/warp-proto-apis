@@ -26,24 +26,27 @@ type InputContext_Git_PullRequest_State int32
 
 const (
 	InputContext_Git_PullRequest_STATE_UNSPECIFIED InputContext_Git_PullRequest_State = 0
-	InputContext_Git_PullRequest_STATE_OPEN        InputContext_Git_PullRequest_State = 1
-	InputContext_Git_PullRequest_STATE_CLOSED      InputContext_Git_PullRequest_State = 2
-	InputContext_Git_PullRequest_STATE_MERGED      InputContext_Git_PullRequest_State = 3
+	InputContext_Git_PullRequest_STATE_OPEN_DRAFT  InputContext_Git_PullRequest_State = 1
+	InputContext_Git_PullRequest_STATE_OPEN        InputContext_Git_PullRequest_State = 2
+	InputContext_Git_PullRequest_STATE_CLOSED      InputContext_Git_PullRequest_State = 3
+	InputContext_Git_PullRequest_STATE_MERGED      InputContext_Git_PullRequest_State = 4
 )
 
 // Enum value maps for InputContext_Git_PullRequest_State.
 var (
 	InputContext_Git_PullRequest_State_name = map[int32]string{
 		0: "STATE_UNSPECIFIED",
-		1: "STATE_OPEN",
-		2: "STATE_CLOSED",
-		3: "STATE_MERGED",
+		1: "STATE_OPEN_DRAFT",
+		2: "STATE_OPEN",
+		3: "STATE_CLOSED",
+		4: "STATE_MERGED",
 	}
 	InputContext_Git_PullRequest_State_value = map[string]int32{
 		"STATE_UNSPECIFIED": 0,
-		"STATE_OPEN":        1,
-		"STATE_CLOSED":      2,
-		"STATE_MERGED":      3,
+		"STATE_OPEN_DRAFT":  1,
+		"STATE_OPEN":        2,
+		"STATE_CLOSED":      3,
+		"STATE_MERGED":      4,
 	}
 )
 
@@ -1650,7 +1653,6 @@ type InputContext_Git_PullRequest struct {
 	state                  protoimpl.MessageState             `protogen:"opaque.v1"`
 	xxx_hidden_Number      int32                              `protobuf:"varint,1,opt,name=number"`
 	xxx_hidden_State       InputContext_Git_PullRequest_State `protobuf:"varint,2,opt,name=state,enum=warp.multi_agent.v1.InputContext_Git_PullRequest_State"`
-	xxx_hidden_Draft       bool                               `protobuf:"varint,3,opt,name=draft"`
 	xxx_hidden_BaseBranch  *string                            `protobuf:"bytes,4,opt,name=base_branch,json=baseBranch"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
@@ -1699,13 +1701,6 @@ func (x *InputContext_Git_PullRequest) GetState() InputContext_Git_PullRequest_S
 	return InputContext_Git_PullRequest_STATE_UNSPECIFIED
 }
 
-func (x *InputContext_Git_PullRequest) GetDraft() bool {
-	if x != nil {
-		return x.xxx_hidden_Draft
-	}
-	return false
-}
-
 func (x *InputContext_Git_PullRequest) GetBaseBranch() string {
 	if x != nil {
 		if x.xxx_hidden_BaseBranch != nil {
@@ -1718,22 +1713,17 @@ func (x *InputContext_Git_PullRequest) GetBaseBranch() string {
 
 func (x *InputContext_Git_PullRequest) SetNumber(v int32) {
 	x.xxx_hidden_Number = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *InputContext_Git_PullRequest) SetState(v InputContext_Git_PullRequest_State) {
 	x.xxx_hidden_State = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
-}
-
-func (x *InputContext_Git_PullRequest) SetDraft(v bool) {
-	x.xxx_hidden_Draft = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *InputContext_Git_PullRequest) SetBaseBranch(v string) {
 	x.xxx_hidden_BaseBranch = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *InputContext_Git_PullRequest) HasNumber() bool {
@@ -1750,18 +1740,11 @@ func (x *InputContext_Git_PullRequest) HasState() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *InputContext_Git_PullRequest) HasDraft() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
 func (x *InputContext_Git_PullRequest) HasBaseBranch() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
 func (x *InputContext_Git_PullRequest) ClearNumber() {
@@ -1774,13 +1757,8 @@ func (x *InputContext_Git_PullRequest) ClearState() {
 	x.xxx_hidden_State = InputContext_Git_PullRequest_STATE_UNSPECIFIED
 }
 
-func (x *InputContext_Git_PullRequest) ClearDraft() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_Draft = false
-}
-
 func (x *InputContext_Git_PullRequest) ClearBaseBranch() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_BaseBranch = nil
 }
 
@@ -1789,10 +1767,8 @@ type InputContext_Git_PullRequest_builder struct {
 
 	// The pull request number.
 	Number *int32
-	// The pull request state, e.g. "open", "closed", or "merged".
+	// The pull request state.
 	State *InputContext_Git_PullRequest_State
-	// Whether the pull request is a draft.
-	Draft *bool
 	// The target branch for the pull request.
 	BaseBranch *string
 }
@@ -1802,19 +1778,15 @@ func (b0 InputContext_Git_PullRequest_builder) Build() *InputContext_Git_PullReq
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Number != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Number = *b.Number
 	}
 	if b.State != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_State = *b.State
 	}
-	if b.Draft != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
-		x.xxx_hidden_Draft = *b.Draft
-	}
 	if b.BaseBranch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_BaseBranch = b.BaseBranch
 	}
 	return m0
@@ -1824,7 +1796,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xcf\x13\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xdc\x13\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1863,7 +1835,7 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\xb1\x04\n" +
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\xbe\x04\n" +
 	"\x03Git\x12\x18\n" +
 	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x12\x1c\n" +
 	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x12P\n" +
@@ -1874,19 +1846,19 @@ const file_input_context_proto_rawDesc = "" +
 	"\n" +
 	"Repository\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1a\n" +
-	"\x05owner\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x1a\x85\x02\n" +
+	"\x05owner\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x1a\x92\x02\n" +
 	"\vPullRequest\x12\x16\n" +
 	"\x06number\x18\x01 \x01(\x05R\x06number\x12M\n" +
-	"\x05state\x18\x02 \x01(\x0e27.warp.multi_agent.v1.InputContext.Git.PullRequest.StateR\x05state\x12\x14\n" +
-	"\x05draft\x18\x03 \x01(\bR\x05draft\x12%\n" +
+	"\x05state\x18\x02 \x01(\x0e27.warp.multi_agent.v1.InputContext.Git.PullRequest.StateR\x05state\x12%\n" +
 	"\vbase_branch\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
-	"baseBranch\"R\n" +
+	"baseBranch\"h\n" +
 	"\x05State\x12\x15\n" +
-	"\x11STATE_UNSPECIFIED\x10\x00\x12\x0e\n" +
+	"\x11STATE_UNSPECIFIED\x10\x00\x12\x14\n" +
+	"\x10STATE_OPEN_DRAFT\x10\x01\x12\x0e\n" +
 	"\n" +
-	"STATE_OPEN\x10\x01\x12\x10\n" +
-	"\fSTATE_CLOSED\x10\x02\x12\x10\n" +
-	"\fSTATE_MERGED\x10\x03\x1a`\n" +
+	"STATE_OPEN\x10\x02\x12\x10\n" +
+	"\fSTATE_CLOSED\x10\x03\x12\x10\n" +
+	"\fSTATE_MERGED\x10\x04J\x04\b\x03\x10\x04R\x05draft\x1a`\n" +
 	"\rSkillsContext\x12O\n" +
 	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkills\x1ak\n" +
 	"\x11LspServersContext\x12V\n" +
