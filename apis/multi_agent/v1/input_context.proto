@@ -101,6 +101,34 @@ message InputContext {
     // The current branch name, populated only from `git symbolic-ref --short HEAD`.
     // Empty/absent when in detached HEAD state.
     string branch = 2 [ (sensitive) = true ];
+
+    // Metadata about the repository in the user's working directory.
+    Repository repository = 3;
+
+    // Metadata about the pull request associated with the current branch.
+    PullRequest pull_request = 4;
+
+    message Repository {
+      // The repository name.
+      string name = 1 [ (sensitive) = true ];
+
+      // The repository owner or organization, if known.
+      string owner = 2 [ (sensitive) = true ];
+    }
+
+    message PullRequest {
+      // The pull request number.
+      string number = 1 [ (sensitive) = true ];
+
+      // The pull request state, e.g. "open", "closed", or "merged".
+      string state = 2;
+
+      // Whether the pull request is a draft.
+      bool draft = 3;
+
+      // The target branch for the pull request.
+      string base_branch = 4 [ (sensitive) = true ];
+    }
   }
 
   message SkillsContext {

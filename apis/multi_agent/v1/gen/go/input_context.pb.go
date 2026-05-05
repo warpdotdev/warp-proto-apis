@@ -1203,9 +1203,11 @@ func (b0 InputContext_ProjectRules_builder) Build() *InputContext_ProjectRules {
 
 // Context about the repo in the user's working directory.
 type InputContext_Git struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Head        *string                `protobuf:"bytes,1,opt,name=head"`
-	xxx_hidden_Branch      *string                `protobuf:"bytes,2,opt,name=branch"`
+	state                  protoimpl.MessageState        `protogen:"opaque.v1"`
+	xxx_hidden_Head        *string                       `protobuf:"bytes,1,opt,name=head"`
+	xxx_hidden_Branch      *string                       `protobuf:"bytes,2,opt,name=branch"`
+	xxx_hidden_Repository  *InputContext_Git_Repository  `protobuf:"bytes,3,opt,name=repository"`
+	xxx_hidden_PullRequest *InputContext_Git_PullRequest `protobuf:"bytes,4,opt,name=pull_request,json=pullRequest"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -1257,14 +1259,36 @@ func (x *InputContext_Git) GetBranch() string {
 	return ""
 }
 
+func (x *InputContext_Git) GetRepository() *InputContext_Git_Repository {
+	if x != nil {
+		return x.xxx_hidden_Repository
+	}
+	return nil
+}
+
+func (x *InputContext_Git) GetPullRequest() *InputContext_Git_PullRequest {
+	if x != nil {
+		return x.xxx_hidden_PullRequest
+	}
+	return nil
+}
+
 func (x *InputContext_Git) SetHead(v string) {
 	x.xxx_hidden_Head = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *InputContext_Git) SetBranch(v string) {
 	x.xxx_hidden_Branch = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *InputContext_Git) SetRepository(v *InputContext_Git_Repository) {
+	x.xxx_hidden_Repository = v
+}
+
+func (x *InputContext_Git) SetPullRequest(v *InputContext_Git_PullRequest) {
+	x.xxx_hidden_PullRequest = v
 }
 
 func (x *InputContext_Git) HasHead() bool {
@@ -1281,6 +1305,20 @@ func (x *InputContext_Git) HasBranch() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *InputContext_Git) HasRepository() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Repository != nil
+}
+
+func (x *InputContext_Git) HasPullRequest() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PullRequest != nil
+}
+
 func (x *InputContext_Git) ClearHead() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Head = nil
@@ -1291,6 +1329,14 @@ func (x *InputContext_Git) ClearBranch() {
 	x.xxx_hidden_Branch = nil
 }
 
+func (x *InputContext_Git) ClearRepository() {
+	x.xxx_hidden_Repository = nil
+}
+
+func (x *InputContext_Git) ClearPullRequest() {
+	x.xxx_hidden_PullRequest = nil
+}
+
 type InputContext_Git_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1299,6 +1345,10 @@ type InputContext_Git_builder struct {
 	// The current branch name, populated only from `git symbolic-ref --short HEAD`.
 	// Empty/absent when in detached HEAD state.
 	Branch *string
+	// Metadata about the repository in the user's working directory.
+	Repository *InputContext_Git_Repository
+	// Metadata about the pull request associated with the current branch.
+	PullRequest *InputContext_Git_PullRequest
 }
 
 func (b0 InputContext_Git_builder) Build() *InputContext_Git {
@@ -1306,13 +1356,15 @@ func (b0 InputContext_Git_builder) Build() *InputContext_Git {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Head != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Head = b.Head
 	}
 	if b.Branch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_Branch = b.Branch
 	}
+	x.xxx_hidden_Repository = b.Repository
+	x.xxx_hidden_PullRequest = b.PullRequest
 	return m0
 }
 
@@ -1434,11 +1486,302 @@ func (b0 InputContext_LspServersContext_builder) Build() *InputContext_LspServer
 	return m0
 }
 
+type InputContext_Git_Repository struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Owner       *string                `protobuf:"bytes,2,opt,name=owner"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *InputContext_Git_Repository) Reset() {
+	*x = InputContext_Git_Repository{}
+	mi := &file_input_context_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InputContext_Git_Repository) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InputContext_Git_Repository) ProtoMessage() {}
+
+func (x *InputContext_Git_Repository) ProtoReflect() protoreflect.Message {
+	mi := &file_input_context_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *InputContext_Git_Repository) GetName() string {
+	if x != nil {
+		if x.xxx_hidden_Name != nil {
+			return *x.xxx_hidden_Name
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Git_Repository) GetOwner() string {
+	if x != nil {
+		if x.xxx_hidden_Owner != nil {
+			return *x.xxx_hidden_Owner
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Git_Repository) SetName(v string) {
+	x.xxx_hidden_Name = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *InputContext_Git_Repository) SetOwner(v string) {
+	x.xxx_hidden_Owner = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *InputContext_Git_Repository) HasName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *InputContext_Git_Repository) HasOwner() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *InputContext_Git_Repository) ClearName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Name = nil
+}
+
+func (x *InputContext_Git_Repository) ClearOwner() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Owner = nil
+}
+
+type InputContext_Git_Repository_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The repository name.
+	Name *string
+	// The repository owner or organization, if known.
+	Owner *string
+}
+
+func (b0 InputContext_Git_Repository_builder) Build() *InputContext_Git_Repository {
+	m0 := &InputContext_Git_Repository{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Name != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Name = b.Name
+	}
+	if b.Owner != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Owner = b.Owner
+	}
+	return m0
+}
+
+type InputContext_Git_PullRequest struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Number      *string                `protobuf:"bytes,1,opt,name=number"`
+	xxx_hidden_State       *string                `protobuf:"bytes,2,opt,name=state"`
+	xxx_hidden_Draft       bool                   `protobuf:"varint,3,opt,name=draft"`
+	xxx_hidden_BaseBranch  *string                `protobuf:"bytes,4,opt,name=base_branch,json=baseBranch"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *InputContext_Git_PullRequest) Reset() {
+	*x = InputContext_Git_PullRequest{}
+	mi := &file_input_context_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *InputContext_Git_PullRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*InputContext_Git_PullRequest) ProtoMessage() {}
+
+func (x *InputContext_Git_PullRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_input_context_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *InputContext_Git_PullRequest) GetNumber() string {
+	if x != nil {
+		if x.xxx_hidden_Number != nil {
+			return *x.xxx_hidden_Number
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Git_PullRequest) GetState() string {
+	if x != nil {
+		if x.xxx_hidden_State != nil {
+			return *x.xxx_hidden_State
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Git_PullRequest) GetDraft() bool {
+	if x != nil {
+		return x.xxx_hidden_Draft
+	}
+	return false
+}
+
+func (x *InputContext_Git_PullRequest) GetBaseBranch() string {
+	if x != nil {
+		if x.xxx_hidden_BaseBranch != nil {
+			return *x.xxx_hidden_BaseBranch
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *InputContext_Git_PullRequest) SetNumber(v string) {
+	x.xxx_hidden_Number = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *InputContext_Git_PullRequest) SetState(v string) {
+	x.xxx_hidden_State = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *InputContext_Git_PullRequest) SetDraft(v bool) {
+	x.xxx_hidden_Draft = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *InputContext_Git_PullRequest) SetBaseBranch(v string) {
+	x.xxx_hidden_BaseBranch = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *InputContext_Git_PullRequest) HasNumber() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *InputContext_Git_PullRequest) HasState() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *InputContext_Git_PullRequest) HasDraft() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *InputContext_Git_PullRequest) HasBaseBranch() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *InputContext_Git_PullRequest) ClearNumber() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Number = nil
+}
+
+func (x *InputContext_Git_PullRequest) ClearState() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_State = nil
+}
+
+func (x *InputContext_Git_PullRequest) ClearDraft() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_Draft = false
+}
+
+func (x *InputContext_Git_PullRequest) ClearBaseBranch() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_BaseBranch = nil
+}
+
+type InputContext_Git_PullRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The pull request number.
+	Number *string
+	// The pull request state, e.g. "open", "closed", or "merged".
+	State *string
+	// Whether the pull request is a draft.
+	Draft *bool
+	// The target branch for the pull request.
+	BaseBranch *string
+}
+
+func (b0 InputContext_Git_PullRequest_builder) Build() *InputContext_Git_PullRequest {
+	m0 := &InputContext_Git_PullRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Number != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Number = b.Number
+	}
+	if b.State != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_State = b.State
+	}
+	if b.Draft != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_Draft = *b.Draft
+	}
+	if b.BaseBranch != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_BaseBranch = b.BaseBranch
+	}
+	return m0
+}
+
 var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xda\x0f\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xc7\x12\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -1477,16 +1820,30 @@ const file_input_context_proto_rawDesc = "" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
-	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a=\n" +
+	"\x1aadditional_rule_file_paths\x18\x03 \x03(\tR\x17additionalRuleFilePaths\x1a\xa9\x03\n" +
 	"\x03Git\x12\x18\n" +
 	"\x04head\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04head\x12\x1c\n" +
-	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x1a`\n" +
+	"\x06branch\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06branch\x12P\n" +
+	"\n" +
+	"repository\x18\x03 \x01(\v20.warp.multi_agent.v1.InputContext.Git.RepositoryR\n" +
+	"repository\x12T\n" +
+	"\fpull_request\x18\x04 \x01(\v21.warp.multi_agent.v1.InputContext.Git.PullRequestR\vpullRequest\x1aB\n" +
+	"\n" +
+	"Repository\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1a\n" +
+	"\x05owner\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x1a~\n" +
+	"\vPullRequest\x12\x1c\n" +
+	"\x06number\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06number\x12\x14\n" +
+	"\x05state\x18\x02 \x01(\tR\x05state\x12\x14\n" +
+	"\x05draft\x18\x03 \x01(\bR\x05draft\x12%\n" +
+	"\vbase_branch\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
+	"baseBranch\x1a`\n" +
 	"\rSkillsContext\x12O\n" +
 	"\x10available_skills\x18\x01 \x03(\v2$.warp.multi_agent.v1.SkillDescriptorR\x0favailableSkills\x1ak\n" +
 	"\x11LspServersContext\x12V\n" +
 	"\x15available_lsp_servers\x18\x01 \x03(\v2\".warp.multi_agent.v1.LspDescriptorR\x13availableLspServersBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_input_context_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_input_context_proto_goTypes = []any{
 	(*InputContext)(nil),                   // 0: warp.multi_agent.v1.InputContext
 	(*InputContext_SelectedText)(nil),      // 1: warp.multi_agent.v1.InputContext.SelectedText
@@ -1500,35 +1857,39 @@ var file_input_context_proto_goTypes = []any{
 	(*InputContext_Git)(nil),               // 9: warp.multi_agent.v1.InputContext.Git
 	(*InputContext_SkillsContext)(nil),     // 10: warp.multi_agent.v1.InputContext.SkillsContext
 	(*InputContext_LspServersContext)(nil), // 11: warp.multi_agent.v1.InputContext.LspServersContext
-	(*timestamppb.Timestamp)(nil),          // 12: google.protobuf.Timestamp
-	(*ExecutedShellCommand)(nil),           // 13: warp.multi_agent.v1.ExecutedShellCommand
-	(*FileContent)(nil),                    // 14: warp.multi_agent.v1.FileContent
-	(*SkillDescriptor)(nil),                // 15: warp.multi_agent.v1.SkillDescriptor
-	(*LspDescriptor)(nil),                  // 16: warp.multi_agent.v1.LspDescriptor
+	(*InputContext_Git_Repository)(nil),    // 12: warp.multi_agent.v1.InputContext.Git.Repository
+	(*InputContext_Git_PullRequest)(nil),   // 13: warp.multi_agent.v1.InputContext.Git.PullRequest
+	(*timestamppb.Timestamp)(nil),          // 14: google.protobuf.Timestamp
+	(*ExecutedShellCommand)(nil),           // 15: warp.multi_agent.v1.ExecutedShellCommand
+	(*FileContent)(nil),                    // 16: warp.multi_agent.v1.FileContent
+	(*SkillDescriptor)(nil),                // 17: warp.multi_agent.v1.SkillDescriptor
+	(*LspDescriptor)(nil),                  // 18: warp.multi_agent.v1.LspDescriptor
 }
 var file_input_context_proto_depIdxs = []int32{
 	2,  // 0: warp.multi_agent.v1.InputContext.directory:type_name -> warp.multi_agent.v1.InputContext.Directory
 	4,  // 1: warp.multi_agent.v1.InputContext.operating_system:type_name -> warp.multi_agent.v1.InputContext.OperatingSystem
 	3,  // 2: warp.multi_agent.v1.InputContext.shell:type_name -> warp.multi_agent.v1.InputContext.Shell
-	12, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
+	14, // 3: warp.multi_agent.v1.InputContext.current_time:type_name -> google.protobuf.Timestamp
 	6,  // 4: warp.multi_agent.v1.InputContext.codebases:type_name -> warp.multi_agent.v1.InputContext.Codebase
 	8,  // 5: warp.multi_agent.v1.InputContext.project_rules:type_name -> warp.multi_agent.v1.InputContext.ProjectRules
 	9,  // 6: warp.multi_agent.v1.InputContext.git:type_name -> warp.multi_agent.v1.InputContext.Git
 	10, // 7: warp.multi_agent.v1.InputContext.updated_skills_context:type_name -> warp.multi_agent.v1.InputContext.SkillsContext
 	11, // 8: warp.multi_agent.v1.InputContext.updated_lsp_servers_context:type_name -> warp.multi_agent.v1.InputContext.LspServersContext
-	13, // 9: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	15, // 9: warp.multi_agent.v1.InputContext.executed_shell_commands:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	1,  // 10: warp.multi_agent.v1.InputContext.selected_text:type_name -> warp.multi_agent.v1.InputContext.SelectedText
 	5,  // 11: warp.multi_agent.v1.InputContext.images:type_name -> warp.multi_agent.v1.InputContext.Image
 	7,  // 12: warp.multi_agent.v1.InputContext.files:type_name -> warp.multi_agent.v1.InputContext.File
-	14, // 13: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
-	14, // 14: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
-	15, // 15: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.SkillDescriptor
-	16, // 16: warp.multi_agent.v1.InputContext.LspServersContext.available_lsp_servers:type_name -> warp.multi_agent.v1.LspDescriptor
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	16, // 13: warp.multi_agent.v1.InputContext.File.content:type_name -> warp.multi_agent.v1.FileContent
+	16, // 14: warp.multi_agent.v1.InputContext.ProjectRules.active_rule_files:type_name -> warp.multi_agent.v1.FileContent
+	12, // 15: warp.multi_agent.v1.InputContext.Git.repository:type_name -> warp.multi_agent.v1.InputContext.Git.Repository
+	13, // 16: warp.multi_agent.v1.InputContext.Git.pull_request:type_name -> warp.multi_agent.v1.InputContext.Git.PullRequest
+	17, // 17: warp.multi_agent.v1.InputContext.SkillsContext.available_skills:type_name -> warp.multi_agent.v1.SkillDescriptor
+	18, // 18: warp.multi_agent.v1.InputContext.LspServersContext.available_lsp_servers:type_name -> warp.multi_agent.v1.LspDescriptor
+	19, // [19:19] is the sub-list for method output_type
+	19, // [19:19] is the sub-list for method input_type
+	19, // [19:19] is the sub-list for extension type_name
+	19, // [19:19] is the sub-list for extension extendee
+	0,  // [0:19] is the sub-list for field type_name
 }
 
 func init() { file_input_context_proto_init() }
@@ -1547,7 +1908,7 @@ func file_input_context_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_input_context_proto_rawDesc), len(file_input_context_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
