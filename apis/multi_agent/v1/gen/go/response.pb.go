@@ -2884,9 +2884,7 @@ type ResponseEvent_StreamFinished_RequestCost_builder struct {
 
 	// The exact, fractional cost of the request in inference credits.
 	Exact *float32
-	// The platform-credit charge attributed to this MAA stream, if any.
-	// Zero when platform-credit billing is off, the harness does not run
-	// through the MAA endpoint, or the stream errored.
+	// How many platform credits this request incurred.
 	PlatformCredits *float32
 }
 
