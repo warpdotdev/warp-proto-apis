@@ -51,15 +51,18 @@ message OrchestrationStatus {
   }
 }
 
-// Inbound transport: client sends on its next outbound request after the
-// user edits the plan card.
+// Client → server: piggybacked on the next request after a plan-card
+// edit. The server validates and upserts it as an
+// OrchestrationConfigSnapshot.
 message OrchestrationConfigUpdate {
   string plan_id = 1;
   OrchestrationConfig config = 2;
   OrchestrationStatus status = 3;
 }
 
-// Canonical in-history record of an orchestration config update.
+// Server-side record of the orchestration config, stored once per
+// conversation and overwritten in-place on each edit. Only an Approved
+// snapshot supplies defaults to run_agents.
 message OrchestrationConfigSnapshot {
   string plan_id = 1;
   OrchestrationConfig config = 2;

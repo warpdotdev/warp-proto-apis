@@ -733,8 +733,9 @@ func (*orchestrationStatus_Approved_) isOrchestrationStatus_Status() {}
 
 func (*orchestrationStatus_Disapproved_) isOrchestrationStatus_Status() {}
 
-// Inbound transport: client sends on its next outbound request after the
-// user edits the plan card.
+// Client → server: piggybacked on the next request after a plan-card
+// edit. The server validates and upserts it as an
+// OrchestrationConfigSnapshot.
 type OrchestrationConfigUpdate struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_PlanId      *string                `protobuf:"bytes,1,opt,name=plan_id,json=planId"`
@@ -863,7 +864,9 @@ func (b0 OrchestrationConfigUpdate_builder) Build() *OrchestrationConfigUpdate {
 	return m0
 }
 
-// Canonical in-history record of an orchestration config update.
+// Server-side record of the orchestration config, stored once per
+// conversation and overwritten in-place on each edit. Only an Approved
+// snapshot supplies defaults to run_agents.
 type OrchestrationConfigSnapshot struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_PlanId      *string                `protobuf:"bytes,1,opt,name=plan_id,json=planId"`
