@@ -2797,12 +2797,13 @@ func (b0 ResponseEvent_StreamFinished_RunCommandStats_builder) Build() *Response
 }
 
 type ResponseEvent_StreamFinished_RequestCost struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Exact       float32                `protobuf:"fixed32,1,opt,name=exact"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Exact           float32                `protobuf:"fixed32,1,opt,name=exact"`
+	xxx_hidden_PlatformCredits float32                `protobuf:"fixed32,2,opt,name=platform_credits,json=platformCredits"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *ResponseEvent_StreamFinished_RequestCost) Reset() {
@@ -2837,9 +2838,21 @@ func (x *ResponseEvent_StreamFinished_RequestCost) GetExact() float32 {
 	return 0
 }
 
+func (x *ResponseEvent_StreamFinished_RequestCost) GetPlatformCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_PlatformCredits
+	}
+	return 0
+}
+
 func (x *ResponseEvent_StreamFinished_RequestCost) SetExact(v float32) {
 	x.xxx_hidden_Exact = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *ResponseEvent_StreamFinished_RequestCost) SetPlatformCredits(v float32) {
+	x.xxx_hidden_PlatformCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *ResponseEvent_StreamFinished_RequestCost) HasExact() bool {
@@ -2849,16 +2862,32 @@ func (x *ResponseEvent_StreamFinished_RequestCost) HasExact() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *ResponseEvent_StreamFinished_RequestCost) HasPlatformCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *ResponseEvent_StreamFinished_RequestCost) ClearExact() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Exact = 0
 }
 
+func (x *ResponseEvent_StreamFinished_RequestCost) ClearPlatformCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_PlatformCredits = 0
+}
+
 type ResponseEvent_StreamFinished_RequestCost_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The exact, fractional cost of the request.
+	// The exact, fractional cost of the request in inference credits.
 	Exact *float32
+	// The platform-credit charge attributed to this MAA stream, if any.
+	// Zero when platform-credit billing is off, the harness does not run
+	// through the MAA endpoint, or the stream errored.
+	PlatformCredits *float32
 }
 
 func (b0 ResponseEvent_StreamFinished_RequestCost_builder) Build() *ResponseEvent_StreamFinished_RequestCost {
@@ -2866,8 +2895,12 @@ func (b0 ResponseEvent_StreamFinished_RequestCost_builder) Build() *ResponseEven
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Exact != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_Exact = *b.Exact
+	}
+	if b.PlatformCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_PlatformCredits = *b.PlatformCredits
 	}
 	return m0
 }
@@ -4763,7 +4796,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x93)\n" +
+	"task.proto\"\xbe)\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4775,7 +4808,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xcd%\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xf8%\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4842,9 +4875,10 @@ const file_response_proto_rawDesc = "" +
 	"\rfiles_changed\x18\x04 \x01(\x05R\ffilesChanged\x1aR\n" +
 	"\x0fRunCommandStats\x12\x14\n" +
 	"\x05count\x18\x01 \x01(\x05R\x05count\x12)\n" +
-	"\x10command_executed\x18\x02 \x01(\x05R\x0fcommandExecuted\x1a#\n" +
+	"\x10command_executed\x18\x02 \x01(\x05R\x0fcommandExecuted\x1aN\n" +
 	"\vRequestCost\x12\x14\n" +
-	"\x05exact\x18\x01 \x01(\x02R\x05exact\x1a\xda\x01\n" +
+	"\x05exact\x18\x01 \x01(\x02R\x05exact\x12)\n" +
+	"\x10platform_credits\x18\x02 \x01(\x02R\x0fplatformCredits\x1a\xda\x01\n" +
 	"\n" +
 	"TokenUsage\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12\x1f\n" +

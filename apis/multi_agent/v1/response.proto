@@ -165,8 +165,11 @@ message ResponseEvent {
     }
 
     message RequestCost {
-        // The exact, fractional cost of the request.
+        // The exact, fractional cost of the request in inference credits.
         float exact = 1;
+
+        // How many platform credits this request incurred.
+        float platform_credits = 2;
     }
 
     // We maintain this message type in addition to the more sparse ModelTokenUsage
