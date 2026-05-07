@@ -262,9 +262,19 @@ message Message {
       CloneRepository clone_repository = 6;
       SummarizeConversation summarize_conversation = 7;
       FetchReviewComments fetch_review_comments = 8;
+      HandoffRehydration handoff_rehydration = 9;
     }
 
     InputContext context = 2;
+  }
+
+  // A hidden system query injected during multi-agent handoff to provide
+  // the child agent with rehydration context from its parent. The client
+  // should not render this message to the user.
+  message HandoffRehydration {
+    // The handoff instruction text to rehydrate the child agent with
+    // context about the parent conversation and delegated task.
+    string instruction = 1 [ (sensitive) = true ];
   }
 
   message AutoCodeDiff { string query = 1 [ (sensitive) = true ]; }
