@@ -444,6 +444,12 @@ message Request {
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
 
+    // Optional user-provided LLM endpoint that conforms to the OpenAI Chat Completions spec.
+    //
+    // When set, requests are routed directly to this endpoint using the supplied model ID
+    // and API key, bypassing `model_config` and `api_keys`.
+    UserProvidedLlmEndpoint user_provided_llm_endpoint = 28;
+
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
@@ -486,6 +492,17 @@ message Request {
       }
 
       // TODO(isaiah): Add Azure/GCP credentials here...
+    }
+
+    message UserProvidedLlmEndpoint {
+      // The base URL of the OpenAI-compatible endpoint.
+      string base_url = 1 [ (sensitive) = true ];
+
+      // The model ID to send to the endpoint.
+      string model_id = 2;
+
+      // The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
+      string api_key = 3 [ (sensitive) = true ];
     }
   }
 
