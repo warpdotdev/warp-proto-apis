@@ -262,6 +262,10 @@ message Message {
       CloneRepository clone_repository = 6;
       SummarizeConversation summarize_conversation = 7;
       FetchReviewComments fetch_review_comments = 8;
+      // Injected by the server when restoring a handed-off conversation.
+      // Carries the rehydration context the agent needs but should never
+      // be rendered as user-visible input on the client.
+      HandoffRehydration handoff_rehydration = 9;
     }
 
     InputContext context = 2;
@@ -270,6 +274,14 @@ message Message {
   message AutoCodeDiff { string query = 1 [ (sensitive) = true ]; }
 
   message ResumeConversation {}
+
+  // Injected by the server when a conversation is handed off to a new agent.
+  // Contains rehydration instructions for the agent to restore handoff state.
+  // Clients should treat this as hidden/non-displayed.
+  message HandoffRehydration {
+    // The rehydration instructions for the agent.
+    string instructions = 1 [ (sensitive) = true ];
+  }
 
   // An input type to generate passive suggestions (e.g. prompt suggestions).
   // If any suggestions are generated, they will be produced as tool calls.
