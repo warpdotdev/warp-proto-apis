@@ -1444,35 +1444,35 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 }
 
 type Request_Settings struct {
-	state                                                 protoimpl.MessageState                    `protogen:"opaque.v1"`
-	xxx_hidden_ModelConfig                                *Request_Settings_ModelConfig             `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
-	xxx_hidden_RulesEnabled                               bool                                      `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
-	xxx_hidden_WebContextRetrievalEnabled                 bool                                      `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
-	xxx_hidden_SupportsParallelToolCalls                  bool                                      `protobuf:"varint,4,opt,name=supports_parallel_tool_calls,json=supportsParallelToolCalls"`
-	xxx_hidden_UseAnthropicTextEditorTools                bool                                      `protobuf:"varint,5,opt,name=use_anthropic_text_editor_tools,json=useAnthropicTextEditorTools"`
-	xxx_hidden_PlanningEnabled                            bool                                      `protobuf:"varint,6,opt,name=planning_enabled,json=planningEnabled"`
-	xxx_hidden_WarpDriveContextEnabled                    bool                                      `protobuf:"varint,7,opt,name=warp_drive_context_enabled,json=warpDriveContextEnabled"`
-	xxx_hidden_SupportsCreateFiles                        bool                                      `protobuf:"varint,8,opt,name=supports_create_files,json=supportsCreateFiles"`
-	xxx_hidden_SupportedTools                             []ToolType                                `protobuf:"varint,9,rep,packed,name=supported_tools,json=supportedTools,enum=warp.multi_agent.v1.ToolType"`
-	xxx_hidden_SupportsLongRunningCommands                bool                                      `protobuf:"varint,10,opt,name=supports_long_running_commands,json=supportsLongRunningCommands"`
-	xxx_hidden_ShouldPreserveFileContentInHistory         bool                                      `protobuf:"varint,11,opt,name=should_preserve_file_content_in_history,json=shouldPreserveFileContentInHistory"`
-	xxx_hidden_SupportsTodosUi                            bool                                      `protobuf:"varint,12,opt,name=supports_todos_ui,json=supportsTodosUi"`
-	xxx_hidden_SupportsLinkedCodeBlocks                   bool                                      `protobuf:"varint,13,opt,name=supports_linked_code_blocks,json=supportsLinkedCodeBlocks"`
-	xxx_hidden_SupportsStartedChildTaskMessage            bool                                      `protobuf:"varint,14,opt,name=supports_started_child_task_message,json=supportsStartedChildTaskMessage"`
-	xxx_hidden_SupportsSuggestPrompt                      bool                                      `protobuf:"varint,15,opt,name=supports_suggest_prompt,json=supportsSuggestPrompt"`
-	xxx_hidden_SupportsReadImageFiles                     bool                                      `protobuf:"varint,16,opt,name=supports_read_image_files,json=supportsReadImageFiles"`
-	xxx_hidden_SupportsReasoningMessage                   bool                                      `protobuf:"varint,17,opt,name=supports_reasoning_message,json=supportsReasoningMessage"`
-	xxx_hidden_ApiKeys                                    *Request_Settings_ApiKeys                 `protobuf:"bytes,18,opt,name=api_keys,json=apiKeys"`
-	xxx_hidden_AutonomyLevel                              AutonomyLevel                             `protobuf:"varint,19,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
-	xxx_hidden_IsolationLevel                             IsolationLevel                            `protobuf:"varint,20,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
-	xxx_hidden_WebSearchEnabled                           bool                                      `protobuf:"varint,21,opt,name=web_search_enabled,json=webSearchEnabled"`
-	xxx_hidden_SupportedCliAgentTools                     []ToolType                                `protobuf:"varint,22,rep,packed,name=supported_cli_agent_tools,json=supportedCliAgentTools,enum=warp.multi_agent.v1.ToolType"`
-	xxx_hidden_SupportsV4AFileDiffs                       bool                                      `protobuf:"varint,23,opt,name=supports_v4a_file_diffs,json=supportsV4aFileDiffs"`
-	xxx_hidden_SupportsSummarizationViaMessageReplacement bool                                      `protobuf:"varint,24,opt,name=supports_summarization_via_message_replacement,json=supportsSummarizationViaMessageReplacement"`
-	xxx_hidden_SupportsBundledSkills                      bool                                      `protobuf:"varint,25,opt,name=supports_bundled_skills,json=supportsBundledSkills"`
-	xxx_hidden_SupportsResearchAgent                      bool                                      `protobuf:"varint,26,opt,name=supports_research_agent,json=supportsResearchAgent"`
-	xxx_hidden_SupportsOrchestrationV2                    bool                                      `protobuf:"varint,27,opt,name=supports_orchestration_v2,json=supportsOrchestrationV2"`
-	xxx_hidden_UserProvidedLlmEndpoint                    *Request_Settings_UserProvidedLlmEndpoint `protobuf:"bytes,28,opt,name=user_provided_llm_endpoint,json=userProvidedLlmEndpoint"`
+	state                                                 protoimpl.MessageState                       `protogen:"opaque.v1"`
+	xxx_hidden_ModelConfig                                *Request_Settings_ModelConfig                `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
+	xxx_hidden_RulesEnabled                               bool                                         `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
+	xxx_hidden_WebContextRetrievalEnabled                 bool                                         `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
+	xxx_hidden_SupportsParallelToolCalls                  bool                                         `protobuf:"varint,4,opt,name=supports_parallel_tool_calls,json=supportsParallelToolCalls"`
+	xxx_hidden_UseAnthropicTextEditorTools                bool                                         `protobuf:"varint,5,opt,name=use_anthropic_text_editor_tools,json=useAnthropicTextEditorTools"`
+	xxx_hidden_PlanningEnabled                            bool                                         `protobuf:"varint,6,opt,name=planning_enabled,json=planningEnabled"`
+	xxx_hidden_WarpDriveContextEnabled                    bool                                         `protobuf:"varint,7,opt,name=warp_drive_context_enabled,json=warpDriveContextEnabled"`
+	xxx_hidden_SupportsCreateFiles                        bool                                         `protobuf:"varint,8,opt,name=supports_create_files,json=supportsCreateFiles"`
+	xxx_hidden_SupportedTools                             []ToolType                                   `protobuf:"varint,9,rep,packed,name=supported_tools,json=supportedTools,enum=warp.multi_agent.v1.ToolType"`
+	xxx_hidden_SupportsLongRunningCommands                bool                                         `protobuf:"varint,10,opt,name=supports_long_running_commands,json=supportsLongRunningCommands"`
+	xxx_hidden_ShouldPreserveFileContentInHistory         bool                                         `protobuf:"varint,11,opt,name=should_preserve_file_content_in_history,json=shouldPreserveFileContentInHistory"`
+	xxx_hidden_SupportsTodosUi                            bool                                         `protobuf:"varint,12,opt,name=supports_todos_ui,json=supportsTodosUi"`
+	xxx_hidden_SupportsLinkedCodeBlocks                   bool                                         `protobuf:"varint,13,opt,name=supports_linked_code_blocks,json=supportsLinkedCodeBlocks"`
+	xxx_hidden_SupportsStartedChildTaskMessage            bool                                         `protobuf:"varint,14,opt,name=supports_started_child_task_message,json=supportsStartedChildTaskMessage"`
+	xxx_hidden_SupportsSuggestPrompt                      bool                                         `protobuf:"varint,15,opt,name=supports_suggest_prompt,json=supportsSuggestPrompt"`
+	xxx_hidden_SupportsReadImageFiles                     bool                                         `protobuf:"varint,16,opt,name=supports_read_image_files,json=supportsReadImageFiles"`
+	xxx_hidden_SupportsReasoningMessage                   bool                                         `protobuf:"varint,17,opt,name=supports_reasoning_message,json=supportsReasoningMessage"`
+	xxx_hidden_ApiKeys                                    *Request_Settings_ApiKeys                    `protobuf:"bytes,18,opt,name=api_keys,json=apiKeys"`
+	xxx_hidden_AutonomyLevel                              AutonomyLevel                                `protobuf:"varint,19,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
+	xxx_hidden_IsolationLevel                             IsolationLevel                               `protobuf:"varint,20,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
+	xxx_hidden_WebSearchEnabled                           bool                                         `protobuf:"varint,21,opt,name=web_search_enabled,json=webSearchEnabled"`
+	xxx_hidden_SupportedCliAgentTools                     []ToolType                                   `protobuf:"varint,22,rep,packed,name=supported_cli_agent_tools,json=supportedCliAgentTools,enum=warp.multi_agent.v1.ToolType"`
+	xxx_hidden_SupportsV4AFileDiffs                       bool                                         `protobuf:"varint,23,opt,name=supports_v4a_file_diffs,json=supportsV4aFileDiffs"`
+	xxx_hidden_SupportsSummarizationViaMessageReplacement bool                                         `protobuf:"varint,24,opt,name=supports_summarization_via_message_replacement,json=supportsSummarizationViaMessageReplacement"`
+	xxx_hidden_SupportsBundledSkills                      bool                                         `protobuf:"varint,25,opt,name=supports_bundled_skills,json=supportsBundledSkills"`
+	xxx_hidden_SupportsResearchAgent                      bool                                         `protobuf:"varint,26,opt,name=supports_research_agent,json=supportsResearchAgent"`
+	xxx_hidden_SupportsOrchestrationV2                    bool                                         `protobuf:"varint,27,opt,name=supports_orchestration_v2,json=supportsOrchestrationV2"`
+	xxx_hidden_UserProvidedLlmEndpoints                   *[]*Request_Settings_UserProvidedLlmEndpoint `protobuf:"bytes,28,rep,name=user_provided_llm_endpoints,json=userProvidedLlmEndpoints"`
 	XXX_raceDetectHookData                                protoimpl.RaceDetectHookData
 	XXX_presence                                          [1]uint32
 	unknownFields                                         protoimpl.UnknownFields
@@ -1697,9 +1697,11 @@ func (x *Request_Settings) GetSupportsOrchestrationV2() bool {
 	return false
 }
 
-func (x *Request_Settings) GetUserProvidedLlmEndpoint() *Request_Settings_UserProvidedLlmEndpoint {
+func (x *Request_Settings) GetUserProvidedLlmEndpoints() []*Request_Settings_UserProvidedLlmEndpoint {
 	if x != nil {
-		return x.xxx_hidden_UserProvidedLlmEndpoint
+		if x.xxx_hidden_UserProvidedLlmEndpoints != nil {
+			return *x.xxx_hidden_UserProvidedLlmEndpoints
+		}
 	}
 	return nil
 }
@@ -1835,8 +1837,8 @@ func (x *Request_Settings) SetSupportsOrchestrationV2(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 28)
 }
 
-func (x *Request_Settings) SetUserProvidedLlmEndpoint(v *Request_Settings_UserProvidedLlmEndpoint) {
-	x.xxx_hidden_UserProvidedLlmEndpoint = v
+func (x *Request_Settings) SetUserProvidedLlmEndpoints(v []*Request_Settings_UserProvidedLlmEndpoint) {
+	x.xxx_hidden_UserProvidedLlmEndpoints = &v
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -2014,13 +2016,6 @@ func (x *Request_Settings) HasSupportsOrchestrationV2() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 26)
 }
 
-func (x *Request_Settings) HasUserProvidedLlmEndpoint() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_UserProvidedLlmEndpoint != nil
-}
-
 func (x *Request_Settings) ClearModelConfig() {
 	x.xxx_hidden_ModelConfig = nil
 }
@@ -2144,10 +2139,6 @@ func (x *Request_Settings) ClearSupportsOrchestrationV2() {
 	x.xxx_hidden_SupportsOrchestrationV2 = false
 }
 
-func (x *Request_Settings) ClearUserProvidedLlmEndpoint() {
-	x.xxx_hidden_UserProvidedLlmEndpoint = nil
-}
-
 type Request_Settings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2218,11 +2209,16 @@ type Request_Settings_builder struct {
 	SupportsResearchAgent *bool
 	// If `true`, the client supports orchestration v2 durable messaging.
 	SupportsOrchestrationV2 *bool
-	// Optional user-provided LLM endpoint that conforms to the OpenAI Chat Completions spec.
+	// Optional list of user-provided LLM endpoints that conform to the OpenAI Chat
+	// Completions spec.
 	//
-	// When set, requests are routed directly to this endpoint using the supplied model ID
-	// and API key, bypassing `model_config` and `api_keys`.
-	UserProvidedLlmEndpoint *Request_Settings_UserProvidedLlmEndpoint
+	// The list is a registry of custom hosts; routing decisions live in
+	// `model_config`. To route a particular agent role to one of these endpoints,
+	// set the corresponding `model_config` field (e.g. `base`, `coding`, etc.)
+	// to `"{endpoint_id}::{model_name}"`, where `endpoint_id` matches an entry's
+	// `id` and `model_name` is one of that entry's `model_names`. Model ids
+	// without `::` continue to resolve against Warp's hosted catalog as before.
+	UserProvidedLlmEndpoints []*Request_Settings_UserProvidedLlmEndpoint
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -2325,7 +2321,7 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 28)
 		x.xxx_hidden_SupportsOrchestrationV2 = *b.SupportsOrchestrationV2
 	}
-	x.xxx_hidden_UserProvidedLlmEndpoint = b.UserProvidedLlmEndpoint
+	x.xxx_hidden_UserProvidedLlmEndpoints = &b.UserProvidedLlmEndpoints
 	return m0
 }
 
@@ -7758,9 +7754,10 @@ func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
 
 type Request_Settings_UserProvidedLlmEndpoint struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_BaseUrl     *string                `protobuf:"bytes,1,opt,name=base_url,json=baseUrl"`
-	xxx_hidden_ModelId     *string                `protobuf:"bytes,2,opt,name=model_id,json=modelId"`
+	xxx_hidden_Id          *string                `protobuf:"bytes,1,opt,name=id"`
+	xxx_hidden_BaseUrl     *string                `protobuf:"bytes,2,opt,name=base_url,json=baseUrl"`
 	xxx_hidden_ApiKey      *string                `protobuf:"bytes,3,opt,name=api_key,json=apiKey"`
+	xxx_hidden_ModelNames  []string               `protobuf:"bytes,4,rep,name=model_names,json=modelNames"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -7792,20 +7789,20 @@ func (x *Request_Settings_UserProvidedLlmEndpoint) ProtoReflect() protoreflect.M
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) GetBaseUrl() string {
+func (x *Request_Settings_UserProvidedLlmEndpoint) GetId() string {
 	if x != nil {
-		if x.xxx_hidden_BaseUrl != nil {
-			return *x.xxx_hidden_BaseUrl
+		if x.xxx_hidden_Id != nil {
+			return *x.xxx_hidden_Id
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) GetModelId() string {
+func (x *Request_Settings_UserProvidedLlmEndpoint) GetBaseUrl() string {
 	if x != nil {
-		if x.xxx_hidden_ModelId != nil {
-			return *x.xxx_hidden_ModelId
+		if x.xxx_hidden_BaseUrl != nil {
+			return *x.xxx_hidden_BaseUrl
 		}
 		return ""
 	}
@@ -7822,29 +7819,40 @@ func (x *Request_Settings_UserProvidedLlmEndpoint) GetApiKey() string {
 	return ""
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) SetBaseUrl(v string) {
-	x.xxx_hidden_BaseUrl = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+func (x *Request_Settings_UserProvidedLlmEndpoint) GetModelNames() []string {
+	if x != nil {
+		return x.xxx_hidden_ModelNames
+	}
+	return nil
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) SetModelId(v string) {
-	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+func (x *Request_Settings_UserProvidedLlmEndpoint) SetId(v string) {
+	x.xxx_hidden_Id = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *Request_Settings_UserProvidedLlmEndpoint) SetBaseUrl(v string) {
+	x.xxx_hidden_BaseUrl = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
 func (x *Request_Settings_UserProvidedLlmEndpoint) SetApiKey(v string) {
 	x.xxx_hidden_ApiKey = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) HasBaseUrl() bool {
+func (x *Request_Settings_UserProvidedLlmEndpoint) SetModelNames(v []string) {
+	x.xxx_hidden_ModelNames = v
+}
+
+func (x *Request_Settings_UserProvidedLlmEndpoint) HasId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) HasModelId() bool {
+func (x *Request_Settings_UserProvidedLlmEndpoint) HasBaseUrl() bool {
 	if x == nil {
 		return false
 	}
@@ -7858,14 +7866,14 @@ func (x *Request_Settings_UserProvidedLlmEndpoint) HasApiKey() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) ClearBaseUrl() {
+func (x *Request_Settings_UserProvidedLlmEndpoint) ClearId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_BaseUrl = nil
+	x.xxx_hidden_Id = nil
 }
 
-func (x *Request_Settings_UserProvidedLlmEndpoint) ClearModelId() {
+func (x *Request_Settings_UserProvidedLlmEndpoint) ClearBaseUrl() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_ModelId = nil
+	x.xxx_hidden_BaseUrl = nil
 }
 
 func (x *Request_Settings_UserProvidedLlmEndpoint) ClearApiKey() {
@@ -7876,30 +7884,37 @@ func (x *Request_Settings_UserProvidedLlmEndpoint) ClearApiKey() {
 type Request_Settings_UserProvidedLlmEndpoint_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Stable, client-minted identifier for this endpoint. Used as the prefix
+	// in `model_config` model ids (e.g. `"{id}::{model_name}"`).
+	Id *string
 	// The base URL of the OpenAI-compatible endpoint.
 	BaseUrl *string
-	// The model ID to send to the endpoint.
-	ModelId *string
 	// The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
 	ApiKey *string
+	// The model names exposed by this endpoint, sent verbatim to the endpoint
+	// API.
+	//
+	// Each entry must be non-empty and must not contain `::`.
+	ModelNames []string
 }
 
 func (b0 Request_Settings_UserProvidedLlmEndpoint_builder) Build() *Request_Settings_UserProvidedLlmEndpoint {
 	m0 := &Request_Settings_UserProvidedLlmEndpoint{}
 	b, x := &b0, m0
 	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Id = b.Id
+	}
 	if b.BaseUrl != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_BaseUrl = b.BaseUrl
 	}
-	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
-		x.xxx_hidden_ModelId = b.ModelId
-	}
 	if b.ApiKey != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
 		x.xxx_hidden_ApiKey = b.ApiKey
 	}
+	x.xxx_hidden_ModelNames = b.ModelNames
 	return m0
 }
 
@@ -8581,7 +8596,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xbfl\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xd8l\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -8765,7 +8780,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x9c\x15\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xb5\x15\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -8794,8 +8809,8 @@ const file_request_proto_rawDesc = "" +
 	".supports_summarization_via_message_replacement\x18\x18 \x01(\bR*supportsSummarizationViaMessageReplacement\x126\n" +
 	"\x17supports_bundled_skills\x18\x19 \x01(\bR\x15supportsBundledSkills\x126\n" +
 	"\x17supports_research_agent\x18\x1a \x01(\bR\x15supportsResearchAgent\x12:\n" +
-	"\x19supports_orchestration_v2\x18\x1b \x01(\bR\x17supportsOrchestrationV2\x12z\n" +
-	"\x1auser_provided_llm_endpoint\x18\x1c \x01(\v2=.warp.multi_agent.v1.Request.Settings.UserProvidedLlmEndpointR\x17userProvidedLlmEndpoint\x1a\xea\x01\n" +
+	"\x19supports_orchestration_v2\x18\x1b \x01(\bR\x17supportsOrchestrationV2\x12|\n" +
+	"\x1buser_provided_llm_endpoints\x18\x1c \x03(\v2=.warp.multi_agent.v1.Request.Settings.UserProvidedLlmEndpointR\x18userProvidedLlmEndpoints\x1a\xea\x01\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
@@ -8817,11 +8832,13 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"secret_key\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\tsecretKey\x12)\n" +
 	"\rsession_token\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\fsessionToken\x12\x16\n" +
-	"\x06region\x18\x04 \x01(\tR\x06region\x1at\n" +
-	"\x17UserProvidedLlmEndpoint\x12\x1f\n" +
-	"\bbase_url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\abaseUrl\x12\x19\n" +
-	"\bmodel_id\x18\x02 \x01(\tR\amodelId\x12\x1d\n" +
-	"\aapi_key\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06apiKey\x1a\x86\x06\n" +
+	"\x06region\x18\x04 \x01(\tR\x06region\x1a\x8a\x01\n" +
+	"\x17UserProvidedLlmEndpoint\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
+	"\bbase_url\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\abaseUrl\x12\x1d\n" +
+	"\aapi_key\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x06apiKey\x12\x1f\n" +
+	"\vmodel_names\x18\x04 \x03(\tR\n" +
+	"modelNames\x1a\x86\x06\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
@@ -8986,7 +9003,7 @@ var file_request_proto_depIdxs = []int32{
 	0,   // 28: warp.multi_agent.v1.Request.Settings.autonomy_level:type_name -> warp.multi_agent.v1.AutonomyLevel
 	1,   // 29: warp.multi_agent.v1.Request.Settings.isolation_level:type_name -> warp.multi_agent.v1.IsolationLevel
 	52,  // 30: warp.multi_agent.v1.Request.Settings.supported_cli_agent_tools:type_name -> warp.multi_agent.v1.ToolType
-	44,  // 31: warp.multi_agent.v1.Request.Settings.user_provided_llm_endpoint:type_name -> warp.multi_agent.v1.Request.Settings.UserProvidedLlmEndpoint
+	44,  // 31: warp.multi_agent.v1.Request.Settings.user_provided_llm_endpoints:type_name -> warp.multi_agent.v1.Request.Settings.UserProvidedLlmEndpoint
 	46,  // 32: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
 	47,  // 33: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	48,  // 34: warp.multi_agent.v1.Request.MCPContext.servers:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPServer

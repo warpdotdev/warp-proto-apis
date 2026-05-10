@@ -444,11 +444,16 @@ message Request {
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
 
-    // Optional user-provided LLM endpoint that conforms to the OpenAI Chat Completions spec.
+    // Optional list of user-provided LLM endpoints that conform to the OpenAI Chat
+    // Completions spec.
     //
-    // When set, requests are routed directly to this endpoint using the supplied model ID
-    // and API key, bypassing `model_config` and `api_keys`.
-    UserProvidedLlmEndpoint user_provided_llm_endpoint = 28;
+    // The list is a registry of custom hosts; routing decisions live in
+    // `model_config`. To route a particular agent role to one of these endpoints,
+    // set the corresponding `model_config` field (e.g. `base`, `coding`, etc.)
+    // to `"{endpoint_id}::{model_name}"`, where `endpoint_id` matches an entry's
+    // `id` and `model_name` is one of that entry's `model_names`. Model ids
+    // without `::` continue to resolve against Warp's hosted catalog as before.
+    repeated UserProvidedLlmEndpoint user_provided_llm_endpoints = 28;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
@@ -495,14 +500,21 @@ message Request {
     }
 
     message UserProvidedLlmEndpoint {
-      // The base URL of the OpenAI-compatible endpoint.
-      string base_url = 1 [ (sensitive) = true ];
+      // Stable, client-minted identifier for this endpoint. Used as the prefix
+      // in `model_config` model ids (e.g. `"{id}::{model_name}"`).
+      string id = 1;
 
-      // The model ID to send to the endpoint.
-      string model_id = 2;
+      // The base URL of the OpenAI-compatible endpoint.
+      string base_url = 2 [ (sensitive) = true ];
 
       // The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
       string api_key = 3 [ (sensitive) = true ];
+
+      // The model names exposed by this endpoint, sent verbatim to the endpoint
+      // API.
+      //
+      // Each entry must be non-empty and must not contain `::`.
+      repeated string model_names = 4;
     }
   }
 
