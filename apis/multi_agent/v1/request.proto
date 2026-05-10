@@ -444,16 +444,16 @@ message Request {
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
 
-    // Optional list of user-provided LLM endpoints that conform to the OpenAI Chat
-    // Completions spec.
+    // Structured per-role model selection. Supersedes `model_config`.
     //
-    // The list is a registry of custom hosts; routing decisions live in
-    // `model_config`. To route a particular agent role to one of these endpoints,
-    // set the corresponding `model_config` field (e.g. `base`, `coding`, etc.)
-    // to `"{endpoint_id}::{model_name}"`, where `endpoint_id` matches an entry's
-    // `id` and `model_name` is one of that entry's `model_names`. Model ids
-    // without `::` continue to resolve against Warp's hosted catalog as before.
-    repeated UserProvidedLlmEndpoint user_provided_llm_endpoints = 28;
+    // When set, servers should prefer this over `model_config` for resolving
+    // which model to use for each agent role. Clients in the transition window
+    // should populate both fields (this one for new servers; `model_config`
+    // for older servers that don't yet read `agent_model_config`).
+    //
+    // Each role independently selects either a Warp-hosted model or a
+    // user-provided OpenAI-compatible endpoint via the `ModelSelection` oneof.
+    AgentModelConfig agent_model_config = 28;
 
     message ModelConfig {
       // The LLM of preference for general tasks.
@@ -499,22 +499,43 @@ message Request {
       // TODO(isaiah): Add Azure/GCP credentials here...
     }
 
-    message UserProvidedLlmEndpoint {
-      // Stable, client-minted identifier for this endpoint. Used as the prefix
-      // in `model_config` model ids (e.g. `"{id}::{model_name}"`).
-      string id = 1;
+    message AgentModelConfig {
+      // The model selection for general/primary tasks.
+      ModelSelection base = 1;
 
-      // The base URL of the OpenAI-compatible endpoint.
-      string base_url = 2 [ (sensitive) = true ];
+      // The model selection for coding tasks.
+      ModelSelection coding = 2;
 
-      // The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
-      string api_key = 3 [ (sensitive) = true ];
+      // The model selection for the CLI agent.
+      ModelSelection cli_agent = 3;
 
-      // The model names exposed by this endpoint, sent verbatim to the endpoint
-      // API.
-      //
-      // Each entry must be non-empty and must not contain `::`.
-      repeated string model_names = 4;
+      // The model selection for the Computer Use agent.
+      ModelSelection computer_use_agent = 4;
+
+      // Optional user-selected max input-token context window override for the
+      // base role. Zero or unset means "use the model's default max".
+      uint32 base_context_window_limit = 5;
+
+      message ModelSelection {
+        oneof selection {
+          // A Warp-hosted model id (e.g. "claude-4-6-opus-high", "auto").
+          string hosted_model = 1;
+
+          // A user-provided OpenAI-compatible endpoint plus the model to use.
+          CustomModelRef custom = 2;
+        }
+
+        message CustomModelRef {
+          // The base URL of the OpenAI-compatible endpoint.
+          string base_url = 1 [ (sensitive) = true ];
+
+          // The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
+          string api_key = 2 [ (sensitive) = true ];
+
+          // The model name sent verbatim to the endpoint API.
+          string model_name = 3;
+        }
+      }
     }
   }
 
