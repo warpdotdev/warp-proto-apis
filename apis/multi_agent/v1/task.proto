@@ -1768,6 +1768,9 @@ message RunAgents {
     Remote remote = 7;
   }
   repeated AgentRunConfig agent_run_configs = 8;
+  // Optional plan ID. When set and matches an OrchestrationConfigSnapshot's
+  // plan_id, run-wide fields inherit from that config.
+  string plan_id = 9;
 }
 
 // The result of a RunAgents tool call.
