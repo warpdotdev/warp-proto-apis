@@ -8804,6 +8804,7 @@ type RunAgents struct {
 	xxx_hidden_Harness         *Harness                     `protobuf:"bytes,5,opt,name=harness"`
 	xxx_hidden_ExecutionMode   isRunAgents_ExecutionMode    `protobuf_oneof:"execution_mode"`
 	xxx_hidden_AgentRunConfigs *[]*RunAgents_AgentRunConfig `protobuf:"bytes,8,rep,name=agent_run_configs,json=agentRunConfigs"`
+	xxx_hidden_PlanId          *string                      `protobuf:"bytes,9,opt,name=plan_id,json=planId"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -8908,14 +8909,24 @@ func (x *RunAgents) GetAgentRunConfigs() []*RunAgents_AgentRunConfig {
 	return nil
 }
 
+func (x *RunAgents) GetPlanId() string {
+	if x != nil {
+		if x.xxx_hidden_PlanId != nil {
+			return *x.xxx_hidden_PlanId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *RunAgents) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
 }
 
 func (x *RunAgents) SetBasePrompt(v string) {
 	x.xxx_hidden_BasePrompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
 }
 
 func (x *RunAgents) SetSkills(v []*SkillRef) {
@@ -8924,7 +8935,7 @@ func (x *RunAgents) SetSkills(v []*SkillRef) {
 
 func (x *RunAgents) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
 }
 
 func (x *RunAgents) SetHarness(v *Harness) {
@@ -8949,6 +8960,11 @@ func (x *RunAgents) SetRemote(v *RunAgents_Remote) {
 
 func (x *RunAgents) SetAgentRunConfigs(v []*RunAgents_AgentRunConfig) {
 	x.xxx_hidden_AgentRunConfigs = &v
+}
+
+func (x *RunAgents) SetPlanId(v string) {
+	x.xxx_hidden_PlanId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *RunAgents) HasSummary() bool {
@@ -9002,6 +9018,13 @@ func (x *RunAgents) HasRemote() bool {
 	return ok
 }
 
+func (x *RunAgents) HasPlanId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *RunAgents) ClearSummary() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Summary = nil
@@ -9037,6 +9060,11 @@ func (x *RunAgents) ClearRemote() {
 	}
 }
 
+func (x *RunAgents) ClearPlanId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_PlanId = nil
+}
+
 const RunAgents_ExecutionMode_not_set_case case_RunAgents_ExecutionMode = 0
 const RunAgents_Local_case case_RunAgents_ExecutionMode = 6
 const RunAgents_Remote_case case_RunAgents_ExecutionMode = 7
@@ -9068,6 +9096,9 @@ type RunAgents_builder struct {
 	Remote *RunAgents_Remote
 	// -- end of xxx_hidden_ExecutionMode
 	AgentRunConfigs []*RunAgents_AgentRunConfig
+	// Optional plan ID. When set and matches an OrchestrationConfigSnapshot's
+	// plan_id, run-wide fields inherit from that config.
+	PlanId *string
 }
 
 func (b0 RunAgents_builder) Build() *RunAgents {
@@ -9075,16 +9106,16 @@ func (b0 RunAgents_builder) Build() *RunAgents {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	if b.BasePrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
 		x.xxx_hidden_BasePrompt = b.BasePrompt
 	}
 	x.xxx_hidden_Skills = &b.Skills
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	x.xxx_hidden_Harness = b.Harness
@@ -9095,6 +9126,10 @@ func (b0 RunAgents_builder) Build() *RunAgents {
 		x.xxx_hidden_ExecutionMode = &runAgents_Remote_{b.Remote}
 	}
 	x.xxx_hidden_AgentRunConfigs = &b.AgentRunConfigs
+	if b.PlanId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_PlanId = b.PlanId
+	}
 	return m0
 }
 
@@ -37336,7 +37371,7 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"\xbc\x05\n" +
+	"\x06result\"\xd5\x05\n" +
 	"\tRunAgents\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12%\n" +
 	"\vbase_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
@@ -37346,7 +37381,8 @@ const file_task_proto_rawDesc = "" +
 	"\aharness\x18\x05 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\aharness\x12<\n" +
 	"\x05local\x18\x06 \x01(\v2$.warp.multi_agent.v1.RunAgents.LocalH\x00R\x05local\x12?\n" +
 	"\x06remote\x18\a \x01(\v2%.warp.multi_agent.v1.RunAgents.RemoteH\x00R\x06remote\x12Y\n" +
-	"\x11agent_run_configs\x18\b \x03(\v2-.warp.multi_agent.v1.RunAgents.AgentRunConfigR\x0fagentRunConfigs\x1a\a\n" +
+	"\x11agent_run_configs\x18\b \x03(\v2-.warp.multi_agent.v1.RunAgents.AgentRunConfigR\x0fagentRunConfigs\x12\x17\n" +
+	"\aplan_id\x18\t \x01(\tR\x06planId\x1a\a\n" +
 	"\x05Local\x1a\x82\x01\n" +
 	"\x06Remote\x12%\n" +
 	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentId\x12\x1f\n" +
