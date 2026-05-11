@@ -1345,6 +1345,8 @@ message ShellCommandFinished {
   string output = 1 [ (sensitive) = true ];
   int32 exit_code = 2;
   string command_id = 3;
+  google.protobuf.Timestamp start_ts = 4;
+  google.protobuf.Timestamp finish_ts = 5;
 }
 
 // The reason why a shell command was denied permission to run.
