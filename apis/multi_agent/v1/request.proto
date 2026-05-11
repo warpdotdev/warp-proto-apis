@@ -444,17 +444,12 @@ message Request {
     // If `true`, the client supports orchestration v2 durable messaging.
     bool supports_orchestration_v2 = 27;
 
-    // Structured per-role model selection. Supersedes `model_config`.
-    //
-    // When set, servers should prefer this over `model_config` for resolving
-    // which model to use for each agent role. Clients in the transition window
-    // should populate both fields (this one for new servers; `model_config`
-    // for older servers that don't yet read `agent_model_config`).
-    //
-    // Each role independently selects either a Warp-hosted model or a
-    // user-provided OpenAI-compatible endpoint via the `ModelSelection` oneof.
-    AgentModelConfig agent_model_config = 28;
+    // A registry of custom model providers configured by the user.
+    CustomModelProviders custom_model_providers = 28;
 
+    // The model IDs provided in the model config can either be a warp-hosted model ID
+    // (e.g. "gemini-2.5-pro") or the `config_key` for a model provided in
+    // `custom_model_providers`.
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
@@ -499,42 +494,24 @@ message Request {
       // TODO(isaiah): Add Azure/GCP credentials here...
     }
 
-    message AgentModelConfig {
-      // The model selection for general/primary tasks.
-      ModelSelection base = 1;
+    message CustomModelProviders {
+      repeated CustomModelProvider providers = 1;
 
-      // The model selection for coding tasks.
-      ModelSelection coding = 2;
+      message CustomModelProvider {
+        // The base URL for the custom model provider.
+        string base_url = 1;
+        // The API key used to authenticate with the provider.
+        string api_key = 2 [ (sensitive) = true ];
+        // The list of custom models made available on the provider.
+        repeated CustomModel models = 3;
+      }
 
-      // The model selection for the CLI agent.
-      ModelSelection cli_agent = 3;
-
-      // The model selection for the Computer Use agent.
-      ModelSelection computer_use_agent = 4;
-
-      // Optional user-selected max input-token context window override for the
-      // base role. Zero or unset means "use the model's default max".
-      uint32 base_context_window_limit = 5;
-
-      message ModelSelection {
-        oneof selection {
-          // A Warp-hosted model id (e.g. "claude-4-6-opus-high", "auto").
-          string hosted_model = 1;
-
-          // A user-provided OpenAI-compatible endpoint plus the model to use.
-          CustomModelRef custom = 2;
-        }
-
-        message CustomModelRef {
-          // The base URL of the OpenAI-compatible endpoint.
-          string base_url = 1 [ (sensitive) = true ];
-
-          // The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
-          string api_key = 2 [ (sensitive) = true ];
-
-          // The model name sent verbatim to the endpoint API.
-          string model_name = 3;
-        }
+      message CustomModel {
+        // The slug of the model (e.g. "gemini-2.5-pro").
+        string slug = 1;
+        // The key to use in the ModelConfig message (e.g. "base"). The client
+        // must guarantee this is unique across all custom models.
+        string config_key = 2;
       }
     }
   }

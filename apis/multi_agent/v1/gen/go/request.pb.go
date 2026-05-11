@@ -1444,35 +1444,35 @@ func (b0 Request_Metadata_builder) Build() *Request_Metadata {
 }
 
 type Request_Settings struct {
-	state                                                 protoimpl.MessageState             `protogen:"opaque.v1"`
-	xxx_hidden_ModelConfig                                *Request_Settings_ModelConfig      `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
-	xxx_hidden_RulesEnabled                               bool                               `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
-	xxx_hidden_WebContextRetrievalEnabled                 bool                               `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
-	xxx_hidden_SupportsParallelToolCalls                  bool                               `protobuf:"varint,4,opt,name=supports_parallel_tool_calls,json=supportsParallelToolCalls"`
-	xxx_hidden_UseAnthropicTextEditorTools                bool                               `protobuf:"varint,5,opt,name=use_anthropic_text_editor_tools,json=useAnthropicTextEditorTools"`
-	xxx_hidden_PlanningEnabled                            bool                               `protobuf:"varint,6,opt,name=planning_enabled,json=planningEnabled"`
-	xxx_hidden_WarpDriveContextEnabled                    bool                               `protobuf:"varint,7,opt,name=warp_drive_context_enabled,json=warpDriveContextEnabled"`
-	xxx_hidden_SupportsCreateFiles                        bool                               `protobuf:"varint,8,opt,name=supports_create_files,json=supportsCreateFiles"`
-	xxx_hidden_SupportedTools                             []ToolType                         `protobuf:"varint,9,rep,packed,name=supported_tools,json=supportedTools,enum=warp.multi_agent.v1.ToolType"`
-	xxx_hidden_SupportsLongRunningCommands                bool                               `protobuf:"varint,10,opt,name=supports_long_running_commands,json=supportsLongRunningCommands"`
-	xxx_hidden_ShouldPreserveFileContentInHistory         bool                               `protobuf:"varint,11,opt,name=should_preserve_file_content_in_history,json=shouldPreserveFileContentInHistory"`
-	xxx_hidden_SupportsTodosUi                            bool                               `protobuf:"varint,12,opt,name=supports_todos_ui,json=supportsTodosUi"`
-	xxx_hidden_SupportsLinkedCodeBlocks                   bool                               `protobuf:"varint,13,opt,name=supports_linked_code_blocks,json=supportsLinkedCodeBlocks"`
-	xxx_hidden_SupportsStartedChildTaskMessage            bool                               `protobuf:"varint,14,opt,name=supports_started_child_task_message,json=supportsStartedChildTaskMessage"`
-	xxx_hidden_SupportsSuggestPrompt                      bool                               `protobuf:"varint,15,opt,name=supports_suggest_prompt,json=supportsSuggestPrompt"`
-	xxx_hidden_SupportsReadImageFiles                     bool                               `protobuf:"varint,16,opt,name=supports_read_image_files,json=supportsReadImageFiles"`
-	xxx_hidden_SupportsReasoningMessage                   bool                               `protobuf:"varint,17,opt,name=supports_reasoning_message,json=supportsReasoningMessage"`
-	xxx_hidden_ApiKeys                                    *Request_Settings_ApiKeys          `protobuf:"bytes,18,opt,name=api_keys,json=apiKeys"`
-	xxx_hidden_AutonomyLevel                              AutonomyLevel                      `protobuf:"varint,19,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
-	xxx_hidden_IsolationLevel                             IsolationLevel                     `protobuf:"varint,20,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
-	xxx_hidden_WebSearchEnabled                           bool                               `protobuf:"varint,21,opt,name=web_search_enabled,json=webSearchEnabled"`
-	xxx_hidden_SupportedCliAgentTools                     []ToolType                         `protobuf:"varint,22,rep,packed,name=supported_cli_agent_tools,json=supportedCliAgentTools,enum=warp.multi_agent.v1.ToolType"`
-	xxx_hidden_SupportsV4AFileDiffs                       bool                               `protobuf:"varint,23,opt,name=supports_v4a_file_diffs,json=supportsV4aFileDiffs"`
-	xxx_hidden_SupportsSummarizationViaMessageReplacement bool                               `protobuf:"varint,24,opt,name=supports_summarization_via_message_replacement,json=supportsSummarizationViaMessageReplacement"`
-	xxx_hidden_SupportsBundledSkills                      bool                               `protobuf:"varint,25,opt,name=supports_bundled_skills,json=supportsBundledSkills"`
-	xxx_hidden_SupportsResearchAgent                      bool                               `protobuf:"varint,26,opt,name=supports_research_agent,json=supportsResearchAgent"`
-	xxx_hidden_SupportsOrchestrationV2                    bool                               `protobuf:"varint,27,opt,name=supports_orchestration_v2,json=supportsOrchestrationV2"`
-	xxx_hidden_AgentModelConfig                           *Request_Settings_AgentModelConfig `protobuf:"bytes,28,opt,name=agent_model_config,json=agentModelConfig"`
+	state                                                 protoimpl.MessageState                 `protogen:"opaque.v1"`
+	xxx_hidden_ModelConfig                                *Request_Settings_ModelConfig          `protobuf:"bytes,1,opt,name=model_config,json=modelConfig"`
+	xxx_hidden_RulesEnabled                               bool                                   `protobuf:"varint,2,opt,name=rules_enabled,json=rulesEnabled"`
+	xxx_hidden_WebContextRetrievalEnabled                 bool                                   `protobuf:"varint,3,opt,name=web_context_retrieval_enabled,json=webContextRetrievalEnabled"`
+	xxx_hidden_SupportsParallelToolCalls                  bool                                   `protobuf:"varint,4,opt,name=supports_parallel_tool_calls,json=supportsParallelToolCalls"`
+	xxx_hidden_UseAnthropicTextEditorTools                bool                                   `protobuf:"varint,5,opt,name=use_anthropic_text_editor_tools,json=useAnthropicTextEditorTools"`
+	xxx_hidden_PlanningEnabled                            bool                                   `protobuf:"varint,6,opt,name=planning_enabled,json=planningEnabled"`
+	xxx_hidden_WarpDriveContextEnabled                    bool                                   `protobuf:"varint,7,opt,name=warp_drive_context_enabled,json=warpDriveContextEnabled"`
+	xxx_hidden_SupportsCreateFiles                        bool                                   `protobuf:"varint,8,opt,name=supports_create_files,json=supportsCreateFiles"`
+	xxx_hidden_SupportedTools                             []ToolType                             `protobuf:"varint,9,rep,packed,name=supported_tools,json=supportedTools,enum=warp.multi_agent.v1.ToolType"`
+	xxx_hidden_SupportsLongRunningCommands                bool                                   `protobuf:"varint,10,opt,name=supports_long_running_commands,json=supportsLongRunningCommands"`
+	xxx_hidden_ShouldPreserveFileContentInHistory         bool                                   `protobuf:"varint,11,opt,name=should_preserve_file_content_in_history,json=shouldPreserveFileContentInHistory"`
+	xxx_hidden_SupportsTodosUi                            bool                                   `protobuf:"varint,12,opt,name=supports_todos_ui,json=supportsTodosUi"`
+	xxx_hidden_SupportsLinkedCodeBlocks                   bool                                   `protobuf:"varint,13,opt,name=supports_linked_code_blocks,json=supportsLinkedCodeBlocks"`
+	xxx_hidden_SupportsStartedChildTaskMessage            bool                                   `protobuf:"varint,14,opt,name=supports_started_child_task_message,json=supportsStartedChildTaskMessage"`
+	xxx_hidden_SupportsSuggestPrompt                      bool                                   `protobuf:"varint,15,opt,name=supports_suggest_prompt,json=supportsSuggestPrompt"`
+	xxx_hidden_SupportsReadImageFiles                     bool                                   `protobuf:"varint,16,opt,name=supports_read_image_files,json=supportsReadImageFiles"`
+	xxx_hidden_SupportsReasoningMessage                   bool                                   `protobuf:"varint,17,opt,name=supports_reasoning_message,json=supportsReasoningMessage"`
+	xxx_hidden_ApiKeys                                    *Request_Settings_ApiKeys              `protobuf:"bytes,18,opt,name=api_keys,json=apiKeys"`
+	xxx_hidden_AutonomyLevel                              AutonomyLevel                          `protobuf:"varint,19,opt,name=autonomy_level,json=autonomyLevel,enum=warp.multi_agent.v1.AutonomyLevel"`
+	xxx_hidden_IsolationLevel                             IsolationLevel                         `protobuf:"varint,20,opt,name=isolation_level,json=isolationLevel,enum=warp.multi_agent.v1.IsolationLevel"`
+	xxx_hidden_WebSearchEnabled                           bool                                   `protobuf:"varint,21,opt,name=web_search_enabled,json=webSearchEnabled"`
+	xxx_hidden_SupportedCliAgentTools                     []ToolType                             `protobuf:"varint,22,rep,packed,name=supported_cli_agent_tools,json=supportedCliAgentTools,enum=warp.multi_agent.v1.ToolType"`
+	xxx_hidden_SupportsV4AFileDiffs                       bool                                   `protobuf:"varint,23,opt,name=supports_v4a_file_diffs,json=supportsV4aFileDiffs"`
+	xxx_hidden_SupportsSummarizationViaMessageReplacement bool                                   `protobuf:"varint,24,opt,name=supports_summarization_via_message_replacement,json=supportsSummarizationViaMessageReplacement"`
+	xxx_hidden_SupportsBundledSkills                      bool                                   `protobuf:"varint,25,opt,name=supports_bundled_skills,json=supportsBundledSkills"`
+	xxx_hidden_SupportsResearchAgent                      bool                                   `protobuf:"varint,26,opt,name=supports_research_agent,json=supportsResearchAgent"`
+	xxx_hidden_SupportsOrchestrationV2                    bool                                   `protobuf:"varint,27,opt,name=supports_orchestration_v2,json=supportsOrchestrationV2"`
+	xxx_hidden_CustomModelProviders                       *Request_Settings_CustomModelProviders `protobuf:"bytes,28,opt,name=custom_model_providers,json=customModelProviders"`
 	XXX_raceDetectHookData                                protoimpl.RaceDetectHookData
 	XXX_presence                                          [1]uint32
 	unknownFields                                         protoimpl.UnknownFields
@@ -1697,9 +1697,9 @@ func (x *Request_Settings) GetSupportsOrchestrationV2() bool {
 	return false
 }
 
-func (x *Request_Settings) GetAgentModelConfig() *Request_Settings_AgentModelConfig {
+func (x *Request_Settings) GetCustomModelProviders() *Request_Settings_CustomModelProviders {
 	if x != nil {
-		return x.xxx_hidden_AgentModelConfig
+		return x.xxx_hidden_CustomModelProviders
 	}
 	return nil
 }
@@ -1835,8 +1835,8 @@ func (x *Request_Settings) SetSupportsOrchestrationV2(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 28)
 }
 
-func (x *Request_Settings) SetAgentModelConfig(v *Request_Settings_AgentModelConfig) {
-	x.xxx_hidden_AgentModelConfig = v
+func (x *Request_Settings) SetCustomModelProviders(v *Request_Settings_CustomModelProviders) {
+	x.xxx_hidden_CustomModelProviders = v
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -2014,11 +2014,11 @@ func (x *Request_Settings) HasSupportsOrchestrationV2() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 26)
 }
 
-func (x *Request_Settings) HasAgentModelConfig() bool {
+func (x *Request_Settings) HasCustomModelProviders() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_AgentModelConfig != nil
+	return x.xxx_hidden_CustomModelProviders != nil
 }
 
 func (x *Request_Settings) ClearModelConfig() {
@@ -2144,8 +2144,8 @@ func (x *Request_Settings) ClearSupportsOrchestrationV2() {
 	x.xxx_hidden_SupportsOrchestrationV2 = false
 }
 
-func (x *Request_Settings) ClearAgentModelConfig() {
-	x.xxx_hidden_AgentModelConfig = nil
+func (x *Request_Settings) ClearCustomModelProviders() {
+	x.xxx_hidden_CustomModelProviders = nil
 }
 
 type Request_Settings_builder struct {
@@ -2218,16 +2218,8 @@ type Request_Settings_builder struct {
 	SupportsResearchAgent *bool
 	// If `true`, the client supports orchestration v2 durable messaging.
 	SupportsOrchestrationV2 *bool
-	// Structured per-role model selection. Supersedes `model_config`.
-	//
-	// When set, servers should prefer this over `model_config` for resolving
-	// which model to use for each agent role. Clients in the transition window
-	// should populate both fields (this one for new servers; `model_config`
-	// for older servers that don't yet read `agent_model_config`).
-	//
-	// Each role independently selects either a Warp-hosted model or a
-	// user-provided OpenAI-compatible endpoint via the `ModelSelection` oneof.
-	AgentModelConfig *Request_Settings_AgentModelConfig
+	// A registry of custom model providers configured by the user.
+	CustomModelProviders *Request_Settings_CustomModelProviders
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -2330,7 +2322,7 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 28)
 		x.xxx_hidden_SupportsOrchestrationV2 = *b.SupportsOrchestrationV2
 	}
-	x.xxx_hidden_AgentModelConfig = b.AgentModelConfig
+	x.xxx_hidden_CustomModelProviders = b.CustomModelProviders
 	return m0
 }
 
@@ -7273,6 +7265,9 @@ func (b0 Request_Input_CodeReview_InitialReviewComments_builder) Build() *Reques
 	return m0
 }
 
+// The model IDs provided in the model config can either be a warp-hosted model ID
+// (e.g. "gemini-2.5-pro") or the `config_key` for a model provided in
+// `custom_model_providers`.
 type Request_Settings_ModelConfig struct {
 	state                                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Base                        *string                `protobuf:"bytes,1,opt,name=base"`
@@ -7761,33 +7756,27 @@ func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
 	return m0
 }
 
-type Request_Settings_AgentModelConfig struct {
-	state                             protoimpl.MessageState                            `protogen:"opaque.v1"`
-	xxx_hidden_Base                   *Request_Settings_AgentModelConfig_ModelSelection `protobuf:"bytes,1,opt,name=base"`
-	xxx_hidden_Coding                 *Request_Settings_AgentModelConfig_ModelSelection `protobuf:"bytes,2,opt,name=coding"`
-	xxx_hidden_CliAgent               *Request_Settings_AgentModelConfig_ModelSelection `protobuf:"bytes,3,opt,name=cli_agent,json=cliAgent"`
-	xxx_hidden_ComputerUseAgent       *Request_Settings_AgentModelConfig_ModelSelection `protobuf:"bytes,4,opt,name=computer_use_agent,json=computerUseAgent"`
-	xxx_hidden_BaseContextWindowLimit uint32                                            `protobuf:"varint,5,opt,name=base_context_window_limit,json=baseContextWindowLimit"`
-	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
-	XXX_presence                      [1]uint32
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+type Request_Settings_CustomModelProviders struct {
+	state                protoimpl.MessageState                                        `protogen:"opaque.v1"`
+	xxx_hidden_Providers *[]*Request_Settings_CustomModelProviders_CustomModelProvider `protobuf:"bytes,1,rep,name=providers"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
-func (x *Request_Settings_AgentModelConfig) Reset() {
-	*x = Request_Settings_AgentModelConfig{}
+func (x *Request_Settings_CustomModelProviders) Reset() {
+	*x = Request_Settings_CustomModelProviders{}
 	mi := &file_request_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_AgentModelConfig) String() string {
+func (x *Request_Settings_CustomModelProviders) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_AgentModelConfig) ProtoMessage() {}
+func (*Request_Settings_CustomModelProviders) ProtoMessage() {}
 
-func (x *Request_Settings_AgentModelConfig) ProtoReflect() protoreflect.Message {
+func (x *Request_Settings_CustomModelProviders) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7799,146 +7788,30 @@ func (x *Request_Settings_AgentModelConfig) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_AgentModelConfig) GetBase() *Request_Settings_AgentModelConfig_ModelSelection {
+func (x *Request_Settings_CustomModelProviders) GetProviders() []*Request_Settings_CustomModelProviders_CustomModelProvider {
 	if x != nil {
-		return x.xxx_hidden_Base
+		if x.xxx_hidden_Providers != nil {
+			return *x.xxx_hidden_Providers
+		}
 	}
 	return nil
 }
 
-func (x *Request_Settings_AgentModelConfig) GetCoding() *Request_Settings_AgentModelConfig_ModelSelection {
-	if x != nil {
-		return x.xxx_hidden_Coding
-	}
-	return nil
+func (x *Request_Settings_CustomModelProviders) SetProviders(v []*Request_Settings_CustomModelProviders_CustomModelProvider) {
+	x.xxx_hidden_Providers = &v
 }
 
-func (x *Request_Settings_AgentModelConfig) GetCliAgent() *Request_Settings_AgentModelConfig_ModelSelection {
-	if x != nil {
-		return x.xxx_hidden_CliAgent
-	}
-	return nil
-}
-
-func (x *Request_Settings_AgentModelConfig) GetComputerUseAgent() *Request_Settings_AgentModelConfig_ModelSelection {
-	if x != nil {
-		return x.xxx_hidden_ComputerUseAgent
-	}
-	return nil
-}
-
-func (x *Request_Settings_AgentModelConfig) GetBaseContextWindowLimit() uint32 {
-	if x != nil {
-		return x.xxx_hidden_BaseContextWindowLimit
-	}
-	return 0
-}
-
-func (x *Request_Settings_AgentModelConfig) SetBase(v *Request_Settings_AgentModelConfig_ModelSelection) {
-	x.xxx_hidden_Base = v
-}
-
-func (x *Request_Settings_AgentModelConfig) SetCoding(v *Request_Settings_AgentModelConfig_ModelSelection) {
-	x.xxx_hidden_Coding = v
-}
-
-func (x *Request_Settings_AgentModelConfig) SetCliAgent(v *Request_Settings_AgentModelConfig_ModelSelection) {
-	x.xxx_hidden_CliAgent = v
-}
-
-func (x *Request_Settings_AgentModelConfig) SetComputerUseAgent(v *Request_Settings_AgentModelConfig_ModelSelection) {
-	x.xxx_hidden_ComputerUseAgent = v
-}
-
-func (x *Request_Settings_AgentModelConfig) SetBaseContextWindowLimit(v uint32) {
-	x.xxx_hidden_BaseContextWindowLimit = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
-}
-
-func (x *Request_Settings_AgentModelConfig) HasBase() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Base != nil
-}
-
-func (x *Request_Settings_AgentModelConfig) HasCoding() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Coding != nil
-}
-
-func (x *Request_Settings_AgentModelConfig) HasCliAgent() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_CliAgent != nil
-}
-
-func (x *Request_Settings_AgentModelConfig) HasComputerUseAgent() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_ComputerUseAgent != nil
-}
-
-func (x *Request_Settings_AgentModelConfig) HasBaseContextWindowLimit() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
-}
-
-func (x *Request_Settings_AgentModelConfig) ClearBase() {
-	x.xxx_hidden_Base = nil
-}
-
-func (x *Request_Settings_AgentModelConfig) ClearCoding() {
-	x.xxx_hidden_Coding = nil
-}
-
-func (x *Request_Settings_AgentModelConfig) ClearCliAgent() {
-	x.xxx_hidden_CliAgent = nil
-}
-
-func (x *Request_Settings_AgentModelConfig) ClearComputerUseAgent() {
-	x.xxx_hidden_ComputerUseAgent = nil
-}
-
-func (x *Request_Settings_AgentModelConfig) ClearBaseContextWindowLimit() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
-	x.xxx_hidden_BaseContextWindowLimit = 0
-}
-
-type Request_Settings_AgentModelConfig_builder struct {
+type Request_Settings_CustomModelProviders_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The model selection for general/primary tasks.
-	Base *Request_Settings_AgentModelConfig_ModelSelection
-	// The model selection for coding tasks.
-	Coding *Request_Settings_AgentModelConfig_ModelSelection
-	// The model selection for the CLI agent.
-	CliAgent *Request_Settings_AgentModelConfig_ModelSelection
-	// The model selection for the Computer Use agent.
-	ComputerUseAgent *Request_Settings_AgentModelConfig_ModelSelection
-	// Optional user-selected max input-token context window override for the
-	// base role. Zero or unset means "use the model's default max".
-	BaseContextWindowLimit *uint32
+	Providers []*Request_Settings_CustomModelProviders_CustomModelProvider
 }
 
-func (b0 Request_Settings_AgentModelConfig_builder) Build() *Request_Settings_AgentModelConfig {
-	m0 := &Request_Settings_AgentModelConfig{}
+func (b0 Request_Settings_CustomModelProviders_builder) Build() *Request_Settings_CustomModelProviders {
+	m0 := &Request_Settings_CustomModelProviders{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Base = b.Base
-	x.xxx_hidden_Coding = b.Coding
-	x.xxx_hidden_CliAgent = b.CliAgent
-	x.xxx_hidden_ComputerUseAgent = b.ComputerUseAgent
-	if b.BaseContextWindowLimit != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
-		x.xxx_hidden_BaseContextWindowLimit = *b.BaseContextWindowLimit
-	}
+	x.xxx_hidden_Providers = &b.Providers
 	return m0
 }
 
@@ -8119,205 +7992,32 @@ func (b0 Request_Settings_ApiKeys_AWSCredentials_builder) Build() *Request_Setti
 	return m0
 }
 
-type Request_Settings_AgentModelConfig_ModelSelection struct {
-	state                protoimpl.MessageState                                       `protogen:"opaque.v1"`
-	xxx_hidden_Selection isRequest_Settings_AgentModelConfig_ModelSelection_Selection `protobuf_oneof:"selection"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) Reset() {
-	*x = Request_Settings_AgentModelConfig_ModelSelection{}
-	mi := &file_request_proto_msgTypes[44]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Request_Settings_AgentModelConfig_ModelSelection) ProtoMessage() {}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[44]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) GetHostedModel() string {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Selection.(*request_Settings_AgentModelConfig_ModelSelection_HostedModel); ok {
-			return x.HostedModel
-		}
-	}
-	return ""
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) GetCustom() *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef {
-	if x != nil {
-		if x, ok := x.xxx_hidden_Selection.(*request_Settings_AgentModelConfig_ModelSelection_Custom); ok {
-			return x.Custom
-		}
-	}
-	return nil
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) SetHostedModel(v string) {
-	x.xxx_hidden_Selection = &request_Settings_AgentModelConfig_ModelSelection_HostedModel{v}
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) SetCustom(v *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) {
-	if v == nil {
-		x.xxx_hidden_Selection = nil
-		return
-	}
-	x.xxx_hidden_Selection = &request_Settings_AgentModelConfig_ModelSelection_Custom{v}
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) HasSelection() bool {
-	if x == nil {
-		return false
-	}
-	return x.xxx_hidden_Selection != nil
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) HasHostedModel() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Selection.(*request_Settings_AgentModelConfig_ModelSelection_HostedModel)
-	return ok
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) HasCustom() bool {
-	if x == nil {
-		return false
-	}
-	_, ok := x.xxx_hidden_Selection.(*request_Settings_AgentModelConfig_ModelSelection_Custom)
-	return ok
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) ClearSelection() {
-	x.xxx_hidden_Selection = nil
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) ClearHostedModel() {
-	if _, ok := x.xxx_hidden_Selection.(*request_Settings_AgentModelConfig_ModelSelection_HostedModel); ok {
-		x.xxx_hidden_Selection = nil
-	}
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) ClearCustom() {
-	if _, ok := x.xxx_hidden_Selection.(*request_Settings_AgentModelConfig_ModelSelection_Custom); ok {
-		x.xxx_hidden_Selection = nil
-	}
-}
-
-const Request_Settings_AgentModelConfig_ModelSelection_Selection_not_set_case case_Request_Settings_AgentModelConfig_ModelSelection_Selection = 0
-const Request_Settings_AgentModelConfig_ModelSelection_HostedModel_case case_Request_Settings_AgentModelConfig_ModelSelection_Selection = 1
-const Request_Settings_AgentModelConfig_ModelSelection_Custom_case case_Request_Settings_AgentModelConfig_ModelSelection_Selection = 2
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection) WhichSelection() case_Request_Settings_AgentModelConfig_ModelSelection_Selection {
-	if x == nil {
-		return Request_Settings_AgentModelConfig_ModelSelection_Selection_not_set_case
-	}
-	switch x.xxx_hidden_Selection.(type) {
-	case *request_Settings_AgentModelConfig_ModelSelection_HostedModel:
-		return Request_Settings_AgentModelConfig_ModelSelection_HostedModel_case
-	case *request_Settings_AgentModelConfig_ModelSelection_Custom:
-		return Request_Settings_AgentModelConfig_ModelSelection_Custom_case
-	default:
-		return Request_Settings_AgentModelConfig_ModelSelection_Selection_not_set_case
-	}
-}
-
-type Request_Settings_AgentModelConfig_ModelSelection_builder struct {
-	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
-
-	// Fields of oneof xxx_hidden_Selection:
-	// A Warp-hosted model id (e.g. "claude-4-6-opus-high", "auto").
-	HostedModel *string
-	// A user-provided OpenAI-compatible endpoint plus the model to use.
-	Custom *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef
-	// -- end of xxx_hidden_Selection
-}
-
-func (b0 Request_Settings_AgentModelConfig_ModelSelection_builder) Build() *Request_Settings_AgentModelConfig_ModelSelection {
-	m0 := &Request_Settings_AgentModelConfig_ModelSelection{}
-	b, x := &b0, m0
-	_, _ = b, x
-	if b.HostedModel != nil {
-		x.xxx_hidden_Selection = &request_Settings_AgentModelConfig_ModelSelection_HostedModel{*b.HostedModel}
-	}
-	if b.Custom != nil {
-		x.xxx_hidden_Selection = &request_Settings_AgentModelConfig_ModelSelection_Custom{b.Custom}
-	}
-	return m0
-}
-
-type case_Request_Settings_AgentModelConfig_ModelSelection_Selection protoreflect.FieldNumber
-
-func (x case_Request_Settings_AgentModelConfig_ModelSelection_Selection) String() string {
-	md := file_request_proto_msgTypes[44].Descriptor()
-	if x == 0 {
-		return "not set"
-	}
-	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
-}
-
-type isRequest_Settings_AgentModelConfig_ModelSelection_Selection interface {
-	isRequest_Settings_AgentModelConfig_ModelSelection_Selection()
-}
-
-type request_Settings_AgentModelConfig_ModelSelection_HostedModel struct {
-	// A Warp-hosted model id (e.g. "claude-4-6-opus-high", "auto").
-	HostedModel string `protobuf:"bytes,1,opt,name=hosted_model,json=hostedModel,oneof"`
-}
-
-type request_Settings_AgentModelConfig_ModelSelection_Custom struct {
-	// A user-provided OpenAI-compatible endpoint plus the model to use.
-	Custom *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef `protobuf:"bytes,2,opt,name=custom,oneof"`
-}
-
-func (*request_Settings_AgentModelConfig_ModelSelection_HostedModel) isRequest_Settings_AgentModelConfig_ModelSelection_Selection() {
-}
-
-func (*request_Settings_AgentModelConfig_ModelSelection_Custom) isRequest_Settings_AgentModelConfig_ModelSelection_Selection() {
-}
-
-type Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_BaseUrl     *string                `protobuf:"bytes,1,opt,name=base_url,json=baseUrl"`
-	xxx_hidden_ApiKey      *string                `protobuf:"bytes,2,opt,name=api_key,json=apiKey"`
-	xxx_hidden_ModelName   *string                `protobuf:"bytes,3,opt,name=model_name,json=modelName"`
+type Request_Settings_CustomModelProviders_CustomModelProvider struct {
+	state                  protoimpl.MessageState                                `protogen:"opaque.v1"`
+	xxx_hidden_BaseUrl     *string                                               `protobuf:"bytes,1,opt,name=base_url,json=baseUrl"`
+	xxx_hidden_ApiKey      *string                                               `protobuf:"bytes,2,opt,name=api_key,json=apiKey"`
+	xxx_hidden_Models      *[]*Request_Settings_CustomModelProviders_CustomModel `protobuf:"bytes,3,rep,name=models"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) Reset() {
-	*x = Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef{}
-	mi := &file_request_proto_msgTypes[45]
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) Reset() {
+	*x = Request_Settings_CustomModelProviders_CustomModelProvider{}
+	mi := &file_request_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) String() string {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) ProtoMessage() {}
+func (*Request_Settings_CustomModelProviders_CustomModelProvider) ProtoMessage() {}
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) ProtoReflect() protoreflect.Message {
-	mi := &file_request_proto_msgTypes[45]
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8328,7 +8028,7 @@ func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) ProtoR
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) GetBaseUrl() string {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) GetBaseUrl() string {
 	if x != nil {
 		if x.xxx_hidden_BaseUrl != nil {
 			return *x.xxx_hidden_BaseUrl
@@ -8338,7 +8038,7 @@ func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) GetBas
 	return ""
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) GetApiKey() string {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) GetApiKey() string {
 	if x != nil {
 		if x.xxx_hidden_ApiKey != nil {
 			return *x.xxx_hidden_ApiKey
@@ -8348,80 +8048,66 @@ func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) GetApi
 	return ""
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) GetModelName() string {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) GetModels() []*Request_Settings_CustomModelProviders_CustomModel {
 	if x != nil {
-		if x.xxx_hidden_ModelName != nil {
-			return *x.xxx_hidden_ModelName
+		if x.xxx_hidden_Models != nil {
+			return *x.xxx_hidden_Models
 		}
-		return ""
 	}
-	return ""
+	return nil
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) SetBaseUrl(v string) {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) SetBaseUrl(v string) {
 	x.xxx_hidden_BaseUrl = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) SetApiKey(v string) {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) SetApiKey(v string) {
 	x.xxx_hidden_ApiKey = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) SetModelName(v string) {
-	x.xxx_hidden_ModelName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) SetModels(v []*Request_Settings_CustomModelProviders_CustomModel) {
+	x.xxx_hidden_Models = &v
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) HasBaseUrl() bool {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) HasBaseUrl() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) HasApiKey() bool {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) HasApiKey() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) HasModelName() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
-}
-
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) ClearBaseUrl() {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) ClearBaseUrl() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_BaseUrl = nil
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) ClearApiKey() {
+func (x *Request_Settings_CustomModelProviders_CustomModelProvider) ClearApiKey() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_ApiKey = nil
 }
 
-func (x *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef) ClearModelName() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_ModelName = nil
-}
-
-type Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef_builder struct {
+type Request_Settings_CustomModelProviders_CustomModelProvider_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The base URL of the OpenAI-compatible endpoint.
+	// The base URL for the custom model provider.
 	BaseUrl *string
-	// The API key sent as `Authorization: Bearer <api_key>` to the endpoint.
+	// The API key used to authenticate with the provider.
 	ApiKey *string
-	// The model name sent verbatim to the endpoint API.
-	ModelName *string
+	// The list of custom models made available on the provider.
+	Models []*Request_Settings_CustomModelProviders_CustomModel
 }
 
-func (b0 Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef_builder) Build() *Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef {
-	m0 := &Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef{}
+func (b0 Request_Settings_CustomModelProviders_CustomModelProvider_builder) Build() *Request_Settings_CustomModelProviders_CustomModelProvider {
+	m0 := &Request_Settings_CustomModelProviders_CustomModelProvider{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.BaseUrl != nil {
@@ -8432,9 +8118,120 @@ func (b0 Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef_builder
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_ApiKey = b.ApiKey
 	}
-	if b.ModelName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_ModelName = b.ModelName
+	x.xxx_hidden_Models = &b.Models
+	return m0
+}
+
+type Request_Settings_CustomModelProviders_CustomModel struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Slug        *string                `protobuf:"bytes,1,opt,name=slug"`
+	xxx_hidden_ConfigKey   *string                `protobuf:"bytes,2,opt,name=config_key,json=configKey"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) Reset() {
+	*x = Request_Settings_CustomModelProviders_CustomModel{}
+	mi := &file_request_proto_msgTypes[45]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Request_Settings_CustomModelProviders_CustomModel) ProtoMessage() {}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) ProtoReflect() protoreflect.Message {
+	mi := &file_request_proto_msgTypes[45]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) GetSlug() string {
+	if x != nil {
+		if x.xxx_hidden_Slug != nil {
+			return *x.xxx_hidden_Slug
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) GetConfigKey() string {
+	if x != nil {
+		if x.xxx_hidden_ConfigKey != nil {
+			return *x.xxx_hidden_ConfigKey
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) SetSlug(v string) {
+	x.xxx_hidden_Slug = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) SetConfigKey(v string) {
+	x.xxx_hidden_ConfigKey = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) HasSlug() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) HasConfigKey() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) ClearSlug() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Slug = nil
+}
+
+func (x *Request_Settings_CustomModelProviders_CustomModel) ClearConfigKey() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ConfigKey = nil
+}
+
+type Request_Settings_CustomModelProviders_CustomModel_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The slug of the model (e.g. "gemini-2.5-pro").
+	Slug *string
+	// The key to use in the ModelConfig message (e.g. "base"). The client
+	// must guarantee this is unique across all custom models.
+	ConfigKey *string
+}
+
+func (b0 Request_Settings_CustomModelProviders_CustomModel_builder) Build() *Request_Settings_CustomModelProviders_CustomModel {
+	m0 := &Request_Settings_CustomModelProviders_CustomModel{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Slug != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Slug = b.Slug
+	}
+	if b.ConfigKey != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_ConfigKey = b.ConfigKey
 	}
 	return m0
 }
@@ -8940,7 +8737,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xbcq\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xban\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -9124,7 +8921,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x99\x1a\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x97\x17\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -9153,8 +8950,8 @@ const file_request_proto_rawDesc = "" +
 	".supports_summarization_via_message_replacement\x18\x18 \x01(\bR*supportsSummarizationViaMessageReplacement\x126\n" +
 	"\x17supports_bundled_skills\x18\x19 \x01(\bR\x15supportsBundledSkills\x126\n" +
 	"\x17supports_research_agent\x18\x1a \x01(\bR\x15supportsResearchAgent\x12:\n" +
-	"\x19supports_orchestration_v2\x18\x1b \x01(\bR\x17supportsOrchestrationV2\x12d\n" +
-	"\x12agent_model_config\x18\x1c \x01(\v26.warp.multi_agent.v1.Request.Settings.AgentModelConfigR\x10agentModelConfig\x1a\xea\x01\n" +
+	"\x19supports_orchestration_v2\x18\x1b \x01(\bR\x17supportsOrchestrationV2\x12p\n" +
+	"\x16custom_model_providers\x18\x1c \x01(\v2:.warp.multi_agent.v1.Request.Settings.CustomModelProvidersR\x14customModelProviders\x1a\xea\x01\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
@@ -9176,22 +8973,17 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"secret_key\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\tsecretKey\x12)\n" +
 	"\rsession_token\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\fsessionToken\x12\x16\n" +
-	"\x06region\x18\x04 \x01(\tR\x06region\x1a\x86\x06\n" +
-	"\x10AgentModelConfig\x12Y\n" +
-	"\x04base\x18\x01 \x01(\v2E.warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelectionR\x04base\x12]\n" +
-	"\x06coding\x18\x02 \x01(\v2E.warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelectionR\x06coding\x12b\n" +
-	"\tcli_agent\x18\x03 \x01(\v2E.warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelectionR\bcliAgent\x12s\n" +
-	"\x12computer_use_agent\x18\x04 \x01(\v2E.warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelectionR\x10computerUseAgent\x129\n" +
-	"\x19base_context_window_limit\x18\x05 \x01(\rR\x16baseContextWindowLimit\x1a\xa3\x02\n" +
-	"\x0eModelSelection\x12#\n" +
-	"\fhosted_model\x18\x01 \x01(\tH\x00R\vhostedModel\x12n\n" +
-	"\x06custom\x18\x02 \x01(\v2T.warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection.CustomModelRefH\x00R\x06custom\x1ao\n" +
-	"\x0eCustomModelRef\x12\x1f\n" +
-	"\bbase_url\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\abaseUrl\x12\x1d\n" +
-	"\aapi_key\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06apiKey\x12\x1d\n" +
+	"\x06region\x18\x04 \x01(\tR\x06region\x1a\xf8\x02\n" +
+	"\x14CustomModelProviders\x12l\n" +
+	"\tproviders\x18\x01 \x03(\v2N.warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProviderR\tproviders\x1a\xaf\x01\n" +
+	"\x13CustomModelProvider\x12\x19\n" +
+	"\bbase_url\x18\x01 \x01(\tR\abaseUrl\x12\x1d\n" +
+	"\aapi_key\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06apiKey\x12^\n" +
+	"\x06models\x18\x03 \x03(\v2F.warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelR\x06models\x1a@\n" +
+	"\vCustomModel\x12\x12\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x1d\n" +
 	"\n" +
-	"model_name\x18\x03 \x01(\tR\tmodelNameB\v\n" +
-	"\tselection\x1a\x86\x06\n" +
+	"config_key\x18\x02 \x01(\tR\tconfigKey\x1a\x86\x06\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
@@ -9267,64 +9059,64 @@ var file_request_proto_goTypes = []any{
 	nil,                                  // 41: warp.multi_agent.v1.Request.Metadata.LoggingEntry
 	(*Request_Settings_ModelConfig)(nil), // 42: warp.multi_agent.v1.Request.Settings.ModelConfig
 	(*Request_Settings_ApiKeys)(nil),     // 43: warp.multi_agent.v1.Request.Settings.ApiKeys
-	(*Request_Settings_AgentModelConfig)(nil),                               // 44: warp.multi_agent.v1.Request.Settings.AgentModelConfig
-	(*Request_Settings_ApiKeys_AWSCredentials)(nil),                         // 45: warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	(*Request_Settings_AgentModelConfig_ModelSelection)(nil),                // 46: warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection
-	(*Request_Settings_AgentModelConfig_ModelSelection_CustomModelRef)(nil), // 47: warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection.CustomModelRef
-	(*Request_MCPContext_MCPResource)(nil),                                  // 48: warp.multi_agent.v1.Request.MCPContext.MCPResource
-	(*Request_MCPContext_MCPTool)(nil),                                      // 49: warp.multi_agent.v1.Request.MCPContext.MCPTool
-	(*Request_MCPContext_MCPServer)(nil),                                    // 50: warp.multi_agent.v1.Request.MCPContext.MCPServer
-	(*Suggestions)(nil),                                                     // 51: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                                            // 52: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                                                    // 53: warp.multi_agent.v1.InputContext
-	(ToolType)(0),                                                           // 54: warp.multi_agent.v1.ToolType
-	(*UserQueryMode)(nil),                                                   // 55: warp.multi_agent.v1.UserQueryMode
-	(AgentType)(0),                                                          // 56: warp.multi_agent.v1.AgentType
-	(*RunningShellCommand)(nil),                                             // 57: warp.multi_agent.v1.RunningShellCommand
-	(*RunShellCommandResult)(nil),                                           // 58: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                                 // 59: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                                            // 60: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                                            // 61: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                                               // 62: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),                                         // 63: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                                                      // 64: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                                                  // 65: warp.multi_agent.v1.FileGlobResult
-	(*ReadMCPResourceResult)(nil),                                           // 66: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),                                               // 67: warp.multi_agent.v1.CallMCPToolResult
-	(*WriteToLongRunningShellCommandResult)(nil),                            // 68: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),                                    // 69: warp.multi_agent.v1.SuggestNewConversationResult
-	(*FileGlobV2Result)(nil),                                                // 70: warp.multi_agent.v1.FileGlobV2Result
-	(*SuggestPromptResult)(nil),                                             // 71: warp.multi_agent.v1.SuggestPromptResult
-	(*OpenCodeReviewResult)(nil),                                            // 72: warp.multi_agent.v1.OpenCodeReviewResult
-	(*InitProjectResult)(nil),                                               // 73: warp.multi_agent.v1.InitProjectResult
-	(*ReadDocumentsResult)(nil),                                             // 74: warp.multi_agent.v1.ReadDocumentsResult
-	(*EditDocumentsResult)(nil),                                             // 75: warp.multi_agent.v1.EditDocumentsResult
-	(*CreateDocumentsResult)(nil),                                           // 76: warp.multi_agent.v1.CreateDocumentsResult
-	(*ReadShellCommandOutputResult)(nil),                                    // 77: warp.multi_agent.v1.ReadShellCommandOutputResult
-	(*UseComputerResult)(nil),                                               // 78: warp.multi_agent.v1.UseComputerResult
-	(*InsertReviewCommentsResult)(nil),                                      // 79: warp.multi_agent.v1.InsertReviewCommentsResult
-	(*RequestComputerUseResult)(nil),                                        // 80: warp.multi_agent.v1.RequestComputerUseResult
-	(*ReadSkillResult)(nil),                                                 // 81: warp.multi_agent.v1.ReadSkillResult
-	(*FetchConversationResult)(nil),                                         // 82: warp.multi_agent.v1.FetchConversationResult
-	(*StartAgentResult)(nil),                                                // 83: warp.multi_agent.v1.StartAgentResult
-	(*SendMessageToAgentResult)(nil),                                        // 84: warp.multi_agent.v1.SendMessageToAgentResult
-	(*TransferShellCommandControlToUserResult)(nil),                         // 85: warp.multi_agent.v1.TransferShellCommandControlToUserResult
-	(*AskUserQuestionResult)(nil),                                           // 86: warp.multi_agent.v1.AskUserQuestionResult
-	(*StartAgentV2Result)(nil),                                              // 87: warp.multi_agent.v1.StartAgentV2Result
-	(*UploadFileArtifactResult)(nil),                                        // 88: warp.multi_agent.v1.UploadFileArtifactResult
-	(*RunAgentsResult)(nil),                                                 // 89: warp.multi_agent.v1.RunAgentsResult
-	(*Attachment)(nil),                                                      // 90: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                                                   // 91: google.protobuf.Empty
-	(*Skill)(nil),                                                           // 92: warp.multi_agent.v1.Skill
-	(*OrchestrationConfigUpdate)(nil),                                       // 93: warp.multi_agent.v1.OrchestrationConfigUpdate
-	(*AgentEvent)(nil),                                                      // 94: warp.multi_agent.v1.AgentEvent
-	(*PassiveSuggestionResultType)(nil),                                     // 95: warp.multi_agent.v1.PassiveSuggestionResultType
-	(*ExecutedShellCommand)(nil),                                            // 96: warp.multi_agent.v1.ExecutedShellCommand
-	(*AnyFileContent)(nil),                                                  // 97: warp.multi_agent.v1.AnyFileContent
-	(*ReviewComment)(nil),                                                   // 98: warp.multi_agent.v1.ReviewComment
-	(*DiffSet)(nil),                                                         // 99: warp.multi_agent.v1.DiffSet
-	(*structpb.Value)(nil),                                                  // 100: google.protobuf.Value
-	(*structpb.Struct)(nil),                                                 // 101: google.protobuf.Struct
+	(*Request_Settings_CustomModelProviders)(nil),                     // 44: warp.multi_agent.v1.Request.Settings.CustomModelProviders
+	(*Request_Settings_ApiKeys_AWSCredentials)(nil),                   // 45: warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
+	(*Request_Settings_CustomModelProviders_CustomModelProvider)(nil), // 46: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider
+	(*Request_Settings_CustomModelProviders_CustomModel)(nil),         // 47: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModel
+	(*Request_MCPContext_MCPResource)(nil),                            // 48: warp.multi_agent.v1.Request.MCPContext.MCPResource
+	(*Request_MCPContext_MCPTool)(nil),                                // 49: warp.multi_agent.v1.Request.MCPContext.MCPTool
+	(*Request_MCPContext_MCPServer)(nil),                              // 50: warp.multi_agent.v1.Request.MCPContext.MCPServer
+	(*Suggestions)(nil),                                               // 51: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                                      // 52: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                                              // 53: warp.multi_agent.v1.InputContext
+	(ToolType)(0),                                                     // 54: warp.multi_agent.v1.ToolType
+	(*UserQueryMode)(nil),                                             // 55: warp.multi_agent.v1.UserQueryMode
+	(AgentType)(0),                                                    // 56: warp.multi_agent.v1.AgentType
+	(*RunningShellCommand)(nil),                                       // 57: warp.multi_agent.v1.RunningShellCommand
+	(*RunShellCommandResult)(nil),                                     // 58: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                           // 59: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                                      // 60: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                                      // 61: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                                         // 62: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),                                   // 63: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                                                // 64: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                                            // 65: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),                                     // 66: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),                                         // 67: warp.multi_agent.v1.CallMCPToolResult
+	(*WriteToLongRunningShellCommandResult)(nil),                      // 68: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),                              // 69: warp.multi_agent.v1.SuggestNewConversationResult
+	(*FileGlobV2Result)(nil),                                          // 70: warp.multi_agent.v1.FileGlobV2Result
+	(*SuggestPromptResult)(nil),                                       // 71: warp.multi_agent.v1.SuggestPromptResult
+	(*OpenCodeReviewResult)(nil),                                      // 72: warp.multi_agent.v1.OpenCodeReviewResult
+	(*InitProjectResult)(nil),                                         // 73: warp.multi_agent.v1.InitProjectResult
+	(*ReadDocumentsResult)(nil),                                       // 74: warp.multi_agent.v1.ReadDocumentsResult
+	(*EditDocumentsResult)(nil),                                       // 75: warp.multi_agent.v1.EditDocumentsResult
+	(*CreateDocumentsResult)(nil),                                     // 76: warp.multi_agent.v1.CreateDocumentsResult
+	(*ReadShellCommandOutputResult)(nil),                              // 77: warp.multi_agent.v1.ReadShellCommandOutputResult
+	(*UseComputerResult)(nil),                                         // 78: warp.multi_agent.v1.UseComputerResult
+	(*InsertReviewCommentsResult)(nil),                                // 79: warp.multi_agent.v1.InsertReviewCommentsResult
+	(*RequestComputerUseResult)(nil),                                  // 80: warp.multi_agent.v1.RequestComputerUseResult
+	(*ReadSkillResult)(nil),                                           // 81: warp.multi_agent.v1.ReadSkillResult
+	(*FetchConversationResult)(nil),                                   // 82: warp.multi_agent.v1.FetchConversationResult
+	(*StartAgentResult)(nil),                                          // 83: warp.multi_agent.v1.StartAgentResult
+	(*SendMessageToAgentResult)(nil),                                  // 84: warp.multi_agent.v1.SendMessageToAgentResult
+	(*TransferShellCommandControlToUserResult)(nil),                   // 85: warp.multi_agent.v1.TransferShellCommandControlToUserResult
+	(*AskUserQuestionResult)(nil),                                     // 86: warp.multi_agent.v1.AskUserQuestionResult
+	(*StartAgentV2Result)(nil),                                        // 87: warp.multi_agent.v1.StartAgentV2Result
+	(*UploadFileArtifactResult)(nil),                                  // 88: warp.multi_agent.v1.UploadFileArtifactResult
+	(*RunAgentsResult)(nil),                                           // 89: warp.multi_agent.v1.RunAgentsResult
+	(*Attachment)(nil),                                                // 90: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                                             // 91: google.protobuf.Empty
+	(*Skill)(nil),                                                     // 92: warp.multi_agent.v1.Skill
+	(*OrchestrationConfigUpdate)(nil),                                 // 93: warp.multi_agent.v1.OrchestrationConfigUpdate
+	(*AgentEvent)(nil),                                                // 94: warp.multi_agent.v1.AgentEvent
+	(*PassiveSuggestionResultType)(nil),                               // 95: warp.multi_agent.v1.PassiveSuggestionResultType
+	(*ExecutedShellCommand)(nil),                                      // 96: warp.multi_agent.v1.ExecutedShellCommand
+	(*AnyFileContent)(nil),                                            // 97: warp.multi_agent.v1.AnyFileContent
+	(*ReviewComment)(nil),                                             // 98: warp.multi_agent.v1.ReviewComment
+	(*DiffSet)(nil),                                                   // 99: warp.multi_agent.v1.DiffSet
+	(*structpb.Value)(nil),                                            // 100: google.protobuf.Value
+	(*structpb.Struct)(nil),                                           // 101: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	3,   // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -9358,7 +9150,7 @@ var file_request_proto_depIdxs = []int32{
 	0,   // 28: warp.multi_agent.v1.Request.Settings.autonomy_level:type_name -> warp.multi_agent.v1.AutonomyLevel
 	1,   // 29: warp.multi_agent.v1.Request.Settings.isolation_level:type_name -> warp.multi_agent.v1.IsolationLevel
 	54,  // 30: warp.multi_agent.v1.Request.Settings.supported_cli_agent_tools:type_name -> warp.multi_agent.v1.ToolType
-	44,  // 31: warp.multi_agent.v1.Request.Settings.agent_model_config:type_name -> warp.multi_agent.v1.Request.Settings.AgentModelConfig
+	44,  // 31: warp.multi_agent.v1.Request.Settings.custom_model_providers:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelProviders
 	48,  // 32: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
 	49,  // 33: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	50,  // 34: warp.multi_agent.v1.Request.MCPContext.servers:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPServer
@@ -9432,19 +9224,16 @@ var file_request_proto_depIdxs = []int32{
 	99,  // 102: warp.multi_agent.v1.Request.Input.CodeReview.InitialReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
 	100, // 103: warp.multi_agent.v1.Request.Metadata.LoggingEntry.value:type_name -> google.protobuf.Value
 	45,  // 104: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	46,  // 105: warp.multi_agent.v1.Request.Settings.AgentModelConfig.base:type_name -> warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection
-	46,  // 106: warp.multi_agent.v1.Request.Settings.AgentModelConfig.coding:type_name -> warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection
-	46,  // 107: warp.multi_agent.v1.Request.Settings.AgentModelConfig.cli_agent:type_name -> warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection
-	46,  // 108: warp.multi_agent.v1.Request.Settings.AgentModelConfig.computer_use_agent:type_name -> warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection
-	47,  // 109: warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection.custom:type_name -> warp.multi_agent.v1.Request.Settings.AgentModelConfig.ModelSelection.CustomModelRef
-	101, // 110: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
-	48,  // 111: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
-	49,  // 112: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
-	113, // [113:113] is the sub-list for method output_type
-	113, // [113:113] is the sub-list for method input_type
-	113, // [113:113] is the sub-list for extension type_name
-	113, // [113:113] is the sub-list for extension extendee
-	0,   // [0:113] is the sub-list for field type_name
+	46,  // 105: warp.multi_agent.v1.Request.Settings.CustomModelProviders.providers:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider
+	47,  // 106: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider.models:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModel
+	101, // 107: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
+	48,  // 108: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
+	49,  // 109: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
+	110, // [110:110] is the sub-list for method output_type
+	110, // [110:110] is the sub-list for method input_type
+	110, // [110:110] is the sub-list for extension type_name
+	110, // [110:110] is the sub-list for extension extendee
+	0,   // [0:110] is the sub-list for field type_name
 }
 
 func init() { file_request_proto_init() }
@@ -9537,10 +9326,6 @@ func file_request_proto_init() {
 		(*request_Input_UserInputs_UserInput_EventsFromAgents)(nil),
 		(*request_Input_UserInputs_UserInput_PassiveSuggestionResult)(nil),
 		(*request_Input_UserInputs_UserInput_OrchestrationConfigUpdate)(nil),
-	}
-	file_request_proto_msgTypes[44].OneofWrappers = []any{
-		(*request_Settings_AgentModelConfig_ModelSelection_HostedModel)(nil),
-		(*request_Settings_AgentModelConfig_ModelSelection_Custom)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
