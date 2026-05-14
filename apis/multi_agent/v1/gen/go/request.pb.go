@@ -1473,6 +1473,7 @@ type Request_Settings struct {
 	xxx_hidden_SupportsResearchAgent                      bool                                   `protobuf:"varint,26,opt,name=supports_research_agent,json=supportsResearchAgent"`
 	xxx_hidden_SupportsOrchestrationV2                    bool                                   `protobuf:"varint,27,opt,name=supports_orchestration_v2,json=supportsOrchestrationV2"`
 	xxx_hidden_CustomModelProviders                       *Request_Settings_CustomModelProviders `protobuf:"bytes,28,opt,name=custom_model_providers,json=customModelProviders"`
+	xxx_hidden_SupportsLocalNonOzHarnessOrchestration     bool                                   `protobuf:"varint,29,opt,name=supports_local_non_oz_harness_orchestration,json=supportsLocalNonOzHarnessOrchestration"`
 	XXX_raceDetectHookData                                protoimpl.RaceDetectHookData
 	XXX_presence                                          [1]uint32
 	unknownFields                                         protoimpl.UnknownFields
@@ -1704,43 +1705,50 @@ func (x *Request_Settings) GetCustomModelProviders() *Request_Settings_CustomMod
 	return nil
 }
 
+func (x *Request_Settings) GetSupportsLocalNonOzHarnessOrchestration() bool {
+	if x != nil {
+		return x.xxx_hidden_SupportsLocalNonOzHarnessOrchestration
+	}
+	return false
+}
+
 func (x *Request_Settings) SetModelConfig(v *Request_Settings_ModelConfig) {
 	x.xxx_hidden_ModelConfig = v
 }
 
 func (x *Request_Settings) SetRulesEnabled(v bool) {
 	x.xxx_hidden_RulesEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 29)
 }
 
 func (x *Request_Settings) SetWebContextRetrievalEnabled(v bool) {
 	x.xxx_hidden_WebContextRetrievalEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 29)
 }
 
 func (x *Request_Settings) SetSupportsParallelToolCalls(v bool) {
 	x.xxx_hidden_SupportsParallelToolCalls = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 29)
 }
 
 func (x *Request_Settings) SetUseAnthropicTextEditorTools(v bool) {
 	x.xxx_hidden_UseAnthropicTextEditorTools = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 29)
 }
 
 func (x *Request_Settings) SetPlanningEnabled(v bool) {
 	x.xxx_hidden_PlanningEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 29)
 }
 
 func (x *Request_Settings) SetWarpDriveContextEnabled(v bool) {
 	x.xxx_hidden_WarpDriveContextEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 29)
 }
 
 func (x *Request_Settings) SetSupportsCreateFiles(v bool) {
 	x.xxx_hidden_SupportsCreateFiles = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 29)
 }
 
 func (x *Request_Settings) SetSupportedTools(v []ToolType) {
@@ -1749,42 +1757,42 @@ func (x *Request_Settings) SetSupportedTools(v []ToolType) {
 
 func (x *Request_Settings) SetSupportsLongRunningCommands(v bool) {
 	x.xxx_hidden_SupportsLongRunningCommands = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 29)
 }
 
 func (x *Request_Settings) SetShouldPreserveFileContentInHistory(v bool) {
 	x.xxx_hidden_ShouldPreserveFileContentInHistory = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 29)
 }
 
 func (x *Request_Settings) SetSupportsTodosUi(v bool) {
 	x.xxx_hidden_SupportsTodosUi = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 29)
 }
 
 func (x *Request_Settings) SetSupportsLinkedCodeBlocks(v bool) {
 	x.xxx_hidden_SupportsLinkedCodeBlocks = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 29)
 }
 
 func (x *Request_Settings) SetSupportsStartedChildTaskMessage(v bool) {
 	x.xxx_hidden_SupportsStartedChildTaskMessage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 29)
 }
 
 func (x *Request_Settings) SetSupportsSuggestPrompt(v bool) {
 	x.xxx_hidden_SupportsSuggestPrompt = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 29)
 }
 
 func (x *Request_Settings) SetSupportsReadImageFiles(v bool) {
 	x.xxx_hidden_SupportsReadImageFiles = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 29)
 }
 
 func (x *Request_Settings) SetSupportsReasoningMessage(v bool) {
 	x.xxx_hidden_SupportsReasoningMessage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 29)
 }
 
 func (x *Request_Settings) SetApiKeys(v *Request_Settings_ApiKeys) {
@@ -1793,17 +1801,17 @@ func (x *Request_Settings) SetApiKeys(v *Request_Settings_ApiKeys) {
 
 func (x *Request_Settings) SetAutonomyLevel(v AutonomyLevel) {
 	x.xxx_hidden_AutonomyLevel = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 29)
 }
 
 func (x *Request_Settings) SetIsolationLevel(v IsolationLevel) {
 	x.xxx_hidden_IsolationLevel = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 29)
 }
 
 func (x *Request_Settings) SetWebSearchEnabled(v bool) {
 	x.xxx_hidden_WebSearchEnabled = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 29)
 }
 
 func (x *Request_Settings) SetSupportedCliAgentTools(v []ToolType) {
@@ -1812,31 +1820,36 @@ func (x *Request_Settings) SetSupportedCliAgentTools(v []ToolType) {
 
 func (x *Request_Settings) SetSupportsV4AFileDiffs(v bool) {
 	x.xxx_hidden_SupportsV4AFileDiffs = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 22, 29)
 }
 
 func (x *Request_Settings) SetSupportsSummarizationViaMessageReplacement(v bool) {
 	x.xxx_hidden_SupportsSummarizationViaMessageReplacement = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 23, 29)
 }
 
 func (x *Request_Settings) SetSupportsBundledSkills(v bool) {
 	x.xxx_hidden_SupportsBundledSkills = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 24, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 24, 29)
 }
 
 func (x *Request_Settings) SetSupportsResearchAgent(v bool) {
 	x.xxx_hidden_SupportsResearchAgent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 25, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 25, 29)
 }
 
 func (x *Request_Settings) SetSupportsOrchestrationV2(v bool) {
 	x.xxx_hidden_SupportsOrchestrationV2 = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 28)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 26, 29)
 }
 
 func (x *Request_Settings) SetCustomModelProviders(v *Request_Settings_CustomModelProviders) {
 	x.xxx_hidden_CustomModelProviders = v
+}
+
+func (x *Request_Settings) SetSupportsLocalNonOzHarnessOrchestration(v bool) {
+	x.xxx_hidden_SupportsLocalNonOzHarnessOrchestration = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 28, 29)
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -2021,6 +2034,13 @@ func (x *Request_Settings) HasCustomModelProviders() bool {
 	return x.xxx_hidden_CustomModelProviders != nil
 }
 
+func (x *Request_Settings) HasSupportsLocalNonOzHarnessOrchestration() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 28)
+}
+
 func (x *Request_Settings) ClearModelConfig() {
 	x.xxx_hidden_ModelConfig = nil
 }
@@ -2148,6 +2168,11 @@ func (x *Request_Settings) ClearCustomModelProviders() {
 	x.xxx_hidden_CustomModelProviders = nil
 }
 
+func (x *Request_Settings) ClearSupportsLocalNonOzHarnessOrchestration() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 28)
+	x.xxx_hidden_SupportsLocalNonOzHarnessOrchestration = false
+}
+
 type Request_Settings_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2220,6 +2245,12 @@ type Request_Settings_builder struct {
 	SupportsOrchestrationV2 *bool
 	// A registry of custom model providers configured by the user.
 	CustomModelProviders *Request_Settings_CustomModelProviders
+	// If `true`, the client supports selecting non-Oz harnesses for local
+	// orchestration. When `false` (default for clients that do not send the
+	// field), the server hides local harness overrides from prompt guidance
+	// and rejects new local orchestration configs or run_agents calls that
+	// specify a non-Oz harness.
+	SupportsLocalNonOzHarnessOrchestration *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -2228,101 +2259,105 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 	_, _ = b, x
 	x.xxx_hidden_ModelConfig = b.ModelConfig
 	if b.RulesEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 29)
 		x.xxx_hidden_RulesEnabled = *b.RulesEnabled
 	}
 	if b.WebContextRetrievalEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 29)
 		x.xxx_hidden_WebContextRetrievalEnabled = *b.WebContextRetrievalEnabled
 	}
 	if b.SupportsParallelToolCalls != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 29)
 		x.xxx_hidden_SupportsParallelToolCalls = *b.SupportsParallelToolCalls
 	}
 	if b.UseAnthropicTextEditorTools != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 29)
 		x.xxx_hidden_UseAnthropicTextEditorTools = *b.UseAnthropicTextEditorTools
 	}
 	if b.PlanningEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 29)
 		x.xxx_hidden_PlanningEnabled = *b.PlanningEnabled
 	}
 	if b.WarpDriveContextEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 29)
 		x.xxx_hidden_WarpDriveContextEnabled = *b.WarpDriveContextEnabled
 	}
 	if b.SupportsCreateFiles != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 29)
 		x.xxx_hidden_SupportsCreateFiles = *b.SupportsCreateFiles
 	}
 	x.xxx_hidden_SupportedTools = b.SupportedTools
 	if b.SupportsLongRunningCommands != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 29)
 		x.xxx_hidden_SupportsLongRunningCommands = *b.SupportsLongRunningCommands
 	}
 	if b.ShouldPreserveFileContentInHistory != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 29)
 		x.xxx_hidden_ShouldPreserveFileContentInHistory = *b.ShouldPreserveFileContentInHistory
 	}
 	if b.SupportsTodosUi != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 29)
 		x.xxx_hidden_SupportsTodosUi = *b.SupportsTodosUi
 	}
 	if b.SupportsLinkedCodeBlocks != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 29)
 		x.xxx_hidden_SupportsLinkedCodeBlocks = *b.SupportsLinkedCodeBlocks
 	}
 	if b.SupportsStartedChildTaskMessage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 29)
 		x.xxx_hidden_SupportsStartedChildTaskMessage = *b.SupportsStartedChildTaskMessage
 	}
 	if b.SupportsSuggestPrompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 29)
 		x.xxx_hidden_SupportsSuggestPrompt = *b.SupportsSuggestPrompt
 	}
 	if b.SupportsReadImageFiles != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 29)
 		x.xxx_hidden_SupportsReadImageFiles = *b.SupportsReadImageFiles
 	}
 	if b.SupportsReasoningMessage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 29)
 		x.xxx_hidden_SupportsReasoningMessage = *b.SupportsReasoningMessage
 	}
 	x.xxx_hidden_ApiKeys = b.ApiKeys
 	if b.AutonomyLevel != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 29)
 		x.xxx_hidden_AutonomyLevel = *b.AutonomyLevel
 	}
 	if b.IsolationLevel != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 29)
 		x.xxx_hidden_IsolationLevel = *b.IsolationLevel
 	}
 	if b.WebSearchEnabled != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 29)
 		x.xxx_hidden_WebSearchEnabled = *b.WebSearchEnabled
 	}
 	x.xxx_hidden_SupportedCliAgentTools = b.SupportedCliAgentTools
 	if b.SupportsV4AFileDiffs != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 22, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 22, 29)
 		x.xxx_hidden_SupportsV4AFileDiffs = *b.SupportsV4AFileDiffs
 	}
 	if b.SupportsSummarizationViaMessageReplacement != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 23, 29)
 		x.xxx_hidden_SupportsSummarizationViaMessageReplacement = *b.SupportsSummarizationViaMessageReplacement
 	}
 	if b.SupportsBundledSkills != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 24, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 24, 29)
 		x.xxx_hidden_SupportsBundledSkills = *b.SupportsBundledSkills
 	}
 	if b.SupportsResearchAgent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 25, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 25, 29)
 		x.xxx_hidden_SupportsResearchAgent = *b.SupportsResearchAgent
 	}
 	if b.SupportsOrchestrationV2 != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 28)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 26, 29)
 		x.xxx_hidden_SupportsOrchestrationV2 = *b.SupportsOrchestrationV2
 	}
 	x.xxx_hidden_CustomModelProviders = b.CustomModelProviders
+	if b.SupportsLocalNonOzHarnessOrchestration != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 28, 29)
+		x.xxx_hidden_SupportsLocalNonOzHarnessOrchestration = *b.SupportsLocalNonOzHarnessOrchestration
+	}
 	return m0
 }
 
@@ -8738,7 +8773,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xban\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\x97o\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -8922,7 +8957,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x97\x17\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xf4\x17\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -8952,7 +8987,8 @@ const file_request_proto_rawDesc = "" +
 	"\x17supports_bundled_skills\x18\x19 \x01(\bR\x15supportsBundledSkills\x126\n" +
 	"\x17supports_research_agent\x18\x1a \x01(\bR\x15supportsResearchAgent\x12:\n" +
 	"\x19supports_orchestration_v2\x18\x1b \x01(\bR\x17supportsOrchestrationV2\x12p\n" +
-	"\x16custom_model_providers\x18\x1c \x01(\v2:.warp.multi_agent.v1.Request.Settings.CustomModelProvidersR\x14customModelProviders\x1a\xea\x01\n" +
+	"\x16custom_model_providers\x18\x1c \x01(\v2:.warp.multi_agent.v1.Request.Settings.CustomModelProvidersR\x14customModelProviders\x12[\n" +
+	"+supports_local_non_oz_harness_orchestration\x18\x1d \x01(\bR&supportsLocalNonOzHarnessOrchestration\x1a\xea\x01\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
