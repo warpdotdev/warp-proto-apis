@@ -7721,8 +7721,9 @@ type Request_Settings_ApiKeys_builder struct {
 	Openai     *string
 	Google     *string
 	OpenRouter *string
-	// If `true`, the client allows the use of Warp credits for LLM calls when
-	// keys are provided.
+	// If `true`, the client allows LLM calls to fall back to Warp credits.
+	// Note that this setting applies to both user-provided keys and custom
+	// endpoints. It lives on the ApiKeys message for legacy reasons.
 	AllowUseOfWarpCredits *bool
 	// Optional AWS credentials (e.g. for Bedrock).
 	AwsCredentials *Request_Settings_ApiKeys_AWSCredentials

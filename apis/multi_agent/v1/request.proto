@@ -477,8 +477,9 @@ message Request {
       string google = 3 [ (sensitive) = true ];
       string open_router = 4 [ (sensitive) = true ];
 
-      // If `true`, the client allows the use of Warp credits for LLM calls when
-      // keys are provided.
+      // If `true`, the client allows LLM calls to fall back to Warp credits.
+      // Note that this setting applies to both user-provided keys and custom
+      // endpoints. It lives on the ApiKeys message for legacy reasons.
       bool allow_use_of_warp_credits = 5;
 
       // Optional AWS credentials (e.g. for Bedrock).
