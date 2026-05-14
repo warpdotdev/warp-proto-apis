@@ -686,6 +686,9 @@ message Message {
         // The ID of the conversation being searched. Empty when searching the
         // current conversation.
         string conversation_id = 2;
+        // The ID of the agent run being searched. Empty unless the search targets
+        // a child agent run returned by orchestration.
+        string agent_run_id = 3;
       }
     }
 
