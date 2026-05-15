@@ -24058,8 +24058,13 @@ type Message_ToolCall_Subagent_ConversationSearchMetadata_builder struct {
 
 	// The natural language query describing what to find in conversation history.
 	Query *string
+	// The explicit target IDs for the search, if it is not searching the
+	// current conversation. At most one of `conversation_id` and
+	// `agent_run_id` should be set. `conversation_id` directly identifies a
+	// conversation; `agent_run_id` identifies an orchestrated child agent run
+	// that the server resolves to that run's conversation for execution.
 	// The ID of the conversation being searched. Empty when searching the
-	// current conversation.
+	// current conversation or when `agent_run_id` is set.
 	ConversationId *string
 	// The ID of the agent run being searched. Empty unless the search targets
 	// a child agent run returned by orchestration.
