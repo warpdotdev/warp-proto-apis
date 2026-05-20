@@ -91,7 +91,7 @@ message ResponseEvent {
       // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
       bool summarized = 2;
 
-      // The total number of credits spent so far in the conversation.
+      // The total number of inference credits spent so far in the conversation.
       float credits_spent = 3;
 
       // Token usage across every model used so far in the conversation.
@@ -106,6 +106,9 @@ message ResponseEvent {
 
       // Token usage using a user's API key.
       map<string, ModelTokenUsage> byok_token_usage = 7;
+
+      // The total number of platform credits spent so far in the conversation.
+      float platform_credits_spent = 8;
     }
 
     // Token usage by model.

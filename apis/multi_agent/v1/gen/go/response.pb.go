@@ -1726,18 +1726,19 @@ func (*responseEvent_StreamFinished_InternalError_) isResponseEvent_StreamFinish
 func (*responseEvent_StreamFinished_InvalidApiKey_) isResponseEvent_StreamFinished_Reason() {}
 
 type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
-	state                         protoimpl.MessageState                                   `protogen:"opaque.v1"`
-	xxx_hidden_ContextWindowUsage float32                                                  `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
-	xxx_hidden_Summarized         bool                                                     `protobuf:"varint,2,opt,name=summarized"`
-	xxx_hidden_CreditsSpent       float32                                                  `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
-	xxx_hidden_TokenUsage         *[]*ResponseEvent_StreamFinished_ModelTokenUsage         `protobuf:"bytes,4,rep,name=token_usage,json=tokenUsage"`
-	xxx_hidden_ToolUsageMetadata  *ResponseEvent_StreamFinished_ToolUsageMetadata          `protobuf:"bytes,5,opt,name=tool_usage_metadata,json=toolUsageMetadata"`
-	xxx_hidden_WarpTokenUsage     map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,6,rep,name=warp_token_usage,json=warpTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_ByokTokenUsage     map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,7,rep,name=byok_token_usage,json=byokTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
-	XXX_presence                  [1]uint32
-	unknownFields                 protoimpl.UnknownFields
-	sizeCache                     protoimpl.SizeCache
+	state                           protoimpl.MessageState                                   `protogen:"opaque.v1"`
+	xxx_hidden_ContextWindowUsage   float32                                                  `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
+	xxx_hidden_Summarized           bool                                                     `protobuf:"varint,2,opt,name=summarized"`
+	xxx_hidden_CreditsSpent         float32                                                  `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
+	xxx_hidden_TokenUsage           *[]*ResponseEvent_StreamFinished_ModelTokenUsage         `protobuf:"bytes,4,rep,name=token_usage,json=tokenUsage"`
+	xxx_hidden_ToolUsageMetadata    *ResponseEvent_StreamFinished_ToolUsageMetadata          `protobuf:"bytes,5,opt,name=tool_usage_metadata,json=toolUsageMetadata"`
+	xxx_hidden_WarpTokenUsage       map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,6,rep,name=warp_token_usage,json=warpTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ByokTokenUsage       map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,7,rep,name=byok_token_usage,json=byokTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_PlatformCreditsSpent float32                                                  `protobuf:"fixed32,8,opt,name=platform_credits_spent,json=platformCreditsSpent"`
+	XXX_raceDetectHookData          protoimpl.RaceDetectHookData
+	XXX_presence                    [1]uint32
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) Reset() {
@@ -1817,19 +1818,26 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetByokTokenUsa
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetPlatformCreditsSpent() float32 {
+	if x != nil {
+		return x.xxx_hidden_PlatformCreditsSpent
+	}
+	return 0
+}
+
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetSummarized(v bool) {
 	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCreditsSpent(v float32) {
 	x.xxx_hidden_CreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
 }
 
 // Deprecated: Marked as deprecated in response.proto.
@@ -1847,6 +1855,11 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetWarpTokenUsa
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetByokTokenUsage(v map[string]*ResponseEvent_StreamFinished_ModelTokenUsage) {
 	x.xxx_hidden_ByokTokenUsage = v
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetPlatformCreditsSpent(v float32) {
+	x.xxx_hidden_PlatformCreditsSpent = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindowUsage() bool {
@@ -1877,6 +1890,13 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasToolUsageMet
 	return x.xxx_hidden_ToolUsageMetadata != nil
 }
 
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasPlatformCreditsSpent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearContextWindowUsage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ContextWindowUsage = 0
@@ -1896,6 +1916,11 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearToolUsageM
 	x.xxx_hidden_ToolUsageMetadata = nil
 }
 
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearPlatformCreditsSpent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_PlatformCreditsSpent = 0
+}
+
 type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1903,7 +1928,7 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	ContextWindowUsage *float32
 	// Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
 	Summarized *bool
-	// The total number of credits spent so far in the conversation.
+	// The total number of inference credits spent so far in the conversation.
 	CreditsSpent *float32
 	// Token usage across every model used so far in the conversation.
 	// This has been deprecated. Use warp_token_usage and byok_token_usage instead.
@@ -1916,6 +1941,8 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	WarpTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage
 	// Token usage using a user's API key.
 	ByokTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage
+	// The total number of platform credits spent so far in the conversation.
+	PlatformCreditsSpent *float32
 }
 
 func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
@@ -1923,21 +1950,25 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ContextWindowUsage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
 	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
 		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	if b.CreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
 		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
 	x.xxx_hidden_ToolUsageMetadata = b.ToolUsageMetadata
 	x.xxx_hidden_WarpTokenUsage = b.WarpTokenUsage
 	x.xxx_hidden_ByokTokenUsage = b.ByokTokenUsage
+	if b.PlatformCreditsSpent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_PlatformCreditsSpent = *b.PlatformCreditsSpent
+	}
 	return m0
 }
 
@@ -4794,7 +4825,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xbe)\n" +
+	"task.proto\"\xf4)\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4806,7 +4837,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xf8%\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xae&\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4822,7 +4853,7 @@ const file_response_proto_rawDesc = "" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12\x8b\x01\n" +
-	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\x95\a\n" +
+	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\xcb\a\n" +
 	"\x19ConversationUsageMetadata\x120\n" +
 	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12\x1e\n" +
 	"\n" +
@@ -4833,7 +4864,8 @@ const file_response_proto_rawDesc = "" +
 	"tokenUsage\x12s\n" +
 	"\x13tool_usage_metadata\x18\x05 \x01(\v2C.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadataR\x11toolUsageMetadata\x12\x89\x01\n" +
 	"\x10warp_token_usage\x18\x06 \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntryR\x0ewarpTokenUsage\x12\x89\x01\n" +
-	"\x10byok_token_usage\x18\a \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntryR\x0ebyokTokenUsage\x1a\x84\x01\n" +
+	"\x10byok_token_usage\x18\a \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntryR\x0ebyokTokenUsage\x124\n" +
+	"\x16platform_credits_spent\x18\b \x01(\x02R\x14platformCreditsSpent\x1a\x84\x01\n" +
 	"\x13WarpTokenUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x84\x01\n" +
