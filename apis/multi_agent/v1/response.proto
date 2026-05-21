@@ -109,6 +109,10 @@ message ResponseEvent {
 
       // The total number of platform credits spent so far in the conversation.
       float platform_credits_spent = 8;
+
+      // Token usage using a custom endpoint.
+      // The model id used in custom_endpoint_token_usage is the config_key of custom model
+      map<string, ModelTokenUsage> custom_endpoint_token_usage = 9;
     }
 
     // Token usage by model.
