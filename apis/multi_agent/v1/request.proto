@@ -447,6 +447,13 @@ message Request {
     // A registry of custom model providers configured by the user.
     CustomModelProviders custom_model_providers = 28;
 
+    // If `true`, the client supports selecting non-Oz harnesses for local
+    // orchestration. When `false` (default for clients that do not send the
+    // field), the server hides local harness overrides from prompt guidance
+    // and rejects new local orchestration configs or run_agents calls that
+    // specify a non-Oz harness.
+    bool supports_local_non_oz_harness_orchestration = 29;
+
     // The model IDs provided in the model config can either be a warp-hosted model ID
     // (e.g. "gemini-2.5-pro") or the `config_key` for a model provided in
     // `custom_model_providers`.
