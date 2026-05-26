@@ -922,8 +922,10 @@ message Message {
       message Screen {}
 
       message Window {
-        // The CGWindowID of the target window.
-        uint32 window_id = 1;
+        // An opaque, platform-specific identifier for the target window. Sent as
+        // a string so window IDs that cannot be represented as an integer on
+        // some platforms are still supported. The client interprets it.
+        string window_id = 1;
         // The pid of the process that owns the window.
         int32 pid = 2;
       }
@@ -1507,16 +1509,29 @@ message UseComputerResult {
     RawImage screenshot = 1;
     Coordinates cursor_position = 2;
 
+    // Metadata about the window that the screenshot captured. Set only when a
+    // window target was used (it lets the agent map window-local coordinates to
+    // the screenshot image); unset for full-screen captures.
+    CapturedWindow captured_window = 3;
+
     // The current set of on-screen windows, refreshed after the actions run, so
     // the agent always has a fresh list to target.
-    repeated WindowInfo windows = 3;
+    repeated WindowInfo windows = 4;
 
-    // When a window target was used, metadata about the captured window so the
-    // agent can map window-local coordinates to the screenshot image.
-    uint32 captured_window_id = 4;
-    int32 captured_width_px = 5;
-    int32 captured_height_px = 6;
-    double captured_scale_factor = 7;
+    // Metadata about a captured window.
+    message CapturedWindow {
+      // An opaque, platform-specific window identifier (see ComputerUseTarget).
+      string window_id = 1;
+      // The captured window's size in physical (actual) pixels. These
+      // dimensions already include the scale factor below; they are NOT logical
+      // / scaled pixels.
+      int32 width_px = 2;
+      int32 height_px = 3;
+      // The ratio of physical pixels to logical pixels for the captured window
+      // (e.g. 2.0 on a Retina display, 1.0 on a non-scaled display). Divide a
+      // physical-pixel value by this to convert it to logical coordinates.
+      double scale_factor = 4;
+    }
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -1545,15 +1560,17 @@ message ScreenDimensions {
 // Metadata about an on-screen window, so the agent can target a window and map
 // window-local coordinates to a window screenshot.
 message WindowInfo {
-  // The CGWindowID of the window.
-  uint32 window_id = 1;
+  // An opaque, platform-specific identifier for the window.
+  string window_id = 1;
   // The pid of the process that owns the window.
   int32 pid = 2;
   // The owning application's name (e.g. "Arc", "Notes").
   string app_name = 3 [ (sensitive) = true ];
   // The window title, if available.
   string title = 4 [ (sensitive) = true ];
-  // Window bounds in global screen points, top-left origin.
+  // Window bounds in global, top-left-origin LOGICAL coordinates (scaled pixels
+  // / "points"), NOT physical pixels. For example, on a 2x display a window
+  // that is 2000 physical pixels wide, width = 1000.
   int32 x = 5;
   int32 y = 6;
   int32 width = 7;
@@ -1592,10 +1609,6 @@ message RequestComputerUseResult {
 
     // The current set of on-screen windows the agent may target.
     repeated WindowInfo windows = 4;
-
-    // Whether background, per-window control is available on this client/OS.
-    // When false, the agent should use full-screen targeting.
-    bool background_supported = 5;
   }
 
   message Rejected {}
