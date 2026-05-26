@@ -447,6 +447,12 @@ message Request {
     // A registry of custom model providers configured by the user.
     CustomModelProviders custom_model_providers = 28;
 
+    // If `true`, the client supports background, per-window computer use (window
+    // targeting via set_computer_use_target, window-scoped screenshots, and
+    // window enumeration). When `false` or unset, the computer-use agent uses
+    // the legacy full-screen / frontmost-application behavior.
+    bool supports_background_computer_use = 29;
+
     // The model IDs provided in the model config can either be a warp-hosted model ID
     // (e.g. "gemini-2.5-pro") or the `config_key` for a model provided in
     // `custom_model_providers`.

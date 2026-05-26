@@ -815,6 +815,10 @@ message Message {
           KeyUp key_up = 8;
         }
 
+        // Optional window this action targets. If unset, the action targets the
+        // screen / frontmost application (legacy full-screen behavior).
+        ComputerUseTarget target = 9;
+
         enum MouseButton {
           LEFT = 0;
           RIGHT = 1;
@@ -894,11 +898,34 @@ message Message {
       // the full source.
       Region region = 3;
 
+      // Optional window to capture. If unset, captures the screen / main
+      // display (legacy behavior).
+      ComputerUseTarget target = 4;
+
       // A rectangular region defined by its top-left and bottom-right corners,
       // in physical screen pixel coordinates.
       message Region {
         Coordinates top_left = 1;
         Coordinates bottom_right = 2;
+      }
+    }
+
+    // The surface a computer-use action or screenshot targets.
+    message ComputerUseTarget {
+      oneof target {
+        // Target the whole screen / frontmost application (legacy behavior).
+        Screen screen = 1;
+        // Target a specific background window of a specific process.
+        Window window = 2;
+      }
+
+      message Screen {}
+
+      message Window {
+        // The CGWindowID of the target window.
+        uint32 window_id = 1;
+        // The pid of the process that owns the window.
+        int32 pid = 2;
       }
     }
   }
@@ -1479,6 +1506,17 @@ message UseComputerResult {
   message Success {
     RawImage screenshot = 1;
     Coordinates cursor_position = 2;
+
+    // The current set of on-screen windows, refreshed after the actions run, so
+    // the agent always has a fresh list to target.
+    repeated WindowInfo windows = 3;
+
+    // When a window target was used, metadata about the captured window so the
+    // agent can map window-local coordinates to the screenshot image.
+    uint32 captured_window_id = 4;
+    int32 captured_width_px = 5;
+    int32 captured_height_px = 6;
+    double captured_scale_factor = 7;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -1502,6 +1540,26 @@ message ReadSkillResult {
 message ScreenDimensions {
   int32 width_px = 1;
   int32 height_px = 2;
+}
+
+// Metadata about an on-screen window, so the agent can target a window and map
+// window-local coordinates to a window screenshot.
+message WindowInfo {
+  // The CGWindowID of the window.
+  uint32 window_id = 1;
+  // The pid of the process that owns the window.
+  int32 pid = 2;
+  // The owning application's name (e.g. "Arc", "Notes").
+  string app_name = 3 [ (sensitive) = true ];
+  // The window title, if available.
+  string title = 4 [ (sensitive) = true ];
+  // Window bounds in global screen points, top-left origin.
+  int32 x = 5;
+  int32 y = 6;
+  int32 width = 7;
+  int32 height = 8;
+  // The window layer (0 is a normal application window).
+  int32 layer = 9;
 }
 
 // Result of a `RequestComputerUse` tool call.
@@ -1531,6 +1589,13 @@ message RequestComputerUseResult {
       LINUX_X11 = 2;
       LINUX_WAYLAND = 3;
     }
+
+    // The current set of on-screen windows the agent may target.
+    repeated WindowInfo windows = 4;
+
+    // Whether background, per-window control is available on this client/OS.
+    // When false, the agent should use full-screen targeting.
+    bool background_supported = 5;
   }
 
   message Rejected {}
