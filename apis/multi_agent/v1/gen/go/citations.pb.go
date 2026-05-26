@@ -32,6 +32,7 @@ const (
 	DocumentType_WARP_DOCUMENTATION  DocumentType = 4
 	DocumentType_WEB_PAGE            DocumentType = 5
 	DocumentType_UNKNOWN             DocumentType = 6
+	DocumentType_AGENT_MEMORY        DocumentType = 7
 )
 
 // Enum value maps for DocumentType.
@@ -44,6 +45,7 @@ var (
 		4: "WARP_DOCUMENTATION",
 		5: "WEB_PAGE",
 		6: "UNKNOWN",
+		7: "AGENT_MEMORY",
 	}
 	DocumentType_value = map[string]int32{
 		"WARP_DRIVE_WORKFLOW": 0,
@@ -53,6 +55,7 @@ var (
 		"WARP_DOCUMENTATION":  4,
 		"WEB_PAGE":            5,
 		"UNKNOWN":             6,
+		"AGENT_MEMORY":        7,
 	}
 )
 
@@ -78,33 +81,35 @@ func (x DocumentType) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Citation represents a reference to a specific document or resource that was used by the LLM in generating
-// the response. Citations can be included both on the message level or on individual tool calls
-// It includes both the unique identifier of the document and its type classification.
-type Citation struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_DocumentId   *string                `protobuf:"bytes,1,opt,name=document_id,json=documentId"`
-	xxx_hidden_DocumentType DocumentType           `protobuf:"varint,2,opt,name=document_type,json=documentType,enum=warp.multi_agent.v1.DocumentType"`
-	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
-	XXX_presence            [1]uint32
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+// AgentMemoryCitation identifies a specific memory inside a specific memory
+// store. It is the structured `source` variant used by Citations whose
+// document_type is AGENT_MEMORY, so clients can route directly to the cited
+// memory without parsing an opaque string ID.
+type AgentMemoryCitation struct {
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_MemoryStoreUid *string                `protobuf:"bytes,1,opt,name=memory_store_uid,json=memoryStoreUid"`
+	xxx_hidden_MemoryUid      *string                `protobuf:"bytes,2,opt,name=memory_uid,json=memoryUid"`
+	xxx_hidden_ContentPreview *string                `protobuf:"bytes,3,opt,name=content_preview,json=contentPreview"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
-func (x *Citation) Reset() {
-	*x = Citation{}
+func (x *AgentMemoryCitation) Reset() {
+	*x = AgentMemoryCitation{}
 	mi := &file_citations_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Citation) String() string {
+func (x *AgentMemoryCitation) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Citation) ProtoMessage() {}
+func (*AgentMemoryCitation) ProtoMessage() {}
 
-func (x *Citation) ProtoReflect() protoreflect.Message {
+func (x *AgentMemoryCitation) ProtoReflect() protoreflect.Message {
 	mi := &file_citations_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -116,90 +121,342 @@ func (x *Citation) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *Citation) GetDocumentId() string {
+func (x *AgentMemoryCitation) GetMemoryStoreUid() string {
 	if x != nil {
-		if x.xxx_hidden_DocumentId != nil {
-			return *x.xxx_hidden_DocumentId
+		if x.xxx_hidden_MemoryStoreUid != nil {
+			return *x.xxx_hidden_MemoryStoreUid
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *Citation) GetDocumentType() DocumentType {
+func (x *AgentMemoryCitation) GetMemoryUid() string {
 	if x != nil {
-		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
-			return x.xxx_hidden_DocumentType
+		if x.xxx_hidden_MemoryUid != nil {
+			return *x.xxx_hidden_MemoryUid
 		}
+		return ""
 	}
-	return DocumentType_WARP_DRIVE_WORKFLOW
+	return ""
 }
 
-func (x *Citation) SetDocumentId(v string) {
-	x.xxx_hidden_DocumentId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+func (x *AgentMemoryCitation) GetContentPreview() string {
+	if x != nil {
+		if x.xxx_hidden_ContentPreview != nil {
+			return *x.xxx_hidden_ContentPreview
+		}
+		return ""
+	}
+	return ""
 }
 
-func (x *Citation) SetDocumentType(v DocumentType) {
-	x.xxx_hidden_DocumentType = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+func (x *AgentMemoryCitation) SetMemoryStoreUid(v string) {
+	x.xxx_hidden_MemoryStoreUid = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Citation) HasDocumentId() bool {
+func (x *AgentMemoryCitation) SetMemoryUid(v string) {
+	x.xxx_hidden_MemoryUid = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+}
+
+func (x *AgentMemoryCitation) SetContentPreview(v string) {
+	x.xxx_hidden_ContentPreview = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
+}
+
+func (x *AgentMemoryCitation) HasMemoryStoreUid() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Citation) HasDocumentType() bool {
+func (x *AgentMemoryCitation) HasMemoryUid() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Citation) ClearDocumentId() {
+func (x *AgentMemoryCitation) HasContentPreview() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *AgentMemoryCitation) ClearMemoryStoreUid() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_DocumentId = nil
+	x.xxx_hidden_MemoryStoreUid = nil
+}
+
+func (x *AgentMemoryCitation) ClearMemoryUid() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_MemoryUid = nil
+}
+
+func (x *AgentMemoryCitation) ClearContentPreview() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ContentPreview = nil
+}
+
+type AgentMemoryCitation_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	MemoryStoreUid *string
+	MemoryUid      *string
+	// Short, display-safe preview of the cited memory content. This is derived
+	// by the server from retrieved memory context, not authored by the model.
+	ContentPreview *string
+}
+
+func (b0 AgentMemoryCitation_builder) Build() *AgentMemoryCitation {
+	m0 := &AgentMemoryCitation{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.MemoryStoreUid != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		x.xxx_hidden_MemoryStoreUid = b.MemoryStoreUid
+	}
+	if b.MemoryUid != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		x.xxx_hidden_MemoryUid = b.MemoryUid
+	}
+	if b.ContentPreview != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_ContentPreview = b.ContentPreview
+	}
+	return m0
+}
+
+// Citation represents a reference to a specific document or resource that was used by the LLM in generating
+// the response. Citations can be included both on the message level or on individual tool calls
+// It includes both the unique identifier of the document and its type classification.
+//
+// The variant of `source` depends on document_type:
+//   - WARP_DRIVE_*, RULE, WARP_DOCUMENTATION, WEB_PAGE: document_id carries
+//     the document's opaque string ID (or URL for WEB_PAGE).
+//   - AGENT_MEMORY: agent_memory carries the structured (store, memory)
+//     identity needed to route to the memory.
+type Citation struct {
+	state                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_DocumentType DocumentType           `protobuf:"varint,2,opt,name=document_type,json=documentType,enum=warp.multi_agent.v1.DocumentType"`
+	xxx_hidden_Source       isCitation_Source      `protobuf_oneof:"source"`
+	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
+	XXX_presence            [1]uint32
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *Citation) Reset() {
+	*x = Citation{}
+	mi := &file_citations_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Citation) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Citation) ProtoMessage() {}
+
+func (x *Citation) ProtoReflect() protoreflect.Message {
+	mi := &file_citations_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *Citation) GetDocumentType() DocumentType {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 0) {
+			return x.xxx_hidden_DocumentType
+		}
+	}
+	return DocumentType_WARP_DRIVE_WORKFLOW
+}
+
+func (x *Citation) GetDocumentId() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Source.(*citation_DocumentId); ok {
+			return x.DocumentId
+		}
+	}
+	return ""
+}
+
+func (x *Citation) GetAgentMemory() *AgentMemoryCitation {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Source.(*citation_AgentMemory); ok {
+			return x.AgentMemory
+		}
+	}
+	return nil
+}
+
+func (x *Citation) SetDocumentType(v DocumentType) {
+	x.xxx_hidden_DocumentType = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *Citation) SetDocumentId(v string) {
+	x.xxx_hidden_Source = &citation_DocumentId{v}
+}
+
+func (x *Citation) SetAgentMemory(v *AgentMemoryCitation) {
+	if v == nil {
+		x.xxx_hidden_Source = nil
+		return
+	}
+	x.xxx_hidden_Source = &citation_AgentMemory{v}
+}
+
+func (x *Citation) HasDocumentType() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *Citation) HasSource() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Source != nil
+}
+
+func (x *Citation) HasDocumentId() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Source.(*citation_DocumentId)
+	return ok
+}
+
+func (x *Citation) HasAgentMemory() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Source.(*citation_AgentMemory)
+	return ok
 }
 
 func (x *Citation) ClearDocumentType() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_DocumentType = DocumentType_WARP_DRIVE_WORKFLOW
+}
+
+func (x *Citation) ClearSource() {
+	x.xxx_hidden_Source = nil
+}
+
+func (x *Citation) ClearDocumentId() {
+	if _, ok := x.xxx_hidden_Source.(*citation_DocumentId); ok {
+		x.xxx_hidden_Source = nil
+	}
+}
+
+func (x *Citation) ClearAgentMemory() {
+	if _, ok := x.xxx_hidden_Source.(*citation_AgentMemory); ok {
+		x.xxx_hidden_Source = nil
+	}
+}
+
+const Citation_Source_not_set_case case_Citation_Source = 0
+const Citation_DocumentId_case case_Citation_Source = 1
+const Citation_AgentMemory_case case_Citation_Source = 3
+
+func (x *Citation) WhichSource() case_Citation_Source {
+	if x == nil {
+		return Citation_Source_not_set_case
+	}
+	switch x.xxx_hidden_Source.(type) {
+	case *citation_DocumentId:
+		return Citation_DocumentId_case
+	case *citation_AgentMemory:
+		return Citation_AgentMemory_case
+	default:
+		return Citation_Source_not_set_case
+	}
 }
 
 type Citation_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	DocumentId   *string
 	DocumentType *DocumentType
+	// Fields of oneof xxx_hidden_Source:
+	DocumentId  *string
+	AgentMemory *AgentMemoryCitation
+	// -- end of xxx_hidden_Source
 }
 
 func (b0 Citation_builder) Build() *Citation {
 	m0 := &Citation{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.DocumentId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
-		x.xxx_hidden_DocumentId = b.DocumentId
-	}
 	if b.DocumentType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
 		x.xxx_hidden_DocumentType = *b.DocumentType
+	}
+	if b.DocumentId != nil {
+		x.xxx_hidden_Source = &citation_DocumentId{*b.DocumentId}
+	}
+	if b.AgentMemory != nil {
+		x.xxx_hidden_Source = &citation_AgentMemory{b.AgentMemory}
 	}
 	return m0
 }
+
+type case_Citation_Source protoreflect.FieldNumber
+
+func (x case_Citation_Source) String() string {
+	md := file_citations_proto_msgTypes[1].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isCitation_Source interface {
+	isCitation_Source()
+}
+
+type citation_DocumentId struct {
+	DocumentId string `protobuf:"bytes,1,opt,name=document_id,json=documentId,oneof"`
+}
+
+type citation_AgentMemory struct {
+	AgentMemory *AgentMemoryCitation `protobuf:"bytes,3,opt,name=agent_memory,json=agentMemory,oneof"`
+}
+
+func (*citation_DocumentId) isCitation_Source() {}
+
+func (*citation_AgentMemory) isCitation_Source() {}
 
 var File_citations_proto protoreflect.FileDescriptor
 
 const file_citations_proto_rawDesc = "" +
 	"\n" +
-	"\x0fcitations.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"s\n" +
-	"\bCitation\x12\x1f\n" +
-	"\vdocument_id\x18\x01 \x01(\tR\n" +
-	"documentId\x12F\n" +
-	"\rdocument_type\x18\x02 \x01(\x0e2!.warp.multi_agent.v1.DocumentTypeR\fdocumentType*\x95\x01\n" +
+	"\x0fcitations.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\x87\x01\n" +
+	"\x13AgentMemoryCitation\x12(\n" +
+	"\x10memory_store_uid\x18\x01 \x01(\tR\x0ememoryStoreUid\x12\x1d\n" +
+	"\n" +
+	"memory_uid\x18\x02 \x01(\tR\tmemoryUid\x12'\n" +
+	"\x0fcontent_preview\x18\x03 \x01(\tR\x0econtentPreview\"\xce\x01\n" +
+	"\bCitation\x12F\n" +
+	"\rdocument_type\x18\x02 \x01(\x0e2!.warp.multi_agent.v1.DocumentTypeR\fdocumentType\x12!\n" +
+	"\vdocument_id\x18\x01 \x01(\tH\x00R\n" +
+	"documentId\x12M\n" +
+	"\fagent_memory\x18\x03 \x01(\v2(.warp.multi_agent.v1.AgentMemoryCitationH\x00R\vagentMemoryB\b\n" +
+	"\x06source*\xa7\x01\n" +
 	"\fDocumentType\x12\x17\n" +
 	"\x13WARP_DRIVE_WORKFLOW\x10\x00\x12\x17\n" +
 	"\x13WARP_DRIVE_NOTEBOOK\x10\x01\x12\x16\n" +
@@ -207,21 +464,24 @@ const file_citations_proto_rawDesc = "" +
 	"\x04RULE\x10\x03\x12\x16\n" +
 	"\x12WARP_DOCUMENTATION\x10\x04\x12\f\n" +
 	"\bWEB_PAGE\x10\x05\x12\v\n" +
-	"\aUNKNOWN\x10\x06BMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
+	"\aUNKNOWN\x10\x06\x12\x10\n" +
+	"\fAGENT_MEMORY\x10\aBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_citations_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_citations_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_citations_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_citations_proto_goTypes = []any{
-	(DocumentType)(0), // 0: warp.multi_agent.v1.DocumentType
-	(*Citation)(nil),  // 1: warp.multi_agent.v1.Citation
+	(DocumentType)(0),           // 0: warp.multi_agent.v1.DocumentType
+	(*AgentMemoryCitation)(nil), // 1: warp.multi_agent.v1.AgentMemoryCitation
+	(*Citation)(nil),            // 2: warp.multi_agent.v1.Citation
 }
 var file_citations_proto_depIdxs = []int32{
 	0, // 0: warp.multi_agent.v1.Citation.document_type:type_name -> warp.multi_agent.v1.DocumentType
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	1, // 1: warp.multi_agent.v1.Citation.agent_memory:type_name -> warp.multi_agent.v1.AgentMemoryCitation
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_citations_proto_init() }
@@ -229,13 +489,17 @@ func file_citations_proto_init() {
 	if File_citations_proto != nil {
 		return
 	}
+	file_citations_proto_msgTypes[1].OneofWrappers = []any{
+		(*citation_DocumentId)(nil),
+		(*citation_AgentMemory)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_citations_proto_rawDesc), len(file_citations_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

@@ -16,12 +16,35 @@ enum DocumentType {
     WARP_DOCUMENTATION = 4;
     WEB_PAGE = 5;
     UNKNOWN = 6;
+    AGENT_MEMORY = 7;
+}
+
+// AgentMemoryCitation identifies a specific memory inside a specific memory
+// store. It is the structured `source` variant used by Citations whose
+// document_type is AGENT_MEMORY, so clients can route directly to the cited
+// memory without parsing an opaque string ID.
+message AgentMemoryCitation {
+    string memory_store_uid = 1;
+    string memory_uid = 2;
+    // Short, display-safe preview of the cited memory content. This is derived
+    // by the server from retrieved memory context, not authored by the model.
+    string content_preview = 3;
 }
 
 // Citation represents a reference to a specific document or resource that was used by the LLM in generating 
 // the response. Citations can be included both on the message level or on individual tool calls
 // It includes both the unique identifier of the document and its type classification.
+//
+// The variant of `source` depends on document_type:
+//   * WARP_DRIVE_*, RULE, WARP_DOCUMENTATION, WEB_PAGE: document_id carries
+//     the document's opaque string ID (or URL for WEB_PAGE).
+//   * AGENT_MEMORY: agent_memory carries the structured (store, memory)
+//     identity needed to route to the memory.
 message Citation {
-    string document_id = 1;
     DocumentType document_type = 2;
+
+    oneof source {
+        string document_id = 1;
+        AgentMemoryCitation agent_memory = 3;
+    }
 }
