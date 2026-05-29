@@ -894,16 +894,17 @@ message Message {
       int32 max_long_edge_px = 1;
       // The maximum total number of pixels in the screenshot.
       int32 max_total_px = 2;
-      // Capture a rectangular sub-region of the display. If unset, will capture
-      // the full source.
+      // Capture a rectangular sub-region of the selected target. If unset,
+      // capture the full target.
       Region region = 3;
 
-      // Optional window to capture. If unset, captures the screen / main
-      // display (legacy behavior).
+      // The source to capture. If unset, capture the screen / main display
+      // (legacy behavior).
       ComputerUseTarget target = 4;
 
-      // A rectangular region defined by its top-left and bottom-right corners,
-      // in physical screen pixel coordinates.
+      // A rectangular region defined by its top-left and bottom-right corners.
+      // Coordinates are physical pixels relative to `target`: screen-local for
+      // a screen target and window-local for a window target.
       message Region {
         Coordinates top_left = 1;
         Coordinates bottom_right = 2;
@@ -1493,7 +1494,7 @@ message InsertReviewCommentsResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
-// Screen coordinates used for computer use actions.
+// Physical pixel coordinates relative to the selected computer-use target.
 message Coordinates {
   int32 x = 1;
   int32 y = 2;
@@ -1522,15 +1523,11 @@ message UseComputerResult {
     message CapturedWindow {
       // An opaque, platform-specific window identifier (see ComputerUseTarget).
       string window_id = 1;
-      // The captured window's size in physical (actual) pixels. These
-      // dimensions already include the scale factor below; they are NOT logical
-      // / scaled pixels.
+      // The captured image's dimensions in native physical pixels, before any
+      // downscaling applied for the model. For a region capture, these are the
+      // region's dimensions rather than the full window's dimensions.
       int32 width_px = 2;
       int32 height_px = 3;
-      // The ratio of physical pixels to logical pixels for the captured window
-      // (e.g. 2.0 on a Retina display, 1.0 on a non-scaled display). Divide a
-      // physical-pixel value by this to convert it to logical coordinates.
-      double scale_factor = 4;
     }
   }
 
@@ -1557,8 +1554,8 @@ message ScreenDimensions {
   int32 height_px = 2;
 }
 
-// Metadata about an on-screen window, so the agent can target a window and map
-// window-local coordinates to a window screenshot.
+// Metadata about an on-screen window, so the agent can select a window to
+// target.
 message WindowInfo {
   // An opaque, platform-specific identifier for the window.
   string window_id = 1;
@@ -1568,15 +1565,8 @@ message WindowInfo {
   string app_name = 3 [ (sensitive) = true ];
   // The window title, if available.
   string title = 4 [ (sensitive) = true ];
-  // Window bounds in global, top-left-origin LOGICAL coordinates (scaled pixels
-  // / "points"), NOT physical pixels. For example, on a 2x display a window
-  // that is 2000 physical pixels wide, width = 1000.
-  int32 x = 5;
-  int32 y = 6;
-  int32 width = 7;
-  int32 height = 8;
   // The window layer (0 is a normal application window).
-  int32 layer = 9;
+  int32 layer = 5;
 }
 
 // Result of a `RequestComputerUse` tool call.
