@@ -496,7 +496,7 @@ message Request {
         string secret_key = 2 [ (sensitive) = true ];
         string session_token = 3 [ (sensitive) = true ];
         string region = 4;
-      } 
+      }
 
       // Optional GCP Credentials (for Gemini Enterprise Agent Platform)
       GoogleCloudCredentials google_cloud_credentials = 7;
