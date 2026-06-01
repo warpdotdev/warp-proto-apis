@@ -405,6 +405,7 @@ message Message {
       StartAgentV2 start_agent_v2 = 33;
       UploadFileArtifact upload_file_artifact = 34;
       RunAgents run_agents = 35;
+      WaitForEvents wait_for_events = 36;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -931,6 +932,26 @@ message Message {
         int32 pid = 2;
       }
     }
+
+    // A tool call indicating the agent has yielded and is waiting for inbound
+    // events (a user message, an inbound message from another agent, or a
+    // lifecycle event). The call is emitted as an unresolved tool call: the
+    // server does NOT synthesize a result at yield time. The client
+    // pattern-matches this variant to transition its conversation into a
+    // dedicated waiting state and to schedule a local watchdog. The wait ends
+    // when either (a) a new inbound input supersedes the call -- the server's
+    // existing tool-call-supersede path emits a generic Cancel result for the
+    // pending call -- or (b) the client's watchdog fires and the client emits
+    // a WaitForEventsResult itself as a new tool-call-result input.
+    message WaitForEvents {
+      // Upper bound on how long the client should wait for a resume input
+      // before emitting a synthetic WaitForEventsResult on the agent's
+      // behalf. Sourced from the server's ExtendTaskIdleTimeout-resolved
+      // (and tenant-capped) value at yield time, converted to seconds for
+      // finer-grained client-side timer scheduling. Unset means the client
+      // should fall back to its default waiting policy.
+      int32 idle_timeout_seconds = 1;
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -984,6 +1005,7 @@ message Message {
       StartAgentV2Result start_agent_v2 = 37;
       UploadFileArtifactResult upload_file_artifact = 38;
       RunAgentsResult run_agents_result = 39;
+      WaitForEventsResult wait_for_events = 40;
     }
 
     // Result of a server-side tool call.
@@ -991,6 +1013,15 @@ message Message {
     message ServerResult { string serialized_result = 1; }
 
     message SubagentResult { string payload = 1; }
+
+    // Emitted by the client when its local waiting watchdog fires. The mere
+    // presence of this result type tells the agent that its WaitForEvents
+    // call timed out without an inbound resume input arriving; the agent's
+    // next turn decides how to proceed (finish_task, re-yield via another
+    // wait_for_events, or any other action). The server never synthesizes
+    // this result -- inbound resume paths cancel the pending call via the
+    // existing generic Cancel mechanism instead.
+    message WaitForEventsResult {}
   }
 
   // An event that is preserved in message history
@@ -1672,6 +1703,7 @@ enum ToolType {
   START_AGENT_V2 = 30;
   UPLOAD_FILE_ARTIFACT = 31;
   RUN_AGENTS = 32;
+  WAIT_FOR_EVENTS = 33;
 }
 
 message UserQueryMode {
