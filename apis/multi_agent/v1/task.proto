@@ -1013,15 +1013,6 @@ message Message {
     message ServerResult { string serialized_result = 1; }
 
     message SubagentResult { string payload = 1; }
-
-    // Emitted by the client when its local waiting watchdog fires. The mere
-    // presence of this result type tells the agent that its WaitForEvents
-    // call timed out without an inbound resume input arriving; the agent's
-    // next turn decides how to proceed (finish_task, re-yield via another
-    // wait_for_events, or any other action). The server never synthesizes
-    // this result -- inbound resume paths cancel the pending call via the
-    // existing generic Cancel mechanism instead.
-    message WaitForEventsResult {}
   }
 
   // An event that is preserved in message history
@@ -2019,6 +2010,20 @@ message UploadFileArtifactResult {
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
+
+// Emitted by the client when its local waiting watchdog fires for a
+// pending `WaitForEvents` tool call (see Message.ToolCall.WaitForEvents).
+// The mere presence of this result type tells the agent that its
+// WaitForEvents call timed out without an inbound resume input arriving;
+// the agent's next turn decides how to proceed (finish_task, re-yield via
+// another wait_for_events, or any other action). The server never
+// synthesizes this result -- inbound resume paths cancel the pending
+// call via the existing generic Cancel mechanism instead.
+//
+// Used in BOTH directions:
+//   * server -> client (history form):  Message.ToolCallResult.result.wait_for_events
+//   * client -> server (input form):    Request.Input.ToolCallResult.result.wait_for_events
+message WaitForEventsResult {}
 
 message PassiveSuggestionResultType {
   oneof trigger {

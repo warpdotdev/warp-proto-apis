@@ -185,6 +185,11 @@ message Request {
         StartAgentV2Result start_agent_v2 = 32;
         UploadFileArtifactResult upload_file_artifact = 33;
         RunAgentsResult run_agents_result = 34;
+        // Emitted by the client when its local watchdog fires for a pending
+        // WaitForEvents tool call. See WaitForEventsResult in task.proto for
+        // the full contract; the variant identity alone signals "the wait
+        // timed out, decide what to do next" to the agent.
+        WaitForEventsResult wait_for_events = 35;
       }
     }
 
