@@ -498,6 +498,11 @@ message Request {
         string region = 4;
       }
 
+      // Optional xAI/Grok OAuth access token from a connected Grok (SuperGrok) subscription.
+      // When set, the server's xAI harness authenticates with this bearer token instead of
+      // Warp's org-wide xAI API key.
+      string grok_oauth_access_token = 7 [ (sensitive) = true ];
+
       // TODO(isaiah): Add Azure/GCP credentials here...
     }
 
