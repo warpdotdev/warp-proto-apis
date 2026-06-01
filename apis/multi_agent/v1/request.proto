@@ -496,9 +496,15 @@ message Request {
         string secret_key = 2 [ (sensitive) = true ];
         string session_token = 3 [ (sensitive) = true ];
         string region = 4;
-      }
+      } 
 
-      // TODO(isaiah): Add Azure/GCP credentials here...
+      // Optional GCP Credentials (for Gemini Enterprise Agent Platform)
+      GoogleCloudCredentials google_cloud_credentials = 7;
+
+      message GoogleCloudCredentials {
+        string access_token = 1 [ (sensitive) = true ];
+      }
+      // TODO(isaiah): Add Azure
     }
 
     message CustomModelProviders {
