@@ -1177,9 +1177,20 @@ message ReadFilesResult {
     Error error = 2;
   }
 
-  message TextFilesSuccess { repeated FileContent files = 1; }
+  message FailedFile {
+    string path = 1 [ (sensitive) = true ];
+    string message = 2 [ (sensitive) = true ];
+  }
 
-  message AnyFilesSuccess { repeated AnyFileContent files = 1; }
+  message TextFilesSuccess {
+    repeated FileContent files = 1;
+    repeated FailedFile failed_files = 2;
+  }
+
+  message AnyFilesSuccess {
+    repeated AnyFileContent files = 1;
+    repeated FailedFile failed_files = 2;
+  }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
