@@ -129,6 +129,11 @@ message ResponseEvent {
 
       // Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction", etc.).
       map<string, uint32> token_usage_by_category = 3;
+
+      // Whether any single LLM call to this model exceeded the model's long-context
+      // threshold (e.g. >272K for GPT-5.4/GPT-5.5, >200K for Gemini). The client
+      // uses this to display a pricing warning.
+      bool long_context_used = 4;
     }
 
     // Tool usage by tool.
