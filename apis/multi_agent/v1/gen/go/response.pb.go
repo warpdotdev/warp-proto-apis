@@ -1736,6 +1736,12 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
 	xxx_hidden_ByokTokenUsage           map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,7,rep,name=byok_token_usage,json=byokTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	xxx_hidden_PlatformCreditsSpent     float32                                                  `protobuf:"fixed32,8,opt,name=platform_credits_spent,json=platformCreditsSpent"`
 	xxx_hidden_CustomEndpointTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,9,rep,name=custom_endpoint_token_usage,json=customEndpointTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_CostCents                *string                                                  `protobuf:"bytes,10,opt,name=cost_cents,json=costCents"`
+	xxx_hidden_PlatformFeeCents         *string                                                  `protobuf:"bytes,11,opt,name=platform_fee_cents,json=platformFeeCents"`
+	xxx_hidden_TotalInputTokens         uint64                                                   `protobuf:"varint,12,opt,name=total_input_tokens,json=totalInputTokens"`
+	xxx_hidden_TotalOutputTokens        uint64                                                   `protobuf:"varint,13,opt,name=total_output_tokens,json=totalOutputTokens"`
+	xxx_hidden_TotalCacheReadTokens     uint64                                                   `protobuf:"varint,14,opt,name=total_cache_read_tokens,json=totalCacheReadTokens"`
+	xxx_hidden_TotalCacheWriteTokens    uint64                                                   `protobuf:"varint,15,opt,name=total_cache_write_tokens,json=totalCacheWriteTokens"`
 	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
 	XXX_presence                        [1]uint32
 	unknownFields                       protoimpl.UnknownFields
@@ -1833,19 +1839,67 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetCustomEndpoi
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetCostCents() string {
+	if x != nil {
+		if x.xxx_hidden_CostCents != nil {
+			return *x.xxx_hidden_CostCents
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetPlatformFeeCents() string {
+	if x != nil {
+		if x.xxx_hidden_PlatformFeeCents != nil {
+			return *x.xxx_hidden_PlatformFeeCents
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTotalInputTokens() uint64 {
+	if x != nil {
+		return x.xxx_hidden_TotalInputTokens
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTotalOutputTokens() uint64 {
+	if x != nil {
+		return x.xxx_hidden_TotalOutputTokens
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTotalCacheReadTokens() uint64 {
+	if x != nil {
+		return x.xxx_hidden_TotalCacheReadTokens
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTotalCacheWriteTokens() uint64 {
+	if x != nil {
+		return x.xxx_hidden_TotalCacheWriteTokens
+	}
+	return 0
+}
+
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 15)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetSummarized(v bool) {
 	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 15)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCreditsSpent(v float32) {
 	x.xxx_hidden_CreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 15)
 }
 
 // Deprecated: Marked as deprecated in response.proto.
@@ -1867,11 +1921,41 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetByokTokenUsa
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetPlatformCreditsSpent(v float32) {
 	x.xxx_hidden_PlatformCreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 15)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCustomEndpointTokenUsage(v map[string]*ResponseEvent_StreamFinished_ModelTokenUsage) {
 	x.xxx_hidden_CustomEndpointTokenUsage = v
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCostCents(v string) {
+	x.xxx_hidden_CostCents = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 15)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetPlatformFeeCents(v string) {
+	x.xxx_hidden_PlatformFeeCents = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 15)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTotalInputTokens(v uint64) {
+	x.xxx_hidden_TotalInputTokens = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 11, 15)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTotalOutputTokens(v uint64) {
+	x.xxx_hidden_TotalOutputTokens = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 12, 15)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTotalCacheReadTokens(v uint64) {
+	x.xxx_hidden_TotalCacheReadTokens = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 15)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTotalCacheWriteTokens(v uint64) {
+	x.xxx_hidden_TotalCacheWriteTokens = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 14, 15)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindowUsage() bool {
@@ -1909,6 +1993,48 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasPlatformCred
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
 }
 
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasCostCents() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 9)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasPlatformFeeCents() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 10)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasTotalInputTokens() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 11)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasTotalOutputTokens() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 12)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasTotalCacheReadTokens() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 13)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasTotalCacheWriteTokens() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 14)
+}
+
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearContextWindowUsage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ContextWindowUsage = 0
@@ -1931,6 +2057,36 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearToolUsageM
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearPlatformCreditsSpent() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
 	x.xxx_hidden_PlatformCreditsSpent = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearCostCents() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 9)
+	x.xxx_hidden_CostCents = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearPlatformFeeCents() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 10)
+	x.xxx_hidden_PlatformFeeCents = nil
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearTotalInputTokens() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 11)
+	x.xxx_hidden_TotalInputTokens = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearTotalOutputTokens() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 12)
+	x.xxx_hidden_TotalOutputTokens = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearTotalCacheReadTokens() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 13)
+	x.xxx_hidden_TotalCacheReadTokens = 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearTotalCacheWriteTokens() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 14)
+	x.xxx_hidden_TotalCacheWriteTokens = 0
 }
 
 type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
@@ -1958,6 +2114,27 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	// Token usage using a custom endpoint.
 	// The model id used in custom_endpoint_token_usage is the config_key of custom model
 	CustomEndpointTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage
+	// The exact, at-cost inference cost spent so far in the conversation, in USD
+	// cents. Encoded as a canonical decimal string to preserve fractional cents
+	// losslessly (e.g. "12.3456"); an empty string means unset/zero. Parse with a
+	// decimal type and never as a float on a charging path. This is the at-cost
+	// replacement for credits_spent.
+	CostCents *string
+	// The exact transparent platform fee spent so far in the conversation, in USD
+	// cents, encoded as a canonical decimal string (e.g. "1.5"); an empty string
+	// means unset/zero. This is the at-cost replacement for platform_credits_spent
+	// and is surfaced as its own line item.
+	PlatformFeeCents *string
+	// Total input (prompt) tokens across every model and API key used in the conversation.
+	TotalInputTokens *uint64
+	// Total output (completion) tokens across every model and API key used in the conversation.
+	TotalOutputTokens *uint64
+	// Total input cache-read tokens across the conversation. Only populated for
+	// providers that report cached token usage (e.g. Anthropic).
+	TotalCacheReadTokens *uint64
+	// Total input cache-write tokens across the conversation. Only populated for
+	// providers that report cached token usage (e.g. Anthropic).
+	TotalCacheWriteTokens *uint64
 }
 
 func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
@@ -1965,15 +2142,15 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ContextWindowUsage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 15)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
 	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 15)
 		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	if b.CreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 15)
 		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
@@ -1981,10 +2158,34 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	x.xxx_hidden_WarpTokenUsage = b.WarpTokenUsage
 	x.xxx_hidden_ByokTokenUsage = b.ByokTokenUsage
 	if b.PlatformCreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 15)
 		x.xxx_hidden_PlatformCreditsSpent = *b.PlatformCreditsSpent
 	}
 	x.xxx_hidden_CustomEndpointTokenUsage = b.CustomEndpointTokenUsage
+	if b.CostCents != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 15)
+		x.xxx_hidden_CostCents = b.CostCents
+	}
+	if b.PlatformFeeCents != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 15)
+		x.xxx_hidden_PlatformFeeCents = b.PlatformFeeCents
+	}
+	if b.TotalInputTokens != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 11, 15)
+		x.xxx_hidden_TotalInputTokens = *b.TotalInputTokens
+	}
+	if b.TotalOutputTokens != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 12, 15)
+		x.xxx_hidden_TotalOutputTokens = *b.TotalOutputTokens
+	}
+	if b.TotalCacheReadTokens != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 15)
+		x.xxx_hidden_TotalCacheReadTokens = *b.TotalCacheReadTokens
+	}
+	if b.TotalCacheWriteTokens != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 14, 15)
+		x.xxx_hidden_TotalCacheWriteTokens = *b.TotalCacheWriteTokens
+	}
 	return m0
 }
 
@@ -4841,7 +5042,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xb0,\n" +
+	"task.proto\"\xcb.\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4853,7 +5054,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xea(\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\x85+\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4869,8 +5070,7 @@ const file_response_proto_rawDesc = "" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12\x8b\x01\n" +
-	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\x87\n" +
-	"\n" +
+	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\xa2\f\n" +
 	"\x19ConversationUsageMetadata\x120\n" +
 	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12\x1e\n" +
 	"\n" +
@@ -4883,7 +5083,15 @@ const file_response_proto_rawDesc = "" +
 	"\x10warp_token_usage\x18\x06 \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntryR\x0ewarpTokenUsage\x12\x89\x01\n" +
 	"\x10byok_token_usage\x18\a \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntryR\x0ebyokTokenUsage\x124\n" +
 	"\x16platform_credits_spent\x18\b \x01(\x02R\x14platformCreditsSpent\x12\xa8\x01\n" +
-	"\x1bcustom_endpoint_token_usage\x18\t \x03(\v2i.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntryR\x18customEndpointTokenUsage\x1a\x84\x01\n" +
+	"\x1bcustom_endpoint_token_usage\x18\t \x03(\v2i.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntryR\x18customEndpointTokenUsage\x12\x1d\n" +
+	"\n" +
+	"cost_cents\x18\n" +
+	" \x01(\tR\tcostCents\x12,\n" +
+	"\x12platform_fee_cents\x18\v \x01(\tR\x10platformFeeCents\x12,\n" +
+	"\x12total_input_tokens\x18\f \x01(\x04R\x10totalInputTokens\x12.\n" +
+	"\x13total_output_tokens\x18\r \x01(\x04R\x11totalOutputTokens\x125\n" +
+	"\x17total_cache_read_tokens\x18\x0e \x01(\x04R\x14totalCacheReadTokens\x127\n" +
+	"\x18total_cache_write_tokens\x18\x0f \x01(\x04R\x15totalCacheWriteTokens\x1a\x84\x01\n" +
 	"\x13WarpTokenUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x84\x01\n" +

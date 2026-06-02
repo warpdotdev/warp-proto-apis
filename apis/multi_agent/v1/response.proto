@@ -113,6 +113,33 @@ message ResponseEvent {
       // Token usage using a custom endpoint.
       // The model id used in custom_endpoint_token_usage is the config_key of custom model
       map<string, ModelTokenUsage> custom_endpoint_token_usage = 9;
+
+      // The exact, at-cost inference cost spent so far in the conversation, in USD
+      // cents. Encoded as a canonical decimal string to preserve fractional cents
+      // losslessly (e.g. "12.3456"); an empty string means unset/zero. Parse with a
+      // decimal type and never as a float on a charging path. This is the at-cost
+      // replacement for credits_spent.
+      string cost_cents = 10;
+
+      // The exact transparent platform fee spent so far in the conversation, in USD
+      // cents, encoded as a canonical decimal string (e.g. "1.5"); an empty string
+      // means unset/zero. This is the at-cost replacement for platform_credits_spent
+      // and is surfaced as its own line item.
+      string platform_fee_cents = 11;
+
+      // Total input (prompt) tokens across every model and API key used in the conversation.
+      uint64 total_input_tokens = 12;
+
+      // Total output (completion) tokens across every model and API key used in the conversation.
+      uint64 total_output_tokens = 13;
+
+      // Total input cache-read tokens across the conversation. Only populated for
+      // providers that report cached token usage (e.g. Anthropic).
+      uint64 total_cache_read_tokens = 14;
+
+      // Total input cache-write tokens across the conversation. Only populated for
+      // providers that report cached token usage (e.g. Anthropic).
+      uint64 total_cache_write_tokens = 15;
     }
 
     // Token usage by model.
