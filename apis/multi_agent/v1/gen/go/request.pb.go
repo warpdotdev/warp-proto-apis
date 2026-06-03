@@ -4058,11 +4058,7 @@ type Request_Input_ToolCallResult_builder struct {
 	StartAgentV2                      *StartAgentV2Result
 	UploadFileArtifact                *UploadFileArtifactResult
 	RunAgentsResult                   *RunAgentsResult
-	// Emitted by the client when its local watchdog fires for a pending
-	// WaitForEvents tool call. See WaitForEventsResult in task.proto for
-	// the full contract; the variant identity alone signals "the wait
-	// timed out, decide what to do next" to the agent.
-	WaitForEvents *WaitForEventsResult
+	WaitForEvents                     *WaitForEventsResult
 	// -- end of xxx_hidden_Result
 }
 
@@ -4319,10 +4315,6 @@ type request_Input_ToolCallResult_RunAgentsResult struct {
 }
 
 type request_Input_ToolCallResult_WaitForEvents struct {
-	// Emitted by the client when its local watchdog fires for a pending
-	// WaitForEvents tool call. See WaitForEventsResult in task.proto for
-	// the full contract; the variant identity alone signals "the wait
-	// timed out, decide what to do next" to the agent.
 	WaitForEvents *WaitForEventsResult `protobuf:"bytes,35,opt,name=wait_for_events,json=waitForEvents,oneof"`
 }
 

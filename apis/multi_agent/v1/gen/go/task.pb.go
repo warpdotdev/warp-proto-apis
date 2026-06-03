@@ -10449,18 +10449,6 @@ func (*uploadFileArtifactResult_Success_) isUploadFileArtifactResult_Result() {}
 
 func (*uploadFileArtifactResult_Error_) isUploadFileArtifactResult_Result() {}
 
-// Emitted by the client when its local waiting watchdog fires for a
-// pending `WaitForEvents` tool call (see Message.ToolCall.WaitForEvents).
-// The mere presence of this result type tells the agent that its
-// WaitForEvents call timed out without an inbound resume input arriving;
-// the agent's next turn decides how to proceed (finish_task, re-yield via
-// another wait_for_events, or any other action). The server never
-// synthesizes this result -- inbound resume paths cancel the pending
-// call via the existing generic Cancel mechanism instead.
-//
-// Used in BOTH directions:
-//   - server -> client (history form):  Message.ToolCallResult.result.wait_for_events
-//   - client -> server (input form):    Request.Input.ToolCallResult.result.wait_for_events
 type WaitForEventsResult struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -23159,14 +23147,9 @@ func (*message_ToolCall_ComputerUseTarget_Window_) isMessage_ToolCall_ComputerUs
 
 // A tool call indicating the agent has yielded and is waiting for inbound
 // events (a user message, an inbound message from another agent, or a
-// lifecycle event). The call is emitted as an unresolved tool call: the
-// server does NOT synthesize a result at yield time. The client
-// pattern-matches this variant to transition its conversation into a
-// dedicated waiting state and to schedule a local watchdog. The wait ends
-// when either (a) a new inbound input supersedes the call -- the server's
-// existing tool-call-supersede path emits a generic Cancel result for the
-// pending call -- or (b) the client's watchdog fires and the client emits
-// a WaitForEventsResult itself as a new tool-call-result input.
+// lifecycle event). The wait ends when either (a) a new inbound input
+// supersedes the call or (b) `idle_timeout_seconds` elapses without any
+// inbound input arriving.
 type Message_ToolCall_WaitForEvents struct {
 	state                         protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_IdleTimeoutSeconds int32                  `protobuf:"varint,1,opt,name=idle_timeout_seconds,json=idleTimeoutSeconds"`
@@ -23228,11 +23211,7 @@ func (x *Message_ToolCall_WaitForEvents) ClearIdleTimeoutSeconds() {
 type Message_ToolCall_WaitForEvents_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Upper bound on how long the client should wait for a resume input
-	// before emitting a synthetic WaitForEventsResult on the agent's
-	// behalf. Sourced from the server's ExtendTaskIdleTimeout-resolved
-	// (and tenant-capped) value at yield time, converted to seconds for
-	// finer-grained client-side timer scheduling. Unset means the client
+	// Upper bound on how long the client should wait. Unset means the client
 	// should fall back to its default waiting policy.
 	IdleTimeoutSeconds *int32
 }
