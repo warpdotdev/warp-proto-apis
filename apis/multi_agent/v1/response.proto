@@ -134,6 +134,10 @@ message ResponseEvent {
       // threshold (e.g. >272K for GPT-5.4/GPT-5.5, >200K for Gemini). The client
       // uses this to display a pricing warning.
       bool long_context_used = 4;
+
+      // Stable public model ID used by clients for identity matching.
+      // This is omitted for custom endpoint and non-public model usage.
+      string client_model_id = 5;
     }
 
     // Tool usage by tool.
