@@ -1728,6 +1728,7 @@ func (*responseEvent_StreamFinished_InvalidApiKey_) isResponseEvent_StreamFinish
 type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
 	state                               protoimpl.MessageState                                   `protogen:"opaque.v1"`
 	xxx_hidden_ContextWindowUsage       float32                                                  `protobuf:"fixed32,1,opt,name=context_window_usage,json=contextWindowUsage"`
+	xxx_hidden_LongContextUsed          bool                                                     `protobuf:"varint,10,opt,name=long_context_used,json=longContextUsed"`
 	xxx_hidden_Summarized               bool                                                     `protobuf:"varint,2,opt,name=summarized"`
 	xxx_hidden_CreditsSpent             float32                                                  `protobuf:"fixed32,3,opt,name=credits_spent,json=creditsSpent"`
 	xxx_hidden_TokenUsage               *[]*ResponseEvent_StreamFinished_ModelTokenUsage         `protobuf:"bytes,4,rep,name=token_usage,json=tokenUsage"`
@@ -1772,6 +1773,13 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetContextWindo
 		return x.xxx_hidden_ContextWindowUsage
 	}
 	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetLongContextUsed() bool {
+	if x != nil {
+		return x.xxx_hidden_LongContextUsed
+	}
+	return false
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetSummarized() bool {
@@ -1835,17 +1843,22 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetCustomEndpoi
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 10)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetLongContextUsed(v bool) {
+	x.xxx_hidden_LongContextUsed = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 10)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetSummarized(v bool) {
 	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 10)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCreditsSpent(v float32) {
 	x.xxx_hidden_CreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 10)
 }
 
 // Deprecated: Marked as deprecated in response.proto.
@@ -1867,7 +1880,7 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetByokTokenUsa
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetPlatformCreditsSpent(v float32) {
 	x.xxx_hidden_PlatformCreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 10)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCustomEndpointTokenUsage(v map[string]*ResponseEvent_StreamFinished_ModelTokenUsage) {
@@ -1881,18 +1894,25 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindo
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasSummarized() bool {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasLongContextUsed() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasCreditsSpent() bool {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasSummarized() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasCreditsSpent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasToolUsageMetadata() bool {
@@ -1906,7 +1926,7 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasPlatformCred
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearContextWindowUsage() {
@@ -1914,13 +1934,18 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearContextWin
 	x.xxx_hidden_ContextWindowUsage = 0
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearSummarized() {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearLongContextUsed() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_LongContextUsed = false
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearSummarized() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_Summarized = false
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearCreditsSpent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_CreditsSpent = 0
 }
 
@@ -1929,7 +1954,7 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearToolUsageM
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearPlatformCreditsSpent() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
 	x.xxx_hidden_PlatformCreditsSpent = 0
 }
 
@@ -1938,6 +1963,9 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 
 	// The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
 	ContextWindowUsage *float32
+	// Whether the latest successfully persisted top-level request used long-context pricing for
+	// Warp-charged or BYOK inference.
+	LongContextUsed *bool
 	// Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
 	Summarized *bool
 	// The total number of inference credits spent so far in the conversation.
@@ -1965,15 +1993,19 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ContextWindowUsage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 10)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
+	if b.LongContextUsed != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 10)
+		x.xxx_hidden_LongContextUsed = *b.LongContextUsed
+	}
 	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 10)
 		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	if b.CreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 10)
 		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
@@ -1981,7 +2013,7 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	x.xxx_hidden_WarpTokenUsage = b.WarpTokenUsage
 	x.xxx_hidden_ByokTokenUsage = b.ByokTokenUsage
 	if b.PlatformCreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 10)
 		x.xxx_hidden_PlatformCreditsSpent = *b.PlatformCreditsSpent
 	}
 	x.xxx_hidden_CustomEndpointTokenUsage = b.CustomEndpointTokenUsage
@@ -4841,7 +4873,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xb0,\n" +
+	"task.proto\"\xf5,\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -4853,7 +4885,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xea(\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xaf)\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -4869,10 +4901,12 @@ const file_response_proto_rawDesc = "" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12`\n" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostR\vrequestCost\x12\x8b\x01\n" +
-	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\x87\n" +
+	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x1a\xb3\n" +
 	"\n" +
 	"\x19ConversationUsageMetadata\x120\n" +
-	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12\x1e\n" +
+	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12*\n" +
+	"\x11long_context_used\x18\n" +
+	" \x01(\bR\x0flongContextUsed\x12\x1e\n" +
 	"\n" +
 	"summarized\x18\x02 \x01(\bR\n" +
 	"summarized\x12#\n" +
@@ -4892,14 +4926,14 @@ const file_response_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x8e\x01\n" +
 	"\x1dCustomEndpointTokenUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
-	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\xb1\x02\n" +
+	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\xca\x02\n" +
 	"\x0fModelTokenUsage\x12\x1d\n" +
 	"\bmodel_id\x18\x01 \x01(\tB\x02\x18\x01R\amodelId\x12!\n" +
 	"\ftotal_tokens\x18\x02 \x01(\rR\vtotalTokens\x12\x92\x01\n" +
 	"\x17token_usage_by_category\x18\x03 \x03(\v2[.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntryR\x14tokenUsageByCategory\x1aG\n" +
 	"\x19TokenUsageByCategoryEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01\x1a\x88\f\n" +
+	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01J\x04\b\x04\x10\x05R\x11long_context_used\x1a\x88\f\n" +
 	"\x11ToolUsageMetadata\x12m\n" +
 	"\x11run_command_stats\x18\x01 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStatsR\x0frunCommandStats\x12i\n" +
 	"\x10read_files_stats\x18\x02 \x01(\v2?.warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStatsR\x0ereadFilesStats\x12s\n" +
