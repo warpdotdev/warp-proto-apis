@@ -405,6 +405,7 @@ message Message {
       StartAgentV2 start_agent_v2 = 33;
       UploadFileArtifact upload_file_artifact = 34;
       RunAgents run_agents = 35;
+      WaitForEvents wait_for_events = 36;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -931,6 +932,17 @@ message Message {
         int32 pid = 2;
       }
     }
+
+    // A tool call indicating the agent has yielded and is waiting for inbound
+    // events (a user message, an inbound message from another agent, or a
+    // lifecycle event). The wait ends when either (a) a new inbound input
+    // supersedes the call or (b) `idle_timeout_seconds` elapses without any
+    // inbound input arriving.
+    message WaitForEvents {
+      // Upper bound on how long the client should wait. Unset means the client
+      // should fall back to its default waiting policy.
+      int32 idle_timeout_seconds = 1;
+    }
   }
 
   // Entry in the message log representing the result of a tool call.
@@ -984,6 +996,7 @@ message Message {
       StartAgentV2Result start_agent_v2 = 37;
       UploadFileArtifactResult upload_file_artifact = 38;
       RunAgentsResult run_agents_result = 39;
+      WaitForEventsResult wait_for_events = 40;
     }
 
     // Result of a server-side tool call.
@@ -1672,6 +1685,7 @@ enum ToolType {
   START_AGENT_V2 = 30;
   UPLOAD_FILE_ARTIFACT = 31;
   RUN_AGENTS = 32;
+  WAIT_FOR_EVENTS = 33;
 }
 
 message UserQueryMode {
@@ -1987,6 +2001,8 @@ message UploadFileArtifactResult {
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
+
+message WaitForEventsResult {}
 
 message PassiveSuggestionResultType {
   oneof trigger {

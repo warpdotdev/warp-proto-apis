@@ -185,6 +185,7 @@ message Request {
         StartAgentV2Result start_agent_v2 = 32;
         UploadFileArtifactResult upload_file_artifact = 33;
         RunAgentsResult run_agents_result = 34;
+        WaitForEventsResult wait_for_events = 35;
       }
     }
 
@@ -498,12 +499,19 @@ message Request {
         string region = 4;
       }
 
+      // Optional GCP Credentials (for Gemini Enterprise Agent Platform)
+      GoogleCloudCredentials google_cloud_credentials = 7;
+
+      message GoogleCloudCredentials {
+        string access_token = 1 [ (sensitive) = true ];
+      }
+
       // Optional xAI/Grok OAuth access token from a connected Grok (SuperGrok) subscription.
       // When set, the server's xAI harness authenticates with this bearer token instead of
       // Warp's org-wide xAI API key.
-      string grok_oauth_access_token = 7 [ (sensitive) = true ];
+      string grok_oauth_access_token = 8 [ (sensitive) = true ];
 
-      // TODO(isaiah): Add Azure/GCP credentials here...
+      // TODO(isaiah): Add Azure
     }
 
     message CustomModelProviders {
