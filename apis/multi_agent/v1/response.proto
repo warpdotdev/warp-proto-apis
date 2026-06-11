@@ -87,9 +87,9 @@ message ResponseEvent {
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
       float context_window_usage = 1;
-      // Whether the latest successfully persisted top-level request used long-context pricing for
-      // Warp-charged or BYOK inference.
-      bool long_context_used = 10;
+      // Input tokens of the latest primary-agent LLM call in the latest successfully persisted
+      // top-level request, when that request had Warp-charged or BYOK usage; 0 otherwise.
+      uint32 total_input_tokens = 10;
 
       // Whether messages were summarized for the agent because the conversation got too big (i.e. the context window was too full)
       bool summarized = 2;
