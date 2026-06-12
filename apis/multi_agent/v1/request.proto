@@ -120,8 +120,10 @@ message Request {
           // outbound request after the user edits the plan card.
           OrchestrationConfigUpdate orchestration_config_update = 7;
 
-          // Marker accompanying the first local user query after a cloud
-          // conversation is continued locally.
+          // Marker signaling that a cloud conversation has been continued
+          // locally. When present, it is always the first entry in `inputs`,
+          // preceding the other user inputs sent with the handoff (e.g. the
+          // first local user query).
           ConversationHandoff conversation_handoff = 8;
         }
       }
