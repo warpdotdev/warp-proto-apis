@@ -123,8 +123,6 @@ message ResponseEvent {
     // type as this message is used to track simple token usage stats on a per-model
     // basis, while TokenUsage is used to track much more granular data.
     message ModelTokenUsage {
-      reserved 4;
-      reserved long_context_used;
       // The internal id of the model.
       // This has been deprecated, as we now use the model id as a key to access this value.
       string model_id = 1 [deprecated = true];
