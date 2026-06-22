@@ -117,25 +117,41 @@ message ResponseEvent {
       // The model id used in custom_endpoint_token_usage is the config_key of custom model
       map<string, ModelTokenUsage> custom_endpoint_token_usage = 9;
 
-      // A breakdown of the context window usage into named segments (e.g. system
-      // prompt, tool definitions, conversation history, latest input). The
-      // segments are scaled so that they sum to `context_window_usage`. Ordered
-      // for display.
-      repeated ContextWindowSegment context_window_segments = 11;
+      // A breakdown of the context window usage into segments
+      // (e.g. system prompt, tool definitions, conversation history, latest
+      // input). The segment token counts add up to the token total represented
+      // by `context_window_usage`. The client derives per-segment percentages
+      // from these token counts; the API does not guarantee any ordering.
+      repeated ContextWindowSegment context_window_segments = 11 [ (internal) = true ];
     }
 
-    // A single named portion of the context window (e.g. "system_prompt").
+    // A single portion of the context window, described by its kind and an
+    // estimated token count.
     message ContextWindowSegment {
-      // The server-defined segment name (e.g. "system_prompt",
-      // "tool_definitions", "conversation_history", "latest_input", "images").
-      string name = 1;
+      // The kind of context window segment this entry represents.
+      ContextWindowSegmentType segment_type = 1;
 
-      // The estimated number of tokens this segment occupies in the context window.
+      // The estimated number of tokens this segment contributes to the
+      // current context window usage.
       uint32 token_count = 2;
+    }
 
-      // The fraction of the model's context window this segment occupies
-      // (segment tokens / model context window).
-      float fraction = 3;
+    // The kind of a ContextWindowSegment.
+    enum ContextWindowSegmentType {
+      // Unknown or unclassified segment.
+      UNKNOWN = 0;
+      // The system prompt.
+      SYSTEM_PROMPT = 1;
+      // Tool definitions provided to the model.
+      TOOL_DEFINITIONS = 2;
+      // Prior conversation history.
+      CONVERSATION_HISTORY = 3;
+      // The latest user input.
+      LATEST_INPUT = 4;
+      // Image attachments.
+      IMAGES = 5;
+      // Any other segment not covered by the values above.
+      OTHER = 6;
     }
 
     // Token usage by model.
