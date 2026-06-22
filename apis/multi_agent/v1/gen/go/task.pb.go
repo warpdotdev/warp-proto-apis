@@ -37707,7 +37707,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xc2\xc5\x01\n" +
+	"\x0ecomment_target\"\xc8\xc5\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -38269,13 +38269,13 @@ const file_task_proto_rawDesc = "" +
 	"\vInvokeSkill\x120\n" +
 	"\x05skill\x18\x01 \x01(\v2\x1a.warp.multi_agent.v1.SkillR\x05skill\x12E\n" +
 	"\n" +
-	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQuery\x1a\xc8\x01\n" +
+	"user_query\x18\x02 \x01(\v2&.warp.multi_agent.v1.Message.UserQueryR\tuserQuery\x1a\xce\x01\n" +
 	"\tModelUsed\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x12,\n" +
 	"\x12model_display_name\x18\x02 \x01(\tR\x10modelDisplayName\x12\x1f\n" +
 	"\vis_fallback\x18\x03 \x01(\bR\n" +
-	"isFallback\x12Q\n" +
-	"\x17prompt_cache_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x14promptCacheExpiresAtB\t\n" +
+	"isFallback\x12W\n" +
+	"\x17prompt_cache_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x04\x88\xb5\x18\x01R\x14promptCacheExpiresAtB\t\n" +
 	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xab\x03\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
 	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12y\n" +
