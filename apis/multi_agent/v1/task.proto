@@ -1153,6 +1153,9 @@ message Message {
     string model_id = 1;
     string model_display_name = 2;
     bool is_fallback = 3;
+    // The time at which the provider-side prompt cache for this request is
+    // expected to expire. Absent means unknown / no cache-expiry info.
+    google.protobuf.Timestamp prompt_cache_expires_at = 4 [ (internal) = true ];
   }
 }
 
