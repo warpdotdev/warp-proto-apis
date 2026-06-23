@@ -477,15 +477,15 @@ message Request {
     // uses the legacy full-screen / frontmost-application behavior.
     bool supports_background_computer_use = 29;
 
-    // A registry of user-defined "auto" models (named routers) configured by
-    // the user. Team-level auto models are _not_ supplied here; those are
+    // A registry of user-defined model routers (named routers) configured by
+    // the user. Team-level model routers are _not_ supplied here; those are
     // already known to the server and the client should simply supply the
     // corresponding LLM ID for those models.
     //
     // Like `custom_model_providers`, this is an inline registry: when a custom
-    // auto model is selected, `ModelConfig.base`/`coding` carry that model's
+    // model router is selected, `ModelConfig.base`/`coding` carry that router's
     // `config_key`, which indexes into this registry.
-    CustomAutoModels custom_auto_models = 30;
+    CustomModelRouters custom_model_routers = 30;
 
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
@@ -568,18 +568,18 @@ message Request {
       }
     }
 
-    // A custom auto model routes either by Warp-determined task complexity
+    // A custom model router routes either by Warp-determined task complexity
     // (`ComplexityRouting`) or by user-authored prompt categories
     // (`PromptRouting`). Routing targets are always concrete (non-auto) model
     // IDs, identical to the IDs shown in Warp's model picker (e.g.
     // "claude-4-5-sonnet", "gpt-5-mini").
-    message CustomAutoModels {
-      repeated CustomAutoModel models = 1;
+    message CustomModelRouters {
+      repeated CustomModelRouter routers = 1;
 
-      message CustomAutoModel {
-        // The key referenced by `ModelConfig` when this custom auto model is
+      message CustomModelRouter {
+        // The key referenced by `ModelConfig` when this custom model router is
         // selected. The client must guarantee this is unique across all custom
-        // autos (and custom models).
+        // model routers (and custom models).
         string config_key = 1;
 
         // The user-facing name shown in the model picker.

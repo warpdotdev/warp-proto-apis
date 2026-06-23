@@ -1475,7 +1475,7 @@ type Request_Settings struct {
 	xxx_hidden_SupportsOrchestrationV2                    bool                                   `protobuf:"varint,27,opt,name=supports_orchestration_v2,json=supportsOrchestrationV2"`
 	xxx_hidden_CustomModelProviders                       *Request_Settings_CustomModelProviders `protobuf:"bytes,28,opt,name=custom_model_providers,json=customModelProviders"`
 	xxx_hidden_SupportsBackgroundComputerUse              bool                                   `protobuf:"varint,29,opt,name=supports_background_computer_use,json=supportsBackgroundComputerUse"`
-	xxx_hidden_CustomAutoModels                           *Request_Settings_CustomAutoModels     `protobuf:"bytes,30,opt,name=custom_auto_models,json=customAutoModels"`
+	xxx_hidden_CustomModelRouters                         *Request_Settings_CustomModelRouters   `protobuf:"bytes,30,opt,name=custom_model_routers,json=customModelRouters"`
 	XXX_raceDetectHookData                                protoimpl.RaceDetectHookData
 	XXX_presence                                          [1]uint32
 	unknownFields                                         protoimpl.UnknownFields
@@ -1714,9 +1714,9 @@ func (x *Request_Settings) GetSupportsBackgroundComputerUse() bool {
 	return false
 }
 
-func (x *Request_Settings) GetCustomAutoModels() *Request_Settings_CustomAutoModels {
+func (x *Request_Settings) GetCustomModelRouters() *Request_Settings_CustomModelRouters {
 	if x != nil {
-		return x.xxx_hidden_CustomAutoModels
+		return x.xxx_hidden_CustomModelRouters
 	}
 	return nil
 }
@@ -1861,8 +1861,8 @@ func (x *Request_Settings) SetSupportsBackgroundComputerUse(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 28, 30)
 }
 
-func (x *Request_Settings) SetCustomAutoModels(v *Request_Settings_CustomAutoModels) {
-	x.xxx_hidden_CustomAutoModels = v
+func (x *Request_Settings) SetCustomModelRouters(v *Request_Settings_CustomModelRouters) {
+	x.xxx_hidden_CustomModelRouters = v
 }
 
 func (x *Request_Settings) HasModelConfig() bool {
@@ -2054,11 +2054,11 @@ func (x *Request_Settings) HasSupportsBackgroundComputerUse() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 28)
 }
 
-func (x *Request_Settings) HasCustomAutoModels() bool {
+func (x *Request_Settings) HasCustomModelRouters() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_CustomAutoModels != nil
+	return x.xxx_hidden_CustomModelRouters != nil
 }
 
 func (x *Request_Settings) ClearModelConfig() {
@@ -2193,8 +2193,8 @@ func (x *Request_Settings) ClearSupportsBackgroundComputerUse() {
 	x.xxx_hidden_SupportsBackgroundComputerUse = false
 }
 
-func (x *Request_Settings) ClearCustomAutoModels() {
-	x.xxx_hidden_CustomAutoModels = nil
+func (x *Request_Settings) ClearCustomModelRouters() {
+	x.xxx_hidden_CustomModelRouters = nil
 }
 
 type Request_Settings_builder struct {
@@ -2282,15 +2282,15 @@ type Request_Settings_builder struct {
 	// and window enumeration). When `false` or unset, the computer-use agent
 	// uses the legacy full-screen / frontmost-application behavior.
 	SupportsBackgroundComputerUse *bool
-	// A registry of user-defined "auto" models (named routers) configured by
-	// the user. Team-level auto models are _not_ supplied here; those are
+	// A registry of user-defined model routers (named routers) configured by
+	// the user. Team-level model routers are _not_ supplied here; those are
 	// already known to the server and the client should simply supply the
 	// corresponding LLM ID for those models.
 	//
 	// Like `custom_model_providers`, this is an inline registry: when a custom
-	// auto model is selected, `ModelConfig.base`/`coding` carry that model's
+	// model router is selected, `ModelConfig.base`/`coding` carry that router's
 	// `config_key`, which indexes into this registry.
-	CustomAutoModels *Request_Settings_CustomAutoModels
+	CustomModelRouters *Request_Settings_CustomModelRouters
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -2398,7 +2398,7 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 28, 30)
 		x.xxx_hidden_SupportsBackgroundComputerUse = *b.SupportsBackgroundComputerUse
 	}
-	x.xxx_hidden_CustomAutoModels = b.CustomAutoModels
+	x.xxx_hidden_CustomModelRouters = b.CustomModelRouters
 	return m0
 }
 
@@ -8112,32 +8112,32 @@ func (b0 Request_Settings_CustomModelProviders_builder) Build() *Request_Setting
 	return m0
 }
 
-// A custom auto model routes either by Warp-determined task complexity
+// A custom model router routes either by Warp-determined task complexity
 // (`ComplexityRouting`) or by user-authored prompt categories
 // (`PromptRouting`). Routing targets are always concrete (non-auto) model
 // IDs, identical to the IDs shown in Warp's model picker (e.g.
 // "claude-4-5-sonnet", "gpt-5-mini").
-type Request_Settings_CustomAutoModels struct {
-	state             protoimpl.MessageState                                `protogen:"opaque.v1"`
-	xxx_hidden_Models *[]*Request_Settings_CustomAutoModels_CustomAutoModel `protobuf:"bytes,1,rep,name=models"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+type Request_Settings_CustomModelRouters struct {
+	state              protoimpl.MessageState                                    `protogen:"opaque.v1"`
+	xxx_hidden_Routers *[]*Request_Settings_CustomModelRouters_CustomModelRouter `protobuf:"bytes,1,rep,name=routers"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
 }
 
-func (x *Request_Settings_CustomAutoModels) Reset() {
-	*x = Request_Settings_CustomAutoModels{}
+func (x *Request_Settings_CustomModelRouters) Reset() {
+	*x = Request_Settings_CustomModelRouters{}
 	mi := &file_request_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_CustomAutoModels) String() string {
+func (x *Request_Settings_CustomModelRouters) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_CustomAutoModels) ProtoMessage() {}
+func (*Request_Settings_CustomModelRouters) ProtoMessage() {}
 
-func (x *Request_Settings_CustomAutoModels) ProtoReflect() protoreflect.Message {
+func (x *Request_Settings_CustomModelRouters) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8149,30 +8149,30 @@ func (x *Request_Settings_CustomAutoModels) ProtoReflect() protoreflect.Message 
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_CustomAutoModels) GetModels() []*Request_Settings_CustomAutoModels_CustomAutoModel {
+func (x *Request_Settings_CustomModelRouters) GetRouters() []*Request_Settings_CustomModelRouters_CustomModelRouter {
 	if x != nil {
-		if x.xxx_hidden_Models != nil {
-			return *x.xxx_hidden_Models
+		if x.xxx_hidden_Routers != nil {
+			return *x.xxx_hidden_Routers
 		}
 	}
 	return nil
 }
 
-func (x *Request_Settings_CustomAutoModels) SetModels(v []*Request_Settings_CustomAutoModels_CustomAutoModel) {
-	x.xxx_hidden_Models = &v
+func (x *Request_Settings_CustomModelRouters) SetRouters(v []*Request_Settings_CustomModelRouters_CustomModelRouter) {
+	x.xxx_hidden_Routers = &v
 }
 
-type Request_Settings_CustomAutoModels_builder struct {
+type Request_Settings_CustomModelRouters_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Models []*Request_Settings_CustomAutoModels_CustomAutoModel
+	Routers []*Request_Settings_CustomModelRouters_CustomModelRouter
 }
 
-func (b0 Request_Settings_CustomAutoModels_builder) Build() *Request_Settings_CustomAutoModels {
-	m0 := &Request_Settings_CustomAutoModels{}
+func (b0 Request_Settings_CustomModelRouters_builder) Build() *Request_Settings_CustomModelRouters {
+	m0 := &Request_Settings_CustomModelRouters{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_Models = &b.Models
+	x.xxx_hidden_Routers = &b.Routers
 	return m0
 }
 
@@ -8675,31 +8675,31 @@ func (b0 Request_Settings_CustomModelProviders_CustomModel_builder) Build() *Req
 	return m0
 }
 
-type Request_Settings_CustomAutoModels_CustomAutoModel struct {
-	state                  protoimpl.MessageState                                     `protogen:"opaque.v1"`
-	xxx_hidden_ConfigKey   *string                                                    `protobuf:"bytes,1,opt,name=config_key,json=configKey"`
-	xxx_hidden_Name        *string                                                    `protobuf:"bytes,2,opt,name=name"`
-	xxx_hidden_Router      isRequest_Settings_CustomAutoModels_CustomAutoModel_Router `protobuf_oneof:"router"`
+type Request_Settings_CustomModelRouters_CustomModelRouter struct {
+	state                  protoimpl.MessageState                                         `protogen:"opaque.v1"`
+	xxx_hidden_ConfigKey   *string                                                        `protobuf:"bytes,1,opt,name=config_key,json=configKey"`
+	xxx_hidden_Name        *string                                                        `protobuf:"bytes,2,opt,name=name"`
+	xxx_hidden_Router      isRequest_Settings_CustomModelRouters_CustomModelRouter_Router `protobuf_oneof:"router"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) Reset() {
-	*x = Request_Settings_CustomAutoModels_CustomAutoModel{}
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) Reset() {
+	*x = Request_Settings_CustomModelRouters_CustomModelRouter{}
 	mi := &file_request_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) String() string {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_CustomAutoModels_CustomAutoModel) ProtoMessage() {}
+func (*Request_Settings_CustomModelRouters_CustomModelRouter) ProtoMessage() {}
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ProtoReflect() protoreflect.Message {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8711,7 +8711,7 @@ func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ProtoReflect() proto
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) GetConfigKey() string {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) GetConfigKey() string {
 	if x != nil {
 		if x.xxx_hidden_ConfigKey != nil {
 			return *x.xxx_hidden_ConfigKey
@@ -8721,7 +8721,7 @@ func (x *Request_Settings_CustomAutoModels_CustomAutoModel) GetConfigKey() strin
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) GetName() string {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) GetName() string {
 	if x != nil {
 		if x.xxx_hidden_Name != nil {
 			return *x.xxx_hidden_Name
@@ -8731,148 +8731,148 @@ func (x *Request_Settings_CustomAutoModels_CustomAutoModel) GetName() string {
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) GetComplexity() *Request_Settings_CustomAutoModels_ComplexityBasedRouter {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) GetComplexity() *Request_Settings_CustomModelRouters_ComplexityBasedRouter {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Router.(*request_Settings_CustomAutoModels_CustomAutoModel_Complexity); ok {
+		if x, ok := x.xxx_hidden_Router.(*request_Settings_CustomModelRouters_CustomModelRouter_Complexity); ok {
 			return x.Complexity
 		}
 	}
 	return nil
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) GetPrompt() *Request_Settings_CustomAutoModels_PromptBasedRouter {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) GetPrompt() *Request_Settings_CustomModelRouters_PromptBasedRouter {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Router.(*request_Settings_CustomAutoModels_CustomAutoModel_Prompt); ok {
+		if x, ok := x.xxx_hidden_Router.(*request_Settings_CustomModelRouters_CustomModelRouter_Prompt); ok {
 			return x.Prompt
 		}
 	}
 	return nil
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) SetConfigKey(v string) {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) SetConfigKey(v string) {
 	x.xxx_hidden_ConfigKey = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) SetName(v string) {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) SetName(v string) {
 	x.xxx_hidden_Name = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) SetComplexity(v *Request_Settings_CustomAutoModels_ComplexityBasedRouter) {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) SetComplexity(v *Request_Settings_CustomModelRouters_ComplexityBasedRouter) {
 	if v == nil {
 		x.xxx_hidden_Router = nil
 		return
 	}
-	x.xxx_hidden_Router = &request_Settings_CustomAutoModels_CustomAutoModel_Complexity{v}
+	x.xxx_hidden_Router = &request_Settings_CustomModelRouters_CustomModelRouter_Complexity{v}
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) SetPrompt(v *Request_Settings_CustomAutoModels_PromptBasedRouter) {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) SetPrompt(v *Request_Settings_CustomModelRouters_PromptBasedRouter) {
 	if v == nil {
 		x.xxx_hidden_Router = nil
 		return
 	}
-	x.xxx_hidden_Router = &request_Settings_CustomAutoModels_CustomAutoModel_Prompt{v}
+	x.xxx_hidden_Router = &request_Settings_CustomModelRouters_CustomModelRouter_Prompt{v}
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) HasConfigKey() bool {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) HasConfigKey() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) HasName() bool {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) HasName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) HasRouter() bool {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) HasRouter() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Router != nil
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) HasComplexity() bool {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) HasComplexity() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Router.(*request_Settings_CustomAutoModels_CustomAutoModel_Complexity)
+	_, ok := x.xxx_hidden_Router.(*request_Settings_CustomModelRouters_CustomModelRouter_Complexity)
 	return ok
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) HasPrompt() bool {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) HasPrompt() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Router.(*request_Settings_CustomAutoModels_CustomAutoModel_Prompt)
+	_, ok := x.xxx_hidden_Router.(*request_Settings_CustomModelRouters_CustomModelRouter_Prompt)
 	return ok
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ClearConfigKey() {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) ClearConfigKey() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_ConfigKey = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ClearName() {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Name = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ClearRouter() {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) ClearRouter() {
 	x.xxx_hidden_Router = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ClearComplexity() {
-	if _, ok := x.xxx_hidden_Router.(*request_Settings_CustomAutoModels_CustomAutoModel_Complexity); ok {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) ClearComplexity() {
+	if _, ok := x.xxx_hidden_Router.(*request_Settings_CustomModelRouters_CustomModelRouter_Complexity); ok {
 		x.xxx_hidden_Router = nil
 	}
 }
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) ClearPrompt() {
-	if _, ok := x.xxx_hidden_Router.(*request_Settings_CustomAutoModels_CustomAutoModel_Prompt); ok {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) ClearPrompt() {
+	if _, ok := x.xxx_hidden_Router.(*request_Settings_CustomModelRouters_CustomModelRouter_Prompt); ok {
 		x.xxx_hidden_Router = nil
 	}
 }
 
-const Request_Settings_CustomAutoModels_CustomAutoModel_Router_not_set_case case_Request_Settings_CustomAutoModels_CustomAutoModel_Router = 0
-const Request_Settings_CustomAutoModels_CustomAutoModel_Complexity_case case_Request_Settings_CustomAutoModels_CustomAutoModel_Router = 3
-const Request_Settings_CustomAutoModels_CustomAutoModel_Prompt_case case_Request_Settings_CustomAutoModels_CustomAutoModel_Router = 4
+const Request_Settings_CustomModelRouters_CustomModelRouter_Router_not_set_case case_Request_Settings_CustomModelRouters_CustomModelRouter_Router = 0
+const Request_Settings_CustomModelRouters_CustomModelRouter_Complexity_case case_Request_Settings_CustomModelRouters_CustomModelRouter_Router = 3
+const Request_Settings_CustomModelRouters_CustomModelRouter_Prompt_case case_Request_Settings_CustomModelRouters_CustomModelRouter_Router = 4
 
-func (x *Request_Settings_CustomAutoModels_CustomAutoModel) WhichRouter() case_Request_Settings_CustomAutoModels_CustomAutoModel_Router {
+func (x *Request_Settings_CustomModelRouters_CustomModelRouter) WhichRouter() case_Request_Settings_CustomModelRouters_CustomModelRouter_Router {
 	if x == nil {
-		return Request_Settings_CustomAutoModels_CustomAutoModel_Router_not_set_case
+		return Request_Settings_CustomModelRouters_CustomModelRouter_Router_not_set_case
 	}
 	switch x.xxx_hidden_Router.(type) {
-	case *request_Settings_CustomAutoModels_CustomAutoModel_Complexity:
-		return Request_Settings_CustomAutoModels_CustomAutoModel_Complexity_case
-	case *request_Settings_CustomAutoModels_CustomAutoModel_Prompt:
-		return Request_Settings_CustomAutoModels_CustomAutoModel_Prompt_case
+	case *request_Settings_CustomModelRouters_CustomModelRouter_Complexity:
+		return Request_Settings_CustomModelRouters_CustomModelRouter_Complexity_case
+	case *request_Settings_CustomModelRouters_CustomModelRouter_Prompt:
+		return Request_Settings_CustomModelRouters_CustomModelRouter_Prompt_case
 	default:
-		return Request_Settings_CustomAutoModels_CustomAutoModel_Router_not_set_case
+		return Request_Settings_CustomModelRouters_CustomModelRouter_Router_not_set_case
 	}
 }
 
-type Request_Settings_CustomAutoModels_CustomAutoModel_builder struct {
+type Request_Settings_CustomModelRouters_CustomModelRouter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// The key referenced by `ModelConfig` when this custom auto model is
+	// The key referenced by `ModelConfig` when this custom model router is
 	// selected. The client must guarantee this is unique across all custom
-	// autos (and custom models).
+	// model routers (and custom models).
 	ConfigKey *string
 	// The user-facing name shown in the model picker.
 	Name *string
 	// Fields of oneof xxx_hidden_Router:
-	Complexity *Request_Settings_CustomAutoModels_ComplexityBasedRouter
-	Prompt     *Request_Settings_CustomAutoModels_PromptBasedRouter
+	Complexity *Request_Settings_CustomModelRouters_ComplexityBasedRouter
+	Prompt     *Request_Settings_CustomModelRouters_PromptBasedRouter
 	// -- end of xxx_hidden_Router
 }
 
-func (b0 Request_Settings_CustomAutoModels_CustomAutoModel_builder) Build() *Request_Settings_CustomAutoModels_CustomAutoModel {
-	m0 := &Request_Settings_CustomAutoModels_CustomAutoModel{}
+func (b0 Request_Settings_CustomModelRouters_CustomModelRouter_builder) Build() *Request_Settings_CustomModelRouters_CustomModelRouter {
+	m0 := &Request_Settings_CustomModelRouters_CustomModelRouter{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ConfigKey != nil {
@@ -8884,17 +8884,17 @@ func (b0 Request_Settings_CustomAutoModels_CustomAutoModel_builder) Build() *Req
 		x.xxx_hidden_Name = b.Name
 	}
 	if b.Complexity != nil {
-		x.xxx_hidden_Router = &request_Settings_CustomAutoModels_CustomAutoModel_Complexity{b.Complexity}
+		x.xxx_hidden_Router = &request_Settings_CustomModelRouters_CustomModelRouter_Complexity{b.Complexity}
 	}
 	if b.Prompt != nil {
-		x.xxx_hidden_Router = &request_Settings_CustomAutoModels_CustomAutoModel_Prompt{b.Prompt}
+		x.xxx_hidden_Router = &request_Settings_CustomModelRouters_CustomModelRouter_Prompt{b.Prompt}
 	}
 	return m0
 }
 
-type case_Request_Settings_CustomAutoModels_CustomAutoModel_Router protoreflect.FieldNumber
+type case_Request_Settings_CustomModelRouters_CustomModelRouter_Router protoreflect.FieldNumber
 
-func (x case_Request_Settings_CustomAutoModels_CustomAutoModel_Router) String() string {
+func (x case_Request_Settings_CustomModelRouters_CustomModelRouter_Router) String() string {
 	md := file_request_proto_msgTypes[49].Descriptor()
 	if x == 0 {
 		return "not set"
@@ -8902,28 +8902,28 @@ func (x case_Request_Settings_CustomAutoModels_CustomAutoModel_Router) String() 
 	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
 }
 
-type isRequest_Settings_CustomAutoModels_CustomAutoModel_Router interface {
-	isRequest_Settings_CustomAutoModels_CustomAutoModel_Router()
+type isRequest_Settings_CustomModelRouters_CustomModelRouter_Router interface {
+	isRequest_Settings_CustomModelRouters_CustomModelRouter_Router()
 }
 
-type request_Settings_CustomAutoModels_CustomAutoModel_Complexity struct {
-	Complexity *Request_Settings_CustomAutoModels_ComplexityBasedRouter `protobuf:"bytes,3,opt,name=complexity,oneof"`
+type request_Settings_CustomModelRouters_CustomModelRouter_Complexity struct {
+	Complexity *Request_Settings_CustomModelRouters_ComplexityBasedRouter `protobuf:"bytes,3,opt,name=complexity,oneof"`
 }
 
-type request_Settings_CustomAutoModels_CustomAutoModel_Prompt struct {
-	Prompt *Request_Settings_CustomAutoModels_PromptBasedRouter `protobuf:"bytes,4,opt,name=prompt,oneof"`
+type request_Settings_CustomModelRouters_CustomModelRouter_Prompt struct {
+	Prompt *Request_Settings_CustomModelRouters_PromptBasedRouter `protobuf:"bytes,4,opt,name=prompt,oneof"`
 }
 
-func (*request_Settings_CustomAutoModels_CustomAutoModel_Complexity) isRequest_Settings_CustomAutoModels_CustomAutoModel_Router() {
+func (*request_Settings_CustomModelRouters_CustomModelRouter_Complexity) isRequest_Settings_CustomModelRouters_CustomModelRouter_Router() {
 }
 
-func (*request_Settings_CustomAutoModels_CustomAutoModel_Prompt) isRequest_Settings_CustomAutoModels_CustomAutoModel_Router() {
+func (*request_Settings_CustomModelRouters_CustomModelRouter_Prompt) isRequest_Settings_CustomModelRouters_CustomModelRouter_Router() {
 }
 
 // Routes by Warp-determined task complexity. Each bucket maps to a
 // concrete model ID. The default will be used when task complexity cannot
 // be determined.
-type Request_Settings_CustomAutoModels_ComplexityBasedRouter struct {
+type Request_Settings_CustomModelRouters_ComplexityBasedRouter struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Default     *string                `protobuf:"bytes,1,opt,name=default"`
 	xxx_hidden_Easy        *string                `protobuf:"bytes,2,opt,name=easy"`
@@ -8935,20 +8935,20 @@ type Request_Settings_CustomAutoModels_ComplexityBasedRouter struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) Reset() {
-	*x = Request_Settings_CustomAutoModels_ComplexityBasedRouter{}
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) Reset() {
+	*x = Request_Settings_CustomModelRouters_ComplexityBasedRouter{}
 	mi := &file_request_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) String() string {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_CustomAutoModels_ComplexityBasedRouter) ProtoMessage() {}
+func (*Request_Settings_CustomModelRouters_ComplexityBasedRouter) ProtoMessage() {}
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) ProtoReflect() protoreflect.Message {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -8960,7 +8960,7 @@ func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) ProtoReflect()
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetDefault() string {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) GetDefault() string {
 	if x != nil {
 		if x.xxx_hidden_Default != nil {
 			return *x.xxx_hidden_Default
@@ -8970,7 +8970,7 @@ func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetDefault() s
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetEasy() string {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) GetEasy() string {
 	if x != nil {
 		if x.xxx_hidden_Easy != nil {
 			return *x.xxx_hidden_Easy
@@ -8980,7 +8980,7 @@ func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetEasy() stri
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetMedium() string {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) GetMedium() string {
 	if x != nil {
 		if x.xxx_hidden_Medium != nil {
 			return *x.xxx_hidden_Medium
@@ -8990,7 +8990,7 @@ func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetMedium() st
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetHard() string {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) GetHard() string {
 	if x != nil {
 		if x.xxx_hidden_Hard != nil {
 			return *x.xxx_hidden_Hard
@@ -9000,75 +9000,75 @@ func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) GetHard() stri
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) SetDefault(v string) {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) SetDefault(v string) {
 	x.xxx_hidden_Default = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) SetEasy(v string) {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) SetEasy(v string) {
 	x.xxx_hidden_Easy = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) SetMedium(v string) {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) SetMedium(v string) {
 	x.xxx_hidden_Medium = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) SetHard(v string) {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) SetHard(v string) {
 	x.xxx_hidden_Hard = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) HasDefault() bool {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) HasDefault() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) HasEasy() bool {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) HasEasy() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) HasMedium() bool {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) HasMedium() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) HasHard() bool {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) HasHard() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) ClearDefault() {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) ClearDefault() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Default = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) ClearEasy() {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) ClearEasy() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Easy = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) ClearMedium() {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) ClearMedium() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_Medium = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_ComplexityBasedRouter) ClearHard() {
+func (x *Request_Settings_CustomModelRouters_ComplexityBasedRouter) ClearHard() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_Hard = nil
 }
 
-type Request_Settings_CustomAutoModels_ComplexityBasedRouter_builder struct {
+type Request_Settings_CustomModelRouters_ComplexityBasedRouter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Default *string
@@ -9077,8 +9077,8 @@ type Request_Settings_CustomAutoModels_ComplexityBasedRouter_builder struct {
 	Hard    *string
 }
 
-func (b0 Request_Settings_CustomAutoModels_ComplexityBasedRouter_builder) Build() *Request_Settings_CustomAutoModels_ComplexityBasedRouter {
-	m0 := &Request_Settings_CustomAutoModels_ComplexityBasedRouter{}
+func (b0 Request_Settings_CustomModelRouters_ComplexityBasedRouter_builder) Build() *Request_Settings_CustomModelRouters_ComplexityBasedRouter {
+	m0 := &Request_Settings_CustomModelRouters_ComplexityBasedRouter{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Default != nil {
@@ -9104,30 +9104,30 @@ func (b0 Request_Settings_CustomAutoModels_ComplexityBasedRouter_builder) Build(
 // The rules should be supplied in order of precedence; an earlier matching
 // rule will take precedence over another matching rule later on in the list.
 // If no rule matches, routes to `default_model` (the required catch-all).
-type Request_Settings_CustomAutoModels_PromptBasedRouter struct {
-	state                  protoimpl.MessageState                                             `protogen:"opaque.v1"`
-	xxx_hidden_Default     *string                                                            `protobuf:"bytes,1,opt,name=default"`
-	xxx_hidden_Rules       *[]*Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule `protobuf:"bytes,2,rep,name=rules"`
+type Request_Settings_CustomModelRouters_PromptBasedRouter struct {
+	state                  protoimpl.MessageState                                               `protogen:"opaque.v1"`
+	xxx_hidden_Default     *string                                                              `protobuf:"bytes,1,opt,name=default"`
+	xxx_hidden_Rules       *[]*Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule `protobuf:"bytes,2,rep,name=rules"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) Reset() {
-	*x = Request_Settings_CustomAutoModels_PromptBasedRouter{}
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) Reset() {
+	*x = Request_Settings_CustomModelRouters_PromptBasedRouter{}
 	mi := &file_request_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) String() string {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_CustomAutoModels_PromptBasedRouter) ProtoMessage() {}
+func (*Request_Settings_CustomModelRouters_PromptBasedRouter) ProtoMessage() {}
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) ProtoReflect() protoreflect.Message {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9139,7 +9139,7 @@ func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) ProtoReflect() pro
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) GetDefault() string {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) GetDefault() string {
 	if x != nil {
 		if x.xxx_hidden_Default != nil {
 			return *x.xxx_hidden_Default
@@ -9149,7 +9149,7 @@ func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) GetDefault() strin
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) GetRules() []*Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) GetRules() []*Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule {
 	if x != nil {
 		if x.xxx_hidden_Rules != nil {
 			return *x.xxx_hidden_Rules
@@ -9158,36 +9158,36 @@ func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) GetRules() []*Requ
 	return nil
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) SetDefault(v string) {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) SetDefault(v string) {
 	x.xxx_hidden_Default = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) SetRules(v []*Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) SetRules(v []*Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) {
 	x.xxx_hidden_Rules = &v
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) HasDefault() bool {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) HasDefault() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter) ClearDefault() {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter) ClearDefault() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Default = nil
 }
 
-type Request_Settings_CustomAutoModels_PromptBasedRouter_builder struct {
+type Request_Settings_CustomModelRouters_PromptBasedRouter_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Default *string
-	Rules   []*Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule
+	Rules   []*Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule
 }
 
-func (b0 Request_Settings_CustomAutoModels_PromptBasedRouter_builder) Build() *Request_Settings_CustomAutoModels_PromptBasedRouter {
-	m0 := &Request_Settings_CustomAutoModels_PromptBasedRouter{}
+func (b0 Request_Settings_CustomModelRouters_PromptBasedRouter_builder) Build() *Request_Settings_CustomModelRouters_PromptBasedRouter {
+	m0 := &Request_Settings_CustomModelRouters_PromptBasedRouter{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Default != nil {
@@ -9198,7 +9198,7 @@ func (b0 Request_Settings_CustomAutoModels_PromptBasedRouter_builder) Build() *R
 	return m0
 }
 
-type Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule struct {
+type Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Rule        *string                `protobuf:"bytes,1,opt,name=rule"`
 	xxx_hidden_Model       *string                `protobuf:"bytes,2,opt,name=model"`
@@ -9208,20 +9208,20 @@ type Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) Reset() {
-	*x = Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule{}
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) Reset() {
+	*x = Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule{}
 	mi := &file_request_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) String() string {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) ProtoMessage() {}
+func (*Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) ProtoMessage() {}
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) ProtoReflect() protoreflect.Message {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -9233,7 +9233,7 @@ func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) ProtoRe
 	return mi.MessageOf(x)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) GetRule() string {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) GetRule() string {
 	if x != nil {
 		if x.xxx_hidden_Rule != nil {
 			return *x.xxx_hidden_Rule
@@ -9243,7 +9243,7 @@ func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) GetRule
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) GetModel() string {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) GetModel() string {
 	if x != nil {
 		if x.xxx_hidden_Model != nil {
 			return *x.xxx_hidden_Model
@@ -9253,49 +9253,49 @@ func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) GetMode
 	return ""
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) SetRule(v string) {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) SetRule(v string) {
 	x.xxx_hidden_Rule = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) SetModel(v string) {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) SetModel(v string) {
 	x.xxx_hidden_Model = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) HasRule() bool {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) HasRule() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) HasModel() bool {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) HasModel() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) ClearRule() {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) ClearRule() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Rule = nil
 }
 
-func (x *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule) ClearModel() {
+func (x *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule) ClearModel() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_Model = nil
 }
 
-type Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule_builder struct {
+type Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	Rule  *string
 	Model *string
 }
 
-func (b0 Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule_builder) Build() *Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule {
-	m0 := &Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule{}
+func (b0 Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule_builder) Build() *Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule {
+	m0 := &Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Rule != nil {
@@ -9810,7 +9810,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xb8y\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xcey\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -9997,7 +9997,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xb2 \n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xc8 \n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -10028,8 +10028,8 @@ const file_request_proto_rawDesc = "" +
 	"\x17supports_research_agent\x18\x1a \x01(\bR\x15supportsResearchAgent\x12:\n" +
 	"\x19supports_orchestration_v2\x18\x1b \x01(\bR\x17supportsOrchestrationV2\x12p\n" +
 	"\x16custom_model_providers\x18\x1c \x01(\v2:.warp.multi_agent.v1.Request.Settings.CustomModelProvidersR\x14customModelProviders\x12G\n" +
-	" supports_background_computer_use\x18\x1d \x01(\bR\x1dsupportsBackgroundComputerUse\x12d\n" +
-	"\x12custom_auto_models\x18\x1e \x01(\v26.warp.multi_agent.v1.Request.Settings.CustomAutoModelsR\x10customAutoModels\x1a\xea\x01\n" +
+	" supports_background_computer_use\x18\x1d \x01(\bR\x1dsupportsBackgroundComputerUse\x12j\n" +
+	"\x14custom_model_routers\x18\x1e \x01(\v28.warp.multi_agent.v1.Request.Settings.CustomModelRoutersR\x12customModelRouters\x1a\xea\x01\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
@@ -10065,26 +10065,26 @@ const file_request_proto_rawDesc = "" +
 	"\vCustomModel\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x1d\n" +
 	"\n" +
-	"config_key\x18\x02 \x01(\tR\tconfigKey\x1a\xe9\x05\n" +
-	"\x10CustomAutoModels\x12^\n" +
-	"\x06models\x18\x01 \x03(\v2F.warp.multi_agent.v1.Request.Settings.CustomAutoModels.CustomAutoModelR\x06models\x1a\xa8\x02\n" +
-	"\x0fCustomAutoModel\x12\x1d\n" +
+	"config_key\x18\x02 \x01(\tR\tconfigKey\x1a\xf9\x05\n" +
+	"\x12CustomModelRouters\x12d\n" +
+	"\arouters\x18\x01 \x03(\v2J.warp.multi_agent.v1.Request.Settings.CustomModelRouters.CustomModelRouterR\arouters\x1a\xae\x02\n" +
+	"\x11CustomModelRouter\x12\x1d\n" +
 	"\n" +
 	"config_key\x18\x01 \x01(\tR\tconfigKey\x12\x18\n" +
-	"\x04name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12n\n" +
+	"\x04name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12p\n" +
 	"\n" +
-	"complexity\x18\x03 \x01(\v2L.warp.multi_agent.v1.Request.Settings.CustomAutoModels.ComplexityBasedRouterH\x00R\n" +
-	"complexity\x12b\n" +
-	"\x06prompt\x18\x04 \x01(\v2H.warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouterH\x00R\x06promptB\b\n" +
+	"complexity\x18\x03 \x01(\v2N.warp.multi_agent.v1.Request.Settings.CustomModelRouters.ComplexityBasedRouterH\x00R\n" +
+	"complexity\x12d\n" +
+	"\x06prompt\x18\x04 \x01(\v2J.warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouterH\x00R\x06promptB\b\n" +
 	"\x06router\x1aq\n" +
 	"\x15ComplexityBasedRouter\x12\x18\n" +
 	"\adefault\x18\x01 \x01(\tR\adefault\x12\x12\n" +
 	"\x04easy\x18\x02 \x01(\tR\x04easy\x12\x16\n" +
 	"\x06medium\x18\x03 \x01(\tR\x06medium\x12\x12\n" +
-	"\x04hard\x18\x04 \x01(\tR\x04hard\x1a\xd6\x01\n" +
+	"\x04hard\x18\x04 \x01(\tR\x04hard\x1a\xd8\x01\n" +
 	"\x11PromptBasedRouter\x12\x18\n" +
-	"\adefault\x18\x01 \x01(\tR\adefault\x12i\n" +
-	"\x05rules\x18\x02 \x03(\v2S.warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouter.PromptRuleR\x05rules\x1a<\n" +
+	"\adefault\x18\x01 \x01(\tR\adefault\x12k\n" +
+	"\x05rules\x18\x02 \x03(\v2U.warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouter.PromptRuleR\x05rules\x1a<\n" +
 	"\n" +
 	"PromptRule\x12\x18\n" +
 	"\x04rule\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04rule\x12\x14\n" +
@@ -10165,71 +10165,71 @@ var file_request_proto_goTypes = []any{
 	nil,                                  // 42: warp.multi_agent.v1.Request.Metadata.LoggingEntry
 	(*Request_Settings_ModelConfig)(nil), // 43: warp.multi_agent.v1.Request.Settings.ModelConfig
 	(*Request_Settings_ApiKeys)(nil),     // 44: warp.multi_agent.v1.Request.Settings.ApiKeys
-	(*Request_Settings_CustomModelProviders)(nil),                          // 45: warp.multi_agent.v1.Request.Settings.CustomModelProviders
-	(*Request_Settings_CustomAutoModels)(nil),                              // 46: warp.multi_agent.v1.Request.Settings.CustomAutoModels
-	(*Request_Settings_ApiKeys_AWSCredentials)(nil),                        // 47: warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
-	(*Request_Settings_ApiKeys_GoogleCloudCredentials)(nil),                // 48: warp.multi_agent.v1.Request.Settings.ApiKeys.GoogleCloudCredentials
-	(*Request_Settings_CustomModelProviders_CustomModelProvider)(nil),      // 49: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider
-	(*Request_Settings_CustomModelProviders_CustomModel)(nil),              // 50: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModel
-	(*Request_Settings_CustomAutoModels_CustomAutoModel)(nil),              // 51: warp.multi_agent.v1.Request.Settings.CustomAutoModels.CustomAutoModel
-	(*Request_Settings_CustomAutoModels_ComplexityBasedRouter)(nil),        // 52: warp.multi_agent.v1.Request.Settings.CustomAutoModels.ComplexityBasedRouter
-	(*Request_Settings_CustomAutoModels_PromptBasedRouter)(nil),            // 53: warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouter
-	(*Request_Settings_CustomAutoModels_PromptBasedRouter_PromptRule)(nil), // 54: warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouter.PromptRule
-	(*Request_MCPContext_MCPResource)(nil),                                 // 55: warp.multi_agent.v1.Request.MCPContext.MCPResource
-	(*Request_MCPContext_MCPTool)(nil),                                     // 56: warp.multi_agent.v1.Request.MCPContext.MCPTool
-	(*Request_MCPContext_MCPServer)(nil),                                   // 57: warp.multi_agent.v1.Request.MCPContext.MCPServer
-	(*Suggestions)(nil),                                                    // 58: warp.multi_agent.v1.Suggestions
-	(*Task)(nil),                                                           // 59: warp.multi_agent.v1.Task
-	(*InputContext)(nil),                                                   // 60: warp.multi_agent.v1.InputContext
-	(ToolType)(0),                                                          // 61: warp.multi_agent.v1.ToolType
-	(*UserQueryMode)(nil),                                                  // 62: warp.multi_agent.v1.UserQueryMode
-	(AgentType)(0),                                                         // 63: warp.multi_agent.v1.AgentType
-	(*RunningShellCommand)(nil),                                            // 64: warp.multi_agent.v1.RunningShellCommand
-	(*RunShellCommandResult)(nil),                                          // 65: warp.multi_agent.v1.RunShellCommandResult
-	(*ReadFilesResult)(nil),                                                // 66: warp.multi_agent.v1.ReadFilesResult
-	(*SearchCodebaseResult)(nil),                                           // 67: warp.multi_agent.v1.SearchCodebaseResult
-	(*ApplyFileDiffsResult)(nil),                                           // 68: warp.multi_agent.v1.ApplyFileDiffsResult
-	(*SuggestPlanResult)(nil),                                              // 69: warp.multi_agent.v1.SuggestPlanResult
-	(*SuggestCreatePlanResult)(nil),                                        // 70: warp.multi_agent.v1.SuggestCreatePlanResult
-	(*GrepResult)(nil),                                                     // 71: warp.multi_agent.v1.GrepResult
-	(*FileGlobResult)(nil),                                                 // 72: warp.multi_agent.v1.FileGlobResult
-	(*ReadMCPResourceResult)(nil),                                          // 73: warp.multi_agent.v1.ReadMCPResourceResult
-	(*CallMCPToolResult)(nil),                                              // 74: warp.multi_agent.v1.CallMCPToolResult
-	(*WriteToLongRunningShellCommandResult)(nil),                           // 75: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
-	(*SuggestNewConversationResult)(nil),                                   // 76: warp.multi_agent.v1.SuggestNewConversationResult
-	(*FileGlobV2Result)(nil),                                               // 77: warp.multi_agent.v1.FileGlobV2Result
-	(*SuggestPromptResult)(nil),                                            // 78: warp.multi_agent.v1.SuggestPromptResult
-	(*OpenCodeReviewResult)(nil),                                           // 79: warp.multi_agent.v1.OpenCodeReviewResult
-	(*InitProjectResult)(nil),                                              // 80: warp.multi_agent.v1.InitProjectResult
-	(*ReadDocumentsResult)(nil),                                            // 81: warp.multi_agent.v1.ReadDocumentsResult
-	(*EditDocumentsResult)(nil),                                            // 82: warp.multi_agent.v1.EditDocumentsResult
-	(*CreateDocumentsResult)(nil),                                          // 83: warp.multi_agent.v1.CreateDocumentsResult
-	(*ReadShellCommandOutputResult)(nil),                                   // 84: warp.multi_agent.v1.ReadShellCommandOutputResult
-	(*UseComputerResult)(nil),                                              // 85: warp.multi_agent.v1.UseComputerResult
-	(*InsertReviewCommentsResult)(nil),                                     // 86: warp.multi_agent.v1.InsertReviewCommentsResult
-	(*RequestComputerUseResult)(nil),                                       // 87: warp.multi_agent.v1.RequestComputerUseResult
-	(*ReadSkillResult)(nil),                                                // 88: warp.multi_agent.v1.ReadSkillResult
-	(*FetchConversationResult)(nil),                                        // 89: warp.multi_agent.v1.FetchConversationResult
-	(*StartAgentResult)(nil),                                               // 90: warp.multi_agent.v1.StartAgentResult
-	(*SendMessageToAgentResult)(nil),                                       // 91: warp.multi_agent.v1.SendMessageToAgentResult
-	(*TransferShellCommandControlToUserResult)(nil),                        // 92: warp.multi_agent.v1.TransferShellCommandControlToUserResult
-	(*AskUserQuestionResult)(nil),                                          // 93: warp.multi_agent.v1.AskUserQuestionResult
-	(*StartAgentV2Result)(nil),                                             // 94: warp.multi_agent.v1.StartAgentV2Result
-	(*UploadFileArtifactResult)(nil),                                       // 95: warp.multi_agent.v1.UploadFileArtifactResult
-	(*RunAgentsResult)(nil),                                                // 96: warp.multi_agent.v1.RunAgentsResult
-	(*WaitForEventsResult)(nil),                                            // 97: warp.multi_agent.v1.WaitForEventsResult
-	(*Attachment)(nil),                                                     // 98: warp.multi_agent.v1.Attachment
-	(*emptypb.Empty)(nil),                                                  // 99: google.protobuf.Empty
-	(*Skill)(nil),                                                          // 100: warp.multi_agent.v1.Skill
-	(*OrchestrationConfigUpdate)(nil),                                      // 101: warp.multi_agent.v1.OrchestrationConfigUpdate
-	(*AgentEvent)(nil),                                                     // 102: warp.multi_agent.v1.AgentEvent
-	(*PassiveSuggestionResultType)(nil),                                    // 103: warp.multi_agent.v1.PassiveSuggestionResultType
-	(*ExecutedShellCommand)(nil),                                           // 104: warp.multi_agent.v1.ExecutedShellCommand
-	(*AnyFileContent)(nil),                                                 // 105: warp.multi_agent.v1.AnyFileContent
-	(*ReviewComment)(nil),                                                  // 106: warp.multi_agent.v1.ReviewComment
-	(*DiffSet)(nil),                                                        // 107: warp.multi_agent.v1.DiffSet
-	(*structpb.Value)(nil),                                                 // 108: google.protobuf.Value
-	(*structpb.Struct)(nil),                                                // 109: google.protobuf.Struct
+	(*Request_Settings_CustomModelProviders)(nil),                            // 45: warp.multi_agent.v1.Request.Settings.CustomModelProviders
+	(*Request_Settings_CustomModelRouters)(nil),                              // 46: warp.multi_agent.v1.Request.Settings.CustomModelRouters
+	(*Request_Settings_ApiKeys_AWSCredentials)(nil),                          // 47: warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
+	(*Request_Settings_ApiKeys_GoogleCloudCredentials)(nil),                  // 48: warp.multi_agent.v1.Request.Settings.ApiKeys.GoogleCloudCredentials
+	(*Request_Settings_CustomModelProviders_CustomModelProvider)(nil),        // 49: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider
+	(*Request_Settings_CustomModelProviders_CustomModel)(nil),                // 50: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModel
+	(*Request_Settings_CustomModelRouters_CustomModelRouter)(nil),            // 51: warp.multi_agent.v1.Request.Settings.CustomModelRouters.CustomModelRouter
+	(*Request_Settings_CustomModelRouters_ComplexityBasedRouter)(nil),        // 52: warp.multi_agent.v1.Request.Settings.CustomModelRouters.ComplexityBasedRouter
+	(*Request_Settings_CustomModelRouters_PromptBasedRouter)(nil),            // 53: warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouter
+	(*Request_Settings_CustomModelRouters_PromptBasedRouter_PromptRule)(nil), // 54: warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouter.PromptRule
+	(*Request_MCPContext_MCPResource)(nil),                                   // 55: warp.multi_agent.v1.Request.MCPContext.MCPResource
+	(*Request_MCPContext_MCPTool)(nil),                                       // 56: warp.multi_agent.v1.Request.MCPContext.MCPTool
+	(*Request_MCPContext_MCPServer)(nil),                                     // 57: warp.multi_agent.v1.Request.MCPContext.MCPServer
+	(*Suggestions)(nil),                                                      // 58: warp.multi_agent.v1.Suggestions
+	(*Task)(nil),                                                             // 59: warp.multi_agent.v1.Task
+	(*InputContext)(nil),                                                     // 60: warp.multi_agent.v1.InputContext
+	(ToolType)(0),                                                            // 61: warp.multi_agent.v1.ToolType
+	(*UserQueryMode)(nil),                                                    // 62: warp.multi_agent.v1.UserQueryMode
+	(AgentType)(0),                                                           // 63: warp.multi_agent.v1.AgentType
+	(*RunningShellCommand)(nil),                                              // 64: warp.multi_agent.v1.RunningShellCommand
+	(*RunShellCommandResult)(nil),                                            // 65: warp.multi_agent.v1.RunShellCommandResult
+	(*ReadFilesResult)(nil),                                                  // 66: warp.multi_agent.v1.ReadFilesResult
+	(*SearchCodebaseResult)(nil),                                             // 67: warp.multi_agent.v1.SearchCodebaseResult
+	(*ApplyFileDiffsResult)(nil),                                             // 68: warp.multi_agent.v1.ApplyFileDiffsResult
+	(*SuggestPlanResult)(nil),                                                // 69: warp.multi_agent.v1.SuggestPlanResult
+	(*SuggestCreatePlanResult)(nil),                                          // 70: warp.multi_agent.v1.SuggestCreatePlanResult
+	(*GrepResult)(nil),                                                       // 71: warp.multi_agent.v1.GrepResult
+	(*FileGlobResult)(nil),                                                   // 72: warp.multi_agent.v1.FileGlobResult
+	(*ReadMCPResourceResult)(nil),                                            // 73: warp.multi_agent.v1.ReadMCPResourceResult
+	(*CallMCPToolResult)(nil),                                                // 74: warp.multi_agent.v1.CallMCPToolResult
+	(*WriteToLongRunningShellCommandResult)(nil),                             // 75: warp.multi_agent.v1.WriteToLongRunningShellCommandResult
+	(*SuggestNewConversationResult)(nil),                                     // 76: warp.multi_agent.v1.SuggestNewConversationResult
+	(*FileGlobV2Result)(nil),                                                 // 77: warp.multi_agent.v1.FileGlobV2Result
+	(*SuggestPromptResult)(nil),                                              // 78: warp.multi_agent.v1.SuggestPromptResult
+	(*OpenCodeReviewResult)(nil),                                             // 79: warp.multi_agent.v1.OpenCodeReviewResult
+	(*InitProjectResult)(nil),                                                // 80: warp.multi_agent.v1.InitProjectResult
+	(*ReadDocumentsResult)(nil),                                              // 81: warp.multi_agent.v1.ReadDocumentsResult
+	(*EditDocumentsResult)(nil),                                              // 82: warp.multi_agent.v1.EditDocumentsResult
+	(*CreateDocumentsResult)(nil),                                            // 83: warp.multi_agent.v1.CreateDocumentsResult
+	(*ReadShellCommandOutputResult)(nil),                                     // 84: warp.multi_agent.v1.ReadShellCommandOutputResult
+	(*UseComputerResult)(nil),                                                // 85: warp.multi_agent.v1.UseComputerResult
+	(*InsertReviewCommentsResult)(nil),                                       // 86: warp.multi_agent.v1.InsertReviewCommentsResult
+	(*RequestComputerUseResult)(nil),                                         // 87: warp.multi_agent.v1.RequestComputerUseResult
+	(*ReadSkillResult)(nil),                                                  // 88: warp.multi_agent.v1.ReadSkillResult
+	(*FetchConversationResult)(nil),                                          // 89: warp.multi_agent.v1.FetchConversationResult
+	(*StartAgentResult)(nil),                                                 // 90: warp.multi_agent.v1.StartAgentResult
+	(*SendMessageToAgentResult)(nil),                                         // 91: warp.multi_agent.v1.SendMessageToAgentResult
+	(*TransferShellCommandControlToUserResult)(nil),                          // 92: warp.multi_agent.v1.TransferShellCommandControlToUserResult
+	(*AskUserQuestionResult)(nil),                                            // 93: warp.multi_agent.v1.AskUserQuestionResult
+	(*StartAgentV2Result)(nil),                                               // 94: warp.multi_agent.v1.StartAgentV2Result
+	(*UploadFileArtifactResult)(nil),                                         // 95: warp.multi_agent.v1.UploadFileArtifactResult
+	(*RunAgentsResult)(nil),                                                  // 96: warp.multi_agent.v1.RunAgentsResult
+	(*WaitForEventsResult)(nil),                                              // 97: warp.multi_agent.v1.WaitForEventsResult
+	(*Attachment)(nil),                                                       // 98: warp.multi_agent.v1.Attachment
+	(*emptypb.Empty)(nil),                                                    // 99: google.protobuf.Empty
+	(*Skill)(nil),                                                            // 100: warp.multi_agent.v1.Skill
+	(*OrchestrationConfigUpdate)(nil),                                        // 101: warp.multi_agent.v1.OrchestrationConfigUpdate
+	(*AgentEvent)(nil),                                                       // 102: warp.multi_agent.v1.AgentEvent
+	(*PassiveSuggestionResultType)(nil),                                      // 103: warp.multi_agent.v1.PassiveSuggestionResultType
+	(*ExecutedShellCommand)(nil),                                             // 104: warp.multi_agent.v1.ExecutedShellCommand
+	(*AnyFileContent)(nil),                                                   // 105: warp.multi_agent.v1.AnyFileContent
+	(*ReviewComment)(nil),                                                    // 106: warp.multi_agent.v1.ReviewComment
+	(*DiffSet)(nil),                                                          // 107: warp.multi_agent.v1.DiffSet
+	(*structpb.Value)(nil),                                                   // 108: google.protobuf.Value
+	(*structpb.Struct)(nil),                                                  // 109: google.protobuf.Struct
 }
 var file_request_proto_depIdxs = []int32{
 	3,   // 0: warp.multi_agent.v1.Request.task_context:type_name -> warp.multi_agent.v1.Request.TaskContext
@@ -10264,7 +10264,7 @@ var file_request_proto_depIdxs = []int32{
 	1,   // 29: warp.multi_agent.v1.Request.Settings.isolation_level:type_name -> warp.multi_agent.v1.IsolationLevel
 	61,  // 30: warp.multi_agent.v1.Request.Settings.supported_cli_agent_tools:type_name -> warp.multi_agent.v1.ToolType
 	45,  // 31: warp.multi_agent.v1.Request.Settings.custom_model_providers:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelProviders
-	46,  // 32: warp.multi_agent.v1.Request.Settings.custom_auto_models:type_name -> warp.multi_agent.v1.Request.Settings.CustomAutoModels
+	46,  // 32: warp.multi_agent.v1.Request.Settings.custom_model_routers:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelRouters
 	55,  // 33: warp.multi_agent.v1.Request.MCPContext.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
 	56,  // 34: warp.multi_agent.v1.Request.MCPContext.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
 	57,  // 35: warp.multi_agent.v1.Request.MCPContext.servers:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPServer
@@ -10342,11 +10342,11 @@ var file_request_proto_depIdxs = []int32{
 	47,  // 107: warp.multi_agent.v1.Request.Settings.ApiKeys.aws_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentials
 	48,  // 108: warp.multi_agent.v1.Request.Settings.ApiKeys.google_cloud_credentials:type_name -> warp.multi_agent.v1.Request.Settings.ApiKeys.GoogleCloudCredentials
 	49,  // 109: warp.multi_agent.v1.Request.Settings.CustomModelProviders.providers:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider
-	51,  // 110: warp.multi_agent.v1.Request.Settings.CustomAutoModels.models:type_name -> warp.multi_agent.v1.Request.Settings.CustomAutoModels.CustomAutoModel
+	51,  // 110: warp.multi_agent.v1.Request.Settings.CustomModelRouters.routers:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelRouters.CustomModelRouter
 	50,  // 111: warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProvider.models:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModel
-	52,  // 112: warp.multi_agent.v1.Request.Settings.CustomAutoModels.CustomAutoModel.complexity:type_name -> warp.multi_agent.v1.Request.Settings.CustomAutoModels.ComplexityBasedRouter
-	53,  // 113: warp.multi_agent.v1.Request.Settings.CustomAutoModels.CustomAutoModel.prompt:type_name -> warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouter
-	54,  // 114: warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouter.rules:type_name -> warp.multi_agent.v1.Request.Settings.CustomAutoModels.PromptBasedRouter.PromptRule
+	52,  // 112: warp.multi_agent.v1.Request.Settings.CustomModelRouters.CustomModelRouter.complexity:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelRouters.ComplexityBasedRouter
+	53,  // 113: warp.multi_agent.v1.Request.Settings.CustomModelRouters.CustomModelRouter.prompt:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouter
+	54,  // 114: warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouter.rules:type_name -> warp.multi_agent.v1.Request.Settings.CustomModelRouters.PromptBasedRouter.PromptRule
 	109, // 115: warp.multi_agent.v1.Request.MCPContext.MCPTool.input_schema:type_name -> google.protobuf.Struct
 	55,  // 116: warp.multi_agent.v1.Request.MCPContext.MCPServer.resources:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPResource
 	56,  // 117: warp.multi_agent.v1.Request.MCPContext.MCPServer.tools:type_name -> warp.multi_agent.v1.Request.MCPContext.MCPTool
@@ -10451,8 +10451,8 @@ func file_request_proto_init() {
 		(*request_Input_UserInputs_UserInput_ConversationHandoff)(nil),
 	}
 	file_request_proto_msgTypes[49].OneofWrappers = []any{
-		(*request_Settings_CustomAutoModels_CustomAutoModel_Complexity)(nil),
-		(*request_Settings_CustomAutoModels_CustomAutoModel_Prompt)(nil),
+		(*request_Settings_CustomModelRouters_CustomModelRouter_Complexity)(nil),
+		(*request_Settings_CustomModelRouters_CustomModelRouter_Prompt)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
