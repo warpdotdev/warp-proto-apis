@@ -67,8 +67,8 @@ message Request {
       StartFromAmbientRunPrompt start_from_ambient_run_prompt = 16;
       InvokeSkill invoke_skill = 17;
 
-      UserQuery user_query = 2 [deprecated = true];
-      ToolCallResult tool_call_result = 3 [deprecated = true];
+      UserQuery user_query = 2 [ deprecated = true ];
+      ToolCallResult tool_call_result = 3 [ deprecated = true ];
     }
 
     message UserQuery {
@@ -79,27 +79,30 @@ message Request {
       AgentType intended_agent = 4;
     }
 
-    // Initial query to spawn the CLI (long-running command) subagent on a running command.
+    // Initial query to spawn the CLI (long-running command) subagent on a
+    // running command.
     message CLIAgentUserQuery {
-        // The user query to send to the subagent.
-        UserQuery user_query = 1;
+      // The user query to send to the subagent.
+      UserQuery user_query = 1;
 
-        // The active (long-)running command.
-        RunningShellCommand running_command = 2;
+      // The active (long-)running command.
+      RunningShellCommand running_command = 2;
 
-        // The tool call ID of the RunShellCommand tool call that ran this command, if any.
-        //
-        // In most cases, this is not populated, because the user is actively 'spawning' the
-        // subagent for a command they ran themself.
-        //
-        // If, however, the agent runs a command (via `RunShellCommand`) and the user eagerly sends
-        // a query just after command execution but prior to the subagent being autumatically
-        // spawned (e.g. interrupts the response stream issuing client actions that are spawning
-        // the agent), this is populated. This enables the server to imperatively spawn the subagent
-        // on this request, along with the eagerly-sent user query, continuing execution in the same
-        // way as it would have had the original stream not been interrupted, albeit with the
-        // additional user query.
-        string run_shell_command_tool_call_id = 3;
+      // The tool call ID of the RunShellCommand tool call that ran this
+      // command, if any.
+      //
+      // In most cases, this is not populated, because the user is actively
+      // 'spawning' the subagent for a command they ran themself.
+      //
+      // If, however, the agent runs a command (via `RunShellCommand`) and the
+      // user eagerly sends a query just after command execution but prior to
+      // the subagent being autumatically spawned (e.g. interrupts the response
+      // stream issuing client actions that are spawning the agent), this is
+      // populated. This enables the server to imperatively spawn the subagent
+      // on this request, along with the eagerly-sent user query, continuing
+      // execution in the same way as it would have had the original stream not
+      // been interrupted, albeit with the additional user query.
+      string run_shell_command_tool_call_id = 3;
     }
 
     message UserInputs {
@@ -113,7 +116,8 @@ message Request {
           MessagesReceivedFromAgents messages_received_from_agents = 4;
           EventsFromAgents events_from_agents = 5;
 
-          // Resolution of a passive suggestion that should be brought into context.
+          // Resolution of a passive suggestion that should be brought into
+          // context.
           PassiveSuggestionResultInput passive_suggestion_result = 6;
 
           // Plan-card edits to plan orchestration config. Sent on the next
@@ -142,9 +146,7 @@ message Request {
       }
 
       // Batch of events received from agents.
-      message EventsFromAgents {
-        repeated AgentEvent agent_events = 1;
-      }
+      message EventsFromAgents { repeated AgentEvent agent_events = 1; }
 
       message PassiveSuggestionResultInput {
         PassiveSuggestionResultType result = 1;
@@ -156,8 +158,8 @@ message Request {
 
     // Tool call result
     message ToolCallResult {
-      reserved 10;  // Removed: RefineResult - no longer used by client
-      reserved refine;  // Field name also reserved for field masks
+      reserved 10;     // Removed: RefineResult - no longer used by client
+      reserved refine; // Field name also reserved for field masks
 
       string tool_call_id = 1;
 
@@ -172,7 +174,8 @@ message Request {
         FileGlobResult file_glob = 9;
         ReadMCPResourceResult read_mcp_resource = 11;
         CallMCPToolResult call_mcp_tool = 12;
-        WriteToLongRunningShellCommandResult write_to_long_running_shell_command = 13;
+        WriteToLongRunningShellCommandResult
+            write_to_long_running_shell_command = 13;
         SuggestNewConversationResult suggest_new_conversation = 14;
         FileGlobV2Result file_glob_v2 = 15;
         SuggestPromptResult suggest_prompt = 16;
@@ -189,7 +192,8 @@ message Request {
         FetchConversationResult fetch_conversation = 27;
         StartAgentResult start_agent = 28;
         SendMessageToAgentResult send_message_to_agent = 29;
-        TransferShellCommandControlToUserResult transfer_shell_command_control_to_user = 30;
+        TransferShellCommandControlToUserResult
+            transfer_shell_command_control_to_user = 30;
         AskUserQuestionResult ask_user_question = 31;
         StartAgentV2Result start_agent_v2 = 32;
         UploadFileArtifactResult upload_file_artifact = 33;
@@ -205,12 +209,12 @@ message Request {
     message QueryWithCannedResponse {
       string query = 1;
       oneof type {
-          Install install = 2;
-          Code code = 3;
-          Deploy deploy = 4;
-          SomethingElse something_else = 5;
-          CustomOnboardingRequest custom_onboarding_request = 6;
-          AgenticOnboardingKickoff agentic_onboarding_kickoff = 7;
+        Install install = 2;
+        Code code = 3;
+        Deploy deploy = 4;
+        SomethingElse something_else = 5;
+        CustomOnboardingRequest custom_onboarding_request = 6;
+        AgenticOnboardingKickoff agentic_onboarding_kickoff = 7;
       }
 
       message Install {}
@@ -220,30 +224,30 @@ message Request {
       message CustomOnboardingRequest {}
       message AgenticOnboardingKickoff {}
     }
-    
-    // A query to perform an automatic code diff e.g. Warp detects compilation errors
-    // in the last run block, and surfaces relevant a code diff to show to the user.
+
+    // A query to perform an automatic code diff e.g. Warp detects compilation
+    // errors in the last run block, and surfaces relevant a code diff to show
+    // to the user.
     message AutoCodeDiffQuery { string query = 1 [ (sensitive) = true ]; }
 
     // An input to resume a conversation.
-    message ResumeConversation { }
+    message ResumeConversation {}
 
-    // An input to generate project rules. This will override the query with a hardcoded prompt and pass the model's response back.
-    message InitProjectRules { }
+    // An input to generate project rules. This will override the query with a
+    // hardcoded prompt and pass the model's response back.
+    message InitProjectRules {}
 
-    // An input to create a new project. When present, the runtime will prepend a predefined
-    // prefix to the user-provided description and send that as the effective user query.
-    message CreateNewProject {
-      string query = 1 [ (sensitive) = true ];
-    }
+    // An input to create a new project. When present, the runtime will prepend
+    // a predefined prefix to the user-provided description and send that as the
+    // effective user query.
+    message CreateNewProject { string query = 1 [ (sensitive) = true ]; }
 
-    // An input to clone a repository. Similar to CreateNewProject, it adds a prefix to the user
-    // input.
-    message CloneRepository {
-      string url = 1 [ (sensitive) = true ];
-    }
+    // An input to clone a repository. Similar to CreateNewProject, it adds a
+    // prefix to the user input.
+    message CloneRepository { string url = 1 [ (sensitive) = true ]; }
 
-    // An input to create a development environment. This will override the query with a hardcoded prompt to set up a warp environment.
+    // An input to create a development environment. This will override the
+    // query with a hardcoded prompt to set up a warp environment.
     message CreateEnvironment {
       repeated string repo_paths = 1 [ (sensitive) = true ];
     }
@@ -255,9 +259,11 @@ message Request {
       repeated Attachment attachments = 1;
 
       oneof trigger {
-        // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+        // Deprecated; remove once prompt suggestions via MAA is fully rolled
+        // out.
         google.protobuf.Empty files_changed = 2;
-        // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
+        // Deprecated; remove once prompt suggestions via MAA is fully rolled
+        // out.
         google.protobuf.Empty command_run = 3;
         // Triggered when a manually run shell command completes.
         ShellCommandCompleted shell_command_completed = 4;
@@ -278,9 +284,7 @@ message Request {
     }
 
     message CodeReview {
-      oneof operation {
-        InitialReviewComments initial_review_comments = 1;
-      }
+      oneof operation { InitialReviewComments initial_review_comments = 1; }
 
       message InitialReviewComments {
         repeated ReviewComment review_comments = 1;
@@ -288,9 +292,7 @@ message Request {
       }
     }
 
-    message FetchReviewComments {
-      string repo_path = 1 [ (sensitive) = true ];
-    }
+    message FetchReviewComments { string repo_path = 1 [ (sensitive) = true ]; }
 
     // An input to summarize the active conversation.
     message SummarizeConversation {
@@ -298,19 +300,21 @@ message Request {
       string prompt = 1 [ (sensitive) = true ];
     }
 
-    // A special input type used to start an ambient agent run where the initial prompt
-    // is retrieved at runtime as the latest prompt known for the run.
+    // A special input type used to start an ambient agent run where the initial
+    // prompt is retrieved at runtime as the latest prompt known for the run.
     // This is only valid when supplied at the start of a conversation.
     message StartFromAmbientRunPrompt {
       // The ambient agent run ID to resolve the prompt from.
       string ambient_run_id = 1;
 
-      // Optional runtime base prompt / instructions (e.g., from file-based agent config).
-      // When provided, this is prepended to the user-visible prompt.
+      // Optional runtime base prompt / instructions (e.g., from file-based
+      // agent config). When provided, this is prepended to the user-visible
+      // prompt.
       string runtime_base_prompt = 2 [ (sensitive) = true ];
 
       // Optional skill to use as base context.
-      // When provided, creates an InvokeSkill message (content hidden from user in UI).
+      // When provided, creates an InvokeSkill message (content hidden from user
+      // in UI).
       Skill runtime_skill = 3;
 
       // Optional directory path where the client downloaded task attachments.
@@ -321,9 +325,10 @@ message Request {
 
     message InvokeSkill {
       Skill skill = 1;
-      // This field is used to either pass in arguments for the skill invocation (if the skill contents have 
-      // any arguments) or pass a user query to be added at the same time as the skill invocation
-      // (in the case of 0-arg skills).
+      // This field is used to either pass in arguments for the skill invocation
+      // (if the skill contents have any arguments) or pass a user query to be
+      // added at the same time as the skill invocation (in the case of 0-arg
+      // skills).
       UserQuery user_query = 2;
     }
   }
@@ -342,14 +347,15 @@ message Request {
 
     // Optional ambient agent task ID.
     //
-    // This is set if the client is working autonomously on an ambient agent task.
+    // This is set if the client is working autonomously on an ambient agent
+    // task.
     string ambient_agent_task_id = 3;
 
     // Optional forked-from conversation ID.
     //
-    // Only populated when starting a new conversation (conversation_id is empty)
-    // that was created by forking an existing conversation.
-    // Value is the source conversation's server conversation ID.
+    // Only populated when starting a new conversation (conversation_id is
+    // empty) that was created by forking an existing conversation. Value is the
+    // source conversation's server conversation ID.
     string forked_from_conversation_id = 4;
 
     // The versioned orchestration address of the parent agent that spawned this
@@ -369,18 +375,20 @@ message Request {
     bool web_context_retrieval_enabled = 3;
     bool supports_parallel_tool_calls = 4;
 
-    // Internal-only field for client to opt-in to using the Anthropic text editor tools.
-    // This will be deprecated before launching MAA.
+    // Internal-only field for client to opt-in to using the Anthropic text
+    // editor tools. This will be deprecated before launching MAA.
     bool use_anthropic_text_editor_tools = 5;
 
     // If `true`, planning is never suggested.
     bool planning_enabled = 6;
 
-    // If `true`, the user's Warp Drive contents can be used as Agent Mode context.
+    // If `true`, the user's Warp Drive contents can be used as Agent Mode
+    // context.
     bool warp_drive_context_enabled = 7;
 
-    // If `true`, the `ApplyFileDiffs` tool call may use the `new_files` argument for creating
-    // files. Otherwise, new files are created by emitting a diff with an empty `search` field.
+    // If `true`, the `ApplyFileDiffs` tool call may use the `new_files`
+    // argument for creating files. Otherwise, new files are created by emitting
+    // a diff with an empty `search` field.
     bool supports_create_files = 8;
 
     // The set of tools that are supported by the client.
@@ -391,28 +399,32 @@ message Request {
 
     // If `true`, the client generally supports long-running commands.
     //
-    // This is different from declaring tool support for `WriteToLongRunningShellCommand`;
-    // that should be used on a per-request basis to indicate if the client can consume
-    // that tool in its current state.
+    // This is different from declaring tool support for
+    // `WriteToLongRunningShellCommand`; that should be used on a per-request
+    // basis to indicate if the client can consume that tool in its current
+    // state.
     bool supports_long_running_commands = 10;
 
-    // `true` if the server should preserve file contents in conversation history, instead of
-    // eliding old file contents and marking them as stale.
+    // `true` if the server should preserve file contents in conversation
+    // history, instead of eliding old file contents and marking them as stale.
     //
     // This is the default behavior for clients released 7/3/2025 and newer.
     bool should_preserve_file_content_in_history = 11;
 
-    // If `true`, the client supports the todos UI and should receive todo-related public API messages.
-    // If `false`, todo-related public API messages should not be sent to the client.
+    // If `true`, the client supports the todos UI and should receive
+    // todo-related public API messages. If `false`, todo-related public API
+    // messages should not be sent to the client.
     bool supports_todos_ui = 12;
 
-    // If `true`, the client supports rendering linked code blocks, and the agent will prefer to output them in its responses.
-    // If `false` or unset, the agent will use plain text code block formatting in its responses.
+    // If `true`, the client supports rendering linked code blocks, and the
+    // agent will prefer to output them in its responses. If `false` or unset,
+    // the agent will use plain text code block formatting in its responses.
     bool supports_linked_code_blocks = 13;
 
     // If 'true', the client supports the StartedChildTask message.
-    // If 'false', the server needs to use the legacy ServerEvent.StartedChildTask, since the
-    // client can't deserialize and pass back up the new message.
+    // If 'false', the server needs to use the legacy
+    // ServerEvent.StartedChildTask, since the client can't deserialize and pass
+    // back up the new message.
     bool supports_started_child_task_message = 14;
 
     // If `true`, the client supports suggested/passive prompts.
@@ -431,8 +443,8 @@ message Request {
     AutonomyLevel autonomy_level = 19;
     IsolationLevel isolation_level = 20;
 
-    // If `true`, the agent may use web search when helpful for completing tasks.
-    // Controlled by the user's execution profile settings.
+    // If `true`, the agent may use web search when helpful for completing
+    // tasks. Controlled by the user's execution profile settings.
     bool web_search_enabled = 21;
 
     // The set of CLI subagent tools that are supported by the client.
@@ -441,11 +453,13 @@ message Request {
     // If `true`, the client supports V4A-style diffs.
     bool supports_v4a_file_diffs = 23;
 
-    // If `true`, the client supports the new summarization approach where messages
-    // are moved to a subtask and replaced with a subagent tool call + result.
+    // If `true`, the client supports the new summarization approach where
+    // messages are moved to a subtask and replaced with a subagent tool call +
+    // result.
     bool supports_summarization_via_message_replacement = 24;
 
-    // If `true`, the client supports reading bundled skills that are distributed alongside it.
+    // If `true`, the client supports reading bundled skills that are
+    // distributed alongside it.
     bool supports_bundled_skills = 25;
 
     // If `true`, the client supports the research agent.
@@ -457,28 +471,31 @@ message Request {
     // A registry of custom model providers configured by the user.
     CustomModelProviders custom_model_providers = 28;
 
-    // If `true`, the client supports background, per-window computer use (window
-    // targeting via set_computer_use_target, window-scoped screenshots, and
-    // window enumeration). When `false` or unset, the computer-use agent uses
-    // the legacy full-screen / frontmost-application behavior.
+    // If `true`, the client supports background, per-window computer use
+    // (window targeting via set_computer_use_target, window-scoped screenshots,
+    // and window enumeration). When `false` or unset, the computer-use agent
+    // uses the legacy full-screen / frontmost-application behavior.
     bool supports_background_computer_use = 29;
 
-    // A registry of user-defined "auto" models (named routers) configured by the user.
+    // A registry of user-defined "auto" models (named routers) configured by
+    // the user. Team-level auto models are _not_ supplied here; those are
+    // already known to the server and the client should simply supply the
+    // corresponding LLM ID for those models.
     //
-    // Like `custom_model_providers`, this is an inline registry: when a custom auto
-    // model is selected, `ModelConfig.base`/`coding` carry that model's `config_key`,
-    // which indexes into this registry.
+    // Like `custom_model_providers`, this is an inline registry: when a custom
+    // auto model is selected, `ModelConfig.base`/`coding` carry that model's
+    // `config_key`, which indexes into this registry.
     CustomAutoModels custom_auto_models = 30;
 
-    // The model IDs provided in the model config can either be a warp-hosted model ID
-    // (e.g. "gemini-2.5-pro") or the `config_key` for a model provided in
-    // `custom_model_providers`.
+    // The model IDs provided in the model config can either be a warp-hosted
+    // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
+    // in `custom_model_providers`.
     message ModelConfig {
       // The LLM of preference for general tasks.
       string base = 1;
 
       // DEPRECATED: The LLM of preference for reasoning tasks.
-      string planning = 2 [deprecated = true];
+      string planning = 2 [ deprecated = true ];
 
       // The LLM of preference for coding tasks.
       string coding = 3;
@@ -522,9 +539,9 @@ message Request {
         string access_token = 1 [ (sensitive) = true ];
       }
 
-      // Optional xAI/Grok OAuth access token from a connected Grok (SuperGrok) subscription.
-      // When set, the server's xAI harness authenticates with this bearer token instead of
-      // Warp's org-wide xAI API key.
+      // Optional xAI/Grok OAuth access token from a connected Grok (SuperGrok)
+      // subscription. When set, the server's xAI harness authenticates with
+      // this bearer token instead of Warp's org-wide xAI API key.
       string grok_oauth_access_token = 8 [ (sensitive) = true ];
 
       // TODO(isaiah): Add Azure
@@ -551,86 +568,64 @@ message Request {
       }
     }
 
-    // A registry of user-defined "auto" models: named routers that resolve to a
-    // concrete model per task. Mirrors the `CustomModelProviders` inline-registry
-    // pattern: a `config_key` referenced by `ModelConfig.base`/`coding` indexes into
-    // `models`.
-    //
     // A custom auto model routes either by Warp-determined task complexity
-    // (`ComplexityRouting`) or by user-authored prompt categories (`PromptRouting`).
-    // Routing targets are always concrete (non-auto) model IDs, identical to the IDs
-    // shown in Warp's model picker (e.g. "claude-4-5-sonnet", "gpt-5-mini").
+    // (`ComplexityRouting`) or by user-authored prompt categories
+    // (`PromptRouting`). Routing targets are always concrete (non-auto) model
+    // IDs, identical to the IDs shown in Warp's model picker (e.g.
+    // "claude-4-5-sonnet", "gpt-5-mini").
     message CustomAutoModels {
       repeated CustomAutoModel models = 1;
 
       message CustomAutoModel {
-        // The key referenced by `ModelConfig.base`/`coding` when this custom auto
-        // model is selected. The client must guarantee this is unique across all
-        // custom autos (and custom models).
+        // The key referenced by `ModelConfig` when this custom auto model is
+        // selected. The client must guarantee this is unique across all custom
+        // autos (and custom models).
         string config_key = 1;
 
         // The user-facing name shown in the model picker.
         string name = 2 [ (sensitive) = true ];
 
-        // The source of the routing definition.
-        oneof source {
-          // Local source: the client sends the full definition inline every request.
-          CustomAutoModelDefinition inline = 3;
-
-          // Cloud source: the client sends only the GSO uid; the server fetches,
-          // authorizes, and deserializes the stored definition.
-          string cloud_uid = 4;
+        oneof router {
+          ComplexityBasedRouter complexity = 3;
+          PromptBasedRouter prompt = 4;
         }
       }
 
-      // The portable routing definition for a custom auto model. Exactly one routing
-      // strategy is set.
-      message CustomAutoModelDefinition {
-        oneof routing {
-          ComplexityRouting complexity = 1;
-          PromptRouting prompt = 2;
-        }
+      // Routes by Warp-determined task complexity. Each bucket maps to a
+      // concrete model ID. The default will be used when task complexity cannot
+      // be determined.
+      message ComplexityBasedRouter {
+        string default = 1;
+        string easy = 2;
+        string medium = 3;
+        string hard = 4;
       }
 
-      // Routes by Warp-determined task complexity. Each bucket maps to a concrete
-      // model ID. Any omitted bucket falls back to `medium`, and if `medium` is
-      // omitted, to a built-in default.
-      message ComplexityRouting {
-        string easy = 1;
-        string medium = 2;
-        string hard = 3;
-      }
+      // Routes by classifying the incoming prompt against the set of `rules`.
+      // The rules should be supplied in order of precedence; an earlier matching
+      // rule will take precedence over another matching rule later on in the list.
+      // If no rule matches, routes to `default_model` (the required catch-all).
+      message PromptBasedRouter {
+        string default = 1;
 
-      // Routes by classifying the incoming prompt against the ordered `rules`. If no
-      // rule matches, routes to `default_model` (the required catch-all).
-      message PromptRouting {
-        // The required catch-all model used when no rule matches.
-        string default_model = 1;
-
-        // The ordered list of rules. May be empty (always routes to `default_model`).
         repeated PromptRule rules = 2;
-      }
 
-      // A single prompt-routing rule: a free-text description paired with a concrete
-      // model.
-      message PromptRule {
-        // The user-authored category description (e.g. "debugging or fixing failing
-        // tests").
-        string description = 1 [ (sensitive) = true ];
-
-        // The concrete model ID to route to when this rule matches.
-        string model = 2;
+        message PromptRule {
+          string rule = 1 [ (sensitive) = true ];
+          string model = 2;
+        }
       }
     }
   }
 
   message MCPContext {
-    // DEPRECATED: Use `servers` field instead for server-attributed tools/resources.
-    // Kept for backwards compatibility with older clients.
-    repeated MCPResource resources = 1 [deprecated = true];
-    repeated MCPTool tools = 2 [deprecated = true];
+    // DEPRECATED: Use `servers` field instead for server-attributed
+    // tools/resources. Kept for backwards compatibility with older clients.
+    repeated MCPResource resources = 1 [ deprecated = true ];
+    repeated MCPTool tools = 2 [ deprecated = true ];
 
-    // Server-grouped MCP context. Each entry represents a single MCP server summary.
+    // Server-grouped MCP context. Each entry represents a single MCP server
+    // summary.
     repeated MCPServer servers = 3;
 
     message MCPResource {
@@ -666,7 +661,6 @@ message Request {
     }
   }
 }
-
 
 enum AutonomyLevel {
   // This is the default and lowest level of autonomy. This assumes a user is
