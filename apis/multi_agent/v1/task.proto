@@ -187,6 +187,11 @@ message Message {
   // Citations associated with this message
   repeated Citation citations = 8;
 
+  // Memories retrieved server-side from attached memory stores, set on the
+  // user message that triggered retrieval. Client-visible so the UI can
+  // surface which memories informed the conversation.
+  repeated FetchedMemory fetched_memories = 29;
+
   // The type of message with its specific content
   oneof message {
     UserQuery user_query = 2;
@@ -235,6 +240,28 @@ message Message {
 
   // A batch of events received from agents.
   message EventsFromAgents { repeated AgentEvent agent_events = 1; }
+
+  // A memory retrieved from an attached memory store for this message.
+  message FetchedMemory {
+    string memory_id = 1;
+
+    string content = 2 [ (sensitive) = true ];
+
+    // The memory store this memory belongs to.
+    string memory_store_id = 3;
+
+    // Where the memory originated. Always set by the server.
+    oneof source {
+      Conversation conversation = 4;
+      Manual manual = 5;
+    }
+
+    // The memory was synthesized from an AI conversation.
+    message Conversation { string conversation_id = 1; }
+
+    // The memory was created directly by a user.
+    message Manual {}
+  }
 
   // User query message type
   message UserQuery {
