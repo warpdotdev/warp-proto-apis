@@ -406,6 +406,8 @@ message Message {
       UploadFileArtifact upload_file_artifact = 34;
       RunAgents run_agents = 35;
       WaitForEvents wait_for_events = 36;
+      StartRecording start_recording = 37;
+      StopRecording stop_recording = 38;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -890,6 +892,18 @@ message Message {
       ScreenshotParams screenshot_params = 2;
     }
 
+    // A tool call to start recording a video of the computer-use session.
+    // Capture configuration (resolution, frame rate, limits) is owned by the
+    // runtime, so no arguments are required for v0.
+    message StartRecording {}
+
+    // A tool call to stop an in-progress recording and publish the resulting
+    // video as a file artifact.
+    message StopRecording {
+      // The recording to stop, as returned by `StartRecordingResult`.
+      string recording_id = 1;
+    }
+
     message ScreenshotParams {
       // The maximum length of the long edge of the screenshot in pixels.
       int32 max_long_edge_px = 1;
@@ -997,6 +1011,8 @@ message Message {
       UploadFileArtifactResult upload_file_artifact = 38;
       RunAgentsResult run_agents_result = 39;
       WaitForEventsResult wait_for_events = 40;
+      StartRecordingResult start_recording = 41;
+      StopRecordingResult stop_recording = 42;
     }
 
     // Result of a server-side tool call.
@@ -1622,6 +1638,75 @@ message RequestComputerUseResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+// Result of a `StartRecording` tool call.
+message StartRecordingResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // Identifier for the started recording, used to stop it later.
+    string recording_id = 1;
+    // When the recording started.
+    google.protobuf.Timestamp started_at = 2;
+    // The capture settings the runtime applied.
+    CaptureSettings settings = 3;
+    // The limits the runtime will enforce; reaching one auto-stops capture.
+    Limits limits = 4;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+
+  // The settings the runtime used to capture the recording.
+  message CaptureSettings {
+    int32 width_px = 1;
+    int32 height_px = 2;
+    // Capture frame rate in frames per second.
+    int32 frame_rate = 3;
+  }
+
+  // Limits the runtime enforces on a recording.
+  message Limits {
+    // Maximum duration before the runtime auto-stops the recording.
+    google.protobuf.Duration max_duration = 1;
+    // Maximum output size in bytes before the runtime auto-stops the recording.
+    int64 max_size_bytes = 2;
+  }
+}
+
+// Result of a `StopRecording` tool call.
+message StopRecordingResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The UID of the uploaded video file artifact.
+    string artifact_uid = 1;
+    // Total duration of the recording.
+    google.protobuf.Duration duration = 2;
+    int32 width_px = 3;
+    int32 height_px = 4;
+    // Size of the recorded video file in bytes.
+    int64 size_bytes = 5;
+    // Whether the recording finalized cleanly or was cut short.
+    CompletionStatus completion_status = 6;
+    // Human-readable reason the recording terminated.
+    string termination_reason = 7;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+
+  // Indicates whether the recording captured the full requested flow.
+  enum CompletionStatus {
+    COMPLETION_STATUS_UNSPECIFIED = 0;
+    COMPLETION_STATUS_COMPLETE = 1;
+    COMPLETION_STATUS_INCOMPLETE = 2;
+  }
+}
+
 // Result of a `FetchConversation` tool call.
 message FetchConversationResult {
   oneof result {
@@ -1689,6 +1774,8 @@ enum ToolType {
   UPLOAD_FILE_ARTIFACT = 31;
   RUN_AGENTS = 32;
   WAIT_FOR_EVENTS = 33;
+  START_RECORDING = 34;
+  STOP_RECORDING = 35;
 }
 
 message UserQueryMode {

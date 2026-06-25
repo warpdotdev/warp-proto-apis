@@ -199,6 +199,8 @@ message Request {
         UploadFileArtifactResult upload_file_artifact = 33;
         RunAgentsResult run_agents_result = 34;
         WaitForEventsResult wait_for_events = 35;
+        StartRecordingResult start_recording = 36;
+        StopRecordingResult stop_recording = 37;
       }
     }
 
