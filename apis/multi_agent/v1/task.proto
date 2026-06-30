@@ -892,10 +892,23 @@ message Message {
       ScreenshotParams screenshot_params = 2;
     }
 
-    // A tool call to start recording a video of the computer-use session.
-    // Capture configuration (resolution, frame rate, limits) is owned by the
-    // runtime, so no arguments are required for v0.
-    message StartRecording {}
+    // A tool call to start recording a video of the computer-use session. The
+    // server owns capture configuration (frame rate, limits) and sends it here.
+    message StartRecording {
+      // Capture frame rate in frames per second.
+      int32 frame_rate = 1;
+      // Limits the runtime enforces; reaching one auto-stops capture.
+      Limits limits = 2;
+
+      // Limits the runtime enforces on a recording.
+      message Limits {
+        // Maximum duration before the runtime auto-stops the recording.
+        google.protobuf.Duration max_duration = 1;
+        // Maximum output size in bytes before the runtime auto-stops the
+        // recording.
+        int64 max_size_bytes = 2;
+      }
+    }
 
     // A tool call to stop an in-progress recording and publish the resulting
     // video as a file artifact.
@@ -1650,28 +1663,16 @@ message StartRecordingResult {
     string recording_id = 1;
     // When the recording started.
     google.protobuf.Timestamp started_at = 2;
-    // The capture settings the runtime applied.
+    // The capture dimensions the client resolved from the display.
     CaptureSettings settings = 3;
-    // The limits the runtime will enforce; reaching one auto-stops capture.
-    Limits limits = 4;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 
-  // The settings the runtime used to capture the recording.
+  // The capture dimensions the client resolved from the display.
   message CaptureSettings {
     int32 width_px = 1;
     int32 height_px = 2;
-    // Capture frame rate in frames per second.
-    int32 frame_rate = 3;
-  }
-
-  // Limits the runtime enforces on a recording.
-  message Limits {
-    // Maximum duration before the runtime auto-stops the recording.
-    google.protobuf.Duration max_duration = 1;
-    // Maximum output size in bytes before the runtime auto-stops the recording.
-    int64 max_size_bytes = 2;
   }
 }
 
