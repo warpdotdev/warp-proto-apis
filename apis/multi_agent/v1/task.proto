@@ -920,12 +920,16 @@ message Message {
     }
 
     // A tool call to start recording a video of the computer-use session. The
-    // server owns capture configuration (frame rate, limits) and sends it here.
+    // server owns capture configuration (frame rate, limits) and sends it here;
+    // the agent authors the summary.
     message StartRecording {
       // Capture frame rate in frames per second.
       int32 frame_rate = 1;
       // Limits the runtime enforces; reaching one auto-stops capture.
       Limits limits = 2;
+      // A short, agent-authored summary of the flow being recorded, shown as the
+      // recording's title.
+      string summary = 3 [ (sensitive) = true ];
 
       // Limits the runtime enforces on a recording.
       message Limits {
