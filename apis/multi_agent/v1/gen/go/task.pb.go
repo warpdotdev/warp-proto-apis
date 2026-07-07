@@ -39677,7 +39677,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xc0\xce\x01\n" +
+	"\x0ecomment_target\"\xba\xce\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -39799,7 +39799,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xbee\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xb8e\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -40091,12 +40091,12 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\x1a\xa2\x01\n" +
 	"\x12RequestComputerUse\x12'\n" +
 	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummary\x12c\n" +
-	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\x92\x02\n" +
+	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\x8c\x02\n" +
 	"\x0eStartRecording\x12\x1d\n" +
 	"\n" +
 	"frame_rate\x18\x01 \x01(\x05R\tframeRate\x12S\n" +
-	"\x06limits\x18\x02 \x01(\v2;.warp.multi_agent.v1.Message.ToolCall.StartRecording.LimitsR\x06limits\x12\x1e\n" +
-	"\asummary\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x1al\n" +
+	"\x06limits\x18\x02 \x01(\v2;.warp.multi_agent.v1.Message.ToolCall.StartRecording.LimitsR\x06limits\x12\x18\n" +
+	"\asummary\x18\x03 \x01(\tR\asummary\x1al\n" +
 	"\x06Limits\x12<\n" +
 	"\fmax_duration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\vmaxDuration\x12$\n" +
 	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytes\x1a2\n" +

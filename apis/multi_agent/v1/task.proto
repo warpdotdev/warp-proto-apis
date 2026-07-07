@@ -929,7 +929,7 @@ message Message {
       Limits limits = 2;
       // A short, agent-authored summary of the flow being recorded, shown as the
       // recording's title.
-      string summary = 3 [ (sensitive) = true ];
+      string summary = 3;
 
       // Limits the runtime enforces on a recording.
       message Limits {
