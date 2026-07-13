@@ -935,6 +935,9 @@ message Message {
       // A value of 0 or 1 means real-time (no speedup). The client applies this
       // via an ffmpeg presentation-timestamp rescale filter.
       uint32 playback_speed_multiplier = 4;
+      // The surface to record. If unset or set to screen, record the full screen
+      // (legacy behavior).
+      ComputerUseTarget target = 5;
 
       // Limits the runtime enforces on a recording.
       message Limits {
