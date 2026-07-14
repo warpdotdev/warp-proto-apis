@@ -1982,6 +1982,10 @@ message RunAgents {
     string prompt = 2 [ (sensitive) = true ];
     // Title for the spawned agent's task.
     string title = 3 [ (sensitive) = true ];
+    // Optional UID of the named agent (service account) the child run should
+    // execute as. Only valid for factory agents dispatching sibling factory
+    // agents; enforced server-side at dispatch time.
+    string agent_identity_uid = 4;
   }
   string summary = 1 [ (sensitive) = true ];
   string base_prompt = 2 [ (sensitive) = true ];
