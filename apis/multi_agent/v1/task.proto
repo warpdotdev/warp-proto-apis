@@ -930,6 +930,11 @@ message Message {
       // A short, agent-authored summary of the flow being recorded, shown as the
       // recording's title.
       string summary = 3;
+      // How many times faster the recorded video should play back relative to
+      // real time. For example, 4.0 makes a 4-minute recording play in 1
+      // minute. A value of 0 or 1 means real-time (no speedup). The client
+      // applies this via an ffmpeg presentation-timestamp rescale filter.
+      float playback_speed_multiplier = 4;
 
       // Limits the runtime enforces on a recording.
       message Limits {
