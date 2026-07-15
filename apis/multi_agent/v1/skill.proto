@@ -35,6 +35,7 @@ message SkillDescriptor {
       google.protobuf.Empty droid = 8;
       google.protobuf.Empty github = 9;
       google.protobuf.Empty open_code = 10;
+      google.protobuf.Empty kiro = 11;
     }
   }
 
