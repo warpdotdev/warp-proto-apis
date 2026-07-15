@@ -1959,12 +1959,8 @@ message RunAgents {
     // LLM-set per call based on whether the children need computer use
     // (browser automation, visual inspection, etc.). Not a user preference.
     bool computer_use_enabled = 3;
-    // Optional runner UID overriding the environment's default runner for the
-    // children's compute config (image/shape/platform). Omit to fall back to
-    // the environment default then system defaults. Ignored when `plan_id`
-    // matches an approved orchestration config. `RunAgentsResult.Launched`
-    // reuses this message for its resolved remote block, so the resolved
-    // `runner_id` flows back to the caller with no extra field.
+    // Optional UID of the runner (OS and resource configuration) for the
+    // remote children.
     string runner_id = 4;
   }
   // Configuration for a single child agent in the batch.

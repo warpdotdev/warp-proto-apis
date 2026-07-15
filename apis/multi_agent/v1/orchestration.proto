@@ -32,9 +32,6 @@ message OrchestrationConfig {
   message Remote {
     string environment_id = 1;
     string worker_host = 2;
-    // Optional runner UID pre-declaring the compute config for children of this
-    // plan. Inherited by matching `run_agents` calls; omitted preserves current
-    // behavior (environment default then system defaults).
     string runner_id = 3;
   }
   string model_id = 1;
