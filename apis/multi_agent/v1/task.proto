@@ -921,14 +921,14 @@ message Message {
 
     // A tool call to start recording a video of the computer-use session. The
     // server owns capture configuration (frame rate, limits) and sends it here;
-    // the agent authors the summary.
+    // the agent authors the summary and description.
     message StartRecording {
       // Capture frame rate in frames per second.
       int32 frame_rate = 1;
       // Limits the runtime enforces; reaching one auto-stops capture.
       Limits limits = 2;
-      // A short, agent-authored summary of the flow being recorded, shown as the
-      // recording's title.
+      // A short, agent-authored title for the recording, shown as the badge
+      // label in Oz web and the blocklist.
       string summary = 3;
       // How many times faster the recorded video should play back relative to
       // real time. For example, 4 makes a 4-minute recording play in 1 minute.
@@ -938,6 +938,10 @@ message Message {
       // The surface to record. If unset or set to screen, record the full screen
       // (legacy behavior).
       ComputerUseTarget target = 5;
+      // An optional, longer agent-authored description of what the recording
+      // captures, shown below the recording in detail views such as the video
+      // lightbox.
+      string description = 6;
 
       // Limits the runtime enforces on a recording.
       message Limits {
