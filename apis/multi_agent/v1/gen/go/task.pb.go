@@ -23832,7 +23832,7 @@ type Message_ToolCall_StartRecording struct {
 	xxx_hidden_FrameRate               int32                                   `protobuf:"varint,1,opt,name=frame_rate,json=frameRate"`
 	xxx_hidden_Limits                  *Message_ToolCall_StartRecording_Limits `protobuf:"bytes,2,opt,name=limits"`
 	xxx_hidden_Summary                 *string                                 `protobuf:"bytes,3,opt,name=summary"`
-	xxx_hidden_PlaybackSpeedMultiplier float32                                 `protobuf:"fixed32,4,opt,name=playback_speed_multiplier,json=playbackSpeedMultiplier"`
+	xxx_hidden_PlaybackSpeedMultiplier uint32                                  `protobuf:"varint,4,opt,name=playback_speed_multiplier,json=playbackSpeedMultiplier"`
 	XXX_raceDetectHookData             protoimpl.RaceDetectHookData
 	XXX_presence                       [1]uint32
 	unknownFields                      protoimpl.UnknownFields
@@ -23888,7 +23888,7 @@ func (x *Message_ToolCall_StartRecording) GetSummary() string {
 	return ""
 }
 
-func (x *Message_ToolCall_StartRecording) GetPlaybackSpeedMultiplier() float32 {
+func (x *Message_ToolCall_StartRecording) GetPlaybackSpeedMultiplier() uint32 {
 	if x != nil {
 		return x.xxx_hidden_PlaybackSpeedMultiplier
 	}
@@ -23909,7 +23909,7 @@ func (x *Message_ToolCall_StartRecording) SetSummary(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *Message_ToolCall_StartRecording) SetPlaybackSpeedMultiplier(v float32) {
+func (x *Message_ToolCall_StartRecording) SetPlaybackSpeedMultiplier(v uint32) {
 	x.xxx_hidden_PlaybackSpeedMultiplier = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
@@ -23972,10 +23972,10 @@ type Message_ToolCall_StartRecording_builder struct {
 	// recording's title.
 	Summary *string
 	// How many times faster the recorded video should play back relative to
-	// real time. For example, 4.0 makes a 4-minute recording play in 1
-	// minute. A value of 0 or 1 means real-time (no speedup). The client
-	// applies this via an ffmpeg presentation-timestamp rescale filter.
-	PlaybackSpeedMultiplier *float32
+	// real time. For example, 4 makes a 4-minute recording play in 1 minute.
+	// A value of 0 or 1 means real-time (no speedup). The client applies this
+	// via an ffmpeg presentation-timestamp rescale filter.
+	PlaybackSpeedMultiplier *uint32
 }
 
 func (b0 Message_ToolCall_StartRecording_builder) Build() *Message_ToolCall_StartRecording {
@@ -40166,7 +40166,7 @@ const file_task_proto_rawDesc = "" +
 	"frame_rate\x18\x01 \x01(\x05R\tframeRate\x12S\n" +
 	"\x06limits\x18\x02 \x01(\v2;.warp.multi_agent.v1.Message.ToolCall.StartRecording.LimitsR\x06limits\x12\x18\n" +
 	"\asummary\x18\x03 \x01(\tR\asummary\x12:\n" +
-	"\x19playback_speed_multiplier\x18\x04 \x01(\x02R\x17playbackSpeedMultiplier\x1al\n" +
+	"\x19playback_speed_multiplier\x18\x04 \x01(\rR\x17playbackSpeedMultiplier\x1al\n" +
 	"\x06Limits\x12<\n" +
 	"\fmax_duration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\vmaxDuration\x12$\n" +
 	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytes\x1a2\n" +
