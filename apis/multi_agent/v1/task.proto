@@ -187,6 +187,11 @@ message Message {
   // Citations associated with this message
   repeated Citation citations = 8;
 
+  // Memories retrieved server-side from attached memory stores, set on the
+  // user message that triggered retrieval. Client-visible so the UI can
+  // surface which memories informed the conversation.
+  repeated FetchedMemory fetched_memories = 29;
+
   // The type of message with its specific content
   oneof message {
     UserQuery user_query = 2;
@@ -235,6 +240,28 @@ message Message {
 
   // A batch of events received from agents.
   message EventsFromAgents { repeated AgentEvent agent_events = 1; }
+
+  // A memory retrieved from an attached memory store for this message.
+  message FetchedMemory {
+    string memory_id = 1;
+
+    string content = 2 [ (sensitive) = true ];
+
+    // The memory store this memory belongs to.
+    string memory_store_id = 3;
+
+    // Where the memory originated. Always set by the server.
+    oneof source {
+      Conversation conversation = 4;
+      Manual manual = 5;
+    }
+
+    // The memory was synthesized from an AI conversation.
+    message Conversation { string conversation_id = 1; }
+
+    // The memory was created directly by a user.
+    message Manual {}
+  }
 
   // User query message type
   message UserQuery {
@@ -406,6 +433,8 @@ message Message {
       UploadFileArtifact upload_file_artifact = 34;
       RunAgents run_agents = 35;
       WaitForEvents wait_for_events = 36;
+      StartRecording start_recording = 37;
+      StopRecording stop_recording = 38;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -890,6 +919,47 @@ message Message {
       ScreenshotParams screenshot_params = 2;
     }
 
+    // A tool call to start recording a video of the computer-use session. The
+    // server owns capture configuration (frame rate, limits) and sends it here;
+    // the agent authors the summary and description.
+    message StartRecording {
+      // Capture frame rate in frames per second.
+      int32 frame_rate = 1;
+      // Limits the runtime enforces; reaching one auto-stops capture.
+      Limits limits = 2;
+      // A short, agent-authored title for the recording, shown as the badge
+      // label in Oz web and the blocklist.
+      string summary = 3;
+      // How many times faster the recorded video should play back relative to
+      // real time. For example, 4 makes a 4-minute recording play in 1 minute.
+      // A value of 0 or 1 means real-time (no speedup). The client applies this
+      // via an ffmpeg presentation-timestamp rescale filter.
+      uint32 playback_speed_multiplier = 4;
+      // The surface to record. If unset or set to screen, record the full screen
+      // (legacy behavior).
+      ComputerUseTarget target = 5;
+      // An optional, longer agent-authored description of what the recording
+      // captures, shown below the recording in detail views such as the video
+      // lightbox.
+      string description = 6;
+
+      // Limits the runtime enforces on a recording.
+      message Limits {
+        // Maximum duration before the runtime auto-stops the recording.
+        google.protobuf.Duration max_duration = 1;
+        // Maximum output size in bytes before the runtime auto-stops the
+        // recording.
+        int64 max_size_bytes = 2;
+      }
+    }
+
+    // A tool call to stop an in-progress recording and publish the resulting
+    // video as a file artifact.
+    message StopRecording {
+      // The recording to stop, as returned by `StartRecordingResult`.
+      string recording_id = 1;
+    }
+
     message ScreenshotParams {
       // The maximum length of the long edge of the screenshot in pixels.
       int32 max_long_edge_px = 1;
@@ -997,6 +1067,8 @@ message Message {
       UploadFileArtifactResult upload_file_artifact = 38;
       RunAgentsResult run_agents_result = 39;
       WaitForEventsResult wait_for_events = 40;
+      StartRecordingResult start_recording = 41;
+      StopRecordingResult stop_recording = 42;
     }
 
     // Result of a server-side tool call.
@@ -1622,6 +1694,63 @@ message RequestComputerUseResult {
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
 
+// Result of a `StartRecording` tool call.
+message StartRecordingResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // Identifier for the started recording, used to stop it later.
+    string recording_id = 1;
+    // When the recording started.
+    google.protobuf.Timestamp started_at = 2;
+    // The capture dimensions the client resolved from the display.
+    CaptureSettings settings = 3;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+
+  // The capture dimensions the client resolved from the display.
+  message CaptureSettings {
+    int32 width_px = 1;
+    int32 height_px = 2;
+  }
+}
+
+// Result of a `StopRecording` tool call.
+message StopRecordingResult {
+  oneof result {
+    Success success = 1;
+    Error error = 2;
+  }
+
+  message Success {
+    // The UID of the uploaded video file artifact.
+    string artifact_uid = 1;
+    // Total duration of the recording.
+    google.protobuf.Duration duration = 2;
+    int32 width_px = 3;
+    int32 height_px = 4;
+    // Size of the recorded video file in bytes.
+    int64 size_bytes = 5;
+    // Whether the recording finalized cleanly or was cut short.
+    CompletionStatus completion_status = 6;
+    // Human-readable reason the recording terminated.
+    string termination_reason = 7;
+  }
+
+  message Error { string message = 1 [ (sensitive) = true ]; }
+
+  // Indicates whether the recording captured the full requested flow.
+  enum CompletionStatus {
+    COMPLETION_STATUS_UNSPECIFIED = 0;
+    COMPLETION_STATUS_COMPLETE = 1;
+    COMPLETION_STATUS_INCOMPLETE = 2;
+  }
+}
+
 // Result of a `FetchConversation` tool call.
 message FetchConversationResult {
   oneof result {
@@ -1689,6 +1818,8 @@ enum ToolType {
   UPLOAD_FILE_ARTIFACT = 31;
   RUN_AGENTS = 32;
   WAIT_FOR_EVENTS = 33;
+  START_RECORDING = 34;
+  STOP_RECORDING = 35;
 }
 
 message UserQueryMode {
@@ -1840,6 +1971,9 @@ message RunAgents {
     // LLM-set per call based on whether the children need computer use
     // (browser automation, visual inspection, etc.). Not a user preference.
     bool computer_use_enabled = 3;
+    // Optional UID of the runner (OS and resource configuration) for the
+    // remote children.
+    string runner_id = 4;
   }
   // Configuration for a single child agent in the batch.
   message AgentRunConfig {
@@ -1852,6 +1986,10 @@ message RunAgents {
     string prompt = 2 [ (sensitive) = true ];
     // Title for the spawned agent's task.
     string title = 3 [ (sensitive) = true ];
+    // Optional UID of the named agent (service account) the child run should
+    // execute as. Only valid for factory agents dispatching sibling factory
+    // agents; enforced server-side at dispatch time.
+    string agent_identity_uid = 4;
   }
   string summary = 1 [ (sensitive) = true ];
   string base_prompt = 2 [ (sensitive) = true ];
