@@ -551,6 +551,11 @@ message Request {
 
     message CustomModelProviders {
       repeated CustomModelProvider providers = 1;
+      enum CustomEndpointSchema {
+        OPENAI_CHAT_COMPLETIONS = 0;
+        OPENAI_RESPONSES = 1;
+        ANTHROPIC_MESSAGES = 2;
+      }
 
       message CustomModelProvider {
         // The base URL for the custom model provider.
@@ -559,6 +564,8 @@ message Request {
         string api_key = 2 [ (sensitive) = true ];
         // The list of custom models made available on the provider.
         repeated CustomModel models = 3;
+        // The request/response protocol spoken by this provider.
+        CustomEndpointSchema schema = 4;
       }
 
       message CustomModel {
