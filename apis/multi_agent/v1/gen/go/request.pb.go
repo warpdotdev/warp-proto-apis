@@ -2317,10 +2317,7 @@ type Request_Settings_builder struct {
 	// `config_key`, which indexes into this registry.
 	CustomModelRouters *Request_Settings_CustomModelRouters
 	// If `true`, the client supports selecting and propagating a remote
-	// `runner_id` for orchestrated child agents (the `runner list` CLI and the
-	// Runner dropdown). When `false` or unset, the server omits runner-discovery
-	// guidance and never emits a `runner_id` on `run_agents` /
-	// `create_orchestration_config`.
+	// `runner_id` for orchestrated child agents.
 	SupportsOrchestrationRunners *bool
 }
 
