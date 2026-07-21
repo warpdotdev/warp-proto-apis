@@ -1750,8 +1750,8 @@ message StopRecordingResult {
     int64 size_bytes = 5;
     // Whether the recording finalized cleanly or was cut short.
     CompletionStatus completion_status = 6;
-    // Human-readable reason the recording terminated.
-    string termination_reason = 7;
+    // Stable reason the recording terminated.
+    TerminationReason termination_reason = 7;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -1761,6 +1761,16 @@ message StopRecordingResult {
     COMPLETION_STATUS_UNSPECIFIED = 0;
     COMPLETION_STATUS_COMPLETE = 1;
     COMPLETION_STATUS_INCOMPLETE = 2;
+  }
+
+  enum TerminationReason {
+    TERMINATION_REASON_UNSPECIFIED = 0;
+    TERMINATION_REASON_MAX_DURATION = 1;
+    TERMINATION_REASON_MAX_SIZE = 2;
+    TERMINATION_REASON_CLIENT_CANCELED = 3;
+    TERMINATION_REASON_ENCODING_FAILED = 4;
+    TERMINATION_REASON_UPLOAD_FAILED = 5;
+    TERMINATION_REASON_OTHER = 6;
   }
 }
 
