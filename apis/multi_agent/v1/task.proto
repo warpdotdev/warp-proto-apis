@@ -2025,43 +2025,53 @@ message RunAgents {
 
 // The result of a RunAgents tool call.
 message RunAgentsResult {
-  message LaunchedAgent { string agent_id = 1; }
-  message FailedAgent { string error = 1 [ (sensitive) = true ]; }
-  // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs
-  // by `name`.
+  oneof outcome {
+    Launched launched = 1;
+    Denied denied = 2;
+    Failure failure = 3;
+  }
+
+  // Orchestration launched. Carries the resolved configuration and
+  // per-agent outcomes.
+  message Launched {
+    repeated AgentOutcome agents = 5;
+
+    // Deprecated: use per-agent configurations in AgentOutcome instead.
+    string resolved_model_id = 1 [deprecated = true];
+    Harness resolved_harness = 2 [deprecated = true];
+    oneof resolved_execution_mode {
+      RunAgents.Local local = 3 [deprecated = true];
+      RunAgents.Remote remote = 4 [deprecated = true];
+    }
+  }
+
+  // Declined for a non-error reason.
+  message Denied { string reason = 1; }
+
+  // Actual error: server-side validation rejected the call, or the client
+  // could not begin the launch sequence. NOT used for user-driven outcomes
+  // (disapproval, cancellation) -- those have their own variants.
+  message Failure { string error = 1 [ (sensitive) = true ]; }
+
+  // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs by `name`.
   message AgentOutcome {
     string name = 1 [ (sensitive) = true ];
     oneof result {
       LaunchedAgent launched = 2;
       FailedAgent failed = 3;
     }
-    // The model_id that was actually used for this child agent. Populated
-    // from the per-agent model_id override when set, otherwise from the
-    // batch-level resolved_model_id.
-    string resolved_model_id = 4;
-  }
-  // Orchestration launched. Carries the resolved configuration and
-  // per-agent outcomes.
-  message Launched {
-    string resolved_model_id = 1;
-    Harness resolved_harness = 2;
-    oneof resolved_execution_mode {
-      RunAgents.Local local = 3;
-      RunAgents.Remote remote = 4;
+
+    // How the agent was configured.
+    string model_id = 4;
+    Harness harness = 5;
+    oneof execution_mode {
+      RunAgents.Local local = 6;
+      RunAgents.Remote remote = 7;
     }
-    repeated AgentOutcome agents = 5;
   }
-  // Declined for a non-error reason.
-  message Denied { string reason = 1; }
-  // Actual error: server-side validation rejected the call, or the client
-  // could not begin the launch sequence. NOT used for user-driven outcomes
-  // (disapproval, cancellation) -- those have their own variants.
-  message Failure { string error = 1 [ (sensitive) = true ]; }
-  oneof outcome {
-    Launched launched = 1;
-    Denied denied = 2;
-    Failure failure = 3;
-  }
+
+  message LaunchedAgent { string agent_id = 1; }
+  message FailedAgent { string error = 1 [ (sensitive) = true ]; }
 }
 
 // A client tool call to send a message to one or more agents.
