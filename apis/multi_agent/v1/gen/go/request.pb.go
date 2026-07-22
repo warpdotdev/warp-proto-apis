@@ -1412,7 +1412,7 @@ type Request_Metadata_builder struct {
 	// When orchestration_v2 is enabled, this is the parent run ID.
 	ParentAgentId *string
 	// The display name for this agent (e.g. "Agent 1"), assigned by the
-	// orchestrator.
+	// orchestrator via StartAgent.name.
 	AgentName *string
 }
 

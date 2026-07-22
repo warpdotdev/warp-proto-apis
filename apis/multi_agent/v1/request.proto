@@ -158,10 +158,8 @@ message Request {
 
     // Tool call result
     message ToolCallResult {
-      reserved 10;     // Removed: RefineResult - no longer used by client
-      reserved refine; // Field name also reserved for field masks
-      reserved 28, 32; // Removed: StartAgentResult, StartAgentV2Result
-      reserved start_agent, start_agent_v2;
+      reserved 10, 28, 32;  
+      reserved refine, start_agent, start_agent_v2;
 
       string tool_call_id = 1;
 
@@ -367,7 +365,7 @@ message Request {
     string parent_agent_id = 5;
 
     // The display name for this agent (e.g. "Agent 1"), assigned by the
-    // orchestrator.
+    // orchestrator via StartAgent.name.
     string agent_name = 6 [ (sensitive) = true ];
   }
 
