@@ -201,6 +201,7 @@ message Request {
         WaitForEventsResult wait_for_events = 35;
         StartRecordingResult start_recording = 36;
         StopRecordingResult stop_recording = 37;
+        StopRecordingV2Result stop_recording_v2 = 38;
       }
     }
 

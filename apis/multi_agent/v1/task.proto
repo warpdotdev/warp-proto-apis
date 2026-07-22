@@ -435,6 +435,7 @@ message Message {
       WaitForEvents wait_for_events = 36;
       StartRecording start_recording = 37;
       StopRecording stop_recording = 38;
+      StopRecordingV2 stop_recording_v2 = 39;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -960,6 +961,15 @@ message Message {
       string recording_id = 1;
     }
 
+    // A tool call to stop an in-progress recording and optionally publish the
+    // resulting video as a file artifact.
+    message StopRecordingV2 {
+      // The recording to stop, as returned by `StartRecordingResult`.
+      string recording_id = 1;
+      // Whether to publish the recording. If omitted, defaults to true.
+      oneof should_report_value { bool should_report = 2; }
+    }
+
     message ScreenshotParams {
       // The maximum length of the long edge of the screenshot in pixels.
       int32 max_long_edge_px = 1;
@@ -1069,6 +1079,7 @@ message Message {
       WaitForEventsResult wait_for_events = 40;
       StartRecordingResult start_recording = 41;
       StopRecordingResult stop_recording = 42;
+      StopRecordingV2Result stop_recording_v2 = 43;
     }
 
     // Result of a server-side tool call.
@@ -1764,6 +1775,17 @@ message StopRecordingResult {
   }
 }
 
+// Result of a `StopRecordingV2` tool call.
+message StopRecordingV2Result {
+  oneof result {
+    StopRecordingResult.Success success = 1;
+    StopRecordingResult.Error error = 2;
+    Discarded discarded = 3;
+  }
+
+  message Discarded {}
+}
+
 // Result of a `FetchConversation` tool call.
 message FetchConversationResult {
   oneof result {
@@ -1833,6 +1855,7 @@ enum ToolType {
   WAIT_FOR_EVENTS = 33;
   START_RECORDING = 34;
   STOP_RECORDING = 35;
+  STOP_RECORDING_V2 = 36;
 }
 
 message UserQueryMode {
