@@ -2007,7 +2007,10 @@ message RunAgents {
     // overrides the batch-level model_id for this child only. When empty,
     // the child inherits the batch-level model_id.
     string model_id = 5;
+    Harness harness = 6;
+
   }
+
   string summary = 1 [ (sensitive) = true ];
   string base_prompt = 2 [ (sensitive) = true ];
   repeated SkillRef skills = 3;
@@ -2064,10 +2067,7 @@ message RunAgentsResult {
     // How the agent was configured.
     string model_id = 4;
     Harness harness = 5;
-    oneof execution_mode {
-      RunAgents.Local local = 6;
-      RunAgents.Remote remote = 7;
-    }
+    ExecutionMode execution_mode = 6;
   }
 
   message LaunchedAgent { string agent_id = 1; }
