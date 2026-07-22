@@ -489,6 +489,10 @@ message Request {
     // `config_key`, which indexes into this registry.
     CustomModelRouters custom_model_routers = 30;
 
+    // If `true`, the client supports selecting and propagating a remote
+    // `runner_id` for orchestrated child agents.
+    bool supports_orchestration_runners = 31;
+
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
     // in `custom_model_providers`.
