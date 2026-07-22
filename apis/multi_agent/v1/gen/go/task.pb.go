@@ -37338,6 +37338,7 @@ type RunAgents_AgentRunConfig struct {
 	xxx_hidden_Prompt           *string                `protobuf:"bytes,2,opt,name=prompt"`
 	xxx_hidden_Title            *string                `protobuf:"bytes,3,opt,name=title"`
 	xxx_hidden_AgentIdentityUid *string                `protobuf:"bytes,4,opt,name=agent_identity_uid,json=agentIdentityUid"`
+	xxx_hidden_ModelId          *string                `protobuf:"bytes,5,opt,name=model_id,json=modelId"`
 	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
 	XXX_presence                [1]uint32
 	unknownFields               protoimpl.UnknownFields
@@ -37409,24 +37410,39 @@ func (x *RunAgents_AgentRunConfig) GetAgentIdentityUid() string {
 	return ""
 }
 
+func (x *RunAgents_AgentRunConfig) GetModelId() string {
+	if x != nil {
+		if x.xxx_hidden_ModelId != nil {
+			return *x.xxx_hidden_ModelId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *RunAgents_AgentRunConfig) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
 }
 
 func (x *RunAgents_AgentRunConfig) SetPrompt(v string) {
 	x.xxx_hidden_Prompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
 }
 
 func (x *RunAgents_AgentRunConfig) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *RunAgents_AgentRunConfig) SetAgentIdentityUid(v string) {
 	x.xxx_hidden_AgentIdentityUid = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *RunAgents_AgentRunConfig) SetModelId(v string) {
+	x.xxx_hidden_ModelId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *RunAgents_AgentRunConfig) HasName() bool {
@@ -37457,6 +37473,13 @@ func (x *RunAgents_AgentRunConfig) HasAgentIdentityUid() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *RunAgents_AgentRunConfig) HasModelId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *RunAgents_AgentRunConfig) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
@@ -37477,6 +37500,11 @@ func (x *RunAgents_AgentRunConfig) ClearAgentIdentityUid() {
 	x.xxx_hidden_AgentIdentityUid = nil
 }
 
+func (x *RunAgents_AgentRunConfig) ClearModelId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_ModelId = nil
+}
+
 type RunAgents_AgentRunConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -37493,6 +37521,10 @@ type RunAgents_AgentRunConfig_builder struct {
 	// execute as. Only valid for factory agents dispatching sibling factory
 	// agents; enforced server-side at dispatch time.
 	AgentIdentityUid *string
+	// Optional model override for this specific child agent. When set,
+	// overrides the batch-level model_id for this child only. When empty,
+	// the child inherits the batch-level model_id.
+	ModelId *string
 }
 
 func (b0 RunAgents_AgentRunConfig_builder) Build() *RunAgents_AgentRunConfig {
@@ -37500,20 +37532,24 @@ func (b0 RunAgents_AgentRunConfig_builder) Build() *RunAgents_AgentRunConfig {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
 		x.xxx_hidden_Name = b.Name
 	}
 	if b.Prompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
 		x.xxx_hidden_Prompt = b.Prompt
 	}
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.AgentIdentityUid != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_AgentIdentityUid = b.AgentIdentityUid
+	}
+	if b.ModelId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_ModelId = b.ModelId
 	}
 	return m0
 }
@@ -37677,13 +37713,14 @@ func (b0 RunAgentsResult_FailedAgent_builder) Build() *RunAgentsResult_FailedAge
 // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs
 // by `name`.
 type RunAgentsResult_AgentOutcome struct {
-	state                  protoimpl.MessageState                `protogen:"opaque.v1"`
-	xxx_hidden_Name        *string                               `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Result      isRunAgentsResult_AgentOutcome_Result `protobuf_oneof:"result"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                      protoimpl.MessageState                `protogen:"opaque.v1"`
+	xxx_hidden_Name            *string                               `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Result          isRunAgentsResult_AgentOutcome_Result `protobuf_oneof:"result"`
+	xxx_hidden_ResolvedModelId *string                               `protobuf:"bytes,4,opt,name=resolved_model_id,json=resolvedModelId"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *RunAgentsResult_AgentOutcome) Reset() {
@@ -37739,9 +37776,19 @@ func (x *RunAgentsResult_AgentOutcome) GetFailed() *RunAgentsResult_FailedAgent 
 	return nil
 }
 
+func (x *RunAgentsResult_AgentOutcome) GetResolvedModelId() string {
+	if x != nil {
+		if x.xxx_hidden_ResolvedModelId != nil {
+			return *x.xxx_hidden_ResolvedModelId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *RunAgentsResult_AgentOutcome) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *RunAgentsResult_AgentOutcome) SetLaunched(v *RunAgentsResult_LaunchedAgent) {
@@ -37758,6 +37805,11 @@ func (x *RunAgentsResult_AgentOutcome) SetFailed(v *RunAgentsResult_FailedAgent)
 		return
 	}
 	x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Failed{v}
+}
+
+func (x *RunAgentsResult_AgentOutcome) SetResolvedModelId(v string) {
+	x.xxx_hidden_ResolvedModelId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *RunAgentsResult_AgentOutcome) HasName() bool {
@@ -37790,6 +37842,13 @@ func (x *RunAgentsResult_AgentOutcome) HasFailed() bool {
 	return ok
 }
 
+func (x *RunAgentsResult_AgentOutcome) HasResolvedModelId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *RunAgentsResult_AgentOutcome) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
@@ -37809,6 +37868,11 @@ func (x *RunAgentsResult_AgentOutcome) ClearFailed() {
 	if _, ok := x.xxx_hidden_Result.(*runAgentsResult_AgentOutcome_Failed); ok {
 		x.xxx_hidden_Result = nil
 	}
+}
+
+func (x *RunAgentsResult_AgentOutcome) ClearResolvedModelId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ResolvedModelId = nil
 }
 
 const RunAgentsResult_AgentOutcome_Result_not_set_case case_RunAgentsResult_AgentOutcome_Result = 0
@@ -37837,6 +37901,10 @@ type RunAgentsResult_AgentOutcome_builder struct {
 	Launched *RunAgentsResult_LaunchedAgent
 	Failed   *RunAgentsResult_FailedAgent
 	// -- end of xxx_hidden_Result
+	// The model_id that was actually used for this child agent. Populated
+	// from the per-agent model_id override when set, otherwise from the
+	// batch-level resolved_model_id.
+	ResolvedModelId *string
 }
 
 func (b0 RunAgentsResult_AgentOutcome_builder) Build() *RunAgentsResult_AgentOutcome {
@@ -37844,7 +37912,7 @@ func (b0 RunAgentsResult_AgentOutcome_builder) Build() *RunAgentsResult_AgentOut
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Name = b.Name
 	}
 	if b.Launched != nil {
@@ -37852,6 +37920,10 @@ func (b0 RunAgentsResult_AgentOutcome_builder) Build() *RunAgentsResult_AgentOut
 	}
 	if b.Failed != nil {
 		x.xxx_hidden_Result = &runAgentsResult_AgentOutcome_Failed{b.Failed}
+	}
+	if b.ResolvedModelId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_ResolvedModelId = b.ResolvedModelId
 	}
 	return m0
 }
@@ -40948,7 +41020,7 @@ const file_task_proto_rawDesc = "" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a\x1d\n" +
 	"\x05Error\x12\x14\n" +
 	"\x05error\x18\x01 \x01(\tR\x05errorB\b\n" +
-	"\x06result\"\xa1\x06\n" +
+	"\x06result\"\xbc\x06\n" +
 	"\tRunAgents\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12%\n" +
 	"\vbase_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
@@ -40966,13 +41038,14 @@ const file_task_proto_rawDesc = "" +
 	"\vworker_host\x18\x02 \x01(\tR\n" +
 	"workerHost\x120\n" +
 	"\x14computer_use_enabled\x18\x03 \x01(\bR\x12computerUseEnabled\x12\x1b\n" +
-	"\trunner_id\x18\x04 \x01(\tR\brunnerId\x1a\x92\x01\n" +
+	"\trunner_id\x18\x04 \x01(\tR\brunnerId\x1a\xad\x01\n" +
 	"\x0eAgentRunConfig\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12\x1a\n" +
 	"\x05title\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x05title\x12,\n" +
-	"\x12agent_identity_uid\x18\x04 \x01(\tR\x10agentIdentityUidB\x10\n" +
-	"\x0eexecution_mode\"\xd4\a\n" +
+	"\x12agent_identity_uid\x18\x04 \x01(\tR\x10agentIdentityUid\x12\x19\n" +
+	"\bmodel_id\x18\x05 \x01(\tR\amodelIdB\x10\n" +
+	"\x0eexecution_mode\"\x80\b\n" +
 	"\x0fRunAgentsResult\x12K\n" +
 	"\blaunched\x18\x01 \x01(\v2-.warp.multi_agent.v1.RunAgentsResult.LaunchedH\x00R\blaunched\x12E\n" +
 	"\x06denied\x18\x02 \x01(\v2+.warp.multi_agent.v1.RunAgentsResult.DeniedH\x00R\x06denied\x12H\n" +
@@ -40980,11 +41053,12 @@ const file_task_proto_rawDesc = "" +
 	"\rLaunchedAgent\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\x1a)\n" +
 	"\vFailedAgent\x12\x1a\n" +
-	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05error\x1a\xd0\x01\n" +
+	"\x05error\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05error\x1a\xfc\x01\n" +
 	"\fAgentOutcome\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12P\n" +
 	"\blaunched\x18\x02 \x01(\v22.warp.multi_agent.v1.RunAgentsResult.LaunchedAgentH\x00R\blaunched\x12J\n" +
-	"\x06failed\x18\x03 \x01(\v20.warp.multi_agent.v1.RunAgentsResult.FailedAgentH\x00R\x06failedB\b\n" +
+	"\x06failed\x18\x03 \x01(\v20.warp.multi_agent.v1.RunAgentsResult.FailedAgentH\x00R\x06failed\x12*\n" +
+	"\x11resolved_model_id\x18\x04 \x01(\tR\x0fresolvedModelIdB\b\n" +
 	"\x06result\x1a\xe4\x02\n" +
 	"\bLaunched\x12*\n" +
 	"\x11resolved_model_id\x18\x01 \x01(\tR\x0fresolvedModelId\x12G\n" +
