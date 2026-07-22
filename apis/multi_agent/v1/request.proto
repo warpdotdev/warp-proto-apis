@@ -160,6 +160,8 @@ message Request {
     message ToolCallResult {
       reserved 10;     // Removed: RefineResult - no longer used by client
       reserved refine; // Field name also reserved for field masks
+      reserved 28, 32; // Removed: StartAgentResult, StartAgentV2Result
+      reserved start_agent, start_agent_v2;
 
       string tool_call_id = 1;
 
@@ -190,12 +192,10 @@ message Request {
         RequestComputerUseResult request_computer_use = 25;
         ReadSkillResult read_skill = 26;
         FetchConversationResult fetch_conversation = 27;
-        StartAgentResult start_agent = 28;
         SendMessageToAgentResult send_message_to_agent = 29;
         TransferShellCommandControlToUserResult
             transfer_shell_command_control_to_user = 30;
         AskUserQuestionResult ask_user_question = 31;
-        StartAgentV2Result start_agent_v2 = 32;
         UploadFileArtifactResult upload_file_artifact = 33;
         RunAgentsResult run_agents_result = 34;
         WaitForEventsResult wait_for_events = 35;
@@ -367,7 +367,7 @@ message Request {
     string parent_agent_id = 5;
 
     // The display name for this agent (e.g. "Agent 1"), assigned by the
-    // orchestrator via StartAgent.name.
+    // orchestrator.
     string agent_name = 6 [ (sensitive) = true ];
   }
 
