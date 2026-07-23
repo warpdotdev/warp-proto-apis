@@ -590,6 +590,7 @@ const (
 	StopRecordingResult_TERMINATION_REASON_ENCODING_FAILED StopRecordingResult_TerminationReason = 4
 	StopRecordingResult_TERMINATION_REASON_UPLOAD_FAILED   StopRecordingResult_TerminationReason = 5
 	StopRecordingResult_TERMINATION_REASON_OTHER           StopRecordingResult_TerminationReason = 6
+	StopRecordingResult_TERMINATION_REASON_EARLY_FINISH    StopRecordingResult_TerminationReason = 7
 )
 
 // Enum value maps for StopRecordingResult_TerminationReason.
@@ -602,6 +603,7 @@ var (
 		4: "TERMINATION_REASON_ENCODING_FAILED",
 		5: "TERMINATION_REASON_UPLOAD_FAILED",
 		6: "TERMINATION_REASON_OTHER",
+		7: "TERMINATION_REASON_EARLY_FINISH",
 	}
 	StopRecordingResult_TerminationReason_value = map[string]int32{
 		"TERMINATION_REASON_UNSPECIFIED":     0,
@@ -611,6 +613,7 @@ var (
 		"TERMINATION_REASON_ENCODING_FAILED": 4,
 		"TERMINATION_REASON_UPLOAD_FAILED":   5,
 		"TERMINATION_REASON_OTHER":           6,
+		"TERMINATION_REASON_EARLY_FINISH":    7,
 	}
 )
 

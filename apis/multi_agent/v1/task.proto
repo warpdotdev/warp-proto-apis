@@ -1750,8 +1750,13 @@ message StopRecordingResult {
     int64 size_bytes = 5;
     // Whether the recording finalized cleanly or was cut short.
     CompletionStatus completion_status = 6;
-    // Stable reason the recording terminated.
-    TerminationReason termination_reason = 7;
+    // DEPRECATED: Human-readable reason string. Use termination_reason_enum
+    // (field 8) instead. Preserved so old clients that still send this field
+    // are not rejected by the server.
+    string termination_reason = 7 [deprecated = true, (sensitive) = true];
+    // Stable, typed reason the recording terminated. New clients should
+    // populate this field; old clients may leave it at UNSPECIFIED.
+    TerminationReason termination_reason_enum = 8;
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
@@ -1771,6 +1776,10 @@ message StopRecordingResult {
     TERMINATION_REASON_ENCODING_FAILED = 4;
     TERMINATION_REASON_UPLOAD_FAILED = 5;
     TERMINATION_REASON_OTHER = 6;
+    // Recording ended because the agent/conversation finished before an
+    // explicit StopRecording call could be issued (e.g. agent task completed,
+    // conversation cancelled, or stop/finalize race).
+    TERMINATION_REASON_EARLY_FINISH = 7;
   }
 }
 
