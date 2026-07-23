@@ -963,6 +963,12 @@ message Message {
     message StopRecording {
       // The recording to stop, as returned by `StartRecordingResult`.
       string recording_id = 1;
+
+      // Whether the finalized recording should be discarded instead of
+      // uploaded as a file artifact. Defaults to false (persist/upload), so
+      // omitting it preserves legacy behavior; set true only when the agent
+      // explicitly wants to throw the recording away.
+      bool discard = 2;
     }
 
     message ScreenshotParams {
@@ -1740,7 +1746,12 @@ message StopRecordingResult {
   oneof result {
     Success success = 1;
     Error error = 2;
+    // The agent chose not to persist the recording, so no artifact was
+    // produced. This is not an error.
+    Discarded discarded = 3;
   }
+
+  message Discarded {}
 
   message Success {
     // The UID of the uploaded video file artifact.
