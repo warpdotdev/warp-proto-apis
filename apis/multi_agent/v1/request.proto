@@ -513,6 +513,10 @@ message Request {
       // User-selected max input-token context window for the base model.
       // Zero or unset means "use the model's default max".
       uint32 base_model_context_window_limit = 6;
+
+      // The LLM of preference for subagents. Unset means "use the base
+      // model".
+      string subagent = 7;
     }
 
     message ApiKeys {

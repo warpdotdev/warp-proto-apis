@@ -7542,6 +7542,7 @@ type Request_Settings_ModelConfig struct {
 	xxx_hidden_CliAgent                    *string                `protobuf:"bytes,4,opt,name=cli_agent,json=cliAgent"`
 	xxx_hidden_ComputerUseAgent            *string                `protobuf:"bytes,5,opt,name=computer_use_agent,json=computerUseAgent"`
 	xxx_hidden_BaseModelContextWindowLimit uint32                 `protobuf:"varint,6,opt,name=base_model_context_window_limit,json=baseModelContextWindowLimit"`
+	xxx_hidden_Subagent                    *string                `protobuf:"bytes,7,opt,name=subagent"`
 	XXX_raceDetectHookData                 protoimpl.RaceDetectHookData
 	XXX_presence                           [1]uint32
 	unknownFields                          protoimpl.UnknownFields
@@ -7631,35 +7632,50 @@ func (x *Request_Settings_ModelConfig) GetBaseModelContextWindowLimit() uint32 {
 	return 0
 }
 
+func (x *Request_Settings_ModelConfig) GetSubagent() string {
+	if x != nil {
+		if x.xxx_hidden_Subagent != nil {
+			return *x.xxx_hidden_Subagent
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Settings_ModelConfig) SetBase(v string) {
 	x.xxx_hidden_Base = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 // Deprecated: Marked as deprecated in request.proto.
 func (x *Request_Settings_ModelConfig) SetPlanning(v string) {
 	x.xxx_hidden_Planning = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
 }
 
 func (x *Request_Settings_ModelConfig) SetCoding(v string) {
 	x.xxx_hidden_Coding = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
 func (x *Request_Settings_ModelConfig) SetCliAgent(v string) {
 	x.xxx_hidden_CliAgent = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *Request_Settings_ModelConfig) SetComputerUseAgent(v string) {
 	x.xxx_hidden_ComputerUseAgent = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
 }
 
 func (x *Request_Settings_ModelConfig) SetBaseModelContextWindowLimit(v uint32) {
 	x.xxx_hidden_BaseModelContextWindowLimit = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+}
+
+func (x *Request_Settings_ModelConfig) SetSubagent(v string) {
+	x.xxx_hidden_Subagent = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 7)
 }
 
 func (x *Request_Settings_ModelConfig) HasBase() bool {
@@ -7705,6 +7721,13 @@ func (x *Request_Settings_ModelConfig) HasBaseModelContextWindowLimit() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
+func (x *Request_Settings_ModelConfig) HasSubagent() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
 func (x *Request_Settings_ModelConfig) ClearBase() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Base = nil
@@ -7736,6 +7759,11 @@ func (x *Request_Settings_ModelConfig) ClearBaseModelContextWindowLimit() {
 	x.xxx_hidden_BaseModelContextWindowLimit = 0
 }
 
+func (x *Request_Settings_ModelConfig) ClearSubagent() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_Subagent = nil
+}
+
 type Request_Settings_ModelConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -7754,6 +7782,9 @@ type Request_Settings_ModelConfig_builder struct {
 	// User-selected max input-token context window for the base model.
 	// Zero or unset means "use the model's default max".
 	BaseModelContextWindowLimit *uint32
+	// The LLM of preference for subagents. Unset means "use the base
+	// model".
+	Subagent *string
 }
 
 func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelConfig {
@@ -7761,28 +7792,32 @@ func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelCo
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Base != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_Base = b.Base
 	}
 	if b.Planning != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
 		x.xxx_hidden_Planning = b.Planning
 	}
 	if b.Coding != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_Coding = b.Coding
 	}
 	if b.CliAgent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_CliAgent = b.CliAgent
 	}
 	if b.ComputerUseAgent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
 		x.xxx_hidden_ComputerUseAgent = b.ComputerUseAgent
 	}
 	if b.BaseModelContextWindowLimit != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
 		x.xxx_hidden_BaseModelContextWindowLimit = *b.BaseModelContextWindowLimit
+	}
+	if b.Subagent != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
+		x.xxx_hidden_Subagent = b.Subagent
 	}
 	return m0
 }
@@ -9842,7 +9877,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xcbz\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xe7z\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10028,7 +10063,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x8e!\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xaa!\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -10061,14 +10096,15 @@ const file_request_proto_rawDesc = "" +
 	"\x16custom_model_providers\x18\x1c \x01(\v2:.warp.multi_agent.v1.Request.Settings.CustomModelProvidersR\x14customModelProviders\x12G\n" +
 	" supports_background_computer_use\x18\x1d \x01(\bR\x1dsupportsBackgroundComputerUse\x12j\n" +
 	"\x14custom_model_routers\x18\x1e \x01(\v28.warp.multi_agent.v1.Request.Settings.CustomModelRoutersR\x12customModelRouters\x12D\n" +
-	"\x1esupports_orchestration_runners\x18\x1f \x01(\bR\x1csupportsOrchestrationRunners\x1a\xea\x01\n" +
+	"\x1esupports_orchestration_runners\x18\x1f \x01(\bR\x1csupportsOrchestrationRunners\x1a\x86\x02\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
 	"\x06coding\x18\x03 \x01(\tR\x06coding\x12\x1b\n" +
 	"\tcli_agent\x18\x04 \x01(\tR\bcliAgent\x12,\n" +
 	"\x12computer_use_agent\x18\x05 \x01(\tR\x10computerUseAgent\x12D\n" +
-	"\x1fbase_model_context_window_limit\x18\x06 \x01(\rR\x1bbaseModelContextWindowLimit\x1a\xd1\x05\n" +
+	"\x1fbase_model_context_window_limit\x18\x06 \x01(\rR\x1bbaseModelContextWindowLimit\x12\x1a\n" +
+	"\bsubagent\x18\a \x01(\tR\bsubagent\x1a\xd1\x05\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +
