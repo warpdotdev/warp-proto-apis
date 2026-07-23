@@ -62,11 +62,12 @@ message Task {
 enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_UNSPECIFIED = 0;
   // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead.
-  LIFECYCLE_EVENT_TYPE_STARTED = 1 [deprecated = true];
+  LIFECYCLE_EVENT_TYPE_STARTED = 1 [ deprecated = true ];
   // Deprecated: use LIFECYCLE_EVENT_TYPE_SUCCEEDED instead.
-  LIFECYCLE_EVENT_TYPE_IDLE = 2 [deprecated = true];
-  // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead. Restart is no longer distinguished from start.
-  LIFECYCLE_EVENT_TYPE_RESTARTED = 3 [deprecated = true];
+  LIFECYCLE_EVENT_TYPE_IDLE = 2 [ deprecated = true ];
+  // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead. Restart is no
+  // longer distinguished from start.
+  LIFECYCLE_EVENT_TYPE_RESTARTED = 3 [ deprecated = true ];
   LIFECYCLE_EVENT_TYPE_ERRORED = 4;
   LIFECYCLE_EVENT_TYPE_CANCELLED = 5;
   LIFECYCLE_EVENT_TYPE_BLOCKED = 6;
@@ -93,11 +94,12 @@ message AgentEvent {
     oneof detail {
       Errored errored = 2;
       // Deprecated: use in_progress instead.
-      google.protobuf.Empty started = 3 [deprecated = true];
+      google.protobuf.Empty started = 3 [ deprecated = true ];
       // Deprecated: use succeeded instead.
-      google.protobuf.Empty idle = 4 [deprecated = true];
-      // Deprecated: use in_progress instead. Restart is no longer distinguished from start.
-      google.protobuf.Empty restarted = 5 [deprecated = true];
+      google.protobuf.Empty idle = 4 [ deprecated = true ];
+      // Deprecated: use in_progress instead. Restart is no longer distinguished
+      // from start.
+      google.protobuf.Empty restarted = 5 [ deprecated = true ];
       google.protobuf.Empty cancelled = 6;
       Blocked blocked = 7;
       google.protobuf.Empty in_progress = 8;
@@ -219,7 +221,7 @@ message Message {
 
   message PassiveSuggestionResult {
     PassiveSuggestionResultType result = 1;
-    InputContext context = 2; 
+    InputContext context = 2;
   }
 
   // A batch of messages received from other agents, persisted in conversation
@@ -392,7 +394,7 @@ message Message {
 
   // Tool call message type
   message ToolCall {
-    reserved 29, 33;             // Removed: StartAgent, StartAgentV2
+    reserved 29, 33; // Removed: StartAgent, StartAgentV2
     reserved start_agent, start_agent_v2;
 
     string tool_call_id = 1;
@@ -663,7 +665,8 @@ message Message {
         PromptChip prompt_chip = 2;
       }
 
-      // Whether the trigger for this suggestion is not actually relevant to the suggestion itself.
+      // Whether the trigger for this suggestion is not actually relevant to the
+      // suggestion itself.
       bool is_trigger_irrelevant = 3;
 
       // Deprecated; remove once prompt suggestions via MAA is fully rolled out.
@@ -712,7 +715,8 @@ message Message {
       message CLISubagent { string command_id = 1; }
 
       message ConversationSearchMetadata {
-        // The natural language query describing what to find in conversation history.
+        // The natural language query describing what to find in conversation
+        // history.
         string query = 1;
         // The explicit target for the search, if it is not searching the
         // current conversation. If unset, the search targets the current
@@ -936,8 +940,8 @@ message Message {
       // A value of 0 or 1 means real-time (no speedup). The client applies this
       // via an ffmpeg presentation-timestamp rescale filter.
       uint32 playback_speed_multiplier = 4;
-      // The surface to record. If unset or set to screen, record the full screen
-      // (legacy behavior).
+      // The surface to record. If unset or set to screen, record the full
+      // screen (legacy behavior).
       ComputerUseTarget target = 5;
       // An optional, longer agent-authored description of what the recording
       // captures, shown below the recording in detail views such as the video
@@ -995,8 +999,8 @@ message Message {
       message Screen {}
 
       message Window {
-        // An opaque, platform-specific identifier for the target window. Sent as
-        // a string so window IDs that cannot be represented as an integer on
+        // An opaque, platform-specific identifier for the target window. Sent
+        // as a string so window IDs that cannot be represented as an integer on
         // some platforms are still supported. The client interprets it.
         string window_id = 1;
         // The pid of the process that owns the window.
@@ -1198,8 +1202,8 @@ message Message {
     message ArtifactCreated {
       // We do not use this event to notify the client about plan artifact
       // creation, which happens when we sync a plan to Warp Drive, so we
-      // explicitly list the supported created artifact types instead of reusing the
-      // `ConversationArtifact` type.
+      // explicitly list the supported created artifact types instead of reusing
+      // the `ConversationArtifact` type.
       oneof artifact {
         PullRequestArtifact pull_request = 1;
         ScreenshotArtifact screenshot = 2;
@@ -1874,6 +1878,14 @@ message RunAgents {
     // remote children.
     string runner_id = 4;
   }
+
+  message ExecutionMode {
+    oneof mode {
+      Local local = 1;
+      Remote remote = 2;
+    }
+  }
+
   // Configuration for a single child agent in the batch.
   message AgentRunConfig {
     // Display name for the child agent. Required: must be non-empty and
@@ -1889,7 +1901,13 @@ message RunAgents {
     // execute as. Only valid for factory agents dispatching sibling factory
     // agents; enforced server-side at dispatch time.
     string agent_identity_uid = 4;
+
+    // Optional, per-agent overrides.
+    string model_id = 5;
+    Harness harness = 6;
+    ExecutionMode execution_mode = 7;
   }
+
   string summary = 1 [ (sensitive) = true ];
   string base_prompt = 2 [ (sensitive) = true ];
   repeated SkillRef skills = 3;
@@ -1907,39 +1925,51 @@ message RunAgents {
 
 // The result of a RunAgents tool call.
 message RunAgentsResult {
-  message LaunchedAgent { string agent_id = 1; }
-  message FailedAgent { string error = 1 [ (sensitive) = true ]; }
-  // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs
-  // by `name`.
+  oneof outcome {
+    Launched launched = 1;
+    Denied denied = 2;
+    Failure failure = 3;
+  }
+
+  // Orchestration launched. Carries the resolved configuration and
+  // per-agent outcomes.
+  message Launched {
+    repeated AgentOutcome agents = 5;
+
+    // Deprecated: use per-agent configurations in AgentOutcome instead.
+    string resolved_model_id = 1 [ deprecated = true ];
+    Harness resolved_harness = 2 [ deprecated = true ];
+    oneof resolved_execution_mode {
+      RunAgents.Local local = 3 [ deprecated = true ];
+      RunAgents.Remote remote = 4 [ deprecated = true ];
+    }
+  }
+
+  // Declined for a non-error reason.
+  message Denied { string reason = 1; }
+
+  // Actual error: server-side validation rejected the call, or the client
+  // could not begin the launch sequence. NOT used for user-driven outcomes
+  // (disapproval, cancellation) -- those have their own variants.
+  message Failure { string error = 1 [ (sensitive) = true ]; }
+
+  // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs by
+  // `name`.
   message AgentOutcome {
     string name = 1 [ (sensitive) = true ];
     oneof result {
       LaunchedAgent launched = 2;
       FailedAgent failed = 3;
     }
+
+    // How the agent was ultimately configured.
+    string model_id = 4;
+    Harness harness = 5;
+    RunAgents.ExecutionMode execution_mode = 6;
   }
-  // Orchestration launched. Carries the resolved configuration and
-  // per-agent outcomes.
-  message Launched {
-    string resolved_model_id = 1;
-    Harness resolved_harness = 2;
-    oneof resolved_execution_mode {
-      RunAgents.Local local = 3;
-      RunAgents.Remote remote = 4;
-    }
-    repeated AgentOutcome agents = 5;
-  }
-  // Declined for a non-error reason.
-  message Denied { string reason = 1; }
-  // Actual error: server-side validation rejected the call, or the client
-  // could not begin the launch sequence. NOT used for user-driven outcomes
-  // (disapproval, cancellation) -- those have their own variants.
-  message Failure { string error = 1 [ (sensitive) = true ]; }
-  oneof outcome {
-    Launched launched = 1;
-    Denied denied = 2;
-    Failure failure = 3;
-  }
+
+  message LaunchedAgent { string agent_id = 1; }
+  message FailedAgent { string error = 1 [ (sensitive) = true ]; }
 }
 
 // A client tool call to send a message to one or more agents.
@@ -2064,7 +2094,8 @@ message PassiveSuggestionResultType {
     repeated Diff diffs = 1;
     // A brief description of the change, if any.
     string summary = 2;
-    // Passive code diffs can be rejected but brought into context for further iteration.
+    // Passive code diffs can be rejected but brought into context for further
+    // iteration.
     bool accepted = 3;
 
     message Diff {
