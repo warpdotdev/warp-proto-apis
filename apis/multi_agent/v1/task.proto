@@ -1753,7 +1753,7 @@ message StopRecordingResult {
     // DEPRECATED: Human-readable reason string. Use termination_reason_enum
     // (field 8) instead. Preserved so old clients that still send this field
     // are not rejected by the server.
-    string termination_reason = 7 [deprecated = true, (sensitive) = true];
+    string termination_reason = 7 [deprecated = true];
     // Stable, typed reason the recording terminated. New clients should
     // populate this field; old clients may leave it at UNSPECIFIED.
     TerminationReason termination_reason_enum = 8;
@@ -1769,16 +1769,25 @@ message StopRecordingResult {
   }
 
   enum TerminationReason {
+    // Default / unknown — field not set by sender or set to an unrecognized value.
     TERMINATION_REASON_UNSPECIFIED = 0;
+    // The server-configured maximum recording duration was reached.
     TERMINATION_REASON_MAX_DURATION = 1;
+    // The server-configured maximum recording file size was reached.
     TERMINATION_REASON_MAX_SIZE = 2;
+    // The recording was explicitly canceled by the user or agent before
+    // the video could be finalized and uploaded.
     TERMINATION_REASON_CLIENT_CANCELED = 3;
+    // The video encoder (ffmpeg) exited before the recording was stopped
+    // by the agent, indicating an encoding or capture failure.
     TERMINATION_REASON_ENCODING_FAILED = 4;
+    // The video artifact upload to the server failed after encoding.
     TERMINATION_REASON_UPLOAD_FAILED = 5;
+    // The recording ended for a known but uncategorized reason.
     TERMINATION_REASON_OTHER = 6;
-    // Recording ended because the agent/conversation finished before an
-    // explicit StopRecording call could be issued (e.g. agent task completed,
-    // conversation cancelled, or stop/finalize race).
+    // The recording was finalized because the agent or conversation finished
+    // before an explicit StopRecording call could be issued (e.g. agent task
+    // completed, conversation cancelled, or a stop/finalize race).
     TERMINATION_REASON_EARLY_FINISH = 7;
   }
 }
