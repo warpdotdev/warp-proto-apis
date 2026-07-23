@@ -392,6 +392,9 @@ message Message {
 
   // Tool call message type
   message ToolCall {
+    reserved 29, 33;             // Removed: StartAgent, StartAgentV2
+    reserved start_agent, start_agent_v2;
+
     string tool_call_id = 1;
 
     // The specific tool being called
@@ -424,12 +427,10 @@ message Message {
       ReadSkill read_skill = 26;
       RequestComputerUse request_computer_use = 27;
       FetchConversation fetch_conversation = 28;
-      StartAgent start_agent = 29;
       SendMessageToAgent send_message_to_agent = 30;
       TransferShellCommandControlToUser transfer_shell_command_control_to_user =
           31;
       AskUserQuestion ask_user_question = 32;
-      StartAgentV2 start_agent_v2 = 33;
       UploadFileArtifact upload_file_artifact = 34;
       RunAgents run_agents = 35;
       WaitForEvents wait_for_events = 36;
@@ -1017,8 +1018,8 @@ message Message {
 
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
-    reserved 13;     // Removed: RefineResult - no longer used by client
-    reserved refine; // Field name also reserved for field masks
+    reserved 13, 33, 37;
+    reserved refine, start_agent, start_agent_v2;
 
     string tool_call_id = 1;
 
@@ -1058,12 +1059,10 @@ message Message {
       ReadSkillResult read_skill = 30;
       RequestComputerUseResult request_computer_use_result = 31;
       FetchConversationResult fetch_conversation = 32;
-      StartAgentResult start_agent = 33;
       SendMessageToAgentResult send_message_to_agent = 34;
       TransferShellCommandControlToUserResult
           transfer_shell_command_control_to_user = 35;
       AskUserQuestionResult ask_user_question = 36;
-      StartAgentV2Result start_agent_v2 = 37;
       UploadFileArtifactResult upload_file_artifact = 38;
       RunAgentsResult run_agents_result = 39;
       WaitForEventsResult wait_for_events = 40;
@@ -1797,6 +1796,9 @@ message ShellCommandError {
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
 enum ToolType {
+  reserved 26, 30;
+  reserved START_AGENT, START_AGENT_V2;
+
   RUN_SHELL_COMMAND = 0;
   SEARCH_CODEBASE = 1;
   READ_FILES = 2;
@@ -1823,11 +1825,9 @@ enum ToolType {
   READ_SKILL = 23;
   REQUEST_COMPUTER_USE = 24;
   FETCH_CONVERSATION = 25;
-  START_AGENT = 26;
   SEND_MESSAGE_TO_AGENT = 27;
   TRANSFER_SHELL_COMMAND_CONTROL_TO_USER = 28;
   ASK_USER_QUESTION = 29;
-  START_AGENT_V2 = 30;
   UPLOAD_FILE_ARTIFACT = 31;
   RUN_AGENTS = 32;
   WAIT_FOR_EVENTS = 33;
@@ -1858,120 +1858,6 @@ enum RiskCategory {
   RISK_CATEGORY_NONTRIVIAL_LOCAL_CHANGE = 3;
   RISK_CATEGORY_EXTERNAL_CHANGE = 4;
   RISK_CATEGORY_RISKY = 5;
-}
-
-// A client tool call to start a new agent in a separate conversation.
-message StartAgent {
-  // The display name for the new agent.
-  string name = 1 [ (sensitive) = true ];
-  // The initial prompt to send to the new agent.
-  string prompt = 2 [ (sensitive) = true ];
-  // Optional lifecycle event subscription for the new child agent.
-  // If omitted, defaults to all lifecycle event types.
-  // If present with an empty event_types list, subscribes to none.
-  LifecycleSubscription lifecycle_subscription = 3;
-  // Where the child agent should run. Defaults to local when omitted.
-  ExecutionMode execution_mode = 4;
-
-  message LifecycleSubscription {
-    // Lifecycle event types the lead agent is subscribing to.
-    // Empty means the lead agent is subscribing to none.
-    repeated LifecycleEventType event_types = 1;
-  }
-
-  message ExecutionMode {
-    oneof mode {
-      google.protobuf.Empty local = 1;
-      Remote remote = 2;
-    }
-
-    message Remote {
-      // Optional cloud environment UID for remote child agents.
-      string environment_id = 1;
-    }
-  }
-}
-
-// The result of a StartAgent tool call.
-message StartAgentResult {
-  oneof result {
-    Success success = 1;
-    Error error = 2;
-  }
-
-  message Success {
-    // The server-assigned child conversation ID.
-    string agent_id = 1;
-  }
-  message Error { string error = 1; }
-}
-
-// A client tool call to start a new agent in a separate run.
-message StartAgentV2 {
-  // The display name for the new agent.
-  string name = 1 [ (sensitive) = true ];
-  // The initial prompt to send to the new agent.
-  string prompt = 2 [ (sensitive) = true ];
-  // Optional lifecycle event subscription for the new child agent.
-  // If omitted, defaults to all lifecycle event types.
-  // If present with an empty event_types list, subscribes to none.
-  LifecycleSubscription lifecycle_subscription = 3;
-  // Where the child agent should run. Defaults to local when omitted.
-  ExecutionMode execution_mode = 4;
-
-  message LifecycleSubscription {
-    // Lifecycle event types the lead agent is subscribing to.
-    // Empty means the lead agent is subscribing to none.
-    repeated LifecycleEventType event_types = 1;
-  }
-
-  message ExecutionMode {
-    oneof mode {
-      Local local = 1;
-      Remote remote = 2;
-    }
-
-    message Harness {
-      // The harness type identifier (e.g. "oz" or "claude").
-      string type = 1;
-    }
-
-    message Local {
-      // Optional execution harness for the local child run.
-      Harness harness = 1;
-    }
-
-    message Remote {
-      // Optional cloud environment UID for remote child agents.
-      string environment_id = 1;
-      // Optional skill references to use as base context for a remote child run.
-      repeated SkillRef skills = 2;
-      // Optional model override for the remote child run.
-      string model_id = 3;
-      // Whether computer use should be enabled for the remote child run.
-      bool computer_use_enabled = 4;
-      // Optional worker host ID for routing the remote child run.
-      string worker_host = 5;
-      // Optional execution harness for the remote child run.
-      Harness harness = 6;
-      // Optional title for the remote child run.
-      string title = 7 [ (sensitive) = true ];
-    }
-  }
-}
-
-// The result of a StartAgentV2 tool call.
-message StartAgentV2Result {
-  oneof result {
-    Success success = 1;
-    Error error = 2;
-  }
-
-  message Success {
-    // The server-assigned child run ID.
-    string agent_id = 1;
-  }
-  message Error { string error = 1; }
 }
 
 // A client tool call to start a batch of child agents that share run-wide
@@ -2007,8 +1893,6 @@ message RunAgents {
     // overrides the batch-level model_id for this child only. When empty,
     // the child inherits the batch-level model_id.
     string model_id = 5;
-    Harness harness = 6;
-
   }
 
   string summary = 1 [ (sensitive) = true ];
@@ -2063,11 +1947,10 @@ message RunAgentsResult {
       LaunchedAgent launched = 2;
       FailedAgent failed = 3;
     }
-
-    // How the agent was configured.
-    string model_id = 4;
-    Harness harness = 5;
-    ExecutionMode execution_mode = 6;
+    // The model_id that was actually used for this child agent. Populated
+    // from the per-agent model_id override when set, otherwise from the
+    // batch-level resolved_model_id.
+    string resolved_model_id = 4;
   }
 
   message LaunchedAgent { string agent_id = 1; }
