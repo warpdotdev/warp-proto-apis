@@ -23027,6 +23027,7 @@ type Message_ToolCall_StartRecording struct {
 	xxx_hidden_PlaybackSpeedMultiplier uint32                                  `protobuf:"varint,4,opt,name=playback_speed_multiplier,json=playbackSpeedMultiplier"`
 	xxx_hidden_Target                  *Message_ToolCall_ComputerUseTarget     `protobuf:"bytes,5,opt,name=target"`
 	xxx_hidden_Description             *string                                 `protobuf:"bytes,6,opt,name=description"`
+	xxx_hidden_CaptureThumbnail        bool                                    `protobuf:"varint,7,opt,name=capture_thumbnail,json=captureThumbnail"`
 	XXX_raceDetectHookData             protoimpl.RaceDetectHookData
 	XXX_presence                       [1]uint32
 	unknownFields                      protoimpl.UnknownFields
@@ -23106,9 +23107,16 @@ func (x *Message_ToolCall_StartRecording) GetDescription() string {
 	return ""
 }
 
+func (x *Message_ToolCall_StartRecording) GetCaptureThumbnail() bool {
+	if x != nil {
+		return x.xxx_hidden_CaptureThumbnail
+	}
+	return false
+}
+
 func (x *Message_ToolCall_StartRecording) SetFrameRate(v int32) {
 	x.xxx_hidden_FrameRate = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 func (x *Message_ToolCall_StartRecording) SetLimits(v *Message_ToolCall_StartRecording_Limits) {
@@ -23117,12 +23125,12 @@ func (x *Message_ToolCall_StartRecording) SetLimits(v *Message_ToolCall_StartRec
 
 func (x *Message_ToolCall_StartRecording) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
 func (x *Message_ToolCall_StartRecording) SetPlaybackSpeedMultiplier(v uint32) {
 	x.xxx_hidden_PlaybackSpeedMultiplier = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *Message_ToolCall_StartRecording) SetTarget(v *Message_ToolCall_ComputerUseTarget) {
@@ -23131,7 +23139,12 @@ func (x *Message_ToolCall_StartRecording) SetTarget(v *Message_ToolCall_Computer
 
 func (x *Message_ToolCall_StartRecording) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+}
+
+func (x *Message_ToolCall_StartRecording) SetCaptureThumbnail(v bool) {
+	x.xxx_hidden_CaptureThumbnail = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 7)
 }
 
 func (x *Message_ToolCall_StartRecording) HasFrameRate() bool {
@@ -23176,6 +23189,13 @@ func (x *Message_ToolCall_StartRecording) HasDescription() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
+func (x *Message_ToolCall_StartRecording) HasCaptureThumbnail() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
 func (x *Message_ToolCall_StartRecording) ClearFrameRate() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_FrameRate = 0
@@ -23204,6 +23224,11 @@ func (x *Message_ToolCall_StartRecording) ClearDescription() {
 	x.xxx_hidden_Description = nil
 }
 
+func (x *Message_ToolCall_StartRecording) ClearCaptureThumbnail() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_CaptureThumbnail = false
+}
+
 type Message_ToolCall_StartRecording_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -23226,6 +23251,13 @@ type Message_ToolCall_StartRecording_builder struct {
 	// captures, shown below the recording in detail views such as the video
 	// lightbox.
 	Description *string
+	// Server-owned flag that gates whether the client produces a thumbnail
+	// frame for this recording. The server sets this from a feature flag,
+	// decoupled from the per-team EMBED / LINK_ONLY PR artifact display
+	// setting, so a thumbnail is available regardless of how the video is
+	// later rendered. When false (the default), the client skips thumbnail
+	// capture and behavior is unchanged.
+	CaptureThumbnail *bool
 }
 
 func (b0 Message_ToolCall_StartRecording_builder) Build() *Message_ToolCall_StartRecording {
@@ -23233,22 +23265,26 @@ func (b0 Message_ToolCall_StartRecording_builder) Build() *Message_ToolCall_Star
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.FrameRate != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_FrameRate = *b.FrameRate
 	}
 	x.xxx_hidden_Limits = b.Limits
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	if b.PlaybackSpeedMultiplier != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_PlaybackSpeedMultiplier = *b.PlaybackSpeedMultiplier
 	}
 	x.xxx_hidden_Target = b.Target
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
 		x.xxx_hidden_Description = b.Description
+	}
+	if b.CaptureThumbnail != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 7)
+		x.xxx_hidden_CaptureThumbnail = *b.CaptureThumbnail
 	}
 	return m0
 }
@@ -38366,7 +38402,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xab\xce\x01\n" +
+	"\x0ecomment_target\"\xd8\xce\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -38488,7 +38524,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x9bf\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xc8f\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -38777,7 +38813,7 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\x1a\xa2\x01\n" +
 	"\x12RequestComputerUse\x12'\n" +
 	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummary\x12c\n" +
-	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\xbb\x03\n" +
+	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\xe8\x03\n" +
 	"\x0eStartRecording\x12\x1d\n" +
 	"\n" +
 	"frame_rate\x18\x01 \x01(\x05R\tframeRate\x12S\n" +
@@ -38785,7 +38821,8 @@ const file_task_proto_rawDesc = "" +
 	"\asummary\x18\x03 \x01(\tR\asummary\x12:\n" +
 	"\x19playback_speed_multiplier\x18\x04 \x01(\rR\x17playbackSpeedMultiplier\x12O\n" +
 	"\x06target\x18\x05 \x01(\v27.warp.multi_agent.v1.Message.ToolCall.ComputerUseTargetR\x06target\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x1al\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12+\n" +
+	"\x11capture_thumbnail\x18\a \x01(\bR\x10captureThumbnail\x1al\n" +
 	"\x06Limits\x12<\n" +
 	"\fmax_duration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\vmaxDuration\x12$\n" +
 	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytes\x1aL\n" +
