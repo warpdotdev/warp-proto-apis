@@ -1331,7 +1331,63 @@ message ApplyFileDiffsResult {
     message DeletedFile { string file_path = 1 [ (sensitive) = true ]; }
   }
 
-  message Error { string message = 1 [ (sensitive) = true ]; }
+  message Error {
+    // Back-compat + fallback. Rendered verbatim by servers that do not
+    // understand `failures`, and the carrier for the Opaque category. New
+    // clients keep populating this until the server-render path is everywhere.
+    string message = 1 [ (sensitive) = true ];
+
+    // Structured failures, in client-produced order. When non-empty, a
+    // structured-aware server renders from these and ignores `message`.
+    repeated Failure failures = 2;
+  }
+
+  // One structured failure entry produced by the client.
+  message Failure {
+    oneof kind {
+      UnmatchedDiffs unmatched_diffs = 1;
+      ChangesAlreadyApplied changes_already_applied = 2;
+      MissingFile missing_file = 3;
+      ReadFailed read_failed = 4;
+      AlreadyExists already_exists = 5;
+      MultipleFileCreation multiple_file_creation = 6;
+      MultipleFileRenames multiple_file_renames = 7;
+      MutatedDeletedFile mutated_deleted_file = 8;
+      google.protobuf.Empty no_diffs_applicable = 9;
+      google.protobuf.Empty remote_file_operations_unsupported = 10;
+      // Prerendered text the server surfaces verbatim (save errors, legacy).
+      Opaque opaque = 11;
+    }
+
+    message UnmatchedDiffs {
+      string file = 1 [ (sensitive) = true ];
+      uint32 fuzzy_match_failure_count = 2;
+      repeated SearchBlockFailure search_block_failures = 3;
+    }
+
+    message SearchBlockFailure {
+      // Search text that failed to match; capped client-side.
+      string search = 1 [ (sensitive) = true ];
+      // True when the search text was truncated to fit the byte cap.
+      bool truncated = 2;
+      // 1-indexed inclusive start line the block was expected to match.
+      // 0 means unknown / not applicable.
+      uint32 expected_start_line = 3;
+      // 1-indexed inclusive end line the block was expected to match.
+      // 0 means unknown / not applicable.
+      uint32 expected_end_line = 4;
+    }
+
+    message ChangesAlreadyApplied { string file = 1 [ (sensitive) = true ]; }
+    message MissingFile { string file = 1 [ (sensitive) = true ]; }
+    message ReadFailed { string file = 1 [ (sensitive) = true ]; }
+    message AlreadyExists { string file = 1 [ (sensitive) = true ]; }
+    message MultipleFileCreation { string file = 1 [ (sensitive) = true ]; }
+    message MultipleFileRenames { string file = 1 [ (sensitive) = true ]; }
+    message MutatedDeletedFile { string file = 1 [ (sensitive) = true ]; }
+    // Prerendered message; the server surfaces it verbatim.
+    message Opaque { string message = 1 [ (sensitive) = true ]; }
+  }
 }
 
 // Result of a `SuggestCreatePlan` tool call.
