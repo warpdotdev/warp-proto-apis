@@ -947,14 +947,6 @@ message Message {
       // captures, shown below the recording in detail views such as the video
       // lightbox.
       string description = 6;
-      // Server-owned flag that gates whether the client produces a thumbnail
-      // frame for this recording. The server sets this from a feature flag,
-      // decoupled from the per-team EMBED / LINK_ONLY PR artifact display
-      // setting, so a thumbnail is available regardless of how the video is
-      // later rendered. When false (the default), the client skips thumbnail
-      // capture and behavior is unchanged.
-      bool capture_thumbnail = 7;
-
       // Limits the runtime enforces on a recording.
       message Limits {
         // Maximum duration before the runtime auto-stops the recording.
