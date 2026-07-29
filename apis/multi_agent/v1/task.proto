@@ -947,6 +947,14 @@ message Message {
       // captures, shown below the recording in detail views such as the video
       // lightbox.
       string description = 6;
+      // The team's resolved PR artifact visibility setting, set by the server.
+      // The client uses it to decide whether to capture a thumbnail (only when
+      // ATTACHMENT_SETTING_EMBED). ATTACHMENT_SETTING_UNSPECIFIED is only the
+      // wire/zero default present when this message was produced by a version
+      // predating team-scoped visibility settings; an up-to-date server always
+      // sets one of DISABLED/LINK_ONLY/EMBED. Retained for backward
+      // compatibility.
+      AttachmentSetting attachment_setting = 7;
       // Limits the runtime enforces on a recording.
       message Limits {
         // Maximum duration before the runtime auto-stops the recording.
@@ -954,6 +962,13 @@ message Message {
         // Maximum output size in bytes before the runtime auto-stops the
         // recording.
         int64 max_size_bytes = 2;
+      }
+      // The team's resolved PR artifact visibility setting.
+      enum AttachmentSetting {
+        ATTACHMENT_SETTING_UNSPECIFIED = 0;
+        ATTACHMENT_SETTING_DISABLED = 1;
+        ATTACHMENT_SETTING_LINK_ONLY = 2;
+        ATTACHMENT_SETTING_EMBED = 3;
       }
     }
 
