@@ -949,11 +949,9 @@ message Message {
       string description = 6;
       // The team's resolved PR artifact visibility setting, set by the server.
       // The client uses it to decide whether to capture a thumbnail (only when
-      // ATTACHMENT_SETTING_EMBED). ATTACHMENT_SETTING_UNSPECIFIED is only the
-      // wire/zero default present when this message was produced by a version
-      // predating team-scoped visibility settings; an up-to-date server always
-      // sets one of DISABLED/LINK_ONLY/EMBED. Retained for backward
-      // compatibility.
+      // ATTACHMENT_SETTING_EMBED). Defaults to ATTACHMENT_SETTING_DISABLED when
+      // unset, so a message produced without it (e.g. by a server predating
+      // team-scoped visibility settings) is treated as no capture.
       AttachmentSetting attachment_setting = 7;
       // Limits the runtime enforces on a recording.
       message Limits {
@@ -963,12 +961,12 @@ message Message {
         // recording.
         int64 max_size_bytes = 2;
       }
-      // The team's resolved PR artifact visibility setting.
+      // The team's resolved PR artifact visibility setting. DISABLED is the
+      // zero value, so an unset field is treated as no capture / no attachment.
       enum AttachmentSetting {
-        ATTACHMENT_SETTING_UNSPECIFIED = 0;
-        ATTACHMENT_SETTING_DISABLED = 1;
-        ATTACHMENT_SETTING_LINK_ONLY = 2;
-        ATTACHMENT_SETTING_EMBED = 3;
+        ATTACHMENT_SETTING_DISABLED = 0;
+        ATTACHMENT_SETTING_LINK_ONLY = 1;
+        ATTACHMENT_SETTING_EMBED = 2;
       }
     }
 

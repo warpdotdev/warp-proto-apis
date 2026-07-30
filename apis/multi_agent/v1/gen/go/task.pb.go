@@ -483,29 +483,27 @@ func (x Message_ToolCall_UseComputer_Action_MouseWheel_Direction) Number() proto
 	return protoreflect.EnumNumber(x)
 }
 
-// The team's resolved PR artifact visibility setting.
+// The team's resolved PR artifact visibility setting. DISABLED is the
+// zero value, so an unset field is treated as no capture / no attachment.
 type Message_ToolCall_StartRecording_AttachmentSetting int32
 
 const (
-	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_UNSPECIFIED Message_ToolCall_StartRecording_AttachmentSetting = 0
-	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_DISABLED    Message_ToolCall_StartRecording_AttachmentSetting = 1
-	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_LINK_ONLY   Message_ToolCall_StartRecording_AttachmentSetting = 2
-	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_EMBED       Message_ToolCall_StartRecording_AttachmentSetting = 3
+	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_DISABLED  Message_ToolCall_StartRecording_AttachmentSetting = 0
+	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_LINK_ONLY Message_ToolCall_StartRecording_AttachmentSetting = 1
+	Message_ToolCall_StartRecording_ATTACHMENT_SETTING_EMBED     Message_ToolCall_StartRecording_AttachmentSetting = 2
 )
 
 // Enum value maps for Message_ToolCall_StartRecording_AttachmentSetting.
 var (
 	Message_ToolCall_StartRecording_AttachmentSetting_name = map[int32]string{
-		0: "ATTACHMENT_SETTING_UNSPECIFIED",
-		1: "ATTACHMENT_SETTING_DISABLED",
-		2: "ATTACHMENT_SETTING_LINK_ONLY",
-		3: "ATTACHMENT_SETTING_EMBED",
+		0: "ATTACHMENT_SETTING_DISABLED",
+		1: "ATTACHMENT_SETTING_LINK_ONLY",
+		2: "ATTACHMENT_SETTING_EMBED",
 	}
 	Message_ToolCall_StartRecording_AttachmentSetting_value = map[string]int32{
-		"ATTACHMENT_SETTING_UNSPECIFIED": 0,
-		"ATTACHMENT_SETTING_DISABLED":    1,
-		"ATTACHMENT_SETTING_LINK_ONLY":   2,
-		"ATTACHMENT_SETTING_EMBED":       3,
+		"ATTACHMENT_SETTING_DISABLED":  0,
+		"ATTACHMENT_SETTING_LINK_ONLY": 1,
+		"ATTACHMENT_SETTING_EMBED":     2,
 	}
 )
 
@@ -23161,7 +23159,7 @@ func (x *Message_ToolCall_StartRecording) GetAttachmentSetting() Message_ToolCal
 			return x.xxx_hidden_AttachmentSetting
 		}
 	}
-	return Message_ToolCall_StartRecording_ATTACHMENT_SETTING_UNSPECIFIED
+	return Message_ToolCall_StartRecording_ATTACHMENT_SETTING_DISABLED
 }
 
 func (x *Message_ToolCall_StartRecording) SetFrameRate(v int32) {
@@ -23276,7 +23274,7 @@ func (x *Message_ToolCall_StartRecording) ClearDescription() {
 
 func (x *Message_ToolCall_StartRecording) ClearAttachmentSetting() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
-	x.xxx_hidden_AttachmentSetting = Message_ToolCall_StartRecording_ATTACHMENT_SETTING_UNSPECIFIED
+	x.xxx_hidden_AttachmentSetting = Message_ToolCall_StartRecording_ATTACHMENT_SETTING_DISABLED
 }
 
 type Message_ToolCall_StartRecording_builder struct {
@@ -23303,11 +23301,9 @@ type Message_ToolCall_StartRecording_builder struct {
 	Description *string
 	// The team's resolved PR artifact visibility setting, set by the server.
 	// The client uses it to decide whether to capture a thumbnail (only when
-	// ATTACHMENT_SETTING_EMBED). ATTACHMENT_SETTING_UNSPECIFIED is only the
-	// wire/zero default present when this message was produced by a version
-	// predating team-scoped visibility settings; an up-to-date server always
-	// sets one of DISABLED/LINK_ONLY/EMBED. Retained for backward
-	// compatibility.
+	// ATTACHMENT_SETTING_EMBED). Defaults to ATTACHMENT_SETTING_DISABLED when
+	// unset, so a message produced without it (e.g. by a server predating
+	// team-scoped visibility settings) is treated as no capture.
 	AttachmentSetting *Message_ToolCall_StartRecording_AttachmentSetting
 }
 
@@ -38453,7 +38449,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xbd\xd0\x01\n" +
+	"\x0ecomment_target\"\x98\xd0\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -38575,7 +38571,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xadh\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x88h\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -38864,7 +38860,7 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\x1a\xa2\x01\n" +
 	"\x12RequestComputerUse\x12'\n" +
 	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummary\x12c\n" +
-	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\xcd\x05\n" +
+	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\xa8\x05\n" +
 	"\x0eStartRecording\x12\x1d\n" +
 	"\n" +
 	"frame_rate\x18\x01 \x01(\x05R\tframeRate\x12S\n" +
@@ -38876,12 +38872,11 @@ const file_task_proto_rawDesc = "" +
 	"\x12attachment_setting\x18\a \x01(\x0e2F.warp.multi_agent.v1.Message.ToolCall.StartRecording.AttachmentSettingR\x11attachmentSetting\x1al\n" +
 	"\x06Limits\x12<\n" +
 	"\fmax_duration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\vmaxDuration\x12$\n" +
-	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytes\"\x98\x01\n" +
-	"\x11AttachmentSetting\x12\"\n" +
-	"\x1eATTACHMENT_SETTING_UNSPECIFIED\x10\x00\x12\x1f\n" +
-	"\x1bATTACHMENT_SETTING_DISABLED\x10\x01\x12 \n" +
-	"\x1cATTACHMENT_SETTING_LINK_ONLY\x10\x02\x12\x1c\n" +
-	"\x18ATTACHMENT_SETTING_EMBED\x10\x03\x1aL\n" +
+	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytes\"t\n" +
+	"\x11AttachmentSetting\x12\x1f\n" +
+	"\x1bATTACHMENT_SETTING_DISABLED\x10\x00\x12 \n" +
+	"\x1cATTACHMENT_SETTING_LINK_ONLY\x10\x01\x12\x1c\n" +
+	"\x18ATTACHMENT_SETTING_EMBED\x10\x02\x1aL\n" +
 	"\rStopRecording\x12!\n" +
 	"\frecording_id\x18\x01 \x01(\tR\vrecordingId\x12\x18\n" +
 	"\adiscard\x18\x02 \x01(\bR\adiscard\x1a\x92\x03\n" +
