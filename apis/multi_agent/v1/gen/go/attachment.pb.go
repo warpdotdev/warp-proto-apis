@@ -828,12 +828,13 @@ func (b0 RunningShellCommand_builder) Build() *RunningShellCommand {
 
 // A snapshot of the terminal grid for a long-running command.
 type LongRunningShellCommandSnapshot struct {
-	state                        protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Output            *string                `protobuf:"bytes,1,opt,name=output"`
-	xxx_hidden_Cursor            *string                `protobuf:"bytes,2,opt,name=cursor"`
-	xxx_hidden_CommandId         *string                `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
-	xxx_hidden_IsAltScreenActive bool                   `protobuf:"varint,4,opt,name=is_alt_screen_active,json=isAltScreenActive"`
-	xxx_hidden_IsPreempted       bool                   `protobuf:"varint,5,opt,name=is_preempted,json=isPreempted"`
+	state                        protoimpl.MessageState      `protogen:"opaque.v1"`
+	xxx_hidden_Output            *string                     `protobuf:"bytes,1,opt,name=output"`
+	xxx_hidden_Cursor            *string                     `protobuf:"bytes,2,opt,name=cursor"`
+	xxx_hidden_CommandId         *string                     `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
+	xxx_hidden_IsAltScreenActive bool                        `protobuf:"varint,4,opt,name=is_alt_screen_active,json=isAltScreenActive"`
+	xxx_hidden_IsPreempted       bool                        `protobuf:"varint,5,opt,name=is_preempted,json=isPreempted"`
+	xxx_hidden_Activity          *LongRunningCommandActivity `protobuf:"bytes,6,opt,name=activity"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
 	unknownFields                protoimpl.UnknownFields
@@ -909,29 +910,40 @@ func (x *LongRunningShellCommandSnapshot) GetIsPreempted() bool {
 	return false
 }
 
+func (x *LongRunningShellCommandSnapshot) GetActivity() *LongRunningCommandActivity {
+	if x != nil {
+		return x.xxx_hidden_Activity
+	}
+	return nil
+}
+
 func (x *LongRunningShellCommandSnapshot) SetOutput(v string) {
 	x.xxx_hidden_Output = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetCursor(v string) {
 	x.xxx_hidden_Cursor = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetCommandId(v string) {
 	x.xxx_hidden_CommandId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetIsAltScreenActive(v bool) {
 	x.xxx_hidden_IsAltScreenActive = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *LongRunningShellCommandSnapshot) SetIsPreempted(v bool) {
 	x.xxx_hidden_IsPreempted = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
+}
+
+func (x *LongRunningShellCommandSnapshot) SetActivity(v *LongRunningCommandActivity) {
+	x.xxx_hidden_Activity = v
 }
 
 func (x *LongRunningShellCommandSnapshot) HasOutput() bool {
@@ -969,6 +981,13 @@ func (x *LongRunningShellCommandSnapshot) HasIsPreempted() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
+func (x *LongRunningShellCommandSnapshot) HasActivity() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Activity != nil
+}
+
 func (x *LongRunningShellCommandSnapshot) ClearOutput() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Output = nil
@@ -992,6 +1011,10 @@ func (x *LongRunningShellCommandSnapshot) ClearIsAltScreenActive() {
 func (x *LongRunningShellCommandSnapshot) ClearIsPreempted() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
 	x.xxx_hidden_IsPreempted = false
+}
+
+func (x *LongRunningShellCommandSnapshot) ClearActivity() {
+	x.xxx_hidden_Activity = nil
 }
 
 type LongRunningShellCommandSnapshot_builder struct {
@@ -1021,6 +1044,10 @@ type LongRunningShellCommandSnapshot_builder struct {
 	// When `true`, the server should inform the agent that the command is still running and that
 	// it should not treat this as a completion signal.
 	IsPreempted *bool
+	// Liveness signals collected by the client while the command is being monitored by an agent.
+	//
+	// Absent when the client does not support activity monitoring.
+	Activity *LongRunningCommandActivity
 }
 
 func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellCommandSnapshot {
@@ -1028,24 +1055,240 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Output != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_Output = b.Output
 	}
 	if b.Cursor != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_Cursor = b.Cursor
 	}
 	if b.CommandId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_CommandId = b.CommandId
 	}
 	if b.IsAltScreenActive != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_IsAltScreenActive = *b.IsAltScreenActive
 	}
 	if b.IsPreempted != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 6)
 		x.xxx_hidden_IsPreempted = *b.IsPreempted
+	}
+	x.xxx_hidden_Activity = b.Activity
+	return m0
+}
+
+// Liveness signals for a long-running command, sampled client-side at ~1 Hz for the duration of
+// agent monitoring.
+type LongRunningCommandActivity struct {
+	state                                 protoimpl.MessageState                      `protogen:"opaque.v1"`
+	xxx_hidden_SecondsSinceLastActivity   float32                                     `protobuf:"fixed32,1,opt,name=seconds_since_last_activity,json=secondsSinceLastActivity"`
+	xxx_hidden_OutputChangedSinceLastRead bool                                        `protobuf:"varint,2,opt,name=output_changed_since_last_read,json=outputChangedSinceLastRead"`
+	xxx_hidden_SecondsSinceOutputChange   float32                                     `protobuf:"fixed32,3,opt,name=seconds_since_output_change,json=secondsSinceOutputChange"`
+	xxx_hidden_Process                    *LongRunningCommandActivity_ProcessActivity `protobuf:"bytes,4,opt,name=process"`
+	xxx_hidden_Files                      *[]*LongRunningCommandActivity_FileActivity `protobuf:"bytes,5,rep,name=files"`
+	xxx_hidden_SignalsUnavailable         bool                                        `protobuf:"varint,6,opt,name=signals_unavailable,json=signalsUnavailable"`
+	XXX_raceDetectHookData                protoimpl.RaceDetectHookData
+	XXX_presence                          [1]uint32
+	unknownFields                         protoimpl.UnknownFields
+	sizeCache                             protoimpl.SizeCache
+}
+
+func (x *LongRunningCommandActivity) Reset() {
+	*x = LongRunningCommandActivity{}
+	mi := &file_attachment_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LongRunningCommandActivity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LongRunningCommandActivity) ProtoMessage() {}
+
+func (x *LongRunningCommandActivity) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *LongRunningCommandActivity) GetSecondsSinceLastActivity() float32 {
+	if x != nil {
+		return x.xxx_hidden_SecondsSinceLastActivity
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity) GetOutputChangedSinceLastRead() bool {
+	if x != nil {
+		return x.xxx_hidden_OutputChangedSinceLastRead
+	}
+	return false
+}
+
+func (x *LongRunningCommandActivity) GetSecondsSinceOutputChange() float32 {
+	if x != nil {
+		return x.xxx_hidden_SecondsSinceOutputChange
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity) GetProcess() *LongRunningCommandActivity_ProcessActivity {
+	if x != nil {
+		return x.xxx_hidden_Process
+	}
+	return nil
+}
+
+func (x *LongRunningCommandActivity) GetFiles() []*LongRunningCommandActivity_FileActivity {
+	if x != nil {
+		if x.xxx_hidden_Files != nil {
+			return *x.xxx_hidden_Files
+		}
+	}
+	return nil
+}
+
+func (x *LongRunningCommandActivity) GetSignalsUnavailable() bool {
+	if x != nil {
+		return x.xxx_hidden_SignalsUnavailable
+	}
+	return false
+}
+
+func (x *LongRunningCommandActivity) SetSecondsSinceLastActivity(v float32) {
+	x.xxx_hidden_SecondsSinceLastActivity = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+}
+
+func (x *LongRunningCommandActivity) SetOutputChangedSinceLastRead(v bool) {
+	x.xxx_hidden_OutputChangedSinceLastRead = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
+}
+
+func (x *LongRunningCommandActivity) SetSecondsSinceOutputChange(v float32) {
+	x.xxx_hidden_SecondsSinceOutputChange = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+}
+
+func (x *LongRunningCommandActivity) SetProcess(v *LongRunningCommandActivity_ProcessActivity) {
+	x.xxx_hidden_Process = v
+}
+
+func (x *LongRunningCommandActivity) SetFiles(v []*LongRunningCommandActivity_FileActivity) {
+	x.xxx_hidden_Files = &v
+}
+
+func (x *LongRunningCommandActivity) SetSignalsUnavailable(v bool) {
+	x.xxx_hidden_SignalsUnavailable = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+}
+
+func (x *LongRunningCommandActivity) HasSecondsSinceLastActivity() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *LongRunningCommandActivity) HasOutputChangedSinceLastRead() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *LongRunningCommandActivity) HasSecondsSinceOutputChange() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *LongRunningCommandActivity) HasProcess() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Process != nil
+}
+
+func (x *LongRunningCommandActivity) HasSignalsUnavailable() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *LongRunningCommandActivity) ClearSecondsSinceLastActivity() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_SecondsSinceLastActivity = 0
+}
+
+func (x *LongRunningCommandActivity) ClearOutputChangedSinceLastRead() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_OutputChangedSinceLastRead = false
+}
+
+func (x *LongRunningCommandActivity) ClearSecondsSinceOutputChange() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_SecondsSinceOutputChange = 0
+}
+
+func (x *LongRunningCommandActivity) ClearProcess() {
+	x.xxx_hidden_Process = nil
+}
+
+func (x *LongRunningCommandActivity) ClearSignalsUnavailable() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_SignalsUnavailable = false
+}
+
+type LongRunningCommandActivity_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// Wall-clock seconds since the most recent activity across all tiers (terminal output, process,
+	// and file). This is sampled independently of the agent's polling cadence, so it is accurate
+	// even when reads are far apart.
+	SecondsSinceLastActivity *float32
+	// Whether the terminal output grid changed since the previous snapshot delivered to the agent.
+	OutputChangedSinceLastRead *bool
+	// Wall-clock seconds since the terminal output grid last changed.
+	SecondsSinceOutputChange *float32
+	Process                  *LongRunningCommandActivity_ProcessActivity
+	Files                    []*LongRunningCommandActivity_FileActivity
+	// Set when the client could not collect process/file signals (e.g. remote session or platform
+	// limitation). When true, only the terminal-output tier is meaningful.
+	SignalsUnavailable *bool
+}
+
+func (b0 LongRunningCommandActivity_builder) Build() *LongRunningCommandActivity {
+	m0 := &LongRunningCommandActivity{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.SecondsSinceLastActivity != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		x.xxx_hidden_SecondsSinceLastActivity = *b.SecondsSinceLastActivity
+	}
+	if b.OutputChangedSinceLastRead != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
+		x.xxx_hidden_OutputChangedSinceLastRead = *b.OutputChangedSinceLastRead
+	}
+	if b.SecondsSinceOutputChange != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		x.xxx_hidden_SecondsSinceOutputChange = *b.SecondsSinceOutputChange
+	}
+	x.xxx_hidden_Process = b.Process
+	x.xxx_hidden_Files = &b.Files
+	if b.SignalsUnavailable != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_SignalsUnavailable = *b.SignalsUnavailable
 	}
 	return m0
 }
@@ -1062,7 +1305,7 @@ type DriveObject struct {
 
 func (x *DriveObject) Reset() {
 	*x = DriveObject{}
-	mi := &file_attachment_proto_msgTypes[4]
+	mi := &file_attachment_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1074,7 +1317,7 @@ func (x *DriveObject) String() string {
 func (*DriveObject) ProtoMessage() {}
 
 func (x *DriveObject) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[4]
+	mi := &file_attachment_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1271,7 +1514,7 @@ func (b0 DriveObject_builder) Build() *DriveObject {
 type case_DriveObject_ObjectPayload protoreflect.FieldNumber
 
 func (x case_DriveObject_ObjectPayload) String() string {
-	md := file_attachment_proto_msgTypes[4].Descriptor()
+	md := file_attachment_proto_msgTypes[5].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -1313,7 +1556,7 @@ type Workflow struct {
 
 func (x *Workflow) Reset() {
 	*x = Workflow{}
-	mi := &file_attachment_proto_msgTypes[5]
+	mi := &file_attachment_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1325,7 +1568,7 @@ func (x *Workflow) String() string {
 func (*Workflow) ProtoMessage() {}
 
 func (x *Workflow) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[5]
+	mi := &file_attachment_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1456,7 +1699,7 @@ type Notebook struct {
 
 func (x *Notebook) Reset() {
 	*x = Notebook{}
-	mi := &file_attachment_proto_msgTypes[6]
+	mi := &file_attachment_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1468,7 +1711,7 @@ func (x *Notebook) String() string {
 func (*Notebook) ProtoMessage() {}
 
 func (x *Notebook) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[6]
+	mi := &file_attachment_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1567,7 +1810,7 @@ type GenericStringObject struct {
 
 func (x *GenericStringObject) Reset() {
 	*x = GenericStringObject{}
-	mi := &file_attachment_proto_msgTypes[7]
+	mi := &file_attachment_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1579,7 +1822,7 @@ func (x *GenericStringObject) String() string {
 func (*GenericStringObject) ProtoMessage() {}
 
 func (x *GenericStringObject) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[7]
+	mi := &file_attachment_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1685,7 +1928,7 @@ type DiffHunk struct {
 
 func (x *DiffHunk) Reset() {
 	*x = DiffHunk{}
-	mi := &file_attachment_proto_msgTypes[8]
+	mi := &file_attachment_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1697,7 +1940,7 @@ func (x *DiffHunk) String() string {
 func (*DiffHunk) ProtoMessage() {}
 
 func (x *DiffHunk) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[8]
+	mi := &file_attachment_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2093,7 +2336,7 @@ func (b0 DiffHunk_builder) Build() *DiffHunk {
 type case_DiffHunk_Current protoreflect.FieldNumber
 
 func (x case_DiffHunk_Current) String() string {
-	md := file_attachment_proto_msgTypes[8].Descriptor()
+	md := file_attachment_proto_msgTypes[9].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2103,7 +2346,7 @@ func (x case_DiffHunk_Current) String() string {
 type case_DiffHunk_Base protoreflect.FieldNumber
 
 func (x case_DiffHunk_Base) String() string {
-	md := file_attachment_proto_msgTypes[8].Descriptor()
+	md := file_attachment_proto_msgTypes[9].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2158,7 +2401,7 @@ type CurrentRef struct {
 
 func (x *CurrentRef) Reset() {
 	*x = CurrentRef{}
-	mi := &file_attachment_proto_msgTypes[9]
+	mi := &file_attachment_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2170,7 +2413,7 @@ func (x *CurrentRef) String() string {
 func (*CurrentRef) ProtoMessage() {}
 
 func (x *CurrentRef) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[9]
+	mi := &file_attachment_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2289,7 +2532,7 @@ func (b0 CurrentRef_builder) Build() *CurrentRef {
 type case_CurrentRef_Ref protoreflect.FieldNumber
 
 func (x case_CurrentRef_Ref) String() string {
-	md := file_attachment_proto_msgTypes[9].Descriptor()
+	md := file_attachment_proto_msgTypes[10].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2322,7 +2565,7 @@ type BaseRef struct {
 
 func (x *BaseRef) Reset() {
 	*x = BaseRef{}
-	mi := &file_attachment_proto_msgTypes[10]
+	mi := &file_attachment_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2334,7 +2577,7 @@ func (x *BaseRef) String() string {
 func (*BaseRef) ProtoMessage() {}
 
 func (x *BaseRef) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[10]
+	mi := &file_attachment_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2491,7 +2734,7 @@ func (b0 BaseRef_builder) Build() *BaseRef {
 type case_BaseRef_Ref protoreflect.FieldNumber
 
 func (x case_BaseRef_Ref) String() string {
-	md := file_attachment_proto_msgTypes[10].Descriptor()
+	md := file_attachment_proto_msgTypes[11].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -2531,7 +2774,7 @@ type DiffSet struct {
 
 func (x *DiffSet) Reset() {
 	*x = DiffSet{}
-	mi := &file_attachment_proto_msgTypes[11]
+	mi := &file_attachment_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2543,7 +2786,7 @@ func (x *DiffSet) String() string {
 func (*DiffSet) ProtoMessage() {}
 
 func (x *DiffSet) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[11]
+	mi := &file_attachment_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2641,7 +2884,7 @@ type FilePathReference struct {
 
 func (x *FilePathReference) Reset() {
 	*x = FilePathReference{}
-	mi := &file_attachment_proto_msgTypes[12]
+	mi := &file_attachment_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2653,7 +2896,7 @@ func (x *FilePathReference) String() string {
 func (*FilePathReference) ProtoMessage() {}
 
 func (x *FilePathReference) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[12]
+	mi := &file_attachment_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2708,6 +2951,354 @@ func (b0 FilePathReference_builder) Build() *FilePathReference {
 	return m0
 }
 
+// Activity of the command's process tree.
+type LongRunningCommandActivity_ProcessActivity struct {
+	state                        protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_CpuTimeDeltaMs    uint64                 `protobuf:"varint,1,opt,name=cpu_time_delta_ms,json=cpuTimeDeltaMs"`
+	xxx_hidden_State             *string                `protobuf:"bytes,2,opt,name=state"`
+	xxx_hidden_LiveProcessCount  uint32                 `protobuf:"varint,3,opt,name=live_process_count,json=liveProcessCount"`
+	xxx_hidden_IoWriteBytesDelta uint64                 `protobuf:"varint,4,opt,name=io_write_bytes_delta,json=ioWriteBytesDelta"`
+	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
+	XXX_presence                 [1]uint32
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) Reset() {
+	*x = LongRunningCommandActivity_ProcessActivity{}
+	mi := &file_attachment_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LongRunningCommandActivity_ProcessActivity) ProtoMessage() {}
+
+func (x *LongRunningCommandActivity_ProcessActivity) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) GetCpuTimeDeltaMs() uint64 {
+	if x != nil {
+		return x.xxx_hidden_CpuTimeDeltaMs
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) GetState() string {
+	if x != nil {
+		if x.xxx_hidden_State != nil {
+			return *x.xxx_hidden_State
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) GetLiveProcessCount() uint32 {
+	if x != nil {
+		return x.xxx_hidden_LiveProcessCount
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) GetIoWriteBytesDelta() uint64 {
+	if x != nil {
+		return x.xxx_hidden_IoWriteBytesDelta
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) SetCpuTimeDeltaMs(v uint64) {
+	x.xxx_hidden_CpuTimeDeltaMs = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) SetState(v string) {
+	x.xxx_hidden_State = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) SetLiveProcessCount(v uint32) {
+	x.xxx_hidden_LiveProcessCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) SetIoWriteBytesDelta(v uint64) {
+	x.xxx_hidden_IoWriteBytesDelta = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) HasCpuTimeDeltaMs() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) HasState() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) HasLiveProcessCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) HasIoWriteBytesDelta() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) ClearCpuTimeDeltaMs() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_CpuTimeDeltaMs = 0
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) ClearState() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_State = nil
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) ClearLiveProcessCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_LiveProcessCount = 0
+}
+
+func (x *LongRunningCommandActivity_ProcessActivity) ClearIoWriteBytesDelta() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_IoWriteBytesDelta = 0
+}
+
+type LongRunningCommandActivity_ProcessActivity_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// CPU time consumed across the process tree since the previous snapshot.
+	CpuTimeDeltaMs *uint64
+	// Coarse process state: `running`, `sleeping`, `disk_wait`, `zombie`, or `unknown`.
+	State *string
+	// Number of live processes in the command's process tree.
+	LiveProcessCount *uint32
+	// Bytes written by the process tree since the previous snapshot, where the OS reports it.
+	IoWriteBytesDelta *uint64
+}
+
+func (b0 LongRunningCommandActivity_ProcessActivity_builder) Build() *LongRunningCommandActivity_ProcessActivity {
+	m0 := &LongRunningCommandActivity_ProcessActivity{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.CpuTimeDeltaMs != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_CpuTimeDeltaMs = *b.CpuTimeDeltaMs
+	}
+	if b.State != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_State = b.State
+	}
+	if b.LiveProcessCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_LiveProcessCount = *b.LiveProcessCount
+	}
+	if b.IoWriteBytesDelta != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_IoWriteBytesDelta = *b.IoWriteBytesDelta
+	}
+	return m0
+}
+
+// Growth of a file the command appears to be writing to (e.g. a redirect target).
+type LongRunningCommandActivity_FileActivity struct {
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Path           *string                `protobuf:"bytes,1,opt,name=path"`
+	xxx_hidden_SizeBytes      uint64                 `protobuf:"varint,2,opt,name=size_bytes,json=sizeBytes"`
+	xxx_hidden_SizeDeltaBytes int64                  `protobuf:"varint,3,opt,name=size_delta_bytes,json=sizeDeltaBytes"`
+	xxx_hidden_Tail           *string                `protobuf:"bytes,4,opt,name=tail"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
+}
+
+func (x *LongRunningCommandActivity_FileActivity) Reset() {
+	*x = LongRunningCommandActivity_FileActivity{}
+	mi := &file_attachment_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LongRunningCommandActivity_FileActivity) ProtoMessage() {}
+
+func (x *LongRunningCommandActivity_FileActivity) ProtoReflect() protoreflect.Message {
+	mi := &file_attachment_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) GetPath() string {
+	if x != nil {
+		if x.xxx_hidden_Path != nil {
+			return *x.xxx_hidden_Path
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *LongRunningCommandActivity_FileActivity) GetSizeBytes() uint64 {
+	if x != nil {
+		return x.xxx_hidden_SizeBytes
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity_FileActivity) GetSizeDeltaBytes() int64 {
+	if x != nil {
+		return x.xxx_hidden_SizeDeltaBytes
+	}
+	return 0
+}
+
+func (x *LongRunningCommandActivity_FileActivity) GetTail() string {
+	if x != nil {
+		if x.xxx_hidden_Tail != nil {
+			return *x.xxx_hidden_Tail
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *LongRunningCommandActivity_FileActivity) SetPath(v string) {
+	x.xxx_hidden_Path = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) SetSizeBytes(v uint64) {
+	x.xxx_hidden_SizeBytes = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) SetSizeDeltaBytes(v int64) {
+	x.xxx_hidden_SizeDeltaBytes = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) SetTail(v string) {
+	x.xxx_hidden_Tail = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) HasPath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) HasSizeBytes() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) HasSizeDeltaBytes() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) HasTail() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *LongRunningCommandActivity_FileActivity) ClearPath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Path = nil
+}
+
+func (x *LongRunningCommandActivity_FileActivity) ClearSizeBytes() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_SizeBytes = 0
+}
+
+func (x *LongRunningCommandActivity_FileActivity) ClearSizeDeltaBytes() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_SizeDeltaBytes = 0
+}
+
+func (x *LongRunningCommandActivity_FileActivity) ClearTail() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_Tail = nil
+}
+
+type LongRunningCommandActivity_FileActivity_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Path      *string
+	SizeBytes *uint64
+	// Change in size since the previous snapshot.
+	SizeDeltaBytes *int64
+	// Redacted tail of the file, text files only, capped in size. Serves as the command's
+	// progress log when terminal output is silent.
+	Tail *string
+}
+
+func (b0 LongRunningCommandActivity_FileActivity_builder) Build() *LongRunningCommandActivity_FileActivity {
+	m0 := &LongRunningCommandActivity_FileActivity{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Path != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		x.xxx_hidden_Path = b.Path
+	}
+	if b.SizeBytes != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		x.xxx_hidden_SizeBytes = *b.SizeBytes
+	}
+	if b.SizeDeltaBytes != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_SizeDeltaBytes = *b.SizeDeltaBytes
+	}
+	if b.Tail != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_Tail = b.Tail
+	}
+	return m0
+}
+
 type DiffSet_DiffHunk struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_FilePath     *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
@@ -2723,7 +3314,7 @@ type DiffSet_DiffHunk struct {
 
 func (x *DiffSet_DiffHunk) Reset() {
 	*x = DiffSet_DiffHunk{}
-	mi := &file_attachment_proto_msgTypes[13]
+	mi := &file_attachment_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2735,7 +3326,7 @@ func (x *DiffSet_DiffHunk) String() string {
 func (*DiffSet_DiffHunk) ProtoMessage() {}
 
 func (x *DiffSet_DiffHunk) ProtoReflect() protoreflect.Message {
-	mi := &file_attachment_proto_msgTypes[13]
+	mi := &file_attachment_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2934,14 +3525,33 @@ const file_attachment_proto_rawDesc = "" +
 	"\x10is_auto_attached\x18\a \x01(\bR\x0eisAutoAttached\"\x87\x01\n" +
 	"\x13RunningShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
-	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"\xca\x01\n" +
+	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"\x97\x02\n" +
 	"\x1fLongRunningShellCommandSnapshot\x12\x1c\n" +
 	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x16\n" +
 	"\x06cursor\x18\x02 \x01(\tR\x06cursor\x12\x1d\n" +
 	"\n" +
 	"command_id\x18\x03 \x01(\tR\tcommandId\x12/\n" +
 	"\x14is_alt_screen_active\x18\x04 \x01(\bR\x11isAltScreenActive\x12!\n" +
-	"\fis_preempted\x18\x05 \x01(\bR\visPreempted\"\x91\x02\n" +
+	"\fis_preempted\x18\x05 \x01(\bR\visPreempted\x12K\n" +
+	"\bactivity\x18\x06 \x01(\v2/.warp.multi_agent.v1.LongRunningCommandActivityR\bactivity\"\x80\x06\n" +
+	"\x1aLongRunningCommandActivity\x12=\n" +
+	"\x1bseconds_since_last_activity\x18\x01 \x01(\x02R\x18secondsSinceLastActivity\x12B\n" +
+	"\x1eoutput_changed_since_last_read\x18\x02 \x01(\bR\x1aoutputChangedSinceLastRead\x12=\n" +
+	"\x1bseconds_since_output_change\x18\x03 \x01(\x02R\x18secondsSinceOutputChange\x12Y\n" +
+	"\aprocess\x18\x04 \x01(\v2?.warp.multi_agent.v1.LongRunningCommandActivity.ProcessActivityR\aprocess\x12R\n" +
+	"\x05files\x18\x05 \x03(\v2<.warp.multi_agent.v1.LongRunningCommandActivity.FileActivityR\x05files\x12/\n" +
+	"\x13signals_unavailable\x18\x06 \x01(\bR\x12signalsUnavailable\x1a\xb1\x01\n" +
+	"\x0fProcessActivity\x12)\n" +
+	"\x11cpu_time_delta_ms\x18\x01 \x01(\x04R\x0ecpuTimeDeltaMs\x12\x14\n" +
+	"\x05state\x18\x02 \x01(\tR\x05state\x12,\n" +
+	"\x12live_process_count\x18\x03 \x01(\rR\x10liveProcessCount\x12/\n" +
+	"\x14io_write_bytes_delta\x18\x04 \x01(\x04R\x11ioWriteBytesDelta\x1a\x8b\x01\n" +
+	"\fFileActivity\x12\x18\n" +
+	"\x04path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x12\x1d\n" +
+	"\n" +
+	"size_bytes\x18\x02 \x01(\x04R\tsizeBytes\x12(\n" +
+	"\x10size_delta_bytes\x18\x03 \x01(\x03R\x0esizeDeltaBytes\x12\x18\n" +
+	"\x04tail\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x04tail\"\x91\x02\n" +
 	"\vDriveObject\x12\x16\n" +
 	"\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uid\x12;\n" +
 	"\bworkflow\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.WorkflowH\x00R\bworkflow\x12;\n" +
@@ -3002,53 +3612,59 @@ const file_attachment_proto_rawDesc = "" +
 	"\x11FilePathReference\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePathBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_attachment_proto_goTypes = []any{
-	(*Attachment)(nil),                      // 0: warp.multi_agent.v1.Attachment
-	(*ExecutedShellCommand)(nil),            // 1: warp.multi_agent.v1.ExecutedShellCommand
-	(*RunningShellCommand)(nil),             // 2: warp.multi_agent.v1.RunningShellCommand
-	(*LongRunningShellCommandSnapshot)(nil), // 3: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*DriveObject)(nil),                     // 4: warp.multi_agent.v1.DriveObject
-	(*Workflow)(nil),                        // 5: warp.multi_agent.v1.Workflow
-	(*Notebook)(nil),                        // 6: warp.multi_agent.v1.Notebook
-	(*GenericStringObject)(nil),             // 7: warp.multi_agent.v1.GenericStringObject
-	(*DiffHunk)(nil),                        // 8: warp.multi_agent.v1.DiffHunk
-	(*CurrentRef)(nil),                      // 9: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                         // 10: warp.multi_agent.v1.BaseRef
-	(*DiffSet)(nil),                         // 11: warp.multi_agent.v1.DiffSet
-	(*FilePathReference)(nil),               // 12: warp.multi_agent.v1.FilePathReference
-	(*DiffSet_DiffHunk)(nil),                // 13: warp.multi_agent.v1.DiffSet.DiffHunk
-	(*DocumentContent)(nil),                 // 14: warp.multi_agent.v1.DocumentContent
-	(*timestamppb.Timestamp)(nil),           // 15: google.protobuf.Timestamp
-	(*FileContentLineRange)(nil),            // 16: warp.multi_agent.v1.FileContentLineRange
-	(*emptypb.Empty)(nil),                   // 17: google.protobuf.Empty
+	(*Attachment)(nil),                                 // 0: warp.multi_agent.v1.Attachment
+	(*ExecutedShellCommand)(nil),                       // 1: warp.multi_agent.v1.ExecutedShellCommand
+	(*RunningShellCommand)(nil),                        // 2: warp.multi_agent.v1.RunningShellCommand
+	(*LongRunningShellCommandSnapshot)(nil),            // 3: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*LongRunningCommandActivity)(nil),                 // 4: warp.multi_agent.v1.LongRunningCommandActivity
+	(*DriveObject)(nil),                                // 5: warp.multi_agent.v1.DriveObject
+	(*Workflow)(nil),                                   // 6: warp.multi_agent.v1.Workflow
+	(*Notebook)(nil),                                   // 7: warp.multi_agent.v1.Notebook
+	(*GenericStringObject)(nil),                        // 8: warp.multi_agent.v1.GenericStringObject
+	(*DiffHunk)(nil),                                   // 9: warp.multi_agent.v1.DiffHunk
+	(*CurrentRef)(nil),                                 // 10: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                    // 11: warp.multi_agent.v1.BaseRef
+	(*DiffSet)(nil),                                    // 12: warp.multi_agent.v1.DiffSet
+	(*FilePathReference)(nil),                          // 13: warp.multi_agent.v1.FilePathReference
+	(*LongRunningCommandActivity_ProcessActivity)(nil), // 14: warp.multi_agent.v1.LongRunningCommandActivity.ProcessActivity
+	(*LongRunningCommandActivity_FileActivity)(nil),    // 15: warp.multi_agent.v1.LongRunningCommandActivity.FileActivity
+	(*DiffSet_DiffHunk)(nil),                           // 16: warp.multi_agent.v1.DiffSet.DiffHunk
+	(*DocumentContent)(nil),                            // 17: warp.multi_agent.v1.DocumentContent
+	(*timestamppb.Timestamp)(nil),                      // 18: google.protobuf.Timestamp
+	(*FileContentLineRange)(nil),                       // 19: warp.multi_agent.v1.FileContentLineRange
+	(*emptypb.Empty)(nil),                              // 20: google.protobuf.Empty
 }
 var file_attachment_proto_depIdxs = []int32{
 	1,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
 	2,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
-	4,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
-	8,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
-	11, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	14, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
-	12, // 6: warp.multi_agent.v1.Attachment.file_path_reference:type_name -> warp.multi_agent.v1.FilePathReference
-	15, // 7: warp.multi_agent.v1.ExecutedShellCommand.started_ts:type_name -> google.protobuf.Timestamp
-	15, // 8: warp.multi_agent.v1.ExecutedShellCommand.finished_ts:type_name -> google.protobuf.Timestamp
+	5,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
+	9,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
+	12, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	17, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
+	13, // 6: warp.multi_agent.v1.Attachment.file_path_reference:type_name -> warp.multi_agent.v1.FilePathReference
+	18, // 7: warp.multi_agent.v1.ExecutedShellCommand.started_ts:type_name -> google.protobuf.Timestamp
+	18, // 8: warp.multi_agent.v1.ExecutedShellCommand.finished_ts:type_name -> google.protobuf.Timestamp
 	3,  // 9: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	5,  // 10: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
-	6,  // 11: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
-	7,  // 12: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
-	16, // 13: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	17, // 14: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
-	17, // 15: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
-	13, // 16: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
-	9,  // 17: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
-	10, // 18: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
-	16, // 19: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	20, // [20:20] is the sub-list for method output_type
-	20, // [20:20] is the sub-list for method input_type
-	20, // [20:20] is the sub-list for extension type_name
-	20, // [20:20] is the sub-list for extension extendee
-	0,  // [0:20] is the sub-list for field type_name
+	4,  // 10: warp.multi_agent.v1.LongRunningShellCommandSnapshot.activity:type_name -> warp.multi_agent.v1.LongRunningCommandActivity
+	14, // 11: warp.multi_agent.v1.LongRunningCommandActivity.process:type_name -> warp.multi_agent.v1.LongRunningCommandActivity.ProcessActivity
+	15, // 12: warp.multi_agent.v1.LongRunningCommandActivity.files:type_name -> warp.multi_agent.v1.LongRunningCommandActivity.FileActivity
+	6,  // 13: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
+	7,  // 14: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
+	8,  // 15: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
+	19, // 16: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	20, // 17: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
+	20, // 18: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
+	16, // 19: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
+	10, // 20: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
+	11, // 21: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
+	19, // 22: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -3069,23 +3685,23 @@ func file_attachment_proto_init() {
 		(*attachment_DocumentContent)(nil),
 		(*attachment_FilePathReference)(nil),
 	}
-	file_attachment_proto_msgTypes[4].OneofWrappers = []any{
+	file_attachment_proto_msgTypes[5].OneofWrappers = []any{
 		(*driveObject_Workflow)(nil),
 		(*driveObject_Notebook)(nil),
 		(*driveObject_GenericStringObject)(nil),
 	}
-	file_attachment_proto_msgTypes[8].OneofWrappers = []any{
+	file_attachment_proto_msgTypes[9].OneofWrappers = []any{
 		(*diffHunk_CurrentBranchName)(nil),
 		(*diffHunk_CurrentHeadlessCommitSha)(nil),
 		(*diffHunk_BaseBranchName)(nil),
 		(*diffHunk_BaseHeadlessCommitSha)(nil),
 		(*diffHunk_UncommittedChanges)(nil),
 	}
-	file_attachment_proto_msgTypes[9].OneofWrappers = []any{
+	file_attachment_proto_msgTypes[10].OneofWrappers = []any{
 		(*currentRef_BranchName)(nil),
 		(*currentRef_HeadlessCommitSha)(nil),
 	}
-	file_attachment_proto_msgTypes[10].OneofWrappers = []any{
+	file_attachment_proto_msgTypes[11].OneofWrappers = []any{
 		(*baseRef_BranchName)(nil),
 		(*baseRef_HeadlessCommitSha)(nil),
 		(*baseRef_UncommittedChanges)(nil),
@@ -3096,7 +3712,7 @@ func file_attachment_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attachment_proto_rawDesc), len(file_attachment_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
