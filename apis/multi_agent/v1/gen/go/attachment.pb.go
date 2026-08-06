@@ -1095,8 +1095,8 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 //   - `LongRunningShellCommandSnapshot.activity` absent  -> the client does not report activity.
 //   - `process` absent                                   -> the process tier was not collected.
 //   - `files` empty                                      -> no write targets were identified.
-//   - `signals_unavailable = true`                       -> process/file tiers are unavailable, so
-//     their silence proves nothing.
+//   - `signals_unavailable = true`                       -> the process tier is unavailable, so its
+//     silence proves nothing.
 type LongRunningCommandActivity struct {
 	state                                 protoimpl.MessageState                      `protogen:"opaque.v1"`
 	xxx_hidden_SecondsSinceLastActivity   float32                                     `protobuf:"fixed32,1,opt,name=seconds_since_last_activity,json=secondsSinceLastActivity"`
@@ -1283,8 +1283,15 @@ type LongRunningCommandActivity_builder struct {
 	SecondsSinceOutputChange *float32
 	Process                  *LongRunningCommandActivity_ProcessActivity
 	Files                    []*LongRunningCommandActivity_FileActivity
-	// Set when the client could not collect process/file signals (e.g. remote session or platform
-	// limitation). When true, only the terminal-output tier is meaningful.
+	// Set when the client could not collect the process tier, either because the session does not
+	// support it (remote session, platform limitation) or because the snapshot was taken before the
+	// sampler had observed the process tree. Always equivalent to `process` being absent.
+	//
+	// This says nothing about the other tiers: terminal output is always meaningful, and `files` is
+	// collected independently and may carry real growth data even when this is set. Consumers must
+	// read it as "we could not look at the process tree", never as "we looked and found nothing" —
+	// an idle-looking process reading is the single most dangerous thing to infer here, since it is
+	// what would justify killing a healthy command.
 	SignalsUnavailable *bool
 }
 
