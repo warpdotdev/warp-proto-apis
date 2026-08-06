@@ -3120,7 +3120,12 @@ type LongRunningCommandActivity_ProcessActivity_builder struct {
 
 	// CPU time consumed across the process tree since the previous snapshot.
 	CpuTimeDeltaMs *uint64
-	// Coarse process state: `running`, `sleeping`, `disk_wait`, `zombie`, or `unknown`.
+	// Coarse aggregate state of the process tree, reduced to whichever member state is the
+	// strongest evidence of progress. One of `running`, `sleeping`, `disk_wait`, `stopped`,
+	// `zombie`, or `unknown`.
+	//
+	// Note that `disk_wait` is uninterruptible I/O, which is progress rather than a hang.
+	// Treat an unrecognised value as `unknown`.
 	State *string
 	// Number of live processes in the command's process tree.
 	LiveProcessCount *uint32
