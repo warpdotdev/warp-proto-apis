@@ -580,9 +580,6 @@ message Request {
         // unchanged to schemas that support it; unset preserves the provider's
         // default behavior.
         string reasoning_effort = 3;
-        // Optional provider-specific reasoning execution mode. The value is
-        // forwarded unchanged to schemas that support it.
-        string reasoning_mode = 4;
       }
     }
 

@@ -8675,7 +8675,6 @@ type Request_Settings_CustomModelProviders_CustomModel struct {
 	xxx_hidden_Slug            *string                `protobuf:"bytes,1,opt,name=slug"`
 	xxx_hidden_ConfigKey       *string                `protobuf:"bytes,2,opt,name=config_key,json=configKey"`
 	xxx_hidden_ReasoningEffort *string                `protobuf:"bytes,3,opt,name=reasoning_effort,json=reasoningEffort"`
-	xxx_hidden_ReasoningMode   *string                `protobuf:"bytes,4,opt,name=reasoning_mode,json=reasoningMode"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -8737,34 +8736,19 @@ func (x *Request_Settings_CustomModelProviders_CustomModel) GetReasoningEffort()
 	return ""
 }
 
-func (x *Request_Settings_CustomModelProviders_CustomModel) GetReasoningMode() string {
-	if x != nil {
-		if x.xxx_hidden_ReasoningMode != nil {
-			return *x.xxx_hidden_ReasoningMode
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *Request_Settings_CustomModelProviders_CustomModel) SetSlug(v string) {
 	x.xxx_hidden_Slug = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
 }
 
 func (x *Request_Settings_CustomModelProviders_CustomModel) SetConfigKey(v string) {
 	x.xxx_hidden_ConfigKey = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
 func (x *Request_Settings_CustomModelProviders_CustomModel) SetReasoningEffort(v string) {
 	x.xxx_hidden_ReasoningEffort = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
-}
-
-func (x *Request_Settings_CustomModelProviders_CustomModel) SetReasoningMode(v string) {
-	x.xxx_hidden_ReasoningMode = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *Request_Settings_CustomModelProviders_CustomModel) HasSlug() bool {
@@ -8788,13 +8772,6 @@ func (x *Request_Settings_CustomModelProviders_CustomModel) HasReasoningEffort()
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *Request_Settings_CustomModelProviders_CustomModel) HasReasoningMode() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
-}
-
 func (x *Request_Settings_CustomModelProviders_CustomModel) ClearSlug() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Slug = nil
@@ -8810,11 +8787,6 @@ func (x *Request_Settings_CustomModelProviders_CustomModel) ClearReasoningEffort
 	x.xxx_hidden_ReasoningEffort = nil
 }
 
-func (x *Request_Settings_CustomModelProviders_CustomModel) ClearReasoningMode() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_ReasoningMode = nil
-}
-
 type Request_Settings_CustomModelProviders_CustomModel_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -8827,9 +8799,6 @@ type Request_Settings_CustomModelProviders_CustomModel_builder struct {
 	// unchanged to schemas that support it; unset preserves the provider's
 	// default behavior.
 	ReasoningEffort *string
-	// Optional provider-specific reasoning execution mode. The value is
-	// forwarded unchanged to schemas that support it.
-	ReasoningMode *string
 }
 
 func (b0 Request_Settings_CustomModelProviders_CustomModel_builder) Build() *Request_Settings_CustomModelProviders_CustomModel {
@@ -8837,20 +8806,16 @@ func (b0 Request_Settings_CustomModelProviders_CustomModel_builder) Build() *Req
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Slug != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_Slug = b.Slug
 	}
 	if b.ConfigKey != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_ConfigKey = b.ConfigKey
 	}
 	if b.ReasoningEffort != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
 		x.xxx_hidden_ReasoningEffort = b.ReasoningEffort
-	}
-	if b.ReasoningMode != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
-		x.xxx_hidden_ReasoningMode = b.ReasoningMode
 	}
 	return m0
 }
@@ -9990,7 +9955,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xea|\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\xc2|\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10176,7 +10141,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xad#\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x85#\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -10235,20 +10200,19 @@ const file_request_proto_rawDesc = "" +
 	"\rsession_token\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\fsessionToken\x12\x16\n" +
 	"\x06region\x18\x04 \x01(\tR\x06region\x1aA\n" +
 	"\x16GoogleCloudCredentials\x12'\n" +
-	"\faccess_token\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vaccessToken\x1a\x97\x05\n" +
+	"\faccess_token\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vaccessToken\x1a\xef\x04\n" +
 	"\x14CustomModelProviders\x12l\n" +
 	"\tproviders\x18\x01 \x03(\v2N.warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelProviderR\tproviders\x1a\x98\x02\n" +
 	"\x13CustomModelProvider\x12\x19\n" +
 	"\bbase_url\x18\x01 \x01(\tR\abaseUrl\x12\x1d\n" +
 	"\aapi_key\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06apiKey\x12^\n" +
 	"\x06models\x18\x03 \x03(\v2F.warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomModelR\x06models\x12g\n" +
-	"\x06schema\x18\x04 \x01(\x0e2O.warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomEndpointSchemaR\x06schema\x1a\x92\x01\n" +
+	"\x06schema\x18\x04 \x01(\x0e2O.warp.multi_agent.v1.Request.Settings.CustomModelProviders.CustomEndpointSchemaR\x06schema\x1ak\n" +
 	"\vCustomModel\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\x12\x1d\n" +
 	"\n" +
 	"config_key\x18\x02 \x01(\tR\tconfigKey\x12)\n" +
-	"\x10reasoning_effort\x18\x03 \x01(\tR\x0freasoningEffort\x12%\n" +
-	"\x0ereasoning_mode\x18\x04 \x01(\tR\rreasoningMode\"a\n" +
+	"\x10reasoning_effort\x18\x03 \x01(\tR\x0freasoningEffort\"a\n" +
 	"\x14CustomEndpointSchema\x12\x1b\n" +
 	"\x17OPENAI_CHAT_COMPLETIONS\x10\x00\x12\x14\n" +
 	"\x10OPENAI_RESPONSES\x10\x01\x12\x16\n" +
