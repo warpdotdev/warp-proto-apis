@@ -79,10 +79,13 @@ message ResponseEvent {
     bool should_refresh_model_config = 9;
 
     // Describes what we charged the user for this AM request.
-    RequestCost request_cost = 10;
+    RequestCost request_cost = 10 [deprecated = true];
 
     // Aggregated usage metadata for a given conversation.
     ConversationUsageMetadata conversation_usage_metadata = 11;
+
+    // The platform and inference usage cost charged to the user for this AM request
+    AgentUsage agent_mode_usage = 12;
 
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
@@ -105,17 +108,17 @@ message ResponseEvent {
       ToolUsageMetadata tool_usage_metadata = 5;
 
       // Token usage using the warp API key.
-      map<string, ModelTokenUsage> warp_token_usage = 6;
+      map<string, ModelTokenUsage> warp_token_usage = 6 [deprecated = true];
 
       // Token usage using a user's API key.
-      map<string, ModelTokenUsage> byok_token_usage = 7;
+      map<string, ModelTokenUsage> byok_token_usage = 7 [deprecated = true];
 
       // The total number of platform credits spent so far in the conversation.
-      float platform_credits_spent = 8;
+      float platform_credits_spent = 8 [deprecated = true];
 
       // Token usage using a custom endpoint.
       // The model id used in custom_endpoint_token_usage is the config_key of custom model
-      map<string, ModelTokenUsage> custom_endpoint_token_usage = 9;
+      map<string, ModelTokenUsage> custom_endpoint_token_usage = 9 [deprecated = true];
 
       // A breakdown of the context window usage into segments
       // (e.g. system prompt, tool definitions, conversation history, latest
@@ -123,6 +126,9 @@ message ResponseEvent {
       // by `context_window_usage`. The client derives per-segment percentages
       // from these token counts; the API does not guarantee any ordering.
       repeated ContextWindowSegment context_window_segments = 11 [ (internal) = true ];
+
+      // The usage costs charged to the user so far in the conversation
+      AgentModeUsage cumulative_agent_mode_usage = 12;
     }
 
     // A single portion of the context window, described by its kind and an
@@ -168,6 +174,67 @@ message ResponseEvent {
 
       // Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction", etc.).
       map<string, uint32> token_usage_by_category = 3;
+    }
+
+    // Usage charged for individual requests or a whole conversation in agent mode
+    message AgentModeUsage {
+      // Inference usage using the warp API key <model_id, usage>
+      map<string, InferenceUsage> warp_token_usage = 1;
+
+      // Inference usage using a user's API key <model_id, usage>
+      map<string, InferenceUsage> byok_token_usage = 2;
+
+      // Token usage using a custom endpoint <model_id, usage>
+      // The model id used in custom_endpoint_token_usage is the config_key of custom model
+      map<string, InferenceUsage> custom_endpoint_token_usage = 3;
+
+      // Platform usage charged
+      float platform_usage_in_cents = 4;
+    }
+
+
+    // Usage for inference, tracked in tokens and US cents
+    message InferenceUsage {
+      // The total number of tokens incurred of each type
+      TokenCount token_counts = 1;
+
+      // The cost in US cents of each type of inference token incurred
+      TokenCost token_cost = 2;
+    }
+
+    message TokenCost {
+        // Cost of non-cached input tokens, in US cents.
+        float input_cost_in_cents = 1;
+
+        // Cost of cache-read input tokens, in US cents.
+        float input_cache_read_cost_in_cents = 2;
+
+        // Cost of cache-write input tokens, in US cents.
+        float input_cache_write_cost_in_cents = 3;
+
+        // Cost of output tokens, in US cents.
+        float output_cost_in_cents = 4;
+    } 
+
+    // Generic format for counting tokens incurred
+    message TokenCount {
+        // The total number of input tokens incurred
+        uint32 input = 1;
+
+        // The total number of output tokens incurred
+        uint32 output = 2;
+
+        // The total number of input cache read tokens incurred
+        //
+        // This is only populated for Anthropic models, which have the only API which provides such
+        // granular cached token usage information.
+        uint32 input_cache_read = 3;
+
+        // The total number of input cache write tokens incurred
+        //
+        // This is only populated for Anthropic models, which have the only API which provides such
+        // granular cached token usage information.
+        uint32 input_cache_write = 4;
     }
 
     // Tool usage by tool.
