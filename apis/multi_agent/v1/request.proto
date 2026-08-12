@@ -367,6 +367,15 @@ message Request {
     // The display name for this agent (e.g. "Agent 1"), assigned by the
     // orchestrator via StartAgent.name.
     string agent_name = 6 [ (sensitive) = true ];
+
+    // Optional UID of the team the request should be attributed to (e.g. for
+    // billing, credits, and team-scoped configuration).
+    //
+    // When set, the server verifies that the authenticated user is a member
+    // of this team and rejects the request if not. When unset (e.g. older
+    // clients), the server falls back to its default team resolution for the
+    // user (historically, the first team returned for the user).
+    string team_uid = 7;
   }
 
   message Settings {
