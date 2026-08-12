@@ -1166,14 +1166,15 @@ func (b0 InputContext_File_builder) Build() *InputContext_File {
 // used whenever the resolved model doesn't support native video, or when `data` is absent
 // because the video exceeded the size cap.
 type InputContext_Video struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Data        []byte                 `protobuf:"bytes,1,opt,name=data"`
-	xxx_hidden_MimeType    *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
-	xxx_hidden_Frames      *[]*InputContext_Image `protobuf:"bytes,3,rep,name=frames"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Data            []byte                 `protobuf:"bytes,1,opt,name=data"`
+	xxx_hidden_MimeType        *string                `protobuf:"bytes,2,opt,name=mime_type,json=mimeType"`
+	xxx_hidden_Frames          *[]*InputContext_Image `protobuf:"bytes,3,rep,name=frames"`
+	xxx_hidden_AudioTranscript *string                `protobuf:"bytes,4,opt,name=audio_transcript,json=audioTranscript"`
+	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
+	XXX_presence               [1]uint32
+	unknownFields              protoimpl.UnknownFields
+	sizeCache                  protoimpl.SizeCache
 }
 
 func (x *InputContext_Video) Reset() {
@@ -1227,21 +1228,36 @@ func (x *InputContext_Video) GetFrames() []*InputContext_Image {
 	return nil
 }
 
+func (x *InputContext_Video) GetAudioTranscript() string {
+	if x != nil {
+		if x.xxx_hidden_AudioTranscript != nil {
+			return *x.xxx_hidden_AudioTranscript
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *InputContext_Video) SetData(v []byte) {
 	if v == nil {
 		v = []byte{}
 	}
 	x.xxx_hidden_Data = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
 func (x *InputContext_Video) SetMimeType(v string) {
 	x.xxx_hidden_MimeType = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
 func (x *InputContext_Video) SetFrames(v []*InputContext_Image) {
 	x.xxx_hidden_Frames = &v
+}
+
+func (x *InputContext_Video) SetAudioTranscript(v string) {
+	x.xxx_hidden_AudioTranscript = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *InputContext_Video) HasData() bool {
@@ -1258,6 +1274,13 @@ func (x *InputContext_Video) HasMimeType() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
+func (x *InputContext_Video) HasAudioTranscript() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *InputContext_Video) ClearData() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Data = nil
@@ -1266,6 +1289,11 @@ func (x *InputContext_Video) ClearData() {
 func (x *InputContext_Video) ClearMimeType() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_MimeType = nil
+}
+
+func (x *InputContext_Video) ClearAudioTranscript() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_AudioTranscript = nil
 }
 
 type InputContext_Video_builder struct {
@@ -1279,8 +1307,17 @@ type InputContext_Video_builder struct {
 	// MIME type of the video (e.g., "video/mp4"). Empty when `data` is absent.
 	MimeType *string
 	// Representative frames extracted from the video, sent through the same pipeline as
-	// directly-attached images.
+	// directly-attached images. Also duplicated into the top-level InputContext.images field so
+	// an older server (one that doesn't understand this Video message at all) still receives the
+	// frames rather than nothing; a newer server de-duplicates by matching bytes instead of
+	// sending both representations to the model.
 	Frames []*InputContext_Image
+	// Transcript of the video's audio track, when the user opted in to including audio and
+	// transcription succeeded. Only meaningful on the frame-fallback path: a model that receives
+	// `data` natively already gets the audio track as part of the video and the server drops this
+	// field for that model, since surfacing both would be redundant (and would defeat the point of
+	// sending native video in the first place).
+	AudioTranscript *string
 }
 
 func (b0 InputContext_Video_builder) Build() *InputContext_Video {
@@ -1288,14 +1325,18 @@ func (b0 InputContext_Video_builder) Build() *InputContext_Video {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Data != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
 		x.xxx_hidden_Data = b.Data
 	}
 	if b.MimeType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
 		x.xxx_hidden_MimeType = b.MimeType
 	}
 	x.xxx_hidden_Frames = &b.Frames
+	if b.AudioTranscript != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_AudioTranscript = b.AudioTranscript
+	}
 	return m0
 }
 
@@ -2023,7 +2064,7 @@ var File_input_context_proto protoreflect.FileDescriptor
 
 const file_input_context_proto_rawDesc = "" +
 	"\n" +
-	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\xd0\x15\n" +
+	"\x13input_context.proto\x12\x13warp.multi_agent.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a!google/protobuf/go_features.proto\x1a\x12file_content.proto\x1a\x10attachment.proto\x1a\roptions.proto\x1a\vskill.proto\x1a\tlsp.proto\"\x82\x16\n" +
 	"\fInputContext\x12I\n" +
 	"\tdirectory\x18\x01 \x01(\v2+.warp.multi_agent.v1.InputContext.DirectoryR\tdirectory\x12\\\n" +
 	"\x10operating_system\x18\x02 \x01(\v21.warp.multi_agent.v1.InputContext.OperatingSystemR\x0foperatingSystem\x12=\n" +
@@ -2059,11 +2100,12 @@ const file_input_context_proto_rawDesc = "" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x18\n" +
 	"\x04path\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x1aB\n" +
 	"\x04File\x12:\n" +
-	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a\x7f\n" +
+	"\acontent\x18\x01 \x01(\v2 .warp.multi_agent.v1.FileContentR\acontent\x1a\xb0\x01\n" +
 	"\x05Video\x12\x18\n" +
 	"\x04data\x18\x01 \x01(\fB\x04\x80\xb5\x18\x01R\x04data\x12\x1b\n" +
 	"\tmime_type\x18\x02 \x01(\tR\bmimeType\x12?\n" +
-	"\x06frames\x18\x03 \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06frames\x1a\xb6\x01\n" +
+	"\x06frames\x18\x03 \x03(\v2'.warp.multi_agent.v1.InputContext.ImageR\x06frames\x12/\n" +
+	"\x10audio_transcript\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x0faudioTranscript\x1a\xb6\x01\n" +
 	"\fProjectRules\x12\x1b\n" +
 	"\troot_path\x18\x01 \x01(\tR\brootPath\x12L\n" +
 	"\x11active_rule_files\x18\x02 \x03(\v2 .warp.multi_agent.v1.FileContentR\x0factiveRuleFiles\x12;\n" +
