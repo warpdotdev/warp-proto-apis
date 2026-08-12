@@ -106,8 +106,18 @@ message InputContext {
     string mime_type = 2;
 
     // Representative frames extracted from the video, sent through the same pipeline as
-    // directly-attached images.
+    // directly-attached images. Also duplicated into the top-level InputContext.images field so
+    // an older server (one that doesn't understand this Video message at all) still receives the
+    // frames rather than nothing; a newer server de-duplicates by matching bytes instead of
+    // sending both representations to the model.
     repeated Image frames = 3;
+
+    // Transcript of the video's audio track, when the user opted in to including audio and
+    // transcription succeeded. Only meaningful on the frame-fallback path: a model that receives
+    // `data` natively already gets the audio track as part of the video and the server drops this
+    // field for that model, since surfacing both would be redundant (and would defeat the point of
+    // sending native video in the first place).
+    string audio_transcript = 4 [ (sensitive) = true ];
   }
 
   message ProjectRules {
