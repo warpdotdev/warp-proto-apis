@@ -84,6 +84,21 @@ message ResponseEvent {
     // Aggregated usage metadata for a given conversation.
     ConversationUsageMetadata conversation_usage_metadata = 11;
 
+    // Reports media (image, video, etc.) attachments removed from this request to fit the
+    // resolved model's real limits (see the server's model-aware media pruning). This is
+    // per-request only, never part of persisted conversation state: the same history sent to a
+    // different (e.g. larger-context) model on a later turn may not be pruned at all, so the
+    // client must treat this as a transient, per-response signal rather than accumulate or
+    // persist it onto the conversation.
+    PrunedMediaSummary pruned_media = 13;
+
+    message PrunedMediaSummary {
+      // How many media items were removed from this request's attachments to fit the resolved
+      // model's limits. Older turns are pruned before the current turn's own attachments, so a
+      // non-zero count here most often means earlier images are no longer visible to the model.
+      uint32 pruned_count = 1;
+    }
+
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
       float context_window_usage = 1;

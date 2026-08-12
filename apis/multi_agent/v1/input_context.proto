@@ -35,6 +35,12 @@ message InputContext {
   repeated File files = 9;
   // END TODO
 
+  // Any attached videos. Sent alongside their extracted-frame fallback representation so the
+  // server can pick whichever one suits the resolved model: a native video part for providers
+  // that support it (currently Gemini 2.5/3.x), or the frames for everyone else. A single video
+  // is never split across both representations for the same request.
+  repeated Video videos = 14;
+
   message SelectedText { string text = 1 [ (sensitive) = true ]; }
 
   // Information about the user's directories.
@@ -83,6 +89,35 @@ message InputContext {
 
   message File {
     FileContent content = 1;
+  }
+
+  // A video attachment. `data` is populated when the video was small enough to send inline
+  // (client-enforced cap); `frames` is always populated as a client-side-extracted fallback,
+  // used whenever the resolved model doesn't support native video, or when `data` is absent
+  // because the video exceeded the size cap.
+  message Video {
+    // Raw video payload. Absent (empty) when the source video exceeded the client's size cap.
+    //
+    // TODO: like Image.data above, the client should NOT base64 encode this. It should send raw
+    // binary data and the server should base64-encode it before sending to the LLM, if needed.
+    bytes data = 1 [ (sensitive) = true ];
+
+    // MIME type of the video (e.g., "video/mp4"). Empty when `data` is absent.
+    string mime_type = 2;
+
+    // Representative frames extracted from the video, sent through the same pipeline as
+    // directly-attached images. Also duplicated into the top-level InputContext.images field so
+    // an older server (one that doesn't understand this Video message at all) still receives the
+    // frames rather than nothing; a newer server de-duplicates by matching bytes instead of
+    // sending both representations to the model.
+    repeated Image frames = 3;
+
+    // Transcript of the video's audio track, when the user opted in to including audio and
+    // transcription succeeded. Only meaningful on the frame-fallback path: a model that receives
+    // `data` natively already gets the audio track as part of the video and the server drops this
+    // field for that model, since surfacing both would be redundant (and would defeat the point of
+    // sending native video in the first place).
+    string audio_transcript = 4 [ (sensitive) = true ];
   }
 
   message ProjectRules {
