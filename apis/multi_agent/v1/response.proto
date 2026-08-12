@@ -85,7 +85,7 @@ message ResponseEvent {
     ConversationUsageMetadata conversation_usage_metadata = 11;
 
     // The platform and inference usage cost charged to the user for this AM request
-    AgentUsage agent_mode_usage = 12;
+    AgentModeUsage agent_mode_usage = 13;
 
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
@@ -196,7 +196,7 @@ message ResponseEvent {
     // Usage for inference, tracked in tokens and US cents
     message InferenceUsage {
       // The total number of tokens incurred of each type
-      TokenCount token_counts = 1;
+      TokenCount token_count = 1;
 
       // The cost in US cents of each type of inference token incurred
       TokenCost token_cost = 2;
@@ -206,14 +206,14 @@ message ResponseEvent {
         // Cost of non-cached input tokens, in US cents.
         float input_cost_in_cents = 1;
 
+        // Cost of output tokens, in US cents.
+        float output_cost_in_cents = 2;
+
         // Cost of cache-read input tokens, in US cents.
-        float input_cache_read_cost_in_cents = 2;
+        float input_cache_read_cost_in_cents = 3;
 
         // Cost of cache-write input tokens, in US cents.
-        float input_cache_write_cost_in_cents = 3;
-
-        // Cost of output tokens, in US cents.
-        float output_cost_in_cents = 4;
+        float input_cache_write_cost_in_cents = 4;
     } 
 
     // Generic format for counting tokens incurred
