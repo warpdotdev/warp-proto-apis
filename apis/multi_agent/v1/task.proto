@@ -950,12 +950,24 @@ message Message {
       string description = 6;
       // How many times faster the recorded video should play back relative to
       // real time. For example, 1.5 makes a 1.5-minute recording play in 1
-      // minute. A value of 0 or <= 1 means real-time (no speedup). The client
-      // applies this via an ffmpeg presentation-timestamp rescale filter.
-      // Supersedes the integer `playback_speed_multiplier` field above, which
-      // cannot express fractional speeds. Unset (0) means the server did not
-      // specify a value; the client falls back to its own default.
-      float playback_speed = 7;
+      // minute. A value of <= 1 means the server explicitly requested
+      // real-time (no speedup) rather than "unset": this field is wrapped in
+      // a one-member oneof (rather than a plain scalar) specifically so wire
+      // presence distinguishes "the server sent 0/1, meaning explicitly
+      // real-time" from "the server sent nothing, so the client should fall
+      // back to its own default" -- a plain proto3 scalar cannot make that
+      // distinction, since both cases decode to a zero value. The `optional`
+      // field label is unavailable here because editions give every singular
+      // field explicit presence by default and reject an explicit
+      // `optional` label, so an explicit oneof is used to get the same
+      // presence bit portably across the edition-2023 (Go) and
+      // downgraded-to-proto3 (Rust) compilation pipelines. The client
+      // applies the resolved value via an ffmpeg presentation-timestamp
+      // rescale filter. Supersedes the integer `playback_speed_multiplier`
+      // field above, which cannot express fractional speeds.
+      oneof playback_speed_kind {
+        float playback_speed = 7;
+      }
 
       // Limits the runtime enforces on a recording.
       message Limits {
