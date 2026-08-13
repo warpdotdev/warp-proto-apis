@@ -85,7 +85,7 @@ message ResponseEvent {
     ConversationUsageMetadata conversation_usage_metadata = 11;
 
     // The platform and inference usage cost charged to the user for this AM request
-    AgentModeUsage agent_mode_usage = 13;
+    ChargedUsage charged_usage = 13;
 
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
@@ -128,7 +128,7 @@ message ResponseEvent {
       repeated ContextWindowSegment context_window_segments = 11 [ (internal) = true ];
 
       // The usage costs charged to the user so far in the conversation
-      AgentModeUsage cumulative_agent_mode_usage = 12;
+      ChargedUsage charged_usage = 12;
     }
 
     // A single portion of the context window, described by its kind and an
@@ -177,16 +177,16 @@ message ResponseEvent {
     }
 
     // Usage charged for individual requests or a whole conversation in agent mode
-    message AgentModeUsage {
+    message ChargedUsage {
       // Inference usage using the warp API key <model_id, usage>
-      map<string, InferenceUsage> warp_token_usage = 1;
+      map<string, InferenceUsage> direct_api_inference_usage = 1;
 
       // Inference usage using a user's API key <model_id, usage>
-      map<string, InferenceUsage> byok_token_usage = 2;
+      map<string, InferenceUsage> byok_inference_usage = 2;
 
       // Token usage using a custom endpoint <model_id, usage>
-      // The model id used in custom_endpoint_token_usage is the config_key of custom model
-      map<string, InferenceUsage> custom_endpoint_token_usage = 3;
+      // The model id used in custom_endpoint_inference_usage is the config_key of custom model
+      map<string, InferenceUsage> custom_endpoint_inference_usage = 3;
 
       // Platform usage charged
       float platform_usage_in_cents = 4;

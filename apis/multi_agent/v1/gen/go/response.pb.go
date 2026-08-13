@@ -1260,7 +1260,7 @@ type ResponseEvent_StreamFinished struct {
 	xxx_hidden_ShouldRefreshModelConfig  bool                                                    `protobuf:"varint,9,opt,name=should_refresh_model_config,json=shouldRefreshModelConfig"`
 	xxx_hidden_RequestCost               *ResponseEvent_StreamFinished_RequestCost               `protobuf:"bytes,10,opt,name=request_cost,json=requestCost"`
 	xxx_hidden_ConversationUsageMetadata *ResponseEvent_StreamFinished_ConversationUsageMetadata `protobuf:"bytes,11,opt,name=conversation_usage_metadata,json=conversationUsageMetadata"`
-	xxx_hidden_AgentModeUsage            *ResponseEvent_StreamFinished_AgentModeUsage            `protobuf:"bytes,13,opt,name=agent_mode_usage,json=agentModeUsage"`
+	xxx_hidden_ChargedUsage              *ResponseEvent_StreamFinished_ChargedUsage              `protobuf:"bytes,13,opt,name=charged_usage,json=chargedUsage"`
 	XXX_raceDetectHookData               protoimpl.RaceDetectHookData
 	XXX_presence                         [1]uint32
 	unknownFields                        protoimpl.UnknownFields
@@ -1395,9 +1395,9 @@ func (x *ResponseEvent_StreamFinished) GetConversationUsageMetadata() *ResponseE
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished) GetAgentModeUsage() *ResponseEvent_StreamFinished_AgentModeUsage {
+func (x *ResponseEvent_StreamFinished) GetChargedUsage() *ResponseEvent_StreamFinished_ChargedUsage {
 	if x != nil {
-		return x.xxx_hidden_AgentModeUsage
+		return x.xxx_hidden_ChargedUsage
 	}
 	return nil
 }
@@ -1484,8 +1484,8 @@ func (x *ResponseEvent_StreamFinished) SetConversationUsageMetadata(v *ResponseE
 	x.xxx_hidden_ConversationUsageMetadata = v
 }
 
-func (x *ResponseEvent_StreamFinished) SetAgentModeUsage(v *ResponseEvent_StreamFinished_AgentModeUsage) {
-	x.xxx_hidden_AgentModeUsage = v
+func (x *ResponseEvent_StreamFinished) SetChargedUsage(v *ResponseEvent_StreamFinished_ChargedUsage) {
+	x.xxx_hidden_ChargedUsage = v
 }
 
 func (x *ResponseEvent_StreamFinished) HasReason() bool {
@@ -1581,11 +1581,11 @@ func (x *ResponseEvent_StreamFinished) HasConversationUsageMetadata() bool {
 	return x.xxx_hidden_ConversationUsageMetadata != nil
 }
 
-func (x *ResponseEvent_StreamFinished) HasAgentModeUsage() bool {
+func (x *ResponseEvent_StreamFinished) HasChargedUsage() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_AgentModeUsage != nil
+	return x.xxx_hidden_ChargedUsage != nil
 }
 
 func (x *ResponseEvent_StreamFinished) ClearReason() {
@@ -1654,8 +1654,8 @@ func (x *ResponseEvent_StreamFinished) ClearConversationUsageMetadata() {
 	x.xxx_hidden_ConversationUsageMetadata = nil
 }
 
-func (x *ResponseEvent_StreamFinished) ClearAgentModeUsage() {
-	x.xxx_hidden_AgentModeUsage = nil
+func (x *ResponseEvent_StreamFinished) ClearChargedUsage() {
+	x.xxx_hidden_ChargedUsage = nil
 }
 
 const ResponseEvent_StreamFinished_Reason_not_set_case case_ResponseEvent_StreamFinished_Reason = 0
@@ -1720,7 +1720,7 @@ type ResponseEvent_StreamFinished_builder struct {
 	// Aggregated usage metadata for a given conversation.
 	ConversationUsageMetadata *ResponseEvent_StreamFinished_ConversationUsageMetadata
 	// The platform and inference usage cost charged to the user for this AM request
-	AgentModeUsage *ResponseEvent_StreamFinished_AgentModeUsage
+	ChargedUsage *ResponseEvent_StreamFinished_ChargedUsage
 }
 
 func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFinished {
@@ -1758,7 +1758,7 @@ func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFini
 	}
 	x.xxx_hidden_RequestCost = b.RequestCost
 	x.xxx_hidden_ConversationUsageMetadata = b.ConversationUsageMetadata
-	x.xxx_hidden_AgentModeUsage = b.AgentModeUsage
+	x.xxx_hidden_ChargedUsage = b.ChargedUsage
 	return m0
 }
 
@@ -1837,7 +1837,7 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
 	xxx_hidden_PlatformCreditsSpent     float32                                                  `protobuf:"fixed32,8,opt,name=platform_credits_spent,json=platformCreditsSpent"`
 	xxx_hidden_CustomEndpointTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,9,rep,name=custom_endpoint_token_usage,json=customEndpointTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	xxx_hidden_ContextWindowSegments    *[]*ResponseEvent_StreamFinished_ContextWindowSegment    `protobuf:"bytes,11,rep,name=context_window_segments,json=contextWindowSegments"`
-	xxx_hidden_CumulativeAgentModeUsage *ResponseEvent_StreamFinished_AgentModeUsage             `protobuf:"bytes,12,opt,name=cumulative_agent_mode_usage,json=cumulativeAgentModeUsage"`
+	xxx_hidden_ChargedUsage             *ResponseEvent_StreamFinished_ChargedUsage               `protobuf:"bytes,12,opt,name=charged_usage,json=chargedUsage"`
 	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
 	XXX_presence                        [1]uint32
 	unknownFields                       protoimpl.UnknownFields
@@ -1955,9 +1955,9 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetContextWindo
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetCumulativeAgentModeUsage() *ResponseEvent_StreamFinished_AgentModeUsage {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetChargedUsage() *ResponseEvent_StreamFinished_ChargedUsage {
 	if x != nil {
-		return x.xxx_hidden_CumulativeAgentModeUsage
+		return x.xxx_hidden_ChargedUsage
 	}
 	return nil
 }
@@ -2016,8 +2016,8 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindo
 	x.xxx_hidden_ContextWindowSegments = &v
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCumulativeAgentModeUsage(v *ResponseEvent_StreamFinished_AgentModeUsage) {
-	x.xxx_hidden_CumulativeAgentModeUsage = v
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetChargedUsage(v *ResponseEvent_StreamFinished_ChargedUsage) {
+	x.xxx_hidden_ChargedUsage = v
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindowUsage() bool {
@@ -2063,11 +2063,11 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasPlatformCred
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasCumulativeAgentModeUsage() bool {
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasChargedUsage() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_CumulativeAgentModeUsage != nil
+	return x.xxx_hidden_ChargedUsage != nil
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearContextWindowUsage() {
@@ -2100,8 +2100,8 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearPlatformCr
 	x.xxx_hidden_PlatformCreditsSpent = 0
 }
 
-func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearCumulativeAgentModeUsage() {
-	x.xxx_hidden_CumulativeAgentModeUsage = nil
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) ClearChargedUsage() {
+	x.xxx_hidden_ChargedUsage = nil
 }
 
 type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
@@ -2147,7 +2147,7 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	// from these token counts; the API does not guarantee any ordering.
 	ContextWindowSegments []*ResponseEvent_StreamFinished_ContextWindowSegment
 	// The usage costs charged to the user so far in the conversation
-	CumulativeAgentModeUsage *ResponseEvent_StreamFinished_AgentModeUsage
+	ChargedUsage *ResponseEvent_StreamFinished_ChargedUsage
 }
 
 func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
@@ -2180,7 +2180,7 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	}
 	x.xxx_hidden_CustomEndpointTokenUsage = b.CustomEndpointTokenUsage
 	x.xxx_hidden_ContextWindowSegments = &b.ContextWindowSegments
-	x.xxx_hidden_CumulativeAgentModeUsage = b.CumulativeAgentModeUsage
+	x.xxx_hidden_ChargedUsage = b.ChargedUsage
 	return m0
 }
 
@@ -2433,32 +2433,32 @@ func (b0 ResponseEvent_StreamFinished_ModelTokenUsage_builder) Build() *Response
 }
 
 // Usage charged for individual requests or a whole conversation in agent mode
-type ResponseEvent_StreamFinished_AgentModeUsage struct {
-	state                               protoimpl.MessageState                                  `protogen:"opaque.v1"`
-	xxx_hidden_WarpTokenUsage           map[string]*ResponseEvent_StreamFinished_InferenceUsage `protobuf:"bytes,1,rep,name=warp_token_usage,json=warpTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_ByokTokenUsage           map[string]*ResponseEvent_StreamFinished_InferenceUsage `protobuf:"bytes,2,rep,name=byok_token_usage,json=byokTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_CustomEndpointTokenUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage `protobuf:"bytes,3,rep,name=custom_endpoint_token_usage,json=customEndpointTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_PlatformUsageInCents     float32                                                 `protobuf:"fixed32,4,opt,name=platform_usage_in_cents,json=platformUsageInCents"`
-	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
-	XXX_presence                        [1]uint32
-	unknownFields                       protoimpl.UnknownFields
-	sizeCache                           protoimpl.SizeCache
+type ResponseEvent_StreamFinished_ChargedUsage struct {
+	state                                   protoimpl.MessageState                                  `protogen:"opaque.v1"`
+	xxx_hidden_DirectApiInferenceUsage      map[string]*ResponseEvent_StreamFinished_InferenceUsage `protobuf:"bytes,1,rep,name=direct_api_inference_usage,json=directApiInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ByokInferenceUsage           map[string]*ResponseEvent_StreamFinished_InferenceUsage `protobuf:"bytes,2,rep,name=byok_inference_usage,json=byokInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_CustomEndpointInferenceUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage `protobuf:"bytes,3,rep,name=custom_endpoint_inference_usage,json=customEndpointInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_PlatformUsageInCents         float32                                                 `protobuf:"fixed32,4,opt,name=platform_usage_in_cents,json=platformUsageInCents"`
+	XXX_raceDetectHookData                  protoimpl.RaceDetectHookData
+	XXX_presence                            [1]uint32
+	unknownFields                           protoimpl.UnknownFields
+	sizeCache                               protoimpl.SizeCache
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) Reset() {
-	*x = ResponseEvent_StreamFinished_AgentModeUsage{}
+func (x *ResponseEvent_StreamFinished_ChargedUsage) Reset() {
+	*x = ResponseEvent_StreamFinished_ChargedUsage{}
 	mi := &file_response_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) String() string {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ResponseEvent_StreamFinished_AgentModeUsage) ProtoMessage() {}
+func (*ResponseEvent_StreamFinished_ChargedUsage) ProtoMessage() {}
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) ProtoReflect() protoreflect.Message {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) ProtoReflect() protoreflect.Message {
 	mi := &file_response_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2470,84 +2470,84 @@ func (x *ResponseEvent_StreamFinished_AgentModeUsage) ProtoReflect() protoreflec
 	return mi.MessageOf(x)
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) GetWarpTokenUsage() map[string]*ResponseEvent_StreamFinished_InferenceUsage {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) GetDirectApiInferenceUsage() map[string]*ResponseEvent_StreamFinished_InferenceUsage {
 	if x != nil {
-		return x.xxx_hidden_WarpTokenUsage
+		return x.xxx_hidden_DirectApiInferenceUsage
 	}
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) GetByokTokenUsage() map[string]*ResponseEvent_StreamFinished_InferenceUsage {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) GetByokInferenceUsage() map[string]*ResponseEvent_StreamFinished_InferenceUsage {
 	if x != nil {
-		return x.xxx_hidden_ByokTokenUsage
+		return x.xxx_hidden_ByokInferenceUsage
 	}
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) GetCustomEndpointTokenUsage() map[string]*ResponseEvent_StreamFinished_InferenceUsage {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) GetCustomEndpointInferenceUsage() map[string]*ResponseEvent_StreamFinished_InferenceUsage {
 	if x != nil {
-		return x.xxx_hidden_CustomEndpointTokenUsage
+		return x.xxx_hidden_CustomEndpointInferenceUsage
 	}
 	return nil
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) GetPlatformUsageInCents() float32 {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) GetPlatformUsageInCents() float32 {
 	if x != nil {
 		return x.xxx_hidden_PlatformUsageInCents
 	}
 	return 0
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) SetWarpTokenUsage(v map[string]*ResponseEvent_StreamFinished_InferenceUsage) {
-	x.xxx_hidden_WarpTokenUsage = v
+func (x *ResponseEvent_StreamFinished_ChargedUsage) SetDirectApiInferenceUsage(v map[string]*ResponseEvent_StreamFinished_InferenceUsage) {
+	x.xxx_hidden_DirectApiInferenceUsage = v
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) SetByokTokenUsage(v map[string]*ResponseEvent_StreamFinished_InferenceUsage) {
-	x.xxx_hidden_ByokTokenUsage = v
+func (x *ResponseEvent_StreamFinished_ChargedUsage) SetByokInferenceUsage(v map[string]*ResponseEvent_StreamFinished_InferenceUsage) {
+	x.xxx_hidden_ByokInferenceUsage = v
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) SetCustomEndpointTokenUsage(v map[string]*ResponseEvent_StreamFinished_InferenceUsage) {
-	x.xxx_hidden_CustomEndpointTokenUsage = v
+func (x *ResponseEvent_StreamFinished_ChargedUsage) SetCustomEndpointInferenceUsage(v map[string]*ResponseEvent_StreamFinished_InferenceUsage) {
+	x.xxx_hidden_CustomEndpointInferenceUsage = v
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) SetPlatformUsageInCents(v float32) {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) SetPlatformUsageInCents(v float32) {
 	x.xxx_hidden_PlatformUsageInCents = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) HasPlatformUsageInCents() bool {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) HasPlatformUsageInCents() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *ResponseEvent_StreamFinished_AgentModeUsage) ClearPlatformUsageInCents() {
+func (x *ResponseEvent_StreamFinished_ChargedUsage) ClearPlatformUsageInCents() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_PlatformUsageInCents = 0
 }
 
-type ResponseEvent_StreamFinished_AgentModeUsage_builder struct {
+type ResponseEvent_StreamFinished_ChargedUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// Inference usage using the warp API key <model_id, usage>
-	WarpTokenUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
+	DirectApiInferenceUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
 	// Inference usage using a user's API key <model_id, usage>
-	ByokTokenUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
+	ByokInferenceUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
 	// Token usage using a custom endpoint <model_id, usage>
-	// The model id used in custom_endpoint_token_usage is the config_key of custom model
-	CustomEndpointTokenUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
+	// The model id used in custom_endpoint_inference_usage is the config_key of custom model
+	CustomEndpointInferenceUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
 	// Platform usage charged
 	PlatformUsageInCents *float32
 }
 
-func (b0 ResponseEvent_StreamFinished_AgentModeUsage_builder) Build() *ResponseEvent_StreamFinished_AgentModeUsage {
-	m0 := &ResponseEvent_StreamFinished_AgentModeUsage{}
+func (b0 ResponseEvent_StreamFinished_ChargedUsage_builder) Build() *ResponseEvent_StreamFinished_ChargedUsage {
+	m0 := &ResponseEvent_StreamFinished_ChargedUsage{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_WarpTokenUsage = b.WarpTokenUsage
-	x.xxx_hidden_ByokTokenUsage = b.ByokTokenUsage
-	x.xxx_hidden_CustomEndpointTokenUsage = b.CustomEndpointTokenUsage
+	x.xxx_hidden_DirectApiInferenceUsage = b.DirectApiInferenceUsage
+	x.xxx_hidden_ByokInferenceUsage = b.ByokInferenceUsage
+	x.xxx_hidden_CustomEndpointInferenceUsage = b.CustomEndpointInferenceUsage
 	if b.PlatformUsageInCents != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
 		x.xxx_hidden_PlatformUsageInCents = *b.PlatformUsageInCents
@@ -5713,7 +5713,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\x82>\n" +
+	"task.proto\"\x9e>\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -5725,7 +5725,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xbc:\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xd8:\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -5741,8 +5741,8 @@ const file_response_proto_rawDesc = "" +
 	"\x1bshould_refresh_model_config\x18\t \x01(\bR\x18shouldRefreshModelConfig\x12d\n" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostB\x02\x18\x01R\vrequestCost\x12\x8b\x01\n" +
-	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x12j\n" +
-	"\x10agent_mode_usage\x18\r \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsageR\x0eagentModeUsage\x1a\xcd\f\n" +
+	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x12c\n" +
+	"\rcharged_usage\x18\r \x01(\v2>.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsageR\fchargedUsage\x1a\xb1\f\n" +
 	"\x19ConversationUsageMetadata\x120\n" +
 	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12,\n" +
 	"\x12total_input_tokens\x18\n" +
@@ -5758,8 +5758,8 @@ const file_response_proto_rawDesc = "" +
 	"\x10byok_token_usage\x18\a \x03(\v2_.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntryB\x02\x18\x01R\x0ebyokTokenUsage\x128\n" +
 	"\x16platform_credits_spent\x18\b \x01(\x02B\x02\x18\x01R\x14platformCreditsSpent\x12\xac\x01\n" +
 	"\x1bcustom_endpoint_token_usage\x18\t \x03(\v2i.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntryB\x02\x18\x01R\x18customEndpointTokenUsage\x12\x84\x01\n" +
-	"\x17context_window_segments\x18\v \x03(\v2F.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentB\x04\x88\xb5\x18\x01R\x15contextWindowSegments\x12\x7f\n" +
-	"\x1bcumulative_agent_mode_usage\x18\f \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsageR\x18cumulativeAgentModeUsage\x1a\x84\x01\n" +
+	"\x17context_window_segments\x18\v \x03(\v2F.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentB\x04\x88\xb5\x18\x01R\x15contextWindowSegments\x12c\n" +
+	"\rcharged_usage\x18\f \x01(\v2>.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsageR\fchargedUsage\x1a\x84\x01\n" +
 	"\x13WarpTokenUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x84\x01\n" +
@@ -5779,19 +5779,19 @@ const file_response_proto_rawDesc = "" +
 	"\x17token_usage_by_category\x18\x03 \x03(\v2[.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntryR\x14tokenUsageByCategory\x1aG\n" +
 	"\x19TokenUsageByCategoryEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01\x1a\x83\a\n" +
-	"\x0eAgentModeUsage\x12~\n" +
-	"\x10warp_token_usage\x18\x01 \x03(\v2T.warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.WarpTokenUsageEntryR\x0ewarpTokenUsage\x12~\n" +
-	"\x10byok_token_usage\x18\x02 \x03(\v2T.warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.ByokTokenUsageEntryR\x0ebyokTokenUsage\x12\x9d\x01\n" +
-	"\x1bcustom_endpoint_token_usage\x18\x03 \x03(\v2^.warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.CustomEndpointTokenUsageEntryR\x18customEndpointTokenUsage\x125\n" +
-	"\x17platform_usage_in_cents\x18\x04 \x01(\x02R\x14platformUsageInCents\x1a\x83\x01\n" +
-	"\x13WarpTokenUsageEntry\x12\x10\n" +
+	"\x05value\x18\x02 \x01(\rR\x05value:\x028\x01\x1a\xc2\a\n" +
+	"\fChargedUsage\x12\x98\x01\n" +
+	"\x1adirect_api_inference_usage\x18\x01 \x03(\v2[.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.DirectApiInferenceUsageEntryR\x17directApiInferenceUsage\x12\x88\x01\n" +
+	"\x14byok_inference_usage\x18\x02 \x03(\v2V.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.ByokInferenceUsageEntryR\x12byokInferenceUsage\x12\xa7\x01\n" +
+	"\x1fcustom_endpoint_inference_usage\x18\x03 \x03(\v2`.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.CustomEndpointInferenceUsageEntryR\x1ccustomEndpointInferenceUsage\x125\n" +
+	"\x17platform_usage_in_cents\x18\x04 \x01(\x02R\x14platformUsageInCents\x1a\x8c\x01\n" +
+	"\x1cDirectApiInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12V\n" +
-	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\x83\x01\n" +
-	"\x13ByokTokenUsageEntry\x12\x10\n" +
+	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\x87\x01\n" +
+	"\x17ByokInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12V\n" +
-	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\x8d\x01\n" +
-	"\x1dCustomEndpointTokenUsageEntry\x12\x10\n" +
+	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\x91\x01\n" +
+	"!CustomEndpointInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12V\n" +
 	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\xcb\x01\n" +
 	"\x0eInferenceUsage\x12]\n" +
@@ -5949,7 +5949,7 @@ var file_response_proto_goTypes = []any{
 	(*ResponseEvent_StreamFinished_ConversationUsageMetadata)(nil), // 7: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
 	(*ResponseEvent_StreamFinished_ContextWindowSegment)(nil),      // 8: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment
 	(*ResponseEvent_StreamFinished_ModelTokenUsage)(nil),           // 9: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	(*ResponseEvent_StreamFinished_AgentModeUsage)(nil),            // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage
+	(*ResponseEvent_StreamFinished_ChargedUsage)(nil),              // 10: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage
 	(*ResponseEvent_StreamFinished_InferenceUsage)(nil),            // 11: warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
 	(*ResponseEvent_StreamFinished_TokenCost)(nil),                 // 12: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCost
 	(*ResponseEvent_StreamFinished_TokenCount)(nil),                // 13: warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCount
@@ -5971,9 +5971,9 @@ var file_response_proto_goTypes = []any{
 	nil,                             // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
 	nil,                             // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry
 	nil,                             // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
-	nil,                             // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.WarpTokenUsageEntry
-	nil,                             // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.ByokTokenUsageEntry
-	nil,                             // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.CustomEndpointTokenUsageEntry
+	nil,                             // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.DirectApiInferenceUsageEntry
+	nil,                             // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.ByokInferenceUsageEntry
+	nil,                             // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.CustomEndpointInferenceUsageEntry
 	(*ClientAction_CreateTask)(nil), // 35: warp.multi_agent.v1.ClientAction.CreateTask
 	(*ClientAction_UpdateTaskServerData)(nil),   // 36: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
 	(*ClientAction_UpdateTaskDescription)(nil),  // 37: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
@@ -6020,19 +6020,19 @@ var file_response_proto_depIdxs = []int32{
 	19, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
 	18, // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
 	7,  // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
-	10, // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.agent_mode_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage
+	10, // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.charged_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage
 	9,  // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	14, // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
 	28, // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.warp_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry
 	29, // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.byok_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
 	30, // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.custom_endpoint_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry
 	8,  // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.context_window_segments:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment
-	10, // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.cumulative_agent_mode_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage
+	10, // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.charged_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage
 	1,  // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment.segment_type:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentType
 	31, // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.token_usage_by_category:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
-	32, // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.warp_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.WarpTokenUsageEntry
-	33, // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.byok_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.ByokTokenUsageEntry
-	34, // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.custom_endpoint_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.CustomEndpointTokenUsageEntry
+	32, // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.direct_api_inference_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.DirectApiInferenceUsageEntry
+	33, // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.byok_inference_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.ByokInferenceUsageEntry
+	34, // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.custom_endpoint_inference_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.CustomEndpointInferenceUsageEntry
 	13, // 41: warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage.token_count:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCount
 	12, // 42: warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage.token_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCost
 	17, // 43: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStats
@@ -6052,9 +6052,9 @@ var file_response_proto_depIdxs = []int32{
 	9,  // 57: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	9,  // 58: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	9,  // 59: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	11, // 60: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
-	11, // 61: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
-	11, // 62: warp.multi_agent.v1.ResponseEvent.StreamFinished.AgentModeUsage.CustomEndpointTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
+	11, // 60: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.DirectApiInferenceUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
+	11, // 61: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.ByokInferenceUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
+	11, // 62: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChargedUsage.CustomEndpointInferenceUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsage
 	48, // 63: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
 	49, // 64: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
 	49, // 65: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
