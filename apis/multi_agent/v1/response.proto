@@ -84,8 +84,9 @@ message ResponseEvent {
     // Aggregated usage metadata for a given conversation.
     ConversationUsageMetadata conversation_usage_metadata = 11;
 
-    // The platform and inference usage cost charged to the user for this AM request
-    ChargedUsage charged_usage = 13;
+    // The platform and inference usage cost charged to the user for this AM request,
+    // broken down by usage category (e.g. "primary_agent", "compaction", etc.).
+    map<string, ChargedUsage> charged_usage_by_category = 13;
 
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
@@ -127,8 +128,9 @@ message ResponseEvent {
       // from these token counts; the API does not guarantee any ordering.
       repeated ContextWindowSegment context_window_segments = 11 [ (internal) = true ];
 
-      // The usage costs charged to the user so far in the conversation
-      ChargedUsage charged_usage = 12;
+      // The usage costs charged to the user so far in the conversation,
+      // broken down by usage category (e.g. "primary_agent", "compaction", etc.).
+      map<string, ChargedUsage> charged_usage_by_category = 12;
     }
 
     // A single portion of the context window, described by its kind and an
