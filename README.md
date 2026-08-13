@@ -5,7 +5,7 @@ Maintains proto definitions alongside generated code for supported clients.
 
 ## General structure
 ```
-warp-server-apis/
+warp-proto-apis/
 └── apis/
     └── <api>/
         └── <version>/
@@ -20,7 +20,7 @@ Run `./script/bootstrap` to install proto compiler dependencies.
 
 ## Updating generated bindings
 
-When updating the proto definitions, you will need to run the `./script/generate` script.  This will automatically update bindings for all supported languages.
+When updating the proto definitions, you will need to run the `./script/generate` script. This will automatically update bindings for all supported languages.
 
 For example, to update the `multi_agent` API:
 ```bash
