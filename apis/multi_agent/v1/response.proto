@@ -220,7 +220,6 @@ message ResponseEvent {
       float web_search_cost_in_cents = 4;
     }
 
-
     message TokenCost {
         // Cost of non-cached input tokens, in US cents.
         float input_cost_in_cents = 1;
