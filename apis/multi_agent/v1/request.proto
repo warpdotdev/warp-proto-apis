@@ -576,6 +576,10 @@ message Request {
         // The key to use in the ModelConfig message (e.g. "base"). The client
         // must guarantee this is unique across all custom models.
         string config_key = 2;
+        // Optional provider-specific reasoning effort. The value is forwarded
+        // unchanged to schemas that support it; unset preserves the provider's
+        // default behavior.
+        string reasoning_effort = 3;
       }
     }
 
