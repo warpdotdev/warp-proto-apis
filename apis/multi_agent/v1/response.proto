@@ -212,7 +212,14 @@ message ResponseEvent {
 
       // The cost in US cents of each type of inference token incurred
       TokenCost token_cost = 2;
+
+      // The number of web searches performed
+      uint32 web_search_count = 3;
+
+      // The cumulative cost of the web searches performed in US cents
+      float web_search_cost_in_cents = 4;
     }
+
 
     message TokenCost {
         // Cost of non-cached input tokens, in US cents.
