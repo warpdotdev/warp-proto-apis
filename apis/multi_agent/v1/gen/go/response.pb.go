@@ -2622,11 +2622,15 @@ func (b0 ResponseEvent_StreamFinished_ChargedUsage_builder) Build() *ResponseEve
 
 // Usage for inference, tracked in tokens and US cents
 type ResponseEvent_StreamFinished_InferenceUsage struct {
-	state                 protoimpl.MessageState                   `protogen:"opaque.v1"`
-	xxx_hidden_TokenCount *ResponseEvent_StreamFinished_TokenCount `protobuf:"bytes,1,opt,name=token_count,json=tokenCount"`
-	xxx_hidden_TokenCost  *ResponseEvent_StreamFinished_TokenCost  `protobuf:"bytes,2,opt,name=token_cost,json=tokenCost"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state                           protoimpl.MessageState                   `protogen:"opaque.v1"`
+	xxx_hidden_TokenCount           *ResponseEvent_StreamFinished_TokenCount `protobuf:"bytes,1,opt,name=token_count,json=tokenCount"`
+	xxx_hidden_TokenCost            *ResponseEvent_StreamFinished_TokenCost  `protobuf:"bytes,2,opt,name=token_cost,json=tokenCost"`
+	xxx_hidden_WebSearchCount       uint32                                   `protobuf:"varint,3,opt,name=web_search_count,json=webSearchCount"`
+	xxx_hidden_WebSearchCostInCents float32                                  `protobuf:"fixed32,4,opt,name=web_search_cost_in_cents,json=webSearchCostInCents"`
+	XXX_raceDetectHookData          protoimpl.RaceDetectHookData
+	XXX_presence                    [1]uint32
+	unknownFields                   protoimpl.UnknownFields
+	sizeCache                       protoimpl.SizeCache
 }
 
 func (x *ResponseEvent_StreamFinished_InferenceUsage) Reset() {
@@ -2668,12 +2672,36 @@ func (x *ResponseEvent_StreamFinished_InferenceUsage) GetTokenCost() *ResponseEv
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished_InferenceUsage) GetWebSearchCount() uint32 {
+	if x != nil {
+		return x.xxx_hidden_WebSearchCount
+	}
+	return 0
+}
+
+func (x *ResponseEvent_StreamFinished_InferenceUsage) GetWebSearchCostInCents() float32 {
+	if x != nil {
+		return x.xxx_hidden_WebSearchCostInCents
+	}
+	return 0
+}
+
 func (x *ResponseEvent_StreamFinished_InferenceUsage) SetTokenCount(v *ResponseEvent_StreamFinished_TokenCount) {
 	x.xxx_hidden_TokenCount = v
 }
 
 func (x *ResponseEvent_StreamFinished_InferenceUsage) SetTokenCost(v *ResponseEvent_StreamFinished_TokenCost) {
 	x.xxx_hidden_TokenCost = v
+}
+
+func (x *ResponseEvent_StreamFinished_InferenceUsage) SetWebSearchCount(v uint32) {
+	x.xxx_hidden_WebSearchCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+}
+
+func (x *ResponseEvent_StreamFinished_InferenceUsage) SetWebSearchCostInCents(v float32) {
+	x.xxx_hidden_WebSearchCostInCents = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
 func (x *ResponseEvent_StreamFinished_InferenceUsage) HasTokenCount() bool {
@@ -2690,12 +2718,36 @@ func (x *ResponseEvent_StreamFinished_InferenceUsage) HasTokenCost() bool {
 	return x.xxx_hidden_TokenCost != nil
 }
 
+func (x *ResponseEvent_StreamFinished_InferenceUsage) HasWebSearchCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ResponseEvent_StreamFinished_InferenceUsage) HasWebSearchCostInCents() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
 func (x *ResponseEvent_StreamFinished_InferenceUsage) ClearTokenCount() {
 	x.xxx_hidden_TokenCount = nil
 }
 
 func (x *ResponseEvent_StreamFinished_InferenceUsage) ClearTokenCost() {
 	x.xxx_hidden_TokenCost = nil
+}
+
+func (x *ResponseEvent_StreamFinished_InferenceUsage) ClearWebSearchCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_WebSearchCount = 0
+}
+
+func (x *ResponseEvent_StreamFinished_InferenceUsage) ClearWebSearchCostInCents() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_WebSearchCostInCents = 0
 }
 
 type ResponseEvent_StreamFinished_InferenceUsage_builder struct {
@@ -2705,6 +2757,10 @@ type ResponseEvent_StreamFinished_InferenceUsage_builder struct {
 	TokenCount *ResponseEvent_StreamFinished_TokenCount
 	// The cost in US cents of each type of inference token incurred
 	TokenCost *ResponseEvent_StreamFinished_TokenCost
+	// The number of web searches performed
+	WebSearchCount *uint32
+	// The cumulative cost of the web searches performed in US cents
+	WebSearchCostInCents *float32
 }
 
 func (b0 ResponseEvent_StreamFinished_InferenceUsage_builder) Build() *ResponseEvent_StreamFinished_InferenceUsage {
@@ -2713,6 +2769,14 @@ func (b0 ResponseEvent_StreamFinished_InferenceUsage_builder) Build() *ResponseE
 	_, _ = b, x
 	x.xxx_hidden_TokenCount = b.TokenCount
 	x.xxx_hidden_TokenCost = b.TokenCost
+	if b.WebSearchCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		x.xxx_hidden_WebSearchCount = *b.WebSearchCount
+	}
+	if b.WebSearchCostInCents != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_WebSearchCostInCents = *b.WebSearchCostInCents
+	}
 	return m0
 }
 
@@ -5778,7 +5842,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc2@\n" +
+	"task.proto\"\xa4A\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -5790,7 +5854,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xfc<\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xde=\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -5863,12 +5927,14 @@ const file_response_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\x91\x01\n" +
 	"!CustomEndpointInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12V\n" +
-	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\xcb\x01\n" +
+	"\x05value\x18\x02 \x01(\v2@.warp.multi_agent.v1.ResponseEvent.StreamFinished.InferenceUsageR\x05value:\x028\x01\x1a\xad\x02\n" +
 	"\x0eInferenceUsage\x12]\n" +
 	"\vtoken_count\x18\x01 \x01(\v2<.warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCountR\n" +
 	"tokenCount\x12Z\n" +
 	"\n" +
-	"token_cost\x18\x02 \x01(\v2;.warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCostR\ttokenCost\x1a\xf3\x01\n" +
+	"token_cost\x18\x02 \x01(\v2;.warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenCostR\ttokenCost\x12(\n" +
+	"\x10web_search_count\x18\x03 \x01(\rR\x0ewebSearchCount\x126\n" +
+	"\x18web_search_cost_in_cents\x18\x04 \x01(\x02R\x14webSearchCostInCents\x1a\xf3\x01\n" +
 	"\tTokenCost\x12-\n" +
 	"\x13input_cost_in_cents\x18\x01 \x01(\x02R\x10inputCostInCents\x12/\n" +
 	"\x14output_cost_in_cents\x18\x02 \x01(\x02R\x11outputCostInCents\x12A\n" +
