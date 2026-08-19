@@ -687,6 +687,15 @@ message Message {
         // This can be useful if the prompt is long and a shorter label is more
         // appropriate for display.
         string label = 2;
+
+        // The server-minted, single-use identifier of the prompt-suggestion
+        // offer that produced this chip. Opaque to the client, which must
+        // round-trip it verbatim in
+        // `PassiveSuggestionResultType.suggestion_id` when the user accepts
+        // the chip. On accept the server substitutes its own stored copy of
+        // the prompt text for whatever the client sends, so the id, not the
+        // text, decides what the agent runs.
+        string suggestion_id = 3;
       }
     }
 
@@ -2095,6 +2104,17 @@ message PassiveSuggestionResultType {
     Prompt prompt = 3;
     CodeDiff code_diff = 4;
   }
+
+  // The server-minted, single-use identifier of the prompt-suggestion offer
+  // that produced the accepted suggestion, copied verbatim from
+  // `ToolCall.SuggestPrompt.PromptChip.suggestion_id`. Empty when the
+  // suggestion did not come from a server-minted offer.
+  //
+  // The server looks the offer up and substitutes its own stored prompt text
+  // for `Prompt.prompt` before running the agent. An empty, unknown, expired,
+  // or already-redeemed id is not an error: the request proceeds with the
+  // client's text against the user's ordinary request allowance.
+  string suggestion_id = 5;
 
   message AgentResponseCompleted {}
 
