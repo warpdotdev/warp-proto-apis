@@ -587,6 +587,11 @@ message Message {
         string file_path = 1 [ (sensitive) = true ];
         // The new file contents.
         string content = 2 [ (sensitive) = true ];
+        // If `true` and `file_path` already exists, fully replace its
+        // contents with `content` instead of failing with an
+        // already-exists error. Only honored when the client has advertised
+        // `Settings.supports_create_file_rewrite`.
+        bool rewrite = 3;
       }
 
       message DeleteFile { string file_path = 1 [ (sensitive) = true ]; }
