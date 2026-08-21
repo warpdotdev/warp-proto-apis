@@ -23020,13 +23020,14 @@ func (b0 Message_ToolCall_RequestComputerUse_builder) Build() *Message_ToolCall_
 // server owns capture configuration (frame rate, limits) and sends it here;
 // the agent authors the summary and description.
 type Message_ToolCall_StartRecording struct {
-	state                              protoimpl.MessageState                  `protogen:"opaque.v1"`
-	xxx_hidden_FrameRate               int32                                   `protobuf:"varint,1,opt,name=frame_rate,json=frameRate"`
-	xxx_hidden_Limits                  *Message_ToolCall_StartRecording_Limits `protobuf:"bytes,2,opt,name=limits"`
-	xxx_hidden_Summary                 *string                                 `protobuf:"bytes,3,opt,name=summary"`
-	xxx_hidden_PlaybackSpeedMultiplier uint32                                  `protobuf:"varint,4,opt,name=playback_speed_multiplier,json=playbackSpeedMultiplier"`
-	xxx_hidden_Target                  *Message_ToolCall_ComputerUseTarget     `protobuf:"bytes,5,opt,name=target"`
-	xxx_hidden_Description             *string                                 `protobuf:"bytes,6,opt,name=description"`
+	state                              protoimpl.MessageState                              `protogen:"opaque.v1"`
+	xxx_hidden_FrameRate               int32                                               `protobuf:"varint,1,opt,name=frame_rate,json=frameRate"`
+	xxx_hidden_Limits                  *Message_ToolCall_StartRecording_Limits             `protobuf:"bytes,2,opt,name=limits"`
+	xxx_hidden_Summary                 *string                                             `protobuf:"bytes,3,opt,name=summary"`
+	xxx_hidden_PlaybackSpeedMultiplier uint32                                              `protobuf:"varint,4,opt,name=playback_speed_multiplier,json=playbackSpeedMultiplier"`
+	xxx_hidden_Target                  *Message_ToolCall_ComputerUseTarget                 `protobuf:"bytes,5,opt,name=target"`
+	xxx_hidden_Description             *string                                             `protobuf:"bytes,6,opt,name=description"`
+	xxx_hidden_PlaybackSpeedKind       isMessage_ToolCall_StartRecording_PlaybackSpeedKind `protobuf_oneof:"playback_speed_kind"`
 	XXX_raceDetectHookData             protoimpl.RaceDetectHookData
 	XXX_presence                       [1]uint32
 	unknownFields                      protoimpl.UnknownFields
@@ -23082,6 +23083,7 @@ func (x *Message_ToolCall_StartRecording) GetSummary() string {
 	return ""
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_StartRecording) GetPlaybackSpeedMultiplier() uint32 {
 	if x != nil {
 		return x.xxx_hidden_PlaybackSpeedMultiplier
@@ -23106,9 +23108,18 @@ func (x *Message_ToolCall_StartRecording) GetDescription() string {
 	return ""
 }
 
+func (x *Message_ToolCall_StartRecording) GetPlaybackSpeed() float32 {
+	if x != nil {
+		if x, ok := x.xxx_hidden_PlaybackSpeedKind.(*message_ToolCall_StartRecording_PlaybackSpeed); ok {
+			return x.PlaybackSpeed
+		}
+	}
+	return 0
+}
+
 func (x *Message_ToolCall_StartRecording) SetFrameRate(v int32) {
 	x.xxx_hidden_FrameRate = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
 }
 
 func (x *Message_ToolCall_StartRecording) SetLimits(v *Message_ToolCall_StartRecording_Limits) {
@@ -23117,12 +23128,13 @@ func (x *Message_ToolCall_StartRecording) SetLimits(v *Message_ToolCall_StartRec
 
 func (x *Message_ToolCall_StartRecording) SetSummary(v string) {
 	x.xxx_hidden_Summary = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_StartRecording) SetPlaybackSpeedMultiplier(v uint32) {
 	x.xxx_hidden_PlaybackSpeedMultiplier = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
 }
 
 func (x *Message_ToolCall_StartRecording) SetTarget(v *Message_ToolCall_ComputerUseTarget) {
@@ -23131,7 +23143,11 @@ func (x *Message_ToolCall_StartRecording) SetTarget(v *Message_ToolCall_Computer
 
 func (x *Message_ToolCall_StartRecording) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+}
+
+func (x *Message_ToolCall_StartRecording) SetPlaybackSpeed(v float32) {
+	x.xxx_hidden_PlaybackSpeedKind = &message_ToolCall_StartRecording_PlaybackSpeed{v}
 }
 
 func (x *Message_ToolCall_StartRecording) HasFrameRate() bool {
@@ -23155,6 +23171,7 @@ func (x *Message_ToolCall_StartRecording) HasSummary() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_StartRecording) HasPlaybackSpeedMultiplier() bool {
 	if x == nil {
 		return false
@@ -23176,6 +23193,21 @@ func (x *Message_ToolCall_StartRecording) HasDescription() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
+func (x *Message_ToolCall_StartRecording) HasPlaybackSpeedKind() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_PlaybackSpeedKind != nil
+}
+
+func (x *Message_ToolCall_StartRecording) HasPlaybackSpeed() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_PlaybackSpeedKind.(*message_ToolCall_StartRecording_PlaybackSpeed)
+	return ok
+}
+
 func (x *Message_ToolCall_StartRecording) ClearFrameRate() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_FrameRate = 0
@@ -23190,6 +23222,7 @@ func (x *Message_ToolCall_StartRecording) ClearSummary() {
 	x.xxx_hidden_Summary = nil
 }
 
+// Deprecated: Marked as deprecated in task.proto.
 func (x *Message_ToolCall_StartRecording) ClearPlaybackSpeedMultiplier() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_PlaybackSpeedMultiplier = 0
@@ -23204,6 +23237,31 @@ func (x *Message_ToolCall_StartRecording) ClearDescription() {
 	x.xxx_hidden_Description = nil
 }
 
+func (x *Message_ToolCall_StartRecording) ClearPlaybackSpeedKind() {
+	x.xxx_hidden_PlaybackSpeedKind = nil
+}
+
+func (x *Message_ToolCall_StartRecording) ClearPlaybackSpeed() {
+	if _, ok := x.xxx_hidden_PlaybackSpeedKind.(*message_ToolCall_StartRecording_PlaybackSpeed); ok {
+		x.xxx_hidden_PlaybackSpeedKind = nil
+	}
+}
+
+const Message_ToolCall_StartRecording_PlaybackSpeedKind_not_set_case case_Message_ToolCall_StartRecording_PlaybackSpeedKind = 0
+const Message_ToolCall_StartRecording_PlaybackSpeed_case case_Message_ToolCall_StartRecording_PlaybackSpeedKind = 7
+
+func (x *Message_ToolCall_StartRecording) WhichPlaybackSpeedKind() case_Message_ToolCall_StartRecording_PlaybackSpeedKind {
+	if x == nil {
+		return Message_ToolCall_StartRecording_PlaybackSpeedKind_not_set_case
+	}
+	switch x.xxx_hidden_PlaybackSpeedKind.(type) {
+	case *message_ToolCall_StartRecording_PlaybackSpeed:
+		return Message_ToolCall_StartRecording_PlaybackSpeed_case
+	default:
+		return Message_ToolCall_StartRecording_PlaybackSpeedKind_not_set_case
+	}
+}
+
 type Message_ToolCall_StartRecording_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -23214,10 +23272,13 @@ type Message_ToolCall_StartRecording_builder struct {
 	// A short, agent-authored title for the recording, shown as the badge
 	// label in Oz web and the blocklist.
 	Summary *string
-	// How many times faster the recorded video should play back relative to
-	// real time. For example, 4 makes a 4-minute recording play in 1 minute.
-	// A value of 0 or 1 means real-time (no speedup). The client applies this
-	// via an ffmpeg presentation-timestamp rescale filter.
+	// Deprecated: cannot represent fractional speeds (e.g. 1.5x). Replaced
+	// by `playback_speed` below. The server no longer populates this field;
+	// it is kept only so old clients that still read it continue to see the
+	// same "0 or 1 means real-time" semantics they always have (i.e. they
+	// fall back to their own client-side default when this is unset).
+	//
+	// Deprecated: Marked as deprecated in task.proto.
 	PlaybackSpeedMultiplier *uint32
 	// The surface to record. If unset or set to screen, record the full
 	// screen (legacy behavior).
@@ -23226,6 +23287,27 @@ type Message_ToolCall_StartRecording_builder struct {
 	// captures, shown below the recording in detail views such as the video
 	// lightbox.
 	Description *string
+	// How many times faster the recorded video should play back relative to
+	// real time. For example, 1.5 makes a 1.5-minute recording play in 1
+	// minute. A value of <= 1 means the server explicitly requested
+	// real-time (no speedup) rather than "unset": this field is wrapped in
+	// a one-member oneof (rather than a plain scalar) specifically so wire
+	// presence distinguishes "the server sent 0/1, meaning explicitly
+	// real-time" from "the server sent nothing, so the client should fall
+	// back to its own default" -- a plain proto3 scalar cannot make that
+	// distinction, since both cases decode to a zero value. The `optional`
+	// field label is unavailable here because editions give every singular
+	// field explicit presence by default and reject an explicit
+	// `optional` label, so an explicit oneof is used to get the same
+	// presence bit portably across the edition-2023 (Go) and
+	// downgraded-to-proto3 (Rust) compilation pipelines. The client
+	// applies the resolved value via an ffmpeg presentation-timestamp
+	// rescale filter. Supersedes the integer `playback_speed_multiplier`
+	// field above, which cannot express fractional speeds.
+
+	// Fields of oneof xxx_hidden_PlaybackSpeedKind:
+	PlaybackSpeed *float32
+	// -- end of xxx_hidden_PlaybackSpeedKind
 }
 
 func (b0 Message_ToolCall_StartRecording_builder) Build() *Message_ToolCall_StartRecording {
@@ -23233,24 +23315,48 @@ func (b0 Message_ToolCall_StartRecording_builder) Build() *Message_ToolCall_Star
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.FrameRate != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
 		x.xxx_hidden_FrameRate = *b.FrameRate
 	}
 	x.xxx_hidden_Limits = b.Limits
 	if b.Summary != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
 		x.xxx_hidden_Summary = b.Summary
 	}
 	if b.PlaybackSpeedMultiplier != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
 		x.xxx_hidden_PlaybackSpeedMultiplier = *b.PlaybackSpeedMultiplier
 	}
 	x.xxx_hidden_Target = b.Target
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
 		x.xxx_hidden_Description = b.Description
 	}
+	if b.PlaybackSpeed != nil {
+		x.xxx_hidden_PlaybackSpeedKind = &message_ToolCall_StartRecording_PlaybackSpeed{*b.PlaybackSpeed}
+	}
 	return m0
+}
+
+type case_Message_ToolCall_StartRecording_PlaybackSpeedKind protoreflect.FieldNumber
+
+func (x case_Message_ToolCall_StartRecording_PlaybackSpeedKind) String() string {
+	md := file_task_proto_msgTypes[124].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isMessage_ToolCall_StartRecording_PlaybackSpeedKind interface {
+	isMessage_ToolCall_StartRecording_PlaybackSpeedKind()
+}
+
+type message_ToolCall_StartRecording_PlaybackSpeed struct {
+	PlaybackSpeed float32 `protobuf:"fixed32,7,opt,name=playback_speed,json=playbackSpeed,oneof"`
+}
+
+func (*message_ToolCall_StartRecording_PlaybackSpeed) isMessage_ToolCall_StartRecording_PlaybackSpeedKind() {
 }
 
 // A tool call to stop an in-progress recording and publish the resulting
@@ -38366,7 +38472,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xab\xce\x01\n" +
+	"\x0ecomment_target\"\xef\xce\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -38488,7 +38594,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\x9bf\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xdff\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -38777,18 +38883,20 @@ const file_task_proto_rawDesc = "" +
 	"\x04type\x1a\xa2\x01\n" +
 	"\x12RequestComputerUse\x12'\n" +
 	"\ftask_summary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vtaskSummary\x12c\n" +
-	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\xbb\x03\n" +
+	"\x11screenshot_params\x18\x02 \x01(\v26.warp.multi_agent.v1.Message.ToolCall.ScreenshotParamsR\x10screenshotParams\x1a\xff\x03\n" +
 	"\x0eStartRecording\x12\x1d\n" +
 	"\n" +
 	"frame_rate\x18\x01 \x01(\x05R\tframeRate\x12S\n" +
 	"\x06limits\x18\x02 \x01(\v2;.warp.multi_agent.v1.Message.ToolCall.StartRecording.LimitsR\x06limits\x12\x18\n" +
-	"\asummary\x18\x03 \x01(\tR\asummary\x12:\n" +
-	"\x19playback_speed_multiplier\x18\x04 \x01(\rR\x17playbackSpeedMultiplier\x12O\n" +
+	"\asummary\x18\x03 \x01(\tR\asummary\x12>\n" +
+	"\x19playback_speed_multiplier\x18\x04 \x01(\rB\x02\x18\x01R\x17playbackSpeedMultiplier\x12O\n" +
 	"\x06target\x18\x05 \x01(\v27.warp.multi_agent.v1.Message.ToolCall.ComputerUseTargetR\x06target\x12 \n" +
-	"\vdescription\x18\x06 \x01(\tR\vdescription\x1al\n" +
+	"\vdescription\x18\x06 \x01(\tR\vdescription\x12'\n" +
+	"\x0eplayback_speed\x18\a \x01(\x02H\x00R\rplaybackSpeed\x1al\n" +
 	"\x06Limits\x12<\n" +
 	"\fmax_duration\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\vmaxDuration\x12$\n" +
-	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytes\x1aL\n" +
+	"\x0emax_size_bytes\x18\x02 \x01(\x03R\fmaxSizeBytesB\x15\n" +
+	"\x13playback_speed_kind\x1aL\n" +
 	"\rStopRecording\x12!\n" +
 	"\frecording_id\x18\x01 \x01(\tR\vrecordingId\x12\x18\n" +
 	"\adiscard\x18\x02 \x01(\bR\adiscard\x1a\x92\x03\n" +
@@ -40494,6 +40602,9 @@ func file_task_proto_init() {
 	file_task_proto_msgTypes[121].OneofWrappers = []any{
 		(*message_ToolCall_ReadSkill_SkillPath)(nil),
 		(*message_ToolCall_ReadSkill_BundledSkillId)(nil),
+	}
+	file_task_proto_msgTypes[124].OneofWrappers = []any{
+		(*message_ToolCall_StartRecording_PlaybackSpeed)(nil),
 	}
 	file_task_proto_msgTypes[127].OneofWrappers = []any{
 		(*message_ToolCall_ComputerUseTarget_Screen_)(nil),

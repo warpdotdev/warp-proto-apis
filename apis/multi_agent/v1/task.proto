@@ -935,11 +935,12 @@ message Message {
       // A short, agent-authored title for the recording, shown as the badge
       // label in Oz web and the blocklist.
       string summary = 3;
-      // How many times faster the recorded video should play back relative to
-      // real time. For example, 4 makes a 4-minute recording play in 1 minute.
-      // A value of 0 or 1 means real-time (no speedup). The client applies this
-      // via an ffmpeg presentation-timestamp rescale filter.
-      uint32 playback_speed_multiplier = 4;
+      // Deprecated: cannot represent fractional speeds (e.g. 1.5x). Replaced
+      // by `playback_speed` below. The server no longer populates this field;
+      // it is kept only so old clients that still read it continue to see the
+      // same "0 or 1 means real-time" semantics they always have (i.e. they
+      // fall back to their own client-side default when this is unset).
+      uint32 playback_speed_multiplier = 4 [deprecated = true];
       // The surface to record. If unset or set to screen, record the full
       // screen (legacy behavior).
       ComputerUseTarget target = 5;
@@ -947,6 +948,26 @@ message Message {
       // captures, shown below the recording in detail views such as the video
       // lightbox.
       string description = 6;
+      // How many times faster the recorded video should play back relative to
+      // real time. For example, 1.5 makes a 1.5-minute recording play in 1
+      // minute. A value of <= 1 means the server explicitly requested
+      // real-time (no speedup) rather than "unset": this field is wrapped in
+      // a one-member oneof (rather than a plain scalar) specifically so wire
+      // presence distinguishes "the server sent 0/1, meaning explicitly
+      // real-time" from "the server sent nothing, so the client should fall
+      // back to its own default" -- a plain proto3 scalar cannot make that
+      // distinction, since both cases decode to a zero value. The `optional`
+      // field label is unavailable here because editions give every singular
+      // field explicit presence by default and reject an explicit
+      // `optional` label, so an explicit oneof is used to get the same
+      // presence bit portably across the edition-2023 (Go) and
+      // downgraded-to-proto3 (Rust) compilation pipelines. The client
+      // applies the resolved value via an ffmpeg presentation-timestamp
+      // rescale filter. Supersedes the integer `playback_speed_multiplier`
+      // field above, which cannot express fractional speeds.
+      oneof playback_speed_kind {
+        float playback_speed = 7;
+      }
 
       // Limits the runtime enforces on a recording.
       message Limits {
