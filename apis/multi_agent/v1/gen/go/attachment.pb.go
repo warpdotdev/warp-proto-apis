@@ -10,6 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/gofeaturespb"
+	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
@@ -22,6 +23,67 @@ const (
 	// Verify that runtime/protoimpl is sufficiently up-to-date.
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
+
+// Aggregate state of the process tree, reduced to whichever member state is the strongest
+// evidence of progress.
+type LongRunningShellCommandActivity_ProcessActivity_State int32
+
+const (
+	// The client never populated this field.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_UNSPECIFIED LongRunningShellCommandActivity_ProcessActivity_State = 0
+	// The client looked at the process tree but could not classify its state.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_UNKNOWN  LongRunningShellCommandActivity_ProcessActivity_State = 1
+	LongRunningShellCommandActivity_ProcessActivity_STATE_RUNNING  LongRunningShellCommandActivity_ProcessActivity_State = 2
+	LongRunningShellCommandActivity_ProcessActivity_STATE_SLEEPING LongRunningShellCommandActivity_ProcessActivity_State = 3
+	// Uninterruptible I/O, which is progress rather than a hang.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_DISK_WAIT LongRunningShellCommandActivity_ProcessActivity_State = 4
+	LongRunningShellCommandActivity_ProcessActivity_STATE_STOPPED   LongRunningShellCommandActivity_ProcessActivity_State = 5
+	LongRunningShellCommandActivity_ProcessActivity_STATE_ZOMBIE    LongRunningShellCommandActivity_ProcessActivity_State = 6
+)
+
+// Enum value maps for LongRunningShellCommandActivity_ProcessActivity_State.
+var (
+	LongRunningShellCommandActivity_ProcessActivity_State_name = map[int32]string{
+		0: "STATE_UNSPECIFIED",
+		1: "STATE_UNKNOWN",
+		2: "STATE_RUNNING",
+		3: "STATE_SLEEPING",
+		4: "STATE_DISK_WAIT",
+		5: "STATE_STOPPED",
+		6: "STATE_ZOMBIE",
+	}
+	LongRunningShellCommandActivity_ProcessActivity_State_value = map[string]int32{
+		"STATE_UNSPECIFIED": 0,
+		"STATE_UNKNOWN":     1,
+		"STATE_RUNNING":     2,
+		"STATE_SLEEPING":    3,
+		"STATE_DISK_WAIT":   4,
+		"STATE_STOPPED":     5,
+		"STATE_ZOMBIE":      6,
+	}
+)
+
+func (x LongRunningShellCommandActivity_ProcessActivity_State) Enum() *LongRunningShellCommandActivity_ProcessActivity_State {
+	p := new(LongRunningShellCommandActivity_ProcessActivity_State)
+	*p = x
+	return p
+}
+
+func (x LongRunningShellCommandActivity_ProcessActivity_State) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (LongRunningShellCommandActivity_ProcessActivity_State) Descriptor() protoreflect.EnumDescriptor {
+	return file_attachment_proto_enumTypes[0].Descriptor()
+}
+
+func (LongRunningShellCommandActivity_ProcessActivity_State) Type() protoreflect.EnumType {
+	return &file_attachment_proto_enumTypes[0]
+}
+
+func (x LongRunningShellCommandActivity_ProcessActivity_State) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
 
 type Attachment struct {
 	state            protoimpl.MessageState `protogen:"opaque.v1"`
@@ -828,13 +890,13 @@ func (b0 RunningShellCommand_builder) Build() *RunningShellCommand {
 
 // A snapshot of the terminal grid for a long-running command.
 type LongRunningShellCommandSnapshot struct {
-	state                        protoimpl.MessageState      `protogen:"opaque.v1"`
-	xxx_hidden_Output            *string                     `protobuf:"bytes,1,opt,name=output"`
-	xxx_hidden_Cursor            *string                     `protobuf:"bytes,2,opt,name=cursor"`
-	xxx_hidden_CommandId         *string                     `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
-	xxx_hidden_IsAltScreenActive bool                        `protobuf:"varint,4,opt,name=is_alt_screen_active,json=isAltScreenActive"`
-	xxx_hidden_IsPreempted       bool                        `protobuf:"varint,5,opt,name=is_preempted,json=isPreempted"`
-	xxx_hidden_Activity          *LongRunningCommandActivity `protobuf:"bytes,6,opt,name=activity"`
+	state                        protoimpl.MessageState           `protogen:"opaque.v1"`
+	xxx_hidden_Output            *string                          `protobuf:"bytes,1,opt,name=output"`
+	xxx_hidden_Cursor            *string                          `protobuf:"bytes,2,opt,name=cursor"`
+	xxx_hidden_CommandId         *string                          `protobuf:"bytes,3,opt,name=command_id,json=commandId"`
+	xxx_hidden_IsAltScreenActive bool                             `protobuf:"varint,4,opt,name=is_alt_screen_active,json=isAltScreenActive"`
+	xxx_hidden_IsPreempted       bool                             `protobuf:"varint,5,opt,name=is_preempted,json=isPreempted"`
+	xxx_hidden_Activity          *LongRunningShellCommandActivity `protobuf:"bytes,6,opt,name=activity"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
 	unknownFields                protoimpl.UnknownFields
@@ -910,7 +972,7 @@ func (x *LongRunningShellCommandSnapshot) GetIsPreempted() bool {
 	return false
 }
 
-func (x *LongRunningShellCommandSnapshot) GetActivity() *LongRunningCommandActivity {
+func (x *LongRunningShellCommandSnapshot) GetActivity() *LongRunningShellCommandActivity {
 	if x != nil {
 		return x.xxx_hidden_Activity
 	}
@@ -942,7 +1004,7 @@ func (x *LongRunningShellCommandSnapshot) SetIsPreempted(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 6)
 }
 
-func (x *LongRunningShellCommandSnapshot) SetActivity(v *LongRunningCommandActivity) {
+func (x *LongRunningShellCommandSnapshot) SetActivity(v *LongRunningShellCommandActivity) {
 	x.xxx_hidden_Activity = v
 }
 
@@ -1046,8 +1108,11 @@ type LongRunningShellCommandSnapshot_builder struct {
 	IsPreempted *bool
 	// Liveness signals collected by the client while the command is being monitored by an agent.
 	//
-	// Absent when the client does not support activity monitoring.
-	Activity *LongRunningCommandActivity
+	// Absent means there are no liveness signals for this snapshot, whether because
+	// the client does not support activity monitoring, the session is remote, or nothing has been
+	// sampled yet (normal on the first read of a command). Infer nothing about liveness from its
+	// absence — judge the command from the terminal output instead.
+	Activity *LongRunningShellCommandActivity
 }
 
 func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellCommandSnapshot {
@@ -1078,50 +1143,38 @@ func (b0 LongRunningShellCommandSnapshot_builder) Build() *LongRunningShellComma
 	return m0
 }
 
-// Liveness signals for a long-running command, sampled client-side at ~1 Hz for the duration of
-// agent monitoring. The signals describe the command's process tree, which is what lets the
-// agent tell a command that is computing silently apart from one that is hung.
+// Liveness signals for a long-running command, sampled client-side every ~5 seconds for the
+// duration of agent monitoring. The signals describe the command's process tree, which is what
+// lets the agent tell a command that is computing silently apart from one that is hung.
 //
-// IMPORTANT — presence semantics. The Rust bindings are generated by rewriting this file to
-// `syntax = "proto3"` (see the Rust crate's build.rs), so the client sends scalars with IMPLICIT
-// presence: a scalar holding its default (`0`, `false`, `""`) is omitted from the wire entirely.
-// The Go bindings are generated from edition 2023 and therefore expose `Has*()` accessors, but
-// those accessors are NOT meaningful for scalars in this message — a quiet command legitimately
-// reports `cpu_time_delta_ms = 0` and `live_process_count = 0`, and those are exactly the values
-// that vanish.
-//
-// Consumers MUST therefore treat an absent scalar inside a present `LongRunningCommandActivity`
-// as its default value, not as "unknown", and MUST NOT gate rendering on `Has*()` for the scalar
-// fields below. Use message-level presence instead, which survives both encodings:
-//   - `LongRunningShellCommandSnapshot.activity` absent  -> the client does not report activity.
-//   - `process` absent                                   -> the process tier was not collected.
-//   - `signals_unavailable = true`                       -> the process tier is unavailable, so its
-//     silence proves nothing.
-type LongRunningCommandActivity struct {
-	state                               protoimpl.MessageState                      `protogen:"opaque.v1"`
-	xxx_hidden_SecondsSinceLastActivity float32                                     `protobuf:"fixed32,1,opt,name=seconds_since_last_activity,json=secondsSinceLastActivity"`
-	xxx_hidden_Process                  *LongRunningCommandActivity_ProcessActivity `protobuf:"bytes,2,opt,name=process"`
-	xxx_hidden_SignalsUnavailable       bool                                        `protobuf:"varint,3,opt,name=signals_unavailable,json=signalsUnavailable"`
-	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
-	XXX_presence                        [1]uint32
-	unknownFields                       protoimpl.UnknownFields
-	sizeCache                           protoimpl.SizeCache
+// This message is only ever sent when the client actually took a reading, so every value it
+// carries is a real measurement — including the zeros, which are what a quiet-but-healthy
+// command looks like. Decide whether a signal was collected from message-level presence
+// (`activity`, `process`), never from scalar presence: the Rust bindings are generated by
+// rewriting this file to `syntax = "proto3"` (see the Rust crate's build.rs), so a scalar
+// holding its default is indistinguishable on the wire from an unset one.
+type LongRunningShellCommandActivity struct {
+	state                        protoimpl.MessageState                           `protogen:"opaque.v1"`
+	xxx_hidden_SinceLastActivity *durationpb.Duration                             `protobuf:"bytes,1,opt,name=since_last_activity,json=sinceLastActivity"`
+	xxx_hidden_Process           *LongRunningShellCommandActivity_ProcessActivity `protobuf:"bytes,2,opt,name=process"`
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
-func (x *LongRunningCommandActivity) Reset() {
-	*x = LongRunningCommandActivity{}
+func (x *LongRunningShellCommandActivity) Reset() {
+	*x = LongRunningShellCommandActivity{}
 	mi := &file_attachment_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LongRunningCommandActivity) String() string {
+func (x *LongRunningShellCommandActivity) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LongRunningCommandActivity) ProtoMessage() {}
+func (*LongRunningShellCommandActivity) ProtoMessage() {}
 
-func (x *LongRunningCommandActivity) ProtoReflect() protoreflect.Message {
+func (x *LongRunningShellCommandActivity) ProtoReflect() protoreflect.Message {
 	mi := &file_attachment_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1133,111 +1186,74 @@ func (x *LongRunningCommandActivity) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *LongRunningCommandActivity) GetSecondsSinceLastActivity() float32 {
+func (x *LongRunningShellCommandActivity) GetSinceLastActivity() *durationpb.Duration {
 	if x != nil {
-		return x.xxx_hidden_SecondsSinceLastActivity
+		return x.xxx_hidden_SinceLastActivity
 	}
-	return 0
+	return nil
 }
 
-func (x *LongRunningCommandActivity) GetProcess() *LongRunningCommandActivity_ProcessActivity {
+func (x *LongRunningShellCommandActivity) GetProcess() *LongRunningShellCommandActivity_ProcessActivity {
 	if x != nil {
 		return x.xxx_hidden_Process
 	}
 	return nil
 }
 
-func (x *LongRunningCommandActivity) GetSignalsUnavailable() bool {
-	if x != nil {
-		return x.xxx_hidden_SignalsUnavailable
-	}
-	return false
+func (x *LongRunningShellCommandActivity) SetSinceLastActivity(v *durationpb.Duration) {
+	x.xxx_hidden_SinceLastActivity = v
 }
 
-func (x *LongRunningCommandActivity) SetSecondsSinceLastActivity(v float32) {
-	x.xxx_hidden_SecondsSinceLastActivity = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
-}
-
-func (x *LongRunningCommandActivity) SetProcess(v *LongRunningCommandActivity_ProcessActivity) {
+func (x *LongRunningShellCommandActivity) SetProcess(v *LongRunningShellCommandActivity_ProcessActivity) {
 	x.xxx_hidden_Process = v
 }
 
-func (x *LongRunningCommandActivity) SetSignalsUnavailable(v bool) {
-	x.xxx_hidden_SignalsUnavailable = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
-}
-
-func (x *LongRunningCommandActivity) HasSecondsSinceLastActivity() bool {
+func (x *LongRunningShellCommandActivity) HasSinceLastActivity() bool {
 	if x == nil {
 		return false
 	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+	return x.xxx_hidden_SinceLastActivity != nil
 }
 
-func (x *LongRunningCommandActivity) HasProcess() bool {
+func (x *LongRunningShellCommandActivity) HasProcess() bool {
 	if x == nil {
 		return false
 	}
 	return x.xxx_hidden_Process != nil
 }
 
-func (x *LongRunningCommandActivity) HasSignalsUnavailable() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+func (x *LongRunningShellCommandActivity) ClearSinceLastActivity() {
+	x.xxx_hidden_SinceLastActivity = nil
 }
 
-func (x *LongRunningCommandActivity) ClearSecondsSinceLastActivity() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_SecondsSinceLastActivity = 0
-}
-
-func (x *LongRunningCommandActivity) ClearProcess() {
+func (x *LongRunningShellCommandActivity) ClearProcess() {
 	x.xxx_hidden_Process = nil
 }
 
-func (x *LongRunningCommandActivity) ClearSignalsUnavailable() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_SignalsUnavailable = false
-}
-
-type LongRunningCommandActivity_builder struct {
+type LongRunningShellCommandActivity_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Wall-clock seconds since the most recent process-tree activity (CPU consumption, I/O writes,
-	// or processes appearing/exiting). This is sampled independently of the agent's polling
-	// cadence, so it is accurate even when reads are far apart.
+	// Wall-clock time since the most recent process-tree activity (CPU consumption, I/O writes,
+	// or processes appearing/exiting). Sampled independently of the agent's polling cadence, so
+	// it is accurate even when reads are far apart.
 	//
-	// `0` means activity was observed in the most recent sample, i.e. the command is maximally
-	// alive. Do not confuse the absence of this field with the absence of activity.
-	SecondsSinceLastActivity *float32
-	Process                  *LongRunningCommandActivity_ProcessActivity
-	// Set when the client could not collect the process tier because the snapshot was taken before
-	// the sampler had observed the process tree (normal on the first read of a command). Always
-	// equivalent to `process` being absent.
-	//
-	// Consumers must read it as "we could not look at the process tree", never as "we looked and
-	// found nothing" — an idle-looking process reading is the single most dangerous thing to infer
-	// here, since it is what would justify killing a healthy command. The terminal snapshot itself
-	// remains meaningful.
-	SignalsUnavailable *bool
+	// Resolution is the ~5s sampling interval: activity is only ever observed at a sample, so a
+	// continuously busy command reports somewhere in [0, one interval) depending on where the
+	// snapshot falls between samples, and an exact zero is rare. Treat any reading below the
+	// sampling interval as "active at the most recent sample"; only readings well above it are
+	// evidence of silence.
+	SinceLastActivity *durationpb.Duration
+	// Absent when this tier was not collected. An all-zero tier is a real reading (a process tree
+	// with nothing left running), so it is reported rather than omitted.
+	Process *LongRunningShellCommandActivity_ProcessActivity
 }
 
-func (b0 LongRunningCommandActivity_builder) Build() *LongRunningCommandActivity {
-	m0 := &LongRunningCommandActivity{}
+func (b0 LongRunningShellCommandActivity_builder) Build() *LongRunningShellCommandActivity {
+	m0 := &LongRunningShellCommandActivity{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.SecondsSinceLastActivity != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
-		x.xxx_hidden_SecondsSinceLastActivity = *b.SecondsSinceLastActivity
-	}
+	x.xxx_hidden_SinceLastActivity = b.SinceLastActivity
 	x.xxx_hidden_Process = b.Process
-	if b.SignalsUnavailable != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_SignalsUnavailable = *b.SignalsUnavailable
-	}
 	return m0
 }
 
@@ -2900,32 +2916,39 @@ func (b0 FilePathReference_builder) Build() *FilePathReference {
 }
 
 // Activity of the command's process tree.
-type LongRunningCommandActivity_ProcessActivity struct {
-	state                        protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_CpuTimeDeltaMs    uint64                 `protobuf:"varint,1,opt,name=cpu_time_delta_ms,json=cpuTimeDeltaMs"`
-	xxx_hidden_State             *string                `protobuf:"bytes,2,opt,name=state"`
-	xxx_hidden_LiveProcessCount  uint32                 `protobuf:"varint,3,opt,name=live_process_count,json=liveProcessCount"`
-	xxx_hidden_IoWriteBytesDelta uint64                 `protobuf:"varint,4,opt,name=io_write_bytes_delta,json=ioWriteBytesDelta"`
+//
+// The `*_delta` fields below accumulate over the window between snapshots — every sample taken
+// since the previous snapshot for this command, not just the most recent one. The window is
+// therefore as long as the gap between agent reads, and is quantized to the sampling interval:
+// work done after the last sample is attributed to the next snapshot. Processes are only
+// counted from the first sample that observed them, so work a process did before monitoring
+// began is excluded.
+type LongRunningShellCommandActivity_ProcessActivity struct {
+	state                        protoimpl.MessageState                                `protogen:"opaque.v1"`
+	xxx_hidden_CpuTimeDeltaMs    uint64                                                `protobuf:"varint,1,opt,name=cpu_time_delta_ms,json=cpuTimeDeltaMs"`
+	xxx_hidden_State             LongRunningShellCommandActivity_ProcessActivity_State `protobuf:"varint,2,opt,name=state,enum=warp.multi_agent.v1.LongRunningShellCommandActivity_ProcessActivity_State"`
+	xxx_hidden_LiveProcessCount  uint32                                                `protobuf:"varint,3,opt,name=live_process_count,json=liveProcessCount"`
+	xxx_hidden_IoWriteBytesDelta uint64                                                `protobuf:"varint,4,opt,name=io_write_bytes_delta,json=ioWriteBytesDelta"`
 	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
 	XXX_presence                 [1]uint32
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) Reset() {
-	*x = LongRunningCommandActivity_ProcessActivity{}
+func (x *LongRunningShellCommandActivity_ProcessActivity) Reset() {
+	*x = LongRunningShellCommandActivity_ProcessActivity{}
 	mi := &file_attachment_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) String() string {
+func (x *LongRunningShellCommandActivity_ProcessActivity) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*LongRunningCommandActivity_ProcessActivity) ProtoMessage() {}
+func (*LongRunningShellCommandActivity_ProcessActivity) ProtoMessage() {}
 
-func (x *LongRunningCommandActivity_ProcessActivity) ProtoReflect() protoreflect.Message {
+func (x *LongRunningShellCommandActivity_ProcessActivity) ProtoReflect() protoreflect.Message {
 	mi := &file_attachment_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -2937,125 +2960,119 @@ func (x *LongRunningCommandActivity_ProcessActivity) ProtoReflect() protoreflect
 	return mi.MessageOf(x)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) GetCpuTimeDeltaMs() uint64 {
+func (x *LongRunningShellCommandActivity_ProcessActivity) GetCpuTimeDeltaMs() uint64 {
 	if x != nil {
 		return x.xxx_hidden_CpuTimeDeltaMs
 	}
 	return 0
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) GetState() string {
+func (x *LongRunningShellCommandActivity_ProcessActivity) GetState() LongRunningShellCommandActivity_ProcessActivity_State {
 	if x != nil {
-		if x.xxx_hidden_State != nil {
-			return *x.xxx_hidden_State
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_State
 		}
-		return ""
 	}
-	return ""
+	return LongRunningShellCommandActivity_ProcessActivity_STATE_UNSPECIFIED
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) GetLiveProcessCount() uint32 {
+func (x *LongRunningShellCommandActivity_ProcessActivity) GetLiveProcessCount() uint32 {
 	if x != nil {
 		return x.xxx_hidden_LiveProcessCount
 	}
 	return 0
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) GetIoWriteBytesDelta() uint64 {
+func (x *LongRunningShellCommandActivity_ProcessActivity) GetIoWriteBytesDelta() uint64 {
 	if x != nil {
 		return x.xxx_hidden_IoWriteBytesDelta
 	}
 	return 0
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) SetCpuTimeDeltaMs(v uint64) {
+func (x *LongRunningShellCommandActivity_ProcessActivity) SetCpuTimeDeltaMs(v uint64) {
 	x.xxx_hidden_CpuTimeDeltaMs = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) SetState(v string) {
-	x.xxx_hidden_State = &v
+func (x *LongRunningShellCommandActivity_ProcessActivity) SetState(v LongRunningShellCommandActivity_ProcessActivity_State) {
+	x.xxx_hidden_State = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) SetLiveProcessCount(v uint32) {
+func (x *LongRunningShellCommandActivity_ProcessActivity) SetLiveProcessCount(v uint32) {
 	x.xxx_hidden_LiveProcessCount = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) SetIoWriteBytesDelta(v uint64) {
+func (x *LongRunningShellCommandActivity_ProcessActivity) SetIoWriteBytesDelta(v uint64) {
 	x.xxx_hidden_IoWriteBytesDelta = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) HasCpuTimeDeltaMs() bool {
+func (x *LongRunningShellCommandActivity_ProcessActivity) HasCpuTimeDeltaMs() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) HasState() bool {
+func (x *LongRunningShellCommandActivity_ProcessActivity) HasState() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) HasLiveProcessCount() bool {
+func (x *LongRunningShellCommandActivity_ProcessActivity) HasLiveProcessCount() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) HasIoWriteBytesDelta() bool {
+func (x *LongRunningShellCommandActivity_ProcessActivity) HasIoWriteBytesDelta() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) ClearCpuTimeDeltaMs() {
+func (x *LongRunningShellCommandActivity_ProcessActivity) ClearCpuTimeDeltaMs() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_CpuTimeDeltaMs = 0
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) ClearState() {
+func (x *LongRunningShellCommandActivity_ProcessActivity) ClearState() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_State = nil
+	x.xxx_hidden_State = LongRunningShellCommandActivity_ProcessActivity_STATE_UNSPECIFIED
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) ClearLiveProcessCount() {
+func (x *LongRunningShellCommandActivity_ProcessActivity) ClearLiveProcessCount() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
 	x.xxx_hidden_LiveProcessCount = 0
 }
 
-func (x *LongRunningCommandActivity_ProcessActivity) ClearIoWriteBytesDelta() {
+func (x *LongRunningShellCommandActivity_ProcessActivity) ClearIoWriteBytesDelta() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_IoWriteBytesDelta = 0
 }
 
-type LongRunningCommandActivity_ProcessActivity_builder struct {
+type LongRunningShellCommandActivity_ProcessActivity_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// CPU time consumed across the process tree since the previous snapshot.
+	// CPU time consumed across the process tree over the window described above.
 	CpuTimeDeltaMs *uint64
-	// Coarse aggregate state of the process tree, reduced to whichever member state is the
-	// strongest evidence of progress. One of `running`, `sleeping`, `disk_wait`, `stopped`,
-	// `zombie`, or `unknown`.
-	//
-	// Note that `disk_wait` is uninterruptible I/O, which is progress rather than a hang.
-	// Treat an unrecognised value as `unknown`.
-	State *string
+	// Coarse aggregate state of the process tree.
+	State *LongRunningShellCommandActivity_ProcessActivity_State
 	// Number of live processes in the command's process tree.
 	LiveProcessCount *uint32
-	// Bytes written by the process tree since the previous snapshot, where the OS reports it.
+	// Bytes written by the process tree over the window described above, where the OS reports it.
 	IoWriteBytesDelta *uint64
 }
 
-func (b0 LongRunningCommandActivity_ProcessActivity_builder) Build() *LongRunningCommandActivity_ProcessActivity {
-	m0 := &LongRunningCommandActivity_ProcessActivity{}
+func (b0 LongRunningShellCommandActivity_ProcessActivity_builder) Build() *LongRunningShellCommandActivity_ProcessActivity {
+	m0 := &LongRunningShellCommandActivity_ProcessActivity{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.CpuTimeDeltaMs != nil {
@@ -3064,7 +3081,7 @@ func (b0 LongRunningCommandActivity_ProcessActivity_builder) Build() *LongRunnin
 	}
 	if b.State != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
-		x.xxx_hidden_State = b.State
+		x.xxx_hidden_State = *b.State
 	}
 	if b.LiveProcessCount != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
@@ -3277,7 +3294,7 @@ var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xf0\x04\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xf0\x04\n" +
 	"\n" +
 	"Attachment\x12%\n" +
 	"\n" +
@@ -3303,24 +3320,31 @@ const file_attachment_proto_rawDesc = "" +
 	"\x10is_auto_attached\x18\a \x01(\bR\x0eisAutoAttached\"\x87\x01\n" +
 	"\x13RunningShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12P\n" +
-	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"\x97\x02\n" +
+	"\bsnapshot\x18\x02 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotR\bsnapshot\"\x9c\x02\n" +
 	"\x1fLongRunningShellCommandSnapshot\x12\x1c\n" +
 	"\x06output\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x06output\x12\x16\n" +
 	"\x06cursor\x18\x02 \x01(\tR\x06cursor\x12\x1d\n" +
 	"\n" +
 	"command_id\x18\x03 \x01(\tR\tcommandId\x12/\n" +
 	"\x14is_alt_screen_active\x18\x04 \x01(\bR\x11isAltScreenActive\x12!\n" +
-	"\fis_preempted\x18\x05 \x01(\bR\visPreempted\x12K\n" +
-	"\bactivity\x18\x06 \x01(\v2/.warp.multi_agent.v1.LongRunningCommandActivityR\bactivity\"\x9b\x03\n" +
-	"\x1aLongRunningCommandActivity\x12=\n" +
-	"\x1bseconds_since_last_activity\x18\x01 \x01(\x02R\x18secondsSinceLastActivity\x12Y\n" +
-	"\aprocess\x18\x02 \x01(\v2?.warp.multi_agent.v1.LongRunningCommandActivity.ProcessActivityR\aprocess\x12/\n" +
-	"\x13signals_unavailable\x18\x03 \x01(\bR\x12signalsUnavailable\x1a\xb1\x01\n" +
+	"\fis_preempted\x18\x05 \x01(\bR\visPreempted\x12P\n" +
+	"\bactivity\x18\x06 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandActivityR\bactivity\"\xe1\x04\n" +
+	"\x1fLongRunningShellCommandActivity\x12I\n" +
+	"\x13since_last_activity\x18\x01 \x01(\v2\x19.google.protobuf.DurationR\x11sinceLastActivity\x12^\n" +
+	"\aprocess\x18\x02 \x01(\v2D.warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivityR\aprocess\x1a\x92\x03\n" +
 	"\x0fProcessActivity\x12)\n" +
-	"\x11cpu_time_delta_ms\x18\x01 \x01(\x04R\x0ecpuTimeDeltaMs\x12\x14\n" +
-	"\x05state\x18\x02 \x01(\tR\x05state\x12,\n" +
+	"\x11cpu_time_delta_ms\x18\x01 \x01(\x04R\x0ecpuTimeDeltaMs\x12`\n" +
+	"\x05state\x18\x02 \x01(\x0e2J.warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.StateR\x05state\x12,\n" +
 	"\x12live_process_count\x18\x03 \x01(\rR\x10liveProcessCount\x12/\n" +
-	"\x14io_write_bytes_delta\x18\x04 \x01(\x04R\x11ioWriteBytesDelta\"\x91\x02\n" +
+	"\x14io_write_bytes_delta\x18\x04 \x01(\x04R\x11ioWriteBytesDelta\"\x92\x01\n" +
+	"\x05State\x12\x15\n" +
+	"\x11STATE_UNSPECIFIED\x10\x00\x12\x11\n" +
+	"\rSTATE_UNKNOWN\x10\x01\x12\x11\n" +
+	"\rSTATE_RUNNING\x10\x02\x12\x12\n" +
+	"\x0eSTATE_SLEEPING\x10\x03\x12\x13\n" +
+	"\x0fSTATE_DISK_WAIT\x10\x04\x12\x11\n" +
+	"\rSTATE_STOPPED\x10\x05\x12\x10\n" +
+	"\fSTATE_ZOMBIE\x10\x06\"\x91\x02\n" +
 	"\vDriveObject\x12\x16\n" +
 	"\x03uid\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uid\x12;\n" +
 	"\bworkflow\x18\x02 \x01(\v2\x1d.warp.multi_agent.v1.WorkflowH\x00R\bworkflow\x12;\n" +
@@ -3381,57 +3405,62 @@ const file_attachment_proto_rawDesc = "" +
 	"\x11FilePathReference\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePathBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
+var file_attachment_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_attachment_proto_goTypes = []any{
-	(*Attachment)(nil),                                 // 0: warp.multi_agent.v1.Attachment
-	(*ExecutedShellCommand)(nil),                       // 1: warp.multi_agent.v1.ExecutedShellCommand
-	(*RunningShellCommand)(nil),                        // 2: warp.multi_agent.v1.RunningShellCommand
-	(*LongRunningShellCommandSnapshot)(nil),            // 3: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*LongRunningCommandActivity)(nil),                 // 4: warp.multi_agent.v1.LongRunningCommandActivity
-	(*DriveObject)(nil),                                // 5: warp.multi_agent.v1.DriveObject
-	(*Workflow)(nil),                                   // 6: warp.multi_agent.v1.Workflow
-	(*Notebook)(nil),                                   // 7: warp.multi_agent.v1.Notebook
-	(*GenericStringObject)(nil),                        // 8: warp.multi_agent.v1.GenericStringObject
-	(*DiffHunk)(nil),                                   // 9: warp.multi_agent.v1.DiffHunk
-	(*CurrentRef)(nil),                                 // 10: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                                    // 11: warp.multi_agent.v1.BaseRef
-	(*DiffSet)(nil),                                    // 12: warp.multi_agent.v1.DiffSet
-	(*FilePathReference)(nil),                          // 13: warp.multi_agent.v1.FilePathReference
-	(*LongRunningCommandActivity_ProcessActivity)(nil), // 14: warp.multi_agent.v1.LongRunningCommandActivity.ProcessActivity
-	(*DiffSet_DiffHunk)(nil),                           // 15: warp.multi_agent.v1.DiffSet.DiffHunk
-	(*DocumentContent)(nil),                            // 16: warp.multi_agent.v1.DocumentContent
-	(*timestamppb.Timestamp)(nil),                      // 17: google.protobuf.Timestamp
-	(*FileContentLineRange)(nil),                       // 18: warp.multi_agent.v1.FileContentLineRange
-	(*emptypb.Empty)(nil),                              // 19: google.protobuf.Empty
+	(LongRunningShellCommandActivity_ProcessActivity_State)(0), // 0: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
+	(*Attachment)(nil),                      // 1: warp.multi_agent.v1.Attachment
+	(*ExecutedShellCommand)(nil),            // 2: warp.multi_agent.v1.ExecutedShellCommand
+	(*RunningShellCommand)(nil),             // 3: warp.multi_agent.v1.RunningShellCommand
+	(*LongRunningShellCommandSnapshot)(nil), // 4: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*LongRunningShellCommandActivity)(nil), // 5: warp.multi_agent.v1.LongRunningShellCommandActivity
+	(*DriveObject)(nil),                     // 6: warp.multi_agent.v1.DriveObject
+	(*Workflow)(nil),                        // 7: warp.multi_agent.v1.Workflow
+	(*Notebook)(nil),                        // 8: warp.multi_agent.v1.Notebook
+	(*GenericStringObject)(nil),             // 9: warp.multi_agent.v1.GenericStringObject
+	(*DiffHunk)(nil),                        // 10: warp.multi_agent.v1.DiffHunk
+	(*CurrentRef)(nil),                      // 11: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                         // 12: warp.multi_agent.v1.BaseRef
+	(*DiffSet)(nil),                         // 13: warp.multi_agent.v1.DiffSet
+	(*FilePathReference)(nil),               // 14: warp.multi_agent.v1.FilePathReference
+	(*LongRunningShellCommandActivity_ProcessActivity)(nil), // 15: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
+	(*DiffSet_DiffHunk)(nil),                                // 16: warp.multi_agent.v1.DiffSet.DiffHunk
+	(*DocumentContent)(nil),                                 // 17: warp.multi_agent.v1.DocumentContent
+	(*timestamppb.Timestamp)(nil),                           // 18: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                             // 19: google.protobuf.Duration
+	(*FileContentLineRange)(nil),                            // 20: warp.multi_agent.v1.FileContentLineRange
+	(*emptypb.Empty)(nil),                                   // 21: google.protobuf.Empty
 }
 var file_attachment_proto_depIdxs = []int32{
-	1,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	2,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
-	5,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
-	9,  // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
-	12, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	16, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
-	13, // 6: warp.multi_agent.v1.Attachment.file_path_reference:type_name -> warp.multi_agent.v1.FilePathReference
-	17, // 7: warp.multi_agent.v1.ExecutedShellCommand.started_ts:type_name -> google.protobuf.Timestamp
-	17, // 8: warp.multi_agent.v1.ExecutedShellCommand.finished_ts:type_name -> google.protobuf.Timestamp
-	3,  // 9: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	4,  // 10: warp.multi_agent.v1.LongRunningShellCommandSnapshot.activity:type_name -> warp.multi_agent.v1.LongRunningCommandActivity
-	14, // 11: warp.multi_agent.v1.LongRunningCommandActivity.process:type_name -> warp.multi_agent.v1.LongRunningCommandActivity.ProcessActivity
-	6,  // 12: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
-	7,  // 13: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
-	8,  // 14: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
-	18, // 15: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	19, // 16: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
-	19, // 17: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
-	15, // 18: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
-	10, // 19: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
-	11, // 20: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
-	18, // 21: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	2,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	3,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
+	6,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
+	10, // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
+	13, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	17, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
+	14, // 6: warp.multi_agent.v1.Attachment.file_path_reference:type_name -> warp.multi_agent.v1.FilePathReference
+	18, // 7: warp.multi_agent.v1.ExecutedShellCommand.started_ts:type_name -> google.protobuf.Timestamp
+	18, // 8: warp.multi_agent.v1.ExecutedShellCommand.finished_ts:type_name -> google.protobuf.Timestamp
+	4,  // 9: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	5,  // 10: warp.multi_agent.v1.LongRunningShellCommandSnapshot.activity:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity
+	19, // 11: warp.multi_agent.v1.LongRunningShellCommandActivity.since_last_activity:type_name -> google.protobuf.Duration
+	15, // 12: warp.multi_agent.v1.LongRunningShellCommandActivity.process:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
+	7,  // 13: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
+	8,  // 14: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
+	9,  // 15: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
+	20, // 16: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	21, // 17: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
+	21, // 18: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
+	16, // 19: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
+	11, // 20: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
+	12, // 21: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
+	0,  // 22: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.state:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
+	20, // 23: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	24, // [24:24] is the sub-list for method output_type
+	24, // [24:24] is the sub-list for method input_type
+	24, // [24:24] is the sub-list for extension type_name
+	24, // [24:24] is the sub-list for extension extendee
+	0,  // [0:24] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -3478,13 +3507,14 @@ func file_attachment_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attachment_proto_rawDesc), len(file_attachment_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_attachment_proto_goTypes,
 		DependencyIndexes: file_attachment_proto_depIdxs,
+		EnumInfos:         file_attachment_proto_enumTypes,
 		MessageInfos:      file_attachment_proto_msgTypes,
 	}.Build()
 	File_attachment_proto = out.File
