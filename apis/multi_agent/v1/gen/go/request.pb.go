@@ -2388,12 +2388,8 @@ type Request_Settings_builder struct {
 	// If `true`, the client supports selecting and propagating a remote
 	// `runner_id` for orchestrated child agents.
 	SupportsOrchestrationRunners *bool
-	// If `true`, the client honors `ApplyFileDiffs.NewFile.allow_overwrite`:
-	// when set on a create_file call whose path already exists, the client
-	// fully replaces the file's contents instead of failing with an
-	// already-exists error. When `false` or unset, the server does not
-	// offer the `allow_overwrite` argument to the model, and an attempt to
-	// create an existing file always fails as before.
+	// If `true`, the client supports `NewFile.allow_overwrite`; unset for older
+	// clients, which always fail on existing files.
 	SupportsCreateFileOverwrite *bool
 }
 

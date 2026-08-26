@@ -24513,10 +24513,8 @@ type Message_ToolCall_ApplyFileDiffs_NewFile_builder struct {
 	FilePath *string
 	// The new file contents.
 	Content *string
-	// If `true` and `file_path` already exists, fully replace its
-	// contents with `content` instead of failing with an
-	// already-exists error. Only honored when the client has advertised
-	// `Settings.supports_create_file_overwrite`.
+	// If `true`, overwrite the existing file at `file_path` instead of
+	// failing.
 	AllowOverwrite *bool
 }
 
