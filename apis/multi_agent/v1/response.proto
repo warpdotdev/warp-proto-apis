@@ -270,6 +270,13 @@ message ResponseEvent {
       ToolCallStats       suggest_create_plan_stats = 11;
       ToolCallStats       read_shell_command_output_stats = 12;
       ToolCallStats       use_computer_stats = 13;
+
+      // Every counted tool call, keyed by the proto oneof field name of the tool that was
+      // called (see specs/factory-benchmarks/tool-call-usage/TECH.md); every server tool
+      // call is collapsed under the single key "server" -- the same name as this message's
+      // own "server" oneof case. Renaming a client tool call's oneof field renames its key
+      // here, since this map is keyed on the wire field name itself.
+      map<string, int32> tool_call_counts = 14;
     }
 
     message ToolCallStats {
