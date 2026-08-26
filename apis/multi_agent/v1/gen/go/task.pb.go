@@ -24393,14 +24393,14 @@ func (b0 Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_builder) Build() *Message
 }
 
 type Message_ToolCall_ApplyFileDiffs_NewFile struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_FilePath    *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
-	xxx_hidden_Content     *string                `protobuf:"bytes,2,opt,name=content"`
-	xxx_hidden_Rewrite     bool                   `protobuf:"varint,3,opt,name=rewrite"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                     protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_FilePath       *string                `protobuf:"bytes,1,opt,name=file_path,json=filePath"`
+	xxx_hidden_Content        *string                `protobuf:"bytes,2,opt,name=content"`
+	xxx_hidden_AllowOverwrite bool                   `protobuf:"varint,3,opt,name=allow_overwrite,json=allowOverwrite"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *Message_ToolCall_ApplyFileDiffs_NewFile) Reset() {
@@ -24448,9 +24448,9 @@ func (x *Message_ToolCall_ApplyFileDiffs_NewFile) GetContent() string {
 	return ""
 }
 
-func (x *Message_ToolCall_ApplyFileDiffs_NewFile) GetRewrite() bool {
+func (x *Message_ToolCall_ApplyFileDiffs_NewFile) GetAllowOverwrite() bool {
 	if x != nil {
-		return x.xxx_hidden_Rewrite
+		return x.xxx_hidden_AllowOverwrite
 	}
 	return false
 }
@@ -24465,8 +24465,8 @@ func (x *Message_ToolCall_ApplyFileDiffs_NewFile) SetContent(v string) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 3)
 }
 
-func (x *Message_ToolCall_ApplyFileDiffs_NewFile) SetRewrite(v bool) {
-	x.xxx_hidden_Rewrite = v
+func (x *Message_ToolCall_ApplyFileDiffs_NewFile) SetAllowOverwrite(v bool) {
+	x.xxx_hidden_AllowOverwrite = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
@@ -24484,7 +24484,7 @@ func (x *Message_ToolCall_ApplyFileDiffs_NewFile) HasContent() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *Message_ToolCall_ApplyFileDiffs_NewFile) HasRewrite() bool {
+func (x *Message_ToolCall_ApplyFileDiffs_NewFile) HasAllowOverwrite() bool {
 	if x == nil {
 		return false
 	}
@@ -24501,9 +24501,9 @@ func (x *Message_ToolCall_ApplyFileDiffs_NewFile) ClearContent() {
 	x.xxx_hidden_Content = nil
 }
 
-func (x *Message_ToolCall_ApplyFileDiffs_NewFile) ClearRewrite() {
+func (x *Message_ToolCall_ApplyFileDiffs_NewFile) ClearAllowOverwrite() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
-	x.xxx_hidden_Rewrite = false
+	x.xxx_hidden_AllowOverwrite = false
 }
 
 type Message_ToolCall_ApplyFileDiffs_NewFile_builder struct {
@@ -24516,8 +24516,8 @@ type Message_ToolCall_ApplyFileDiffs_NewFile_builder struct {
 	// If `true` and `file_path` already exists, fully replace its
 	// contents with `content` instead of failing with an
 	// already-exists error. Only honored when the client has advertised
-	// `Settings.supports_create_file_rewrite`.
-	Rewrite *bool
+	// `Settings.supports_create_file_overwrite`.
+	AllowOverwrite *bool
 }
 
 func (b0 Message_ToolCall_ApplyFileDiffs_NewFile_builder) Build() *Message_ToolCall_ApplyFileDiffs_NewFile {
@@ -24532,9 +24532,9 @@ func (b0 Message_ToolCall_ApplyFileDiffs_NewFile_builder) Build() *Message_ToolC
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 3)
 		x.xxx_hidden_Content = b.Content
 	}
-	if b.Rewrite != nil {
+	if b.AllowOverwrite != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
-		x.xxx_hidden_Rewrite = *b.Rewrite
+		x.xxx_hidden_AllowOverwrite = *b.AllowOverwrite
 	}
 	return m0
 }
@@ -38400,7 +38400,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xc5\xce\x01\n" +
+	"\x0ecomment_target\"\xd4\xce\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -38522,7 +38522,7 @@ const file_task_proto_rawDesc = "" +
 	"CodeReview\x12?\n" +
 	"\bcomments\x18\x01 \x01(\v2#.warp.multi_agent.v1.ReviewCommentsR\bcomments\x1a8\n" +
 	"\x13FetchReviewComments\x12!\n" +
-	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xb5f\n" +
+	"\trepo_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\brepoPath\x1a\xc4f\n" +
 	"\bToolCall\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12c\n" +
@@ -38605,7 +38605,7 @@ const file_task_proto_rawDesc = "" +
 	"\x0eSearchCodebase\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12!\n" +
 	"\fpath_filters\x18\x02 \x03(\tR\vpathFilters\x12#\n" +
-	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\x9a\b\n" +
+	"\rcodebase_path\x18\x03 \x01(\tR\fcodebasePath\x1a\xa9\b\n" +
 	"\x0eApplyFileDiffs\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12S\n" +
 	"\x05diffs\x18\x02 \x03(\v2=.warp.multi_agent.v1.Message.ToolCall.ApplyFileDiffs.FileDiffR\x05diffs\x12Y\n" +
@@ -38627,11 +38627,11 @@ const file_task_proto_rawDesc = "" +
 	"preContext\x12\x16\n" +
 	"\x03old\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\x03old\x12\x16\n" +
 	"\x03new\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\x03new\x12'\n" +
-	"\fpost_context\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vpostContext\x1af\n" +
+	"\fpost_context\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\vpostContext\x1au\n" +
 	"\aNewFile\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x12\x1e\n" +
-	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12\x18\n" +
-	"\arewrite\x18\x03 \x01(\bR\arewrite\x1a/\n" +
+	"\acontent\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\acontent\x12'\n" +
+	"\x0fallow_overwrite\x18\x03 \x01(\bR\x0eallowOverwrite\x1a/\n" +
 	"\n" +
 	"DeleteFile\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePath\x1ai\n" +

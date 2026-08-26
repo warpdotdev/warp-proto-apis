@@ -1521,7 +1521,7 @@ type Request_Settings struct {
 	xxx_hidden_SupportsBackgroundComputerUse              bool                                   `protobuf:"varint,29,opt,name=supports_background_computer_use,json=supportsBackgroundComputerUse"`
 	xxx_hidden_CustomModelRouters                         *Request_Settings_CustomModelRouters   `protobuf:"bytes,30,opt,name=custom_model_routers,json=customModelRouters"`
 	xxx_hidden_SupportsOrchestrationRunners               bool                                   `protobuf:"varint,31,opt,name=supports_orchestration_runners,json=supportsOrchestrationRunners"`
-	xxx_hidden_SupportsCreateFileRewrite                  bool                                   `protobuf:"varint,32,opt,name=supports_create_file_rewrite,json=supportsCreateFileRewrite"`
+	xxx_hidden_SupportsCreateFileOverwrite                bool                                   `protobuf:"varint,32,opt,name=supports_create_file_overwrite,json=supportsCreateFileOverwrite"`
 	XXX_raceDetectHookData                                protoimpl.RaceDetectHookData
 	XXX_presence                                          [1]uint32
 	unknownFields                                         protoimpl.UnknownFields
@@ -1774,9 +1774,9 @@ func (x *Request_Settings) GetSupportsOrchestrationRunners() bool {
 	return false
 }
 
-func (x *Request_Settings) GetSupportsCreateFileRewrite() bool {
+func (x *Request_Settings) GetSupportsCreateFileOverwrite() bool {
 	if x != nil {
-		return x.xxx_hidden_SupportsCreateFileRewrite
+		return x.xxx_hidden_SupportsCreateFileOverwrite
 	}
 	return false
 }
@@ -1930,8 +1930,8 @@ func (x *Request_Settings) SetSupportsOrchestrationRunners(v bool) {
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 30, 32)
 }
 
-func (x *Request_Settings) SetSupportsCreateFileRewrite(v bool) {
-	x.xxx_hidden_SupportsCreateFileRewrite = v
+func (x *Request_Settings) SetSupportsCreateFileOverwrite(v bool) {
+	x.xxx_hidden_SupportsCreateFileOverwrite = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 31, 32)
 }
 
@@ -2138,7 +2138,7 @@ func (x *Request_Settings) HasSupportsOrchestrationRunners() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 30)
 }
 
-func (x *Request_Settings) HasSupportsCreateFileRewrite() bool {
+func (x *Request_Settings) HasSupportsCreateFileOverwrite() bool {
 	if x == nil {
 		return false
 	}
@@ -2286,9 +2286,9 @@ func (x *Request_Settings) ClearSupportsOrchestrationRunners() {
 	x.xxx_hidden_SupportsOrchestrationRunners = false
 }
 
-func (x *Request_Settings) ClearSupportsCreateFileRewrite() {
+func (x *Request_Settings) ClearSupportsCreateFileOverwrite() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 31)
-	x.xxx_hidden_SupportsCreateFileRewrite = false
+	x.xxx_hidden_SupportsCreateFileOverwrite = false
 }
 
 type Request_Settings_builder struct {
@@ -2388,13 +2388,13 @@ type Request_Settings_builder struct {
 	// If `true`, the client supports selecting and propagating a remote
 	// `runner_id` for orchestrated child agents.
 	SupportsOrchestrationRunners *bool
-	// If `true`, the client honors `ApplyFileDiffs.NewFile.rewrite`: when set
-	// on a create_file call whose path already exists, the client fully
-	// replaces the file's contents instead of failing with an
+	// If `true`, the client honors `ApplyFileDiffs.NewFile.allow_overwrite`:
+	// when set on a create_file call whose path already exists, the client
+	// fully replaces the file's contents instead of failing with an
 	// already-exists error. When `false` or unset, the server does not
-	// offer the `rewrite` argument to the model, and an attempt to create an
-	// existing file always fails as before.
-	SupportsCreateFileRewrite *bool
+	// offer the `allow_overwrite` argument to the model, and an attempt to
+	// create an existing file always fails as before.
+	SupportsCreateFileOverwrite *bool
 }
 
 func (b0 Request_Settings_builder) Build() *Request_Settings {
@@ -2507,9 +2507,9 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 30, 32)
 		x.xxx_hidden_SupportsOrchestrationRunners = *b.SupportsOrchestrationRunners
 	}
-	if b.SupportsCreateFileRewrite != nil {
+	if b.SupportsCreateFileOverwrite != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 31, 32)
-		x.xxx_hidden_SupportsCreateFileRewrite = *b.SupportsCreateFileRewrite
+		x.xxx_hidden_SupportsCreateFileOverwrite = *b.SupportsCreateFileOverwrite
 	}
 	return m0
 }
@@ -9991,7 +9991,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\x83}\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\"\x87}\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10177,7 +10177,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xc6#\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xca#\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -10210,8 +10210,8 @@ const file_request_proto_rawDesc = "" +
 	"\x16custom_model_providers\x18\x1c \x01(\v2:.warp.multi_agent.v1.Request.Settings.CustomModelProvidersR\x14customModelProviders\x12G\n" +
 	" supports_background_computer_use\x18\x1d \x01(\bR\x1dsupportsBackgroundComputerUse\x12j\n" +
 	"\x14custom_model_routers\x18\x1e \x01(\v28.warp.multi_agent.v1.Request.Settings.CustomModelRoutersR\x12customModelRouters\x12D\n" +
-	"\x1esupports_orchestration_runners\x18\x1f \x01(\bR\x1csupportsOrchestrationRunners\x12?\n" +
-	"\x1csupports_create_file_rewrite\x18  \x01(\bR\x19supportsCreateFileRewrite\x1a\xea\x01\n" +
+	"\x1esupports_orchestration_runners\x18\x1f \x01(\bR\x1csupportsOrchestrationRunners\x12C\n" +
+	"\x1esupports_create_file_overwrite\x18  \x01(\bR\x1bsupportsCreateFileOverwrite\x1a\xea\x01\n" +
 	"\vModelConfig\x12\x12\n" +
 	"\x04base\x18\x01 \x01(\tR\x04base\x12\x1e\n" +
 	"\bplanning\x18\x02 \x01(\tB\x02\x18\x01R\bplanning\x12\x16\n" +
