@@ -103,13 +103,17 @@ message LongRunningShellCommandActivity {
     enum State {
       // The client never populated this field.
       STATE_UNSPECIFIED = 0;
-      // The client looked at the process tree but could not classify its state.
+      // The client inspected the process tree but found no classifiable process state.
       STATE_UNKNOWN = 1;
+      // At least one process is running or waking.
       STATE_RUNNING = 2;
+      // No process is running or in disk wait, and at least one is sleeping, idle, or parked.
       STATE_SLEEPING = 3;
-      // Uninterruptible I/O, which is progress rather than a hang.
+      // No process is running, and at least one is in uninterruptible I/O, treated as liveness.
       STATE_DISK_WAIT = 4;
+      // No more-active state exists, and at least one process is stopped, traced, or lock-blocked.
       STATE_STOPPED = 5;
+      // No more-active state exists, and at least one process is zombie, dead, or wake-killed.
       STATE_ZOMBIE = 6;
     }
 

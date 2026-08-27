@@ -31,14 +31,18 @@ type LongRunningShellCommandActivity_ProcessActivity_State int32
 const (
 	// The client never populated this field.
 	LongRunningShellCommandActivity_ProcessActivity_STATE_UNSPECIFIED LongRunningShellCommandActivity_ProcessActivity_State = 0
-	// The client looked at the process tree but could not classify its state.
-	LongRunningShellCommandActivity_ProcessActivity_STATE_UNKNOWN  LongRunningShellCommandActivity_ProcessActivity_State = 1
-	LongRunningShellCommandActivity_ProcessActivity_STATE_RUNNING  LongRunningShellCommandActivity_ProcessActivity_State = 2
+	// The client inspected the process tree but found no classifiable process state.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_UNKNOWN LongRunningShellCommandActivity_ProcessActivity_State = 1
+	// At least one process is running or waking.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_RUNNING LongRunningShellCommandActivity_ProcessActivity_State = 2
+	// No process is running or in disk wait, and at least one is sleeping, idle, or parked.
 	LongRunningShellCommandActivity_ProcessActivity_STATE_SLEEPING LongRunningShellCommandActivity_ProcessActivity_State = 3
-	// Uninterruptible I/O, which is progress rather than a hang.
+	// No process is running, and at least one is in uninterruptible I/O, treated as liveness.
 	LongRunningShellCommandActivity_ProcessActivity_STATE_DISK_WAIT LongRunningShellCommandActivity_ProcessActivity_State = 4
-	LongRunningShellCommandActivity_ProcessActivity_STATE_STOPPED   LongRunningShellCommandActivity_ProcessActivity_State = 5
-	LongRunningShellCommandActivity_ProcessActivity_STATE_ZOMBIE    LongRunningShellCommandActivity_ProcessActivity_State = 6
+	// No more-active state exists, and at least one process is stopped, traced, or lock-blocked.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_STOPPED LongRunningShellCommandActivity_ProcessActivity_State = 5
+	// No more-active state exists, and at least one process is zombie, dead, or wake-killed.
+	LongRunningShellCommandActivity_ProcessActivity_STATE_ZOMBIE LongRunningShellCommandActivity_ProcessActivity_State = 6
 )
 
 // Enum value maps for LongRunningShellCommandActivity_ProcessActivity_State.
