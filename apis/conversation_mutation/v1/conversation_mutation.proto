@@ -1,0 +1,377 @@
+// Harness-neutral semantic mutations for durable conversation replay.
+edition = "2023";
+
+package warp.conversation_mutation.v1;
+
+import "google/protobuf/go_features.proto";
+import "google/protobuf/timestamp.proto";
+
+import "warp/conversation_mutation/v1/options.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/conversation_mutation/v1/gen/go;v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// The semantic schema version carried by every mutation.
+enum SchemaVersion {
+  SCHEMA_VERSION_UNSPECIFIED = 0;
+  SCHEMA_VERSION_V1 = 1;
+}
+
+// One execution-scoped semantic change to a conversation.
+message ConversationMutation {
+  // The schema used to encode this mutation.
+  SchemaVersion schema_version = 1;
+
+  // Stable identity and ordering information.
+  MutationIdentity identity = 2;
+
+  // Who caused the mutation and where it entered the system.
+  Attribution attribution = 3;
+
+  // When the mutation occurred at its authoritative producer.
+  google.protobuf.Timestamp occurred_at = 4;
+
+  oneof mutation {
+    ExecutionMutation execution = 10;
+    EntryMutation entry = 11;
+    ContentMutation content = 12;
+    ActionMutation action = 13;
+    DeliveryMutation delivery = 14;
+    InterruptionMutation interruption = 15;
+    ControlMutation control = 16;
+  }
+}
+
+// Stable IDs and the execution-scoped ordering key for a mutation.
+message MutationIdentity {
+  string conversation_id = 1;
+  string execution_id = 2;
+  string mutation_id = 3;
+
+  // Monotonically increases without gaps within execution_id.
+  uint64 sequence = 4;
+
+  // Stable run and request IDs when the producer has them.
+  string run_id = 5;
+  string request_id = 6;
+}
+
+// Canonical context attached to an accepted writable prompt before its first
+// execution-scoped ConversationMutation sequence is assigned.
+//
+// This message intentionally contains no prompt body or inline media bytes.
+message AcceptedMessageContext {
+  SchemaVersion schema_version = 1;
+  string conversation_id = 2;
+  string execution_id = 3;
+  string message_id = 4;
+  Attribution attribution = 5;
+
+  // Authorized references that the receiver resolves out of band.
+  repeated MediaReference media = 6;
+}
+
+// Attribution retained across ingestion, persistence, and replay.
+message Attribution {
+  Author author = 1;
+  Origin origin = 2;
+
+  // The external or internal delivery that caused this mutation.
+  SourceDeliveryReference source_delivery = 3;
+}
+
+message Author {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    KIND_USER = 1;
+    KIND_AGENT = 2;
+    KIND_SYSTEM = 3;
+    KIND_INTEGRATION = 4;
+  }
+
+  string id = 1;
+  Kind kind = 2;
+  string display_name = 3 [(sensitive) = true];
+}
+
+message Origin {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    KIND_WARP = 1;
+    KIND_FACTORY = 2;
+    KIND_PUBLIC_API = 3;
+    KIND_SLACK = 4;
+    KIND_LINEAR = 5;
+    KIND_MCP = 6;
+    KIND_HARNESS = 7;
+  }
+
+  Kind kind = 1;
+
+  // Stable installation, connection, or harness identity.
+  string source_id = 2;
+
+  // Product-defined subtype, such as a harness or integration name.
+  string subtype = 3;
+}
+
+// Identifies the source delivery without embedding its body or media bytes.
+message SourceDeliveryReference {
+  string delivery_id = 1;
+  string channel_id = 2;
+  string thread_id = 3;
+  string message_id = 4;
+}
+
+// An authorized, lazy-loadable media reference.
+message MediaReference {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    KIND_IMAGE = 1;
+    KIND_VIDEO = 2;
+    KIND_AUDIO = 3;
+    KIND_FILE = 4;
+    KIND_ARTIFACT = 5;
+  }
+
+  string media_id = 1;
+  Kind kind = 2;
+  string mime_type = 3;
+  uint64 size_bytes = 4;
+  bytes sha256 = 5;
+  string display_name = 6 [(sensitive) = true];
+
+  // Opaque storage or artifact identity resolved through an authorized API.
+  string reference = 7;
+}
+
+enum ExecutionState {
+  EXECUTION_STATE_UNSPECIFIED = 0;
+  EXECUTION_STATE_QUEUED = 1;
+  EXECUTION_STATE_RUNNING = 2;
+  EXECUTION_STATE_WAITING = 3;
+  EXECUTION_STATE_SUCCEEDED = 4;
+  EXECUTION_STATE_FAILED = 5;
+  EXECUTION_STATE_CANCELLED = 6;
+  EXECUTION_STATE_INTERRUPTED = 7;
+}
+
+message ExecutionMutation {
+  oneof change {
+    Started started = 1;
+    StateChanged state_changed = 2;
+    Finished finished = 3;
+  }
+
+  message Started {
+    google.protobuf.Timestamp started_at = 1;
+  }
+
+  message StateChanged {
+    ExecutionState state = 1;
+    string detail = 2 [(sensitive) = true];
+  }
+
+  message Finished {
+    ExecutionState state = 1;
+    google.protobuf.Timestamp finished_at = 2;
+    string detail = 3 [(sensitive) = true];
+  }
+}
+
+enum EntryKind {
+  ENTRY_KIND_UNSPECIFIED = 0;
+  ENTRY_KIND_USER_MESSAGE = 1;
+  ENTRY_KIND_ASSISTANT_MESSAGE = 2;
+  ENTRY_KIND_REASONING = 3;
+  ENTRY_KIND_ACTION = 4;
+  ENTRY_KIND_SYSTEM = 5;
+  ENTRY_KIND_EVENT = 6;
+}
+
+enum EntryState {
+  ENTRY_STATE_UNSPECIFIED = 0;
+  ENTRY_STATE_STREAMING = 1;
+  ENTRY_STATE_FINAL = 2;
+  ENTRY_STATE_FAILED = 3;
+  ENTRY_STATE_CANCELLED = 4;
+  ENTRY_STATE_INTERRUPTED = 5;
+}
+
+message EntryMutation {
+  string entry_id = 1;
+
+  oneof change {
+    Created created = 2;
+    Finalized finalized = 3;
+  }
+
+  message Created {
+    EntryKind kind = 1;
+    string parent_entry_id = 2;
+    google.protobuf.Timestamp created_at = 3;
+    repeated MediaReference media = 4;
+  }
+
+  message Finalized {
+    EntryState state = 1;
+    google.protobuf.Timestamp finalized_at = 2;
+  }
+}
+
+enum ContentEncoding {
+  CONTENT_ENCODING_UNSPECIFIED = 0;
+  CONTENT_ENCODING_UTF8_TEXT = 1;
+  CONTENT_ENCODING_UTF8_MARKDOWN = 2;
+  CONTENT_ENCODING_UTF8_JSON = 3;
+  CONTENT_ENCODING_PROTOBUF = 4;
+}
+
+message ContentMutation {
+  string entry_id = 1;
+  string content_id = 2;
+
+  // Stable position of this content block within the entry.
+  uint32 content_index = 3;
+
+  oneof change {
+    Delta delta = 4;
+    Final final = 5;
+  }
+
+  message Delta {
+    // Monotonically increases from zero within content_id.
+    uint64 delta_index = 1;
+    ContentEncoding encoding = 2;
+    bytes data = 3 [(sensitive) = true];
+  }
+
+  message Final {
+    ContentEncoding encoding = 1;
+    bytes data = 2 [(sensitive) = true];
+    repeated MediaReference media = 3;
+  }
+}
+
+enum ActionKind {
+  ACTION_KIND_UNSPECIFIED = 0;
+  ACTION_KIND_TOOL = 1;
+  ACTION_KIND_COMMAND = 2;
+  ACTION_KIND_COMPUTER_USE = 3;
+  ACTION_KIND_APPROVAL = 4;
+  ACTION_KIND_SUBAGENT = 5;
+  ACTION_KIND_INTEGRATION = 6;
+}
+
+enum ActionState {
+  ACTION_STATE_UNSPECIFIED = 0;
+  ACTION_STATE_PENDING = 1;
+  ACTION_STATE_RUNNING = 2;
+  ACTION_STATE_WAITING_FOR_APPROVAL = 3;
+  ACTION_STATE_SUCCEEDED = 4;
+  ACTION_STATE_FAILED = 5;
+  ACTION_STATE_CANCELLED = 6;
+  ACTION_STATE_REJECTED = 7;
+  ACTION_STATE_INTERRUPTED = 8;
+}
+
+message ActionMutation {
+  string entry_id = 1;
+  string action_id = 2;
+
+  oneof change {
+    Started started = 3;
+    StateChanged state_changed = 4;
+    Result result = 5;
+  }
+
+  message Started {
+    ActionKind kind = 1;
+    string name = 2;
+    bytes input_json = 3 [(sensitive) = true];
+    google.protobuf.Timestamp started_at = 4;
+  }
+
+  message StateChanged {
+    ActionState state = 1;
+    string detail = 2 [(sensitive) = true];
+  }
+
+  message Result {
+    ActionState state = 1;
+    bytes output_json = 2 [(sensitive) = true];
+    repeated MediaReference media = 3;
+    string error_message = 4 [(sensitive) = true];
+    google.protobuf.Timestamp finished_at = 5;
+  }
+}
+
+enum DeliveryState {
+  DELIVERY_STATE_UNSPECIFIED = 0;
+  DELIVERY_STATE_ACCEPTED = 1;
+  DELIVERY_STATE_ROUTING = 2;
+  DELIVERY_STATE_DELIVERED = 3;
+  DELIVERY_STATE_FAILED = 4;
+}
+
+message DeliveryMutation {
+  string delivery_id = 1;
+  string entry_id = 2;
+  DeliveryState state = 3;
+  google.protobuf.Timestamp changed_at = 4;
+  string detail = 5 [(sensitive) = true];
+}
+
+enum InterruptionScope {
+  INTERRUPTION_SCOPE_UNSPECIFIED = 0;
+  INTERRUPTION_SCOPE_EXECUTION = 1;
+  INTERRUPTION_SCOPE_ENTRY = 2;
+  INTERRUPTION_SCOPE_ACTION = 3;
+  INTERRUPTION_SCOPE_DELIVERY = 4;
+}
+
+enum InterruptionReason {
+  INTERRUPTION_REASON_UNSPECIFIED = 0;
+  INTERRUPTION_REASON_CANCELLED = 1;
+  INTERRUPTION_REASON_REPLACED = 2;
+  INTERRUPTION_REASON_DISCONNECTED = 3;
+  INTERRUPTION_REASON_STORAGE_UNAVAILABLE = 4;
+  INTERRUPTION_REASON_RETENTION_EXPIRED = 5;
+  INTERRUPTION_REASON_PROTOCOL_ERROR = 6;
+  INTERRUPTION_REASON_INTERNAL_ERROR = 7;
+}
+
+message InterruptionMutation {
+  InterruptionScope scope = 1;
+  string target_id = 2;
+  InterruptionReason reason = 3;
+  bool recoverable = 4;
+  string detail = 5 [(sensitive) = true];
+  google.protobuf.Timestamp interrupted_at = 6;
+}
+
+enum ControlKind {
+  CONTROL_KIND_UNSPECIFIED = 0;
+  CONTROL_KIND_STEER = 1;
+  CONTROL_KIND_CANCEL = 2;
+  CONTROL_KIND_PAUSE = 3;
+  CONTROL_KIND_RESUME = 4;
+}
+
+enum ControlState {
+  CONTROL_STATE_UNSPECIFIED = 0;
+  CONTROL_STATE_REQUESTED = 1;
+  CONTROL_STATE_ACCEPTED = 2;
+  CONTROL_STATE_APPLIED = 3;
+  CONTROL_STATE_REJECTED = 4;
+  CONTROL_STATE_FAILED = 5;
+}
+
+message ControlMutation {
+  string control_id = 1;
+  ControlKind kind = 2;
+  ControlState state = 3;
+  string target_id = 4;
+  string detail = 5 [(sensitive) = true];
+  google.protobuf.Timestamp changed_at = 6;
+}

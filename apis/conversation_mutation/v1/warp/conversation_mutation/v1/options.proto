@@ -1,0 +1,12 @@
+edition = "2023";
+
+package warp.conversation_mutation.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/conversation_mutation/v1/gen/go;v1";
+
+extend google.protobuf.FieldOptions {
+  // Indicates that the field might contain sensitive information.
+  bool sensitive = 51000;
+}
