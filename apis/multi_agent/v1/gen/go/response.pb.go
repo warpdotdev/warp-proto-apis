@@ -2413,9 +2413,8 @@ type ResponseEvent_StreamFinished_ModelTokenUsage_builder struct {
 	ModelId *string
 	// The total tokens that we have used with the given model in this conversation.
 	//
-	// Widened from uint32 to uint64 to avoid overflow for long-running conversations;
-	// the field number is unchanged, so old clients decoding a value above uint32::MAX
-	// will see a truncated value, and new clients can still decode old payloads.
+	// Must be uint64: uint32 is not wide enough to represent the number of tokens used
+	// in a conversation, as observed in practice.
 	TotalTokens *uint64
 	// Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction", etc.).
 	TokenUsageByCategory map[string]uint64
