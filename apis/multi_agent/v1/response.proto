@@ -171,10 +171,13 @@ message ResponseEvent {
       string model_id = 1 [deprecated = true];
 
       // The total tokens that we have used with the given model in this conversation.
-      uint32 total_tokens = 2;
+      //
+      // Must be uint64: uint32 is not wide enough to represent the number of tokens used
+      // in a conversation, as observed in practice.
+      uint64 total_tokens = 2;
 
       // Breakdown of total_tokens by usage category (e.g. "primary_agent", "compaction", etc.).
-      map<string, uint32> token_usage_by_category = 3;
+      map<string, uint64> token_usage_by_category = 3;
     }
 
     // The charges incurred by a single agent mode request, or accumulated across
