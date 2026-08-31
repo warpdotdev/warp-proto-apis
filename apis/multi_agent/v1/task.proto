@@ -2121,12 +2121,28 @@ message PassiveSuggestionResultType {
 }
 
 message RawImage {
-  // Raw image bytes.
-  bytes data = 1 [ (sensitive) = true ];
+  // Where the image bytes live. The other RawImage fields (mime_type, width,
+  // height) remain populated for both variants.
+  oneof source {
+    // Raw image bytes.
+    bytes data = 1 [ (sensitive) = true ];
+    // A reference to the image bytes in object storage.
+    StoredScreenshotRef stored_ref = 5;
+  }
   // MIME type of the image content (e.g., "image/png").
   string mime_type = 2;
   // The width of the image, in pixels.
   int32 width = 3;
   // The height of the image, in pixels.
   int32 height = 4;
+}
+
+// A reference to a computer-use screenshot stored in Warp-managed object
+// storage, keyed by `{conversation_id}/{screenshot_uid}`.
+message StoredScreenshotRef {
+  string screenshot_uid = 1;
+  string conversation_id = 2;
+  // The raw (unencoded) byte length of the stored image, kept so the server
+  // can budget LLM payload sizes without fetching the object.
+  int64 size_bytes = 3;
 }
