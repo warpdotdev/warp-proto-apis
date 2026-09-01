@@ -107,6 +107,11 @@ message AgentEvent {
       Failed failed = 10;
     }
 
+    // Resolved display name of the sender, so viewers don't render raw ids.
+    string sender_display_name = 11 [ (sensitive) = true ];
+    // The sender's Oz run id, for unambiguous drill-down joins.
+    string sender_run_id = 12;
+
     message Errored {
       string stage = 1;
       string reason = 2;
@@ -194,6 +199,29 @@ message Message {
   // surface which memories informed the conversation.
   repeated FetchedMemory fetched_memories = 29;
 
+  // The agent identity that authored this message. Server-stamped at
+  // message-append time.
+  AuthoringAgent authored_by = 30;
+
+  // Monotonically increasing per-conversation sequence number assigned at
+  // append time. Gaps are allowed; ordering is authoritative.
+  uint64 sequence = 31;
+
+  // Whether clients should render this message. Replaces per-case prose
+  // contracts like "handoff_rehydration must never be rendered".
+  MessageVisibility visibility = 32;
+
+  // For streamed/updated messages: when the content last changed.
+  // `timestamp` (field 14) remains creation time.
+  google.protobuf.Timestamp completed_at = 33;
+
+  // The run execution attempt that produced this message, for windowing a
+  // requeued (handoff/follow-up) run's transcript.
+  string execution_id = 34;
+
+  // Coarse grouping significance for transcript viewers.
+  MessageSignificance significance = 35;
+
   // The type of message with its specific content
   oneof message {
     UserQuery user_query = 2;
@@ -237,6 +265,10 @@ message Message {
       repeated string addresses = 3;
       string subject = 4 [ (sensitive) = true ];
       string message_body = 5 [ (sensitive) = true ];
+      // Resolved display name of the sender, so viewers don't render raw ids.
+      string sender_display_name = 6 [ (sensitive) = true ];
+      // The sender's Oz run id, for unambiguous drill-down joins.
+      string sender_run_id = 7;
     }
   }
 
@@ -277,6 +309,10 @@ message Message {
     UserQueryMode mode = 4;
 
     AgentType intended_agent = 5;
+
+    // What produced this query. Server-stamped; clients treat
+    // UNSPECIFIED as HUMAN for legacy data.
+    UserQueryOrigin origin = 6;
   }
 
   // System queries represent prompts from the Warp client that were
@@ -382,6 +418,10 @@ message Message {
     message ConversationSummary {
       string summary = 1;
       int32 token_count = 2;
+      // The inclusive message-id range this summary replaced, so viewers can
+      // render compaction boundaries.
+      string start_message_id = 3;
+      string end_message_id = 4;
     }
 
     // Summarize the result of a tool call.
@@ -439,6 +479,14 @@ message Message {
       StartRecording start_recording = 37;
       StopRecording stop_recording = 38;
     }
+
+    // Whether this call's in-flight time is active work or a wait.
+    ToolWaitKind wait_kind = 39;
+
+    // Set when this call is agent-authored prose destined for humans on an
+    // external platform. Presence of this field is the signal; viewers
+    // should render an authored-message bubble.
+    OutboundMessageInfo outbound_message = 40;
 
     // A tool call to fetch a conversation's tasks from the client.
     // Used by subagents that need to access a different conversation's data.
@@ -645,6 +693,10 @@ message Message {
       // If set, this should match the `id` of an MCPServer in the request's
       // MCPContext.
       string server_id = 2;
+
+      // Resolved identity of the server named by `server_id`. Server-stamped;
+      // survives even when the raw id is a bare uuid or config-map key.
+      MCPServerIdentity server_identity = 3;
     }
 
     // A tool call to execute an MCP tool.
@@ -659,6 +711,10 @@ message Message {
       // If set, this should match the `id` of an MCPServer in the request's
       // MCPContext.
       string server_id = 3;
+
+      // Resolved identity of the server named by `server_id`. Server-stamped;
+      // survives even when the raw id is a bare uuid or config-map key.
+      MCPServerIdentity server_identity = 4;
     }
 
     // A tool call to suggest a prompt for the user to run.
@@ -714,6 +770,12 @@ message Message {
         ConversationSearchMetadata conversation_search = 8;
         google.protobuf.Empty warp_documentation_search = 9;
       }
+
+      // Human-readable description of what the subagent was asked to do,
+      // mirrored from the server-side payload for display.
+      string task_description = 10 [ (sensitive) = true ];
+      // The prompt/query given to the subagent, when applicable.
+      string prompt = 11 [ (sensitive) = true ];
 
       message CLISubagent { string command_id = 1; }
 
@@ -1083,6 +1145,16 @@ message Message {
       StopRecordingResult stop_recording = 42;
     }
 
+    // Uniform outcome classification, so viewers don't have to duck-type the
+    // per-tool result shapes. Server-stamped at append time.
+    ToolCallStatus status = 43;
+
+    // Error detail when `status` is FAILED or DENIED.
+    ToolCallError error = 44;
+
+    // Platform-echoed outcome when the call carried `outbound_message`.
+    OutboundMessageOutcome outbound_message_outcome = 45;
+
     // Result of a server-side tool call.
     // Provided by the server to simply roundtrip.
     message ServerResult { string serialized_result = 1; }
@@ -1175,6 +1247,9 @@ message Message {
     message PullRequestArtifact {
       string url = 1 [ (sensitive) = true ];
       string branch = 2 [ (sensitive) = true ];
+      // Canonical artifact UID shared with the run's artifact list, so
+      // viewers can dedupe without URL normalization.
+      string artifact_uid = 3;
     }
 
     message ScreenshotArtifact {
@@ -1530,6 +1605,8 @@ message CallMCPToolResult {
         // https://github.com/modelcontextprotocol/modelcontextprotocol/blob/42273f11b9b3d5d5a93d3af8fd9a942b220adc01/schema/2025-03-26/schema.json#L566
         bytes data = 1 [ (sensitive) = true ];
         string mime_type = 2;
+        // Stable content identifier (server-computed digest) for caching.
+        string content_id = 3;
       }
     }
   }
@@ -1807,6 +1884,166 @@ message ShellCommandError {
   }
 }
 
+// Resolved identity of an MCP server, denormalized onto MCP tool calls at
+// message-creation time so transcript viewers don't have to re-resolve the
+// raw server_id against agent config or a second API.
+message MCPServerIdentity {
+  // Matches CallMCPTool.server_id / ReadMCPResource.server_id.
+  string server_id = 1;
+  // Human-readable server name (e.g. "Team Slack").
+  string display_name = 2 [ (sensitive) = true ];
+  // Well-known provider classification, when the server maps to one.
+  MCPProvider provider = 3;
+  // Canonical lowercase provider slug (e.g. "slack", "context7"). Set even
+  // when the enum lags behind newly supported providers.
+  string provider_slug = 4;
+  // Resolved transport URL of the server, when known.
+  string server_url = 5 [ (sensitive) = true ];
+  // UID of the Warp managed MCP server backing this entry, when applicable.
+  string managed_server_uid = 6;
+}
+
+// Well-known MCP providers, mirroring the server's integration registry.
+enum MCPProvider {
+  MCP_PROVIDER_UNSPECIFIED = 0;
+  MCP_PROVIDER_SLACK = 1;
+  MCP_PROVIDER_LINEAR = 2;
+  MCP_PROVIDER_JIRA = 3;
+  MCP_PROVIDER_GITHUB = 4;
+  MCP_PROVIDER_GITLAB = 5;
+  MCP_PROVIDER_FIGMA = 6;
+  MCP_PROVIDER_NOTION = 7;
+  MCP_PROVIDER_SENTRY = 8;
+  MCP_PROVIDER_DATADOG = 9;
+}
+
+// The agent identity that authored a message, stamped by the server at
+// message-append time.
+message AuthoringAgent {
+  // UID of the agent identity (service account) this message executed as.
+  // Empty for ad-hoc/inline agents with no named identity.
+  string agent_identity_uid = 1;
+  // Display name at time of authorship (e.g. "Foreman").
+  string display_name = 2 [ (sensitive) = true ];
+  // Agent type slug matching the service-account enum
+  // (e.g. "CUSTOM", "FOREMAN", "REVIEW").
+  string agent_type = 3;
+  // The model that produced this message.
+  string model_id = 4;
+}
+
+// Whether clients should render a message.
+enum MessageVisibility {
+  // Treat as visible (legacy data predates this field).
+  MESSAGE_VISIBILITY_UNSPECIFIED = 0;
+  MESSAGE_VISIBILITY_VISIBLE = 1;
+  // Bookkeeping / machinery; clients must never render it.
+  MESSAGE_VISIBILITY_HIDDEN = 2;
+}
+
+// Coarse rendering significance, so transcript viewers can group/fold
+// without hardcoding per-case tables that go stale as cases are added.
+enum MessageSignificance {
+  MESSAGE_SIGNIFICANCE_UNSPECIFIED = 0;
+  // A conversational turn boundary (user input, final agent output).
+  MESSAGE_SIGNIFICANCE_TURN = 1;
+  // Orchestration structure (spawns, inter-agent messages, questions).
+  MESSAGE_SIGNIFICANCE_STRUCTURE = 2;
+  // Routine tool work; safe to fold into groups.
+  MESSAGE_SIGNIFICANCE_ACTION = 3;
+  // Low-value bookkeeping; safe to hide by default.
+  MESSAGE_SIGNIFICANCE_NOISE = 4;
+}
+
+// What produced a user query.
+enum UserQueryOrigin {
+  USER_QUERY_ORIGIN_UNSPECIFIED = 0;
+  USER_QUERY_ORIGIN_HUMAN = 1;
+  // Server-synthesized wake prompt (e.g. "you have new agent messages").
+  USER_QUERY_ORIGIN_SYSTEM_WAKE = 2;
+  USER_QUERY_ORIGIN_PARENT_AGENT = 3;
+  USER_QUERY_ORIGIN_AUTOMATION = 4;
+  USER_QUERY_ORIGIN_SCHEDULED = 5;
+}
+
+// Whether a tool call's in-flight time is active work or a wait.
+enum ToolWaitKind {
+  // Normal work: the call-to-result span counts as working time.
+  TOOL_WAIT_KIND_UNSPECIFIED = 0;
+  // Blocked on a human (ask_user_question, request_computer_use approval,
+  // transfer_shell_command_control_to_user).
+  TOOL_WAIT_KIND_HUMAN = 1;
+  // Blocked on other agents (wait_for_events).
+  TOOL_WAIT_KIND_AGENT = 2;
+}
+
+// Uniform outcome classification for a tool call result, so viewers don't
+// have to duck-type across every per-tool result shape.
+enum ToolCallStatus {
+  TOOL_CALL_STATUS_UNSPECIFIED = 0;
+  // e.g. a long-running command snapshot: the call is still executing.
+  TOOL_CALL_STATUS_IN_PROGRESS = 1;
+  TOOL_CALL_STATUS_SUCCEEDED = 2;
+  TOOL_CALL_STATUS_FAILED = 3;
+  // Permission denied or rejected by the user.
+  TOOL_CALL_STATUS_DENIED = 4;
+  TOOL_CALL_STATUS_CANCELLED = 5;
+}
+
+// Uniform error detail accompanying a FAILED or DENIED tool call result.
+message ToolCallError {
+  // Stable machine-readable code (e.g. "command_not_found", "denylisted").
+  string code = 1;
+  string message = 2 [ (sensitive) = true ];
+}
+
+// Marks a tool call as agent-authored prose destined for humans on an
+// external platform (Slack message, Linear/Jira comment, ...). Set by the
+// server when it recognizes the call; viewers render these as authored
+// chat bubbles rather than generic tool cards.
+message OutboundMessageInfo {
+  // The message body, extracted from the tool arguments.
+  string body = 1 [ (sensitive) = true ];
+  BodyFormat body_format = 2;
+  Target target = 3;
+  Author author = 4;
+
+  enum BodyFormat {
+    BODY_FORMAT_UNSPECIFIED = 0;
+    BODY_FORMAT_PLAIN = 1;
+    BODY_FORMAT_MARKDOWN = 2;
+    BODY_FORMAT_SLACK_MRKDWN = 3;
+    BODY_FORMAT_HTML = 4;
+  }
+
+  // Where the message is going.
+  message Target {
+    // e.g. "channel", "thread", "issue", "merge_request".
+    string kind = 1;
+    // Raw platform id (e.g. "C0123ABCD", "ENG-1234").
+    string id = 2 [ (sensitive) = true ];
+    // Resolved human-readable name (e.g. "#releases").
+    string display_name = 3 [ (sensitive) = true ];
+    string url = 4 [ (sensitive) = true ];
+  }
+
+  // The identity the message posts as on the destination platform.
+  message Author {
+    string display_name = 1 [ (sensitive) = true ];
+    string handle = 2 [ (sensitive) = true ];
+    string avatar_url = 3 [ (sensitive) = true ];
+  }
+}
+
+// Platform-echoed outcome of an outbound message, set on the result.
+message OutboundMessageOutcome {
+  string permalink = 1 [ (sensitive) = true ];
+  google.protobuf.Timestamp posted_at = 2;
+  // The author identity the platform reports (e.g. Linear echoes the
+  // comment author).
+  OutboundMessageInfo.Author posted_as = 3;
+}
+
 // An enumeration of the different types of client-server tools.
 // This must map 1:1 with the list of structured tool call / tool call result
 // types.
@@ -1968,7 +2205,7 @@ message RunAgentsResult {
   message Failure { string error = 1 [ (sensitive) = true ]; }
 
   // Per-agent outcome. Clients correlate entries to AgentRunConfig inputs by
-  // `name`.
+  // `config_index` when set, falling back to `name` for legacy data.
   message AgentOutcome {
     string name = 1 [ (sensitive) = true ];
     oneof result {
@@ -1980,9 +2217,18 @@ message RunAgentsResult {
     string model_id = 4;
     Harness harness = 5;
     RunAgents.ExecutionMode execution_mode = 6;
+
+    // Zero-based index of the AgentRunConfig this outcome corresponds to.
+    // Prefer over name-matching, which collides on duplicate names.
+    int32 config_index = 7;
   }
 
-  message LaunchedAgent { string agent_id = 1; }
+  message LaunchedAgent {
+    string agent_id = 1;
+    // The Oz run id of the launched child (ai_tasks row). Stable across
+    // handoff requeues; prefer this over agent_id for run joins.
+    string run_id = 2;
+  }
   message FailedAgent { string error = 1 [ (sensitive) = true ]; }
 }
 
@@ -1994,6 +2240,16 @@ message SendMessageToAgent {
   string subject = 2 [ (sensitive) = true ];
   // The body of the message.
   string message = 3 [ (sensitive) = true ];
+  // Resolved recipient identities for `addresses`. Server-stamped.
+  repeated Recipient recipients = 4;
+
+  message Recipient {
+    // Matches an entry in `addresses`.
+    string address = 1;
+    string display_name = 2 [ (sensitive) = true ];
+    // The recipient's Oz run id, for unambiguous drill-down joins.
+    string run_id = 3;
+  }
 }
 
 // The result of a SendMessageToAgent tool call.
@@ -2043,9 +2299,21 @@ message AskUserQuestionResult {
     Error error = 2;
   }
 
-  message Success { repeated AnswerItem answers = 1; }
+  message Success {
+    repeated AnswerItem answers = 1;
+    // Who answered, and when. Server-stamped from the responding session.
+    Responder responded_by = 2;
+    google.protobuf.Timestamp responded_at = 3;
+  }
 
   message Error { string message = 1; }
+
+  // The identity of the person who answered.
+  message Responder {
+    string user_uid = 1;
+    string display_name = 2 [ (sensitive) = true ];
+    string avatar_url = 3 [ (sensitive) = true ];
+  }
 
   // The user's answer to a single question.
   message AnswerItem {
@@ -2129,4 +2397,6 @@ message RawImage {
   int32 width = 3;
   // The height of the image, in pixels.
   int32 height = 4;
+  // Stable content identifier (server-computed digest) for caching.
+  string content_id = 5;
 }

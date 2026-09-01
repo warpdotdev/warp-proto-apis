@@ -4,6 +4,9 @@ edition = "2023";
 package warp.multi_agent.v1;
 
 import "google/protobuf/go_features.proto";
+import "google/protobuf/timestamp.proto";
+import "orchestration.proto";
+import "options.proto";
 import "task.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
@@ -21,4 +24,32 @@ message ConversationData {
   // and those events are necessary to know the ordering of messages.
   // DEPRECATED: the Tasks themselves contain the information needed to linearize now.
   repeated string ordered_message_ids = 2 [deprecated = true];
+
+  // Viewer-facing metadata about the conversation. Assembled by the server
+  // when serving or snapshotting the transcript; interactive clients may
+  // ignore it and must round-trip it.
+  ConversationHeader header = 3;
+}
+
+// Conversation-level metadata for transcript viewers.
+message ConversationHeader {
+  string conversation_id = 1;
+  string title = 2 [ (sensitive) = true ];
+  Harness harness = 3;
+  string working_directory = 4 [ (sensitive) = true ];
+  string git_branch = 5 [ (sensitive) = true ];
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp last_updated_at = 7;
+  // MCP servers referenced by tool calls in this conversation.
+  repeated MCPServerIdentity mcp_servers = 8;
+  // Agent identities that authored messages in this conversation.
+  repeated AuthoringAgent participants = 9;
+  // Root of the orchestration tree this conversation belongs to.
+  string root_run_id = 10;
+  // Runs bound to this conversation, oldest first (handoff re-runs share it).
+  repeated string run_ids = 11;
+  // Set when this conversation was forked/split from another.
+  string forked_from_conversation_id = 12;
+  // Incremented when the population contract changes.
+  uint32 schema_version = 13;
 }
