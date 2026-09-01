@@ -500,6 +500,10 @@ message Request {
     // references.
     bool supports_stored_screenshots = 33;
 
+    // If `true`, the client consumes server-synthesized results paired with
+    // client tool calls and suppresses local execution of the resolved calls.
+    bool supports_server_synthesized_client_tool_results = 34;
+
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
     // in `custom_model_providers`.
