@@ -42,7 +42,7 @@ class Request(_message.Message):
     class Input(_message.Message):
         __slots__ = ("context", "user_inputs", "query_with_canned_response", "auto_code_diff_query", "resume_conversation", "init_project_rules", "generate_passive_suggestions", "create_new_project", "clone_repository", "code_review", "summarize_conversation", "create_environment", "fetch_review_comments", "start_from_ambient_run_prompt", "invoke_skill", "user_query", "tool_call_result")
         class UserQuery(_message.Message):
-            __slots__ = ("query", "referenced_attachments", "mode", "intended_agent")
+            __slots__ = ("query", "referenced_attachments", "mode", "intended_agent", "attribution_token")
             class ReferencedAttachmentsEntry(_message.Message):
                 __slots__ = ("key", "value")
                 KEY_FIELD_NUMBER: _ClassVar[int]
@@ -54,11 +54,13 @@ class Request(_message.Message):
             REFERENCED_ATTACHMENTS_FIELD_NUMBER: _ClassVar[int]
             MODE_FIELD_NUMBER: _ClassVar[int]
             INTENDED_AGENT_FIELD_NUMBER: _ClassVar[int]
+            ATTRIBUTION_TOKEN_FIELD_NUMBER: _ClassVar[int]
             query: str
             referenced_attachments: _containers.MessageMap[str, _attachment_pb2.Attachment]
             mode: _task_pb2.UserQueryMode
             intended_agent: _task_pb2.AgentType
-            def __init__(self, query: _Optional[str] = ..., referenced_attachments: _Optional[_Mapping[str, _attachment_pb2.Attachment]] = ..., mode: _Optional[_Union[_task_pb2.UserQueryMode, _Mapping]] = ..., intended_agent: _Optional[_Union[_task_pb2.AgentType, str]] = ...) -> None: ...
+            attribution_token: str
+            def __init__(self, query: _Optional[str] = ..., referenced_attachments: _Optional[_Mapping[str, _attachment_pb2.Attachment]] = ..., mode: _Optional[_Union[_task_pb2.UserQueryMode, _Mapping]] = ..., intended_agent: _Optional[_Union[_task_pb2.AgentType, str]] = ..., attribution_token: _Optional[str] = ...) -> None: ...
         class CLIAgentUserQuery(_message.Message):
             __slots__ = ("user_query", "running_command", "run_shell_command_tool_call_id")
             USER_QUERY_FIELD_NUMBER: _ClassVar[int]
@@ -381,7 +383,7 @@ class Request(_message.Message):
         agent_name: str
         def __init__(self, conversation_id: _Optional[str] = ..., logging: _Optional[_Mapping[str, _struct_pb2.Value]] = ..., ambient_agent_task_id: _Optional[str] = ..., forked_from_conversation_id: _Optional[str] = ..., parent_agent_id: _Optional[str] = ..., agent_name: _Optional[str] = ...) -> None: ...
     class Settings(_message.Message):
-        __slots__ = ("model_config", "rules_enabled", "web_context_retrieval_enabled", "supports_parallel_tool_calls", "use_anthropic_text_editor_tools", "planning_enabled", "warp_drive_context_enabled", "supports_create_files", "supported_tools", "supports_long_running_commands", "should_preserve_file_content_in_history", "supports_todos_ui", "supports_linked_code_blocks", "supports_started_child_task_message", "supports_suggest_prompt", "supports_read_image_files", "supports_reasoning_message", "api_keys", "autonomy_level", "isolation_level", "web_search_enabled", "supported_cli_agent_tools", "supports_v4a_file_diffs", "supports_summarization_via_message_replacement", "supports_bundled_skills", "supports_research_agent", "supports_orchestration_v2", "custom_model_providers", "supports_background_computer_use", "custom_model_routers", "supports_orchestration_runners", "supports_stored_screenshots")
+        __slots__ = ("model_config", "rules_enabled", "web_context_retrieval_enabled", "supports_parallel_tool_calls", "use_anthropic_text_editor_tools", "planning_enabled", "warp_drive_context_enabled", "supports_create_files", "supported_tools", "supports_long_running_commands", "should_preserve_file_content_in_history", "supports_todos_ui", "supports_linked_code_blocks", "supports_started_child_task_message", "supports_suggest_prompt", "supports_read_image_files", "supports_reasoning_message", "api_keys", "autonomy_level", "isolation_level", "web_search_enabled", "supported_cli_agent_tools", "supports_v4a_file_diffs", "supports_summarization_via_message_replacement", "supports_bundled_skills", "supports_research_agent", "supports_orchestration_v2", "custom_model_providers", "supports_background_computer_use", "custom_model_routers", "supports_orchestration_runners", "supports_create_file_overwrite", "supports_stored_screenshots")
         class ModelConfig(_message.Message):
             __slots__ = ("base", "planning", "coding", "cli_agent", "computer_use_agent", "base_model_context_window_limit")
             BASE_FIELD_NUMBER: _ClassVar[int]
@@ -537,6 +539,7 @@ class Request(_message.Message):
         SUPPORTS_BACKGROUND_COMPUTER_USE_FIELD_NUMBER: _ClassVar[int]
         CUSTOM_MODEL_ROUTERS_FIELD_NUMBER: _ClassVar[int]
         SUPPORTS_ORCHESTRATION_RUNNERS_FIELD_NUMBER: _ClassVar[int]
+        SUPPORTS_CREATE_FILE_OVERWRITE_FIELD_NUMBER: _ClassVar[int]
         SUPPORTS_STORED_SCREENSHOTS_FIELD_NUMBER: _ClassVar[int]
         model_config: Request.Settings.ModelConfig
         rules_enabled: bool
@@ -569,8 +572,9 @@ class Request(_message.Message):
         supports_background_computer_use: bool
         custom_model_routers: Request.Settings.CustomModelRouters
         supports_orchestration_runners: bool
+        supports_create_file_overwrite: bool
         supports_stored_screenshots: bool
-        def __init__(self, model_config: _Optional[_Union[Request.Settings.ModelConfig, _Mapping]] = ..., rules_enabled: _Optional[bool] = ..., web_context_retrieval_enabled: _Optional[bool] = ..., supports_parallel_tool_calls: _Optional[bool] = ..., use_anthropic_text_editor_tools: _Optional[bool] = ..., planning_enabled: _Optional[bool] = ..., warp_drive_context_enabled: _Optional[bool] = ..., supports_create_files: _Optional[bool] = ..., supported_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_long_running_commands: _Optional[bool] = ..., should_preserve_file_content_in_history: _Optional[bool] = ..., supports_todos_ui: _Optional[bool] = ..., supports_linked_code_blocks: _Optional[bool] = ..., supports_started_child_task_message: _Optional[bool] = ..., supports_suggest_prompt: _Optional[bool] = ..., supports_read_image_files: _Optional[bool] = ..., supports_reasoning_message: _Optional[bool] = ..., api_keys: _Optional[_Union[Request.Settings.ApiKeys, _Mapping]] = ..., autonomy_level: _Optional[_Union[AutonomyLevel, str]] = ..., isolation_level: _Optional[_Union[IsolationLevel, str]] = ..., web_search_enabled: _Optional[bool] = ..., supported_cli_agent_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_v4a_file_diffs: _Optional[bool] = ..., supports_summarization_via_message_replacement: _Optional[bool] = ..., supports_bundled_skills: _Optional[bool] = ..., supports_research_agent: _Optional[bool] = ..., supports_orchestration_v2: _Optional[bool] = ..., custom_model_providers: _Optional[_Union[Request.Settings.CustomModelProviders, _Mapping]] = ..., supports_background_computer_use: _Optional[bool] = ..., custom_model_routers: _Optional[_Union[Request.Settings.CustomModelRouters, _Mapping]] = ..., supports_orchestration_runners: _Optional[bool] = ..., supports_stored_screenshots: _Optional[bool] = ...) -> None: ...
+        def __init__(self, model_config: _Optional[_Union[Request.Settings.ModelConfig, _Mapping]] = ..., rules_enabled: _Optional[bool] = ..., web_context_retrieval_enabled: _Optional[bool] = ..., supports_parallel_tool_calls: _Optional[bool] = ..., use_anthropic_text_editor_tools: _Optional[bool] = ..., planning_enabled: _Optional[bool] = ..., warp_drive_context_enabled: _Optional[bool] = ..., supports_create_files: _Optional[bool] = ..., supported_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_long_running_commands: _Optional[bool] = ..., should_preserve_file_content_in_history: _Optional[bool] = ..., supports_todos_ui: _Optional[bool] = ..., supports_linked_code_blocks: _Optional[bool] = ..., supports_started_child_task_message: _Optional[bool] = ..., supports_suggest_prompt: _Optional[bool] = ..., supports_read_image_files: _Optional[bool] = ..., supports_reasoning_message: _Optional[bool] = ..., api_keys: _Optional[_Union[Request.Settings.ApiKeys, _Mapping]] = ..., autonomy_level: _Optional[_Union[AutonomyLevel, str]] = ..., isolation_level: _Optional[_Union[IsolationLevel, str]] = ..., web_search_enabled: _Optional[bool] = ..., supported_cli_agent_tools: _Optional[_Iterable[_Union[_task_pb2.ToolType, str]]] = ..., supports_v4a_file_diffs: _Optional[bool] = ..., supports_summarization_via_message_replacement: _Optional[bool] = ..., supports_bundled_skills: _Optional[bool] = ..., supports_research_agent: _Optional[bool] = ..., supports_orchestration_v2: _Optional[bool] = ..., custom_model_providers: _Optional[_Union[Request.Settings.CustomModelProviders, _Mapping]] = ..., supports_background_computer_use: _Optional[bool] = ..., custom_model_routers: _Optional[_Union[Request.Settings.CustomModelRouters, _Mapping]] = ..., supports_orchestration_runners: _Optional[bool] = ..., supports_create_file_overwrite: _Optional[bool] = ..., supports_stored_screenshots: _Optional[bool] = ...) -> None: ...
     class MCPContext(_message.Message):
         __slots__ = ("resources", "tools", "servers")
         class MCPResource(_message.Message):

@@ -1,0 +1,390 @@
+// Attribution for user queries: which Warp user sent a query, what produced
+// it (client, external platform, parent agent, schedule, ...), and the
+// original third-party message it was derived from. Shared by task.proto
+// (persisted messages) and request.proto (inputs).
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+import "google/protobuf/timestamp.proto";
+
+import "options.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A Warp user as resolved by the server. Pure identity; how it was resolved
+// lives on the enclosing QueryAuthor.
+message WarpUser {
+  // Warp (Firebase) user uid.
+  string uid = 1;
+  // Display name at the time the query was recorded.
+  string display_name = 2 [ (sensitive) = true ];
+  // Primary email at the time the query was recorded.
+  string email = 3 [ (sensitive) = true ];
+  // Profile photo URL.
+  string avatar_url = 4 [ (sensitive) = true ];
+  // Uid of the team the user acted under for this query, if any.
+  string team_uid = 5;
+}
+
+// How the server established which Warp user is behind a query.
+enum IdentityResolution {
+  IDENTITY_RESOLUTION_UNSPECIFIED = 0;
+  // Authenticated directly by a Warp client session (desktop, web, CLI).
+  IDENTITY_RESOLUTION_CLIENT_SESSION = 1;
+  // Authenticated by a public API credential.
+  IDENTITY_RESOLUTION_API_KEY = 2;
+  // The external platform account is linked to a Warp user via an OAuth
+  // external account binding.
+  IDENTITY_RESOLUTION_EXTERNAL_ACCOUNT_BINDING = 3;
+  // The external platform account's email matched a Warp user on the team.
+  IDENTITY_RESOLUTION_EMAIL_MATCH = 4;
+  // No Warp user could be resolved (unbound external user, bot actor).
+  // QueryAuthor.user is unset in this case.
+  IDENTITY_RESOLUTION_UNRESOLVED = 5;
+}
+
+// The Warp user on whose behalf a UserQuery was sent. Conversations are
+// multi-player, so this is recorded per query. Server-stamped; never trusted
+// from clients.
+message QueryAuthor {
+  // The resolved Warp user. Unset when resolution is UNRESOLVED.
+  WarpUser user = 1;
+  // How `user` was resolved.
+  IdentityResolution resolution = 2;
+  // True if this user created the run/conversation the query belongs to.
+  bool is_run_creator = 3;
+}
+
+// A user or bot on a third-party platform. Field availability varies by
+// platform; unset fields are unknown.
+message ExternalUser {
+  // Platform-native user id (Slack user id, GitHub numeric id, GitLab user
+  // id, Linear actor id, Jira accountId).
+  string id = 1 [ (sensitive) = true ];
+  // Login/handle (GitHub login, GitLab username, Slack @name), when the
+  // platform has one.
+  string handle = 2 [ (sensitive) = true ];
+  // Human-readable name (Slack real name, GitLab name, Jira displayName).
+  string display_name = 3 [ (sensitive) = true ];
+  // Avatar image URL.
+  string avatar_url = 4 [ (sensitive) = true ];
+  // Email, when the platform exposes it and scopes permit.
+  string email = 5 [ (sensitive) = true ];
+  // Link to the user's profile page on the platform.
+  string profile_url = 6 [ (sensitive) = true ];
+  // True if the platform identifies the actor as a bot/app/integration.
+  bool is_bot = 7;
+}
+
+// Text encoding of ExternalMessage.body.
+enum BodyFormat {
+  BODY_FORMAT_UNSPECIFIED = 0;
+  BODY_FORMAT_PLAIN_TEXT = 1;
+  // CommonMark / GitHub-flavored markdown (GitHub, GitLab, Linear).
+  BODY_FORMAT_MARKDOWN = 2;
+  // Slack mrkdwn (<@U123>, <#C123|name>, *bold*, ...).
+  BODY_FORMAT_SLACK_MRKDWN = 3;
+  BODY_FORMAT_HTML = 4;
+  // Atlassian Document Format JSON (Jira comments); `body` holds the JSON.
+  BODY_FORMAT_ATLASSIAN_DOCUMENT_FORMAT = 5;
+}
+
+// The original third-party message or event a UserQuery was derived from,
+// with enough context to render it as it appeared on the platform.
+// Provider-agnostic fields are top-level; provider-specific ids and container
+// context (channel, repo, issue, ...) live in the `platform` oneof.
+message ExternalMessage {
+  // Who posted the message/event. Unset for custom webhooks and for events
+  // with no actor.
+  ExternalUser sender = 1;
+  // The raw message text as posted, before any Warp templating or prompt
+  // assembly. Encoding given by `body_format`.
+  string body = 2 [ (sensitive) = true ];
+  BodyFormat body_format = 3;
+  // Permalink to the message/comment/event on the platform.
+  string permalink = 4 [ (sensitive) = true ];
+  // When the message was posted, according to the platform.
+  google.protobuf.Timestamp platform_timestamp = 5;
+
+  oneof platform {
+    Slack slack = 6;
+    GitHub github = 7;
+    GitLab gitlab = 8;
+    Linear linear = 9;
+    Jira jira = 10;
+    CustomWebhook custom_webhook = 11;
+  }
+
+  // Slack message, app_mention, or reaction event.
+  message Slack {
+    // Slack workspace (team) id.
+    string team_id = 1;
+    // Workspace domain (e.g. "acme" for acme.slack.com).
+    string workspace_domain = 2 [ (sensitive) = true ];
+    // Channel id. Sensitive because DM channel ids identify people.
+    string channel_id = 3 [ (sensitive) = true ];
+    // Channel name, if known (empty for DMs).
+    string channel_name = 4 [ (sensitive) = true ];
+    // Slack channel type: "channel", "group", "im", "mpim".
+    string channel_type = 5;
+    // Slack ts of this message (its id within the channel).
+    string message_ts = 6;
+    // Slack ts of the thread parent, if this is a thread reply.
+    string thread_ts = 7;
+    // Slack event type: "message", "app_mention", "reaction_added".
+    string event_type = 8;
+    // Slack message subtype (e.g. "bot_message", "file_share"), if any.
+    string subtype = 9;
+    // True if the message had been edited when received.
+    bool edited = 10;
+    // Emoji name for reaction events (e.g. "eyes").
+    string reaction = 11;
+    // Slack Block Kit `blocks` JSON, for high-fidelity rendering.
+    string blocks_json = 12 [ (sensitive) = true ];
+    // Posting bot id, when the sender is a bot.
+    string bot_id = 13;
+    // Slack app id that posted the message, when the sender is an app.
+    string app_id = 14;
+  }
+
+  // GitHub issue/PR comment, review, review comment, or workflow event.
+  message GitHub {
+    // Host, e.g. "github.com" or a GHES hostname.
+    string host = 1 [ (sensitive) = true ];
+    // Repository owner or organization login.
+    string owner = 2 [ (sensitive) = true ];
+    // Repository name.
+    string repo = 3 [ (sensitive) = true ];
+    // Repository database id.
+    int64 repository_id = 4;
+    // GitHub App installation id that delivered the event.
+    int64 installation_id = 5;
+    // Issue or pull request number.
+    int32 number = 6;
+    // True if `number` refers to a pull request.
+    bool is_pull_request = 7;
+    // Issue/PR title.
+    string title = 8 [ (sensitive) = true ];
+    // Issue/PR html_url (the top-level permalink points at the comment).
+    string html_url = 9 [ (sensitive) = true ];
+    // Webhook action, e.g. "created", "opened", "submitted", "rerequested".
+    string action = 10;
+    // GraphQL node id of the issue/PR.
+    string node_id = 11;
+    // Comment id (issue comment or review comment), if the event is a comment.
+    int64 comment_id = 12;
+    // GraphQL node id of the comment, if any.
+    string comment_node_id = 13;
+    // For review comment replies, the id of the comment replied to.
+    int64 in_reply_to_id = 14;
+    // Review id, for review and review comment events.
+    int64 review_id = 15;
+    // Review state: "approved", "changes_requested", "commented".
+    string review_state = 16;
+    // File location, for review comments.
+    ReviewCommentLocation location = 17;
+    // Labels on the issue/PR at event time.
+    repeated string labels = 18 [ (sensitive) = true ];
+    // PR base branch.
+    string base_branch = 19 [ (sensitive) = true ];
+    // PR head branch.
+    string head_branch = 20 [ (sensitive) = true ];
+    // PR head commit sha.
+    string head_sha = 21;
+    // Workflow run details, for check/workflow events.
+    WorkflowRun workflow_run = 22;
+
+    // Where a review comment is anchored in the diff.
+    message ReviewCommentLocation {
+      // File path within the repository.
+      string path = 1 [ (sensitive) = true ];
+      // Last line of the commented range.
+      int32 line = 2;
+      // First line of a multi-line comment; 0 for single-line comments.
+      int32 start_line = 3;
+      // "LEFT" or "RIGHT".
+      string side = 4;
+      // Diff hunk the comment is attached to.
+      string diff_hunk = 5 [ (sensitive) = true ];
+    }
+
+    // GitHub Actions workflow run that produced the event.
+    message WorkflowRun {
+      // Workflow name.
+      string name = 1 [ (sensitive) = true ];
+      // Run conclusion: "success", "failure", "cancelled", ...
+      string conclusion = 2;
+    }
+  }
+
+  // GitLab merge request note or event.
+  message GitLab {
+    // Host, e.g. "gitlab.com" or a self-managed hostname.
+    string host = 1 [ (sensitive) = true ];
+    // Project path with namespace, e.g. "group/subgroup/project".
+    string project_path = 2 [ (sensitive) = true ];
+    // Numeric project id.
+    int64 project_id = 3;
+    // Project-scoped merge request number shown in the UI.
+    int32 merge_request_iid = 4;
+    // Global merge request id.
+    int64 merge_request_id = 5;
+    // Merge request title.
+    string title = 6 [ (sensitive) = true ];
+    // Merge request URL (the top-level permalink points at the note).
+    string merge_request_url = 7 [ (sensitive) = true ];
+    // Merge request target branch.
+    string target_branch = 8 [ (sensitive) = true ];
+    // Webhook action, e.g. "open", "update", "merge".
+    string action = 9;
+    // Note id, if the event is a note.
+    int64 note_id = 10;
+    // Usernames mentioned in the note.
+    repeated string mentions = 11 [ (sensitive) = true ];
+  }
+
+  // Linear issue comment or agent session event.
+  message Linear {
+    // Linear organization id.
+    string organization_id = 1;
+    // Linear team id.
+    string team_id = 2;
+    // Linear project id, set if the issue belongs to a project.
+    string project_id = 3;
+    // Issue UUID.
+    string issue_id = 4;
+    // Human-readable issue identifier, e.g. "ENG-123".
+    string issue_identifier = 5 [ (sensitive) = true ];
+    // Issue title.
+    string title = 6 [ (sensitive) = true ];
+    // Issue URL (the top-level permalink points at the comment).
+    string issue_url = 7 [ (sensitive) = true ];
+    // Workflow state id of the issue at event time.
+    string state_id = 8;
+    // Label names on the issue at event time.
+    repeated string labels = 9 [ (sensitive) = true ];
+    // Comment id, if the event is a comment.
+    string comment_id = 10;
+    // Linear agent session id, for agent-session events.
+    string agent_session_id = 11;
+    // Webhook action, e.g. "create", "update", "prompted".
+    string action = 12;
+  }
+
+  // Jira issue comment or A2A (Rovo) event.
+  message Jira {
+    // Atlassian cloud id.
+    string cloud_id = 1;
+    // Site URL, e.g. "https://acme.atlassian.net".
+    string site_url = 2 [ (sensitive) = true ];
+    // Project key, e.g. "ENG".
+    string project_key = 3 [ (sensitive) = true ];
+    // Numeric issue id.
+    string issue_id = 4;
+    // Issue key, e.g. "ENG-123".
+    string issue_key = 5 [ (sensitive) = true ];
+    // Issue URL (the top-level permalink points at the comment).
+    string issue_url = 6 [ (sensitive) = true ];
+    // Webhook event type, e.g. "comment_created".
+    string event_type = 7;
+    // Comment id, if the event is a comment.
+    string comment_id = 8;
+    // Parent comment id, for threaded replies.
+    string parent_comment_id = 9;
+    // A2A context id, for agent-to-agent events.
+    string a2a_context_id = 10;
+    // A2A message id, for agent-to-agent events.
+    string a2a_message_id = 11;
+  }
+
+  // Custom (user-configured) webhook delivery. Carries no user identity.
+  message CustomWebhook {
+    // Uid of the configured webhook.
+    string webhook_uid = 1;
+    // Provider- or Warp-assigned delivery id, for deduplication.
+    string delivery_id = 2;
+    // Provider event name, when the payload declares one (e.g. Sentry
+    // "issue.created").
+    string event_name = 3;
+  }
+}
+
+// What produced a UserQuery. A oneof of per-kind messages (like Harness) so
+// each kind can carry its own payload without breaking the wire format.
+// Orthogonal to QueryAuthor (who) and ExternalMessage (source text): an
+// automation-matched GitHub event has origin=automation and a source_message.
+message UserQueryOrigin {
+  oneof kind {
+    WarpClient warp_client = 1;
+    ExternalPlatform external_platform = 2;
+    ParentAgent parent_agent = 3;
+    AgentMessageWake agent_message_wake = 4;
+    Schedule schedule = 5;
+    Automation automation = 6;
+    PublicApi public_api = 7;
+    ServerSynthesized server_synthesized = 8;
+  }
+
+  // A human typed the query in a Warp client.
+  message WarpClient {
+    // Which client surface the query came from.
+    Surface surface = 1;
+
+    enum Surface {
+      SURFACE_UNSPECIFIED = 0;
+      SURFACE_DESKTOP = 1;
+      SURFACE_WEB = 2;
+      SURFACE_CLI = 3;
+    }
+  }
+
+  // A human posted on an external platform (Slack mention, GitHub comment,
+  // Linear/Jira comment). The message is in UserQuery.source_message.
+  message ExternalPlatform {}
+
+  // A parent (orchestrating) agent sent this query to a child agent.
+  message ParentAgent {
+    // Versioned orchestration address of the parent (conversation id in
+    // orchestration v1, run id in v2). Mirrors Request.Metadata.parent_agent_id.
+    string parent_agent_id = 1;
+    // Oz run id of the parent, when known.
+    string parent_run_id = 2;
+  }
+
+  // Server-synthesized wake prompt ("You have received N new agent
+  // message(s) ...").
+  message AgentMessageWake {
+    // Number of unread agent messages that triggered the wake; 0 if unknown.
+    int32 message_count = 1;
+  }
+
+  // A scheduled agent fired.
+  message Schedule {
+    // Uid of the schedule.
+    string schedule_uid = 1;
+  }
+
+  // An automation rule matched an event that was not a direct human request
+  // (CI failure, label added by a bot, ...). The matched event is in
+  // UserQuery.source_message when it came from a supported platform.
+  message Automation {
+    // Uid of the automation rule.
+    string automation_uid = 1;
+    // Trigger kind the rule matched, e.g. "github.check_run.rerequested".
+    string matched_kind = 2;
+    // Provider delivery id of the matched event.
+    string delivery_id = 3;
+  }
+
+  // Submitted through the public API.
+  message PublicApi {}
+
+  // Any other server-synthesized query (resume, handoff rehydration, ...).
+  message ServerSynthesized {
+    // Free-form, non-user-facing reason for debugging (e.g. "handoff_resume").
+    string reason = 1;
+  }
+}
