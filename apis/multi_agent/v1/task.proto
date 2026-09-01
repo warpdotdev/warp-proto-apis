@@ -18,6 +18,7 @@ import "options.proto";
 import "todo.proto";
 import "skill.proto";
 import "orchestration.proto";
+import "attribution.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -106,6 +107,12 @@ message AgentEvent {
       google.protobuf.Empty succeeded = 9;
       Failed failed = 10;
     }
+
+    // Resolved display name of the sender, so viewers don't render raw ids.
+    string sender_display_name = 11 [ (sensitive) = true ];
+    // TODO(Ben): add agent type here?
+    // The sender's Oz run id, for unambiguous drill-down joins.
+    string sender_run_id = 12;
 
     message Errored {
       string stage = 1;
@@ -267,6 +274,7 @@ message Message {
 
   // User query message type
   message UserQuery {
+    // Final assembled query text to be sent to the agent.
     string query = 1 [ (sensitive) = true ];
 
     // Context that the client supplied as part of the user query input.
@@ -277,6 +285,20 @@ message Message {
     UserQueryMode mode = 4;
 
     AgentType intended_agent = 5;
+
+    // What produced this query (client, external platform, parent agent,
+    // wake, schedule, ...). Server-stamped when the message is persisted.
+    UserQueryOrigin origin = 6;
+
+    // The Warp user on whose behalf this query was sent. Server-stamped from
+    // the authenticated principal or the resolved external identity. Unset
+    // for origins with no human (parent_agent, agent_message_wake, schedule).
+    QueryAuthor author = 7;
+
+    // The original third-party message/event this query was derived from.
+    // Unset for queries typed directly in a Warp client. `query` remains the
+    // assembled prompt the agent sees; this holds the raw source.
+    ExternalMessage source_message = 8;
   }
 
   // System queries represent prompts from the Warp client that were
