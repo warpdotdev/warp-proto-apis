@@ -33,11 +33,12 @@ This regenerates Go bindings. Rust bindings are generated at compile time via bu
 The TypeScript package is generated during npm lifecycle scripts and is not checked into git.
 
 ```bash
-npm install
+npm ci
 npm run generate:ts
 ```
 
-Generated TypeScript files are written to `generated/`.
+Generated TypeScript files are written to `generated/`. Requires `protoc` 27.0+. `./script/generate` and
+`./script/bootstrap` are Go-only and do not touch TypeScript.
 
 ### Building Rust Crates
 ```bash
@@ -97,7 +98,7 @@ generated/              # Generated TypeScript package output (not checked in)
 - Workspace dependencies are defined in root `Cargo.toml`
 
 ### TypeScript
-- Uses `@bufbuild/protoc-gen-es`
+- Uses `@bufbuild/protoc-gen-es`, pinned to an exact version in `package.json` (lockfile committed)
 - Code generation runs in npm `prepare` via `script/generate-typescript-package`
 - Generated bindings are **not** checked into git
 - Package name: `@warp/multi-agent-api-v1`
@@ -158,7 +159,7 @@ The repository has a GitHub Actions workflow that validates generated code is up
 ### Modifying Existing Proto Files
 1. Edit the proto file
 2. Run `./script/generate -a <api> -v <version>` to update Go bindings
-3. Run `npm install && npm run generate:ts` to verify TypeScript generation still works
+3. Run `npm ci && npm run generate:ts` to verify TypeScript generation still works
 4. For Rust, run `cargo build` to verify the build script handles the changes correctly
 5. Commit proto and generated Go changes (TypeScript output is not committed)
 

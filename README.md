@@ -25,13 +25,18 @@ npm install @warp/multi-agent-api-v1@github:warpdotdev/warp-proto-apis#<commit-s
 or:
 
 ```bash
-pnpm add @warp/multi-agent-api-v1@github:warpdotdev/warp-proto-apis#<commit-sha>
+yarn add @warp/multi-agent-api-v1@https://github.com/warpdotdev/warp-proto-apis#<commit-sha>
 ```
 
-Requirements for Git installs:
-- Node.js 18+
+Bindings are generated on the consumer's machine by the package's `prepare` script, so Git installs require:
+- Node.js 22+ (required by the pinned `@bufbuild/protoc-gen-es` generator)
 - `git`
-- `protoc` in `PATH` (https://protobuf.dev/installation/)
+- `protoc` 27.0+ in `PATH` (edition 2023 support; https://protobuf.dev/installation/)
+
+Note: pnpm does not run `prepare` for Git dependencies by default. pnpm consumers must approve this package via
+[`allowBuilds`](https://pnpm.io/settings/build) for the install to succeed.
+Recent npm versions (11.17+) warn that the `prepare` script is not covered by `allowScripts`; the install still
+succeeds, and the warning can be silenced with `npm approve-scripts @warp/multi-agent-api-v1`.
 
 Example import:
 
@@ -60,14 +65,16 @@ This is installed by the bootstrap script.
 
 ### TypeScript
 TypeScript bindings are generated during package install via the root `prepare` script and are not checked into git.
-To generate them locally:
+`./script/generate` does not produce them. To generate them locally:
 
 ```bash
-npm install
+npm ci
 npm run generate:ts
 ```
 
-This writes generated files to `generated/`. The generated code depends on `@bufbuild/protobuf` at runtime.
+This requires `protoc` 27.0+ and writes generated files to `generated/`. The generator (`@bufbuild/protoc-gen-es`) is
+pinned to an exact version in `package.json` and `package-lock.json` so output is reproducible across installs. The
+generated code depends on `@bufbuild/protobuf` at runtime.
 
 ### Rust
 There are no specific dependencies required for Rust, outside of the `protoc` compiler and a Rust toolchain.  The Rust code generation happens at compile time (as part of a Rust build script), so no additional setup is required and nothing needs to be regenerated and checked in when proto files are modified.

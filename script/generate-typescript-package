@@ -7,9 +7,20 @@ API_PATH="$ROOT_DIR/apis/multi_agent/v1"
 OUT_DIR="$ROOT_DIR/generated"
 PLUGIN_PATH="$ROOT_DIR/node_modules/.bin/protoc-gen-es"
 
+MIN_PROTOC_MAJOR=27
+
 if ! command -v protoc >/dev/null 2>&1; then
   echo "Error: protoc is required but was not found in PATH." >&2
   echo "Install protoc: https://protobuf.dev/installation/" >&2
+  exit 1
+fi
+
+# The protos use edition = "2023", which requires protoc >= 27.0.
+PROTOC_VERSION="$(protoc --version 2>/dev/null | awk '{print $2}')"
+PROTOC_MAJOR="${PROTOC_VERSION%%.*}"
+if ! [[ "$PROTOC_MAJOR" =~ ^[0-9]+$ ]] || [ "$PROTOC_MAJOR" -lt "$MIN_PROTOC_MAJOR" ]; then
+  echo "Error: protoc >= ${MIN_PROTOC_MAJOR}.0 is required (edition 2023 support); found '${PROTOC_VERSION:-unknown}'." >&2
+  echo "Upgrade protoc: https://protobuf.dev/installation/" >&2
   exit 1
 fi
 

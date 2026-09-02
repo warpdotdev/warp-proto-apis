@@ -8,11 +8,3 @@ fi
 
 # Install protoc go plugin.
 go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.36.6
-
-# Install protoc TypeScript plugin (protoc-gen-es from @bufbuild/protobuf).
-if command -v npm &> /dev/null; then
-    npm install --global @bufbuild/protoc-gen-es@^2.11.0
-else
-    echo "Warning: npm not found. TypeScript code generation will not be available."
-    echo "Install Node.js (https://nodejs.org/) to enable TypeScript generation."
-fi
