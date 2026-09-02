@@ -108,12 +108,6 @@ message AgentEvent {
       Failed failed = 10;
     }
 
-    // Resolved display name of the sender, so viewers don't render raw ids.
-    string sender_display_name = 11 [ (sensitive) = true ];
-    // TODO(Ben): add agent type here?
-    // The sender's Oz run id, for unambiguous drill-down joins.
-    string sender_run_id = 12;
-
     message Errored {
       string stage = 1;
       string reason = 2;
@@ -286,13 +280,17 @@ message Message {
 
     AgentType intended_agent = 5;
 
-    // What produced this query (client, external platform, parent agent,
-    // wake, schedule, ...). Server-stamped when the message is persisted.
+    // What produced this query (client, parent agent, wake, schedule,
+    // automation, ...). Server-stamped when the message is persisted.
     UserQueryOrigin origin = 6;
 
-    // The Warp user on whose behalf this query was sent. Server-stamped from
-    // the authenticated principal or the resolved external identity. Unset
-    // for origins with no human (parent_agent, agent_message_wake, schedule).
+    // The Warp user on whose behalf this query was sent. Server-stamped
+    // whenever the server resolved a Warp user, regardless of origin. For
+    // externally-sourced queries (origin = automation with a source_message)
+    // `author.principal` is unset iff `author.resolution` is UNRESOLVED, in
+    // which case the platform-side identity is on `source_message.sender`.
+    // Entirely unset for origins with no human behind them (parent_agent,
+    // agent_message_wake, schedule).
     QueryAuthor author = 7;
 
     // The original third-party message/event this query was derived from.
