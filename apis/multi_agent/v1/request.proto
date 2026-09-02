@@ -77,6 +77,20 @@ message Request {
       map<string, Attachment> referenced_attachments = 2;
       UserQueryMode mode = 3;
       AgentType intended_agent = 4;
+
+      // Opaque, server-issued attribution token for a query the server
+      // injected into a running cloud agent (e.g. a Slack follow-up). The
+      // server attaches it to the injected message and the client echoes it
+      // back verbatim; the server decodes it into origin / author /
+      // source_message on the persisted Message.UserQuery.
+      //
+      // Integrity: the token is authenticated with a server-held key
+      // (encrypted or signed), so a client cannot forge or alter attribution.
+      // A token that fails verification is discarded and the query is
+      // persisted with origin = server_synthesized and
+      // author.resolution = UNRESOLVED. Clients never construct or interpret
+      // it and cannot set attribution directly.
+      string attribution_token = 5;
     }
 
     // Initial query to spawn the CLI (long-running command) subagent on a

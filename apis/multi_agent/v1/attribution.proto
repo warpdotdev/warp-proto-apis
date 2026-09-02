@@ -1,0 +1,244 @@
+// Attribution for user queries: which Warp user sent a query, what produced
+// it (client, parent agent, schedule, automation, ...), and the original
+// third-party message it was derived from. Shared by task.proto (persisted
+// messages) and request.proto (inputs).
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+import "google/protobuf/timestamp.proto";
+
+import "options.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+// A Warp user as resolved by the server. Pure identity: display name and
+// avatar are fetched just-in-time by clients since they change over time.
+message WarpUser {
+  // Warp (Firebase) user uid.
+  string uid = 1;
+  // Primary email at the time the query was recorded.
+  string email = 2 [ (sensitive) = true ];
+  // Uid of the team the user acted under for this query, if any.
+  string team_uid = 3;
+}
+
+// How the server established which Warp user is behind a query. Recorded for
+// auditing (e.g. to explain how an integration user was able to steer an
+// agent).
+enum IdentityResolution {
+  IDENTITY_RESOLUTION_UNSPECIFIED = 0;
+  // Authenticated directly by a Warp client session (desktop, web, CLI).
+  IDENTITY_RESOLUTION_CLIENT_SESSION = 1;
+  // Authenticated by a public API credential.
+  IDENTITY_RESOLUTION_API_KEY = 2;
+  // The external platform account is linked to a Warp user via an OAuth
+  // external account binding.
+  IDENTITY_RESOLUTION_EXTERNAL_ACCOUNT_BINDING = 3;
+  // The external platform account's email matched a Warp user on the team.
+  IDENTITY_RESOLUTION_EMAIL_MATCH = 4;
+  // No Warp user could be resolved (unbound external user, bot actor).
+  // QueryAuthor.principal is unset in this case.
+  IDENTITY_RESOLUTION_UNRESOLVED = 5;
+}
+
+// The Warp principal on whose behalf a UserQuery was sent. Conversations are
+// multi-player, so this is recorded per query. Server-stamped; never trusted
+// from clients.
+//
+// The author is not always a Warp user: a Slack/GitHub/... actor with no
+// linked Warp account yields resolution = UNRESOLVED and an unset principal,
+// and the platform-side identity lives on ExternalMessage.sender instead.
+message QueryAuthor {
+  // The resolved principal. Modeled as a oneof so non-user principals (e.g. a
+  // service account) can be added later without breaking the wire format.
+  oneof principal {
+    WarpUser user = 1;
+  }
+  // How `principal` was resolved.
+  IdentityResolution resolution = 2;
+}
+
+// A user or bot on a third-party platform. Field availability varies by
+// platform; unset fields are unknown. The platform itself is given by the
+// enclosing ExternalMessage.platform oneof.
+message ExternalUser {
+  // Platform-native user id (Slack user id, GitHub numeric id, GitLab user
+  // id, Linear actor id, Jira accountId).
+  string id = 1 [ (sensitive) = true ];
+  // Login/handle (GitHub login, GitLab username, Slack @name), when the
+  // platform has one.
+  string handle = 2 [ (sensitive) = true ];
+  // Human-readable name (Slack real name, GitLab name, Jira displayName).
+  string display_name = 3 [ (sensitive) = true ];
+  // Avatar image URL. May expire (some platforms serve signed URLs); clients
+  // should fall back to the Warp user's avatar or initials.
+  string avatar_url = 4 [ (sensitive) = true ];
+  // Email, when the platform exposes it and scopes permit.
+  string email = 5 [ (sensitive) = true ];
+  // Link to the user's profile page on the platform.
+  string profile_url = 6 [ (sensitive) = true ];
+  // True if the platform identifies the actor as a bot/app/integration.
+  bool is_bot = 7;
+}
+
+// Text encoding of ExternalMessage.body.
+enum BodyFormat {
+  BODY_FORMAT_UNSPECIFIED = 0;
+  BODY_FORMAT_PLAIN_TEXT = 1;
+  // CommonMark / GitHub-flavored markdown (GitHub, GitLab, Linear).
+  BODY_FORMAT_MARKDOWN = 2;
+  // Slack mrkdwn (<@U123>, <#C123|name>, *bold*, ...).
+  BODY_FORMAT_SLACK_MRKDWN = 3;
+  BODY_FORMAT_HTML = 4;
+  // Atlassian Document Format JSON (Jira comments); `body` holds the JSON.
+  BODY_FORMAT_ATLASSIAN_DOCUMENT_FORMAT = 5;
+}
+
+// The original third-party message or event a UserQuery was derived from:
+// who posted it, the raw text, a permalink back to it, and the minimal
+// platform-specific container it lives in (Slack channel, GitHub PR, ...).
+// The `platform` oneof is always set, even when its message is empty, so it
+// also identifies the platform. Keep the per-platform messages minimal; add
+// fields as concrete needs arise.
+message ExternalMessage {
+  // Who posted the message/event. Unset for custom webhooks and for events
+  // with no actor.
+  ExternalUser sender = 1;
+  // The raw message text as posted, before any Warp templating or prompt
+  // assembly. Encoding given by `body_format`.
+  string body = 2 [ (sensitive) = true ];
+  BodyFormat body_format = 3;
+  // Permalink to the message/comment/event on the platform.
+  string permalink = 4 [ (sensitive) = true ];
+  // When the message was posted, according to the platform.
+  google.protobuf.Timestamp platform_timestamp = 5;
+
+  oneof platform {
+    Slack slack = 6;
+    GitHub github = 7;
+    GitLab gitlab = 8;
+    Linear linear = 9;
+    Jira jira = 10;
+    CustomWebhook custom_webhook = 11;
+  }
+
+  // Slack message or app_mention.
+  message Slack {
+    // Slack workspace (team) id; channel and user ids are scoped to it.
+    string team_id = 1;
+    // Channel id. Sensitive because DM channel ids identify people.
+    string channel_id = 2 [ (sensitive) = true ];
+    // Channel name, if known (empty for DMs).
+    string channel_name = 3 [ (sensitive) = true ];
+    // Slack ts of the thread parent, if this message is a thread reply.
+    string thread_ts = 4;
+  }
+
+  // GitHub issue or pull request comment/review.
+  message GitHub {
+    // Repository owner or organization login.
+    string owner = 1 [ (sensitive) = true ];
+    // Repository name.
+    string repo = 2 [ (sensitive) = true ];
+    // Issue or pull request number.
+    int32 number = 3;
+    // True if `number` refers to a pull request.
+    bool is_pull_request = 4;
+  }
+
+  // GitLab merge request note.
+  message GitLab {
+    // Project path with namespace, e.g. "group/subgroup/project".
+    string project_path = 1 [ (sensitive) = true ];
+    // Project-scoped merge request number shown in the UI.
+    int32 merge_request_iid = 2;
+  }
+
+  // Linear issue comment.
+  message Linear {
+    // Human-readable issue identifier, e.g. "ENG-123".
+    string issue_identifier = 1 [ (sensitive) = true ];
+  }
+
+  // Jira issue comment.
+  message Jira {
+    // Issue key, e.g. "ENG-123".
+    string issue_key = 1 [ (sensitive) = true ];
+  }
+
+  // Custom (user-configured) webhook delivery. Carries no user identity.
+  message CustomWebhook {
+    // Uid of the configured webhook.
+    string webhook_uid = 1;
+  }
+}
+
+// What produced a UserQuery: the mechanism by which it reached the agent.
+// Modeled as a oneof of per-variant messages (like Harness) so each variant
+// can carry its own payload without breaking the wire format. Orthogonal to
+// QueryAuthor (who) and ExternalMessage (source text): a GitHub comment that
+// matched an automation rule has origin=automation, a source_message, and an
+// author if the commenter resolved to a Warp user; the same comment routed
+// directly through the integration has origin=external_platform.
+message UserQueryOrigin {
+  oneof variant {
+    WarpClient warp_client = 1;
+    ExternalPlatform external_platform = 2;
+    ParentAgent parent_agent = 3;
+    AgentMessageWake agent_message_wake = 4;
+    Schedule schedule = 5;
+    Automation automation = 6;
+    PublicApi public_api = 7;
+    ServerSynthesized server_synthesized = 8;
+  }
+
+  // A human typed the query in a Warp client.
+  message WarpClient {}
+
+  // A message on a directly integrated platform (Slack mention or thread
+  // follow-up, GitHub/GitLab/Linear/Jira comment, custom webhook) was routed
+  // to the agent without an automation rule. Carries no fields: the platform
+  // and its container live on UserQuery.source_message. Contrast with
+  // Automation, which always names the rule that dispatched the query.
+  message ExternalPlatform {}
+
+  // A parent (orchestrating) agent sent this query to a child agent.
+  message ParentAgent {
+    // Oz run id of the parent agent.
+    string parent_run_id = 1;
+  }
+
+  // Server-synthesized wake prompt ("You have received N new agent
+  // message(s) ...").
+  message AgentMessageWake {
+    // Number of unread agent messages that triggered the wake; 0 if unknown.
+    int32 message_count = 1;
+  }
+
+  // A scheduled agent fired.
+  message Schedule {
+    // Uid of the schedule.
+    string schedule_uid = 1;
+  }
+
+  // An automation rule dispatched the query after matching an external event
+  // (GitHub comment, CI failure, custom webhook, ...). The mechanism is the
+  // rule even when the matched event was a human's message. The matched event
+  // is in UserQuery.source_message when it came from a supported platform.
+  message Automation {
+    // Uid of the automation rule.
+    string automation_uid = 1;
+  }
+
+  // Submitted through the public API.
+  message PublicApi {}
+
+  // Any other server-synthesized query (resume, handoff rehydration, ...).
+  message ServerSynthesized {
+    // Free-form, non-user-facing reason for debugging (e.g. "handoff_resume").
+    string reason = 1;
+  }
+}
