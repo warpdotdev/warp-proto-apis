@@ -993,13 +993,13 @@ func (*agentEvent_LifecycleEvent_) isAgentEvent_Event() {}
 
 // Timing information for a single top-level request.
 type RequestTiming struct {
-	state                                 protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_StartedAt                  *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=started_at,json=startedAt"`
-	xxx_hidden_FirstTokenAt               *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=first_token_at,json=firstTokenAt"`
-	xxx_hidden_EndedAt                    *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=ended_at,json=endedAt"`
-	xxx_hidden_TotalLlmGenerationDuration *durationpb.Duration   `protobuf:"bytes,4,opt,name=total_llm_generation_duration,json=totalLlmGenerationDuration"`
-	unknownFields                         protoimpl.UnknownFields
-	sizeCache                             protoimpl.SizeCache
+	state                                      protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_RequestStartedAt                *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=request_started_at,json=requestStartedAt"`
+	xxx_hidden_FirstTokenAt                    *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=first_token_at,json=firstTokenAt"`
+	xxx_hidden_RequestEndedAt                  *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=request_ended_at,json=requestEndedAt"`
+	xxx_hidden_CumulativeLlmGenerationDuration *durationpb.Duration   `protobuf:"bytes,4,opt,name=cumulative_llm_generation_duration,json=cumulativeLlmGenerationDuration"`
+	unknownFields                              protoimpl.UnknownFields
+	sizeCache                                  protoimpl.SizeCache
 }
 
 func (x *RequestTiming) Reset() {
@@ -1027,9 +1027,9 @@ func (x *RequestTiming) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *RequestTiming) GetStartedAt() *timestamppb.Timestamp {
+func (x *RequestTiming) GetRequestStartedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.xxx_hidden_StartedAt
+		return x.xxx_hidden_RequestStartedAt
 	}
 	return nil
 }
@@ -1041,41 +1041,41 @@ func (x *RequestTiming) GetFirstTokenAt() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *RequestTiming) GetEndedAt() *timestamppb.Timestamp {
+func (x *RequestTiming) GetRequestEndedAt() *timestamppb.Timestamp {
 	if x != nil {
-		return x.xxx_hidden_EndedAt
+		return x.xxx_hidden_RequestEndedAt
 	}
 	return nil
 }
 
-func (x *RequestTiming) GetTotalLlmGenerationDuration() *durationpb.Duration {
+func (x *RequestTiming) GetCumulativeLlmGenerationDuration() *durationpb.Duration {
 	if x != nil {
-		return x.xxx_hidden_TotalLlmGenerationDuration
+		return x.xxx_hidden_CumulativeLlmGenerationDuration
 	}
 	return nil
 }
 
-func (x *RequestTiming) SetStartedAt(v *timestamppb.Timestamp) {
-	x.xxx_hidden_StartedAt = v
+func (x *RequestTiming) SetRequestStartedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_RequestStartedAt = v
 }
 
 func (x *RequestTiming) SetFirstTokenAt(v *timestamppb.Timestamp) {
 	x.xxx_hidden_FirstTokenAt = v
 }
 
-func (x *RequestTiming) SetEndedAt(v *timestamppb.Timestamp) {
-	x.xxx_hidden_EndedAt = v
+func (x *RequestTiming) SetRequestEndedAt(v *timestamppb.Timestamp) {
+	x.xxx_hidden_RequestEndedAt = v
 }
 
-func (x *RequestTiming) SetTotalLlmGenerationDuration(v *durationpb.Duration) {
-	x.xxx_hidden_TotalLlmGenerationDuration = v
+func (x *RequestTiming) SetCumulativeLlmGenerationDuration(v *durationpb.Duration) {
+	x.xxx_hidden_CumulativeLlmGenerationDuration = v
 }
 
-func (x *RequestTiming) HasStartedAt() bool {
+func (x *RequestTiming) HasRequestStartedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_StartedAt != nil
+	return x.xxx_hidden_RequestStartedAt != nil
 }
 
 func (x *RequestTiming) HasFirstTokenAt() bool {
@@ -1085,61 +1085,66 @@ func (x *RequestTiming) HasFirstTokenAt() bool {
 	return x.xxx_hidden_FirstTokenAt != nil
 }
 
-func (x *RequestTiming) HasEndedAt() bool {
+func (x *RequestTiming) HasRequestEndedAt() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_EndedAt != nil
+	return x.xxx_hidden_RequestEndedAt != nil
 }
 
-func (x *RequestTiming) HasTotalLlmGenerationDuration() bool {
+func (x *RequestTiming) HasCumulativeLlmGenerationDuration() bool {
 	if x == nil {
 		return false
 	}
-	return x.xxx_hidden_TotalLlmGenerationDuration != nil
+	return x.xxx_hidden_CumulativeLlmGenerationDuration != nil
 }
 
-func (x *RequestTiming) ClearStartedAt() {
-	x.xxx_hidden_StartedAt = nil
+func (x *RequestTiming) ClearRequestStartedAt() {
+	x.xxx_hidden_RequestStartedAt = nil
 }
 
 func (x *RequestTiming) ClearFirstTokenAt() {
 	x.xxx_hidden_FirstTokenAt = nil
 }
 
-func (x *RequestTiming) ClearEndedAt() {
-	x.xxx_hidden_EndedAt = nil
+func (x *RequestTiming) ClearRequestEndedAt() {
+	x.xxx_hidden_RequestEndedAt = nil
 }
 
-func (x *RequestTiming) ClearTotalLlmGenerationDuration() {
-	x.xxx_hidden_TotalLlmGenerationDuration = nil
+func (x *RequestTiming) ClearCumulativeLlmGenerationDuration() {
+	x.xxx_hidden_CumulativeLlmGenerationDuration = nil
 }
 
 type RequestTiming_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// When the server began processing the request.
-	StartedAt *timestamppb.Timestamp
+	// When warp-server began accepting the request. Together with
+	// request_ended_at, this forms the outer wall-clock span of the request.
+	RequestStartedAt *timestamppb.Timestamp
 	// When the first token of the response was received from the LLM.
 	FirstTokenAt *timestamppb.Timestamp
-	// When the server finished processing the request.
-	EndedAt *timestamppb.Timestamp
+	// When warp-server finished closing out the request (e.g. closing the
+	// connection). Together with request_started_at, this forms the outer
+	// wall-clock span of the request.
+	RequestEndedAt *timestamppb.Timestamp
 	// The accumulated duration spent streaming responses from the LLM across
 	// every internal LLM call made while handling this request (e.g. tool-use
-	// loops, compaction, retries). This is a sum of per-attempt streaming
-	// durations, not `ended_at - started_at`, since the latter also includes
-	// non-LLM work (e.g. tool execution, waiting on the client).
-	TotalLlmGenerationDuration *durationpb.Duration
+	// loops, compaction, retries). This is not simply
+	// `request_ended_at - request_started_at`: it's a sum of per-attempt
+	// streaming durations, so it excludes retry-backoff gaps and other non-LLM
+	// work (e.g. tool execution, waiting on the client) that the outer span
+	// includes.
+	CumulativeLlmGenerationDuration *durationpb.Duration
 }
 
 func (b0 RequestTiming_builder) Build() *RequestTiming {
 	m0 := &RequestTiming{}
 	b, x := &b0, m0
 	_, _ = b, x
-	x.xxx_hidden_StartedAt = b.StartedAt
+	x.xxx_hidden_RequestStartedAt = b.RequestStartedAt
 	x.xxx_hidden_FirstTokenAt = b.FirstTokenAt
-	x.xxx_hidden_EndedAt = b.EndedAt
-	x.xxx_hidden_TotalLlmGenerationDuration = b.TotalLlmGenerationDuration
+	x.xxx_hidden_RequestEndedAt = b.RequestEndedAt
+	x.xxx_hidden_CumulativeLlmGenerationDuration = b.CumulativeLlmGenerationDuration
 	return m0
 }
 
@@ -38777,13 +38782,12 @@ const file_task_proto_rawDesc = "" +
 	"\x06reason\x18\x01 \x01(\tR\x06reason\x12)\n" +
 	"\rerror_message\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\ferrorMessageB\b\n" +
 	"\x06detailB\a\n" +
-	"\x05event\"\xa1\x02\n" +
-	"\rRequestTiming\x129\n" +
-	"\n" +
-	"started_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstartedAt\x12@\n" +
-	"\x0efirst_token_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\ffirstTokenAt\x125\n" +
-	"\bended_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\aendedAt\x12\\\n" +
-	"\x1dtotal_llm_generation_duration\x18\x04 \x01(\v2\x19.google.protobuf.DurationR\x1atotalLlmGenerationDuration\"\xeb\x01\n" +
+	"\x05event\"\xc9\x02\n" +
+	"\rRequestTiming\x12H\n" +
+	"\x12request_started_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x10requestStartedAt\x12@\n" +
+	"\x0efirst_token_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\ffirstTokenAt\x12D\n" +
+	"\x10request_ended_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x0erequestEndedAt\x12f\n" +
+	"\"cumulative_llm_generation_duration\x18\x04 \x01(\v2\x19.google.protobuf.DurationR\x1fcumulativeLlmGenerationDuration\"\xeb\x01\n" +
 	"\x0eReviewComments\x12M\n" +
 	"\x10pending_comments\x18\x01 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x0fpendingComments\x12Q\n" +
 	"\x12completed_comments\x18\x02 \x03(\v2\".warp.multi_agent.v1.ReviewCommentR\x11completedComments\x127\n" +
@@ -40220,10 +40224,10 @@ var file_task_proto_depIdxs = []int32{
 	14,  // 1: warp.multi_agent.v1.Task.messages:type_name -> warp.multi_agent.v1.Message
 	269, // 2: warp.multi_agent.v1.AgentEvent.occurred_at:type_name -> google.protobuf.Timestamp
 	64,  // 3: warp.multi_agent.v1.AgentEvent.lifecycle_event:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent
-	269, // 4: warp.multi_agent.v1.RequestTiming.started_at:type_name -> google.protobuf.Timestamp
+	269, // 4: warp.multi_agent.v1.RequestTiming.request_started_at:type_name -> google.protobuf.Timestamp
 	269, // 5: warp.multi_agent.v1.RequestTiming.first_token_at:type_name -> google.protobuf.Timestamp
-	269, // 6: warp.multi_agent.v1.RequestTiming.ended_at:type_name -> google.protobuf.Timestamp
-	270, // 7: warp.multi_agent.v1.RequestTiming.total_llm_generation_duration:type_name -> google.protobuf.Duration
+	269, // 6: warp.multi_agent.v1.RequestTiming.request_ended_at:type_name -> google.protobuf.Timestamp
+	270, // 7: warp.multi_agent.v1.RequestTiming.cumulative_llm_generation_duration:type_name -> google.protobuf.Duration
 	13,  // 8: warp.multi_agent.v1.ReviewComments.pending_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	13,  // 9: warp.multi_agent.v1.ReviewComments.completed_comments:type_name -> warp.multi_agent.v1.ReviewComment
 	271, // 10: warp.multi_agent.v1.ReviewComments.diff_set:type_name -> warp.multi_agent.v1.DiffSet
