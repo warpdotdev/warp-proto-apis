@@ -3,6 +3,7 @@ edition = "2023";
 
 package warp.multi_agent.v1;
 
+import "google/protobuf/duration.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
 
@@ -86,6 +87,9 @@ message ResponseEvent {
 
     // The platform and inference usage cost charged to the user for this AM request.
     RequestCharges request_charges = 13;
+
+    // Timing information for this request.
+    RequestTiming request_timing = 14;
 
     message ConversationUsageMetadata {
       // The fraction of the base model's context window that is used in the current conversation (i.e. total tokens / model context window).
@@ -205,6 +209,9 @@ message ResponseEvent {
 
       // Platform usage charged
       float platform_usage_in_cents = 4;
+
+      // Duration of platform usage charged.
+      google.protobuf.Duration platform_usage_duration = 5;
     }
 
 

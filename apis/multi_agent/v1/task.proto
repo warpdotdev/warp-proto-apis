@@ -122,6 +122,14 @@ message AgentEvent {
   }
 }
 
+// Timing information for a single top-level request.
+message RequestTiming {
+  google.protobuf.Timestamp started_at = 1;
+  google.protobuf.Timestamp first_token_at = 2;
+  google.protobuf.Timestamp ended_at = 3;
+  google.protobuf.Duration total_llm_generation_duration = 4;
+}
+
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
   repeated ReviewComment completed_comments = 2;
