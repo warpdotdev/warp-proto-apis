@@ -2657,7 +2657,7 @@ type ResponseEvent_StreamFinished_ChargedUsage_builder struct {
 	CustomEndpointInferenceUsage map[string]*ResponseEvent_StreamFinished_InferenceUsage
 	// Platform usage charged
 	PlatformUsageInCents *float32
-	// Duration of platform usage charged.
+	// Duration of platform usage charged (AKA Agent Hours)
 	PlatformUsageDuration *durationpb.Duration
 }
 
