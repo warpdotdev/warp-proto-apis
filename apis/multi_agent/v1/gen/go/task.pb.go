@@ -1118,9 +1118,17 @@ func (x *RequestTiming) ClearTotalLlmGenerationDuration() {
 type RequestTiming_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	StartedAt                  *timestamppb.Timestamp
-	FirstTokenAt               *timestamppb.Timestamp
-	EndedAt                    *timestamppb.Timestamp
+	// When the server began processing the request.
+	StartedAt *timestamppb.Timestamp
+	// When the first token of the response was received from the LLM.
+	FirstTokenAt *timestamppb.Timestamp
+	// When the server finished processing the request.
+	EndedAt *timestamppb.Timestamp
+	// The accumulated duration spent streaming responses from the LLM across
+	// every internal LLM call made while handling this request (e.g. tool-use
+	// loops, compaction, retries). This is a sum of per-attempt streaming
+	// durations, not `ended_at - started_at`, since the latter also includes
+	// non-LLM work (e.g. tool execution, waiting on the client).
 	TotalLlmGenerationDuration *durationpb.Duration
 }
 
