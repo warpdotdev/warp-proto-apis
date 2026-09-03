@@ -210,7 +210,7 @@ message ResponseEvent {
       // Platform usage charged
       float platform_usage_in_cents = 4;
 
-      // Duration of platform usage charged.
+      // Duration of platform usage charged (AKA Agent Hours)
       google.protobuf.Duration platform_usage_duration = 5;
     }
 
