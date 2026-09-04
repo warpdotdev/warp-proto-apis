@@ -135,7 +135,7 @@ message RequestTiming {
   google.protobuf.Timestamp request_ended_at = 3;
 
   // Sum of per-attempt LLM streaming durations across every internal LLM call
-  // in this request (tool loops, compaction, retries).
+  // in this request
   google.protobuf.Duration cumulative_llm_generation_duration = 4;
 }
 
