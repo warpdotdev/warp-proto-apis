@@ -1745,8 +1745,7 @@ type ResponseEvent_StreamFinished_builder struct {
 	ConversationUsageMetadata *ResponseEvent_StreamFinished_ConversationUsageMetadata
 	// The platform and inference usage cost charged to the user for this AM request.
 	RequestCharges *ResponseEvent_StreamFinished_RequestCharges
-	// Timing information for this request.
-	RequestTiming *RequestTiming
+	RequestTiming  *RequestTiming
 }
 
 func (b0 ResponseEvent_StreamFinished_builder) Build() *ResponseEvent_StreamFinished {

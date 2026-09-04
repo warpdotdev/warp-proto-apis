@@ -1118,22 +1118,16 @@ func (x *RequestTiming) ClearCumulativeLlmGenerationDuration() {
 type RequestTiming_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// When warp-server began accepting the request. Together with
-	// request_ended_at, this forms the outer wall-clock span of the request.
+	// When warp-server began accepting the request.
 	RequestStartedAt *timestamppb.Timestamp
 	// When the first token of the response was received from the LLM.
 	FirstTokenAt *timestamppb.Timestamp
 	// When warp-server finished closing out the request (e.g. closing the
-	// connection). Together with request_started_at, this forms the outer
-	// wall-clock span of the request.
+	// connection).
 	RequestEndedAt *timestamppb.Timestamp
-	// The accumulated duration spent streaming responses from the LLM across
-	// every internal LLM call made while handling this request (e.g. tool-use
-	// loops, compaction, retries). This is not simply
-	// `request_ended_at - request_started_at`: it's a sum of per-attempt
-	// streaming durations, so it excludes retry-backoff gaps and other non-LLM
-	// work (e.g. tool execution, waiting on the client) that the outer span
-	// includes.
+	// Sum of per-attempt LLM streaming durations across every internal LLM call
+	// in this request (tool loops, compaction, retries). Excludes tool
+	// execution, retry backoff, and time waiting on the client.
 	CumulativeLlmGenerationDuration *durationpb.Duration
 }
 

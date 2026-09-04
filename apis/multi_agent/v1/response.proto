@@ -88,7 +88,6 @@ message ResponseEvent {
     // The platform and inference usage cost charged to the user for this AM request.
     RequestCharges request_charges = 13;
 
-    // Timing information for this request.
     RequestTiming request_timing = 14;
 
     message ConversationUsageMetadata {
