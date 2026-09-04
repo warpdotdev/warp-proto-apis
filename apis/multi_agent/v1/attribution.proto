@@ -98,11 +98,17 @@ enum BodyFormat {
 }
 
 // The original third-party message or event a UserQuery was derived from:
-// who posted it, the raw text, a permalink back to it, and the minimal
+// who posted it, the raw text, a permalink back to it, and the
 // platform-specific container it lives in (Slack channel, GitHub PR, ...).
 // The `platform` oneof is always set, even when its message is empty, so it
-// also identifies the platform. Keep the per-platform messages minimal; add
-// fields as concrete needs arise.
+// also identifies the platform.
+//
+// Beyond the message itself, each platform arm carries the context the
+// server fetched at trigger time (thread history, issue/PR snapshot, file
+// patch, ...) so that the prompt the agent sees can be rendered from this
+// message alone, after the fact, instead of being pre-assembled into
+// UserQuery.query. Fixed guidance text and file attachments are not
+// recorded here.
 message ExternalMessage {
   // Who posted the message/event. Unset for custom webhooks and for events
   // with no actor.
@@ -135,6 +141,21 @@ message ExternalMessage {
     string channel_name = 3 [ (sensitive) = true ];
     // Slack ts of the thread parent, if this message is a thread reply.
     string thread_ts = 4;
+    // Slack ts of this message (raw "seconds.micros" string, also its id).
+    // platform_timestamp is the parsed form; this is what the prompt prints.
+    string message_ts = 5;
+    // Workspace host, e.g. "acme.slack.com", from the message permalink.
+    string workspace_domain = 6 [ (sensitive) = true ];
+    // Earlier messages in the thread as fetched at trigger time, oldest
+    // first, excluding this message. Capped by the server (15 today).
+    repeated ThreadMessage thread_history = 7;
+
+    message ThreadMessage {
+      string text = 1 [ (sensitive) = true ];
+      // Raw JSON of the Slack message `attachments` array (unfurls / app
+      // blocks), if any. Not file uploads.
+      string attachments_json = 2 [ (sensitive) = true ];
+    }
   }
 
   // GitHub issue or pull request comment/review.
@@ -147,9 +168,70 @@ message ExternalMessage {
     int32 number = 3;
     // True if `number` refers to a pull request.
     bool is_pull_request = 4;
+    EventType event_type = 5;
+    // Issue / PR title, as fetched at trigger time.
+    string title = 6 [ (sensitive) = true ];
+    // Issue / PR state, "open" or "closed".
+    string state = 7;
+    repeated string labels = 8 [ (sensitive) = true ];
+    // Issue / PR body. Unset for PULL_REQUEST_OPENED, where it is `body`.
+    string description = 9 [ (sensitive) = true ];
+    string head_branch = 10 [ (sensitive) = true ];
+    string base_branch = 11 [ (sensitive) = true ];
+    // Comment thread as fetched at trigger time, oldest first, capped (15):
+    // the issue/PR conversation for ISSUE_COMMENT, the review-comment thread
+    // rooted at this comment's root for PULL_REQUEST_REVIEW_COMMENT. May
+    // include this message itself.
+    repeated Comment thread = 12;
+    // Where this review comment sits (PULL_REQUEST_REVIEW_COMMENT only).
+    ReviewCommentLocation location = 13;
+    // Full patch of `location.path` in the PR, as fetched at trigger time.
+    string file_patch = 14 [ (sensitive) = true ];
+    // The submitted review (PULL_REQUEST_REVIEW_SUBMITTED only); `body` is
+    // the review summary and `sender` the reviewer.
+    Review review = 15;
+
+    enum EventType {
+      EVENT_TYPE_UNSPECIFIED = 0;
+      // Comment on an issue or PR conversation.
+      EVENT_TYPE_ISSUE_COMMENT = 1;
+      // Inline review comment on a PR diff.
+      EVENT_TYPE_PULL_REQUEST_REVIEW_COMMENT = 2;
+      // PR opened; `body` is the PR description.
+      EVENT_TYPE_PULL_REQUEST_OPENED = 3;
+      // Review submitted; see `review`.
+      EVENT_TYPE_PULL_REQUEST_REVIEW_SUBMITTED = 4;
+    }
+
+    // Position of an inline review comment in the PR diff.
+    message ReviewCommentLocation {
+      string path = 1 [ (sensitive) = true ];
+      int32 line = 2;
+      int32 start_line = 3;
+      string diff_hunk = 4 [ (sensitive) = true ];
+    }
+
+    // An issue, PR, or review comment.
+    message Comment {
+      // `handle` is the GitHub login.
+      ExternalUser author = 1;
+      string body = 2 [ (sensitive) = true ];
+      string html_url = 3 [ (sensitive) = true ];
+      // Set for inline review comments.
+      ReviewCommentLocation location = 4;
+    }
+
+    // A submitted pull request review.
+    message Review {
+      // "approved", "changes_requested", or "commented".
+      string state = 1;
+      repeated Comment comments = 2;
+    }
   }
 
-  // GitLab merge request note.
+  // GitLab merge request note. Carries only the container: no GitLab field
+  // is rendered into a prompt today (the raw event travels as an
+  // attachment), so there is nothing further to record yet.
   message GitLab {
     // Project path with namespace, e.g. "group/subgroup/project".
     string project_path = 1 [ (sensitive) = true ];
@@ -161,18 +243,61 @@ message ExternalMessage {
   message Linear {
     // Human-readable issue identifier, e.g. "ENG-123".
     string issue_identifier = 1 [ (sensitive) = true ];
+    string issue_title = 2 [ (sensitive) = true ];
+    // Issue context pre-rendered by Linear and delivered with the agent
+    // session (promptContext). Equals `body` when the session has no
+    // comment.
+    string prompt_context = 3 [ (sensitive) = true ];
+    // Issue assignee, fetched only when the session was created by an app
+    // rather than a person (used to request their PR review).
+    ExternalUser issue_assignee = 4;
+    // Guidance entries attached to a prompted event, in order.
+    repeated string guidance = 5 [ (sensitive) = true ];
   }
 
   // Jira issue comment.
   message Jira {
     // Issue key, e.g. "ENG-123".
     string issue_key = 1 [ (sensitive) = true ];
+    Trigger trigger = 2;
+    // Issue snapshot fetched at trigger time.
+    string summary = 3 [ (sensitive) = true ];
+    string status = 4;
+    string issue_type = 5;
+    string priority = 6;
+    ExternalUser reporter = 7;
+    repeated string labels = 8 [ (sensitive) = true ];
+    // Most recent comments, oldest first, capped (5). Plain text as
+    // returned by the Jira REST client.
+    repeated Comment recent_comments = 9;
+    // Rovo agent-session request text when a triggering comment also
+    // exists (then `body` holds the comment). Unset otherwise.
+    string session_request = 10 [ (sensitive) = true ];
+
+    enum Trigger {
+      TRIGGER_UNSPECIFIED = 0;
+      // The agent label was added to the issue; `body` is the issue
+      // description as plain text.
+      TRIGGER_LABEL_ADDED = 1;
+      // A comment in the issue thread; `body` is the comment.
+      TRIGGER_ISSUE_COMMENT = 2;
+      // A message through the Rovo (A2A) agent connector.
+      TRIGGER_ROVO_AGENT_MESSAGE = 3;
+    }
+
+    message Comment {
+      // `author.id` is the Atlassian accountId.
+      ExternalUser author = 1;
+      string body = 2 [ (sensitive) = true ];
+    }
   }
 
   // Custom (user-configured) webhook delivery. Carries no user identity.
   message CustomWebhook {
     // Uid of the configured webhook.
     string webhook_uid = 1;
+    // Configured display name of the webhook at delivery time.
+    string webhook_name = 2 [ (sensitive) = true ];
   }
 }
 
@@ -231,6 +356,13 @@ message UserQueryOrigin {
   message Automation {
     // Uid of the automation rule.
     string automation_uid = 1;
+    // Canonical kind the rule matched, e.g. "github.issue_comment".
+    string matched_event_kind = 2;
+    // All canonical kinds classified for the delivery, when more than one.
+    repeated string event_kinds = 3;
+    // Provider delivery id (or a Warp-assigned hash when the provider has
+    // none).
+    string delivery_id = 4;
   }
 
   // Submitted through the public API.
