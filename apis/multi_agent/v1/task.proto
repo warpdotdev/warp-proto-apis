@@ -122,6 +122,23 @@ message AgentEvent {
   }
 }
 
+// Timing information for a single top-level request.
+message RequestTiming {
+  // When warp-server began accepting the request.
+  google.protobuf.Timestamp request_started_at = 1;
+
+  // When the first token of the response was received from the LLM.
+  google.protobuf.Timestamp first_token_at = 2;
+
+  // When warp-server finished closing out the request (e.g. closing the
+  // connection).
+  google.protobuf.Timestamp request_ended_at = 3;
+
+  // Sum of per-attempt LLM streaming durations across every internal LLM call
+  // in this request
+  google.protobuf.Duration cumulative_llm_generation_duration = 4;
+}
+
 message ReviewComments {
   repeated ReviewComment pending_comments = 1;
   repeated ReviewComment completed_comments = 2;
