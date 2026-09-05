@@ -15,6 +15,7 @@ import "suggestions.proto";
 import "task.proto";
 import "skill.proto";
 import "orchestration.proto";
+import "oz_hooks.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -38,6 +39,8 @@ message Request {
 
   // Information about the client's MCP capabilities.
   MCPContext mcp_context = 6;
+  // First-party Oz lifecycle hook capabilities and enabled events.
+  OzHookContext oz_hook_context = 7;
 
   message TaskContext {
     reserved active_task_id;
@@ -129,6 +132,9 @@ message Request {
           // preceding the other user inputs sent with the handoff (e.g. the
           // first local user query).
           ConversationHandoff conversation_handoff = 8;
+
+          // Result of a server-requested first-party Oz lifecycle hook.
+          OzHookResult oz_hook_result = 9;
         }
       }
 
@@ -499,6 +505,8 @@ message Request {
     // replace inline computer-use screenshot bytes with `StoredScreenshotRef`
     // references.
     bool supports_stored_screenshots = 33;
+    // If `true`, the client supports first-party Oz lifecycle hook gates.
+    bool supports_oz_lifecycle_hooks = 34;
 
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
