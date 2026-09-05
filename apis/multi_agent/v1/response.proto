@@ -7,6 +7,7 @@ import "google/protobuf/field_mask.proto";
 import "google/protobuf/go_features.proto";
 
 import "options.proto";
+import "oz_hooks.proto";
 import "suggestions.proto";
 import "task.proto";
 
@@ -54,6 +55,9 @@ message ResponseEvent {
     // If the request is already associated with an ambient/cloud run, this reuses
     // that existing run row ID.
     string run_id = 3;
+
+    // Oz hook payload schema versions supported by the server for this stream.
+    repeated string supported_oz_hook_payload_schema_versions = 4;
   }
 
   message ClientActions { repeated ClientAction actions = 1; }
@@ -367,6 +371,7 @@ message ClientAction {
     StartNewConversation start_new_conversation = 12;
     UpdateTaskServerData update_task_server_data = 13;
     MoveMessagesToNewTask move_messages_to_new_task = 14;
+    RunOzHook run_oz_hook = 15;
   }
 
   // Create task action

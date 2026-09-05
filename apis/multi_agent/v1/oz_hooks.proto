@@ -1,0 +1,68 @@
+// The first-party Oz lifecycle hook protocol.
+edition = "2023";
+
+package warp.multi_agent.v1;
+
+import "google/protobuf/go_features.proto";
+import "google/protobuf/struct.proto";
+
+import "options.proto";
+
+option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
+option features.(pb.go).api_level = API_OPAQUE;
+
+enum OzHookEvent {
+  OZ_HOOK_EVENT_UNSPECIFIED = 0;
+  OZ_HOOK_EVENT_SESSION_START = 1;
+  OZ_HOOK_EVENT_SESSION_END = 2;
+  OZ_HOOK_EVENT_USER_PROMPT_SUBMIT = 3;
+  OZ_HOOK_EVENT_STOP = 4;
+  OZ_HOOK_EVENT_PRE_TOOL_USE = 5;
+  OZ_HOOK_EVENT_POST_TOOL_USE = 6;
+  OZ_HOOK_EVENT_PRE_COMPACT = 7;
+}
+
+message OzHookContext {
+  repeated OzHookEvent enabled_events = 1;
+  repeated string supported_payload_schema_versions = 2;
+}
+
+message RunOzHook {
+  string invocation_id = 1;
+  string tool_use_id = 2;
+  OzHookEvent event = 3;
+  string schema_version = 4;
+  google.protobuf.Struct redacted_payload = 5 [ (sensitive) = true ];
+}
+
+message OzHookResult {
+  string invocation_id = 1;
+  string tool_use_id = 2;
+
+  oneof outcome {
+    Continue continue = 3;
+    Deny deny = 4;
+    Failed failed = 5;
+    Cancelled cancelled = 6;
+  }
+
+  message Continue {}
+
+  message Deny {
+    string reason = 1 [ (sensitive) = true ];
+    string source = 2;
+  }
+
+  message Failed {
+    string category = 1;
+    ResolvedAction resolved_action = 2;
+  }
+
+  message Cancelled {}
+
+  enum ResolvedAction {
+    RESOLVED_ACTION_UNSPECIFIED = 0;
+    RESOLVED_ACTION_CONTINUE = 1;
+    RESOLVED_ACTION_DENY = 2;
+  }
+}
