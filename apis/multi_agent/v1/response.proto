@@ -337,7 +337,11 @@ message ResponseEvent {
     message Other {}
     message Done {}
     message ReachedMaxTokenLimit {}
-    message QuotaLimit {}
+    message QuotaLimit {
+      // The external inference provider whose account quota was exhausted.
+      // Unknown preserves the legacy meaning of exhausted Warp credits.
+      LLMProvider provider = 1;
+    }
     message ContextWindowExceeded {}
     message LLMUnavailable {}
     message InvalidApiKey {
