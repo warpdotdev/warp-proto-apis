@@ -57,11 +57,23 @@ message Task {
   string server_data = 8;
 }
 
+// An interval of wall-clock time.
+message TimeSpan {
+  google.protobuf.Timestamp started_at = 1;
+  google.protobuf.Timestamp ended_at = 2;
+}
+
 message RequestTiming {
-  google.protobuf.Timestamp request_started_at = 1;
+  // The server-side processing window of the request
+  TimeSpan request_timespan = 1;
+
+  // When the first non-empty LLM output chunk of the request arrived. Unset if
+  // no LLM call produced any output
   google.protobuf.Timestamp first_token_at = 2;
-  google.protobuf.Timestamp request_ended_at = 3;
-  google.protobuf.Duration cumulative_llm_generation_duration = 4;
+
+  // Wall-clock spans of each internal LLM generation call, in order, including
+  // retried attempts. Summing their durations gives the total generation time.
+  repeated TimeSpan llm_generation_timespans = 3;
 }
 
 // The charges incurred by a single agent mode request, or accumulated across
@@ -90,6 +102,7 @@ message ChargedUsage {
   // Platform usage charged
   float platform_usage_in_cents = 4;
 
+  // The number of "agent hours" being charged for platform usage
   google.protobuf.Duration platform_usage_duration = 5;
 }
 
