@@ -157,22 +157,22 @@ message TokenCost {
 // Generic format for counting tokens incurred
 message TokenCount {
     // The total number of input tokens incurred
-    uint32 input = 1;
+    uint64 input = 1;
 
     // The total number of output tokens incurred
-    uint32 output = 2;
+    uint64 output = 2;
 
     // The total number of input cache read tokens incurred
     //
     // This is only populated for Anthropic models, which have the only API which provides such
     // granular cached token usage information.
-    uint32 input_cache_read = 3;
+    uint64 input_cache_read = 3;
 
     // The total number of input cache write tokens incurred
     //
     // This is only populated for Anthropic models, which have the only API which provides such
     // granular cached token usage information.
-    uint32 input_cache_write = 4;
+    uint64 input_cache_write = 4;
 }
 
 // Lifecycle event types emitted by child agents and routed to lead agents.
