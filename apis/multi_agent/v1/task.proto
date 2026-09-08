@@ -329,9 +329,9 @@ message Message {
 
     enum Outcome {
       OUTCOME_UNSPECIFIED = 0;
-      COMPLETED = 1;
-      CANCELED = 2;
-      ERRORED = 3;
+      OUTCOME_COMPLETED = 1;
+      OUTCOME_CANCELED = 2;
+      OUTCOME_ERRORED = 3;
     }
 
     ToolCallSummary tool_call_summary = 5;
