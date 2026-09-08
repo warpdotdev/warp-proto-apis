@@ -348,24 +348,24 @@ type Message_RequestMetadata_Outcome int32
 
 const (
 	Message_RequestMetadata_OUTCOME_UNSPECIFIED Message_RequestMetadata_Outcome = 0
-	Message_RequestMetadata_COMPLETED           Message_RequestMetadata_Outcome = 1
-	Message_RequestMetadata_CANCELED            Message_RequestMetadata_Outcome = 2
-	Message_RequestMetadata_ERRORED             Message_RequestMetadata_Outcome = 3
+	Message_RequestMetadata_OUTCOME_COMPLETED   Message_RequestMetadata_Outcome = 1
+	Message_RequestMetadata_OUTCOME_CANCELED    Message_RequestMetadata_Outcome = 2
+	Message_RequestMetadata_OUTCOME_ERRORED     Message_RequestMetadata_Outcome = 3
 )
 
 // Enum value maps for Message_RequestMetadata_Outcome.
 var (
 	Message_RequestMetadata_Outcome_name = map[int32]string{
 		0: "OUTCOME_UNSPECIFIED",
-		1: "COMPLETED",
-		2: "CANCELED",
-		3: "ERRORED",
+		1: "OUTCOME_COMPLETED",
+		2: "OUTCOME_CANCELED",
+		3: "OUTCOME_ERRORED",
 	}
 	Message_RequestMetadata_Outcome_value = map[string]int32{
 		"OUTCOME_UNSPECIFIED": 0,
-		"COMPLETED":           1,
-		"CANCELED":            2,
-		"ERRORED":             3,
+		"OUTCOME_COMPLETED":   1,
+		"OUTCOME_CANCELED":    2,
+		"OUTCOME_ERRORED":     3,
 	}
 )
 
@@ -20575,7 +20575,11 @@ func (x *Message_RequestMetadata_ContextWindow) ClearSummarized() {
 type Message_RequestMetadata_ContextWindow_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	Usage      *float32
+	// Percentage [0-100] of the model context window used
+	// up to the current point in the conversation
+	Usage *float32
+	// Whether the conversation messages were summarized
+	// because the context window was too full
 	Summarized *bool
 }
 
@@ -40214,7 +40218,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xdb\xd5\x01\n" +
+	"\x0ecomment_target\"\xf3\xd5\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -40250,7 +40254,7 @@ const file_task_proto_rawDesc = "" +
 	"\x12events_from_agents\x18\x1a \x01(\v2-.warp.multi_agent.v1.Message.EventsFromAgentsH\x00R\x10eventsFromAgents\x12r\n" +
 	"\x19passive_suggestion_result\x18\x1b \x01(\v24.warp.multi_agent.v1.Message.PassiveSuggestionResultH\x00R\x17passiveSuggestionResult\x12v\n" +
 	"\x1dorchestration_config_snapshot\x18\x1c \x01(\v20.warp.multi_agent.v1.OrchestrationConfigSnapshotH\x00R\x1borchestrationConfigSnapshot\x12Y\n" +
-	"\x10request_metadata\x18\x1e \x01(\v2,.warp.multi_agent.v1.Message.RequestMetadataH\x00R\x0frequestMetadata\x1a\xa9\x06\n" +
+	"\x10request_metadata\x18\x1e \x01(\v2,.warp.multi_agent.v1.Message.RequestMetadataH\x00R\x0frequestMetadata\x1a\xc1\x06\n" +
 	"\x0fRequestMetadata\x12:\n" +
 	"\x06timing\x18\x01 \x01(\v2\".warp.multi_agent.v1.RequestTimingR\x06timing\x12=\n" +
 	"\acharges\x18\x02 \x01(\v2#.warp.multi_agent.v1.RequestChargesR\acharges\x12\x1e\n" +
@@ -40272,12 +40276,12 @@ const file_task_proto_rawDesc = "" +
 	"\x05usage\x18\x01 \x01(\x02R\x05usage\x12\x1e\n" +
 	"\n" +
 	"summarized\x18\x02 \x01(\bR\n" +
-	"summarized\"L\n" +
+	"summarized\"d\n" +
 	"\aOutcome\x12\x17\n" +
-	"\x13OUTCOME_UNSPECIFIED\x10\x00\x12\r\n" +
-	"\tCOMPLETED\x10\x01\x12\f\n" +
-	"\bCANCELED\x10\x02\x12\v\n" +
-	"\aERRORED\x10\x03\x1a\xa0\x01\n" +
+	"\x13OUTCOME_UNSPECIFIED\x10\x00\x12\x15\n" +
+	"\x11OUTCOME_COMPLETED\x10\x01\x12\x14\n" +
+	"\x10OUTCOME_CANCELED\x10\x02\x12\x13\n" +
+	"\x0fOUTCOME_ERRORED\x10\x03\x1a\xa0\x01\n" +
 	"\x17PassiveSuggestionResult\x12H\n" +
 	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x12;\n" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x1a\xc3\x02\n" +
