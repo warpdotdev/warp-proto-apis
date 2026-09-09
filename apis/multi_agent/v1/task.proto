@@ -104,6 +104,9 @@ message ChargedUsage {
 
   // The number of "agent hours" being charged for platform usage
   google.protobuf.Duration platform_usage_duration = 5;
+
+  // Platform usage charged, in credits
+  float platform_usage_in_credits = 6;
 }
 
 
@@ -120,6 +123,9 @@ message InferenceUsage {
 
   // The cumulative cost of the web searches performed in US cents
   float web_search_cost_in_cents = 4;
+
+  // The cumulative cost of the web searches performed in credits
+  float web_search_cost_in_credits = 5;
 }
 
 message TokenCost {
@@ -134,6 +140,18 @@ message TokenCost {
 
     // Cost of cache-write input tokens, in US cents.
     float input_cache_write_cost_in_cents = 4;
+
+    // Cost of non-cached input tokens, in credits.
+    float input_cost_in_credits = 5;
+
+    // Cost of output tokens, in credits.
+    float output_cost_in_credits = 6;
+
+    // Cost of cache-read input tokens, in credits.
+    float input_cache_read_cost_in_credits = 7;
+
+    // Cost of cache-write input tokens, in credits.
+    float input_cache_write_cost_in_credits = 8;
 }
 
 // Generic format for counting tokens incurred

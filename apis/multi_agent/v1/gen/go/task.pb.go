@@ -1128,6 +1128,7 @@ type ChargedUsage struct {
 	xxx_hidden_CustomEndpointInferenceUsage map[string]*InferenceUsage `protobuf:"bytes,3,rep,name=custom_endpoint_inference_usage,json=customEndpointInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	xxx_hidden_PlatformUsageInCents         float32                    `protobuf:"fixed32,4,opt,name=platform_usage_in_cents,json=platformUsageInCents"`
 	xxx_hidden_PlatformUsageDuration        *durationpb.Duration       `protobuf:"bytes,5,opt,name=platform_usage_duration,json=platformUsageDuration"`
+	xxx_hidden_PlatformUsageInCredits       float32                    `protobuf:"fixed32,6,opt,name=platform_usage_in_credits,json=platformUsageInCredits"`
 	XXX_raceDetectHookData                  protoimpl.RaceDetectHookData
 	XXX_presence                            [1]uint32
 	unknownFields                           protoimpl.UnknownFields
@@ -1194,6 +1195,13 @@ func (x *ChargedUsage) GetPlatformUsageDuration() *durationpb.Duration {
 	return nil
 }
 
+func (x *ChargedUsage) GetPlatformUsageInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_PlatformUsageInCredits
+	}
+	return 0
+}
+
 func (x *ChargedUsage) SetDirectApiInferenceUsage(v map[string]*InferenceUsage) {
 	x.xxx_hidden_DirectApiInferenceUsage = v
 }
@@ -1208,11 +1216,16 @@ func (x *ChargedUsage) SetCustomEndpointInferenceUsage(v map[string]*InferenceUs
 
 func (x *ChargedUsage) SetPlatformUsageInCents(v float32) {
 	x.xxx_hidden_PlatformUsageInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
 }
 
 func (x *ChargedUsage) SetPlatformUsageDuration(v *durationpb.Duration) {
 	x.xxx_hidden_PlatformUsageDuration = v
+}
+
+func (x *ChargedUsage) SetPlatformUsageInCredits(v float32) {
+	x.xxx_hidden_PlatformUsageInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
 
 func (x *ChargedUsage) HasPlatformUsageInCents() bool {
@@ -1229,6 +1242,13 @@ func (x *ChargedUsage) HasPlatformUsageDuration() bool {
 	return x.xxx_hidden_PlatformUsageDuration != nil
 }
 
+func (x *ChargedUsage) HasPlatformUsageInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
 func (x *ChargedUsage) ClearPlatformUsageInCents() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_PlatformUsageInCents = 0
@@ -1236,6 +1256,11 @@ func (x *ChargedUsage) ClearPlatformUsageInCents() {
 
 func (x *ChargedUsage) ClearPlatformUsageDuration() {
 	x.xxx_hidden_PlatformUsageDuration = nil
+}
+
+func (x *ChargedUsage) ClearPlatformUsageInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_PlatformUsageInCredits = 0
 }
 
 type ChargedUsage_builder struct {
@@ -1252,6 +1277,8 @@ type ChargedUsage_builder struct {
 	PlatformUsageInCents *float32
 	// The number of "agent hours" being charged for platform usage
 	PlatformUsageDuration *durationpb.Duration
+	// Platform usage charged, in credits
+	PlatformUsageInCredits *float32
 }
 
 func (b0 ChargedUsage_builder) Build() *ChargedUsage {
@@ -1262,24 +1289,29 @@ func (b0 ChargedUsage_builder) Build() *ChargedUsage {
 	x.xxx_hidden_ByokInferenceUsage = b.ByokInferenceUsage
 	x.xxx_hidden_CustomEndpointInferenceUsage = b.CustomEndpointInferenceUsage
 	if b.PlatformUsageInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
 		x.xxx_hidden_PlatformUsageInCents = *b.PlatformUsageInCents
 	}
 	x.xxx_hidden_PlatformUsageDuration = b.PlatformUsageDuration
+	if b.PlatformUsageInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_PlatformUsageInCredits = *b.PlatformUsageInCredits
+	}
 	return m0
 }
 
 // Usage for inference, tracked in tokens and US cents
 type InferenceUsage struct {
-	state                           protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_TokenCount           *TokenCount            `protobuf:"bytes,1,opt,name=token_count,json=tokenCount"`
-	xxx_hidden_TokenCost            *TokenCost             `protobuf:"bytes,2,opt,name=token_cost,json=tokenCost"`
-	xxx_hidden_WebSearchCount       uint32                 `protobuf:"varint,3,opt,name=web_search_count,json=webSearchCount"`
-	xxx_hidden_WebSearchCostInCents float32                `protobuf:"fixed32,4,opt,name=web_search_cost_in_cents,json=webSearchCostInCents"`
-	XXX_raceDetectHookData          protoimpl.RaceDetectHookData
-	XXX_presence                    [1]uint32
-	unknownFields                   protoimpl.UnknownFields
-	sizeCache                       protoimpl.SizeCache
+	state                             protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_TokenCount             *TokenCount            `protobuf:"bytes,1,opt,name=token_count,json=tokenCount"`
+	xxx_hidden_TokenCost              *TokenCost             `protobuf:"bytes,2,opt,name=token_cost,json=tokenCost"`
+	xxx_hidden_WebSearchCount         uint32                 `protobuf:"varint,3,opt,name=web_search_count,json=webSearchCount"`
+	xxx_hidden_WebSearchCostInCents   float32                `protobuf:"fixed32,4,opt,name=web_search_cost_in_cents,json=webSearchCostInCents"`
+	xxx_hidden_WebSearchCostInCredits float32                `protobuf:"fixed32,5,opt,name=web_search_cost_in_credits,json=webSearchCostInCredits"`
+	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
+	XXX_presence                      [1]uint32
+	unknownFields                     protoimpl.UnknownFields
+	sizeCache                         protoimpl.SizeCache
 }
 
 func (x *InferenceUsage) Reset() {
@@ -1335,6 +1367,13 @@ func (x *InferenceUsage) GetWebSearchCostInCents() float32 {
 	return 0
 }
 
+func (x *InferenceUsage) GetWebSearchCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_WebSearchCostInCredits
+	}
+	return 0
+}
+
 func (x *InferenceUsage) SetTokenCount(v *TokenCount) {
 	x.xxx_hidden_TokenCount = v
 }
@@ -1345,12 +1384,17 @@ func (x *InferenceUsage) SetTokenCost(v *TokenCost) {
 
 func (x *InferenceUsage) SetWebSearchCount(v uint32) {
 	x.xxx_hidden_WebSearchCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
 }
 
 func (x *InferenceUsage) SetWebSearchCostInCents(v float32) {
 	x.xxx_hidden_WebSearchCostInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+}
+
+func (x *InferenceUsage) SetWebSearchCostInCredits(v float32) {
+	x.xxx_hidden_WebSearchCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
 }
 
 func (x *InferenceUsage) HasTokenCount() bool {
@@ -1381,6 +1425,13 @@ func (x *InferenceUsage) HasWebSearchCostInCents() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *InferenceUsage) HasWebSearchCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
 func (x *InferenceUsage) ClearTokenCount() {
 	x.xxx_hidden_TokenCount = nil
 }
@@ -1399,6 +1450,11 @@ func (x *InferenceUsage) ClearWebSearchCostInCents() {
 	x.xxx_hidden_WebSearchCostInCents = 0
 }
 
+func (x *InferenceUsage) ClearWebSearchCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_WebSearchCostInCredits = 0
+}
+
 type InferenceUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1410,6 +1466,8 @@ type InferenceUsage_builder struct {
 	WebSearchCount *uint32
 	// The cumulative cost of the web searches performed in US cents
 	WebSearchCostInCents *float32
+	// The cumulative cost of the web searches performed in credits
+	WebSearchCostInCredits *float32
 }
 
 func (b0 InferenceUsage_builder) Build() *InferenceUsage {
@@ -1419,26 +1477,34 @@ func (b0 InferenceUsage_builder) Build() *InferenceUsage {
 	x.xxx_hidden_TokenCount = b.TokenCount
 	x.xxx_hidden_TokenCost = b.TokenCost
 	if b.WebSearchCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
 		x.xxx_hidden_WebSearchCount = *b.WebSearchCount
 	}
 	if b.WebSearchCostInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
 		x.xxx_hidden_WebSearchCostInCents = *b.WebSearchCostInCents
+	}
+	if b.WebSearchCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		x.xxx_hidden_WebSearchCostInCredits = *b.WebSearchCostInCredits
 	}
 	return m0
 }
 
 type TokenCost struct {
-	state                                 protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_InputCostInCents           float32                `protobuf:"fixed32,1,opt,name=input_cost_in_cents,json=inputCostInCents"`
-	xxx_hidden_OutputCostInCents          float32                `protobuf:"fixed32,2,opt,name=output_cost_in_cents,json=outputCostInCents"`
-	xxx_hidden_InputCacheReadCostInCents  float32                `protobuf:"fixed32,3,opt,name=input_cache_read_cost_in_cents,json=inputCacheReadCostInCents"`
-	xxx_hidden_InputCacheWriteCostInCents float32                `protobuf:"fixed32,4,opt,name=input_cache_write_cost_in_cents,json=inputCacheWriteCostInCents"`
-	XXX_raceDetectHookData                protoimpl.RaceDetectHookData
-	XXX_presence                          [1]uint32
-	unknownFields                         protoimpl.UnknownFields
-	sizeCache                             protoimpl.SizeCache
+	state                                   protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_InputCostInCents             float32                `protobuf:"fixed32,1,opt,name=input_cost_in_cents,json=inputCostInCents"`
+	xxx_hidden_OutputCostInCents            float32                `protobuf:"fixed32,2,opt,name=output_cost_in_cents,json=outputCostInCents"`
+	xxx_hidden_InputCacheReadCostInCents    float32                `protobuf:"fixed32,3,opt,name=input_cache_read_cost_in_cents,json=inputCacheReadCostInCents"`
+	xxx_hidden_InputCacheWriteCostInCents   float32                `protobuf:"fixed32,4,opt,name=input_cache_write_cost_in_cents,json=inputCacheWriteCostInCents"`
+	xxx_hidden_InputCostInCredits           float32                `protobuf:"fixed32,5,opt,name=input_cost_in_credits,json=inputCostInCredits"`
+	xxx_hidden_OutputCostInCredits          float32                `protobuf:"fixed32,6,opt,name=output_cost_in_credits,json=outputCostInCredits"`
+	xxx_hidden_InputCacheReadCostInCredits  float32                `protobuf:"fixed32,7,opt,name=input_cache_read_cost_in_credits,json=inputCacheReadCostInCredits"`
+	xxx_hidden_InputCacheWriteCostInCredits float32                `protobuf:"fixed32,8,opt,name=input_cache_write_cost_in_credits,json=inputCacheWriteCostInCredits"`
+	XXX_raceDetectHookData                  protoimpl.RaceDetectHookData
+	XXX_presence                            [1]uint32
+	unknownFields                           protoimpl.UnknownFields
+	sizeCache                               protoimpl.SizeCache
 }
 
 func (x *TokenCost) Reset() {
@@ -1494,24 +1560,72 @@ func (x *TokenCost) GetInputCacheWriteCostInCents() float32 {
 	return 0
 }
 
+func (x *TokenCost) GetInputCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_InputCostInCredits
+	}
+	return 0
+}
+
+func (x *TokenCost) GetOutputCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_OutputCostInCredits
+	}
+	return 0
+}
+
+func (x *TokenCost) GetInputCacheReadCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_InputCacheReadCostInCredits
+	}
+	return 0
+}
+
+func (x *TokenCost) GetInputCacheWriteCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_InputCacheWriteCostInCredits
+	}
+	return 0
+}
+
 func (x *TokenCost) SetInputCostInCents(v float32) {
 	x.xxx_hidden_InputCostInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
 }
 
 func (x *TokenCost) SetOutputCostInCents(v float32) {
 	x.xxx_hidden_OutputCostInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
 }
 
 func (x *TokenCost) SetInputCacheReadCostInCents(v float32) {
 	x.xxx_hidden_InputCacheReadCostInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
 }
 
 func (x *TokenCost) SetInputCacheWriteCostInCents(v float32) {
 	x.xxx_hidden_InputCacheWriteCostInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
+}
+
+func (x *TokenCost) SetInputCostInCredits(v float32) {
+	x.xxx_hidden_InputCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
+}
+
+func (x *TokenCost) SetOutputCostInCredits(v float32) {
+	x.xxx_hidden_OutputCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
+}
+
+func (x *TokenCost) SetInputCacheReadCostInCredits(v float32) {
+	x.xxx_hidden_InputCacheReadCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
+}
+
+func (x *TokenCost) SetInputCacheWriteCostInCredits(v float32) {
+	x.xxx_hidden_InputCacheWriteCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *TokenCost) HasInputCostInCents() bool {
@@ -1542,6 +1656,34 @@ func (x *TokenCost) HasInputCacheWriteCostInCents() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
 }
 
+func (x *TokenCost) HasInputCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *TokenCost) HasOutputCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *TokenCost) HasInputCacheReadCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *TokenCost) HasInputCacheWriteCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *TokenCost) ClearInputCostInCents() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_InputCostInCents = 0
@@ -1562,6 +1704,26 @@ func (x *TokenCost) ClearInputCacheWriteCostInCents() {
 	x.xxx_hidden_InputCacheWriteCostInCents = 0
 }
 
+func (x *TokenCost) ClearInputCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_InputCostInCredits = 0
+}
+
+func (x *TokenCost) ClearOutputCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_OutputCostInCredits = 0
+}
+
+func (x *TokenCost) ClearInputCacheReadCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_InputCacheReadCostInCredits = 0
+}
+
+func (x *TokenCost) ClearInputCacheWriteCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_InputCacheWriteCostInCredits = 0
+}
+
 type TokenCost_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1573,6 +1735,14 @@ type TokenCost_builder struct {
 	InputCacheReadCostInCents *float32
 	// Cost of cache-write input tokens, in US cents.
 	InputCacheWriteCostInCents *float32
+	// Cost of non-cached input tokens, in credits.
+	InputCostInCredits *float32
+	// Cost of output tokens, in credits.
+	OutputCostInCredits *float32
+	// Cost of cache-read input tokens, in credits.
+	InputCacheReadCostInCredits *float32
+	// Cost of cache-write input tokens, in credits.
+	InputCacheWriteCostInCredits *float32
 }
 
 func (b0 TokenCost_builder) Build() *TokenCost {
@@ -1580,20 +1750,36 @@ func (b0 TokenCost_builder) Build() *TokenCost {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.InputCostInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
 		x.xxx_hidden_InputCostInCents = *b.InputCostInCents
 	}
 	if b.OutputCostInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
 		x.xxx_hidden_OutputCostInCents = *b.OutputCostInCents
 	}
 	if b.InputCacheReadCostInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
 		x.xxx_hidden_InputCacheReadCostInCents = *b.InputCacheReadCostInCents
 	}
 	if b.InputCacheWriteCostInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
 		x.xxx_hidden_InputCacheWriteCostInCents = *b.InputCacheWriteCostInCents
+	}
+	if b.InputCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
+		x.xxx_hidden_InputCostInCredits = *b.InputCostInCredits
+	}
+	if b.OutputCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
+		x.xxx_hidden_OutputCostInCredits = *b.OutputCostInCredits
+	}
+	if b.InputCacheReadCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
+		x.xxx_hidden_InputCacheReadCostInCredits = *b.InputCacheReadCostInCredits
+	}
+	if b.InputCacheWriteCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_InputCacheWriteCostInCredits = *b.InputCacheWriteCostInCredits
 	}
 	return m0
 }
@@ -40137,13 +40323,14 @@ const file_task_proto_rawDesc = "" +
 	"\x11usage_by_category\x18\x01 \x03(\v28.warp.multi_agent.v1.RequestCharges.UsageByCategoryEntryR\x0fusageByCategory\x1ae\n" +
 	"\x14UsageByCategoryEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x127\n" +
-	"\x05value\x18\x02 \x01(\v2!.warp.multi_agent.v1.ChargedUsageR\x05value:\x028\x01\"\xe2\x06\n" +
+	"\x05value\x18\x02 \x01(\v2!.warp.multi_agent.v1.ChargedUsageR\x05value:\x028\x01\"\x9d\a\n" +
 	"\fChargedUsage\x12{\n" +
 	"\x1adirect_api_inference_usage\x18\x01 \x03(\v2>.warp.multi_agent.v1.ChargedUsage.DirectApiInferenceUsageEntryR\x17directApiInferenceUsage\x12k\n" +
 	"\x14byok_inference_usage\x18\x02 \x03(\v29.warp.multi_agent.v1.ChargedUsage.ByokInferenceUsageEntryR\x12byokInferenceUsage\x12\x8a\x01\n" +
 	"\x1fcustom_endpoint_inference_usage\x18\x03 \x03(\v2C.warp.multi_agent.v1.ChargedUsage.CustomEndpointInferenceUsageEntryR\x1ccustomEndpointInferenceUsage\x125\n" +
 	"\x17platform_usage_in_cents\x18\x04 \x01(\x02R\x14platformUsageInCents\x12Q\n" +
-	"\x17platform_usage_duration\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x15platformUsageDuration\x1ao\n" +
+	"\x17platform_usage_duration\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x15platformUsageDuration\x129\n" +
+	"\x19platform_usage_in_credits\x18\x06 \x01(\x02R\x16platformUsageInCredits\x1ao\n" +
 	"\x1cDirectApiInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
 	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\x1aj\n" +
@@ -40152,19 +40339,24 @@ const file_task_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\x1at\n" +
 	"!CustomEndpointInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
-	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\"\xf3\x01\n" +
+	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\"\xaf\x02\n" +
 	"\x0eInferenceUsage\x12@\n" +
 	"\vtoken_count\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.TokenCountR\n" +
 	"tokenCount\x12=\n" +
 	"\n" +
 	"token_cost\x18\x02 \x01(\v2\x1e.warp.multi_agent.v1.TokenCostR\ttokenCost\x12(\n" +
 	"\x10web_search_count\x18\x03 \x01(\rR\x0ewebSearchCount\x126\n" +
-	"\x18web_search_cost_in_cents\x18\x04 \x01(\x02R\x14webSearchCostInCents\"\xf3\x01\n" +
+	"\x18web_search_cost_in_cents\x18\x04 \x01(\x02R\x14webSearchCostInCents\x12:\n" +
+	"\x1aweb_search_cost_in_credits\x18\x05 \x01(\x02R\x16webSearchCostInCredits\"\xeb\x03\n" +
 	"\tTokenCost\x12-\n" +
 	"\x13input_cost_in_cents\x18\x01 \x01(\x02R\x10inputCostInCents\x12/\n" +
 	"\x14output_cost_in_cents\x18\x02 \x01(\x02R\x11outputCostInCents\x12A\n" +
 	"\x1einput_cache_read_cost_in_cents\x18\x03 \x01(\x02R\x19inputCacheReadCostInCents\x12C\n" +
-	"\x1finput_cache_write_cost_in_cents\x18\x04 \x01(\x02R\x1ainputCacheWriteCostInCents\"\x90\x01\n" +
+	"\x1finput_cache_write_cost_in_cents\x18\x04 \x01(\x02R\x1ainputCacheWriteCostInCents\x121\n" +
+	"\x15input_cost_in_credits\x18\x05 \x01(\x02R\x12inputCostInCredits\x123\n" +
+	"\x16output_cost_in_credits\x18\x06 \x01(\x02R\x13outputCostInCredits\x12E\n" +
+	" input_cache_read_cost_in_credits\x18\a \x01(\x02R\x1binputCacheReadCostInCredits\x12G\n" +
+	"!input_cache_write_cost_in_credits\x18\b \x01(\x02R\x1cinputCacheWriteCostInCredits\"\x90\x01\n" +
 	"\n" +
 	"TokenCount\x12\x14\n" +
 	"\x05input\x18\x01 \x01(\rR\x05input\x12\x16\n" +
