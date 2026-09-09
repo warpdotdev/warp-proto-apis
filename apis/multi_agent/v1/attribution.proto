@@ -1,4 +1,4 @@
-// Attribution for user queries: which Warp user sent a query, what produced
+// Attribution for user queries: who sent a query, what produced
 // it (client, parent agent, schedule, automation, ...), and the original
 // third-party message it was derived from. Shared by task.proto (persisted
 // messages) and request.proto (inputs).
@@ -44,13 +44,16 @@ enum IdentityResolution {
   IDENTITY_RESOLUTION_UNRESOLVED = 5;
 }
 
-// The Warp principal on whose behalf a UserQuery was sent. Conversations are
-// multi-player, so this is recorded per query. Server-stamped; never trusted
-// from clients.
+// The server's resolution of a UserQuery's author to a Warp principal.
+// Conversations are multi-player, so this is recorded per query.
+// Server-stamped; never trusted from clients.
 //
-// The author is not always a Warp user: a Slack/GitHub/... actor with no
-// linked Warp account yields resolution = UNRESOLVED and an unset principal,
-// and the platform-side identity lives on ExternalMessage.sender instead.
+// ExternalMessage.sender records the original platform-side identity,
+// whether or not it resolves to a Warp user. Keeping that identity separate
+// from the resolved Warp principal preserves both for linked external users.
+// For an external actor with no resolved Warp account, QueryAuthor is still
+// set with resolution = UNRESOLVED and an unset principal; the sender's
+// identity remains available on ExternalMessage.sender.
 message QueryAuthor {
   // The resolved principal. Modeled as a oneof so non-user principals (e.g. a
   // service account) can be added later without breaking the wire format.
@@ -304,10 +307,11 @@ message ExternalMessage {
 // What produced a UserQuery: the mechanism by which it reached the agent.
 // Modeled as a oneof of per-variant messages (like Harness) so each variant
 // can carry its own payload without breaking the wire format. Orthogonal to
-// QueryAuthor (who) and ExternalMessage (source text): a GitHub comment that
-// matched an automation rule has origin=automation, a source_message, and an
-// author if the commenter resolved to a Warp user; the same comment routed
-// directly through the integration has origin=external_platform.
+// QueryAuthor (Warp identity resolution) and ExternalMessage (original
+// sender and source text): a GitHub comment that matched an automation rule
+// has origin=automation, a source_message, and an author recording whether
+// the commenter resolved to a Warp user; the same comment routed directly
+// through the integration has origin=external_platform.
 message UserQueryOrigin {
   oneof variant {
     WarpClient warp_client = 1;

@@ -14310,11 +14310,13 @@ type Message_UserQuery_builder struct {
 	// What produced this query (client, parent agent, wake, schedule,
 	// automation, ...). Server-stamped when the message is persisted.
 	Origin *UserQueryOrigin
-	// The Warp user on whose behalf this query was sent. Server-stamped
-	// whenever the server resolved a Warp user, regardless of origin. For
-	// externally-sourced queries (origin = automation with a source_message)
-	// `author.principal` is unset iff `author.resolution` is UNRESOLVED, in
-	// which case the platform-side identity is on `source_message.sender`.
+	// The server's resolution of the query author to a Warp principal.
+	// Server-stamped whenever a Warp user was resolved or source_message is
+	// set, including both external_platform and automation origins. For
+	// queries with source_message, author remains set even if no Warp user
+	// could be resolved: author.principal is unset iff author.resolution is
+	// UNRESOLVED. The original platform identity stays on
+	// source_message.sender even when a Warp user was resolved.
 	// Entirely unset for origins with no human behind them (parent_agent,
 	// agent_message_wake, schedule).
 	Author *QueryAuthor
