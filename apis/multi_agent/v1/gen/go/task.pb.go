@@ -20678,7 +20678,6 @@ func (b0 Message_RequestMetadata_ToolCallSummary_builder) Build() *Message_Reque
 type Message_RequestMetadata_ContextWindow struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Usage       float32                `protobuf:"fixed32,1,opt,name=usage"`
-	xxx_hidden_Summarized  bool                   `protobuf:"varint,2,opt,name=summarized"`
 	XXX_raceDetectHookData protoimpl.RaceDetectHookData
 	XXX_presence           [1]uint32
 	unknownFields          protoimpl.UnknownFields
@@ -20717,21 +20716,9 @@ func (x *Message_RequestMetadata_ContextWindow) GetUsage() float32 {
 	return 0
 }
 
-func (x *Message_RequestMetadata_ContextWindow) GetSummarized() bool {
-	if x != nil {
-		return x.xxx_hidden_Summarized
-	}
-	return false
-}
-
 func (x *Message_RequestMetadata_ContextWindow) SetUsage(v float32) {
 	x.xxx_hidden_Usage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
-}
-
-func (x *Message_RequestMetadata_ContextWindow) SetSummarized(v bool) {
-	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
 func (x *Message_RequestMetadata_ContextWindow) HasUsage() bool {
@@ -20741,21 +20728,9 @@ func (x *Message_RequestMetadata_ContextWindow) HasUsage() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *Message_RequestMetadata_ContextWindow) HasSummarized() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
-}
-
 func (x *Message_RequestMetadata_ContextWindow) ClearUsage() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Usage = 0
-}
-
-func (x *Message_RequestMetadata_ContextWindow) ClearSummarized() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
-	x.xxx_hidden_Summarized = false
 }
 
 type Message_RequestMetadata_ContextWindow_builder struct {
@@ -20764,9 +20739,6 @@ type Message_RequestMetadata_ContextWindow_builder struct {
 	// Percentage [0-100] of the model context window used
 	// up to the current point in the conversation
 	Usage *float32
-	// Whether the conversation messages were summarized
-	// because the context window was too full
-	Summarized *bool
 }
 
 func (b0 Message_RequestMetadata_ContextWindow_builder) Build() *Message_RequestMetadata_ContextWindow {
@@ -20774,12 +20746,8 @@ func (b0 Message_RequestMetadata_ContextWindow_builder) Build() *Message_Request
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Usage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
 		x.xxx_hidden_Usage = *b.Usage
-	}
-	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
-		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	return m0
 }
@@ -40410,7 +40378,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xf3\xd5\x01\n" +
+	"\x0ecomment_target\"\xe5\xd5\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -40446,7 +40414,7 @@ const file_task_proto_rawDesc = "" +
 	"\x12events_from_agents\x18\x1a \x01(\v2-.warp.multi_agent.v1.Message.EventsFromAgentsH\x00R\x10eventsFromAgents\x12r\n" +
 	"\x19passive_suggestion_result\x18\x1b \x01(\v24.warp.multi_agent.v1.Message.PassiveSuggestionResultH\x00R\x17passiveSuggestionResult\x12v\n" +
 	"\x1dorchestration_config_snapshot\x18\x1c \x01(\v20.warp.multi_agent.v1.OrchestrationConfigSnapshotH\x00R\x1borchestrationConfigSnapshot\x12Y\n" +
-	"\x10request_metadata\x18\x1e \x01(\v2,.warp.multi_agent.v1.Message.RequestMetadataH\x00R\x0frequestMetadata\x1a\xc1\x06\n" +
+	"\x10request_metadata\x18\x1e \x01(\v2,.warp.multi_agent.v1.Message.RequestMetadataH\x00R\x0frequestMetadata\x1a\xb3\x06\n" +
 	"\x0fRequestMetadata\x12:\n" +
 	"\x06timing\x18\x01 \x01(\v2\".warp.multi_agent.v1.RequestTimingR\x06timing\x12=\n" +
 	"\acharges\x18\x02 \x01(\v2#.warp.multi_agent.v1.RequestChargesR\acharges\x12\x1e\n" +
@@ -40463,11 +40431,9 @@ const file_task_proto_rawDesc = "" +
 	"\rfiles_changed\x18\x03 \x01(\rR\ffilesChanged\x12\x1f\n" +
 	"\vlines_added\x18\x04 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
-	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x1aE\n" +
+	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x1a7\n" +
 	"\rContextWindow\x12\x14\n" +
-	"\x05usage\x18\x01 \x01(\x02R\x05usage\x12\x1e\n" +
-	"\n" +
-	"summarized\x18\x02 \x01(\bR\n" +
+	"\x05usage\x18\x01 \x01(\x02R\x05usageJ\x04\b\x02\x10\x03R\n" +
 	"summarized\"d\n" +
 	"\aOutcome\x12\x17\n" +
 	"\x13OUTCOME_UNSPECIFIED\x10\x00\x12\x15\n" +

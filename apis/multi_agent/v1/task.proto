@@ -364,12 +364,12 @@ message Message {
     }
 
     message ContextWindow {
+      reserved summarized;
+      reserved 2;
+
       // Percentage [0-100] of the model context window used
       // up to the current point in the conversation
       float usage = 1;
-      // Whether the conversation messages were summarized
-      // because the context window was too full
-      bool summarized = 2;
     }
   }
 
