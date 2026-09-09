@@ -40378,7 +40378,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xe5\xd5\x01\n" +
+	"\x0ecomment_target\"\xd3\xd5\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -40414,7 +40414,7 @@ const file_task_proto_rawDesc = "" +
 	"\x12events_from_agents\x18\x1a \x01(\v2-.warp.multi_agent.v1.Message.EventsFromAgentsH\x00R\x10eventsFromAgents\x12r\n" +
 	"\x19passive_suggestion_result\x18\x1b \x01(\v24.warp.multi_agent.v1.Message.PassiveSuggestionResultH\x00R\x17passiveSuggestionResult\x12v\n" +
 	"\x1dorchestration_config_snapshot\x18\x1c \x01(\v20.warp.multi_agent.v1.OrchestrationConfigSnapshotH\x00R\x1borchestrationConfigSnapshot\x12Y\n" +
-	"\x10request_metadata\x18\x1e \x01(\v2,.warp.multi_agent.v1.Message.RequestMetadataH\x00R\x0frequestMetadata\x1a\xb3\x06\n" +
+	"\x10request_metadata\x18\x1e \x01(\v2,.warp.multi_agent.v1.Message.RequestMetadataH\x00R\x0frequestMetadata\x1a\xa1\x06\n" +
 	"\x0fRequestMetadata\x12:\n" +
 	"\x06timing\x18\x01 \x01(\v2\".warp.multi_agent.v1.RequestTimingR\x06timing\x12=\n" +
 	"\acharges\x18\x02 \x01(\v2#.warp.multi_agent.v1.RequestChargesR\acharges\x12\x1e\n" +
@@ -40431,10 +40431,9 @@ const file_task_proto_rawDesc = "" +
 	"\rfiles_changed\x18\x03 \x01(\rR\ffilesChanged\x12\x1f\n" +
 	"\vlines_added\x18\x04 \x01(\rR\n" +
 	"linesAdded\x12#\n" +
-	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x1a7\n" +
+	"\rlines_removed\x18\x05 \x01(\rR\flinesRemoved\x1a%\n" +
 	"\rContextWindow\x12\x14\n" +
-	"\x05usage\x18\x01 \x01(\x02R\x05usageJ\x04\b\x02\x10\x03R\n" +
-	"summarized\"d\n" +
+	"\x05usage\x18\x01 \x01(\x02R\x05usage\"d\n" +
 	"\aOutcome\x12\x17\n" +
 	"\x13OUTCOME_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11OUTCOME_COMPLETED\x10\x01\x12\x14\n" +
