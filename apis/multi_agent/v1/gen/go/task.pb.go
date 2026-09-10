@@ -1787,10 +1787,10 @@ func (b0 TokenCost_builder) Build() *TokenCost {
 // Generic format for counting tokens incurred
 type TokenCount struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Input           uint32                 `protobuf:"varint,1,opt,name=input"`
-	xxx_hidden_Output          uint32                 `protobuf:"varint,2,opt,name=output"`
-	xxx_hidden_InputCacheRead  uint32                 `protobuf:"varint,3,opt,name=input_cache_read,json=inputCacheRead"`
-	xxx_hidden_InputCacheWrite uint32                 `protobuf:"varint,4,opt,name=input_cache_write,json=inputCacheWrite"`
+	xxx_hidden_Input           uint64                 `protobuf:"varint,1,opt,name=input"`
+	xxx_hidden_Output          uint64                 `protobuf:"varint,2,opt,name=output"`
+	xxx_hidden_InputCacheRead  uint64                 `protobuf:"varint,3,opt,name=input_cache_read,json=inputCacheRead"`
+	xxx_hidden_InputCacheWrite uint64                 `protobuf:"varint,4,opt,name=input_cache_write,json=inputCacheWrite"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -1822,50 +1822,50 @@ func (x *TokenCount) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *TokenCount) GetInput() uint32 {
+func (x *TokenCount) GetInput() uint64 {
 	if x != nil {
 		return x.xxx_hidden_Input
 	}
 	return 0
 }
 
-func (x *TokenCount) GetOutput() uint32 {
+func (x *TokenCount) GetOutput() uint64 {
 	if x != nil {
 		return x.xxx_hidden_Output
 	}
 	return 0
 }
 
-func (x *TokenCount) GetInputCacheRead() uint32 {
+func (x *TokenCount) GetInputCacheRead() uint64 {
 	if x != nil {
 		return x.xxx_hidden_InputCacheRead
 	}
 	return 0
 }
 
-func (x *TokenCount) GetInputCacheWrite() uint32 {
+func (x *TokenCount) GetInputCacheWrite() uint64 {
 	if x != nil {
 		return x.xxx_hidden_InputCacheWrite
 	}
 	return 0
 }
 
-func (x *TokenCount) SetInput(v uint32) {
+func (x *TokenCount) SetInput(v uint64) {
 	x.xxx_hidden_Input = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 4)
 }
 
-func (x *TokenCount) SetOutput(v uint32) {
+func (x *TokenCount) SetOutput(v uint64) {
 	x.xxx_hidden_Output = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 4)
 }
 
-func (x *TokenCount) SetInputCacheRead(v uint32) {
+func (x *TokenCount) SetInputCacheRead(v uint64) {
 	x.xxx_hidden_InputCacheRead = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 4)
 }
 
-func (x *TokenCount) SetInputCacheWrite(v uint32) {
+func (x *TokenCount) SetInputCacheWrite(v uint64) {
 	x.xxx_hidden_InputCacheWrite = v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
 }
@@ -1922,19 +1922,19 @@ type TokenCount_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// The total number of input tokens incurred
-	Input *uint32
+	Input *uint64
 	// The total number of output tokens incurred
-	Output *uint32
+	Output *uint64
 	// The total number of input cache read tokens incurred
 	//
 	// This is only populated for Anthropic models, which have the only API which provides such
 	// granular cached token usage information.
-	InputCacheRead *uint32
+	InputCacheRead *uint64
 	// The total number of input cache write tokens incurred
 	//
 	// This is only populated for Anthropic models, which have the only API which provides such
 	// granular cached token usage information.
-	InputCacheWrite *uint32
+	InputCacheWrite *uint64
 }
 
 func (b0 TokenCount_builder) Build() *TokenCount {
@@ -40327,10 +40327,10 @@ const file_task_proto_rawDesc = "" +
 	"!input_cache_write_cost_in_credits\x18\b \x01(\x02R\x1cinputCacheWriteCostInCredits\"\x90\x01\n" +
 	"\n" +
 	"TokenCount\x12\x14\n" +
-	"\x05input\x18\x01 \x01(\rR\x05input\x12\x16\n" +
-	"\x06output\x18\x02 \x01(\rR\x06output\x12(\n" +
-	"\x10input_cache_read\x18\x03 \x01(\rR\x0einputCacheRead\x12*\n" +
-	"\x11input_cache_write\x18\x04 \x01(\rR\x0finputCacheWrite\"\xc0\b\n" +
+	"\x05input\x18\x01 \x01(\x04R\x05input\x12\x16\n" +
+	"\x06output\x18\x02 \x01(\x04R\x06output\x12(\n" +
+	"\x10input_cache_read\x18\x03 \x01(\x04R\x0einputCacheRead\x12*\n" +
+	"\x11input_cache_write\x18\x04 \x01(\x04R\x0finputCacheWrite\"\xc0\b\n" +
 	"\n" +
 	"AgentEvent\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12;\n" +
