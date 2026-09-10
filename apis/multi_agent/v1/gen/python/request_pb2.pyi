@@ -9,6 +9,7 @@ import suggestions_pb2 as _suggestions_pb2
 import task_pb2 as _task_pb2
 import skill_pb2 as _skill_pb2
 import orchestration_pb2 as _orchestration_pb2
+import attribution_pb2 as _attribution_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -42,7 +43,7 @@ class Request(_message.Message):
     class Input(_message.Message):
         __slots__ = ("context", "user_inputs", "query_with_canned_response", "auto_code_diff_query", "resume_conversation", "init_project_rules", "generate_passive_suggestions", "create_new_project", "clone_repository", "code_review", "summarize_conversation", "create_environment", "fetch_review_comments", "start_from_ambient_run_prompt", "invoke_skill", "user_query", "tool_call_result")
         class UserQuery(_message.Message):
-            __slots__ = ("query", "referenced_attachments", "mode", "intended_agent", "attribution_token")
+            __slots__ = ("query", "referenced_attachments", "mode", "intended_agent", "origin", "author", "source_message")
             class ReferencedAttachmentsEntry(_message.Message):
                 __slots__ = ("key", "value")
                 KEY_FIELD_NUMBER: _ClassVar[int]
@@ -54,13 +55,17 @@ class Request(_message.Message):
             REFERENCED_ATTACHMENTS_FIELD_NUMBER: _ClassVar[int]
             MODE_FIELD_NUMBER: _ClassVar[int]
             INTENDED_AGENT_FIELD_NUMBER: _ClassVar[int]
-            ATTRIBUTION_TOKEN_FIELD_NUMBER: _ClassVar[int]
+            ORIGIN_FIELD_NUMBER: _ClassVar[int]
+            AUTHOR_FIELD_NUMBER: _ClassVar[int]
+            SOURCE_MESSAGE_FIELD_NUMBER: _ClassVar[int]
             query: str
             referenced_attachments: _containers.MessageMap[str, _attachment_pb2.Attachment]
             mode: _task_pb2.UserQueryMode
             intended_agent: _task_pb2.AgentType
-            attribution_token: str
-            def __init__(self, query: _Optional[str] = ..., referenced_attachments: _Optional[_Mapping[str, _attachment_pb2.Attachment]] = ..., mode: _Optional[_Union[_task_pb2.UserQueryMode, _Mapping]] = ..., intended_agent: _Optional[_Union[_task_pb2.AgentType, str]] = ..., attribution_token: _Optional[str] = ...) -> None: ...
+            origin: _attribution_pb2.UserQueryOrigin
+            author: _attribution_pb2.QueryAuthor
+            source_message: _attribution_pb2.ExternalMessage
+            def __init__(self, query: _Optional[str] = ..., referenced_attachments: _Optional[_Mapping[str, _attachment_pb2.Attachment]] = ..., mode: _Optional[_Union[_task_pb2.UserQueryMode, _Mapping]] = ..., intended_agent: _Optional[_Union[_task_pb2.AgentType, str]] = ..., origin: _Optional[_Union[_attribution_pb2.UserQueryOrigin, _Mapping]] = ..., author: _Optional[_Union[_attribution_pb2.QueryAuthor, _Mapping]] = ..., source_message: _Optional[_Union[_attribution_pb2.ExternalMessage, _Mapping]] = ...) -> None: ...
         class CLIAgentUserQuery(_message.Message):
             __slots__ = ("user_query", "running_command", "run_shell_command_tool_call_id")
             USER_QUERY_FIELD_NUMBER: _ClassVar[int]

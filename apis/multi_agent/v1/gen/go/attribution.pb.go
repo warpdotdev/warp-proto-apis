@@ -402,8 +402,9 @@ func (b0 WarpUser_builder) Build() *WarpUser {
 }
 
 // The server's resolution of a UserQuery's author to a Warp principal.
-// Conversations are multi-player, so this is recorded per query.
-// Server-stamped; never trusted from clients.
+// Conversations are multi-player, so this is recorded per query. The server
+// populates it for queries it injects into a running agent and the client
+// echoes it back on Request.Input.UserQuery; it is not verified for now.
 //
 // ExternalMessage.sender records the original platform-side identity,
 // whether or not it resolves to a Warp user. Keeping that identity separate

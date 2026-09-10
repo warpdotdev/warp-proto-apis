@@ -14308,10 +14308,13 @@ type Message_UserQuery_builder struct {
 	Mode                  *UserQueryMode
 	IntendedAgent         *AgentType
 	// What produced this query (client, parent agent, wake, schedule,
-	// automation, ...). Server-stamped when the message is persisted.
+	// automation, ...). Copied from Request.Input.UserQuery.origin when the
+	// client supplied it, otherwise server-stamped when the message is
+	// persisted.
 	Origin *UserQueryOrigin
 	// The server's resolution of the query author to a Warp principal.
-	// Server-stamped whenever a Warp user was resolved or source_message is
+	// Copied from Request.Input.UserQuery.author when supplied; otherwise
+	// server-stamped whenever a Warp user was resolved or source_message is
 	// set, including both external_platform and automation origins. For
 	// queries with source_message, author remains set even if no Warp user
 	// could be resolved: author.principal is unset iff author.resolution is
