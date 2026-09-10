@@ -157,7 +157,9 @@ const (
 	ExternalMessage_GitHub_EVENT_TYPE_PULL_REQUEST_REVIEW_COMMENT ExternalMessage_GitHub_EventType = 2
 	// PR opened; `body` is the PR description.
 	ExternalMessage_GitHub_EVENT_TYPE_PULL_REQUEST_OPENED ExternalMessage_GitHub_EventType = 3
-	// Review submitted; see `review`.
+	// Review submitted; see `review`. `body` is the review summary, which
+	// is often empty (e.g. an approval with only inline comments); the
+	// inline comments are in `review.comments`.
 	ExternalMessage_GitHub_EVENT_TYPE_PULL_REQUEST_REVIEW_SUBMITTED ExternalMessage_GitHub_EventType = 4
 )
 
@@ -1271,8 +1273,12 @@ type ExternalMessage_builder struct {
 	// Who posted the message/event. Unset for custom webhooks and for events
 	// with no actor.
 	Sender *ExternalUser
-	// The raw message text as posted, before any Warp templating or prompt
-	// assembly. Encoding given by `body_format`.
+	// The human-written text of the triggering message as posted, before any
+	// Warp templating or prompt assembly. Encoding given by `body_format`.
+	// Empty for events that carry no message text: label/state changes, a
+	// review submitted with no summary, CI results. Never synthesized; for
+	// such events the platform arm (e.g. `github.review`) and
+	// UserQueryOrigin.Automation.matched_event_kind describe what happened.
 	Body       *string
 	BodyFormat *BodyFormat
 	// Permalink to the message/comment/event on the platform.
@@ -2054,7 +2060,11 @@ type ExternalMessage_Slack_builder struct {
 	// Workspace host, e.g. "acme.slack.com", from the message permalink.
 	WorkspaceDomain *string
 	// Earlier messages in the thread as fetched at trigger time, oldest
-	// first, excluding this message. Capped by the server (15 today).
+	// first, excluding this message. Rendered into the initial prompt of a
+	// task created from a thread mention; follow-up queries omit it where
+	// the agent already holds the thread in its conversation context. Not
+	// capped today: the server paginates every reply (15 per page), so
+	// size follows thread length.
 	ThreadHistory []*ExternalMessage_Slack_ThreadMessage
 }
 
@@ -2528,7 +2538,7 @@ type ExternalMessage_GitHub_builder struct {
 	// Full patch of `location.path` in the PR, as fetched at trigger time.
 	FilePatch *string
 	// The submitted review (PULL_REQUEST_REVIEW_SUBMITTED only); `body` is
-	// the review summary and `sender` the reviewer.
+	// the review summary (may be empty) and `sender` the reviewer.
 	Review *ExternalMessage_GitHub_Review
 }
 
@@ -2700,7 +2710,11 @@ func (b0 ExternalMessage_GitLab_builder) Build() *ExternalMessage_GitLab {
 	return m0
 }
 
-// Linear issue comment.
+// Linear issue comment or agent-session prompt. Automation events with no
+// message text (issue labeled, state changed, assigned) carry no source
+// text: `body` is empty and only the container fields below are set, or
+// source_message is left unset and the event is identified by
+// UserQueryOrigin.Automation.matched_event_kind.
 type ExternalMessage_Linear struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_IssueIdentifier *string                `protobuf:"bytes,1,opt,name=issue_identifier,json=issueIdentifier"`
@@ -3871,7 +3885,9 @@ type ExternalMessage_GitHub_Review_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 	// "approved", "changes_requested", or "commented".
-	State    *string
+	State *string
+	// Inline comments submitted with the review, in order. This is the
+	// review's content when the summary (`body`) is empty.
 	Comments []*ExternalMessage_GitHub_Comment
 }
 
@@ -4459,9 +4475,12 @@ type UserQueryOrigin_Automation_builder struct {
 
 	// Uid of the automation rule.
 	AutomationUid *string
-	// Canonical kind the rule matched, e.g. "github.issue_comment".
+	// Canonical trigger kind the rule matched, as "<provider>/<event>" using
+	// warp-server's trigger provider and event names, e.g.
+	// "github/pull_request_review_submitted", "linear/issue_labeled".
 	MatchedEventKind *string
-	// All canonical kinds classified for the delivery, when more than one.
+	// All canonical kinds classified for the delivery (same form), when more
+	// than one.
 	EventKinds []string
 	// Provider delivery id (or a Warp-assigned hash when the provider has
 	// none).

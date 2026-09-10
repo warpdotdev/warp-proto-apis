@@ -117,8 +117,12 @@ message ExternalMessage {
   // Who posted the message/event. Unset for custom webhooks and for events
   // with no actor.
   ExternalUser sender = 1;
-  // The raw message text as posted, before any Warp templating or prompt
-  // assembly. Encoding given by `body_format`.
+  // The human-written text of the triggering message as posted, before any
+  // Warp templating or prompt assembly. Encoding given by `body_format`.
+  // Empty for events that carry no message text: label/state changes, a
+  // review submitted with no summary, CI results. Never synthesized; for
+  // such events the platform arm (e.g. `github.review`) and
+  // UserQueryOrigin.Automation.matched_event_kind describe what happened.
   string body = 2 [ (sensitive) = true ];
   BodyFormat body_format = 3;
   // Permalink to the message/comment/event on the platform.
@@ -151,7 +155,11 @@ message ExternalMessage {
     // Workspace host, e.g. "acme.slack.com", from the message permalink.
     string workspace_domain = 6 [ (sensitive) = true ];
     // Earlier messages in the thread as fetched at trigger time, oldest
-    // first, excluding this message. Capped by the server (15 today).
+    // first, excluding this message. Rendered into the initial prompt of a
+    // task created from a thread mention; follow-up queries omit it where
+    // the agent already holds the thread in its conversation context. Not
+    // capped today: the server paginates every reply (15 per page), so
+    // size follows thread length.
     repeated ThreadMessage thread_history = 7;
 
     message ThreadMessage {
@@ -192,7 +200,7 @@ message ExternalMessage {
     // Full patch of `location.path` in the PR, as fetched at trigger time.
     string file_patch = 14 [ (sensitive) = true ];
     // The submitted review (PULL_REQUEST_REVIEW_SUBMITTED only); `body` is
-    // the review summary and `sender` the reviewer.
+    // the review summary (may be empty) and `sender` the reviewer.
     Review review = 15;
 
     enum EventType {
@@ -203,7 +211,9 @@ message ExternalMessage {
       EVENT_TYPE_PULL_REQUEST_REVIEW_COMMENT = 2;
       // PR opened; `body` is the PR description.
       EVENT_TYPE_PULL_REQUEST_OPENED = 3;
-      // Review submitted; see `review`.
+      // Review submitted; see `review`. `body` is the review summary, which
+      // is often empty (e.g. an approval with only inline comments); the
+      // inline comments are in `review.comments`.
       EVENT_TYPE_PULL_REQUEST_REVIEW_SUBMITTED = 4;
     }
 
@@ -229,6 +239,8 @@ message ExternalMessage {
     message Review {
       // "approved", "changes_requested", or "commented".
       string state = 1;
+      // Inline comments submitted with the review, in order. This is the
+      // review's content when the summary (`body`) is empty.
       repeated Comment comments = 2;
     }
   }
@@ -243,7 +255,11 @@ message ExternalMessage {
     int32 merge_request_iid = 2;
   }
 
-  // Linear issue comment.
+  // Linear issue comment or agent-session prompt. Automation events with no
+  // message text (issue labeled, state changed, assigned) carry no source
+  // text: `body` is empty and only the container fields below are set, or
+  // source_message is left unset and the event is identified by
+  // UserQueryOrigin.Automation.matched_event_kind.
   message Linear {
     // Human-readable issue identifier, e.g. "ENG-123".
     string issue_identifier = 1 [ (sensitive) = true ];
@@ -361,9 +377,12 @@ message UserQueryOrigin {
   message Automation {
     // Uid of the automation rule.
     string automation_uid = 1;
-    // Canonical kind the rule matched, e.g. "github.issue_comment".
+    // Canonical trigger kind the rule matched, as "<provider>/<event>" using
+    // warp-server's trigger provider and event names, e.g.
+    // "github/pull_request_review_submitted", "linear/issue_labeled".
     string matched_event_kind = 2;
-    // All canonical kinds classified for the delivery, when more than one.
+    // All canonical kinds classified for the delivery (same form), when more
+    // than one.
     repeated string event_kinds = 3;
     // Provider delivery id (or a Warp-assigned hash when the provider has
     // none).
