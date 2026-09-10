@@ -3387,20 +3387,20 @@ var file_attachment_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_attachment_proto_goTypes = []any{
 	(LongRunningShellCommandActivity_ProcessActivity_State)(0), // 0: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
-	(*Attachment)(nil),                      // 1: warp.multi_agent.v1.Attachment
-	(*ExecutedShellCommand)(nil),            // 2: warp.multi_agent.v1.ExecutedShellCommand
-	(*RunningShellCommand)(nil),             // 3: warp.multi_agent.v1.RunningShellCommand
-	(*LongRunningShellCommandSnapshot)(nil), // 4: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*LongRunningShellCommandActivity)(nil), // 5: warp.multi_agent.v1.LongRunningShellCommandActivity
-	(*DriveObject)(nil),                     // 6: warp.multi_agent.v1.DriveObject
-	(*Workflow)(nil),                        // 7: warp.multi_agent.v1.Workflow
-	(*Notebook)(nil),                        // 8: warp.multi_agent.v1.Notebook
-	(*GenericStringObject)(nil),             // 9: warp.multi_agent.v1.GenericStringObject
-	(*DiffHunk)(nil),                        // 10: warp.multi_agent.v1.DiffHunk
-	(*CurrentRef)(nil),                      // 11: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                         // 12: warp.multi_agent.v1.BaseRef
-	(*DiffSet)(nil),                         // 13: warp.multi_agent.v1.DiffSet
-	(*FilePathReference)(nil),               // 14: warp.multi_agent.v1.FilePathReference
+	(*Attachment)(nil),                                      // 1: warp.multi_agent.v1.Attachment
+	(*ExecutedShellCommand)(nil),                            // 2: warp.multi_agent.v1.ExecutedShellCommand
+	(*RunningShellCommand)(nil),                             // 3: warp.multi_agent.v1.RunningShellCommand
+	(*LongRunningShellCommandSnapshot)(nil),                 // 4: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*LongRunningShellCommandActivity)(nil),                 // 5: warp.multi_agent.v1.LongRunningShellCommandActivity
+	(*DriveObject)(nil),                                     // 6: warp.multi_agent.v1.DriveObject
+	(*Workflow)(nil),                                        // 7: warp.multi_agent.v1.Workflow
+	(*Notebook)(nil),                                        // 8: warp.multi_agent.v1.Notebook
+	(*GenericStringObject)(nil),                             // 9: warp.multi_agent.v1.GenericStringObject
+	(*DiffHunk)(nil),                                        // 10: warp.multi_agent.v1.DiffHunk
+	(*CurrentRef)(nil),                                      // 11: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                         // 12: warp.multi_agent.v1.BaseRef
+	(*DiffSet)(nil),                                         // 13: warp.multi_agent.v1.DiffSet
+	(*FilePathReference)(nil),                               // 14: warp.multi_agent.v1.FilePathReference
 	(*LongRunningShellCommandActivity_ProcessActivity)(nil), // 15: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
 	(*DiffSet_DiffHunk)(nil),                                // 16: warp.multi_agent.v1.DiffSet.DiffHunk
 	(*DocumentContent)(nil),                                 // 17: warp.multi_agent.v1.DocumentContent
