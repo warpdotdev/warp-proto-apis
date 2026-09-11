@@ -821,6 +821,10 @@ message Message {
       // If set, this should match the `id` of an MCPServer in the request's
       // MCPContext.
       string server_id = 2;
+
+      // Identity of the server named by `server_id`, stamped by warp-server
+      // when it authors the call. Unset on calls that predate this field.
+      MCPServerIdentity server_identity = 3;
     }
 
     // A tool call to execute an MCP tool.
@@ -835,6 +839,10 @@ message Message {
       // If set, this should match the `id` of an MCPServer in the request's
       // MCPContext.
       string server_id = 3;
+
+      // Identity of the server named by `server_id`, stamped by warp-server
+      // when it authors the call. Unset on calls that predate this field.
+      MCPServerIdentity server_identity = 4;
     }
 
     // A tool call to suggest a prompt for the user to run.
@@ -1711,6 +1719,48 @@ message CallMCPToolResult {
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
+}
+
+// Warp-side identity of an MCP server.
+//
+// Clients describe each server they expose in `MCPContext.MCPServer.identity`
+// (setting `integration` or `managed_server_uid`; `display_name` is optional
+// there since `MCPContext.MCPServer.name` carries it). warp-server copies that
+// identity, with `display_name` filled from `name`, onto the server's tool
+// calls as `CallMCPTool.server_identity` / `ReadMCPResource.server_identity`,
+// because `server_id` on those calls is the client's opaque installation id and
+// the persisted conversation carries no `MCPContext` to resolve it. Clients
+// round-trip the stamped copy unchanged.
+message MCPServerIdentity {
+  // Human-readable server name. On tool calls, `MCPContext.MCPServer.name` at
+  // authoring time.
+  string display_name = 1 [ (sensitive) = true ];
+
+  // The well-known integration backing the server, or UNSPECIFIED when it is
+  // not one.
+  MCPIntegration integration = 2;
+
+  // The Warp managed MCP server uid, or empty when the server is not a
+  // managed one.
+  string managed_server_uid = 3;
+}
+
+// Well-known integration MCP servers that a client may reference by id in
+// place of a managed MCP server uid (`MCPServerConfig.warp_id` in the public
+// API). Mirrors warp-server's `managed_mcp.IntegrationMCPID` registry; add a
+// value here when that registry gains an id. A client that predates a value
+// sends UNSPECIFIED for it.
+enum MCPIntegration {
+  MCP_INTEGRATION_UNSPECIFIED = 0;
+  // "linear"
+  MCP_INTEGRATION_LINEAR = 1;
+  // "slack"
+  MCP_INTEGRATION_SLACK = 2;
+  // "jira"
+  MCP_INTEGRATION_JIRA = 3;
+  // "linear_agent_session": Linear's agent-session surface, distinct from the
+  // general Linear integration.
+  MCP_INTEGRATION_LINEAR_AGENT_SESSION = 4;
 }
 
 message SuggestPromptResult {
