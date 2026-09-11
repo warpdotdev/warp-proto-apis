@@ -228,6 +228,8 @@ message Request {
         CustomOnboardingRequest custom_onboarding_request = 6;
         AgenticOnboardingKickoff agentic_onboarding_kickoff = 7;
       }
+      // Preserve fresh query attribution through the canned response path.
+      UserQueryAttribution attribution = 8;
 
       message Install {}
       message Code {}
