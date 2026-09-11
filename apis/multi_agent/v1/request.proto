@@ -694,6 +694,14 @@ message Request {
 
       // Tools provided by this server.
       repeated MCPTool tools = 4;
+
+      // Warp-side identity of this server, stamped by the client at request
+      // time from the `MCPServerConfig.warp_id` it was resolved from: set
+      // `integration` for a well-known integration id (e.g. "linear") or
+      // `managed_server_uid` for a managed server. Unset for local or ad-hoc
+      // servers. `display_name` may be left unset; warp-server fills it from
+      // `name` when it copies this identity onto the server's MCP tool calls.
+      MCPServerIdentity identity = 6;
     }
   }
 }
