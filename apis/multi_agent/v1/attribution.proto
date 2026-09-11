@@ -14,6 +14,16 @@ import "options.proto";
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
 
+// Attribution transported with an accepted query or stored with a pending
+// delivery. Request.Input.UserQuery and Message.UserQuery keep these fields
+// flattened. This envelope carries the same unverified metadata; it is not
+// an authentication or authorization credential.
+message UserQueryAttribution {
+  UserQueryOrigin origin = 1;
+  QueryAuthor author = 2;
+  ExternalMessage source_message = 3;
+}
+
 // A Warp user as resolved by the server. Pure identity: display name and
 // avatar are fetched just-in-time by clients since they change over time.
 message WarpUser {
@@ -107,12 +117,13 @@ enum BodyFormat {
 // The `platform` oneof is always set, even when its message is empty, so it
 // also identifies the platform.
 //
-// Beyond the message itself, each platform arm carries the context the
-// server fetched at trigger time (thread history, issue/PR snapshot, file
-// patch, ...) so that the prompt the agent sees can be rendered from this
-// message alone, after the fact, instead of being pre-assembled into
-// UserQuery.query. Fixed guidance text and file attachments are not
-// recorded here.
+// Beyond source identity, container identifiers, links, and timestamps,
+// each platform arm carries only provider context used to render this
+// particular query (selected thread history, issue/PR snapshot, patch,
+// ...). Data fetched only for filtering or routing must not be included.
+// These inputs preserve the provider-dependent parts of UserQuery.query;
+// regenerating the complete prompt also requires shared instructions,
+// rendering choices, and existing file attachment handling.
 message ExternalMessage {
   // Who posted the message/event. Unset for custom webhooks and for events
   // with no actor.
@@ -154,13 +165,13 @@ message ExternalMessage {
     string message_ts = 5;
     // Workspace host, e.g. "acme.slack.com", from the message permalink.
     string workspace_domain = 6 [ (sensitive) = true ];
-    // Earlier messages in the thread as fetched at trigger time, oldest
-    // first, excluding this message. Rendered into the initial prompt of a
-    // task created from a thread mention; follow-up queries omit it where
-    // the agent already holds the thread in its conversation context. Not
-    // capped today: the server paginates every reply (15 per page), so
-    // size follows thread length.
+    // Earlier messages actually rendered into this query, oldest first,
+    // excluding this message. Initial prompts can paginate the entire
+    // thread; legacy follow-ups can render a single fetched page. Empty
+    // when the query omits history or fetching history fails.
     repeated ThreadMessage thread_history = 7;
+    // Reaction name, only when the query renders the reaction event.
+    string reaction = 8 [ (sensitive) = true ];
 
     message ThreadMessage {
       string text = 1 [ (sensitive) = true ];
@@ -202,6 +213,14 @@ message ExternalMessage {
     // The submitted review (PULL_REQUEST_REVIEW_SUBMITTED only); `body` is
     // the review summary (may be empty) and `sender` the reviewer.
     Review review = 15;
+    // Whether a mention follow-up refers to a comment or a description.
+    bool is_comment = 16;
+    // Event-specific inputs retained only when the query renders them.
+    string assignee_added = 17 [ (sensitive) = true ];
+    string requested_reviewer = 18 [ (sensitive) = true ];
+    string requested_team = 19 [ (sensitive) = true ];
+    string conclusion = 20;
+    string workflow_name = 21 [ (sensitive) = true ];
 
     enum EventType {
       EVENT_TYPE_UNSPECIFIED = 0;
@@ -273,6 +292,8 @@ message ExternalMessage {
     ExternalUser issue_assignee = 4;
     // Guidance entries attached to a prompted event, in order.
     repeated string guidance = 5 [ (sensitive) = true ];
+    // Linear agent-session identifier, when used by this query's prompt.
+    string session_id = 6 [ (sensitive) = true ];
   }
 
   // Jira issue comment.
