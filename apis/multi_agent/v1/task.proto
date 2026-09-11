@@ -18,6 +18,7 @@ import "options.proto";
 import "todo.proto";
 import "skill.proto";
 import "orchestration.proto";
+import "attribution.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -418,6 +419,7 @@ message Message {
 
   // User query message type
   message UserQuery {
+    // Final assembled query text to be sent to the agent.
     string query = 1 [ (sensitive) = true ];
 
     // Context that the client supplied as part of the user query input.
@@ -428,6 +430,29 @@ message Message {
     UserQueryMode mode = 4;
 
     AgentType intended_agent = 5;
+
+    // What produced this query (client, parent agent, wake, schedule,
+    // automation, ...). Copied from Request.Input.UserQuery.origin when the
+    // client supplied it, otherwise server-stamped when the message is
+    // persisted.
+    UserQueryOrigin origin = 6;
+
+    // The server's resolution of the query author to a Warp principal.
+    // Copied from Request.Input.UserQuery.author when supplied; otherwise
+    // server-stamped whenever a Warp user was resolved or source_message is
+    // set, including both external_platform and automation origins. For
+    // queries with source_message, author remains set even if no Warp user
+    // could be resolved: author.principal is unset iff author.resolution is
+    // UNRESOLVED. The original platform identity stays on
+    // source_message.sender even when a Warp user was resolved.
+    // Entirely unset for origins with no human behind them (parent_agent,
+    // agent_message_wake, schedule).
+    QueryAuthor author = 7;
+
+    // The original third-party message/event this query was derived from.
+    // Unset for queries typed directly in a Warp client. `query` remains the
+    // assembled prompt the agent sees; this holds the raw source.
+    ExternalMessage source_message = 8;
   }
 
   // System queries represent prompts from the Warp client that were
