@@ -603,18 +603,20 @@ class Request(_message.Message):
             input_schema: _struct_pb2.Struct
             def __init__(self, name: _Optional[str] = ..., description: _Optional[str] = ..., input_schema: _Optional[_Union[_struct_pb2.Struct, _Mapping]] = ...) -> None: ...
         class MCPServer(_message.Message):
-            __slots__ = ("name", "description", "id", "resources", "tools")
+            __slots__ = ("name", "description", "id", "resources", "tools", "identity")
             NAME_FIELD_NUMBER: _ClassVar[int]
             DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
             ID_FIELD_NUMBER: _ClassVar[int]
             RESOURCES_FIELD_NUMBER: _ClassVar[int]
             TOOLS_FIELD_NUMBER: _ClassVar[int]
+            IDENTITY_FIELD_NUMBER: _ClassVar[int]
             name: str
             description: str
             id: str
             resources: _containers.RepeatedCompositeFieldContainer[Request.MCPContext.MCPResource]
             tools: _containers.RepeatedCompositeFieldContainer[Request.MCPContext.MCPTool]
-            def __init__(self, name: _Optional[str] = ..., description: _Optional[str] = ..., id: _Optional[str] = ..., resources: _Optional[_Iterable[_Union[Request.MCPContext.MCPResource, _Mapping]]] = ..., tools: _Optional[_Iterable[_Union[Request.MCPContext.MCPTool, _Mapping]]] = ...) -> None: ...
+            identity: _task_pb2.MCPServerIdentity
+            def __init__(self, name: _Optional[str] = ..., description: _Optional[str] = ..., id: _Optional[str] = ..., resources: _Optional[_Iterable[_Union[Request.MCPContext.MCPResource, _Mapping]]] = ..., tools: _Optional[_Iterable[_Union[Request.MCPContext.MCPTool, _Mapping]]] = ..., identity: _Optional[_Union[_task_pb2.MCPServerIdentity, _Mapping]] = ...) -> None: ...
         RESOURCES_FIELD_NUMBER: _ClassVar[int]
         TOOLS_FIELD_NUMBER: _ClassVar[int]
         SERVERS_FIELD_NUMBER: _ClassVar[int]

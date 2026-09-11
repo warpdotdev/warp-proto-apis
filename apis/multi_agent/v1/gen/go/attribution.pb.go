@@ -871,12 +871,13 @@ func (b0 ExternalUser_builder) Build() *ExternalUser {
 // The `platform` oneof is always set, even when its message is empty, so it
 // also identifies the platform.
 //
-// Beyond the message itself, each platform arm carries the context the
-// server fetched at trigger time (thread history, issue/PR snapshot, file
-// patch, ...) so that the prompt the agent sees can be rendered from this
-// message alone, after the fact, instead of being pre-assembled into
-// UserQuery.query. Fixed guidance text and file attachments are not
-// recorded here.
+// Beyond source identity, container identifiers, links, and timestamps,
+// each platform arm carries only provider context used to render this
+// particular query (selected thread history, issue/PR snapshot, patch,
+// ...). Data fetched only for filtering or routing must not be included.
+// These inputs preserve the provider-dependent parts of UserQuery.query;
+// regenerating the complete prompt also requires shared instructions,
+// rendering choices, and existing file attachment handling.
 type ExternalMessage struct {
 	state                        protoimpl.MessageState     `protogen:"opaque.v1"`
 	xxx_hidden_Sender            *ExternalUser              `protobuf:"bytes,1,opt,name=sender"`
@@ -1837,6 +1838,7 @@ type ExternalMessage_Slack struct {
 	xxx_hidden_MessageTs       *string                                 `protobuf:"bytes,5,opt,name=message_ts,json=messageTs"`
 	xxx_hidden_WorkspaceDomain *string                                 `protobuf:"bytes,6,opt,name=workspace_domain,json=workspaceDomain"`
 	xxx_hidden_ThreadHistory   *[]*ExternalMessage_Slack_ThreadMessage `protobuf:"bytes,7,rep,name=thread_history,json=threadHistory"`
+	xxx_hidden_Reaction        *string                                 `protobuf:"bytes,8,opt,name=reaction"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -1937,38 +1939,53 @@ func (x *ExternalMessage_Slack) GetThreadHistory() []*ExternalMessage_Slack_Thre
 	return nil
 }
 
+func (x *ExternalMessage_Slack) GetReaction() string {
+	if x != nil {
+		if x.xxx_hidden_Reaction != nil {
+			return *x.xxx_hidden_Reaction
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ExternalMessage_Slack) SetTeamId(v string) {
 	x.xxx_hidden_TeamId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
 }
 
 func (x *ExternalMessage_Slack) SetChannelId(v string) {
 	x.xxx_hidden_ChannelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
 }
 
 func (x *ExternalMessage_Slack) SetChannelName(v string) {
 	x.xxx_hidden_ChannelName = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
 }
 
 func (x *ExternalMessage_Slack) SetThreadTs(v string) {
 	x.xxx_hidden_ThreadTs = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
 }
 
 func (x *ExternalMessage_Slack) SetMessageTs(v string) {
 	x.xxx_hidden_MessageTs = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
 }
 
 func (x *ExternalMessage_Slack) SetWorkspaceDomain(v string) {
 	x.xxx_hidden_WorkspaceDomain = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
 }
 
 func (x *ExternalMessage_Slack) SetThreadHistory(v []*ExternalMessage_Slack_ThreadMessage) {
 	x.xxx_hidden_ThreadHistory = &v
+}
+
+func (x *ExternalMessage_Slack) SetReaction(v string) {
+	x.xxx_hidden_Reaction = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *ExternalMessage_Slack) HasTeamId() bool {
@@ -2013,6 +2030,13 @@ func (x *ExternalMessage_Slack) HasWorkspaceDomain() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
+func (x *ExternalMessage_Slack) HasReaction() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *ExternalMessage_Slack) ClearTeamId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_TeamId = nil
@@ -2043,6 +2067,11 @@ func (x *ExternalMessage_Slack) ClearWorkspaceDomain() {
 	x.xxx_hidden_WorkspaceDomain = nil
 }
 
+func (x *ExternalMessage_Slack) ClearReaction() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_Reaction = nil
+}
+
 type ExternalMessage_Slack_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2059,13 +2088,13 @@ type ExternalMessage_Slack_builder struct {
 	MessageTs *string
 	// Workspace host, e.g. "acme.slack.com", from the message permalink.
 	WorkspaceDomain *string
-	// Earlier messages in the thread as fetched at trigger time, oldest
-	// first, excluding this message. Rendered into the initial prompt of a
-	// task created from a thread mention; follow-up queries omit it where
-	// the agent already holds the thread in its conversation context. Not
-	// capped today: the server paginates every reply (15 per page), so
-	// size follows thread length.
+	// Earlier messages actually rendered into this query, oldest first,
+	// excluding this message. Initial prompts can paginate the entire
+	// thread; legacy follow-ups can render a single fetched page. Empty
+	// when the query omits history or fetching history fails.
 	ThreadHistory []*ExternalMessage_Slack_ThreadMessage
+	// Reaction name, only when the query renders the reaction event.
+	Reaction *string
 }
 
 func (b0 ExternalMessage_Slack_builder) Build() *ExternalMessage_Slack {
@@ -2073,55 +2102,65 @@ func (b0 ExternalMessage_Slack_builder) Build() *ExternalMessage_Slack {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.TeamId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
 		x.xxx_hidden_TeamId = b.TeamId
 	}
 	if b.ChannelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
 		x.xxx_hidden_ChannelId = b.ChannelId
 	}
 	if b.ChannelName != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
 		x.xxx_hidden_ChannelName = b.ChannelName
 	}
 	if b.ThreadTs != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
 		x.xxx_hidden_ThreadTs = b.ThreadTs
 	}
 	if b.MessageTs != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
 		x.xxx_hidden_MessageTs = b.MessageTs
 	}
 	if b.WorkspaceDomain != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
 		x.xxx_hidden_WorkspaceDomain = b.WorkspaceDomain
 	}
 	x.xxx_hidden_ThreadHistory = &b.ThreadHistory
+	if b.Reaction != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_Reaction = b.Reaction
+	}
 	return m0
 }
 
 // GitHub issue or pull request comment/review.
 type ExternalMessage_GitHub struct {
-	state                    protoimpl.MessageState                        `protogen:"opaque.v1"`
-	xxx_hidden_Owner         *string                                       `protobuf:"bytes,1,opt,name=owner"`
-	xxx_hidden_Repo          *string                                       `protobuf:"bytes,2,opt,name=repo"`
-	xxx_hidden_Number        int32                                         `protobuf:"varint,3,opt,name=number"`
-	xxx_hidden_IsPullRequest bool                                          `protobuf:"varint,4,opt,name=is_pull_request,json=isPullRequest"`
-	xxx_hidden_EventType     ExternalMessage_GitHub_EventType              `protobuf:"varint,5,opt,name=event_type,json=eventType,enum=warp.multi_agent.v1.ExternalMessage_GitHub_EventType"`
-	xxx_hidden_Title         *string                                       `protobuf:"bytes,6,opt,name=title"`
-	xxx_hidden_State         *string                                       `protobuf:"bytes,7,opt,name=state"`
-	xxx_hidden_Labels        []string                                      `protobuf:"bytes,8,rep,name=labels"`
-	xxx_hidden_Description   *string                                       `protobuf:"bytes,9,opt,name=description"`
-	xxx_hidden_HeadBranch    *string                                       `protobuf:"bytes,10,opt,name=head_branch,json=headBranch"`
-	xxx_hidden_BaseBranch    *string                                       `protobuf:"bytes,11,opt,name=base_branch,json=baseBranch"`
-	xxx_hidden_Thread        *[]*ExternalMessage_GitHub_Comment            `protobuf:"bytes,12,rep,name=thread"`
-	xxx_hidden_Location      *ExternalMessage_GitHub_ReviewCommentLocation `protobuf:"bytes,13,opt,name=location"`
-	xxx_hidden_FilePatch     *string                                       `protobuf:"bytes,14,opt,name=file_patch,json=filePatch"`
-	xxx_hidden_Review        *ExternalMessage_GitHub_Review                `protobuf:"bytes,15,opt,name=review"`
-	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
-	XXX_presence             [1]uint32
-	unknownFields            protoimpl.UnknownFields
-	sizeCache                protoimpl.SizeCache
+	state                        protoimpl.MessageState                        `protogen:"opaque.v1"`
+	xxx_hidden_Owner             *string                                       `protobuf:"bytes,1,opt,name=owner"`
+	xxx_hidden_Repo              *string                                       `protobuf:"bytes,2,opt,name=repo"`
+	xxx_hidden_Number            int32                                         `protobuf:"varint,3,opt,name=number"`
+	xxx_hidden_IsPullRequest     bool                                          `protobuf:"varint,4,opt,name=is_pull_request,json=isPullRequest"`
+	xxx_hidden_EventType         ExternalMessage_GitHub_EventType              `protobuf:"varint,5,opt,name=event_type,json=eventType,enum=warp.multi_agent.v1.ExternalMessage_GitHub_EventType"`
+	xxx_hidden_Title             *string                                       `protobuf:"bytes,6,opt,name=title"`
+	xxx_hidden_State             *string                                       `protobuf:"bytes,7,opt,name=state"`
+	xxx_hidden_Labels            []string                                      `protobuf:"bytes,8,rep,name=labels"`
+	xxx_hidden_Description       *string                                       `protobuf:"bytes,9,opt,name=description"`
+	xxx_hidden_HeadBranch        *string                                       `protobuf:"bytes,10,opt,name=head_branch,json=headBranch"`
+	xxx_hidden_BaseBranch        *string                                       `protobuf:"bytes,11,opt,name=base_branch,json=baseBranch"`
+	xxx_hidden_Thread            *[]*ExternalMessage_GitHub_Comment            `protobuf:"bytes,12,rep,name=thread"`
+	xxx_hidden_Location          *ExternalMessage_GitHub_ReviewCommentLocation `protobuf:"bytes,13,opt,name=location"`
+	xxx_hidden_FilePatch         *string                                       `protobuf:"bytes,14,opt,name=file_patch,json=filePatch"`
+	xxx_hidden_Review            *ExternalMessage_GitHub_Review                `protobuf:"bytes,15,opt,name=review"`
+	xxx_hidden_IsComment         bool                                          `protobuf:"varint,16,opt,name=is_comment,json=isComment"`
+	xxx_hidden_AssigneeAdded     *string                                       `protobuf:"bytes,17,opt,name=assignee_added,json=assigneeAdded"`
+	xxx_hidden_RequestedReviewer *string                                       `protobuf:"bytes,18,opt,name=requested_reviewer,json=requestedReviewer"`
+	xxx_hidden_RequestedTeam     *string                                       `protobuf:"bytes,19,opt,name=requested_team,json=requestedTeam"`
+	xxx_hidden_Conclusion        *string                                       `protobuf:"bytes,20,opt,name=conclusion"`
+	xxx_hidden_WorkflowName      *string                                       `protobuf:"bytes,21,opt,name=workflow_name,json=workflowName"`
+	XXX_raceDetectHookData       protoimpl.RaceDetectHookData
+	XXX_presence                 [1]uint32
+	unknownFields                protoimpl.UnknownFields
+	sizeCache                    protoimpl.SizeCache
 }
 
 func (x *ExternalMessage_GitHub) Reset() {
@@ -2282,39 +2321,96 @@ func (x *ExternalMessage_GitHub) GetReview() *ExternalMessage_GitHub_Review {
 	return nil
 }
 
+func (x *ExternalMessage_GitHub) GetIsComment() bool {
+	if x != nil {
+		return x.xxx_hidden_IsComment
+	}
+	return false
+}
+
+func (x *ExternalMessage_GitHub) GetAssigneeAdded() string {
+	if x != nil {
+		if x.xxx_hidden_AssigneeAdded != nil {
+			return *x.xxx_hidden_AssigneeAdded
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_GitHub) GetRequestedReviewer() string {
+	if x != nil {
+		if x.xxx_hidden_RequestedReviewer != nil {
+			return *x.xxx_hidden_RequestedReviewer
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_GitHub) GetRequestedTeam() string {
+	if x != nil {
+		if x.xxx_hidden_RequestedTeam != nil {
+			return *x.xxx_hidden_RequestedTeam
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_GitHub) GetConclusion() string {
+	if x != nil {
+		if x.xxx_hidden_Conclusion != nil {
+			return *x.xxx_hidden_Conclusion
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_GitHub) GetWorkflowName() string {
+	if x != nil {
+		if x.xxx_hidden_WorkflowName != nil {
+			return *x.xxx_hidden_WorkflowName
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ExternalMessage_GitHub) SetOwner(v string) {
 	x.xxx_hidden_Owner = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetRepo(v string) {
 	x.xxx_hidden_Repo = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetNumber(v int32) {
 	x.xxx_hidden_Number = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetIsPullRequest(v bool) {
 	x.xxx_hidden_IsPullRequest = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetEventType(v ExternalMessage_GitHub_EventType) {
 	x.xxx_hidden_EventType = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetState(v string) {
 	x.xxx_hidden_State = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetLabels(v []string) {
@@ -2323,17 +2419,17 @@ func (x *ExternalMessage_GitHub) SetLabels(v []string) {
 
 func (x *ExternalMessage_GitHub) SetDescription(v string) {
 	x.xxx_hidden_Description = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetHeadBranch(v string) {
 	x.xxx_hidden_HeadBranch = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 9, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetBaseBranch(v string) {
 	x.xxx_hidden_BaseBranch = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 10, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetThread(v []*ExternalMessage_GitHub_Comment) {
@@ -2346,11 +2442,41 @@ func (x *ExternalMessage_GitHub) SetLocation(v *ExternalMessage_GitHub_ReviewCom
 
 func (x *ExternalMessage_GitHub) SetFilePatch(v string) {
 	x.xxx_hidden_FilePatch = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 15)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 13, 21)
 }
 
 func (x *ExternalMessage_GitHub) SetReview(v *ExternalMessage_GitHub_Review) {
 	x.xxx_hidden_Review = v
+}
+
+func (x *ExternalMessage_GitHub) SetIsComment(v bool) {
+	x.xxx_hidden_IsComment = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 15, 21)
+}
+
+func (x *ExternalMessage_GitHub) SetAssigneeAdded(v string) {
+	x.xxx_hidden_AssigneeAdded = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 16, 21)
+}
+
+func (x *ExternalMessage_GitHub) SetRequestedReviewer(v string) {
+	x.xxx_hidden_RequestedReviewer = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 17, 21)
+}
+
+func (x *ExternalMessage_GitHub) SetRequestedTeam(v string) {
+	x.xxx_hidden_RequestedTeam = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 18, 21)
+}
+
+func (x *ExternalMessage_GitHub) SetConclusion(v string) {
+	x.xxx_hidden_Conclusion = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 19, 21)
+}
+
+func (x *ExternalMessage_GitHub) SetWorkflowName(v string) {
+	x.xxx_hidden_WorkflowName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 20, 21)
 }
 
 func (x *ExternalMessage_GitHub) HasOwner() bool {
@@ -2444,6 +2570,48 @@ func (x *ExternalMessage_GitHub) HasReview() bool {
 	return x.xxx_hidden_Review != nil
 }
 
+func (x *ExternalMessage_GitHub) HasIsComment() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 15)
+}
+
+func (x *ExternalMessage_GitHub) HasAssigneeAdded() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 16)
+}
+
+func (x *ExternalMessage_GitHub) HasRequestedReviewer() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 17)
+}
+
+func (x *ExternalMessage_GitHub) HasRequestedTeam() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 18)
+}
+
+func (x *ExternalMessage_GitHub) HasConclusion() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 19)
+}
+
+func (x *ExternalMessage_GitHub) HasWorkflowName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 20)
+}
+
 func (x *ExternalMessage_GitHub) ClearOwner() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Owner = nil
@@ -2507,6 +2675,36 @@ func (x *ExternalMessage_GitHub) ClearReview() {
 	x.xxx_hidden_Review = nil
 }
 
+func (x *ExternalMessage_GitHub) ClearIsComment() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 15)
+	x.xxx_hidden_IsComment = false
+}
+
+func (x *ExternalMessage_GitHub) ClearAssigneeAdded() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 16)
+	x.xxx_hidden_AssigneeAdded = nil
+}
+
+func (x *ExternalMessage_GitHub) ClearRequestedReviewer() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 17)
+	x.xxx_hidden_RequestedReviewer = nil
+}
+
+func (x *ExternalMessage_GitHub) ClearRequestedTeam() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 18)
+	x.xxx_hidden_RequestedTeam = nil
+}
+
+func (x *ExternalMessage_GitHub) ClearConclusion() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 19)
+	x.xxx_hidden_Conclusion = nil
+}
+
+func (x *ExternalMessage_GitHub) ClearWorkflowName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 20)
+	x.xxx_hidden_WorkflowName = nil
+}
+
 type ExternalMessage_GitHub_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2540,6 +2738,14 @@ type ExternalMessage_GitHub_builder struct {
 	// The submitted review (PULL_REQUEST_REVIEW_SUBMITTED only); `body` is
 	// the review summary (may be empty) and `sender` the reviewer.
 	Review *ExternalMessage_GitHub_Review
+	// Whether a mention follow-up refers to a comment or a description.
+	IsComment *bool
+	// Event-specific inputs retained only when the query renders them.
+	AssigneeAdded     *string
+	RequestedReviewer *string
+	RequestedTeam     *string
+	Conclusion        *string
+	WorkflowName      *string
 }
 
 func (b0 ExternalMessage_GitHub_builder) Build() *ExternalMessage_GitHub {
@@ -2547,53 +2753,77 @@ func (b0 ExternalMessage_GitHub_builder) Build() *ExternalMessage_GitHub {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Owner != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 21)
 		x.xxx_hidden_Owner = b.Owner
 	}
 	if b.Repo != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 21)
 		x.xxx_hidden_Repo = b.Repo
 	}
 	if b.Number != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 21)
 		x.xxx_hidden_Number = *b.Number
 	}
 	if b.IsPullRequest != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 21)
 		x.xxx_hidden_IsPullRequest = *b.IsPullRequest
 	}
 	if b.EventType != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 21)
 		x.xxx_hidden_EventType = *b.EventType
 	}
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 21)
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.State != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 21)
 		x.xxx_hidden_State = b.State
 	}
 	x.xxx_hidden_Labels = b.Labels
 	if b.Description != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 21)
 		x.xxx_hidden_Description = b.Description
 	}
 	if b.HeadBranch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 9, 21)
 		x.xxx_hidden_HeadBranch = b.HeadBranch
 	}
 	if b.BaseBranch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 10, 21)
 		x.xxx_hidden_BaseBranch = b.BaseBranch
 	}
 	x.xxx_hidden_Thread = &b.Thread
 	x.xxx_hidden_Location = b.Location
 	if b.FilePatch != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 15)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 13, 21)
 		x.xxx_hidden_FilePatch = b.FilePatch
 	}
 	x.xxx_hidden_Review = b.Review
+	if b.IsComment != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 15, 21)
+		x.xxx_hidden_IsComment = *b.IsComment
+	}
+	if b.AssigneeAdded != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 16, 21)
+		x.xxx_hidden_AssigneeAdded = b.AssigneeAdded
+	}
+	if b.RequestedReviewer != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 17, 21)
+		x.xxx_hidden_RequestedReviewer = b.RequestedReviewer
+	}
+	if b.RequestedTeam != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 18, 21)
+		x.xxx_hidden_RequestedTeam = b.RequestedTeam
+	}
+	if b.Conclusion != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 19, 21)
+		x.xxx_hidden_Conclusion = b.Conclusion
+	}
+	if b.WorkflowName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 20, 21)
+		x.xxx_hidden_WorkflowName = b.WorkflowName
+	}
 	return m0
 }
 
@@ -2722,6 +2952,7 @@ type ExternalMessage_Linear struct {
 	xxx_hidden_PromptContext   *string                `protobuf:"bytes,3,opt,name=prompt_context,json=promptContext"`
 	xxx_hidden_IssueAssignee   *ExternalUser          `protobuf:"bytes,4,opt,name=issue_assignee,json=issueAssignee"`
 	xxx_hidden_Guidance        []string               `protobuf:"bytes,5,rep,name=guidance"`
+	xxx_hidden_SessionId       *string                `protobuf:"bytes,6,opt,name=session_id,json=sessionId"`
 	XXX_raceDetectHookData     protoimpl.RaceDetectHookData
 	XXX_presence               [1]uint32
 	unknownFields              protoimpl.UnknownFields
@@ -2797,19 +3028,29 @@ func (x *ExternalMessage_Linear) GetGuidance() []string {
 	return nil
 }
 
+func (x *ExternalMessage_Linear) GetSessionId() string {
+	if x != nil {
+		if x.xxx_hidden_SessionId != nil {
+			return *x.xxx_hidden_SessionId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *ExternalMessage_Linear) SetIssueIdentifier(v string) {
 	x.xxx_hidden_IssueIdentifier = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 6)
 }
 
 func (x *ExternalMessage_Linear) SetIssueTitle(v string) {
 	x.xxx_hidden_IssueTitle = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 6)
 }
 
 func (x *ExternalMessage_Linear) SetPromptContext(v string) {
 	x.xxx_hidden_PromptContext = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 6)
 }
 
 func (x *ExternalMessage_Linear) SetIssueAssignee(v *ExternalUser) {
@@ -2818,6 +3059,11 @@ func (x *ExternalMessage_Linear) SetIssueAssignee(v *ExternalUser) {
 
 func (x *ExternalMessage_Linear) SetGuidance(v []string) {
 	x.xxx_hidden_Guidance = v
+}
+
+func (x *ExternalMessage_Linear) SetSessionId(v string) {
+	x.xxx_hidden_SessionId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
 }
 
 func (x *ExternalMessage_Linear) HasIssueIdentifier() bool {
@@ -2848,6 +3094,13 @@ func (x *ExternalMessage_Linear) HasIssueAssignee() bool {
 	return x.xxx_hidden_IssueAssignee != nil
 }
 
+func (x *ExternalMessage_Linear) HasSessionId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
 func (x *ExternalMessage_Linear) ClearIssueIdentifier() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_IssueIdentifier = nil
@@ -2867,6 +3120,11 @@ func (x *ExternalMessage_Linear) ClearIssueAssignee() {
 	x.xxx_hidden_IssueAssignee = nil
 }
 
+func (x *ExternalMessage_Linear) ClearSessionId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_SessionId = nil
+}
+
 type ExternalMessage_Linear_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2882,6 +3140,8 @@ type ExternalMessage_Linear_builder struct {
 	IssueAssignee *ExternalUser
 	// Guidance entries attached to a prompted event, in order.
 	Guidance []string
+	// Linear agent-session identifier, when used by this query's prompt.
+	SessionId *string
 }
 
 func (b0 ExternalMessage_Linear_builder) Build() *ExternalMessage_Linear {
@@ -2889,19 +3149,23 @@ func (b0 ExternalMessage_Linear_builder) Build() *ExternalMessage_Linear {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.IssueIdentifier != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 6)
 		x.xxx_hidden_IssueIdentifier = b.IssueIdentifier
 	}
 	if b.IssueTitle != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 6)
 		x.xxx_hidden_IssueTitle = b.IssueTitle
 	}
 	if b.PromptContext != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 6)
 		x.xxx_hidden_PromptContext = b.PromptContext
 	}
 	x.xxx_hidden_IssueAssignee = b.IssueAssignee
 	x.xxx_hidden_Guidance = b.Guidance
+	if b.SessionId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		x.xxx_hidden_SessionId = b.SessionId
+	}
 	return m0
 }
 
@@ -4655,7 +4919,7 @@ const file_attribution_proto_rawDesc = "" +
 	"\x05email\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\x05email\x12%\n" +
 	"\vprofile_url\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"profileUrl\x12\x15\n" +
-	"\x06is_bot\x18\a \x01(\bR\x05isBot\"\xb3\x1c\n" +
+	"\x06is_bot\x18\a \x01(\bR\x05isBot\"\xf3\x1e\n" +
 	"\x0fExternalMessage\x129\n" +
 	"\x06sender\x18\x01 \x01(\v2!.warp.multi_agent.v1.ExternalUserR\x06sender\x12\x18\n" +
 	"\x04body\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04body\x12@\n" +
@@ -4669,7 +4933,7 @@ const file_attribution_proto_rawDesc = "" +
 	"\x06linear\x18\t \x01(\v2+.warp.multi_agent.v1.ExternalMessage.LinearH\x00R\x06linear\x12?\n" +
 	"\x04jira\x18\n" +
 	" \x01(\v2).warp.multi_agent.v1.ExternalMessage.JiraH\x00R\x04jira\x12[\n" +
-	"\x0ecustom_webhook\x18\v \x01(\v22.warp.multi_agent.v1.ExternalMessage.CustomWebhookH\x00R\rcustomWebhook\x1a\x98\x03\n" +
+	"\x0ecustom_webhook\x18\v \x01(\v22.warp.multi_agent.v1.ExternalMessage.CustomWebhookH\x00R\rcustomWebhook\x1a\xba\x03\n" +
 	"\x05Slack\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\tR\x06teamId\x12#\n" +
 	"\n" +
@@ -4679,11 +4943,11 @@ const file_attribution_proto_rawDesc = "" +
 	"\n" +
 	"message_ts\x18\x05 \x01(\tR\tmessageTs\x12/\n" +
 	"\x10workspace_domain\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\x0fworkspaceDomain\x12_\n" +
-	"\x0ethread_history\x18\a \x03(\v28.warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessageR\rthreadHistory\x1aZ\n" +
+	"\x0ethread_history\x18\a \x03(\v28.warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessageR\rthreadHistory\x12 \n" +
+	"\breaction\x18\b \x01(\tB\x04\x80\xb5\x18\x01R\breaction\x1aZ\n" +
 	"\rThreadMessage\x12\x18\n" +
 	"\x04text\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04text\x12/\n" +
-	"\x10attachments_json\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x0fattachmentsJson\x1a\xd9\n" +
-	"\n" +
+	"\x10attachments_json\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x0fattachmentsJson\x1a\xd2\f\n" +
 	"\x06GitHub\x12\x1a\n" +
 	"\x05owner\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x12\x18\n" +
 	"\x04repo\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04repo\x12\x16\n" +
@@ -4704,7 +4968,16 @@ const file_attribution_proto_rawDesc = "" +
 	"\blocation\x18\r \x01(\v2A.warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocationR\blocation\x12#\n" +
 	"\n" +
 	"file_patch\x18\x0e \x01(\tB\x04\x80\xb5\x18\x01R\tfilePatch\x12J\n" +
-	"\x06review\x18\x0f \x01(\v22.warp.multi_agent.v1.ExternalMessage.GitHub.ReviewR\x06review\x1a\x87\x01\n" +
+	"\x06review\x18\x0f \x01(\v22.warp.multi_agent.v1.ExternalMessage.GitHub.ReviewR\x06review\x12\x1d\n" +
+	"\n" +
+	"is_comment\x18\x10 \x01(\bR\tisComment\x12+\n" +
+	"\x0eassignee_added\x18\x11 \x01(\tB\x04\x80\xb5\x18\x01R\rassigneeAdded\x123\n" +
+	"\x12requested_reviewer\x18\x12 \x01(\tB\x04\x80\xb5\x18\x01R\x11requestedReviewer\x12+\n" +
+	"\x0erequested_team\x18\x13 \x01(\tB\x04\x80\xb5\x18\x01R\rrequestedTeam\x12\x1e\n" +
+	"\n" +
+	"conclusion\x18\x14 \x01(\tR\n" +
+	"conclusion\x12)\n" +
+	"\rworkflow_name\x18\x15 \x01(\tB\x04\x80\xb5\x18\x01R\fworkflowName\x1a\x87\x01\n" +
 	"\x15ReviewCommentLocation\x12\x18\n" +
 	"\x04path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04path\x12\x12\n" +
 	"\x04line\x18\x02 \x01(\x05R\x04line\x12\x1d\n" +
@@ -4727,14 +5000,16 @@ const file_attribution_proto_rawDesc = "" +
 	"(EVENT_TYPE_PULL_REQUEST_REVIEW_SUBMITTED\x10\x04\x1a]\n" +
 	"\x06GitLab\x12'\n" +
 	"\fproject_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\vprojectPath\x12*\n" +
-	"\x11merge_request_iid\x18\x02 \x01(\x05R\x0fmergeRequestIid\x1a\xf9\x01\n" +
+	"\x11merge_request_iid\x18\x02 \x01(\x05R\x0fmergeRequestIid\x1a\x9e\x02\n" +
 	"\x06Linear\x12/\n" +
 	"\x10issue_identifier\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x0fissueIdentifier\x12%\n" +
 	"\vissue_title\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"issueTitle\x12+\n" +
 	"\x0eprompt_context\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\rpromptContext\x12H\n" +
 	"\x0eissue_assignee\x18\x04 \x01(\v2!.warp.multi_agent.v1.ExternalUserR\rissueAssignee\x12 \n" +
-	"\bguidance\x18\x05 \x03(\tB\x04\x80\xb5\x18\x01R\bguidance\x1a\xa9\x05\n" +
+	"\bguidance\x18\x05 \x03(\tB\x04\x80\xb5\x18\x01R\bguidance\x12#\n" +
+	"\n" +
+	"session_id\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tsessionId\x1a\xa9\x05\n" +
 	"\x04Jira\x12!\n" +
 	"\tissue_key\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bissueKey\x12K\n" +
 	"\atrigger\x18\x02 \x01(\x0e21.warp.multi_agent.v1.ExternalMessage.Jira.TriggerR\atrigger\x12\x1e\n" +

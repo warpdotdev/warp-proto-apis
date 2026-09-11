@@ -228,7 +228,6 @@ message Request {
         CustomOnboardingRequest custom_onboarding_request = 6;
         AgenticOnboardingKickoff agentic_onboarding_kickoff = 7;
       }
-
       message Install {}
       message Code {}
       message Deploy {}
