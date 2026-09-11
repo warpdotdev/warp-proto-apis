@@ -20829,7 +20829,7 @@ func (x *Message_RequestMetadata_ContextWindow) ClearUsage() {
 type Message_RequestMetadata_ContextWindow_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	// Percentage [0-100] of the model context window used
+	// The fraction [0-1] of the model context window that is used
 	// up to the current point in the conversation
 	Usage *float32
 }
