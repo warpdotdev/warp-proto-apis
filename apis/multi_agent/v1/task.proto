@@ -364,8 +364,8 @@ message Message {
     }
 
     message ContextWindow {
-      // Percentage [0-100] of the model context window used
-      // up to the current point in the conversation
+      // The fraction [0-1] of the model context window that is used
+      // up to the current point in the conversation (i.e. total tokens / model context window).
       float usage = 1;
     }
   }
