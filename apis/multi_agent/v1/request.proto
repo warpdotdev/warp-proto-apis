@@ -569,6 +569,14 @@ message Request {
       // this bearer token instead of Warp's org-wide xAI API key.
       string grok_oauth_access_token = 8 [ (sensitive) = true ];
 
+      // The signed-in user's delegated ChatGPT access token (Sign in with
+      // ChatGPT token sharing). Like `grok_oauth_access_token`, this is
+      // user-provided inference: OpenAI requests are billed to the user's
+      // ChatGPT subscription. Unlike the other keys, the server holds the
+      // credential and populates this field itself; any value sent by a
+      // client is discarded.
+      string chatgpt_delegated_access_token = 9 [ (sensitive) = true ];
+
       // TODO(isaiah): Add Azure
     }
 

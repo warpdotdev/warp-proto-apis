@@ -7979,19 +7979,20 @@ func (b0 Request_Settings_ModelConfig_builder) Build() *Request_Settings_ModelCo
 }
 
 type Request_Settings_ApiKeys struct {
-	state                             protoimpl.MessageState                           `protogen:"opaque.v1"`
-	xxx_hidden_Anthropic              *string                                          `protobuf:"bytes,1,opt,name=anthropic"`
-	xxx_hidden_Openai                 *string                                          `protobuf:"bytes,2,opt,name=openai"`
-	xxx_hidden_Google                 *string                                          `protobuf:"bytes,3,opt,name=google"`
-	xxx_hidden_OpenRouter             *string                                          `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
-	xxx_hidden_AllowUseOfWarpCredits  bool                                             `protobuf:"varint,5,opt,name=allow_use_of_warp_credits,json=allowUseOfWarpCredits"`
-	xxx_hidden_AwsCredentials         *Request_Settings_ApiKeys_AWSCredentials         `protobuf:"bytes,6,opt,name=aws_credentials,json=awsCredentials"`
-	xxx_hidden_GoogleCloudCredentials *Request_Settings_ApiKeys_GoogleCloudCredentials `protobuf:"bytes,7,opt,name=google_cloud_credentials,json=googleCloudCredentials"`
-	xxx_hidden_GrokOauthAccessToken   *string                                          `protobuf:"bytes,8,opt,name=grok_oauth_access_token,json=grokOauthAccessToken"`
-	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
-	XXX_presence                      [1]uint32
-	unknownFields                     protoimpl.UnknownFields
-	sizeCache                         protoimpl.SizeCache
+	state                                  protoimpl.MessageState                           `protogen:"opaque.v1"`
+	xxx_hidden_Anthropic                   *string                                          `protobuf:"bytes,1,opt,name=anthropic"`
+	xxx_hidden_Openai                      *string                                          `protobuf:"bytes,2,opt,name=openai"`
+	xxx_hidden_Google                      *string                                          `protobuf:"bytes,3,opt,name=google"`
+	xxx_hidden_OpenRouter                  *string                                          `protobuf:"bytes,4,opt,name=open_router,json=openRouter"`
+	xxx_hidden_AllowUseOfWarpCredits       bool                                             `protobuf:"varint,5,opt,name=allow_use_of_warp_credits,json=allowUseOfWarpCredits"`
+	xxx_hidden_AwsCredentials              *Request_Settings_ApiKeys_AWSCredentials         `protobuf:"bytes,6,opt,name=aws_credentials,json=awsCredentials"`
+	xxx_hidden_GoogleCloudCredentials      *Request_Settings_ApiKeys_GoogleCloudCredentials `protobuf:"bytes,7,opt,name=google_cloud_credentials,json=googleCloudCredentials"`
+	xxx_hidden_GrokOauthAccessToken        *string                                          `protobuf:"bytes,8,opt,name=grok_oauth_access_token,json=grokOauthAccessToken"`
+	xxx_hidden_ChatgptDelegatedAccessToken *string                                          `protobuf:"bytes,9,opt,name=chatgpt_delegated_access_token,json=chatgptDelegatedAccessToken"`
+	XXX_raceDetectHookData                 protoimpl.RaceDetectHookData
+	XXX_presence                           [1]uint32
+	unknownFields                          protoimpl.UnknownFields
+	sizeCache                              protoimpl.SizeCache
 }
 
 func (x *Request_Settings_ApiKeys) Reset() {
@@ -8090,29 +8091,39 @@ func (x *Request_Settings_ApiKeys) GetGrokOauthAccessToken() string {
 	return ""
 }
 
+func (x *Request_Settings_ApiKeys) GetChatgptDelegatedAccessToken() string {
+	if x != nil {
+		if x.xxx_hidden_ChatgptDelegatedAccessToken != nil {
+			return *x.xxx_hidden_ChatgptDelegatedAccessToken
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Settings_ApiKeys) SetAnthropic(v string) {
 	x.xxx_hidden_Anthropic = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenai(v string) {
 	x.xxx_hidden_Openai = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
 }
 
 func (x *Request_Settings_ApiKeys) SetGoogle(v string) {
 	x.xxx_hidden_Google = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
 }
 
 func (x *Request_Settings_ApiKeys) SetOpenRouter(v string) {
 	x.xxx_hidden_OpenRouter = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
 }
 
 func (x *Request_Settings_ApiKeys) SetAllowUseOfWarpCredits(v bool) {
 	x.xxx_hidden_AllowUseOfWarpCredits = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
 }
 
 func (x *Request_Settings_ApiKeys) SetAwsCredentials(v *Request_Settings_ApiKeys_AWSCredentials) {
@@ -8125,7 +8136,12 @@ func (x *Request_Settings_ApiKeys) SetGoogleCloudCredentials(v *Request_Settings
 
 func (x *Request_Settings_ApiKeys) SetGrokOauthAccessToken(v string) {
 	x.xxx_hidden_GrokOauthAccessToken = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 9)
+}
+
+func (x *Request_Settings_ApiKeys) SetChatgptDelegatedAccessToken(v string) {
+	x.xxx_hidden_ChatgptDelegatedAccessToken = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 9)
 }
 
 func (x *Request_Settings_ApiKeys) HasAnthropic() bool {
@@ -8184,6 +8200,13 @@ func (x *Request_Settings_ApiKeys) HasGrokOauthAccessToken() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
 }
 
+func (x *Request_Settings_ApiKeys) HasChatgptDelegatedAccessToken() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
+}
+
 func (x *Request_Settings_ApiKeys) ClearAnthropic() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Anthropic = nil
@@ -8222,6 +8245,11 @@ func (x *Request_Settings_ApiKeys) ClearGrokOauthAccessToken() {
 	x.xxx_hidden_GrokOauthAccessToken = nil
 }
 
+func (x *Request_Settings_ApiKeys) ClearChatgptDelegatedAccessToken() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
+	x.xxx_hidden_ChatgptDelegatedAccessToken = nil
+}
+
 type Request_Settings_ApiKeys_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -8241,6 +8269,13 @@ type Request_Settings_ApiKeys_builder struct {
 	// subscription. When set, the server's xAI harness authenticates with
 	// this bearer token instead of Warp's org-wide xAI API key.
 	GrokOauthAccessToken *string
+	// The signed-in user's delegated ChatGPT access token (Sign in with
+	// ChatGPT token sharing). Like `grok_oauth_access_token`, this is
+	// user-provided inference: OpenAI requests are billed to the user's
+	// ChatGPT subscription. Unlike the other keys, the server holds the
+	// credential and populates this field itself; any value sent by a
+	// client is discarded.
+	ChatgptDelegatedAccessToken *string
 }
 
 func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
@@ -8248,30 +8283,34 @@ func (b0 Request_Settings_ApiKeys_builder) Build() *Request_Settings_ApiKeys {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Anthropic != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
 		x.xxx_hidden_Anthropic = b.Anthropic
 	}
 	if b.Openai != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
 		x.xxx_hidden_Openai = b.Openai
 	}
 	if b.Google != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
 		x.xxx_hidden_Google = b.Google
 	}
 	if b.OpenRouter != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
 		x.xxx_hidden_OpenRouter = b.OpenRouter
 	}
 	if b.AllowUseOfWarpCredits != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
 		x.xxx_hidden_AllowUseOfWarpCredits = *b.AllowUseOfWarpCredits
 	}
 	x.xxx_hidden_AwsCredentials = b.AwsCredentials
 	x.xxx_hidden_GoogleCloudCredentials = b.GoogleCloudCredentials
 	if b.GrokOauthAccessToken != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 9)
 		x.xxx_hidden_GrokOauthAccessToken = b.GrokOauthAccessToken
+	}
+	if b.ChatgptDelegatedAccessToken != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 9)
+		x.xxx_hidden_ChatgptDelegatedAccessToken = b.ChatgptDelegatedAccessToken
 	}
 	return m0
 }
@@ -10133,7 +10172,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"\xd0\x7f\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"\x9b\x80\x01\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10322,7 +10361,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x8a$\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xd5$\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -10364,7 +10403,7 @@ const file_request_proto_rawDesc = "" +
 	"\x06coding\x18\x03 \x01(\tR\x06coding\x12\x1b\n" +
 	"\tcli_agent\x18\x04 \x01(\tR\bcliAgent\x12,\n" +
 	"\x12computer_use_agent\x18\x05 \x01(\tR\x10computerUseAgent\x12D\n" +
-	"\x1fbase_model_context_window_limit\x18\x06 \x01(\rR\x1bbaseModelContextWindowLimit\x1a\xd1\x05\n" +
+	"\x1fbase_model_context_window_limit\x18\x06 \x01(\rR\x1bbaseModelContextWindowLimit\x1a\x9c\x06\n" +
 	"\aApiKeys\x12\"\n" +
 	"\tanthropic\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\tanthropic\x12\x1c\n" +
 	"\x06openai\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06openai\x12\x1c\n" +
@@ -10374,7 +10413,8 @@ const file_request_proto_rawDesc = "" +
 	"\x19allow_use_of_warp_credits\x18\x05 \x01(\bR\x15allowUseOfWarpCredits\x12e\n" +
 	"\x0faws_credentials\x18\x06 \x01(\v2<.warp.multi_agent.v1.Request.Settings.ApiKeys.AWSCredentialsR\x0eawsCredentials\x12~\n" +
 	"\x18google_cloud_credentials\x18\a \x01(\v2D.warp.multi_agent.v1.Request.Settings.ApiKeys.GoogleCloudCredentialsR\x16googleCloudCredentials\x12;\n" +
-	"\x17grok_oauth_access_token\x18\b \x01(\tB\x04\x80\xb5\x18\x01R\x14grokOauthAccessToken\x1a\x9d\x01\n" +
+	"\x17grok_oauth_access_token\x18\b \x01(\tB\x04\x80\xb5\x18\x01R\x14grokOauthAccessToken\x12I\n" +
+	"\x1echatgpt_delegated_access_token\x18\t \x01(\tB\x04\x80\xb5\x18\x01R\x1bchatgptDelegatedAccessToken\x1a\x9d\x01\n" +
 	"\x0eAWSCredentials\x12#\n" +
 	"\n" +
 	"access_key\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\taccessKey\x12#\n" +
