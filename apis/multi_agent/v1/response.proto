@@ -68,6 +68,7 @@ message ResponseEvent {
       LLMUnavailable llm_unavailable = 6;
       InternalError internal_error = 7;
       InvalidApiKey invalid_api_key = 12;
+      ChatGPTSubscriptionError chatgpt_subscription_error = 14;
     }
 
     // Internal-only field containing per-model token usage incurred in producing the response
@@ -267,6 +268,48 @@ message ResponseEvent {
       string model_name = 2;
     }
     message InternalError { string message = 1; }
+
+    // Emitted when a request funded by the user's ChatGPT subscription fails
+    // with a token-sharing error (e.g. the subscription's usage limit was
+    // reached). This is always a terminal, user-side failure: the server never
+    // retries or falls back on the user's behalf. The server composes the
+    // user-facing copy and the recovery actions so clients render this
+    // generically without interpreting individual error codes.
+    message ChatGPTSubscriptionError {
+      // The raw OpenAI token-sharing error code (e.g.
+      // `subscription_sharing_usage_limit_exceeded`). For telemetry only;
+      // clients must not branch on it.
+      string code = 1;
+
+      // Server-authored user-facing copy.
+      string title = 2;
+      string message = 3;
+
+      // Recovery actions to offer the user, in display order. The first action
+      // is the primary one. May be empty.
+      repeated Action actions = 4;
+
+      message Action {
+        Kind kind = 1;
+
+        // Server-authored button label.
+        string label = 2;
+
+        enum Kind {
+          KIND_UNSPECIFIED = 0;
+
+          // Re-issue the turn unchanged, still funded by the ChatGPT
+          // subscription.
+          RETRY = 1;
+
+          // Switch this conversation to Warp-funded inference: the client sets
+          // a per-conversation flag that sends
+          // `Request.Settings.ApiKeys.skip_chatgpt_subscription = true` on all
+          // subsequent requests, then resumes the conversation.
+          CONTINUE_WITH_WARP_CREDITS = 2;
+        }
+      }
+    }
   }
 }
 
