@@ -512,6 +512,11 @@ message Request {
     // references.
     bool supports_stored_screenshots = 33;
 
+    // If `true`, the client understands
+    // `StreamFinished.chatgpt_subscription_error`. When `false` or unset, the
+    // server reports those failures as `internal_error` instead.
+    bool supports_chatgpt_subscription_error = 34;
+
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
     // in `custom_model_providers`.
@@ -568,6 +573,20 @@ message Request {
       // subscription. When set, the server's xAI harness authenticates with
       // this bearer token instead of Warp's org-wide xAI API key.
       string grok_oauth_access_token = 8 [ (sensitive) = true ];
+
+      // The signed-in user's delegated ChatGPT access token (Sign in with
+      // ChatGPT token sharing). Like `grok_oauth_access_token`, this is
+      // user-provided inference: OpenAI requests are billed to the user's
+      // ChatGPT subscription. Unlike the other keys, the server holds the
+      // credential and populates this field itself; any value sent by a
+      // client is discarded.
+      string chatgpt_delegated_access_token = 9 [ (sensitive) = true ];
+
+      // If `true`, the user chose Warp-funded inference for this conversation
+      // after a ChatGPT token-sharing failure. The server must not attach the
+      // delegated ChatGPT token, so OpenAI requests run on Warp's key and are
+      // billed to Warp credits.
+      bool skip_chatgpt_subscription = 10;
 
       // TODO(isaiah): Add Azure
     }
