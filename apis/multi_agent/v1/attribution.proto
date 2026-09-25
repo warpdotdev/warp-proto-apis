@@ -105,7 +105,8 @@ enum BodyFormat {
 // who posted it, the raw text, a permalink back to it, and the
 // platform-specific container it lives in (Slack channel, GitHub PR, ...).
 // The `platform` oneof is always set, even when its message is empty, so it
-// also identifies the platform.
+// also identifies the platform; `warp` marks text submitted to Warp
+// directly (web app, desktop, CLI, public API, MCP).
 //
 // Beyond source identity, container identifiers, links, and timestamps,
 // each platform arm carries only provider context used to render this
@@ -138,6 +139,7 @@ message ExternalMessage {
     Linear linear = 9;
     Jira jira = 10;
     CustomWebhook custom_webhook = 11;
+    Warp warp = 12;
   }
 
   // Slack message or app_mention.
@@ -329,6 +331,42 @@ message ExternalMessage {
     string webhook_uid = 1;
     // Configured display name of the webhook at delivery time.
     string webhook_name = 2 [ (sensitive) = true ];
+  }
+
+  // The message was submitted to Warp directly rather than relayed from a
+  // third-party platform. Stamped on every query a caller submits to Warp
+  // directly, so `body` holds what the human typed and `query` what the
+  // agent sees; the two differ when the server assembled a prompt around the
+  // submitted text (a requester-identity preamble on run creation, appended
+  // attachment context on follow-ups). Not stamped for prompts the server
+  // composes itself. The conversation
+  // itself is the container, and `sender` is left unset because `author`
+  // names the Warp user; `surface` stands in for the container and says
+  // which Warp entry point the text came through.
+  message Warp {
+    // The entry point the text was submitted through, from the server's
+    // classification of the request (client id and API source headers), so
+    // it never disagrees with UserQueryOrigin. UNSPECIFIED when the request
+    // matched no known surface.
+    Surface surface = 1;
+
+    enum Surface {
+      SURFACE_UNSPECIFIED = 0;
+      // The Oz / Factory web UI (requests carrying `x-oz-api-source:
+      // WEB_APP`). Not Warp on Web: the browser build of the Warp client is
+      // SURFACE_DESKTOP_APP.
+      SURFACE_WEB_APP = 1;
+      // The Warp client (`warp-app` client id): the native desktop app, and
+      // also Warp on Web (the browser build, e.g. a shared session), which
+      // reports the same client id and cannot be told apart from it.
+      SURFACE_DESKTOP_APP = 2;
+      // The Warp CLI or agent CLI.
+      SURFACE_CLI = 3;
+      // A third-party caller of the public API.
+      SURFACE_PUBLIC_API = 4;
+      // A Factory MCP client.
+      SURFACE_MCP = 5;
+    }
   }
 }
 
