@@ -142,14 +142,13 @@ message Request {
           // first local user query).
           ConversationHandoff conversation_handoff = 8;
 
-          // Requests fresh resolution of any agent messages currently
-          // pending for this run. Carries no content itself: the server
-          // resolves undelivered messages at the moment it handles this
-          // input and responds with MessagesReceivedFromAgents when any
-          // exist, or nothing when there are none. Sent in reply to a
-          // server-pushed wake nudge on an already-reachable session, so the
-          // agent is told real content instead of a possibly-stale claim.
-          AgentMessageWakeCheck agent_message_wake_check = 9;
+          // Reports that this run was woken because agent messages may be waiting,
+          // and asks the server to resolve any still undelivered to it. Carries no
+          // content. When messages exist the server adds them to the task as
+          // MessagesReceivedFromAgents and the turn proceeds; when none exist the
+          // turn ends without a model call. Sent in reply to the server-pushed wake
+          // prompt on an already-reachable session.
+          AgentMessageWake agent_message_wake = 9;
         }
       }
 
@@ -176,9 +175,8 @@ message Request {
       // Signals that a cloud conversation has been continued locally.
       message ConversationHandoff {}
 
-      // Signals that the client wants fresh resolution of pending agent
-      // messages for the current run. See the oneof field's own comment.
-      message AgentMessageWakeCheck {}
+      // Signals that the run was woken because agent messages may be waiting.
+      message AgentMessageWake {}
     }
 
     // Tool call result

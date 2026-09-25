@@ -6509,10 +6509,10 @@ func (x *Request_Input_UserInputs_UserInput) GetConversationHandoff() *Request_I
 	return nil
 }
 
-func (x *Request_Input_UserInputs_UserInput) GetAgentMessageWakeCheck() *Request_Input_UserInputs_AgentMessageWakeCheck {
+func (x *Request_Input_UserInputs_UserInput) GetAgentMessageWake() *Request_Input_UserInputs_AgentMessageWake {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_AgentMessageWakeCheck); ok {
-			return x.AgentMessageWakeCheck
+		if x, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_AgentMessageWake); ok {
+			return x.AgentMessageWake
 		}
 	}
 	return nil
@@ -6582,12 +6582,12 @@ func (x *Request_Input_UserInputs_UserInput) SetConversationHandoff(v *Request_I
 	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_ConversationHandoff{v}
 }
 
-func (x *Request_Input_UserInputs_UserInput) SetAgentMessageWakeCheck(v *Request_Input_UserInputs_AgentMessageWakeCheck) {
+func (x *Request_Input_UserInputs_UserInput) SetAgentMessageWake(v *Request_Input_UserInputs_AgentMessageWake) {
 	if v == nil {
 		x.xxx_hidden_Input = nil
 		return
 	}
-	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_AgentMessageWakeCheck{v}
+	x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_AgentMessageWake{v}
 }
 
 func (x *Request_Input_UserInputs_UserInput) HasInput() bool {
@@ -6661,11 +6661,11 @@ func (x *Request_Input_UserInputs_UserInput) HasConversationHandoff() bool {
 	return ok
 }
 
-func (x *Request_Input_UserInputs_UserInput) HasAgentMessageWakeCheck() bool {
+func (x *Request_Input_UserInputs_UserInput) HasAgentMessageWake() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_AgentMessageWakeCheck)
+	_, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_AgentMessageWake)
 	return ok
 }
 
@@ -6721,8 +6721,8 @@ func (x *Request_Input_UserInputs_UserInput) ClearConversationHandoff() {
 	}
 }
 
-func (x *Request_Input_UserInputs_UserInput) ClearAgentMessageWakeCheck() {
-	if _, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_AgentMessageWakeCheck); ok {
+func (x *Request_Input_UserInputs_UserInput) ClearAgentMessageWake() {
+	if _, ok := x.xxx_hidden_Input.(*request_Input_UserInputs_UserInput_AgentMessageWake); ok {
 		x.xxx_hidden_Input = nil
 	}
 }
@@ -6736,7 +6736,7 @@ const Request_Input_UserInputs_UserInput_EventsFromAgents_case case_Request_Inpu
 const Request_Input_UserInputs_UserInput_PassiveSuggestionResult_case case_Request_Input_UserInputs_UserInput_Input = 6
 const Request_Input_UserInputs_UserInput_OrchestrationConfigUpdate_case case_Request_Input_UserInputs_UserInput_Input = 7
 const Request_Input_UserInputs_UserInput_ConversationHandoff_case case_Request_Input_UserInputs_UserInput_Input = 8
-const Request_Input_UserInputs_UserInput_AgentMessageWakeCheck_case case_Request_Input_UserInputs_UserInput_Input = 9
+const Request_Input_UserInputs_UserInput_AgentMessageWake_case case_Request_Input_UserInputs_UserInput_Input = 9
 
 func (x *Request_Input_UserInputs_UserInput) WhichInput() case_Request_Input_UserInputs_UserInput_Input {
 	if x == nil {
@@ -6759,8 +6759,8 @@ func (x *Request_Input_UserInputs_UserInput) WhichInput() case_Request_Input_Use
 		return Request_Input_UserInputs_UserInput_OrchestrationConfigUpdate_case
 	case *request_Input_UserInputs_UserInput_ConversationHandoff:
 		return Request_Input_UserInputs_UserInput_ConversationHandoff_case
-	case *request_Input_UserInputs_UserInput_AgentMessageWakeCheck:
-		return Request_Input_UserInputs_UserInput_AgentMessageWakeCheck_case
+	case *request_Input_UserInputs_UserInput_AgentMessageWake:
+		return Request_Input_UserInputs_UserInput_AgentMessageWake_case
 	default:
 		return Request_Input_UserInputs_UserInput_Input_not_set_case
 	}
@@ -6786,14 +6786,13 @@ type Request_Input_UserInputs_UserInput_builder struct {
 	// preceding the other user inputs sent with the handoff (e.g. the
 	// first local user query).
 	ConversationHandoff *Request_Input_UserInputs_ConversationHandoff
-	// Requests fresh resolution of any agent messages currently
-	// pending for this run. Carries no content itself: the server
-	// resolves undelivered messages at the moment it handles this
-	// input and responds with MessagesReceivedFromAgents when any
-	// exist, or nothing when there are none. Sent in reply to a
-	// server-pushed wake nudge on an already-reachable session, so the
-	// agent is told real content instead of a possibly-stale claim.
-	AgentMessageWakeCheck *Request_Input_UserInputs_AgentMessageWakeCheck
+	// Reports that this run was woken because agent messages may be waiting,
+	// and asks the server to resolve any still undelivered to it. Carries no
+	// content. When messages exist the server adds them to the task as
+	// MessagesReceivedFromAgents and the turn proceeds; when none exist the
+	// turn ends without a model call. Sent in reply to the server-pushed wake
+	// prompt on an already-reachable session.
+	AgentMessageWake *Request_Input_UserInputs_AgentMessageWake
 	// -- end of xxx_hidden_Input
 }
 
@@ -6825,8 +6824,8 @@ func (b0 Request_Input_UserInputs_UserInput_builder) Build() *Request_Input_User
 	if b.ConversationHandoff != nil {
 		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_ConversationHandoff{b.ConversationHandoff}
 	}
-	if b.AgentMessageWakeCheck != nil {
-		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_AgentMessageWakeCheck{b.AgentMessageWakeCheck}
+	if b.AgentMessageWake != nil {
+		x.xxx_hidden_Input = &request_Input_UserInputs_UserInput_AgentMessageWake{b.AgentMessageWake}
 	}
 	return m0
 }
@@ -6885,15 +6884,14 @@ type request_Input_UserInputs_UserInput_ConversationHandoff struct {
 	ConversationHandoff *Request_Input_UserInputs_ConversationHandoff `protobuf:"bytes,8,opt,name=conversation_handoff,json=conversationHandoff,oneof"`
 }
 
-type request_Input_UserInputs_UserInput_AgentMessageWakeCheck struct {
-	// Requests fresh resolution of any agent messages currently
-	// pending for this run. Carries no content itself: the server
-	// resolves undelivered messages at the moment it handles this
-	// input and responds with MessagesReceivedFromAgents when any
-	// exist, or nothing when there are none. Sent in reply to a
-	// server-pushed wake nudge on an already-reachable session, so the
-	// agent is told real content instead of a possibly-stale claim.
-	AgentMessageWakeCheck *Request_Input_UserInputs_AgentMessageWakeCheck `protobuf:"bytes,9,opt,name=agent_message_wake_check,json=agentMessageWakeCheck,oneof"`
+type request_Input_UserInputs_UserInput_AgentMessageWake struct {
+	// Reports that this run was woken because agent messages may be waiting,
+	// and asks the server to resolve any still undelivered to it. Carries no
+	// content. When messages exist the server adds them to the task as
+	// MessagesReceivedFromAgents and the turn proceeds; when none exist the
+	// turn ends without a model call. Sent in reply to the server-pushed wake
+	// prompt on an already-reachable session.
+	AgentMessageWake *Request_Input_UserInputs_AgentMessageWake `protobuf:"bytes,9,opt,name=agent_message_wake,json=agentMessageWake,oneof"`
 }
 
 func (*request_Input_UserInputs_UserInput_UserQuery) isRequest_Input_UserInputs_UserInput_Input() {}
@@ -6919,7 +6917,7 @@ func (*request_Input_UserInputs_UserInput_OrchestrationConfigUpdate) isRequest_I
 func (*request_Input_UserInputs_UserInput_ConversationHandoff) isRequest_Input_UserInputs_UserInput_Input() {
 }
 
-func (*request_Input_UserInputs_UserInput_AgentMessageWakeCheck) isRequest_Input_UserInputs_UserInput_Input() {
+func (*request_Input_UserInputs_UserInput_AgentMessageWake) isRequest_Input_UserInputs_UserInput_Input() {
 }
 
 // Batch of messages received from other agents.
@@ -7154,28 +7152,27 @@ func (b0 Request_Input_UserInputs_ConversationHandoff_builder) Build() *Request_
 	return m0
 }
 
-// Signals that the client wants fresh resolution of pending agent
-// messages for the current run. See the oneof field's own comment.
-type Request_Input_UserInputs_AgentMessageWakeCheck struct {
+// Signals that the run was woken because agent messages may be waiting.
+type Request_Input_UserInputs_AgentMessageWake struct {
 	state         protoimpl.MessageState `protogen:"opaque.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *Request_Input_UserInputs_AgentMessageWakeCheck) Reset() {
-	*x = Request_Input_UserInputs_AgentMessageWakeCheck{}
+func (x *Request_Input_UserInputs_AgentMessageWake) Reset() {
+	*x = Request_Input_UserInputs_AgentMessageWake{}
 	mi := &file_request_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *Request_Input_UserInputs_AgentMessageWakeCheck) String() string {
+func (x *Request_Input_UserInputs_AgentMessageWake) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*Request_Input_UserInputs_AgentMessageWakeCheck) ProtoMessage() {}
+func (*Request_Input_UserInputs_AgentMessageWake) ProtoMessage() {}
 
-func (x *Request_Input_UserInputs_AgentMessageWakeCheck) ProtoReflect() protoreflect.Message {
+func (x *Request_Input_UserInputs_AgentMessageWake) ProtoReflect() protoreflect.Message {
 	mi := &file_request_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -7187,13 +7184,13 @@ func (x *Request_Input_UserInputs_AgentMessageWakeCheck) ProtoReflect() protoref
 	return mi.MessageOf(x)
 }
 
-type Request_Input_UserInputs_AgentMessageWakeCheck_builder struct {
+type Request_Input_UserInputs_AgentMessageWake_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
 }
 
-func (b0 Request_Input_UserInputs_AgentMessageWakeCheck_builder) Build() *Request_Input_UserInputs_AgentMessageWakeCheck {
-	m0 := &Request_Input_UserInputs_AgentMessageWakeCheck{}
+func (b0 Request_Input_UserInputs_AgentMessageWake_builder) Build() *Request_Input_UserInputs_AgentMessageWake {
+	m0 := &Request_Input_UserInputs_AgentMessageWake{}
 	b, x := &b0, m0
 	_, _ = b, x
 	return m0
@@ -10343,7 +10340,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"\xbf\x82\x01\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"\xaa\x82\x01\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10353,7 +10350,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xeaN\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd5N\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -10391,10 +10388,10 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryR\tuserQuery\x12Q\n" +
 	"\x0frunning_command\x18\x02 \x01(\v2(.warp.multi_agent.v1.RunningShellCommandR\x0erunningCommand\x12A\n" +
-	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xc9\r\n" +
+	"\x1erun_shell_command_tool_call_id\x18\x03 \x01(\tR\x19runShellCommandToolCallId\x1a\xb4\r\n" +
 	"\n" +
 	"UserInputs\x12O\n" +
-	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\xa0\b\n" +
+	"\x06inputs\x18\x01 \x03(\v27.warp.multi_agent.v1.Request.Input.UserInputs.UserInputR\x06inputs\x1a\x90\b\n" +
 	"\tUserInput\x12M\n" +
 	"\n" +
 	"user_query\x18\x01 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryH\x00R\tuserQuery\x12]\n" +
@@ -10404,8 +10401,8 @@ const file_request_proto_rawDesc = "" +
 	"\x12events_from_agents\x18\x05 \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgentsH\x00R\x10eventsFromAgents\x12\x88\x01\n" +
 	"\x19passive_suggestion_result\x18\x06 \x01(\v2J.warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInputH\x00R\x17passiveSuggestionResult\x12p\n" +
 	"\x1borchestration_config_update\x18\a \x01(\v2..warp.multi_agent.v1.OrchestrationConfigUpdateH\x00R\x19orchestrationConfigUpdate\x12v\n" +
-	"\x14conversation_handoff\x18\b \x01(\v2A.warp.multi_agent.v1.Request.Input.UserInputs.ConversationHandoffH\x00R\x13conversationHandoff\x12~\n" +
-	"\x18agent_message_wake_check\x18\t \x01(\v2C.warp.multi_agent.v1.Request.Input.UserInputs.AgentMessageWakeCheckH\x00R\x15agentMessageWakeCheckB\a\n" +
+	"\x14conversation_handoff\x18\b \x01(\v2A.warp.multi_agent.v1.Request.Input.UserInputs.ConversationHandoffH\x00R\x13conversationHandoff\x12n\n" +
+	"\x12agent_message_wake\x18\t \x01(\v2>.warp.multi_agent.v1.Request.Input.UserInputs.AgentMessageWakeH\x00R\x10agentMessageWakeB\a\n" +
 	"\x05input\x1a\xd4\x02\n" +
 	"\x1aMessagesReceivedFromAgents\x12t\n" +
 	"\bmessages\x18\x01 \x03(\v2X.warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessageR\bmessages\x1a\xbf\x01\n" +
@@ -10420,8 +10417,8 @@ const file_request_proto_rawDesc = "" +
 	"\fagent_events\x18\x01 \x03(\v2\x1f.warp.multi_agent.v1.AgentEventR\vagentEvents\x1ah\n" +
 	"\x1cPassiveSuggestionResultInput\x12H\n" +
 	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x1a\x15\n" +
-	"\x13ConversationHandoff\x1a\x17\n" +
-	"\x15AgentMessageWakeCheck\x1a\x81\x18\n" +
+	"\x13ConversationHandoff\x1a\x12\n" +
+	"\x10AgentMessageWake\x1a\x81\x18\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -10704,7 +10701,7 @@ var file_request_proto_goTypes = []any{
 	(*Request_Input_UserInputs_EventsFromAgents)(nil),                           // 30: warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents
 	(*Request_Input_UserInputs_PassiveSuggestionResultInput)(nil),               // 31: warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput
 	(*Request_Input_UserInputs_ConversationHandoff)(nil),                        // 32: warp.multi_agent.v1.Request.Input.UserInputs.ConversationHandoff
-	(*Request_Input_UserInputs_AgentMessageWakeCheck)(nil),                      // 33: warp.multi_agent.v1.Request.Input.UserInputs.AgentMessageWakeCheck
+	(*Request_Input_UserInputs_AgentMessageWake)(nil),                           // 33: warp.multi_agent.v1.Request.Input.UserInputs.AgentMessageWake
 	(*Request_Input_UserInputs_MessagesReceivedFromAgents_ReceivedMessage)(nil), // 34: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
 	(*Request_Input_QueryWithCannedResponse_Install)(nil),                       // 35: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Install
 	(*Request_Input_QueryWithCannedResponse_Code)(nil),                          // 36: warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.Code
@@ -10891,7 +10888,7 @@ var file_request_proto_depIdxs = []int32{
 	31,  // 99: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.passive_suggestion_result:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput
 	106, // 100: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.orchestration_config_update:type_name -> warp.multi_agent.v1.OrchestrationConfigUpdate
 	32,  // 101: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.conversation_handoff:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.ConversationHandoff
-	33,  // 102: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.agent_message_wake_check:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.AgentMessageWakeCheck
+	33,  // 102: warp.multi_agent.v1.Request.Input.UserInputs.UserInput.agent_message_wake:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.AgentMessageWake
 	34,  // 103: warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.messages:type_name -> warp.multi_agent.v1.Request.Input.UserInputs.MessagesReceivedFromAgents.ReceivedMessage
 	107, // 104: warp.multi_agent.v1.Request.Input.UserInputs.EventsFromAgents.agent_events:type_name -> warp.multi_agent.v1.AgentEvent
 	108, // 105: warp.multi_agent.v1.Request.Input.UserInputs.PassiveSuggestionResultInput.result:type_name -> warp.multi_agent.v1.PassiveSuggestionResultType
@@ -11013,7 +11010,7 @@ func file_request_proto_init() {
 		(*request_Input_UserInputs_UserInput_PassiveSuggestionResult)(nil),
 		(*request_Input_UserInputs_UserInput_OrchestrationConfigUpdate)(nil),
 		(*request_Input_UserInputs_UserInput_ConversationHandoff)(nil),
-		(*request_Input_UserInputs_UserInput_AgentMessageWakeCheck)(nil),
+		(*request_Input_UserInputs_UserInput_AgentMessageWake)(nil),
 	}
 	file_request_proto_msgTypes[50].OneofWrappers = []any{
 		(*request_Settings_CustomModelRouters_CustomModelRouter_Complexity)(nil),
