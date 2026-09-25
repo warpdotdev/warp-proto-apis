@@ -258,9 +258,13 @@ type ExternalMessage_Warp_Surface int32
 
 const (
 	ExternalMessage_Warp_SURFACE_UNSPECIFIED ExternalMessage_Warp_Surface = 0
-	// The Factory web app.
+	// The Oz / Factory web UI (requests carrying `x-oz-api-source:
+	// WEB_APP`). Not Warp on Web: the browser build of the Warp client is
+	// SURFACE_DESKTOP_APP.
 	ExternalMessage_Warp_SURFACE_WEB_APP ExternalMessage_Warp_Surface = 1
-	// The Warp desktop app (cloud mode).
+	// The Warp client (`warp-app` client id): the native desktop app, and
+	// also Warp on Web (the browser build, e.g. a shared session), which
+	// reports the same client id and cannot be told apart from it.
 	ExternalMessage_Warp_SURFACE_DESKTOP_APP ExternalMessage_Warp_Surface = 2
 	// The Warp CLI or agent CLI.
 	ExternalMessage_Warp_SURFACE_CLI ExternalMessage_Warp_Surface = 3
@@ -928,7 +932,7 @@ func (b0 ExternalUser_builder) Build() *ExternalUser {
 // platform-specific container it lives in (Slack channel, GitHub PR, ...).
 // The `platform` oneof is always set, even when its message is empty, so it
 // also identifies the platform; `warp` marks text submitted to Warp
-// directly when the server assembled a prompt around it.
+// directly (web app, desktop, CLI, public API, MCP).
 //
 // Beyond source identity, container identifiers, links, and timestamps,
 // each platform arm carries only provider context used to render this
@@ -3724,10 +3728,12 @@ func (b0 ExternalMessage_CustomWebhook_builder) Build() *ExternalMessage_CustomW
 }
 
 // The message was submitted to Warp directly rather than relayed from a
-// third-party platform. Stamped only when the server assembled a prompt
-// around the submitted text (a requester-identity preamble on run
-// creation, appended attachment context on follow-ups), so `body` holds
-// what the human typed and `query` what the agent sees. The conversation
+// third-party platform. Stamped on every query a caller submits to Warp
+// directly, so `body` holds what the human typed and `query` what the
+// agent sees; the two differ when the server assembled a prompt around the
+// submitted text (a requester-identity preamble on run creation, appended
+// attachment context on follow-ups). Not stamped for prompts the server
+// composes itself. The conversation
 // itself is the container, and `sender` is left unset because `author`
 // names the Warp user; `surface` stands in for the container and says
 // which Warp entry point the text came through.
