@@ -254,6 +254,64 @@ func (x ExternalMessage_Jira_Trigger) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
+type ExternalMessage_Warp_Surface int32
+
+const (
+	ExternalMessage_Warp_SURFACE_UNSPECIFIED ExternalMessage_Warp_Surface = 0
+	// The Factory web app.
+	ExternalMessage_Warp_SURFACE_WEB_APP ExternalMessage_Warp_Surface = 1
+	// The Warp desktop app (cloud mode).
+	ExternalMessage_Warp_SURFACE_DESKTOP_APP ExternalMessage_Warp_Surface = 2
+	// The Warp CLI or agent CLI.
+	ExternalMessage_Warp_SURFACE_CLI ExternalMessage_Warp_Surface = 3
+	// A third-party caller of the public API.
+	ExternalMessage_Warp_SURFACE_PUBLIC_API ExternalMessage_Warp_Surface = 4
+	// A Factory MCP client.
+	ExternalMessage_Warp_SURFACE_MCP ExternalMessage_Warp_Surface = 5
+)
+
+// Enum value maps for ExternalMessage_Warp_Surface.
+var (
+	ExternalMessage_Warp_Surface_name = map[int32]string{
+		0: "SURFACE_UNSPECIFIED",
+		1: "SURFACE_WEB_APP",
+		2: "SURFACE_DESKTOP_APP",
+		3: "SURFACE_CLI",
+		4: "SURFACE_PUBLIC_API",
+		5: "SURFACE_MCP",
+	}
+	ExternalMessage_Warp_Surface_value = map[string]int32{
+		"SURFACE_UNSPECIFIED": 0,
+		"SURFACE_WEB_APP":     1,
+		"SURFACE_DESKTOP_APP": 2,
+		"SURFACE_CLI":         3,
+		"SURFACE_PUBLIC_API":  4,
+		"SURFACE_MCP":         5,
+	}
+)
+
+func (x ExternalMessage_Warp_Surface) Enum() *ExternalMessage_Warp_Surface {
+	p := new(ExternalMessage_Warp_Surface)
+	*p = x
+	return p
+}
+
+func (x ExternalMessage_Warp_Surface) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ExternalMessage_Warp_Surface) Descriptor() protoreflect.EnumDescriptor {
+	return file_attribution_proto_enumTypes[4].Descriptor()
+}
+
+func (ExternalMessage_Warp_Surface) Type() protoreflect.EnumType {
+	return &file_attribution_proto_enumTypes[4]
+}
+
+func (x ExternalMessage_Warp_Surface) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // A Warp user as resolved by the server. Pure identity: display name and
 // avatar are fetched just-in-time by clients since they change over time.
 type WarpUser struct {
@@ -869,7 +927,8 @@ func (b0 ExternalUser_builder) Build() *ExternalUser {
 // who posted it, the raw text, a permalink back to it, and the
 // platform-specific container it lives in (Slack channel, GitHub PR, ...).
 // The `platform` oneof is always set, even when its message is empty, so it
-// also identifies the platform.
+// also identifies the platform; `warp` marks text submitted to Warp
+// directly when the server assembled a prompt around it.
 //
 // Beyond source identity, container identifiers, links, and timestamps,
 // each platform arm carries only provider context used to render this
@@ -1014,6 +1073,15 @@ func (x *ExternalMessage) GetCustomWebhook() *ExternalMessage_CustomWebhook {
 	return nil
 }
 
+func (x *ExternalMessage) GetWarp() *ExternalMessage_Warp {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Platform.(*externalMessage_Warp_); ok {
+			return x.Warp
+		}
+	}
+	return nil
+}
+
 func (x *ExternalMessage) SetSender(v *ExternalUser) {
 	x.xxx_hidden_Sender = v
 }
@@ -1083,6 +1151,14 @@ func (x *ExternalMessage) SetCustomWebhook(v *ExternalMessage_CustomWebhook) {
 		return
 	}
 	x.xxx_hidden_Platform = &externalMessage_CustomWebhook_{v}
+}
+
+func (x *ExternalMessage) SetWarp(v *ExternalMessage_Warp) {
+	if v == nil {
+		x.xxx_hidden_Platform = nil
+		return
+	}
+	x.xxx_hidden_Platform = &externalMessage_Warp_{v}
 }
 
 func (x *ExternalMessage) HasSender() bool {
@@ -1175,6 +1251,14 @@ func (x *ExternalMessage) HasCustomWebhook() bool {
 	return ok
 }
 
+func (x *ExternalMessage) HasWarp() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Platform.(*externalMessage_Warp_)
+	return ok
+}
+
 func (x *ExternalMessage) ClearSender() {
 	x.xxx_hidden_Sender = nil
 }
@@ -1238,6 +1322,12 @@ func (x *ExternalMessage) ClearCustomWebhook() {
 	}
 }
 
+func (x *ExternalMessage) ClearWarp() {
+	if _, ok := x.xxx_hidden_Platform.(*externalMessage_Warp_); ok {
+		x.xxx_hidden_Platform = nil
+	}
+}
+
 const ExternalMessage_Platform_not_set_case case_ExternalMessage_Platform = 0
 const ExternalMessage_Slack_case case_ExternalMessage_Platform = 6
 const ExternalMessage_Github_case case_ExternalMessage_Platform = 7
@@ -1245,6 +1335,7 @@ const ExternalMessage_Gitlab_case case_ExternalMessage_Platform = 8
 const ExternalMessage_Linear_case case_ExternalMessage_Platform = 9
 const ExternalMessage_Jira_case case_ExternalMessage_Platform = 10
 const ExternalMessage_CustomWebhook_case case_ExternalMessage_Platform = 11
+const ExternalMessage_Warp_case case_ExternalMessage_Platform = 12
 
 func (x *ExternalMessage) WhichPlatform() case_ExternalMessage_Platform {
 	if x == nil {
@@ -1263,6 +1354,8 @@ func (x *ExternalMessage) WhichPlatform() case_ExternalMessage_Platform {
 		return ExternalMessage_Jira_case
 	case *externalMessage_CustomWebhook_:
 		return ExternalMessage_CustomWebhook_case
+	case *externalMessage_Warp_:
+		return ExternalMessage_Warp_case
 	default:
 		return ExternalMessage_Platform_not_set_case
 	}
@@ -1293,6 +1386,7 @@ type ExternalMessage_builder struct {
 	Linear        *ExternalMessage_Linear
 	Jira          *ExternalMessage_Jira
 	CustomWebhook *ExternalMessage_CustomWebhook
+	Warp          *ExternalMessage_Warp
 	// -- end of xxx_hidden_Platform
 }
 
@@ -1331,6 +1425,9 @@ func (b0 ExternalMessage_builder) Build() *ExternalMessage {
 	}
 	if b.CustomWebhook != nil {
 		x.xxx_hidden_Platform = &externalMessage_CustomWebhook_{b.CustomWebhook}
+	}
+	if b.Warp != nil {
+		x.xxx_hidden_Platform = &externalMessage_Warp_{b.Warp}
 	}
 	return m0
 }
@@ -1373,6 +1470,10 @@ type externalMessage_CustomWebhook_ struct {
 	CustomWebhook *ExternalMessage_CustomWebhook `protobuf:"bytes,11,opt,name=custom_webhook,json=customWebhook,oneof"`
 }
 
+type externalMessage_Warp_ struct {
+	Warp *ExternalMessage_Warp `protobuf:"bytes,12,opt,name=warp,oneof"`
+}
+
 func (*externalMessage_Slack_) isExternalMessage_Platform() {}
 
 func (*externalMessage_Github) isExternalMessage_Platform() {}
@@ -1384,6 +1485,8 @@ func (*externalMessage_Linear_) isExternalMessage_Platform() {}
 func (*externalMessage_Jira_) isExternalMessage_Platform() {}
 
 func (*externalMessage_CustomWebhook_) isExternalMessage_Platform() {}
+
+func (*externalMessage_Warp_) isExternalMessage_Platform() {}
 
 // What produced a UserQuery: the mechanism by which it reached the agent.
 // Modeled as a oneof of per-variant messages (like Harness) so each variant
@@ -3620,6 +3723,95 @@ func (b0 ExternalMessage_CustomWebhook_builder) Build() *ExternalMessage_CustomW
 	return m0
 }
 
+// The message was submitted to Warp directly rather than relayed from a
+// third-party platform. Stamped only when the server assembled a prompt
+// around the submitted text (a requester-identity preamble on run
+// creation, appended attachment context on follow-ups), so `body` holds
+// what the human typed and `query` what the agent sees. The conversation
+// itself is the container, and `sender` is left unset because `author`
+// names the Warp user; `surface` stands in for the container and says
+// which Warp entry point the text came through.
+type ExternalMessage_Warp struct {
+	state                  protoimpl.MessageState       `protogen:"opaque.v1"`
+	xxx_hidden_Surface     ExternalMessage_Warp_Surface `protobuf:"varint,1,opt,name=surface,enum=warp.multi_agent.v1.ExternalMessage_Warp_Surface"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ExternalMessage_Warp) Reset() {
+	*x = ExternalMessage_Warp{}
+	mi := &file_attribution_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExternalMessage_Warp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalMessage_Warp) ProtoMessage() {}
+
+func (x *ExternalMessage_Warp) ProtoReflect() protoreflect.Message {
+	mi := &file_attribution_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ExternalMessage_Warp) GetSurface() ExternalMessage_Warp_Surface {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 0) {
+			return x.xxx_hidden_Surface
+		}
+	}
+	return ExternalMessage_Warp_SURFACE_UNSPECIFIED
+}
+
+func (x *ExternalMessage_Warp) SetSurface(v ExternalMessage_Warp_Surface) {
+	x.xxx_hidden_Surface = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *ExternalMessage_Warp) HasSurface() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ExternalMessage_Warp) ClearSurface() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Surface = ExternalMessage_Warp_SURFACE_UNSPECIFIED
+}
+
+type ExternalMessage_Warp_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	// The entry point the text was submitted through, from the server's
+	// classification of the request (client id and API source headers), so
+	// it never disagrees with UserQueryOrigin. UNSPECIFIED when the request
+	// matched no known surface.
+	Surface *ExternalMessage_Warp_Surface
+}
+
+func (b0 ExternalMessage_Warp_builder) Build() *ExternalMessage_Warp {
+	m0 := &ExternalMessage_Warp{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Surface != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Surface = *b.Surface
+	}
+	return m0
+}
+
 type ExternalMessage_Slack_ThreadMessage struct {
 	state                      protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Text            *string                `protobuf:"bytes,1,opt,name=text"`
@@ -3632,7 +3824,7 @@ type ExternalMessage_Slack_ThreadMessage struct {
 
 func (x *ExternalMessage_Slack_ThreadMessage) Reset() {
 	*x = ExternalMessage_Slack_ThreadMessage{}
-	mi := &file_attribution_proto_msgTypes[11]
+	mi := &file_attribution_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3644,7 +3836,7 @@ func (x *ExternalMessage_Slack_ThreadMessage) String() string {
 func (*ExternalMessage_Slack_ThreadMessage) ProtoMessage() {}
 
 func (x *ExternalMessage_Slack_ThreadMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[11]
+	mi := &file_attribution_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3748,7 +3940,7 @@ type ExternalMessage_GitHub_ReviewCommentLocation struct {
 
 func (x *ExternalMessage_GitHub_ReviewCommentLocation) Reset() {
 	*x = ExternalMessage_GitHub_ReviewCommentLocation{}
-	mi := &file_attribution_proto_msgTypes[12]
+	mi := &file_attribution_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3760,7 +3952,7 @@ func (x *ExternalMessage_GitHub_ReviewCommentLocation) String() string {
 func (*ExternalMessage_GitHub_ReviewCommentLocation) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub_ReviewCommentLocation) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[12]
+	mi := &file_attribution_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3920,7 +4112,7 @@ type ExternalMessage_GitHub_Comment struct {
 
 func (x *ExternalMessage_GitHub_Comment) Reset() {
 	*x = ExternalMessage_GitHub_Comment{}
-	mi := &file_attribution_proto_msgTypes[13]
+	mi := &file_attribution_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3932,7 +4124,7 @@ func (x *ExternalMessage_GitHub_Comment) String() string {
 func (*ExternalMessage_GitHub_Comment) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[13]
+	mi := &file_attribution_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4082,7 +4274,7 @@ type ExternalMessage_GitHub_Review struct {
 
 func (x *ExternalMessage_GitHub_Review) Reset() {
 	*x = ExternalMessage_GitHub_Review{}
-	mi := &file_attribution_proto_msgTypes[14]
+	mi := &file_attribution_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4094,7 +4286,7 @@ func (x *ExternalMessage_GitHub_Review) String() string {
 func (*ExternalMessage_GitHub_Review) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub_Review) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[14]
+	mi := &file_attribution_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4179,7 +4371,7 @@ type ExternalMessage_Jira_Comment struct {
 
 func (x *ExternalMessage_Jira_Comment) Reset() {
 	*x = ExternalMessage_Jira_Comment{}
-	mi := &file_attribution_proto_msgTypes[15]
+	mi := &file_attribution_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4191,7 +4383,7 @@ func (x *ExternalMessage_Jira_Comment) String() string {
 func (*ExternalMessage_Jira_Comment) ProtoMessage() {}
 
 func (x *ExternalMessage_Jira_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[15]
+	mi := &file_attribution_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4280,7 +4472,7 @@ type UserQueryOrigin_WarpClient struct {
 
 func (x *UserQueryOrigin_WarpClient) Reset() {
 	*x = UserQueryOrigin_WarpClient{}
-	mi := &file_attribution_proto_msgTypes[16]
+	mi := &file_attribution_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4292,7 +4484,7 @@ func (x *UserQueryOrigin_WarpClient) String() string {
 func (*UserQueryOrigin_WarpClient) ProtoMessage() {}
 
 func (x *UserQueryOrigin_WarpClient) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[16]
+	mi := &file_attribution_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4328,7 +4520,7 @@ type UserQueryOrigin_ExternalPlatform struct {
 
 func (x *UserQueryOrigin_ExternalPlatform) Reset() {
 	*x = UserQueryOrigin_ExternalPlatform{}
-	mi := &file_attribution_proto_msgTypes[17]
+	mi := &file_attribution_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4340,7 +4532,7 @@ func (x *UserQueryOrigin_ExternalPlatform) String() string {
 func (*UserQueryOrigin_ExternalPlatform) ProtoMessage() {}
 
 func (x *UserQueryOrigin_ExternalPlatform) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[17]
+	mi := &file_attribution_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4375,7 +4567,7 @@ type UserQueryOrigin_ParentAgent struct {
 
 func (x *UserQueryOrigin_ParentAgent) Reset() {
 	*x = UserQueryOrigin_ParentAgent{}
-	mi := &file_attribution_proto_msgTypes[18]
+	mi := &file_attribution_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4387,7 +4579,7 @@ func (x *UserQueryOrigin_ParentAgent) String() string {
 func (*UserQueryOrigin_ParentAgent) ProtoMessage() {}
 
 func (x *UserQueryOrigin_ParentAgent) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[18]
+	mi := &file_attribution_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4456,7 +4648,7 @@ type UserQueryOrigin_AgentMessageWake struct {
 
 func (x *UserQueryOrigin_AgentMessageWake) Reset() {
 	*x = UserQueryOrigin_AgentMessageWake{}
-	mi := &file_attribution_proto_msgTypes[19]
+	mi := &file_attribution_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4468,7 +4660,7 @@ func (x *UserQueryOrigin_AgentMessageWake) String() string {
 func (*UserQueryOrigin_AgentMessageWake) ProtoMessage() {}
 
 func (x *UserQueryOrigin_AgentMessageWake) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[19]
+	mi := &file_attribution_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4533,7 +4725,7 @@ type UserQueryOrigin_Schedule struct {
 
 func (x *UserQueryOrigin_Schedule) Reset() {
 	*x = UserQueryOrigin_Schedule{}
-	mi := &file_attribution_proto_msgTypes[20]
+	mi := &file_attribution_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4545,7 +4737,7 @@ func (x *UserQueryOrigin_Schedule) String() string {
 func (*UserQueryOrigin_Schedule) ProtoMessage() {}
 
 func (x *UserQueryOrigin_Schedule) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[20]
+	mi := &file_attribution_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4619,7 +4811,7 @@ type UserQueryOrigin_Automation struct {
 
 func (x *UserQueryOrigin_Automation) Reset() {
 	*x = UserQueryOrigin_Automation{}
-	mi := &file_attribution_proto_msgTypes[21]
+	mi := &file_attribution_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4631,7 +4823,7 @@ func (x *UserQueryOrigin_Automation) String() string {
 func (*UserQueryOrigin_Automation) ProtoMessage() {}
 
 func (x *UserQueryOrigin_Automation) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[21]
+	mi := &file_attribution_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4780,7 +4972,7 @@ type UserQueryOrigin_PublicApi struct {
 
 func (x *UserQueryOrigin_PublicApi) Reset() {
 	*x = UserQueryOrigin_PublicApi{}
-	mi := &file_attribution_proto_msgTypes[22]
+	mi := &file_attribution_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4792,7 +4984,7 @@ func (x *UserQueryOrigin_PublicApi) String() string {
 func (*UserQueryOrigin_PublicApi) ProtoMessage() {}
 
 func (x *UserQueryOrigin_PublicApi) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[22]
+	mi := &file_attribution_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4827,7 +5019,7 @@ type UserQueryOrigin_ServerSynthesized struct {
 
 func (x *UserQueryOrigin_ServerSynthesized) Reset() {
 	*x = UserQueryOrigin_ServerSynthesized{}
-	mi := &file_attribution_proto_msgTypes[23]
+	mi := &file_attribution_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4839,7 +5031,7 @@ func (x *UserQueryOrigin_ServerSynthesized) String() string {
 func (*UserQueryOrigin_ServerSynthesized) ProtoMessage() {}
 
 func (x *UserQueryOrigin_ServerSynthesized) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[23]
+	mi := &file_attribution_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4919,7 +5111,7 @@ const file_attribution_proto_rawDesc = "" +
 	"\x05email\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\x05email\x12%\n" +
 	"\vprofile_url\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"profileUrl\x12\x15\n" +
-	"\x06is_bot\x18\a \x01(\bR\x05isBot\"\xf3\x1e\n" +
+	"\x06is_bot\x18\a \x01(\bR\x05isBot\"\x97!\n" +
 	"\x0fExternalMessage\x129\n" +
 	"\x06sender\x18\x01 \x01(\v2!.warp.multi_agent.v1.ExternalUserR\x06sender\x12\x18\n" +
 	"\x04body\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04body\x12@\n" +
@@ -4933,7 +5125,8 @@ const file_attribution_proto_rawDesc = "" +
 	"\x06linear\x18\t \x01(\v2+.warp.multi_agent.v1.ExternalMessage.LinearH\x00R\x06linear\x12?\n" +
 	"\x04jira\x18\n" +
 	" \x01(\v2).warp.multi_agent.v1.ExternalMessage.JiraH\x00R\x04jira\x12[\n" +
-	"\x0ecustom_webhook\x18\v \x01(\v22.warp.multi_agent.v1.ExternalMessage.CustomWebhookH\x00R\rcustomWebhook\x1a\xba\x03\n" +
+	"\x0ecustom_webhook\x18\v \x01(\v22.warp.multi_agent.v1.ExternalMessage.CustomWebhookH\x00R\rcustomWebhook\x12?\n" +
+	"\x04warp\x18\f \x01(\v2).warp.multi_agent.v1.ExternalMessage.WarpH\x00R\x04warp\x1a\xba\x03\n" +
 	"\x05Slack\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\tR\x06teamId\x12#\n" +
 	"\n" +
@@ -5034,7 +5227,16 @@ const file_attribution_proto_rawDesc = "" +
 	"\rCustomWebhook\x12\x1f\n" +
 	"\vwebhook_uid\x18\x01 \x01(\tR\n" +
 	"webhookUid\x12'\n" +
-	"\fwebhook_name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vwebhookNameB\n" +
+	"\fwebhook_name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\vwebhookName\x1a\xe0\x01\n" +
+	"\x04Warp\x12K\n" +
+	"\asurface\x18\x01 \x01(\x0e21.warp.multi_agent.v1.ExternalMessage.Warp.SurfaceR\asurface\"\x8a\x01\n" +
+	"\aSurface\x12\x17\n" +
+	"\x13SURFACE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fSURFACE_WEB_APP\x10\x01\x12\x17\n" +
+	"\x13SURFACE_DESKTOP_APP\x10\x02\x12\x0f\n" +
+	"\vSURFACE_CLI\x10\x03\x12\x16\n" +
+	"\x12SURFACE_PUBLIC_API\x10\x04\x12\x0f\n" +
+	"\vSURFACE_MCP\x10\x05B\n" +
 	"\n" +
 	"\bplatform\"\x8b\t\n" +
 	"\x0fUserQueryOrigin\x12R\n" +
@@ -5087,77 +5289,81 @@ const file_attribution_proto_rawDesc = "" +
 	"\x10BODY_FORMAT_HTML\x10\x04\x12)\n" +
 	"%BODY_FORMAT_ATLASSIAN_DOCUMENT_FORMAT\x10\x05BMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_attribution_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_attribution_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_attribution_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_attribution_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
 var file_attribution_proto_goTypes = []any{
 	(IdentityResolution)(0),                              // 0: warp.multi_agent.v1.IdentityResolution
 	(BodyFormat)(0),                                      // 1: warp.multi_agent.v1.BodyFormat
 	(ExternalMessage_GitHub_EventType)(0),                // 2: warp.multi_agent.v1.ExternalMessage.GitHub.EventType
 	(ExternalMessage_Jira_Trigger)(0),                    // 3: warp.multi_agent.v1.ExternalMessage.Jira.Trigger
-	(*WarpUser)(nil),                                     // 4: warp.multi_agent.v1.WarpUser
-	(*QueryAuthor)(nil),                                  // 5: warp.multi_agent.v1.QueryAuthor
-	(*ExternalUser)(nil),                                 // 6: warp.multi_agent.v1.ExternalUser
-	(*ExternalMessage)(nil),                              // 7: warp.multi_agent.v1.ExternalMessage
-	(*UserQueryOrigin)(nil),                              // 8: warp.multi_agent.v1.UserQueryOrigin
-	(*ExternalMessage_Slack)(nil),                        // 9: warp.multi_agent.v1.ExternalMessage.Slack
-	(*ExternalMessage_GitHub)(nil),                       // 10: warp.multi_agent.v1.ExternalMessage.GitHub
-	(*ExternalMessage_GitLab)(nil),                       // 11: warp.multi_agent.v1.ExternalMessage.GitLab
-	(*ExternalMessage_Linear)(nil),                       // 12: warp.multi_agent.v1.ExternalMessage.Linear
-	(*ExternalMessage_Jira)(nil),                         // 13: warp.multi_agent.v1.ExternalMessage.Jira
-	(*ExternalMessage_CustomWebhook)(nil),                // 14: warp.multi_agent.v1.ExternalMessage.CustomWebhook
-	(*ExternalMessage_Slack_ThreadMessage)(nil),          // 15: warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
-	(*ExternalMessage_GitHub_ReviewCommentLocation)(nil), // 16: warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
-	(*ExternalMessage_GitHub_Comment)(nil),               // 17: warp.multi_agent.v1.ExternalMessage.GitHub.Comment
-	(*ExternalMessage_GitHub_Review)(nil),                // 18: warp.multi_agent.v1.ExternalMessage.GitHub.Review
-	(*ExternalMessage_Jira_Comment)(nil),                 // 19: warp.multi_agent.v1.ExternalMessage.Jira.Comment
-	(*UserQueryOrigin_WarpClient)(nil),                   // 20: warp.multi_agent.v1.UserQueryOrigin.WarpClient
-	(*UserQueryOrigin_ExternalPlatform)(nil),             // 21: warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
-	(*UserQueryOrigin_ParentAgent)(nil),                  // 22: warp.multi_agent.v1.UserQueryOrigin.ParentAgent
-	(*UserQueryOrigin_AgentMessageWake)(nil),             // 23: warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
-	(*UserQueryOrigin_Schedule)(nil),                     // 24: warp.multi_agent.v1.UserQueryOrigin.Schedule
-	(*UserQueryOrigin_Automation)(nil),                   // 25: warp.multi_agent.v1.UserQueryOrigin.Automation
-	(*UserQueryOrigin_PublicApi)(nil),                    // 26: warp.multi_agent.v1.UserQueryOrigin.PublicApi
-	(*UserQueryOrigin_ServerSynthesized)(nil),            // 27: warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
-	(*timestamppb.Timestamp)(nil),                        // 28: google.protobuf.Timestamp
+	(ExternalMessage_Warp_Surface)(0),                    // 4: warp.multi_agent.v1.ExternalMessage.Warp.Surface
+	(*WarpUser)(nil),                                     // 5: warp.multi_agent.v1.WarpUser
+	(*QueryAuthor)(nil),                                  // 6: warp.multi_agent.v1.QueryAuthor
+	(*ExternalUser)(nil),                                 // 7: warp.multi_agent.v1.ExternalUser
+	(*ExternalMessage)(nil),                              // 8: warp.multi_agent.v1.ExternalMessage
+	(*UserQueryOrigin)(nil),                              // 9: warp.multi_agent.v1.UserQueryOrigin
+	(*ExternalMessage_Slack)(nil),                        // 10: warp.multi_agent.v1.ExternalMessage.Slack
+	(*ExternalMessage_GitHub)(nil),                       // 11: warp.multi_agent.v1.ExternalMessage.GitHub
+	(*ExternalMessage_GitLab)(nil),                       // 12: warp.multi_agent.v1.ExternalMessage.GitLab
+	(*ExternalMessage_Linear)(nil),                       // 13: warp.multi_agent.v1.ExternalMessage.Linear
+	(*ExternalMessage_Jira)(nil),                         // 14: warp.multi_agent.v1.ExternalMessage.Jira
+	(*ExternalMessage_CustomWebhook)(nil),                // 15: warp.multi_agent.v1.ExternalMessage.CustomWebhook
+	(*ExternalMessage_Warp)(nil),                         // 16: warp.multi_agent.v1.ExternalMessage.Warp
+	(*ExternalMessage_Slack_ThreadMessage)(nil),          // 17: warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
+	(*ExternalMessage_GitHub_ReviewCommentLocation)(nil), // 18: warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
+	(*ExternalMessage_GitHub_Comment)(nil),               // 19: warp.multi_agent.v1.ExternalMessage.GitHub.Comment
+	(*ExternalMessage_GitHub_Review)(nil),                // 20: warp.multi_agent.v1.ExternalMessage.GitHub.Review
+	(*ExternalMessage_Jira_Comment)(nil),                 // 21: warp.multi_agent.v1.ExternalMessage.Jira.Comment
+	(*UserQueryOrigin_WarpClient)(nil),                   // 22: warp.multi_agent.v1.UserQueryOrigin.WarpClient
+	(*UserQueryOrigin_ExternalPlatform)(nil),             // 23: warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
+	(*UserQueryOrigin_ParentAgent)(nil),                  // 24: warp.multi_agent.v1.UserQueryOrigin.ParentAgent
+	(*UserQueryOrigin_AgentMessageWake)(nil),             // 25: warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
+	(*UserQueryOrigin_Schedule)(nil),                     // 26: warp.multi_agent.v1.UserQueryOrigin.Schedule
+	(*UserQueryOrigin_Automation)(nil),                   // 27: warp.multi_agent.v1.UserQueryOrigin.Automation
+	(*UserQueryOrigin_PublicApi)(nil),                    // 28: warp.multi_agent.v1.UserQueryOrigin.PublicApi
+	(*UserQueryOrigin_ServerSynthesized)(nil),            // 29: warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
+	(*timestamppb.Timestamp)(nil),                        // 30: google.protobuf.Timestamp
 }
 var file_attribution_proto_depIdxs = []int32{
-	4,  // 0: warp.multi_agent.v1.QueryAuthor.user:type_name -> warp.multi_agent.v1.WarpUser
+	5,  // 0: warp.multi_agent.v1.QueryAuthor.user:type_name -> warp.multi_agent.v1.WarpUser
 	0,  // 1: warp.multi_agent.v1.QueryAuthor.resolution:type_name -> warp.multi_agent.v1.IdentityResolution
-	6,  // 2: warp.multi_agent.v1.ExternalMessage.sender:type_name -> warp.multi_agent.v1.ExternalUser
+	7,  // 2: warp.multi_agent.v1.ExternalMessage.sender:type_name -> warp.multi_agent.v1.ExternalUser
 	1,  // 3: warp.multi_agent.v1.ExternalMessage.body_format:type_name -> warp.multi_agent.v1.BodyFormat
-	28, // 4: warp.multi_agent.v1.ExternalMessage.platform_timestamp:type_name -> google.protobuf.Timestamp
-	9,  // 5: warp.multi_agent.v1.ExternalMessage.slack:type_name -> warp.multi_agent.v1.ExternalMessage.Slack
-	10, // 6: warp.multi_agent.v1.ExternalMessage.github:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub
-	11, // 7: warp.multi_agent.v1.ExternalMessage.gitlab:type_name -> warp.multi_agent.v1.ExternalMessage.GitLab
-	12, // 8: warp.multi_agent.v1.ExternalMessage.linear:type_name -> warp.multi_agent.v1.ExternalMessage.Linear
-	13, // 9: warp.multi_agent.v1.ExternalMessage.jira:type_name -> warp.multi_agent.v1.ExternalMessage.Jira
-	14, // 10: warp.multi_agent.v1.ExternalMessage.custom_webhook:type_name -> warp.multi_agent.v1.ExternalMessage.CustomWebhook
-	20, // 11: warp.multi_agent.v1.UserQueryOrigin.warp_client:type_name -> warp.multi_agent.v1.UserQueryOrigin.WarpClient
-	21, // 12: warp.multi_agent.v1.UserQueryOrigin.external_platform:type_name -> warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
-	22, // 13: warp.multi_agent.v1.UserQueryOrigin.parent_agent:type_name -> warp.multi_agent.v1.UserQueryOrigin.ParentAgent
-	23, // 14: warp.multi_agent.v1.UserQueryOrigin.agent_message_wake:type_name -> warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
-	24, // 15: warp.multi_agent.v1.UserQueryOrigin.schedule:type_name -> warp.multi_agent.v1.UserQueryOrigin.Schedule
-	25, // 16: warp.multi_agent.v1.UserQueryOrigin.automation:type_name -> warp.multi_agent.v1.UserQueryOrigin.Automation
-	26, // 17: warp.multi_agent.v1.UserQueryOrigin.public_api:type_name -> warp.multi_agent.v1.UserQueryOrigin.PublicApi
-	27, // 18: warp.multi_agent.v1.UserQueryOrigin.server_synthesized:type_name -> warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
-	15, // 19: warp.multi_agent.v1.ExternalMessage.Slack.thread_history:type_name -> warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
-	2,  // 20: warp.multi_agent.v1.ExternalMessage.GitHub.event_type:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.EventType
-	17, // 21: warp.multi_agent.v1.ExternalMessage.GitHub.thread:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
-	16, // 22: warp.multi_agent.v1.ExternalMessage.GitHub.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
-	18, // 23: warp.multi_agent.v1.ExternalMessage.GitHub.review:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Review
-	6,  // 24: warp.multi_agent.v1.ExternalMessage.Linear.issue_assignee:type_name -> warp.multi_agent.v1.ExternalUser
-	3,  // 25: warp.multi_agent.v1.ExternalMessage.Jira.trigger:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Trigger
-	6,  // 26: warp.multi_agent.v1.ExternalMessage.Jira.reporter:type_name -> warp.multi_agent.v1.ExternalUser
-	19, // 27: warp.multi_agent.v1.ExternalMessage.Jira.recent_comments:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Comment
-	6,  // 28: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
-	16, // 29: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
-	17, // 30: warp.multi_agent.v1.ExternalMessage.GitHub.Review.comments:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
-	6,  // 31: warp.multi_agent.v1.ExternalMessage.Jira.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	30, // 4: warp.multi_agent.v1.ExternalMessage.platform_timestamp:type_name -> google.protobuf.Timestamp
+	10, // 5: warp.multi_agent.v1.ExternalMessage.slack:type_name -> warp.multi_agent.v1.ExternalMessage.Slack
+	11, // 6: warp.multi_agent.v1.ExternalMessage.github:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub
+	12, // 7: warp.multi_agent.v1.ExternalMessage.gitlab:type_name -> warp.multi_agent.v1.ExternalMessage.GitLab
+	13, // 8: warp.multi_agent.v1.ExternalMessage.linear:type_name -> warp.multi_agent.v1.ExternalMessage.Linear
+	14, // 9: warp.multi_agent.v1.ExternalMessage.jira:type_name -> warp.multi_agent.v1.ExternalMessage.Jira
+	15, // 10: warp.multi_agent.v1.ExternalMessage.custom_webhook:type_name -> warp.multi_agent.v1.ExternalMessage.CustomWebhook
+	16, // 11: warp.multi_agent.v1.ExternalMessage.warp:type_name -> warp.multi_agent.v1.ExternalMessage.Warp
+	22, // 12: warp.multi_agent.v1.UserQueryOrigin.warp_client:type_name -> warp.multi_agent.v1.UserQueryOrigin.WarpClient
+	23, // 13: warp.multi_agent.v1.UserQueryOrigin.external_platform:type_name -> warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
+	24, // 14: warp.multi_agent.v1.UserQueryOrigin.parent_agent:type_name -> warp.multi_agent.v1.UserQueryOrigin.ParentAgent
+	25, // 15: warp.multi_agent.v1.UserQueryOrigin.agent_message_wake:type_name -> warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
+	26, // 16: warp.multi_agent.v1.UserQueryOrigin.schedule:type_name -> warp.multi_agent.v1.UserQueryOrigin.Schedule
+	27, // 17: warp.multi_agent.v1.UserQueryOrigin.automation:type_name -> warp.multi_agent.v1.UserQueryOrigin.Automation
+	28, // 18: warp.multi_agent.v1.UserQueryOrigin.public_api:type_name -> warp.multi_agent.v1.UserQueryOrigin.PublicApi
+	29, // 19: warp.multi_agent.v1.UserQueryOrigin.server_synthesized:type_name -> warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
+	17, // 20: warp.multi_agent.v1.ExternalMessage.Slack.thread_history:type_name -> warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
+	2,  // 21: warp.multi_agent.v1.ExternalMessage.GitHub.event_type:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.EventType
+	19, // 22: warp.multi_agent.v1.ExternalMessage.GitHub.thread:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
+	18, // 23: warp.multi_agent.v1.ExternalMessage.GitHub.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
+	20, // 24: warp.multi_agent.v1.ExternalMessage.GitHub.review:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Review
+	7,  // 25: warp.multi_agent.v1.ExternalMessage.Linear.issue_assignee:type_name -> warp.multi_agent.v1.ExternalUser
+	3,  // 26: warp.multi_agent.v1.ExternalMessage.Jira.trigger:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Trigger
+	7,  // 27: warp.multi_agent.v1.ExternalMessage.Jira.reporter:type_name -> warp.multi_agent.v1.ExternalUser
+	21, // 28: warp.multi_agent.v1.ExternalMessage.Jira.recent_comments:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Comment
+	4,  // 29: warp.multi_agent.v1.ExternalMessage.Warp.surface:type_name -> warp.multi_agent.v1.ExternalMessage.Warp.Surface
+	7,  // 30: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
+	18, // 31: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
+	19, // 32: warp.multi_agent.v1.ExternalMessage.GitHub.Review.comments:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
+	7,  // 33: warp.multi_agent.v1.ExternalMessage.Jira.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
+	34, // [34:34] is the sub-list for method output_type
+	34, // [34:34] is the sub-list for method input_type
+	34, // [34:34] is the sub-list for extension type_name
+	34, // [34:34] is the sub-list for extension extendee
+	0,  // [0:34] is the sub-list for field type_name
 }
 
 func init() { file_attribution_proto_init() }
@@ -5176,6 +5382,7 @@ func file_attribution_proto_init() {
 		(*externalMessage_Linear_)(nil),
 		(*externalMessage_Jira_)(nil),
 		(*externalMessage_CustomWebhook_)(nil),
+		(*externalMessage_Warp_)(nil),
 	}
 	file_attribution_proto_msgTypes[4].OneofWrappers = []any{
 		(*userQueryOrigin_WarpClient_)(nil),
@@ -5192,8 +5399,8 @@ func file_attribution_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attribution_proto_rawDesc), len(file_attribution_proto_rawDesc)),
-			NumEnums:      4,
-			NumMessages:   24,
+			NumEnums:      5,
+			NumMessages:   25,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
