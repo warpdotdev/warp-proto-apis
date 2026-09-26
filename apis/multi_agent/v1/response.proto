@@ -290,24 +290,30 @@ message ResponseEvent {
       repeated Action actions = 4;
 
       message Action {
-        Kind kind = 1;
-
         // Server-authored button label.
-        string label = 2;
+        string label = 1;
 
-        enum Kind {
-          KIND_UNSPECIFIED = 0;
-
-          // Re-issue the turn unchanged, still funded by the ChatGPT
-          // subscription.
-          RETRY = 1;
-
-          // Switch this conversation to Warp-funded inference: the client sets
-          // a per-conversation flag that sends
-          // `Request.Settings.ApiKeys.skip_chatgpt_subscription = true` on all
-          // subsequent requests, then resumes the conversation.
-          CONTINUE_WITH_WARP_CREDITS = 2;
+        // What the action does. Clients drop actions whose kind they do not
+        // recognize.
+        oneof kind {
+          Retry retry = 2;
+          ContinueWithWarpCredits continue_with_warp_credits = 3;
+          OpenUrl open_url = 4;
         }
+
+        // Re-issue the turn unchanged, still funded by the ChatGPT
+        // subscription.
+        message Retry {}
+
+        // Switch this conversation to Warp-funded inference: the client sets
+        // a per-conversation flag that sends
+        // `Request.Settings.ApiKeys.skip_chatgpt_subscription = true` on all
+        // subsequent requests, then resumes the conversation.
+        message ContinueWithWarpCredits {}
+
+        // Open a page in the user's browser (e.g. the ChatGPT usage settings
+        // page). Does not change the conversation's state.
+        message OpenUrl { string url = 1; }
       }
     }
   }
