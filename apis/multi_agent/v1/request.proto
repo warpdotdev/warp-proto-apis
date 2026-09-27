@@ -142,13 +142,13 @@ message Request {
           // first local user query).
           ConversationHandoff conversation_handoff = 8;
 
-          // Reports that this run was woken because agent messages may be waiting,
-          // and asks the server to inject any still undelivered messages into the
-          // turn. Carries no content. When messages exist the server adds them to
-          // the task as MessagesReceivedFromAgents and the turn proceeds; when none
-          // exist the turn ends without a model call. Sent in reply to the
-          // server-pushed wake prompt on an already-reachable session.
-          AgentMessageWake agent_message_wake = 9;
+          // Reports that this run was woken and asks the server to inject any
+          // still undelivered agent messages into the turn. Carries no content.
+          // When messages exist the server adds them to the task as
+          // MessagesReceivedFromAgents and the turn proceeds; when none exist the
+          // turn ends without a model call. Sent in reply to the server-pushed
+          // wake prompt on an already-reachable session.
+          AgentWake agent_wake = 9;
         }
       }
 
@@ -175,8 +175,9 @@ message Request {
       // Signals that a cloud conversation has been continued locally.
       message ConversationHandoff {}
 
-      // Signals that the run was woken because agent messages may be waiting.
-      message AgentMessageWake {}
+      // Signals that the run was woken and pending agent messages should be
+      // delivered into this turn.
+      message AgentWake {}
     }
 
     // Tool call result
