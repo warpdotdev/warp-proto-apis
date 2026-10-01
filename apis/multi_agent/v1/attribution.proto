@@ -140,6 +140,7 @@ message ExternalMessage {
     Jira jira = 10;
     CustomWebhook custom_webhook = 11;
     Warp warp = 12;
+    Teams teams = 13;
   }
 
   // Slack message or app_mention.
@@ -171,6 +172,18 @@ message ExternalMessage {
       // blocks), if any. Not file uploads.
       string attachments_json = 2 [ (sensitive) = true ];
     }
+  }
+
+  // Microsoft Teams standard-channel message.
+  message Teams {
+    // Microsoft Graph team id.
+    string team_id = 1 [ (sensitive) = true ];
+    // Microsoft Graph channel id.
+    string channel_id = 2 [ (sensitive) = true ];
+    // Microsoft Graph id of the thread's root message.
+    string thread_id = 3 [ (sensitive) = true ];
+    // Microsoft Graph id of this message.
+    string message_id = 4 [ (sensitive) = true ];
   }
 
   // GitHub issue or pull request comment/review.
