@@ -1450,7 +1450,7 @@ message RunShellCommandResult {
   }
 
   message TerminalBusy {
-    string command_id = 1;
+    string running_command_id = 1;
   }
 
   // Deprecated; use [ShellCommandFinished::output] instead;

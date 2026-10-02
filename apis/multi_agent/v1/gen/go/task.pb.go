@@ -32662,12 +32662,12 @@ func (b0 Message_ArtifactEvent_ForkArtifacts_builder) Build() *Message_ArtifactE
 }
 
 type RunShellCommandResult_TerminalBusy struct {
-	state                  protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_CommandId   *string                `protobuf:"bytes,1,opt,name=command_id,json=commandId"`
-	XXX_raceDetectHookData protoimpl.RaceDetectHookData
-	XXX_presence           [1]uint32
-	unknownFields          protoimpl.UnknownFields
-	sizeCache              protoimpl.SizeCache
+	state                       protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_RunningCommandId *string                `protobuf:"bytes,1,opt,name=running_command_id,json=runningCommandId"`
+	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
+	XXX_presence                [1]uint32
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
 }
 
 func (x *RunShellCommandResult_TerminalBusy) Reset() {
@@ -32695,46 +32695,46 @@ func (x *RunShellCommandResult_TerminalBusy) ProtoReflect() protoreflect.Message
 	return mi.MessageOf(x)
 }
 
-func (x *RunShellCommandResult_TerminalBusy) GetCommandId() string {
+func (x *RunShellCommandResult_TerminalBusy) GetRunningCommandId() string {
 	if x != nil {
-		if x.xxx_hidden_CommandId != nil {
-			return *x.xxx_hidden_CommandId
+		if x.xxx_hidden_RunningCommandId != nil {
+			return *x.xxx_hidden_RunningCommandId
 		}
 		return ""
 	}
 	return ""
 }
 
-func (x *RunShellCommandResult_TerminalBusy) SetCommandId(v string) {
-	x.xxx_hidden_CommandId = &v
+func (x *RunShellCommandResult_TerminalBusy) SetRunningCommandId(v string) {
+	x.xxx_hidden_RunningCommandId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
 }
 
-func (x *RunShellCommandResult_TerminalBusy) HasCommandId() bool {
+func (x *RunShellCommandResult_TerminalBusy) HasRunningCommandId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *RunShellCommandResult_TerminalBusy) ClearCommandId() {
+func (x *RunShellCommandResult_TerminalBusy) ClearRunningCommandId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
-	x.xxx_hidden_CommandId = nil
+	x.xxx_hidden_RunningCommandId = nil
 }
 
 type RunShellCommandResult_TerminalBusy_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
-	CommandId *string
+	RunningCommandId *string
 }
 
 func (b0 RunShellCommandResult_TerminalBusy_builder) Build() *RunShellCommandResult_TerminalBusy {
 	m0 := &RunShellCommandResult_TerminalBusy{}
 	b, x := &b0, m0
 	_, _ = b, x
-	if b.CommandId != nil {
+	if b.RunningCommandId != nil {
 		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
-		x.xxx_hidden_CommandId = b.CommandId
+		x.xxx_hidden_RunningCommandId = b.RunningCommandId
 	}
 	return m0
 }
@@ -41491,7 +41491,7 @@ const file_task_proto_rawDesc = "" +
 	"\vis_fallback\x18\x03 \x01(\bR\n" +
 	"isFallback\x12W\n" +
 	"\x17prompt_cache_expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x04\x88\xb5\x18\x01R\x14promptCacheExpiresAtB\t\n" +
-	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xba\x04\n" +
+	"\amessageJ\x04\b\f\x10\rR\x12started_child_task\"\xc9\x04\n" +
 	"\x15RunShellCommandResult\x12\x1e\n" +
 	"\acommand\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12y\n" +
 	"\x1dlong_running_command_snapshot\x18\x04 \x01(\v24.warp.multi_agent.v1.LongRunningShellCommandSnapshotH\x00R\x1alongRunningCommandSnapshot\x12V\n" +
@@ -41499,10 +41499,9 @@ const file_task_proto_rawDesc = "" +
 	"\x11permission_denied\x18\x06 \x01(\v2%.warp.multi_agent.v1.PermissionDeniedH\x00R\x10permissionDenied\x12^\n" +
 	"\rterminal_busy\x18\a \x01(\v27.warp.multi_agent.v1.RunShellCommandResult.TerminalBusyH\x00R\fterminalBusy\x12\x1e\n" +
 	"\x06output\x18\x01 \x01(\tB\x06\x80\xb5\x18\x01\x18\x01R\x06output\x12\x1f\n" +
-	"\texit_code\x18\x02 \x01(\x05B\x02\x18\x01R\bexitCode\x1a-\n" +
-	"\fTerminalBusy\x12\x1d\n" +
-	"\n" +
-	"command_id\x18\x01 \x01(\tR\tcommandIdB\b\n" +
+	"\texit_code\x18\x02 \x01(\x05B\x02\x18\x01R\bexitCode\x1a<\n" +
+	"\fTerminalBusy\x12,\n" +
+	"\x12running_command_id\x18\x01 \x01(\tR\x10runningCommandIdB\b\n" +
 	"\x06result\"\xdf\x05\n" +
 	"\x0fReadFilesResult\x12e\n" +
 	"\x12text_files_success\x18\x01 \x01(\v25.warp.multi_agent.v1.ReadFilesResult.TextFilesSuccessH\x00R\x10textFilesSuccess\x12b\n" +
