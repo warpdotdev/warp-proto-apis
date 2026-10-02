@@ -1444,6 +1444,13 @@ message RunShellCommandResult {
 
     // The command was denied permission to run.
     PermissionDenied permission_denied = 6;
+
+    // The requested command was not started because the terminal is busy.
+    TerminalBusy terminal_busy = 7;
+  }
+
+  message TerminalBusy {
+    string running_command_id = 1;
   }
 
   // Deprecated; use [ShellCommandFinished::output] instead;
