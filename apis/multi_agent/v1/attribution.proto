@@ -141,6 +141,7 @@ message ExternalMessage {
     CustomWebhook custom_webhook = 11;
     Warp warp = 12;
     Teams teams = 13;
+    AzureDevOps azure_devops = 14;
   }
 
   // Slack message or app_mention.
@@ -184,6 +185,21 @@ message ExternalMessage {
     string thread_id = 3 [ (sensitive) = true ];
     // Microsoft Graph id of this message.
     string message_id = 4 [ (sensitive) = true ];
+  }
+  // Azure DevOps pull request, work item, or repository event.
+  message AzureDevOps {
+    string organization_name = 1 [ (sensitive) = true ];
+    string project_id = 2 [ (sensitive) = true ];
+    string project_name = 3 [ (sensitive) = true ];
+    string repository_id = 4 [ (sensitive) = true ];
+    string repository_name = 5 [ (sensitive) = true ];
+    int32 pull_request_id = 6;
+    int32 work_item_id = 7;
+    int32 comment_id = 8;
+    // Event context, present only when rendered in this query.
+    string status = 9;
+    string assignee = 10 [ (sensitive) = true ];
+    repeated string added_tags = 11 [ (sensitive) = true ];
   }
 
   // GitHub issue or pull request comment/review.
