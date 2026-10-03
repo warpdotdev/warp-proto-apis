@@ -8,6 +8,10 @@ fn main() -> Result<()> {
     let out_dir = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
 
     let re_features = Regex::new(r"option features.*").unwrap();
+    let re_explicit_presence = Regex::new(
+        r"(?m)^(\s*)(\w+)\s+(\w+)\s*=\s*(\d+)\s*\[\s*features\.field_presence\s*=\s*EXPLICIT\s*\];",
+    )
+    .unwrap();
     let re_reserved = Regex::new(r"(?m)^(\s*)reserved\s+([^;]+);").unwrap();
     let re_identifier = Regex::new(r"^[a-zA-Z_][a-zA-Z0-9_]*$").unwrap();
 
@@ -28,6 +32,8 @@ fn main() -> Result<()> {
 
         let proto_content = std::fs::read_to_string(&proto).expect("Failed to read proto file");
 
+        let proto_content =
+            re_explicit_presence.replace_all(&proto_content, "${1}optional ${2} ${3} = ${4};");
         let modified_content = re_features
             .replace_all(&proto_content, "")
             .replace(r#"edition = "2023";"#, r#"syntax = "proto3";"#)
