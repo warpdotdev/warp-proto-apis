@@ -193,7 +193,6 @@ message ExternalMessage {
     string project_name = 3 [ (sensitive) = true ];
     string repository_id = 4 [ (sensitive) = true ];
     string repository_name = 5 [ (sensitive) = true ];
-    reserved 8;
     // Event context, present only when rendered in this query.
     string status = 9;
     string assignee = 10 [ (sensitive) = true ];
