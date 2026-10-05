@@ -741,6 +741,10 @@ message Message {
         // A V4A hunk represents a single change block in a file update.
         // See here for more details on the semantic meaning of the fields:
         // https://cookbook.openai.com/examples/gpt4-1_prompting_guide#apply-patch
+        // The four content strings encode line lists: empty means no lines,
+        // and each represented line ends in LF, including blank lines.
+        // Readers also accept legacy strings without a final LF. A final LF
+        // terminates the last line rather than adding an extra line.
         message Hunk {
           // Context to quickly identify the location of the change (i.e. the
           // `@@` statements).
