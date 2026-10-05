@@ -1095,6 +1095,15 @@ func (x *ExternalMessage) GetTeams() *ExternalMessage_Teams {
 	return nil
 }
 
+func (x *ExternalMessage) GetAzureDevops() *ExternalMessage_AzureDevOps {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Platform.(*externalMessage_AzureDevops); ok {
+			return x.AzureDevops
+		}
+	}
+	return nil
+}
+
 func (x *ExternalMessage) SetSender(v *ExternalUser) {
 	x.xxx_hidden_Sender = v
 }
@@ -1180,6 +1189,14 @@ func (x *ExternalMessage) SetTeams(v *ExternalMessage_Teams) {
 		return
 	}
 	x.xxx_hidden_Platform = &externalMessage_Teams_{v}
+}
+
+func (x *ExternalMessage) SetAzureDevops(v *ExternalMessage_AzureDevOps) {
+	if v == nil {
+		x.xxx_hidden_Platform = nil
+		return
+	}
+	x.xxx_hidden_Platform = &externalMessage_AzureDevops{v}
 }
 
 func (x *ExternalMessage) HasSender() bool {
@@ -1288,6 +1305,14 @@ func (x *ExternalMessage) HasTeams() bool {
 	return ok
 }
 
+func (x *ExternalMessage) HasAzureDevops() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Platform.(*externalMessage_AzureDevops)
+	return ok
+}
+
 func (x *ExternalMessage) ClearSender() {
 	x.xxx_hidden_Sender = nil
 }
@@ -1363,6 +1388,12 @@ func (x *ExternalMessage) ClearTeams() {
 	}
 }
 
+func (x *ExternalMessage) ClearAzureDevops() {
+	if _, ok := x.xxx_hidden_Platform.(*externalMessage_AzureDevops); ok {
+		x.xxx_hidden_Platform = nil
+	}
+}
+
 const ExternalMessage_Platform_not_set_case case_ExternalMessage_Platform = 0
 const ExternalMessage_Slack_case case_ExternalMessage_Platform = 6
 const ExternalMessage_Github_case case_ExternalMessage_Platform = 7
@@ -1372,6 +1403,7 @@ const ExternalMessage_Jira_case case_ExternalMessage_Platform = 10
 const ExternalMessage_CustomWebhook_case case_ExternalMessage_Platform = 11
 const ExternalMessage_Warp_case case_ExternalMessage_Platform = 12
 const ExternalMessage_Teams_case case_ExternalMessage_Platform = 13
+const ExternalMessage_AzureDevops_case case_ExternalMessage_Platform = 14
 
 func (x *ExternalMessage) WhichPlatform() case_ExternalMessage_Platform {
 	if x == nil {
@@ -1394,6 +1426,8 @@ func (x *ExternalMessage) WhichPlatform() case_ExternalMessage_Platform {
 		return ExternalMessage_Warp_case
 	case *externalMessage_Teams_:
 		return ExternalMessage_Teams_case
+	case *externalMessage_AzureDevops:
+		return ExternalMessage_AzureDevops_case
 	default:
 		return ExternalMessage_Platform_not_set_case
 	}
@@ -1426,6 +1460,7 @@ type ExternalMessage_builder struct {
 	CustomWebhook *ExternalMessage_CustomWebhook
 	Warp          *ExternalMessage_Warp
 	Teams         *ExternalMessage_Teams
+	AzureDevops   *ExternalMessage_AzureDevOps
 	// -- end of xxx_hidden_Platform
 }
 
@@ -1470,6 +1505,9 @@ func (b0 ExternalMessage_builder) Build() *ExternalMessage {
 	}
 	if b.Teams != nil {
 		x.xxx_hidden_Platform = &externalMessage_Teams_{b.Teams}
+	}
+	if b.AzureDevops != nil {
+		x.xxx_hidden_Platform = &externalMessage_AzureDevops{b.AzureDevops}
 	}
 	return m0
 }
@@ -1520,6 +1558,10 @@ type externalMessage_Teams_ struct {
 	Teams *ExternalMessage_Teams `protobuf:"bytes,13,opt,name=teams,oneof"`
 }
 
+type externalMessage_AzureDevops struct {
+	AzureDevops *ExternalMessage_AzureDevOps `protobuf:"bytes,14,opt,name=azure_devops,json=azureDevops,oneof"`
+}
+
 func (*externalMessage_Slack_) isExternalMessage_Platform() {}
 
 func (*externalMessage_Github) isExternalMessage_Platform() {}
@@ -1535,6 +1577,8 @@ func (*externalMessage_CustomWebhook_) isExternalMessage_Platform() {}
 func (*externalMessage_Warp_) isExternalMessage_Platform() {}
 
 func (*externalMessage_Teams_) isExternalMessage_Platform() {}
+
+func (*externalMessage_AzureDevops) isExternalMessage_Platform() {}
 
 // What produced a UserQuery: the mechanism by which it reached the agent.
 // Modeled as a oneof of per-variant messages (like Harness) so each variant
@@ -2466,6 +2510,428 @@ func (b0 ExternalMessage_Teams_builder) Build() *ExternalMessage_Teams {
 	return m0
 }
 
+// Azure DevOps pull request, work item, or repository event.
+type ExternalMessage_AzureDevOps struct {
+	state                       protoimpl.MessageState               `protogen:"opaque.v1"`
+	xxx_hidden_OrganizationName *string                              `protobuf:"bytes,1,opt,name=organization_name,json=organizationName"`
+	xxx_hidden_ProjectId        *string                              `protobuf:"bytes,2,opt,name=project_id,json=projectId"`
+	xxx_hidden_ProjectName      *string                              `protobuf:"bytes,3,opt,name=project_name,json=projectName"`
+	xxx_hidden_RepositoryId     *string                              `protobuf:"bytes,4,opt,name=repository_id,json=repositoryId"`
+	xxx_hidden_RepositoryName   *string                              `protobuf:"bytes,5,opt,name=repository_name,json=repositoryName"`
+	xxx_hidden_Status           *string                              `protobuf:"bytes,9,opt,name=status"`
+	xxx_hidden_Assignee         *string                              `protobuf:"bytes,10,opt,name=assignee"`
+	xxx_hidden_AddedTags        []string                             `protobuf:"bytes,11,rep,name=added_tags,json=addedTags"`
+	xxx_hidden_Target           isExternalMessage_AzureDevOps_Target `protobuf_oneof:"target"`
+	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
+	XXX_presence                [1]uint32
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *ExternalMessage_AzureDevOps) Reset() {
+	*x = ExternalMessage_AzureDevOps{}
+	mi := &file_attribution_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExternalMessage_AzureDevOps) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalMessage_AzureDevOps) ProtoMessage() {}
+
+func (x *ExternalMessage_AzureDevOps) ProtoReflect() protoreflect.Message {
+	mi := &file_attribution_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ExternalMessage_AzureDevOps) GetOrganizationName() string {
+	if x != nil {
+		if x.xxx_hidden_OrganizationName != nil {
+			return *x.xxx_hidden_OrganizationName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetProjectId() string {
+	if x != nil {
+		if x.xxx_hidden_ProjectId != nil {
+			return *x.xxx_hidden_ProjectId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetProjectName() string {
+	if x != nil {
+		if x.xxx_hidden_ProjectName != nil {
+			return *x.xxx_hidden_ProjectName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetRepositoryId() string {
+	if x != nil {
+		if x.xxx_hidden_RepositoryId != nil {
+			return *x.xxx_hidden_RepositoryId
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetRepositoryName() string {
+	if x != nil {
+		if x.xxx_hidden_RepositoryName != nil {
+			return *x.xxx_hidden_RepositoryName
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetStatus() string {
+	if x != nil {
+		if x.xxx_hidden_Status != nil {
+			return *x.xxx_hidden_Status
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetAssignee() string {
+	if x != nil {
+		if x.xxx_hidden_Assignee != nil {
+			return *x.xxx_hidden_Assignee
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ExternalMessage_AzureDevOps) GetAddedTags() []string {
+	if x != nil {
+		return x.xxx_hidden_AddedTags
+	}
+	return nil
+}
+
+func (x *ExternalMessage_AzureDevOps) GetPullRequest() *ExternalMessage_AzureDevOps_PullRequest {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Target.(*externalMessage_AzureDevOps_PullRequest_); ok {
+			return x.PullRequest
+		}
+	}
+	return nil
+}
+
+func (x *ExternalMessage_AzureDevOps) GetWorkItem() *ExternalMessage_AzureDevOps_WorkItem {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Target.(*externalMessage_AzureDevOps_WorkItem_); ok {
+			return x.WorkItem
+		}
+	}
+	return nil
+}
+
+func (x *ExternalMessage_AzureDevOps) SetOrganizationName(v string) {
+	x.xxx_hidden_OrganizationName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetProjectId(v string) {
+	x.xxx_hidden_ProjectId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetProjectName(v string) {
+	x.xxx_hidden_ProjectName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetRepositoryId(v string) {
+	x.xxx_hidden_RepositoryId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetRepositoryName(v string) {
+	x.xxx_hidden_RepositoryName = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetStatus(v string) {
+	x.xxx_hidden_Status = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetAssignee(v string) {
+	x.xxx_hidden_Assignee = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 9)
+}
+
+func (x *ExternalMessage_AzureDevOps) SetAddedTags(v []string) {
+	x.xxx_hidden_AddedTags = v
+}
+
+func (x *ExternalMessage_AzureDevOps) SetPullRequest(v *ExternalMessage_AzureDevOps_PullRequest) {
+	if v == nil {
+		x.xxx_hidden_Target = nil
+		return
+	}
+	x.xxx_hidden_Target = &externalMessage_AzureDevOps_PullRequest_{v}
+}
+
+func (x *ExternalMessage_AzureDevOps) SetWorkItem(v *ExternalMessage_AzureDevOps_WorkItem) {
+	if v == nil {
+		x.xxx_hidden_Target = nil
+		return
+	}
+	x.xxx_hidden_Target = &externalMessage_AzureDevOps_WorkItem_{v}
+}
+
+func (x *ExternalMessage_AzureDevOps) HasOrganizationName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasProjectId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasProjectName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasRepositoryId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasRepositoryName() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasStatus() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasAssignee() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *ExternalMessage_AzureDevOps) HasTarget() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_Target != nil
+}
+
+func (x *ExternalMessage_AzureDevOps) HasPullRequest() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Target.(*externalMessage_AzureDevOps_PullRequest_)
+	return ok
+}
+
+func (x *ExternalMessage_AzureDevOps) HasWorkItem() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Target.(*externalMessage_AzureDevOps_WorkItem_)
+	return ok
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearOrganizationName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_OrganizationName = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearProjectId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_ProjectId = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearProjectName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ProjectName = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearRepositoryId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_RepositoryId = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearRepositoryName() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 4)
+	x.xxx_hidden_RepositoryName = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearStatus() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_Status = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearAssignee() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_Assignee = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearTarget() {
+	x.xxx_hidden_Target = nil
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearPullRequest() {
+	if _, ok := x.xxx_hidden_Target.(*externalMessage_AzureDevOps_PullRequest_); ok {
+		x.xxx_hidden_Target = nil
+	}
+}
+
+func (x *ExternalMessage_AzureDevOps) ClearWorkItem() {
+	if _, ok := x.xxx_hidden_Target.(*externalMessage_AzureDevOps_WorkItem_); ok {
+		x.xxx_hidden_Target = nil
+	}
+}
+
+const ExternalMessage_AzureDevOps_Target_not_set_case case_ExternalMessage_AzureDevOps_Target = 0
+const ExternalMessage_AzureDevOps_PullRequest_case case_ExternalMessage_AzureDevOps_Target = 6
+const ExternalMessage_AzureDevOps_WorkItem_case case_ExternalMessage_AzureDevOps_Target = 7
+
+func (x *ExternalMessage_AzureDevOps) WhichTarget() case_ExternalMessage_AzureDevOps_Target {
+	if x == nil {
+		return ExternalMessage_AzureDevOps_Target_not_set_case
+	}
+	switch x.xxx_hidden_Target.(type) {
+	case *externalMessage_AzureDevOps_PullRequest_:
+		return ExternalMessage_AzureDevOps_PullRequest_case
+	case *externalMessage_AzureDevOps_WorkItem_:
+		return ExternalMessage_AzureDevOps_WorkItem_case
+	default:
+		return ExternalMessage_AzureDevOps_Target_not_set_case
+	}
+}
+
+type ExternalMessage_AzureDevOps_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	OrganizationName *string
+	ProjectId        *string
+	ProjectName      *string
+	RepositoryId     *string
+	RepositoryName   *string
+	// Event context, present only when rendered in this query.
+	Status    *string
+	Assignee  *string
+	AddedTags []string
+	// Unset for repository events or an unknown parent.
+
+	// Fields of oneof xxx_hidden_Target:
+	PullRequest *ExternalMessage_AzureDevOps_PullRequest
+	WorkItem    *ExternalMessage_AzureDevOps_WorkItem
+	// -- end of xxx_hidden_Target
+}
+
+func (b0 ExternalMessage_AzureDevOps_builder) Build() *ExternalMessage_AzureDevOps {
+	m0 := &ExternalMessage_AzureDevOps{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.OrganizationName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
+		x.xxx_hidden_OrganizationName = b.OrganizationName
+	}
+	if b.ProjectId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
+		x.xxx_hidden_ProjectId = b.ProjectId
+	}
+	if b.ProjectName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
+		x.xxx_hidden_ProjectName = b.ProjectName
+	}
+	if b.RepositoryId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
+		x.xxx_hidden_RepositoryId = b.RepositoryId
+	}
+	if b.RepositoryName != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
+		x.xxx_hidden_RepositoryName = b.RepositoryName
+	}
+	if b.Status != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 9)
+		x.xxx_hidden_Status = b.Status
+	}
+	if b.Assignee != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 9)
+		x.xxx_hidden_Assignee = b.Assignee
+	}
+	x.xxx_hidden_AddedTags = b.AddedTags
+	if b.PullRequest != nil {
+		x.xxx_hidden_Target = &externalMessage_AzureDevOps_PullRequest_{b.PullRequest}
+	}
+	if b.WorkItem != nil {
+		x.xxx_hidden_Target = &externalMessage_AzureDevOps_WorkItem_{b.WorkItem}
+	}
+	return m0
+}
+
+type case_ExternalMessage_AzureDevOps_Target protoreflect.FieldNumber
+
+func (x case_ExternalMessage_AzureDevOps_Target) String() string {
+	md := file_attribution_proto_msgTypes[7].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isExternalMessage_AzureDevOps_Target interface {
+	isExternalMessage_AzureDevOps_Target()
+}
+
+type externalMessage_AzureDevOps_PullRequest_ struct {
+	PullRequest *ExternalMessage_AzureDevOps_PullRequest `protobuf:"bytes,6,opt,name=pull_request,json=pullRequest,oneof"`
+}
+
+type externalMessage_AzureDevOps_WorkItem_ struct {
+	WorkItem *ExternalMessage_AzureDevOps_WorkItem `protobuf:"bytes,7,opt,name=work_item,json=workItem,oneof"`
+}
+
+func (*externalMessage_AzureDevOps_PullRequest_) isExternalMessage_AzureDevOps_Target() {}
+
+func (*externalMessage_AzureDevOps_WorkItem_) isExternalMessage_AzureDevOps_Target() {}
+
 // GitHub issue or pull request comment/review.
 type ExternalMessage_GitHub struct {
 	state                        protoimpl.MessageState                        `protogen:"opaque.v1"`
@@ -2498,7 +2964,7 @@ type ExternalMessage_GitHub struct {
 
 func (x *ExternalMessage_GitHub) Reset() {
 	*x = ExternalMessage_GitHub{}
-	mi := &file_attribution_proto_msgTypes[7]
+	mi := &file_attribution_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2510,7 +2976,7 @@ func (x *ExternalMessage_GitHub) String() string {
 func (*ExternalMessage_GitHub) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[7]
+	mi := &file_attribution_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3175,7 +3641,7 @@ type ExternalMessage_GitLab struct {
 
 func (x *ExternalMessage_GitLab) Reset() {
 	*x = ExternalMessage_GitLab{}
-	mi := &file_attribution_proto_msgTypes[8]
+	mi := &file_attribution_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3187,7 +3653,7 @@ func (x *ExternalMessage_GitLab) String() string {
 func (*ExternalMessage_GitLab) ProtoMessage() {}
 
 func (x *ExternalMessage_GitLab) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[8]
+	mi := &file_attribution_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3294,7 +3760,7 @@ type ExternalMessage_Linear struct {
 
 func (x *ExternalMessage_Linear) Reset() {
 	*x = ExternalMessage_Linear{}
-	mi := &file_attribution_proto_msgTypes[9]
+	mi := &file_attribution_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3306,7 +3772,7 @@ func (x *ExternalMessage_Linear) String() string {
 func (*ExternalMessage_Linear) ProtoMessage() {}
 
 func (x *ExternalMessage_Linear) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[9]
+	mi := &file_attribution_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3523,7 +3989,7 @@ type ExternalMessage_Jira struct {
 
 func (x *ExternalMessage_Jira) Reset() {
 	*x = ExternalMessage_Jira{}
-	mi := &file_attribution_proto_msgTypes[10]
+	mi := &file_attribution_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3535,7 +4001,7 @@ func (x *ExternalMessage_Jira) String() string {
 func (*ExternalMessage_Jira) ProtoMessage() {}
 
 func (x *ExternalMessage_Jira) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[10]
+	mi := &file_attribution_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3852,7 +4318,7 @@ type ExternalMessage_CustomWebhook struct {
 
 func (x *ExternalMessage_CustomWebhook) Reset() {
 	*x = ExternalMessage_CustomWebhook{}
-	mi := &file_attribution_proto_msgTypes[11]
+	mi := &file_attribution_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3864,7 +4330,7 @@ func (x *ExternalMessage_CustomWebhook) String() string {
 func (*ExternalMessage_CustomWebhook) ProtoMessage() {}
 
 func (x *ExternalMessage_CustomWebhook) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[11]
+	mi := &file_attribution_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3974,7 +4440,7 @@ type ExternalMessage_Warp struct {
 
 func (x *ExternalMessage_Warp) Reset() {
 	*x = ExternalMessage_Warp{}
-	mi := &file_attribution_proto_msgTypes[12]
+	mi := &file_attribution_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3986,7 +4452,7 @@ func (x *ExternalMessage_Warp) String() string {
 func (*ExternalMessage_Warp) ProtoMessage() {}
 
 func (x *ExternalMessage_Warp) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[12]
+	mi := &file_attribution_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4056,7 +4522,7 @@ type ExternalMessage_Slack_ThreadMessage struct {
 
 func (x *ExternalMessage_Slack_ThreadMessage) Reset() {
 	*x = ExternalMessage_Slack_ThreadMessage{}
-	mi := &file_attribution_proto_msgTypes[13]
+	mi := &file_attribution_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4068,7 +4534,7 @@ func (x *ExternalMessage_Slack_ThreadMessage) String() string {
 func (*ExternalMessage_Slack_ThreadMessage) ProtoMessage() {}
 
 func (x *ExternalMessage_Slack_ThreadMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[13]
+	mi := &file_attribution_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4157,6 +4623,216 @@ func (b0 ExternalMessage_Slack_ThreadMessage_builder) Build() *ExternalMessage_S
 	return m0
 }
 
+type ExternalMessage_AzureDevOps_PullRequest struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          int32                  `protobuf:"varint,1,opt,name=id"`
+	xxx_hidden_CommentId   int32                  `protobuf:"varint,2,opt,name=comment_id,json=commentId"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) Reset() {
+	*x = ExternalMessage_AzureDevOps_PullRequest{}
+	mi := &file_attribution_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalMessage_AzureDevOps_PullRequest) ProtoMessage() {}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_attribution_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) GetId() int32 {
+	if x != nil {
+		return x.xxx_hidden_Id
+	}
+	return 0
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) GetCommentId() int32 {
+	if x != nil {
+		return x.xxx_hidden_CommentId
+	}
+	return 0
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) SetId(v int32) {
+	x.xxx_hidden_Id = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) SetCommentId(v int32) {
+	x.xxx_hidden_CommentId = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) HasCommentId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = 0
+}
+
+func (x *ExternalMessage_AzureDevOps_PullRequest) ClearCommentId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CommentId = 0
+}
+
+type ExternalMessage_AzureDevOps_PullRequest_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id        *int32
+	CommentId *int32
+}
+
+func (b0 ExternalMessage_AzureDevOps_PullRequest_builder) Build() *ExternalMessage_AzureDevOps_PullRequest {
+	m0 := &ExternalMessage_AzureDevOps_PullRequest{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Id = *b.Id
+	}
+	if b.CommentId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CommentId = *b.CommentId
+	}
+	return m0
+}
+
+type ExternalMessage_AzureDevOps_WorkItem struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Id          int32                  `protobuf:"varint,1,opt,name=id"`
+	xxx_hidden_CommentId   int32                  `protobuf:"varint,2,opt,name=comment_id,json=commentId"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) Reset() {
+	*x = ExternalMessage_AzureDevOps_WorkItem{}
+	mi := &file_attribution_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExternalMessage_AzureDevOps_WorkItem) ProtoMessage() {}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) ProtoReflect() protoreflect.Message {
+	mi := &file_attribution_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) GetId() int32 {
+	if x != nil {
+		return x.xxx_hidden_Id
+	}
+	return 0
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) GetCommentId() int32 {
+	if x != nil {
+		return x.xxx_hidden_CommentId
+	}
+	return 0
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) SetId(v int32) {
+	x.xxx_hidden_Id = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) SetCommentId(v int32) {
+	x.xxx_hidden_CommentId = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) HasId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) HasCommentId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) ClearId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Id = 0
+}
+
+func (x *ExternalMessage_AzureDevOps_WorkItem) ClearCommentId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_CommentId = 0
+}
+
+type ExternalMessage_AzureDevOps_WorkItem_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Id        *int32
+	CommentId *int32
+}
+
+func (b0 ExternalMessage_AzureDevOps_WorkItem_builder) Build() *ExternalMessage_AzureDevOps_WorkItem {
+	m0 := &ExternalMessage_AzureDevOps_WorkItem{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Id != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 2)
+		x.xxx_hidden_Id = *b.Id
+	}
+	if b.CommentId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_CommentId = *b.CommentId
+	}
+	return m0
+}
+
 // Position of an inline review comment in the PR diff.
 type ExternalMessage_GitHub_ReviewCommentLocation struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
@@ -4172,7 +4848,7 @@ type ExternalMessage_GitHub_ReviewCommentLocation struct {
 
 func (x *ExternalMessage_GitHub_ReviewCommentLocation) Reset() {
 	*x = ExternalMessage_GitHub_ReviewCommentLocation{}
-	mi := &file_attribution_proto_msgTypes[14]
+	mi := &file_attribution_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4184,7 +4860,7 @@ func (x *ExternalMessage_GitHub_ReviewCommentLocation) String() string {
 func (*ExternalMessage_GitHub_ReviewCommentLocation) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub_ReviewCommentLocation) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[14]
+	mi := &file_attribution_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4344,7 +5020,7 @@ type ExternalMessage_GitHub_Comment struct {
 
 func (x *ExternalMessage_GitHub_Comment) Reset() {
 	*x = ExternalMessage_GitHub_Comment{}
-	mi := &file_attribution_proto_msgTypes[15]
+	mi := &file_attribution_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4356,7 +5032,7 @@ func (x *ExternalMessage_GitHub_Comment) String() string {
 func (*ExternalMessage_GitHub_Comment) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[15]
+	mi := &file_attribution_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4506,7 +5182,7 @@ type ExternalMessage_GitHub_Review struct {
 
 func (x *ExternalMessage_GitHub_Review) Reset() {
 	*x = ExternalMessage_GitHub_Review{}
-	mi := &file_attribution_proto_msgTypes[16]
+	mi := &file_attribution_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4518,7 +5194,7 @@ func (x *ExternalMessage_GitHub_Review) String() string {
 func (*ExternalMessage_GitHub_Review) ProtoMessage() {}
 
 func (x *ExternalMessage_GitHub_Review) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[16]
+	mi := &file_attribution_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4603,7 +5279,7 @@ type ExternalMessage_Jira_Comment struct {
 
 func (x *ExternalMessage_Jira_Comment) Reset() {
 	*x = ExternalMessage_Jira_Comment{}
-	mi := &file_attribution_proto_msgTypes[17]
+	mi := &file_attribution_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4615,7 +5291,7 @@ func (x *ExternalMessage_Jira_Comment) String() string {
 func (*ExternalMessage_Jira_Comment) ProtoMessage() {}
 
 func (x *ExternalMessage_Jira_Comment) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[17]
+	mi := &file_attribution_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4704,7 +5380,7 @@ type UserQueryOrigin_WarpClient struct {
 
 func (x *UserQueryOrigin_WarpClient) Reset() {
 	*x = UserQueryOrigin_WarpClient{}
-	mi := &file_attribution_proto_msgTypes[18]
+	mi := &file_attribution_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4716,7 +5392,7 @@ func (x *UserQueryOrigin_WarpClient) String() string {
 func (*UserQueryOrigin_WarpClient) ProtoMessage() {}
 
 func (x *UserQueryOrigin_WarpClient) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[18]
+	mi := &file_attribution_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4752,7 +5428,7 @@ type UserQueryOrigin_ExternalPlatform struct {
 
 func (x *UserQueryOrigin_ExternalPlatform) Reset() {
 	*x = UserQueryOrigin_ExternalPlatform{}
-	mi := &file_attribution_proto_msgTypes[19]
+	mi := &file_attribution_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4764,7 +5440,7 @@ func (x *UserQueryOrigin_ExternalPlatform) String() string {
 func (*UserQueryOrigin_ExternalPlatform) ProtoMessage() {}
 
 func (x *UserQueryOrigin_ExternalPlatform) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[19]
+	mi := &file_attribution_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4799,7 +5475,7 @@ type UserQueryOrigin_ParentAgent struct {
 
 func (x *UserQueryOrigin_ParentAgent) Reset() {
 	*x = UserQueryOrigin_ParentAgent{}
-	mi := &file_attribution_proto_msgTypes[20]
+	mi := &file_attribution_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4811,7 +5487,7 @@ func (x *UserQueryOrigin_ParentAgent) String() string {
 func (*UserQueryOrigin_ParentAgent) ProtoMessage() {}
 
 func (x *UserQueryOrigin_ParentAgent) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[20]
+	mi := &file_attribution_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4880,7 +5556,7 @@ type UserQueryOrigin_AgentMessageWake struct {
 
 func (x *UserQueryOrigin_AgentMessageWake) Reset() {
 	*x = UserQueryOrigin_AgentMessageWake{}
-	mi := &file_attribution_proto_msgTypes[21]
+	mi := &file_attribution_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4892,7 +5568,7 @@ func (x *UserQueryOrigin_AgentMessageWake) String() string {
 func (*UserQueryOrigin_AgentMessageWake) ProtoMessage() {}
 
 func (x *UserQueryOrigin_AgentMessageWake) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[21]
+	mi := &file_attribution_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4957,7 +5633,7 @@ type UserQueryOrigin_Schedule struct {
 
 func (x *UserQueryOrigin_Schedule) Reset() {
 	*x = UserQueryOrigin_Schedule{}
-	mi := &file_attribution_proto_msgTypes[22]
+	mi := &file_attribution_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4969,7 +5645,7 @@ func (x *UserQueryOrigin_Schedule) String() string {
 func (*UserQueryOrigin_Schedule) ProtoMessage() {}
 
 func (x *UserQueryOrigin_Schedule) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[22]
+	mi := &file_attribution_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5043,7 +5719,7 @@ type UserQueryOrigin_Automation struct {
 
 func (x *UserQueryOrigin_Automation) Reset() {
 	*x = UserQueryOrigin_Automation{}
-	mi := &file_attribution_proto_msgTypes[23]
+	mi := &file_attribution_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5055,7 +5731,7 @@ func (x *UserQueryOrigin_Automation) String() string {
 func (*UserQueryOrigin_Automation) ProtoMessage() {}
 
 func (x *UserQueryOrigin_Automation) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[23]
+	mi := &file_attribution_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5204,7 +5880,7 @@ type UserQueryOrigin_PublicApi struct {
 
 func (x *UserQueryOrigin_PublicApi) Reset() {
 	*x = UserQueryOrigin_PublicApi{}
-	mi := &file_attribution_proto_msgTypes[24]
+	mi := &file_attribution_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5216,7 +5892,7 @@ func (x *UserQueryOrigin_PublicApi) String() string {
 func (*UserQueryOrigin_PublicApi) ProtoMessage() {}
 
 func (x *UserQueryOrigin_PublicApi) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[24]
+	mi := &file_attribution_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5251,7 +5927,7 @@ type UserQueryOrigin_ServerSynthesized struct {
 
 func (x *UserQueryOrigin_ServerSynthesized) Reset() {
 	*x = UserQueryOrigin_ServerSynthesized{}
-	mi := &file_attribution_proto_msgTypes[25]
+	mi := &file_attribution_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5263,7 +5939,7 @@ func (x *UserQueryOrigin_ServerSynthesized) String() string {
 func (*UserQueryOrigin_ServerSynthesized) ProtoMessage() {}
 
 func (x *UserQueryOrigin_ServerSynthesized) ProtoReflect() protoreflect.Message {
-	mi := &file_attribution_proto_msgTypes[25]
+	mi := &file_attribution_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5343,7 +6019,7 @@ const file_attribution_proto_rawDesc = "" +
 	"\x05email\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\x05email\x12%\n" +
 	"\vprofile_url\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
 	"profileUrl\x12\x15\n" +
-	"\x06is_bot\x18\a \x01(\bR\x05isBot\"\xf1\"\n" +
+	"\x06is_bot\x18\a \x01(\bR\x05isBot\"\xe0(\n" +
 	"\x0fExternalMessage\x129\n" +
 	"\x06sender\x18\x01 \x01(\v2!.warp.multi_agent.v1.ExternalUserR\x06sender\x12\x18\n" +
 	"\x04body\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04body\x12@\n" +
@@ -5359,7 +6035,8 @@ const file_attribution_proto_rawDesc = "" +
 	" \x01(\v2).warp.multi_agent.v1.ExternalMessage.JiraH\x00R\x04jira\x12[\n" +
 	"\x0ecustom_webhook\x18\v \x01(\v22.warp.multi_agent.v1.ExternalMessage.CustomWebhookH\x00R\rcustomWebhook\x12?\n" +
 	"\x04warp\x18\f \x01(\v2).warp.multi_agent.v1.ExternalMessage.WarpH\x00R\x04warp\x12B\n" +
-	"\x05teams\x18\r \x01(\v2*.warp.multi_agent.v1.ExternalMessage.TeamsH\x00R\x05teams\x1a\xba\x03\n" +
+	"\x05teams\x18\r \x01(\v2*.warp.multi_agent.v1.ExternalMessage.TeamsH\x00R\x05teams\x12U\n" +
+	"\fazure_devops\x18\x0e \x01(\v20.warp.multi_agent.v1.ExternalMessage.AzureDevOpsH\x00R\vazureDevops\x1a\xba\x03\n" +
 	"\x05Slack\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\tR\x06teamId\x12#\n" +
 	"\n" +
@@ -5380,7 +6057,30 @@ const file_attribution_proto_rawDesc = "" +
 	"channel_id\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\tchannelId\x12!\n" +
 	"\tthread_id\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\bthreadId\x12#\n" +
 	"\n" +
-	"message_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\tmessageId\x1a\xd2\f\n" +
+	"message_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\tmessageId\x1a\x95\x05\n" +
+	"\vAzureDevOps\x121\n" +
+	"\x11organization_name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x10organizationName\x12#\n" +
+	"\n" +
+	"project_id\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\tprojectId\x12'\n" +
+	"\fproject_name\x18\x03 \x01(\tB\x04\x80\xb5\x18\x01R\vprojectName\x12)\n" +
+	"\rrepository_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01R\frepositoryId\x12-\n" +
+	"\x0frepository_name\x18\x05 \x01(\tB\x04\x80\xb5\x18\x01R\x0erepositoryName\x12\x16\n" +
+	"\x06status\x18\t \x01(\tR\x06status\x12 \n" +
+	"\bassignee\x18\n" +
+	" \x01(\tB\x04\x80\xb5\x18\x01R\bassignee\x12#\n" +
+	"\n" +
+	"added_tags\x18\v \x03(\tB\x04\x80\xb5\x18\x01R\taddedTags\x12a\n" +
+	"\fpull_request\x18\x06 \x01(\v2<.warp.multi_agent.v1.ExternalMessage.AzureDevOps.PullRequestH\x00R\vpullRequest\x12X\n" +
+	"\twork_item\x18\a \x01(\v29.warp.multi_agent.v1.ExternalMessage.AzureDevOps.WorkItemH\x00R\bworkItem\x1aC\n" +
+	"\vPullRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12$\n" +
+	"\n" +
+	"comment_id\x18\x02 \x01(\x05B\x05\xaa\x01\x02\b\x01R\tcommentId\x1a@\n" +
+	"\bWorkItem\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12$\n" +
+	"\n" +
+	"comment_id\x18\x02 \x01(\x05B\x05\xaa\x01\x02\b\x01R\tcommentIdB\b\n" +
+	"\x06target\x1a\xd2\f\n" +
 	"\x06GitHub\x12\x1a\n" +
 	"\x05owner\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05owner\x12\x18\n" +
 	"\x04repo\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04repo\x12\x16\n" +
@@ -5530,7 +6230,7 @@ const file_attribution_proto_rawDesc = "" +
 	"%BODY_FORMAT_ATLASSIAN_DOCUMENT_FORMAT\x10\x05BMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_attribution_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_attribution_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_attribution_proto_msgTypes = make([]protoimpl.MessageInfo, 29)
 var file_attribution_proto_goTypes = []any{
 	(IdentityResolution)(0),                              // 0: warp.multi_agent.v1.IdentityResolution
 	(BodyFormat)(0),                                      // 1: warp.multi_agent.v1.BodyFormat
@@ -5544,68 +6244,74 @@ var file_attribution_proto_goTypes = []any{
 	(*UserQueryOrigin)(nil),                              // 9: warp.multi_agent.v1.UserQueryOrigin
 	(*ExternalMessage_Slack)(nil),                        // 10: warp.multi_agent.v1.ExternalMessage.Slack
 	(*ExternalMessage_Teams)(nil),                        // 11: warp.multi_agent.v1.ExternalMessage.Teams
-	(*ExternalMessage_GitHub)(nil),                       // 12: warp.multi_agent.v1.ExternalMessage.GitHub
-	(*ExternalMessage_GitLab)(nil),                       // 13: warp.multi_agent.v1.ExternalMessage.GitLab
-	(*ExternalMessage_Linear)(nil),                       // 14: warp.multi_agent.v1.ExternalMessage.Linear
-	(*ExternalMessage_Jira)(nil),                         // 15: warp.multi_agent.v1.ExternalMessage.Jira
-	(*ExternalMessage_CustomWebhook)(nil),                // 16: warp.multi_agent.v1.ExternalMessage.CustomWebhook
-	(*ExternalMessage_Warp)(nil),                         // 17: warp.multi_agent.v1.ExternalMessage.Warp
-	(*ExternalMessage_Slack_ThreadMessage)(nil),          // 18: warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
-	(*ExternalMessage_GitHub_ReviewCommentLocation)(nil), // 19: warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
-	(*ExternalMessage_GitHub_Comment)(nil),               // 20: warp.multi_agent.v1.ExternalMessage.GitHub.Comment
-	(*ExternalMessage_GitHub_Review)(nil),                // 21: warp.multi_agent.v1.ExternalMessage.GitHub.Review
-	(*ExternalMessage_Jira_Comment)(nil),                 // 22: warp.multi_agent.v1.ExternalMessage.Jira.Comment
-	(*UserQueryOrigin_WarpClient)(nil),                   // 23: warp.multi_agent.v1.UserQueryOrigin.WarpClient
-	(*UserQueryOrigin_ExternalPlatform)(nil),             // 24: warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
-	(*UserQueryOrigin_ParentAgent)(nil),                  // 25: warp.multi_agent.v1.UserQueryOrigin.ParentAgent
-	(*UserQueryOrigin_AgentMessageWake)(nil),             // 26: warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
-	(*UserQueryOrigin_Schedule)(nil),                     // 27: warp.multi_agent.v1.UserQueryOrigin.Schedule
-	(*UserQueryOrigin_Automation)(nil),                   // 28: warp.multi_agent.v1.UserQueryOrigin.Automation
-	(*UserQueryOrigin_PublicApi)(nil),                    // 29: warp.multi_agent.v1.UserQueryOrigin.PublicApi
-	(*UserQueryOrigin_ServerSynthesized)(nil),            // 30: warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
-	(*timestamppb.Timestamp)(nil),                        // 31: google.protobuf.Timestamp
+	(*ExternalMessage_AzureDevOps)(nil),                  // 12: warp.multi_agent.v1.ExternalMessage.AzureDevOps
+	(*ExternalMessage_GitHub)(nil),                       // 13: warp.multi_agent.v1.ExternalMessage.GitHub
+	(*ExternalMessage_GitLab)(nil),                       // 14: warp.multi_agent.v1.ExternalMessage.GitLab
+	(*ExternalMessage_Linear)(nil),                       // 15: warp.multi_agent.v1.ExternalMessage.Linear
+	(*ExternalMessage_Jira)(nil),                         // 16: warp.multi_agent.v1.ExternalMessage.Jira
+	(*ExternalMessage_CustomWebhook)(nil),                // 17: warp.multi_agent.v1.ExternalMessage.CustomWebhook
+	(*ExternalMessage_Warp)(nil),                         // 18: warp.multi_agent.v1.ExternalMessage.Warp
+	(*ExternalMessage_Slack_ThreadMessage)(nil),          // 19: warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
+	(*ExternalMessage_AzureDevOps_PullRequest)(nil),      // 20: warp.multi_agent.v1.ExternalMessage.AzureDevOps.PullRequest
+	(*ExternalMessage_AzureDevOps_WorkItem)(nil),         // 21: warp.multi_agent.v1.ExternalMessage.AzureDevOps.WorkItem
+	(*ExternalMessage_GitHub_ReviewCommentLocation)(nil), // 22: warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
+	(*ExternalMessage_GitHub_Comment)(nil),               // 23: warp.multi_agent.v1.ExternalMessage.GitHub.Comment
+	(*ExternalMessage_GitHub_Review)(nil),                // 24: warp.multi_agent.v1.ExternalMessage.GitHub.Review
+	(*ExternalMessage_Jira_Comment)(nil),                 // 25: warp.multi_agent.v1.ExternalMessage.Jira.Comment
+	(*UserQueryOrigin_WarpClient)(nil),                   // 26: warp.multi_agent.v1.UserQueryOrigin.WarpClient
+	(*UserQueryOrigin_ExternalPlatform)(nil),             // 27: warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
+	(*UserQueryOrigin_ParentAgent)(nil),                  // 28: warp.multi_agent.v1.UserQueryOrigin.ParentAgent
+	(*UserQueryOrigin_AgentMessageWake)(nil),             // 29: warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
+	(*UserQueryOrigin_Schedule)(nil),                     // 30: warp.multi_agent.v1.UserQueryOrigin.Schedule
+	(*UserQueryOrigin_Automation)(nil),                   // 31: warp.multi_agent.v1.UserQueryOrigin.Automation
+	(*UserQueryOrigin_PublicApi)(nil),                    // 32: warp.multi_agent.v1.UserQueryOrigin.PublicApi
+	(*UserQueryOrigin_ServerSynthesized)(nil),            // 33: warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
+	(*timestamppb.Timestamp)(nil),                        // 34: google.protobuf.Timestamp
 }
 var file_attribution_proto_depIdxs = []int32{
 	5,  // 0: warp.multi_agent.v1.QueryAuthor.user:type_name -> warp.multi_agent.v1.WarpUser
 	0,  // 1: warp.multi_agent.v1.QueryAuthor.resolution:type_name -> warp.multi_agent.v1.IdentityResolution
 	7,  // 2: warp.multi_agent.v1.ExternalMessage.sender:type_name -> warp.multi_agent.v1.ExternalUser
 	1,  // 3: warp.multi_agent.v1.ExternalMessage.body_format:type_name -> warp.multi_agent.v1.BodyFormat
-	31, // 4: warp.multi_agent.v1.ExternalMessage.platform_timestamp:type_name -> google.protobuf.Timestamp
+	34, // 4: warp.multi_agent.v1.ExternalMessage.platform_timestamp:type_name -> google.protobuf.Timestamp
 	10, // 5: warp.multi_agent.v1.ExternalMessage.slack:type_name -> warp.multi_agent.v1.ExternalMessage.Slack
-	12, // 6: warp.multi_agent.v1.ExternalMessage.github:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub
-	13, // 7: warp.multi_agent.v1.ExternalMessage.gitlab:type_name -> warp.multi_agent.v1.ExternalMessage.GitLab
-	14, // 8: warp.multi_agent.v1.ExternalMessage.linear:type_name -> warp.multi_agent.v1.ExternalMessage.Linear
-	15, // 9: warp.multi_agent.v1.ExternalMessage.jira:type_name -> warp.multi_agent.v1.ExternalMessage.Jira
-	16, // 10: warp.multi_agent.v1.ExternalMessage.custom_webhook:type_name -> warp.multi_agent.v1.ExternalMessage.CustomWebhook
-	17, // 11: warp.multi_agent.v1.ExternalMessage.warp:type_name -> warp.multi_agent.v1.ExternalMessage.Warp
+	13, // 6: warp.multi_agent.v1.ExternalMessage.github:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub
+	14, // 7: warp.multi_agent.v1.ExternalMessage.gitlab:type_name -> warp.multi_agent.v1.ExternalMessage.GitLab
+	15, // 8: warp.multi_agent.v1.ExternalMessage.linear:type_name -> warp.multi_agent.v1.ExternalMessage.Linear
+	16, // 9: warp.multi_agent.v1.ExternalMessage.jira:type_name -> warp.multi_agent.v1.ExternalMessage.Jira
+	17, // 10: warp.multi_agent.v1.ExternalMessage.custom_webhook:type_name -> warp.multi_agent.v1.ExternalMessage.CustomWebhook
+	18, // 11: warp.multi_agent.v1.ExternalMessage.warp:type_name -> warp.multi_agent.v1.ExternalMessage.Warp
 	11, // 12: warp.multi_agent.v1.ExternalMessage.teams:type_name -> warp.multi_agent.v1.ExternalMessage.Teams
-	23, // 13: warp.multi_agent.v1.UserQueryOrigin.warp_client:type_name -> warp.multi_agent.v1.UserQueryOrigin.WarpClient
-	24, // 14: warp.multi_agent.v1.UserQueryOrigin.external_platform:type_name -> warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
-	25, // 15: warp.multi_agent.v1.UserQueryOrigin.parent_agent:type_name -> warp.multi_agent.v1.UserQueryOrigin.ParentAgent
-	26, // 16: warp.multi_agent.v1.UserQueryOrigin.agent_message_wake:type_name -> warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
-	27, // 17: warp.multi_agent.v1.UserQueryOrigin.schedule:type_name -> warp.multi_agent.v1.UserQueryOrigin.Schedule
-	28, // 18: warp.multi_agent.v1.UserQueryOrigin.automation:type_name -> warp.multi_agent.v1.UserQueryOrigin.Automation
-	29, // 19: warp.multi_agent.v1.UserQueryOrigin.public_api:type_name -> warp.multi_agent.v1.UserQueryOrigin.PublicApi
-	30, // 20: warp.multi_agent.v1.UserQueryOrigin.server_synthesized:type_name -> warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
-	18, // 21: warp.multi_agent.v1.ExternalMessage.Slack.thread_history:type_name -> warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
-	2,  // 22: warp.multi_agent.v1.ExternalMessage.GitHub.event_type:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.EventType
-	20, // 23: warp.multi_agent.v1.ExternalMessage.GitHub.thread:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
-	19, // 24: warp.multi_agent.v1.ExternalMessage.GitHub.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
-	21, // 25: warp.multi_agent.v1.ExternalMessage.GitHub.review:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Review
-	7,  // 26: warp.multi_agent.v1.ExternalMessage.Linear.issue_assignee:type_name -> warp.multi_agent.v1.ExternalUser
-	3,  // 27: warp.multi_agent.v1.ExternalMessage.Jira.trigger:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Trigger
-	7,  // 28: warp.multi_agent.v1.ExternalMessage.Jira.reporter:type_name -> warp.multi_agent.v1.ExternalUser
-	22, // 29: warp.multi_agent.v1.ExternalMessage.Jira.recent_comments:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Comment
-	4,  // 30: warp.multi_agent.v1.ExternalMessage.Warp.surface:type_name -> warp.multi_agent.v1.ExternalMessage.Warp.Surface
-	7,  // 31: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
-	19, // 32: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
-	20, // 33: warp.multi_agent.v1.ExternalMessage.GitHub.Review.comments:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
-	7,  // 34: warp.multi_agent.v1.ExternalMessage.Jira.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
-	35, // [35:35] is the sub-list for method output_type
-	35, // [35:35] is the sub-list for method input_type
-	35, // [35:35] is the sub-list for extension type_name
-	35, // [35:35] is the sub-list for extension extendee
-	0,  // [0:35] is the sub-list for field type_name
+	12, // 13: warp.multi_agent.v1.ExternalMessage.azure_devops:type_name -> warp.multi_agent.v1.ExternalMessage.AzureDevOps
+	26, // 14: warp.multi_agent.v1.UserQueryOrigin.warp_client:type_name -> warp.multi_agent.v1.UserQueryOrigin.WarpClient
+	27, // 15: warp.multi_agent.v1.UserQueryOrigin.external_platform:type_name -> warp.multi_agent.v1.UserQueryOrigin.ExternalPlatform
+	28, // 16: warp.multi_agent.v1.UserQueryOrigin.parent_agent:type_name -> warp.multi_agent.v1.UserQueryOrigin.ParentAgent
+	29, // 17: warp.multi_agent.v1.UserQueryOrigin.agent_message_wake:type_name -> warp.multi_agent.v1.UserQueryOrigin.AgentMessageWake
+	30, // 18: warp.multi_agent.v1.UserQueryOrigin.schedule:type_name -> warp.multi_agent.v1.UserQueryOrigin.Schedule
+	31, // 19: warp.multi_agent.v1.UserQueryOrigin.automation:type_name -> warp.multi_agent.v1.UserQueryOrigin.Automation
+	32, // 20: warp.multi_agent.v1.UserQueryOrigin.public_api:type_name -> warp.multi_agent.v1.UserQueryOrigin.PublicApi
+	33, // 21: warp.multi_agent.v1.UserQueryOrigin.server_synthesized:type_name -> warp.multi_agent.v1.UserQueryOrigin.ServerSynthesized
+	19, // 22: warp.multi_agent.v1.ExternalMessage.Slack.thread_history:type_name -> warp.multi_agent.v1.ExternalMessage.Slack.ThreadMessage
+	20, // 23: warp.multi_agent.v1.ExternalMessage.AzureDevOps.pull_request:type_name -> warp.multi_agent.v1.ExternalMessage.AzureDevOps.PullRequest
+	21, // 24: warp.multi_agent.v1.ExternalMessage.AzureDevOps.work_item:type_name -> warp.multi_agent.v1.ExternalMessage.AzureDevOps.WorkItem
+	2,  // 25: warp.multi_agent.v1.ExternalMessage.GitHub.event_type:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.EventType
+	23, // 26: warp.multi_agent.v1.ExternalMessage.GitHub.thread:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
+	22, // 27: warp.multi_agent.v1.ExternalMessage.GitHub.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
+	24, // 28: warp.multi_agent.v1.ExternalMessage.GitHub.review:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Review
+	7,  // 29: warp.multi_agent.v1.ExternalMessage.Linear.issue_assignee:type_name -> warp.multi_agent.v1.ExternalUser
+	3,  // 30: warp.multi_agent.v1.ExternalMessage.Jira.trigger:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Trigger
+	7,  // 31: warp.multi_agent.v1.ExternalMessage.Jira.reporter:type_name -> warp.multi_agent.v1.ExternalUser
+	25, // 32: warp.multi_agent.v1.ExternalMessage.Jira.recent_comments:type_name -> warp.multi_agent.v1.ExternalMessage.Jira.Comment
+	4,  // 33: warp.multi_agent.v1.ExternalMessage.Warp.surface:type_name -> warp.multi_agent.v1.ExternalMessage.Warp.Surface
+	7,  // 34: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
+	22, // 35: warp.multi_agent.v1.ExternalMessage.GitHub.Comment.location:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.ReviewCommentLocation
+	23, // 36: warp.multi_agent.v1.ExternalMessage.GitHub.Review.comments:type_name -> warp.multi_agent.v1.ExternalMessage.GitHub.Comment
+	7,  // 37: warp.multi_agent.v1.ExternalMessage.Jira.Comment.author:type_name -> warp.multi_agent.v1.ExternalUser
+	38, // [38:38] is the sub-list for method output_type
+	38, // [38:38] is the sub-list for method input_type
+	38, // [38:38] is the sub-list for extension type_name
+	38, // [38:38] is the sub-list for extension extendee
+	0,  // [0:38] is the sub-list for field type_name
 }
 
 func init() { file_attribution_proto_init() }
@@ -5626,6 +6332,7 @@ func file_attribution_proto_init() {
 		(*externalMessage_CustomWebhook_)(nil),
 		(*externalMessage_Warp_)(nil),
 		(*externalMessage_Teams_)(nil),
+		(*externalMessage_AzureDevops)(nil),
 	}
 	file_attribution_proto_msgTypes[4].OneofWrappers = []any{
 		(*userQueryOrigin_WarpClient_)(nil),
@@ -5637,13 +6344,17 @@ func file_attribution_proto_init() {
 		(*userQueryOrigin_PublicApi_)(nil),
 		(*userQueryOrigin_ServerSynthesized_)(nil),
 	}
+	file_attribution_proto_msgTypes[7].OneofWrappers = []any{
+		(*externalMessage_AzureDevOps_PullRequest_)(nil),
+		(*externalMessage_AzureDevOps_WorkItem_)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attribution_proto_rawDesc), len(file_attribution_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   26,
+			NumMessages:   29,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
