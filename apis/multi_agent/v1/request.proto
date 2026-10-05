@@ -534,6 +534,9 @@ message Request {
     // delivery. When unset, the server leaves pending agent messages for the
     // client's own delivery path.
     bool supports_server_side_agent_message_injection = 35;
+    // Supports blank-line-preserving V4A matching, replacement bytes, and
+    // restored previews. Only set when V4A file diffs are enabled.
+    bool supports_v4a_blank_line_fixes = 36;
 
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided

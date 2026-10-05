@@ -26912,6 +26912,10 @@ func (b0 Message_ToolCall_ApplyFileDiffs_DeleteFile_builder) Build() *Message_To
 // A V4A hunk represents a single change block in a file update.
 // See here for more details on the semantic meaning of the fields:
 // https://cookbook.openai.com/examples/gpt4-1_prompting_guide#apply-patch
+// The four content strings encode line lists: empty means no lines,
+// and each represented line ends in LF, including blank lines.
+// Readers also accept legacy strings without a final LF. A final LF
+// terminates the last line rather than adding an extra line.
 type Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk struct {
 	state                    protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_ChangeContext []string               `protobuf:"bytes,1,rep,name=change_context,json=changeContext"`
