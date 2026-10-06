@@ -468,7 +468,8 @@ message Request {
     IsolationLevel isolation_level = 20;
 
     // If `true`, the agent may use web search when helpful for completing
-    // tasks. Controlled by the user's execution profile settings.
+    // tasks. Controlled by the user's execution profile settings. When
+    // `web_fetch_enabled` is unset, this also controls web fetch.
     bool web_search_enabled = 21;
 
     // The set of CLI subagent tools that are supported by the client.
@@ -534,6 +535,12 @@ message Request {
     // delivery. When unset, the server leaves pending agent messages for the
     // client's own delivery path.
     bool supports_server_side_agent_message_injection = 35;
+
+    // If `true`, the agent may fetch the contents of web pages when helpful
+    // for completing tasks. Controlled by the user's execution profile
+    // settings. Unset for older clients, in which case the server falls back
+    // to `web_search_enabled`.
+    bool web_fetch_enabled = 37 [features.field_presence = EXPLICIT];
 
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
