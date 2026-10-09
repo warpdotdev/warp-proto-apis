@@ -1182,17 +1182,19 @@ func (b0 RequestCharges_builder) Build() *RequestCharges {
 
 // Usage charged for individual requests or a whole conversation in agent mode
 type ChargedUsage struct {
-	state                                   protoimpl.MessageState     `protogen:"opaque.v1"`
-	xxx_hidden_DirectApiInferenceUsage      map[string]*InferenceUsage `protobuf:"bytes,1,rep,name=direct_api_inference_usage,json=directApiInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_ByokInferenceUsage           map[string]*InferenceUsage `protobuf:"bytes,2,rep,name=byok_inference_usage,json=byokInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_CustomEndpointInferenceUsage map[string]*InferenceUsage `protobuf:"bytes,3,rep,name=custom_endpoint_inference_usage,json=customEndpointInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	xxx_hidden_PlatformUsageInCents         float32                    `protobuf:"fixed32,4,opt,name=platform_usage_in_cents,json=platformUsageInCents"`
-	xxx_hidden_PlatformUsageDuration        *durationpb.Duration       `protobuf:"bytes,5,opt,name=platform_usage_duration,json=platformUsageDuration"`
-	xxx_hidden_PlatformUsageInCredits       float32                    `protobuf:"fixed32,6,opt,name=platform_usage_in_credits,json=platformUsageInCredits"`
-	XXX_raceDetectHookData                  protoimpl.RaceDetectHookData
-	XXX_presence                            [1]uint32
-	unknownFields                           protoimpl.UnknownFields
-	sizeCache                               protoimpl.SizeCache
+	state                                        protoimpl.MessageState     `protogen:"opaque.v1"`
+	xxx_hidden_DirectApiInferenceUsage           map[string]*InferenceUsage `protobuf:"bytes,1,rep,name=direct_api_inference_usage,json=directApiInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_ByokInferenceUsage                map[string]*InferenceUsage `protobuf:"bytes,2,rep,name=byok_inference_usage,json=byokInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_CustomEndpointInferenceUsage      map[string]*InferenceUsage `protobuf:"bytes,3,rep,name=custom_endpoint_inference_usage,json=customEndpointInferenceUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_PlatformUsageInCents              float32                    `protobuf:"fixed32,4,opt,name=platform_usage_in_cents,json=platformUsageInCents"`
+	xxx_hidden_PlatformUsageDuration             *durationpb.Duration       `protobuf:"bytes,5,opt,name=platform_usage_duration,json=platformUsageDuration"`
+	xxx_hidden_PlatformUsageInCredits            float32                    `protobuf:"fixed32,6,opt,name=platform_usage_in_credits,json=platformUsageInCredits"`
+	xxx_hidden_UnallocatedInferenceCostInCents   float32                    `protobuf:"fixed32,7,opt,name=unallocated_inference_cost_in_cents,json=unallocatedInferenceCostInCents"`
+	xxx_hidden_UnallocatedInferenceCostInCredits float32                    `protobuf:"fixed32,8,opt,name=unallocated_inference_cost_in_credits,json=unallocatedInferenceCostInCredits"`
+	XXX_raceDetectHookData                       protoimpl.RaceDetectHookData
+	XXX_presence                                 [1]uint32
+	unknownFields                                protoimpl.UnknownFields
+	sizeCache                                    protoimpl.SizeCache
 }
 
 func (x *ChargedUsage) Reset() {
@@ -1262,6 +1264,20 @@ func (x *ChargedUsage) GetPlatformUsageInCredits() float32 {
 	return 0
 }
 
+func (x *ChargedUsage) GetUnallocatedInferenceCostInCents() float32 {
+	if x != nil {
+		return x.xxx_hidden_UnallocatedInferenceCostInCents
+	}
+	return 0
+}
+
+func (x *ChargedUsage) GetUnallocatedInferenceCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_UnallocatedInferenceCostInCredits
+	}
+	return 0
+}
+
 func (x *ChargedUsage) SetDirectApiInferenceUsage(v map[string]*InferenceUsage) {
 	x.xxx_hidden_DirectApiInferenceUsage = v
 }
@@ -1276,7 +1292,7 @@ func (x *ChargedUsage) SetCustomEndpointInferenceUsage(v map[string]*InferenceUs
 
 func (x *ChargedUsage) SetPlatformUsageInCents(v float32) {
 	x.xxx_hidden_PlatformUsageInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
 }
 
 func (x *ChargedUsage) SetPlatformUsageDuration(v *durationpb.Duration) {
@@ -1285,7 +1301,17 @@ func (x *ChargedUsage) SetPlatformUsageDuration(v *durationpb.Duration) {
 
 func (x *ChargedUsage) SetPlatformUsageInCredits(v float32) {
 	x.xxx_hidden_PlatformUsageInCredits = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 6)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
+}
+
+func (x *ChargedUsage) SetUnallocatedInferenceCostInCents(v float32) {
+	x.xxx_hidden_UnallocatedInferenceCostInCents = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
+}
+
+func (x *ChargedUsage) SetUnallocatedInferenceCostInCredits(v float32) {
+	x.xxx_hidden_UnallocatedInferenceCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *ChargedUsage) HasPlatformUsageInCents() bool {
@@ -1309,6 +1335,20 @@ func (x *ChargedUsage) HasPlatformUsageInCredits() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
 }
 
+func (x *ChargedUsage) HasUnallocatedInferenceCostInCents() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *ChargedUsage) HasUnallocatedInferenceCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *ChargedUsage) ClearPlatformUsageInCents() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
 	x.xxx_hidden_PlatformUsageInCents = 0
@@ -1321,6 +1361,16 @@ func (x *ChargedUsage) ClearPlatformUsageDuration() {
 func (x *ChargedUsage) ClearPlatformUsageInCredits() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
 	x.xxx_hidden_PlatformUsageInCredits = 0
+}
+
+func (x *ChargedUsage) ClearUnallocatedInferenceCostInCents() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_UnallocatedInferenceCostInCents = 0
+}
+
+func (x *ChargedUsage) ClearUnallocatedInferenceCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_UnallocatedInferenceCostInCredits = 0
 }
 
 type ChargedUsage_builder struct {
@@ -1339,6 +1389,10 @@ type ChargedUsage_builder struct {
 	PlatformUsageDuration *durationpb.Duration
 	// Platform usage charged, in credits
 	PlatformUsageInCredits *float32
+	// Recorded inference charges with no positive component allocation weight.
+	UnallocatedInferenceCostInCents *float32
+	// Display credits for unallocated inference charges on dollar-based billing.
+	UnallocatedInferenceCostInCredits *float32
 }
 
 func (b0 ChargedUsage_builder) Build() *ChargedUsage {
@@ -1349,13 +1403,21 @@ func (b0 ChargedUsage_builder) Build() *ChargedUsage {
 	x.xxx_hidden_ByokInferenceUsage = b.ByokInferenceUsage
 	x.xxx_hidden_CustomEndpointInferenceUsage = b.CustomEndpointInferenceUsage
 	if b.PlatformUsageInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
 		x.xxx_hidden_PlatformUsageInCents = *b.PlatformUsageInCents
 	}
 	x.xxx_hidden_PlatformUsageDuration = b.PlatformUsageDuration
 	if b.PlatformUsageInCredits != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 6)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
 		x.xxx_hidden_PlatformUsageInCredits = *b.PlatformUsageInCredits
+	}
+	if b.UnallocatedInferenceCostInCents != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
+		x.xxx_hidden_UnallocatedInferenceCostInCents = *b.UnallocatedInferenceCostInCents
+	}
+	if b.UnallocatedInferenceCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_UnallocatedInferenceCostInCredits = *b.UnallocatedInferenceCostInCredits
 	}
 	return m0
 }
@@ -40874,14 +40936,16 @@ const file_task_proto_rawDesc = "" +
 	"\x11usage_by_category\x18\x01 \x03(\v28.warp.multi_agent.v1.RequestCharges.UsageByCategoryEntryR\x0fusageByCategory\x1ae\n" +
 	"\x14UsageByCategoryEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x127\n" +
-	"\x05value\x18\x02 \x01(\v2!.warp.multi_agent.v1.ChargedUsageR\x05value:\x028\x01\"\x9d\a\n" +
+	"\x05value\x18\x02 \x01(\v2!.warp.multi_agent.v1.ChargedUsageR\x05value:\x028\x01\"\xbd\b\n" +
 	"\fChargedUsage\x12{\n" +
 	"\x1adirect_api_inference_usage\x18\x01 \x03(\v2>.warp.multi_agent.v1.ChargedUsage.DirectApiInferenceUsageEntryR\x17directApiInferenceUsage\x12k\n" +
 	"\x14byok_inference_usage\x18\x02 \x03(\v29.warp.multi_agent.v1.ChargedUsage.ByokInferenceUsageEntryR\x12byokInferenceUsage\x12\x8a\x01\n" +
 	"\x1fcustom_endpoint_inference_usage\x18\x03 \x03(\v2C.warp.multi_agent.v1.ChargedUsage.CustomEndpointInferenceUsageEntryR\x1ccustomEndpointInferenceUsage\x125\n" +
 	"\x17platform_usage_in_cents\x18\x04 \x01(\x02R\x14platformUsageInCents\x12Q\n" +
 	"\x17platform_usage_duration\x18\x05 \x01(\v2\x19.google.protobuf.DurationR\x15platformUsageDuration\x129\n" +
-	"\x19platform_usage_in_credits\x18\x06 \x01(\x02R\x16platformUsageInCredits\x1ao\n" +
+	"\x19platform_usage_in_credits\x18\x06 \x01(\x02R\x16platformUsageInCredits\x12L\n" +
+	"#unallocated_inference_cost_in_cents\x18\a \x01(\x02R\x1funallocatedInferenceCostInCents\x12P\n" +
+	"%unallocated_inference_cost_in_credits\x18\b \x01(\x02R!unallocatedInferenceCostInCredits\x1ao\n" +
 	"\x1cDirectApiInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
 	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\x1aj\n" +

@@ -108,6 +108,12 @@ message ChargedUsage {
 
   // Platform usage charged, in credits
   float platform_usage_in_credits = 6;
+
+  // Recorded inference charges with no positive component allocation weight.
+  float unallocated_inference_cost_in_cents = 7;
+
+  // Display credits for unallocated inference charges on dollar-based billing.
+  float unallocated_inference_cost_in_credits = 8;
 }
 
 
