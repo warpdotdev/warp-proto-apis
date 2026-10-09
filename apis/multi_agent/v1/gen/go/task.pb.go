@@ -1603,8 +1603,7 @@ type InferenceUsage_builder struct {
 	WebSearchCostInCents *float32
 	// The cumulative cost of the web searches performed in credits
 	WebSearchCostInCredits *float32
-	// URL pages requested by native web-fetch tool calls, not successful responses.
-	// Absent when fetch usage was not recorded.
+	// Number of web pages fetched via web content tools
 	WebFetchPageCount *uint32
 	// The cumulative cost of requested web-fetch pages in US cents.
 	WebFetchCostInCents *float32
