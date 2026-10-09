@@ -128,8 +128,7 @@ message InferenceUsage {
   // The cumulative cost of the web searches performed in credits
   float web_search_cost_in_credits = 5;
 
-  // URL pages requested by native web-fetch tool calls, not successful responses.
-  // Absent when fetch usage was not recorded.
+  // Number of web pages fetched via web content tools
   uint32 web_fetch_page_count = 6;
 
   // The cumulative cost of requested web-fetch pages in US cents.
