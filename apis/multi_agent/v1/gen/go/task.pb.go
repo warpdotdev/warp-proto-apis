@@ -1368,6 +1368,9 @@ type InferenceUsage struct {
 	xxx_hidden_WebSearchCount         uint32                 `protobuf:"varint,3,opt,name=web_search_count,json=webSearchCount"`
 	xxx_hidden_WebSearchCostInCents   float32                `protobuf:"fixed32,4,opt,name=web_search_cost_in_cents,json=webSearchCostInCents"`
 	xxx_hidden_WebSearchCostInCredits float32                `protobuf:"fixed32,5,opt,name=web_search_cost_in_credits,json=webSearchCostInCredits"`
+	xxx_hidden_WebFetchPageCount      uint32                 `protobuf:"varint,6,opt,name=web_fetch_page_count,json=webFetchPageCount"`
+	xxx_hidden_WebFetchCostInCents    float32                `protobuf:"fixed32,7,opt,name=web_fetch_cost_in_cents,json=webFetchCostInCents"`
+	xxx_hidden_WebFetchCostInCredits  float32                `protobuf:"fixed32,8,opt,name=web_fetch_cost_in_credits,json=webFetchCostInCredits"`
 	XXX_raceDetectHookData            protoimpl.RaceDetectHookData
 	XXX_presence                      [1]uint32
 	unknownFields                     protoimpl.UnknownFields
@@ -1434,6 +1437,27 @@ func (x *InferenceUsage) GetWebSearchCostInCredits() float32 {
 	return 0
 }
 
+func (x *InferenceUsage) GetWebFetchPageCount() uint32 {
+	if x != nil {
+		return x.xxx_hidden_WebFetchPageCount
+	}
+	return 0
+}
+
+func (x *InferenceUsage) GetWebFetchCostInCents() float32 {
+	if x != nil {
+		return x.xxx_hidden_WebFetchCostInCents
+	}
+	return 0
+}
+
+func (x *InferenceUsage) GetWebFetchCostInCredits() float32 {
+	if x != nil {
+		return x.xxx_hidden_WebFetchCostInCredits
+	}
+	return 0
+}
+
 func (x *InferenceUsage) SetTokenCount(v *TokenCount) {
 	x.xxx_hidden_TokenCount = v
 }
@@ -1444,17 +1468,32 @@ func (x *InferenceUsage) SetTokenCost(v *TokenCost) {
 
 func (x *InferenceUsage) SetWebSearchCount(v uint32) {
 	x.xxx_hidden_WebSearchCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
 }
 
 func (x *InferenceUsage) SetWebSearchCostInCents(v float32) {
 	x.xxx_hidden_WebSearchCostInCents = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
 }
 
 func (x *InferenceUsage) SetWebSearchCostInCredits(v float32) {
 	x.xxx_hidden_WebSearchCostInCredits = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 5)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
+}
+
+func (x *InferenceUsage) SetWebFetchPageCount(v uint32) {
+	x.xxx_hidden_WebFetchPageCount = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 5, 8)
+}
+
+func (x *InferenceUsage) SetWebFetchCostInCents(v float32) {
+	x.xxx_hidden_WebFetchCostInCents = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 6, 8)
+}
+
+func (x *InferenceUsage) SetWebFetchCostInCredits(v float32) {
+	x.xxx_hidden_WebFetchCostInCredits = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *InferenceUsage) HasTokenCount() bool {
@@ -1492,6 +1531,27 @@ func (x *InferenceUsage) HasWebSearchCostInCredits() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 4)
 }
 
+func (x *InferenceUsage) HasWebFetchPageCount() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 5)
+}
+
+func (x *InferenceUsage) HasWebFetchCostInCents() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 6)
+}
+
+func (x *InferenceUsage) HasWebFetchCostInCredits() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *InferenceUsage) ClearTokenCount() {
 	x.xxx_hidden_TokenCount = nil
 }
@@ -1515,6 +1575,21 @@ func (x *InferenceUsage) ClearWebSearchCostInCredits() {
 	x.xxx_hidden_WebSearchCostInCredits = 0
 }
 
+func (x *InferenceUsage) ClearWebFetchPageCount() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 5)
+	x.xxx_hidden_WebFetchPageCount = 0
+}
+
+func (x *InferenceUsage) ClearWebFetchCostInCents() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 6)
+	x.xxx_hidden_WebFetchCostInCents = 0
+}
+
+func (x *InferenceUsage) ClearWebFetchCostInCredits() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_WebFetchCostInCredits = 0
+}
+
 type InferenceUsage_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -1528,6 +1603,12 @@ type InferenceUsage_builder struct {
 	WebSearchCostInCents *float32
 	// The cumulative cost of the web searches performed in credits
 	WebSearchCostInCredits *float32
+	// Number of web pages fetched via web content tools
+	WebFetchPageCount *uint32
+	// The cumulative cost of requested web-fetch pages in US cents.
+	WebFetchCostInCents *float32
+	// The cumulative cost of requested web-fetch pages in credits.
+	WebFetchCostInCredits *float32
 }
 
 func (b0 InferenceUsage_builder) Build() *InferenceUsage {
@@ -1537,16 +1618,28 @@ func (b0 InferenceUsage_builder) Build() *InferenceUsage {
 	x.xxx_hidden_TokenCount = b.TokenCount
 	x.xxx_hidden_TokenCost = b.TokenCost
 	if b.WebSearchCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
 		x.xxx_hidden_WebSearchCount = *b.WebSearchCount
 	}
 	if b.WebSearchCostInCents != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
 		x.xxx_hidden_WebSearchCostInCents = *b.WebSearchCostInCents
 	}
 	if b.WebSearchCostInCredits != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 5)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
 		x.xxx_hidden_WebSearchCostInCredits = *b.WebSearchCostInCredits
+	}
+	if b.WebFetchPageCount != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 5, 8)
+		x.xxx_hidden_WebFetchPageCount = *b.WebFetchPageCount
+	}
+	if b.WebFetchCostInCents != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 6, 8)
+		x.xxx_hidden_WebFetchCostInCents = *b.WebFetchCostInCents
+	}
+	if b.WebFetchCostInCredits != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_WebFetchCostInCredits = *b.WebFetchCostInCredits
 	}
 	return m0
 }
@@ -40797,7 +40890,7 @@ const file_task_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\x1at\n" +
 	"!CustomEndpointInferenceUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x129\n" +
-	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\"\xaf\x02\n" +
+	"\x05value\x18\x02 \x01(\v2#.warp.multi_agent.v1.InferenceUsageR\x05value:\x028\x01\"\xd0\x03\n" +
 	"\x0eInferenceUsage\x12@\n" +
 	"\vtoken_count\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.TokenCountR\n" +
 	"tokenCount\x12=\n" +
@@ -40805,7 +40898,10 @@ const file_task_proto_rawDesc = "" +
 	"token_cost\x18\x02 \x01(\v2\x1e.warp.multi_agent.v1.TokenCostR\ttokenCost\x12(\n" +
 	"\x10web_search_count\x18\x03 \x01(\rR\x0ewebSearchCount\x126\n" +
 	"\x18web_search_cost_in_cents\x18\x04 \x01(\x02R\x14webSearchCostInCents\x12:\n" +
-	"\x1aweb_search_cost_in_credits\x18\x05 \x01(\x02R\x16webSearchCostInCredits\"\xeb\x03\n" +
+	"\x1aweb_search_cost_in_credits\x18\x05 \x01(\x02R\x16webSearchCostInCredits\x12/\n" +
+	"\x14web_fetch_page_count\x18\x06 \x01(\rR\x11webFetchPageCount\x124\n" +
+	"\x17web_fetch_cost_in_cents\x18\a \x01(\x02R\x13webFetchCostInCents\x128\n" +
+	"\x19web_fetch_cost_in_credits\x18\b \x01(\x02R\x15webFetchCostInCredits\"\xeb\x03\n" +
 	"\tTokenCost\x12-\n" +
 	"\x13input_cost_in_cents\x18\x01 \x01(\x02R\x10inputCostInCents\x12/\n" +
 	"\x14output_cost_in_cents\x18\x02 \x01(\x02R\x11outputCostInCents\x12A\n" +
