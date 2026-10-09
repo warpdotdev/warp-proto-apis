@@ -108,6 +108,23 @@ message ChargedUsage {
 
   // Platform usage charged, in credits
   float platform_usage_in_credits = 6;
+
+  // The monetary basis of direct-API inference components.
+  InferenceCostBasis inference_cost_basis = 7;
+
+  // Recorded inference charges with no positive component allocation weight.
+  float unallocated_inference_cost_in_cents = 8;
+
+  // Display credits for unallocated inference charges on dollar-based billing.
+  float unallocated_inference_cost_in_credits = 9;
+
+  enum InferenceCostBasis {
+    INFERENCE_COST_BASIS_UNSPECIFIED = 0;
+    INFERENCE_COST_BASIS_MODEL_PRICED = 1;
+    INFERENCE_COST_BASIS_RECORDED_BILLED = 2;
+    // Historical and recorded contributions use different monetary bases.
+    INFERENCE_COST_BASIS_MIXED = 3;
+  }
 }
 
 
