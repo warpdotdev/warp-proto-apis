@@ -2162,6 +2162,8 @@ message RunAgents {
     string model_id = 5;
     Harness harness = 6;
     ExecutionMode execution_mode = 7;
+    // Explicit metadata overrides for this child.
+    map<string, string> metadata = 8 [ (sensitive) = true ];
   }
 
   string summary = 1 [ (sensitive) = true ];
@@ -2177,6 +2179,8 @@ message RunAgents {
   // Optional plan ID. When set and matches an OrchestrationConfigSnapshot's
   // plan_id, run-wide fields inherit from that config.
   string plan_id = 9;
+  // Explicit metadata defaults for every child; per-child entries take precedence.
+  map<string, string> metadata = 10 [ (sensitive) = true ];
 }
 
 // The result of a RunAgents tool call.
