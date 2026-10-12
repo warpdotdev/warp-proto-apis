@@ -1062,6 +1062,8 @@ message Message {
 
         message MouseDown {
           MouseButton button = 1;
+          // Where to press the button. If unset, the button is pressed at the
+          // pointer's current position.
           Coordinates at = 2;
         }
 
