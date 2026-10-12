@@ -29282,7 +29282,7 @@ type Message_ToolCall_UseComputer_Action_MouseDown_builder struct {
 
 	Button *Message_ToolCall_UseComputer_Action_MouseButton
 	// Where to press the button. If unset, the button is pressed at the
-	// pointer's current position (e.g. after a preceding `MouseMove`).
+	// pointer's current position.
 	At *Coordinates
 }
 
