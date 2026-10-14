@@ -18,12 +18,14 @@ message Harness {
     OpenCode open_code = 3;
     Gemini gemini = 4;
     Codex codex = 5;
+    Pi pi = 6;
   }
   message Oz {}
   message ClaudeCode {}
   message OpenCode {}
   message Gemini {}
   message Codex {}
+  message Pi {}
 }
 
 // Plan-level orchestration settings.
