@@ -535,6 +535,11 @@ message Request {
     // client's own delivery path.
     bool supports_server_side_agent_message_injection = 35;
 
+    // If `true`, the client can render and execute subscription recovery
+    // `CopyText` actions. Otherwise, the server includes their text in the
+    // error message instead.
+    bool supports_chatgpt_subscription_copy_text = 36;
+
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
     // in `custom_model_providers`.

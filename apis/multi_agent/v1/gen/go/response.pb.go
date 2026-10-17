@@ -4239,6 +4239,15 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) GetOpenUr
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) GetCopyText() *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText {
+	if x != nil {
+		if x, ok := x.xxx_hidden_Kind.(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_); ok {
+			return x.CopyText
+		}
+	}
+	return nil
+}
+
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) SetLabel(v string) {
 	x.xxx_hidden_Label = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
@@ -4266,6 +4275,14 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) SetOpenUr
 		return
 	}
 	x.xxx_hidden_Kind = &responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_{v}
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) SetCopyText(v *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) {
+	if v == nil {
+		x.xxx_hidden_Kind = nil
+		return
+	}
+	x.xxx_hidden_Kind = &responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_{v}
 }
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) HasLabel() bool {
@@ -4306,6 +4323,14 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) HasOpenUr
 	return ok
 }
 
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) HasCopyText() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_Kind.(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_)
+	return ok
+}
+
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) ClearLabel() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Label = nil
@@ -4333,10 +4358,17 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) ClearOpen
 	}
 }
 
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) ClearCopyText() {
+	if _, ok := x.xxx_hidden_Kind.(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_); ok {
+		x.xxx_hidden_Kind = nil
+	}
+}
+
 const ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind_not_set_case case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind = 0
 const ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry_case case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind = 2
 const ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits_case case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind = 3
 const ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_case case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind = 4
+const ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_case case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind = 5
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) WhichKind() case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind {
 	if x == nil {
@@ -4349,6 +4381,8 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) WhichKind
 		return ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits_case
 	case *responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_:
 		return ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_case
+	case *responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_:
+		return ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_case
 	default:
 		return ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind_not_set_case
 	}
@@ -4366,6 +4400,7 @@ type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_builder struct
 	Retry                   *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry
 	ContinueWithWarpCredits *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits
 	OpenUrl                 *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl
+	CopyText                *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText
 	// -- end of xxx_hidden_Kind
 }
 
@@ -4385,6 +4420,9 @@ func (b0 ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_builder) B
 	}
 	if b.OpenUrl != nil {
 		x.xxx_hidden_Kind = &responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_{b.OpenUrl}
+	}
+	if b.CopyText != nil {
+		x.xxx_hidden_Kind = &responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_{b.CopyText}
 	}
 	return m0
 }
@@ -4415,6 +4453,10 @@ type responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_ struc
 	OpenUrl *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl `protobuf:"bytes,4,opt,name=open_url,json=openUrl,oneof"`
 }
 
+type responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_ struct {
+	CopyText *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText `protobuf:"bytes,5,opt,name=copy_text,json=copyText,oneof"`
+}
+
 func (*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry_) isResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind() {
 }
 
@@ -4422,6 +4464,9 @@ func (*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWith
 }
 
 func (*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_) isResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind() {
+}
+
+func (*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_) isResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind() {
 }
 
 // Re-issue the turn unchanged, still funded by the ChatGPT
@@ -4597,6 +4642,86 @@ func (b0 ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_bu
 	return m0
 }
 
+// Copy plain text to the clipboard on explicit user activation. Does
+// not retry the request or change the conversation's funding.
+type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText struct {
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Text        *string                `protobuf:"bytes,1,opt,name=text"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) Reset() {
+	*x = ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText{}
+	mi := &file_response_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) ProtoMessage() {}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) ProtoReflect() protoreflect.Message {
+	mi := &file_response_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) GetText() string {
+	if x != nil {
+		if x.xxx_hidden_Text != nil {
+			return *x.xxx_hidden_Text
+		}
+		return ""
+	}
+	return ""
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) SetText(v string) {
+	x.xxx_hidden_Text = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) HasText() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
+}
+
+func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) ClearText() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
+	x.xxx_hidden_Text = nil
+}
+
+type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_builder struct {
+	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
+
+	Text *string
+}
+
+func (b0 ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_builder) Build() *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText {
+	m0 := &ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText{}
+	b, x := &b0, m0
+	_, _ = b, x
+	if b.Text != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		x.xxx_hidden_Text = b.Text
+	}
+	return m0
+}
+
 // Create task action
 type ClientAction_CreateTask struct {
 	state           protoimpl.MessageState `protogen:"opaque.v1"`
@@ -4607,7 +4732,7 @@ type ClientAction_CreateTask struct {
 
 func (x *ClientAction_CreateTask) Reset() {
 	*x = ClientAction_CreateTask{}
-	mi := &file_response_proto_msgTypes[31]
+	mi := &file_response_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4619,7 +4744,7 @@ func (x *ClientAction_CreateTask) String() string {
 func (*ClientAction_CreateTask) ProtoMessage() {}
 
 func (x *ClientAction_CreateTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[31]
+	mi := &file_response_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4678,7 +4803,7 @@ type ClientAction_UpdateTaskServerData struct {
 
 func (x *ClientAction_UpdateTaskServerData) Reset() {
 	*x = ClientAction_UpdateTaskServerData{}
-	mi := &file_response_proto_msgTypes[32]
+	mi := &file_response_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4690,7 +4815,7 @@ func (x *ClientAction_UpdateTaskServerData) String() string {
 func (*ClientAction_UpdateTaskServerData) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskServerData) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[32]
+	mi := &file_response_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4790,7 +4915,7 @@ type ClientAction_UpdateTaskDescription struct {
 
 func (x *ClientAction_UpdateTaskDescription) Reset() {
 	*x = ClientAction_UpdateTaskDescription{}
-	mi := &file_response_proto_msgTypes[33]
+	mi := &file_response_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4802,7 +4927,7 @@ func (x *ClientAction_UpdateTaskDescription) String() string {
 func (*ClientAction_UpdateTaskDescription) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[33]
+	mi := &file_response_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4902,7 +5027,7 @@ type ClientAction_AddMessagesToTask struct {
 
 func (x *ClientAction_AddMessagesToTask) Reset() {
 	*x = ClientAction_AddMessagesToTask{}
-	mi := &file_response_proto_msgTypes[34]
+	mi := &file_response_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4914,7 +5039,7 @@ func (x *ClientAction_AddMessagesToTask) String() string {
 func (*ClientAction_AddMessagesToTask) ProtoMessage() {}
 
 func (x *ClientAction_AddMessagesToTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[34]
+	mi := &file_response_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4998,7 +5123,7 @@ type ClientAction_UpdateTaskMessage struct {
 
 func (x *ClientAction_UpdateTaskMessage) Reset() {
 	*x = ClientAction_UpdateTaskMessage{}
-	mi := &file_response_proto_msgTypes[35]
+	mi := &file_response_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5010,7 +5135,7 @@ func (x *ClientAction_UpdateTaskMessage) String() string {
 func (*ClientAction_UpdateTaskMessage) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[35]
+	mi := &file_response_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5128,7 +5253,7 @@ type ClientAction_AppendToMessageContent struct {
 
 func (x *ClientAction_AppendToMessageContent) Reset() {
 	*x = ClientAction_AppendToMessageContent{}
-	mi := &file_response_proto_msgTypes[36]
+	mi := &file_response_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5140,7 +5265,7 @@ func (x *ClientAction_AppendToMessageContent) String() string {
 func (*ClientAction_AppendToMessageContent) ProtoMessage() {}
 
 func (x *ClientAction_AppendToMessageContent) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[36]
+	mi := &file_response_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5258,7 +5383,7 @@ type ClientAction_UpdateTaskSummary struct {
 
 func (x *ClientAction_UpdateTaskSummary) Reset() {
 	*x = ClientAction_UpdateTaskSummary{}
-	mi := &file_response_proto_msgTypes[37]
+	mi := &file_response_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5270,7 +5395,7 @@ func (x *ClientAction_UpdateTaskSummary) String() string {
 func (*ClientAction_UpdateTaskSummary) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[37]
+	mi := &file_response_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5368,7 +5493,7 @@ type ClientAction_BeginTransaction struct {
 
 func (x *ClientAction_BeginTransaction) Reset() {
 	*x = ClientAction_BeginTransaction{}
-	mi := &file_response_proto_msgTypes[38]
+	mi := &file_response_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5380,7 +5505,7 @@ func (x *ClientAction_BeginTransaction) String() string {
 func (*ClientAction_BeginTransaction) ProtoMessage() {}
 
 func (x *ClientAction_BeginTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[38]
+	mi := &file_response_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5412,7 +5537,7 @@ type ClientAction_CommitTransaction struct {
 
 func (x *ClientAction_CommitTransaction) Reset() {
 	*x = ClientAction_CommitTransaction{}
-	mi := &file_response_proto_msgTypes[39]
+	mi := &file_response_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5424,7 +5549,7 @@ func (x *ClientAction_CommitTransaction) String() string {
 func (*ClientAction_CommitTransaction) ProtoMessage() {}
 
 func (x *ClientAction_CommitTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[39]
+	mi := &file_response_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5456,7 +5581,7 @@ type ClientAction_RollbackTransaction struct {
 
 func (x *ClientAction_RollbackTransaction) Reset() {
 	*x = ClientAction_RollbackTransaction{}
-	mi := &file_response_proto_msgTypes[40]
+	mi := &file_response_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5468,7 +5593,7 @@ func (x *ClientAction_RollbackTransaction) String() string {
 func (*ClientAction_RollbackTransaction) ProtoMessage() {}
 
 func (x *ClientAction_RollbackTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[40]
+	mi := &file_response_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5503,7 +5628,7 @@ type ClientAction_StartNewConversation struct {
 
 func (x *ClientAction_StartNewConversation) Reset() {
 	*x = ClientAction_StartNewConversation{}
-	mi := &file_response_proto_msgTypes[41]
+	mi := &file_response_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5515,7 +5640,7 @@ func (x *ClientAction_StartNewConversation) String() string {
 func (*ClientAction_StartNewConversation) ProtoMessage() {}
 
 func (x *ClientAction_StartNewConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[41]
+	mi := &file_response_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5588,7 +5713,7 @@ type ClientAction_MoveMessagesToNewTask struct {
 
 func (x *ClientAction_MoveMessagesToNewTask) Reset() {
 	*x = ClientAction_MoveMessagesToNewTask{}
-	mi := &file_response_proto_msgTypes[42]
+	mi := &file_response_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5600,7 +5725,7 @@ func (x *ClientAction_MoveMessagesToNewTask) String() string {
 func (*ClientAction_MoveMessagesToNewTask) ProtoMessage() {}
 
 func (x *ClientAction_MoveMessagesToNewTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[42]
+	mi := &file_response_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5800,7 +5925,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xa98\n" +
+	"task.proto\"\xc49\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -5812,7 +5937,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xe34\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xfe5\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -5919,21 +6044,24 @@ const file_response_proto_rawDesc = "" +
 	"\n" +
 	"model_name\x18\x02 \x01(\tR\tmodelName\x1a)\n" +
 	"\rInternalError\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage\x1a\xc9\x05\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\x1a\xe4\x06\n" +
 	"\x18ChatGPTSubscriptionError\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12k\n" +
-	"\aactions\x18\x04 \x03(\v2Q.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.ActionR\aactions\x1a\xfb\x03\n" +
+	"\aactions\x18\x04 \x03(\v2Q.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.ActionR\aactions\x1a\x96\x05\n" +
 	"\x06Action\x12\x14\n" +
 	"\x05label\x18\x01 \x01(\tR\x05label\x12o\n" +
 	"\x05retry\x18\x02 \x01(\v2W.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.RetryH\x00R\x05retry\x12\xa8\x01\n" +
 	"\x1acontinue_with_warp_credits\x18\x03 \x01(\v2i.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCreditsH\x00R\x17continueWithWarpCredits\x12v\n" +
-	"\bopen_url\x18\x04 \x01(\v2Y.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrlH\x00R\aopenUrl\x1a\a\n" +
+	"\bopen_url\x18\x04 \x01(\v2Y.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrlH\x00R\aopenUrl\x12y\n" +
+	"\tcopy_text\x18\x05 \x01(\v2Z.warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyTextH\x00R\bcopyText\x1a\a\n" +
 	"\x05Retry\x1a\x19\n" +
 	"\x17ContinueWithWarpCredits\x1a\x1b\n" +
 	"\aOpenUrl\x12\x10\n" +
-	"\x03url\x18\x01 \x01(\tR\x03urlB\x06\n" +
+	"\x03url\x18\x01 \x01(\tR\x03url\x1a\x1e\n" +
+	"\bCopyText\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\tR\x04textB\x06\n" +
 	"\x04kind\"\x93\x01\n" +
 	"\x18ContextWindowSegmentType\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\x11\n" +
@@ -6010,7 +6138,7 @@ const file_response_proto_rawDesc = "" +
 	"\x1eLLM_PROVIDER_GEMINI_ENTERPRISE\x10\aBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_response_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 43)
+var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
 var file_response_proto_goTypes = []any{
 	(LLMProvider)(0), // 0: warp.multi_agent.v1.LLMProvider
 	(ResponseEvent_StreamFinished_ContextWindowSegmentType)(0), // 1: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentType
@@ -6045,41 +6173,42 @@ var file_response_proto_goTypes = []any{
 	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry)(nil),                   // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.Retry
 	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits)(nil), // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCredits
 	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl)(nil),                 // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrl
-	(*ClientAction_CreateTask)(nil),                                                              // 33: warp.multi_agent.v1.ClientAction.CreateTask
-	(*ClientAction_UpdateTaskServerData)(nil),                                                    // 34: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	(*ClientAction_UpdateTaskDescription)(nil),                                                   // 35: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                                                       // 36: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                                                       // 37: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),                                                  // 38: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                                                       // 39: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*ClientAction_BeginTransaction)(nil),                                                        // 40: warp.multi_agent.v1.ClientAction.BeginTransaction
-	(*ClientAction_CommitTransaction)(nil),                                                       // 41: warp.multi_agent.v1.ClientAction.CommitTransaction
-	(*ClientAction_RollbackTransaction)(nil),                                                     // 42: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*ClientAction_StartNewConversation)(nil),                                                    // 43: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*ClientAction_MoveMessagesToNewTask)(nil),                                                   // 44: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
-	(*Suggestions)(nil),                                                                          // 45: warp.multi_agent.v1.Suggestions
-	(*RequestCharges)(nil),                                                                       // 46: warp.multi_agent.v1.RequestCharges
-	(*Task)(nil),                                                                                 // 47: warp.multi_agent.v1.Task
-	(*Message)(nil),                                                                              // 48: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil),                                                                // 49: google.protobuf.FieldMask
+	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText)(nil),                // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyText
+	(*ClientAction_CreateTask)(nil),                                                              // 34: warp.multi_agent.v1.ClientAction.CreateTask
+	(*ClientAction_UpdateTaskServerData)(nil),                                                    // 35: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	(*ClientAction_UpdateTaskDescription)(nil),                                                   // 36: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                                                       // 37: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                                                       // 38: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                                                  // 39: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                                                       // 40: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*ClientAction_BeginTransaction)(nil),                                                        // 41: warp.multi_agent.v1.ClientAction.BeginTransaction
+	(*ClientAction_CommitTransaction)(nil),                                                       // 42: warp.multi_agent.v1.ClientAction.CommitTransaction
+	(*ClientAction_RollbackTransaction)(nil),                                                     // 43: warp.multi_agent.v1.ClientAction.RollbackTransaction
+	(*ClientAction_StartNewConversation)(nil),                                                    // 44: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*ClientAction_MoveMessagesToNewTask)(nil),                                                   // 45: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
+	(*Suggestions)(nil),           // 46: warp.multi_agent.v1.Suggestions
+	(*RequestCharges)(nil),        // 47: warp.multi_agent.v1.RequestCharges
+	(*Task)(nil),                  // 48: warp.multi_agent.v1.Task
+	(*Message)(nil),               // 49: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil), // 50: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	4,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
 	5,  // 1: warp.multi_agent.v1.ResponseEvent.client_actions:type_name -> warp.multi_agent.v1.ResponseEvent.ClientActions
 	6,  // 2: warp.multi_agent.v1.ResponseEvent.finished:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished
-	33, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
-	36, // 4: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	37, // 5: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	38, // 6: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	45, // 7: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	39, // 8: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	35, // 9: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	40, // 10: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
-	41, // 11: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
-	42, // 12: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
-	43, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
-	34, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	44, // 15: warp.multi_agent.v1.ClientAction.move_messages_to_new_task:type_name -> warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
+	34, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
+	37, // 4: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	38, // 5: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	39, // 6: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	46, // 7: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	40, // 8: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	36, // 9: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	41, // 10: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
+	42, // 11: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
+	43, // 12: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
+	44, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
+	35, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	45, // 15: warp.multi_agent.v1.ClientAction.move_messages_to_new_task:type_name -> warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
 	3,  // 16: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
 	16, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
 	17, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
@@ -6093,14 +6222,14 @@ var file_response_proto_depIdxs = []int32{
 	15, // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
 	14, // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
 	7,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
-	46, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_charges:type_name -> warp.multi_agent.v1.RequestCharges
+	47, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_charges:type_name -> warp.multi_agent.v1.RequestCharges
 	9,  // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	10, // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
 	25, // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.warp_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry
 	26, // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.byok_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
 	27, // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.custom_endpoint_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry
 	8,  // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.context_window_segments:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment
-	46, // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.total_charges:type_name -> warp.multi_agent.v1.RequestCharges
+	47, // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.total_charges:type_name -> warp.multi_agent.v1.RequestCharges
 	1,  // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment.segment_type:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentType
 	28, // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.token_usage_by_category:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
 	13, // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStats
@@ -6124,19 +6253,20 @@ var file_response_proto_depIdxs = []int32{
 	30, // 57: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.retry:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.Retry
 	31, // 58: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.continue_with_warp_credits:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCredits
 	32, // 59: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.open_url:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrl
-	47, // 60: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	48, // 61: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	48, // 62: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	49, // 63: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	48, // 64: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	49, // 65: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	47, // 66: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
-	48, // 67: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
-	68, // [68:68] is the sub-list for method output_type
-	68, // [68:68] is the sub-list for method input_type
-	68, // [68:68] is the sub-list for extension type_name
-	68, // [68:68] is the sub-list for extension extendee
-	0,  // [0:68] is the sub-list for field type_name
+	33, // 60: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.copy_text:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyText
+	48, // 61: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	49, // 62: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	49, // 63: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	50, // 64: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	49, // 65: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	50, // 66: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	48, // 67: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
+	49, // 68: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
+	69, // [69:69] is the sub-list for method output_type
+	69, // [69:69] is the sub-list for method input_type
+	69, // [69:69] is the sub-list for extension type_name
+	69, // [69:69] is the sub-list for extension extendee
+	0,  // [0:69] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -6182,6 +6312,7 @@ func file_response_proto_init() {
 		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry_)(nil),
 		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits_)(nil),
 		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_)(nil),
+		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -6189,7 +6320,7 @@ func file_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_response_proto_rawDesc), len(file_response_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   43,
+			NumMessages:   44,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
