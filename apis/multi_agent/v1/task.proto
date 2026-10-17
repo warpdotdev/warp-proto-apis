@@ -764,6 +764,19 @@ message Message {
           string new = 4 [ (sensitive) = true ];
           // The context lines right after the change.
           string post_context = 5 [ (sensitive) = true ];
+
+          // Prefer when present, including when all lists are empty. Reject
+          // entries containing LF rather than falling back to legacy strings.
+          LineData line_data = 6;
+
+          // Exact patch lines, without LF delimiters. CR is line content.
+          // The legacy strings remain newline joins of these same lists.
+          message LineData {
+            repeated string pre_context = 1 [ (sensitive) = true ];
+            repeated string old = 2 [ (sensitive) = true ];
+            repeated string new = 3 [ (sensitive) = true ];
+            repeated string post_context = 4 [ (sensitive) = true ];
+          }
         }
       }
 
