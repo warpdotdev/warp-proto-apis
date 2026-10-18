@@ -2166,6 +2166,8 @@ message RunAgents {
     ExecutionMode execution_mode = 7;
     // Explicit metadata overrides for this child.
     map<string, string> metadata = 8 [ (sensitive) = true ];
+    // Qualified blueprint stage requested from this named remote profile.
+    string blueprint_stage_path = 9 [ (sensitive) = true ];
   }
 
   string summary = 1 [ (sensitive) = true ];
