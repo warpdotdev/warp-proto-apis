@@ -299,6 +299,7 @@ message ResponseEvent {
           Retry retry = 2;
           ContinueWithWarpCredits continue_with_warp_credits = 3;
           OpenUrl open_url = 4;
+          CopyText copy_text = 5;
         }
 
         // Re-issue the turn unchanged, still funded by the ChatGPT
@@ -314,6 +315,10 @@ message ResponseEvent {
         // Open a page in the user's browser (e.g. the ChatGPT usage settings
         // page). Does not change the conversation's state.
         message OpenUrl { string url = 1; }
+
+        // Copy plain text to the clipboard on explicit user activation. Does
+        // not retry the request or change the conversation's funding.
+        message CopyText { string text = 1; }
       }
     }
   }
