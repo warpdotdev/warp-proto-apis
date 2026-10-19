@@ -869,6 +869,13 @@ message Message {
       // Identity of the server named by `server_id`, stamped by warp-server
       // when it authors the call. Unset on calls that predate this field.
       MCPServerIdentity server_identity = 4;
+
+      // Display names for the IDs mentioned in the text this call sends
+      // (Warp Slack MCP `message` / `initial_comment`), keyed by raw ID.
+      // Server-authored: warp-server stamps the persisted transcript and
+      // discards any value a client sends. Display-only: `args` keep the raw
+      // IDs and this is never sent to the model.
+      map<string, MentionLabel> mention_labels = 5 [ (sensitive) = true ];
     }
 
     // A tool call to suggest a prompt for the user to run.
@@ -1754,6 +1761,14 @@ message CallMCPToolResult {
   }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
+
+  // Display names for the IDs in this result (Warp Slack MCP read_channel /
+  // read_thread: each message's `user` and the mentions in its `text`), keyed
+  // by raw ID. Server-authored: warp-server discards any value a client sends
+  // in Request.Input.ToolCallResult and stamps the persisted transcript.
+  // Display-only: the result keeps its raw IDs and this is never sent to the
+  // model.
+  map<string, MentionLabel> mention_labels = 3 [ (sensitive) = true ];
 }
 
 // Warp-side identity of an MCP server.
