@@ -1704,7 +1704,14 @@ message ShellCommandFinished {
 
 // The reason why a shell command was denied permission to run.
 message PermissionDenied {
-  oneof reason { google.protobuf.Empty denylisted_command = 1; }
+  oneof reason {
+    google.protobuf.Empty denylisted_command = 1;
+    HookDenied hook_denied = 2;
+  }
+
+  // An agent hook denied the command. `reason` is the hook's own text, shown
+  // to the model.
+  message HookDenied { string reason = 1 [ (sensitive) = true ]; }
 }
 
 message CallMCPToolResult {
