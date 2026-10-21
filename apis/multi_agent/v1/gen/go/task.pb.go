@@ -27264,6 +27264,13 @@ type Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk_builder struct {
 	PostContext *string
 	// Prefer when present, including when all lists are empty. Reject
 	// entries containing LF rather than falling back to legacy strings.
+	//
+	// Example (textproto): delete one blank line after "before".
+	//
+	//	pre_context: "before" old: "" new: ""
+	//	line_data { pre_context: "before" old: "" }
+	//
+	// The empty old entry is one blank line; no new entries means no lines.
 	LineData *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk_LineData
 }
 
