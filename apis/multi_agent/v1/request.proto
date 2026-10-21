@@ -540,6 +540,10 @@ message Request {
     // error message instead.
     bool supports_chatgpt_subscription_copy_text = 36;
 
+    // If `true`, the client can approve, validate, and execute per-child model
+    // overrides in run_agents. Unset clients support only the batch model.
+    bool supports_child_model_routing = 37;
+
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
     // in `custom_model_providers`.
