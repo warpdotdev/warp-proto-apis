@@ -35015,8 +35015,7 @@ func (b0 SuggestNewConversationResult_Rejected_builder) Build() *SuggestNewConve
 	return m0
 }
 
-// An agent hook denied the command. `reason` is the hook's own text, shown
-// to the model.
+// An agent hook denied the command.
 type PermissionDenied_HookDenied struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Reason      *string                `protobuf:"bytes,1,opt,name=reason"`
@@ -35081,6 +35080,7 @@ func (x *PermissionDenied_HookDenied) ClearReason() {
 type PermissionDenied_HookDenied_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// The hook's own explanation of the denial, shown to the model.
 	Reason *string
 }
 

@@ -1709,9 +1709,11 @@ message PermissionDenied {
     HookDenied hook_denied = 2;
   }
 
-  // An agent hook denied the command. `reason` is the hook's own text, shown
-  // to the model.
-  message HookDenied { string reason = 1 [ (sensitive) = true ]; }
+  // An agent hook denied the command.
+  message HookDenied {
+    // The hook's own explanation of the denial, shown to the model.
+    string reason = 1 [ (sensitive) = true ];
+  }
 }
 
 message CallMCPToolResult {
