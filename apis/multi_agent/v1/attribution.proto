@@ -88,6 +88,29 @@ message ExternalUser {
   bool is_bot = 7;
 }
 
+// The display name of a platform ID mentioned in message text, such as a Slack
+// user, channel, or user group in mrkdwn (`<@U123>`, `<#C123>`,
+// `<!subteam^S123>`). warp-server resolves it when the text enters Warp and
+// stores it beside the text, which keeps its raw IDs. Display-only: renderers
+// overlay it for people, and it is never sent to the model. Frozen at
+// ingestion; a later rename does not update it.
+message MentionLabel {
+  enum Kind {
+    KIND_UNSPECIFIED = 0;
+    // A user (Slack `<@U…>` / `<@W…>`), rendered "@label".
+    KIND_USER = 1;
+    // A channel (Slack `<#C…>`), rendered "#label".
+    KIND_CHANNEL = 2;
+    // A user group (Slack `<!subteam^S…>`); the label is its handle, rendered
+    // "@label".
+    KIND_USER_GROUP = 3;
+  }
+  // The name without its "@" or "#" prefix. Sanitized: no `<`, `>`, `|`,
+  // backtick, control or format characters, and at most 64 characters.
+  string label = 1 [ (sensitive) = true ];
+  Kind kind = 2;
+}
+
 // Text encoding of ExternalMessage.body.
 enum BodyFormat {
   BODY_FORMAT_UNSPECIFIED = 0;
@@ -131,6 +154,12 @@ message ExternalMessage {
   string permalink = 4 [ (sensitive) = true ];
   // When the message was posted, according to the platform.
   google.protobuf.Timestamp platform_timestamp = 5;
+  // Display names for the IDs `body` mentions (Slack users, channels, and
+  // user groups in BODY_FORMAT_SLACK_MRKDWN), keyed by raw ID. IDs warp-server
+  // could not resolve are absent and render raw. Display-only: `body` and the
+  // query sent to the model keep the raw IDs. A Factory bot whose alias `body`
+  // already carries inline is never a key.
+  map<string, MentionLabel> mention_labels = 15 [ (sensitive) = true ];
 
   oneof platform {
     Slack slack = 6;
