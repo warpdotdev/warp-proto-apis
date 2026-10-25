@@ -38209,19 +38209,20 @@ func (*runAgents_ExecutionMode_Remote) isRunAgents_ExecutionMode_Mode() {}
 
 // Configuration for a single child agent in the batch.
 type RunAgents_AgentRunConfig struct {
-	state                       protoimpl.MessageState   `protogen:"opaque.v1"`
-	xxx_hidden_Name             *string                  `protobuf:"bytes,1,opt,name=name"`
-	xxx_hidden_Prompt           *string                  `protobuf:"bytes,2,opt,name=prompt"`
-	xxx_hidden_Title            *string                  `protobuf:"bytes,3,opt,name=title"`
-	xxx_hidden_AgentIdentityUid *string                  `protobuf:"bytes,4,opt,name=agent_identity_uid,json=agentIdentityUid"`
-	xxx_hidden_ModelId          *string                  `protobuf:"bytes,5,opt,name=model_id,json=modelId"`
-	xxx_hidden_Harness          *Harness                 `protobuf:"bytes,6,opt,name=harness"`
-	xxx_hidden_ExecutionMode    *RunAgents_ExecutionMode `protobuf:"bytes,7,opt,name=execution_mode,json=executionMode"`
-	xxx_hidden_Metadata         map[string]string        `protobuf:"bytes,8,rep,name=metadata" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	XXX_raceDetectHookData      protoimpl.RaceDetectHookData
-	XXX_presence                [1]uint32
-	unknownFields               protoimpl.UnknownFields
-	sizeCache                   protoimpl.SizeCache
+	state                         protoimpl.MessageState   `protogen:"opaque.v1"`
+	xxx_hidden_Name               *string                  `protobuf:"bytes,1,opt,name=name"`
+	xxx_hidden_Prompt             *string                  `protobuf:"bytes,2,opt,name=prompt"`
+	xxx_hidden_Title              *string                  `protobuf:"bytes,3,opt,name=title"`
+	xxx_hidden_AgentIdentityUid   *string                  `protobuf:"bytes,4,opt,name=agent_identity_uid,json=agentIdentityUid"`
+	xxx_hidden_ModelId            *string                  `protobuf:"bytes,5,opt,name=model_id,json=modelId"`
+	xxx_hidden_Harness            *Harness                 `protobuf:"bytes,6,opt,name=harness"`
+	xxx_hidden_ExecutionMode      *RunAgents_ExecutionMode `protobuf:"bytes,7,opt,name=execution_mode,json=executionMode"`
+	xxx_hidden_Metadata           map[string]string        `protobuf:"bytes,8,rep,name=metadata" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	xxx_hidden_BlueprintStagePath *string                  `protobuf:"bytes,9,opt,name=blueprint_stage_path,json=blueprintStagePath"`
+	XXX_raceDetectHookData        protoimpl.RaceDetectHookData
+	XXX_presence                  [1]uint32
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
 }
 
 func (x *RunAgents_AgentRunConfig) Reset() {
@@ -38320,29 +38321,39 @@ func (x *RunAgents_AgentRunConfig) GetMetadata() map[string]string {
 	return nil
 }
 
+func (x *RunAgents_AgentRunConfig) GetBlueprintStagePath() string {
+	if x != nil {
+		if x.xxx_hidden_BlueprintStagePath != nil {
+			return *x.xxx_hidden_BlueprintStagePath
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *RunAgents_AgentRunConfig) SetName(v string) {
 	x.xxx_hidden_Name = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
 }
 
 func (x *RunAgents_AgentRunConfig) SetPrompt(v string) {
 	x.xxx_hidden_Prompt = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 9)
 }
 
 func (x *RunAgents_AgentRunConfig) SetTitle(v string) {
 	x.xxx_hidden_Title = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 9)
 }
 
 func (x *RunAgents_AgentRunConfig) SetAgentIdentityUid(v string) {
 	x.xxx_hidden_AgentIdentityUid = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 9)
 }
 
 func (x *RunAgents_AgentRunConfig) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
 }
 
 func (x *RunAgents_AgentRunConfig) SetHarness(v *Harness) {
@@ -38355,6 +38366,11 @@ func (x *RunAgents_AgentRunConfig) SetExecutionMode(v *RunAgents_ExecutionMode) 
 
 func (x *RunAgents_AgentRunConfig) SetMetadata(v map[string]string) {
 	x.xxx_hidden_Metadata = v
+}
+
+func (x *RunAgents_AgentRunConfig) SetBlueprintStagePath(v string) {
+	x.xxx_hidden_BlueprintStagePath = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 9)
 }
 
 func (x *RunAgents_AgentRunConfig) HasName() bool {
@@ -38406,6 +38422,13 @@ func (x *RunAgents_AgentRunConfig) HasExecutionMode() bool {
 	return x.xxx_hidden_ExecutionMode != nil
 }
 
+func (x *RunAgents_AgentRunConfig) HasBlueprintStagePath() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
+}
+
 func (x *RunAgents_AgentRunConfig) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
@@ -38439,6 +38462,11 @@ func (x *RunAgents_AgentRunConfig) ClearExecutionMode() {
 	x.xxx_hidden_ExecutionMode = nil
 }
 
+func (x *RunAgents_AgentRunConfig) ClearBlueprintStagePath() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
+	x.xxx_hidden_BlueprintStagePath = nil
+}
+
 type RunAgents_AgentRunConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -38461,6 +38489,8 @@ type RunAgents_AgentRunConfig_builder struct {
 	ExecutionMode *RunAgents_ExecutionMode
 	// Explicit metadata overrides for this child.
 	Metadata map[string]string
+	// Qualified blueprint stage requested from this named remote profile.
+	BlueprintStagePath *string
 }
 
 func (b0 RunAgents_AgentRunConfig_builder) Build() *RunAgents_AgentRunConfig {
@@ -38468,28 +38498,32 @@ func (b0 RunAgents_AgentRunConfig_builder) Build() *RunAgents_AgentRunConfig {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
 		x.xxx_hidden_Name = b.Name
 	}
 	if b.Prompt != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 9)
 		x.xxx_hidden_Prompt = b.Prompt
 	}
 	if b.Title != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 9)
 		x.xxx_hidden_Title = b.Title
 	}
 	if b.AgentIdentityUid != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 9)
 		x.xxx_hidden_AgentIdentityUid = b.AgentIdentityUid
 	}
 	if b.ModelId != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
 		x.xxx_hidden_ModelId = b.ModelId
 	}
 	x.xxx_hidden_Harness = b.Harness
 	x.xxx_hidden_ExecutionMode = b.ExecutionMode
 	x.xxx_hidden_Metadata = b.Metadata
+	if b.BlueprintStagePath != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 9)
+		x.xxx_hidden_BlueprintStagePath = b.BlueprintStagePath
+	}
 	return m0
 }
 
@@ -42074,7 +42108,7 @@ const file_task_proto_rawDesc = "" +
 	"\rUserQueryMode\x12,\n" +
 	"\x04plan\x18\x01 \x01(\v2\x16.google.protobuf.EmptyH\x00R\x04plan\x12:\n" +
 	"\vorchestrate\x18\x02 \x01(\v2\x16.google.protobuf.EmptyH\x00R\vorchestrateB\x06\n" +
-	"\x04type\"\x8b\v\n" +
+	"\x04type\"\xc3\v\n" +
 	"\tRunAgents\x12\x1e\n" +
 	"\asummary\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\asummary\x12%\n" +
 	"\vbase_prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\n" +
@@ -42098,7 +42132,7 @@ const file_task_proto_rawDesc = "" +
 	"\rExecutionMode\x12<\n" +
 	"\x05local\x18\x01 \x01(\v2$.warp.multi_agent.v1.RunAgents.LocalH\x00R\x05local\x12?\n" +
 	"\x06remote\x18\x02 \x01(\v2%.warp.multi_agent.v1.RunAgents.RemoteH\x00R\x06remoteB\x06\n" +
-	"\x04mode\x1a\xd6\x03\n" +
+	"\x04mode\x1a\x8e\x04\n" +
 	"\x0eAgentRunConfig\x12\x18\n" +
 	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x1c\n" +
 	"\x06prompt\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x06prompt\x12\x1a\n" +
@@ -42107,7 +42141,8 @@ const file_task_proto_rawDesc = "" +
 	"\bmodel_id\x18\x05 \x01(\tR\amodelId\x126\n" +
 	"\aharness\x18\x06 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\aharness\x12S\n" +
 	"\x0eexecution_mode\x18\a \x01(\v2,.warp.multi_agent.v1.RunAgents.ExecutionModeR\rexecutionMode\x12]\n" +
-	"\bmetadata\x18\b \x03(\v2;.warp.multi_agent.v1.RunAgents.AgentRunConfig.MetadataEntryB\x04\x80\xb5\x18\x01R\bmetadata\x1a;\n" +
+	"\bmetadata\x18\b \x03(\v2;.warp.multi_agent.v1.RunAgents.AgentRunConfig.MetadataEntryB\x04\x80\xb5\x18\x01R\bmetadata\x126\n" +
+	"\x14blueprint_stage_path\x18\t \x01(\tB\x04\x80\xb5\x18\x01R\x12blueprintStagePath\x1a;\n" +
 	"\rMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a;\n" +
