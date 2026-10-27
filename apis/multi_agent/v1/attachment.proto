@@ -16,6 +16,15 @@ import "options.proto";
 import "file_content.proto";
 
 message Attachment {
+  // Controls whether clients should present this attachment to users.
+  enum Visibility {
+    // Legacy attachments and attachments without an explicit policy are user-visible.
+    VISIBILITY_UNSPECIFIED = 0;
+    // The attachment should be presented to users.
+    VISIBILITY_USER = 1;
+    // The attachment is internal agent context and should not be presented to users.
+    VISIBILITY_SYSTEM = 2;
+  }
   oneof value {
     string plain_text = 1 [ (sensitive) = true ];
     ExecutedShellCommand executed_shell_command = 2;
@@ -27,6 +36,8 @@ message Attachment {
     DocumentContent document_content = 7;
     FilePathReference file_path_reference = 8;
   }
+
+  Visibility visibility = 9;
 }
 
 // Information about shell commands that the user has executed.

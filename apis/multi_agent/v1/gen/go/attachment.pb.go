@@ -24,6 +24,54 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Controls whether clients should present this attachment to users.
+type Attachment_Visibility int32
+
+const (
+	// Legacy attachments and attachments without an explicit policy are user-visible.
+	Attachment_VISIBILITY_UNSPECIFIED Attachment_Visibility = 0
+	// The attachment should be presented to users.
+	Attachment_VISIBILITY_USER Attachment_Visibility = 1
+	// The attachment is internal agent context and should not be presented to users.
+	Attachment_VISIBILITY_SYSTEM Attachment_Visibility = 2
+)
+
+// Enum value maps for Attachment_Visibility.
+var (
+	Attachment_Visibility_name = map[int32]string{
+		0: "VISIBILITY_UNSPECIFIED",
+		1: "VISIBILITY_USER",
+		2: "VISIBILITY_SYSTEM",
+	}
+	Attachment_Visibility_value = map[string]int32{
+		"VISIBILITY_UNSPECIFIED": 0,
+		"VISIBILITY_USER":        1,
+		"VISIBILITY_SYSTEM":      2,
+	}
+)
+
+func (x Attachment_Visibility) Enum() *Attachment_Visibility {
+	p := new(Attachment_Visibility)
+	*p = x
+	return p
+}
+
+func (x Attachment_Visibility) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (Attachment_Visibility) Descriptor() protoreflect.EnumDescriptor {
+	return file_attachment_proto_enumTypes[0].Descriptor()
+}
+
+func (Attachment_Visibility) Type() protoreflect.EnumType {
+	return &file_attachment_proto_enumTypes[0]
+}
+
+func (x Attachment_Visibility) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
 // Aggregate state of the process tree, reduced to the member state that is the strongest
 // evidence of progress.
 type LongRunningShellCommandActivity_ProcessActivity_State int32
@@ -78,11 +126,11 @@ func (x LongRunningShellCommandActivity_ProcessActivity_State) String() string {
 }
 
 func (LongRunningShellCommandActivity_ProcessActivity_State) Descriptor() protoreflect.EnumDescriptor {
-	return file_attachment_proto_enumTypes[0].Descriptor()
+	return file_attachment_proto_enumTypes[1].Descriptor()
 }
 
 func (LongRunningShellCommandActivity_ProcessActivity_State) Type() protoreflect.EnumType {
-	return &file_attachment_proto_enumTypes[0]
+	return &file_attachment_proto_enumTypes[1]
 }
 
 func (x LongRunningShellCommandActivity_ProcessActivity_State) Number() protoreflect.EnumNumber {
@@ -90,10 +138,13 @@ func (x LongRunningShellCommandActivity_ProcessActivity_State) Number() protoref
 }
 
 type Attachment struct {
-	state            protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_Value isAttachment_Value     `protobuf_oneof:"value"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"opaque.v1"`
+	xxx_hidden_Value       isAttachment_Value     `protobuf_oneof:"value"`
+	xxx_hidden_Visibility  Attachment_Visibility  `protobuf:"varint,9,opt,name=visibility,enum=warp.multi_agent.v1.Attachment_Visibility"`
+	XXX_raceDetectHookData protoimpl.RaceDetectHookData
+	XXX_presence           [1]uint32
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *Attachment) Reset() {
@@ -194,6 +245,15 @@ func (x *Attachment) GetFilePathReference() *FilePathReference {
 	return nil
 }
 
+func (x *Attachment) GetVisibility() Attachment_Visibility {
+	if x != nil {
+		if protoimpl.X.Present(&(x.XXX_presence[0]), 1) {
+			return x.xxx_hidden_Visibility
+		}
+	}
+	return Attachment_VISIBILITY_UNSPECIFIED
+}
+
 func (x *Attachment) SetPlainText(v string) {
 	x.xxx_hidden_Value = &attachment_PlainText{v}
 }
@@ -253,6 +313,11 @@ func (x *Attachment) SetFilePathReference(v *FilePathReference) {
 		return
 	}
 	x.xxx_hidden_Value = &attachment_FilePathReference{v}
+}
+
+func (x *Attachment) SetVisibility(v Attachment_Visibility) {
+	x.xxx_hidden_Visibility = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
 func (x *Attachment) HasValue() bool {
@@ -327,6 +392,13 @@ func (x *Attachment) HasFilePathReference() bool {
 	return ok
 }
 
+func (x *Attachment) HasVisibility() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
+}
+
 func (x *Attachment) ClearValue() {
 	x.xxx_hidden_Value = nil
 }
@@ -378,6 +450,11 @@ func (x *Attachment) ClearFilePathReference() {
 	if _, ok := x.xxx_hidden_Value.(*attachment_FilePathReference); ok {
 		x.xxx_hidden_Value = nil
 	}
+}
+
+func (x *Attachment) ClearVisibility() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
+	x.xxx_hidden_Visibility = Attachment_VISIBILITY_UNSPECIFIED
 }
 
 const Attachment_Value_not_set_case case_Attachment_Value = 0
@@ -432,6 +509,7 @@ type Attachment_builder struct {
 	DocumentContent   *DocumentContent
 	FilePathReference *FilePathReference
 	// -- end of xxx_hidden_Value
+	Visibility *Attachment_Visibility
 }
 
 func (b0 Attachment_builder) Build() *Attachment {
@@ -461,6 +539,10 @@ func (b0 Attachment_builder) Build() *Attachment {
 	}
 	if b.FilePathReference != nil {
 		x.xxx_hidden_Value = &attachment_FilePathReference{b.FilePathReference}
+	}
+	if b.Visibility != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 2)
+		x.xxx_hidden_Visibility = *b.Visibility
 	}
 	return m0
 }
@@ -3272,7 +3354,7 @@ var File_attachment_proto protoreflect.FileDescriptor
 
 const file_attachment_proto_rawDesc = "" +
 	"\n" +
-	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\xf0\x04\n" +
+	"\x10attachment.proto\x12\x13warp.multi_agent.v1\x1a\x1egoogle/protobuf/duration.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16document_content.proto\x1a\roptions.proto\x1a\x12file_content.proto\"\x92\x06\n" +
 	"\n" +
 	"Attachment\x12%\n" +
 	"\n" +
@@ -3283,7 +3365,15 @@ const file_attachment_proto_rawDesc = "" +
 	"\tdiff_hunk\x18\x05 \x01(\v2\x1d.warp.multi_agent.v1.DiffHunkB\x02\x18\x01H\x00R\bdiffHunk\x129\n" +
 	"\bdiff_set\x18\x06 \x01(\v2\x1c.warp.multi_agent.v1.DiffSetH\x00R\adiffSet\x12Q\n" +
 	"\x10document_content\x18\a \x01(\v2$.warp.multi_agent.v1.DocumentContentH\x00R\x0fdocumentContent\x12X\n" +
-	"\x13file_path_reference\x18\b \x01(\v2&.warp.multi_agent.v1.FilePathReferenceH\x00R\x11filePathReferenceB\a\n" +
+	"\x13file_path_reference\x18\b \x01(\v2&.warp.multi_agent.v1.FilePathReferenceH\x00R\x11filePathReference\x12J\n" +
+	"\n" +
+	"visibility\x18\t \x01(\x0e2*.warp.multi_agent.v1.Attachment.VisibilityR\n" +
+	"visibility\"T\n" +
+	"\n" +
+	"Visibility\x12\x1a\n" +
+	"\x16VISIBILITY_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fVISIBILITY_USER\x10\x01\x12\x15\n" +
+	"\x11VISIBILITY_SYSTEM\x10\x02B\a\n" +
 	"\x05value\"\xb2\x02\n" +
 	"\x14ExecutedShellCommand\x12\x1e\n" +
 	"\acommand\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\acommand\x12\x1c\n" +
@@ -3383,62 +3473,64 @@ const file_attachment_proto_rawDesc = "" +
 	"\x11FilePathReference\x12!\n" +
 	"\tfile_path\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\bfilePathBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
-var file_attachment_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_attachment_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_attachment_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_attachment_proto_goTypes = []any{
-	(LongRunningShellCommandActivity_ProcessActivity_State)(0), // 0: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
-	(*Attachment)(nil),                      // 1: warp.multi_agent.v1.Attachment
-	(*ExecutedShellCommand)(nil),            // 2: warp.multi_agent.v1.ExecutedShellCommand
-	(*RunningShellCommand)(nil),             // 3: warp.multi_agent.v1.RunningShellCommand
-	(*LongRunningShellCommandSnapshot)(nil), // 4: warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	(*LongRunningShellCommandActivity)(nil), // 5: warp.multi_agent.v1.LongRunningShellCommandActivity
-	(*DriveObject)(nil),                     // 6: warp.multi_agent.v1.DriveObject
-	(*Workflow)(nil),                        // 7: warp.multi_agent.v1.Workflow
-	(*Notebook)(nil),                        // 8: warp.multi_agent.v1.Notebook
-	(*GenericStringObject)(nil),             // 9: warp.multi_agent.v1.GenericStringObject
-	(*DiffHunk)(nil),                        // 10: warp.multi_agent.v1.DiffHunk
-	(*CurrentRef)(nil),                      // 11: warp.multi_agent.v1.CurrentRef
-	(*BaseRef)(nil),                         // 12: warp.multi_agent.v1.BaseRef
-	(*DiffSet)(nil),                         // 13: warp.multi_agent.v1.DiffSet
-	(*FilePathReference)(nil),               // 14: warp.multi_agent.v1.FilePathReference
-	(*LongRunningShellCommandActivity_ProcessActivity)(nil), // 15: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
-	(*DiffSet_DiffHunk)(nil),                                // 16: warp.multi_agent.v1.DiffSet.DiffHunk
-	(*DocumentContent)(nil),                                 // 17: warp.multi_agent.v1.DocumentContent
-	(*timestamppb.Timestamp)(nil),                           // 18: google.protobuf.Timestamp
-	(*durationpb.Duration)(nil),                             // 19: google.protobuf.Duration
-	(*FileContentLineRange)(nil),                            // 20: warp.multi_agent.v1.FileContentLineRange
-	(*emptypb.Empty)(nil),                                   // 21: google.protobuf.Empty
+	(Attachment_Visibility)(0),                                 // 0: warp.multi_agent.v1.Attachment.Visibility
+	(LongRunningShellCommandActivity_ProcessActivity_State)(0), // 1: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
+	(*Attachment)(nil),                                         // 2: warp.multi_agent.v1.Attachment
+	(*ExecutedShellCommand)(nil),                               // 3: warp.multi_agent.v1.ExecutedShellCommand
+	(*RunningShellCommand)(nil),                                // 4: warp.multi_agent.v1.RunningShellCommand
+	(*LongRunningShellCommandSnapshot)(nil),                    // 5: warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	(*LongRunningShellCommandActivity)(nil),                    // 6: warp.multi_agent.v1.LongRunningShellCommandActivity
+	(*DriveObject)(nil),                                        // 7: warp.multi_agent.v1.DriveObject
+	(*Workflow)(nil),                                           // 8: warp.multi_agent.v1.Workflow
+	(*Notebook)(nil),                                           // 9: warp.multi_agent.v1.Notebook
+	(*GenericStringObject)(nil),                                // 10: warp.multi_agent.v1.GenericStringObject
+	(*DiffHunk)(nil),                                           // 11: warp.multi_agent.v1.DiffHunk
+	(*CurrentRef)(nil),                                         // 12: warp.multi_agent.v1.CurrentRef
+	(*BaseRef)(nil),                                            // 13: warp.multi_agent.v1.BaseRef
+	(*DiffSet)(nil),                                            // 14: warp.multi_agent.v1.DiffSet
+	(*FilePathReference)(nil),                                  // 15: warp.multi_agent.v1.FilePathReference
+	(*LongRunningShellCommandActivity_ProcessActivity)(nil),    // 16: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
+	(*DiffSet_DiffHunk)(nil),                                   // 17: warp.multi_agent.v1.DiffSet.DiffHunk
+	(*DocumentContent)(nil),                                    // 18: warp.multi_agent.v1.DocumentContent
+	(*timestamppb.Timestamp)(nil),                              // 19: google.protobuf.Timestamp
+	(*durationpb.Duration)(nil),                                // 20: google.protobuf.Duration
+	(*FileContentLineRange)(nil),                               // 21: warp.multi_agent.v1.FileContentLineRange
+	(*emptypb.Empty)(nil),                                      // 22: google.protobuf.Empty
 }
 var file_attachment_proto_depIdxs = []int32{
-	2,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
-	3,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
-	6,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
-	10, // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
-	13, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
-	17, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
-	14, // 6: warp.multi_agent.v1.Attachment.file_path_reference:type_name -> warp.multi_agent.v1.FilePathReference
-	18, // 7: warp.multi_agent.v1.ExecutedShellCommand.started_ts:type_name -> google.protobuf.Timestamp
-	18, // 8: warp.multi_agent.v1.ExecutedShellCommand.finished_ts:type_name -> google.protobuf.Timestamp
-	4,  // 9: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
-	5,  // 10: warp.multi_agent.v1.LongRunningShellCommandSnapshot.activity:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity
-	19, // 11: warp.multi_agent.v1.LongRunningShellCommandActivity.since_last_activity:type_name -> google.protobuf.Duration
-	15, // 12: warp.multi_agent.v1.LongRunningShellCommandActivity.process:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
-	7,  // 13: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
-	8,  // 14: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
-	9,  // 15: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
-	20, // 16: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	21, // 17: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
-	21, // 18: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
-	16, // 19: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
-	11, // 20: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
-	12, // 21: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
-	0,  // 22: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.state:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
-	20, // 23: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	3,  // 0: warp.multi_agent.v1.Attachment.executed_shell_command:type_name -> warp.multi_agent.v1.ExecutedShellCommand
+	4,  // 1: warp.multi_agent.v1.Attachment.running_shell_command:type_name -> warp.multi_agent.v1.RunningShellCommand
+	7,  // 2: warp.multi_agent.v1.Attachment.drive_object:type_name -> warp.multi_agent.v1.DriveObject
+	11, // 3: warp.multi_agent.v1.Attachment.diff_hunk:type_name -> warp.multi_agent.v1.DiffHunk
+	14, // 4: warp.multi_agent.v1.Attachment.diff_set:type_name -> warp.multi_agent.v1.DiffSet
+	18, // 5: warp.multi_agent.v1.Attachment.document_content:type_name -> warp.multi_agent.v1.DocumentContent
+	15, // 6: warp.multi_agent.v1.Attachment.file_path_reference:type_name -> warp.multi_agent.v1.FilePathReference
+	0,  // 7: warp.multi_agent.v1.Attachment.visibility:type_name -> warp.multi_agent.v1.Attachment.Visibility
+	19, // 8: warp.multi_agent.v1.ExecutedShellCommand.started_ts:type_name -> google.protobuf.Timestamp
+	19, // 9: warp.multi_agent.v1.ExecutedShellCommand.finished_ts:type_name -> google.protobuf.Timestamp
+	5,  // 10: warp.multi_agent.v1.RunningShellCommand.snapshot:type_name -> warp.multi_agent.v1.LongRunningShellCommandSnapshot
+	6,  // 11: warp.multi_agent.v1.LongRunningShellCommandSnapshot.activity:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity
+	20, // 12: warp.multi_agent.v1.LongRunningShellCommandActivity.since_last_activity:type_name -> google.protobuf.Duration
+	16, // 13: warp.multi_agent.v1.LongRunningShellCommandActivity.process:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity
+	8,  // 14: warp.multi_agent.v1.DriveObject.workflow:type_name -> warp.multi_agent.v1.Workflow
+	9,  // 15: warp.multi_agent.v1.DriveObject.notebook:type_name -> warp.multi_agent.v1.Notebook
+	10, // 16: warp.multi_agent.v1.DriveObject.generic_string_object:type_name -> warp.multi_agent.v1.GenericStringObject
+	21, // 17: warp.multi_agent.v1.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	22, // 18: warp.multi_agent.v1.DiffHunk.uncommitted_changes:type_name -> google.protobuf.Empty
+	22, // 19: warp.multi_agent.v1.BaseRef.uncommitted_changes:type_name -> google.protobuf.Empty
+	17, // 20: warp.multi_agent.v1.DiffSet.hunks:type_name -> warp.multi_agent.v1.DiffSet.DiffHunk
+	12, // 21: warp.multi_agent.v1.DiffSet.curr_ref:type_name -> warp.multi_agent.v1.CurrentRef
+	13, // 22: warp.multi_agent.v1.DiffSet.base_ref:type_name -> warp.multi_agent.v1.BaseRef
+	1,  // 23: warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.state:type_name -> warp.multi_agent.v1.LongRunningShellCommandActivity.ProcessActivity.State
+	21, // 24: warp.multi_agent.v1.DiffSet.DiffHunk.line_range:type_name -> warp.multi_agent.v1.FileContentLineRange
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_attachment_proto_init() }
@@ -3485,7 +3577,7 @@ func file_attachment_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_attachment_proto_rawDesc), len(file_attachment_proto_rawDesc)),
-			NumEnums:      1,
+			NumEnums:      2,
 			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
