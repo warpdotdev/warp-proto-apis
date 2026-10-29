@@ -379,7 +379,7 @@ type OrchestrationConfig struct {
 	xxx_hidden_ModelId       *string                             `protobuf:"bytes,1,opt,name=model_id,json=modelId"`
 	xxx_hidden_Harness       *Harness                            `protobuf:"bytes,2,opt,name=harness"`
 	xxx_hidden_ExecutionMode isOrchestrationConfig_ExecutionMode `protobuf_oneof:"execution_mode"`
-	xxx_hidden_AgentModels   *[]*OrchestrationConfig_AgentModel  `protobuf:"bytes,5,rep,name=agent_models,json=agentModels"`
+	xxx_hidden_AgentConfigs  *[]*OrchestrationConfig_AgentConfig `protobuf:"bytes,5,rep,name=agent_configs,json=agentConfigs"`
 	XXX_raceDetectHookData   protoimpl.RaceDetectHookData
 	XXX_presence             [1]uint32
 	unknownFields            protoimpl.UnknownFields
@@ -446,10 +446,10 @@ func (x *OrchestrationConfig) GetRemote() *OrchestrationConfig_Remote {
 	return nil
 }
 
-func (x *OrchestrationConfig) GetAgentModels() []*OrchestrationConfig_AgentModel {
+func (x *OrchestrationConfig) GetAgentConfigs() []*OrchestrationConfig_AgentConfig {
 	if x != nil {
-		if x.xxx_hidden_AgentModels != nil {
-			return *x.xxx_hidden_AgentModels
+		if x.xxx_hidden_AgentConfigs != nil {
+			return *x.xxx_hidden_AgentConfigs
 		}
 	}
 	return nil
@@ -480,8 +480,8 @@ func (x *OrchestrationConfig) SetRemote(v *OrchestrationConfig_Remote) {
 	x.xxx_hidden_ExecutionMode = &orchestrationConfig_Remote_{v}
 }
 
-func (x *OrchestrationConfig) SetAgentModels(v []*OrchestrationConfig_AgentModel) {
-	x.xxx_hidden_AgentModels = &v
+func (x *OrchestrationConfig) SetAgentConfigs(v []*OrchestrationConfig_AgentConfig) {
+	x.xxx_hidden_AgentConfigs = &v
 }
 
 func (x *OrchestrationConfig) HasModelId() bool {
@@ -567,15 +567,18 @@ func (x *OrchestrationConfig) WhichExecutionMode() case_OrchestrationConfig_Exec
 type OrchestrationConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Batch model default for children without an explicit model override.
 	ModelId *string
 	Harness *Harness
 	// Fields of oneof xxx_hidden_ExecutionMode:
 	Local  *OrchestrationConfig_Local
 	Remote *OrchestrationConfig_Remote
 	// -- end of xxx_hidden_ExecutionMode
-	// A nonempty roster binds approval to these child names. Empty preserves
-	// batch-only approval for clients that predate child model configuration.
-	AgentModels []*OrchestrationConfig_AgentModel
+	// Complete approved child roster, including children inheriting the batch model.
+	// Membership is order-independent; duplicate, added, removed, or renamed slots
+	// prevent roster-based approval reuse.
+	// Empty preserves legacy batch-only approval.
+	AgentConfigs []*OrchestrationConfig_AgentConfig
 }
 
 func (b0 OrchestrationConfig_builder) Build() *OrchestrationConfig {
@@ -593,7 +596,7 @@ func (b0 OrchestrationConfig_builder) Build() *OrchestrationConfig {
 	if b.Remote != nil {
 		x.xxx_hidden_ExecutionMode = &orchestrationConfig_Remote_{b.Remote}
 	}
-	x.xxx_hidden_AgentModels = &b.AgentModels
+	x.xxx_hidden_AgentConfigs = &b.AgentConfigs
 	return m0
 }
 
@@ -1499,7 +1502,7 @@ func (b0 OrchestrationConfig_Remote_builder) Build() *OrchestrationConfig_Remote
 	return m0
 }
 
-type OrchestrationConfig_AgentModel struct {
+type OrchestrationConfig_AgentConfig struct {
 	state                  protoimpl.MessageState `protogen:"opaque.v1"`
 	xxx_hidden_Name        *string                `protobuf:"bytes,1,opt,name=name"`
 	xxx_hidden_ModelId     *string                `protobuf:"bytes,2,opt,name=model_id,json=modelId"`
@@ -1509,20 +1512,20 @@ type OrchestrationConfig_AgentModel struct {
 	sizeCache              protoimpl.SizeCache
 }
 
-func (x *OrchestrationConfig_AgentModel) Reset() {
-	*x = OrchestrationConfig_AgentModel{}
+func (x *OrchestrationConfig_AgentConfig) Reset() {
+	*x = OrchestrationConfig_AgentConfig{}
 	mi := &file_orchestration_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *OrchestrationConfig_AgentModel) String() string {
+func (x *OrchestrationConfig_AgentConfig) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*OrchestrationConfig_AgentModel) ProtoMessage() {}
+func (*OrchestrationConfig_AgentConfig) ProtoMessage() {}
 
-func (x *OrchestrationConfig_AgentModel) ProtoReflect() protoreflect.Message {
+func (x *OrchestrationConfig_AgentConfig) ProtoReflect() protoreflect.Message {
 	mi := &file_orchestration_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -1534,7 +1537,7 @@ func (x *OrchestrationConfig_AgentModel) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-func (x *OrchestrationConfig_AgentModel) GetName() string {
+func (x *OrchestrationConfig_AgentConfig) GetName() string {
 	if x != nil {
 		if x.xxx_hidden_Name != nil {
 			return *x.xxx_hidden_Name
@@ -1544,7 +1547,7 @@ func (x *OrchestrationConfig_AgentModel) GetName() string {
 	return ""
 }
 
-func (x *OrchestrationConfig_AgentModel) GetModelId() string {
+func (x *OrchestrationConfig_AgentConfig) GetModelId() string {
 	if x != nil {
 		if x.xxx_hidden_ModelId != nil {
 			return *x.xxx_hidden_ModelId
@@ -1554,50 +1557,52 @@ func (x *OrchestrationConfig_AgentModel) GetModelId() string {
 	return ""
 }
 
-func (x *OrchestrationConfig_AgentModel) SetName(v string) {
+func (x *OrchestrationConfig_AgentConfig) SetName(v string) {
 	x.xxx_hidden_Name = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 2)
 }
 
-func (x *OrchestrationConfig_AgentModel) SetModelId(v string) {
+func (x *OrchestrationConfig_AgentConfig) SetModelId(v string) {
 	x.xxx_hidden_ModelId = &v
 	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 2)
 }
 
-func (x *OrchestrationConfig_AgentModel) HasName() bool {
+func (x *OrchestrationConfig_AgentConfig) HasName() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
-func (x *OrchestrationConfig_AgentModel) HasModelId() bool {
+func (x *OrchestrationConfig_AgentConfig) HasModelId() bool {
 	if x == nil {
 		return false
 	}
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 1)
 }
 
-func (x *OrchestrationConfig_AgentModel) ClearName() {
+func (x *OrchestrationConfig_AgentConfig) ClearName() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Name = nil
 }
 
-func (x *OrchestrationConfig_AgentModel) ClearModelId() {
+func (x *OrchestrationConfig_AgentConfig) ClearModelId() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 1)
 	x.xxx_hidden_ModelId = nil
 }
 
-type OrchestrationConfig_AgentModel_builder struct {
+type OrchestrationConfig_AgentConfig_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
+	// Batch-local key matching run_agents.agent_run_configs[].name after trimming
+	// and ignoring case, not a service-account name or UID.
 	Name *string
 	// Empty inherits the batch model.
 	ModelId *string
 }
 
-func (b0 OrchestrationConfig_AgentModel_builder) Build() *OrchestrationConfig_AgentModel {
-	m0 := &OrchestrationConfig_AgentModel{}
+func (b0 OrchestrationConfig_AgentConfig_builder) Build() *OrchestrationConfig_AgentConfig {
+	m0 := &OrchestrationConfig_AgentConfig{}
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Name != nil {
@@ -1701,7 +1706,7 @@ var File_orchestration_proto protoreflect.FileDescriptor
 
 const file_orchestration_proto_rawDesc = "" +
 	"\n" +
-	"\x13orchestration.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\"\xc0\x03\n" +
+	"\x13orchestration.proto\x12\x13warp.multi_agent.v1\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\"\xc0\x03\n" +
 	"\aHarness\x121\n" +
 	"\x02oz\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.Harness.OzH\x00R\x02oz\x12J\n" +
 	"\vclaude_code\x18\x02 \x01(\v2'.warp.multi_agent.v1.Harness.ClaudeCodeH\x00R\n" +
@@ -1718,22 +1723,21 @@ const file_orchestration_proto_rawDesc = "" +
 	"\x06Gemini\x1a\a\n" +
 	"\x05Codex\x1a\x04\n" +
 	"\x02PiB\t\n" +
-	"\avariant\"\x9a\x04\n" +
+	"\avariant\"\xa4\x04\n" +
 	"\x13OrchestrationConfig\x12\x19\n" +
 	"\bmodel_id\x18\x01 \x01(\tR\amodelId\x126\n" +
 	"\aharness\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.HarnessR\aharness\x12F\n" +
 	"\x05local\x18\x03 \x01(\v2..warp.multi_agent.v1.OrchestrationConfig.LocalH\x00R\x05local\x12I\n" +
-	"\x06remote\x18\x04 \x01(\v2/.warp.multi_agent.v1.OrchestrationConfig.RemoteH\x00R\x06remote\x12V\n" +
-	"\fagent_models\x18\x05 \x03(\v23.warp.multi_agent.v1.OrchestrationConfig.AgentModelR\vagentModels\x1a\a\n" +
+	"\x06remote\x18\x04 \x01(\v2/.warp.multi_agent.v1.OrchestrationConfig.RemoteH\x00R\x06remote\x12Y\n" +
+	"\ragent_configs\x18\x05 \x03(\v24.warp.multi_agent.v1.OrchestrationConfig.AgentConfigR\fagentConfigs\x1a\a\n" +
 	"\x05Local\x1am\n" +
 	"\x06Remote\x12%\n" +
 	"\x0eenvironment_id\x18\x01 \x01(\tR\renvironmentId\x12\x1f\n" +
 	"\vworker_host\x18\x02 \x01(\tR\n" +
 	"workerHost\x12\x1b\n" +
-	"\trunner_id\x18\x03 \x01(\tR\brunnerId\x1a;\n" +
-	"\n" +
-	"AgentModel\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\x12\x19\n" +
+	"\trunner_id\x18\x03 \x01(\tR\brunnerId\x1aB\n" +
+	"\vAgentConfig\x12\x18\n" +
+	"\x04name\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12\x19\n" +
 	"\bmodel_id\x18\x02 \x01(\tR\amodelIdB\x10\n" +
 	"\x0eexecution_mode\"\xe5\x01\n" +
 	"\x13OrchestrationStatus\x12O\n" +
@@ -1767,7 +1771,7 @@ var file_orchestration_proto_goTypes = []any{
 	(*Harness_Pi)(nil),                      // 10: warp.multi_agent.v1.Harness.Pi
 	(*OrchestrationConfig_Local)(nil),       // 11: warp.multi_agent.v1.OrchestrationConfig.Local
 	(*OrchestrationConfig_Remote)(nil),      // 12: warp.multi_agent.v1.OrchestrationConfig.Remote
-	(*OrchestrationConfig_AgentModel)(nil),  // 13: warp.multi_agent.v1.OrchestrationConfig.AgentModel
+	(*OrchestrationConfig_AgentConfig)(nil), // 13: warp.multi_agent.v1.OrchestrationConfig.AgentConfig
 	(*OrchestrationStatus_Approved)(nil),    // 14: warp.multi_agent.v1.OrchestrationStatus.Approved
 	(*OrchestrationStatus_Disapproved)(nil), // 15: warp.multi_agent.v1.OrchestrationStatus.Disapproved
 }
@@ -1781,7 +1785,7 @@ var file_orchestration_proto_depIdxs = []int32{
 	0,  // 6: warp.multi_agent.v1.OrchestrationConfig.harness:type_name -> warp.multi_agent.v1.Harness
 	11, // 7: warp.multi_agent.v1.OrchestrationConfig.local:type_name -> warp.multi_agent.v1.OrchestrationConfig.Local
 	12, // 8: warp.multi_agent.v1.OrchestrationConfig.remote:type_name -> warp.multi_agent.v1.OrchestrationConfig.Remote
-	13, // 9: warp.multi_agent.v1.OrchestrationConfig.agent_models:type_name -> warp.multi_agent.v1.OrchestrationConfig.AgentModel
+	13, // 9: warp.multi_agent.v1.OrchestrationConfig.agent_configs:type_name -> warp.multi_agent.v1.OrchestrationConfig.AgentConfig
 	14, // 10: warp.multi_agent.v1.OrchestrationStatus.approved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Approved
 	15, // 11: warp.multi_agent.v1.OrchestrationStatus.disapproved:type_name -> warp.multi_agent.v1.OrchestrationStatus.Disapproved
 	1,  // 12: warp.multi_agent.v1.OrchestrationConfigUpdate.config:type_name -> warp.multi_agent.v1.OrchestrationConfig
@@ -1800,6 +1804,7 @@ func file_orchestration_proto_init() {
 	if File_orchestration_proto != nil {
 		return
 	}
+	file_options_proto_init()
 	file_orchestration_proto_msgTypes[0].OneofWrappers = []any{
 		(*harness_Oz_)(nil),
 		(*harness_ClaudeCode_)(nil),

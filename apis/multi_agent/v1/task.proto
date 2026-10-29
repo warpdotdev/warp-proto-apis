@@ -2140,7 +2140,7 @@ enum RiskCategory {
 }
 
 // A client tool call to start a batch of child agents that share run-wide
-// configuration (model, harness, execution mode).
+// configuration (harness and execution mode), with optional per-child models.
 message RunAgents {
   message Local {}
   message Remote {
@@ -2188,6 +2188,7 @@ message RunAgents {
   string summary = 1 [ (sensitive) = true ];
   string base_prompt = 2 [ (sensitive) = true ];
   repeated SkillRef skills = 3;
+  // Batch model default for children without an explicit model override.
   string model_id = 4;
   Harness harness = 5;
   oneof execution_mode {

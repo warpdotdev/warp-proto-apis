@@ -10398,7 +10398,7 @@ func (*userQueryMode_Plan) isUserQueryMode_Type() {}
 func (*userQueryMode_Orchestrate) isUserQueryMode_Type() {}
 
 // A client tool call to start a batch of child agents that share run-wide
-// configuration (model, harness, execution mode).
+// configuration (harness and execution mode), with optional per-child models.
 type RunAgents struct {
 	state                      protoimpl.MessageState       `protogen:"opaque.v1"`
 	xxx_hidden_Summary         *string                      `protobuf:"bytes,1,opt,name=summary"`
@@ -10705,8 +10705,9 @@ type RunAgents_builder struct {
 	Summary    *string
 	BasePrompt *string
 	Skills     []*SkillRef
-	ModelId    *string
-	Harness    *Harness
+	// Batch model default for children without an explicit model override.
+	ModelId *string
+	Harness *Harness
 	// Fields of oneof xxx_hidden_ExecutionMode:
 	Local  *RunAgents_Local
 	Remote *RunAgents_Remote
