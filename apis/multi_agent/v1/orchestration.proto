@@ -42,6 +42,15 @@ message OrchestrationConfig {
     Local local = 3;
     Remote remote = 4;
   }
+  // A nonempty roster binds approval to these child names. Empty preserves
+  // batch-only approval for clients that predate child model configuration.
+  repeated AgentModel agent_models = 5;
+
+  message AgentModel {
+    string name = 1;
+    // Empty inherits the batch model.
+    string model_id = 2;
+  }
 }
 
 // User's approval status for orchestration on a plan.
