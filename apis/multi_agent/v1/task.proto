@@ -108,6 +108,10 @@ message ChargedUsage {
 
   // Platform usage charged, in credits
   float platform_usage_in_credits = 6;
+
+  // Token usage funded by a connected Claude Platform organization. Warp token
+  // costs are zero; Anthropic's actual price is not reported.
+  map<string, InferenceUsage> claude_platform_inference_usage = 7;
 }
 
 
