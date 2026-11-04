@@ -131,6 +131,9 @@ message ResponseEvent {
       // The usage costs charged to the user so far in the conversation,
       // summed across every request in the conversation.
       RequestCharges total_charges = 12;
+
+      // Token usage funded by a connected Claude Platform organization.
+      map<string, ModelTokenUsage> claude_platform_token_usage = 13;
     }
 
     // A single portion of the context window, described by its kind and an

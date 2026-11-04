@@ -1883,6 +1883,7 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata struct {
 	xxx_hidden_CustomEndpointTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,9,rep,name=custom_endpoint_token_usage,json=customEndpointTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	xxx_hidden_ContextWindowSegments    *[]*ResponseEvent_StreamFinished_ContextWindowSegment    `protobuf:"bytes,11,rep,name=context_window_segments,json=contextWindowSegments"`
 	xxx_hidden_TotalCharges             *RequestCharges                                          `protobuf:"bytes,12,opt,name=total_charges,json=totalCharges"`
+	xxx_hidden_ClaudePlatformTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage `protobuf:"bytes,13,rep,name=claude_platform_token_usage,json=claudePlatformTokenUsage" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	XXX_raceDetectHookData              protoimpl.RaceDetectHookData
 	XXX_presence                        [1]uint32
 	unknownFields                       protoimpl.UnknownFields
@@ -2007,24 +2008,31 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetTotalCharges
 	return nil
 }
 
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) GetClaudePlatformTokenUsage() map[string]*ResponseEvent_StreamFinished_ModelTokenUsage {
+	if x != nil {
+		return x.xxx_hidden_ClaudePlatformTokenUsage
+	}
+	return nil
+}
+
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindowUsage(v float32) {
 	x.xxx_hidden_ContextWindowUsage = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 12)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 13)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTotalInputTokens(v uint32) {
 	x.xxx_hidden_TotalInputTokens = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 12)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 1, 13)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetSummarized(v bool) {
 	x.xxx_hidden_Summarized = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 12)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 13)
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetCreditsSpent(v float32) {
 	x.xxx_hidden_CreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 12)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 13)
 }
 
 // Deprecated: Marked as deprecated in response.proto.
@@ -2049,7 +2057,7 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetByokTokenUsa
 // Deprecated: Marked as deprecated in response.proto.
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetPlatformCreditsSpent(v float32) {
 	x.xxx_hidden_PlatformCreditsSpent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 12)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 13)
 }
 
 // Deprecated: Marked as deprecated in response.proto.
@@ -2063,6 +2071,10 @@ func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetContextWindo
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetTotalCharges(v *RequestCharges) {
 	x.xxx_hidden_TotalCharges = v
+}
+
+func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) SetClaudePlatformTokenUsage(v map[string]*ResponseEvent_StreamFinished_ModelTokenUsage) {
+	x.xxx_hidden_ClaudePlatformTokenUsage = v
 }
 
 func (x *ResponseEvent_StreamFinished_ConversationUsageMetadata) HasContextWindowUsage() bool {
@@ -2194,6 +2206,8 @@ type ResponseEvent_StreamFinished_ConversationUsageMetadata_builder struct {
 	// The usage costs charged to the user so far in the conversation,
 	// summed across every request in the conversation.
 	TotalCharges *RequestCharges
+	// Token usage funded by a connected Claude Platform organization.
+	ClaudePlatformTokenUsage map[string]*ResponseEvent_StreamFinished_ModelTokenUsage
 }
 
 func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build() *ResponseEvent_StreamFinished_ConversationUsageMetadata {
@@ -2201,19 +2215,19 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.ContextWindowUsage != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 12)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 13)
 		x.xxx_hidden_ContextWindowUsage = *b.ContextWindowUsage
 	}
 	if b.TotalInputTokens != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 12)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 1, 13)
 		x.xxx_hidden_TotalInputTokens = *b.TotalInputTokens
 	}
 	if b.Summarized != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 12)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 13)
 		x.xxx_hidden_Summarized = *b.Summarized
 	}
 	if b.CreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 12)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 13)
 		x.xxx_hidden_CreditsSpent = *b.CreditsSpent
 	}
 	x.xxx_hidden_TokenUsage = &b.TokenUsage
@@ -2221,12 +2235,13 @@ func (b0 ResponseEvent_StreamFinished_ConversationUsageMetadata_builder) Build()
 	x.xxx_hidden_WarpTokenUsage = b.WarpTokenUsage
 	x.xxx_hidden_ByokTokenUsage = b.ByokTokenUsage
 	if b.PlatformCreditsSpent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 12)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 13)
 		x.xxx_hidden_PlatformCreditsSpent = *b.PlatformCreditsSpent
 	}
 	x.xxx_hidden_CustomEndpointTokenUsage = b.CustomEndpointTokenUsage
 	x.xxx_hidden_ContextWindowSegments = &b.ContextWindowSegments
 	x.xxx_hidden_TotalCharges = b.TotalCharges
+	x.xxx_hidden_ClaudePlatformTokenUsage = b.ClaudePlatformTokenUsage
 	return m0
 }
 
@@ -4179,7 +4194,7 @@ type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action struct {
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) Reset() {
 	*x = ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action{}
-	mi := &file_response_proto_msgTypes[27]
+	mi := &file_response_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4191,7 +4206,7 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) String() 
 func (*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[27]
+	mi := &file_response_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4430,7 +4445,7 @@ func (b0 ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_builder) B
 type case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind protoreflect.FieldNumber
 
 func (x case_ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Kind) String() string {
-	md := file_response_proto_msgTypes[27].Descriptor()
+	md := file_response_proto_msgTypes[28].Descriptor()
 	if x == 0 {
 		return "not set"
 	}
@@ -4479,7 +4494,7 @@ type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry struct {
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry) Reset() {
 	*x = ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry{}
-	mi := &file_response_proto_msgTypes[28]
+	mi := &file_response_proto_msgTypes[29]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4491,7 +4506,7 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry) Str
 func (*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[28]
+	mi := &file_response_proto_msgTypes[29]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4526,7 +4541,7 @@ type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWa
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits) Reset() {
 	*x = ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits{}
-	mi := &file_response_proto_msgTypes[29]
+	mi := &file_response_proto_msgTypes[30]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4539,7 +4554,7 @@ func (*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWith
 }
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[29]
+	mi := &file_response_proto_msgTypes[30]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4575,7 +4590,7 @@ type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl struct
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl) Reset() {
 	*x = ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl{}
-	mi := &file_response_proto_msgTypes[30]
+	mi := &file_response_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4587,7 +4602,7 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl) S
 func (*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[30]
+	mi := &file_response_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4655,7 +4670,7 @@ type ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText struc
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) Reset() {
 	*x = ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText{}
-	mi := &file_response_proto_msgTypes[31]
+	mi := &file_response_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4667,7 +4682,7 @@ func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) 
 func (*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) ProtoMessage() {}
 
 func (x *ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[31]
+	mi := &file_response_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4732,7 +4747,7 @@ type ClientAction_CreateTask struct {
 
 func (x *ClientAction_CreateTask) Reset() {
 	*x = ClientAction_CreateTask{}
-	mi := &file_response_proto_msgTypes[32]
+	mi := &file_response_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4744,7 +4759,7 @@ func (x *ClientAction_CreateTask) String() string {
 func (*ClientAction_CreateTask) ProtoMessage() {}
 
 func (x *ClientAction_CreateTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[32]
+	mi := &file_response_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4803,7 +4818,7 @@ type ClientAction_UpdateTaskServerData struct {
 
 func (x *ClientAction_UpdateTaskServerData) Reset() {
 	*x = ClientAction_UpdateTaskServerData{}
-	mi := &file_response_proto_msgTypes[33]
+	mi := &file_response_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4815,7 +4830,7 @@ func (x *ClientAction_UpdateTaskServerData) String() string {
 func (*ClientAction_UpdateTaskServerData) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskServerData) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[33]
+	mi := &file_response_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4915,7 +4930,7 @@ type ClientAction_UpdateTaskDescription struct {
 
 func (x *ClientAction_UpdateTaskDescription) Reset() {
 	*x = ClientAction_UpdateTaskDescription{}
-	mi := &file_response_proto_msgTypes[34]
+	mi := &file_response_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4927,7 +4942,7 @@ func (x *ClientAction_UpdateTaskDescription) String() string {
 func (*ClientAction_UpdateTaskDescription) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskDescription) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[34]
+	mi := &file_response_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5027,7 +5042,7 @@ type ClientAction_AddMessagesToTask struct {
 
 func (x *ClientAction_AddMessagesToTask) Reset() {
 	*x = ClientAction_AddMessagesToTask{}
-	mi := &file_response_proto_msgTypes[35]
+	mi := &file_response_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5039,7 +5054,7 @@ func (x *ClientAction_AddMessagesToTask) String() string {
 func (*ClientAction_AddMessagesToTask) ProtoMessage() {}
 
 func (x *ClientAction_AddMessagesToTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[35]
+	mi := &file_response_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5123,7 +5138,7 @@ type ClientAction_UpdateTaskMessage struct {
 
 func (x *ClientAction_UpdateTaskMessage) Reset() {
 	*x = ClientAction_UpdateTaskMessage{}
-	mi := &file_response_proto_msgTypes[36]
+	mi := &file_response_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5135,7 +5150,7 @@ func (x *ClientAction_UpdateTaskMessage) String() string {
 func (*ClientAction_UpdateTaskMessage) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskMessage) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[36]
+	mi := &file_response_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5253,7 +5268,7 @@ type ClientAction_AppendToMessageContent struct {
 
 func (x *ClientAction_AppendToMessageContent) Reset() {
 	*x = ClientAction_AppendToMessageContent{}
-	mi := &file_response_proto_msgTypes[37]
+	mi := &file_response_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5265,7 +5280,7 @@ func (x *ClientAction_AppendToMessageContent) String() string {
 func (*ClientAction_AppendToMessageContent) ProtoMessage() {}
 
 func (x *ClientAction_AppendToMessageContent) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[37]
+	mi := &file_response_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5383,7 +5398,7 @@ type ClientAction_UpdateTaskSummary struct {
 
 func (x *ClientAction_UpdateTaskSummary) Reset() {
 	*x = ClientAction_UpdateTaskSummary{}
-	mi := &file_response_proto_msgTypes[38]
+	mi := &file_response_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5395,7 +5410,7 @@ func (x *ClientAction_UpdateTaskSummary) String() string {
 func (*ClientAction_UpdateTaskSummary) ProtoMessage() {}
 
 func (x *ClientAction_UpdateTaskSummary) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[38]
+	mi := &file_response_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5493,7 +5508,7 @@ type ClientAction_BeginTransaction struct {
 
 func (x *ClientAction_BeginTransaction) Reset() {
 	*x = ClientAction_BeginTransaction{}
-	mi := &file_response_proto_msgTypes[39]
+	mi := &file_response_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5505,7 +5520,7 @@ func (x *ClientAction_BeginTransaction) String() string {
 func (*ClientAction_BeginTransaction) ProtoMessage() {}
 
 func (x *ClientAction_BeginTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[39]
+	mi := &file_response_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5537,7 +5552,7 @@ type ClientAction_CommitTransaction struct {
 
 func (x *ClientAction_CommitTransaction) Reset() {
 	*x = ClientAction_CommitTransaction{}
-	mi := &file_response_proto_msgTypes[40]
+	mi := &file_response_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5549,7 +5564,7 @@ func (x *ClientAction_CommitTransaction) String() string {
 func (*ClientAction_CommitTransaction) ProtoMessage() {}
 
 func (x *ClientAction_CommitTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[40]
+	mi := &file_response_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5581,7 +5596,7 @@ type ClientAction_RollbackTransaction struct {
 
 func (x *ClientAction_RollbackTransaction) Reset() {
 	*x = ClientAction_RollbackTransaction{}
-	mi := &file_response_proto_msgTypes[41]
+	mi := &file_response_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5593,7 +5608,7 @@ func (x *ClientAction_RollbackTransaction) String() string {
 func (*ClientAction_RollbackTransaction) ProtoMessage() {}
 
 func (x *ClientAction_RollbackTransaction) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[41]
+	mi := &file_response_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5628,7 +5643,7 @@ type ClientAction_StartNewConversation struct {
 
 func (x *ClientAction_StartNewConversation) Reset() {
 	*x = ClientAction_StartNewConversation{}
-	mi := &file_response_proto_msgTypes[42]
+	mi := &file_response_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5640,7 +5655,7 @@ func (x *ClientAction_StartNewConversation) String() string {
 func (*ClientAction_StartNewConversation) ProtoMessage() {}
 
 func (x *ClientAction_StartNewConversation) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[42]
+	mi := &file_response_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5713,7 +5728,7 @@ type ClientAction_MoveMessagesToNewTask struct {
 
 func (x *ClientAction_MoveMessagesToNewTask) Reset() {
 	*x = ClientAction_MoveMessagesToNewTask{}
-	mi := &file_response_proto_msgTypes[43]
+	mi := &file_response_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5725,7 +5740,7 @@ func (x *ClientAction_MoveMessagesToNewTask) String() string {
 func (*ClientAction_MoveMessagesToNewTask) ProtoMessage() {}
 
 func (x *ClientAction_MoveMessagesToNewTask) ProtoReflect() protoreflect.Message {
-	mi := &file_response_proto_msgTypes[43]
+	mi := &file_response_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5925,7 +5940,7 @@ var File_response_proto protoreflect.FileDescriptor
 const file_response_proto_rawDesc = "" +
 	"\n" +
 	"\x0eresponse.proto\x12\x13warp.multi_agent.v1\x1a google/protobuf/field_mask.proto\x1a!google/protobuf/go_features.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\"\xc49\n" +
+	"task.proto\"\x80<\n" +
 	"\rResponseEvent\x12C\n" +
 	"\x04init\x18\x01 \x01(\v2-.warp.multi_agent.v1.ResponseEvent.StreamInitH\x00R\x04init\x12Y\n" +
 	"\x0eclient_actions\x18\x02 \x01(\v20.warp.multi_agent.v1.ResponseEvent.ClientActionsH\x00R\rclientActions\x12O\n" +
@@ -5937,7 +5952,7 @@ const file_response_proto_rawDesc = "" +
 	"request_id\x18\x02 \x01(\tR\trequestId\x12\x15\n" +
 	"\x06run_id\x18\x03 \x01(\tR\x05runId\x1aL\n" +
 	"\rClientActions\x12;\n" +
-	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xfe5\n" +
+	"\aactions\x18\x01 \x03(\v2!.warp.multi_agent.v1.ClientActionR\aactions\x1a\xba8\n" +
 	"\x0eStreamFinished\x12O\n" +
 	"\x05other\x18\x01 \x01(\v27.warp.multi_agent.v1.ResponseEvent.StreamFinished.OtherH\x00R\x05other\x12L\n" +
 	"\x04done\x18\x02 \x01(\v26.warp.multi_agent.v1.ResponseEvent.StreamFinished.DoneH\x00R\x04done\x12p\n" +
@@ -5955,7 +5970,7 @@ const file_response_proto_rawDesc = "" +
 	"\frequest_cost\x18\n" +
 	" \x01(\v2=.warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCostB\x02\x18\x01R\vrequestCost\x12\x8b\x01\n" +
 	"\x1bconversation_usage_metadata\x18\v \x01(\v2K.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadataR\x19conversationUsageMetadata\x12L\n" +
-	"\x0frequest_charges\x18\r \x01(\v2#.warp.multi_agent.v1.RequestChargesR\x0erequestCharges\x1a\x96\f\n" +
+	"\x0frequest_charges\x18\r \x01(\v2#.warp.multi_agent.v1.RequestChargesR\x0erequestCharges\x1a\xd2\x0e\n" +
 	"\x19ConversationUsageMetadata\x120\n" +
 	"\x14context_window_usage\x18\x01 \x01(\x02R\x12contextWindowUsage\x12,\n" +
 	"\x12total_input_tokens\x18\n" +
@@ -5972,7 +5987,8 @@ const file_response_proto_rawDesc = "" +
 	"\x16platform_credits_spent\x18\b \x01(\x02B\x02\x18\x01R\x14platformCreditsSpent\x12\xac\x01\n" +
 	"\x1bcustom_endpoint_token_usage\x18\t \x03(\v2i.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntryB\x02\x18\x01R\x18customEndpointTokenUsage\x12\x84\x01\n" +
 	"\x17context_window_segments\x18\v \x03(\v2F.warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentB\x04\x88\xb5\x18\x01R\x15contextWindowSegments\x12H\n" +
-	"\rtotal_charges\x18\f \x01(\v2#.warp.multi_agent.v1.RequestChargesR\ftotalCharges\x1a\x84\x01\n" +
+	"\rtotal_charges\x18\f \x01(\v2#.warp.multi_agent.v1.RequestChargesR\ftotalCharges\x12\xa8\x01\n" +
+	"\x1bclaude_platform_token_usage\x18\r \x03(\v2i.warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ClaudePlatformTokenUsageEntryR\x18claudePlatformTokenUsage\x1a\x84\x01\n" +
 	"\x13WarpTokenUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x84\x01\n" +
@@ -5980,6 +5996,9 @@ const file_response_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x8e\x01\n" +
 	"\x1dCustomEndpointTokenUsageEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
+	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\x8e\x01\n" +
+	"\x1dClaudePlatformTokenUsageEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12W\n" +
 	"\x05value\x18\x02 \x01(\v2A.warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsageR\x05value:\x028\x01\x1a\xa6\x01\n" +
 	"\x14ContextWindowSegment\x12m\n" +
@@ -6138,7 +6157,7 @@ const file_response_proto_rawDesc = "" +
 	"\x1eLLM_PROVIDER_GEMINI_ENTERPRISE\x10\aBMZCgithub.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1\x92\x03\x05\xd2>\x02\x10\x03b\beditionsp\xe8\a"
 
 var file_response_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 44)
+var file_response_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
 var file_response_proto_goTypes = []any{
 	(LLMProvider)(0), // 0: warp.multi_agent.v1.LLMProvider
 	(ResponseEvent_StreamFinished_ContextWindowSegmentType)(0), // 1: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentType
@@ -6168,47 +6187,48 @@ var file_response_proto_goTypes = []any{
 	nil, // 25: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry
 	nil, // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
 	nil, // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry
-	nil, // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
-	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action)(nil),                         // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action
-	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry)(nil),                   // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.Retry
-	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits)(nil), // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCredits
-	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl)(nil),                 // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrl
-	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText)(nil),                // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyText
-	(*ClientAction_CreateTask)(nil),                                                              // 34: warp.multi_agent.v1.ClientAction.CreateTask
-	(*ClientAction_UpdateTaskServerData)(nil),                                                    // 35: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	(*ClientAction_UpdateTaskDescription)(nil),                                                   // 36: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	(*ClientAction_AddMessagesToTask)(nil),                                                       // 37: warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	(*ClientAction_UpdateTaskMessage)(nil),                                                       // 38: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	(*ClientAction_AppendToMessageContent)(nil),                                                  // 39: warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	(*ClientAction_UpdateTaskSummary)(nil),                                                       // 40: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	(*ClientAction_BeginTransaction)(nil),                                                        // 41: warp.multi_agent.v1.ClientAction.BeginTransaction
-	(*ClientAction_CommitTransaction)(nil),                                                       // 42: warp.multi_agent.v1.ClientAction.CommitTransaction
-	(*ClientAction_RollbackTransaction)(nil),                                                     // 43: warp.multi_agent.v1.ClientAction.RollbackTransaction
-	(*ClientAction_StartNewConversation)(nil),                                                    // 44: warp.multi_agent.v1.ClientAction.StartNewConversation
-	(*ClientAction_MoveMessagesToNewTask)(nil),                                                   // 45: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
-	(*Suggestions)(nil),           // 46: warp.multi_agent.v1.Suggestions
-	(*RequestCharges)(nil),        // 47: warp.multi_agent.v1.RequestCharges
-	(*Task)(nil),                  // 48: warp.multi_agent.v1.Task
-	(*Message)(nil),               // 49: warp.multi_agent.v1.Message
-	(*fieldmaskpb.FieldMask)(nil), // 50: google.protobuf.FieldMask
+	nil, // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ClaudePlatformTokenUsageEntry
+	nil, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
+	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action)(nil),                         // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action
+	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry)(nil),                   // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.Retry
+	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits)(nil), // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCredits
+	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl)(nil),                 // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrl
+	(*ResponseEvent_StreamFinished_ChatGPTSubscriptionError_Action_CopyText)(nil),                // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyText
+	(*ClientAction_CreateTask)(nil),                                                              // 35: warp.multi_agent.v1.ClientAction.CreateTask
+	(*ClientAction_UpdateTaskServerData)(nil),                                                    // 36: warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	(*ClientAction_UpdateTaskDescription)(nil),                                                   // 37: warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	(*ClientAction_AddMessagesToTask)(nil),                                                       // 38: warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	(*ClientAction_UpdateTaskMessage)(nil),                                                       // 39: warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	(*ClientAction_AppendToMessageContent)(nil),                                                  // 40: warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	(*ClientAction_UpdateTaskSummary)(nil),                                                       // 41: warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	(*ClientAction_BeginTransaction)(nil),                                                        // 42: warp.multi_agent.v1.ClientAction.BeginTransaction
+	(*ClientAction_CommitTransaction)(nil),                                                       // 43: warp.multi_agent.v1.ClientAction.CommitTransaction
+	(*ClientAction_RollbackTransaction)(nil),                                                     // 44: warp.multi_agent.v1.ClientAction.RollbackTransaction
+	(*ClientAction_StartNewConversation)(nil),                                                    // 45: warp.multi_agent.v1.ClientAction.StartNewConversation
+	(*ClientAction_MoveMessagesToNewTask)(nil),                                                   // 46: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
+	(*Suggestions)(nil),           // 47: warp.multi_agent.v1.Suggestions
+	(*RequestCharges)(nil),        // 48: warp.multi_agent.v1.RequestCharges
+	(*Task)(nil),                  // 49: warp.multi_agent.v1.Task
+	(*Message)(nil),               // 50: warp.multi_agent.v1.Message
+	(*fieldmaskpb.FieldMask)(nil), // 51: google.protobuf.FieldMask
 }
 var file_response_proto_depIdxs = []int32{
 	4,  // 0: warp.multi_agent.v1.ResponseEvent.init:type_name -> warp.multi_agent.v1.ResponseEvent.StreamInit
 	5,  // 1: warp.multi_agent.v1.ResponseEvent.client_actions:type_name -> warp.multi_agent.v1.ResponseEvent.ClientActions
 	6,  // 2: warp.multi_agent.v1.ResponseEvent.finished:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished
-	34, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
-	37, // 4: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
-	38, // 5: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
-	39, // 6: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
-	46, // 7: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
-	40, // 8: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
-	36, // 9: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
-	41, // 10: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
-	42, // 11: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
-	43, // 12: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
-	44, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
-	35, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
-	45, // 15: warp.multi_agent.v1.ClientAction.move_messages_to_new_task:type_name -> warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
+	35, // 3: warp.multi_agent.v1.ClientAction.create_task:type_name -> warp.multi_agent.v1.ClientAction.CreateTask
+	38, // 4: warp.multi_agent.v1.ClientAction.add_messages_to_task:type_name -> warp.multi_agent.v1.ClientAction.AddMessagesToTask
+	39, // 5: warp.multi_agent.v1.ClientAction.update_task_message:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskMessage
+	40, // 6: warp.multi_agent.v1.ClientAction.append_to_message_content:type_name -> warp.multi_agent.v1.ClientAction.AppendToMessageContent
+	47, // 7: warp.multi_agent.v1.ClientAction.show_suggestions:type_name -> warp.multi_agent.v1.Suggestions
+	41, // 8: warp.multi_agent.v1.ClientAction.update_task_summary:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskSummary
+	37, // 9: warp.multi_agent.v1.ClientAction.update_task_description:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskDescription
+	42, // 10: warp.multi_agent.v1.ClientAction.begin_transaction:type_name -> warp.multi_agent.v1.ClientAction.BeginTransaction
+	43, // 11: warp.multi_agent.v1.ClientAction.commit_transaction:type_name -> warp.multi_agent.v1.ClientAction.CommitTransaction
+	44, // 12: warp.multi_agent.v1.ClientAction.rollback_transaction:type_name -> warp.multi_agent.v1.ClientAction.RollbackTransaction
+	45, // 13: warp.multi_agent.v1.ClientAction.start_new_conversation:type_name -> warp.multi_agent.v1.ClientAction.StartNewConversation
+	36, // 14: warp.multi_agent.v1.ClientAction.update_task_server_data:type_name -> warp.multi_agent.v1.ClientAction.UpdateTaskServerData
+	46, // 15: warp.multi_agent.v1.ClientAction.move_messages_to_new_task:type_name -> warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask
 	3,  // 16: warp.multi_agent.v1.ResponseEvent.ClientActions.actions:type_name -> warp.multi_agent.v1.ClientAction
 	16, // 17: warp.multi_agent.v1.ResponseEvent.StreamFinished.other:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Other
 	17, // 18: warp.multi_agent.v1.ResponseEvent.StreamFinished.done:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.Done
@@ -6222,51 +6242,53 @@ var file_response_proto_depIdxs = []int32{
 	15, // 26: warp.multi_agent.v1.ResponseEvent.StreamFinished.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.TokenUsage
 	14, // 27: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_cost:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RequestCost
 	7,  // 28: warp.multi_agent.v1.ResponseEvent.StreamFinished.conversation_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata
-	47, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_charges:type_name -> warp.multi_agent.v1.RequestCharges
+	48, // 29: warp.multi_agent.v1.ResponseEvent.StreamFinished.request_charges:type_name -> warp.multi_agent.v1.RequestCharges
 	9,  // 30: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
 	10, // 31: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.tool_usage_metadata:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata
 	25, // 32: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.warp_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry
 	26, // 33: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.byok_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry
 	27, // 34: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.custom_endpoint_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry
 	8,  // 35: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.context_window_segments:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment
-	47, // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.total_charges:type_name -> warp.multi_agent.v1.RequestCharges
-	1,  // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment.segment_type:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentType
-	28, // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.token_usage_by_category:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
-	13, // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStats
-	11, // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_files_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 41: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.search_codebase_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 42: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.grep_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 43: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.file_glob_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	12, // 44: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.apply_file_diff_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
-	11, // 45: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.write_to_long_running_shell_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 46: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_mcp_resource_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 47: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.call_mcp_tool_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 48: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 49: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 50: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_shell_command_output_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	11, // 51: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.use_computer_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
-	0,  // 52: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
-	29, // 53: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.actions:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action
-	9,  // 54: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	9,  // 55: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	9,  // 56: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
-	30, // 57: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.retry:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.Retry
-	31, // 58: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.continue_with_warp_credits:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCredits
-	32, // 59: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.open_url:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrl
-	33, // 60: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.copy_text:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyText
-	48, // 61: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
-	49, // 62: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
-	49, // 63: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
-	50, // 64: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
-	49, // 65: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
-	50, // 66: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
-	48, // 67: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
-	49, // 68: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
-	69, // [69:69] is the sub-list for method output_type
-	69, // [69:69] is the sub-list for method input_type
-	69, // [69:69] is the sub-list for extension type_name
-	69, // [69:69] is the sub-list for extension extendee
-	0,  // [0:69] is the sub-list for field type_name
+	48, // 36: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.total_charges:type_name -> warp.multi_agent.v1.RequestCharges
+	28, // 37: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.claude_platform_token_usage:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ClaudePlatformTokenUsageEntry
+	1,  // 38: warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegment.segment_type:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ContextWindowSegmentType
+	29, // 39: warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.token_usage_by_category:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage.TokenUsageByCategoryEntry
+	13, // 40: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.run_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.RunCommandStats
+	11, // 41: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_files_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 42: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.search_codebase_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 43: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.grep_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 44: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.file_glob_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	12, // 45: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.apply_file_diff_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ApplyFileDiffStats
+	11, // 46: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.write_to_long_running_shell_command_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 47: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_mcp_resource_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 48: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.call_mcp_tool_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 49: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 50: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.suggest_create_plan_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 51: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.read_shell_command_output_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	11, // 52: warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolUsageMetadata.use_computer_stats:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ToolCallStats
+	0,  // 53: warp.multi_agent.v1.ResponseEvent.StreamFinished.InvalidApiKey.provider:type_name -> warp.multi_agent.v1.LLMProvider
+	30, // 54: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.actions:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action
+	9,  // 55: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.WarpTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	9,  // 56: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ByokTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	9,  // 57: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.CustomEndpointTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	9,  // 58: warp.multi_agent.v1.ResponseEvent.StreamFinished.ConversationUsageMetadata.ClaudePlatformTokenUsageEntry.value:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ModelTokenUsage
+	31, // 59: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.retry:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.Retry
+	32, // 60: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.continue_with_warp_credits:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.ContinueWithWarpCredits
+	33, // 61: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.open_url:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.OpenUrl
+	34, // 62: warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.copy_text:type_name -> warp.multi_agent.v1.ResponseEvent.StreamFinished.ChatGPTSubscriptionError.Action.CopyText
+	49, // 63: warp.multi_agent.v1.ClientAction.CreateTask.task:type_name -> warp.multi_agent.v1.Task
+	50, // 64: warp.multi_agent.v1.ClientAction.AddMessagesToTask.messages:type_name -> warp.multi_agent.v1.Message
+	50, // 65: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.message:type_name -> warp.multi_agent.v1.Message
+	51, // 66: warp.multi_agent.v1.ClientAction.UpdateTaskMessage.mask:type_name -> google.protobuf.FieldMask
+	50, // 67: warp.multi_agent.v1.ClientAction.AppendToMessageContent.message:type_name -> warp.multi_agent.v1.Message
+	51, // 68: warp.multi_agent.v1.ClientAction.AppendToMessageContent.mask:type_name -> google.protobuf.FieldMask
+	49, // 69: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.new_task:type_name -> warp.multi_agent.v1.Task
+	50, // 70: warp.multi_agent.v1.ClientAction.MoveMessagesToNewTask.replacement_messages:type_name -> warp.multi_agent.v1.Message
+	71, // [71:71] is the sub-list for method output_type
+	71, // [71:71] is the sub-list for method input_type
+	71, // [71:71] is the sub-list for extension type_name
+	71, // [71:71] is the sub-list for extension extendee
+	0,  // [0:71] is the sub-list for field type_name
 }
 
 func init() { file_response_proto_init() }
@@ -6308,7 +6330,7 @@ func file_response_proto_init() {
 		(*responseEvent_StreamFinished_InvalidApiKey_)(nil),
 		(*responseEvent_StreamFinished_ChatgptSubscriptionError)(nil),
 	}
-	file_response_proto_msgTypes[27].OneofWrappers = []any{
+	file_response_proto_msgTypes[28].OneofWrappers = []any{
 		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_Retry_)(nil),
 		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_ContinueWithWarpCredits_)(nil),
 		(*responseEvent_StreamFinished_ChatGPTSubscriptionError_Action_OpenUrl_)(nil),
@@ -6320,7 +6342,7 @@ func file_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_response_proto_rawDesc), len(file_response_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   44,
+			NumMessages:   45,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
