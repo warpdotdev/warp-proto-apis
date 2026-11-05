@@ -225,6 +225,7 @@ message Request {
         WaitForEventsResult wait_for_events = 35;
         StartRecordingResult start_recording = 36;
         StopRecordingResult stop_recording = 37;
+        CreateGitCommitResult create_git_commit = 38;
       }
     }
 
@@ -541,6 +542,9 @@ message Request {
     // `CopyText` actions. Otherwise, the server includes their text in the
     // error message instead.
     bool supports_chatgpt_subscription_copy_text = 36;
+
+    // The client can create local commits with trusted GitHub turn attribution.
+    bool supports_create_git_commit = 37;
 
     // The model IDs provided in the model config can either be a warp-hosted
     // model ID (e.g. "gemini-2.5-pro") or the `config_key` for a model provided
