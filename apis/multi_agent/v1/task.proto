@@ -585,6 +585,8 @@ message Message {
   message ToolCall {
     reserved 29, 33; // Removed: StartAgent, StartAgentV2
     reserved start_agent, start_agent_v2;
+    reserved 40;
+    reserved create_git_commit;
 
     string tool_call_id = 1;
 
@@ -630,7 +632,6 @@ message Message {
       WaitForEvents wait_for_events = 36;
       StartRecording start_recording = 37;
       StopRecording stop_recording = 38;
-      CreateGitCommit create_git_commit = 40;
     }
 
     // A tool call to fetch a conversation's tasks from the client.
@@ -668,14 +669,6 @@ message Message {
       // Finer-grained classification of command risk. When present, clients
       // should prefer this over is_read_only and is_risky.
       RiskCategory risk_category = 7;
-    }
-
-    // Creates a new local commit from the staged index.
-    message CreateGitCommit {
-      string repository_path = 1 [ (sensitive) = true ];
-      string message = 2 [ (sensitive) = true ];
-      // A full commit SHA, or "unborn" for the first commit.
-      string expected_head = 3;
     }
 
     // A tool call to write bytes to the PTY when a command is running in the
@@ -1259,8 +1252,8 @@ message Message {
 
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
-    reserved 13, 33, 37;
-    reserved refine, start_agent, start_agent_v2;
+    reserved 13, 33, 37, 43;
+    reserved refine, start_agent, start_agent_v2, create_git_commit;
 
     string tool_call_id = 1;
 
@@ -1309,7 +1302,6 @@ message Message {
       WaitForEventsResult wait_for_events = 40;
       StartRecordingResult start_recording = 41;
       StopRecordingResult stop_recording = 42;
-      CreateGitCommitResult create_git_commit = 43;
     }
 
     // Result of a server-side tool call.
@@ -2094,8 +2086,8 @@ message ShellCommandError {
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
 enum ToolType {
-  reserved 26, 30;
-  reserved START_AGENT, START_AGENT_V2;
+  reserved 26, 30, 36;
+  reserved START_AGENT, START_AGENT_V2, CREATE_GIT_COMMIT;
 
   RUN_SHELL_COMMAND = 0;
   SEARCH_CODEBASE = 1;
@@ -2131,7 +2123,6 @@ enum ToolType {
   WAIT_FOR_EVENTS = 33;
   START_RECORDING = 34;
   STOP_RECORDING = 35;
-  CREATE_GIT_COMMIT = 36;
 }
 
 message UserQueryMode {
@@ -2367,18 +2358,6 @@ message UploadFileArtifactResult {
     string mime_type = 2;
     int64 size_bytes = 3;
   }
-
-  message Error { string message = 1 [ (sensitive) = true ]; }
-}
-
-// Result of a local `CreateGitCommit` tool call.
-message CreateGitCommitResult {
-  oneof result {
-    Success success = 1;
-    Error error = 2;
-  }
-
-  message Success { string commit_sha = 1; }
 
   message Error { string message = 1 [ (sensitive) = true ]; }
 }
