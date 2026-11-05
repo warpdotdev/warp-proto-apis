@@ -2644,12 +2644,15 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 }
 
 type Request_MCPContext struct {
-	state                protoimpl.MessageState             `protogen:"opaque.v1"`
-	xxx_hidden_Resources *[]*Request_MCPContext_MCPResource `protobuf:"bytes,1,rep,name=resources"`
-	xxx_hidden_Tools     *[]*Request_MCPContext_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
-	xxx_hidden_Servers   *[]*Request_MCPContext_MCPServer   `protobuf:"bytes,3,rep,name=servers"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state                                protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Resources                 *[]*Request_MCPContext_MCPResource `protobuf:"bytes,1,rep,name=resources"`
+	xxx_hidden_Tools                     *[]*Request_MCPContext_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
+	xxx_hidden_Servers                   *[]*Request_MCPContext_MCPServer   `protobuf:"bytes,3,rep,name=servers"`
+	xxx_hidden_SupportsGithubTurnBinding bool                               `protobuf:"varint,4,opt,name=supports_github_turn_binding,json=supportsGithubTurnBinding"`
+	XXX_raceDetectHookData               protoimpl.RaceDetectHookData
+	XXX_presence                         [1]uint32
+	unknownFields                        protoimpl.UnknownFields
+	sizeCache                            protoimpl.SizeCache
 }
 
 func (x *Request_MCPContext) Reset() {
@@ -2706,6 +2709,13 @@ func (x *Request_MCPContext) GetServers() []*Request_MCPContext_MCPServer {
 	return nil
 }
 
+func (x *Request_MCPContext) GetSupportsGithubTurnBinding() bool {
+	if x != nil {
+		return x.xxx_hidden_SupportsGithubTurnBinding
+	}
+	return false
+}
+
 // Deprecated: Marked as deprecated in request.proto.
 func (x *Request_MCPContext) SetResources(v []*Request_MCPContext_MCPResource) {
 	x.xxx_hidden_Resources = &v
@@ -2718,6 +2728,23 @@ func (x *Request_MCPContext) SetTools(v []*Request_MCPContext_MCPTool) {
 
 func (x *Request_MCPContext) SetServers(v []*Request_MCPContext_MCPServer) {
 	x.xxx_hidden_Servers = &v
+}
+
+func (x *Request_MCPContext) SetSupportsGithubTurnBinding(v bool) {
+	x.xxx_hidden_SupportsGithubTurnBinding = v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
+}
+
+func (x *Request_MCPContext) HasSupportsGithubTurnBinding() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
+}
+
+func (x *Request_MCPContext) ClearSupportsGithubTurnBinding() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
+	x.xxx_hidden_SupportsGithubTurnBinding = false
 }
 
 type Request_MCPContext_builder struct {
@@ -2733,6 +2760,8 @@ type Request_MCPContext_builder struct {
 	// Server-grouped MCP context. Each entry represents a single MCP server
 	// summary.
 	Servers []*Request_MCPContext_MCPServer
+	// The runtime preserves turn references for GitHub calls and child launches.
+	SupportsGithubTurnBinding *bool
 }
 
 func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
@@ -2742,6 +2771,10 @@ func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
 	x.xxx_hidden_Resources = &b.Resources
 	x.xxx_hidden_Tools = &b.Tools
 	x.xxx_hidden_Servers = &b.Servers
+	if b.SupportsGithubTurnBinding != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
+		x.xxx_hidden_SupportsGithubTurnBinding = *b.SupportsGithubTurnBinding
+	}
 	return m0
 }
 
@@ -2754,6 +2787,7 @@ type Request_Input_UserQuery struct {
 	xxx_hidden_Origin                *UserQueryOrigin       `protobuf:"bytes,5,opt,name=origin"`
 	xxx_hidden_Author                *QueryAuthor           `protobuf:"bytes,6,opt,name=author"`
 	xxx_hidden_SourceMessage         *ExternalMessage       `protobuf:"bytes,7,opt,name=source_message,json=sourceMessage"`
+	xxx_hidden_InputUid              *string                `protobuf:"bytes,8,opt,name=input_uid,json=inputUid"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -2839,9 +2873,19 @@ func (x *Request_Input_UserQuery) GetSourceMessage() *ExternalMessage {
 	return nil
 }
 
+func (x *Request_Input_UserQuery) GetInputUid() string {
+	if x != nil {
+		if x.xxx_hidden_InputUid != nil {
+			return *x.xxx_hidden_InputUid
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *Request_Input_UserQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
 }
 
 func (x *Request_Input_UserQuery) SetReferencedAttachments(v map[string]*Attachment) {
@@ -2854,7 +2898,7 @@ func (x *Request_Input_UserQuery) SetMode(v *UserQueryMode) {
 
 func (x *Request_Input_UserQuery) SetIntendedAgent(v AgentType) {
 	x.xxx_hidden_IntendedAgent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 7)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 8)
 }
 
 func (x *Request_Input_UserQuery) SetOrigin(v *UserQueryOrigin) {
@@ -2867,6 +2911,11 @@ func (x *Request_Input_UserQuery) SetAuthor(v *QueryAuthor) {
 
 func (x *Request_Input_UserQuery) SetSourceMessage(v *ExternalMessage) {
 	x.xxx_hidden_SourceMessage = v
+}
+
+func (x *Request_Input_UserQuery) SetInputUid(v string) {
+	x.xxx_hidden_InputUid = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 7, 8)
 }
 
 func (x *Request_Input_UserQuery) HasQuery() bool {
@@ -2911,6 +2960,13 @@ func (x *Request_Input_UserQuery) HasSourceMessage() bool {
 	return x.xxx_hidden_SourceMessage != nil
 }
 
+func (x *Request_Input_UserQuery) HasInputUid() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 7)
+}
+
 func (x *Request_Input_UserQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
@@ -2937,6 +2993,11 @@ func (x *Request_Input_UserQuery) ClearSourceMessage() {
 	x.xxx_hidden_SourceMessage = nil
 }
 
+func (x *Request_Input_UserQuery) ClearInputUid() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 7)
+	x.xxx_hidden_InputUid = nil
+}
+
 type Request_Input_UserQuery_builder struct {
 	_ [0]func() // Prevents comparability and use of unkeyed literals for the builder.
 
@@ -2955,6 +3016,8 @@ type Request_Input_UserQuery_builder struct {
 	Origin        *UserQueryOrigin
 	Author        *QueryAuthor
 	SourceMessage *ExternalMessage
+	// Reference to a server-accepted input; not an authorization claim.
+	InputUid *string
 }
 
 func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
@@ -2962,18 +3025,22 @@ func (b0 Request_Input_UserQuery_builder) Build() *Request_Input_UserQuery {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
 		x.xxx_hidden_Query = b.Query
 	}
 	x.xxx_hidden_ReferencedAttachments = b.ReferencedAttachments
 	x.xxx_hidden_Mode = b.Mode
 	if b.IntendedAgent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 7)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 8)
 		x.xxx_hidden_IntendedAgent = *b.IntendedAgent
 	}
 	x.xxx_hidden_Origin = b.Origin
 	x.xxx_hidden_Author = b.Author
 	x.xxx_hidden_SourceMessage = b.SourceMessage
+	if b.InputUid != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 7, 8)
+		x.xxx_hidden_InputUid = b.InputUid
+	}
 	return m0
 }
 
@@ -10407,7 +10474,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"\u0083\x01\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"\xa0\x84\x01\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10417,7 +10484,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xb8N\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd5N\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -10439,7 +10506,7 @@ const file_request_proto_rawDesc = "" +
 	"\finvoke_skill\x18\x11 \x01(\v2..warp.multi_agent.v1.Request.Input.InvokeSkillH\x00R\vinvokeSkill\x12Q\n" +
 	"\n" +
 	"user_query\x18\x02 \x01(\v2,.warp.multi_agent.v1.Request.Input.UserQueryB\x02\x18\x01H\x00R\tuserQuery\x12a\n" +
-	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\xd6\x04\n" +
+	"\x10tool_call_result\x18\x03 \x01(\v21.warp.multi_agent.v1.Request.Input.ToolCallResultB\x02\x18\x01H\x00R\x0etoolCallResult\x1a\xf3\x04\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12~\n" +
 	"\x16referenced_attachments\x18\x02 \x03(\v2G.warp.multi_agent.v1.Request.Input.UserQuery.ReferencedAttachmentsEntryR\x15referencedAttachments\x126\n" +
@@ -10447,7 +10514,8 @@ const file_request_proto_rawDesc = "" +
 	"\x0eintended_agent\x18\x04 \x01(\x0e2\x1e.warp.multi_agent.v1.AgentTypeR\rintendedAgent\x12<\n" +
 	"\x06origin\x18\x05 \x01(\v2$.warp.multi_agent.v1.UserQueryOriginR\x06origin\x128\n" +
 	"\x06author\x18\x06 \x01(\v2 .warp.multi_agent.v1.QueryAuthorR\x06author\x12K\n" +
-	"\x0esource_message\x18\a \x01(\v2$.warp.multi_agent.v1.ExternalMessageR\rsourceMessage\x1ai\n" +
+	"\x0esource_message\x18\a \x01(\v2$.warp.multi_agent.v1.ExternalMessageR\rsourceMessage\x12\x1b\n" +
+	"\tinput_uid\x18\b \x01(\tR\binputUid\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
 	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xf6\x01\n" +
@@ -10705,12 +10773,13 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"PromptRule\x12\x18\n" +
 	"\x04rule\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04rule\x12\x14\n" +
-	"\x05model\x18\x02 \x01(\tR\x05model\x1a\xca\x06\n" +
+	"\x05model\x18\x02 \x01(\tR\x05model\x1a\x8b\a\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
 	"\x05tools\x18\x02 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolB\x02\x18\x01R\x05tools\x12K\n" +
-	"\aservers\x18\x03 \x03(\v21.warp.multi_agent.v1.Request.MCPContext.MCPServerR\aservers\x1a\x84\x01\n" +
+	"\aservers\x18\x03 \x03(\v21.warp.multi_agent.v1.Request.MCPContext.MCPServerR\aservers\x12?\n" +
+	"\x1csupports_github_turn_binding\x18\x04 \x01(\bR\x19supportsGithubTurnBinding\x1a\x84\x01\n" +
 	"\vMCPResource\x12\x16\n" +
 	"\x03uri\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uri\x12\x18\n" +
 	"\x04name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +

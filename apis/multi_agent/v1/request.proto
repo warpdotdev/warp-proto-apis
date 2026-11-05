@@ -89,6 +89,8 @@ message Request {
       UserQueryOrigin origin = 5;
       QueryAuthor author = 6;
       ExternalMessage source_message = 7;
+      // Reference to a server-accepted input; not an authorization claim.
+      string input_uid = 8;
     }
 
     // Initial query to spawn the CLI (long-running command) subagent on a
@@ -705,6 +707,9 @@ message Request {
     // Server-grouped MCP context. Each entry represents a single MCP server
     // summary.
     repeated MCPServer servers = 3;
+
+    // The runtime preserves turn references for GitHub calls and child launches.
+    bool supports_github_turn_binding = 4;
 
     message MCPResource {
       string uri = 1 [ (sensitive) = true ];
