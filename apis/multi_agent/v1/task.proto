@@ -462,9 +462,6 @@ message Message {
     // Unset for queries typed directly in a Warp client. `query` remains the
     // assembled prompt the agent sees; this holds the raw source.
     ExternalMessage source_message = 8;
-
-    // Reference to a server-accepted input; not an authorization claim.
-    string input_uid = 9;
   }
 
   // System queries represent prompts from the Warp client that were

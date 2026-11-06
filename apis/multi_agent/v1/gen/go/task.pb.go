@@ -14469,7 +14469,6 @@ type Message_UserQuery struct {
 	xxx_hidden_Origin                *UserQueryOrigin       `protobuf:"bytes,6,opt,name=origin"`
 	xxx_hidden_Author                *QueryAuthor           `protobuf:"bytes,7,opt,name=author"`
 	xxx_hidden_SourceMessage         *ExternalMessage       `protobuf:"bytes,8,opt,name=source_message,json=sourceMessage"`
-	xxx_hidden_InputUid              *string                `protobuf:"bytes,9,opt,name=input_uid,json=inputUid"`
 	XXX_raceDetectHookData           protoimpl.RaceDetectHookData
 	XXX_presence                     [1]uint32
 	unknownFields                    protoimpl.UnknownFields
@@ -14562,19 +14561,9 @@ func (x *Message_UserQuery) GetSourceMessage() *ExternalMessage {
 	return nil
 }
 
-func (x *Message_UserQuery) GetInputUid() string {
-	if x != nil {
-		if x.xxx_hidden_InputUid != nil {
-			return *x.xxx_hidden_InputUid
-		}
-		return ""
-	}
-	return ""
-}
-
 func (x *Message_UserQuery) SetQuery(v string) {
 	x.xxx_hidden_Query = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 8)
 }
 
 func (x *Message_UserQuery) SetContext(v *InputContext) {
@@ -14591,7 +14580,7 @@ func (x *Message_UserQuery) SetMode(v *UserQueryMode) {
 
 func (x *Message_UserQuery) SetIntendedAgent(v AgentType) {
 	x.xxx_hidden_IntendedAgent = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 9)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 4, 8)
 }
 
 func (x *Message_UserQuery) SetOrigin(v *UserQueryOrigin) {
@@ -14604,11 +14593,6 @@ func (x *Message_UserQuery) SetAuthor(v *QueryAuthor) {
 
 func (x *Message_UserQuery) SetSourceMessage(v *ExternalMessage) {
 	x.xxx_hidden_SourceMessage = v
-}
-
-func (x *Message_UserQuery) SetInputUid(v string) {
-	x.xxx_hidden_InputUid = &v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 8, 9)
 }
 
 func (x *Message_UserQuery) HasQuery() bool {
@@ -14660,13 +14644,6 @@ func (x *Message_UserQuery) HasSourceMessage() bool {
 	return x.xxx_hidden_SourceMessage != nil
 }
 
-func (x *Message_UserQuery) HasInputUid() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 8)
-}
-
 func (x *Message_UserQuery) ClearQuery() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_Query = nil
@@ -14695,11 +14672,6 @@ func (x *Message_UserQuery) ClearAuthor() {
 
 func (x *Message_UserQuery) ClearSourceMessage() {
 	x.xxx_hidden_SourceMessage = nil
-}
-
-func (x *Message_UserQuery) ClearInputUid() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 8)
-	x.xxx_hidden_InputUid = nil
 }
 
 type Message_UserQuery_builder struct {
@@ -14732,8 +14704,6 @@ type Message_UserQuery_builder struct {
 	// Unset for queries typed directly in a Warp client. `query` remains the
 	// assembled prompt the agent sees; this holds the raw source.
 	SourceMessage *ExternalMessage
-	// Reference to a server-accepted input; not an authorization claim.
-	InputUid *string
 }
 
 func (b0 Message_UserQuery_builder) Build() *Message_UserQuery {
@@ -14741,23 +14711,19 @@ func (b0 Message_UserQuery_builder) Build() *Message_UserQuery {
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.Query != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 8)
 		x.xxx_hidden_Query = b.Query
 	}
 	x.xxx_hidden_Context = b.Context
 	x.xxx_hidden_ReferencedAttachments = b.ReferencedAttachments
 	x.xxx_hidden_Mode = b.Mode
 	if b.IntendedAgent != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 9)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 4, 8)
 		x.xxx_hidden_IntendedAgent = *b.IntendedAgent
 	}
 	x.xxx_hidden_Origin = b.Origin
 	x.xxx_hidden_Author = b.Author
 	x.xxx_hidden_SourceMessage = b.SourceMessage
-	if b.InputUid != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 8, 9)
-		x.xxx_hidden_InputUid = b.InputUid
-	}
 	return m0
 }
 
@@ -41167,7 +41133,7 @@ const file_task_proto_rawDesc = "" +
 	"\x10CommentedDiffset\x129\n" +
 	"\acurrent\x18\x01 \x01(\v2\x1f.warp.multi_agent.v1.CurrentRefR\acurrent\x120\n" +
 	"\x04base\x18\x02 \x01(\v2\x1c.warp.multi_agent.v1.BaseRefR\x04baseB\x10\n" +
-	"\x0ecomment_target\"\xd5\xda\x01\n" +
+	"\x0ecomment_target\"\xb8\xda\x01\n" +
 	"\aMessage\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\atask_id\x18\v \x01(\tR\x06taskId\x12\x1d\n" +
@@ -41251,7 +41217,7 @@ const file_task_proto_rawDesc = "" +
 	"\fConversation\x12'\n" +
 	"\x0fconversation_id\x18\x01 \x01(\tR\x0econversationId\x1a\b\n" +
 	"\x06ManualB\b\n" +
-	"\x06source\x1a\xaa\x05\n" +
+	"\x06source\x1a\x8d\x05\n" +
 	"\tUserQuery\x12\x1a\n" +
 	"\x05query\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x05query\x12;\n" +
 	"\acontext\x18\x02 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12x\n" +
@@ -41260,8 +41226,7 @@ const file_task_proto_rawDesc = "" +
 	"\x0eintended_agent\x18\x05 \x01(\x0e2\x1e.warp.multi_agent.v1.AgentTypeR\rintendedAgent\x12<\n" +
 	"\x06origin\x18\x06 \x01(\v2$.warp.multi_agent.v1.UserQueryOriginR\x06origin\x128\n" +
 	"\x06author\x18\a \x01(\v2 .warp.multi_agent.v1.QueryAuthorR\x06author\x12K\n" +
-	"\x0esource_message\x18\b \x01(\v2$.warp.multi_agent.v1.ExternalMessageR\rsourceMessage\x12\x1b\n" +
-	"\tinput_uid\x18\t \x01(\tR\binputUid\x1ai\n" +
+	"\x0esource_message\x18\b \x01(\v2$.warp.multi_agent.v1.ExternalMessageR\rsourceMessage\x1ai\n" +
 	"\x1aReferencedAttachmentsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x125\n" +
 	"\x05value\x18\x02 \x01(\v2\x1f.warp.multi_agent.v1.AttachmentR\x05value:\x028\x01\x1a\xf9\x06\n" +

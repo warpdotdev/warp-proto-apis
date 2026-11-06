@@ -2983,7 +2983,10 @@ type Request_Input_UserQuery_builder struct {
 	Origin        *UserQueryOrigin
 	Author        *QueryAuthor
 	SourceMessage *ExternalMessage
-	// Reference to a server-accepted input; not an authorization claim.
+	// Identifies one query submission accepted by the server, not its author.
+	// Clients preserve this ID when forwarding an injected query.
+	// The server resolves it against stored input in the authorized run.
+	// This reference is not an authorization claim.
 	InputUid *string
 }
 
