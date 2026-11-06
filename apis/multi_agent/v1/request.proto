@@ -184,8 +184,8 @@ message Request {
 
     // Tool call result
     message ToolCallResult {
-      reserved 10, 28, 32, 38;
-      reserved refine, start_agent, start_agent_v2, create_git_commit;
+      reserved 10, 28, 32;
+      reserved refine, start_agent, start_agent_v2;
 
       string tool_call_id = 1;
 
@@ -396,9 +396,6 @@ message Request {
   }
 
   message Settings {
-    reserved 37;
-    reserved supports_create_git_commit;
-
     ModelConfig model_config = 1;
     bool rules_enabled = 2;
     bool web_context_retrieval_enabled = 3;
@@ -710,9 +707,6 @@ message Request {
     // Server-grouped MCP context. Each entry represents a single MCP server
     // summary.
     repeated MCPServer servers = 3;
-
-    // The runtime preserves turn references for GitHub calls and child launches.
-    bool supports_github_turn_binding = 4;
 
     message MCPResource {
       string uri = 1 [ (sensitive) = true ];

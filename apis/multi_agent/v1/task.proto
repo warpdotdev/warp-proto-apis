@@ -19,7 +19,6 @@ import "todo.proto";
 import "skill.proto";
 import "orchestration.proto";
 import "attribution.proto";
-import "github_turn.proto";
 
 option go_package = "github.com/warpdotdev/warp-proto-apis/apis/multi_agent/v1/gen/go;v1";
 option features.(pb.go).api_level = API_OPAQUE;
@@ -585,13 +584,8 @@ message Message {
   message ToolCall {
     reserved 29, 33; // Removed: StartAgent, StartAgentV2
     reserved start_agent, start_agent_v2;
-    reserved 40;
-    reserved create_git_commit;
 
     string tool_call_id = 1;
-
-    // Captured by the server when it creates the operation.
-    GitHubTurnReference github_turn = 39;
 
     // The specific tool being called
     oneof tool {
@@ -1252,8 +1246,8 @@ message Message {
 
   // Entry in the message log representing the result of a tool call.
   message ToolCallResult {
-    reserved 13, 33, 37, 43;
-    reserved refine, start_agent, start_agent_v2, create_git_commit;
+    reserved 13, 33, 37;
+    reserved refine, start_agent, start_agent_v2;
 
     string tool_call_id = 1;
 
@@ -2086,8 +2080,8 @@ message ShellCommandError {
 // Note that the `Server` tool is omitted from this list as an exception;
 // it's not a tool call understood by the client.
 enum ToolType {
-  reserved 26, 30, 36;
-  reserved START_AGENT, START_AGENT_V2, CREATE_GIT_COMMIT;
+  reserved 26, 30;
+  reserved START_AGENT, START_AGENT_V2;
 
   RUN_SHELL_COMMAND = 0;
   SEARCH_CODEBASE = 1;

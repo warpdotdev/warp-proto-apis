@@ -2644,15 +2644,12 @@ func (b0 Request_Settings_builder) Build() *Request_Settings {
 }
 
 type Request_MCPContext struct {
-	state                                protoimpl.MessageState             `protogen:"opaque.v1"`
-	xxx_hidden_Resources                 *[]*Request_MCPContext_MCPResource `protobuf:"bytes,1,rep,name=resources"`
-	xxx_hidden_Tools                     *[]*Request_MCPContext_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
-	xxx_hidden_Servers                   *[]*Request_MCPContext_MCPServer   `protobuf:"bytes,3,rep,name=servers"`
-	xxx_hidden_SupportsGithubTurnBinding bool                               `protobuf:"varint,4,opt,name=supports_github_turn_binding,json=supportsGithubTurnBinding"`
-	XXX_raceDetectHookData               protoimpl.RaceDetectHookData
-	XXX_presence                         [1]uint32
-	unknownFields                        protoimpl.UnknownFields
-	sizeCache                            protoimpl.SizeCache
+	state                protoimpl.MessageState             `protogen:"opaque.v1"`
+	xxx_hidden_Resources *[]*Request_MCPContext_MCPResource `protobuf:"bytes,1,rep,name=resources"`
+	xxx_hidden_Tools     *[]*Request_MCPContext_MCPTool     `protobuf:"bytes,2,rep,name=tools"`
+	xxx_hidden_Servers   *[]*Request_MCPContext_MCPServer   `protobuf:"bytes,3,rep,name=servers"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Request_MCPContext) Reset() {
@@ -2709,13 +2706,6 @@ func (x *Request_MCPContext) GetServers() []*Request_MCPContext_MCPServer {
 	return nil
 }
 
-func (x *Request_MCPContext) GetSupportsGithubTurnBinding() bool {
-	if x != nil {
-		return x.xxx_hidden_SupportsGithubTurnBinding
-	}
-	return false
-}
-
 // Deprecated: Marked as deprecated in request.proto.
 func (x *Request_MCPContext) SetResources(v []*Request_MCPContext_MCPResource) {
 	x.xxx_hidden_Resources = &v
@@ -2728,23 +2718,6 @@ func (x *Request_MCPContext) SetTools(v []*Request_MCPContext_MCPTool) {
 
 func (x *Request_MCPContext) SetServers(v []*Request_MCPContext_MCPServer) {
 	x.xxx_hidden_Servers = &v
-}
-
-func (x *Request_MCPContext) SetSupportsGithubTurnBinding(v bool) {
-	x.xxx_hidden_SupportsGithubTurnBinding = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 3, 4)
-}
-
-func (x *Request_MCPContext) HasSupportsGithubTurnBinding() bool {
-	if x == nil {
-		return false
-	}
-	return protoimpl.X.Present(&(x.XXX_presence[0]), 3)
-}
-
-func (x *Request_MCPContext) ClearSupportsGithubTurnBinding() {
-	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 3)
-	x.xxx_hidden_SupportsGithubTurnBinding = false
 }
 
 type Request_MCPContext_builder struct {
@@ -2760,8 +2733,6 @@ type Request_MCPContext_builder struct {
 	// Server-grouped MCP context. Each entry represents a single MCP server
 	// summary.
 	Servers []*Request_MCPContext_MCPServer
-	// The runtime preserves turn references for GitHub calls and child launches.
-	SupportsGithubTurnBinding *bool
 }
 
 func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
@@ -2771,10 +2742,6 @@ func (b0 Request_MCPContext_builder) Build() *Request_MCPContext {
 	x.xxx_hidden_Resources = &b.Resources
 	x.xxx_hidden_Tools = &b.Tools
 	x.xxx_hidden_Servers = &b.Servers
-	if b.SupportsGithubTurnBinding != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 3, 4)
-		x.xxx_hidden_SupportsGithubTurnBinding = *b.SupportsGithubTurnBinding
-	}
 	return m0
 }
 
@@ -10474,7 +10441,7 @@ var File_request_proto protoreflect.FileDescriptor
 const file_request_proto_rawDesc = "" +
 	"\n" +
 	"\rrequest.proto\x12\x13warp.multi_agent.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a!google/protobuf/go_features.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x13input_context.proto\x1a\x10attachment.proto\x1a\x12file_content.proto\x1a\roptions.proto\x1a\x11suggestions.proto\x1a\n" +
-	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"ۄ\x01\n" +
+	"task.proto\x1a\vskill.proto\x1a\x13orchestration.proto\x1a\x11attribution.proto\"߃\x01\n" +
 	"\aRequest\x12K\n" +
 	"\ftask_context\x18\x01 \x01(\v2(.warp.multi_agent.v1.Request.TaskContextR\vtaskContext\x128\n" +
 	"\x05input\x18\x02 \x01(\v2\".warp.multi_agent.v1.Request.InputR\x05input\x12A\n" +
@@ -10484,7 +10451,7 @@ const file_request_proto_rawDesc = "" +
 	"\vmcp_context\x18\x06 \x01(\v2'.warp.multi_agent.v1.Request.MCPContextR\n" +
 	"mcpContext\x1aT\n" +
 	"\vTaskContext\x12/\n" +
-	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xeeN\n" +
+	"\x05tasks\x18\x01 \x03(\v2\x19.warp.multi_agent.v1.TaskR\x05tasksJ\x04\b\x02\x10\x03R\x0eactive_task_id\x1a\xd5N\n" +
 	"\x05Input\x12;\n" +
 	"\acontext\x18\x01 \x01(\v2!.warp.multi_agent.v1.InputContextR\acontext\x12P\n" +
 	"\vuser_inputs\x18\x06 \x01(\v2-.warp.multi_agent.v1.Request.Input.UserInputsH\x00R\n" +
@@ -10554,7 +10521,7 @@ const file_request_proto_rawDesc = "" +
 	"\x1cPassiveSuggestionResultInput\x12H\n" +
 	"\x06result\x18\x01 \x01(\v20.warp.multi_agent.v1.PassiveSuggestionResultTypeR\x06result\x1a\x15\n" +
 	"\x13ConversationHandoff\x1a\v\n" +
-	"\tAgentWake\x1a\x9a\x18\n" +
+	"\tAgentWake\x1a\x81\x18\n" +
 	"\x0eToolCallResult\x12 \n" +
 	"\ftool_call_id\x18\x01 \x01(\tR\n" +
 	"toolCallId\x12X\n" +
@@ -10595,7 +10562,7 @@ const file_request_proto_rawDesc = "" +
 	"\x0fstart_recording\x18$ \x01(\v2).warp.multi_agent.v1.StartRecordingResultH\x00R\x0estartRecording\x12Q\n" +
 	"\x0estop_recording\x18% \x01(\v2(.warp.multi_agent.v1.StopRecordingResultH\x00R\rstopRecordingB\b\n" +
 	"\x06resultJ\x04\b\n" +
-	"\x10\vJ\x04\b\x1c\x10\x1dJ\x04\b \x10!J\x04\b&\x10'R\x06refineR\vstart_agentR\x0estart_agent_v2R\x11create_git_commit\x1a\xcc\x06\n" +
+	"\x10\vJ\x04\b\x1c\x10\x1dJ\x04\b \x10!R\x06refineR\vstart_agentR\x0estart_agent_v2\x1a\xcc\x06\n" +
 	"\x17QueryWithCannedResponse\x12\x14\n" +
 	"\x05query\x18\x01 \x01(\tR\x05query\x12^\n" +
 	"\ainstall\x18\x02 \x01(\v2B.warp.multi_agent.v1.Request.Input.QueryWithCannedResponse.InstallH\x00R\ainstall\x12U\n" +
@@ -10667,7 +10634,7 @@ const file_request_proto_rawDesc = "" +
 	"agent_name\x18\x06 \x01(\tB\x04\x80\xb5\x18\x01R\tagentName\x1aR\n" +
 	"\fLoggingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\xb7'\n" +
+	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01\x1a\x95'\n" +
 	"\bSettings\x12T\n" +
 	"\fmodel_config\x18\x01 \x01(\v21.warp.multi_agent.v1.Request.Settings.ModelConfigR\vmodelConfig\x12#\n" +
 	"\rrules_enabled\x18\x02 \x01(\bR\frulesEnabled\x12A\n" +
@@ -10773,13 +10740,12 @@ const file_request_proto_rawDesc = "" +
 	"\n" +
 	"PromptRule\x12\x18\n" +
 	"\x04rule\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x04rule\x12\x14\n" +
-	"\x05model\x18\x02 \x01(\tR\x05modelJ\x04\b%\x10&R\x1asupports_create_git_commit\x1a\x8b\a\n" +
+	"\x05model\x18\x02 \x01(\tR\x05model\x1a\xca\x06\n" +
 	"\n" +
 	"MCPContext\x12U\n" +
 	"\tresources\x18\x01 \x03(\v23.warp.multi_agent.v1.Request.MCPContext.MCPResourceB\x02\x18\x01R\tresources\x12I\n" +
 	"\x05tools\x18\x02 \x03(\v2/.warp.multi_agent.v1.Request.MCPContext.MCPToolB\x02\x18\x01R\x05tools\x12K\n" +
-	"\aservers\x18\x03 \x03(\v21.warp.multi_agent.v1.Request.MCPContext.MCPServerR\aservers\x12?\n" +
-	"\x1csupports_github_turn_binding\x18\x04 \x01(\bR\x19supportsGithubTurnBinding\x1a\x84\x01\n" +
+	"\aservers\x18\x03 \x03(\v21.warp.multi_agent.v1.Request.MCPContext.MCPServerR\aservers\x1a\x84\x01\n" +
 	"\vMCPResource\x12\x16\n" +
 	"\x03uri\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01R\x03uri\x12\x18\n" +
 	"\x04name\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01R\x04name\x12&\n" +
