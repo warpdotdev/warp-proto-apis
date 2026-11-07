@@ -228,7 +228,7 @@ message AgentEvent {
       // Deprecated: use in_progress instead. Restart is no longer distinguished
       // from start.
       google.protobuf.Empty restarted = 5 [ deprecated = true ];
-      google.protobuf.Empty cancelled = 6;
+      Cancelled cancelled = 6;
       Blocked blocked = 7;
       google.protobuf.Empty in_progress = 8;
       google.protobuf.Empty succeeded = 9;
@@ -242,6 +242,8 @@ message AgentEvent {
     }
 
     message Blocked { string blocked_action = 1 [ (sensitive) = true ]; }
+
+    message Cancelled { string reason = 1 [ (sensitive) = true ]; }
 
     message Failed {
       string reason = 1;
