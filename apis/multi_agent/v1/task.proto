@@ -108,6 +108,10 @@ message ChargedUsage {
 
   // Platform usage charged, in credits
   float platform_usage_in_credits = 6;
+
+  // Claude tokens billed to the team's linked organization, keyed by model ID.
+  // Token costs are zero; Warp web-tool charges remain separately recorded.
+  map<string, InferenceUsage> claude_linked_billing_inference_usage = 7;
 }
 
 
