@@ -621,6 +621,13 @@ message Request {
         OPENAI_RESPONSES = 1;
         ANTHROPIC_MESSAGES = 2;
       }
+      enum ComputerUseToolset {
+        NONE = 0;
+        ANTHROPIC_COMPUTER_20250124 = 1;
+        ANTHROPIC_COMPUTER_20251124 = 2;
+        ANTHROPIC_COMPUTER_TOOLSET_20260801 = 3;
+        OPENAI_RESPONSES_COMPUTER_TOOL = 4;
+      }
 
       message CustomModelProvider {
         // The base URL for the custom model provider.
@@ -643,6 +650,8 @@ message Request {
         // unchanged to schemas that support it; unset preserves the provider's
         // default behavior.
         string reasoning_effort = 3;
+        // The native computer-use wire contract; NONE disables computer use.
+        ComputerUseToolset computer_use_toolset = 4;
       }
     }
 
