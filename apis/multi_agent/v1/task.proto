@@ -1299,6 +1299,8 @@ message Message {
       WaitForEventsResult wait_for_events = 40;
       StartRecordingResult start_recording = 41;
       StopRecordingResult stop_recording = 42;
+      // An agent hook denied the tool call before it ran. Valid for any tool.
+      DeniedByHook denied_by_hook = 43;
     }
 
     // Result of a server-side tool call.
@@ -1728,6 +1730,12 @@ message ShellCommandFinished {
 // The reason why a shell command was denied permission to run.
 message PermissionDenied {
   oneof reason { google.protobuf.Empty denylisted_command = 1; }
+}
+
+// The result of a tool call that an agent hook denied before it ran.
+message DeniedByHook {
+  // Why the call was denied, shown to the model.
+  string reason = 1 [ (sensitive) = true ];
 }
 
 message CallMCPToolResult {

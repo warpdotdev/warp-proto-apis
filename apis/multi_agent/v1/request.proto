@@ -223,6 +223,8 @@ message Request {
         WaitForEventsResult wait_for_events = 35;
         StartRecordingResult start_recording = 36;
         StopRecordingResult stop_recording = 37;
+        // An agent hook denied the tool call before it ran. Valid for any tool.
+        DeniedByHook denied_by_hook = 38;
       }
     }
 
