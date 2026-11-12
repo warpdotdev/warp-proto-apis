@@ -5546,12 +5546,14 @@ func (b0 UserQueryOrigin_ParentAgent_builder) Build() *UserQueryOrigin_ParentAge
 // Server-synthesized wake prompt ("You have received N new agent
 // message(s) ...").
 type UserQueryOrigin_AgentMessageWake struct {
-	state                   protoimpl.MessageState `protogen:"opaque.v1"`
-	xxx_hidden_MessageCount int32                  `protobuf:"varint,1,opt,name=message_count,json=messageCount"`
-	XXX_raceDetectHookData  protoimpl.RaceDetectHookData
-	XXX_presence            [1]uint32
-	unknownFields           protoimpl.UnknownFields
-	sizeCache               protoimpl.SizeCache
+	state                     protoimpl.MessageState                            `protogen:"opaque.v1"`
+	xxx_hidden_MessageCount   int32                                             `protobuf:"varint,1,opt,name=message_count,json=messageCount"`
+	xxx_hidden_GithubCoauthor isUserQueryOrigin_AgentMessageWake_GithubCoauthor `protobuf_oneof:"github_coauthor"`
+	xxx_hidden_ParentRunId    *string                                           `protobuf:"bytes,3,opt,name=parent_run_id,json=parentRunId"`
+	XXX_raceDetectHookData    protoimpl.RaceDetectHookData
+	XXX_presence              [1]uint32
+	unknownFields             protoimpl.UnknownFields
+	sizeCache                 protoimpl.SizeCache
 }
 
 func (x *UserQueryOrigin_AgentMessageWake) Reset() {
@@ -5586,9 +5588,37 @@ func (x *UserQueryOrigin_AgentMessageWake) GetMessageCount() int32 {
 	return 0
 }
 
+func (x *UserQueryOrigin_AgentMessageWake) GetGithubCoauthorUserUid() string {
+	if x != nil {
+		if x, ok := x.xxx_hidden_GithubCoauthor.(*userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid); ok {
+			return x.GithubCoauthorUserUid
+		}
+	}
+	return ""
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) GetParentRunId() string {
+	if x != nil {
+		if x.xxx_hidden_ParentRunId != nil {
+			return *x.xxx_hidden_ParentRunId
+		}
+		return ""
+	}
+	return ""
+}
+
 func (x *UserQueryOrigin_AgentMessageWake) SetMessageCount(v int32) {
 	x.xxx_hidden_MessageCount = v
-	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 1)
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 0, 3)
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) SetGithubCoauthorUserUid(v string) {
+	x.xxx_hidden_GithubCoauthor = &userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid{v}
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) SetParentRunId(v string) {
+	x.xxx_hidden_ParentRunId = &v
+	protoimpl.X.SetPresent(&(x.XXX_presence[0]), 2, 3)
 }
 
 func (x *UserQueryOrigin_AgentMessageWake) HasMessageCount() bool {
@@ -5598,9 +5628,61 @@ func (x *UserQueryOrigin_AgentMessageWake) HasMessageCount() bool {
 	return protoimpl.X.Present(&(x.XXX_presence[0]), 0)
 }
 
+func (x *UserQueryOrigin_AgentMessageWake) HasGithubCoauthor() bool {
+	if x == nil {
+		return false
+	}
+	return x.xxx_hidden_GithubCoauthor != nil
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) HasGithubCoauthorUserUid() bool {
+	if x == nil {
+		return false
+	}
+	_, ok := x.xxx_hidden_GithubCoauthor.(*userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid)
+	return ok
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) HasParentRunId() bool {
+	if x == nil {
+		return false
+	}
+	return protoimpl.X.Present(&(x.XXX_presence[0]), 2)
+}
+
 func (x *UserQueryOrigin_AgentMessageWake) ClearMessageCount() {
 	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 0)
 	x.xxx_hidden_MessageCount = 0
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) ClearGithubCoauthor() {
+	x.xxx_hidden_GithubCoauthor = nil
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) ClearGithubCoauthorUserUid() {
+	if _, ok := x.xxx_hidden_GithubCoauthor.(*userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid); ok {
+		x.xxx_hidden_GithubCoauthor = nil
+	}
+}
+
+func (x *UserQueryOrigin_AgentMessageWake) ClearParentRunId() {
+	protoimpl.X.ClearPresent(&(x.XXX_presence[0]), 2)
+	x.xxx_hidden_ParentRunId = nil
+}
+
+const UserQueryOrigin_AgentMessageWake_GithubCoauthor_not_set_case case_UserQueryOrigin_AgentMessageWake_GithubCoauthor = 0
+const UserQueryOrigin_AgentMessageWake_GithubCoauthorUserUid_case case_UserQueryOrigin_AgentMessageWake_GithubCoauthor = 2
+
+func (x *UserQueryOrigin_AgentMessageWake) WhichGithubCoauthor() case_UserQueryOrigin_AgentMessageWake_GithubCoauthor {
+	if x == nil {
+		return UserQueryOrigin_AgentMessageWake_GithubCoauthor_not_set_case
+	}
+	switch x.xxx_hidden_GithubCoauthor.(type) {
+	case *userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid:
+		return UserQueryOrigin_AgentMessageWake_GithubCoauthorUserUid_case
+	default:
+		return UserQueryOrigin_AgentMessageWake_GithubCoauthor_not_set_case
+	}
 }
 
 type UserQueryOrigin_AgentMessageWake_builder struct {
@@ -5608,6 +5690,10 @@ type UserQueryOrigin_AgentMessageWake_builder struct {
 
 	// Number of unread agent messages that triggered the wake; 0 if unknown.
 	MessageCount *int32
+	// Fields of oneof xxx_hidden_GithubCoauthor:
+	GithubCoauthorUserUid *string
+	// -- end of xxx_hidden_GithubCoauthor
+	ParentRunId *string
 }
 
 func (b0 UserQueryOrigin_AgentMessageWake_builder) Build() *UserQueryOrigin_AgentMessageWake {
@@ -5615,10 +5701,38 @@ func (b0 UserQueryOrigin_AgentMessageWake_builder) Build() *UserQueryOrigin_Agen
 	b, x := &b0, m0
 	_, _ = b, x
 	if b.MessageCount != nil {
-		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 1)
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 0, 3)
 		x.xxx_hidden_MessageCount = *b.MessageCount
 	}
+	if b.GithubCoauthorUserUid != nil {
+		x.xxx_hidden_GithubCoauthor = &userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid{*b.GithubCoauthorUserUid}
+	}
+	if b.ParentRunId != nil {
+		protoimpl.X.SetPresentNonAtomic(&(x.XXX_presence[0]), 2, 3)
+		x.xxx_hidden_ParentRunId = b.ParentRunId
+	}
 	return m0
+}
+
+type case_UserQueryOrigin_AgentMessageWake_GithubCoauthor protoreflect.FieldNumber
+
+func (x case_UserQueryOrigin_AgentMessageWake_GithubCoauthor) String() string {
+	md := file_attribution_proto_msgTypes[24].Descriptor()
+	if x == 0 {
+		return "not set"
+	}
+	return protoimpl.X.MessageFieldStringOf(md, protoreflect.FieldNumber(x))
+}
+
+type isUserQueryOrigin_AgentMessageWake_GithubCoauthor interface {
+	isUserQueryOrigin_AgentMessageWake_GithubCoauthor()
+}
+
+type userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid struct {
+	GithubCoauthorUserUid string `protobuf:"bytes,2,opt,name=github_coauthor_user_uid,json=githubCoauthorUserUid,oneof"`
+}
+
+func (*userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid) isUserQueryOrigin_AgentMessageWake_GithubCoauthor() {
 }
 
 // A scheduled agent fired.
@@ -6178,7 +6292,8 @@ const file_attribution_proto_rawDesc = "" +
 	"\x12SURFACE_PUBLIC_API\x10\x04\x12\x0f\n" +
 	"\vSURFACE_MCP\x10\x05B\n" +
 	"\n" +
-	"\bplatform\"\x8b\t\n" +
+	"\bplatform\"\x84\n" +
+	"\n" +
 	"\x0fUserQueryOrigin\x12R\n" +
 	"\vwarp_client\x18\x01 \x01(\v2/.warp.multi_agent.v1.UserQueryOrigin.WarpClientH\x00R\n" +
 	"warpClient\x12d\n" +
@@ -6196,9 +6311,12 @@ const file_attribution_proto_rawDesc = "" +
 	"WarpClient\x1a\x12\n" +
 	"\x10ExternalPlatform\x1a1\n" +
 	"\vParentAgent\x12\"\n" +
-	"\rparent_run_id\x18\x01 \x01(\tR\vparentRunId\x1a7\n" +
+	"\rparent_run_id\x18\x01 \x01(\tR\vparentRunId\x1a\xaf\x01\n" +
 	"\x10AgentMessageWake\x12#\n" +
-	"\rmessage_count\x18\x01 \x01(\x05R\fmessageCount\x1a-\n" +
+	"\rmessage_count\x18\x01 \x01(\x05R\fmessageCount\x12?\n" +
+	"\x18github_coauthor_user_uid\x18\x02 \x01(\tB\x04\x80\xb5\x18\x01H\x00R\x15githubCoauthorUserUid\x12\"\n" +
+	"\rparent_run_id\x18\x03 \x01(\tR\vparentRunIdB\x11\n" +
+	"\x0fgithub_coauthor\x1a-\n" +
 	"\bSchedule\x12!\n" +
 	"\fschedule_uid\x18\x01 \x01(\tR\vscheduleUid\x1a\xa3\x01\n" +
 	"\n" +
@@ -6347,6 +6465,9 @@ func file_attribution_proto_init() {
 	file_attribution_proto_msgTypes[7].OneofWrappers = []any{
 		(*externalMessage_AzureDevOps_PullRequest_)(nil),
 		(*externalMessage_AzureDevOps_WorkItem_)(nil),
+	}
+	file_attribution_proto_msgTypes[24].OneofWrappers = []any{
+		(*userQueryOrigin_AgentMessageWake_GithubCoauthorUserUid)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

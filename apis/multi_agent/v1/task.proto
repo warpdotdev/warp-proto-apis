@@ -2288,6 +2288,7 @@ message SendMessageToAgent {
   string subject = 2 [ (sensitive) = true ];
   // The body of the message.
   string message = 3 [ (sensitive) = true ];
+  RunAgents.GitHubCommitAttribution github_commit_attribution = 4;
 }
 
 // The result of a SendMessageToAgent tool call.
