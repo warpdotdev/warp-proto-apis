@@ -27,9 +27,7 @@ const (
 )
 
 // Kinds of notifications carried by AgentEvent.LifecycleEvent.detail.
-// State types report the sender's state, not the recipient's. WAITED_ON instead
-// reports that the sender is waiting for the recipient; it is not a state change
-// of the recipient.
+// Each type reports the sender's state, not the recipient's.
 type LifecycleEventType int32
 
 const (
@@ -53,8 +51,8 @@ const (
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_IN_PROGRESS LifecycleEventType = 7
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_SUCCEEDED   LifecycleEventType = 8
 	LifecycleEventType_LIFECYCLE_EVENT_TYPE_FAILED      LifecycleEventType = 9
-	// The sender is waiting for the recipient, not being waited on by it.
-	LifecycleEventType_LIFECYCLE_EVENT_TYPE_WAITED_ON LifecycleEventType = 10
+	// The sender entered Waiting and is waiting for the recipient.
+	LifecycleEventType_LIFECYCLE_EVENT_TYPE_WAITING LifecycleEventType = 10
 )
 
 // Enum value maps for LifecycleEventType.
@@ -70,7 +68,7 @@ var (
 		7:  "LIFECYCLE_EVENT_TYPE_IN_PROGRESS",
 		8:  "LIFECYCLE_EVENT_TYPE_SUCCEEDED",
 		9:  "LIFECYCLE_EVENT_TYPE_FAILED",
-		10: "LIFECYCLE_EVENT_TYPE_WAITED_ON",
+		10: "LIFECYCLE_EVENT_TYPE_WAITING",
 	}
 	LifecycleEventType_value = map[string]int32{
 		"LIFECYCLE_EVENT_TYPE_UNSPECIFIED": 0,
@@ -83,7 +81,7 @@ var (
 		"LIFECYCLE_EVENT_TYPE_IN_PROGRESS": 7,
 		"LIFECYCLE_EVENT_TYPE_SUCCEEDED":   8,
 		"LIFECYCLE_EVENT_TYPE_FAILED":      9,
-		"LIFECYCLE_EVENT_TYPE_WAITED_ON":   10,
+		"LIFECYCLE_EVENT_TYPE_WAITING":     10,
 	}
 )
 
@@ -12752,7 +12750,7 @@ func (b0 Task_Dependencies_builder) Build() *Task_Dependencies {
 
 // A notification about another agent's state or action. For state details such
 // as in_progress, the sender is the agent that entered that state. For
-// waited_on, the sender is the agent that began waiting for the recipient.
+// waiting, the sender is the agent that began waiting for the recipient.
 // Sender and recipient roles do not imply a parent/child relationship.
 type AgentEvent_LifecycleEvent struct {
 	state                    protoimpl.MessageState             `protogen:"opaque.v1"`
@@ -12883,10 +12881,10 @@ func (x *AgentEvent_LifecycleEvent) GetFailed() *AgentEvent_LifecycleEvent_Faile
 	return nil
 }
 
-func (x *AgentEvent_LifecycleEvent) GetWaitedOn() *emptypb.Empty {
+func (x *AgentEvent_LifecycleEvent) GetWaiting() *emptypb.Empty {
 	if x != nil {
-		if x, ok := x.xxx_hidden_Detail.(*agentEvent_LifecycleEvent_WaitedOn); ok {
-			return x.WaitedOn
+		if x, ok := x.xxx_hidden_Detail.(*agentEvent_LifecycleEvent_Waiting); ok {
+			return x.Waiting
 		}
 	}
 	return nil
@@ -12972,12 +12970,12 @@ func (x *AgentEvent_LifecycleEvent) SetFailed(v *AgentEvent_LifecycleEvent_Faile
 	x.xxx_hidden_Detail = &agentEvent_LifecycleEvent_Failed_{v}
 }
 
-func (x *AgentEvent_LifecycleEvent) SetWaitedOn(v *emptypb.Empty) {
+func (x *AgentEvent_LifecycleEvent) SetWaiting(v *emptypb.Empty) {
 	if v == nil {
 		x.xxx_hidden_Detail = nil
 		return
 	}
-	x.xxx_hidden_Detail = &agentEvent_LifecycleEvent_WaitedOn{v}
+	x.xxx_hidden_Detail = &agentEvent_LifecycleEvent_Waiting{v}
 }
 
 func (x *AgentEvent_LifecycleEvent) HasSenderAgentId() bool {
@@ -13069,11 +13067,11 @@ func (x *AgentEvent_LifecycleEvent) HasFailed() bool {
 	return ok
 }
 
-func (x *AgentEvent_LifecycleEvent) HasWaitedOn() bool {
+func (x *AgentEvent_LifecycleEvent) HasWaiting() bool {
 	if x == nil {
 		return false
 	}
-	_, ok := x.xxx_hidden_Detail.(*agentEvent_LifecycleEvent_WaitedOn)
+	_, ok := x.xxx_hidden_Detail.(*agentEvent_LifecycleEvent_Waiting)
 	return ok
 }
 
@@ -13143,8 +13141,8 @@ func (x *AgentEvent_LifecycleEvent) ClearFailed() {
 	}
 }
 
-func (x *AgentEvent_LifecycleEvent) ClearWaitedOn() {
-	if _, ok := x.xxx_hidden_Detail.(*agentEvent_LifecycleEvent_WaitedOn); ok {
+func (x *AgentEvent_LifecycleEvent) ClearWaiting() {
+	if _, ok := x.xxx_hidden_Detail.(*agentEvent_LifecycleEvent_Waiting); ok {
 		x.xxx_hidden_Detail = nil
 	}
 }
@@ -13159,7 +13157,7 @@ const AgentEvent_LifecycleEvent_Blocked_case case_AgentEvent_LifecycleEvent_Deta
 const AgentEvent_LifecycleEvent_InProgress_case case_AgentEvent_LifecycleEvent_Detail = 8
 const AgentEvent_LifecycleEvent_Succeeded_case case_AgentEvent_LifecycleEvent_Detail = 9
 const AgentEvent_LifecycleEvent_Failed_case case_AgentEvent_LifecycleEvent_Detail = 10
-const AgentEvent_LifecycleEvent_WaitedOn_case case_AgentEvent_LifecycleEvent_Detail = 11
+const AgentEvent_LifecycleEvent_Waiting_case case_AgentEvent_LifecycleEvent_Detail = 11
 
 func (x *AgentEvent_LifecycleEvent) WhichDetail() case_AgentEvent_LifecycleEvent_Detail {
 	if x == nil {
@@ -13184,8 +13182,8 @@ func (x *AgentEvent_LifecycleEvent) WhichDetail() case_AgentEvent_LifecycleEvent
 		return AgentEvent_LifecycleEvent_Succeeded_case
 	case *agentEvent_LifecycleEvent_Failed_:
 		return AgentEvent_LifecycleEvent_Failed_case
-	case *agentEvent_LifecycleEvent_WaitedOn:
-		return AgentEvent_LifecycleEvent_WaitedOn_case
+	case *agentEvent_LifecycleEvent_Waiting:
+		return AgentEvent_LifecycleEvent_Waiting_case
 	default:
 		return AgentEvent_LifecycleEvent_Detail_not_set_case
 	}
@@ -13221,7 +13219,7 @@ type AgentEvent_LifecycleEvent_builder struct {
 	Failed     *AgentEvent_LifecycleEvent_Failed
 	// sender_agent_id is waiting for the agent receiving this event.
 	// For example, delivery to B with sender_agent_id=A means A is waiting for B.
-	WaitedOn *emptypb.Empty
+	Waiting *emptypb.Empty
 	// -- end of xxx_hidden_Detail
 }
 
@@ -13260,8 +13258,8 @@ func (b0 AgentEvent_LifecycleEvent_builder) Build() *AgentEvent_LifecycleEvent {
 	if b.Failed != nil {
 		x.xxx_hidden_Detail = &agentEvent_LifecycleEvent_Failed_{b.Failed}
 	}
-	if b.WaitedOn != nil {
-		x.xxx_hidden_Detail = &agentEvent_LifecycleEvent_WaitedOn{b.WaitedOn}
+	if b.Waiting != nil {
+		x.xxx_hidden_Detail = &agentEvent_LifecycleEvent_Waiting{b.Waiting}
 	}
 	return m0
 }
@@ -13326,10 +13324,10 @@ type agentEvent_LifecycleEvent_Failed_ struct {
 	Failed *AgentEvent_LifecycleEvent_Failed `protobuf:"bytes,10,opt,name=failed,oneof"`
 }
 
-type agentEvent_LifecycleEvent_WaitedOn struct {
+type agentEvent_LifecycleEvent_Waiting struct {
 	// sender_agent_id is waiting for the agent receiving this event.
 	// For example, delivery to B with sender_agent_id=A means A is waiting for B.
-	WaitedOn *emptypb.Empty `protobuf:"bytes,11,opt,name=waited_on,json=waitedOn,oneof"`
+	Waiting *emptypb.Empty `protobuf:"bytes,11,opt,name=waiting,oneof"`
 }
 
 func (*agentEvent_LifecycleEvent_Errored_) isAgentEvent_LifecycleEvent_Detail() {}
@@ -13350,7 +13348,7 @@ func (*agentEvent_LifecycleEvent_Succeeded) isAgentEvent_LifecycleEvent_Detail()
 
 func (*agentEvent_LifecycleEvent_Failed_) isAgentEvent_LifecycleEvent_Detail() {}
 
-func (*agentEvent_LifecycleEvent_WaitedOn) isAgentEvent_LifecycleEvent_Detail() {}
+func (*agentEvent_LifecycleEvent_Waiting) isAgentEvent_LifecycleEvent_Detail() {}
 
 type AgentEvent_LifecycleEvent_Errored struct {
 	state                   protoimpl.MessageState `protogen:"opaque.v1"`
@@ -41362,13 +41360,13 @@ const file_task_proto_rawDesc = "" +
 	"\x05input\x18\x01 \x01(\x04R\x05input\x12\x16\n" +
 	"\x06output\x18\x02 \x01(\x04R\x06output\x12(\n" +
 	"\x10input_cache_read\x18\x03 \x01(\x04R\x0einputCacheRead\x12*\n" +
-	"\x11input_cache_write\x18\x04 \x01(\x04R\x0finputCacheWrite\"\xc4\t\n" +
+	"\x11input_cache_write\x18\x04 \x01(\x04R\x0finputCacheWrite\"\xc1\t\n" +
 	"\n" +
 	"AgentEvent\x12\x19\n" +
 	"\bevent_id\x18\x01 \x01(\tR\aeventId\x12;\n" +
 	"\voccurred_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"occurredAt\x12Y\n" +
-	"\x0flifecycle_event\x18\x03 \x01(\v2..warp.multi_agent.v1.AgentEvent.LifecycleEventH\x00R\x0elifecycleEvent\x1a\xf9\a\n" +
+	"\x0flifecycle_event\x18\x03 \x01(\v2..warp.multi_agent.v1.AgentEvent.LifecycleEventH\x00R\x0elifecycleEvent\x1a\xf6\a\n" +
 	"\x0eLifecycleEvent\x12&\n" +
 	"\x0fsender_agent_id\x18\x01 \x01(\tR\rsenderAgentId\x12R\n" +
 	"\aerrored\x18\x02 \x01(\v26.warp.multi_agent.v1.AgentEvent.LifecycleEvent.ErroredH\x00R\aerrored\x126\n" +
@@ -41381,8 +41379,8 @@ const file_task_proto_rawDesc = "" +
 	"inProgress\x126\n" +
 	"\tsucceeded\x18\t \x01(\v2\x16.google.protobuf.EmptyH\x00R\tsucceeded\x12O\n" +
 	"\x06failed\x18\n" +
-	" \x01(\v25.warp.multi_agent.v1.AgentEvent.LifecycleEvent.FailedH\x00R\x06failed\x125\n" +
-	"\twaited_on\x18\v \x01(\v2\x16.google.protobuf.EmptyH\x00R\bwaitedOn\x1ab\n" +
+	" \x01(\v25.warp.multi_agent.v1.AgentEvent.LifecycleEvent.FailedH\x00R\x06failed\x122\n" +
+	"\awaiting\x18\v \x01(\v2\x16.google.protobuf.EmptyH\x00R\awaiting\x1ab\n" +
 	"\aErrored\x12\x14\n" +
 	"\x05stage\x18\x01 \x01(\tR\x05stage\x12\x16\n" +
 	"\x06reason\x18\x02 \x01(\tR\x06reason\x12)\n" +
@@ -42523,7 +42521,7 @@ const file_task_proto_rawDesc = "" +
 	"\x0escreenshot_uid\x18\x01 \x01(\tR\rscreenshotUid\x12'\n" +
 	"\x0fconversation_id\x18\x02 \x01(\tR\x0econversationId\x12\x1d\n" +
 	"\n" +
-	"size_bytes\x18\x03 \x01(\x03R\tsizeBytes*\xa2\x03\n" +
+	"size_bytes\x18\x03 \x01(\x03R\tsizeBytes*\xa0\x03\n" +
 	"\x12LifecycleEventType\x12$\n" +
 	" LIFECYCLE_EVENT_TYPE_UNSPECIFIED\x10\x00\x12$\n" +
 	"\x1cLIFECYCLE_EVENT_TYPE_STARTED\x10\x01\x1a\x02\b\x01\x12!\n" +
@@ -42534,8 +42532,8 @@ const file_task_proto_rawDesc = "" +
 	"\x1cLIFECYCLE_EVENT_TYPE_BLOCKED\x10\x06\x12$\n" +
 	" LIFECYCLE_EVENT_TYPE_IN_PROGRESS\x10\a\x12\"\n" +
 	"\x1eLIFECYCLE_EVENT_TYPE_SUCCEEDED\x10\b\x12\x1f\n" +
-	"\x1bLIFECYCLE_EVENT_TYPE_FAILED\x10\t\x12\"\n" +
-	"\x1eLIFECYCLE_EVENT_TYPE_WAITED_ON\x10\n" +
+	"\x1bLIFECYCLE_EVENT_TYPE_FAILED\x10\t\x12 \n" +
+	"\x1cLIFECYCLE_EVENT_TYPE_WAITING\x10\n" +
 	"*\xac\x01\n" +
 	"\x0eMCPIntegration\x12\x1f\n" +
 	"\x1bMCP_INTEGRATION_UNSPECIFIED\x10\x00\x12\x1a\n" +
@@ -43070,7 +43068,7 @@ var file_task_proto_depIdxs = []int32{
 	299, // 148: warp.multi_agent.v1.AgentEvent.LifecycleEvent.in_progress:type_name -> google.protobuf.Empty
 	299, // 149: warp.multi_agent.v1.AgentEvent.LifecycleEvent.succeeded:type_name -> google.protobuf.Empty
 	83,  // 150: warp.multi_agent.v1.AgentEvent.LifecycleEvent.failed:type_name -> warp.multi_agent.v1.AgentEvent.LifecycleEvent.Failed
-	299, // 151: warp.multi_agent.v1.AgentEvent.LifecycleEvent.waited_on:type_name -> google.protobuf.Empty
+	299, // 151: warp.multi_agent.v1.AgentEvent.LifecycleEvent.waiting:type_name -> google.protobuf.Empty
 	304, // 152: warp.multi_agent.v1.ReviewComment.CommentedFile.current:type_name -> warp.multi_agent.v1.CurrentRef
 	305, // 153: warp.multi_agent.v1.ReviewComment.CommentedFile.base:type_name -> warp.multi_agent.v1.BaseRef
 	304, // 154: warp.multi_agent.v1.ReviewComment.CommentedDiffset.current:type_name -> warp.multi_agent.v1.CurrentRef
@@ -43552,7 +43550,7 @@ func file_task_proto_init() {
 		(*agentEvent_LifecycleEvent_InProgress)(nil),
 		(*agentEvent_LifecycleEvent_Succeeded)(nil),
 		(*agentEvent_LifecycleEvent_Failed_)(nil),
-		(*agentEvent_LifecycleEvent_WaitedOn)(nil),
+		(*agentEvent_LifecycleEvent_Waiting)(nil),
 	}
 	file_task_proto_msgTypes[79].OneofWrappers = []any{
 		(*message_FetchedMemory_Conversation_)(nil),

@@ -190,9 +190,7 @@ message TokenCount {
 }
 
 // Kinds of notifications carried by AgentEvent.LifecycleEvent.detail.
-// State types report the sender's state, not the recipient's. WAITED_ON instead
-// reports that the sender is waiting for the recipient; it is not a state change
-// of the recipient.
+// Each type reports the sender's state, not the recipient's.
 enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_UNSPECIFIED = 0;
   // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead.
@@ -208,8 +206,8 @@ enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_IN_PROGRESS = 7;
   LIFECYCLE_EVENT_TYPE_SUCCEEDED = 8;
   LIFECYCLE_EVENT_TYPE_FAILED = 9;
-  // The sender is waiting for the recipient, not being waited on by it.
-  LIFECYCLE_EVENT_TYPE_WAITED_ON = 10;
+  // The sender entered Waiting and is waiting for the recipient.
+  LIFECYCLE_EVENT_TYPE_WAITING = 10;
 }
 
 // An event delivered to an agent. The recipient is implicit in the receiving
@@ -224,7 +222,7 @@ message AgentEvent {
 
   // A notification about another agent's state or action. For state details such
   // as in_progress, the sender is the agent that entered that state. For
-  // waited_on, the sender is the agent that began waiting for the recipient.
+  // waiting, the sender is the agent that began waiting for the recipient.
   // Sender and recipient roles do not imply a parent/child relationship.
   message LifecycleEvent {
     // ID of the agent whose state or action is reported, even when the event is
@@ -247,7 +245,7 @@ message AgentEvent {
       Failed failed = 10;
       // sender_agent_id is waiting for the agent receiving this event.
       // For example, delivery to B with sender_agent_id=A means A is waiting for B.
-      google.protobuf.Empty waited_on = 11;
+      google.protobuf.Empty waiting = 11;
     }
 
     message Errored {
