@@ -453,10 +453,6 @@ message UserQueryOrigin {
   message AgentMessageWake {
     // Number of unread agent messages that triggered the wake; 0 if unknown.
     int32 message_count = 1;
-    oneof github_coauthor {
-      string github_coauthor_user_uid = 2 [ (sensitive) = true ];
-    }
-    string parent_run_id = 3;
   }
 
   // A scheduled agent fired.
