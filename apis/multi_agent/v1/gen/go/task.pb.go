@@ -27620,9 +27620,8 @@ type Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk_builder struct {
 	// entries containing LF rather than falling back to legacy strings.
 	//
 	// Example (JSON):
-	//
-	//	{"lineData": {"preContext": ["context"], "old": ["old text"],
-	//	              "new": ["new text", ""], "postContext": []}}
+	//   {"lineData": {"preContext": ["context"], "old": ["old text"],
+	//                 "new": ["new text", ""], "postContext": []}}
 	LineData *Message_ToolCall_ApplyFileDiffs_V4AFileUpdate_Hunk_LineData
 }
 
