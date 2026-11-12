@@ -2165,6 +2165,10 @@ enum RiskCategory {
 // A client tool call to start a batch of child agents that share run-wide
 // configuration (model, harness, execution mode).
 message RunAgents {
+  message GitHubCommitAttribution {
+    string coauthor_user_uid = 1 [ (sensitive) = true ];
+  }
+
   message Local {}
   message Remote {
     string environment_id = 1;
@@ -2223,6 +2227,8 @@ message RunAgents {
   string plan_id = 9;
   // Explicit metadata defaults for every child; per-child entries take precedence.
   map<string, string> metadata = 10 [ (sensitive) = true ];
+  // Server-selected delegation-turn credit. Presence preserves an empty selection.
+  GitHubCommitAttribution github_commit_attribution = 11;
 }
 
 // The result of a RunAgents tool call.
