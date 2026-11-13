@@ -189,8 +189,8 @@ message TokenCount {
     uint64 input_cache_write = 4;
 }
 
-// Lifecycle event types emitted by child agents and routed to lead agents.
-// These align with task states to provide a consistent lifecycle model.
+// Kinds of notifications carried by AgentEvent.LifecycleEvent.detail.
+// Each type reports the sender's state, not the recipient's.
 enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_UNSPECIFIED = 0;
   // Deprecated: use LIFECYCLE_EVENT_TYPE_IN_PROGRESS instead.
@@ -206,9 +206,12 @@ enum LifecycleEventType {
   LIFECYCLE_EVENT_TYPE_IN_PROGRESS = 7;
   LIFECYCLE_EVENT_TYPE_SUCCEEDED = 8;
   LIFECYCLE_EVENT_TYPE_FAILED = 9;
+  // The sender entered Waiting and is waiting for the recipient.
+  LIFECYCLE_EVENT_TYPE_WAITING = 10;
 }
 
-// A generic event emitted by an agent and routed to other agents.
+// An event delivered to an agent. The recipient is implicit in the receiving
+// conversation and is not encoded in this message.
 message AgentEvent {
   // Unique identifier for idempotency and deduplication.
   string event_id = 1;
@@ -217,12 +220,15 @@ message AgentEvent {
 
   oneof event { LifecycleEvent lifecycle_event = 3; }
 
-  // Lifecycle event payload emitted by a sender agent.
+  // A notification about another agent's state or action. For state details such
+  // as in_progress, the sender is the agent that entered that state. For
+  // waiting, the sender is the agent that began waiting for the recipient.
+  // Sender and recipient roles do not imply a parent/child relationship.
   message LifecycleEvent {
-    // The sender agent ID (conversation ID in V0).
+    // ID of the agent whose state or action is reported, even when the event is
+    // produced on its behalf by the server (conversation ID in V0).
     string sender_agent_id = 1;
-    // Lifecycle detail payload. Empty variants represent enum-like lifecycle
-    // states while still allowing future expansion of per-state metadata.
+    // The notification kind and its metadata, corresponding to LifecycleEventType.
     oneof detail {
       Errored errored = 2;
       // Deprecated: use in_progress instead.
@@ -237,6 +243,9 @@ message AgentEvent {
       google.protobuf.Empty in_progress = 8;
       google.protobuf.Empty succeeded = 9;
       Failed failed = 10;
+      // sender_agent_id is waiting for the agent receiving this event.
+      // For example, delivery to B with sender_agent_id=A means A is waiting for B.
+      google.protobuf.Empty waiting = 11;
     }
 
     message Errored {
