@@ -1821,6 +1821,8 @@ enum MCPIntegration {
   // "linear_agent_session": Linear's agent-session surface, distinct from the
   // general Linear integration.
   MCP_INTEGRATION_LINEAR_AGENT_SESSION = 4;
+  // "github"
+  MCP_INTEGRATION_GITHUB = 5;
 }
 
 message SuggestPromptResult {
