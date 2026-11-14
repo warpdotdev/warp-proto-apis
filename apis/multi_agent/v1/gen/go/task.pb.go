@@ -125,6 +125,8 @@ const (
 	// "linear_agent_session": Linear's agent-session surface, distinct from the
 	// general Linear integration.
 	MCPIntegration_MCP_INTEGRATION_LINEAR_AGENT_SESSION MCPIntegration = 4
+	// "github"
+	MCPIntegration_MCP_INTEGRATION_GITHUB MCPIntegration = 5
 )
 
 // Enum value maps for MCPIntegration.
@@ -135,6 +137,7 @@ var (
 		2: "MCP_INTEGRATION_SLACK",
 		3: "MCP_INTEGRATION_JIRA",
 		4: "MCP_INTEGRATION_LINEAR_AGENT_SESSION",
+		5: "MCP_INTEGRATION_GITHUB",
 	}
 	MCPIntegration_value = map[string]int32{
 		"MCP_INTEGRATION_UNSPECIFIED":          0,
@@ -142,6 +145,7 @@ var (
 		"MCP_INTEGRATION_SLACK":                2,
 		"MCP_INTEGRATION_JIRA":                 3,
 		"MCP_INTEGRATION_LINEAR_AGENT_SESSION": 4,
+		"MCP_INTEGRATION_GITHUB":               5,
 	}
 )
 
@@ -42695,13 +42699,14 @@ const file_task_proto_rawDesc = "" +
 	"\x1eLIFECYCLE_EVENT_TYPE_SUCCEEDED\x10\b\x12\x1f\n" +
 	"\x1bLIFECYCLE_EVENT_TYPE_FAILED\x10\t\x12 \n" +
 	"\x1cLIFECYCLE_EVENT_TYPE_WAITING\x10\n" +
-	"*\xac\x01\n" +
+	"*\xc8\x01\n" +
 	"\x0eMCPIntegration\x12\x1f\n" +
 	"\x1bMCP_INTEGRATION_UNSPECIFIED\x10\x00\x12\x1a\n" +
 	"\x16MCP_INTEGRATION_LINEAR\x10\x01\x12\x19\n" +
 	"\x15MCP_INTEGRATION_SLACK\x10\x02\x12\x18\n" +
 	"\x14MCP_INTEGRATION_JIRA\x10\x03\x12(\n" +
-	"$MCP_INTEGRATION_LINEAR_AGENT_SESSION\x10\x04*\xa9\x06\n" +
+	"$MCP_INTEGRATION_LINEAR_AGENT_SESSION\x10\x04\x12\x1a\n" +
+	"\x16MCP_INTEGRATION_GITHUB\x10\x05*\xa9\x06\n" +
 	"\bToolType\x12\x15\n" +
 	"\x11RUN_SHELL_COMMAND\x10\x00\x12\x13\n" +
 	"\x0fSEARCH_CODEBASE\x10\x01\x12\x0e\n" +
