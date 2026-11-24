@@ -624,6 +624,11 @@ message Request {
         ANTHROPIC_MESSAGES = 2;
       }
 
+      enum CustomEndpointAuthMode {
+        X_API_KEY = 0;
+        BEARER_TOKEN = 1;
+      }
+
       message CustomModelProvider {
         // The base URL for the custom model provider.
         string base_url = 1;
@@ -633,6 +638,9 @@ message Request {
         repeated CustomModel models = 3;
         // The request/response protocol spoken by this provider.
         CustomEndpointSchema schema = 4;
+        // Authentication header for Anthropic Messages endpoints.
+        // OpenAI-compatible schemas always use Bearer authentication.
+        CustomEndpointAuthMode auth_mode = 5;
       }
 
       message CustomModel {
