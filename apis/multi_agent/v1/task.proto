@@ -140,6 +140,10 @@ message InferenceUsage {
 
   // The cumulative cost of requested web-fetch pages in credits.
   float web_fetch_cost_in_credits = 8;
+
+  // Provider list-price estimates in US cents, not charges billed by Warp.
+  // Absent when no estimate was recorded; credits are not populated.
+  TokenCost estimated_token_cost = 9;
 }
 
 message TokenCost {
