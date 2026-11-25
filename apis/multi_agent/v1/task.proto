@@ -1255,6 +1255,9 @@ message Message {
       // Upper bound on how long the client should wait. Unset means the client
       // should fall back to its default waiting policy.
       int32 idle_timeout_seconds = 1;
+      // Run IDs supplied for this wait, retained for conversation history.
+      // Any inbound input may still end the wait.
+      repeated string run_ids = 2;
     }
   }
 
